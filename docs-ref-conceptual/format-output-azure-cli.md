@@ -4,18 +4,18 @@ description: Azure CLI menawarkan berbagai format output seperti JSON dan YAML. 
 author: dbradish-microsoft
 ms.author: dbradish
 manager: barbkess
-ms.date: 08/19/2021
+ms.date: 11/11/2021
 ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli commands
-ms.openlocfilehash: 685ee84eddeab2e8bf03b5c1fc523e473f98f6bd
-ms.sourcegitcommit: ecad34e4d4654660377050fccba7861e942e03de
+ms.openlocfilehash: be163b4355f8bcb6b23ba54ba8078a9762abe433
+ms.sourcegitcommit: 30e08311cdf7da0ca3107ce8e802128615b2345b
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 09/13/2021
-ms.locfileid: "132439053"
+ms.lasthandoff: 11/17/2021
+ms.locfileid: "132729659"
 ---
 # <a name="output-formats-for-azure-cli-commands"></a>Format output untuk perintah Azure CLI
 
@@ -26,6 +26,7 @@ Azure CLI menggunakan JSON sebagai format output default, tetapi menawarkan form
 `json`   | JSON string. Pengaturan ini adalah default
 `jsonc`  | JSON berwarna
 `yaml`   | YAML, alternatif yang dapat dibaca manusia untuk JSON
+`yamlc`  | YAML berwarna
 `table`  | Tabel ASCII dengan tombol sebagai judul kolom
 `tsv`    | Nilai yang dipisahkan tab, tanpa tombol
 `none`   | Tidak ada output selain kesalahan dan peringatan
@@ -212,7 +213,8 @@ What default output format would you like?
  [3] table - Human-readable output format.
  [4] tsv - Tab- and Newline-delimited. Great for GREP, AWK, etc.
  [5] yaml - YAML formatted output. An alternative to JSON. Great for configuration files.
- [6] none - No output, except for errors and warnings.
+ [6] yamlc - Colored YAML formatted output. An alternative to JSON. Great for configuration files.
+ [7] none - No output, except for errors and warnings.
 Please enter a choice [1]:
 ```
 
