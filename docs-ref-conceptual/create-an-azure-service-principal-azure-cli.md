@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure service principal, create service principal azure, create service principal azure cli
-ms.openlocfilehash: 37ecfc1adcb7e7b8cb6b377b7c60466fabe03d49
-ms.sourcegitcommit: ecad34e4d4654660377050fccba7861e942e03de
+ms.openlocfilehash: 7476775ef6d0cbd9f4a79a3ab974fbf81689b55f
+ms.sourcegitcommit: fb2e4f5ff86cb6f52588f159d95e8f418a0746ff
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 09/13/2021
-ms.locfileid: "132439069"
+ms.lasthandoff: 11/24/2021
+ms.locfileid: "132979181"
 ---
 # <a name="create-an-azure-service-principal-with-the-azure-cli"></a>Membuat perwakilan layanan Azure dengan Azure CLI
 
@@ -42,16 +42,15 @@ Saat membuat prinsip layanan, Anda memilih jenis autentikasi masuk yang digunaka
 > [!WARNING]
 > Saat Anda membuat kepala layanan Azure menggunakan `az ad sp create-for-rbac` perintah, output menyertakan kredensial yang harus Anda lindungi. Pastikan Anda tidak menyertakan kredensial ini dalam kode Anda atau periksa kredensial ke dalam kontrol sumber Anda. Sebagai alternatif, pertimbangkan untuk menggunakan [identitas terkelola](/azure/active-directory/managed-identities-azure-resources/overview) jika tersedia untuk menghindari kebutuhan untuk menggunakan kredensial.
 >
-> Secara default, `az ad sp create-for-rbac` memberikan peran [Kontributor](/azure/role-based-access-control/built-in-roles#contributor) ke kepala layanan di lingkup langganan. Untuk mengurangi risiko kepala layanan yang dikompromikan, tetapkan peran yang lebih spesifik dan persempit ruang lingkup ke sumber daya atau kelompok sumber daya. Lihat [Langkah-langkah untuk menambahkan tugas peran](/azure/role-based-access-control/role-assignments-steps) untuk informasi selengkapnya.
->
-> Dalam rilis di masa mendatang, `az ad sp create-for-rbac` TIDAK akan membuat tugas peran **Kontributor** secara default. Jika diperlukan, gunakan `--role` argumen untuk secara eksplisit membuat tugas peran.
+> Kami sarankan `Contributor` menggunakan parameter `--role` minimal. Untuk mengurangi risiko kepala layanan yang dikompromikan, tetapkan peran yang lebih spesifik dan persempit ruang lingkup ke sumber daya atau kelompok sumber daya. Lihat [Langkah-langkah untuk menambahkan tugas peran](/azure/role-based-access-control/role-assignments-steps) untuk informasi selengkapnya.
+
 
 ### <a name="password-based-authentication"></a>Autentikasi berbasis kata sandi
 
 Tanpa parameter otentikasi, autentikasi berbasis kata sandi digunakan dengan kata sandi acak yang dibuat untuk Anda.
 
   ```azurecli-interactive
-  az ad sp create-for-rbac --name ServicePrincipalName
+  az ad sp create-for-rbac --name ServicePrincipalName --role Contributor
   ```
 
 > [!IMPORTANT]
@@ -67,25 +66,25 @@ Untuk autentikasi berbasis sertifikat, gunakan `--cert` argumen. Argumen ini men
 > Saat menggunakan file PEM, **SERTIFIKAT** harus ditambahkan ke **KUNCI PRIBADI** dalam file.
 
 ```azurecli-interactive
-az ad sp create-for-rbac --name ServicePrincipalName --cert "-----BEGIN CERTIFICATE-----
+az ad sp create-for-rbac --name ServicePrincipalName --role Contributor --cert "-----BEGIN CERTIFICATE-----
 ...
 -----END CERTIFICATE-----"
 ```
 
 ```azurecli-interactive
-az ad sp create-for-rbac --name ServicePrincipalName --cert @/path/to/cert.pem
+az ad sp create-for-rbac --name ServicePrincipalName --role Contributor --cert @/path/to/cert.pem
 ```
 
 `--keyvault`Argumen dapat ditambahkan untuk menggunakan sertifikat di Azure Key Vault. Dalam hal ini, `--cert` nilainya adalah nama sertifikat.
 
 ```azurecli-interactive
-az ad sp create-for-rbac --name ServicePrincipalName --cert CertName --keyvault VaultName
+az ad sp create-for-rbac --name ServicePrincipalName --role Contributor --cert CertName --keyvault VaultName
 ```
 
 Untuk membuat sertifikat _yang ditandatangani sendiri_ untuk autentikasi, gunakan `--create-cert` argumen:
 
 ```azurecli-interactive
-az ad sp create-for-rbac --name ServicePrincipalName --create-cert
+az ad sp create-for-rbac --name ServicePrincipalName --role Contributor --create-cert
 ```
 
 Output konsol:
@@ -120,7 +119,7 @@ myCertificateValue
 `--keyvault`Argumen dapat ditambahkan untuk menyimpan sertifikat di Azure Key Vault. Saat `--keyvault` menggunakan, `--cert` argumen __diperlukan.__
 
 ```azurecli-interactive
-az ad sp create-for-rbac --name ServicePrincipalName --create-cert --cert CertName --keyvault VaultName
+az ad sp create-for-rbac --name ServicePrincipalName --role Contributor --create-cert --cert CertName --keyvault VaultName
 ```
 
 Kecuali Anda menyimpan sertifikat di Key Vault, outputnya termasuk `fileWithCertAndPrivateKey` kuncinya. Nilai kunci ini memberi tahu Anda di mana sertifikat yang dihasilkan disimpan.
@@ -167,7 +166,7 @@ Azure CLI memiliki perintah berikut untuk mengelola tugas peran:
 * [pembuatan penetapan peran az](/cli/azure/role/assignment#az_role_assignment_create)
 * [az role assignment delete](/cli/azure/role/assignment#az_role_assignment_delete)
 
-Peran default untuk kepala layanan adalah **Kontributor.** Peran ini memiliki izin penuh untuk membaca dan menulis ke akun Azure. Peran **Pembaca** lebih ketat, dengan akses baca saja.  Untuk informasi selengkapnya tentang Role-Based Access Control (RBAC) dan peran, lihat [RBAC: Built-in roles](/azure/active-directory/role-based-access-built-in-roles).
+Kami sarankan Anda menggunakan peran **Kontributor** minimal untuk kepala layanan. Peran ini memiliki izin penuh untuk membaca dan menulis ke akun Azure. Peran **Pembaca** lebih ketat, dengan akses baca saja. Untuk informasi selengkapnya tentang Role-Based Access Control (RBAC) dan peran, lihat [RBAC: Built-in roles](/azure/active-directory/role-based-access-built-in-roles).
 
 Contoh ini menambahkan peran **Pembaca** dan menghapus **Kontributor:**
 
@@ -210,7 +209,7 @@ Untuk mempelajari [selengkapnya](authenticate-azure-cli.md)tentang masuk dengan 
 Bagian berikut memberikan contoh cara membuat sumber daya untuk [Azure Storage](/azure/storage/) dengan kepala layanan, menggunakan perintah berikut:
 
 * [az login](/cli/azure/reference-index#az_login)
-* [pembuatan grup az](/cli/azure/group#az_group_create)
+* [az group create](/cli/azure/group#az_group_create)
 * [az storage account create](/cli/azure/storage/account#az_storage_account_create)
 * [daftar kunci akun penyimpanan az](/cli/azure/storage/account/keys#az_storage_account_keys_list)
 
