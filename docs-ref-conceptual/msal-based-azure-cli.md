@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: msal, msal-based azure cli
-ms.openlocfilehash: cee69615861e1d5ddedaf6aeca40f9cf92b8fb75
-ms.sourcegitcommit: d2227bc475235bf86193e9cae5e02f349a6342e2
+ms.openlocfilehash: a065380ebe465ebb76a0735aead1890334397f51
+ms.sourcegitcommit: 23211f978c3a7079b2884355be102a9f18fea713
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 11/02/2021
-ms.locfileid: "132439111"
+ms.lasthandoff: 12/01/2021
+ms.locfileid: "133334315"
 ---
 # <a name="msal-based-azure-cli"></a>MSAL-based Azure CLI
 
@@ -30,9 +30,12 @@ Versi sebelumnya dari Azure CLI menyimpan token ADAL dan entri utama layanan ke 
 
 Cache token MSAL dan entri utama layanan disimpan sebagai file terenkripsi di Windows, dan file plaintext di Linux dan MacOS.
 
+> [!IMPORTANT]
+> Saat menggunakan Azure CLI dalam pipa, seperti Azure DevOps, pastikan semua tugas/tahapan menggunakan versi Azure CLI di atas v2.30.0 untuk CLI azure berbasis MSAL. Azure CLI 2.30.0 tidak kompatibel dengan versi sebelumnya dan lemparan dan kesalahan saat menggunakan kesalahan yang tidak kompatibel.
+
 ## <a name="alternatives-to-consider"></a>Alternatif untuk dipertimbangkan
 
-Berikut adalah beberapa alternatif yang dapat Anda pertimbangkan:
+Berikut adalah beberapa alternatif yang dapat Anda pertimbangkan untuk kompatibilitas mundur:
 
 ### <a name="calling-az-account-get-access-token"></a>Memanggil `az account get-access-token`
 
@@ -55,12 +58,12 @@ az account get-access-token --subscription "<subscription ID or name>"
 
 ## <a name="see-also"></a>Lihat juga
 
-* MSAL
-  * [Ringkasan Pustaka Autentikasi Microsoft (MSAL)](/azure/active-directory/develop/msal-overview)
-  * [Memigrasikan aplikasi ke Microsoft Authentication Library (MSAL)](/azure/active-directory/develop/msal-migration)
-* Python
-  * [AzureCliCredential Class](/python/api/azure-identity/azure.identity.azureclicredential) in Python
-* .NET
-  * [AzureCliCredential Class](/dotnet/api/azure.identity.azureclicredential) in .NET
-* Java
-  * [AzureCliCredential Class](/java/api/com.azure.identity.azureclicredential) in Java
+- MSAL
+  - [Ringkasan Pustaka Autentikasi Microsoft (MSAL)](/azure/active-directory/develop/msal-overview)
+  - [Memigrasikan aplikasi ke Microsoft Authentication Library (MSAL)](/azure/active-directory/develop/msal-migration)
+- Python
+  - [AzureCliCredential Class](/python/api/azure-identity/azure.identity.azureclicredential) in Python
+- .NET
+  - [AzureCliCredential Class](/dotnet/api/azure.identity.azureclicredential) in .NET
+- Java
+  - [AzureCliCredential Class](/java/api/com.azure.identity.azureclicredential) in Java

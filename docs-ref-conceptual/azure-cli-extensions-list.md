@@ -11,12 +11,12 @@ ms.technology: azure-cli
 ms.devlang: azure-cli
 ms.custom: devx-track-azurecli
 keywords: az extension, azure cli extensions, azure extensions
-ms.openlocfilehash: d842586b672950b8e0a6851c738a5e2c07652110
-ms.sourcegitcommit: d2227bc475235bf86193e9cae5e02f349a6342e2
+ms.openlocfilehash: ed072149e36fad78b0d62885ddb9b26ae39f258b
+ms.sourcegitcommit: 23211f978c3a7079b2884355be102a9f18fea713
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 11/02/2021
-ms.locfileid: "132439124"
+ms.lasthandoff: 12/01/2021
+ms.locfileid: "133330553"
 ---
 # <a name="available-azure-cli-extensions"></a>Tersedia Azure CLI extensions
 
@@ -41,13 +41,13 @@ Anda akan diminta untuk menginstal ekstensi pada penggunaan pertama.
 |[wawasan aplikasi](https://github.com/Azure/azure-cli-extensions/tree/master/src/application-insights) | 2.0.79 | Dukungan untuk mengelola komponen aplikasi Insights dan kueri metrik, peristiwa, dan log dari komponen tersebut. | Pratinjau | [0.1.14](https://github.com/Azure/azure-cli-extensions/tree/master/src/application-insights/HISTORY.rst) |
 |[appservice-kube](https://github.com/Azure/azure-cli-extensions) | 2.26.0 | Layanan Aplikasi alat Microsoft Azure Command-Line pada Ekstensi Kubernetes | Pratinjau | [0.1.0](https://github.com/Azure/azure-cli-extensions) |
 |[arcappliance](https://msazure.visualstudio.com/AzureArcPlatform/_git/arcappliance-cli-extensions) | 2.0.67 | Microsoft Azure Command-Line Alat Ekstensi Arcappliance | Pratinjau | [0.1.42](https://msazure.visualstudio.com/AzureArcPlatform/_git/arcappliance-cli-extensions) |
-|[arcdata](https://docs.microsoft.com/en-us/azure/azure-arc/data/) | 2.3.1 | Alat untuk mengelola ArcData. | GA | [1.0.0](https://docs.microsoft.com/en-us/azure/azure-arc/data/) |
+|[arcdata](/azure/azure-arc/data/) | 2.3.1 | Alat untuk mengelola ArcData. | GA | [1.0.0](/azure/azure-arc/data/) |
 |[pengesahan](https://github.com/Azure/azure-cli-extensions/tree/master/src/attestation) | 2.11.0 | alat Microsoft Azure Command-Line AttestationManagementClient Extension | Eksperimental | [0.2.0](https://github.com/Azure/azure-cli-extensions/tree/master/src/attestation/HISTORY.rst) |
 |[authV2](https://github.com/Azure/azure-cli-extensions/tree/master/src/authV2) | 2.23.0 | Microsoft Azure Command-Line Alat Ekstensi Authv2 | GA | [0.1.1](https://github.com/Azure/azure-cli-extensions/tree/master/src/authV2/HISTORY.rst) |
 |[Automation](https://github.com/Azure/azure-cli-extensions/tree/master/src/automation) | 2.13.0 | Microsoft Azure Command-Line Tools AutomationClient Extension | Eksperimental | [0.1.1](https://github.com/Azure/azure-cli-extensions/tree/master/src/automation/HISTORY.rst) |
 |[azure-batch-cli-extensions](https://github.com/Azure/azure-batch-cli-extensions) | 2.0.74 | Perintah tambahan untuk bekerja dengan layanan Azure Batch | GA | [6.0.0](https://github.com/Azure/azure-batch-cli-extensions) |
-|[azure-cli-ml](https://docs.microsoft.com/python/api/overview/azure/ml/?view=azure-ml-py) | 2.3.1 | Microsoft Azure Command-Line Tools AzureML Command Module | GA | [1.33.0](https://docs.microsoft.com/python/api/overview/azure/ml/?view=azure-ml-py/HISTORY.rst) |
-|[azure-devops](https://github.com/Microsoft/azure-devops-cli-extension) | 2.2.0 | Alat untuk mengelola Azure DevOps. | GA | [0.21.0](https://github.com/Microsoft/azure-devops-cli-extension) |
+|[azure-cli-ml](/python/api/overview/azure/ml/?view=azure-ml-py) | 2.3.1 | Microsoft Azure Command-Line Tools AzureML Command Module | GA | [1.33.0](/python/api/overview/azure/ml/?view=azure-ml-py%2fHISTORY.rst) |
+|[azure-devops](https://github.com/Microsoft/azure-devops-cli-extension) | 2.2.0 | Alat untuk mengelola Azure DevOps. | GA | [0.20.0](https://github.com/Microsoft/azure-devops-cli-extension) |
 |[azure-firewall](https://github.com/Azure/azure-cli-extensions/tree/master/src/azure-firewall) | 2.15.0 | Kelola sumber daya Azure Firewall. | Pratinjau | [0.12.0](https://github.com/Azure/azure-cli-extensions/tree/master/src/azure-firewall/HISTORY.rst) |
 |[azure-iot](https://github.com/azure/azure-iot-cli-extension) | 2.17.1 | Ekstensi Azure IoT untuk Azure CLI. | GA | [0.11.0](https://github.com/azure/azure-iot-cli-extension) |
 |[infrastruktur baremetal](https://github.com/Azure/azure-baremetalinfrastructure-cli-extension) | 2.12.0 | Perintah tambahan untuk bekerja dengan instans BareMetal. | GA | [0.0.2](https://github.com/Azure/azure-baremetalinfrastructure-cli-extension) |

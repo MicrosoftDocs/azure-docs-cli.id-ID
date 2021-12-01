@@ -7,13 +7,13 @@ ms.author: jduffney
 ms.topic: quickstart
 ms.service: azure
 ms.date: 08/01/2021
-ms.custom: devx-track-azurecli, seo-azure-cli
+ms.custom: devx-track-azurecli, seo-azure-cli, mode-api
 Keywords: azure command line tool, azure cli tools, azure cli vs powershell, azure cli powershell, powershell cli, azure cli vs cloud shell, shell environment
-ms.openlocfilehash: 910965503c3a1240ce2264f841d8e5ff02274d22
-ms.sourcegitcommit: ecad34e4d4654660377050fccba7861e942e03de
+ms.openlocfilehash: a0d2ebac85d01f49bd3bdb7a6d1ab49054ae4e5d
+ms.sourcegitcommit: 23211f978c3a7079b2884355be102a9f18fea713
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 09/13/2021
-ms.locfileid: "132439045"
+ms.lasthandoff: 12/01/2021
+ms.locfileid: "133330517"
 ---
 [!INCLUDE[Choose the right Azure command-line tool](~/azure-dev-docs-pr/articles/includes/choose-the-right-azure-command-line-tool.md)]

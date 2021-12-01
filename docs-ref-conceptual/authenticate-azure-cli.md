@@ -4,18 +4,18 @@ description: Pelajari berbagai jenis autentikasi untuk login Azure CLI Anda — 
 author: dbradish-microsoft
 ms.author: dbradish
 manager: barbkess
-ms.date: 02/22/2019
+ms.date: 09/10/2021
 ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: az login, authentication types , authentication methods, azure, cli login, az login powershell, cli login
-ms.openlocfilehash: 1e9612502596585d6242df0d7d75cbb61c3580e6
-ms.sourcegitcommit: ecad34e4d4654660377050fccba7861e942e03de
+ms.openlocfilehash: 25a5f4e11d3e71dcaae604fba43b334ad3344b1d
+ms.sourcegitcommit: 23211f978c3a7079b2884355be102a9f18fea713
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 09/13/2021
-ms.locfileid: "132439061"
+ms.lasthandoff: 12/01/2021
+ms.locfileid: "133330625"
 ---
 # <a name="sign-in-with-azure-cli"></a>Masuk dengan Azure CLI 
 
