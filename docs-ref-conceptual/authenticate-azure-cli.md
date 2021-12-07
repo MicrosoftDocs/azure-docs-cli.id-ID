@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: az login, authentication types , authentication methods, azure, cli login, az login powershell, cli login
-ms.openlocfilehash: 25a5f4e11d3e71dcaae604fba43b334ad3344b1d
-ms.sourcegitcommit: 23211f978c3a7079b2884355be102a9f18fea713
+ms.openlocfilehash: 857885731b88422cdb8f36a20c6502309af92a55
+ms.sourcegitcommit: 6b5185b9fd55b84b0494e25e44165d435e3a22e2
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 12/01/2021
-ms.locfileid: "133330625"
+ms.lasthandoff: 12/07/2021
+ms.locfileid: "133894214"
 ---
 # <a name="sign-in-with-azure-cli"></a>Masuk dengan Azure CLI 
 
@@ -59,7 +59,7 @@ az login -u <username> -p <password>
 
 ## <a name="sign-in-with-a-service-principal"></a>Masuk dengan kepala layanan
 
-Prinsip layanan adalah akun yang tidak terkait dengan pengguna tertentu, yang dapat memiliki izin pada mereka yang ditetapkan melalui peran yang telah ditentukan sebelumnya. Mengautentikasi dengan prinsip layanan adalah cara terbaik untuk menulis skrip atau program yang aman, memungkinkan Anda menerapkan pembatasan izin dan informasi kredensial statis yang disimpan secara lokal. Untuk mempelajari [selengkapnya](./create-an-azure-service-principal-azure-cli.md#sign-in-using-a-service-principal)tentang prinsipal layanan, lihat Membuat kepala layanan Azure dengan Azure CLI .
+Prinsip layanan adalah akun yang tidak terkait dengan pengguna tertentu, yang dapat memiliki izin pada mereka yang ditetapkan melalui peran yang telah ditentukan sebelumnya. Mengautentikasi dengan prinsip layanan adalah cara terbaik untuk menulis skrip atau program yang aman, memungkinkan Anda menerapkan pembatasan izin dan informasi kredensial statis yang disimpan secara lokal. Untuk mempelajari [selengkapnya](./create-an-azure-service-principal-azure-cli.md#4-sign-in-using-a-service-principal)tentang prinsipal layanan, lihat Membuat kepala layanan Azure dengan Azure CLI .
 
 Untuk masuk dengan kepala layanan, Anda perlu:
 

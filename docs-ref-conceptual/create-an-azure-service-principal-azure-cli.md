@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure service principal, create service principal azure, create service principal azure cli
-ms.openlocfilehash: 7476775ef6d0cbd9f4a79a3ab974fbf81689b55f
-ms.sourcegitcommit: fb2e4f5ff86cb6f52588f159d95e8f418a0746ff
+ms.openlocfilehash: 6371d1ee7aec05fc842ab25acad28a7b4a399519
+ms.sourcegitcommit: 6b5185b9fd55b84b0494e25e44165d435e3a22e2
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 11/24/2021
-ms.locfileid: "132979181"
+ms.lasthandoff: 12/07/2021
+ms.locfileid: "133917663"
 ---
 # <a name="create-an-azure-service-principal-with-the-azure-cli"></a>Membuat perwakilan layanan Azure dengan Azure CLI
 
@@ -27,7 +27,7 @@ Prinsip layanan Azure adalah identitas yang dibuat untuk digunakan dengan aplika
 
 Artikel ini menunjukkan kepada Anda langkah-langkah untuk membuat, mendapatkan informasi tentang, dan mengatur ulang kepala layanan Azure dengan Azure CLI.
 
-## <a name="create-a-service-principal"></a>Buat perwakilan layanan
+## <a name="1-create-a-service-principal"></a>1. Membuat prinsip layanan
 
 Buat kepala layanan Azure dengan perintah [az ad sp create-for-rbac.](/cli/azure/ad/sp#az_ad_sp_create_for_rbac) 
 
@@ -56,7 +56,7 @@ Tanpa parameter otentikasi, autentikasi berbasis kata sandi digunakan dengan kat
 > [!IMPORTANT]
 > Pada Azure CLI 2.0.68, `--password` parameter untuk membuat prinsip layanan dengan kata sandi yang ditentukan pengguna tidak lagi __didukung__ untuk mencegah penggunaan kata sandi yang lemah secara tidak sengaja.
 
-Output untuk prinsip layanan dengan otentikasi kata sandi termasuk `password` kuncinya. __Pastikan__ Anda menyalin nilai ini - tidak dapat diambil. Jika Anda lupa kata sandi, [atur ulang info masuk perwakilan layanan](#reset-credentials).
+Output untuk prinsip layanan dengan otentikasi kata sandi termasuk `password` kuncinya. __Pastikan__ Anda menyalin nilai ini - tidak dapat diambil. Jika Anda lupa kata sandi, [atur ulang info masuk perwakilan layanan](#6-reset-credentials).
 
 ### <a name="certificate-based-authentication"></a>Autentikasi berbasis sertifikat
 
@@ -125,7 +125,7 @@ az ad sp create-for-rbac --name ServicePrincipalName --role Contributor --create
 Kecuali Anda menyimpan sertifikat di Key Vault, outputnya termasuk `fileWithCertAndPrivateKey` kuncinya. Nilai kunci ini memberi tahu Anda di mana sertifikat yang dihasilkan disimpan.
 __Pastikan__ Anda menyalin sertifikat ke lokasi yang aman, atau Anda tidak dapat masuk dengan kepala layanan ini.
 
-Jika Anda kehilangan akses ke kunci pribadi sertifikat, [atur ulang kredensial utama layanan.](#reset-credentials)
+Jika Anda kehilangan akses ke kunci pribadi sertifikat, [atur ulang kredensial utama layanan.](#6-reset-credentials)
 
 #### <a name="retrieve-certificate-from-key-vault"></a>Mengambil sertifikat dari Key Vault
 
@@ -136,7 +136,7 @@ az keyvault secret download --file /path/to/cert.pfx --vault-name VaultName --na
 openssl pkcs12 -in cert.pfx -passin pass: -out cert.pem -nodes
 ```
 
-## <a name="get-an-existing-service-principal"></a>Dapatkan prinsip layanan yang sudah ada
+## <a name="2-get-an-existing-service-principal"></a>2. Dapatkan prinsip layanan yang sudah ada
 
 Daftar kepala layanan di penyewa dapat diambil dengan [daftar az ad sp.](/cli/azure/ad/sp#az_ad_sp_list) Secara default perintah ini mengembalikan 100 prinsip layanan pertama untuk penyewa Anda. Untuk mendapatkan semua prinsip layanan penyewa, gunakan `--all` argumen. Mendapatkan daftar ini bisa memakan waktu lama, jadi disarankan agar Anda memfilter daftar dengan salah satu argumen berikut:
 
@@ -156,9 +156,9 @@ az ad sp list --show-mine --query "[].{id:appId, tenant:appOwnerTenantId}"
 >
 > `az ad sp list` atau [az ad sp show](/cli/azure/ad/sp#az_ad_sp_show) mendapatkan pengguna dan penyewa, tetapi tidak ada rahasia otentikasi _atau_ metode otentikasi.
 > Rahasia untuk sertifikat di Key Vault dapat diambil dengan [az keyvault secret show,](/cli/azure/keyvault/secret#az_keyvault_secret_show)tetapi tidak ada rahasia lain yang disimpan secara default.
-> Jika Anda lupa metode otentikasi atau rahasia, [atur ulang kredensial utama layanan.](#reset-credentials)
+> Jika Anda lupa metode otentikasi atau rahasia, [atur ulang kredensial utama layanan.](#6-reset-credentials)
 
-## <a name="manage-service-principal-roles"></a>Mengelola peran utama layanan
+## <a name="3-manage-service-principal-roles"></a>3. Mengelola peran utama layanan
 
 Azure CLI memiliki perintah berikut untuk mengelola tugas peran:
 
@@ -186,7 +186,7 @@ Perubahan dapat diverifikasi dengan mencantumkan peran yang ditetapkan:
 az role assignment list --assignee APP_ID
 ```
 
-## <a name="sign-in-using-a-service-principal"></a>Masuk menggunakan prinsipal layanan
+## <a name="4-sign-in-using-a-service-principal"></a>4. Masuk menggunakan prinsipal layanan
 
 Uji kredensial dan izin kepala layanan baru dengan masuk. Untuk masuk dengan kepala layanan, Anda memerlukan `appId` , `tenant` , dan kredensial.
 
@@ -204,7 +204,7 @@ az login --service-principal --username APP_ID --tenant TENANT_ID --password /pa
 
 Untuk mempelajari [selengkapnya](authenticate-azure-cli.md)tentang masuk dengan kepala layanan, lihat Masuk dengan Azure CLI .
 
-## <a name="create-a-resource-using-service-principal"></a>Membuat sumber daya menggunakan prinsipal layanan
+## <a name="5-create-a-resource-using-service-principal"></a>5. Membuat sumber daya menggunakan prinsip layanan
 
 Bagian berikut memberikan contoh cara membuat sumber daya untuk [Azure Storage](/azure/storage/) dengan kepala layanan, menggunakan perintah berikut:
 
@@ -213,7 +213,7 @@ Bagian berikut memberikan contoh cara membuat sumber daya untuk [Azure Storage](
 * [az storage account create](/cli/azure/storage/account#az_storage_account_create)
 * [daftar kunci akun penyimpanan az](/cli/azure/storage/account/keys#az_storage_account_keys_list)
 
-Untuk masuk dengan kepala layanan, Anda memerlukan `appId` , , dan kembali sebagai jawaban ketika Anda membuat kepala layanan `tenant` `password` [Anda.](#sign-in-using-a-service-principal)
+Untuk masuk dengan kepala layanan, Anda memerlukan `appId` , , dan kembali sebagai jawaban ketika Anda membuat kepala layanan `tenant` `password` [Anda.](#4-sign-in-using-a-service-principal)
 
 1. Masuk sebagai kepala layanan.
 
@@ -247,7 +247,7 @@ Untuk masuk dengan kepala layanan, Anda memerlukan `appId` , , dan kembali sebag
     az storage account keys list --name MY_RESOURCE_<SERVICENAME> --resource-group MY_RESOURCE_GROUP
     ```
 
-## <a name="reset-credentials"></a>Mengatur ulang info masuk
+## <a name="6-reset-credentials"></a>6. Mereset kredensial
 
 Jika Anda lupa kredensial untuk kepala layanan, gunakan [reset kredensial az ad sp.](/cli/azure/ad/sp/credential#az_ad_sp_credential_reset) Perintah reset mengambil argumen yang sama dengan `az ad sp create-for-rbac` .
 

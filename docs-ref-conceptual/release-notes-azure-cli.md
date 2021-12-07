@@ -4,18 +4,18 @@ description: Pelajari tentang catatan rilis dan pembaruan Azure Command-Line Int
 author: dbradish-microsoft
 ms.author: dbradish
 manager: barbkess
-ms.date: 11/02/2021
+ms.date: 12/07/2021
 ms.topic: article
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli updates, azure cli notes, azure cli versions
-ms.openlocfilehash: ebe3df9d95f7e9f13e80ec147c1df705d05eba5c
-ms.sourcegitcommit: 967852390c65067978f9547842dd0dbb3b1190a6
+ms.openlocfilehash: c17526dacb4fd0f624b814be7c5d1693334220a3
+ms.sourcegitcommit: 6b5185b9fd55b84b0494e25e44165d435e3a22e2
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 11/03/2021
-ms.locfileid: "132439128"
+ms.lasthandoff: 12/07/2021
+ms.locfileid: "133927563"
 ---
 # <a name="azure-cli-release-notes"></a>Azure CLI release notes
 
@@ -153,7 +153,7 @@ Versi 2.30.0
 
 * `az synapse kusto`: Tambahkan dukungan kusto pool (mgmt)
 
-## <a name="october-29-2021"></a>Tanggal 29 Oktober 2021
+## <a name="october-29-2021"></a>29 Oktober 2021
 
 Versi 2.29.2
 
@@ -5783,7 +5783,7 @@ Versi 2.0.47
 * Diubah `functionapp create` untuk mendukung pembuatan tipe paket konsumsi Linux dengan runtime tertentu
 * [PREVIEW] Menambahkan dukungan untuk hosting webapps pada kontainer Windows
 
-### <a name="event-hub"></a>Hub Acara
+### <a name="event-hub"></a>Pusat Aktivitas
 * Perintah tetap `eventhub update`
 * [MELANGGAR PERUBAHAN] Mengubah `list` perintah untuk menangani kesalahan untuk sumber daya (s) NotFound (404) dengan cara yang khas alih-alih menampilkan daftar kosong
 
