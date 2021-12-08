@@ -10,14 +10,142 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli updates, azure cli notes, azure cli versions
-ms.openlocfilehash: c17526dacb4fd0f624b814be7c5d1693334220a3
-ms.sourcegitcommit: 6b5185b9fd55b84b0494e25e44165d435e3a22e2
+ms.openlocfilehash: b016b90f0ebdcac7e844fd644bc64a02a1a48909
+ms.sourcegitcommit: fec09f927466b7b69b85dbe7fdb615796a8e2b83
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 12/07/2021
-ms.locfileid: "133927563"
+ms.lasthandoff: 12/08/2021
+ms.locfileid: "134231380"
 ---
 # <a name="azure-cli-release-notes"></a>Azure CLI release notes
+
+## <a name="december-07-2021"></a>Tanggal 07 Desember 2021
+
+Versi 2.31.0
+
+### <a name="aks"></a>AKS
+
+* `az aks update`: Mendukung edit label nodepool setelah pembuatan
+* `az aks nodepool update`: Mendukung edit label nodepool setelah pembuatan
+* `az aks create`: Memperbaiki masalah bahwa `--attach-acr` parameter tidak dapat bekerja
+
+### <a name="ams"></a>AMS
+
+* Hapus variabel usang 'identifier_uri' dari membuat metode sp
+* Memperbarui versi api untuk pendaftaran tautan pribadi AMS dan AVA
+
+### <a name="app-service"></a>App Service
+
+* `az functionapp create`: Tambahkan dukungan untuk membuat webapp yang bergabung ke vnet
+* `az webapp up`: Memperbaiki kegagalan untuk mendeteksi aplikasi web dotnet 6.0
+* `az appservice ase update`Dukungan untuk mengizinkan koneksi endpoint pribadi baru di ASEv3
+* `az appservice ase list-addresses`: Dukungan ASEv3
+* `az staticwebapp identity assign`: Menetapkan identitas layanan terkelola ke aplikasi web statis
+* `az staticwebapp identity remove`: Nonaktifkan identitas layanan terkelola aplikasi web statis
+* `az staticwebapp identity show`: Menampilkan identitas layanan terkelola aplikasi web statis
+* Perbaiki #17507: `az staticwebapp functions` : Tambahkan dukungan untuk menghubungkan aplikasi fungsi yang ada ke webapp statis (bawa fungsi Anda sendiri)
+* `az staticwebapp create`: Memperbarui teks bantuan dengan panduan untuk repos di organisasi Github
+* `az functionapp deployment source config-zip`: Perbaiki #12289: Izinkan build on zip deploy untuk aplikasi fungsi windows
+* `az staticwebapp create`: Tambahkan pesan kesalahan yang lebih baik saat mencoba membuat webapp statis yang sudah ada
+* `az appservice`: Perbaiki AttributeError selama penanganan kesalahan pengguna
+* `az appservice plan create`: Tambahkan `--zone-redundant` parameter untuk mendukung redundansi zona yang memungkinkan untuk ketersediaan tinggi
+* `az webapp ssh`: Tambahkan dukungan proksi
+* `az webapp create-remote-connection`: Tambahkan dukungan proksi
+* `az webapp log download/tail`: Tambahkan dukungan proksi
+* `az webapp create`: Perbaiki penguraian url server registri kontainer untuk `--deployment-container-image-name/-i` argumen
+* `az functionapp deployment source config-zip`Memperbaiki kembali keberhasilan ketika penyebaran tidak berhasil
+* `az staticwebapp appsettings set`: Membuat set fungsional
+* `az staticwebapp appsettings`: Beralih ke metode SDK pengaturan aplikasi SWA yang baru
+* `az functionapp plan create`: Tambahkan `--zone-redundant` parameter untuk memberikan opsi untuk membuat paket layanan aplikasi redundan zona
+* Mendukung identitas terkelola dalam wadah Layanan Aplikasi
+
+### <a name="arm"></a>ARM
+
+* `az resource\group list`: Mendukung kueri data hanya dengan meneruskan nama tag ke `--tag` parameter
+* `az account management-group`: Tambahkan parameter baru `--no-register` untuk melewatkan pendaftaran RP untuk `Microsoft.Management`
+* `az deployment`Prettify output kesalahan untuk penyebaran ARM
+* `az bicep install`: Tambahkan parameter baru `--target-platform/-t` untuk menentukan platform berjalan Bicep CLI
+* `az bicep upgrade`: Tambahkan parameter baru `--target-platform/-t` untuk menentukan platform berjalan Bicep CLI
+* `az deployment sub/tenant/mg create`: Memperbaiki `KeyError: 'resourceGroup'` hasil output dalam format tabel saat menerapkan sumber daya tingkat grup non-sumber daya
+* `az policy assignment create` dan `az policy assignment identity assign` mendukung penambahan identitas yang ditetapkan pengguna
+* `az bicep install`Bekerja sekarang di belakang proxy perusahaan
+
+### <a name="backup"></a>Cadangan
+
+* GA `az backup` dan beberapa perbaikan bug
+* `az backup protectable-item list/show`: Perbaiki AttributeError untuk server_name
+* `az backup restore restore-disks`: Tambahkan dukungan untuk Cross Zonal Restore
+
+### <a name="cognitive-services"></a>Cognitive Services
+
+* `az cognitiveservices account deployment`: Tambahkan perintah baru `show` `list` , , `create` , `delete`
+* `az cognitiveservices account commitment-plan`: Tambahkan perintah baru `show` `list` , , `create` , `delete`
+* `az cognitiveservices commitment-tier`: Tambahkan perintah baru `list`
+
+### <a name="compute"></a>Compute
+
+* Perbaiki #20182: `az snapshot create` : Perbaiki bug deteksi otomatis untuk `--copy-start`
+* Perbaiki #20133: `az vm create` : Perbaiki tidak berfungsi saat tidak `--data-disk-delete-option` `--attach-data-disks` disediakan
+* Memperbaiki decoding diagnostik boot
+* `az vm create/update`: Tambahkan parameter baru `--enable-hibernation` untuk mendukung kemampuan hibernasi yang memungkinkan
+* `az vm/vmss run-command show`Menambahkan parameter baru `--instance-view` untuk mendukung pelacakan kemajuan RunCommand
+* Memperbarui deskripsi bantuan untuk disk yang tidak terurus
+* `az disk create/update`: Tambahkan `--public-network-access` argumen untuk mengontrol kebijakan untuk ekspor pada disk
+* `az disk create/update`: Tambahkan `--accelerated-network` argumen untuk mendukung jaringan yang dipercepat
+* `az snapshot create/update`: Tambahkan `--public-network-access` argumen untuk mengontrol kebijakan untuk ekspor pada disk
+* `az snapshot create/update`: Menambahkan `--accelerated-network` argumen mendukung jaringan yang dipercepat
+* `az snapshot create`: Perbaiki #20258: Perbaiki pembuatan snapshot dari disk Uniform VMSS OS
+
+### <a name="eventgrid"></a>EventGrid
+
+* GA `az eventgrid system-topic`
+
+### <a name="key-vault"></a>Key Vault
+
+* `az keyvault key encrypt/decrypt`Dukungan algoritma AES untuk MHSM
+* `az keyvault key rotation-policy update`: Mendukung kasus unta dan kasus ular json untuk `--value`
+
+### <a name="netappfiles"></a>NetAppFiles
+
+* `az netappfiles volume create`: Memperbaiki kebijakan ekspor volume
+
+### <a name="network"></a>Jaringan
+
+* `az network express-route peering connection ipv6-config`: Tambahkan perintah baru `set` , `remove`
+* `az network application-gateway waf-policy managed-rule exclusion`: Tambahkan subkelompok baru `rule-set` untuk mendukung pengecualian per aturan
+* `az network bastion create`: Perbaiki validator yang tidak valid saat `--scale-units` tidak ada
+* `az network vnet create`Menambahkan `--enable-encryption` argumen untuk mendukung mengaktifkan enkripsi pada jaringan virtual
+* `az network vnet update`Menambahkan `--enable-encryption` argumen untuk mendukung mengaktifkan enkripsi pada jaringan virtual
+* `az network vnet create`: Tambahkan `--encryption-enforcement-policy` argumen untuk memilih Jika Mesin Virtual tanpa enkripsi diizinkan di Jaringan Virtual terenkripsi.
+* `az network vnet update`: Tambahkan `--encryption-enforcement-policy` argumen untuk memilih Jika Mesin Virtual tanpa enkripsi diizinkan di Jaringan Virtual terenkripsi.
+
+### <a name="packaging"></a>Pengemasan
+
+* Mendukung Python 3.10
+* Tambahkan Dockerfile.mariner untuk mendukung pembangunan Mariner
+
+### <a name="profile"></a>Profil
+
+* `az logout`, `az account clear` : Hapus file cache token ADAL `accessTokens.json`
+
+### <a name="rdbms"></a>RDBMS
+
+* Perbaiki bug akhiran zona DNS pribadi
+* Perbaiki #20124: `az mysql/postgres flexible-server db create` : Buat grup sumber daya dan nama server diperlukan
+* `az postgres flexible-server`: Hapus tag pratinjau
+
+### <a name="storage"></a>Penyimpanan
+
+* `az storage share list-handle/close-handle`: Perintah baru untuk pegangan berbagi
+* Tingkat akun GA dan tingkat versi gumpalan penyimpanan yang tidak berubah
+
+### <a name="synapse"></a>Synapse
+
+* [MELANGGAR PERUBAHAN]  `az synapse sql/pool audit-policy` : Hapus`--blob-auditing-policy-name`
+* `az synapse notebook/spark-job-definition`: Tambahkan `--folder-path` argumen
+* `az synapse spark pool create/update`: Tambahkan `--spark-config-file-path`
+* `az synapse spark job submit`: Perbaiki untuk `--main-class-name`
+* `az synapse sql-script`: Grup perintah baru untuk mendukung manajemen skrip sql
 
 ## <a name="november-02-2021"></a>November 02, 2021
 
