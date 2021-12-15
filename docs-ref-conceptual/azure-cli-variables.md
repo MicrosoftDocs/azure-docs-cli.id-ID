@@ -1,5 +1,5 @@
 ---
-title: Menentukan nilai dalam perintah Azure CLI | Microsoft Docs
+title: Cara menggunakan variabel dalam perintah Azure CLI | Microsoft Docs
 description: Pelajari tentang menentukan nilai secara langsung dalam perintah Azure CLI dengan menggunakan variabel shell, mengatur langganan, membuat nilai default, atau menggunakan nilai persisten.
 author: dbradish-microsoft
 ms.author: dbradish
@@ -8,14 +8,14 @@ ms.topic: how-to
 ms.date: 08/01/2021
 ms.custom: template-how-to, devx-track-azurecli, seo-azure-cli
 keywords: azure cli variables, azure cli commands, value of variable, shell variables
-ms.openlocfilehash: e104fb5ad5eb05b2957c77e12db64f80f0032ec7
-ms.sourcegitcommit: ecad34e4d4654660377050fccba7861e942e03de
+ms.openlocfilehash: 7e524e834be80117d4e2e69b69a07019b7f12389
+ms.sourcegitcommit: 62469e9c1ad07f215129ece5db89c530f1a77968
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 09/13/2021
-ms.locfileid: "132439067"
+ms.lasthandoff: 12/15/2021
+ms.locfileid: "135155922"
 ---
-# <a name="specifying-values-in-azure-cli-commands"></a>Menentukan nilai dalam perintah Azure CLI
+# <a name="how-to-use-variables-in-azure-cli-commands"></a>Cara menggunakan variabel dalam perintah Azure CLI
 
 Selain menentukan nilai secara langsung dalam perintah, Anda dapat memberikan nilai dalam beberapa cara:
 
@@ -118,7 +118,7 @@ az storage account create --name storage135 --location eastus --sku Standard_LRS
 
 Untuk informasi lebih lanjut, lihat [Azure CLI persisted parameter](/cli/azure/param-persist-howto).
 
-## <a name="clean-up-resources"></a>Menghapus sumber daya
+## <a name="clean-up-resources"></a>Membersihkan sumber daya
 
 Jika Anda membuat sumber daya untuk mencoba salah satu perintah dalam artikel ini, Anda dapat menghapusnya dengan menggunakan perintah [hapus grup az:](/cli/azure/group#az_group_delete)
 
