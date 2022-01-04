@@ -4,20 +4,94 @@ description: Pelajari tentang catatan rilis dan pembaruan Azure Command-Line Int
 author: dbradish-microsoft
 ms.author: dbradish
 manager: barbkess
-ms.date: 12/07/2021
+ms.date: 01/04/2022
 ms.topic: article
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli updates, azure cli notes, azure cli versions
-ms.openlocfilehash: b016b90f0ebdcac7e844fd644bc64a02a1a48909
-ms.sourcegitcommit: fec09f927466b7b69b85dbe7fdb615796a8e2b83
+ms.openlocfilehash: 0c6338a96b15f043a6c0b22fd7041457c60191ba
+ms.sourcegitcommit: a5413bf8e5feb1614be35613ba115185a8cb808f
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 12/08/2021
-ms.locfileid: "134231380"
+ms.lasthandoff: 01/04/2022
+ms.locfileid: "135782930"
 ---
 # <a name="azure-cli-release-notes"></a>Azure CLI release notes
+
+## <a name="january-04-2022"></a>Tanggal 04 Januari 2022
+
+Versi 2.32.0
+
+### <a name="aks"></a>AKS
+
+* `az aks create`: Tambahkan parameter baru `--enable-fips-image` untuk mendukung mengaktifkan gambar fips
+* `az aks nodepool add`: Tambahkan parameter baru `--enable-fips-image` untuk mendukung mengaktifkan gambar fips
+
+### <a name="app-service"></a>App Service
+
+* [BREAKING CHANGE:]  `az webapp up` Hapus dukungan untuk python|3.6 (linux dan windows), ruby|2.5 (linux), dan php|7.3 (windows) runtimes. Tambahkan dukungan untuk runtime python|3.9 (linux), php|8.0 (linux), dan ruby|2.7 (linux)
+* [BREAKING CHANGE:]  `az webapp create` Hapus dukungan untuk python|3.6 (linux dan windows), ruby|2.5 (linux), dan php|7.3 (windows) runtimes. Tambahkan dukungan untuk runtime python|3.9 (linux), php|8.0 (linux), dan ruby|2.7 (linux)
+* [BREAKING CHANGE]  `az functionapp create` : Hapus dukungan python 3.6
+* Perbaiki #19550: `az staticwebapp users update` : Izinkan memperbarui peran pengguna aplikasi web statis lagi
+* `az logicapp create`Autogenerasi Paket Layanan Aplikasi WS1 ketika tidak ada nilai untuk `--plan` atau `--consumption-plan-location` disediakan
+* `az appservice plan create`Izinkan pembuatan Paket Layanan Aplikasi untuk Aplikasi Logika (SKU WS1, WS2, dan WS3)
+* Perbaiki #20757: `az webapp up` : Perbaiki indeks daftar di luar jangkauan ketika tidak ada argumen yang `--plan` disahkan
+* Perbaiki #18652: `az webapp up` : Cari \* .csproj di direktori anak
+* `az webapp list-runtimes`: Hapus dukungan untuk python|3.6 (linux dan windows), ruby|2.5 (linux), dan php|7.3 (windows) runtimes. Tambahkan dukungan untuk runtime python|3.9 (linux), php|8.0 (linux), dan ruby|2.7 (linux)
+
+### <a name="backup"></a>Cadangan
+
+* `az backup restore restore-azurewl`: Menambahkan validasi sisi klien
+* `az backup container unregister`: Mendukung tipe MAB untuk parameter `--backup-management-type`
+* `az backup protectable-item list/show`: Tambahkan kebijakan perlindungan otomatis dan bidang node-list dalam respons untuk SQLInstance SQLAG
+* `az backup protection auto-enable-for-azurewl/auto-disable-for-azurewl`: Menambahkan dukungan untuk SQLAG
+
+### <a name="compute"></a>Compute 
+
+* `az vm/vmss create/update`: Perluas validasi tipe lisensi untuk `--license-type` parameter
+* `az sig image-definition list-shared`: Tambahkan parameter baru `--marker` dan `--show-next-marker` untuk mendukung paging
+* `az sig image-version list-shared`: Tambahkan parameter baru `--marker` dan `--show-next-marker` untuk mendukung paging
+
+### <a name="iot"></a>IoT
+
+* `az iot hub update`: Tambahkan penanganan kesalahan untuk parameter unggah file dan memperbaiki kesalahan titik akhir penyimpanan $default kosong
+* `az iot central app create`Menambahkan parameter baru `--mi-system-assigned` untuk mendukung pembuatan aplikasi dengan identitas terkelola yang ditetapkan sistem
+* `az iot central app identity show/assign/remove`Menambahkan perintah baru untuk mengelola identitas terkelola yang ditetapkan sistem ke aplikasi IoT Central yang ada
+* `az iot dps access-policy`: Diganti dengan `az iot dps policy`
+* `az iot dps linked-hub create`: Tambahkan argumen kenyamanan untuk menghubungkan hub
+
+### <a name="network"></a>Jaringan
+
+* Perbaiki #19482: Azure Bastion AAD memperbaiki perubahan inti CLI baru
+* `az network lb inbound-nat-pool create`: Tambahkan parameter baru `--backend-pool-name`
+
+### <a name="profile"></a>Profil
+
+* `az account show/set`: Tambahkan `-n` , `--name` argumen
+
+### <a name="redis"></a>Redis
+
+* `az redis identity`Menambahkan dukungan untuk menetapkan dan memodifikasi Identitas
+
+### <a name="rest"></a>REST
+
+* [BREAKING CHANGE]  `az rest` : Hapus , `resourceGroup` `x509ThumbprintHex` transformasi
+
+### <a name="role"></a>Peran
+
+* [BREAKING CHANGE:]  `az ad sp create-for-rbac` Jatuhkan properti dari `name` output. Gunakan `appId` sebagai gantinya
+* [BREAKING CHANGE]  `az ad sp create-for-rbac` : Tidak ada tugas peran yang akan dibuat secara default
+
+### <a name="storage"></a>Penyimpanan
+
+* `az storage copy`: Tambahkan argumen `extra_options` posisional untuk melewati opsi ke `azcopy`
+
+### <a name="synapse"></a>Synapse
+
+* [BREAKING CHANGE]  `az synapse managed private endpoints create` : Hapus dan , gunakan sebagai `--resource-id` `--group-id` `--file` gantinya
+* `az synapse sql pool create/restore`: Menambahkan parameter `--storage-type` untuk mendukung menentukan tipe akun penyimpanan
+* `az synapse kql-script`Grup komando baru untuk mendukung skrip Kusto
 
 ## <a name="december-07-2021"></a>Tanggal 07 Desember 2021
 
@@ -1451,7 +1525,7 @@ Versi 2.21.0
 * `az vm create`: Peluncuran Terpercaya
 * Fix #16037: az vm open-port accepts list of ports
 
-### <a name="extension"></a>Ekstensi
+### <a name="extension"></a>Extensi
 
 * Menambahkan pesan yang dapat ditindaklanjuti saat ekstensi tidak kompatibel dengan inti CLI
 
@@ -1572,7 +1646,7 @@ Versi 2.20.0
 
 * Upgrade ke versi 3.0.0 dan tambahkan dukungan untuk NetworkAclBypass + Update Mongo ServerVersion + kebijakan cadangan
 
-### <a name="extension"></a>Ekstensi
+### <a name="extension"></a>Extensi
 
 * Konfigurasi dukungan url indeks ekstensi
 
@@ -1684,7 +1758,7 @@ Versi 2.19.0
 * Grup perintah baru sshkey. Perbolehkan referensi sumber daya kunci SSH saat membuat VM
 * `az disk create/update`: Tambahkan parameter `--enable-bursting` untuk mendukung pengisian disk
 
-### <a name="extension"></a>Ekstensi
+### <a name="extension"></a>Extensi
 
 * Perintah perintah ekstensi dukungan cocok untuk penginstalan dinamis
 
@@ -2460,7 +2534,7 @@ Versi 2.12.0
 
 Menambahkan perintah Cluster dan parameter trusted_service_access_enabled untuk Networkruleset
 
-### <a name="extension"></a>Ekstensi
+### <a name="extension"></a>Extensi
 
 * `az extension add`: Tambahkan `--upgrade` opsi untuk memperbarui ekstensi jika sudah diinstal
 * Mengaktifkan penginstalan dinamis secara default
@@ -2615,7 +2689,7 @@ Versi 2.11.0
 
 * `az eventhubs eventhub create/update`: Mengubah dokumentasi destination_name
 
-### <a name="extension"></a>Ekstensi
+### <a name="extension"></a>Extensi
 
 * Menambahkan `az extension list-versions` perintah untuk mencantumkan semua versi ekstensi yang tersedia
 
@@ -2757,7 +2831,7 @@ Versi 2.10.0
 
 * `az config`: Menambahkan modul perintah baru `config`
 
-### <a name="extension"></a>Ekstensi
+### <a name="extension"></a>Extensi
 
 * Dukungan secara otomatis menginstal ekstensi jika ekstensi perintah tidak diinstal
 
@@ -3025,7 +3099,7 @@ Versi 2.8.0
 
 * `az eventhubs namespace create` : Menambahkan parameter identitas terkelola
 
-### <a name="extension"></a>Ekstensi
+### <a name="extension"></a>Extensi
 
 * Menambahkan --version ke dukungan untuk menginstal dari versi tertentu
 * Aktifkan ekstensi CLI untuk menyertakan paket di namespace 'azure'
@@ -3215,7 +3289,7 @@ Versi 2.6.0
 
 * Memperbarui status on/off konteks lokal ke tingkat pengguna global
 
-### <a name="extension"></a>Ekstensi
+### <a name="extension"></a>Extensi
 
 * `az extension add`: Tambahkan --system untuk mengaktifkan penginstalan ekstensi di jalur sistem
 * Mendukung .egg-info untuk menyimpan metadata ekstensi tipe roda
@@ -3279,7 +3353,7 @@ Versi 2.5.1
 
 * `az cosmosdb create/update`: tambahkan dukungan --enable-public-network
 
-### <a name="extension"></a>Ekstensi
+### <a name="extension"></a>Extensi
 
 * Memperbaiki pemuatan metadata yang salah untuk ekstensi tipe roda
 
@@ -3541,7 +3615,7 @@ Versi 2.3.0
 
 * Pembaruan ke Alpine 3.11 dan Python 3.6.10
 
-### <a name="extension"></a>Ekstensi
+### <a name="extension"></a>Extensi
 
 * Memungkinkan untuk memuat ekstensi di jalur sistem melalui paket
 
@@ -6375,7 +6449,7 @@ Versi 2.0.42
 * Menambahkan parameter Log Analytics `--log-analytics-workspace` dan `--log-analytics-workspace-key`
 * Menambahkan `--protocol` parameter untuk menentukan protokol jaringan mana yang akan digunakan
 
-### <a name="extension"></a>Ekstensi
+### <a name="extension"></a>Extensi
 
 * Diubah `extension list-available` menjadi hanya menampilkan ekstensi yang kompatibel dengan versi CLI
 
@@ -6604,7 +6678,7 @@ Versi 2.0.33
 * Menambahkan dukungan untuk mengekspor grup kontainer dalam format yaml
 * Menambahkan dukungan untuk menggunakan file yaml untuk membuat / memperbarui grup kontainer
 
-### <a name="extension"></a>Ekstensi
+### <a name="extension"></a>Extensi
 
 * Penghapusan ekstensi yang ditingkatkan
 
@@ -6715,7 +6789,7 @@ Versi 2.0.32
 
 * Rilis awal - Menambahkan dukungan untuk skenario migrasi SQL ke Azure SQL
 
-### <a name="extension"></a>Ekstensi
+### <a name="extension"></a>Extensi
 
 * Bug tetap di mana metadata ekstensi berhenti ditampilkan
 
@@ -6847,7 +6921,7 @@ Versi 2.0.31
 * Menambahkan parameter pemasangan volume git repo `--gitrepo-url` `--gitrepo-dir` `--gitrepo-revision` dan `--gitrepo-mount-path`
 * Tetap [#5926:](https://github.com/Azure/azure-cli/issues/5926) `az container exec` gagal saat --container-name ditentukan
 
-### <a name="extension"></a>Ekstensi
+### <a name="extension"></a>Extensi
 
 * Mengubah pesan pemeriksaan distribusi menjadi tingkat debug
 
@@ -6948,7 +7022,7 @@ Versi 2.0.30
 * Perintah `container exec` tambahan. Menjalankan perintah dalam wadah untuk grup kontainer yang sedang berjalan
 * Mengizinkan output tabel untuk membuat dan memperbarui grup kontainer
 
-### <a name="extension"></a>Ekstensi
+### <a name="extension"></a>Extensi
 
 * Menambahkan pesan untuk `extension add` jika ekstensi sedang dalam pratinjau
 * Diubah `extension list-available` untuk menampilkan data ekstensi lengkap dengan `--show-details`
@@ -7039,7 +7113,7 @@ Versi 2.0.29
 
 * Rilis awal
 
-### <a name="extension"></a>Ekstensi
+### <a name="extension"></a>Extensi
 
 * Menambahkan cek untuk memperingatkan pengguna jika distro yang digunakan berbeda maka yang disimpan dalam file sumber paket, karena ini dapat menyebabkan kesalahan
 
@@ -7191,7 +7265,7 @@ Versi 2.0.27
 
 * Menambahkan dukungan untuk pengaturan kemampuan
 
-### <a name="extension"></a>Ekstensi
+### <a name="extension"></a>Extensi
 
 * Menambahkan dukungan untuk `--pip-proxy` parameter ke `az extension [add|update]` perintah
 * Menambahkan dukungan untuk `--pip-extra-index-urls` argumen ke `az extension [add|update]` perintah
@@ -7559,7 +7633,7 @@ Versi 2.0.21
 
 * Diubah `account list` untuk mengembalikan informasi yang lebih ringkas
 
-### <a name="extension"></a>Ekstensi
+### <a name="extension"></a>Extensi
 
 * Ditambahkan `extension list-available` untuk memungkinkan daftar ekstensi Resmi Microsoft
 * Ditambahkan `--name` `extension [add|update]` untuk memungkinkan penginstalan ekstensi berdasarkan nama
@@ -7790,7 +7864,7 @@ Versi 2.0.17
 
 * Fixed 'CustomDomain tidak dapat interable' bug untuk `cdn custom-domain create`
 
-### <a name="extension"></a>Ekstensi
+### <a name="extension"></a>Extensi
 
 * Rilis Awal
 
