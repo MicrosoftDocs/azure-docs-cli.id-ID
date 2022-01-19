@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
-ms.openlocfilehash: 5986adc5f8c666f1e31df1027f937ebe9c578591
-ms.sourcegitcommit: 82cb7af10a689b9b485859552d2f834bd593f6a1
+ms.openlocfilehash: 0f0a5c116607494e94b6cb82151fb13a78b1863b
+ms.sourcegitcommit: 9d7e461f68914e3d66f29d030bdf50ae58a4ef8b
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 10/06/2021
-ms.locfileid: "132439081"
+ms.lasthandoff: 01/19/2022
+ms.locfileid: "136921306"
 ---
 # <a name="how-to-use-azure-cli-effectively"></a>Cara menggunakan Azure CLI secara efektif
 
@@ -153,7 +153,7 @@ Banyak perintah menawarkan `--no-wait` parameter, yang memungkinkan perintah lai
 az group delete --name MyResourceGroup --no-wait
 ```
 
-Saat Anda menghapus grup sumber daya, Anda juga menghapus semua sumber daya yang menjadi miliknya. Merebut kembali sumber daya ini bisa memakan waktu lama. `--no-wait`Ketika perintah ini berjalan, konsol dapat menerima perintah segera, meskipun masih bekerja pada perintah.
+Saat menghapus grup sumber daya, semua sumber daya yang dimilikinya juga dihapus. Menghapus sumber daya ini bisa memakan waktu lama. Menjalankan perintah dengan `--no-wait` parameter, memungkinkan konsol untuk menerima perintah baru tanpa mengganggu penghapusan.
 
 Banyak perintah menawarkan opsi tunggu, menghentikan konsol sampai beberapa kondisi terpenuhi. Contoh berikut menggunakan perintah [az vm wait](/cli/azure/vm#az_vm_wait) untuk mendukung pembuatan sumber daya independen secara paralel:
 

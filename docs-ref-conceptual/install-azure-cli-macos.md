@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: Install azure cli, azure cli macos, macos cli, install azure cli macos
-ms.openlocfilehash: ba982b124479e11f851611271e6606460c05d3f7
-ms.sourcegitcommit: d2227bc475235bf86193e9cae5e02f349a6342e2
+ms.openlocfilehash: 548fe7d9c8632249aa478eab3335d9b000d9c094
+ms.sourcegitcommit: 9d7e461f68914e3d66f29d030bdf50ae58a4ef8b
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 11/02/2021
-ms.locfileid: "132439118"
+ms.lasthandoff: 01/19/2022
+ms.locfileid: "136921378"
 ---
 # <a name="install-azure-cli-on-macos"></a>Instal Azure CLI di macOS
 
@@ -38,8 +38,7 @@ brew update && brew install azure-cli
 
 > [!IMPORTANT]
 >
-> Azure CLI memiliki ketergantungan pada paket `python3` Homebrew, dan akan menginstalnya.
-> Azure CLI dijamin kompatibel dengan versi terbaru yang `python3` diterbitkan di Homebrew.
+> Azure CLI memiliki ketergantungan pada paket `python@3.10` Homebrew, dan akan menginstalnya.
 
 ## <a name="troubleshooting"></a>Pemecahan Masalah
 
@@ -51,11 +50,11 @@ Rumus Homebrew Azure CLI menginstal file penyelesaian yang disebutkan `az` dalam
 
 ### <a name="unable-to-find-python-or-installed-packages"></a>Tidak dapat menemukan Python atau paket yang diinstal
 
-Mungkin ada ketidakcocokan versi kecil atau masalah lain selama instalasi homebrew. CLI tidak menggunakan lingkungan virtual Python, sehingga bergantung pada menemukan versi Python yang diinstal. Perbaikan yang mungkin adalah menginstal dan menghubungkan kembali `python3` dependensi dari Homebrew.
+Mungkin ada ketidakcocokan versi kecil atau masalah lain selama instalasi homebrew. CLI tidak menggunakan lingkungan virtual Python, sehingga bergantung pada menemukan versi Python yang diinstal. Perbaikan yang mungkin adalah menginstal dan menghubungkan kembali `python@3.10` dependensi dari Homebrew.
 
 ```bash
-brew update && brew install python3 && brew upgrade python3
-brew link --overwrite python3
+brew update && brew install python@3.10 && brew upgrade python@3.10
+brew link --overwrite python@3.10
 ```
 
 ### <a name="cli-version-1x-is-installed"></a>CLI versi 1.x diinstal

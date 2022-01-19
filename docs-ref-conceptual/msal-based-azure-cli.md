@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: msal, msal-based azure cli
-ms.openlocfilehash: a065380ebe465ebb76a0735aead1890334397f51
-ms.sourcegitcommit: 23211f978c3a7079b2884355be102a9f18fea713
+ms.openlocfilehash: 54a57a3246178fa4bf47623524121c61ad4aec4a
+ms.sourcegitcommit: 9d7e461f68914e3d66f29d030bdf50ae58a4ef8b
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 12/01/2021
-ms.locfileid: "133334315"
+ms.lasthandoff: 01/19/2022
+ms.locfileid: "136921360"
 ---
 # <a name="msal-based-azure-cli"></a>MSAL-based Azure CLI
 
@@ -31,11 +31,11 @@ Versi sebelumnya dari Azure CLI menyimpan token ADAL dan entri utama layanan ke 
 Cache token MSAL dan entri utama layanan disimpan sebagai file terenkripsi di Windows, dan file plaintext di Linux dan MacOS.
 
 > [!IMPORTANT]
-> Saat menggunakan Azure CLI dalam pipa, seperti Azure DevOps, pastikan semua tugas/tahapan menggunakan versi Azure CLI di atas v2.30.0 untuk CLI azure berbasis MSAL. Azure CLI 2.30.0 tidak kompatibel dengan versi sebelumnya dan lemparan dan kesalahan saat menggunakan kesalahan yang tidak kompatibel.
+> Saat menggunakan Azure CLI dalam pipa seperti Azure DevOps, pastikan semua tugas dan tahapan menggunakan versi Azure CLI di atas v2.30.0 untuk Azure CLI berbasis MSAL. Azure CLI 2.30.0 tidak kompatibel dengan versi sebelumnya dan menimbulkan kesalahan saat bekerja dengan versi di bawah 2.30.0.
 
 ## <a name="alternatives-to-consider"></a>Alternatif untuk dipertimbangkan
 
-Berikut adalah beberapa alternatif yang dapat Anda pertimbangkan untuk kompatibilitas mundur:
+Berikut adalah beberapa alternatif yang dapat Anda pertimbangkan untuk stabilitas:
 
 ### <a name="calling-az-account-get-access-token"></a>Memanggil `az account get-access-token`
 
