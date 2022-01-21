@@ -5,12 +5,12 @@ manager: barbkess
 ms.date: 09/29/2020
 ms.topic: include
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: fd07e59a66b338e4fda5052f91bf5fd31966e714
-ms.sourcegitcommit: d2227bc475235bf86193e9cae5e02f349a6342e2
+ms.openlocfilehash: a3328b1765bbbe78c65db01236d0c802fc2a5c15
+ms.sourcegitcommit: d1cef00a447e85a7f596c1e7d01f209e99d8dcc6
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 11/02/2021
-ms.locfileid: "132439116"
+ms.lasthandoff: 01/21/2022
+ms.locfileid: "137614876"
 ---
 ## <a name="overview"></a>Gambaran Umum
 
@@ -18,8 +18,8 @@ ms.locfileid: "132439116"
 
 | Distribusi | Versi |
 |:-------------|:--------|
-| Ubuntu       | 14.04 LTS (Trusty Tahir), 16.04 LTS (Xenial Xerus), 18.04 LTS (Bionic Beaver), 20.04 LTS (Focal Fossa), 20.10 (Groovy Gorilla) |
-| Debian       | Debian 8 (Jessie), Debian 9 (Stretch), Debian 10 (Buster) |
+| Ubuntu       | 14.04 LTS (Trusty Tahir), 16.04 LTS (Xenial Xerus), 18.04 LTS (Bionic Beaver), 20.04 LTS (Focal Fossa), 21.04 (Hirsute Hippo) |
+| Debian       | Debian 8 (Jessie), Debian 9 (Stretch), Debian 10 (Buster), Debian 11 (Bullseye) |
 
 > [!WARNING]
 > Ubuntu 20.04 (Focal Fossa) dan 20.10 (Groovy Gorilla) termasuk paket dengan versi yang `azure-cli` `2.0.81` disediakan oleh `universe` repositori. Paket ini sudah usang dan tidak disarankan. Jika paket ini diinstal, lepaskan paket sebelum melanjutkan dengan menjalankan `sudo apt remove azure-cli -y && sudo apt autoremove -y` perintah.
