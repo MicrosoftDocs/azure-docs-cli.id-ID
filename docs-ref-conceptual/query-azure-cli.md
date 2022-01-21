@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: ''
-ms.openlocfilehash: 19e533e2201aa8662fd53a72910369c81c8ea634
-ms.sourcegitcommit: ecad34e4d4654660377050fccba7861e942e03de
+ms.openlocfilehash: 8a6d1951052b1905b2fcf4af9370d9d61c046fe2
+ms.sourcegitcommit: d1cef00a447e85a7f596c1e7d01f209e99d8dcc6
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 09/13/2021
-ms.locfileid: "132439052"
+ms.lasthandoff: 01/21/2022
+ms.locfileid: "137601048"
 ---
 # <a name="how-to-query-azure-cli-command-output-using-a-jmespath-query"></a>Cara query output perintah Azure CLI menggunakan kueri JMESPath
 
@@ -97,7 +97,7 @@ az vm show -g QueryDemo -n TestVM --query osProfile.linuxConfiguration.ssh.publi
 Kasus umum adalah Anda hanya perlu mendapatkan _satu_ nilai dari perintah CLI, seperti ID sumber daya Azure, nama sumber daya, nama pengguna, atau kata sandi. Dalam hal ini, Anda juga sering ingin menyimpan nilai dalam variabel lingkungan lokal. Untuk mendapatkan satu properti, pertama-tama pastikan Anda hanya mendapatkan satu properti dari kueri. Memodifikasi contoh terakhir untuk mendapatkan hanya nama pengguna admin:
 
 ```azurecli-interactive
-az vm show -g QueryDemo -n TestVM --query 'osProfile.adminUsername' -o json
+az vm show -g QueryDemo -n TestVM --query "osProfile.adminUsername" -o json
 ```
 
 ```JSON
@@ -118,7 +118,7 @@ echo $USER
 Ini hampir pasti bukan yang Anda inginkan. Dalam hal ini, Anda ingin menggunakan format output yang tidak melampirkan nilai yang dikembalikan dengan informasi tipe. Opsi output terbaik yang ditawarkan CLI untuk tujuan ini `tsv` adalah, nilai yang dipisahkan tab. Secara khusus, ketika mengambil nilai yang hanya satu nilai (bukan kamus atau daftar), `tsv` output dijamin tidak dikutip.
 
 ```azurecli-interactive
-az vm show -g QueryDemo -n TestVM --query 'osProfile.adminUsername' -o tsv
+az vm show -g QueryDemo -n TestVM --query "osProfile.adminUsername" -o tsv
 ```
 
 ```output
@@ -136,7 +136,7 @@ Querying nilai Boolean sedikit berbeda.  Ada dua opsi:
 az account list --query "[?isDefault]"
 
 # If you want a false value, use an escape character.
-az account list --query "[?isDefault == \`false\`]"
+az account list --query "[?isDefault == ``false``]"
 ```
 
 ## <a name="get-multiple-values"></a>Mendapatkan beberapa nilai
@@ -164,7 +164,7 @@ Format untuk hash multiselect adalah `{displayName:JMESPathExpression, ...}` .
 `displayName` akan menjadi string yang ditampilkan dalam output, dan `JMESPathExpression` merupakan ekspresi JMESPath untuk dievaluasi. Memodifikasi contoh dari bagian terakhir dengan mengubah daftar multiselect menjadi hash:
 
 ```azurecli-interactive
-az vm show -g QueryDemo -n TestVM --query '{VMName:name, admin:osProfile.adminUsername, sshKey:osProfile.linuxConfiguration.ssh.publicKeys[0].keyData }' -o json
+az vm show -g QueryDemo -n TestVM --query "{VMName:name, admin:osProfile.adminUsername, sshKey:osProfile.linuxConfiguration.ssh.publicKeys[0].keyData }" -o json
 ```
 
 ```json
@@ -184,7 +184,7 @@ Jika `[]` muncul di awal kueri, kueri meratakan hasil perintah CLI. Hasilnya `az
 Untuk mendapatkan nama, OS, dan nama administrator untuk setiap VM dalam grup sumber daya:
 
 ```azurecli-interactive
-az vm list -g QueryDemo --query '[].{Name:name, OS:storageProfile.osDisk.osType, admin:osProfile.adminUsername}' -o json
+az vm list -g QueryDemo --query "[].{Name:name, OS:storageProfile.osDisk.osType, admin:osProfile.adminUsername}" -o json
 ```
 
 ```json
@@ -210,7 +210,7 @@ az vm list -g QueryDemo --query '[].{Name:name, OS:storageProfile.osDisk.osType,
 Ketika dikombinasikan dengan `--output table` format output, nama kolom cocok dengan `displayKey` nilai hash multiselect:
 
 ```azurecli-interactive
-az vm list -g QueryDemo --query '[].{Name:name, OS:storageProfile.osDisk.osType, Admin:osProfile.adminUsername}' --output table
+az vm list -g QueryDemo --query "[].{Name:name, OS:storageProfile.osDisk.osType, Admin:osProfile.adminUsername}" --output table
 ```
 
 ```output
@@ -233,7 +233,7 @@ Array apa pun dapat diratakan, bukan hanya hasil tingkat atas yang dikembalikan 
 Ekspresi kueri ini meratakan `osProfile.linuxConfiguration.ssh.publicKeys` array, lalu menjalankan `keyData` ekspresi pada setiap elemen:
 
 ```azurecli-interactive
-az vm show -g QueryDemo -n TestVM --query '{VMName:name, admin:osProfile.adminUsername, sshKeys:osProfile.linuxConfiguration.ssh.publicKeys[].keyData }' -o json
+az vm show -g QueryDemo -n TestVM --query "{VMName:name, admin:osProfile.adminUsername, sshKeys:osProfile.linuxConfiguration.ssh.publicKeys[].keyData }" -o json
 ```
 
 ```json
