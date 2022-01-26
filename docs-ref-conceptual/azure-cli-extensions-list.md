@@ -4,19 +4,19 @@ description: Daftar lengkap ekstensi Azure Command-Line Interface (CLI) yang did
 author: haroldrandom
 ms.author: jianzen
 manager: yonzhan,yungezz
-ms.date: 01/19/2022
+ms.date: 01/22/2022
 ms.topic: article
 ms.prod: azure
 ms.technology: azure-cli
 ms.devlang: azure-cli
 ms.custom: devx-track-azurecli
 keywords: az extension, azure cli extensions, azure extensions
-ms.openlocfilehash: fb406f5e48b710f6aaf5e929cb68657651cd3a59
-ms.sourcegitcommit: d1cef00a447e85a7f596c1e7d01f209e99d8dcc6
+ms.openlocfilehash: 7020b447e62c825f7bf2e105396acb418199c482
+ms.sourcegitcommit: 42ea271946794893d4c727152d5a1373ab9b01e1
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 01/21/2022
-ms.locfileid: "137602920"
+ms.lasthandoff: 01/26/2022
+ms.locfileid: "137781588"
 ---
 # <a name="available-azure-cli-extensions"></a>Tersedia Azure CLI extensions
 
@@ -49,7 +49,7 @@ Anda akan diminta untuk menginstal ekstensi pada penggunaan pertama.
 |[azure-cli-ml](https://docs.microsoft.com/python/api/overview/azure/ml/?view=azure-ml-py) | 2.3.1 | Microsoft Azure Command-Line Tools AzureML Command Module | GA | [1.37.0](https://docs.microsoft.com/python/api/overview/azure/ml/?view=azure-ml-py/HISTORY.rst) |
 |[azure-devops](https://github.com/Microsoft/azure-devops-cli-extension) | 2.30.0 | Alat untuk mengelola Azure DevOps. | GA | [0.22.0](https://github.com/Microsoft/azure-devops-cli-extension) |
 |[azure-firewall](https://github.com/Azure/azure-cli-extensions/tree/master/src/azure-firewall) | 2.15.0 | Kelola sumber daya Azure Firewall. | Pratinjau | [0.13.0](https://github.com/Azure/azure-cli-extensions/tree/master/src/azure-firewall/HISTORY.rst) |
-|[azure-iot](https://github.com/azure/azure-iot-cli-extension) | 2.17.1 | Ekstensi Azure IoT untuk Azure CLI. | GA | [0.12.1](https://github.com/azure/azure-iot-cli-extension) |
+|[azure-iot](https://github.com/azure/azure-iot-cli-extension) | 2.24.1 | Ekstensi Azure IoT untuk Azure CLI. | GA | [0.13.0](https://github.com/azure/azure-iot-cli-extension) |
 |[azurestackhci](https://github.com/Azure/azure-cli-extensions/tree/master/src/azurestackhci) | 2.15.0 | Microsoft Azure Command-Line Tools AzureStackHCI Extension | Eksperimental | [0.2.2](https://github.com/Azure/azure-cli-extensions/tree/master/src/azurestackhci) |
 |[infrastruktur baremetal](https://github.com/Azure/azure-baremetalinfrastructure-cli-extension) | 2.12.0 | Perintah tambahan untuk bekerja dengan instans BareMetal. | GA | [0.0.2](https://github.com/Azure/azure-baremetalinfrastructure-cli-extension) |
 |[blockchain](https://github.com/Azure/azure-cli-extensions/tree/master/src/blockchain) | 2.3.1 | Microsoft Azure Command-Line Tools BlockchainManagementClient Extension | Eksperimental | [0.1.1](https://github.com/Azure/azure-cli-extensions/tree/master/src/blockchain/HISTORY.rst) |
@@ -101,7 +101,7 @@ Anda akan diminta untuk menginstal ekstensi pada penggunaan pertama.
 |[interaktif](https://github.com/Azure/azure-cli) | 2.0.62 | Shell Interaktif Microsoft Azure Command-Line | Pratinjau | [0.4.5](https://github.com/Azure/azure-cli) |
 |[penganalisis internet](https://github.com/Azure/azure-cli-extensions/tree/master/src/internet-analyzer) | 2.0.67 | Microsoft Azure Command-Line Tools Ekstensi Penganalisis Internet | Pratinjau | [0.1.0rc6](https://github.com/Azure/azure-cli-extensions/tree/master/src/internet-analyzer/HISTORY.rst) |
 |[ip-group](https://github.com/Azure/azure-cli-extensions) | 2.0.67 | Microsoft Azure Command-Line Tools IpGroup Extension | Pratinjau | [0.1.2](https://github.com/Azure/azure-cli-extensions) |
-|[konfigurasi k8s](https://github.com/Azure/azure-cli-extensions/tree/master/src/k8s-configuration) | 2.15.0 | Microsoft Azure Command-Line Tools K8s-configuration Extension | GA | [1.4.0](https://github.com/Azure/azure-cli-extensions/tree/master/src/k8s-configuration/HISTORY.rst) |
+|[konfigurasi k8s](https://github.com/Azure/azure-cli-extensions/tree/master/src/k8s-configuration) | 2.15.0 | Microsoft Azure Command-Line Tools K8s-configuration Extension | GA | [1.4.1](https://github.com/Azure/azure-cli-extensions/tree/master/src/k8s-configuration/HISTORY.rst) |
 |[ekstensi k8s](https://github.com/Azure/azure-cli-extensions) | 2.24.0 | Alat Microsoft Azure Command-Line Ekstensi K8s | GA | [1.0.4](https://github.com/Azure/azure-cli-extensions) |
 |[k8sconfiguration](https://github.com/Azure/azure-cli-extensions/tree/master/src/k8sconfiguration) | 2.15.0 | Microsoft Azure Command-Line Alat Ekstensi Konfigurasi K8 | Pratinjau | [0.2.4](https://github.com/Azure/azure-cli-extensions/tree/master/src/k8sconfiguration/HISTORY.rst) |
 |[kusto](https://github.com/Azure/azure-cli-extensions/tree/master/src/kusto) | 2.15.0 | alat Microsoft Azure Command-Line KustoManagementClient Extension | GA | [0.4.0](https://github.com/Azure/azure-cli-extensions/tree/master/src/kusto/HISTORY.rst) |
