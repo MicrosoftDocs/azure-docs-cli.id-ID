@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure service principal, create service principal azure, create service principal azure cli
-ms.openlocfilehash: 6371d1ee7aec05fc842ab25acad28a7b4a399519
-ms.sourcegitcommit: 6b5185b9fd55b84b0494e25e44165d435e3a22e2
+ms.openlocfilehash: bdaaac53af62319b57ba8c79c7d3a4739fa1f130
+ms.sourcegitcommit: 8be4e4ac6b298b7d61108e987c9b98dfbff29fda
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 12/07/2021
-ms.locfileid: "133917663"
+ms.lasthandoff: 01/28/2022
+ms.locfileid: "137825303"
 ---
 # <a name="create-an-azure-service-principal-with-the-azure-cli"></a>Membuat perwakilan layanan Azure dengan Azure CLI
 
@@ -29,7 +29,7 @@ Artikel ini menunjukkan kepada Anda langkah-langkah untuk membuat, mendapatkan i
 
 ## <a name="1-create-a-service-principal"></a>1. Membuat prinsip layanan
 
-Buat kepala layanan Azure dengan perintah [az ad sp create-for-rbac.](/cli/azure/ad/sp#az_ad_sp_create_for_rbac) 
+Buat kepala layanan Azure dengan perintah [az ad sp create-for-rbac.](/cli/azure/ad/sp#az_ad_sp_create_for_rbac)
 
 Dan `appId` `tenant` kunci muncul dalam output dan digunakan `az ad sp create-for-rbac` dalam otentikasi utama layanan. Catat nilainya, tetapi nilai dapat diambil kapan saja dengan [daftar az ad sp](/cli/azure/ad/sp#az_ad_sp_list).
 
@@ -138,7 +138,7 @@ openssl pkcs12 -in cert.pfx -passin pass: -out cert.pem -nodes
 
 ## <a name="2-get-an-existing-service-principal"></a>2. Dapatkan prinsip layanan yang sudah ada
 
-Daftar kepala layanan di penyewa dapat diambil dengan [daftar az ad sp.](/cli/azure/ad/sp#az_ad_sp_list) Secara default perintah ini mengembalikan 100 prinsip layanan pertama untuk penyewa Anda. Untuk mendapatkan semua prinsip layanan penyewa, gunakan `--all` argumen. Mendapatkan daftar ini bisa memakan waktu lama, jadi disarankan agar Anda memfilter daftar dengan salah satu argumen berikut:
+Daftar kepala layanan di penyewa dapat diambil dengan [daftar az ad sp.](/cli/azure/ad/sp#az-ad-sp-list) Secara default perintah ini mengembalikan 100 prinsip layanan pertama untuk penyewa Anda. Untuk mendapatkan semua prinsip layanan penyewa, gunakan `--all` argumen. Mendapatkan daftar ini bisa memakan waktu lama, jadi disarankan agar Anda memfilter daftar dengan salah satu argumen berikut:
 
 * `--display-name` meminta kepala layanan yang memiliki _awalan_ yang sesuai dengan nama yang disediakan. Nama tampilan kepala layanan adalah nilai yang ditetapkan dengan `--name` parameter selama pembuatan. Jika Anda tidak mengatur `--name` selama pembuatan utama layanan, awalan nama adalah `azure-cli-` .
 * `--spn` filter pada pencocokan nama utama layanan yang tepat. Nama utama layanan selalu dimulai dengan `https://` .
