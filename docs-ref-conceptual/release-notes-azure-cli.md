@@ -4,20 +4,116 @@ description: Pelajari tentang catatan rilis dan pembaruan Azure Command-Line Int
 author: dbradish-microsoft
 ms.author: dbradish
 manager: barbkess
-ms.date: 01/04/2022
+ms.date: 02/01/2022
 ms.topic: article
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli updates, azure cli notes, azure cli versions
-ms.openlocfilehash: 0c6338a96b15f043a6c0b22fd7041457c60191ba
-ms.sourcegitcommit: a5413bf8e5feb1614be35613ba115185a8cb808f
+ms.openlocfilehash: bb173c94c6326ef415dd1010542c2cf4750d1302
+ms.sourcegitcommit: f0c495b26b7fbfb6edc4563326b1a79615d5f780
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 01/04/2022
-ms.locfileid: "135782930"
+ms.lasthandoff: 02/02/2022
+ms.locfileid: "137989299"
 ---
 # <a name="azure-cli-release-notes"></a>Azure CLI release notes
+
+## <a name="february-01-2022"></a>Tanggal 01 Februari 2022
+
+Versi 2.33.0
+
+### <a name="acr"></a>ACR
+
+* `az acr connected-registry create`: Tambahkan `--notifications` ke dukungan menambahkan pola untuk menghasilkan peristiwa pemberitahuan pada artefak registri yang terhubung
+* `az acr connected-registry update`: Tambahkan `--add-notifications` dan `--remove-notifications` untuk mendukung menambahkan atau menghapus pola untuk menghasilkan peristiwa pemberitahuan pada artefak registri yang terhubung
+
+### <a name="aks"></a>AKS
+
+* `az aks nodepool add/update/upgrade`: Tambahkan parameter `--aks-custom-headers` baru untuk mendukung header kustom
+* `az aks create`Menambahkan parameter `--snapshot-id` baru untuk mendukung pembuatan nodepool dari snapshot saat membuat cluster
+* `az aks nodepool add/upgrade`: Tambahkan parameter `--snapshot-id` baru untuk mendukung pembuatan nodepool dari snapshot
+* `az aks snapshot create/delete/list/show`: Menambahkan perintah baru untuk mendukung pengelolaan operasi terkait snapshot
+* `az aks update/az aks nodepool update`: Izinkan string kosong sebagai nilai label
+
+### <a name="app-config"></a>Konfigurasi Aplikasi
+
+* [MELANGGAR PERUBAHAN] Slot layanan aplikasi dukungan
+
+### <a name="app-service"></a>App Service
+
+* `az webapp vnet-integration add`: Perbaiki bug yang mencegah menambahkan vnet dalam langganan yang berbeda dari webapp
+* `az functionapp vnet-integration add`: Perbaiki bug yang mencegah menambahkan vnet dalam langganan yang berbeda dari functionapp
+* `az webapp create`: Dukungan bergabung dengan vnet dalam langganan yang berbeda
+* `az functionapp create`: Dukungan bergabung dengan vnet dalam langganan yang berbeda
+* `az functionapp create` : Hapus pratinjau dari runtime PowerShell untuk linux
+* `az appservice plan update`: Tambahkan `--elastic-scale` dan `--max-elastic-worker-count` parameter untuk mendukung skala elastis
+* `az webapp update`: Tambahkan `--minimum-elastic-instance-count` dan `--prewarmed-instance-count` parameter untuk mendukung pengaturan jumlah instans
+* `az webapp up`: Tambahkan teks bantuan dan debug teks untuk penghematan dan pemuatan konfigurasi
+* `az webapp list-runtimes`: Dukungan node 16-lts runtime untuk linux dan windows
+
+### <a name="batch"></a>Batch
+
+* `az batch create/activate`: Tambahkan info bantuan jalur paket aplikasi klarifikasi untuk argumen `--package-file`
+
+### <a name="bot-service"></a>Layanan Bot
+
+* `az bot create`: Tambahkan lokasi seperti yang ditentukan oleh pengguna untuk pembuatan bot untuk regionalitas / EUDB
+
+### <a name="compute"></a>Compute 
+
+* `az image builder create`: Tambahkan parameter `--proxy-vm-size` baru untuk mendukung kustomisasi ukuran VM proxy
+* `az image builder create`: Menambahkan parameter `--build-vm-identities` baru untuk mendukung kustomisasi identitas yang ditetapkan pengguna
+* `az vmss update`: Tambahkan parameter `--force-deletion` baru untuk mendukung kekuatan menghapus VMSS
+* `az vm/vmss create`: Tambahkan log peringatan dan ubah bantuan untuk menginformasikan bahwa nilai `Contributor` `--role` default akan dihapus
+* `az disk-encryption-set create`: Membuat parameter `--source-vault` tidak diperlukan
+* `az vm create/update`: Tambahkan parameter `--v-cpus-available` baru dan `--v-cpus-per-core` untuk mendukung kustomisasi VMSize
+
+### <a name="cosmos-db"></a>Cosmos DB
+
+* `az managed-cassandra cluster status`: Menambahkan dukungan format tabel
+
+### <a name="key-vault"></a>Key Vault
+
+* `az keyvault create`: Tambahkan izin default pada pembuatan keyvault
+
+### <a name="monitor"></a>Monitor
+
+* `az monitor action-group`: Dukungan penerima hub acara
+
+### <a name="netappfiles"></a>NetAppFiles
+
+* `az netappfiles account ad add`: Tambahkan parameter opsional baru bernama encrypt-dc-connections
+* `az netappfiles volume export-policy add`: Tambahkan parameter opsional yang hilang kerberos5_read_only, kerberos5_read_write, kerberos5i_read_only, kerberos5i_read_write, kerberos5_p_read_only, kerberos5_p_read_write, has_root_access, chown_mode
+* `az netappfiles account ad update`: Menambahkan perintah
+
+### <a name="network"></a>Jaringan
+
+* Tambahkan Microsoft.DataFactory/pabrik ke Titik Akhir Pribadi yang didukung
+* Tambahkan Microsoft.Databricks/workspaces ke titik akhir pribadi yang didukung
+* `az network private-endpoint`: Tambahkan parameter dan subkelompok untuk mendukung Konfigurasi IP, ASG dan NicName
+* `az network traffic-manager endpoint create/update`: Tambahkan argumen `--min-child-ipv4` baru dan `--min-child-ipv6`.
+* Tambahkan Microsoft.HybridCompute/privateLinkScopes ke Titik Akhir Pribadi yang didukung
+
+### <a name="packaging"></a>Pengemasan
+
+* Perbarui gambar dasar Dockerfile dari Alpine 3.14 hingga 3.15
+
+### <a name="rdbms"></a>RDBMS
+
+* `az postgres flexible-server create`: Mengubah versi postgres default
+
+### <a name="redis"></a>Redis
+
+* `az redis create`Menambahkan nilai default untuk identitas dan akses jaringan publik sebagai `None`
+
+### <a name="serviceconnector"></a>ServiceConnector
+
+* Mendukung sumber daya target baru: servicebus, eventhub, appconfig
+
+### <a name="storage"></a>Penyimpanan
+
+* Berhenti mendukung `--auth-mode login` untuk `az storage blob sync` dan `az storage fs directory upload/download`
 
 ## <a name="january-04-2022"></a>Tanggal 04 Januari 2022
 
@@ -25,19 +121,19 @@ Versi 2.32.0
 
 ### <a name="aks"></a>AKS
 
-* `az aks create`: Tambahkan parameter baru `--enable-fips-image` untuk mendukung mengaktifkan gambar fips
-* `az aks nodepool add`: Tambahkan parameter baru `--enable-fips-image` untuk mendukung mengaktifkan gambar fips
+* `az aks create`: Tambahkan parameter `--enable-fips-image` baru untuk mendukung mengaktifkan gambar fips
+* `az aks nodepool add`: Tambahkan parameter `--enable-fips-image` baru untuk mendukung mengaktifkan gambar fips
 
 ### <a name="app-service"></a>App Service
 
-* [BREAKING CHANGE:]  `az webapp up` Hapus dukungan untuk python|3.6 (linux dan windows), ruby|2.5 (linux), dan php|7.3 (windows) runtimes. Tambahkan dukungan untuk runtime python|3.9 (linux), php|8.0 (linux), dan ruby|2.7 (linux)
-* [BREAKING CHANGE:]  `az webapp create` Hapus dukungan untuk python|3.6 (linux dan windows), ruby|2.5 (linux), dan php|7.3 (windows) runtimes. Tambahkan dukungan untuk runtime python|3.9 (linux), php|8.0 (linux), dan ruby|2.7 (linux)
-* [BREAKING CHANGE]  `az functionapp create` : Hapus dukungan python 3.6
-* Perbaiki #19550: `az staticwebapp users update` : Izinkan memperbarui peran pengguna aplikasi web statis lagi
+* [BREAKING CHANGE] `az webapp up`: Hapus dukungan untuk python|3.6 (linux dan windows), ruby|2.5 (linux), dan php|7.3 (windows) runtimes. Tambahkan dukungan untuk runtime python|3.9 (linux), php|8.0 (linux), dan ruby|2.7 (linux)
+* [BREAKING CHANGE] `az webapp create`: Hapus dukungan untuk python|3.6 (linux dan windows), ruby|2.5 (linux), dan php|7.3 (windows) runtimes. Tambahkan dukungan untuk runtime python|3.9 (linux), php|8.0 (linux), dan ruby|2.7 (linux)
+* [BREAKING CHANGE] `az functionapp create`: Hapus dukungan python 3.6
+* Perbaiki #19550: `az staticwebapp users update`: Izinkan memperbarui peran pengguna aplikasi web statis lagi
 * `az logicapp create`Autogenerasi Paket Layanan Aplikasi WS1 ketika tidak ada nilai untuk `--plan` atau `--consumption-plan-location` disediakan
 * `az appservice plan create`Izinkan pembuatan Paket Layanan Aplikasi untuk Aplikasi Logika (SKU WS1, WS2, dan WS3)
-* Perbaiki #20757: `az webapp up` : Perbaiki indeks daftar di luar jangkauan ketika tidak ada argumen yang `--plan` disahkan
-* Perbaiki #18652: `az webapp up` : Cari \* .csproj di direktori anak
+* Perbaiki #20757: `az webapp up`: Perbaiki indeks daftar di luar jangkauan ketika tidak ada `--plan` argumen yang disahkan
+* Perbaiki #18652: `az webapp up`: Cari \*.csproj di direktori anak
 * `az webapp list-runtimes`: Hapus dukungan untuk python|3.6 (linux dan windows), ruby|2.5 (linux), dan php|7.3 (windows) runtimes. Tambahkan dukungan untuk runtime python|3.9 (linux), php|8.0 (linux), dan ruby|2.7 (linux)
 
 ### <a name="backup"></a>Cadangan
@@ -50,13 +146,13 @@ Versi 2.32.0
 ### <a name="compute"></a>Compute 
 
 * `az vm/vmss create/update`: Perluas validasi tipe lisensi untuk `--license-type` parameter
-* `az sig image-definition list-shared`: Tambahkan parameter baru `--marker` dan `--show-next-marker` untuk mendukung paging
-* `az sig image-version list-shared`: Tambahkan parameter baru `--marker` dan `--show-next-marker` untuk mendukung paging
+* `az sig image-definition list-shared`: Tambahkan parameter `--marker` baru dan `--show-next-marker` untuk mendukung paging
+* `az sig image-version list-shared`: Tambahkan parameter `--marker` baru dan `--show-next-marker` untuk mendukung paging
 
 ### <a name="iot"></a>IoT
 
 * `az iot hub update`: Tambahkan penanganan kesalahan untuk parameter unggah file dan memperbaiki kesalahan titik akhir penyimpanan $default kosong
-* `az iot central app create`Menambahkan parameter baru `--mi-system-assigned` untuk mendukung pembuatan aplikasi dengan identitas terkelola yang ditetapkan sistem
+* `az iot central app create`Menambahkan parameter `--mi-system-assigned` baru untuk mendukung pembuatan aplikasi dengan identitas terkelola yang ditetapkan sistem
 * `az iot central app identity show/assign/remove`Menambahkan perintah baru untuk mengelola identitas terkelola yang ditetapkan sistem ke aplikasi IoT Central yang ada
 * `az iot dps access-policy`: Diganti dengan `az iot dps policy`
 * `az iot dps linked-hub create`: Tambahkan argumen kenyamanan untuk menghubungkan hub
@@ -68,7 +164,7 @@ Versi 2.32.0
 
 ### <a name="profile"></a>Profil
 
-* `az account show/set`: Tambahkan `-n` , `--name` argumen
+* `az account show/set`: Tambahkan `-n`, `--name` argumen
 
 ### <a name="redis"></a>Redis
 
@@ -76,12 +172,12 @@ Versi 2.32.0
 
 ### <a name="rest"></a>REST
 
-* [BREAKING CHANGE]  `az rest` : Hapus , `resourceGroup` `x509ThumbprintHex` transformasi
+* [BREAKING CHANGE] `az rest`: Hapus `resourceGroup`, `x509ThumbprintHex` transformasi
 
 ### <a name="role"></a>Peran
 
-* [BREAKING CHANGE:]  `az ad sp create-for-rbac` Jatuhkan properti dari `name` output. Gunakan `appId` sebagai gantinya
-* [BREAKING CHANGE]  `az ad sp create-for-rbac` : Tidak ada tugas peran yang akan dibuat secara default
+* [BREAKING CHANGE] `az ad sp create-for-rbac`: Jatuhkan `name` properti dari output. Gunakan `appId` sebagai gantinya
+* [BREAKING CHANGE] `az ad sp create-for-rbac`: Tidak ada tugas peran yang akan dibuat secara default
 
 ### <a name="storage"></a>Penyimpanan
 
@@ -89,7 +185,7 @@ Versi 2.32.0
 
 ### <a name="synapse"></a>Synapse
 
-* [BREAKING CHANGE]  `az synapse managed private endpoints create` : Hapus dan , gunakan sebagai `--resource-id` `--group-id` `--file` gantinya
+* [BREAKING CHANGE] `az synapse managed private endpoints create`: Hapus `--resource-id` dan `--group-id`, gunakan `--file` sebagai gantinya
 * `az synapse sql pool create/restore`: Menambahkan parameter `--storage-type` untuk mendukung menentukan tipe akun penyimpanan
 * `az synapse kql-script`Grup komando baru untuk mendukung skrip Kusto
 
@@ -117,7 +213,7 @@ Versi 2.31.0
 * `az staticwebapp identity assign`: Menetapkan identitas layanan terkelola ke aplikasi web statis
 * `az staticwebapp identity remove`: Nonaktifkan identitas layanan terkelola aplikasi web statis
 * `az staticwebapp identity show`: Menampilkan identitas layanan terkelola aplikasi web statis
-* Perbaiki #17507: `az staticwebapp functions` : Tambahkan dukungan untuk menghubungkan aplikasi fungsi yang ada ke webapp statis (bawa fungsi Anda sendiri)
+* Perbaiki #17507: `az staticwebapp functions`: Tambahkan dukungan untuk menghubungkan aplikasi fungsi yang ada ke webapp statis (bawa fungsi Anda sendiri)
 * `az staticwebapp create`: Memperbarui teks bantuan dengan panduan untuk repos di organisasi Github
 * `az functionapp deployment source config-zip`: Perbaiki #12289: Izinkan build on zip deploy untuk aplikasi fungsi windows
 * `az staticwebapp create`: Tambahkan pesan kesalahan yang lebih baik saat mencoba membuat webapp statis yang sudah ada
@@ -136,11 +232,11 @@ Versi 2.31.0
 ### <a name="arm"></a>ARM
 
 * `az resource\group list`: Mendukung kueri data hanya dengan meneruskan nama tag ke `--tag` parameter
-* `az account management-group`: Tambahkan parameter baru `--no-register` untuk melewatkan pendaftaran RP untuk `Microsoft.Management`
+* `az account management-group`: Tambahkan parameter `--no-register` baru untuk melewatkan pendaftaran RP untuk `Microsoft.Management`
 * `az deployment`Prettify output kesalahan untuk penyebaran ARM
-* `az bicep install`: Tambahkan parameter baru `--target-platform/-t` untuk menentukan platform berjalan Bicep CLI
-* `az bicep upgrade`: Tambahkan parameter baru `--target-platform/-t` untuk menentukan platform berjalan Bicep CLI
-* `az deployment sub/tenant/mg create`: Memperbaiki `KeyError: 'resourceGroup'` hasil output dalam format tabel saat menerapkan sumber daya tingkat grup non-sumber daya
+* `az bicep install`: Tambahkan parameter `--target-platform/-t` baru untuk menentukan platform berjalan Bicep CLI
+* `az bicep upgrade`: Tambahkan parameter `--target-platform/-t` baru untuk menentukan platform berjalan Bicep CLI
+* `az deployment sub/tenant/mg create`: Memperbaiki hasil `KeyError: 'resourceGroup'` output dalam format tabel saat menerapkan sumber daya tingkat grup non-sumber daya
 * `az policy assignment create` dan `az policy assignment identity assign` mendukung penambahan identitas yang ditetapkan pengguna
 * `az bicep install`Bekerja sekarang di belakang proxy perusahaan
 
@@ -152,17 +248,17 @@ Versi 2.31.0
 
 ### <a name="cognitive-services"></a>Cognitive Services
 
-* `az cognitiveservices account deployment`: Tambahkan perintah baru `show` `list` , , `create` , `delete`
-* `az cognitiveservices account commitment-plan`: Tambahkan perintah baru `show` `list` , , `create` , `delete`
+* `az cognitiveservices account deployment`: Tambahkan perintah `show`baru , `list`, , `create``delete`
+* `az cognitiveservices account commitment-plan`: Tambahkan perintah `show`baru , `list`, , `create``delete`
 * `az cognitiveservices commitment-tier`: Tambahkan perintah baru `list`
 
 ### <a name="compute"></a>Compute
 
-* Perbaiki #20182: `az snapshot create` : Perbaiki bug deteksi otomatis untuk `--copy-start`
-* Perbaiki #20133: `az vm create` : Perbaiki tidak berfungsi saat tidak `--data-disk-delete-option` `--attach-data-disks` disediakan
+* Perbaiki #20182: `az snapshot create`: Perbaiki bug deteksi otomatis untuk `--copy-start`
+* Perbaiki #20133: `az vm create`: Perbaiki `--data-disk-delete-option` tidak berfungsi saat tidak `--attach-data-disks` disediakan
 * Memperbaiki decoding diagnostik boot
-* `az vm create/update`: Tambahkan parameter baru `--enable-hibernation` untuk mendukung kemampuan hibernasi yang memungkinkan
-* `az vm/vmss run-command show`Menambahkan parameter baru `--instance-view` untuk mendukung pelacakan kemajuan RunCommand
+* `az vm create/update`: Tambahkan parameter `--enable-hibernation` baru untuk mendukung kemampuan hibernasi yang memungkinkan
+* `az vm/vmss run-command show`Menambahkan parameter `--instance-view` baru untuk mendukung pelacakan kemajuan RunCommand
 * Memperbarui deskripsi bantuan untuk disk yang tidak terurus
 * `az disk create/update`: Tambahkan `--public-network-access` argumen untuk mengontrol kebijakan untuk ekspor pada disk
 * `az disk create/update`: Tambahkan `--accelerated-network` argumen untuk mendukung jaringan yang dipercepat
@@ -185,11 +281,11 @@ Versi 2.31.0
 
 ### <a name="network"></a>Jaringan
 
-* `az network express-route peering connection ipv6-config`: Tambahkan perintah baru `set` , `remove`
-* `az network application-gateway waf-policy managed-rule exclusion`: Tambahkan subkelompok baru `rule-set` untuk mendukung pengecualian per aturan
+* `az network express-route peering connection ipv6-config`: Tambahkan perintah `set`baru , `remove`
+* `az network application-gateway waf-policy managed-rule exclusion`: Tambahkan subkelompok `rule-set` baru untuk mendukung pengecualian per aturan
 * `az network bastion create`: Perbaiki validator yang tidak valid saat `--scale-units` tidak ada
-* `az network vnet create`Menambahkan `--enable-encryption` argumen untuk mendukung mengaktifkan enkripsi pada jaringan virtual
-* `az network vnet update`Menambahkan `--enable-encryption` argumen untuk mendukung mengaktifkan enkripsi pada jaringan virtual
+* `az network vnet create``--enable-encryption` Menambahkan argumen untuk mendukung mengaktifkan enkripsi pada jaringan virtual
+* `az network vnet update``--enable-encryption` Menambahkan argumen untuk mendukung mengaktifkan enkripsi pada jaringan virtual
 * `az network vnet create`: Tambahkan `--encryption-enforcement-policy` argumen untuk memilih Jika Mesin Virtual tanpa enkripsi diizinkan di Jaringan Virtual terenkripsi.
 * `az network vnet update`: Tambahkan `--encryption-enforcement-policy` argumen untuk memilih Jika Mesin Virtual tanpa enkripsi diizinkan di Jaringan Virtual terenkripsi.
 
@@ -200,12 +296,12 @@ Versi 2.31.0
 
 ### <a name="profile"></a>Profil
 
-* `az logout`, `az account clear` : Hapus file cache token ADAL `accessTokens.json`
+* `az logout`, `az account clear`: Hapus file cache token ADAL `accessTokens.json`
 
 ### <a name="rdbms"></a>RDBMS
 
 * Perbaiki bug akhiran zona DNS pribadi
-* Perbaiki #20124: `az mysql/postgres flexible-server db create` : Buat grup sumber daya dan nama server diperlukan
+* Perbaiki #20124: `az mysql/postgres flexible-server db create`: Buat grup sumber daya dan nama server diperlukan
 * `az postgres flexible-server`: Hapus tag pratinjau
 
 ### <a name="storage"></a>Penyimpanan
@@ -215,7 +311,7 @@ Versi 2.31.0
 
 ### <a name="synapse"></a>Synapse
 
-* [MELANGGAR PERUBAHAN]  `az synapse sql/pool audit-policy` : Hapus`--blob-auditing-policy-name`
+* [MELANGGAR PERUBAHAN] `az synapse sql/pool audit-policy`: Hapus `--blob-auditing-policy-name`
 * `az synapse notebook/spark-job-definition`: Tambahkan `--folder-path` argumen
 * `az synapse spark pool create/update`: Tambahkan `--spark-config-file-path`
 * `az synapse spark job submit`: Perbaiki untuk `--main-class-name`
@@ -231,28 +327,28 @@ Versi 2.30.0
 
 ### <a name="acr"></a>ACR
 
-* [BREAKING CHANGE]  `az connected-registry` : bendera versi pendek sedang `--repository` `-t` dihapus.
-* [BREAKING CHANGE:]  `az connected-registry install renew credentials` Sekarang mengharuskan pengguna untuk mengkonfirmasi pembuatan kata sandi.
-* `az connected-registry install`: Terdepresiasi dan alihkan ke `az acr connected-registry get-settings` .
-* `az connected-registry repo`: Terdepresiasi dan alihkan ke `az acr connected-registry permissions update` .
+* [BREAKING CHANGE] `az connected-registry`: `--repository` bendera versi `-t` pendek sedang dihapus.
+* [BREAKING CHANGE] `az connected-registry install renew credentials`: Sekarang mengharuskan pengguna untuk mengkonfirmasi pembuatan kata sandi.
+* `az connected-registry install`: Terdepresiasi dan alihkan ke `az acr connected-registry get-settings`.
+* `az connected-registry repo`: Terdepresiasi dan alihkan ke `az acr connected-registry permissions update`.
 * `az connected-registry permissions show`Perintah baru yang memungkinkan pengguna untuk melihat informasi peta lingkup sinkronisasi.
 * `az connected-registry get-settings`Perintah baru yang mengambil informasi yang diperlukan untuk menginstal registri yang terhubung dan memungkinkan pembuatan kata sandi token sinkronisasi baru.
 * `az connected-registry create`: Tidak lagi menambahkan postfix ke token sinkronisasi dan nama peta lingkup.
 
 ### <a name="aks"></a>AKS
 
-* `az aks create/update`: Tambahkan parameter baru `--aks-custom-headers` untuk mendukung header kustom
+* `az aks create/update`: Tambahkan parameter `--aks-custom-headers` baru untuk mendukung header kustom
 * `az aks create`: Pengaturan dukungan `--private-dns-zone` tidak ada untuk pembuatan klaster pribadi
-* `az aks create/update`: Tambahkan parameter baru `--enable-secret-rotation` dan untuk mendukung rotasi `--rotation-poll-interval` rahasia
-* `az aks enable-addons`: Tambahkan parameter baru `--enable-secret-rotation` dan untuk mendukung rotasi `--rotation-poll-interval` rahasia
+* `az aks create/update`: Tambahkan parameter `--enable-secret-rotation` baru dan `--rotation-poll-interval` untuk mendukung rotasi rahasia
+* `az aks enable-addons`: Tambahkan parameter `--enable-secret-rotation` baru dan `--rotation-poll-interval` untuk mendukung rotasi rahasia
 
 ### <a name="app-config"></a>Konfigurasi Aplikasi
 
-* `az appconfig kv import/export`Menambahkan parameter baru `--profile` untuk mendukung penggunaan `appconfig/kvset` profil
+* `az appconfig kv import/export`Menambahkan parameter `--profile` baru untuk mendukung penggunaan `appconfig/kvset` profil
 
 ### <a name="app-service"></a>App Service
 
-* Perbaiki #19617: `az webapp ssh` : Buka Web SSH pada instans yang ditentukan
+* Perbaiki #19617: `az webapp ssh`: Buka Web SSH pada instans yang ditentukan
 * `az staticwebapp hostname`: Dukungan menambahkan nama host webapp statis melalui validasi TXT
 * Aktifkan dukungan untuk PowerShell pada aplikasi fungsi Linux dengan V4
 
@@ -266,9 +362,9 @@ Versi 2.30.0
 
 ### <a name="compute"></a>Compute
 
-* `az disk update`: Memperbaiki masalah bahwa memperbarui kebijakan akses jaringan `AllowPrivate` gagal
-* `az vm update`Menambahkan `--host` argumen dan `--host-group` argumen untuk mendukung menetapkan VM yang ada ke ADH tertentu
-* Perbaiki # 19599: `az vm create` Perbaiki masalah yang tidak berfungsi ketika tidak `--nic-delete-option` `--nics` disediakan.
+* `az disk update`: Memperbaiki masalah bahwa memperbarui kebijakan akses jaringan gagal `AllowPrivate`
+* `az vm update``--host` Menambahkan argumen dan `--host-group` argumen untuk mendukung menetapkan VM yang ada ke ADH tertentu
+* Perbaiki # 19599: `az vm create`Perbaiki masalah yang `--nic-delete-option` tidak berfungsi ketika tidak `--nics` disediakan.
 * `az snapshot create`: Dukungan copyStart sebagai createOption
 * `az vmss create/update`: Dukungan dalam-tamu patching untuk VMSS
 * `az vm application set/list`: Menambahkan perintah baru untuk mendukung aplikasi VM
@@ -287,8 +383,8 @@ Versi 2.30.0
 ### <a name="container"></a>Kontainer
 
 * `az container create`: Menambahkan parameter `--zone` untuk mendukung pemilihan Availability Zone
-* `az container create`Memperbaiki masalah yang `--subnet` atau tidak dapat digunakan dengan tipe alamat IP untuk `--vnet` `Public` memungkinkan `Private`
-* `az container create`: Tambahkan Dukungan `--registry-login-server` untuk bekerja dengan `--acr-identity`
+* `az container create`Memperbaiki masalah yang `--subnet` atau `--vnet` tidak dapat digunakan dengan tipe `Public` alamat IP untuk memungkinkan `Private`
+* `az container create`: Tambahkan Dukungan untuk `--registry-login-server` bekerja dengan `--acr-identity`
 
 ### <a name="cosmos-db"></a>Cosmos DB
 
@@ -302,11 +398,11 @@ Versi 2.30.0
 
 ### <a name="functionapp"></a>FunctionApp
 
-* [BREAKING CHANGE]  `az functionapp devops-pipeline` : Hapus perintah dan pindahkan ke `functionapp` ekstensi
+* [BREAKING CHANGE] `az functionapp devops-pipeline`: Hapus perintah dan pindahkan ke `functionapp` ekstensi
 
 ### <a name="hdinsight"></a>HDInsight
 
-* `az hdinsight create`: Tambahkan dua parameter `--zones` dan untuk mendukung pembuatan cluster dengan fitur availability zone dan membuat cluster `--private-link-configurations` berkemampuan tautan pribadi dengan fitur konfigurasi tautan pribadi.
+* `az hdinsight create`: Tambahkan dua parameter `--zones` dan `--private-link-configurations` untuk mendukung pembuatan cluster dengan fitur availability zone dan membuat cluster berkemampuan tautan pribadi dengan fitur konfigurasi tautan pribadi.
 
 ### <a name="key-vault"></a>Key Vault
 
@@ -321,15 +417,15 @@ Versi 2.30.0
 
 ### <a name="netappfiles"></a>NetAppFiles
 
-* [BREAKING CHANGE]  `az netappfiles account backup-policy create/update` : Hapus parameter `--yearly-backups` opsional.
+* [BREAKING CHANGE] `az netappfiles account backup-policy create/update`: Hapus parameter `--yearly-backups`opsional .
 * `az netappfiles account list`: Tambahkan opsi untuk melewatkan `--resource-group` parameter dan mengambil akun untuk berlangganan.
 * `az netappfiles pool create`: Menambahkan parameter opsional bernama `--encryption-type`
-* `az netappfiles volume create`: Tambahkan parameter opsional: `--network-features` , `--avs-data-store` , , `--default-group-quota` `--default-user-quota` , `--is-def-quota-enabled`
-* `az netappfiles volume update`: Tambahkan parameter opsional: `--default-group-quota` , `--default-user-quota` , `--is-def-quota-enabled`
+* `az netappfiles volume create`: Tambahkan parameter opsional: `--network-features`, , `--avs-data-store`, `--default-group-quota`, `--default-user-quota``--is-def-quota-enabled`
+* `az netappfiles volume update`: Tambahkan parameter opsional: `--default-group-quota`, , `--default-user-quota``--is-def-quota-enabled`
 
 ### <a name="network"></a>Jaringan
 
-* `az network bastion create`: Tambahkan parameter baru `--scale-units` dan untuk mendukung unit skala `--sku` pengaturan
+* `az network bastion create`: Tambahkan parameter `--scale-units` baru dan `--sku` untuk mendukung unit skala pengaturan
 * `az network vnet`: Menambahkan parameter `--bgp-community`
 * `az network private-endpoint-connection`: Dukungan "Microsoft.Cache/Redis"
 * `az network private-endpoint-connection`: Dukungan "Microsoft.SignalrService/WebPubsub"
@@ -361,7 +457,7 @@ Versi 2.29.2
 
 ### <a name="aro"></a>ARO
 
-* Hotfix: `az aro create` : Hapus URI Pengenal
+* Hotfix: `az aro create`: Hapus URI Pengenal
 
 ## <a name="october-21-2021"></a>Tanggal 21 Oktober 2021
 
@@ -378,7 +474,7 @@ Versi 2.29.0
 ### <a name="aks"></a>AKS
 
 * `az aks check-acr`Benjolan canipull ke 0.0.3 alpha untuk mendukung awan berdaulat
-* `az aks create/update`: Tambahkan parameter baru `--disable-local-accounts` untuk mendukung menonaktifkan akun lokal
+* `az aks create/update`: Tambahkan parameter `--disable-local-accounts` baru untuk mendukung menonaktifkan akun lokal
 * `az aks enable-addons`: Mendukung addon open-service-mesh
 * `az aks create/update`: Menambahkan dukungan untuk memperbarui tag
 
@@ -410,15 +506,15 @@ Versi 2.29.0
 
 ### <a name="compute"></a>Compute
 
-* `az sig create/update`: Tambahkan parameter baru `--soft-delete` untuk mendukung penghapusan lunak
-* `az sig image-version`: Tambahkan parameter baru `--replication-mode` untuk mendukung mode replikasi pengaturan
+* `az sig create/update`: Tambahkan parameter `--soft-delete` baru untuk mendukung penghapusan lunak
+* `az sig image-version`: Tambahkan parameter `--replication-mode` baru untuk mendukung mode replikasi pengaturan
 * `az vm/vmss update`: Perbaiki disosiasi VM/VMSS dari reservasi kapasitas
 * `az vm/vmss create`: Sembunyikan alias `--data-delete-option` dalam bantuan
 * `az vmss create`: Mendukung pembuatan cepat untuk VMSS fleksibel
 
 ### <a name="container"></a>Kontainer
 
-* [BREAKING CHANGE]  `az container create` : Hapus `--network-profile` parameter, properti tidak lagi didukung
+* [BREAKING CHANGE] `az container create`: Hapus `--network-profile` parameter, properti tidak lagi didukung
 * `az container logs`: Memperbaiki kesalahan atribut yang diperkenalkan oleh migrasi Track 2
 * `az container create`: Menambahkan parameter `--acr-identity` untuk mendukung penarikan gambar ACR yang diautentikasi MSI
 
@@ -434,8 +530,8 @@ Versi 2.29.0
 
 ### <a name="key-vault"></a>Key Vault
 
-* [MELANGGAR PERUBAHAN] Fix # 18479: `az keyvault network-rule add` : Perbaiki bug yang memungkinkan duplikat dengan yang sudah ada dalam aturan `--ip-address` jaringan
-* Perbaiki #10254: `az keyvault network-rule add` : Tambahkan kemampuan untuk menerima beberapa alamat IP sebagai daftar dalam bentuk `--ip-address ip1 [ip2] [ip3]...`
+* [MELANGGAR PERUBAHAN] Fix # 18479: `az keyvault network-rule add`: Perbaiki bug yang memungkinkan duplikat `--ip-address` dengan yang sudah ada dalam aturan jaringan
+* Perbaiki #10254: `az keyvault network-rule add`: Tambahkan kemampuan untuk menerima beberapa alamat IP sebagai daftar dalam bentuk `--ip-address ip1 [ip2] [ip3]...`
 * `az keyvault delete`: Tambahkan peringatan saat menghapus HSM yang dikelola
 
 ### <a name="network"></a>Jaringan
@@ -461,7 +557,7 @@ Versi 2.29.0
 
 ### <a name="rdbms"></a>RDBMS
 
-* [BREAKING CHANGE]  `az postgres flexible-server migration` : Perubahan `--properties @{filepath}` ke`--properties {filepath}`
+* [BREAKING CHANGE] `az postgres flexible-server migration`: Perubahan `--properties @{filepath}` ke `--properties {filepath}`
 * `az postgres flexible-server migration create`Pengguna dapat meneruskan nama file dengan kutipan ganda atau tidak ada kutipan dan sama untuk jalur absolut.
 * `az postgres flexible-server migration check-name-availability`Menambahkan perintah untuk memeriksa apakah nama migrasi tersedia.
 * `az postgres flexible-server migration update`Tambahkan `--start-data-migration` ke penjadwalan ulang migrasi untuk memulai sekarang.
@@ -481,7 +577,7 @@ Versi 2.29.0
 * Perbaiki #19059: Perbaiki tautan dokumen ke titik ke situs web dokumen publik
 * `az storage account hns-migration start/stop`: Dukungan memigrasikan akun penyimpanan untuk mengaktifkan ruang nama hierarkis
 * `az storage container-rm create/update`: Tambahkan `--root-squash` ke dukungan memungkinkan nfsv3 root squash atau semua squash
-* Perbaiki #17858: `az storage blob upload` : membuat --name optional
+* Perbaiki #17858: `az storage blob upload`: membuat --name optional
 * `az storage account create/update`: Tambahkan parameter akses jaringan --publik
 * `az storage container immutability-policy create`: Tambahkan --allow-protected-append-writes-all/--w-all parameter
 * `az storage container legal-hold set`: Tambahkan --allow-protected-append-writes-all/--w-all parameter
@@ -489,11 +585,11 @@ Versi 2.29.0
 
 ### <a name="synapse"></a>Synapse
 
-* [BREAKING CHANGE:]  `az synapse sql/pool audit-policy update` Tambahkan `blob-storage-target-state` `log-analytics-target-state` parameter, `event-hub-target-state` ,,(setidaknya pilih salah satu dari 3 paras ini)
+* [BREAKING CHANGE] `az synapse sql/pool audit-policy update`: Tambahkan parameter `blob-storage-target-state`, `log-analytics-target-state`( `event-hub-target-state` setidaknya pilih salah satu dari 3 paras ini)
 * `az synapse integration-runtime`: Dukungan mulai/hentikan integrasi-runtime
 * `az synapse trigger`: Tambahkan az synapse trigger wait
 * `az synapse trigger-run`: Tambahkan az synapse trigger-run cancel
-* `az synapse integration-runtime`Perintah deprecate `create` dan akan mengarahkan ke atau `managed create` `self-hosted create` perintah
+* `az synapse integration-runtime`Perintah deprecate `create` dan akan mengarahkan ke `managed create` atau `self-hosted create` perintah
 * `az synapse dataset/pipeline/linked-service/trigger`: Perintah usang `set` dan akan mengarahkan ke `update` perintah
 * `az synapse workspace-package`: Dukungan paket ruang kerja CRUD
 * `az synapse spark pool update`: Dukungan tambahkan atau hapus paket tertentu
@@ -515,13 +611,13 @@ Versi 2.28.0
 ### <a name="acr"></a>ACR
 
 * `az acr create/update`: Menambahkan dukungan untuk menonaktifkan ekspor melalui `--allow-exports`
-* `az acr`: Bump core api-version ke `2021-06-01-preview` dari `2020-11-01-preview` . agent_pool, tugas dan menjalankan operasi tidak berubah dari `2019-06-01-preview`
+* `az acr`: Bump core api-version ke `2021-06-01-preview` dari `2020-11-01-preview`. agent_pool, tugas dan menjalankan operasi tidak berubah dari `2019-06-01-preview`
 * `az acr task credential`: Memperbaiki masalah di mana kredensial tugas tidak digunakan
 * `az acr task logs`: Perbaiki AttributeError saat menanyakan log tugas
 
 ### <a name="acs"></a>ACS
 
-* [BREAKING CHANGE:]  `az aks nodepool update` Perubahan menolak kemampuan untuk menggunakan max-surge dengan node-image-only
+* [BREAKING CHANGE] `az aks nodepool update`: Perubahan menolak kemampuan untuk menggunakan max-surge dengan node-image-only
 
 ### <a name="aks"></a>AKS
 
@@ -529,7 +625,7 @@ Versi 2.28.0
 * Memperbaiki parameter yang salah dilewati untuk opsi `--assign-kubelet-identity` dalam aks membuat sub-perintah
 * Memutakhirkan versi api ke `2021-07-01` modul ACS
 * `az aks create/update`: Tambahkan dukungan untuk fitur fqdn publik cluster pribadi
-* Kembali PR #18825: `az aks create/update` : Tambahkan parameter untuk mendukung peningkatan otomatis `--auto-upgrade-channel` (dengan perbaikan)
+* Kembali PR #18825: `az aks create/update`: Tambahkan parameter `--auto-upgrade-channel` untuk mendukung peningkatan otomatis (dengan perbaikan)
 * `aks create/aks nodepool add`: Tambahkan parameter ` --os-sku` untuk mendukung memilih OS host kontainer yang mendasarinya
 
 ### <a name="app-config"></a>Konfigurasi Aplikasi
@@ -539,17 +635,17 @@ Versi 2.28.0
 ### <a name="app-service"></a>App Service
 
 * `az webapp config storage-account list/add/update/delete`: Hapus bendera pratinjau
-* Perbaiki #18497: `functionapp identity show` : Perbaiki crash saat nama functionapp tidak mereferensikan functionapp yang ada
+* Perbaiki #18497: `functionapp identity show`: Perbaiki crash saat nama functionapp tidak mereferensikan functionapp yang ada
 * `az webapp config set`: Tambahkan contoh bantuan tambahan untuk pengguna powershell
-* Perbaiki #17818: `az functionapp update` : Tambahkan validasi instans untuk memperbarui functionapp
+* Perbaiki #17818: `az functionapp update`: Tambahkan validasi instans untuk memperbarui functionapp
 * `az webapp config hostname add`: Memperbaiki masalah yang disebabkan oleh AttributeError
 * `az webapp config hostname add`: Memperbaiki masalah yang disebabkan oleh AttributeError
-* Perbaiki #16470: `az staticwebapp secrets` : Tambahkan perintah untuk mengelola rahasia penyebaran
+* Perbaiki #16470: `az staticwebapp secrets`: Tambahkan perintah untuk mengelola rahasia penyebaran
 * `az webapp deployment source config-local-git`: Perbaiki masalah yang disebabkan oleh AttributeError saat opsi slot ditentukan
 * `az webapp deleted restore` : Perbaiki masalah bahwa objek 'WebAppsOperations' tidak memiliki atribut 'restore_from_deleted_app'
 * `az webapp up`Menambahkan kemampuan untuk menyebarkan Linux dan Windows webapps ke grup sumber daya yang sama
 * `az webapp up`: Menambahkan dukungan untuk menerapkan ke Lingkungan Layanan Aplikasi
-* Perbaiki #19098: `az webapp deployment slot auto-swap ` : Perbaiki kesalahan AttributeError untuk parameter `--slot --disable`
+* Perbaiki #19098: `az webapp deployment slot auto-swap `: Perbaiki kesalahan AttributeError untuk parameter `--slot --disable`
 
 ### <a name="arm"></a>ARM
 
@@ -567,19 +663,19 @@ Versi 2.28.0
 * Memutakhirkan versi api untuk VM dan VMSS dari `2021-03-01` ke `2021-04-01`
 * `az vmss create/update`: Dukungan spot mengembalikan kebijakan ke set skala VM
 * Menambahkan contoh baru untuk membuat disk dari galeri gambar berbagi
-* `az vm image list/list-offers/list-skus/list-publishers/show`: Tambahkan parameter baru `--edge-zone` untuk mendukung kueri gambar di bawah zona tepi
+* `az vm image list/list-offers/list-skus/list-publishers/show`: Tambahkan parameter `--edge-zone` baru untuk mendukung kueri gambar di bawah zona tepi
 * Memperbaiki masalah yang disebabkan oleh kurangnya `os_type` saat membuat VM dari id galeri bersama
 * Memperbarui dokumen galeri gambar bersama
 * `az capacity reservation`: Menambahkan perintah baru untuk mengelola reservasi kapasitas
 * `az capacity reservation group`: Menambahkan perintah baru untuk mengelola grup reservasi kapasitas
-* `az vm create/update`: Tambahkan parameter baru `--capacity-reservation-group` untuk mendukung asosiasi ke reservasi kapasitas
-* `az vmss create/update`: Tambahkan parameter baru `--capacity-reservation-group` untuk mendukung asosiasi ke reservasi kapasitas
+* `az vm create/update`: Tambahkan parameter `--capacity-reservation-group` baru untuk mendukung asosiasi ke reservasi kapasitas
+* `az vmss create/update`: Tambahkan parameter `--capacity-reservation-group` baru untuk mendukung asosiasi ke reservasi kapasitas
 * `az vmss create`: Mendukung pembuatan VMSS dari gambar galeri bersama
 
 ### <a name="iot"></a>IoT
 
 * `az iot hub/dps certificate update/create`: Tambahkan `--verified` argumen untuk menandai sertifikat sebagai diverifikasi tanpa aliran proof-of-possession
-* `az iot hub create/update`: `--disable-local-auth` Tambahkan, `--disable-device-sas` , dan argumen untuk mengkonfigurasi metode `--disable-module-sas` otentikasi kunci SAS yang diterima.
+* `az iot hub create/update`: Tambahkan `--disable-local-auth`, `--disable-device-sas`, dan `--disable-module-sas` argumen untuk mengkonfigurasi metode otentikasi kunci SAS yang diterima.
 
 ### <a name="key-vault"></a>Key Vault
 
@@ -589,9 +685,9 @@ Versi 2.28.0
 ### <a name="network"></a>Jaringan
 
 * Memperbaiki kesalahan contoh pembuatan aturan NSG
-* Tambahkan grup perintah `az network custom-ip prefix` baru.
-* `az network public-ip`: Tambahkan parameter `--ip-address` .
-* `az network public-ip prefix create`: Tambahkan parameter `--custom-ip-prefix-name` .
+* Tambahkan grup `az network custom-ip prefix`perintah baru.
+* `az network public-ip`: Tambahkan parameter `--ip-address`.
+* `az network public-ip prefix create`: Tambahkan parameter `--custom-ip-prefix-name`.
 * `az network dns record-set {record-type} add-record`: Dukungan idempotent
 * PrivateLink mendukung `Microsoft.Purview/accounts` 2021-07-01
 * `az network bastion ssh`: terhubung ke mesin Virtual melalui ssh menggunakan Bastion Tunneling.
@@ -612,15 +708,15 @@ Versi 2.28.0
 
 ### <a name="rdbms"></a>RDBMS
 
-* [BREAKING CHANGE]  `az postgres flexible-server migration` : Ganti nama `--migration-id` menjadi`--migration-name`
-* [BREAKING CHANGE:]  `az mysql flexible-server create/update` parameter yang tersedia diubah dari `--high-availability` 'Diaktifkan' menjadi 'ZoneRedundant' dan 'SameZone'.
+* [BREAKING CHANGE] `az postgres flexible-server migration`: Ganti nama `--migration-id` menjadi `--migration-name`
+* [BREAKING CHANGE] `az mysql flexible-server create/update`: `--high-availability` parameter yang tersedia diubah dari 'Diaktifkan' menjadi 'ZoneRedundant' dan 'SameZone'.
 * Memperbaiki masalah pembaruan jendela pemeliharaan dengan MySQL dan Ubah parameter restart agar tidak sensitif terhadap kasus
 * `az mysql flexible-server restore` memungkinkan perubahan opsi jaringan dari jaringan pribadi ke jaringan publik dan sebaliknya.
 * `az mysql flexible-server replica create`: Tambahkan `zone` parameter.
 
 ### <a name="role"></a>Peran
 
-* `az role assignment create`Dukungan `ForeignGroup` untuk `--assignee-principal-type`
+* `az role assignment create``ForeignGroup` Dukungan untuk`--assignee-principal-type`
 * `az role assignment create`: Jangan memanggil api Graph jika `--assignee-principal-type` disediakan
 
 ### <a name="sql"></a>SQL
@@ -634,7 +730,7 @@ Versi 2.28.0
 
 ### <a name="synapse"></a>Synapse
 
-* [MELANGGAR PERUBAHAN] Mengganti nama `az synapse workspace key update` `az synapse workspace key activate` dan menghapus `--is-active`
+* [MELANGGAR PERUBAHAN] Mengganti nama `az synapse workspace key update` dan `az synapse workspace key activate` menghapus `--is-active`
 * Optimalkan argumen pekerjaan pemicu
 * `az synapse`: Tambahkan fitur titik akhir pribadi yang dikelola.
 * Kolam spark menghapus persyaratan pustaka
@@ -645,7 +741,7 @@ Versi 2.27.2
 
 ### <a name="cosmos-db"></a>Cosmos DB
 
-* Hotfix: `az cosmosdb restore` : Perbaiki perintah pemulihan untuk akun yang dihapus
+* Hotfix: `az cosmosdb restore`: Perbaiki perintah pemulihan untuk akun yang dihapus
 
 ## <a name="august-17-2021"></a>17 Agustus 2021
 
@@ -653,12 +749,12 @@ Versi 2.27.1
 
 ### <a name="arm"></a>ARM
 
-* Hotfix: Perbaiki #19124: `az deployment what-if` : Tangani jenis perubahan yang tidak didukung dan tidak ada efek
+* Hotfix: Perbaiki #19124: `az deployment what-if`: Tangani jenis perubahan yang tidak didukung dan tidak ada efek
 
 ### <a name="batch"></a>Batch
 
-Upgrade batch data-plane ke [azure-batch 11.0.0](https://pypi.org/project/azure-batch/) Upgrade batch management-plane ke [azure-batch-mgmt 16.0.0](https://pypi.org/project/azure-mgmt-batch/16.0.0/) 
- `az batch location` : Tambahkan perintah ke `list-skus` daftar SKU yang tersedia di lokasi : Tambahkan `az batch account` perintah ke daftar `outbound-endpoints` dependensi jaringan keluar
+Upgrade batch data-plane ke [azure-batch 11.0.0](https://pypi.org/project/azure-batch/) Upgrade batch management-plane to [azure-batch-mgmt 16.0.0](https://pypi.org/project/azure-mgmt-batch/16.0.0/)
+`az batch location`: Tambahkan `list-skus` perintah ke daftar SKU yang tersedia di lokasi `az batch account`: Tambahkan `outbound-endpoints` perintah untuk daftar dependensi jaringan keluar
 
 ## <a name="august-03-2021"></a>Tanggal 03 Agustus 2021
 
@@ -666,8 +762,8 @@ Versi 2.27.0
 
 ### <a name="acr"></a>ACR
 
-* [BREAKING CHANGE:]  `az acr connected-registry install info` Tambahkan parameter baru yang `--parent-protocol` diperlukan.
-* [BREAKING CHANGE:]  `az acr connected-registry install renew-credentials` Tambahkan parameter baru yang `--parent-protocol` diperlukan.
+* [BREAKING CHANGE] `az acr connected-registry install info`: Tambahkan parameter `--parent-protocol`baru yang diperlukan.
+* [BREAKING CHANGE] `az acr connected-registry install renew-credentials`: Tambahkan parameter `--parent-protocol`baru yang diperlukan.
 * `az acr import`: Mendukung parameter baru `--no-wait`
 * Memperbaiki masalah kompatibilitas SDK Python saat memigrasikan Track 2
 * `az acr build`: Membuat file .dockerignore termasuk direktori dengan `!`
@@ -678,8 +774,8 @@ Versi 2.27.0
 
 ### <a name="appconfig"></a>Konfigurasi Aplikasi
 
-* [BREAKING CHANGE]  `appconfig feature set` : Atur nilai parameter ke string kosong jika tidak `--description` ditentukan
-* [BREAKING CHANGE:]  `az appconfig feature` Dukungan namespacing untuk bendera fitur dan mengubah bidang output
+* [BREAKING CHANGE] `appconfig feature set`: Mengatur nilai parameter `--description` ke string kosong jika tidak ditentukan
+* [BREAKING CHANGE] `az appconfig feature`: Dukungan namespacing untuk bendera fitur dan mengubah bidang output
 * `az appconfig create`: Menambahkan dukungan tag saat membuat sumber daya
 
 ### <a name="app-service"></a>App Service
@@ -689,7 +785,7 @@ Versi 2.27.0
 * `az appservice ase create`Dukungan untuk redundansi Eksternal dan Zona ASEv3
 * `az webapp hybrid-connection add`: Meningkatkan pesan bantuan/kesalahan dan membuka blokir Linux
 * `az webapp config access-restriction remove`: Perbaiki masalah #18947 menghapus aturan endpoint layanan
-* : Perbaiki #17424: `az appservice plan show` : Berikan status keluar yang benar
+* : Perbaiki #17424: `az appservice plan show`: Berikan status keluar yang benar
 
 ### <a name="arm"></a>ARM
 
@@ -701,7 +797,7 @@ Versi 2.27.0
 * `az deployment group/sub/mg/tenant create`: Tambahkan parameter --what-if untuk meminta What-If dengan perintah pembuatan penyebaran.
 * `az deployment group/sub/mg/tenant create`: Tambahkan parameter --proceed-if-no-change untuk melewatkan konfirmasi saat --confirm-with-what-if diatur dan tidak ada perubahan dalam hasil What-If.
 * Bump api-version dari 2020-10-01 hingga 2021-04-01
-* `az ts create`: Membuat `--template-file` berkas bisep dukungan parameter
+* `az ts create`: Membuat berkas bisep dukungan parameter `--template-file`
 * `az resource create`: Tambahkan contoh untuk membuat ekstensi situs ke aplikasi web
 * `az ts export`: Perbaiki masalah bahwa spesifikasi templat ekspor tanpa templat terkait gagal
 
@@ -767,8 +863,8 @@ Versi 2.27.0
 * `az network application-gateway waf-policy custom-rule match-condition add`: Tambahkan contoh
 * `az network express-route port link update`: Tambahkan `--macsec-sci-state` argumen.
 * Link pribadi tambahkan Microsoft.Web/hostingMena
-* `az network lb frontend-ip update`: Dukungan lintas penyewa untuk `--gateway-lb` argumen.
-* `az network nic ip-config update`: Dukungan lintas penyewa untuk `--gateway-lb` argumen.
+* `az network lb frontend-ip update`: Dukungan lintas penyewa untuk argumen `--gateway-lb`.
+* `az network nic ip-config update`: Dukungan lintas penyewa untuk argumen `--gateway-lb`.
 * Link pribadi tambahkan penyedia Microsoft.StorageSync/storageSyncServices
 * Link pribadi tambahkan penyedia Microsoft.Media/mediaservices
 * Link pribadi tambahkan penyedia Microsoft.Batch/batchAccounts
@@ -814,17 +910,17 @@ Versi 2.26.1
 
 ### <a name="acr"></a>ACR
 
-* Hotfix: `az acr build\connected-registry\pack\run\scope-map` : Perbaiki bug kompatibilitas yang disebabkan oleh peningkatan SDK
+* Hotfix: `az acr build\connected-registry\pack\run\scope-map`: Perbaiki bug kompatibilitas yang disebabkan oleh peningkatan SDK
 
 ### <a name="aks"></a>AKS
 
-* Hotfix: `az aks create` : Perbaiki masalah yang tidak dapat dilakukan `assign-kubelet-identity` opsi
+* Hotfix: `az aks create`: Perbaiki masalah yang `assign-kubelet-identity` tidak dapat dilakukan opsi
 
 ### <a name="storage"></a>Penyimpanan
 
 * Hotfix: Memperbaiki masalah yang disebabkan oleh peningkatan JWT.
-* Hotfix: `az storage fs directory download` : Perbaiki masalah untuk menghasilkan url sas yang `--sas-token` valid
-* Hotfix: `az storage blob copy start` : Perbaiki masalah dalam salinan dari akun yang berbeda
+* Hotfix: `az storage fs directory download`: Perbaiki masalah untuk `--sas-token` menghasilkan url sas yang valid
+* Hotfix: `az storage blob copy start`: Perbaiki masalah dalam salinan dari akun yang berbeda
 
 ## <a name="july-06-2021"></a>Juli 06, 2021
 
@@ -850,9 +946,9 @@ Versi 2.26.0
 
 ### <a name="app-service"></a>App Service
 
-* [BREAKING CHANGE]  `az functionapp create` : Hapus dukungan untuk EOL Node 8 dan 10
-* [BREAKING CHANGE]  `az webapp deployment source config` : Hapus vsts-cd-manager
-* [BREAKING CHANGE]  `az functionapp deployment source config` : Hapus vsts-cd-manager
+* [BREAKING CHANGE] `az functionapp create`: Hapus dukungan untuk EOL Node 8 dan 10
+* [BREAKING CHANGE] `az webapp deployment source config`: Hapus vsts-cd-manager
+* [BREAKING CHANGE] `az functionapp deployment source config`: Hapus vsts-cd-manager
 * `az webapp/functionapp config access-restriction add`: Mencegah aturan duplikat menggunakan titik akhir layanan.
 * `az webapp/functionapp config access-restriction remove`: Hapus titik akhir layanan tidak sensitif terhadap kasus
 * `az webapp config access-restrictions add`: Lewati validasi jika pengguna tidak memiliki akses untuk mendapatkan daftar tag layanan.
@@ -917,7 +1013,7 @@ Versi 2.26.0
 
 ### <a name="hdinsight"></a>HDInsight
 
-* `az hdinsight create`: Hapus pemberitahuan perubahan melanggar masuk untuk parameter `--workernode-size` dan `--headnode-size` .
+* `az hdinsight create`: Hapus pemberitahuan perubahan melanggar masuk untuk parameter `--workernode-size` dan `--headnode-size`.
 * Tambahkan tiga cmdlet baru untuk mendukung fitur monitor azure baru:
 
 ### <a name="netappfiles"></a>NetAppFiles
@@ -954,7 +1050,7 @@ Versi 2.26.0
 ### <a name="storage"></a>Penyimpanan
 
 * Dukungan GA dijamin SMB
-* `az storage account create`Dukungan `--enable-nfs-v3` untuk mengatur protokol NFS 3.0
+* `az storage account create``--enable-nfs-v3` Dukungan untuk mengatur protokol NFS 3.0
 * Hapus lembut wadah dukungan
 
 ## <a name="june-15-2021"></a>Tanggal 15 Juni 2021
@@ -1012,13 +1108,13 @@ Versi 2.25.0
 ### <a name="netappfiles"></a>NetAppFiles
 
 * `az netappfiles volume backup status`Perintah ditambahkan untuk mendapatkan status cadangan untuk volume.
-* `az netappfiles volume update`Parameter opsional yang ditambahkan `--snapshot-policy-id` bernama o menetapkan kebijakan snapshot ke volume.
-* `az netappfiles volume backup create`Parameter opsional yang ditambahkan diberi nama `--use-existing-snapshot` untuk mencadangkan snapshot yang sudah ada secara manual.
-* `az netappfiles volume backup update`Parameter opsional yang ditambahkan diberi nama `--use-existing-snapshot` untuk mencadangkan snapshot yang sudah ada secara manual. Label parameter opsional juga ditambahkan untuk menambahkan label ke cadangan.
+* `az netappfiles volume update`Parameter opsional yang ditambahkan bernama `--snapshot-policy-id` o menetapkan kebijakan snapshot ke volume.
+* `az netappfiles volume backup create`Parameter opsional yang ditambahkan diberi `--use-existing-snapshot` nama untuk mencadangkan snapshot yang sudah ada secara manual.
+* `az netappfiles volume backup update`Parameter opsional yang ditambahkan diberi `--use-existing-snapshot` nama untuk mencadangkan snapshot yang sudah ada secara manual. Label parameter opsional juga ditambahkan untuk menambahkan label ke cadangan.
 
 ### <a name="network"></a>Jaringan
 
-* `Microsoft.Sql/servers`Penyedia dukungan di tautan Pribadi
+* Penyedia `Microsoft.Sql/servers` dukungan di tautan Pribadi
 * `az network private-link-resource list`: Dukungan `--type microsoft.keyvault/managedHSMs`
 * `az network private-endpoint-connection`: Dukungan `--type microsoft.keyvault/managedHSMs`
 
@@ -1031,7 +1127,7 @@ Versi 2.25.0
 
 ### <a name="role"></a>Peran
 
-* [BREAKING CHANGE:]  `az ad sp create-for-rbac` sekarang hanya digunakan sebagai `--name` `displayName` aplikasi. Hal ini tidak digunakan untuk menghasilkan `identifierUris` lagi. `name` dalam output sekarang sama dengan `appID` `servicePrincipalNames` () dan usang.
+* [BREAKING CHANGE] `az ad sp create-for-rbac`: `--name` sekarang hanya digunakan sebagai `displayName` aplikasi. Hal ini tidak digunakan untuk menghasilkan `identifierUris` lagi. `name` dalam output sekarang sama `appID` dengan (`servicePrincipalNames`) dan usang.
 
 ### <a name="signalr"></a>SignalR
 
@@ -1042,7 +1138,7 @@ Versi 2.25.0
 
 * `az storage blob copy start`: Dukungan --tier dan --rehydrate-priority
 * GA rilis file penyimpanan berbagi NFS dan SMB multichannel
-* [BREAKING CHANGE]  `az storage account create` : Hapus opsi untuk `StorageFileDataSmbShareOwner` --default-share-permission
+* [MELANGGAR PERUBAHAN] `az storage account create`: Hapus `StorageFileDataSmbShareOwner` opsi untuk --default-share-permission
 * `az storage blob list`: --nilai parameter delimiter sekarang akan dihormati
 
 ### <a name="synapse"></a>Synapse
@@ -1096,7 +1192,7 @@ Versi 2.24.0
 
 ### <a name="app-service"></a>App Service
 
-* [BREAKING CHANGE]  `az webapp list-runtimes` : Tambahkan dukungan Dotnet6 dan perbarui runtime
+* [BREAKING CHANGE] `az webapp list-runtimes`: Tambahkan dukungan Dotnet6 dan perbarui runtime
 * `webapp log tail`: Perbaiki #17987: logging.warning call dengan argumen 'akhir' yang tidak valid
 * Perbaiki perintah pengaturan aplikasi pembaruan #16838- az cli selalu membuat pengaturan slot menjadi kenyataan
 * `az appservice`: Menambahkan fungsi untuk mengambil pengguna github token akses pribadi
@@ -1130,7 +1226,7 @@ Versi 2.24.0
 
 ### <a name="hdinsight"></a>HDInsight
 
-* [BREAKING CHANGE]  `az hdinsight create` : Gunakan mendapatkan api sku default untuk mengatur ukuran workernode dan headnode jika pelanggan tidak menyediakan.
+* [BREAKING CHANGE] `az hdinsight create`: Gunakan mendapatkan api sku default untuk mengatur ukuran workernode dan headnode jika pelanggan tidak menyediakan.
 
 ### <a name="iot"></a>IoT
 
@@ -1140,7 +1236,7 @@ Versi 2.24.0
 * `az iot hub identity show`Perintah baru untuk menunjukkan properti identitas IoT Hub.
 * `az iot hub identity show`Perintah baru untuk memperbarui jenis identitas IoT Hub.
 * `az iot hub identity remove`Perintah baru untuk menghapus identitas terkelola yang ditetapkan pengguna/sistem dari IoT Hub.
-* `az iot hub routing-endpoint create`Parameter `--identity` baru memungkinkan memilih identitas yang ditetapkan pengguna / sistem untuk titik akhir perutean.
+* `az iot hub routing-endpoint create``--identity` Parameter baru memungkinkan memilih identitas yang ditetapkan pengguna / sistem untuk titik akhir perutean.
 * `az iot hub route create`: Tipe sumber perutean baru `DeviceConnectionStateEvents`
 
 ### <a name="kusto"></a>Kusto
@@ -1156,7 +1252,7 @@ Versi 2.24.0
 * `az network rule create/update`: Parameter baru `--backend-pools-name`
 * `az network vnet-gateway create`: Tambahkan paramter baru `--nat-rule`
 * Menambahkan grup cmd baru `az network vnet-gateway nat-rule`
-* `az network vpn-conncetion create`: Tambahkan paramter baru `--ingress-nat-rule` dan `--egress-nat-rule`
+* `az network vpn-conncetion create`: Tambahkan paramter `--ingress-nat-rule` baru dan `--egress-nat-rule`
 * `az network vnet create`: Tambahkan parameter baru `--flowtimeout`
 
 ### <a name="packaging"></a>Pengemasan
@@ -1170,10 +1266,10 @@ Versi 2.24.0
 
 ### <a name="service-fabric"></a>Service Fabric
 
-* [BREAKING CHANGE:]  `az sf cluster certificate` Hapus semua perintah di bawah grup ini. Silakan ikuti petunjuk di [Tambahkan sertifikat sekunder menggunakan Azure Resource Manager](/azure/service-fabric/service-fabric-cluster-security-update-certs-azure#add-a-secondary-certificate-using-azure-resource-manager) untuk menambahkan /menghapus sertifikat cluster.
-* [BREAKING CHANGE]  `az sf managed-service update` : Hapus parameter usang --drop-source-replica-on-move.
-* [BREAKING CHANGE]  `az sf managed-service create` : Hapus parameter usang --service-dns-name, --drop-source-replica-on-move dan -instance-close-delay-duration.
-* [BREAKING CHANGE]  `az sf cluster` : Ganti nama parameter --vault-resource-group menjadi --vault-rg.
+* [MELANGGAR PERUBAHAN] `az sf cluster certificate`: Hapus semua perintah di bawah grup ini. Silakan ikuti petunjuk di [Tambahkan sertifikat sekunder menggunakan Azure Resource Manager](/azure/service-fabric/service-fabric-cluster-security-update-certs-azure#add-a-secondary-certificate-using-azure-resource-manager) untuk menambahkan /menghapus sertifikat cluster.
+* [BREAKING CHANGE] `az sf managed-service update`: Hapus parameter usang --drop-source-replica-on-move.
+* [BREAKING CHANGE] `az sf managed-service create`: Hapus parameter usang --service-dns-name, --drop-source-replica-on-move dan -instance-close-delay-duration.
+* [BREAKING CHANGE] `az sf cluster`: Ganti nama parameter --vault-resource-group menjadi --vault-rg.
 * `az sf managed-cluster and sf managed-node-type`: Mengatur grup sebagai tidak mempratinjau
 * Update paket azure-mgmt-servicefabricmanagedclusters ke versi terbaru 1.0.0 yang menggunakan 2021-05-01 GA api version.
 * `az sf managed-cluster create`: Tambahkan parameter --upgrade-mode, --upgrade-cadence dan --code-version.
@@ -1186,7 +1282,7 @@ Versi 2.24.0
 
 ### <a name="storage"></a>Penyimpanan
 
-* [BREAKING CHANGE]  `az storage share-rm delete` : Meningkatkan kesalahan ketika ada snapshot untuk berbagi file target dan menambahkan untuk menentukan menghapus berbagi file target `--include` dan snapshot-nya
+* [BREAKING CHANGE] `az storage share-rm delete`: Meningkatkan kesalahan ketika ada snapshot untuk berbagi file target dan menambahkan `--include` untuk menentukan menghapus berbagi file target dan snapshot-nya
 * `az storage blob generate-sas`: Tambahkan spasi untuk membagi kata-kata yang dikocatenated dalam pesan bantuan argumen --cache-control, --content-disposition, --content-encoding, --content-language dan --content-type.
 * `az storage blob url`: Tambahkan spasi untuk membagi kata-kata yang dikocatenated dalam pesan bantuan argumen --snapshot.
 * `az storage container generate-sas`: Tambahkan spasi untuk membagi kata-kata yang dikocatenated dalam pesan bantuan argumen --cache-control, --content-disposition, --content-encoding, --content-language dan --content-type.
@@ -1207,7 +1303,7 @@ Versi 2.23.0
 
 ### <a name="aks"></a>AKS
 
-* `az aks update`: `--windows-admin-password` Tambahkan ke dukungan memperbarui kata sandi Windows
+* `az aks update`: Tambahkan `--windows-admin-password` ke dukungan memperbarui kata sandi Windows
 * `az aks update`: Dukungan pemutakhiran dari klaster SPN ke klaster MSI.
 * `az aks create`: Menambahkan `--enable-encryption-at-host` parameter
 
@@ -1257,7 +1353,7 @@ Versi 2.23.0
 
 ### <a name="hdinsight"></a>HDInsight
 
-* Menambahkan PERUBAHAN BREAKING Masuk untuk menghapus nilai default `--workernode-size` dan  `--headnode-size`
+* Menambahkan PERUBAHAN BREAKING Masuk untuk menghapus nilai `--workernode-size` default dan  `--headnode-size`
 
 ### <a name="key-vault"></a>Key Vault
 
@@ -1277,10 +1373,10 @@ Versi 2.23.0
 
 ### <a name="network"></a>Jaringan
 
-* [BREAKING CHANGE] az network dns record-set a show: Properti `arecords` dalam output akan diubah menjadi `aRecords` .
-* Perintah `az network express-route list-route-tables-summary` baru.
-* Perintah `az network express-route peering get-stats` baru.
-* Perintah `az network express-route peering connection list` baru.
+* [BREAKING CHANGE] az network dns record-set a show: Properti `arecords` dalam output akan diubah menjadi `aRecords`.
+* Perintah baru `az network express-route list-route-tables-summary`.
+* Perintah baru `az network express-route peering get-stats`.
+* Perintah baru `az network express-route peering connection list`.
 * `az network lb create`: Tambahkan parameter baru `--edge-zone`
 * `az network nic create`: Tambahkan parameter baru `--edge-zone`
 * `az network private-endpoint create`: Tambahkan parameter baru `--edge-zone`
@@ -1290,18 +1386,18 @@ Versi 2.23.0
 * `az network vnet create`: Tambahkan parameter baru `--edge-zone`
 * Perintah Baru `az network lb list-nic`
 * `az network application-gateway show-backend-health`: mendukung argumen operasi probe.
-* `az network vpn-connection list`: parameter dukungan `--vnet-gateway` .
-* Perintah `az network vnet-gateway disconnect-vpn-connections` baru.
-* Perintah `az network vnet-gateway vpn-client show-health` baru.
-* Perintah `az network vnet-gateway vpn-client ipsec-policy show` baru.
-* Perintah `az network vnet-gateway vpn-client ipsec-policy set` baru.
-* Perintah `az network vnet-gateway packet-capture start` baru.
-* Perintah `az network vnet-gateway packet-capture stop` baru.
-* Perintah `az network vnet-gateway show-supported-devices` baru.
-* Perintah `az network vpn-connection list-ike-sas` baru.
-* Perintah `az network vpn-connection packet-capture start` baru.
-* Perintah `az network vpn-connection packet-capture stop` baru.
-* Perintah `az network vpn-connection show-device-config-script` baru.
+* `az network vpn-connection list`: parameter `--vnet-gateway`dukungan .
+* Perintah baru `az network vnet-gateway disconnect-vpn-connections`.
+* Perintah baru `az network vnet-gateway vpn-client show-health`.
+* Perintah baru `az network vnet-gateway vpn-client ipsec-policy show`.
+* Perintah baru `az network vnet-gateway vpn-client ipsec-policy set`.
+* Perintah baru `az network vnet-gateway packet-capture start`.
+* Perintah baru `az network vnet-gateway packet-capture stop`.
+* Perintah baru `az network vnet-gateway show-supported-devices`.
+* Perintah baru `az network vpn-connection list-ike-sas`.
+* Perintah baru `az network vpn-connection packet-capture start`.
+* Perintah baru `az network vpn-connection packet-capture stop`.
+* Perintah baru `az network vpn-connection show-device-config-script`.
 * `az network private-link-resource list`: mendukung lebih banyak penyedia untuk `--type`
 
 ### <a name="packaging"></a>Pengemasan
@@ -1310,7 +1406,7 @@ Versi 2.23.0
 * Bump dibundel python ke `3.8.9` dalam MSI.
 
 ### <a name="rdbms"></a>RDBMS
-* [BREAKING CHANGE:]  `az mysql flexible-server create` nilai default diubah dari `--storage-size` 10 menjadi 32.
+* [BREAKING CHANGE] `az mysql flexible-server create`: `--storage-size` nilai default diubah dari 10 menjadi 32.
 * `az postgres flexible-server create`: Tambahkan `--private-dns-zone` parameter untuk membuat server dengan akses pribadi.
 
 ### <a name="role"></a>Peran
@@ -1356,8 +1452,8 @@ Versi 2.22.0
 
 ### <a name="acr"></a>ACR
 
-* [BREAKING CHANGE:]  `az acr connected-registry install info` Ganti kunci ACR_REGISTRY_NAME, ACR_SYNC_TOKEN_NAME, ACR_SYNC_TOKEN_PASSWORD, ACR_PARENT_GATEWAY_ENDPOINT, dan ACR_PARENT_PROTOCOL dengan kunci string baru yang terhubung, ACR_REGISTRY_CONNECTION_STRING.
-* [BREAKING CHANGE:]  `az acr connected-registry install renew-credentials` Ganti kunci ACR_REGISTRY_NAME, ACR_SYNC_TOKEN_NAME, ACR_SYNC_TOKEN_PASSWORD, ACR_PARENT_GATEWAY_ENDPOINT, dan ACR_PARENT_PROTOCOL dengan kunci string baru yang terhubung, ACR_REGISTRY_CONNECTION_STRING.
+* [BREAKING CHANGE] `az acr connected-registry install info`: Ganti kunci ACR_REGISTRY_NAME, ACR_SYNC_TOKEN_NAME, ACR_SYNC_TOKEN_PASSWORD, ACR_PARENT_GATEWAY_ENDPOINT, dan ACR_PARENT_PROTOCOL dengan kunci string baru yang terhubung, ACR_REGISTRY_CONNECTION_STRING.
+* [BREAKING CHANGE] `az acr connected-registry install renew-credentials`: Ganti kunci ACR_REGISTRY_NAME, ACR_SYNC_TOKEN_NAME, ACR_SYNC_TOKEN_PASSWORD, ACR_PARENT_GATEWAY_ENDPOINT, dan ACR_PARENT_PROTOCOL dengan kunci string baru yang terhubung, ACR_REGISTRY_CONNECTION_STRING.
 * `az acr connected-registry create`Verifikasi sebelum pembuatan token dan sinkronisasi peta lingkup bahwa semua leluhur aktif.
 * `az acr connected-registry create`: Tambahkan repositori dan izin gateway yang diperlukan untuk pembuatan ke semua nenek moyang registri terhubung baru jika diperlukan sebelum pembuatan registri yang terhubung.
 * `az acr connected-registry delete`: Hapus izin gateway dari sumber daya yang dihapus dari semua peta lingkup sinkronisasi leluhurnya.
@@ -1381,8 +1477,8 @@ Versi 2.22.0
 
 ### <a name="arm"></a>ARM
 
-* [BREAKING CHANGE]  `az bicep build` : Ubah parameter `--files` menjadi`--file`
-* [BREAKING CHANGE]  `az bicep decompile` : Ubah parameter `--files` menjadi`--file`
+* [BREAKING CHANGE] `az bicep build`: Ubah parameter `--files` menjadi `--file`
+* [BREAKING CHANGE] `az bicep decompile`: Ubah parameter `--files` menjadi `--file`
 * Perbaiki #17379: hasil pemasangan otomatis bisep dalam output json yang tidak valid dari penyebaran
 * `az bicep build`: Menambahkan parameter `--outdir` untuk menentukan direktori output
 * `az bicep build`: Menambahkan parameter `--outfile` untuk menentukan jalur berkas output
@@ -1406,7 +1502,7 @@ Versi 2.22.0
 
 ### <a name="container"></a>Kontainer
 
-* Perbaiki #16499: `az container create` : Memperbaiki penanganan nilai pengembalian dari network_profiles.create_or_update
+* Perbaiki #16499: `az container create`: Memperbaiki penanganan nilai pengembalian dari network_profiles.create_or_update
 
 ### <a name="cosmos-db"></a>Cosmos DB
 
@@ -1421,7 +1517,7 @@ Versi 2.22.0
 
 ### <a name="interactive"></a>Interaktif
 
-* Perbaiki #16931: `KeyError` Perbaiki `az interactive --update`
+* Perbaiki #16931: Perbaiki `KeyError``az interactive --update`
 
 ### <a name="netappfiles"></a>NetAppFiles
 
@@ -1436,7 +1532,7 @@ Versi 2.22.0
 
 ### <a name="packaging"></a>Pengemasan
 
-* [MELANGGAR PERUBAHAN] RPM diinstal az sekarang menggunakan `python3` bukan kode `/usr/bin/python3` keras.
+* [MELANGGAR PERUBAHAN] RPM diinstal az sekarang menggunakan `python3` bukan kode `/usr/bin/python3`keras.
 
 ### <a name="rdbms"></a>RDBMS
 
@@ -1462,8 +1558,8 @@ Versi 2.22.0
 
 ### <a name="synapse"></a>Synapse
 
-* [BREAKING CHANGE]  `az synapse role assignment create` : Nama peran di versi lama tidak diperbolehkan, Sql Admin, Apache Spark Admin, Workspace Admin
-* [BREAKING CHANGE:]  `az synapse role assignment create` Ketika argumen --assignee tidak dapat secara unik menentukan objek utama, perintah akan meningkatkan kesalahan alih-alih menambahkan tugas peran untuk objek utama yang tidak pasti.
+* [BREAKING CHANGE] `az synapse role assignment create`: Nama peran di versi lama tidak diperbolehkan, Sql Admin, Apache Spark Admin, Workspace Admin
+* [BREAKING CHANGE] `az synapse role assignment create`: Ketika argumen --assignee tidak dapat secara unik menentukan objek utama, perintah akan meningkatkan kesalahan alih-alih menambahkan tugas peran untuk objek utama yang tidak pasti.
 * `az synapse role scope list`: Daftar semua lingkup sinapsis mendukung.
 * `az synapse role assignment create/list/delete`: Tambahkan argumen --scope/--item-type/--item untuk mendukung mengelola tugas peran berdasarkan ruang lingkup.
 * `az synapse role assignment create/list/delete`: Tambahkan --assignee-object-id argument, itu akan memotong api Graph dan secara unik menentukan objek utama alih-alih menyimpulkan objek utama menggunakan argumen --assignee.
@@ -1487,14 +1583,14 @@ Versi 2.21.0
 
 ### <a name="apim"></a>APIM
 
-* [BREAKING CHANGE:]  `apim backup` tidak mendukung `--storage-account-container` multi-value.
-* [BREAKING CHANGE:]  `apim restore` tidak mendukung `--storage-account-container` multi-value.
+* [BREAKING CHANGE] `apim backup`: `--storage-account-container` tidak mendukung multi-value.
+* [BREAKING CHANGE] `apim restore`: `--storage-account-container` tidak mendukung multi-value.
 
 ### <a name="app-service"></a>App Service
 
-* [MELANGGAR PERUBAHAN] Perbaiki #16087: `az webapp config ssl create` : atur parameter sesuai `--name` kebutuhan.
+* [MELANGGAR PERUBAHAN] Perbaiki #16087: `az webapp config ssl create`: atur `--name` parameter sesuai kebutuhan.
 * Perbaiki #17053: `az webapp show` mengembalikan nilai null untuk properti SiteConfig
-* Perbaiki #17207: `az webapp log config` : 'level' selalu default ke verbose
+* Perbaiki #17207: `az webapp log config`: 'level' selalu default ke verbose
 
 ### <a name="arm"></a>ARM
 
@@ -1517,7 +1613,7 @@ Versi 2.21.0
 ### <a name="compute"></a>Compute
 
 * Memperbaiki bug pembaruan pengguna vm Windows
-* Perbaiki #16585: `az vmss deallocate` : `--instance-ids` gagal
+* Perbaiki #16585: `az vmss deallocate`: `--instance-ids` gagal
 * `az vm create`Parameter baru `--platform-fault-domain` dalam mode FLEX VMSS
 * `az vm create`: `--patch-mode` untuk Linux VM
 * `az ssh vm`: Secara otomatis meluncurkan browser saat mendapatkan sertifikat gagal
@@ -1525,15 +1621,15 @@ Versi 2.21.0
 * `az vm create`: Peluncuran Terpercaya
 * Fix #16037: az vm open-port accepts list of ports
 
-### <a name="extension"></a>Extensi
+### <a name="extension"></a>Ekstensi
 
 * Menambahkan pesan yang dapat ditindaklanjuti saat ekstensi tidak kompatibel dengan inti CLI
 
 ### <a name="key-vault"></a>Key Vault
 
-* `az keyvault role definition list`Dukungan `--custom-role-only` untuk daftar hanya definisi peran kustom
+* `az keyvault role definition list``--custom-role-only` Dukungan untuk daftar hanya definisi peran kustom
 * Mendukung definisi peran kustom keyvault
-* Tambahkan `--no-wait` untuk perintah dan untuk `az keyvault security-domain download` `--target-operation` perintah `az keyvault security-domain wait`
+* Tambahkan `--no-wait` untuk perintah `az keyvault security-domain download` dan `--target-operation` untuk perintah `az keyvault security-domain wait`
 
 ### <a name="netappfiles"></a>NetAppFiles
 
@@ -1646,7 +1742,7 @@ Versi 2.20.0
 
 * Upgrade ke versi 3.0.0 dan tambahkan dukungan untuk NetworkAclBypass + Update Mongo ServerVersion + kebijakan cadangan
 
-### <a name="extension"></a>Extensi
+### <a name="extension"></a>Ekstensi
 
 * Konfigurasi dukungan url indeks ekstensi
 
@@ -1658,14 +1754,14 @@ Versi 2.20.0
 
 ### <a name="key-vault"></a>Key Vault
 
-* [BREAKING CHANGE]  `az keyvault role assignment/definition list` : harus dalam output `roleDefinitionName` `roleName` perintah
-* [MELANGGAR PERUBAHAN]  `id` perubahan menjadi `jobId` , perubahan menjadi dalam output `azureStorageBlobContainerUri` `folderUrl` `az keyvault backup/restore` perintah,`az keyvault key restore`
+* [BREAKING CHANGE] `az keyvault role assignment/definition list`: `roleDefinitionName` harus `roleName` dalam output perintah
+* [MELANGGAR PERUBAHAN] `id` perubahan menjadi `jobId`, `azureStorageBlobContainerUri` perubahan menjadi `folderUrl` dalam output perintah,`az keyvault backup/restore``az keyvault key restore`
 
 ### <a name="network"></a>Jaringan
 
 * Versi Bump dari '2020-07-01' hingga '2020-08-01'
 * `az network public-ip create`Dukungan '--zona 1 2 3' setelah '2020-08-01'
-* `az network routeserver peering`: Ganti nama `--vrouter-name` dengan `--routeserver`
+* `az network routeserver peering`: Ganti nama dengan `--vrouter-name``--routeserver`
 * `az network express-route peering create`: Dukungan alamat ipv6
 * `az network public-ip create`: Mengekspos argumen baru `--tier`
 
@@ -1685,10 +1781,10 @@ Versi 2.20.0
 
 ### <a name="storage"></a>Penyimpanan
 
-* [BREAKING CHANGE]  `az storage account file-service-properties` : Default untuk mengaktifkan kebijakan penghapusan retensi dengan hari retensi 7 di sisi server
+* [BREAKING CHANGE] `az storage account file-service-properties`: Default untuk mengaktifkan kebijakan penghapusan retensi dengan hari retensi 7 di sisi server
 * Perbaiki #16872: az storage blob now (2.19) memerlukan login bahkan jika koneksi-string disediakan
 * Perbaiki #16959: az storage copy crashs: ValidationError: variabel lokal 'service' direferensikan sebelum penugasan
-* Perbaiki #14054: Objek 'NoneType' tidak memiliki __nama__ atribut '
+* Perbaiki #14054: Objek 'NoneType' tidak memiliki atribut '__nama__'
 * Perbaiki #16679: `az storage blob download` gagal dengan "Izin ditolak" jika berkas tujuan adalah direktori
 * Pemutakhiran versi api penyimpanan ke 2021-01-01
 * Versi dukungan dalam kebijakan manajemen Lifecyle
@@ -1704,7 +1800,7 @@ Versi 2.19.1
 
 ### <a name="key-vault"></a>Key Vault
 
-* Hotfix: Paket dependensi `azure-keyvault-administration` disematkan ke 4.0.0b1
+* Hotfix: Paket `azure-keyvault-administration` dependensi disematkan ke 4.0.0b1
 
 ## <a name="february-09-2021"></a>Tanggal 09 Februari 2021
 
@@ -1712,8 +1808,8 @@ Versi 2.19.0
 
 ### <a name="acr"></a>ACR
 
-* `az acr connected-registry install info`: Tambahkan kunci baru `ACR_SYNC_TOKEN_NAME` dengan nilai yang sama dengan `ACR_SYNC_TOKEN_USERNAME` . Sebuah peringatan bahwa yang terakhir akan usang ditampilkan.
-* `az acr connected-registry install renew-credentials`: Tambahkan kunci baru `ACR_SYNC_TOKEN_NAME` dengan nilai yang sama dengan `ACR_SYNC_TOKEN_USERNAME` . Sebuah peringatan bahwa yang terakhir akan usang ditampilkan.
+* `az acr connected-registry install info`: Tambahkan kunci `ACR_SYNC_TOKEN_NAME` baru dengan nilai yang sama dengan `ACR_SYNC_TOKEN_USERNAME`. Sebuah peringatan bahwa yang terakhir akan usang ditampilkan.
+* `az acr connected-registry install renew-credentials`: Tambahkan kunci `ACR_SYNC_TOKEN_NAME` baru dengan nilai yang sama dengan `ACR_SYNC_TOKEN_USERNAME`. Sebuah peringatan bahwa yang terakhir akan usang ditampilkan.
 
 ### <a name="aks"></a>AKS
 
@@ -1726,7 +1822,7 @@ Versi 2.19.0
 
 ### <a name="app-config"></a>Konfigurasi Aplikasi
 
-* [BREAKING CHANGE]  `az appconfig feature filter add` : Dukungan menambahkan objek JSON sebagai nilai parameter filter fitur
+* [BREAKING CHANGE] `az appconfig feature filter add`: Dukungan menambahkan objek JSON sebagai nilai parameter filter fitur
 
 ### <a name="app-service"></a>App Service
 
@@ -1736,7 +1832,7 @@ Versi 2.19.0
 * Meningkatkan perilaku appservice ase create-inbound-services untuk memungkinkan melewatkan layanan DNS dan mendukung DNS untuk ASEv2
 * `az webapp up/az webapp create`: Memperbaiki kesalahan nonetype
 * `az webapp up/create`: penanganan kesalahan nama aplikasi yang lebih baik dengan periode
-* Fix #16681: `az webapp config ssl import` Memperbaiki bug yang menyebabkan kegagalan pada awan nasional
+* Fix #16681: `az webapp config ssl import`Memperbaiki bug yang menyebabkan kegagalan pada awan nasional
 
 ### <a name="arm"></a>ARM
 
@@ -1749,7 +1845,7 @@ Versi 2.19.0
 
 ### <a name="botservice"></a>Layanan Bot
 
-* `az bot create/update`: Tambahkan fitur Enkripsi `--cmk-key-url` dan `--encryption-off`
+* `az bot create/update`: Tambahkan fitur `--cmk-key-url` Enkripsi dan `--encryption-off`
 * `az bot update`: Ganti nama Encryption-OFF arg ke CMK-OFF dan memperbarui versi api
 
 ### <a name="compute"></a>Compute
@@ -1758,17 +1854,17 @@ Versi 2.19.0
 * Grup perintah baru sshkey. Perbolehkan referensi sumber daya kunci SSH saat membuat VM
 * `az disk create/update`: Tambahkan parameter `--enable-bursting` untuk mendukung pengisian disk
 
-### <a name="extension"></a>Extensi
+### <a name="extension"></a>Ekstensi
 
 * Perintah perintah ekstensi dukungan cocok untuk penginstalan dinamis
 
 ### <a name="hdinsight"></a>HDInsight
 
-* `az hdinsight create`: Tambahkan parameter baru `--enable-compute-isolation` untuk mendukung membuat cluster dengan fitur compute isolation.
+* `az hdinsight create`: Tambahkan parameter `--enable-compute-isolation` baru untuk mendukung membuat cluster dengan fitur compute isolation.
 
 ### <a name="key-vault"></a>Key Vault
 
-* `az keyvault key import`Parameter `--curve` dukungan untuk mengimpor kunci BYOK
+* `az keyvault key import`Parameter dukungan `--curve` untuk mengimpor kunci BYOK
 * `az keyvault certificate download`: Perbaiki panggilan metode yang usang /dihapus
 * `az keyvault create/update`: Hapus tag pratinjau untuk `--enable-rbac-authorization`
 
@@ -1778,14 +1874,14 @@ Versi 2.19.0
 
 ### <a name="netappfiles"></a>NetAppFiles
 
-* `az netappfiles account ad add`: Tambahkan parameter `--security-operators` .
-* `az netappfiles volume create`: Tambahkan parameter `--smb-continuously-available` .
-* `az netappfiles volume create`: Tambahkan parameter `--smb-encryption` .
+* `az netappfiles account ad add`: Tambahkan parameter `--security-operators`.
+* `az netappfiles volume create`: Tambahkan parameter `--smb-continuously-available`.
+* `az netappfiles volume create`: Tambahkan parameter `--smb-encryption`.
 * `az netappfiles`: Tidak lagi dalam mode pratinjau.
 
 ### <a name="network"></a>Jaringan
 
-* [BREAKING CHANGE]  `az network vrouter` : Bejat kelompok perintah ini, silakan `az network routeserver` gunakan.
+* [BREAKING CHANGE] `az network vrouter`: Bejat kelompok perintah ini, silakan gunakan `az network routeserver`.
 * `az network routeserver`: Tambahkan grup perintah baru.
 * `az network application-gateway create`: Menambahkan parameter `--ssl-profile-id`
 * `az network application-gateway client-cert`: Mengelola sertifikat klien tepercaya dari gateway aplikasi
@@ -1835,7 +1931,7 @@ Versi 2.19.0
 * `az synapse workspace create `: Tambahkan parameter `--key-identifier` untuk mendukung pembuatan ruang kerja menggunakan kunci yang dikelola pelanggan.
 * `az synapse workspace key`: Tambahkan cmdlet CRUD untuk mendukung mengelola kunci di bawah ruang kerja sinapsis tertentu.
 * `az synapse workspace managed-identity`: Tambahkan cmdlet untuk mendukung identitas terkelola CRUD ke pengaturan akses SQL.
-* `az synapse workspace`: Tambahkan dukungan perlindungan eksfiltrasi data, tambahkan parameter `--allowed-tenant-ids` .
+* `az synapse workspace`: Tambahkan dukungan perlindungan eksfiltrasi data, tambahkan parameter `--allowed-tenant-ids`.
 
 ## <a name="january-19-2021"></a>Tanggal 19 Januari 2021
 
@@ -1843,7 +1939,7 @@ Versi 2.18.0
 
 ### <a name="acr"></a>ACR
 
-* `az acr create / update`: Tambahkan `--allow-trusted-services` . Parameter ini menentukan apakah layanan azure tepercaya diizinkan untuk mengakses pendaftar terbatas jaringan. Default adalah untuk memungkinkan.
+* `az acr create / update`: Tambahkan `--allow-trusted-services`. Parameter ini menentukan apakah layanan azure tepercaya diizinkan untuk mengakses pendaftar terbatas jaringan. Default adalah untuk memungkinkan.
 
 ### <a name="aks"></a>AKS
 
@@ -1851,9 +1947,9 @@ Versi 2.18.0
 
 ### <a name="app-service"></a>App Service
 
-* Perbaiki #13907: `az webapp config ssl import` : Ubah perintah untuk juga mengimpor Sertifikat Layanan Aplikasi
-* Perbaiki #16125: `az webapp ssh` : Jika menggunakan klien windows, buka browser ke tautan scm
-* Fix #13291: `az webapp deployment slot swap` : Perintah harus mendukung melestarikan vnet.
+* Perbaiki #13907: `az webapp config ssl import`: Ubah perintah untuk juga mengimpor Sertifikat Layanan Aplikasi
+* Perbaiki #16125: `az webapp ssh`: Jika menggunakan klien windows, buka browser ke tautan scm
+* Fix #13291: `az webapp deployment slot swap`: Perintah harus mendukung melestarikan vnet.
 * [MELANGGAR PERUBAHAN] Memperbaiki regresi di mana Anda tidak dapat menggunakan versi runtime dengan spasi dalam nama
 
 ### <a name="arm"></a>ARM
@@ -1888,7 +1984,7 @@ Versi 2.18.0
 
 ### <a name="monitor"></a>Monitor
 
-* [BREAKING CHANGE]  `az monitor log-analytics workspace data-export` : Hapus parameter yang sudah usang dan memerlukan `--export-all-tables` `--tables` parameter
+* [BREAKING CHANGE] `az monitor log-analytics workspace data-export`: Hapus parameter yang sudah usang `--export-all-tables` dan memerlukan `--tables` parameter
 
 ### <a name="rdbms"></a>RDBMS
 
@@ -1896,7 +1992,7 @@ Versi 2.18.0
 
 ### <a name="role"></a>Peran
 
-* Perbaiki #11594: `az role assignment create` : Hanya menunjukkan nilai yang didukung untuk `--assignee-principal-type`
+* Perbaiki #11594: `az role assignment create`: Hanya menunjukkan nilai yang didukung untuk `--assignee-principal-type`
 
 ### <a name="storage"></a>Penyimpanan
 
@@ -1910,7 +2006,7 @@ Versi 2.17.1
 
 ### <a name="rdbms"></a>RDBMS
 
-* Hotfix: `az mysql create` Mengembalikan nama parameter yang salah 'serv_name' menjadi 'service_name'
+* Hotfix: `az mysql create`Mengembalikan nama parameter yang salah 'serv_name' ke 'service_name'
 
 ## <a name="december-29-2020"></a>Tanggal 29 Desember 2020
 
@@ -1955,7 +2051,7 @@ Versi 2.17.0
 ### <a name="batch"></a>Batch
 
 * Upgrade data plane to [azure batch 10.0.0](https://pypi.org/project/azure-batch/10.0.0/)
-* [BREAKING CHANGE] az batch job task-counts: Mengubah output dari objek JSON yang mengembalikan jumlah tugas ke objek JSON kompleks yang mencakup jumlah tugas `taskCounts` () serta jumlah slot tugas `taskSlotCounts` ().
+* [BREAKING CHANGE] az batch job task-counts: Mengubah output dari objek JSON yang mengembalikan jumlah tugas ke objek JSON kompleks yang mencakup jumlah tugas (`taskCounts`) serta jumlah slot tugas (`taskSlotCounts`).
 
 ### <a name="compute"></a>Compute
 
@@ -1977,7 +2073,7 @@ Versi 2.17.0
 
 ### <a name="key-vault"></a>Key Vault
 
-* `az keyvault key import`Dukungan `--kty` untuk mengimpor kunci BYOK
+* `az keyvault key import``--kty` Dukungan untuk mengimpor kunci BYOK
 
 ### <a name="monitor"></a>Monitor
 
@@ -2042,7 +2138,7 @@ Versi 2.16.0
 ### <a name="app-service"></a>App Service
 
 * Perbaiki #14857: Biarkan pengguna memperbarui konfigurasi webapp bahkan dengan pembatasan akses
-* `az functionapp create`: Terima `--runtime python` dan sebagai Parameter Azure Functions  `--runtime-version 3.9` v3
+* `az functionapp create`: Terima `--runtime python` dan  `--runtime-version 3.9` sebagai Parameter Azure Functions v3
 * Fix #16041: az webapp config ssl create results in unknown error
 
 ### <a name="arm"></a>ARM
@@ -2201,7 +2297,7 @@ Versi 2.15.0
 
 ### <a name="hdinsight"></a>HDInsight
 
-* az hdinsight create: Tambahkan dua parameter `--resource-provider-connection` dan untuk mendukung fitur relay `--enable-private-link` outbound dan private link.
+* az hdinsight create: Tambahkan dua parameter `--resource-provider-connection` dan `--enable-private-link` untuk mendukung fitur relay outbound dan private link.
 
 ### <a name="key-vault"></a>Key Vault
 
@@ -2241,7 +2337,7 @@ Versi 2.15.0
 
 ### <a name="role"></a>Peran
 
-* `az role assignment create`: Membuat `--description` , `--condition` , `--condition-version` pratinjau
+* `az role assignment create`: Membuat `--description`, `--condition`, `--condition-version` pratinjau
 
 ### <a name="security"></a>Keamanan
 
@@ -2326,8 +2422,8 @@ Versi 2.14.0
 
 ### <a name="key-vault"></a>Key Vault
 
-* Membatalkan `--enable-soft-delete false` pembatalan saat membuat atau memperbarui kubah
-* Membuat `--bypass` dan bekerja sama dengan parameter `--default-action` acl jaringan saat membuat kubah
+* Membatalkan pembatalan `--enable-soft-delete false` saat membuat atau memperbarui kubah
+* Membuat `--bypass` dan `--default-action` bekerja sama dengan parameter acl jaringan saat membuat kubah
 
 ### <a name="misc"></a>Misc.
 
@@ -2337,12 +2433,12 @@ Versi 2.14.0
 
 * Tambahkan Perintah Daftar-SKUS, Transformer Tabel, Konteks Lokal untuk Postgres, MySQL, Mariadb Single Server
 * [MELANGGAR PERUBAHAN] Pembaruan nama parameter. Perbaikan Pesawat Manajemen untuk MySQL dan PostgreSQL
-* `az postgres|mariadb|mysql server create` : Perbarui buat pengalaman untuk Postgres, MySQL dan MariaDB - bidang baru dalam output , Memperkenalkan nilai baru untuk `--public` parameter dalam perintah buat (semua, , , , \<IP\> \<IPRange\> 0.0.0.0)
+* `az postgres|mariadb|mysql server create` : Perbarui buat pengalaman untuk Postgres, MySQL dan MariaDB - bidang baru dalam output , Memperkenalkan nilai baru untuk `--public` parameter dalam perintah buat (semua,\<IP\>,,\<IPRange\>0.0.0.0)
 
 ### <a name="signalr"></a>SignalR
 
-* `az signalr create`: Tambahkan opsi baru `--enable-messaging-logs` untuk mengontrol layanan menghasilkan log pesan atau tidak
-* `az signalr update`: Tambahkan opsi baru `--enable-messaging-logs` untuk mengontrol layanan menghasilkan log pesan atau tidak
+* `az signalr create`: Tambahkan opsi `--enable-messaging-logs` baru untuk mengontrol layanan menghasilkan log pesan atau tidak
+* `az signalr update`: Tambahkan opsi `--enable-messaging-logs` baru untuk mengontrol layanan menghasilkan log pesan atau tidak
 
 ### <a name="sql"></a>SQL
 
@@ -2446,7 +2542,7 @@ Versi 2.13.0
 
 ### <a name="role"></a>Peran
 
-* Perbaiki #15278: `az role assignment list/delete` : Melarang argumen string kosong
+* Perbaiki #15278: `az role assignment list/delete`: Melarang argumen string kosong
 
 ### <a name="sql"></a>SQL
 
@@ -2460,8 +2556,8 @@ Versi 2.13.0
 
 ### <a name="storage"></a>Penyimpanan
 
-* [BREAKING CHANGE]  `az storage blob copy start` : Memperbaiki masalah format untuk `--destination-if-modified-since` dan`--destination-if-unmodified-since`
-* [BREAKING CHANGE]  `az storage blob incremental-copy start` : Memperbaiki masalah format untuk `--destination-if-modified-since` dan`--destination-if-unmodified-since`
+* [BREAKING CHANGE] `az storage blob copy start`: Memperbaiki masalah format untuk `--destination-if-modified-since` dan `--destination-if-unmodified-since`
+* [BREAKING CHANGE] `az storage blob incremental-copy start`: Memperbaiki masalah format untuk `--destination-if-modified-since` dan `--destination-if-unmodified-since`
 * `az storage fs`: Memperbaiki masalah string koneksi
 * `az storage share-rm`: TINGKAT akses rilis GA
 * `az storage container-rm`Menambahkan grup perintah baru untuk menggunakan Microsoft. Storage penyedia sumber daya untuk operasi manajemen kontainer.
@@ -2534,7 +2630,7 @@ Versi 2.12.0
 
 Menambahkan perintah Cluster dan parameter trusted_service_access_enabled untuk Networkruleset
 
-### <a name="extension"></a>Extensi
+### <a name="extension"></a>Ekstensi
 
 * `az extension add`: Tambahkan `--upgrade` opsi untuk memperbarui ekstensi jika sudah diinstal
 * Mengaktifkan penginstalan dinamis secara default
@@ -2579,7 +2675,7 @@ Menambahkan perintah Cluster dan parameter trusted_service_access_enabled untuk 
 
 ### <a name="role"></a>Peran
 
-* `az role assignment create/update`: Dukungan `--description` , `--condition` dan `--condition-version`
+* `az role assignment create/update`: Dukungan `--description`, `--condition` dan `--condition-version`
 * `az ad app permission delete`: Dukungan `--api-permissions` untuk menghapus secara spesifik `ResourceAccess`
 
 ### <a name="service-fabric"></a>Service Fabric
@@ -2597,7 +2693,7 @@ Menambahkan perintah Cluster dan parameter trusted_service_access_enabled untuk 
 * GA rilis penyimpanan gumpalan PITR
 * `az storage blob query`: Mendukung Akselerasi Kueri Azure Storage
 * Mendukung Soft Delete untuk berbagi file
-* `az storage copy`: Tambahkan dukungan kredensial akun dan terdepresiasi `--source-local-path` , `--destination-local-path` , `--destination-account-name`
+* `az storage copy`: Tambahkan dukungan kredensial akun dan terdepresiasi `--source-local-path`, `--destination-local-path`, `--destination-account-name`
 * `az storage account blob-service-properties update`: Menambahkan dukungan kebijakan penyimpanan hapus kontainer
 
 ### <a name="synapse"></a>Synapse
@@ -2650,7 +2746,7 @@ Versi 2.11.0
 * `az webapp create-remote-connection`: Tambahkan parameter --instance untuk terhubung ke instans tertentu
 * Perbaiki #14758: az webapp membuat kesalahan saat membuat aplikasi windows dengan --runtime dotnetcore
 * Perbaiki #14701: Terapkan functionapp create --assign-identity
-* Perbaiki #11244: `az webapp auth update` : Tambahkan parameter opsional untuk memperbarui cap jempol client-secret-certificate-thumbprint
+* Perbaiki #11244: `az webapp auth update`: Tambahkan parameter opsional untuk memperbarui cap jempol client-secret-certificate-thumbprint
 * `az functionapp keys`: Menambahkan perintah yang memungkinkan pengguna untuk mengelola kunci aplikasi fungsi mereka
 * `az functionapp function`: Menambahkan perintah yang memungkinkan pengguna untuk mengelola fungsi masing-masing
 * `az functionapp function keys`: Menambahkan perintah yang memungkinkan pengguna untuk mengelola kunci fungsi mereka
@@ -2659,7 +2755,7 @@ Versi 2.11.0
 
 ### <a name="arm"></a>ARM
 
-* `az resource list`: Memperluas data pengembalian `createdTime` , `changedTime` dan `provisioningState`
+* `az resource list`: Memperluas data `createdTime`pengembalian , `changedTime` dan `provisioningState`
 * `az resource`: Tambahkan parameter `--latest-include-preview` untuk mendukung menggunakan versi api terbaru apakah versi ini pratinjau
 
 ### <a name="aro"></a>ARO
@@ -2689,7 +2785,7 @@ Versi 2.11.0
 
 * `az eventhubs eventhub create/update`: Mengubah dokumentasi destination_name
 
-### <a name="extension"></a>Extensi
+### <a name="extension"></a>Ekstensi
 
 * Menambahkan `az extension list-versions` perintah untuk mencantumkan semua versi ekstensi yang tersedia
 
@@ -2725,7 +2821,7 @@ Versi 2.11.0
 
 * `az ad group create`Dukungan menentukan deskripsi saat membuat grup
 * `az role definition create`: mencetak pesan yang dapat dibaca manusia alih-alih pengecualian ketika assignableScope adalah array kosong
-* [BREAKING CHANGE]  `az ad sp create-for-rbac` : ubah izin default sertifikat yang dibuat
+* [MELANGGAR PERUBAHAN] `az ad sp create-for-rbac`: mengubah izin default sertifikat yang dibuat
 
 ### <a name="sql"></a>SQL
 
@@ -2831,7 +2927,7 @@ Versi 2.10.0
 
 * `az config`: Menambahkan modul perintah baru `config`
 
-### <a name="extension"></a>Extensi
+### <a name="extension"></a>Ekstensi
 
 * Dukungan secara otomatis menginstal ekstensi jika ekstensi perintah tidak diinstal
 
@@ -2859,7 +2955,7 @@ Versi 2.10.0
 ### <a name="netappfiles"></a>NetAppFiles
 
 * `az volume revert`: Tambahkan Volume Kembali untuk mengembalikan volume ke salah satu snapshotnya.
-* [MELANGGAR PERUBAHAN] Hapus `az netappfiles mount-target` .
+* [MELANGGAR PERUBAHAN] Hapus `az netappfiles mount-target`.
 * `az volume show`: Menambahkan situs ke Properti Direktori Aktif
 
 ### <a name="network"></a>Jaringan
@@ -2884,11 +2980,11 @@ Versi 2.9.1
 
 ### <a name="iot"></a>IoT
 
-* [BREAKING CHANGE]  `az iot pnp` : Hapus perintah pratinjau IoT PNP dari inti CLI
+* [BREAKING CHANGE] `az iot pnp`: Hapus perintah pratinjau IoT PNP dari inti CLI
 
 ### <a name="rest"></a>REST
 
-* Perbaiki #14152: `az rest` : Terima URL ARM tanpa ID berlangganan
+* Perbaiki #14152: `az rest`: Terima URL ARM tanpa ID berlangganan
 
 ### <a name="storage"></a>Penyimpanan
 
@@ -2994,7 +3090,7 @@ Versi 2.9.0
 
 ### <a name="sql"></a>SQL
 
-* `az sql mi create`, `az sql mi update` : Tambahkan parameter ke `--tags` penandaan sumber daya dukungan
+* `az sql mi create`, `az sql mi update`: Tambahkan `--tags` parameter ke penandaan sumber daya dukungan
 * `az sql mi failover`: Dukungan failover dari titik primer atau sekunder
 
 ### <a name="storage"></a>Penyimpanan
@@ -3016,7 +3112,7 @@ Versi 2.8.0
 ### <a name="acr"></a>ACR
 
 * Menambahkan dukungan untuk menonaktifkan titik akhir wilayah / menonaktifkan perutean
-* [MELANGGAR PERUBAHAN]  `az acr login --expose-token` tidak menerima nama pengguna dan kata sandi
+* [MELANGGAR PERUBAHAN] `az acr login --expose-token` tidak menerima nama pengguna dan kata sandi
 
 ### <a name="acs"></a>ACS
 
@@ -3055,7 +3151,7 @@ Versi 2.8.0
 * `az deployment group/sub what-if`: Tambahkan parameter --exclude-change-types/-x.
 * `az deployment group/sub/mg/tenant create`: Tambahkan --what-if-exclude-change-types/-x parameter.
 * `az deployment group/sub/mg/tenant validate`: Tampilkan pesan kesalahan dalam format yang lebih baik.
-* `az group export`: Tambahkan parameter baru `--skip-resource-name-params` dan `--skip-all-params` untuk mendukung parameterisasi lewati
+* `az group export`: Tambahkan parameter `--skip-resource-name-params` baru dan `--skip-all-params` untuk mendukung parameterisasi lewati
 * Add az feature unregister api
 
 ### <a name="aro"></a>ARO
@@ -3079,7 +3175,7 @@ Versi 2.8.0
 
 ### <a name="cognitive-services"></a>Cognitive Services
 
-* [MELANGGAR PERUBAHAN]  `az cognitiveservices account` Sekarang memiliki struktur terpadu untuk semua perintah.
+* [MELANGGAR PERUBAHAN] `az cognitiveservices account` Sekarang memiliki struktur terpadu untuk semua perintah.
 * `az cognitiveservices account identity`Menambahkan manajemen identitas untuk Layanan Kognitif.
 
 ### <a name="compute"></a>Compute
@@ -3099,7 +3195,7 @@ Versi 2.8.0
 
 * `az eventhubs namespace create` : Menambahkan parameter identitas terkelola
 
-### <a name="extension"></a>Extensi
+### <a name="extension"></a>Ekstensi
 
 * Menambahkan --version ke dukungan untuk menginstal dari versi tertentu
 * Aktifkan ekstensi CLI untuk menyertakan paket di namespace 'azure'
@@ -3148,7 +3244,7 @@ Versi 2.8.0
 * Perbaiki #13708: Perbaiki pesan peringatan untuk kredensial
 * `az storage share-rm create/update`: Tambahkan protokol NFS dan dukungan root squash
 * `az storage account create`: Tambahkan dukungan untuk enkripsi ganda
-* [BREAKING CHANGE]  `az storage blob/container/file/share/table/queue generate-sas` : membuat --expiry dan --permissions diperlukan
+* [BREAKING CHANGE] `az storage blob/container/file/share/table/queue generate-sas`: membuat --expiry dan --permissions diperlukan
 * `az storage blob set-tier`Migrasi ke Track 2 untuk mendukung pengaturan prioritas rehydrate
 
 ## <a name="june-02-2020"></a>Juni 02, 2020
@@ -3289,14 +3385,14 @@ Versi 2.6.0
 
 * Memperbarui status on/off konteks lokal ke tingkat pengguna global
 
-### <a name="extension"></a>Extensi
+### <a name="extension"></a>Ekstensi
 
 * `az extension add`: Tambahkan --system untuk mengaktifkan penginstalan ekstensi di jalur sistem
 * Mendukung .egg-info untuk menyimpan metadata ekstensi tipe roda
 
 ### <a name="iot"></a>IoT
 
-* `az iot`: Perbarui modul perintah IoT pertama-tama jalankan pesan kesadaran ekstensi ke Id modern yang akurat dan tidak `azure-iot` usang.
+* `az iot`: Perbarui modul perintah IoT pertama-tama jalankan pesan kesadaran ekstensi ke Id `azure-iot`modern yang akurat dan tidak usang.
 
 ### <a name="iot-hub"></a>IoT Hub
 
@@ -3353,7 +3449,7 @@ Versi 2.5.1
 
 * `az cosmosdb create/update`: tambahkan dukungan --enable-public-network
 
-### <a name="extension"></a>Extensi
+### <a name="extension"></a>Ekstensi
 
 * Memperbaiki pemuatan metadata yang salah untuk ekstensi tipe roda
 
@@ -3411,7 +3507,7 @@ Versi 2.5.0
 
 ### <a name="keyvault"></a>Az.KeyVault
 
-* Menambahkan parameter baru `--enable-rbac-authorization` selama membuat atau memperbarui
+* Menambahkan parameter `--enable-rbac-authorization` baru selama membuat atau memperbarui
 
 ### <a name="monitor"></a>Monitor
 
@@ -3451,9 +3547,9 @@ Versi 2.4.0
 ### <a name="appservice"></a>AppService
 
 * `az functionapp create`: Mengubah cara linuxFxVersion sedang diatur untuk aplikasi fungsi dotnet linux. Ini harus memperbaiki bug yang mencegah aplikasi konsumsi dotnet linux dibuat.
-* [BREAKING CHANGE]  `az webapp create` : fix untuk menjaga AppSettings yang ada dengan az webapp create
-* [BREAKING CHANGE]  `az webapp up` : perbaiki untuk membuat perintah RG for az webapp up saat menggunakan bendera -g
-* [BREAKING CHANGE]  `az webapp config` : memperbaiki untuk menampilkan nilai untuk output non-JSON dengan az webapp config connection-string list
+* [BREAKING CHANGE] `az webapp create`: memperbaiki agar AppSettings yang ada dengan az webapp create
+* [BREAKING CHANGE] `az webapp up`: memperbaiki untuk membuat perintah RG for az webapp up saat menggunakan bendera -g
+* [BREAKING CHANGE] `az webapp config`: memperbaiki untuk menampilkan nilai untuk output non-JSON dengan az webapp config connection-string list
 
 ### <a name="arm"></a>ARM
 
@@ -3522,7 +3618,7 @@ Versi 2.4.0
 
 ### <a name="sql"></a>SQL
 
-* Tambahkan `az sql mi op list` , `az sql mi op get` , `az sql mi op cancel`
+* Tambahkan `az sql mi op list`, `az sql mi op get`, `az sql mi op cancel`
 * `az sql midb`: memperbarui/menampilkan kebijakan retensi jangka panjang, memperlihatkan/menghapus cadangan retensi jangka panjang, memulihkan cadangan retensi jangka panjang
 
 ### <a name="storage"></a>Penyimpanan
@@ -3615,13 +3711,13 @@ Versi 2.3.0
 
 * Pembaruan ke Alpine 3.11 dan Python 3.6.10
 
-### <a name="extension"></a>Extensi
+### <a name="extension"></a>Ekstensi
 
 * Memungkinkan untuk memuat ekstensi di jalur sistem melalui paket
 
 ### <a name="hdinsight"></a>HDInsight
 
-* (az hdinsight create:) Pelanggan dukungan menentukan versi tls yang didukung minimal dengan menggunakan parameter `--minimal-tls-version` . Nilai yang diizinkan adalah 1,0,1.1,1,2
+* (az hdinsight create:) Pelanggan dukungan menentukan versi tls yang didukung minimal dengan menggunakan parameter `--minimal-tls-version`. Nilai yang diizinkan adalah 1,0,1.1,1,2
 
 ### <a name="iot"></a>IoT
 
@@ -3638,7 +3734,7 @@ Versi 2.3.0
 * Cadangan/pemulihan sertifikat dukungan
 * keyvault create/update: Support --retention-days
 * Tidak lagi menampilkan kunci / rahasia terkelola saat mendaftar
-* az keyvault create: support `--network-acls` , dan untuk menentukan aturan jaringan saat membuat `--network-acls-ips` `--network-acls-vnets` vault
+* az keyvault create: support `--network-acls`, `--network-acls-ips` dan `--network-acls-vnets` untuk menentukan aturan jaringan saat membuat vault
 
 ### <a name="lock"></a>Kunci
 
@@ -3709,7 +3805,7 @@ Versi 2.2.0
 
 * az webapp create : Memperbaiki masalah saat menjalankan perintah dengan --runtime
 * az functionapp deployment source config-zip: Menambahkan pesan kesalahan jika grup sumber daya atau nama fungsi tidak valid/tidak ada
-* functionapp create: Perbaiki pesan peringatan yang muncul dengan `functionapp create` hari ini yang mengutip bendera tetapi secara keliru menggunakan bukan dalam nama `--functions_version` `_` `-` bendera
+* functionapp create: Perbaiki pesan peringatan yang muncul dengan `functionapp create` hari ini yang `--functions_version` mengutip bendera tetapi secara keliru menggunakan `_` bukan `-` dalam nama bendera
 * az functionapp create: Memperbarui cara linuxFxVersion dan nama gambar kontainer sedang diatur untuk aplikasi fungsi linux
 * az functionapp deployment source config-zip: Memperbaiki masalah yang disebabkan oleh pengaturan aplikasi mengubah kondisi balap selama zip deploy, memberikan 5xx kesalahan selama penyebaran
 * Perbaiki #5720946: az webapp backup gagal mengatur nama
@@ -3718,10 +3814,10 @@ Versi 2.2.0
 
 * az resource: Meningkatkan contoh modul sumber daya
 * az daftar penugasan kebijakan: Mendukung daftar tugas kebijakan di lingkup Grup Manajemen
-* Menambahkan `az deployment group` dan untuk penyebaran templat di grup sumber `az deployment operation group` daya. Ini adalah duplikat dari `az group deployment` dan `az group deployment operation`
-* Tambahkan `az deployment sub` dan untuk penyebaran templat di lingkup `az deployment operation sub` langganan. Ini adalah duplikat dari `az deployment` dan `az deployment operation`
-* Menambahkan `az deployment mg` dan untuk penyebaran templat di grup `az deployment operation mg` manajemen
-* Menambahkan `az deployment tenant` dan untuk penyebaran templat di lingkup `az deployment operation tenant` penyewa
+* Menambahkan `az deployment group` dan `az deployment operation group` untuk penyebaran templat di grup sumber daya. Ini adalah duplikat dari `az group deployment` dan `az group deployment operation`
+* Tambahkan `az deployment sub` dan `az deployment operation sub` untuk penyebaran templat di lingkup langganan. Ini adalah duplikat dari `az deployment` dan `az deployment operation`
+* Menambahkan `az deployment mg` dan `az deployment operation mg` untuk penyebaran templat di grup manajemen
+* Menambahkan `az deployment tenant` dan `az deployment operation tenant` untuk penyebaran templat di lingkup penyewa
 * az pembuatan tugas kebijakan: Menambahkan deskripsi ke `--location` parameter
 * az penyebaran grup buat: Menambahkan parameter `--aux-tenants` untuk mendukung penyewa silang
 
@@ -3805,7 +3901,7 @@ Versi 2.1.0
 
 ### <a name="acr"></a>ACR
 
-* Menambahkan argumen baru `--expose-token` untuk `az acr login`
+* Menambahkan argumen `--expose-token` baru untuk `az acr login`
 * Memperbaiki output yang salah dari `az acr task identity show -n Name -r Registry -o table`
 * az acr login: Lemparkan CLIError jika ada kesalahan yang dikembalikan oleh perintah docker
 
@@ -3848,7 +3944,7 @@ Versi 2.1.0
 * vm/vmss/availability-set update: add --ppg to allowing update proximityplacementgroup
 * vmss create: add --data-disk-iops dan --data-disk-mbps
 * az vm host: remove preview tag for `vm host` and `vm host group`
-* [MELANGGAR PERUBAHAN] Perbaiki #10728: `az vm create` : buat subnet secara otomatis jika vnet ditentukan dan subnet tidak ada
+* [MELANGGAR PERUBAHAN] Perbaiki #10728: `az vm create`: buat subnet secara otomatis jika vnet ditentukan dan subnet tidak ada
 * Meningkatkan ketahanan daftar gambar vm
 
 ### <a name="eventhub"></a>Eventhub
@@ -3857,8 +3953,8 @@ Versi 2.1.0
 
 ### <a name="keyvault"></a>Az.KeyVault
 
-* az keyvault key create: menambahkan nilai baru `import` untuk parameter `--ops`
-* az keyvault key list-versions: parameter dukungan `--id` untuk menentukan kunci
+* az keyvault key create: menambahkan nilai `import` baru untuk parameter `--ops`
+* az keyvault key list-versions: parameter `--id` dukungan untuk menentukan kunci
 * Mendukung koneksi endpoint pribadi
 
 ### <a name="network"></a>Jaringan
@@ -3873,8 +3969,8 @@ Versi 2.1.0
 
 ### <a name="profile"></a>Profil
 
-* Pratinjau: Menambahkan atribut baru `homeTenantId` dan `managedByTenants` ke akun langganan. Silakan jalankan kembali `az login` agar perubahan berlaku
-* az login: Tampilkan peringatan saat langganan terdaftar dari lebih dari satu penyewa dan default ke yang pertama. Untuk memilih penyewa tertentu saat mengakses langganan ini, harap `--tenant` sertakan `az login`
+* Pratinjau: Menambahkan atribut `homeTenantId` baru dan `managedByTenants` ke akun langganan. Silakan jalankan `az login` kembali agar perubahan berlaku
+* az login: Tampilkan peringatan saat langganan terdaftar dari lebih dari satu penyewa dan default ke yang pertama. Untuk memilih penyewa tertentu saat mengakses langganan ini, harap sertakan `--tenant``az login`
 
 ### <a name="role"></a>Peran
 
@@ -3882,11 +3978,11 @@ Versi 2.1.0
 
 ### <a name="sql"></a>SQL
 
-* Memperbarui cmdlet Instans Terkelola SQL `az sql mi update` dengan dua parameter baru: tingkat dan keluarga
+* Memperbarui cmdlet `az sql mi update` Instans Terkelola SQL dengan dua parameter baru: tingkat dan keluarga
 
 ### <a name="storage"></a>Penyimpanan
 
-* [BREAKING CHANGE]  `az storage account create` : Ubah jenis akun penyimpanan default ke StorageV2
+* [BREAKING CHANGE] `az storage account create`: Ubah jenis akun penyimpanan default ke StorageV2
 
 ## <a name="february-04-2020"></a>Tanggal 04 Februari 2020
 
@@ -3899,7 +3995,7 @@ Versi 2.0.81
 
 ### <a name="acr"></a>ACR
 
-* [MELANGGAR PERUBAHAN]  `az acr delete` akan meminta
+* [MELANGGAR PERUBAHAN] `az acr delete` akan meminta
 * [MELANGGAR PERUBAHAN] 'az acr task delete' akan meminta
 * Menambahkan grup perintah baru 'az acr taskrun show/list/delete' for taskrun management
 
@@ -3922,11 +4018,11 @@ Versi 2.0.81
 
 ### <a name="arm"></a>ARM
 
-* Memperbaiki masalah #10246: `az resource tag` crash saat parameter masuk adalah ID grup sumber `--ids` daya
-* Perbaiki masalah #11658: `az group export` perintah tidak mendukung dan `--query` `--output` parameter
-* Memperbaiki masalah #10279: Kode keluar `az group deployment validate` adalah 0 ketika verifikasi gagal
+* Memperbaiki masalah #10246: `az resource tag` crash saat parameter `--ids` masuk adalah ID grup sumber daya
+* Perbaiki masalah #11658: `az group export` perintah tidak mendukung `--query` dan `--output` parameter
+* Memperbaiki masalah #10279: Kode `az group deployment validate` keluar adalah 0 ketika verifikasi gagal
 * Memperbaiki masalah #9916: Meningkatkan pesan kesalahan konflik antara tag dan kondisi filter lainnya untuk `az resource list` perintah
-* Menambahkan parameter baru `--managed-by` untuk mendukung menambahkan informasi terkelola Untuk perintah `az group create`
+* Menambahkan parameter `--managed-by` baru untuk mendukung menambahkan informasi terkelola Untuk perintah `az group create`
 
 ### <a name="azure-red-hat-openshift"></a>Azure Red Hat OpenShift
 
@@ -3959,7 +4055,7 @@ Versi 2.0.81
 
 ### <a name="key-vault"></a>Key Vault
 
-* Tambahkan perintah baru `az keyvault key download` untuk mengunduh kunci.
+* Tambahkan perintah `az keyvault key download` baru untuk mengunduh kunci.
 
 ### <a name="misc"></a>Misc
 
@@ -3971,7 +4067,7 @@ Versi 2.0.81
 
 ### <a name="policy"></a>Kebijakan
 
-* Menambahkan perintah baru `az policy metadata` untuk mengambil sumber daya metadata kebijakan yang kaya
+* Menambahkan perintah `az policy metadata` baru untuk mengambil sumber daya metadata kebijakan yang kaya
 * `az policy remediation create`Menentukan apakah kepatuhan harus dievaluasi ulang sebelum remediasi dengan `--resource-discovery-mode` parameter
 
 ### <a name="profile"></a>Profil
@@ -3980,27 +4076,27 @@ Versi 2.0.81
 
 ### <a name="rbac"></a>RBAC
 
-* [MELANGGAR PERUBAHAN] Perbaiki #11883: `az role assignment create` : ruang lingkup kosong akan menimbulkan kesalahan
+* [MELANGGAR PERUBAHAN] Perbaiki #11883: `az role assignment create`: ruang lingkup kosong akan menimbulkan kesalahan
 
 ### <a name="security"></a>Keamanan
 
-* Tambahkan perintah baru `az atp show` dan untuk melihat dan mengelola pengaturan perlindungan ancaman tingkat lanjut untuk akun `az atp update` penyimpanan.
+* Tambahkan perintah `az atp show` baru dan `az atp update` untuk melihat dan mengelola pengaturan perlindungan ancaman tingkat lanjut untuk akun penyimpanan.
 
 ### <a name="sql"></a>SQL
 
 * `sql dw create`: deprecate `--zone-redundant` dan `--read-replica-count` parameter. Parameter ini tidak berlaku untuk DataWarehouse.
-* [BREAKING CHANGE]  `az sql db create` : Hapus "WideWorldImportersStd" dan "WideWorldImportersFull" sebagai nilai yang diizinkan didokumentasikan untuk "az sql db create --sample-name". Database sampel ini akan selalu menyebabkan penciptaan gagal.
-* Tambahkan perintah Baru `sql db classification show/list/update/delete` dan untuk mengelola klasifikasi sensitivitas untuk database `sql db classification recommendation list/enable/disable` SQL.
+* [BREAKING CHANGE] `az sql db create`: Hapus "WideWorldImportersStd" dan "WideWorldImportersFull" sebagai nilai yang diizinkan didokumentasikan untuk "az sql db create --sample-name". Database sampel ini akan selalu menyebabkan penciptaan gagal.
+* Tambahkan perintah `sql db classification show/list/update/delete` Baru dan `sql db classification recommendation list/enable/disable` untuk mengelola klasifikasi sensitivitas untuk database SQL.
 * `az sql db audit-policy`Memperbaiki tindakan dan grup audit kosong
 
 ### <a name="storage"></a>Penyimpanan
 
-* Tambahkan grup perintah baru `az storage share-rm` untuk menggunakan penyedia sumber daya Microsoft.Storage untuk operasi manajemen berbagi file Azure.
+* Tambahkan grup `az storage share-rm` perintah baru untuk menggunakan penyedia sumber daya Microsoft.Storage untuk operasi manajemen berbagi file Azure.
 * Memperbaiki masalah #11415: kesalahan izin untuk `az storage blob update`
 * Integrasikan Azcopy 10.3.3 dan dukung Win32.
-* `az storage copy`: Tambahkan `--include-path` , `--include-pattern` , dan `--exclude-path` `--exclude-pattern` parameter
-* `az storage remove`: Perubahan `--inlcude` dan parameter untuk , , dan `--exclude` `--include-path` `--include-pattern` `--exclude-path` `--exclude-pattern` parameter
-* `az storage sync`: Tambahkan `--include-pattern` , `--exclude-path` dan `--exclude-pattern` parameter
+* `az storage copy`: Tambahkan `--include-path`, `--include-pattern`, dan`--exclude-pattern` `--exclude-path` parameter
+* `az storage remove`: Perubahan `--inlcude` dan `--exclude` parameter untuk `--include-path`, `--include-pattern`, `--exclude-path` dan`--exclude-pattern` parameter
+* `az storage sync`: Tambahkan `--include-pattern`, `--exclude-path` dan`--exclude-pattern` parameter
 
 ### <a name="servicefabric"></a>ServiceFabric
 
@@ -4018,7 +4114,7 @@ Versi 2.0.80
 ### <a name="storage"></a>Penyimpanan
 
 * Upgrade azure-mgmt-storage version to 7.1.0
-* `az storage account create`: Menambahkan `--encryption-key-type-for-table` dan mendukung Layanan Enkripsi Tabel dan `--encryption-key-type-for-queue` Antrian
+* `az storage account create`: Menambahkan `--encryption-key-type-for-table` dan `--encryption-key-type-for-queue` mendukung Layanan Enkripsi Tabel dan Antrian
 
 ## <a name="january-07-2020"></a>Tanggal 07 Januari 2020
 
@@ -4042,7 +4138,7 @@ Versi 2.0.79
 
 ### <a name="arm"></a>ARM
 
-* Perbaiki `az resource tag` : Layanan Pemulihan Tag Vault tidak dapat diperbarui
+* Perbaiki `az resource tag`: Layanan Pemulihan Tag Vault tidak dapat diperbarui
 
 ### <a name="backup"></a>Cadangan
 
@@ -4063,7 +4159,7 @@ Versi 2.0.79
 
 ### <a name="misc"></a>Misc.
 
-* Menambahkan perintah pratinjau `az version show` untuk memperlihatkan versi modul dan ekstensi Azure CLI dalam format JSON secara default atau format yang dikonfigurasi oleh --output
+* Menambahkan perintah `az version show` pratinjau untuk memperlihatkan versi modul dan ekstensi Azure CLI dalam format JSON secara default atau format yang dikonfigurasi oleh --output
 
 ### <a name="event-hubs"></a>Event Hubs
 
@@ -4081,7 +4177,7 @@ Versi 2.0.79
 
 * `az storage account create`: Hapus bendera pratinjau untuk parameter --enable-hierarchical-namespace
 * Update azure-mgmt-storage version to 7.0.0 to use api version 2019-06-01
-* Tambahkan parameter baru `--enable-delete-retention` dan untuk mendukung pengelolaan kebijakan penghapusan retensi untuk properti `--delete-retention-days` blob-service- akun penyimpanan.
+* Tambahkan parameter `--enable-delete-retention` baru dan `--delete-retention-days` untuk mendukung pengelolaan kebijakan penghapusan retensi untuk properti blob-service-akun penyimpanan.
 
 ## <a name="december-17-2019"></a>17 Desember 2019
 
@@ -4093,7 +4189,7 @@ Versi 2.0.79
 
 ### <a name="acs"></a>ACS
 
-* [BREAKING CHANGE]az openshift create: rename `--workspace-resource-id` to `--workspace-id` .
+* [BREAKING CHANGEaz] openshift create: ganti nama `--workspace-resource-id` menjadi `--workspace-id`.
 
 ### <a name="ams"></a>AMS
 
@@ -4114,7 +4210,7 @@ Versi 2.0.79
 
 * Paket azure-mgmt-resource yang diperbarui untuk menggunakan 6.0.0
 * Dukungan Penyewa Silang untuk `az group deployment create` perintah dengan menambahkan parameter baru `--aux-subs`
-* Menambahkan parameter baru `--metadata` untuk mendukung penambahan informasi metadata untuk definisi yang ditetapkan kebijakan.
+* Menambahkan parameter `--metadata` baru untuk mendukung penambahan informasi metadata untuk definisi yang ditetapkan kebijakan.
 
 ### <a name="backup"></a>Cadangan
 
@@ -4159,11 +4255,11 @@ Versi 2.0.79
 
 ### <a name="key-vault"></a>Key Vault
 
-* Tetap #8095: `az keyvault storage remove` : meningkatkan pesan bantuan
-* Tetap #8921: `az keyvault key/secret/certificate list/list-deleted/list-versions` : memperbaiki bug validasi pada parameter `--maxresults`
-* Tetap #10512: `az keyvault set-policy` : meningkatkan pesan kesalahan ketika tidak ada , atau `--object-id` `--spn` `--upn` ditentukan
-* Tetap #10846: `az keyvault secret show-deleted` : ketika `--id` ditentukan, tidak `--name/-n` diperlukan
-* Tetap #11084: `az keyvault secret download` : meningkatkan pesan bantuan parameter `--encoding`
+* Tetap #8095: `az keyvault storage remove`: meningkatkan pesan bantuan
+* Tetap #8921: `az keyvault key/secret/certificate list/list-deleted/list-versions`: memperbaiki bug validasi pada parameter `--maxresults`
+* Tetap #10512: `az keyvault set-policy`: meningkatkan pesan kesalahan ketika tidak ada `--object-id`, `--spn` atau `--upn` ditentukan
+* Tetap #10846: `az keyvault secret show-deleted`: ketika `--id` ditentukan, `--name/-n` tidak diperlukan
+* Tetap #11084: `az keyvault secret download`: meningkatkan pesan bantuan parameter `--encoding`
 
 ### <a name="network"></a>Jaringan
 
@@ -4185,7 +4281,7 @@ Versi 2.0.79
 
 ### <a name="redis"></a>Redis
 
-* Menambahkan param pratinjau `--replicas-per-master` ke `az redis create` perintah
+* Menambahkan param `--replicas-per-master` pratinjau ke `az redis create` perintah
 * Diperbarui azure-mgmt-redis dari 6.0.0 to 7.0.0rc1
 
 ### <a name="servicefabric"></a>ServiceFabric
@@ -4201,8 +4297,8 @@ Versi 2.0.79
 
 * GA Rilis File Besar Berbagi properti untuk membuat akun penyimpanan dan memperbarui perintah
 * GA Rilis Dukungan Token SAS Delegasi Pengguna
-* Menambahkan perintah baru `az storage account blob-service-properties show` dan mengelola properti layanan gumpalan untuk akun `az storage account blob-service-properties update --enable-change-feed` penyimpanan.
-* [COMING BREAKING `az storage copy` CHANGE]: `*` karakter tidak lagi didukung sebagai wildcard di URL, tetapi parameter baru - termasuk-pola dan --exclude-pattern akan ditambahkan dengan dukungan `*` wildcard.
+* Menambahkan perintah `az storage account blob-service-properties show` baru dan `az storage account blob-service-properties update --enable-change-feed` mengelola properti layanan gumpalan untuk akun penyimpanan.
+* [COMING BREAKING CHANGE] `az storage copy`: `*` karakter tidak lagi didukung sebagai wildcard di URL, tetapi parameter baru - termasuk-pola dan --exclude-pattern akan ditambahkan dengan `*` dukungan wildcard.
 * Masalah tetap #11043: Menambahkan dukungan untuk menghapus seluruh kontainer/berbagi dalam `az storage remove` perintah
 
 ## <a name="november-26-2019"></a>Tanggal 26 November 2019
@@ -4259,7 +4355,7 @@ Versi 2.0.77
 
 ### <a name="key-vault"></a>Key Vault
 
-* Tetap # 11121: Saat `az keyvault certificate list` menggunakan, lewat `--include-pending` sekarang tidak memerlukan nilai `true` atau `false`
+* Tetap # 11121: Saat menggunakan `az keyvault certificate list`, lewat `--include-pending` sekarang tidak memerlukan nilai `true` atau `false`
 
 ### <a name="netappfiles"></a>NetAppFiles
 
@@ -4290,7 +4386,7 @@ Versi 2.0.77
 
 ### <a name="rbac"></a>RBAC
 
-* Tetap #10996: Kesalahan Polandia `--force-change-password-next-login` `az ad user update` untuk saat tidak `--password` ditentukan
+* Tetap #10996: Kesalahan Polandia untuk `--force-change-password-next-login` `az ad user update` saat `--password` tidak ditentukan
 
 ### <a name="redis"></a>Redis
 
@@ -4300,8 +4396,8 @@ Versi 2.0.77
 
 * Versi SDK yang Ditingkatkan ke 0.6.0
 * Menambahkan info detail billingplan setelah menelepon Get-Gatalogs
-* Menambahkan perintah baru `az reservations reservation-order calculate` untuk menghitung harga untuk reservasi
-* Menambahkan perintah baru `az reservations reservation-order purchase` untuk membeli reservasi baru
+* Menambahkan perintah `az reservations reservation-order calculate` baru untuk menghitung harga untuk reservasi
+* Menambahkan perintah `az reservations reservation-order purchase` baru untuk membeli reservasi baru
 
 ### <a name="rest"></a>Sisanya
 * Diubah `az rest` menjadi GA
@@ -4322,13 +4418,13 @@ Versi 2.0.76
 
 ### <a name="acr"></a>ACR
 
-* Menambahkan parameter pratinjau `--pack-image-tag` ke perintah `az acr pack build` .
+* Menambahkan parameter `--pack-image-tag` pratinjau ke perintah `az acr pack build`.
 * Menambahkan dukungan untuk memungkinkan audit dalam membuat registri
 * Menambahkan dukungan untuk RBAC repository-scoped
 
 ### <a name="aks"></a>AKS
 
-* Ditambahkan, `--enable-cluster-autoscaler` `--min-count` dan ke `--max-count` `az aks create` perintah, yang memungkinkan autoscaler cluster untuk kolam node.
+* Ditambahkan `--enable-cluster-autoscaler`, `--min-count` dan `--max-count` ke `az aks create` perintah, yang memungkinkan autoscaler cluster untuk kolam node.
 * Menambahkan bendera di atas serta `--update-cluster-autoscaler` dan `--disable-cluster-autoscaler` ke `az aks update` perintah, memungkinkan pembaruan untuk mengelompokkan autoscaler.
 
 ### <a name="appconfig"></a>Konfigurasi Aplikasi
@@ -4340,7 +4436,7 @@ Versi 2.0.76
 
 * `az appservice plan create`: Menambahkan dukungan untuk mengatur 'persitescaling' pada buat rencana layanan aplikasi.
 * Memperbaiki masalah di mana operasi pengikat ssl konfigurasi webapp menghapus tag yang ada dari sumber daya
-* Menambahkan `--build-remote` bendera `az functionapp deployment source config-zip` untuk mendukung tindakan pembuatan jarak jauh selama penyebaran aplikasi fungsi.
+* Menambahkan `--build-remote` bendera untuk `az functionapp deployment source config-zip` mendukung tindakan pembuatan jarak jauh selama penyebaran aplikasi fungsi.
 * Mengubah versi node default pada aplikasi fungsi menjadi ~10 untuk Windows
 * Menambahkan `--runtime-version` properti ke `az functionapp create`
 
@@ -4358,16 +4454,16 @@ Versi 2.0.76
 * `az vm create`: Menambahkan peringatan ketika menentukan jaringan yang dipercepat dan NIC yang ada bersama-sama.
 * `az vm create`Ditambahkan `--vmss` untuk menentukan set skala mesin virtual yang ada bahwa mesin virtual harus ditugaskan untuk.
 * `az vm/vmss create`Menambahkan salinan lokal gambar alias file sehingga dapat diakses di lingkungan jaringan terbatas.
-* `az vmss create`Ditambahkan `--orchestration-mode` untuk menentukan bagaimana mesin virtual dikelola oleh set skala.
+* `az vmss create``--orchestration-mode` Ditambahkan untuk menentukan bagaimana mesin virtual dikelola oleh set skala.
 * `az vm/vmss update`: Ditambahkan `--ultra-ssd-enabled` untuk memungkinkan memperbarui pengaturan ultra SSD.
-* [BREAKING CHANGE:]  `az vm extension set` Bug tetap di mana pengguna tidak dapat mengatur ekstensi pada VM dengan `--ids` .
-* Menambahkan perintah baru `az vm image terms accept/cancel/show` untuk mengelola istilah gambar Azure Marketplace.
+* [BREAKING CHANGE] `az vm extension set`: Bug tetap di mana pengguna tidak dapat mengatur ekstensi pada VM dengan `--ids`.
+* Menambahkan perintah `az vm image terms accept/cancel/show` baru untuk mengelola istilah gambar Azure Marketplace.
 * VmAccessForLinux yang diperbarui ke versi 1.5
 
 ### <a name="cosmosdb"></a>CosmosDB
 
-* [BREAKING CHANGE]  `az sql container create` : Diubah menjadi parameter yang `--partition-key-path` diperlukan
-* [BREAKING CHANGE]  `az gremlin graph create` : Diubah menjadi parameter yang `--partition-key-path` diperlukan
+* [BREAKING CHANGE] `az sql container create`: Diubah `--partition-key-path` ke parameter yang diperlukan
+* [BREAKING CHANGE] `az gremlin graph create`: Diubah `--partition-key-path` ke parameter yang diperlukan
 * `az sql container create`: Ditambahkan `--unique-key-policy` dan `--conflict-resolution-policy`
 * `az sql container create/update`: Memperbarui `--idx` skema default
 * `gremlin graph create`: Ditambahkan `--conflict-resolution-policy`
@@ -4390,7 +4486,7 @@ Versi 2.0.76
 
 * Upgrade azure-mgmt-netapp ke 0.6.0 to use API version 2019-07-01. Versi API baru ini meliputi:
 
-    - Penciptaan volume `--protocol-types` menerima sekarang "NFSv4.1&quot; bukan &quot;NFSv4"
+    - Penciptaan volume `--protocol-types` menerima sekarang "NFSv4.1" bukan "NFSv4"
     - Properti kebijakan ekspor volume sekarang bernama 'nfsv41' bukan 'nfsv4'
     - Volume `--creation-token` yang diganti namanya menjadi `--file-path`
     - Tanggal pembuatan snapshot sekarang bernama hanya 'dibuat'
@@ -4398,7 +4494,7 @@ Versi 2.0.76
 ### <a name="network"></a>Jaringan
 
 * `az network private-dns link vnet create/update`: Mendukung penautan jaringan virtual lintas penyewa.
-* [BREAKING CHANGE:]  `az network vnet subnet list` Berubah dan harus dibutuhkan `--resource-group` `--vnet-name` sekarang.
+* [MELANGGAR PERUBAHAN] `az network vnet subnet list`: Berubah `--resource-group` dan `--vnet-name` harus diperlukan sekarang.
 * `az network public-ip prefix create`Menambahkan dukungan untuk menentukan versi alamat IP (IPv4, IPv6) saat pembuatan
 * Bumped azure-mgmt-network to 7.0.0 dan api-version to 2019-09-01
 * `az network vrouter`: Menambahkan dukungan untuk layanan baru router virtual dan router virtual mengintip
@@ -4419,7 +4515,7 @@ Versi 2.0.76
 
 ### <a name="sql"></a>SQL
 
-* Ditambahkan, `--compute-model` `--auto-pause-delay` , dan parameter untuk mendukung `--min-capacity` operasi CRUD untuk penawaran SQL Database baru: Model komputasi tanpa server.
+* Ditambahkan`--compute-model`, `--auto-pause-delay`, dan `--min-capacity` parameter untuk mendukung operasi CRUD untuk penawaran SQL Database baru: Model komputasi tanpa server.
 
 ### <a name="storage"></a>Penyimpanan
 
@@ -4432,13 +4528,13 @@ Versi 2.0.75
 
 ### <a name="aks"></a>AKS
 
-* Mengubah `--load-balancer-sku` nilai default menjadi jika didukung oleh versi `standard` kubernetes
-* Mengubah `--vm-set-type` nilai default menjadi jika didukung oleh versi `virtualmachinescalesets` kubernetes
+* Mengubah `--load-balancer-sku` nilai default menjadi `standard` jika didukung oleh versi kubernetes
+* Mengubah `--vm-set-type` nilai default menjadi `virtualmachinescalesets` jika didukung oleh versi kubernetes
 
 ### <a name="ams"></a>AMS
 
 * [MELANGGAR PERUBAHAN] Mengubah nama `job start` menjadi `job create`
-* [MELANGGAR PERUBAHAN] Mengubah `--ask` parameter `content-key-policy create` untuk menggunakan string heks 32 karakter, bukan UTF8
+* [MELANGGAR PERUBAHAN] `--ask` Mengubah parameter `content-key-policy create` untuk menggunakan string heks 32 karakter, bukan UTF8
 
 ### <a name="appservice"></a>AppService
 
@@ -4455,8 +4551,8 @@ Versi 2.0.75
 * Menambahkan `--enable-agent` parameter ke `vm create`
 * Diubah `vm create` untuk menggunakan SKU IP publik standar secara otomatis saat menggunakan zona
 * Diubah `vm create` untuk secara otomatis membuat nama komputer yang valid untuk VM jika tidak ada yang disediakan
-* Menambahkan `--computer-name-prefix` parameter `vmss create` untuk mendukung awalan nama komputer kustom mesin virtual di VMSS
-* Menambahkan `--workspace` parameter untuk mengaktifkan ruang kerja analisis log secara `vm create` otomatis
+* Menambahkan `--computer-name-prefix` parameter untuk `vmss create` mendukung awalan nama komputer kustom mesin virtual di VMSS
+* Menambahkan `--workspace` parameter untuk `vm create` mengaktifkan ruang kerja analisis log secara otomatis
 * Galeri yang diperbarui versi API ke 2019-07-01
 
 ### <a name="core"></a>Core
@@ -4474,7 +4570,7 @@ Versi 2.0.75
 ### <a name="network"></a>Jaringan
 
 * Menambahkan dukungan untuk linking virtual cross-tenant ke `network private-dns link vnet [create|update]`
-* [MELANGGAR PERUBAHAN] Diubah `network vnet subnet list` menjadi kebutuhan dan `--resource-group` `--vnet-name` parameter
+* [MELANGGAR PERUBAHAN] Diubah `network vnet subnet list` menjadi kebutuhan `--resource-group` dan `--vnet-name` parameter
 
 ### <a name="sql"></a>SQL
 
@@ -4483,7 +4579,7 @@ Versi 2.0.75
 ### <a name="storage"></a>Penyimpanan
 
 * Menambahkan `--preserve-s2s-access-tier` parameter `storage copy` untuk mempertahankan tingkat akses selama salinan layanan ke layanan
-* Menambahkan `--enable-large-file-share` parameter `storage account [create|update]` untuk mendukung berbagi file besar untuk akun penyimpanan
+* Menambahkan `--enable-large-file-share` parameter untuk `storage account [create|update]` mendukung berbagi file besar untuk akun penyimpanan
 
 ## <a name="september-24-2019"></a>24 September 2019
 
@@ -4497,7 +4593,7 @@ Versi 2.0.74
 ### <a name="aks"></a>AKS
 
 * Menambahkan `--load-balancer-sku` parameter ke `aks create` perintah, yang memungkinkan untuk membuat cluster AKS dengan SLB
-* Ditambahkan, `--load-balancer-managed-outbound-ip-count` `--load-balancer-outbound-ips` dan parameter untuk `--load-balancer-outbound-ip-prefixes` `aks [create|update]` perintah, yang memungkinkan untuk memperbarui profil load balancer dari cluster AKS dengan SLB
+* Ditambahkan `--load-balancer-managed-outbound-ip-count`, `--load-balancer-outbound-ips` dan `--load-balancer-outbound-ip-prefixes` parameter untuk `aks [create|update]` perintah, yang memungkinkan untuk memperbarui profil load balancer dari cluster AKS dengan SLB
 * Menambahkan `--vm-set-type` parameter ke `aks create` perintah, yang memungkinkan untuk menentukan jenis vm dari Cluster AKS (vmas atau vmss)
 
 ### <a name="arm"></a>ARM
@@ -4508,7 +4604,7 @@ Versi 2.0.74
 
 * Menambahkan `--terminate-notification-time` parameter ke `vmss [create|update]` perintah untuk mendukung penghentian konfigurasi acara terjadwal
 * Menambahkan `--enable-terminate-notification` parameter ke `vmss update` perintah untuk mendukung penghentian konfigurasi acara terjadwal
-* Menambahkan `--priority,` `--eviction-policy,` `--max-billing` parameter ke `[vm|vmss] create` perintah
+* Menambahkan `--priority,` `--eviction-policy,` `--max-billing` parameter ke perintah `[vm|vmss] create`
 * Diubah `disk create` untuk memungkinkan menentukan ukuran yang tepat dari pengunggahan disk
 * Menambahkan dukungan untuk snapshot inkremental untuk disk terkelola ke `snapshot create`
 
@@ -4516,7 +4612,7 @@ Versi 2.0.74
 
 * Menambahkan `--type <key-type>` parameter ke `cosmosdb keys list` perintah untuk memperlihatkan kunci, hanya membaca kunci atau string koneksi
 * Perintah tambahan `cosmosdb keys regenerate`
-* [USANG] Usang, `cosmosdb list-connection-strings` dan `cosmosdb regenerate-key` `cosmosdb list-read-only-keys` perintah
+* [USANG] `cosmosdb list-connection-strings`Usang, `cosmosdb regenerate-key` dan `cosmosdb list-read-only-keys` perintah
 
 ### <a name="eventgrid"></a>EventGrid
 
@@ -4524,7 +4620,7 @@ Versi 2.0.74
 
 ### <a name="key-vault"></a>Key Vault
 
-* Masalah tetap di mana masuk dengan penyewa `login -t` () dapat `keyvault create` menyebabkan gagal
+* Masalah tetap di mana masuk dengan penyewa (`login -t`) dapat menyebabkan `keyvault create` gagal
 
 ### <a name="monitor"></a>Monitor
 
@@ -4543,13 +4639,13 @@ Versi 2.0.74
 
 ### <a name="acr"></a>ACR
 
-* Menambahkan grup perintah `acr config retention` untuk mengonfigurasi kebijakan retensi
+* Menambahkan grup `acr config retention` perintah untuk mengonfigurasi kebijakan retensi
 
 ### <a name="aks"></a>AKS
 
 * Menambahkan dukungan untuk integrasi ACR dengan perintah berikut:
-  * Menambahkan `--attach-acr` parameter `aks [create|update]` untuk melampirkan ACR ke klaster AKS
-  * Menambahkan `--detach-acr` parameter `aks update` untuk melepaskan ACR dari klaster AKS
+  * Menambahkan `--attach-acr` parameter untuk `aks [create|update]` melampirkan ACR ke klaster AKS
+  * Menambahkan `--detach-acr` parameter untuk `aks update` melepaskan ACR dari klaster AKS
 
 ### <a name="arm"></a>ARM
 
@@ -4557,18 +4653,18 @@ Versi 2.0.74
 
 ### <a name="batch"></a>Batch
 
-* Menambahkan pengaturan konfigurasi JSON baru ke `--json-file` untuk `batch pool create` :
+* Menambahkan pengaturan konfigurasi JSON baru ke `--json-file` untuk `batch pool create`:
   * Ditambahkan `MountConfigurations` untuk tunggangan sistem file (lihat [Meminta Badan](/rest/api/batchservice/pool/add#request-body) untuk detail)
-  * Menambahkan properti opsional `publicIPs` untuk IP publik di kolam renang `NetworkConfiguration` (lihat Meminta [Badan](/rest/api/batchservice/pool/add#request-body) untuk detailnya)
+  * Menambahkan properti `publicIPs` `NetworkConfiguration` opsional untuk IP publik di kolam renang (lihat [Meminta Badan](/rest/api/batchservice/pool/add#request-body) untuk detailnya)
 * Menambahkan dukungan untuk galeri gambar bersama ke `--image`
-* [MELANGGAR PERUBAHAN] Mengubah nilai default `--start-task-wait-for-success` `batch pool create` menjadi `true`
-* [MELANGGAR PERUBAHAN] Mengubah nilai default `Scope` untuk selalu menjadi Pool `AutoUserSpecification` (berada di node `Task` Windows, pada node `Pool` Linux)
+* [MELANGGAR PERUBAHAN] Mengubah nilai `--start-task-wait-for-success` `batch pool create` default menjadi `true`
+* [MELANGGAR PERUBAHAN] Mengubah nilai default untuk `Scope` `AutoUserSpecification` selalu menjadi Pool (berada `Task` di node Windows, `Pool` pada node Linux)
   * Argumen ini hanya dapat diatur dari konfigurasi JSON dengan `--json-file`
 
 ### <a name="hdinsight"></a>HDInsight
 
 * Rilis GA
-* [MELANGGAR PERUBAHAN] Mengubah parameter `--workernode-count/-c` `az hdinsight resize` yang diperlukan.
+* [MELANGGAR PERUBAHAN] Mengubah parameter `--workernode-count/-c` yang `az hdinsight resize` diperlukan.
 
 ### <a name="key-vault"></a>Key Vault
 
@@ -4577,7 +4673,7 @@ Versi 2.0.74
 
 ### <a name="network"></a>Jaringan
 
-* Menambahkan `--interval` parameter `network watcher flow-log` untuk mengatur nilai interval analisis lalu lintas
+* Menambahkan `--interval` parameter untuk `network watcher flow-log` mengatur nilai interval analisis lalu lintas
 * Ditambahkan `network application-gateway identity` untuk mengelola identitas gateway
 * Menambahkan dukungan untuk mengatur Key Vault ID ke `network application-gateway ssl-cert`
 * Ditambahkan `network express-route peering peer-connection [show|list]`
@@ -4601,7 +4697,7 @@ Versi 2.0.72
 ### <a name="appservice"></a>AppService
 
 * Memperbaiki masalah dengan `webapp webjob continuous start` perintah saat menentukan slot
-* Diubah `webapp up` untuk mendeteksi folder dan `env` menghapusnya dari file yang digunakan untuk penyebaran
+* Diubah `webapp up` untuk mendeteksi `env` folder dan menghapusnya dari file yang digunakan untuk penyebaran
 
 ### <a name="keyvault"></a>Keyvault
 
@@ -4610,7 +4706,7 @@ Versi 2.0.72
 ### <a name="network"></a>Jaringan
 
 * Menambahkan dukungan untuk alamat IPv6 ke `--private-ip-address-version` argumen
-* Menambahkan perintah baru `network private-endpoint [create|update|list-types]` untuk manajemen endpoint pribadi
+* Menambahkan perintah `network private-endpoint [create|update|list-types]` baru untuk manajemen endpoint pribadi
 * Menambahkan grup perintah `network private-link-service`
 * Ditambahkan `--private-endpoint-network-policies` dan `--private-link-service-network-policies` argumen untuk `network vnet subnet update`
 
@@ -4623,7 +4719,7 @@ Versi 2.0.72
 * Menambahkan dukungan untuk nama Key Vault kasus campuran
 * Masalah tetap saat menggunakan sertifikat di Key Vault
 * Memperbaiki masalah dengan menggunakan file sertifikat PFX
-* Masalah tetap `sf cluster certificate add` dengan ketika grup sumber daya Key Vault tidak ditentukan
+* Masalah tetap dengan `sf cluster certificate add` ketika grup sumber daya Key Vault tidak ditentukan
 * Masalah tetap dengan `sf cluster set` tidak berfungsi
 
 ### <a name="signalr"></a>SignalR
@@ -4663,30 +4759,30 @@ Versi 2.0.71
 
 Rilis ini berisi sejumlah besar perubahan melanggar.
 
-* [MELANGGAR PERUBAHAN] Mengganti nama parameter untuk `hdinsight create` :
-  * Berganti nama `--storage-default-container` menjadi `--storage-container`
-  * Berganti nama `--storage-default-filesystem` menjadi `--storage-filesystem`
-* [MELANGGAR PERUBAHAN] Mengubah `--name` argumen `application create` untuk mewakili nama aplikasi, bukan nama cluster
-* Menambahkan `--cluster-name` argumen `application create` untuk menggantikan fungsionalitas lama `--name`
-* [MELANGGAR PERUBAHAN] Mengganti nama parameter untuk `application create` :
-  * Berganti nama `--application-type` menjadi `--type`
-  * Berganti nama `--marketplace-identifier` menjadi `--marketplace-id`
-  * Berganti nama `--https-endpoint-access-mode` menjadi `--access-mode`
-  * Berganti nama  `--https-endpoint-destination-port` menjadi `--destination-port`
-* [MELANGGAR PERUBAHAN] Parameter yang dihapus untuk `application create` :
+* [MELANGGAR PERUBAHAN] Mengganti nama parameter untuk `hdinsight create`:
+  * Berganti nama menjadi `--storage-default-container``--storage-container`
+  * Berganti nama menjadi `--storage-default-filesystem``--storage-filesystem`
+* [MELANGGAR PERUBAHAN] `--name` Mengubah argumen `application create` untuk mewakili nama aplikasi, bukan nama cluster
+* Menambahkan `--cluster-name` argumen untuk `application create` menggantikan fungsionalitas lama `--name`
+* [MELANGGAR PERUBAHAN] Mengganti nama parameter untuk `application create`:
+  * Berganti nama menjadi `--application-type``--type`
+  * Berganti nama menjadi `--marketplace-identifier``--marketplace-id`
+  * Berganti nama menjadi `--https-endpoint-access-mode``--access-mode`
+  * Berganti nama menjadi `--https-endpoint-destination-port``--destination-port`
+* [MELANGGAR PERUBAHAN] Parameter yang dihapus untuk `application create`:
   * `--https-endpoint-location`
   * `--https-endpoint-public-port`
   * `--ssh-endpoint-destination-port`
   * `--ssh-endpoint-location`
   * `--ssh-endpoint-public-port`
-* [MELANGGAR CHNAGE] Berganti nama `--target-instance-count` menjadi `--workernode-count` untuk `hdinsight resize`
-* [MELANGGAR PERUBAHAN] Mengubah semua perintah dalam `hdinsight script-action` grup untuk menggunakan parameter sebagai nama tindakan `--name` skrip.
+* [MELANGGAR CHNAGE] Berganti nama menjadi `--target-instance-count` `--workernode-count` untuk `hdinsight resize`
+* [MELANGGAR PERUBAHAN] Mengubah semua perintah dalam `hdinsight script-action` grup untuk menggunakan `--name` parameter sebagai nama tindakan skrip.
 * Menambahkan `--cluster-name` argumen ke semua `hdinsight script-action` perintah untuk menggantikan fungsionalitas lama `--name`
 * [MELANGGAR PERUBAHAN] Berganti nama `--script-execution-id` menjadi `--execution-id` untuk semua `hdinsight script-action` perintah
-* [MELANGGAR PERUBAHAN] Berganti nama `hdinsight script-action show` menjadi `hdinsight script-action show-execution-details`
-* [MELANGGAR CHNAGE] Mengubah parameter `hdinsight script-action execute --roles` menjadi ruang-terpisah bukan koma-terpisah
+* [MELANGGAR PERUBAHAN] Berganti nama menjadi `hdinsight script-action show``hdinsight script-action show-execution-details`
+* [MELANGGAR CHNAGE] Mengubah parameter menjadi `hdinsight script-action execute --roles` ruang-terpisah bukan koma-terpisah
 * [MELANGGAR PERUBAHAN] Menghapus `--persisted` parameter dari `hdinsight script-action list`
-* Mengubah `hdinsight create --cluster-configurations` parameter untuk menerima jalur ke file JSON lokal atau string JSON
+* `hdinsight create --cluster-configurations` Mengubah parameter untuk menerima jalur ke file JSON lokal atau string JSON
 * Perintah tambahan `hdinsight script-action list-execution-history`
 * Diubah `hdinsight monitor enable --workspace` untuk menerima ID ruang kerja Log Analytics atau nama ruang kerja
 * Menambahkan `hdinsight monitor enable --primary-key` argumen, yang diperlukan jika ID ruang kerja disediakan sebagai parameter
@@ -4706,7 +4802,7 @@ Rilis ini berisi sejumlah besar perubahan melanggar.
 
 ### <a name="profile"></a>Profil
 
-* Menambahkan `--resource-type` argumen `account get-access-token` untuk mendapatkan token akses sumber daya
+* Menambahkan `--resource-type` argumen untuk `account get-access-token` mendapatkan token akses sumber daya
 
 ### <a name="servicefabric"></a>ServiceFabric
 
@@ -4729,19 +4825,19 @@ Versi 2.0.70
 ### <a name="appservice"></a>Layanan aplikasi
 
 * Diubah `webapp config ssl` untuk menampilkan pesan jika sumber daya tidak ditemukan
-* Masalah tetap di mana `functionapp create` tidak menerima tipe akun `Standard_RAGRS` penyimpanan
+* Masalah tetap di mana `functionapp create` tidak menerima `Standard_RAGRS` tipe akun penyimpanan
 * Memperbaiki masalah di mana `webapp up` akan gagal jika dijalankan menggunakan versi python yang lebih lama
 
 ### <a name="network"></a>Jaringan
 
-* Menghapus parameter tidak valid `--ids` dari `network nic ip-config add` (memperbaiki #9861)
-* Memperbaiki #9604. Menambahkan `--root-certs` parameter `network application-gateway http-settings [create|update]` untuk mendukung sertifikat root tepercaya rekan pengguna.
+* Menghapus parameter `--ids` tidak valid dari `network nic ip-config add` (memperbaiki #9861)
+* Memperbaiki #9604. Menambahkan `--root-certs` parameter untuk `network application-gateway http-settings [create|update]` mendukung sertifikat root tepercaya rekan pengguna.
 * Tetap berpendapat `--subscription` untuk `network dns record-set ns create` (#9965)
 
 ### <a name="rbac"></a>RBAC
 
 * Perintah tambahan `user update`
-* [USANG] Usang dari `--upn-or-object-id` perintah terkait pengguna
+* [USANG] Usang `--upn-or-object-id` dari perintah terkait pengguna
     * Menggunakan argumen pengganti `--id`
 * Menambahkan `--id` argumen ke perintah terkait pengguna
 
@@ -4759,8 +4855,8 @@ Versi 2.0.70
 * Diubah `list-skus` untuk menggunakan versi api yang lebih baru ke detail zona output
 * Mengubah default `--single-placement-group` ke `false` untuk `vmss create`
 * Menambahkan kemampuan untuk memilih SKU penyimpanan ZRS untuk `[snapshot|disk] create`
-* Menambahkan grup perintah baru `vm host` untuk mendukung host khusus
-* Menambahkan parameter `--host` dan `--host-group` `vm create` untuk mengatur host khusus VM
+* Menambahkan grup `vm host` perintah baru untuk mendukung host khusus
+* Menambahkan parameter `--host` dan `--host-group` untuk `vm create` mengatur host khusus VM
 
 ## <a name="july-16-2019"></a>16 Juli 2019
 
@@ -4768,7 +4864,7 @@ Versi 2.0.69
 
 ### <a name="appservice"></a>Layanan aplikasi
 
-* `webapp identity`Perintah yang diubah untuk mengembalikan pesan kesalahan yang tepat jika ResourceGroupName atau nama Aplikasi tidak valid
+* Perintah yang diubah `webapp identity` untuk mengembalikan pesan kesalahan yang tepat jika ResourceGroupName atau nama Aplikasi tidak valid
 * Tetap `webapp list` untuk mengembalikan nilai yang benar untuk numberOfSites jika tidak ada ResourceGroup yang disediakan
 * Efek samping tetap dari `appservice plan create` dan `webapp create`
 
@@ -4781,7 +4877,7 @@ Versi 2.0.69
 * [MELANGGAR PERUBAHAN] Diganti `batch pool node-agent-skus list` dengan `batch pool supported-images list`
 * Menambahkan dukungan untuk aturan keamanan yang memblokir akses jaringan ke kolam berdasarkan port sumber lalu lintas saat menggunakan `--json-file` opsi `batch pool create network`
 * Menambahkan dukungan untuk menjalankan tugas di direktori kerja kontainer atau di direktori kerja tugas Batch saat menggunakan `--json-file` opsi `batch task create`
-* Memperbaiki kesalahan dalam `--application-package-references` opsi di mana ia hanya akan bekerja dengan `batch pool create` default
+* Memperbaiki kesalahan dalam `--application-package-references` opsi `batch pool create` di mana ia hanya akan bekerja dengan default
 
 ### <a name="eventhubs"></a>Eventhubs
 
@@ -4813,7 +4909,7 @@ Versi 2.0.68
 ### <a name="core"></a>Core
 
 * Modul perintah sekarang dikonsolidasikan menjadi python tunggal didistribusikan. Ini mendepresiasi penggunaan langsung banyak `azure-cli-` paket di PyPI.
-  Ini harus mengurangi ukuran pemasangan dan hanya mempengaruhi pengguna yang telah langsung menginstal melalui `pip` .
+  Ini harus mengurangi ukuran pemasangan dan hanya mempengaruhi pengguna yang telah langsung menginstal melalui `pip`.
 
 ### <a name="acr"></a>ACR
 
@@ -4822,8 +4918,8 @@ Versi 2.0.68
 ### <a name="appservice"></a>Layanan aplikasi
 
 * Diubah `functionapp create` untuk mengaktifkan wawasan aplikasi secara default
-* [MELANGGAR PERUBAHAN] Dihapus `functionapp devops-build` perintah usang.
-  *  Gunakan perintah baru `az functionapp devops-pipeline` sebagai gantinya
+* [MELANGGAR PERUBAHAN] Dihapus perintah usang `functionapp devops-build` .
+  *  Gunakan perintah `az functionapp devops-pipeline` baru sebagai gantinya
 * Menambahkan dukungan paket aplikasi fungsi Konsumsi Linux ke `functionapp deployment config-zip`
 
 ### <a name="cosmos-db"></a>Cosmos DB
@@ -4841,13 +4937,13 @@ Versi 2.0.68
 ### <a name="hdinsight"></a>HDInsight
 
 * [MELANGGAR PERUBAHAN] Mengubah `oms` nama grup perintah menjadi `monitor`
-* [MELANGGAR PERUBAHAN] `--http-password/-p` Membuat parameter yang diperlukan
+* [MELANGGAR PERUBAHAN] Membuat `--http-password/-p` parameter yang diperlukan
 * Menambahkan completers untuk `--cluster-admin-account` dan `cluster-users-group-dns` parameter lebih lengkap
 * Parameter `cluster-users-group-dns` yang diubah yang diperlukan saat `—esp` hadir
 * Menambahkan batas waktu untuk semua argumen yang ada auto-completers
 * Menambahkan batas waktu untuk mengubah nama sumber daya menjadi id sumber daya
 * Mengubah Completers Otomatis untuk memilih sumber daya dari grup sumber daya apa pun. Ini bisa menjadi kelompok sumber daya yang berbeda dari yang ditentukan dengan `-g`
-* Menambahkan dukungan `--sub-domain-suffix` dan `--disable_gateway_auth` parameter dalam `hdinsight application create` perintah
+* Menambahkan dukungan dan `--sub-domain-suffix` `--disable_gateway_auth` parameter dalam `hdinsight application create` perintah
 
 ### <a name="managed-services"></a>Layanan Terkelola
 
@@ -4860,7 +4956,7 @@ Versi 2.0.68
 
 * [MELANGGAR PERUBAHAN] Argumen yang dihapus `--password` untuk `create-for-rbac`
 * Menambahkan `--assignee-principal-type` parameter ke `create` perintah untuk menghindari kegagalan intermiten yang disebabkan oleh latensi replikasi server grafik AAD
-* Memperbaiki crash `ad signed-in-user` saat mencantumkan objek yang dimiliki
+* Memperbaiki crash saat `ad signed-in-user` mencantumkan objek yang dimiliki
 * Masalah tetap di mana `ad sp` tidak akan menemukan aplikasi yang tepat dari kepala layanan
 
 ### <a name="rdbms"></a>RDBMS
@@ -4873,13 +4969,13 @@ Versi 2.0.68
 
 ### <a name="storage"></a>Penyimpanan
 
-* Menambahkan dukungan token SAS delegasi pengguna `--as-user` dengan `storage blob generate-sas`
-* Menambahkan dukungan token SAS delegasi pengguna `--as-user` dengan `storage container generate-sas`
+* Menambahkan dukungan token SAS delegasi pengguna dengan `--as-user``storage blob generate-sas`
+* Menambahkan dukungan token SAS delegasi pengguna dengan `--as-user``storage container generate-sas`
 
 ### <a name="vm"></a>VM
 
 * Bug tetap di mana `vmss create` mengembalikan pesan kesalahan saat dijalankan `--no-wait`
-* Menghapus validasi sisi klien untuk `vmss create --single-placement-group` . Tidak gagal jika `--single-placement-group` diatur ke dan lebih besar dari `true` `--instance-count` 100 atau zona ketersediaan ditentukan, tetapi meninggalkan validasi ini ke layanan komputasi
+* Menghapus validasi sisi klien untuk `vmss create --single-placement-group`. Tidak gagal jika `--single-placement-group` diatur ke `true` dan`--instance-count` lebih besar dari 100 atau zona ketersediaan ditentukan, tetapi meninggalkan validasi ini ke layanan komputasi
 * Bug tetap di mana `[vm|vmss] extension image list` gagal saat digunakan `--latest`
 
 
@@ -4929,7 +5025,7 @@ Sebagai hasil dari perubahan ini, beberapa kelompok perintah mungkin tampak "tib
 ### <a name="eventgrid"></a>EventGrid
 * Menambahkan `eventgrid domain` perintah untuk operasi CRUD domain
 * Menambahkan `eventgrid domain topic` perintah untuk topik domain operasi CRUD
-* Menambahkan `--odata-query` argumen `eventgrid [topic|event-subscription] list` untuk memfilter hasil menggunakan sintaks OData
+* Menambahkan `--odata-query` argumen untuk `eventgrid [topic|event-subscription] list` memfilter hasil menggunakan sintaks OData
 * `event-subscription create/update`: Menambahkan servicebusqueue sebagai nilai baru untuk `--endpoint-type` parameter
 * [MELANGGAR PERUBAHAN] Dukungan yang dihapus untuk `--included-event-types All` dengan `eventgrid event-subscription [create|update]`
 
@@ -4947,14 +5043,14 @@ Sebagai hasil dari perubahan ini, beberapa kelompok perintah mungkin tampak "tib
 * Masalah tetap dengan `watcher flow-log configure` di mana pencatatan aliran tidak dapat diaktifkan di wilayah tertentu
 
 ### <a name="resource"></a>Sumber daya
-* Perintah `az rest` tambahan untuk membuat panggilan REST
+* Perintah tambahan `az rest` untuk membuat panggilan REST
 * Memperbaiki kesalahan saat menggunakan `policy assignment list` grup sumber daya atau tingkat langganan `--scope`
 
 ### <a name="servicebus"></a>ServiceBus
 * Masalah tetap dengan `servicebus topic create --max-size` [#9319](https://github.com/azure/azure-cli/issues/9319)
 
 ### <a name="sql"></a>SQL
-* Diubah `--location` menjadi opsional untuk - menggunakan lokasi grup sumber daya jika tidak `sql [server|mi] create` ditentukan
+* Diubah `--location` menjadi opsional untuk `sql [server|mi] create` - menggunakan lokasi grup sumber daya jika tidak ditentukan
 * Memperbaiki kesalahan "NoneType" untuk `sql db list-editions --available`
 
 ### <a name="sqlvm"></a>SQLVm
@@ -4983,7 +5079,7 @@ Versi 2.0.66
 * Mencetak pesan ramah saat langganan tidak disetujui untuk menggunakan Azure Red Hat OpenShift
 
 ### <a name="batch"></a>Batch
-* Peningkatan penanganan kesalahan saat tidak masuk ke akun \[ [#9165](https://github.com/Azure/azure-cli/issues/9165) \] \[ [#8978](https://github.com/Azure/azure-cli/issues/8978)\]
+* Peningkatan penanganan kesalahan saat tidak masuk ke akun \[[#9165](https://github.com/Azure/azure-cli/issues/9165)\]\[[#8978](https://github.com/Azure/azure-cli/issues/8978)\]
 
 ### <a name="iot"></a>IoT
 * Menambahkan dukungan untuk failover manual
@@ -4993,13 +5089,13 @@ Versi 2.0.66
 * Ditambahkan `--waf-policy` dan `--max-capacity` argumen untuk `network application-gateway [create|update]`
 
 ### <a name="resource"></a>Sumber daya
-* Pesan kesalahan yang disempurnakan `deployment create` dari saat tidak ada TTY yang tersedia
+* Pesan kesalahan yang disempurnakan dari `deployment create` saat tidak ada TTY yang tersedia
 
 ### <a name="role"></a>Peran
 * Teks bantuan yang diperbarui.
 
 ### <a name="compute"></a>Compute
-* Menambahkan dukungan `vm create` untuk VM dari gambar terkelola dengan lun data-disk yang tidak dimulai dari 0 atau yang melewatkan angka
+* Menambahkan dukungan untuk `vm create` VM dari gambar terkelola dengan lun data-disk yang tidak dimulai dari 0 atau yang melewatkan angka
 
 ## <a name="may-21-2019"></a>Tanggal 21 Mei 2019
 
@@ -5019,10 +5115,10 @@ Versi 2.0.65
 ### <a name="appservice"></a>AppService
 * [USANG] Perintah usang `functionapp devops-build` - akan dihapus dalam rilis berikutnya
 * Diubah `functionapp devops-pipeline` untuk mengambil log build dari Azure DevOps dalam mode verbose
-* [MELANGGAR PERUBAHAN] Menghapus `--use_local_settings` bendera dari `functionapp devops-pipeline` perintah - adalah no-op
-* Diubah `webapp up` untuk mengembalikan output JSON jika tidak `--logs` digunakan
+* [MELANGGAR PERUBAHAN] `--use_local_settings` Menghapus bendera dari `functionapp devops-pipeline` perintah - adalah no-op
+* Diubah `webapp up` untuk mengembalikan output JSON jika `--logs` tidak digunakan
 * Menambahkan dukungan untuk menulis sumber daya default ke konfigurasi lokal untuk `webapp up`
-* Menambahkan dukungan `webapp up` untuk memindahkan aplikasi tanpa menggunakan `--location` argumen
+* Menambahkan dukungan untuk `webapp up` memindahkan aplikasi tanpa menggunakan `--location` argumen
 * Memperbaiki masalah di mana untuk penggunaan pembuatan SKU ASP Gratis sebagai nilai SKU tidak berfungsi
 
 ### <a name="botservice"></a>Layanan Bot
@@ -5037,7 +5133,7 @@ Versi 2.0.65
 
 ### <a name="network"></a>Jaringan
 * [MELANGGAR PERUBAHAN]: Removed `network interface-endpoints` command group - use `network private-endpoints`
-* Menambahkan `--nat-gateway` argumen `network vnet subnet [create|update]` untuk melampirkan ke gateway NAT
+* Menambahkan `--nat-gateway` argumen untuk `network vnet subnet [create|update]` melampirkan ke gateway NAT
 * Masalah tetap dengan `dns zone import` di mana nama catatan tidak bisa menandingi tipe catatan
 
 ### <a name="rdbms"></a>RDBMS
@@ -5050,17 +5146,17 @@ Versi 2.0.65
 * `storage blob sync`: menambahkan perintah sinkronisasi untuk gumpalan penyimpanan
 
 ### <a name="compute"></a>Compute
-* Ditambahkan `--computer-name` `vm create` untuk mengatur nama komputer VM
-* Berganti nama `--ssh-key-value` menjadi untuk - sekarang dapat menerima beberapa nilai atau jalur kunci publik `--ssh-key-values` `[vm|vmss] create` ssh
-  * __Catatan:__ Ini **bukan** perubahan yang melanggar - `--ssh-key-value` akan diurai dengan benar karena hanya cocok `--ssh-key-values`
-* Mengubah `--type` argumen `ppg create` menjadi opsional
+* Ditambahkan `--computer-name` untuk `vm create` mengatur nama komputer VM
+* Berganti nama `--ssh-key-value` menjadi `--ssh-key-values` untuk `[vm|vmss] create` - sekarang dapat menerima beberapa nilai atau jalur kunci publik ssh
+  * __Catatan__: Ini **bukan** perubahan yang melanggar - `--ssh-key-value` akan diurai dengan benar karena hanya cocok `--ssh-key-values`
+* `--type` Mengubah argumen `ppg create` menjadi opsional
 
 ## <a name="may-6-2019"></a>6 Mei 2019
 
 Versi 2.0.64
 
 ### <a name="acs"></a>ACS
-* [MELANGGAR PERUBAHAN] Menghapus `--fqdn` bendera pada `openshift` perintah
+* [MELANGGAR PERUBAHAN] `--fqdn` Menghapus bendera pada `openshift` perintah
 * Diubah untuk menggunakan Azure Red Hat Openshift GA API Version
 * Menambahkan `customer-admin-group-id` bendera ke `openshift create`
 * [GA] Dihapus `(PREVIEW)` dari `aks create` opsi `--network-policy`
@@ -5068,13 +5164,13 @@ Versi 2.0.64
 ### <a name="appservice"></a>Layanan aplikasi
 * [USANG] Perintah usang `functionapp devops-build`
   * Berganti nama menjadi `functionapp devops-pipeline`
-* Tetap mendapatkan nama pengguna yang benar untuk cloudshell yang `webapp up` menyebabkan gagal
-* Dokumentasi `appservice plan --sku` yang diperbarui diperbarui untuk mencerminkan appserviceplans yang didukung
+* Tetap mendapatkan nama pengguna yang benar untuk cloudshell yang menyebabkan `webapp up` gagal
+* Dokumentasi yang `appservice plan --sku` diperbarui diperbarui untuk mencerminkan appserviceplans yang didukung
 * Menambahkan argumen opsional untuk grup sumber daya dan berencana untuk `webapp up`
-* Menambahkan dukungan `webapp ssh` untuk menghormati `AZURE_CLI_DISABLE_CONNECTION_VERIFICATION` variabel lingkungan
+* Menambahkan dukungan untuk `webapp ssh` menghormati `AZURE_CLI_DISABLE_CONNECTION_VERIFICATION` variabel lingkungan
 * Dukungan tambahan `appserviceplan create` untuk Linux Free SKU
 * Diubah `webapp up` menjadi tidur 30-an setelah mengatur `SCM_DO_BUILD_DURING_DEPLOYMENT=true` pengaturan aplikasi untuk menangani kudu cold start
-* Menambahkan dukungan untuk `powershell` runtime `functionapp create` ke Windows
+* Menambahkan dukungan untuk `powershell` runtime ke `functionapp create` Windows
 * Perintah tambahan `create-remote-connection`
 
 ### <a name="batch"></a>Batch
@@ -5082,22 +5178,22 @@ Versi 2.0.64
 
 ### <a name="botservice"></a>Layanan bot
 * [MELANGGAR PERUBAHAN] Diubah `bot create -v v4 -k webapp` untuk membuat Bot Aplikasi Web kosong secara default (yaitu tidak ada bot yang digunakan ke Layanan Aplikasi)
-* Menambahkan `--echo` bendera `bot create` untuk menggunakan perilaku lama dengan `-v v4`
-* [MELANGGAR PERUBAHAN] Mengubah nilai default  `--version` menjadi `v4`
+* Menambahkan `--echo` bendera untuk `bot create` menggunakan perilaku lama dengan `-v v4`
+* [MELANGGAR PERUBAHAN] Mengubah nilai  `--version` default menjadi `v4`
   * __NOTA:__ `bot prepare-publish` masih menggunakan default lamanya
-* [MELANGGAR PERUBAHAN] Diubah `--lang` menjadi tidak lagi default ke `Csharp` . Jika perintah membutuhkan `--lang` dan tidak disediakan, perintah sekarang akan kesalahan keluar.
-* [MELANGGAR PERUBAHAN] Mengubah `--appid` dan `--password` args `bot create` untuk diminta dan sekarang dapat dibuat melalui `ad app create`
+* [MELANGGAR PERUBAHAN] Diubah `--lang` menjadi tidak lagi default ke `Csharp`. Jika perintah membutuhkan `--lang` dan tidak disediakan, perintah sekarang akan kesalahan keluar.
+* [MELANGGAR PERUBAHAN] `--appid` Mengubah dan `--password` args untuk `bot create` diminta dan sekarang dapat dibuat melalui `ad app create`
 * Ditambahkan `--appid` dan `--password` validasi
 * [MELANGGAR PERUBAHAN] Diubah `bot create -v v4` menjadi tidak membuat atau menggunakan Akun Storage atau aplikasi Insights
 * [MELANGGAR PERUBAHAN] Diubah `bot create -v v3` untuk memerlukan wilayah di mana Insights Aplikasi tersedia
 * [MELANGGAR PERUBAHAN] Diubah `bot update` menjadi sekarang hanya mempengaruhi sifat spesifik bot
-* [MELANGGAR PERUBAHAN] Mengubah `--lang` bendera untuk `Javascript` diterima, bukan `Node`
+* [MELANGGAR PERUBAHAN] Mengubah `--lang` bendera untuk diterima `Javascript` , bukan `Node`
 * [MELANGGAR PERUBAHAN] Dihapus `Node` sebagai nilai yang diizinkan `--lang`
 * [MELANGGAR PERUBAHAN] Diubah `bot create -v v4 -k webapp` menjadi tidak lagi menjadi `SCM_DO_BUILD_DURING_DEPLOYMENT` kenyataan. Semua penyebaran melalui Kudu akan bertindak sesuai dengan perilaku default mereka
-* Diubah `bot download` untuk bot tanpa file untuk membuat file konfigurasi khusus bahasa dengan nilai dari Pengaturan Aplikasi untuk `.bot` bot
+* Diubah `bot download` untuk bot tanpa `.bot` file untuk membuat file konfigurasi khusus bahasa dengan nilai dari Pengaturan Aplikasi untuk bot
 * Menambahkan `Typescript` dukungan untuk `bot prepare-deploy`
-* Menambahkan pesan peringatan `bot prepare-deploy` ke untuk dan bot untuk kapan tidak `Javascript` `Typescript` `--code-dir` berisi `package.json`
-* Diubah `bot prepare-deploy` untuk kembali jika `true` berhasil
+* Menambahkan pesan peringatan ke `bot prepare-deploy` untuk `Javascript` dan `Typescript` bot untuk kapan `--code-dir` tidak berisi `package.json`
+* Diubah `bot prepare-deploy` untuk kembali `true` jika berhasil
 * Menambahkan log verbose ke `bot prepare-deploy`
 * Menambahkan lebih banyak wilayah Insights Aplikasi yang tersedia ke`az bot create -v v3`
 
@@ -5112,7 +5208,7 @@ Versi 2.0.64
 * [MELANGGAR PERUBAHAN] Mengganti `--cache` arugment dengan `--defer` untuk `vnet [create|update]`
 
 ### <a name="policy-insights"></a>Policy Insights
-* Menambahkan dukungan `--expand PolicyEvaluationDetails` untuk meminta rincian evaluasi kebijakan tentang sumber daya
+* Menambahkan dukungan untuk `--expand PolicyEvaluationDetails` meminta rincian evaluasi kebijakan tentang sumber daya
 
 ### <a name="role"></a>Peran
 * [USANG] Mengubah `create-for-rbac` argumen sembunyikan '-kata sandi' - dukungan akan dihapus pada Mei 2019
@@ -5120,17 +5216,17 @@ Versi 2.0.64
 ### <a name="service-bus"></a>Service Bus
 * Menambahkan `namespace network-rule` perintah
 * Menambahkan `--default-action` argumen untuk aturan jaringan ke `namespace [create|update]`
-* Tetap `topic [create|update]` untuk memungkinkan dukungan untuk nilai `--max-size` 10, 20, 40 dan 80GB dengan SKU premium
+* Tetap `topic [create|update]` untuk memungkinkan `--max-size` dukungan untuk nilai 10, 20, 40 dan 80GB dengan SKU premium
 
 ### <a name="sql"></a>SQL
 * Menambahkan `sql virtual-cluster [list|show|delete]` perintah
 
 ### <a name="vm"></a>VM
-* Ditambahkan `--protect-from-scale-in` dan `--protect-from-scale-set-actions` `vmss update` untuk mengaktifkan pembaruan pada kebijakan perlindungan instans VMSS VM
-* Ditambahkan `--instance-id` `vmss update` untuk mengaktifkan pembaruan generik instans VMSS VM
+* Ditambahkan `--protect-from-scale-in` dan `--protect-from-scale-set-actions` untuk `vmss update` mengaktifkan pembaruan pada kebijakan perlindungan instans VMSS VM
+* Ditambahkan `--instance-id` untuk `vmss update` mengaktifkan pembaruan generik instans VMSS VM
 * Ditambahkan `--instance-id` ke `vmss wait`
 * Menambahkan grup perintah baru `ppg` untuk mengelola Grup Penempatan Kedekatan
-* Ditambahkan `--ppg` ke `[vm|vmss] create` dan untuk mengelola `vm availability-set create` PPG
+* Ditambahkan `--ppg` ke `[vm|vmss] create` dan `vm availability-set create` untuk mengelola PPG
 * Menambahkan `--hyper-v-generation` parameter ke `image create`
 
 ## <a name="april-23-2019"></a>23 April 2019
@@ -5147,13 +5243,13 @@ Versi 2.0.63
 ### <a name="appservice"></a>AppService
 * Menambahkan dukungan untuk ASE dan timeout untuk `webapp ssh`
 * Menambahkan dukungan untuk membangun CD CI ke pipa Azure DevOps dari repositori Github ke aplikasi Fungsi
-* Menambahkan `--github-pat` argumen `functionapp devops-build create` untuk menerima token akses pribadi Github
-* Menambahkan `--github-repository` argumen `functionapp devops-build create` untuk menerima repositori Github yang berisi kode sumber functionapp
+* Menambahkan `--github-pat` argumen untuk `functionapp devops-build create` menerima token akses pribadi Github
+* Menambahkan `--github-repository` argumen untuk `functionapp devops-build create` menerima repositori Github yang berisi kode sumber functionapp
 * Masalah tetap di mana `az webapp up --logs` gagal dengan kesalahan dan memperbarui default. Versi NETCORE ke 2.1
 * Menghapus pengaturan functionapp yang tidak perlu saat membuat aplikasi fungsi dengan paket konsumsi
 * Diubah `webapp up` sehingga string ASP default sekarang menambahkan nomor di akhir untuk membuat ASP baru berdasarkan opsi SKU
-* Ditambahkan `-b` sebagai opsi `webapp up` untuk meluncurkan aplikasi di browser
-* Diubah `webapp deployment source config zip` untuk menangani variabel `AZURE_CLI_DISABLE_CONNECTION_VERIFICATION` lingkungan
+* Ditambahkan `-b` sebagai opsi untuk `webapp up` meluncurkan aplikasi di browser
+* Diubah `webapp deployment source config zip` untuk menangani `AZURE_CLI_DISABLE_CONNECTION_VERIFICATION` variabel lingkungan
 
 ### <a name="deployment-manager"></a>Deployment Manager
 * [PREVIEW] Membuat dan mengelola artefak yang mendukung peluncuran
@@ -5165,8 +5261,8 @@ Versi 2.0.63
 * Menambahkan delegasi server nama otomatis ke `dns zone create` orang tua selama pembuatan zona anak
 
 ### <a name="resource"></a>Sumber daya
-* [USANG] Usang, `--link-id` dan `--target-id` argumen `--filter-string` dari `resource link`
-  * Gunakan `--link` argumen, `--target` , dan `--filter` sebagai gantinya
+* [USANG] Usang `--link-id`, `--target-id` dan `--filter-string` argumen dari `resource link`
+  * Gunakan argumen `--link`, `--target`, dan `--filter` sebagai gantinya
 * Masalah tetap di mana `resource link [create|update]` perintah tidak akan berfungsi
 * Memperbaiki masalah di mana menghapus menggunakan ID sumber daya bisa crash pada kesalahan
 
@@ -5180,9 +5276,9 @@ Versi 2.0.63
 * Masalah tetap dengan token SAS yang dikodekan ganda di `storage blob generate-sas`
 
 ### <a name="vm"></a>VM
-* Menambahkan `--skip-shutdown` bendera `vm|vmss stop` ke VM power-off tanpa shutdown
-* Menambahkan `--storage-account-type` argumen `sig image-version create` untuk mengatur tipe akun profil penerbitan
-* Menambahkan `--target-regions` argumen `sig image-version create` untuk memungkinkan pengaturan tipe akun penyimpanan khusus wilayah
+* Menambahkan `--skip-shutdown` bendera ke `vm|vmss stop` VM power-off tanpa shutdown
+* Menambahkan `--storage-account-type` argumen untuk `sig image-version create` mengatur tipe akun profil penerbitan
+* Menambahkan `--target-regions` argumen untuk `sig image-version create` memungkinkan pengaturan tipe akun penyimpanan khusus wilayah
 
 ## <a name="april-9-2019"></a>9 April 2019
 
@@ -5196,12 +5292,12 @@ Versi 2.0.63
 * [USANG]: Deprecated the `--bitrate` parameter of `account-filter` and `asset-filter`
 * [MELANGGAR PERUBAHAN]: Renamed the `--bitrate` parameter to `--first-quality`
 * Menambahkan dukungan parameter enkripsi baru di `ams streaming-policy create`
-* Menambahkan paramter baru `--filters` ke `ams streaming-locator create`
+* Menambahkan paramter `--filters` baru ke `ams streaming-locator create`
 
 ### <a name="appservice"></a>AppService
 * Menambahkan `--logs` dukungan untuk `webapp up`
-* Masalah pembuatan `functionapp devops-build create` perintah tetap `azure-pipelines.yml`
-* Peningkatan `unctionapp devops-build create` penanganan dan indikator kesalahan
+* Masalah pembuatan perintah `azure-pipelines.yml` tetap `functionapp devops-build create`
+* `unctionapp devops-build create` Peningkatan penanganan dan indikator kesalahan
 * [MELANGGAR PERUBAHAN] Menghapus `--local-git` bendera untuk `devops-build` perintah, deteksi dan penanganan git lokal wajib untuk membuat Azure DevOps pipa
 * Menambahkan dukungan untuk pembuatan paket fungsi Linux
 * Menambahkan kemampuan untuk mengubah paket di bawah aplikasi fungsi menggunakan `functionapp update --plan`
@@ -5228,10 +5324,10 @@ Versi 2.0.63
 * Ditambahkan `network private-dns` untuk zona DNS Pribadi
 
 ### <a name="resource"></a>Sumber daya
-* Masalah tetap dengan `deployment create` dan di mana file parameter dengan satu set parameter kosong tidak akan `group deployment create` berfungsi
+* Masalah tetap dengan `deployment create` dan `group deployment create` di mana file parameter dengan satu set parameter kosong tidak akan berfungsi
 
 ### <a name="role"></a>Peran
-* Memperbaiki `create-for-rbac` untuk menangani dengan `--years` benar
+* Memperbaiki `create-for-rbac` untuk menangani `--years` dengan benar
 * [MELANGGAR PERUBAHAN] Diubah `role assignment delete` menjadi prompt saat menghapus semua tugas di bawah langganan tanpa syarat
 
 ### <a name="sql"></a>SQL
@@ -5239,8 +5335,8 @@ Versi 2.0.63
 
 ### <a name="storage"></a>Penyimpanan
 * [MELANGGAR PERUBAHAN] Dihapus hasil dari `storage blob delete`
-* Ditambahkan `--full-uri` `storage blob generate-sas` untuk membuat uri penuh untuk gumpalan dengan sas
-* Ditambahkan `--file-snapshot` `storage file copy start` ke untuk menyalin file dari snapshot
+* Ditambahkan `--full-uri` untuk `storage blob generate-sas` membuat uri penuh untuk gumpalan dengan sas
+* Ditambahkan `--file-snapshot` ke `storage file copy start` untuk menyalin file dari snapshot
 * Diubah `storage blob copy cancel` menjadi hanya memperlihatkan kesalahan, bukan pengecualian untuk Operasi NoPendingCopy
 
 ## <a name="march-26-2019"></a>26 Maret 2019
@@ -5255,7 +5351,7 @@ Versi 2.0.63
 
 ### <a name="acr"></a>ACR
 * Sumber redundan tetap dalam impor gambar
-* Ditambahkan `--auth-mode` ke `acr build` , , , `acr run` dan `acr task create` `acr task update` perintah
+* Ditambahkan ke , , , `acr task create`dan `acr task update` perintah `acr run``acr build``--auth-mode`
 * Menambahkan grup perintah 'kredensial tugas acr' untuk mengelola kredensial untuk Tugas
 * Menambahkan '--no-wait' ke `acr build` perintah
 
@@ -5266,22 +5362,22 @@ Versi 2.0.63
 ### <a name="bot-service"></a>Layanan BOT
 * Ditambahkan `bot prepare-deploy` untuk mempersiapkan penyebaran bot melalui `webapp`
 * Diubah `bot create --kind registration` untuk menampilkan kata sandi jika kata sandi tidak disediakan
-* [MELANGGAR PERUBAHAN] Diubah `--endpoint` `bot create --kind registration` menjadi default ke string kosong alih-alih diperlukan
+* [MELANGGAR PERUBAHAN] `bot create --kind registration` Diubah `--endpoint` menjadi default ke string kosong alih-alih diperlukan
 * Ditambahkan `SCM_DO_BUILD_DURING_DEPLOYMENT` ke Pengaturan Aplikasi template ARM untuk Bot Aplikasi Web v4
 
 ### <a name="cdn"></a>CDN
-* Dukungan tambahan `--no-wait` untuk `cdn endpoint [create|update|start|stop|delete|load|purge]`
+* Dukungan tambahan untuk `--no-wait``cdn endpoint [create|update|start|stop|delete|load|purge]`
 * [BREAKING CHANGE]: Mengubah `cdn endpoint create` perilaku caching string kueri default. Tidak lagi default ke "IgnoreQueryString". Sekarang diatur oleh layanan
 
 ### <a name="cosmosdb"></a>Cosmosdb
 * Menambahkan dukungan untuk `--enable-multiple-write-locations` pembaruan akun
-* Menambahkan `network-rule` subkelompok dengan `add` `remove` perintah, , dan `list` untuk mengelola aturan VNET dari akun Cosmos DB
+* Menambahkan `network-rule` subkelompok dengan perintah `add`, `remove`, dan `list` untuk mengelola aturan VNET dari akun Cosmos DB
 
 ### <a name="interactive"></a>Interaktif
 * Ketidakcocokan tetap dengan ekstensi Interaktif yang diinstal melalui azdev
 
 ### <a name="monitor"></a>Monitor
-* Diubah untuk memungkinkan nilai dimensi `*` untuk `monitor metrics alert [create|update]`
+* Diubah untuk memungkinkan nilai `*` dimensi untuk `monitor metrics alert [create|update]`
 
 ### <a name="network"></a>Jaringan
 * Menambahkan `rewrite-rule` grup perintah ke `application-gateway`
@@ -5290,7 +5386,7 @@ Versi 2.0.63
 * Menambahkan dukungan akun tingkat penyewa untuk identitas layanan terkelola ke `login`
 
 ### <a name="postgres"></a>Postgres
-* Menambahkan `replica` perintah dan perintah postgresql `restart server`
+* Menambahkan perintah dan `restart server` perintah postgresql `replica`
 * Diubah untuk mendapatkan lokasi default dari grup sumber daya saat tidak disediakan untuk membuat server dan menambahkan validasi untuk hari retensi
 
 ### <a name="resource"></a>Sumber daya
@@ -5298,17 +5394,17 @@ Versi 2.0.63
 * Masalah tetap dengan `deployment [create|validate]` di mana tipe secureObject tidak dikenali
 
 ### <a name="graph"></a>Graph
-* Dukungan tambahan `--end-date` untuk `ad [app|sp] credential reset`
+* Dukungan tambahan untuk `--end-date``ad [app|sp] credential reset`
 * Menambahkan dukungan untuk menambahkan izin dengan `ad app permission add`
-* Memperbaiki bug `ad app permission list` saat tidak ada izin
+* Memperbaiki bug saat `ad app permission list` tidak ada izin
 * Diubah `ad sp delete` untuk melewatkan penghapusan tugas peran jika akun saat ini tidak memiliki langganan
-* Diubah `ad app create` menjadi daftar default ke kosong jika tidak `--identifier-uris` disediakan
+* Diubah `ad app create` menjadi `--identifier-uris` daftar default ke kosong jika tidak disediakan
 
 ### <a name="storage"></a>penyimpanan
-* Ditambahkan `--snapshot` `storage file download-batch` ke untuk mengunduh dari snapshot berbagi
+* Ditambahkan `--snapshot` ke `storage file download-batch` untuk mengunduh dari snapshot berbagi
 * Mengubah `storage blob [download-batch|upload-batch]` bilah kemajuan menjadi kurang verbose dan menunjukkan gumpalan saat ini
-* Masalah tetap `storage account update` dengan saat memperbarui parameter enkripsi
-* Masalah tetap di mana `storage blob show` akan gagal ketika menggunakan oauth `--auth-mode=login` ()
+* Masalah tetap dengan `storage account update` saat memperbarui parameter enkripsi
+* Masalah tetap di mana `storage blob show` akan gagal saat menggunakan oauth (`--auth-mode=login`)
 
 ### <a name="vm"></a>VM
 * Perintah tambahan `image update`
@@ -5327,7 +5423,7 @@ Versi 2.0.60
 
 ### <a name="acs"></a>ACS
 
-* Diubah untuk mengabaikan `--listen-address` parameter jika tidak didukung oleh `aks browse` kubectl
+* Diubah untuk mengabaikan `--listen-address` parameter jika `aks browse` tidak didukung oleh kubectl
 
 ### <a name="appservice"></a>AppService
 
@@ -5349,7 +5445,7 @@ Versi 2.0.60
 
 ### <a name="eventhub"></a>EventHub
 
-* Menambahkan `--skip-empty-archives` bendera `eventhub create|update` untuk mendukung arsip kosong dalam penangkapan
+* Menambahkan `--skip-empty-archives` bendera untuk `eventhub create|update` mendukung arsip kosong dalam penangkapan
 
 ### <a name="find"></a>Cari
 
@@ -5357,7 +5453,7 @@ Versi 2.0.60
 
 ### <a name="hdinsight"></a>HDInsight
 
-* Menambahkan `--storage-account-managed-identity` parameter untuk mendukung `hdinsight create` ADLS Gen2 MSI
+* Menambahkan `--storage-account-managed-identity` parameter untuk `hdinsight create` mendukung ADLS Gen2 MSI
 
 ### <a name="network"></a>Jaringan
 
@@ -5386,7 +5482,7 @@ Versi 2.0.59
 
 ### <a name="acr"></a>ACR
 
-* Menambahkan `--target` parameter untuk `acr build` , dan `acr task create` `acr task update` perintah
+* Menambahkan `--target` parameter untuk `acr build`, `acr task create` dan `acr task update` perintah
 * Peningkatan penanganan kesalahan untuk perintah runtime saat tidak masuk ke Azure
 
 ### <a name="acs"></a>ACS
@@ -5401,17 +5497,17 @@ Versi 2.0.59
 * [MELANGGAR PERUBAHAN] Menghapus `batch pool upgrade os` perintah
 * [MELANGGAR PERUBAHAN] Menghapus `Pacakges` properti dari `Application` tanggapan
 * Menambahkan `batch application package list` perintah ke daftar paket aplikasi
-* [MELANGGAR PERUBAHAN] Diubah `--application-id` menjadi dalam semua `--application-name` `batch application` perintah,
+* [MELANGGAR PERUBAHAN] Diubah `--application-id` menjadi `--application-name` dalam semua `batch application` perintah,
 * Menambahkan `--json-file` argumen ke perintah untuk meminta respons API mentah
 * Validasi yang diperbarui untuk secara otomatis menyertakan `https://` di semua titik akhir jika hilang
 
 ### <a name="cosmosdb"></a>CosmosDB
 
-* Menambahkan `network-rule` subkelompok dengan `add` `remove` perintah, , dan `list` untuk mengelola aturan VNET dari akun Cosmos DB
+* Menambahkan `network-rule` subkelompok dengan perintah `add`, `remove`, dan `list` untuk mengelola aturan VNET dari akun Cosmos DB
 
 ### <a name="kusto"></a>Kusto
 
-* [MELANGGAR PERUBAHAN] Diubah `hot_cache_period` dan tipe untuk database ke format durasi `soft_delete_period` ISO8601
+* [MELANGGAR PERUBAHAN] Diubah `hot_cache_period` dan `soft_delete_period` tipe untuk database ke format durasi ISO8601
 
 ### <a name="network"></a>Jaringan
 
@@ -5437,7 +5533,7 @@ Versi 2.0.59
 
 ### <a name="vm"></a>VM
 
-* Masalah tetap dengan `vm create where ` --accelerated-networking' tidak diaktifkan secara default untuk Ubuntu 18.0
+* Masalah tetap dengan `vm create where `--accelerated-networking' tidak diaktifkan secara default untuk Ubuntu 18.0
 
 ## <a name="february-12-2019"></a>12 Februari 2019
 
@@ -5449,13 +5545,13 @@ Versi 2.0.58
 * Regresi tetap di mana `--ids` tidak bisa lagi digunakan dengan output JSON
 
 ### <a name="acr"></a>ACR
-* [MELANGGAR PERUBAHAN] Grup `acr build-task` perintah dihapus
+* [MELANGGAR PERUBAHAN] Grup perintah dihapus `acr build-task`
 * [MELANGGAR PERUBAHAN] Dihapus `--tag` dan `--manifest` opsi dari `acr repository delete`
 
 ### <a name="acs"></a>ACS
 * Menambahkan dukungan untuk nama-nama kasus-tidak sensitif untuk `aks [enable-addons|disable-addons]`
 * Menambahkan dukungan untuk Azure Active Directory memperbarui operasi menggunakan`aks update-credentials --reset-aad`
-* Menambahkan klarifikasi `--output` yang diabaikan untuk `aks get-credentials`
+* Menambahkan klarifikasi yang `--output` diabaikan untuk `aks get-credentials`
 
 ### <a name="ams"></a>AMS
 * Menambahkan `ams streaming-endpoint [start | stop | create | update] wait` perintah
@@ -5471,25 +5567,25 @@ Versi 2.0.58
 ### <a name="botservice"></a>Layanan bot
 * Peningkatan UX untuk `bot publish`
 * Menambahkan peringatan untuk timeout saat berlari `npm install` selama `az bot publish`
-* Menghapus char tidak valid `.` dari `--name`  dalam `az bot create`
+* Menghapus char `.` tidak valid dari `--name`  dalam `az bot create`
 * Diubah untuk berhenti mengacak nama sumber daya saat membuat Azure Storage, Paket Layanan Aplikasi, Fungsi / Aplikasi Web, dan aplikasi Insights
 * [USANG] Argumen usang `--proj-name` yang mendukung `--proj-file-path`
 * Diubah `az bot publish` untuk menghapus file penyebaran IIS Node.js yang diambil jika belum ada
-* Menambahkan `--keep-node-modules` argumen `az bot publish` untuk tidak menghapus `node_modules` folder di App Service
+* Menambahkan `--keep-node-modules` argumen untuk `az bot publish` tidak menghapus `node_modules` folder di App Service
 * Menambahkan `"publishCommand"` pasangan nilai kunci ke output dari `az bot create` saat membuat bot Azure Function atau Web App
-  * Nilai `"publishCommand"` adalah perintah yang diisi sebelumnya dengan parameter yang diperlukan untuk mempublikasikan bot yang baru `az bot publish` dibuat.
+  * Nilai `"publishCommand"` adalah perintah yang diisi sebelumnya dengan parameter yang diperlukan untuk mempublikasikan bot yang `az bot publish` baru dibuat.
 * Diperbarui `"WEBSITE_NODE_DEFAULT_VERSION"` dalam templat ARM untuk bot SDK v4 untuk menggunakan 10.14.1, bukan 8.9.4
 
 ### <a name="key-vault"></a>Key Vault
-* Memperbaiki masalah dengan `keyvault secret backup` di mana beberapa pengguna menerima kesalahan saat `unexpected_keyword` menggunakan `--id`
+* Memperbaiki masalah dengan `keyvault secret backup` di mana beberapa pengguna menerima kesalahan `unexpected_keyword` saat menggunakan `--id`
 
 ### <a name="monitor"></a>Monitor
 * Diubah `monitor metrics alert [create|update]` untuk memungkinkan nilai dimensi `*`
 
 ### <a name="network"></a>Jaringan
 * Diubah `dns zone export` untuk memastikan CNAME yang diekspor adalah FQDN
-* Menambahkan `--gateway-name` parameter `nic ip-config address-pool [add|remove]` untuk mendukung kumpulan alamat backend gateway aplikasi
-* Ditambahkan `--traffic-analytics` dan `--workspace` argumen `network watcher flow-log configure` untuk mendukung analisis lalu lintas melalui ruang kerja Log Analytics
+* Menambahkan `--gateway-name` parameter untuk `nic ip-config address-pool [add|remove]` mendukung kumpulan alamat backend gateway aplikasi
+* Ditambahkan `--traffic-analytics` dan `--workspace` argumen untuk `network watcher flow-log configure` mendukung analisis lalu lintas melalui ruang kerja Log Analytics
 * Ditambahkan `--idle-timeout` dan `--floating-ip` untuk `lb inbound-nat-pool [create|update]`
 
 ### <a name="policy-insights"></a>Policy Insights
@@ -5504,7 +5600,7 @@ Versi 2.0.58
 * Menambahkan perintah untuk mengelola jadwal patch (buat, perbarui, hapus, perlihatkan)
 * Menambahkan dukungan untuk Availability Zones dan Minimum TLS Version ke 'redis create
 * [MELANGGAR PERUBAHAN] Dihapus `redis update-settings` dan `redis list-all` perintah
-* [MELANGGAR PERUBAHAN] Parameter untuk `redis create` : 'pengaturan penyewa' tidak diterima dalam format kunci[=value]
+* [MELANGGAR PERUBAHAN] Parameter untuk `redis create`: 'pengaturan penyewa' tidak diterima dalam format kunci[=value]
 * [USANG] Menambahkan pesan peringatan untuk perintah usang `redis import-method`
 
 ### <a name="role"></a>Peran
@@ -5514,10 +5610,10 @@ Versi 2.0.58
 * [USANG] Argumen usang `--boostrap-acc-pwd` karena kesalahan ketik
 
 ### <a name="vm"></a>VM
-* Diubah `vm list-skus` untuk memungkinkan penggunaan di `--all` tempat `--all true`
+* Diubah `vm list-skus` untuk memungkinkan penggunaan `--all` di tempat `--all true`
 * Ditambahkan `vmss run-command [invoke | list | show]`
 * Bug tetap di mana `vmss encryption enable` akan gagal jika dijalankan sebelumnya
-* [MELANGGAR PERUBAHAN] Memindahkan `az identity` perintah ke `role` perintah
+* [MELANGGAR PERUBAHAN] `az identity` Memindahkan perintah ke `role` perintah
 
 ## <a name="january-31-2019"></a>Tanggal 31 Januari 2019
 
@@ -5525,7 +5621,7 @@ Versi 2.0.57
 
 ### <a name="core"></a>Core
 
-* Hot Fix untuk [masalah 8399.](https://github.com/Azure/azure-cli/issues/8399)
+* Hot Fix untuk [masalah 8399](https://github.com/Azure/azure-cli/issues/8399).
 
 ## <a name="january-28-2019"></a>28 Januari 2019
 
@@ -5540,8 +5636,8 @@ Versi 2.0.56
 * Menambahkan dukungan untuk operasi pembaruan utama layanan dengan `aks update-credentials -reset-service-principal`
 
 ### <a name="ams"></a>AMS
-* [MELANGGAR PERUBAHAN] Berganti nama `ams asset get-streaming-locators` menjadi `ams asset list-streaming-locators`
-* [MELANGGAR PERUBAHAN] Berganti nama `ams streaming-locator get-content-keys` menjadi `ams streaming-locator list-content-keys`
+* [MELANGGAR PERUBAHAN] Berganti nama menjadi `ams asset get-streaming-locators``ams asset list-streaming-locators`
+* [MELANGGAR PERUBAHAN] Berganti nama menjadi `ams streaming-locator get-content-keys``ams streaming-locator list-content-keys`
 
 ### <a name="appservice"></a>Layanan aplikasi
 * Menambahkan dukungan untuk wawasan aplikasi `functionapp create`
@@ -5555,8 +5651,8 @@ Versi 2.0.56
 ### <a name="eventgrid"></a>EventGrid
 * Menambahkan `--deadletter-endpoint` parameter ke `event-subscription [create|update]`
 * Menambahkan storagequeue dan hybridconnection sebagai nilai baru untuk 'event-subscription [create|update] --endpoint-type'
-* Ditambahkan `--max-delivery-attempts` dan `--event-ttl` parameter untuk menentukan kebijakan percobaan ulang untuk `event-subscription create` peristiwa
-* Menambahkan pesan peringatan `event-subscription [create|update]` saat webhook sebagai tujuan digunakan untuk berlangganan acara
+* Ditambahkan `--max-delivery-attempts` dan `--event-ttl` parameter untuk `event-subscription create` menentukan kebijakan percobaan ulang untuk peristiwa
+* Menambahkan pesan peringatan saat `event-subscription [create|update]` webhook sebagai tujuan digunakan untuk berlangganan acara
 * Menambahkan parameter sumber-sumber daya-id untuk semua perintah terkait langganan acara dan menandai semua parameter terkait sumber daya lainnya sebagai usang
 
 ### <a name="hdinsight"></a>HDInsight
@@ -5580,7 +5676,7 @@ Versi 2.0.56
 * Aktifkan akun tingkat penyewa untuk identitas layanan terkelola untuk `login`
 
 ### <a name="network"></a>Jaringan
-* Masalah tetap `express-route update` dengan: di mana `--bandwidth` argumen diabaikan
+* Masalah tetap dengan `express-route update`: di mana `--bandwidth` argumen diabaikan
 * Masalah tetap dengan `ddos-protection update` di mana pemahaman yang ditetapkan menyebabkan jejak tumpukan
 
 ### <a name="resource"></a>Sumber daya
@@ -5642,7 +5738,7 @@ Versi 2.0.55
 * Masalah tetap di mana memasok `--vnets ""` menyebabkan `ddos-protection update` kesalahan
 
 ### <a name="role"></a>Peran
-* [USANG] Argumen yang didepresiasi `--password` untuk `create-for-rbac` . Gunakan kata sandi aman yang dihasilkan oleh CLI sebagai gantinya
+* [USANG] Argumen yang didepresiasi `--password` untuk `create-for-rbac`. Gunakan kata sandi aman yang dihasilkan oleh CLI sebagai gantinya
 
 ### <a name="security"></a>Keamanan
 * Rilis Awal
@@ -5654,11 +5750,11 @@ Versi 2.0.55
 * Menambahkan `storage blob service-properties update` perintah dengan dukungan untuk situs web statis
 
 ### <a name="vm"></a>VM
-* Berubah `vm [disk|unmanaged-disk]` dan memiliki parameter yang lebih `vmss disk` konsisten
+* Berubah `vm [disk|unmanaged-disk]` dan `vmss disk` memiliki parameter yang lebih konsisten
 * Menambahkan dukungan untuk referensi gambar penyewa silang `[vm|vmss] create`
 * Bug tetap dengan konfigurasi default di `vm diagnostics get-default-config --windows-os`
-* Menambahkan argumen `--provision-after-extensions` `vmss extension set` untuk menentukan ekstensi apa yang harus disediakan sebelum ekstensi ditetapkan
-* Menambahkan argumen `--replica-count` `sig image-version update` untuk mengatur jumlah replikasi default
+* Menambahkan argumen `--provision-after-extensions` untuk `vmss extension set` menentukan ekstensi apa yang harus disediakan sebelum ekstensi ditetapkan
+* Menambahkan argumen `--replica-count` untuk `sig image-version update` mengatur jumlah replikasi default
 * Bug tetap dengan `image create --source` di mana disk os sumber keliru untuk VM dengan nama yang sama, bahkan jika ID sumber daya penuh disediakan
 
 ## <a name="december-20-2018"></a>Desember 20, 2018
@@ -5692,9 +5788,9 @@ Versi 2.0.53
 ### <a name="acs"></a>ACS
 * Menambahkan Pratinjau Node Virtual
 * Dihapus "(PREVIEW)" dari argumen AAD ke`aks create`
-* [USANG] Perintah yang sudah `az acs` usang. Layanan ACS akan pensiun pada 31 Januari 2020
+* [USANG] Perintah yang sudah usang `az acs` . Layanan ACS akan pensiun pada 31 Januari 2020
 * Menambahkan dukungan Kebijakan Jaringan saat membuat klaster AKS baru
-* Persyaratan argumen yang dihapus `--nodepool-name` jika hanya ada satu `aks scale` nodepool
+* Persyaratan argumen yang `--nodepool-name` dihapus jika `aks scale` hanya ada satu nodepool
 
 ### <a name="appservice"></a>Layanan aplikasi
 * Masalah tetap di mana `webapp config container` tidak menghormati `--slot` parameter
@@ -5727,7 +5823,7 @@ Versi 2.0.53
 *  Menambahkan kemampuan untuk memperbarui versi skema log untuk layanan penyimpanan di `storage logging update`
 
 ### <a name="vm"></a>VM
-* Kecelakaan tetap `vm identity remove` ketika vm yang ditentukan tidak memiliki identitas layanan terkelola yang ditetapkan
+* `vm identity remove` Kecelakaan tetap ketika vm yang ditentukan tidak memiliki identitas layanan terkelola yang ditetapkan
 
 ## <a name="december-4-2018"></a>4 Desember 2018
 
@@ -5741,14 +5837,14 @@ Versi 2.0.52
 * Memperbaiki bug pada aplikasi windows berbasis kontainer karena perubahan backend
 
 ### <a name="network"></a>Jaringan
-* Menambahkan `--exclusion` argumen `application-gateway waf-config set` untuk mendukung pengecualian WAF
+* Menambahkan `--exclusion` argumen untuk `application-gateway waf-config set` mendukung pengecualian WAF
 
 ### <a name="role"></a>Peran
 * Menambahkan dukungan untuk pengidentifikasi kustom untuk kredensial kata sandi
 
 ### <a name="vm"></a>VM
 * [USANG] Parameter usang `vm extension [show|wait] --expand`
-* Menambahkan `--force` parameter `vm restart` ke VM yang tidak responsif
+* Menambahkan `--force` parameter ke `vm restart` VM yang tidak responsif
 * Diubah `[vm|vmss] create --authentication-type` untuk menerima "semua" untuk membuat VM dengan kata sandi dan autentikasi ssh
 * Menambahkan `image create --os-disk-caching` parameter untuk mengatur caching disk os untuk gambar
 
@@ -5761,11 +5857,11 @@ Versi 2.0.51
 ### <a name="acr"></a>ACR
 * Menambahkan token konteks ke langkah tugas
 * Menambahkan dukungan untuk mengatur rahasia dalam acr run untuk mencerminkan tugas acr
-* Peningkatan dukungan untuk `--top` dan `--orderby` untuk dan `show-tags` `show-manifests` perintah
+* Peningkatan dukungan untuk `--top` dan `--orderby` untuk `show-tags` dan `show-manifests` perintah
 
 ### <a name="appservice"></a>Layanan aplikasi
 * Mengubah batas waktu default penyebaran zip ke polling untuk status meningkat menjadi 5 menit, juga menambahkan properti timeout untuk menyesuaikan nilai ini
-* Memperbarui `node_version` default. Mengatur ulang tindakan pertukaran slot, selama swap dua fase mempertahankan semua pengaturan aplikasi & string koneksi
+* Memperbarui default `node_version`. Mengatur ulang tindakan pertukaran slot, selama swap dua fase mempertahankan semua pengaturan aplikasi & string koneksi
 * Penghapusan klien-sisi SKU memeriksa untuk rencana layanan aplikasi Linux membuat
 * Memperbaiki kesalahan saat mencoba mendapatkan status zipdeploy
 
@@ -5776,10 +5872,10 @@ Versi 2.0.51
 * Bug tetap di mana kesalahan mungkin telah diabaikan
 
 ### <a name="network"></a>Jaringan
-* Menambahkan `root-cert` subkomite `application-gateway` untuk menangani sertifikasi akar tepercaya
-* Ditambahkan `--min-capacity` dan `--custom-error-pages` pilihan `application-gateway [create|update]` untuk:
+* Menambahkan `root-cert` subkomite untuk `application-gateway` menangani sertifikasi akar tepercaya
+* Ditambahkan `--min-capacity` dan `--custom-error-pages` pilihan untuk `application-gateway [create|update]`:
 * Ditambahkan `--zones` untuk dukungan zona ketersediaan ke `application-gateway create`
-* Menambahkan `--file-upload-limit` argumen, `--max-request-body-size` dan `--request-body-check` untuk `application-gateway waf-config set`
+* Menambahkan argumen `--file-upload-limit`, `--max-request-body-size` dan `--request-body-check` untuk `application-gateway waf-config set`
 
 ### <a name="rdbms"></a>Rdbms
 * Menambahkan perintah mariadb vnet
@@ -5791,15 +5887,15 @@ Versi 2.0.51
 ### <a name="storage"></a>Penyimpanan
 * Peningkatan penanganan kasus sudut untuk perintah salinan penyimpanan
 * Memperbaiki masalah dengan `storage blob copy start-batch` tidak menggunakan kredensial login saat akun tujuan dan sumber sama
-* Bug tetap dengan `storage [blob|file] url` tempat yang tidak dimasukkan ke dalam `sas_token` URL
-* Menambahkan peringatan perubahan melanggar `[blob|container] list` untuk: akan segera output hanya 5000 hasil pertama secara default
+* Bug tetap dengan`storage [blob|file] url` tempat `sas_token` yang tidak dimasukkan ke dalam URL
+* Menambahkan peringatan perubahan melanggar untuk `[blob|container] list`: akan segera output hanya 5000 hasil pertama secara default
 
 ### <a name="vm"></a>VM
-* Menambahkan dukungan `[vm|vmss] create --storage-sku` untuk menentukan akun penyimpanan SKU untuk OS terkelola dan disk data secara terpisah
-* Mengubah parameter nama versi `sig image-version` menjadi `--image-version -e`
-* `sig image-version`Argumen `--image-version-name` usang, digantikan oleh`--image-version`
+* Menambahkan dukungan untuk `[vm|vmss] create --storage-sku` menentukan akun penyimpanan SKU untuk OS terkelola dan disk data secara terpisah
+* Mengubah parameter `sig image-version` nama versi menjadi `--image-version -e`
+* Argumen `--image-version-name`usang`sig image-version`, digantikan oleh`--image-version`
 * Menambahkan dukungan untuk menggunakan disk OS lokal ke `[vm|vmss] create --ephemeral-os-disk`
-* Dukungan tambahan `--no-wait` untuk `snapshot create/update`
+* Dukungan tambahan untuk `--no-wait``snapshot create/update`
 * Perintah tambahan `snapshot wait`
 * Menambahkan dukungan untuk menggunakan nama instan dengan `[vm|vmss] extension set --extension-instance-name`
 
@@ -5837,15 +5933,15 @@ Versi 2.0.50
   * `ams streaming-locator get-content-keys`
 * Menambahkan dukungan parameter enkripsi ke `ams streaming-policy create`
 * Menambahkan dukungan hingga `ams transform output remove` saat ini dapat dilakukan dengan melewati indeks output untuk dihapus
-* Ditambahkan `--correlation-data` dan `--label` argumen ke grup `ams job` perintah
-* Ditambahkan `--storage-account` dan `--container` argumen ke grup `ams asset` perintah
+* Ditambahkan `--correlation-data` dan `--label` argumen ke `ams job` grup perintah
+* Ditambahkan `--storage-account` dan `--container` argumen ke `ams asset` grup perintah
 * Menambahkan nilai default untuk waktu kadaluwarsa (Sekarang+23h) dan izin (Baca) dalam `ams asset get-sas-url` perintah
 * [MELANGGAR PERUBAHAN] Perintah diganti `ams streaming locator` dengan `ams streaming-locator`
 * [MELANGGAR PERUBAHAN] Argumen yang diperbarui `--content-keys` dari `ams streaming locator`
-* [MELANGGAR PERUBAHAN] Berganti nama `--content-policy-name` menjadi `--content-key-policy-name` dalam `ams streaming locator` perintah
+* [MELANGGAR PERUBAHAN] Berganti nama menjadi `--content-policy-name` `--content-key-policy-name` dalam `ams streaming locator` perintah
 * [MELANGGAR PERUBAHAN] Perintah diganti `ams streaming policy` dengan `ams streaming-policy`
-* [MELANGGAR PERUBAHAN] Argumen diganti `--preset-names` dengan `--preset` dalam grup `ams transform` perintah. Sekarang Anda hanya dapat mengatur 1 output/preset pada satu waktu (untuk menambahkan lebih banyak, Anda harus menjalankan `ams transform output add`). Selain itu, Anda dapat mengatur StandardEncoderPreset kustom dengan melewati jalur ke JSON kustom Anda.
-* [MELANGGAR PERUBAHAN] Berganti nama `--output-asset-names ` menjadi `--output-assets` dalam `ams job start` perintah. Sekarang menerima daftar aset yang dipisahkan spasi dalam format 'assetName=label'. Aset tanpa label dapat dikirim seperti ini: 'assetName='
+* [MELANGGAR PERUBAHAN] Argumen diganti `--preset-names` dengan `--preset` dalam `ams transform` grup perintah. Sekarang Anda hanya dapat mengatur 1 output/preset pada satu waktu (untuk menambahkan lebih banyak, Anda harus menjalankan `ams transform output add`). Selain itu, Anda dapat mengatur StandardEncoderPreset kustom dengan melewati jalur ke JSON kustom Anda.
+* [MELANGGAR PERUBAHAN] Berganti nama menjadi `--output-asset-names ` `--output-assets` dalam `ams job start` perintah. Sekarang menerima daftar aset yang dipisahkan spasi dalam format 'assetName=label'. Aset tanpa label dapat dikirim seperti ini: 'assetName='
 
 ### <a name="appservice"></a>AppService
 * Memperbaiki bug `az webapp config backup update` yang mencegah pengaturan jadwal cadangan jika belum ditetapkan
@@ -5863,15 +5959,15 @@ Versi 2.0.50
 * Interaktif sekarang menginstal `interactive` ekstensi, yang akan memungkinkan pembaruan dan dukungan yang lebih cepat
 
 ### <a name="monitor"></a>Monitor
-* Menambahkan dukungan untuk nama metrik yang mencakup karakter forward-slash (/) dan periode (.) `--condition``monitor metrics alert [create|update]`
+* Menambahkan dukungan untuk nama metrik yang mencakup karakter forward-slash (/) dan periode (.)`--condition``monitor metrics alert [create|update]`
 
 ### <a name="network"></a>Jaringan
-* Nama perintah yang `network interface-endpoint` usang yang mendukung `network private-endpoint`
-* Masalah tetap dengan di mana `--peer-circuit` argumen tidak akan menerima `express-route peering connection create` ID
+* Nama perintah yang usang `network interface-endpoint` yang mendukung `network private-endpoint`
+* Masalah tetap dengan di mana `--peer-circuit` argumen tidak `express-route peering connection create`akan menerima ID
 * Masalah tetap di mana `--ip-tags` tidak bekerja dengan benar `public-ip create`
 
 ### <a name="profile"></a>Profil
-* Ditambahkan `--use-cert-sn-issuer` `az login` ke untuk login utama layanan dengan cert auto-rolls
+* Ditambahkan `--use-cert-sn-issuer` ke `az login` untuk login utama layanan dengan cert auto-rolls
 
 ### <a name="rdbms"></a>RDBMS
 * Menambahkan perintah replika mysql
@@ -5885,11 +5981,11 @@ Versi 2.0.50
 * Menambahkan dukungan untuk memberikan izin ke aplikasi AAD
 
 ### <a name="storage"></a>Penyimpanan
-* Menambahkan dukungan untuk terhubung ke layanan penyimpanan hanya dengan SAS dan endpoint (tanpa nama akun atau kunci) seperti yang dijelaskan dalam [Konfigurasikan string koneksi Azure Storage](/azure/storage/common/storage-configure-connection-string).
+* Menambahkan dukungan untuk terhubung ke layanan penyimpanan hanya dengan SAS dan endpoint (tanpa nama akun atau kunci) seperti yang dijelaskan dalam [Konfigurasikan Azure Storage string koneksi](/azure/storage/common/storage-configure-connection-string).
 
 ### <a name="vm"></a>VM
-* Menambahkan `storage-sku` argumen `image create` untuk mengatur tipe akun penyimpanan default gambar
-* Bug tetap dengan `vm resize` opsi tempat menyebabkan perintah `--no-wait` macet
+* Menambahkan `storage-sku` argumen untuk `image create` mengatur tipe akun penyimpanan default gambar
+* Bug tetap dengan `vm resize` opsi tempat `--no-wait` menyebabkan perintah macet
 * Mengubah `vm encryption show` format output tabel untuk memperlihatkan status
 * Diubah `vm secret format` menjadi membutuhkan output json / jsonc. Peringatkan pengguna dan default ke output json jika format output yang tidak diinginkan dipilih
 * Validasi argumen yang disempurnakan untuk `vm create --image`
@@ -5906,7 +6002,7 @@ Versi 2.0.49
 * Memperbaiki masalah pengkodean ACR Build di Python2
 
 ### <a name="cdn"></a>CDN
-* [MELANGGAR PERUBAHAN] Mengubah `cdn endpoint create` perilaku caching string kueri default untuk tidak lagi default ke "IgnoreQueryString". Sekarang diatur oleh layanan
+* [MELANGGAR PERUBAHAN] Mengubah `cdn endpoint create`perilaku caching string kueri default untuk tidak lagi default ke "IgnoreQueryString". Sekarang diatur oleh layanan
 
 ### <a name="container"></a>Kontainer
 * Ditambahkan `Private` sebagai tipe yang valid untuk diteruskan ke '--ip-address'
@@ -5928,33 +6024,33 @@ Versi 2.0.49
 * [MELANGGAR PERUBAHAN] Menghapus dukungan untuk F1 SKU; Gunakan S1 SKU sebagai gantinya
 
 ### <a name="monitor"></a>Monitor
-* Perubahan pada `monitor activity-log list` :
+* Perubahan pada `monitor activity-log list`:
   * Menambahkan dukungan untuk mendaftarkan semua acara di tingkat langganan
   * Menambahkan `--offset` parameter untuk lebih mudah membuat kueri waktu
   * Peningkatan validasi untuk `--start-time` dan `--end-time` menggunakan format ISO8601 yang lebih luas dan format datetime yang lebih mudah digunakan
   * Ditambahkan `--namespace` sebagai alias untuk opsi usang `--resource-provider`
-  * Usang karena `--filters` tidak ada nilai selain yang memiliki opsi yang diketik kuat didukung oleh layanan
-* Perubahan pada `monitor metrics list` :
+  * Usang `--filters` karena tidak ada nilai selain yang memiliki opsi yang diketik kuat didukung oleh layanan
+* Perubahan pada `monitor metrics list`:
   * Menambahkan `--offset` parameter untuk lebih mudah membuat kueri waktu
   * Peningkatan validasi untuk `--start-time` dan `--end-time` menggunakan format ISO8601 yang lebih luas dan format datetime yang lebih mudah digunakan
-* Peningkatan validasi `--event-hub` dan `--event-hub-rule` argumen untuk `monitor diagnostic-settings create`
+* Peningkatan validasi dan `--event-hub` `--event-hub-rule` argumen untuk `monitor diagnostic-settings create`
 
 ### <a name="network"></a>Jaringan
-* Ditambahkan `--app-gateway-address-pools` dan `--gateway-name` argumen `nic create` ke, untuk mendukung penambahan kolam alamat backend gateway aplikasi ke NIC
-* Ditambahkan `--app-gateway-address-pools` dan `--gateway-name` argumen `nic ip-config create/update` ke, untuk mendukung penambahan kolam alamat backend gateway aplikasi ke NIC
+* Ditambahkan `--app-gateway-address-pools` dan `--gateway-name` argumen ke `nic create`, untuk mendukung penambahan kolam alamat backend gateway aplikasi ke NIC
+* Ditambahkan `--app-gateway-address-pools` dan `--gateway-name` argumen ke `nic ip-config create/update`, untuk mendukung penambahan kolam alamat backend gateway aplikasi ke NIC
 
 ### <a name="servicebus"></a>ServiceBus
-* Menambahkan Read-Only ke `migration_state` Properti Konfigurasi Migrasi untuk menampilkan Standar Bus Layanan saat ini ke status migrasi ruang nama Premium
+* Menambahkan Read-Only `migration_state` ke Properti Konfigurasi Migrasi untuk menampilkan Standar Bus Layanan saat ini ke status migrasi ruang nama Premium
 
 ### <a name="sql"></a>SQL
-* Tetap `sql failover-group create` dan bekerja dengan kebijakan `sql failover-group update` failover manual
+* Tetap `sql failover-group create` dan `sql failover-group update` bekerja dengan kebijakan failover manual
 
 ### <a name="storage"></a>Penyimpanan
-* `az storage cors list`Pemformatan output tetap, semua item memperlihatkan tombol "Layanan" yang benar
+* Pemformatan output tetap `az storage cors list` , semua item memperlihatkan tombol "Layanan" yang benar
 * Parameter `--bypass-immutability-policy` tambahan untuk penghapusan kontainer yang diblokir kebijakan immutability
 
 ### <a name="vm"></a>VM
-* Terapkan mode caching disk `None` untuk seri mesin Lv / Lv2 di `[vm|vmss] create`
+* Terapkan mode `None` caching disk untuk seri mesin Lv / Lv2 di `[vm|vmss] create`
 * Daftar ukuran yang didukung diperbarui yang mendukung akselerator jaringan untuk `vm create`
 * Menambahkan argumen diketik yang kuat untuk iops ultrassd dan konfigurasi mbps untuk `disk create`
 
@@ -6002,12 +6098,12 @@ Versi 2.0.47
 * Diubah untuk membatasi commmands penyimpanan keyvault ke profil API terbaru
 
 ### <a name="network"></a>Jaringan
-* Tetap: `network dns zone create` Perintah berhasil bahkan jika pengguna telah mengonfigurasi lokasi default. Lihat #6052
+* Tetap `network dns zone create`: Perintah berhasil bahkan jika pengguna telah mengonfigurasi lokasi default. Lihat #6052
 * Usang `--remote-vnet-id` untuk `network vnet peering create`
 * Ditambahkan `--remote-vnet` ke `network vnet peering create` mana menerima nama atau ID
-* Menambahkan dukungan untuk beberapa awalan subnet `network vnet create` dengan `--subnet-prefixes`
-* Menambahkan dukungan untuk beberapa awalan subnet `network vnet subnet [create|update]` dengan `--address-prefixes`
-* Masalah tetap dengan `network application-gateway create` yang dicegah membuat gateway dengan atau `WAF_v2` `Standard_v2` SKU
+* Menambahkan dukungan untuk beberapa awalan subnet dengan `network vnet create``--subnet-prefixes`
+* Menambahkan dukungan untuk beberapa awalan subnet dengan `network vnet subnet [create|update]``--address-prefixes`
+* Masalah tetap dengan `network application-gateway create` yang dicegah membuat gateway dengan `WAF_v2` atau `Standard_v2` SKU
 * Menambahkan `--service-endpoint-policy` argumen kenyamanan ke `network vnet subnet update`
 
 ### <a name="role"></a>Peran
@@ -6020,7 +6116,7 @@ Versi 2.0.47
 * [MELANGGAR PERUBAHAN] Mengubah `list` perintah untuk menangani kesalahan untuk sumber daya (s) NotFound (404) dengan cara yang khas alih-alih menampilkan daftar kosong
 
 ### <a name="vm"></a>VM
-* Bidang kosong tetap `accessSas` di `disk grant-access`
+* Bidang kosong `accessSas` tetap di `disk grant-access`
 * Diubah `vmss create` menjadi cadangan rentang port frontend yang cukup besar untuk menangani overprovisioning
 * Perintah pemutakhiran tetap untuk `sig`
 * Menambahkan `--no-wait` dukungan untuk mengelola versi gambar di `sig`
@@ -6040,7 +6136,7 @@ Versi 2.0.46
 * Menambahkan bendera tanpa format untuk menampilkan log build
 
 ### <a name="acs"></a>ACS
-* Mengubah `install-connector` perintah untuk mengatur FQDN Master AKS
+* `install-connector` Mengubah perintah untuk mengatur FQDN Master AKS
 * Tetap membuat tugas peran untuk vnet-subnet-id saat tidak menentukan kepala layanan dan skip-role-assignemnt
 
 ### <a name="appservice"></a>AppService
@@ -6051,8 +6147,8 @@ Versi 2.0.46
 * Menambahkan dukungan untuk mendaftar dan memulihkan aplikasi web yang dihapus
 
 ### <a name="batch"></a>Batch
-* Mengubah menambahkan tugas `--json-file` untuk mendukung sintaks AddTaskCollectionParameter
-* Dokumentasi yang diperbarui dari format yang diterima `--json-file`
+* Mengubah menambahkan tugas untuk `--json-file` mendukung sintaks AddTaskCollectionParameter
+* Dokumentasi yang diperbarui dari format yang `--json-file` diterima
 * Ditambahkan `--max-tasks-per-node-option` ke `batch pool create`
 * Mengubah perilaku `batch account` untuk menampilkan akun yang saat ini masuk jika tidak ada opsi yang ditentukan
 
@@ -6060,7 +6156,7 @@ Versi 2.0.46
 * Kegagalan pembuatan akun penyimpanan otomatis tetap dalam `batchai cluster create` perintah
 
 ### <a name="cognitive-services"></a>Cognitive Services
-* Menambahkan completer untuk  `--sku` , `--kind` , `--location` argumen
+* Menambahkan completer untuk  `--sku`, `--kind`, `--location` argumen
 * Perintah tambahan `cognitiveservices account list-usage`
 * Perintah tambahan `cognitiveservices account list-kinds`
 * Perintah tambahan `cognitiveservices account list`
@@ -6070,7 +6166,7 @@ Versi 2.0.46
 ### <a name="container"></a>Kontainer
 * Menambahkan kemampuan untuk memulai ulang dan menghentikan grup kontainer yang sedang berjalan
 * Ditambahkan `--network-profile` untuk lewat di profil jaringan
-* Ditambahkan, `--subnet` `--vnet_name` , untuk memungkinkan membuat grup kontainer dalam VNET
+* Ditambahkan `--subnet`, `--vnet_name`, untuk memungkinkan membuat grup kontainer dalam VNET
 * Mengubah output tabel untuk memperlihatkan status grup kontainer
 
 ### <a name="datalake"></a>Datalake
@@ -6090,16 +6186,16 @@ Versi 2.0.46
 * Menambahkan `network public-ip prefix` perintah untuk mendukung fitur awalan IP publik
 * Menambahkan `network service-endpoint` perintah untuk mendukung fitur kebijakan endpoint layanan
 * Menambahkan `network lb outbound-rule` perintah untuk mendukung pembuatan aturan outbound Standard Load Balancer
-* `--public-ip-prefix`Tambahkan `network lb frontend-ip create/update` ke untuk mendukung konfigurasi IP frontend menggunakan prefiks IP publik
+* Tambahkan `--public-ip-prefix` ke `network lb frontend-ip create/update` untuk mendukung konfigurasi IP frontend menggunakan prefiks IP publik
 * Tambahkan `--enable-tcp-reset` ke `network lb rule/inbound-nat-rule/inbound-nat-pool create/update`
 * Tambahkan `--disable-outbound-snat` ke `network lb rule create/update`
-* `network watcher flow-log show/configure`Izinkan untuk digunakan dengan NSGs klasik
+* Izinkan `network watcher flow-log show/configure` untuk digunakan dengan NSGs klasik
 * Menambahkan `network watcher run-configuration-diagnostic` perintah
-* Memperbaiki `network watcher test-connectivity` perintah dan menambahkan , dan `--method` `--valid-status-codes` `--headers` properti
+* Memperbaiki `network watcher test-connectivity` perintah dan menambahkan `--method`, `--valid-status-codes` dan `--headers` properti
 * `network express-route create/update`: Tambahkan `--allow-global-reach` bendera
 * `network vnet subnet create/update`: Tambahkan dukungan untuk `--delegation`
 * Perintah tambahan `network vnet subnet list-available-delegations`
-* `network traffic-manager profile create/update`: Menambahkan dukungan untuk `--interval` , dan untuk konfigurasi Monitor Opsi `--timeout` `--max-failures` `--monitor-path` usang, dan mendukung , `--monitor-port` `--monitor-protocol` `--path` `--port` , `--protocol`
+* `network traffic-manager profile create/update`: Menambahkan dukungan untuk `--interval`, `--timeout` dan `--max-failures` untuk konfigurasi Monitor Opsi `--monitor-path`usang, `--monitor-port` dan `--monitor-protocol` mendukung `--path`, , `--port``--protocol`
 * `network lb frontend-ip create/update`Memperbaiki logika untuk menetapkan metode alokasi IP pribadi Jika alamat IP pribadi disediakan, alokasi akan statis Jika tidak ada alamat IP pribadi yang disediakan, atau string kosong disediakan untuk alamat IP pribadi, alokasinya dinamis.
 * `dns record-set * create/update`: Tambahkan dukungan untuk `--target-resource`
 * Menambahkan `network interface-endpoint` perintah ke objek titik akhir antarmuka kueri
@@ -6115,7 +6211,7 @@ Versi 2.0.46
 
 ### <a name="manage-app"></a>Mengelola Aplikasi
 * Bug tetap dalam `managedapp create --kind MarketPlace` menyebabkan pembuatan instans aplikasi yang dikelola Marketplace macet
-* `feature`Perintah yang diubah untuk dibatasi pada profil yang didukung
+* Perintah `feature` yang diubah untuk dibatasi pada profil yang didukung
 
 ### <a name="role"></a>Peran
 * Menambahkan dukungan untuk mendaftarkan keanggotaan grup pengguna
@@ -6166,7 +6262,7 @@ Versi 2.0.45
 
 ### <a name="cognitive-services"></a>Cognitive Services
 
-* Menambahkan parameter baru `--api-properties,` yang diperlukan untuk membuat beberapa layanan
+* Menambahkan parameter `--api-properties,` baru yang diperlukan untuk membuat beberapa layanan
 
 ### <a name="iot"></a>IoT
 
@@ -6214,7 +6310,7 @@ Versi 2.0.44
 
 ### <a name="acs"></a>ACS
 
-* Diubah `az acs/aks install-cli` menjadi instalasi di bawah pada `%USERPROFILE%\.azure-kubectl` Windows
+* Diubah `az acs/aks install-cli` menjadi instalasi di bawah `%USERPROFILE%\.azure-kubectl` pada Windows
 * Diubah `az aks install-connector` untuk mendeteksi apakah cluster memiliki RBAC dan mengkonfigurasi Konektor ACI dengan tepat
 * Diubah menjadi tugas peran ke subnet saat disediakan
 * Menambahkan opsi baru untuk "melewatkan tugas peran" untuk subnet saat disediakan
@@ -6227,7 +6323,7 @@ Versi 2.0.44
 
 ### <a name="batchai"></a>BatchAI
 
-* Mengubah output logger untuk pembuatan akun penyimpanan otomatis untuk menentukan *"grup* sumber daya".
+* Mengubah output logger untuk pembuatan akun penyimpanan otomatis untuk menentukan " *grup* sumber daya".
 
 ### <a name="container"></a>Kontainer
 
@@ -6261,15 +6357,15 @@ Versi 2.0.44
 
 ### <a name="storage"></a>Penyimpanan
 
-* [MELANGGAR PERUBAHAN] Diubah `storage account show-usage` menjadi memerlukan parameter dan akan mendaftar berdasarkan `--location` wilayah
-* `--resource-group`Parameter yang diubah menjadi opsional untuk `storage account` perintah
+* [MELANGGAR PERUBAHAN] Diubah `storage account show-usage` menjadi memerlukan `--location` parameter dan akan mendaftar berdasarkan wilayah
+* Parameter `--resource-group` yang diubah menjadi opsional untuk `storage account` perintah
 * Menghapus peringatan 'Prasyarat gagal' untuk kegagalan individu dalam perintah batch untuk pesan agregat tunggal
 * Mengubah `[blob|file] delete-batch` perintah agar tidak lagi mengeluarkan array null
 * Mengubah `blob [download|upload|delete-batch]` perintah untuk membaca sas-token dari url kontainer
 
 ### <a name="vm"></a>VM
 
-* Menambahkan filter umum `vm list-skus` untuk kemudahan penggunaan
+* Menambahkan filter umum untuk `vm list-skus` kemudahan penggunaan
 
 ## <a name="july-31-2018"></a>31 Juli 2018
 
@@ -6290,7 +6386,7 @@ Versi 2.0.43
 
 ### <a name="container"></a>Kontainer
 
-* Persyaratan yang dihapus `--log-analytics-workspace-key` untuk nama atau ID saat di mengatur langganan
+* Persyaratan yang dihapus untuk `--log-analytics-workspace-key` nama atau ID saat di mengatur langganan
 
 ### <a name="network"></a>Jaringan
 
@@ -6298,13 +6394,13 @@ Versi 2.0.43
 
 ### <a name="resource"></a>Sumber daya
 
-* Ditambahkan `--rollback-on-error` `group deployment create` untuk menjalankan penyebaran yang diketahui baik pada kesalahan
+* Ditambahkan `--rollback-on-error` untuk `group deployment create` menjalankan penyebaran yang diketahui baik pada kesalahan
 * Masalah tetap di mana `--parameters {}` dengan `group deployment create` mengakibatkan kesalahan
 
 ### <a name="role"></a>Peran
 
 * Menambahkan dukungan untuk profil tumpukan 2017-03-09-profile
-* Masalah tetap di mana parameter pembaruan generik `app update` tidak akan berfungsi dengan benar
+* Masalah tetap di mana parameter `app update` pembaruan generik tidak akan berfungsi dengan benar
 
 ### <a name="search"></a>Cari
 
@@ -6320,14 +6416,14 @@ Versi 2.0.43
 ### <a name="storage"></a>Penyimpanan
 
 * Menambahkan dukungan untuk mengunduh file besar menggunakan satu koneksi
-* `show`Perintah dikonversi yang terlewatkan dari kegagalan dengan kode keluar 3 pada sumber daya yang hilang
+* Perintah `show` dikonversi yang terlewatkan dari kegagalan dengan kode keluar 3 pada sumber daya yang hilang
 
 ### <a name="vm"></a>VM
 
 * Menambahkan dukungan ke kumpulan ketersediaan daftar menurut langganan
 * Dukungan tambahan untuk `StandardSSD_LRS`
 * Menambahkan dukungan untuk grup keamanan aplikasi untuk membuat set skala VM
-* [MELANGGAR PERUBAHAN] Diubah, `[vm|vmss] create` , dan untuk menghasilkan identitas yang ditetapkan pengguna dalam format `[vm|vmss] identity assign` `[vm|vmss] identity remove` kamus
+* [MELANGGAR PERUBAHAN] Diubah `[vm|vmss] create`, `[vm|vmss] identity assign`, dan `[vm|vmss] identity remove` untuk menghasilkan identitas yang ditetapkan pengguna dalam format kamus
 
 ## <a name="july-18-2018"></a>Juli 18, 2018
 
@@ -6343,12 +6439,12 @@ Versi 2.0.42
 
 * [MELANGGAR PERUBAHAN] Diperbarui '--no-push' ke bendera murni dalam perintah 'acr build'
 * Ditambahkan `show` dan `update` perintah di bawah `acr repository` grup
-* Menambahkan `--detail` bendera untuk `show-manifests` dan untuk menampilkan informasi yang lebih `show-tags` rinci
+* Menambahkan `--detail` bendera untuk `show-manifests` dan `show-tags` untuk menampilkan informasi yang lebih rinci
 * Menambahkan `--image` parameter untuk mendukung mendapatkan detail build atau log berdasarkan gambar
 
 ### <a name="acs"></a>ACS
 
-* Diubah `az aks create` menjadi kesalahan jika kurang dari `--max-pods` 5
+* Diubah `az aks create` menjadi kesalahan jika `--max-pods` kurang dari 5
 
 ### <a name="appservice"></a>AppService
 
@@ -6380,13 +6476,13 @@ Versi 2.0.42
 * Menambahkan `--no-wait` dukungan untuk `group deployment delete`
 * Menambahkan `--no-wait` dukungan untuk `deployment delete`
 * Perintah tambahan `deployment wait`
-* Masalah tetap di mana perintah tingkat langganan `az deployment` secara keliru muncul untuk profil 2017-03-09-profile
+* Masalah tetap di mana perintah tingkat `az deployment` langganan secara keliru muncul untuk profil 2017-03-09-profile
 
 ### <a name="sql"></a>SQL
 
-* Tetap 'Nama grup sumber daya yang disediakan ... tidak cocok dengan nama dalam kesalahan Url saat menentukan nama dan perintah kolam elastis `sql db copy` `sql db replica create`
+* Tetap 'Nama grup sumber daya yang disediakan ... tidak cocok dengan nama dalam kesalahan Url saat menentukan nama `sql db copy` dan `sql db replica create` perintah kolam elastis
 * Perbolehkan mengonfigurasi server sql default dengan mengeksekusi `az configure --defaults sql-server=<name>`
-* Formatter tabel yang diimplementasikan untuk `sql server` , , , dan `sql server firewall-rule` `sql list-usages` `sql show-usage` perintah
+* Formatter tabel yang diimplementasikan untuk `sql server`, , `sql server firewall-rule`, `sql list-usages`dan `sql show-usage` perintah
 
 ### <a name="storage"></a>Penyimpanan
 
@@ -6394,7 +6490,7 @@ Versi 2.0.42
 
 ### <a name="vm"></a>VM
 
-* [MELANGGAR PERUBAHAN] Diubah `vmss create` untuk digunakan sebagai ukuran `Standard_DS1_v2` instans default
+* [MELANGGAR PERUBAHAN] Diubah `vmss create` untuk digunakan `Standard_DS1_v2` sebagai ukuran instans default
 * Menambahkan `--no-wait` dukungan untuk `vm extension [set|delete]` dan `vmss extension [set|delete]`
 * Ditambahkan `vm extension wait`
 
@@ -6446,16 +6542,16 @@ Versi 2.0.42
 ### <a name="container"></a>Kontainer
 
 * Diubah `container create` menjadi default ke operasi yang sudah berjalan lama
-* Menambahkan parameter Log Analytics `--log-analytics-workspace` dan `--log-analytics-workspace-key`
+* Menambahkan parameter `--log-analytics-workspace` Log Analytics dan `--log-analytics-workspace-key`
 * Menambahkan `--protocol` parameter untuk menentukan protokol jaringan mana yang akan digunakan
 
-### <a name="extension"></a>Extensi
+### <a name="extension"></a>Ekstensi
 
 * Diubah `extension list-available` menjadi hanya menampilkan ekstensi yang kompatibel dengan versi CLI
 
 ### <a name="network"></a>Jaringan
 
-* Masalah tetap di mana jenis catatan sensitif terhadap kasus[(#6602)](https://github.com/Azure/azure-cli/issues/6602)
+* Masalah tetap di mana tipe catatan sensitif terhadap kasus ([#6602](https://github.com/Azure/azure-cli/issues/6602))
 
 ### <a name="rdbms"></a>Rdbms
 
@@ -6483,7 +6579,7 @@ Versi 2.0.38
 
 ### <a name="core"></a>Core
 
-* Menambahkan dukungan global `--subscription` untuk sebagian besar perintah
+* Menambahkan dukungan global untuk `--subscription` sebagian besar perintah
 
 ### <a name="acr"></a>ACR
 
@@ -6492,22 +6588,22 @@ Versi 2.0.38
 
 ### <a name="acs"></a>ACS
 
-* Opsi perintah yang `aks use-dev-spaces` diperbarui. Menambahkan `--update` dukungan
+* Opsi `aks use-dev-spaces` perintah yang diperbarui. Menambahkan `--update` dukungan
 * Diubah `aks get-credentials --admin` menjadi tidak menempatkan konteks pengguna di `$HOME/.kube/config`
-* Properti baca-saja yang terbuka `nodeResourceGroup` pada kluster terkelola
+* Properti baca-saja `nodeResourceGroup` yang terbuka pada kluster terkelola
 * Galat perintah tetap `acs browse`
-* Dibuat `--connector-name` opsional untuk , `aks install-connector` `aks upgrade-connector` dan `aks remove-connector`
+* Dibuat `--connector-name` opsional untuk `aks install-connector`, `aks upgrade-connector` dan `aks remove-connector`
 * Menambahkan wilayah Instans Azure Container baru untuk `aks install-connector`
 * Menambahkan lokasi yang dinormalisasi ke dalam nama rilis helm dan nama node ke `aks install-connector`
 
 ### <a name="appservice"></a>AppService
 
 * Menambahkan dukungan untuk versi urllib yang lebih baru
-* Menambahkan dukungan `functionapp create` untuk menggunakan paket layanan aplikasi dari grup sumber daya eksternal
+* Menambahkan dukungan untuk `functionapp create` menggunakan paket layanan aplikasi dari grup sumber daya eksternal
 
 ### <a name="batch"></a>Batch
 
-* Menghilangkan `azure-batch-extensions` dependensi
+* `azure-batch-extensions` Menghilangkan dependensi
 
 ### <a name="batch-ai"></a>Batch AI
 
@@ -6515,18 +6611,18 @@ Versi 2.0.38
 * Menambahkan dukungan untuk eksperimen. Eksperimen memungkinkan untuk mengelompokkan pekerjaan dalam koleksi yang menghilangkan batasan jumlah pekerjaan yang diciptakan
 * Menambahkan dukungan untuk mengkonfigurasi `/dev/shm` untuk pekerjaan yang berjalan dalam wadah docker
 * Ditambahkan `batchai cluster node exec` dan `batchai job node exec` perintah. Perintah ini memungkinkan untuk mengeksekusi perintah apa pun secara langsung pada node dan menyediakan fungsionalitas untuk penerusan port.
-* Menambahkan dukungan `--ids` untuk `batchai` perintah
+* Menambahkan dukungan untuk `--ids` `batchai` perintah
 * [MELANGGAR PERUBAHAN] Semua cluster dan fileserver harus dibuat di bawah ruang kerja
 * [MELANGGAR PERUBAHAN] Pekerjaan harus dibuat di bawah eksperimen
 * [MELANGGAR PERUBAHAN] Dihapus `--nfs-resource-group` dari `cluster create` dan `job create` perintah. Untuk me-mount NFS milik kelompok ruang kerja / sumber daya yang berbeda menyediakan ID ARM server file melalui `--nfs` opsi
 * [MELANGGAR PERUBAHAN] Dihapus `--cluster-resource-group` dari `job create` perintah. Untuk mengirimkan pekerjaan pada cluster milik ruang kerja / kelompok sumber daya yang berbeda menyediakan ID ARM cluster melalui `--cluster` opsi
 * [MELANGGAR PERUBAHAN] Atribut yang dihapus `location` dari pekerjaan, cluster, dan server file. Lokasi sekarang adalah atribut ruang kerja.
-* [MELANGGAR PERUBAHAN] Dihapus `--location` dari `job create` , dan `cluster create` `file-server create` perintah
+* [MELANGGAR PERUBAHAN] Dihapus `--location` dari `job create`, `cluster create` dan `file-server create` perintah
 * [MELANGGAR PERUBAHAN] Mengubah nama opsi pendek untuk membuat antarmuka lebih konsisten:
-  - Berganti nama [ `--config` , ] menjadi [ , `-c` `--config-file` `-f` ]
-  - Berganti nama [ `--cluster` , ] menjadi [ , `-r` `--cluster` `-c` ]
-  - Berganti nama [ `--cluster` , ] menjadi [ , `-n` `--cluster` `-c` ]
-  - Berganti nama [ `--job` , ] menjadi [ , `-n` `--job` `-j` ]
+  - Berganti nama [`--config`, `-c`] menjadi [`--config-file`, `-f`]
+  - Berganti nama [`--cluster`, `-r`] menjadi [`--cluster`, `-c`]
+  - Berganti nama [`--cluster`, `-n`] menjadi [`--cluster`, `-c`]
+  - Berganti nama [`--job`, `-n`] menjadi [`--job`, `-j`]
 
 ### <a name="maps"></a>Maps
 
@@ -6534,15 +6630,15 @@ Versi 2.0.38
 
 ### <a name="network"></a>Jaringan
 
-* Menambahkan dukungan `https` untuk `network lb probe create` [#6571](https://github.com/Azure/azure-cli/issues/6571)
+* Menambahkan dukungan untuk `https` `network lb probe create` [#6571](https://github.com/Azure/azure-cli/issues/6571)
 * Masalah tetap di mana `--endpoint-status` kasus sensitif. [#6502](https://github.com/Azure/azure-cli/issues/6502)
 
 ### <a name="reservations"></a>Reservasi
 
-* [MELANGGAR PERUBAHAN] Menambahkan parameter yang diperlukan `ReservedResourceType` untuk `reservations catalog show`
-* Menambahkan parameter `Location` ke `reservations catalog show`
+* [MELANGGAR PERUBAHAN] Menambahkan parameter `ReservedResourceType` yang diperlukan untuk `reservations catalog show`
+* Menambahkan parameter `Location`ke `reservations catalog show`
 * [MELANGGAR PERUBAHAN] Dihapus `kind` dari `ReservationProperties`
-* [MELANGGAR PERUBAHAN] Berganti nama `capabilities` menjadi `sku_properties` di `Catalog`
+* [MELANGGAR PERUBAHAN] Berganti nama menjadi `capabilities` `sku_properties` di `Catalog`
 * [MELANGGAR PERUBAHAN] Dihapus `size` dan `tier` properti dari `Catalog`
 * Menambahkan parameter `InstanceFlexibility` ke `reservations reservation update`
 
@@ -6556,13 +6652,13 @@ Versi 2.0.38
 
 ### <a name="storage"></a>Penyimpanan
 
-* Mengubah output tabel `storage blob download` agar lebih mudah dibaca
+* Mengubah output `storage blob download` tabel agar lebih mudah dibaca
 
 ### <a name="vm"></a>VM
 
 * Peningkatan perbaikan vm size check untuk dukungan jaringan yang dipercepat di `vm create`
 * Peringatan tambahan untuk `vmss create` itu ukuran vm default akan dialihkan dari `Standard_D1_v2` ke `Standard_DS1_v2`
-* Ditambahkan `--force-update` `[vm|vmss] extension set` untuk memperbarui ekstensi bahkan ketika konfigurasi tidak berubah
+* Ditambahkan `--force-update` untuk `[vm|vmss] extension set` memperbarui ekstensi bahkan ketika konfigurasi tidak berubah
 
 ## <a name="june-13-2018"></a>13 Juni 2018
 
@@ -6577,7 +6673,7 @@ Versi 2.0.38
 ### <a name="aks"></a>AKS
 
 * Menambahkan opsi jaringan tingkat lanjut ke `aks create`
-* Menambahkan argumen `aks create` untuk mengaktifkan pemantauan dan perutean HTTP
+* Menambahkan argumen untuk `aks create` mengaktifkan pemantauan dan perutean HTTP
 * Menambahkan `--no-ssh-key` argumen ke `aks create`
 * Menambahkan `--enable-rbac` argumen ke `aks create`
 * [PREVIEW] Menambahkan dukungan untuk otentikasi Azure Active Directory ke`aks create`
@@ -6651,7 +6747,7 @@ Versi 2.0.38
 
 ### <a name="vm"></a>VM
 
-* Diubah `vm list-skus` untuk menggunakan kolom tetap dan menambahkan peringatan bahwa dan akan `Tier` `Size` dihapus
+* Diubah `vm list-skus` untuk menggunakan kolom tetap dan menambahkan peringatan bahwa `Tier` dan `Size` akan dihapus
 * Menambahkan `--accelerated-networking` opsi ke `vm create`
 * Ditambahkan `--tags` ke `identity create`
 
@@ -6665,7 +6761,7 @@ Versi 2.0.33
 
 ### <a name="acs"></a>ACS
 
-* Menambahkan perintah Dev-Spaces baru `aks use-dev-spaces` dan `aks remove-dev-spaces`
+* Menambahkan perintah `aks use-dev-spaces` Dev-Spaces baru dan `aks remove-dev-spaces`
 * Kesalahan ketik tetap dalam pesan bantuan
 
 ### <a name="appservice"></a>AppService
@@ -6678,7 +6774,7 @@ Versi 2.0.33
 * Menambahkan dukungan untuk mengekspor grup kontainer dalam format yaml
 * Menambahkan dukungan untuk menggunakan file yaml untuk membuat / memperbarui grup kontainer
 
-### <a name="extension"></a>Extensi
+### <a name="extension"></a>Ekstensi
 
 * Penghapusan ekstensi yang ditingkatkan
 
@@ -6694,7 +6790,7 @@ Versi 2.0.33
 ### <a name="network"></a>Jaringan
 
 * Memperbaiki masalah di mana `network watcher show-topology` tidak akan bekerja dengan vnet dan / atau nama subnet [#6326](https://github.com/Azure/azure-cli/issues/6326)
-* Memperbaiki masalah di mana beberapa `network watcher` perintah akan mengklaim Network Watcher tidak diaktifkan untuk wilayah ketika itu adalah # [6264](https://github.com/Azure/azure-cli/issues/6264)
+* Memperbaiki masalah di mana beberapa `network watcher` perintah akan mengklaim Network Watcher tidak diaktifkan untuk wilayah ketika itu adalah [# 6264](https://github.com/Azure/azure-cli/issues/6264)
 
 ### <a name="sql"></a>SQL
 
@@ -6702,7 +6798,7 @@ Versi 2.0.33
     * Berganti nama menjadi `serviceLevelObjective` properti `currentServiceObjectiveName`
     * Dihapus `currentServiceObjectiveId` dan `requestedServiceObjectiveId` properti
     * Properti `maxSizeBytes` yang diubah menjadi nilai integer, bukan string
-* [MELANGGAR PERUBAHAN] Mengubah hal-hal berikut `db` dan properti menjadi hanya `dw` baca:
+* [MELANGGAR PERUBAHAN] Mengubah hal-hal berikut `db` dan `dw` properti menjadi hanya baca:
     * `requestedServiceObjectiveName`.  Untuk memperbarui, gunakan `--service-objective` parameter atau atur `sku.name` properti
     * `edition`. Untuk memperbarui, gunakan `--edition` parameter atau atur `sku.tier` properti
     * `elasticPoolName`. Untuk memperbarui, gunakan `--elastic-pool` parameter atau atur `elasticPoolId` properti
@@ -6711,8 +6807,8 @@ Versi 2.0.33
     * `dtu`. Untuk memperbarui, gunakan `--capacity` parameter
     *  `databaseDtuMin`. Untuk memperbarui, gunakan `--db-min-capacity` parameter
     *  `databaseDtuMax`. Untuk memperbarui, gunakan `--db-max-capacity` parameter
-* Ditambahkan `--family` dan `--capacity` parameter `db` `dw` untuk, , dan `elastic-pool` perintah.
-* Menambahkan formatter tabel ke `db` , `dw` , dan `elastic-pool` perintah.
+* Ditambahkan `--family` dan `--capacity` parameter untuk `db`, `dw`, dan `elastic-pool` perintah.
+* Menambahkan formatter tabel ke `db`, `dw`, dan `elastic-pool` perintah.
 
 ### <a name="storage"></a>Penyimpanan
 
@@ -6721,7 +6817,7 @@ Versi 2.0.33
 
 ### <a name="vm"></a>VM
 
-* [MELANGGAR PERUBAHAN] Dihapus `--write-accelerator` dari `vm create` . Dukungan yang sama dapat diakses melalui `vm update` atau `vm disk attach`
+* [MELANGGAR PERUBAHAN] Dihapus `--write-accelerator` dari `vm create`. Dukungan yang sama dapat diakses melalui `vm update` atau `vm disk attach`
 * Pencocokan gambar ekstensi tetap di `[vm|vmss] extension`
 * Ditambahkan `--boot-diagnostics-storage` untuk `vm create` menangkap log boot
 * Ditambahkan `--license-type` ke `[vm|vmss] update`
@@ -6734,8 +6830,8 @@ Versi 2.0.32
 
 * Memperbaiki pengecualian yang tidak ditangani saat mengambil rahasia dari akun utama layanan dengan sertifikat
 * Menambahkan dukungan terbatas untuk argumen posisional
-* Perbaiki masalah di mana `--query` tidak dapat digunakan dengan `--ids` . [#5591](https://github.com/Azure/azure-cli/issues/5591)
-* Skenario perpipaan yang ditingkatkan dari perintah saat menggunakan `--ids` . Mendukung `-o tsv` dengan kueri yang ditentukan atau tanpa menentukan `-o json` kueri
+* Perbaiki masalah di mana `--query` tidak dapat digunakan dengan `--ids`. [#5591](https://github.com/Azure/azure-cli/issues/5591)
+* Skenario perpipaan yang ditingkatkan dari perintah saat menggunakan `--ids`. Mendukung `-o tsv` dengan kueri yang ditentukan atau `-o json` tanpa menentukan kueri
 * Menambahkan saran perintah tentang kesalahan jika pengguna memiliki kesalahan ketik dalam perintah mereka
 * Memperbaiki kesalahan saat pengguna mengetik `az ''`
 * Menambahkan dukungan tipe sumber daya kustom untuk modul perintah dan ekstensi
@@ -6751,8 +6847,8 @@ Versi 2.0.32
 
 ### <a name="acs"></a>ACS
 
-* Menambahkan peringatan `az aks` yang merupakan layanan pratinjau
-* Memperbaiki masalah izin `aks install-connector` ketika `--aci-resource-group` tidak ditentukan
+* Menambahkan peringatan yang `az aks` merupakan layanan pratinjau
+* Memperbaiki masalah `aks install-connector` izin ketika `--aci-resource-group` tidak ditentukan
 
 ### <a name="ams"></a>AMS
 
@@ -6760,9 +6856,9 @@ Versi 2.0.32
 
 ### <a name="appservice"></a>Layanan aplikasi
 
-* Memperbaiki bug `webapp delete` saat `--slot` disediakan
+* Memperbaiki bug saat `webapp delete` `--slot` disediakan
 * Dihapus `--runtime-version` dari `webapp auth update`
-* Menambahkan dukungan untuk versi min \_ tls \_ & https2.0
+* Menambahkan dukungan untuk mintlsversion\_\_ & https2.0
 * Menambahkan dukungan untuk multikontainer
 
 ### <a name="batch-ai"></a>Batch AI
@@ -6779,7 +6875,7 @@ Versi 2.0.32
 
 ### <a name="container"></a>Kontainer
 
-* Persyaratan yang dihapus `--registry-server` untuk kapan server registri disertakan dalam nama `container create` gambar
+* Persyaratan `--registry-server` yang dihapus untuk `container create` kapan server registri disertakan dalam nama gambar
 
 ### <a name="cosmos-db"></a>Cosmos DB
 
@@ -6789,7 +6885,7 @@ Versi 2.0.32
 
 * Rilis awal - Menambahkan dukungan untuk skenario migrasi SQL ke Azure SQL
 
-### <a name="extension"></a>Extensi
+### <a name="extension"></a>Ekstensi
 
 * Bug tetap di mana metadata ekstensi berhenti ditampilkan
 
@@ -6806,7 +6902,7 @@ Versi 2.0.32
 
 ### <a name="network"></a>Jaringan
 
-* [MELANGGAR PERUBAHAN] Menghapus `--ids` parameter untuk:
+* [MELANGGAR PERUBAHAN] `--ids` Menghapus parameter untuk:
   * `express-route auth list`
   * `express-route peering list`
   * `nic ip-config list`
@@ -6824,9 +6920,9 @@ Versi 2.0.32
 ### <a name="redis"></a>Redis
 
 * Usang `redis patch-schedule patch-schedule show` demi `redis patch-schedule show`
-* `redis list-all`Usang. Fungsi ini telah dilipat menjadi `redis list`
+* Usang `redis list-all`. Fungsi ini telah dilipat menjadi `redis list`
 * Usang `redis import-method` demi `redis import`
-* Menambahkan dukungan `--ids` untuk berbagai perintah
+* Menambahkan dukungan untuk `--ids` berbagai perintah
 
 ### <a name="role"></a>Peran
 
@@ -6889,19 +6985,19 @@ Versi 2.0.31
   - Menambahkan dukungan toolkit pyTorch
 
 * Perintah tambahan `job wait` yang memungkinkan untuk menunggu penyelesaian pekerjaan dan melaporkan kode keluar pekerjaan
-* Perintah `usage show` tambahan untuk mencantumkan penggunaan dan batasan sumber daya Batch AI saat ini untuk berbagai wilayah
+* Perintah tambahan `usage show` untuk mencantumkan penggunaan dan batasan sumber daya Batch AI saat ini untuk berbagai wilayah
 * Awan nasional didukung
 * Menambahkan argumen baris perintah pekerjaan untuk me-mount sistem file pada tingkat pekerjaan selain file konfigurasi
 * Menambahkan lebih banyak opsi untuk menyesuaikan kluster - prioritas vm, subnet, jumlah node awal untuk kluster skala otomatis, menentukan gambar kustom
 * Menambahkan opsi baris perintah untuk menentukan tipe caching untuk NFS yang dikelola Batch AI
 * Disederhanakan menentukan sistem file mount dalam file konfigurasi. Sekarang Anda dapat menghilangkan kredensial untuk Azure File Share dan Azure Blob Containers - CLI akan mengisi kredensial yang hilang menggunakan kunci akun penyimpanan yang disediakan melalui parameter baris perintah atau ditentukan melalui variabel lingkungan atau akan menanyakan kunci dari Azure Storage (jika akun penyimpanan milik langganan saat ini)
 * Perintah aliran file pekerjaan sekarang selesai secara otomatis ketika pekerjaan selesai (berhasil, gagal, dihentikan atau dihapus)
-* Peningkatan `table` output untuk `show` operasi
-* Opsi `--use-auto-storage` tambahan untuk pembuatan cluster. Opsi ini memudahkan untuk mengelola akun penyimpanan dan memasang Azure File Share dan Azure Blob Containers ke cluster
+* `table` Peningkatan output untuk `show` operasi
+* Opsi tambahan `--use-auto-storage` untuk pembuatan cluster. Opsi ini memudahkan untuk mengelola akun penyimpanan dan memasang Azure File Share dan Azure Blob Containers ke cluster
 * Menambahkan `--generate-ssh-keys` opsi ke `cluster create` dan `file-server create`
 * Menambahkan kemampuan untuk menyediakan tugas penyetelan node melalui baris perintah
 * [MELANGGAR PERUBAHAN] Dipindahkan `job stream-file` dan `job list-files` perintah di bawah `job file` grup
-* [MELANGGAR PERUBAHAN] Berganti nama `--admin-user-name` menjadi dalam perintah agar konsisten dengan `--user-name` `file-server create` `cluster create` perintah
+* [MELANGGAR PERUBAHAN] Berganti nama `--admin-user-name` `--user-name` menjadi dalam `file-server create` perintah agar konsisten dengan `cluster create` perintah
 
 ### <a name="billing"></a>Billing
 
@@ -6910,18 +7006,18 @@ Versi 2.0.31
 ### <a name="consumption"></a>Consumption
 
 * Menambahkan `marketplace` perintah
-* [MELANGGAR PERUBAHAN] Berganti nama `reservations summaries` menjadi `reservation summary`
-* [MELANGGAR PERUBAHAN] Berganti nama `reservations details` menjadi `reservation detail`
+* [MELANGGAR PERUBAHAN] Berganti nama menjadi `reservations summaries``reservation summary`
+* [MELANGGAR PERUBAHAN] Berganti nama menjadi `reservations details``reservation detail`
 * [MELANGGAR PERUBAHAN] Opsi dihapus `--reservation-order-id` dan `--reservation-id` pendek untuk `reservation` perintah
 * [MELANGGAR PERUBAHAN] Opsi singkat yang dihapus `--grain` untuk `reservation summary` perintah
 * [MELANGGAR PERUBAHAN] Opsi singkat yang dihapus `--include-meter-details` untuk `pricesheet` perintah
 
 ### <a name="container"></a>Kontainer
 
-* Menambahkan parameter pemasangan volume git repo `--gitrepo-url` `--gitrepo-dir` `--gitrepo-revision` dan `--gitrepo-mount-path`
-* Tetap [#5926:](https://github.com/Azure/azure-cli/issues/5926) `az container exec` gagal saat --container-name ditentukan
+* Menambahkan parameter `--gitrepo-url` `--gitrepo-dir` `--gitrepo-revision` pemasangan volume git repo dan `--gitrepo-mount-path`
+* Tetap [#5926](https://github.com/Azure/azure-cli/issues/5926): `az container exec` gagal saat --container-name ditentukan
 
-### <a name="extension"></a>Extensi
+### <a name="extension"></a>Ekstensi
 
 * Mengubah pesan pemeriksaan distribusi menjadi tingkat debug
 
@@ -6933,18 +7029,18 @@ Versi 2.0.31
 
 ### <a name="network"></a>Jaringan
 
-* Tetap [#5936:](https://github.com/Azure/azure-cli/issues/5936) `application-gateway create` tag tidak bisa bertaruh set
-* Menambahkan argumen `--auth-certs` untuk melampirkan sertifikat otentikasi untuk `application-gateway http-settings [create|update]` . [#4910](https://github.com/Azure/azure-cli/issues/4910)
+* Tetap [#5936](https://github.com/Azure/azure-cli/issues/5936): `application-gateway create` tag tidak bisa bertaruh set
+* Menambahkan argumen `--auth-certs` untuk melampirkan sertifikat otentikasi untuk `application-gateway http-settings [create|update]`. [#4910](https://github.com/Azure/azure-cli/issues/4910)
 * Menambahkan `ddos-protection` perintah untuk membuat rencana perlindungan DDoS
-* Menambahkan dukungan `--ddos-protection-plan` `vnet [create|update]` untuk mengasosiasikan VNet ke rencana perlindungan DDoS
+* Menambahkan dukungan untuk `--ddos-protection-plan` `vnet [create|update]` mengasosiasikan VNet ke rencana perlindungan DDoS
 * Memperbaiki masalah dengan `--disable-bgp-route-propagation` bendera di `network route-table [create|update]`
-* Menghapus argumen dummy `--public-ip-address-type` dan `--subnet-type` untuk `network lb [create|update]`
+* Menghapus argumen `--public-ip-address-type` dummy dan `--subnet-type` untuk `network lb [create|update]`
 * Menambahkan dukungan untuk catatan TXT dengan urutan escape RFC 1035 ke `network dns zone [import|export]` dan `network dns record-set txt add-record`
 
 ### <a name="profile"></a>Profil
 
 * Menambahkan dukungan untuk akun Azure Classic in `account list`
-* [MELANGGAR PERUBAHAN] Argumen `--msi`  &  `--msi-port` yang dihapus
+* [MELANGGAR PERUBAHAN] Argumen yang dihapus `--msi` & `--msi-port`
 
 ### <a name="rdbms"></a>RDBMS
 
@@ -6953,8 +7049,8 @@ Versi 2.0.31
 
 ### <a name="resource"></a>Sumber daya
 
-* Dukungan tambahan `--metadata` untuk `policy definition create`
-* Menambahkan dukungan untuk `--metadata` , `--set` , , `--add` `--remove` untuk `policy definition update`
+* Dukungan tambahan untuk `--metadata``policy definition create`
+* Menambahkan dukungan untuk `--metadata`, , `--set`, `--add``--remove` untuk`policy definition update`
 
 ### <a name="sql"></a>SQL
 
@@ -6970,8 +7066,8 @@ Versi 2.0.31
 * Diubah `vmss create` menjadi default ke Lb Standar untuk zonal, besar atau single-placement-group difabelkan skala-set
 * [MELANGGAR PERUBAHAN]: Removed `vm assign-identity`, `vm remove-identity and `vm format-secret`
 * Menambahkan dukungan untuk Public-IP SKU untuk `vm create`
-* Ditambahkan `--keyvault` dan `--resource-group` argumen `vm secret format` untuk mendukung skenario di mana perintah tidak dapat menyelesaikan ID kubah. [#5718](https://github.com/Azure/azure-cli/issues/5718)
-* Kesalahan yang lebih baik `[vm|vmss create]` ketika lokasi grup sumber daya tidak memiliki dukungan zona
+* Ditambahkan `--keyvault` dan `--resource-group` argumen untuk `vm secret format` mendukung skenario di mana perintah tidak dapat menyelesaikan ID kubah. [#5718](https://github.com/Azure/azure-cli/issues/5718)
+* Kesalahan yang `[vm|vmss create]` lebih baik ketika lokasi grup sumber daya tidak memiliki dukungan zona
 
 
 ## <a name="march-27-2018"></a>27 Maret 2018
@@ -6993,8 +7089,8 @@ Versi 2.0.30
 
 ### <a name="backup"></a>Cadangan
 
-* Menambahkan perintah `az backup protection isenabled-for-vm` baru. Perintah ini dapat digunakan untuk memeriksa apakah VM dicadangkan oleh lemari besi mana pun dalam langganan.
-* ID objek Azure yang diaktifkan `--resource-group` dan parameter untuk perintah `--vault-name` berikut:
+* Menambahkan perintah `az backup protection isenabled-for-vm`baru. Perintah ini dapat digunakan untuk memeriksa apakah VM dicadangkan oleh lemari besi mana pun dalam langganan.
+* ID objek Azure yang diaktifkan dan `--resource-group` `--vault-name` parameter untuk perintah berikut:
   * `backup container show`
   * `backup item set-policy`
   * `backup item show`
@@ -7019,10 +7115,10 @@ Versi 2.0.30
 
 ### <a name="container"></a>Kontainer
 
-* Perintah `container exec` tambahan. Menjalankan perintah dalam wadah untuk grup kontainer yang sedang berjalan
+* Perintah tambahan `container exec` . Menjalankan perintah dalam wadah untuk grup kontainer yang sedang berjalan
 * Mengizinkan output tabel untuk membuat dan memperbarui grup kontainer
 
-### <a name="extension"></a>Extensi
+### <a name="extension"></a>Ekstensi
 
 * Menambahkan pesan untuk `extension add` jika ekstensi sedang dalam pratinjau
 * Diubah `extension list-available` untuk menampilkan data ekstensi lengkap dengan `--show-details`
@@ -7041,9 +7137,9 @@ Versi 2.0.30
 
 ### <a name="monitor"></a>Monitor
 
-* Menambahkan dukungan untuk `--top` , `--orderby` dan ke `--namespace` `metrics list` [#5785](https://github.com/Azure/azure-cli/issues/5785)
-* Tetap [#4529:](https://github.com/Azure/azure-cli/issues/5785) `metrics list` Menerima daftar metrik yang dipisahkan ruang untuk diambil
-* Menambahkan dukungan `--namespace` untuk `metrics list-definitions` [#5785](https://github.com/Azure/azure-cli/issues/5785)
+* Menambahkan dukungan untuk `--top`, `--orderby` dan `--namespace` ke `metrics list` [#5785](https://github.com/Azure/azure-cli/issues/5785)
+* Tetap [#4529](https://github.com/Azure/azure-cli/issues/5785): `metrics list` Menerima daftar metrik yang dipisahkan ruang untuk diambil
+* Menambahkan dukungan untuk `--namespace` `metrics list-definitions` [#5785](https://github.com/Azure/azure-cli/issues/5785)
 
 ### <a name="network"></a>Jaringan
 
@@ -7067,16 +7163,16 @@ Versi 2.0.30
 * Mengubah `rbac` perintah untuk mengembalikan kurang dari 1000 D pada resolusi objek
 * Menambahkan perintah manajemen kredensial `ad sp credential [reset|list|delete]`
 * [MELANGGAR PERUBAHAN] Menghapus 'properti' dari `az role assignment [list|show]` output
-* Menambahkan dukungan `dataActions` dan `notDataActions` izin ke `role definition`
+* Menambahkan dukungan dan `dataActions` `notDataActions` izin ke `role definition`
 
 ### <a name="storage"></a>Penyimpanan
 
 * Masalah tetap saat mengunggah file dengan ukuran antara 195GB dan 200GB
-* Tetap [#4049:](https://github.com/Azure/azure-cli/issues/4049)Masalah dengan lampiran unggahan gumpalan mengabaikan parameter kondisi
+* Tetap [#4049](https://github.com/Azure/azure-cli/issues/4049): Masalah dengan lampiran unggahan gumpalan mengabaikan parameter kondisi
 
 ### <a name="vm"></a>VM
 
-* Menambahkan peringatan `vmss create` untuk perubahan melanggar yang akan datang untuk set dengan 100+ instance
+* Menambahkan peringatan untuk `vmss create` perubahan melanggar yang akan datang untuk set dengan 100+ instance
 * Menambahkan dukungan tangguh zona untuk `vm [snapshot|image]`
 * Mengubah tampilan instans disk untuk melaporkan status enkripsi yang lebih baik
 * [MELANGGAR PERUBAHAN] Diubah `vm extension delete` menjadi tidak lagi mengembalikan output
@@ -7088,7 +7184,7 @@ Versi 2.0.29
 ### <a name="acr"></a>ACR
 
 * Menambahkan dukungan untuk `--image` parameter ke `repository delete`
-* Usang dan `--manifest` `--tag` parameter `repository delete` perintah
+* Usang `--manifest` dan `--tag` parameter `repository delete` perintah
 * Menambahkan `repository untag` perintah untuk menghapus tag tanpa menghapus data
 
 ### <a name="acs"></a>ACS
@@ -7098,8 +7194,8 @@ Versi 2.0.29
 
 ### <a name="advisor"></a>Advisor
 
-* [MELANGGAR PERUBAHAN] Berganti nama `advisor configuration get` menjadi `advisor configuration list`
-* [MELANGGAR PERUBAHAN] Berganti nama `advisor configuration set` menjadi `advisor configuration update`
+* [MELANGGAR PERUBAHAN] Berganti nama menjadi `advisor configuration get``advisor configuration list`
+* [MELANGGAR PERUBAHAN] Berganti nama menjadi `advisor configuration set``advisor configuration update`
 * [MELANGGAR PERUBAHAN] Dihapus `advisor recommendation generate`
 * Menambahkan `--refresh` parameter ke `advisor recommendation list`
 * Perintah tambahan `advisor recommendation show`
@@ -7107,21 +7203,21 @@ Versi 2.0.29
 ### <a name="appservice"></a>Layanan aplikasi
 
 * Usang `[webapp|functionapp] assign-identity`
-* Menambahkan perintah identitas terkelola `webapp identity [assign|show]` dan `functionapp identity [assign|show]`
+* Menambahkan perintah `webapp identity [assign|show]` identitas terkelola dan `functionapp identity [assign|show]`
 
 ### <a name="eventhubs"></a>Eventhubs
 
 * Rilis awal
 
-### <a name="extension"></a>Extensi
+### <a name="extension"></a>Ekstensi
 
 * Menambahkan cek untuk memperingatkan pengguna jika distro yang digunakan berbeda maka yang disimpan dalam file sumber paket, karena ini dapat menyebabkan kesalahan
 
 ### <a name="interactive"></a>Interaktif
 
-* Tetap [#5625:](https://github.com/Azure/azure-cli/issues/5625)Bertahankan sejarah di berbagai sesi
-* Tetap [#3016:](https://github.com/Azure/azure-cli/issues/3016)Sejarah tidak dicatat saat berada dalam lingkup
-* Tetap [#5688:](https://github.com/Azure/azure-cli/issues/5688)Penyelesaian tidak muncul jika pemuatan tabel perintah mengalami pengecualian
+* Tetap [# 5625](https://github.com/Azure/azure-cli/issues/5625): Bertahan sejarah di berbagai sesi
+* Tetap [#3016](https://github.com/Azure/azure-cli/issues/3016): Sejarah tidak dicatat saat berada dalam lingkup
+* Tetap [#5688](https://github.com/Azure/azure-cli/issues/5688): Penyelesaian tidak muncul jika pemuatan tabel perintah mengalami pengecualian
 * Pengukur kemajuan tetap untuk operasi jangka panjang
 
 ### <a name="monitor"></a>Monitor
@@ -7133,7 +7229,7 @@ Versi 2.0.29
 
 ### <a name="network"></a>Jaringan
 
-* [MELANGGAR PERUBAHAN] Menghapus `--tags` parameter dari  `route-filter rule create`
+* [MELANGGAR PERUBAHAN] `--tags` Menghapus parameter dari  `route-filter rule create`
 * Menghapus beberapa nilai default yang salah untuk perintah berikut:
   * `network express-route update`
   * `network nsg rule update`
@@ -7146,7 +7242,7 @@ Versi 2.0.29
 ### <a name="profile"></a>Profil
 
 * Parameter usang `--msi` untuk `az login`
-* Menambahkan `--identity` parameter `az login` untuk diganti `--msi`
+* Menambahkan `--identity` parameter untuk `az login` diganti `--msi`
 
 ### <a name="rdbms"></a>RDBMS
 
@@ -7158,15 +7254,15 @@ Versi 2.0.29
 
 ### <a name="storage"></a>Penyimpanan
 
-* Fixed [#4971](https://github.com/Azure/azure-cli/issues/4971): `storage blob copy` sekarang mendukung awan Azure lainnya
-* Tetap [# 5286:](https://github.com/Azure/azure-cli/issues/5286)Perintah batch `storage blob [delete-batch|download-batch|upload-batch]` tidak lagi melemparkan kesalahan pada kegagalan prasyarat
+* Tetap [#4971](https://github.com/Azure/azure-cli/issues/4971): `storage blob copy` sekarang mendukung awan Azure lainnya
+* Tetap [# 5286](https://github.com/Azure/azure-cli/issues/5286): Perintah `storage blob [delete-batch|download-batch|upload-batch]` batch tidak lagi melemparkan kesalahan pada kegagalan prasyarat
 
 ### <a name="vm"></a>VM
 
-* Menambahkan dukungan untuk melampirkan disk data yang `[vm|vmss] create` tidak terkel manajemen dan mengonfigurasi caching
+* Menambahkan dukungan untuk `[vm|vmss] create` melampirkan disk data yang tidak terkel manajemen dan mengonfigurasi caching
 * Usang `[vm|vmss] assign-identity` dan `[vm|vmss] remove-identity`
 * Ditambahkan `vm identity [assign|remove|show]` dan `vmss identity [assign|remove|show]` perintah untuk menggantikan perintah usang
-* Mengubah prioritas default `vmss create` menjadi Tidak Ada
+* Mengubah prioritas `vmss create` default menjadi Tidak Ada
 
 ## <a name="february-27-2018"></a>Tanggal 27 Februari 2018
 
@@ -7174,7 +7270,7 @@ Versi 2.0.28
 
 ### <a name="core"></a>Core
 
-* Diperbaiki [#5184:](https://github.com/Azure/azure-cli/issues/5184)Masalah pemasangan Homebrew
+* Tetap [#5184](https://github.com/Azure/azure-cli/issues/5184): Masalah pemasangan Homebrew
 * Menambahkan dukungan untuk telemetri ekstensi dengan tombol kustom
 * Menambahkan http logging ke `--debug`
 
@@ -7182,7 +7278,7 @@ Versi 2.0.28
 
 * Diubah untuk menggunakan `virtual-kubelet-for-aks` bagan Helm secara `aks install-connector` default
 * Masalah tetap: Izin tidak masuk ke kepala layanan untuk membuat masalah grup kontainer ACI
-* Ditambahkan, `--aci-container-group` `--location` , dan parameter `--image-tag` untuk `aks install-connector`
+* Ditambahkan `--aci-container-group`, `--location`, dan `--image-tag` parameter untuk `aks install-connector`
 * Menghapus pemberitahuan deprecation dari `aks get-versions`
 
 ### <a name="appservice"></a>Layanan aplikasi
@@ -7201,11 +7297,11 @@ Versi 2.0.28
 
 ### <a name="container"></a>Kontainer
 
-* Ditambahkan `--secrets` dan `--secrets-mount-path` argumen `container create` untuk menggunakan rahasia di ACI
+* Ditambahkan `--secrets` dan `--secrets-mount-path` argumen untuk `container create` menggunakan rahasia di ACI
 
 ### <a name="network"></a>Jaringan
 
-* Tetap [#5559:](https://github.com/Azure/azure-cli/issues/5559)Klien yang hilang di `network vnet-gateway vpn-client generate`
+* Tetap [#5559](https://github.com/Azure/azure-cli/issues/5559): Klien yang hilang `network vnet-gateway vpn-client generate`
 
 ### <a name="resource"></a>Sumber daya
 
@@ -7242,10 +7338,10 @@ Versi 2.0.27
 * Diubah `aks get-versions` untuk menampilkan versi Kubernetes yang tersedia untuk `aks create`
 * Mengubah `aks create` default untuk membiarkan server memilih versi Kubernetes
 * Pesan bantuan yang diperbarui mengacu pada prinsip layanan yang dihasilkan oleh AKS
-* Mengubah ukuran node default untuk `aks create` dari "Standard \_ D1 \_ v2" menjadi "Standard \_ DS1 \_ v2"
+* Mengubah ukuran node default untuk `aks create` dari "StandardD1v2\_\_" menjadi "StandardDS1v2\_\_"
 * Peningkatan keandalan saat menemukan pod dasbor untuk `az aks browse`
 * Diperbaiki `aks get-credentials` untuk menangani kesalahan Unicode saat memuat file konfigurasi Kubernetes
-* Menambahkan pesan `az aks install-cli` untuk membantu `kubectl` masuk `$PATH`
+* Menambahkan pesan untuk `az aks install-cli` membantu masuk `kubectl``$PATH`
 
 ### <a name="appservice"></a>Layanan aplikasi
 
@@ -7258,14 +7354,14 @@ Versi 2.0.27
 
 ### <a name="container"></a>Kontainer
 
-* Opsi `--follow` tambahan `az container logs` untuk log streaming
+* Opsi `--follow` tambahan untuk `az container logs` log streaming
 * Perintah tambahan `container attach` yang melampirkan output standar lokal dan aliran kesalahan ke wadah dalam grup kontainer
 
 ### <a name="cosmosdb"></a>CosmosDB
 
 * Menambahkan dukungan untuk pengaturan kemampuan
 
-### <a name="extension"></a>Extensi
+### <a name="extension"></a>Ekstensi
 
 * Menambahkan dukungan untuk `--pip-proxy` parameter ke `az extension [add|update]` perintah
 * Menambahkan dukungan untuk `--pip-extra-index-urls` argumen ke `az extension [add|update]` perintah
@@ -7292,7 +7388,7 @@ Versi 2.0.27
 
 ### <a name="network"></a>Jaringan
 
-* Memperbaiki `--tags` opsi untuk perintah berikut:
+* `--tags` Memperbaiki opsi untuk perintah berikut:
   * `network public-ip create`
   * `network lb create`
   * `network local-gateway create`
@@ -7316,7 +7412,7 @@ Versi 2.0.27
 
 * Menambahkan `sql server dns-alias` perintah
 * Ditambahkan `sql db rename`
-* Menambahkan dukungan untuk `--ids` argumen ke semua perintah sql
+* Menambahkan dukungan untuk argumen ke `--ids` semua perintah sql
 
 ### <a name="storage"></a>Penyimpanan
 
@@ -7364,12 +7460,12 @@ Versi 2.0.26
 
 ### <a name="network"></a>Jaringan
 
-* Menambahkan perlindungan `--cert-password` untuk `application-gateway create`
-* Masalah tetap dengan `application-gateway update` di mana keliru menerapkan nilai `--sku` default
+* Menambahkan perlindungan untuk `--cert-password``application-gateway create`
+* Masalah tetap dengan `application-gateway update` di mana `--sku` keliru menerapkan nilai default
 * Menambahkan perlindungan untuk `--shared-key` dan `--authorization-key``vpn-connection create`
 * Memperbaiki masalah klien yang hilang dengan `asg create`
 * Menambahkan `--file-name / -f` parameter untuk nama yang diekspor ke `dns zone export`
-* Memperbaiki masalah berikut `dns zone export` dengan:
+* Memperbaiki masalah berikut dengan `dns zone export`:
   * Masalah tetap di mana catatan TXT yang panjang salah diekspor
   * Masalah tetap di mana catatan TXT yang dikutip salah diekspor tanpa kutipan yang lolos
 * Masalah tetap di mana catatan tertentu diimpor dua kali dengan `dns zone import`
@@ -7396,7 +7492,7 @@ Versi 2.0.26
 * Perintah tambahan `vm image accept-terms` untuk memungkinkan pembuatan VM dari gambar dengan biaya tambahan
 * Tetap `[vm|vmss create]` untuk memastikan perintah dapat berjalan di bawah proxy dengan sertifikat yang tidak ditandatangani
 * [PREVIEW] Menambahkan dukungan untuk prioritas "rendah" untuk VMSS
-* Menambahkan perlindungan `--admin-password` untuk `[vm|vmss] create`
+* Menambahkan perlindungan untuk `--admin-password``[vm|vmss] create`
 
 
 ## <a name="january-17-2018"></a>17 Januari 2018
@@ -7421,9 +7517,9 @@ Versi 2.0.25
 
 ### <a name="backup"></a>Cadangan
 
-* Opsi `--container-name` yang diubah untuk menjadi `backup item list` opsional
+* Opsi `--container-name` yang diubah `backup item list` untuk menjadi opsional
 * Menambahkan opsi akun penyimpanan ke `backup restore restore-disks`
-* Pemeriksaan lokasi tetap `backup protection enable-for-vm` agar kasus tidak sensitif
+* Pemeriksaan `backup protection enable-for-vm` lokasi tetap agar kasus tidak sensitif
 * Masalah tetap di mana perintah gagal dengan nama kontainer tidak valid
 * Diubah `backup item list` untuk menyertakan 'Status Kesehatan' secara default
 
@@ -7463,7 +7559,7 @@ Versi 2.0.25
 
 ### <a name="monitor"></a>Monitor
 
-* Menambahkan dukungan pengaturan multi-diagnostik. `--name`Parameter ini sekarang diperlukan untuk`az monitor diagnostic-settings create`
+* Menambahkan dukungan pengaturan multi-diagnostik. Parameter ini `--name` sekarang diperlukan untuk `az monitor diagnostic-settings create`
 * Menambahkan perintah `monitor diagnostic-settings categories` untuk mendapatkan kategori pengaturan diagnostik
 
 ### <a name="network"></a>Jaringan
@@ -7477,7 +7573,7 @@ Versi 2.0.25
 
 ### <a name="role"></a>Peran
 
-* Menambahkan `--assignee-object-id` argumen `role assignment create` ke untuk memotong kueri grafik
+* Menambahkan `--assignee-object-id` argumen ke `role assignment create` untuk memotong kueri grafik
 
 ### <a name="service-fabric"></a>Service Fabric
 
@@ -7487,11 +7583,11 @@ Versi 2.0.25
 ### <a name="vm"></a>VM
 
 * [PREVIEW] Dukungan lintas zona untuk `vmss`
-* [MELANGGAR PERUBAHAN] Mengubah default zona tunggal `vmss` menjadi penyeimbang beban "Standar"
+* [MELANGGAR PERUBAHAN] Mengubah default zona `vmss` tunggal menjadi penyeimbang beban "Standar"
 * [MELANGGAR PERUBAHAN] Diubah `externalIdentities` menjadi `userAssignedIdentities` untuk EMSI
 * [PREVIEW] Menambahkan dukungan untuk os disk swap
 * Menambahkan dukungan untuk menggunakan gambar VM dari langganan lain
-* Ditambahkan, `--plan-name` `--plan-product` , dan argumen `--plan-promotion-code` `--plan-publisher` untuk `[vm|vmss] create`
+* Ditambahkan `--plan-name`, `--plan-product`, `--plan-promotion-code` dan `--plan-publisher` argumen untuk `[vm|vmss] create`
 * Masalah kesalahan tetap dengan `[vm|vmss] create`
 * Penggunaan sumber daya yang berlebihan yang disebabkan oleh `vm image list --all`
 
@@ -7523,17 +7619,17 @@ Versi 2.0.23
 
 Versi 2.0.22
 
-* Perintah yang `az component` dihapus. Gunakan `az extension` sebagai gantinya
+* Perintah yang dihapus `az component` . Gunakan `az extension` sebagai gantinya
 
 ### <a name="core"></a>Core
-* Memodifikasi `AZURE_US_GOV_CLOUD` titik akhir otoritas AAD dari login.microsoftonline.com ke login.microsoftonline.us
+* `AZURE_US_GOV_CLOUD` Memodifikasi titik akhir otoritas AAD dari login.microsoftonline.com ke login.microsoftonline.us
 * Masalah tetap di mana telemetri akan terus mengirim ulang
 
 ### <a name="acs"></a>ACS
 
 * Ditambahkan `aks install-connector` dan `aks remove-connector` perintah
 * Pelaporan kesalahan yang disempurnakan untuk `acs create`
-* Penggunaan tetap `aks get-credentials -f` tanpa jalur yang sepenuhnya memenuhi syarat
+* `aks get-credentials -f` Penggunaan tetap tanpa jalur yang sepenuhnya memenuhi syarat
 
 ### <a name="advisor"></a>Advisor
 
@@ -7542,7 +7638,7 @@ Versi 2.0.22
 ### <a name="appservice"></a>Layanan aplikasi
 
 * Pembuatan nama cert tetap dengan `webapp config ssl upload`
-* Memperbaiki `webapp [list|show]` dan menampilkan aplikasi yang `functionapp [list|show]` benar
+* Memperbaiki `webapp [list|show]` dan `functionapp [list|show]` menampilkan aplikasi yang benar
 * Nilai default tambahan untuk `WEBSITE_NODE_DEFAULT_VERSION`
 
 ### <a name="consumption"></a>Consumption
@@ -7564,7 +7660,7 @@ Versi 2.0.22
 ### <a name="role"></a>Peran
 
 * Menambahkan tampilan tugas default untuk administraors "klasik" ke `role assignment list`
-* Menambahkan suport `ad sp reset-credentials` untuk menambahkan kredensial alih-alih menimpa
+* Menambahkan suport untuk `ad sp reset-credentials` menambahkan kredensial alih-alih menimpa
 * Pelaporan kesalahan yang disempurnakan untuk `ad sp create-for-rbac`
 
 ### <a name="sql"></a>SQL
@@ -7596,7 +7692,7 @@ Versi 2.0.21
 
 ### <a name="appservice"></a>Layanan aplikasi
 
-* Menambahkan sumber penyebaran `config-zip` untuk aplikasi web dan aplikasi fungsi
+* Menambahkan sumber `config-zip` penyebaran untuk aplikasi web dan aplikasi fungsi
 * Menambahkan `--docker-container-logging` opsi ke `az webapp log config`
 * Menghapus `storage` opsi dari parameter `--web-server-logging``az webapp log config`
 * Pesan kesalahan yang disempurnakan untuk `deployment user set`
@@ -7609,10 +7705,10 @@ Versi 2.0.21
 
 ### <a name="batchai"></a>Batchai
 
-* Menambahkan opsi `-s` singkat, , karena `--vm-size` saat memberikan ukuran VM dalam `file-server create` perintah
+* Menambahkan opsi singkat, , `-s`karena `--vm-size` saat memberikan ukuran VM dalam `file-server create` perintah
 * Menambahkan nama akun penyimpanan dan argumen kunci ke `cluster create` parameter
 * Dokumentasi tetap untuk `job list-files` dan `job stream-file`
-* Menambahkan opsi `-r` singkat, , untuk `--cluster-name` saat memberikan nama cluster dalam `job create` perintah
+* Menambahkan opsi singkat, , `-r`untuk `--cluster-name` saat memberikan nama cluster dalam `job create` perintah
 
 ### <a name="cloud"></a>Cloud
 
@@ -7633,10 +7729,10 @@ Versi 2.0.21
 
 * Diubah `account list` untuk mengembalikan informasi yang lebih ringkas
 
-### <a name="extension"></a>Extensi
+### <a name="extension"></a>Ekstensi
 
 * Ditambahkan `extension list-available` untuk memungkinkan daftar ekstensi Resmi Microsoft
-* Ditambahkan `--name` `extension [add|update]` untuk memungkinkan penginstalan ekstensi berdasarkan nama
+* Ditambahkan `--name` untuk `extension [add|update]` memungkinkan penginstalan ekstensi berdasarkan nama
 
 ### <a name="iot"></a>IoT
 
@@ -7667,7 +7763,7 @@ Versi 2.0.21
 
 ### <a name="storage"></a>Penyimpanan
 
-* Diubah `storage account create` untuk menggunakan SKU sebagai `Standard_RAGRS` default
+* Diubah `storage account create` untuk menggunakan SKU `Standard_RAGRS` sebagai default
 * Bug tetap saat berhadapan dengan nama file / blob yang mencakup chars non-ascii
 * Bug tetap yang mencegah penggunaan `--source-uri` dengan `storage [blob|file] copy start-batch`
 * Menambahkan perintah untuk glob dan menghapus beberapa objek dengan `storage [blob|file] delete-batch`
@@ -7677,10 +7773,10 @@ Versi 2.0.21
 
 ### <a name="vm"></a>VM
 
-* Memperbaiki bug dengan `vmss create` yang dicegah menggunakan tingkat `Basic` ukuran
-* Menambahkan `--plan` argumen `[vm|vmss] create` ke untuk gambar kustom dengan informasi penagihan
-* Menambahkan `vm secret ` perintah [add|remove|list]'
-* Berganti nama `vm format-secret` menjadi `vm secret format`
+* Memperbaiki bug dengan `vmss create` yang dicegah menggunakan `Basic` tingkat ukuran
+* Menambahkan `--plan` argumen ke `[vm|vmss] create` untuk gambar kustom dengan informasi penagihan
+* Menambahkan `vm secret `perintah [add|remove|list]'
+* Berganti nama menjadi `vm format-secret``vm secret format`
 * Menambahkan `--encrypt format` argumen ke `vm encryption enable`
 
 ## <a name="october-24-2017"></a>24 Oktober 2017
@@ -7739,7 +7835,7 @@ Versi 2.0.19
 ### <a name="batch"></a>Batch
 
 * Diperbarui ke Batch SDK 4.0.0
-* Opsi `--image` terbaru Dari VirtualMachineConfiguration untuk mendukung referensi gambar ARM selain mempublikasikan:offer:sku:version
+* Opsi terbaru `--image` Dari VirtualMachineConfiguration untuk mendukung referensi gambar ARM selain mempublikasikan:offer:sku:version
 * Menambahkan dukungan untuk model ekstensi CLI baru untuk perintah Ekstensi Batch
 * Dukungan Batch yang dihapus dari model komponen
 
@@ -7753,21 +7849,21 @@ Versi 2.0.19
 
 ### <a name="network"></a>Jaringan
 
-* Argumen `--server` yang diubah menjadi `application-gateway address-pool create` opsional, memungkinkan untuk kolam alamat kosong
+* Argumen `--server` yang diubah `application-gateway address-pool create` menjadi opsional, memungkinkan untuk kolam alamat kosong
 * Diperbarui `traffic-manager` untuk mendukung fitur terbaru
 
 ### <a name="resource"></a>Sumber daya
 
 * Menambahkan dukungan untuk `--resource-group/-g` opsi untuk nama grup sumber daya ke `group`
-* Menambahkan perintah `account lock` untuk bekerja dengan kunci tingkat langganan
-* Menambahkan perintah `group lock` untuk bekerja dengan kunci tingkat grup
-* Menambahkan perintah `resource lock` untuk bekerja dengan kunci tingkat sumber daya
+* Menambahkan perintah untuk `account lock` bekerja dengan kunci tingkat langganan
+* Menambahkan perintah untuk `group lock` bekerja dengan kunci tingkat grup
+* Menambahkan perintah untuk `resource lock` bekerja dengan kunci tingkat sumber daya
 
 ### <a name="sql"></a>Sql
 
 * Menambahkan dukungan untuk SQL Transparent Data Encryption (TDE) dan TDE dengan Bring Your Own Key
 * Menambahkan `db list-deleted` perintah dan `db restore --deleted-time` parameter, memungkinkan kemampuan untuk menemukan dan memulihkan database yang dihapus
-* Ditambahkan `db op list` `db op cancel` dan, memungkinkan kemampuan untuk daftar dan membatalkan operasi yang sedang berlangsung pada database
+* Ditambahkan `db op list` dan `db op cancel`, memungkinkan kemampuan untuk daftar dan membatalkan operasi yang sedang berlangsung pada database
 
 ### <a name="storage"></a>Penyimpanan
 
@@ -7775,7 +7871,7 @@ Versi 2.0.19
 
 ### <a name="vm"></a>Vm
 
-* Memperbaiki bug di `vm show` mana menggunakan menyebabkan kecelakaan pada alamat IP pribadi yang `-d` hilang
+* Memperbaiki bug di `vm show` mana menggunakan `-d` menyebabkan kecelakaan pada alamat IP pribadi yang hilang
 * [PREVIEW] Menambahkan dukungan untuk rolling upgrade ke `vmss create`
 * Menambahkan dukungan untuk memperbarui pengaturan enkripsi dengan `vm encryption enable`
 * Menambahkan `--os-disk-size-gb` parameter ke `vm create`
@@ -7791,7 +7887,7 @@ Versi 2.0.18
 * Menambahkan dukungan untuk menampilkan definisi kebijakan bawaan
 * Menambahkan parameter mode dukungan untuk membuat definisi kebijakan
 * Menambahkan dukungan untuk definisi dan templat UI ke `managedapp definition create`
-* [MELANGGAR PERUBAHAN] Mengubah `managedapp` tipe sumber daya dari ke dan `appliances` `applications` `applianceDefinitions` ke `applicationDefinitions`
+* [MELANGGAR PERUBAHAN] Mengubah `managedapp` tipe sumber daya dari `appliances` ke `applications` dan `applianceDefinitions` ke `applicationDefinitions`
 
 ### <a name="network"></a>Jaringan
 
@@ -7823,7 +7919,7 @@ Versi 2.0.18
 ### <a name="vm"></a>VM
 
 * Ditambahkan untuk dukungan ke zona ketersediaan ke `[vm|vmss|disk] create`
-* Masalah tetap di mana menggunakan `--app-gateway ID` `vmss create` dengan akan menyebabkan kegagalan
+* Masalah tetap di mana menggunakan`--app-gateway ID` dengan `vmss create` akan menyebabkan kegagalan
 * Menambahkan `--asgs` argumen ke `vm create`
 * Menambahkan dukungan untuk menjalankan perintah pada VM dengan `vm run-command`
 * [PREVIEW] Menambahkan dukungan untuk enkripsi disk VMSS dengan `vmss encryption`
@@ -7864,7 +7960,7 @@ Versi 2.0.17
 
 * Fixed 'CustomDomain tidak dapat interable' bug untuk `cdn custom-domain create`
 
-### <a name="extension"></a>Extensi
+### <a name="extension"></a>Ekstensi
 
 * Rilis Awal
 
@@ -7874,15 +7970,15 @@ Versi 2.0.17
 
 ### <a name="network"></a>Jaringan
 
-* Berganti nama `vnet list-private-access-services` menjadi `vnet list-endpoint-services`
-* Berganti nama `--private-access-services` argumen untuk `--service-endpoints``vnet subnet create/update`
+* Berganti nama menjadi `vnet list-private-access-services``vnet list-endpoint-services`
+* Berganti nama argumen `--private-access-services` untuk `--service-endpoints``vnet subnet create/update`
 * Menambahkan dukungan untuk beberapa rentang IP dan rentang port ke `nsg rule create/update`
 * Menambahkan dukungan untuk SKU untuk `lb create`
 * Menambahkan dukungan untuk SKU untuk `public-ip create`
 
 ### <a name="resource"></a>Sumber daya
 
-* Mengizinkan melewati definisi parameter kebijakan sumber daya pada `policy definition create` tahun 1999, dan `policy definition update`
+* Mengizinkan melewati definisi parameter kebijakan sumber daya pada `policy definition create`tahun 1999, dan `policy definition update`
 * Perbolehkan passing dalam nilai parameter untuk `policy assignment create`
 * Memungkinkan untuk melewati JSON atau file untuk semua params
 * Versi API yang Bertambah
@@ -7933,9 +8029,9 @@ Versi 2.0.15
 ### <a name="appservice"></a>Layanan aplikasi
 
 * [MELANGGAR PERUBAHAN] Inkonsistensi tetap dalam output `az webapp config appsettings [delete|set]`
-* Menambahkan alias baru `-i` untuk `az webapp config container set --docker-custom-image-name`
+* Menambahkan alias `-i` baru untuk `az webapp config container set --docker-custom-image-name`
 * Terkena `az webapp log show`
-* Argumen baru yang terbuka `az webapp delete` untuk mempertahankan paket layanan aplikasi, metrik, atau pendaftaran DNS
+* Argumen baru yang terbuka untuk `az webapp delete` mempertahankan paket layanan aplikasi, metrik, atau pendaftaran DNS
 * Tetap: Mendeteksi pengaturan slot dengan benar
 
 ### <a name="iot"></a>IoT
@@ -7944,7 +8040,7 @@ Versi 2.0.15
 
 ### <a name="network"></a>Jaringan
 
-* [MELANGGAR PERUBAHAN] Berganti nama `vnet list-private-access-services` menjadi `vnet list-endpoint-services`
+* [MELANGGAR PERUBAHAN] Berganti nama menjadi `vnet list-private-access-services``vnet list-endpoint-services`
 * [MELANGGAR PERUBAHAN] Opsi berganti nama `--private-access-services` menjadi `--service-endpoints` untuk `vnet subnet [create|update]`
 * Menambahkan dukungan untuk beberapa rentang IP dan port ke `nsg rule [create|update]`
 * Menambahkan dukungan untuk SKU untuk `lb create`
@@ -7952,7 +8048,7 @@ Versi 2.0.15
 
 ### <a name="profile"></a>Profil
 
-* Terekspos `--msi` dan masuk menggunakan identitas mesin `--msi-port` virtual
+* Terekspos `--msi` dan `--msi-port` masuk menggunakan identitas mesin virtual
 
 ### <a name="service-fabric"></a>Service Fabric
 
@@ -7964,7 +8060,7 @@ Versi 2.0.15
 ### <a name="storage"></a>Penyimpanan
 
 * Mengaktifkan pengaturan tingkat gumpalan
-* Ditambahkan `--bypass` dan `--default-action` argumen untuk mendukung `storage account [create|update]` tunneling layanan
+* Ditambahkan `--bypass` dan `--default-action` argumen untuk `storage account [create|update]` mendukung tunneling layanan
 * Menambahkan perintah untuk menambahkan aturan VNET dan aturan berbasis IP ke `storage account network-rule`
 * Enkripsi layanan yang diaktifkan oleh kunci yang dikelola pelanggan
 * [MELANGGAR PERUBAHAN] Opsi berganti nama `--encryption` menjadi `--encryption-services` untuk `az storage account create and az storage account update` perintah
@@ -7972,8 +8068,8 @@ Versi 2.0.15
 
 ### <a name="vm"></a>VM
 
-* Masalah tetap di mana informasi tambahan dan salah ditampilkan `vmss get-instance-view` saat menggunakan `--instance-id *`
-* Menambahkan dukungan `--lb-sku` `vmss create` untuk:
+* Masalah tetap di mana informasi tambahan dan salah ditampilkan saat `vmss get-instance-view` menggunakan `--instance-id *`
+* Menambahkan dukungan untuk `--lb-sku` `vmss create`:
 * Menghapus nama manusia dari nama admin yang dianulir untuk `[vm|vmss] create`
 * Masalah tetap di mana `[vm|vmss] create` akan membuang kesalahan jika tidak dapat mengekstrak informasi rencana dari gambar
 * Memperbaiki crash saat membuat scaleset vmms dengan LB internal
@@ -8035,7 +8131,7 @@ Versi 2.0.13
 * `lb`Masalah tetap di mana nama sumber daya anak tertentu tidak menyelesaikan dengan benar ketika dihilangkan
 * `application-gateway {subresource} delete`Masalah tetap di mana `--no-wait` tidak dihormati
 * `application-gateway http-settings update`: Masalah tetap di mana `--connection-draining-timeout` tidak dapat dimatikan
-* Argumen kata kunci tak terduga kesalahan tetap `sa_data_size_kilobyes` dengan `az network vpn-connection ipsec-policy add`
+* Argumen `sa_data_size_kilobyes` kata kunci tak terduga kesalahan tetap dengan `az network vpn-connection ipsec-policy add`
 
 ### <a name="profile"></a>Profil
 
@@ -8153,14 +8249,14 @@ vm (2.0.11)
 
 ### <a name="cdn"></a>CDN
 
-* Memberikan pesan kesalahan yang lebih baik `cdn endpoint list` ketika profil yang ditentukan oleh tidak `--profile-name` ada
+* Memberikan pesan kesalahan yang lebih baik ketika `cdn endpoint list` profil yang ditentukan oleh `--profile-name` tidak ada
 
 ### <a name="cloud"></a>Cloud
 
 * Mengubah titik akhir metadata cloud versi API ke format YYYY-MM-DD
 * Titik akhir galeri tidak diperlukan
 * Dukungan untuk mendaftarkan cloud hanya dengan titik akhir manajer sumber daya ARM
-* Menyediakan opsi `cloud set` untuk memilih profil saat memilih cloud saat ini
+* Menyediakan opsi untuk `cloud set` memilih profil saat memilih cloud saat ini
 * Terkena `endpoint_vm_image_alias_doc`
 
 ### <a name="cosmosdb"></a>CosmosDB
@@ -8170,7 +8266,7 @@ vm (2.0.11)
 
 ### <a name="data-lake-analytics"></a>Data Lake Analytics
 
-* Menambahkan perintah untuk manajemen kebijakan komputasi di bawah `dla account compute-policy` judul
+* Menambahkan perintah untuk manajemen kebijakan komputasi di `dla account compute-policy` bawah judul
 * Ditambahkan `dla job pipeline show`
 * Ditambahkan `dla job recurrence list`
 
@@ -8178,7 +8274,7 @@ vm (2.0.11)
 
 * Menambahkan dukungan untuk rotasi kunci kubah kunci yang dikelola pengguna `dls account update`
 * Memperbarui versi SDK sistem file Data Lake Store yang sedang diperbarui, mengatasi masalah kinerja
-* Perintah `dls enable-key-vault` tambahan. Perintah ini mencoba untuk mengaktifkan pengguna yang disediakan Key Vault untuk digunakan mengenkripsi data ina data Lake Store account
+* Perintah tambahan `dls enable-key-vault`. Perintah ini mencoba untuk mengaktifkan pengguna yang disediakan Key Vault untuk digunakan mengenkripsi data ina data Lake Store account
 
 ### <a name="interactive"></a>Interaktif
 
@@ -8200,10 +8296,10 @@ vm (2.0.11)
 ### <a name="key-vault"></a>Key vault
 
 * Menambahkan perintah untuk fitur pemulihan kubah utama:
-  * `keyvault` subkomands `purge` , `recover` , `keyvault list-deleted`
-  * `keyvault secret` subkomands `backup` , , , `restore` `purge` `recover` , `list-deleted`
-  * `keyvault certificate` subkomands `purge` , `recover` , `list-deleted`
-  * `keyvault key` subkomands `purge` , `recover` , `list-deleted`
+  * `keyvault` subkomands `purge`, `recover`, `keyvault list-deleted`
+  * `keyvault secret`subkomands `backup`, `restore`, `purge`, , `recover``list-deleted`
+  * `keyvault certificate` subkomands `purge`, `recover`, `list-deleted`
+  * `keyvault key` subkomands `purge`, `recover`, `list-deleted`
 * Integrasi kubah kunci utama layanan tambahan (#3133)
 * Dataplane kubah kunci yang diperbarui menjadi 0.3.2. (#3307)
 
@@ -8215,17 +8311,17 @@ vm (2.0.11)
 ### <a name="monitor"></a>Monitor
 
 * Perbaiki file templat dengan `monitor autoscale-settings get-parameters-template` perintah (#3349)
-* Berganti nama `monitor alert-rule-incidents list` menjadi `monitor alert list-incidents`
-* Berganti nama `monitor alert-rule-incidents show` menjadi `monitor alert show-incident`
-* Berganti nama `monitor metric-defintions list` menjadi `monitor metrics list-definitions`
-* Berganti nama `monitor alert-rules` menjadi `monitor alert`
-* Diubah `monitor alert create` :
+* Berganti nama menjadi `monitor alert-rule-incidents list``monitor alert list-incidents`
+* Berganti nama menjadi `monitor alert-rule-incidents show``monitor alert show-incident`
+* Berganti nama menjadi `monitor metric-defintions list``monitor metrics list-definitions`
+* Berganti nama menjadi `monitor alert-rules``monitor alert`
+* Diubah `monitor alert create`:
   * `condition` dan `action` subkomite tidak lagi menerima JSON
   * Menambahkan banyak parameter untuk menyederhanakan proses pembuatan aturan
   * `location` Tidak lagi diperlukan
   * Menambahkan dukungan nama dan ID untuk target
   * Hapus `--alert-rule-resource-name`
-  * Mengganti nama `is-enabled` menjadi , tidak lagi `enabled` diperlukan
+  * Mengganti nama `is-enabled` menjadi `enabled`, tidak lagi diperlukan
   * `description` default sekarang berdasarkan kondisi yang disediakan
   *  Menambahkan contoh untuk membantu clarifiy format baru
 * Nama dukungan atau ID untuk `monitor metric` perintah
@@ -8239,25 +8335,25 @@ vm (2.0.11)
 * Masalah tetap di mana `application-gateway redirect-config update` dengan `--no-wait` tidak akan bekerja
 * Memperbaiki bug saat menggunakan `--servers` argumen dengan `application-gateway address-pool create` dan `application-gateway address-pool update`
 * Menambahkan `application-gateway redirect-config` perintah
-* Menambahkan perintah ke `application-gateway ssl-policy` : `list-options` , `predefined list` , `predefined show`
-* Menambahkan argumen ke `application-gateway ssl-policy set` : `--name` , `--cipher-suites` , `--min-protocol-version`
-* Menambahkan argumen ke `application-gateway http-settings create` dan : , , `application-gateway http-settings update` `--host-name-from-backend-pool` `--affinity-cookie-name` `--enable-probe` , `--path`
-* Menambahkan argumen ke `application-gateway url-path-map create` dan `application-gateway url-path-map update` : `--default-redirect-config` , `--redirect-config`
+* Menambahkan perintah ke `application-gateway ssl-policy`: `list-options`, , `predefined list``predefined show`
+* Menambahkan argumen ke `application-gateway ssl-policy set`: `--name`, , `--cipher-suites``--min-protocol-version`
+* Menambahkan argumen ke `application-gateway http-settings create` dan `application-gateway http-settings update`: , `--host-name-from-backend-pool`, `--affinity-cookie-name`, `--enable-probe``--path`
+* Menambahkan argumen ke `application-gateway url-path-map create` dan `application-gateway url-path-map update`: `--default-redirect-config`, `--redirect-config`
 * Menambahkan argumen `--redirect-config` ke `application-gateway url-path-map rule create`
-* Dukungan tambahan `--no-wait` untuk `application-gateway url-path-map rule delete`
-* Menambahkan argumen ke `application-gateway probe create` dan : , , `application-gateway probe update` `--host-name-from-http-settings` `--min-servers` `--match-body` , `--match-status-codes`
+* Dukungan tambahan untuk `--no-wait``application-gateway url-path-map rule delete`
+* Menambahkan argumen ke `application-gateway probe create` dan `application-gateway probe update`: , `--host-name-from-http-settings`, `--min-servers`, `--match-body``--match-status-codes`
 * Menambahkan argumen `--redirect-config` ke `application-gateway rule create` dan `application-gateway rule update`
-* Menambahkan dukungan `--accelerated-networking` untuk `nic create` dan `nic update`
+* Menambahkan dukungan untuk `--accelerated-networking` `nic create` dan `nic update`
 * Argumen yang dihapus `--internal-dns-name-suffix` dari `nic create`
-* Menambahkan dukungan `--dns-servers` untuk `nic update` ke `nic create` dan: Tambahkan dukungan untuk --dns-server
+* Menambahkan dukungan untuk `--dns-servers` ke `nic update` dan `nic create`: Tambahkan dukungan untuk --dns-server
 * Bug tetap di mana `local-gateway create` diabaikan `--local-address-prefixes`
-* Dukungan tambahan `--dns-servers` untuk `vnet update`
+* Dukungan tambahan untuk `--dns-servers``vnet update`
 * Bug tetap saat membuat peering tanpa penyaringan rute dengan `express-route peering create`
-* Bug tetap di mana `--provider` dan argumen tidak bekerja `--bandwidth` dengan `express-route update`
+* Bug tetap di mana `--provider` dan `--bandwidth` argumen tidak bekerja dengan `express-route update`
 * Bug tetap dengan `network watcher show-topology` logika default
 * Pemformatan output yang ditingkatkan untuk `network list-usages`
 * Gunakan IP frontend default untuk `application-gateway http-listener create` jika hanya ada satu yang ada
-* Gunakan kumpulan alamat default, pengaturan HTTP, dan pendengar HTTP `application-gateway rule create` jika hanya ada satu
+* Gunakan kumpulan alamat default, pengaturan HTTP, dan pendengar HTTP jika `application-gateway rule create` hanya ada satu
 * Gunakan IP frontend default dan kolam backend untuk `lb rule create` jika hanya ada satu
 * Gunakan IP frontend default untuk `lb inbound-nat-rule create` jika hanya ada satu yang ada
 
@@ -8281,9 +8377,9 @@ vm (2.0.11)
 * Peningkatan petunjuk untuk parameter yang hilang untuk `group deployment create`
 * Parsing sintaks yang ditingkatkan `--parameters KEY=VALUE`
 * Masalah tetap di mana `group deployment create` file parameter tidak lagi dikenali menggunakan `@<file>` sintaks
-* `--ids`Argumen dukungan untuk dan `resource` `managedapp` perintah
+* Argumen dukungan `--ids` untuk `resource` dan `managedapp` perintah
 * Memperbaiki beberapa pesan parsing dan kesalahan (#3584)
-* Parsing tetap `--resource-type` `lock` agar perintah menerima `<resource-namespace>` dan `<resource-type>`
+* Parsing tetap `--resource-type` agar `lock` perintah menerima `<resource-namespace>` dan `<resource-type>`
 * Menambahkan pemeriksaan parameter untuk templat tautan templat (#3629)
 * Menambahkan dukungan untuk menentukan parameter penyebaran menggunakan `KEY=VALUE` sintaksis
 
@@ -8308,7 +8404,7 @@ vm (2.0.11)
 
 ### <a name="storage"></a>Penyimpanan
 
-* Opsi dihapus `--marker` dari , , dan perintah `storage blob list` `storage container list` `storage share list` (#3745)
+* Opsi dihapus `--marker` dari `storage blob list`, `storage container list`, dan `storage share list` perintah (#3745)
 * Diaktifkan membuat akun penyimpanan https saja
 * Metrik penyimpanan yang diperbarui, perintah logging dan cors (#3495)
 * Pesan pengecualian yang diulang dari CORS menambahkan (#3638) (#3362)
@@ -8336,8 +8432,8 @@ Versi 2.0.6
 * Sertakan modul Interaktif (ganti nama az-shell)
 * Menambahkan dukungan untuk perintah CDN
 * Menghapus modul Kontainer
-* Tambahkan 'az -v' sebagai pintasan untuk 'az --version'[(#2926)](https://github.com/Azure/azure-cli/issues/2926)
-* Meningkatkan kinerja beban paket dan eksekusi perintah[(#2819)](https://github.com/Azure/azure-cli/issues/2819)
+* Tambahkan 'az -v' sebagai pintasan untuk 'az --version' ([#2926](https://github.com/Azure/azure-cli/issues/2926))
+* Meningkatkan kinerja beban paket dan eksekusi perintah ([#2819](https://github.com/Azure/azure-cli/issues/2819))
 
 ```text
 azure-cli (2.0.6)
@@ -8379,14 +8475,14 @@ vm (2.0.6)
 ### <a name="core"></a>Core
 
 * inti: menangkap pengecualian yang disebabkan oleh penyedia yang tidak terdaftar dan mendaftarkannya secara otomatis
-* perf: pertahankan cache token adal dalam memori sampai proses keluar[(#2603)](https://github.com/Azure/azure-cli/issues/2603)
-* Perbaiki byte yang dikembalikan dari sidik jari hex -o tsv[(#3053)](https://github.com/Azure/azure-cli/issues/3053)
-* Peningkatan Unduhan Sertifikat Vault Kunci dan Integrasi SP AAD[(#3003)](https://github.com/Azure/azure-cli/issues/3003)
-* Tambahkan lokasi Python ke 'az —version'[(#2986)](https://github.com/Azure/azure-cli/issues/2986)
-* login: mendukung login ketika tidak ada langganan[(#2929)](https://github.com/Azure/azure-cli/issues/2929)
-* inti: perbaiki kegagalan saat login menggunakan kepala layanan dua kali[(#2800)](https://github.com/Azure/azure-cli/issues/2800)
-* core: Izinkan jalur file accessTokens.json dapat dikonfigurasi melalui env var[(#2605)](https://github.com/Azure/azure-cli/issues/2605)
-* inti: Izinkan default yang dikonfigurasi untuk diterapkan pada arg opsional[(#2703)](https://github.com/Azure/azure-cli/issues/2703)
+* perf: pertahankan cache token adal dalam memori sampai proses keluar ([#2603](https://github.com/Azure/azure-cli/issues/2603))
+* Perbaiki byte yang dikembalikan dari sidik jari heks -o tsv ([#3053](https://github.com/Azure/azure-cli/issues/3053))
+* Peningkatan Unduhan Sertifikat Vault Kunci dan integrasi SP AAD ([#3003](https://github.com/Azure/azure-cli/issues/3003))
+* Tambahkan lokasi Python ke 'az —version' ([#2986](https://github.com/Azure/azure-cli/issues/2986))
+* login: mendukung login ketika tidak ada langganan ([#2929](https://github.com/Azure/azure-cli/issues/2929))
+* inti: perbaiki kegagalan saat login menggunakan kepala layanan dua kali ([# 2800](https://github.com/Azure/azure-cli/issues/2800))
+* core: Izinkan jalur file accessTokens.json dapat dikonfigurasi melalui env var ([#2605](https://github.com/Azure/azure-cli/issues/2605))
+* inti: Perbolehkan default yang dikonfigurasi untuk diterapkan pada arg opsional ([#2703](https://github.com/Azure/azure-cli/issues/2703))
 * inti: Peningkatan kinerja
 * inti: Custom CA Certs - Pengaturan dukungan REQUESTS_CA_BUNDLE variabel lingkungan
 * inti: Konfigurasi cloud - gunakan titik akhir 'pengelola sumber daya' jika titik akhir 'manajemen' tidak diatur
@@ -8396,7 +8492,7 @@ vm (2.0.6)
 * memperbaiki master dan jumlah agen menjadi integer, bukan string
 * mengekspos 'az acs create --no-wait' dan 'az acs wait' untuk pembuatan async
 * mengekspos 'az acs create --validate' untuk validasi dry-run
-* hapus profil windows sebelum perintah panggilan PUT untuk skala[(#2755)](https://github.com/Azure/azure-cli/issues/2755)
+* menghapus profil windows sebelum perintah panggilan PUT untuk skala ([#2755](https://github.com/Azure/azure-cli/issues/2755))
 
 ### <a name="appservice"></a>AppService
 
@@ -8405,10 +8501,10 @@ vm (2.0.6)
 * Buat "az webapp" untuk menggantikan "az appservice web" (for backward compat, "az appservice web" akan tetap untuk 2 rilis)
 * Mengekspos argumen untuk mengonfigurasi penyebaran dan "tumpukan runtime" di webapp create
 * Mengekspos "webapp list-runtimes"
-* dukungan konfigurasi string koneksi[(#2647)](https://github.com/Azure/azure-cli/issues/2647)
+* dukungan mengonfigurasi string koneksi ([#2647](https://github.com/Azure/azure-cli/issues/2647))
 * dukungan slot swap dengan preview
-* Kesalahan Polandia dari perintah layanan aplikasi[(#2948)](https://github.com/Azure/azure-cli/issues/2948)
-* Gunakan grup sumber daya paket layanan aplikasi untuk operasi sertifikat[(#2750)](https://github.com/Azure/azure-cli/issues/2750)
+* Kesalahan Polandia dari perintah layanan aplikasi ([#2948](https://github.com/Azure/azure-cli/issues/2948))
+* Gunakan grup sumber daya paket layanan aplikasi untuk operasi sertifikat ([#2750](https://github.com/Azure/azure-cli/issues/2750))
 
 ### <a name="cosmosdb"></a>CosmosDB
 
@@ -8431,8 +8527,8 @@ vm (2.0.6)
 ### <a name="data-lake-store"></a>Data Lake Store
 
 * Memperbarui versi SDK sistem file yang mendasarinya, yang memberikan dukungan yang lebih baik untuk menangani skenario pelambatan sisi server
-* Meningkatkan kinerja beban paket dan eksekusi perintah[(#2819)](https://github.com/Azure/azure-cli/issues/2819)
-* bantuan yang tidak terjawab untuk acara akses. menambahkannya. ([#2743)](https://github.com/Azure/azure-cli/issues/2743)
+* Meningkatkan kinerja beban paket dan eksekusi perintah ([#2819](https://github.com/Azure/azure-cli/issues/2819))
+* bantuan yang tidak terjawab untuk acara akses. menambahkannya. ([#2743](https://github.com/Azure/azure-cli/issues/2743))
 
 ### <a name="find"></a>Cari
 
@@ -8440,24 +8536,24 @@ vm (2.0.6)
 
 ### <a name="keyvault"></a>Az.KeyVault
 
-* BC: `az keyvault certificate download` ubah -e dari string atau biner ke PEM atau DER untuk lebih mewakili opsi
+* BC:`az keyvault certificate download` ubah -e dari string atau biner ke PEM atau DER untuk lebih mewakili opsi
 * BC: Hapus --expires dan --not-before dari `keyvault certificate create` karena parameter ini tidak didukung oleh layanan
-* Menambahkan parameter validitas `keyvault certificate create` --untuk secara selektif mengesampingkan nilai dalam --policy
+* Menambahkan parameter validitas --untuk `keyvault certificate create` secara selektif mengesampingkan nilai dalam --policy
 * Memperbaiki masalah di `keyvault certificate get-default-policy` mana 'kedaluwarsa' dan 'not_before' diekspos tetapi 'validity_in_months' tidak
-* perbaikan keyvault untuk impor pem dan pfx[(#2754)](https://github.com/Azure/azure-cli/issues/2754)
+* perbaikan keyvault untuk impor pem dan pfx ([#2754](https://github.com/Azure/azure-cli/issues/2754))
 
 ### <a name="lab"></a>Laboratorium
 
 * Menambahkan perintah buat, perlihatkan, hapus & daftar untuk lingkungan di laboratorium
 * Menambahkan perintah tampilkan & daftar untuk melihat templat ARM di lab
-* Menambahkan bendera --environment `az lab vm list` untuk memfilter VM berdasarkan lingkungan di laboratorium
-* Menambahkan perintah kenyamanan `az lab formula export-artifacts` untuk mengekspor perancah artefak dalam rumus Lab
+* Menambahkan bendera `az lab vm list` --environment untuk memfilter VM berdasarkan lingkungan di laboratorium
+* Menambahkan perintah `az lab formula export-artifacts` kenyamanan untuk mengekspor perancah artefak dalam rumus Lab
 * Menambahkan perintah untuk mengelola rahasia di dalam Lab
 
 ### <a name="monitor"></a>Monitor
 
-* Bug Fix: Pemodelan `--actions` `az alert-rules create` untuk mengkonsumsi string JSON[(#3009)](https://github.com/Azure/azure-cli/issues/3009)
-* Perbaikan bug - pengaturan diagnostik membuat tidak menerima log / metrik dari perintah perlihatkan[(#2913)](https://github.com/Azure/azure-cli/issues/2913)
+* Bug Fix: Pemodelan `--actions` `az alert-rules create` untuk mengkonsumsi string JSON ([#3009](https://github.com/Azure/azure-cli/issues/3009))
+* Perbaikan bug - pengaturan diagnostik membuat tidak menerima log / metrik dari perintah perlihatkan ([#2913](https://github.com/Azure/azure-cli/issues/2913))
 
 ### <a name="network"></a>Jaringan
 
@@ -8480,7 +8576,7 @@ vm (2.0.6)
 
 ### <a name="profile"></a>Profil
 
-* Dukungan login ketika tidak ada langganan yang ditemukan[(#2560)](https://github.com/Azure/azure-cli/issues/2560)
+* Dukungan login ketika tidak ada langganan yang ditemukan ([#2560](https://github.com/Azure/azure-cli/issues/2560))
 * Mendukung nama param pendek di az account set --subscription ([#2980](https://github.com/Azure/azure-cli/issues/2980))
 
 ### <a name="redis"></a>Redis
@@ -8490,26 +8586,26 @@ vm (2.0.6)
 
 ### <a name="resource"></a>Sumber daya
 
-* Menambahkan perintah definisi managedapp dan managedapp[(#2985)](https://github.com/Azure/azure-cli/issues/2985)
-* Perintah 'operasi penyedia' Dukungan[(#2908)](https://github.com/Azure/azure-cli/issues/2908)
-* Mendukung pembuat sumber daya generik[(#2606)](https://github.com/Azure/azure-cli/issues/2606)
-* Perbaiki penguraian sumber daya dan pencarian versi api. ([#2781)](https://github.com/Azure/azure-cli/issues/2781)
-* Tambahkan dokumen untuk pembaruan kunci az. ([#2702)](https://github.com/Azure/azure-cli/issues/2702)
-* Kesalahan jika Anda mencoba membuat daftar sumber daya untuk grup yang tidak ada. ([#2769)](https://github.com/Azure/azure-cli/issues/2769)
-* [Menghitung] Perbaiki masalah dengan VMSS dan VM availability set update. ([#2773)](https://github.com/Azure/azure-cli/issues/2773)
-* Perbaiki kunci membuat dan menghapus jika jalur sumber daya induk tidak ada[(#2742)](https://github.com/Azure/azure-cli/issues/2742)
+* Menambahkan perintah definisi managedapp dan managedapp ([#2985](https://github.com/Azure/azure-cli/issues/2985))
+* Perintah 'operasi penyedia' dukungan ([#2908](https://github.com/Azure/azure-cli/issues/2908))
+* Mendukung pembuat sumber daya generik ([#2606](https://github.com/Azure/azure-cli/issues/2606))
+* Perbaiki penguraian sumber daya dan pencarian versi api. ([#2781](https://github.com/Azure/azure-cli/issues/2781))
+* Tambahkan dokumen untuk pembaruan kunci az. ([#2702](https://github.com/Azure/azure-cli/issues/2702))
+* Kesalahan jika Anda mencoba membuat daftar sumber daya untuk grup yang tidak ada. ([#2769](https://github.com/Azure/azure-cli/issues/2769))
+* [Menghitung] Perbaiki masalah dengan VMSS dan VM availability set update. ([#2773](https://github.com/Azure/azure-cli/issues/2773))
+* Perbaiki pembuatan kunci dan hapus jika jalur sumber daya induk tidak ada ([#2742](https://github.com/Azure/azure-cli/issues/2742))
 
 ### <a name="role"></a>Peran
 
-* create-for-rbac: pastikan tanggal akhir SP tidak akan melebihi tanggal kedaluwarsa sertifikat[(#2989)](https://github.com/Azure/azure-cli/issues/2989)
-* RBAC: menambahkan dukungan penuh untuk 'grup iklan'[(#2016)](https://github.com/Azure/azure-cli/issues/2016)
-* peran: memperbaiki masalah pada pembaruan definisi peran[(#2745)](https://github.com/Azure/azure-cli/issues/2745)
+* create-for-rbac: pastikan tanggal akhir SP tidak akan melebihi tanggal kedaluwarsa sertifikat ([#2989](https://github.com/Azure/azure-cli/issues/2989))
+* RBAC: menambahkan dukungan penuh untuk 'grup iklan' ([#2016](https://github.com/Azure/azure-cli/issues/2016))
+* peran: memperbaiki masalah pada pembaruan definisi peran ([#2745](https://github.com/Azure/azure-cli/issues/2745))
 * create-for-rbac: pastikan kata sandi yang disediakan pengguna dijemput
 
 ### <a name="sql"></a>SQL
 
 * Ditambahkan az sql server list-usages and az sql db list-usages commands
-* SQL - kemampuan untuk terhubung langsung ke penyedia sumber daya[(#2832)](https://github.com/Azure/azure-cli/issues/2832)
+* SQL - kemampuan untuk terhubung langsung ke penyedia sumber daya ([#2832](https://github.com/Azure/azure-cli/issues/2832))
 
 ### <a name="storage"></a>Penyimpanan
 
@@ -8527,7 +8623,7 @@ vm (2.0.6)
   2. az vm/vmss disk
   3. Di dalam "az vm/vmss create", gunakan "—use-unmanaged-disk" untuk menghindari disk terkelola Perintah lain harus berfungsi
 * vm/vmss: meningkatkan teks peringatan saat menghasilkan pasangan kunci ssh
-* vm/vmss: dukungan dibuat dari gambar market place yang membutuhkan info rencana[(#1209)](https://github.com/Azure/azure-cli/issues/1209)
+* vm/vmss: dukungan dibuat dari gambar market place yang membutuhkan info rencana ([#1209](https://github.com/Azure/azure-cli/issues/1209))
 
 
 ## <a name="april-3-2017"></a>3 April 2017
@@ -8569,27 +8665,27 @@ vm (2.0.2)
 ### <a name="core"></a>Core
 
 * Menambahkan acr, lab, monitor, dan temukan modul ke daftar default
-* Login: lewati penyewa yang salah[(#2634)](https://github.com/Azure/azure-cli/pull/2634)
-* login: mengatur langganan default ke satu dengan status "Diaktifkan"[(#2575)](https://github.com/Azure/azure-cli/pull/2575)
-* Tambahkan perintah tunggu dan dukungan --no-wait ke perintah lainnya[(#2524)](https://github.com/Azure/azure-cli/pull/2524)
-* inti: mendukung login menggunakan kepala layanan dengan sertifikat[(#2457)](https://github.com/Azure/azure-cli/pull/2457)
-* Tambahkan dorongan untuk parameter templat yang hilang. ([#2364)](https://github.com/Azure/azure-cli/pull/2364)
+* Login: lewati penyewa yang salah ([#2634](https://github.com/Azure/azure-cli/pull/2634))
+* login: mengatur langganan default ke satu dengan status "Diaktifkan" ([#2575](https://github.com/Azure/azure-cli/pull/2575))
+* Tambahkan perintah tunggu dan dukungan --no-wait ke perintah lainnya ([#2524](https://github.com/Azure/azure-cli/pull/2524))
+* inti: mendukung login menggunakan kepala layanan dengan sertifikat ([#2457](https://github.com/Azure/azure-cli/pull/2457))
+* Tambahkan dorongan untuk parameter templat yang hilang. ([#2364](https://github.com/Azure/azure-cli/pull/2364))
 * Mendukung pengaturan nilai default untuk argumen umum seperti grup sumber daya default, web default, vm default
 * Mendukung login ke penyewa tertentu
 
 ### <a name="acs"></a>ACS
 
-* [ACS] Menambahkan dukungan untuk mengonfigurasi kluster ACS default[(#2554)](https://github.com/Azure/azure-cli/pull/2554)
-* Tambahkan dukungan untuk mendorong kata sandi kunci ssh. [(#2044)](https://github.com/Azure/azure-cli/pull/2044)
-* Tambahkan dukungan untuk kluster windows. ([#2211)](https://github.com/Azure/azure-cli/pull/2211)
-* Beralih dari peran Pemilik ke Kontributor. ([#2321)](https://github.com/Azure/azure-cli/pull/2321)
+* [ACS] Menambahkan dukungan untuk mengonfigurasi kluster ACS default ([#2554](https://github.com/Azure/azure-cli/pull/2554))
+* Tambahkan dukungan untuk mendorong kata sandi kunci ssh. ([#2044](https://github.com/Azure/azure-cli/pull/2044))
+* Tambahkan dukungan untuk kluster windows. ([#2211](https://github.com/Azure/azure-cli/pull/2211))
+* Beralih dari peran Pemilik ke Kontributor. ([#2321](https://github.com/Azure/azure-cli/pull/2321))
 
 ### <a name="appservice"></a>AppService
 
-* appservice: dukungan untuk mendapatkan alamat IP eksternal yang digunakan untuk catatan DNS A[(#2627)](https://github.com/Azure/azure-cli/pull/2627)
-* appservice: dukungan mengikat sertifikat wildcard[(#2625](https://github.com/Azure/azure-cli/pull/2625))
-* appservice: profil penerbitan daftar dukungan[(#2504)](https://github.com/Azure/azure-cli/pull/2504)
-* AppService - Memicu sinkronisasi kontrol sumber setelah konfigurasi[(#2326)](https://github.com/Azure/azure-cli/pull/2326)
+* appservice: dukungan untuk mendapatkan alamat ip eksternal yang digunakan untuk catatan DNS A ([#2627](https://github.com/Azure/azure-cli/pull/2627))
+* appservice: mendukung sertifikat wildcard yang mengikat ([#2625](https://github.com/Azure/azure-cli/pull/2625))
+* appservice: profil penerbitan daftar dukungan ([#2504](https://github.com/Azure/azure-cli/pull/2504))
+* AppService - Memicu sinkronisasi kontrol sumber setelah konfigurasi ([#2326](https://github.com/Azure/azure-cli/pull/2326))
 
 ### <a name="datalake"></a>DataLake
 
@@ -8598,17 +8694,17 @@ vm (2.0.2)
 
 ### <a name="docuemntdb"></a>DocuemntDB
 
-* DocumentDB: Menambahkan dukungan untuk mencantumkan string koneksi[(#2580)](https://github.com/Azure/azure-cli/pull/2580)
+* DocumentDB: Menambahkan dukungan untuk mencantumkan string koneksi ([#2580](https://github.com/Azure/azure-cli/pull/2580))
 
 ### <a name="vm"></a>VM
 
-* [Menghitung] Tambahkan dukungan AppGateway ke buat set skala mesin virtual[(#2570)](https://github.com/Azure/azure-cli/pull/2570)
-* [VM/VMSS] Peningkatan dukungan caching disk[(#2522)](https://github.com/Azure/azure-cli/pull/2522)
-* VM/VMSS: menggabungkan logika validasi kredensial yang digunakan oleh portal[(#2537)](https://github.com/Azure/azure-cli/pull/2537)
-* Tambahkan perintah tunggu dan dukungan tanpa menunggu[(#2524)](https://github.com/Azure/azure-cli/pull/2524)
-* Set skala mesin virtual: dukungan * untuk daftar tampilan instans di vms[(#2467](https://github.com/Azure/azure-cli/pull/2467))
-* Tambahkan --rahasia untuk VM dan set skala mesin virtual ([#2212}( <https://github.com/Azure/azure-cli/pull/2212> ))
-* Izinkan pembuatan VM dengan VHD khusus[(#2256)](https://github.com/Azure/azure-cli/pull/2256)
+* [Menghitung] Menambahkan dukungan AppGateway ke buat set skala mesin virtual ([#2570](https://github.com/Azure/azure-cli/pull/2570))
+* [VM/VMSS] Peningkatan dukungan caching disk ([#2522](https://github.com/Azure/azure-cli/pull/2522))
+* VM/VMSS: menggabungkan logika validasi kredensial yang digunakan oleh portal ([#2537](https://github.com/Azure/azure-cli/pull/2537))
+* Tambahkan perintah tunggu dan dukungan --no-wait ([#2524](https://github.com/Azure/azure-cli/pull/2524))
+* Set skala mesin virtual: dukungan * untuk daftar tampilan instans di vms ([#2467](https://github.com/Azure/azure-cli/pull/2467))
+* Tambahkan --rahasia untuk VM dan set skala mesin virtual ([#2212}(<https://github.com/Azure/azure-cli/pull/2212>))
+* Izinkan pembuatan VM dengan VHD khusus ([#2256](https://github.com/Azure/azure-cli/pull/2256))
 
 ## <a name="february-27-2017"></a>Tanggal 27 Februari 2017
 
@@ -8620,7 +8716,7 @@ Rilis Azure CLI 2.0 ini adalah rilis "Umum Tersedia" pertama Ketersediaan umum b
 - Jaringan
 - Penyimpanan
 
-Modul perintah ini dapat digunakan dalam produksi dan didukung oleh Microsoft SLA standar Anda dapat membuka masalah secara langsung dengan dukungan Microsoft atau pada [daftar masalah github](https://github.com/azure/azure-cli/issues/) kami Anda dapat mengajukan pertanyaan tentang [StackOverflow menggunakan tag azure-cli,](http://stackoverflow.com/questions/tagged/azure-cli)atau menghubungi tim produk di [azfeedback@microsoft.com](mailto:azfeedback@microsoft.com) Anda dapat memberikan umpan balik dari baris perintah dengan `az feedback` perintah
+Modul perintah ini dapat digunakan dalam produksi dan didukung oleh Microsoft SLA standar Anda dapat membuka masalah secara langsung dengan dukungan Microsoft atau pada [daftar masalah github](https://github.com/azure/azure-cli/issues/) kami Anda dapat mengajukan pertanyaan [tentang StackOverflow menggunakan tag azure-cli](http://stackoverflow.com/questions/tagged/azure-cli), atau menghubungi tim produk di [azfeedback@microsoft.com](mailto:azfeedback@microsoft.com) Anda dapat memberikan umpan balik dari baris perintah dengan `az feedback` perintah
 
 Perintah dalam modul ini stabil dan sintaksnya diperkirakan tidak akan berubah dalam rilis mendatang dari versi Azure CLI ini.
 
@@ -8656,9 +8752,9 @@ Python (Darwin) 2.7.10 (default, Jul 30 2016, 19:40:32)
 ```
 
 > [!Note]
-> Beberapa modul perintah memiliki postfix "b *n"* atau "rc *n"* Modul perintah ini masih dalam pratinjau dan akan tersedia secara umum di masa depan.
+> Beberapa modul perintah memiliki postfix "*bn*" atau "*rcn*" Modul perintah ini masih dalam pratinjau dan akan tersedia secara umum di masa depan.
 
-Kami juga memiliki pratinjau malam yang dibangun dari CLI Untuk informasi, lihat instruksi ini [untuk membangun malam,](https://github.com/Azure/azure-cli#nightly-builds)dan instruksi ini tentang [pengaturan pengembang dan kode kontribusi.](https://github.com/Azure/azure-cli#developer-setup)
+Kami juga memiliki pratinjau malam yang dibangun dari CLI Untuk informasi, lihat instruksi ini [untuk membangun malam hari](https://github.com/Azure/azure-cli#nightly-builds), dan instruksi ini tentang [pengaturan pengembang dan kode kontribusi.](https://github.com/Azure/azure-cli#developer-setup)
 
 Anda dapat melaporkan masalah dengan pratinjau malam yang dibangun dengan cara berikut:
 - Melaporkan masalah dalam [daftar masalah github](https://github.com/azure/azure-cli/issues/) kami
