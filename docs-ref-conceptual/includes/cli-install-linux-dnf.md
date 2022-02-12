@@ -5,16 +5,16 @@ manager: barbkess
 ms.date: 11/24/2020
 ms.topic: include
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 64719e7a313dd1247a284a56543d09ef3c69d6f0
-ms.sourcegitcommit: d2227bc475235bf86193e9cae5e02f349a6342e2
+ms.openlocfilehash: 64354fafa776303afe2998a8d4fbf9c4f4be09ae
+ms.sourcegitcommit: ad79327952adf0f8be8f1b9678e72434d9f03f0c
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 11/02/2021
-ms.locfileid: "132439115"
+ms.lasthandoff: 02/12/2022
+ms.locfileid: "138606462"
 ---
 ## <a name="overview"></a>Gambaran Umum
 
-Untuk distribusi Linux seperti `dnf` RHEL, Fedora, atau CentOS, ada paket untuk Azure CLI. Paket ini telah diuji dengan RHEL 7.7, RHEL 8, Fedora 24 dan lebih tinggi, CentOS 7 dan CentOS 8.
+Untuk distribusi Linux dengan `dnf` seperti RHEL, Fedora, atau CentOS, ada paket untuk Azure CLI. Paket ini telah diuji dengan RHEL 7.7, RHEL 8, Fedora 24 dan lebih tinggi, CentOS 7 dan CentOS 8.
 
 [!INCLUDE [current-version](current-version.md)]
 
@@ -22,7 +22,7 @@ Untuk distribusi Linux seperti `dnf` RHEL, Fedora, atau CentOS, ada paket untuk 
 
 > [!NOTE]
 >
-> Gunakan `yum` manajer paket jika Anda menggunakan sistem Linux yang tidak mendukung manajer `dnf` paket.
+> Gunakan `yum` manajer paket jika Anda menggunakan sistem Linux yang tidak mendukung `dnf` manajer paket.
 
 ## <a name="install"></a>Instal
 
@@ -32,7 +32,7 @@ Untuk distribusi Linux seperti `dnf` RHEL, Fedora, atau CentOS, ada paket untuk 
    sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
    ```
 
-2. Buat `azure-cli` informasi repositori lokal.
+2. Membuat informasi repositori lokal `azure-cli` .
 
    ```bash
    echo -e "[azure-cli]
@@ -51,7 +51,7 @@ Untuk distribusi Linux seperti `dnf` RHEL, Fedora, atau CentOS, ada paket untuk 
 
 ## <a name="install-specific-version"></a>Menginstal versi tertentu
 
-Anda harus terlebih dahulu mengkonfigurasi `azure-cli` informasi repositori seperti yang ditunjukkan di atas. Versi yang tersedia dapat ditemukan di [catatan rilis Azure CLI](/cli/azure/release-notes-azure-cli).
+Anda harus terlebih dahulu mengonfigurasi `azure-cli` informasi repositori seperti yang ditunjukkan di atas. Versi yang tersedia dapat ditemukan di [catatan rilis Azure CLI](/cli/azure/release-notes-azure-cli).
 
 1. Untuk melihat versi yang tersedia dengan perintah:
 
@@ -67,11 +67,11 @@ Anda harus terlebih dahulu mengkonfigurasi `azure-cli` informasi repositori sepe
 
 ## <a name="troubleshooting"></a>Pemecahan Masalah
 
-Berikut adalah beberapa masalah umum yang terlihat saat menginstal dengan `dnf` . Jika Anda mengalami masalah yang tidak tercakup di sini, [ajukan masalah di GitHub.](https://github.com/Azure/azure-cli/issues)
+Berikut adalah beberapa masalah umum yang terlihat saat menginstal dengan `dnf`. Jika Anda mengalami masalah yang tidak tercakup di sini, [ajukan masalah di GitHub](https://github.com/Azure/azure-cli/issues).
 
-### <a name="install-on-rhel-76-or-other-systems-without-python-3"></a>Instal pada RHEL 7.6 atau sistem lain tanpa Python 3
+### <a name="install-on-rhel-76-or-other-systems-without-python-3"></a>Instal di RHEL 7.6 atau sistem lain tanpa Python 3
 
-Jika Anda bisa, silakan upgrade sistem Anda ke versi dengan dukungan resmi untuk `python 3.6+` paket. Jika tidak, Anda harus terlebih dahulu menginstal `python3` paket kemudian menginstal Azure CLI tanpa ketergantungan.
+Jika Anda bisa, silakan tingkatkan sistem Anda ke versi dengan dukungan resmi untuk `python 3.6+` paket. Jika tidak, Anda harus menginstal `python3` paket terlebih dahulu lalu menginstal Azure CLI tanpa dependensi.
 
 Anda dapat menggunakan satu perintah berikut untuk menginstal Azure CLI dengan `python 3.6` bawaan dari sumber:
 
@@ -81,58 +81,58 @@ curl -sL https://azurecliprod.blob.core.windows.net/rhel7_6_install.sh | sudo ba
 
 Anda juga dapat melakukannya selangkah demi selangkah:
 
-Pertama, Azure CLI membutuhkan `SSL 1.1+` dan Anda perlu membangun dari sumber sebelum `openssl 1.1` `python3` membangun:
+Pertama, Azure CLI memerlukan `SSL 1.1+` dan Anda perlu membangun `openssl 1.1` dari sumber sebelum membangun `python3`:
 
 ```bash
-$ sudo dnf install gcc gcc-c++ make ncurses patch wget tar zlib zlib-devel -y
+sudo dnf install gcc gcc-c++ make ncurses patch wget tar zlib zlib-devel -y
 # build openssl from source
-$ cd ~
-$ wget https://www.openssl.org/source/openssl-1.1.1d.tar.gz
-$ tar -xzf openssl-1.1.1d.tar.gz
-$ cd openssl-1.1.1d
-$ ./config --prefix=/usr/local/ssl --openssldir=/usr/local/ssl
-$ make
-$ sudo make install
+cd ~
+wget https://www.openssl.org/source/openssl-1.1.1d.tar.gz
+tar -xzf openssl-1.1.1d.tar.gz
+cd openssl-1.1.1d
+./config --prefix=/usr/local/ssl --openssldir=/usr/local/ssl
+make
+sudo make install
 # configure shared object lookup directory so that libssl.so.1.1 can be found
-$ echo "/usr/local/ssl/lib" | sudo tee /etc/ld.so.conf.d/openssl-1.1.1d.conf
+echo "/usr/local/ssl/lib" | sudo tee /etc/ld.so.conf.d/openssl-1.1.1d.conf
 # reload config
-$ sudo ldconfig -v
+sudo ldconfig -v
 ```
 
-Kemudian membangun Python 3 dari sumber:
+Kemudian bangun Python 3 dari sumber:
 
 ```bash
-$ PYTHON_VERSION="3.6.9"
-$ PYTHON_SRC_DIR=$(mktemp -d)
-$ wget -qO- https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tgz | tar -xz -C "$PYTHON_SRC_DIR"
-$ cd $PYTHON_SRC_DIR/Python-$PYTHON_VERSION
-$ ./configure --prefix=/usr --with-openssl=/usr/local/ssl
-$ make
-$ sudo make install
+PYTHON_VERSION="3.6.9"
+PYTHON_SRC_DIR=$(mktemp -d)
+wget -qO- https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tgz | tar -xz -C "$PYTHON_SRC_DIR"
+cd $PYTHON_SRC_DIR/Python-$PYTHON_VERSION
+./configure --prefix=/usr --with-openssl=/usr/local/ssl
+make
+sudo make install
 ```
 
-Akhirnya, ikuti langkah 1 dan 2 dari [instruksi instalasi](#install) untuk menambahkan repositori Azure CLI. Anda sekarang dapat mengunduh paket dan menginstalnya tanpa ketergantungan.
+Terakhir, ikuti langkah 1 dan 2 dari [instruksi instal](#install) untuk menambahkan repositori Azure CLI. Anda sekarang dapat mengunduh paket dan menginstalnya tanpa ketergantungan.
 
 > [!NOTE]
 >
-> Jika Anda tidak menginstal plugin unduhan dnf, Anda akan menemukan perintah yang tidak menemukan kesalahan saat mengeksekusi kode di bawah ini. Gunakan `dnf install 'dnf-command(download)'` untuk menginstal plugin unduhan dnf.
+> Jika Anda tidak menginstal plugin unduhan dnf, Anda akan menemukan perintah yang tidak ditemukan kesalahan dalam mengeksekusi kode di bawah ini. Gunakan `dnf install 'dnf-command(download)'` untuk menginstal plugin unduhan dnf.
 
 ```bash
-$ sudo dnf download azure-cli
-$ sudo rpm -ivh --nodeps azure-cli-*.rpm
+sudo dnf download azure-cli
+sudo rpm -ivh --nodeps azure-cli-*.rpm
 ```
 
-Sebagai alternatif, Anda juga dapat menginstal Python 3 melalui beberapa [repo tambahan.](https://developers.redhat.com/blog/2018/08/13/install-python3-rhel/) Mengikuti cara ini, jika Anda telah mengatur `python3` tetapi masih mendapatkan kesalahan ketika mencoba untuk menjalankan `python3: command not found` cli, Anda perlu menambahkannya ke jalan Anda.
+Sebagai alternatif, Anda juga dapat menginstal Python 3 melalui beberapa [repo tambahan](https://developers.redhat.com/blog/2018/08/13/install-python3-rhel/). Dengan cara ini, jika Anda telah mengatur `python3` tetapi masih mendapatkan kesalahan `python3: command not found` ketika mencoba untuk menjalankan cli, Anda perlu menambahkannya ke jalur Anda.
 
 ```bash
-$ scl enable rh-python36 bash
+scl enable rh-python36 bash
 ```
 
 ### <a name="proxy-blocks-connection"></a>Koneksi blok proksi
 
 [!INCLUDE[configure-proxy](configure-proxy.md)]
 
-Anda mungkin juga ingin secara eksplisit mengkonfigurasi `dnf` untuk menggunakan proxy ini setiap saat. Pastikan bahwa baris berikut muncul di bawah `[main]` `/etc/dnf/dnf.conf` bagian:
+Anda mungkin juga ingin mengkonfigurasi `dnf` secara eksplisit untuk menggunakan proxy ini setiap saat. Pastikan baris berikut muncul di bawah `[main]` bagian `/etc/dnf/dnf.conf`:
 
 ```dnf.conf
 [main]
