@@ -4,20 +4,32 @@ description: Pelajari tentang catatan rilis dan pembaruan Azure Command-Line Int
 author: dbradish-microsoft
 ms.author: dbradish
 manager: barbkess
-ms.date: 02/01/2022
+ms.date: 02/14/2022
 ms.topic: article
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli updates, azure cli notes, azure cli versions
-ms.openlocfilehash: d68e5b43457a8d1d8596c92a1613b79155f06622
-ms.sourcegitcommit: ad79327952adf0f8be8f1b9678e72434d9f03f0c
+ms.openlocfilehash: a83057d13a92e40307dc81107172e919e4ac5cb6
+ms.sourcegitcommit: 133f901f17aebce8976e4751bcadf0758a9a1c76
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 02/12/2022
-ms.locfileid: "138554870"
+ms.lasthandoff: 02/14/2022
+ms.locfileid: "138623393"
 ---
 # <a name="azure-cli-release-notes"></a>Catatan rilis Azure CLI
+
+## <a name="february-14-2022"></a>14 Februari 2022
+
+Versi 2.33.1
+
+### <a name="compute"></a>Compute
+
+* Hotfix: Perbaiki #21224: Perbaiki masalah yang tidak diaktifkan VMCustomization
+
+### <a name="packaging"></a>Pengemasan
+
+* [MELANGGAR PERUBAHAN] Drop jmespath-terminal dari gambar docker
 
 ## <a name="february-01-2022"></a>01 Februari 2022
 
