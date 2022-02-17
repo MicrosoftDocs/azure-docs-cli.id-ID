@@ -1,7 +1,7 @@
 ### YamlMime:Tutorial
-title: Create virtual machines (VM) – Azure CLI | Microsoft Docs
+title: Membuat mesin virtual (VM) – Azure CLI | Microsoft Dokumen
 metadata:
-  title: Create virtual machines (VM) – Azure CLI | Microsoft Docs
+  title: Membuat mesin virtual (VM) – Azure CLI | Microsoft Dokumen
   description: Pelajari cara membuat mesin virtual (VM) dengan Azure CLI dengan menyelesaikan tutorial ini melalui Azure Cloud Shell atau dengan menginstal CLI secara lokal.
   audience: Developer
   level: Beginner
@@ -18,12 +18,12 @@ metadata:
   ms.custom: devx-track-azurecli, seo-azure-cli
   clicktale: true
   keywords: azure cli create vm, virtual machine in azure cli
-  ms.openlocfilehash: de51ef93c80d804d5482b6daf44c24405c5bb056
-  ms.sourcegitcommit: ecad34e4d4654660377050fccba7861e942e03de
+  ms.openlocfilehash: 3e141780e0aa3976c4ee14b86f22de9c3eb95f6a
+  ms.sourcegitcommit: 766c21c494eb7fbdc5160c437868c187c0b6e587
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 09/13/2021
-  ms.locfileid: "132439062"
+  ms.lasthandoff: 02/17/2022
+  ms.locfileid: "138916652"
 items:
 - durationInMinutes: 1
   content: >-
@@ -36,11 +36,11 @@ items:
     Gunakan __ctrl-shift-v__ (__cmd-shift-v__ di macOS) untuk menempelkan teks tutorial ke Azure Cloud Shell.
 - durationInMinutes: 1
   title: Masuk
-  content: "Jika Anda menggunakan instalasi lokal CLI, Anda harus masuk sebelum melakukan langkah-langkah lain.\n\n```azurecli-interactive\naz login\n```\n\nSelesaikan proses autentikasi dengan mengikuti langkah-langkah yang ditampilkan di terminal Anda. "
+  content: "Jika Anda menggunakan pemasangan CLI lokal, Anda harus masuk sebelum melakukan langkah-langkah lain.\n\n```azurecli-interactive\naz login\n```\n\nSelesaikan proses autentikasi dengan mengikuti langkah-langkah yang ditampilkan di terminal Anda. "
 - durationInMinutes: 1
-  title: Buat grup sumber daya
+  title: Membuat grup sumber daya
   content: >-
-    Di Azure, semua sumber daya dialokasikan dalam kelompok manajemen sumber daya. Kelompok sumber daya menyediakan pengelompokan sumber daya logis yang membuat mereka lebih mudah untuk bekerja sebagai koleksi. Untuk tutorial ini, semua sumber daya yang dibuat masuk ke dalam satu kelompok bernama `TutorialResources` .
+    Di Azure, semua sumber daya dialokasikan dalam grup manajemen sumber daya. Kelompok sumber daya menyediakan pengelompokan sumber daya logis yang membuatnya lebih mudah untuk dikerjakan sebagai koleksi. Untuk tutorial ini, semua sumber daya yang dibuat masuk ke dalam satu kelompok bernama `TutorialResources`.
 
 
     ```azurecli
@@ -50,14 +50,14 @@ items:
     ```
 - durationInMinutes: 4
   title: Membuat komputer virtual
-  content: "Mesin virtual di Azure memiliki sejumlah besar dependensi. CLI membuat sumber daya ini untuk Anda berdasarkan argumen baris perintah yang Anda tentukan.\n\nBuat mesin virtual baru yang menjalankan Ubuntu, yang menggunakan autentikasi SSH untuk login.\n\n```azurecli-interactive\naz vm create --resource-group TutorialResources \\\n  --name TutorialVM1 \\\n  --image UbuntuLTS \\\n  --generate-ssh-keys \\\n  --output json \\\n  --verbose \n```\n\n> [!NOTE]\n> Jika Anda memiliki kunci SSH yang `id_rsa` sudah tersedia, kunci ini digunakan untuk otentikasi daripada memiliki kunci baru yang dihasilkan.\n\nSaat VM dibuat, Anda melihat nilai lokal yang digunakan dan sumber daya Azure dibuat karena `--verbose` opsi tersebut.\nSetelah VM siap, JSON dikembalikan dari layanan Azure termasuk alamat IP publik.\n\n```json\n{\n  \"fqdns\": \"\",\n  \"id\": \"...\",\n  \"location\": \"eastus\",\n  \"macAddress\": \"...\",\n  \"powerState\": \"VM running\",\n  \"privateIpAddress\": \"...\",\n  \"publicIpAddress\": <PUBLIC_IP_ADDRESS>,\n  \"resourceGroup\": \"TutorialResources\",\n  \"zones\": \"\"\n}\n```\n\nKonfirmasikan bahwa VM berjalan dengan menghubungkan melalui SSH.\n\n```bash\nssh <PUBLIC_IP_ADDRESS>\n```\n\nPergi ke depan dan log out dari VM.\n\nAda cara lain untuk mendapatkan alamat IP ini setelah VM dimulai. Di bagian berikutnya Anda akan melihat cara mendapatkan informasi terperinci tentang VM, dan cara memfilternya."
+  content: "Mesin virtual di Azure memiliki sejumlah besar dependensi. CLI membuat sumber daya ini untuk Anda berdasarkan argumen baris perintah yang Anda tentukan.\n\nBuat mesin virtual baru yang menjalankan Ubuntu, yang menggunakan otentikasi SSH untuk login.\n\n```azurecli-interactive\naz vm create --resource-group TutorialResources \\\n  --name TutorialVM1 \\\n  --image UbuntuLTS \\\n  --generate-ssh-keys \\\n  --output json \\\n  --verbose \n```\n\n> [!NOTE]\n> Jika Anda memiliki kunci `id_rsa` SSH bernama sudah tersedia, kunci ini digunakan untuk otentikasi daripada memiliki kunci baru yang dihasilkan.\n\nSaat VM dibuat, Anda akan melihat nilai lokal yang digunakan dan sumber daya Azure dibuat karena opsi tersebut `--verbose` .\nSetelah VM siap, JSON dikembalikan dari layanan Azure termasuk alamat IP publik.\n\n```json\n{\n  \"fqdns\": \"\",\n  \"id\": \"...\",\n  \"location\": \"eastus\",\n  \"macAddress\": \"...\",\n  \"powerState\": \"VM running\",\n  \"privateIpAddress\": \"...\",\n  \"publicIpAddress\": <PUBLIC_IP_ADDRESS>,\n  \"resourceGroup\": \"TutorialResources\",\n  \"zones\": \"\"\n}\n```\n\nKonfirmasikan bahwa VM berjalan dengan menghubungkan melalui SSH.\n\n```bash\nssh <PUBLIC_IP_ADDRESS>\n```\n\nLanjutkan dan keluar dari VM.\n\nAda cara lain untuk mendapatkan alamat IP ini setelah VM dimulai. Di bagian berikutnya Anda akan melihat cara mendapatkan informasi terperinci tentang VM, dan cara memfilternya."
 - durationInMinutes: 3
   title: Mendapatkan informasi VM dengan kueri
-  content: "Sekarang VM telah dibuat, informasi rinci tentang hal itu dapat diambil. Perintah umum untuk mendapatkan informasi dari sumber daya adalah `show` .\n\n```azurecli-interactive\naz vm show --name TutorialVM1 --resource-group TutorialResources\n```\n\nAnda akan melihat banyak informasi, yang bisa sulit diurai secara visual. JSON yang dikembalikan berisi informasi tentang otentikasi, antarmuka jaringan, penyimpanan, dan banyak lagi. Yang paling penting, berisi CD objek Azure untuk sumber daya yang vm terhubung ke. ID objek memungkinkan mengakses sumber daya ini secara langsung untuk mendapatkan informasi lebih lanjut tentang konfigurasi dan kemampuan VM. \n\nUntuk mengekstrak ID objek yang kita inginkan, `--query` argumen digunakan. Kueri ditulis dalam [bahasa kueri JMESPath.](http://jmespath.org) Mulailah dengan mendapatkan ID objek pengontrol antarmuka jaringan (NIC).\n\n```azurecli-interactive\naz vm show --name TutorialVM1 \\\n  --resource-group TutorialResources \\\n  --query 'networkProfile.networkInterfaces[].id' \\\n  --output tsv\n```\n\nAda banyak hal yang terjadi di sini, hanya dengan menambahkan kueri. Setiap bagian dari itu referensi kunci dalam output JSON, atau operator JMESPath.\n\n* `networkProfile` Adalah kunci dari JSON tingkat atas, yang memiliki `networkInterfaces` sebagai subkunci. Jika nilai JSON adalah kamus, kuncinya direferensikan dari kunci induk dengan `.` operator.\n* `networkInterfaces`Nilainya adalah array, sehingga diratakan dengan `[]` operator. Operator ini menjalankan sisa kueri pada setiap elemen array. Dalam hal ini, ia mendapat `id` nilai dari setiap elemen array.\n\nFormat output `tsv` (nilai tab-separated) dijamin hanya mencakup data hasil dan spasi yang terdiri dari tab dan garis baru.\nKarena nilai yang dikembalikan adalah string telanjang tunggal, aman untuk menetapkan langsung ke variabel lingkungan.\n\nLanjutkan dan tetapkan ID objek NIC ke variabel lingkungan sekarang.\n\n```bash\nNIC_ID=$(az vm show -n TutorialVM1 -g TutorialResources \\\n  --query 'networkProfile.networkInterfaces[].id' \\\n  -o tsv)\n```\n\nContoh ini juga menunjukkan penggunaan argumen pendek. Anda dapat menggunakan `-g` `--resource-group` bukan, `-n` `--name` bukan, dan `-o` `--output` bukan."
+  content: "Sekarang vm telah dibuat, informasi rinci tentang hal itu dapat diambil. Perintah umum untuk mendapatkan informasi dari sumber daya adalah `show`.\n\n```azurecli-interactive\naz vm show --name TutorialVM1 --resource-group TutorialResources\n```\n\nAnda akan melihat banyak informasi, yang bisa sulit diurai secara visual. JSON yang dikembalikan berisi informasi tentang otentikasi, antarmuka jaringan, penyimpanan, dan banyak lagi. Yang paling penting, ini berisi ID objek Azure untuk sumber daya yang terhubung dengan VM. ID objek memungkinkan mengakses sumber daya ini secara langsung untuk mendapatkan informasi lebih lanjut tentang konfigurasi dan kemampuan VM. \n\nUntuk mengekstrak ID objek yang kita inginkan, `--query` argumen digunakan. Kueri ditulis dalam [bahasa kueri JMESPath](http://jmespath.org). Mulailah dengan mendapatkan ID objek network interface controller (NIC).\n\n```azurecli-interactive\naz vm show --name TutorialVM1 \\\n  --resource-group TutorialResources \\\n  --query 'networkProfile.networkInterfaces[].id' \\\n  --output tsv\n```\n\nAda banyak hal yang terjadi di sini, hanya dengan menambahkan kueri. Setiap bagiannya mereferensikan kunci dalam JSON output, atau merupakan operator JMESPath.\n\n* `networkProfile` adalah kunci dari JSON tingkat atas, yang memiliki `networkInterfaces` subkunci. Jika nilai JSON adalah kamus, kuncinya dirujuk dari kunci induk dengan `.` operator.\n* Nilainya `networkInterfaces` adalah array, sehingga diratakan dengan `[]` operator. Operator ini menjalankan sisa kueri pada setiap elemen array. Dalam hal ini, ia mendapat `id` nilai dari setiap elemen array.\n\nFormat `tsv` output (nilai yang dipisahkan tab) dijamin hanya mencakup data hasil dan spasi yang terdiri dari tab dan garis baru.\nKarena nilai yang dikembalikan adalah string telanjang tunggal, aman untuk menetapkan langsung ke variabel lingkungan.\n\nLanjutkan dan tetapkan ID objek NIC ke variabel lingkungan sekarang.\n\n```azurecli-interactive\nNIC_ID=$(az vm show -n TutorialVM1 -g TutorialResources \\\n  --query 'networkProfile.networkInterfaces[].id' \\\n  -o tsv)\n```\n\nContoh ini juga menunjukkan penggunaan argumen singkat. Anda dapat menggunakan `-g` bukan, `--resource-group``-n` bukan`--name`, bukan`-o`.`--output`"
 - durationInMinutes: 4
   title: Mengatur variabel lingkungan dari output CLI
   content: >-
-    Sekarang setelah Anda memiliki ID NIC, jalankan `az network nic show` untuk mendapatkan informasinya. Perhatikan bahwa Anda tidak memerlukan grup sumber daya di sini, karena nama grup sumber daya terdapat dalam ID sumber daya Azure.
+    Sekarang setelah Anda memiliki ID NIC, jalankan `az network nic show` untuk mendapatkan informasinya. Perhatikan bahwa Anda tidak memerlukan grup sumber daya di sini, karena nama grup sumber daya terkandung dalam ID sumber daya Azure.
 
 
     ```azurecli-interactive
@@ -68,7 +68,7 @@ items:
 
 
 
-    Perintah ini menunjukkan semua informasi untuk antarmuka jaringan VM. Data ini mencakup pengaturan DNS, informasi IP, pengaturan keamanan, dan alamat MAC. Saat ini tujuannya adalah untuk mendapatkan alamat IP publik dan IP objek SUBNET Masehi.
+    Perintah ini menunjukkan semua informasi untuk antarmuka jaringan VM. Data ini mencakup pengaturan DNS, informasi IP, pengaturan keamanan, dan alamat MAC. Saat ini tujuannya adalah untuk mendapatkan alamat IP publik dan IP objek subnet.
 
 
     ```azurecli-interactive
@@ -96,10 +96,10 @@ items:
     Perintah ini menampilkan objek JSON yang memiliki tombol kustom ('IP' dan 'Subnet') untuk nilai yang diekstraksi. Meskipun gaya output ini mungkin tidak berguna untuk alat baris perintah, ini membantu dengan keterbacaan manusia dan dapat digunakan dengan skrip khusus.
 
 
-    Untuk menggunakan alat baris perintah, ubah perintah untuk menghapus tombol dan output JSON kustom sebagai `tsv` . Gaya output ini dapat diproses oleh perintah shell `read` untuk memuat hasil menjadi beberapa variabel. Karena dua nilai pada baris terpisah ditampilkan, `read` delimiter perintah harus diatur ke string kosong daripada default ruang putih non-newline.
+    Untuk menggunakan alat baris perintah, ubah perintah untuk menghapus tombol dan output JSON kustom sebagai `tsv`. Gaya output ini dapat diproses oleh perintah shell `read` untuk memuat hasil ke dalam beberapa variabel. Karena dua nilai pada baris terpisah ditampilkan, `read` pembatas perintah harus diatur ke string kosong daripada default spasi putih non-newline.
 
 
-    ```bash
+    ```azurecli-interactive
 
     read -d '' IP_ID SUBNET_ID <<< $(az network nic show \
       --ids $NIC_ID \
@@ -108,10 +108,10 @@ items:
     ```
 
 
-    Anda tidak akan menggunakan ID subnet segera, tetapi harus disimpan sekarang untuk menghindari harus melakukan pencarian kedua nanti. Untuk saat ini, gunakan ID objek IP publik untuk mencari alamat IP publik dan menyimpannya dalam variabel shell.
+    Anda tidak akan menggunakan SUBNET ID segera, tetapi harus disimpan sekarang untuk menghindari harus melakukan pencarian kedua nanti. Untuk saat ini, gunakan ID objek IP publik untuk mencari alamat IP publik dan menyimpannya dalam variabel shell.
 
 
-    ```bash
+    ```azurecli-interactive
 
     VM1_IP_ADDR=$(az network public-ip show --ids $IP_ID \
       --query ipAddress \
@@ -119,7 +119,7 @@ items:
     ```
 
 
-    Sekarang Anda memiliki alamat IP VM yang disimpan dalam variabel shell. Silakan dan periksa bahwa itu adalah nilai yang sama yang Anda gunakan untuk awalnya terhubung ke VM.
+    Sekarang Anda memiliki alamat IP VM yang disimpan dalam variabel shell. Lanjutkan dan periksa apakah itu adalah nilai yang sama dengan yang anda gunakan untuk awalnya terhubung ke VM.
 
 
     ```bash
@@ -130,10 +130,10 @@ items:
 - durationInMinutes: 2
   title: Membuat VM baru di subnet yang ada
   content: >-
-    VM kedua menggunakan subnet yang ada. Anda dapat melewati beberapa langkah untuk mendapatkan alamat IP publik VM baru disimpan ke dalam variabel lingkungan segera, karena dikembalikan dalam informasi pembuatan VM. Jika Anda memerlukan informasi lain tentang VM nanti, itu selalu dapat diperoleh dari `az vm show` perintah.
+    VM kedua menggunakan subnet yang ada. Anda dapat melewati beberapa langkah untuk mendapatkan alamat IP publik dari VM baru yang disimpan ke dalam variabel lingkungan segera, karena dikembalikan dalam informasi pembuatan VM. Jika Anda memerlukan informasi lain tentang VM nanti, itu selalu dapat diperoleh dari `az vm show` perintah.
 
 
-    ```bash
+    ```azurecli
 
     VM2_IP_ADDR=$(az vm create -g TutorialResources \
       -n TutorialVM2 \
@@ -145,7 +145,7 @@ items:
     ```
 
 
-    Menggunakan alamat IP yang tersimpan, SSH ke VM yang baru dibuat.
+    Menggunakan alamat IP yang tersimpan, SSH ke dalam VM yang baru dibuat.
 
 
     ```bash
@@ -155,11 +155,11 @@ items:
     ```
 
 
-    Pergi ke depan dan log out dari VM.
+    Lanjutkan dan keluar dari VM.
 - durationInMinutes: 2
-  title: Pembersihan
+  title: Penghapusan
   content: >-
-    Sekarang setelah tutorial selesai, saatnya untuk membersihkan sumber daya yang dibuat. Anda dapat menghapus sumber daya individual dengan `delete` perintah, tetapi cara paling aman untuk menghapus semua sumber daya dalam grup sumber daya adalah dengan `group delete` .
+    Sekarang setelah tutorial selesai, saatnya untuk membersihkan sumber daya yang dibuat. Anda dapat menghapus sumber daya individual dengan `delete` perintah, tetapi cara teraman untuk menghapus semua sumber daya dalam grup sumber daya adalah dengan `group delete`.
 
 
     ```azurecli-interactive
@@ -169,7 +169,7 @@ items:
     ```
 
 
-    Perintah ini menghapus sumber daya yang dibuat selama tutorial, dan dijamin untuk menanganinya dalam urutan yang benar. `--no-wait`Parameter menjaga CLI dari pemblokiran saat penghapusan berlangsung. Jika Anda ingin menunggu sampai penghapusan selesai atau saksikan kemajuannya, gunakan `group wait` perintah.
+    Perintah ini menghapus sumber daya yang dibuat selama tutorial, dan dijamin akan deallocate mereka dalam urutan yang benar. Parameter `--no-wait` menjaga CLI dari pemblokiran saat penghapusan berlangsung. Jika Anda ingin menunggu sampai penghapusan selesai atau melihatnya berlanjut, gunakan perintah tersebut `group wait` .
 
 
     ```azurecli-interactive
@@ -183,10 +183,10 @@ items:
 - durationInMinutes: 1
   title: Ringkasan
   content: >-
-    Selamat! Anda belajar cara membuat VM dengan sumber daya baru atau yang sudah ada, menggunakan `--query` dan argumen untuk menangkap data yang akan disimpan dalam variabel `--output` shell, dan melihat beberapa sumber daya yang dibuat untuk VM Azure.
+    Selamat! Anda mempelajari cara membuat VM dengan sumber daya baru atau yang sudah ada, menggunakan `--query` dan `--output` argumen untuk menangkap data yang akan disimpan dalam variabel shell, dan melihat beberapa sumber daya yang dibuat untuk AZURE VM.
 
 
-    Ke mana Anda pergi dari sini tergantung pada apa yang Anda rencanakan untuk menggunakan CLI. Ada berbagai bahan yang melangkah lebih dalam pada fitur yang tercakup dalam tutorial ini.
+    Ke mana Anda pergi dari sini tergantung pada apa yang Anda rencanakan untuk menggunakan CLI. Ada berbagai materi yang melangkah lebih dalam pada fitur yang tercakup dalam tutorial ini.
 
 
     ### <a name="samples"></a>Sampel
@@ -195,43 +195,43 @@ items:
     Jika Anda ingin segera memulai dengan tugas-tugas tertentu, lihat beberapa contoh skrip.
 
 
-    * Bekerja dengan [VM Linux dan](/azure/virtual-machines/linux/cli-samples?toc=%2fcli%2fazure%2ftoc.json) VM [Windows](/azure/virtual-machines/windows/cli-samples?toc=%2fcli%2fazure%2ftoc.json)
+    * Bekerja dengan [VM Linux](/azure/virtual-machines/linux/cli-samples?toc=%2fcli%2fazure%2ftoc.json) dan [VM Windows](/azure/virtual-machines/windows/cli-samples?toc=%2fcli%2fazure%2ftoc.json)
 
     * Bekerja dengan [webapps](/azure/app-service/app-service-cli-samples?toc=%2Fcli%2Fazure%2Ftoc.json) dan [Azure Functions](/azure/azure-functions/functions-cli-samples?toc=%2fcli%2fazure%2ftoc.json)
 
-    * Bekerja dengan database - [Database Azure SQL,](/azure/sql-database/sql-database-cli-samples?toc=%2fcli%2fazure%2ftoc.json) [PostgreSQL,](/azure/postgresql/sample-scripts-azure-cli?toc=%2fcli%2fazure%2ftoc.json) [MySQL,](/azure/mysql/sample-scripts-azure-cli?toc=%2fcli%2fazure%2ftoc.json)dan [CosmosDB.](/azure/cosmos-db/cli-samples?toc=%2fcli%2fazure%2ftoc.json)
+    * Bekerja dengan database - [Azure SQL database](/azure/sql-database/sql-database-cli-samples?toc=%2fcli%2fazure%2ftoc.json), [PostgreSQL](/azure/postgresql/sample-scripts-azure-cli?toc=%2fcli%2fazure%2ftoc.json), [MySQL](/azure/mysql/sample-scripts-azure-cli?toc=%2fcli%2fazure%2ftoc.json), dan [CosmosDB](/azure/cosmos-db/cli-samples?toc=%2fcli%2fazure%2ftoc.json).
 
 
     ### <a name="in-depth-cli-documentation"></a>Dokumentasi CLI mendalam
 
 
-    Ada juga topik yang masuk lebih dalam ke fitur CLI yang ditampilkan dalam tutorial.
+    Ada juga topik yang masuk lebih dalam ke fitur CLI yang ditunjukkan dalam tutorial.
 
 
-    * Pelajari [selengkapnya](format-output-azure-cli.md) tentang format output
+    * Pelajari format [output lebih lanjut](format-output-azure-cli.md)
 
-    * Pelajari selengkapnya tentang [kueri output](query-azure-cli.md)
+    * Pelajari kueri [output lebih lanjut](query-azure-cli.md)
 
-    * Pelajari selengkapnya tentang [otorisasi di Azure](authenticate-azure-cli.md)
+    * Pelajari lebih lanjut tentang [otorisasi di Azure](authenticate-azure-cli.md)
 
 
     ### <a name="other-useful-documentation"></a>Dokumentasi berguna lainnya
 
 
-    Anda mungkin ingin meluangkan waktu untuk menjelajahi fitur CLI yang lebih canggih, seperti [mengonfigurasi default](azure-cli-configuration.md) atau [ekstensi.](azure-cli-extensions-overview.md)
+    Anda mungkin ingin meluangkan waktu untuk menjelajahi fitur CLI yang lebih canggih, seperti [mengonfigurasi default](azure-cli-configuration.md) atau [ekstensi](azure-cli-extensions-overview.md).
 
 
     ### <a name="feedback"></a>Saran dan Komentar
 
 
-    Jika Anda ingin memberikan umpan balik, saran, atau mengajukan pertanyaan tentang CLI, ada sejumlah cara bagi Anda untuk menghubungi.
+    Jika Anda ingin memberikan umpan balik, saran, atau mengajukan pertanyaan tentang CLI, ada beberapa cara bagi Anda untuk menghubungi.
 
 
-    * `az feedback` Adalah perintah built-in untuk CLI yang memungkinkan memberikan umpan balik bentuk gratis kepada tim.
+    * `az feedback` adalah perintah bawaan untuk CLI yang memungkinkan memberikan umpan balik bentuk bebas kepada tim.
 
-    * Mengajukan permintaan fitur atau laporan bug dengan CLI di [repositori Azure CLI](https://github.com/Azure/azure-cli).
+    * Ajukan permintaan fitur atau laporan bug dengan CLI di [repositori Azure CLI](https://github.com/Azure/azure-cli).
 
-    * Ajukan pertanyaan atau dapatkan klarifikasi dengan mengajukan masalah di [repositori dokumentasi Azure CLI.](https://github.com/MicrosoftDocs/azure-docs-cli/issues)
+    * Ajukan pertanyaan atau dapatkan klarifikasi dengan mengajukan masalah di [repositori dokumentasi Azure CLI](https://github.com/MicrosoftDocs/azure-docs-cli/issues).
 
 
     Kami harap Anda menikmati menggunakan Azure CLI!
