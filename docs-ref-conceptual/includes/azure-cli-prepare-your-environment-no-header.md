@@ -7,7 +7,7 @@ manager: barbkess
 ms.custom: devx-track-azurecli
 ms.openlocfilehash: 4659382c5f19e43ea9c9d8ff73073065d3fac3479470b074ba2f7d58fc99e739
 ms.sourcegitcommit: 16753e7a57048868e186c49e44c1877406530fa5
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: id-ID
 ms.lasthandoff: 08/06/2021
 ms.locfileid: "132439021"
