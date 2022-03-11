@@ -1,6 +1,6 @@
 ---
-title: Azure cloud management - Azure CLI | Microsoft Docs
-description: Buat, masuk, dan kelola beberapa awan dengan Azure CLI. Pelajari cara mendapatkan informasi tentang awan, mengubah awan saat ini, dan mendaftarkan / tidak terdaftar awan baru.
+title: Manajemen cloud Azure - Azure CLI | Microsoft Docs
+description: Buat, masuk, dan kelola beberapa cloud dengan Azure CLI. Pelajari cara mendapatkan informasi tentang cloud, mengubah cloud saat ini, dan mendaftarkan/membatalkan pendaftaran cloud baru.
 author: dbradish-microsoft
 manager: barbkess
 ms.author: dbradish
@@ -9,23 +9,23 @@ ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
-keywords: azure cloud management
+keywords: manajemen cloud azure
 ms.openlocfilehash: 2ab4b2e200104023607e5726938c41a3af442ab7
 ms.sourcegitcommit: ecad34e4d4654660377050fccba7861e942e03de
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: id-ID
 ms.lasthandoff: 09/13/2021
 ms.locfileid: "132439038"
 ---
-# <a name="azure-cloud-management-with-the-azure-cli"></a>Azure cloud management with the Azure CLI
+# <a name="azure-cloud-management-with-the-azure-cli"></a>Manajemen cloud Azure dengan Azure CLI
 
-Jika Anda bekerja di berbagai wilayah atau menggunakan [Azure Stack,](/azure/azure-stack/user/)Anda mungkin perlu menggunakan lebih dari satu cloud. Microsoft menyediakan cloud untuk mematuhi undang-undang regional, yang tersedia untuk Anda gunakan. Artikel ini menunjukkan kepada Anda cara mendapatkan informasi tentang awan, mengubah awan saat ini, dan mendaftarkan atau tidak terdaftar awan baru.
+Jika Anda bekerja di berbagai wilayah atau menggunakan [Azure Stack](/azure/azure-stack/user/), Anda mungkin perlu menggunakan beberapa cloud. Microsoft menyediakan cloud untuk mematuhi hukum regional, yang tersedia untuk Anda gunakan. Artikel ini menunjukkan cara mendapatkan informasi tentang cloud, mengubah awan saat ini, dan mendaftarkan atau membatalkan pendaftaran cloud baru.
 
-## <a name="list-available-clouds"></a>Daftar awan yang tersedia
+## <a name="list-available-clouds"></a>Mencantumkan cloud yang tersedia
 
-Anda dapat mencantumkan awan yang tersedia dengan perintah [daftar az cloud.](/cli/azure/cloud#az_cloud_list) Perintah ini menunjukkan cloud mana yang saat ini aktif, apa profilnya saat ini, dan informasi tentang akhiran regional dan nama host.
+Anda dapat membuat daftar cloud yang tersedia dengan perintah [az cloud list](/cli/azure/cloud#az_cloud_list). Perintah ini menunjukkan cloud mana yang saat ini aktif, apa profilnya saat ini, dan informasi tentang akhiran regional dan nama host.
 
-Untuk mendapatkan awan aktif dan daftar semua awan yang tersedia:
+Untuk mendapatkan cloud aktif dan daftar semua cloud yang tersedia:
 
 ```azurecli-interactive
 az cloud list --output table
@@ -40,7 +40,7 @@ True        AzureCloud         latest
             AzureGermanCloud   latest
 ```
 
-Awan yang saat ini aktif ada `True` di `IsActive` kolom. Hanya satu cloud yang bisa aktif kapan saja. Untuk mendapatkan informasi lebih rinci tentang cloud, termasuk titik akhir yang digunakan untuk layanan Azure, gunakan `cloud show` perintah:
+Cloud yang saat ini aktif memiliki `True` di kolom `IsActive`. Hanya satu cloud yang dapat aktif setiap saat. Untuk mendapatkan informasi yang lebih mendetail tentang cloud, termasuk titik akhir yang digunakannya untuk layanan Azure, gunakan perintah `cloud show`:
 
 ```azurecli-interactive
 az cloud show --name AzureChinaCloud --output json
@@ -73,34 +73,34 @@ az cloud show --name AzureChinaCloud --output json
 }
 ```
 
-## <a name="switch-the-active-cloud"></a>Beralih cloud aktif
+## <a name="switch-the-active-cloud"></a>Beralih ke cloud yang aktif
 
-Untuk mengatur cloud default menggunakan file konfigurasi, lihat [nilai konfigurasi CLI dan variabel lingkungan](./azure-cli-configuration.md#cli-configuration-values-and-environment-variables).  Untuk mengganti awan aktif, jalankan perintah [set awan az.](/cli/azure/cloud#az_cloud_set) Perintah ini mengambil satu argumen yang diperlukan, nama awan.
+Untuk mengatur cloud default menggunakan file konfigurasi, lihat [Nilai konfigurasi CLI dan variabel lingkungan](./azure-cli-configuration.md#cli-configuration-values-and-environment-variables).  Untuk mengganti cloud aktif, jalankan perintah [az cloud set](/cli/azure/cloud#az_cloud_set). Perintah ini membutuhkan satu argumen yang diperlukan, nama cloud.
 
 ```azurecli-interactive
 az cloud set --name AzureChinaCloud
 ```
 
 > [!IMPORTANT]
-> Jika autentikasi untuk cloud yang diaktifkan telah kedaluwarsa, Anda perlu mengautentikasi ulang sebelum melakukan tugas CLI lainnya. Jika ini adalah pertama kalinya Anda beralih ke cloud baru, Anda juga perlu mengatur langganan aktif.
+> Jika autentikasi Anda untuk cloud yang diaktifkan telah kedaluwarsa, Anda perlu mengautentikasi ulang sebelum melakukan tugas CLI lainnya. Jika ini pertama kalinya Anda beralih ke cloud baru, Anda juga perlu mengatur langganan aktif.
 > Untuk petunjuk tentang autentikasi, lihat [Masuk dengan Azure CLI](authenticate-azure-cli.md). Untuk informasi tentang manajemen langganan, lihat [Mengelola langganan Azure dengan Azure CLI](manage-azure-subscriptions-azure-cli.md)
 
 ## <a name="register-a-new-cloud"></a>Mendaftarkan cloud baru
 
-Daftarkan cloud baru jika Anda memiliki titik akhir anda sendiri untuk Azure Stack. Membuat cloud dilakukan dengan perintah [registrasi az cloud.](/cli/azure/cloud#az_cloud_register) Perintah ini memerlukan nama dan satu set titik akhir layanan. Untuk mempelajari cara mendaftarkan cloud untuk digunakan dengan Azure Stack, lihat [Menggunakan profil versi API dengan Azure CLI di Azure Stack](/azure/azure-stack/user/azure-stack-version-profiles-azurecli2#connect-to-azure-stack).
+Daftarkan cloud baru jika Anda memiliki titik akhir sendiri untuk Azure Stack. Membuat cloud dilakukan dengan perintah [az cloud register](/cli/azure/cloud#az_cloud_register). Perintah ini memerlukan nama dan satu set titik akhir layanan. Untuk mempelajari cara mendaftarkan cloud untuk digunakan dengan Azure Stack, lihat [Menggunakan profil versi API dengan Azure CLI di Azure Stack](/azure/azure-stack/user/azure-stack-version-profiles-azurecli2#connect-to-azure-stack).
 
-Anda tidak perlu mendaftarkan informasi untuk wilayah China, Pemerintah AS, atau Jerman. Cloud ini dikelola oleh Microsoft dan tersedia secara default.  Untuk informasi selengkapnya tentang semua pengaturan titik akhir yang tersedia, lihat [dokumentasi untuk `az cloud register` ](/cli/azure/cloud#az_cloud_register).
+Anda tidak perlu mendaftarkan informasi untuk wilayah China, Pemerintah AS, atau Jerman. Cloud ini dikelola oleh Microsoft dan tersedia secara default.  Untuk informasi selengkapnya tentang semua aturan titik akhir yang tersedia, lihat [dokumentasi untuk `az cloud register`](/cli/azure/cloud#az_cloud_register).
 
-Mendaftarkan cloud tidak secara otomatis beralih ke sana. Gunakan `az cloud set` perintah untuk memilih cloud yang baru dibuat.
+Mendaftarkan cloud tidak secara otomatis beralih ke cloud. Gunakan perintah `az cloud set` untuk memilih cloud yang baru dibuat.
 
-## <a name="update-an-existing-cloud"></a>Memperbarui awan yang sudah ada
+## <a name="update-an-existing-cloud"></a>Memperbarui cloud yang sudah ada
 
-Jika Anda memiliki izin, Anda juga dapat memperbarui cloud yang sudah ada. Memperbarui cloud beralih ke profil layanan Azure yang berbeda atau memodifikasi titik akhir koneksi.
-Perbarui cloud dengan perintah [pembaruan az cloud,](/cli/azure/cloud#az_cloud_update) yang mengambil argumen yang sama dengan `az cloud register` .
+Jika memiliki izin, Anda juga dapat memperbarui cloud yang ada. Memperbarui cloud beralih ke profil layanan Azure yang berbeda atau memodifikasi titik akhir koneksi.
+Perbarui cloud dengan perintah [az cloud update](/cli/azure/cloud#az_cloud_update), yang menggunakan argumen yang sama seperti `az cloud register`.
 
-## <a name="unregister-a-cloud"></a>Tidak terdaftar awan
+## <a name="unregister-a-cloud"></a>Membatalkan pendaftaran cloud
 
-Jika Anda tidak lagi membutuhkan awan yang dibuat, itu dapat tidak terdaftar dengan perintah [az cloud unregister:](/cli/azure/cloud#az_cloud_unregister)
+Jika Anda tidak lagi memerlukan cloud yang dibuat, pendaftarannya dapat dibatalkan dengan perintah [az cloud unregister](/cli/azure/cloud#az_cloud_unregister):
 
 ```azurecli-interactive
 az cloud unregister --name MyCloud

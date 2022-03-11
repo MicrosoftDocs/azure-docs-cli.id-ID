@@ -8,14 +8,14 @@ ms.prod: azure
 ms.technology: azure-cli
 ms.openlocfilehash: 2c37a51ed3d3d63111cb741224f6592bc84a0effd9b39755ea833455234f5d87
 ms.sourcegitcommit: 16753e7a57048868e186c49e44c1877406530fa5
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: id-ID
 ms.lasthandoff: 08/06/2021
 ms.locfileid: "132439036"
 ---
-Jika Anda tidak dapat terhubung ke sumber daya eksternal karena proxy, pastikan Anda telah mengatur dan variabel dengan benar `HTTP_PROXY` `HTTPS_PROXY` di shell Anda. Anda perlu menghubungi administrator sistem Anda untuk mengetahui host dan port apa yang akan digunakan untuk proxy ini.
+Jika Anda tidak dapat terhubung ke sumber daya eksternal dikarenakan proksi, pastikan Anda telah mengatur variabel `HTTP_PROXY` dan `HTTPS_PROXY` dengan benar dalam shell Anda. Anda perlu menghubungi administrator sistem untuk mengetahui host dan port yang akan digunakan untuk proksi ini.
 
-Nilai-nilai ini dihormati oleh banyak program Linux, termasuk yang digunakan dalam proses instalasi. Untuk mengatur nilai-nilai ini:
+Nilai ini digunakan oleh berbagai program Linux, termasuk nilai yang digunakan dalam proses penginstalan. Untuk mengatur nilai ini:
 
 ```bash
 # No auth
@@ -28,6 +28,6 @@ export HTTPS_PROXY=https://[username]:[password]@[proxy]:[port]
 ```
 
 > [!IMPORTANT]
-> Jika Anda berada di belakang proxy, variabel shell ini harus diatur untuk terhubung ke layanan Azure dengan CLI.
-> Jika Anda tidak menggunakan auth dasar, disarankan untuk mengekspor variabel-variabel ini dalam `.bashrc` file Anda.
-> Selalu ikuti kebijakan keamanan bisnis Anda dan persyaratan administrator sistem Anda.
+> Jika Anda berada di belakang proksi, variabel shell ini harus diatur untuk terhubung ke layanan Azure dengan CLI.
+> Jika tidak menggunakan autentikasi dasar, sebaiknya Anda mengekspor variabel ini dalam file `.bashrc`.
+> Selalu ikuti kebijakan keamanan bisnis dan persyaratan administrator sistem Anda.

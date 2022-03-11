@@ -1,5 +1,5 @@
 ---
-title: Mode interaktif Azure CLI | Microsoft Docs
+title: Mode Interaktif Azure CLI | Microsoft Docs
 description: Mode interaktif Azure CLI adalah shell interaktif dengan penyelesaian otomatis, deskripsi perintah, dan contoh.
 author: dbradish-microsoft
 ms.author: dbradish
@@ -9,58 +9,58 @@ ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
-Keywords: azure cli interactive mode
+Keywords: mode interaktif azure cli
 ms.openlocfilehash: 1018b845e9a04458540f913b69e0908eaaac6893
 ms.sourcegitcommit: ecad34e4d4654660377050fccba7861e942e03de
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: id-ID
 ms.lasthandoff: 09/13/2021
 ms.locfileid: "132439040"
 ---
 # <a name="azure-cli-interactive-mode"></a>Mode interaktif Azure CLI
 
-Anda dapat menggunakan Azure CLI dalam mode interaktif dengan menjalankan `az interactive` perintah.  Mode interaktif Azure CLI menempatkan Anda dalam shell interaktif dengan penyelesaian otomatis, deskripsi perintah, dan contoh.
+Anda dapat menggunakan Azure CLI dalam mode interaktif dengan menjalankan perintah `az interactive`.  Mode interaktif Azure CLI menempatkan Anda dalam shell interaktif dengan penyelesaian otomatis, deskripsi perintah, dan contoh.
 
 ![mode interaktif](./media/interactive-azure-cli/webapp-create.png)
 
 > [!NOTE]
-> Kami tidak menggunakan gaya default di sini, yang tidak membaca juga pada latar belakang hitam.
+> Di sini, kami tidak menggunakan gaya default, yang juga tidak dibaca di latar belakang hitam.
 
-Jika Anda belum masuk ke akun Anda, gunakan `login` perintah tersebut.
+Jika Anda belum masuk ke akun, gunakan perintah `login`.
 
-## <a name="what-is-the-azure-cli-interactive-mode"></a>Apa itu mode interaktif Azure CLI?
+## <a name="what-is-the-azure-cli-interactive-mode"></a>Apa yang dimaksud dengan mode interaktif Azure CLI?
 
-Azure CLI Interactive Mode (az interactive) menyediakan pengguna lingkungan interaktif untuk menjalankan perintah Azure CLI. Mode interaktif memudahkan Anda untuk mempelajari kemampuan, sintaks perintah, dan format output Azure CLI. Ini menyediakan dropdown pelengkapan otomatis, saran autocached dikombinasikan dengan dokumentasi runtime, termasuk contoh bagaimana setiap perintah digunakan. Azure CLI Interactive Mode bertujuan untuk memberikan pengalaman yang ideal bagi pengguna yang belajar menggunakan perintah Azure CLI. 
+Mode Interaktif Azure CLI (az interactive) menyediakan pengguna lingkungan interaktif untuk menjalankan perintah Azure CLI. Mode interaktif memudahkan Anda mempelajari kemampuan, sintaks perintah, dan format output Azure CLI. Ini menyediakan menu drop-down penyelesaian otomatis, saran cache otomatis yang dikombinasikan dengan dokumentasi runtime, termasuk contoh bagaimana setiap perintah digunakan. Mode Interaktif Azure CLI bertujuan untuk memberikan pengalaman yang ideal bagi pengguna yang belajar menggunakan perintah Azure CLI. 
 
 ## <a name="configure"></a>Konfigurasikan
 
-Mode interaktif secara opsional menampilkan deskripsi perintah, deskripsi parameter, dan contoh perintah.
-Mengaktifkan atau menonaktifkan deskripsi dan contoh menggunakan `F1` .
+Secara opsional, mode interaktif menampilkan deskripsi perintah, deskripsi parameter, dan contoh perintah.
+Aktifkan atau nonaktifkan deskripsi dan contoh menggunakan `F1`.
 
-![Deskripsi dan contoh on/off](./media/interactive-azure-cli/descriptions-and-examples.png)
+![Deskripsi dan contoh aktif/nonaktif](./media/interactive-azure-cli/descriptions-and-examples.png)
 
-Anda dapat mengaktifkan atau menonaktifkan tampilan default parameter menggunakan `F2` .
+Anda dapat mengaktifkan atau menonaktifkan tampilan default parameter menggunakan `F2`.
 
-![Tampilkan default/mati parameter](./media/interactive-azure-cli/defaults.png)
+![Tampilan default parameter aktif/nonaktif](./media/interactive-azure-cli/defaults.png)
 
 `F3` beralih tampilan beberapa gerakan kunci.
 
-![Gerakan tombol beralih](./media/interactive-azure-cli/gestures.png)
+![Peralihan gerakan kunci](./media/interactive-azure-cli/gestures.png)
 
 ## <a name="scope"></a>Cakupan
 
-Anda dapat lingkup mode interaktif Anda ke kelompok perintah tertentu seperti `vm` atau `vm image` .
-Ketika Anda melakukannya, semua perintah ditafsirkan dalam lingkup itu.
-Ini adalah singkatan yang bagus jika Anda melakukan semua pekerjaan Anda dalam kelompok perintah itu.
+Anda dapat menguji mode interaktif dengan grup perintah tertentu seperti `vm` atau `vm image`.
+Jika Anda melakukannya, semua perintah akan ditafsirkan dalam cakupan tersebut.
+Sebaiknya Anda melakukan semua pekerjaan di grup perintah tersebut.
 
-Alih-alih mengetik perintah ini:
+Sebagai alternatif mengetik perintah ini:
 
 ```azurecli
 az>> vm create -n myVM -g myRG --image UbuntuLTS
 az>> vm list -o table
 ```
 
-Anda dapat lingkup ke grup perintah vm dan ketik perintah ini:
+Anda dapat menguji dengan grup perintah vm dan mengetik perintah ini:
 
 ```azurecli
 az>> %%vm
@@ -68,16 +68,16 @@ az vm>> create -n myVM -g myRG --image UbuntuLTS
 az vm>>list -o table
 ```
 
-Anda dapat lingkup ke kelompok perintah tingkat yang lebih rendah juga.
-Anda dapat ruang lingkup untuk `vm image` menggunakan `%%vm image` .
-Dalam hal ini, karena kita sudah dise `vm` lingkup, kita akan `%%image` menggunakan.
+Anda juga dapat menguji dengan grup perintah tingkat rendah.
+Anda dapat menguji dengan `vm image` menggunakan `%%vm image`.
+Dalam hal ini, karena kita telah menguji dengan `vm`, kita akan menggunakan `%%image`.
 
 ```azurecli
 az vm>> %%image
 az vm image>>
 ```
 
-Pada saat itu, kita dapat pop ruang lingkup kembali untuk `vm` `%%..` menggunakan, atau kita dapat ruang lingkup ke akar dengan `%%` hanya.
+Pada poin ini, kita dapat memunculkan cakupan kembali ke `vm` menggunakan `%%..`, atau kita dapat menguji dengan akarnya dengan `%%` saja.
 
 ```azurecli
 az vm image>> %%
@@ -86,15 +86,15 @@ az>>
 
 ## <a name="query"></a>Kueri
 
-Anda dapat mengeksekusi kueri JMESPath pada hasil perintah terakhir yang Anda jalankan dengan menggunakan `??` diikuti oleh kueri JMESPath.
-Misalnya, setelah membuat grup, Anda dapat mengambil id grup baru.
+Anda dapat menjalankan kueri JMESPath di hasil perintah terakhir yang Anda jalankan dengan menggunakan `??` yang diikuti oleh kueri JMESPath.
+Misalnya, setelah membuat grup, Anda dapat mengambil ID grup baru.
 
 ```azurecli
 az>> group create -n myRG -l westEurope
 az>> "?? id"
 ```
 
-Anda juga dapat menggunakan sintaks ini untuk menggunakan hasil perintah sebelumnya sebagai argumen untuk perintah Anda berikutnya.* Misalnya setelah mencantumkan semua grup, daftar semua sumber daya tipe `virtualMachine` pada grup pertama yang lokasinya adalah westeurope. 
+Anda juga dapat menggunakan sintaks ini untuk menggunakan hasil perintah sebelumnya sebagai argumen untuk perintah Berikutnya.* Misalnya setelah mencantumkan semua grup, cantumkan semua sumber daya jenis `virtualMachine`pada grup pertama yang lokasinya adalah westeurope. 
 
 ```azurecli
 az>> vm create --name myVM --resource-group myRG --image UbuntuLTS --no-wait -o json
@@ -102,11 +102,11 @@ az>> group list -o json
 az>> resource list -g "?? [?location=='westeurope'].name | [0]" --query "[?type=='Microsoft.Compute/virtualMachines'].name
 ```
 
-Untuk mempelajari selengkapnya tentang kueri hasil perintah Anda, lihat [Hasil perintah Kueri dengan Azure CLI](query-azure-cli.md).
+Untuk mempelajari lebih lanjut cara mengkueri hasil perintah Anda, lihat [Mengkueri hasil perintah dengan Azure CLI](query-azure-cli.md).
 
-## <a name="bash-commands"></a>Perintah bash
+## <a name="bash-commands"></a>Perintah Bash
 
-Anda dapat menjalankan perintah shell tanpa meninggalkan mode interaktif menggunakan `#[cmd]` .
+Anda dapat menjalankan perintah shell tanpa keluar dari mode interaktif menggunakan `#[cmd]`.
 
 ```azurecli
 az>> #dir
@@ -115,11 +115,11 @@ az>> #dir
 ## <a name="examples"></a>Contoh
 
 Beberapa perintah memiliki banyak contoh.
-Anda dapat menggulir ke halaman berikutnya dari contoh yang digunakan `CTRL-N` dan halaman sebelumnya menggunakan `CTRL-Y` .
+Anda dapat menggulir ke halaman contoh berikutnya menggunakan `CTRL-N` dan halaman sebelumnya menggunakan `CTRL-Y`.
 
-![Gulir ke halaman contoh berikutnya](./media/interactive-azure-cli/examples.png)
+![Menggulir ke halaman contoh berikutnya](./media/interactive-azure-cli/examples.png)
 
-Anda juga dapat melihat contoh spesifik menggunakan `::#` .
+Anda juga dapat melihat contoh tertentu menggunakan `::#`.
 
 ```azurecli
 az>> vm create ::8

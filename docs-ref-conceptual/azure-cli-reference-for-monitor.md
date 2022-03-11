@@ -1,6 +1,6 @@
 ---
-title: Azure CLI references for Azure Monitor | Microsoft Docs
-description: Perintah referensi inti dan ekstensi LFind Azure CLI untuk mengelola Azure Monitor. Ikuti tautan ke artikel populer untuk mempelajari cara menggunakan Azure CLI untuk Azure Monitor
+title: Referensi Azure CLI untuk Azure Monitor | Microsoft Docs
+description: Temukan perintah referensi inti dan ekstensi Azure CLI untuk mengelola Azure Monitor. Ikuti tautan ke artikel populer untuk mempelajari cara menggunakan Azure CLI untuk Azure Monitor
 author: dbradish-microsoft
 manager: barbkess
 ms.devlang: azurecli
@@ -10,56 +10,56 @@ ms.author: dbradish
 ms.service: azure-cli
 ms.reviewer: robb
 ms.custom: devx-track-azurecli, seo-azure-cli
-keywords: azure references, azure monitor
+keywords: referensi azure, azure monitor
 ms.openlocfilehash: 1fb28dcfc4fdc914a760dbc2e28fc46e6967b3ab
 ms.sourcegitcommit: 82cb7af10a689b9b485859552d2f834bd593f6a1
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: id-ID
 ms.lasthandoff: 10/06/2021
 ms.locfileid: "132439079"
 ---
-# <a name="azure-cli-reference-commands-for-azure-monitor"></a>Azure CLI reference commands for Azure Monitor
+# <a name="azure-cli-reference-commands-for-azure-monitor"></a>Perintah referensi Azure CLI untuk Azure Monitor
 
-Azure Command-Line Interface[(CLI)](./what-is-azure-cli.md)adalah seperangkat perintah yang digunakan untuk membuat dan mengelola sumber daya Azure untuk banyak layanan Azure. Untuk Azure Monitor, lebih dari 100 perintah berbeda tersedia, yang memberi Anda kemampuan untuk bekerja secara efektif dengan layanan dari baris perintah.
+Azure Command-Line Interface ([CLI](./what-is-azure-cli.md)) adalah sekumpulan perintah yang digunakan untuk membuat dan mengelola sumber daya Azure untuk berbagai layanan Azure. Untuk Azure Monitor, terdapat lebih dari 100 perintah lainnya, yang memungkinkan Anda bekerja secara efektif dengan layanan dari baris perintah.
 
-Perintah Azure CLI untuk [Azure Monitor](/azure/azure-monitor/) terdiri dari dua bagian: Azure CLI (biasa disebut sebagai **inti** CLI) dan **ekstensi** jejak Azure Monitor CLI . Ekstensi Azure CLI untuk Azure Monitor secara otomatis diinstal saat pertama kali Anda menjalankan referensi ekstensi. Untuk informasi selengkapnya tentang referensi ekstensi, lihat [Menggunakan ekstensi dengan Azure CLI](./azure-cli-extensions-overview.md).
+Perintah Azure CLI untuk [Azure Monitor](/azure/azure-monitor/) terdiri dari dua bagian: Azure CLI (biasanya disebut sebagai **inti** CLI) dan **ekstensi** jejak CLI Azure Monitor. Ekstensi Azure CLI untuk Azure Monitor diinstal secara otomatis saat pertama kali Anda menjalankan referensi ekstensi. Untuk informasi selengkapnya tentang ekstensi, lihat [Menggunakan ekstensi dengan Azure CLI](./azure-cli-extensions-overview.md).
 
 > [!IMPORTANT]
 >
-> Azure Monitor sekarang menyertakan Insights Aplikasi dan Log Analytics. Anda harus menginstal ekstensi untuk setiap sub-area saat bekerja dengan Azure CLI untuk Azure Monitor. Anda diminta untuk menginstal referensi ekstensi pada penggunaan pertama. Atau, Anda dapat menggunakan `az extension add` perintah untuk menginstal ekstensi secara manual.
+> Azure Monitor kini dilengkapi dengan Application Insights dan Log Analytics. Anda harus menginstal ekstensi untuk setiap sub-area saat bekerja dengan Azure CLI untuk Azure Monitor. Anda diminta menginstal referensi ekstensi saat digunakan pertama kali. Sebagai alternatif, Anda dapat menggunakan perintah `az extension add` untuk menginstal ekstensi secara manual.
 
-## <a name="azure-monitor-references"></a>Azure Monitor references
+## <a name="azure-monitor-references"></a>Referensi Azure Monitor
 
 Daftar referensi Azure CLI yang dapat digunakan untuk mengelola Azure Monitor, deskripsi referensi, dan tautan ke artikel populer:
 
 | Referensi | Menginstal ekstensi | Deskripsi | Untuk informasi selengkapnya
 |-|-|-|-|
 | [az monitor](/cli/azure/monitor) | | Grup perintah tingkat atas untuk semua perintah Azure CLI untuk Azure Monitor. | [Gambaran umum Azure Monitor](/azure/azure-monitor/overview)
-| [az monitor action-group](/cli/azure/monitor/action-group) | | Kelola grup tindakan, yang berhubungan dengan pemberitahuan setelah peringatan dipecat. | [Azure Monitor alerts](/azure/azure-monitor/platform/alerts-overview)
-| [az monitor action-rule](/cli/azure/monitor/action-rule) | ya | Kelola aturan tindakan, yang memungkinkan Anda menambahkan atau menekan grup tindakan pada peringatan yang Dipecat. | [Azure Monitor alerts](/azure/azure-monitor/alerts/alerts-action-rules)
-| [az monitor activity-log](/cli/azure/monitor/activity-log) | | Mengelola log aktivitas, termasuk peringatan log aktivitas. | [Azure activity logs](/azure/azure-monitor/platform/activity-log)
-| [az monitor app-insights](/cli/azure/monitor/app-insights) | ya | Kelola Insights Aplikasi untuk pemantauan aplikasi. | [Gambaran umum Application insights](/azure/azure-monitor/app/app-insights-overview)
-| [az monitor autoscale](/cli/azure/monitor/autoscale) | | Mengelola pengaturan skalaoto.com. | [Gambaran umum skala otomatis](/azure/azure-monitor/platform/autoscale-overview)
+| [az monitor action-group](/cli/azure/monitor/action-group) | | Mengelola grup tindakan, yang terkait dengan notifikasi setelah peringatan dipicu. | [Peringatan Azure Monitor](/azure/azure-monitor/platform/alerts-overview)
+| [az monitor action-rule](/cli/azure/monitor/action-rule) | ya | Mengelola aturan tindakan, yang memungkinkan Anda menambahkan atau menekan grup tindakan pada peringatan yang dipicu. | [Peringatan Azure Monitor](/azure/azure-monitor/alerts/alerts-action-rules)
+| [az monitor activity-log](/cli/azure/monitor/activity-log) | | Mengelola log aktivitas, termasuk peringatan log aktivitas. | [Log aktivitas Azure](/azure/azure-monitor/platform/activity-log)
+| [az monitor app-insights](/cli/azure/monitor/app-insights) | ya | Mengelola Application Insights untuk pemantauan aplikasi. | [Gambaran umum Application insights](/azure/azure-monitor/app/app-insights-overview)
+| [az monitor autoscale](/cli/azure/monitor/autoscale) | | Mengelola pengaturan skala otomatis. | [Ringkasan skala otomatis](/azure/azure-monitor/platform/autoscale-overview)
 | [az monitor data-collection](/cli/azure/monitor/data-collection) | ya | Mengelola aturan pengumpulan data. | [Aturan pengumpulan data](/azure/azure-monitor/agents/data-collection-rule-overview)
-| [az monitor diagnostic-settings](/cli/azure/monitor/diagnostic-settings) | | Mengelola pengaturan diagnostik layanan, yang mengatur pengumpulan dan perutean dari berbagai jenis metrik platform dan log. | [Membuat pengaturan diagnostik](/azure/azure-monitor/platform/diagnostic-settings)
-| [az footprint](/cli/azure/footprint) | ya | Kelola pengaturan Azure Footprint. |
-| [az monitor log-analytics](/cli/azure/monitor/log-analytics) | | Mengelola cluster log dan ruang kerja. | [Merancang penyebaran Log Azure Monitor](/azure/azure-monitor/platform/design-logs-deployment)
-| [az monitor log-analytics solution](/cli/azure/monitor/log-analytics/solution) | ya | Kelola solusi Log Analytics. |
-| [az monitor log-profiles](/cli/azure/monitor/log-profiles) | | Jangan gunakan untuk pengembangan baru. Perintah ini sebelumnya digunakan untuk merutekan log aktivitas ke Azure Monitor Logs dan Log Analytics.  Gunakan [pengaturan diagnostik](/azure/azure-monitor/platform/diagnostic-settings) sebagai gantinya.  | [Mengirim log Aktivitas ke ruang kerja Log Analytics](/azure/azure-monitor/platform/activity-log#send-to-log-analytics-workspace)
-| [az monitor metrics](/cli/azure/monitor/metrics) | | Kelola metrik platform dan aturan peringatan metrik yang hampir realtime. | [Ikhtisar metrik di Azure Monitor](/azure/azure-monitor/platform/data-platform-metrics) dan Memahami cara kerja peringatan [metrik](/azure/azure-monitor/platform/alerts-metric-overview)
-| [az monitor private-link-scope](/cli/azure/monitor/private-link-scope) | | Mengelola memantau sumber daya lingkup link pribadi. | [Menggunakan Azure Private Link untuk menyambungkan jaringan dengan aman ke Azure Monitor](/azure/azure-monitor/platform/private-link-security)
-| [az monitor scheduled-query](/cli/azure/monitor/scheduled-query) | ya | Mengelola pertanyaan terjadwal.
+| [az monitor diagnostic-settings](/cli/azure/monitor/diagnostic-settings) | | Mengelola pengaturan diagnostik layanan, yang menyiapkan pengumpulan dan perutean berbagai jenis log dan metrik platform. | [Membuat pengaturan diagnostik](/azure/azure-monitor/platform/diagnostic-settings)
+| [az footprint](/cli/azure/footprint) | ya | Mengelola pengaturan Azure Footprint. |
+| [az monitor log-analytics](/cli/azure/monitor/log-analytics) | | Mengelola kluster log dan ruang kerja. | [Merancang penyebaran Log Azure Monitor](/azure/azure-monitor/platform/design-logs-deployment)
+| [az monitor log-analytics solution](/cli/azure/monitor/log-analytics/solution) | ya | Mengelola solusi Log Analytics. |
+| [az monitor log-profiles](/cli/azure/monitor/log-profiles) | | JANGAN gunakan untuk pengembangan baru. Perintah ini sebelumnya digunakan untuk merutekan log aktivitas ke Log Azure Monitor dan Log Analytics.  Sebagai gantinya, gunakan [pengaturan diagnostik](/azure/azure-monitor/platform/diagnostic-settings).  | [Mengirim Log aktivitas ke ruang kerja Log Analytics](/azure/azure-monitor/platform/activity-log#send-to-log-analytics-workspace)
+| [az monitor metrics](/cli/azure/monitor/metrics) | | Mengelola metrik platform dan aturan peringatan metrik mendekati real time. | [Ringkasan metrik di Azure Monitor](/azure/azure-monitor/platform/data-platform-metrics) dan [Memahami cara kerja peringatan metrik](/azure/azure-monitor/platform/alerts-metric-overview)
+| [az monitor private-link-scope](/cli/azure/monitor/private-link-scope) | | Mengelola pemantauan sumber daya cakupan tautan privat. | [Menggunakan Azure Private Link untuk menyambungkan jaringan dengan aman ke Azure Monitor](/azure/azure-monitor/platform/private-link-security)
+| [az monitor scheduled-query](/cli/azure/monitor/scheduled-query) | ya | Mengelola kueri terjadwal.
 
-## <a name="popular-azure-monitor-articles-using-the-azure-cli"></a>Popular Azure Monitor articles using the Azure CLI
+## <a name="popular-azure-monitor-articles-using-the-azure-cli"></a>Artikel Azure Monitor populer menggunakan Azure CLI
 
 - [Sampel CLI Azure Monitor](/azure/azure-monitor/samples/cli-samples)
 - [Membuat ruang kerja Log Analytics dengan Azure CLI](/azure/azure-monitor/learn/quick-create-workspace-cli)
 
-## <a name="azure-cli-reference-examples-for-azure-monitor"></a>Azure CLI reference examples for Azure Monitor
+## <a name="azure-cli-reference-examples-for-azure-monitor"></a>Contoh referensi Azure CLI untuk Azure Monitor
 
-Contoh disediakan dengan setiap referensi Azure CLI. Meskipun Anda juga dapat menyelesaikan tugas-tugas ini melalui portal Azure, menggunakan Azure CLI memerlukan baris perintah. Berikut adalah beberapa blok kode untuk memberi Anda gambaran tentang betapa mudahnya menggunakan Azure CLI.
+Contoh dilengkapi dengan setiap referensi Azure CLI. Meskipun Anda juga dapat menyelesaikan tugas ini melalui portal Azure, penggunaan Azure CLI memerlukan baris perintah. Berikut beberapa blok kode untuk memberi gambaran tentang mudahnya menggunakan Azure CLI.
 
-Untuk bekerja dengan Azure Monitor, Anda terlebih dahulu memerlukan grup sumber daya.  Azure resource groups mudah dibuat dan dikelola dengan Azure CLI.  
+Untuk bekerja dengan Azure Monitor, Anda harus memiliki grup sumber daya terlebih dahulu.  Grup sumber daya Azure mudah dibuat dan dikelola dengan Azure CLI.  
 
 ```azurecli
 #create a resource group
@@ -69,7 +69,7 @@ az group create --location westus --name MyResourceGroup
 az group list --subscription MySubscription --output table
 ```
 
-Juga mudah untuk membuat peringatan log Azure Monitor.
+Peringatan log Azure Monitor juga mudah dibuat.
 
 ```azurecli
 #create an Azure Monitor activity log alert
@@ -78,8 +78,8 @@ az monitor activity-log alert create --name MyAlertName --resource-group MyResou
 
 ## <a name="see-also"></a>Lihat juga
 
-- [Mulai dengan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari tentang instalasi dan masuk.
+- [Mulai gunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari penginstalan dan aktivitas masuk.
 
-- Temukan referensi [inti](/cli/azure/reference-index) dan [ekstensi](./azure-cli-extensions-list.md) tambahan dalam dokumentasi Azure CLI.
+- Temukan referensi [inti](/cli/azure/reference-index) dan [ekstensi](./azure-cli-extensions-list.md) lainnya di dokumentasi Azure CLI.
 
-- Pelajari selengkapnya tentang referensi ekstensi di [Gunakan ekstensi dengan Azure CLI](./azure-cli-extensions-overview.md).
+- Pelajari referensi ekstensi lebih lanjut di [Menggunakan ekstensi dengan Azure CLI](./azure-cli-extensions-overview.md).

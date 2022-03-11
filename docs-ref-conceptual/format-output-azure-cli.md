@@ -9,27 +9,27 @@ ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
-keywords: azure cli commands
+keywords: perintah azure cli
 ms.openlocfilehash: be163b4355f8bcb6b23ba54ba8078a9762abe433
 ms.sourcegitcommit: 30e08311cdf7da0ca3107ce8e802128615b2345b
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: id-ID
 ms.lasthandoff: 11/17/2021
 ms.locfileid: "132729659"
 ---
 # <a name="output-formats-for-azure-cli-commands"></a>Format output untuk perintah Azure CLI
 
-Azure CLI menggunakan JSON sebagai format output default, tetapi menawarkan format lain.  Gunakan `--output` `--out` parameter `-o` (atau) untuk memformat output CLI. Nilai argumen dan jenis output adalah:
+Azure CLI menggunakan JSON sebagai format output default-nya, tetapi menawarkan format lain.  Gunakan parameter `--output` (`--out` atau `-o`) untuk memformat output CLI. Nilai argumen dan jenis output-nya adalah:
 
 --output | Deskripsi
 ---------|-------------------------------
-`json`   | JSON string. Pengaturan ini adalah default
+`json`   | String JSON. Ini adalah pengaturan default
 `jsonc`  | JSON berwarna
 `yaml`   | YAML, alternatif yang dapat dibaca manusia untuk JSON
 `yamlc`  | YAML berwarna
-`table`  | Tabel ASCII dengan tombol sebagai judul kolom
-`tsv`    | Nilai yang dipisahkan tab, tanpa tombol
-`none`   | Tidak ada output selain kesalahan dan peringatan
+`table`  | Tabel ASCII dengan kunci sebagai judul kolom
+`tsv`    | Nilai yang dipisahkan tab, tanpa kunci
+`none`   | Tidak ada output lain selain kesalahan dan peringatan
 
 ## <a name="json-output-format"></a>Format output JSON
 
@@ -39,7 +39,7 @@ Contoh berikut menampilkan daftar mesin virtual dalam langganan Anda dalam forma
 az vm list --output json
 ```
 
-Output berikut memiliki beberapa bidang dihilangkan untuk singkatnya, dan mengidentifikasi informasi diganti.
+Untuk mempersingkat, beberapa bidang pada output berikut dihilangkan, informasi yang diganti diidentifikasi.
 
 ```json
 [
@@ -71,13 +71,13 @@ Output berikut memiliki beberapa bidang dihilangkan untuk singkatnya, dan mengid
 
 ## <a name="yaml-output-format"></a>Format output YAML
 
-`yaml`Format mencetak output sebagai [YAML,](http://yaml.org/)format serialisasi data teks biasa. YAML cenderung lebih mudah dibaca daripada JSON, dan dengan mudah memetakan ke format itu. Beberapa aplikasi dan perintah CLI mengambil YAML sebagai input konfigurasi, bukan JSON.
+Format `yaml` mencetak output sebagai [YAML](http://yaml.org/), format serialisasi data teks biasa. YAML cenderung lebih mudah dibaca daripada JSON, dan dipetakan dengan mudah ke format tersebut. Beberapa aplikasi dan perintah CLI menggunakan YAML sebagai input konfigurasi, bukan JSON.
 
 ```azurecli-interactive
 az vm list --out yaml
 ```
 
-Output berikut memiliki beberapa bidang dihilangkan untuk singkatnya, dan mengidentifikasi informasi diganti.
+Untuk mempersingkat, beberapa bidang pada output berikut dihilangkan, informasi yang diganti diidentifikasi.
 
 ```yaml
 - availabilitySet: null
@@ -101,7 +101,7 @@ Output berikut memiliki beberapa bidang dihilangkan untuk singkatnya, dan mengid
 
 ## <a name="table-output-format"></a>Format output tabel
 
-`table`Format mencetak output sebagai tabel ASCII, sehingga mudah dibaca dan dipindai. Objek bertumpuk tidak termasuk dalam output tabel, tetapi masih dapat difilter sebagai bagian dari kueri. Beberapa bidang tidak termasuk dalam tabel, jadi format ini adalah yang terbaik ketika Anda menginginkan gambaran data yang cepat dan dapat dicari manusia.
+Format `table` mencetak output sebagai tabel ASCII, sehingga mudah dibaca dan dipindai. Objek bersarang tidak disertakan dalam output tabel, namun masih dapat difilter sebagai bagian dari kueri. Beberapa bidang tidak disertakan dalam tabel, jadi ini adalah format terbaik jika Anda menginginkan ringkasan data yang cepat dan dapat dicari manusia.
 
 ```azurecli-interactive
 az vm list --out table
@@ -117,7 +117,7 @@ KBDemo001VM  RGDEMO001        westus
 KBDemo020    RGDEMO001        westus
 ```
 
-Anda dapat menggunakan `--query` parameter untuk mengkustomisasi properti dan kolom yang ingin Anda tampilkan dalam output daftar. Contoh berikut menunjukkan cara memilih hanya Nama VM dan Nama Grup Sumber Daya dalam `list` perintah.
+Anda dapat menggunakan parameter `--query` untuk menyesuaikan properti dan kolom yang ingin ditampilkan dalam output daftar. Contoh berikut menunjukkan cara memilih Nama VM dan Nama Grup Sumber Daya saja dalam perintah `list`.
 
 ```azurecli-interactive
 az vm list --query "[].{resource:resourceGroup, name:name}" -o table
@@ -134,19 +134,19 @@ RGDEMO001   KBDemo020
 ```
 
 > [!NOTE]
-> Beberapa tombol tidak dicetak dalam tampilan tabel secara default. Mereka `id` adalah, `type` `etag` dan. Jika Anda perlu melihat ini dalam output Anda, Anda dapat menggunakan fitur re-keying JMESPath untuk mengubah nama kunci dan menghindari penyaringan.
+> Secara default, beberapa kunci tidak dicetak dalam tampilan tabel. Kunci tersebut adalah `id`, `type`, dan `etag`. Jika ingin melihatnya di output, Anda dapat menggunakan fitur penentuan ulang kunci JMESPath untuk mengubah nama kunci dan menghindari pemfilteran.
 >
 > ```azurecli-interactive
 > az vm list --query "[].{objectID:id}" -o table
 > ```
 
-Untuk selengkapnya tentang menggunakan kueri untuk memfilter data, lihat [Menggunakan kueri JMESPath dengan Azure CLI](./query-azure-cli.md).
+Untuk informasi tentang cara menggunakan kueri untuk memfilter data, lihat [Menggunakan kueri JMESPath dengan Azure CLI](./query-azure-cli.md).
 
 ## <a name="tsv-output-format"></a>Format output TSV
 
-`tsv`Format output mengembalikan nilai tab dan newline-separated tanpa pemformatan tambahan, tombol, atau simbol lainnya. Format ini memudahkan untuk mengkonsumsi output ke dalam perintah dan alat lain yang perlu memproses teks dalam beberapa bentuk. Seperti `table` formatnya, `tsv` tidak mencetak objek bertumpuk.
+Format output `tsv` menampilkan nilai yang dipisahkan tab dan baris baru tanpa pemformatan tambahan, kunci, atau simbol lainnya. Format ini memudahkan penggunaan output ke dalam perintah dan alat lain yang perlu memproses teks dalam beberapa bentuk. Seperti halnya format `table`, `tsv` tidak mencetak objek bersarang.
 
-Menggunakan contoh sebelumnya dengan `tsv` opsi output hasil tab-separated.
+Penggunaan contoh sebelumnya dengan opsi `tsv` akan menghasilkan hasil yang dipisahkan tab.
 
 ```azurecli-interactive
 az vm list --out tsv
@@ -160,11 +160,11 @@ None    None        /subscriptions/.../resourceGroups/RGDEMO001/providers/Micros
 None    None        /subscriptions/.../resourceGroups/RGDEMO001/providers/Microsoft.Compute/virtualMachines/KBDemo020   None    None    westus    KBDemo020            None    Succeeded    RGDEMO001    None            Microsoft.Compute/virtualMachines    36baa9-9b80-48a8-b4a9-854c7a858ece
 ```
 
-Salah satu pembatasan format output TSV adalah bahwa tidak ada jaminan pada pemesanan output. CLI melakukan upaya terbaik untuk menjaga pemesanan dengan menyortir kunci dalam respons JSON menurut abjad, dan kemudian mencetak nilai-nilainya agar output TSV. Ini bukan jaminan bahwa pesanan selalu identik, karena format respons layanan Azure dapat berubah.
+Salah satu batasan format output TSV adalah bahwa pengurutan output tidak bisa dijamin. CLI melakukan upaya terbaik untuk menjaga pengurutan dengan menyortir kunci dalam JSON respons menurut abjad, dan kemudian mencetak nilainya secara berurutan untuk output TSV. Hal ini bukan jaminan bahwa urutannya selalu identik, karena format respons layanan Azure bisa berubah.
 
-Untuk menegakkan pemesanan yang konsisten, Anda harus menggunakan `--query` parameter dan format daftar [multiselect.](query-azure-cli.md#get-multiple-values) Ketika perintah CLI mengembalikan kamus JSON tunggal, gunakan format umum `[key1, key2, ..., keyN]` untuk memaksa urutan kunci.  Untuk perintah CLI yang mengembalikan array, gunakan format umum `[].[key1, key2, ..., keyN]` untuk memesan nilai kolom.
+Untuk menerapkan pengurutan yang konsisten, Anda harus menggunakan parameter `--query` dan format [daftar multi-pilihan](query-azure-cli.md#get-multiple-values). Jika perintah CLI menampilkan satu kamus JSON, gunakan format umum `[key1, key2, ..., keyN]` untuk memaksa urutan kunci.  Untuk perintah CLI yang menampilkan larik, gunakan format umum `[].[key1, key2, ..., keyN]` untuk mengurutkan nilai kolom.
 
-Misalnya, untuk memesan informasi yang ditampilkan di atas berdasarkan ID, lokasi, grup sumber daya, dan nama VM:
+Misalnya, untuk mengurutkan informasi yang ditampilkan di atas berdasarkan ID, lokasi, grup sumber daya, dan nama VM:
 
 ```azurecli-interactive
 az vm list --out tsv --query '[].[id, location, resourceGroup, name]'
@@ -178,7 +178,7 @@ az vm list --out tsv --query '[].[id, location, resourceGroup, name]'
 /subscriptions/.../resourceGroups/RGDEMO001/providers/Microsoft.Compute/virtualMachines/KBDemo020       westus  RGDEMO001       KBDemo020
 ```
 
-Contoh berikutnya menunjukkan bagaimana `tsv` output dapat disalurkan ke perintah lain dalam bash. Kueri digunakan untuk memfilter output dan urutan gaya, `grep` memilih item yang memiliki teks "RGD" di dalamnya, lalu perintah memilih bidang keempat untuk menampilkan nama VM dalam `cut` output.
+Contoh berikutnya menunjukkan bagaimana output `tsv` dapat dialirkan ke perintah lain dalam bash. Kueri digunakan untuk memfilter output dan memaksa pengurutan, `grep` memilih item yang memiliki teks "RGD" di dalamnya, lalu perintah `cut` memilih bidang keempat untuk menampilkan nama VM dalam output.
 
 ```azurecli-interactive
 az vm list --out tsv --query '[].[id, location, resourceGroup, name]' | grep RGD | cut -f4
@@ -189,9 +189,9 @@ KBDemo001VM
 KBDemo020
 ```
 
-## <a name="set-the-default-output-format"></a>Mengatur format output default
+## <a name="set-the-default-output-format"></a>Menetapkan format output default
 
-Gunakan `az config set` perintah untuk mengatur lingkungan Anda dan menetapkan pengaturan default untuk format output. Format output default adalah `json` .
+Gunakan perintah `az config set` untuk menyiapkan lingkungan Anda dan menetapkan pengaturan default untuk format output. Format output default-nya adalah `json`.
 
 ```azurecli
 az config set core.output=<format>
@@ -218,4 +218,4 @@ What default output format would you like?
 Please enter a choice [1]:
 ```
 
-Untuk mempelajari selengkapnya tentang mengonfigurasi lingkungan Anda, lihat [konfigurasi Azure CLI](./azure-cli-configuration.md).
+Untuk mempelajari lebih lanjut cara mengonfigurasi lingkungan, lihat [Konfigurasi Azure CLI](./azure-cli-configuration.md).

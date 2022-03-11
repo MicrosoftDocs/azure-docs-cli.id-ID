@@ -1,6 +1,6 @@
 ---
-title: Opsi parameter yang bertahan – Azure CLI | Microsoft Docs
-description: Pelajari cara menggunakan parameter Azure Command-Line Interface (CLI) untuk menyimpan nilai parameter lokal yang dapat digunakan kembali untuk perintah Azure CLI.
+title: Opsi parameter tetap – Azure CLI | Microsoft Docs
+description: Pelajari cara menggunakan parameter tetap Azure Command-Line Interface (CLI) untuk menyimpan nilai parameter tetap lokal yang dapat digunakan kembali untuk perintah Azure CLI.
 author: dbradish-microsoft
 ms.author: dbradish
 manager: barbkess
@@ -10,47 +10,47 @@ ms.topic: conceptual
 ms.devlang: azurecli
 ms.technology: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
-keywords: azure persisted parameters, persisted parameters
+keywords: parameter tetap azure, parameter tetap
 ms.openlocfilehash: e296260b5d621b6d22f99718bec673cadddc9625
 ms.sourcegitcommit: ecad34e4d4654660377050fccba7861e942e03de
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: id-ID
 ms.lasthandoff: 09/13/2021
 ms.locfileid: "132439068"
 ---
-# <a name="azure-cli-persisted-parameter"></a>Azure CLI persisted parameter
+# <a name="azure-cli-persisted-parameter"></a>Parameter tetap Azure CLI
 
-The Azure CLI [az config param-persist](/cli/azure/config/param-persist) reference memberikan kemampuan untuk mempertahankan nilai parameter lokal yang bertahan untuk perintah Azure CLI.  Ini menghilangkan kebutuhan untuk terus mengetik ulang parameter umum. Misalnya, lokasi dan grup sumber daya diperlukan parameter dalam banyak perintah CLI, tetapi mereka tidak berkontribusi pada _maksud_ perintah.  Ketika Anda menyimpan nilai parameter dengan parameter yang bertahan, Anda mengurangi redundansi dan dapat secara signifikan mempersingkat sintaks perintah CLI.
+Referensi [az config param-persist](/cli/azure/config/param-persist) Azure CLI menyediakan kemampuan untuk mempertahankan nilai parameter tetap lokal untuk perintah Azure CLI.  Dengan demikian,parameter umum tidak lagi perlu diketik ulang terus-menerus. Misalnya, lokasi dan grup sumber daya adalah parameter yang diperlukan dalam berbagai perintah CLI, tetapi tidak berkontribusi terhadap _niat_ perintah.  Jika Anda menyimpan nilai parameter dengan parameter tetap, berarti Anda mengurangi redundansi dan dapat mempersingkat sintaks perintah CLI secara signifikan.
 
-Nilai konfigurasi yang digunakan oleh CLI dievaluasi dalam prioritas berikut, dengan item yang lebih tinggi pada daftar mengambil prioritas.
+Nilai konfigurasi yang digunakan oleh CLI dievaluasi dengan prioritas berikut, di mana item yang lebih tinggi diprioritaskan dalam daftar.
 
 1. Parameter baris perintah
 1. Nilai dalam direktori kerja lokal yang ditetapkan oleh `az config param-persist`
 1. Variabel lingkungan
-1. Nilai dalam file konfigurasi atau set dengan `az config`
+1. Nilai dalam file konfigurasi atau ditetapkan dengan `az config`
 
-[Instal Azure CLI](install-azure-cli.md) atau buka [Azure Cloud Shell](https://shell.azure.com) untuk menjalankan skrip di artikel ini.  Jika Anda menggunakan instalasi lokal Azure CLI, versi 2.12.0 atau yang lebih baru diperlukan untuk menjalankan `az config param-persist` perintah.  Jalankan [versi az](/cli/azure/reference-index#az_version) untuk menemukan versi dan pustaka dependen yang diinstal. Untuk meningkatkan ke versi terbaru, jalankan [peningkatan az](/cli/azure/reference-index#az_upgrade).  Azure Cloud Shell selalu memiliki versi terbaru dari Azure CLI.
+[Instal Azure CLI](install-azure-cli.md) atau buka [Azure Cloud Shell](https://shell.azure.com) untuk menjalankan skrip dalam artikel ini.  Jika Anda menggunakan penginstalan lokal Azure CLI, versi 2.12.0 atau yang lebih baru diperlukan untuk menjalankan perintah `az config param-persist`.  Jalankan [versi az](/cli/azure/reference-index#az_version) untuk menemukan versi dan pustaka dependen yang diinstal. Untuk meningkatkan ke versi terbaru, jalankan [peningkatan az](/cli/azure/reference-index#az_upgrade).  Azure Cloud Shell selalu memiliki Azure CLI versi terbaru.
 
-## <a name="persisted-parameter-data-file"></a>Berkas data parameter yang bertahan
+## <a name="persisted-parameter-data-file"></a>File data parameter tetap
 
-Nilai parameter yang disimpan dalam file bernama `.param_persist` yang disimpan dalam direktori kerja Anda.  Jika Anda menggunakan [Azure Cloud Shell](https://shell.azure.com) untuk menjalankan perintah Azure CLI, direktori kerja Anda ada di akun penyimpanan yang digunakan oleh Azure CLI.  Jika Anda menggunakan [instalasi lokal](install-azure-cli.md) Azure CLI, direktori kerja Anda ada di mesin lokal Anda.  Di kedua lokasi, `.param_persist` file disembunyikan dan tidak boleh diperbarui secara manual.
+Nilai parameter tetap disimpan dalam file bernama `.param_persist` yang disimpan dalam direktori kerja Anda.  Jika Anda menggunakan [Azure Cloud Shell](https://shell.azure.com) untuk menjalankan perintah Azure CLI, direktori kerja Anda berada di akun penyimpanan yang digunakan oleh Azure CLI.  Jika Anda menggunakan [penginstalan lokal](install-azure-cli.md) Azure CLI, direktori kerja Anda berada di mesin lokal Anda.  Di salah satu lokasi, file `.param_persist` disembunyikan dan tidak boleh diperbarui secara manual.
 
-## <a name="persisted-parameter-storage-and-support"></a>Penyimpanan dan dukungan parameter yang berkelanjutan
+## <a name="persisted-parameter-storage-and-support"></a>Penyimpanan dan dukungan parameter tetap
 
-Parameter Azure CLI berikut didukung oleh parameter yang bertahan.  Parameter `resource_group_name` dan disimpan secara berbeda karena Anda dapat `location` menambahkannya ke parameter yang bertahan _tanpa_ menjalankan perintah buat.
+Parameter Azure CLI berikut didukung oleh parameter tetap.  Parameter `resource_group_name` dan `location` disimpan secara berbeda karena Anda dapat menambahkannya ke parameter tetap _tanpa_ menjalankan perintah create.
 
-| Parameter yang bertahan | tindakan Storage | Didukung oleh
+| Parameter tetap | Tindakan penyimpanan | Didukung oleh
 |-|-|-|
-| lokasi | Jalankan perintah apa pun | Semua referensi Azure CLI
-| resource_group_name | Jalankan perintah apa pun | Semua referensi Azure CLI
-| vnet_name | Menjalankan perintah buat | Azure Web Apps only
-| storage_account_name | Menjalankan perintah buat |  Azure Web Apps only
-| webapp_name | Menjalankan perintah buat | Azure Web Apps only
-| function_app_name | Menjalankan perintah buat | Azure Functions only
+| lokasi | Menjalankan perintah apa pun | Semua referensi Azure CLI
+| resource_group_name | Menjalankan perintah apa pun | Semua referensi Azure CLI
+| vnet_name | Menjalankan perintah buat | Khusus Azure Web Apps
+| storage_account_name | Menjalankan perintah buat |  Khusus Azure Web Apps
+| webapp_name | Menjalankan perintah buat | Khusus Azure Web Apps
+| function_app_name | Menjalankan perintah buat | Khusus Azure Functions
 
-## <a name="sample-script-using-persisted-parameters"></a>Contoh skrip menggunakan parameter yang bertahan
+## <a name="sample-script-using-persisted-parameters"></a>Contoh skrip yang menggunakan parameter tetap
 
-Tanpa parameter yang bertahan, perintah CLI berurutan harus mengulangi nilai parameter yang sama.  Dengan parameter yang diaktifkan, nilai parameter yang tersimpan dapat dihilangkan dari perintah berurutan.  Dalam contoh `location` ini, , `resource group name` atau diulang dalam `storage account name` perintah berikutnya.
+Tanpa parameter tetap, perintah CLI berurutan pasti akan mengulangi nilai parameter yang sama.  Dengan diaktifkannya parameter tetap, nilai parameter tersimpan Anda dapat dihilangkan dari perintah berurutan.  Dalam contoh ini, `location`, `resource group name`, atau `storage account name` diulang dalam perintah berikutnya.
 
 ```azurecli
 # Reminder: function app and storage account names must be unique.
@@ -76,18 +76,18 @@ az functionapp create \
 az config param-persist show
 ```
 
-## <a name="persisted-parameter-and-global-variable-comparison"></a>Parameter yang bertahan dan perbandingan variabel global
+## <a name="persisted-parameter-and-global-variable-comparison"></a>Perbandingan variabel global dan parameter tetap
 
-Ada dua perintah Azure CLI yang dapat digunakan untuk nilai parameter default: `az config set defaults` dan `az config param-persist` .  Gunakan `az config set defaults.<option>=<value>` perintah untuk menentukan _variabel global_ seperti grup, lokasi, atau web. Gunakan `az param-persist` untuk menentukan nilai default _lokal_ yang unik untuk beban kerja Anda.  Nilai yang disimpan digunakan oleh CLI sebagai pengganti argumen yang diperlukan.
+Ada dua perintah Azure CLI yang dapat digunakan untuk nilai parameter default: `az config set defaults` dan `az config param-persist`.  Gunakan perintah `az config set defaults.<option>=<value>` untuk menentukan _variabel global_ seperti grup, lokasi, atau web. Gunakan `az param-persist` untuk menentukan _nilai default lokal_ yang unik untuk beban kerja Anda.  Nilai tersimpan digunakan oleh CLI sebagai pengganti argumen yang diperlukan.
 
 > [!Important]
-> Parameter yang bertahan mengesampingkan nilai konteks global.
+> Parameter tetap mengesampingkan nilai konteks global.
 >
 
-| Referensi | Cakupan | Set | Gunakan 
+| Referensi | Cakupan | Set | Penggunaan
 |-|-|-|-|
-[`az config set defaults.<option>=<value>`](/cli/azure/config) | Lingkup global di seluruh CLI | Mengatur secara eksplisit menggunakan `az config set defaults.<option>=<value>` | Gunakan untuk pengaturan seperti log, pengumpulan data, dan nilai argumen default
-[`az config param-persist`](/cli/azure/config/param-persist) | Dise lingkup lokal ke direktori kerja tertentu | Atur secara otomatis setelah parameter yang bertahan diaktifkan | Gunakan untuk perintah berurutan beban kerja individu.
+[`az config set defaults.<option>=<value>`](/cli/azure/config) | Dicakup secara global di seluruh CLI | Diatur secara eksplisit menggunakan `az config set defaults.<option>=<value>` | Digunakan untuk pengaturan seperti pengelogan, pengumpulan data, dan nilai argumen default
+[`az config param-persist`](/cli/azure/config/param-persist) | Dicakup secara lokal ke direktori kerja tertentu | Diatur otomatis setelah parameter tetap diaktifkan | Digunakan untuk perintah berurutan beban kerja individual.
 
 ### <a name="command-examples"></a>Contoh perintah
 
@@ -124,7 +124,7 @@ Output perintah CLI menunjukkan bahwa akun penyimpanan baru dibuat dalam grup su
 ...
 ```
 
-Gunakan `az config param-persist` untuk mengatur parameter yang tetap digunakan dalam pembuatan akun penyimpanan Azure.  Jika variabel global ditetapkan untuk objek yang sama, parameter yang bertahan akan menimpa variabel global.
+Gunakan `az config param-persist` untuk menetapkan parameter tetap yang digunakan dalam membuat akun penyimpanan Azure.  Jika variabel global ditetapkan untuk objek yang sama, parameter tetap akan menimpa variabel global.
 
 ```azurecli
 # turn persisted parameter on
@@ -141,7 +141,7 @@ az storage account create \
   --sku Standard_LRS
 ```
 
-Bahkan dengan variabel global yang ditetapkan untuk kelompok sumber daya dengan nilai `myGlobalVariableRG` , dengan parameter bertahan diaktifkan, akun penyimpanan baru dibuat dengan `myParamPersistRG` .
+Meskipun variabel global ditetapkan untuk grup sumber daya dengan nilai `myGlobalVariableRG`, dengan parameter tetap yang diaktifkan, akun penyimpanan baru dibuat dengan `myParamPersistRG`.
 
 ```output
 ...
@@ -162,5 +162,5 @@ Bahkan dengan variabel global yang ditetapkan untuk kelompok sumber daya dengan 
 
 ## <a name="see-also"></a>Lihat juga
 
-* [Tutorial: Gunakan parameter yang bertahan dengan perintah Azure CLI berurutan](param-persist-tutorial.md)
-* [Azure CLI Configuration using `az config`](azure-cli-configuration.md)
+* [Tutorial: Menggunakan parameter tetap untuk perintah Azure CLI berurutan](param-persist-tutorial.md)
+* [Konfigurasi Azure CLI menggunakan `az config`](azure-cli-configuration.md)

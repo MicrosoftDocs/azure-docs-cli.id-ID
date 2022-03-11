@@ -1,6 +1,6 @@
 ---
-title: Mulai menggunakan | Azure Command-Line Interface (CLI) Microsoft Dokumen
-description: Pelajari cara mulai menggunakan Azure CLI dengan menyelesaikan perintah umum. Anda dapat mulai menggunakan Azure CLI dengan menjalankannya di lingkungan shell Azure Cloud.
+title: Mulai menggunakan Azure Command-Line Interface (CLI) | Microsoft Docs
+description: Pelajari cara mulai menggunakan Azure CLI dengan menyelesaikan perintah umum. Anda dapat mulai menggunakan Azure CLI dengan menjalankannya di lingkungan Azure Cloud Shell.
 author: dbradish-microsoft
 ms.author: dbradish
 manager: barbkess
@@ -9,10 +9,10 @@ ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
-keywords: azure cli, cara menggunakan azure cli, azure command line interface, cara membuka azure cli, azure cli commands
+keywords: azure cli, cara menggunakan azure cli, antarmuka baris perintah azure, cara membuka azure cli, perintah azure cli
 ms.openlocfilehash: a98d282beebeafd3262fe5d662a083019956721f
 ms.sourcegitcommit: ad79327952adf0f8be8f1b9678e72434d9f03f0c
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: id-ID
 ms.lasthandoff: 02/12/2022
 ms.locfileid: "138526549"
@@ -23,22 +23,22 @@ Selamat datang di Azure Command-Line Interface (CLI)!  Artikel ini memperkenalka
 
 > [!NOTE]
 >
-> Dalam skrip dan di situs dokumentasi Microsoft, contoh Azure CLI ditulis untuk `bash` shell. Contoh satu baris akan berjalan di platform apa pun. Contoh yang lebih panjang yang mencakup kelanjutan baris (`\`) atau penetapan variabel perlu dimodifikasi untuk bekerja pada shell lain, termasuk PowerShell.
+> Dalam skrip dan di situs dokumentasi Microsoft, contoh Azure CLI ditulis untuk shell `bash`. Contoh satu baris akan berjalan di platform apa pun. Contoh yang lebih panjang yang mencakup kelanjutan baris (`\`) atau penetapan variabel harus diubah agar berfungsi di shell lain, termasuk PowerShell.
 
 ## <a name="install-or-run-in-azure-cloud-shell"></a>Menginstal atau menjalankan di Azure Cloud Shell
 
-Cara termudah untuk mempelajari cara menggunakan Azure CLI adalah dengan menjalankannya di lingkungan Azure Cloud Shell melalui browser Anda. Untuk mempelajari tentang Cloud Shell, lihat  [Mulai Cepat untuk Bash di Azure Cloud Shell](/azure/cloud-shell/quickstart).
+Cara termudah untuk mempelajari cara menggunakan Azure CLI adalah menjalankannya di lingkungan Azure Cloud Shell melalui browser. Untuk mempelajari Cloud Shell, lihat [Panduan mulai cepat untuk Bash di Azure Cloud Shell](/azure/cloud-shell/quickstart).
 
-Saat Anda siap menginstal CLI, lihat [instruksi instalasi](install-azure-cli.md).
+Jika Anda sudah siap menginstal CLI, lihat [petunjuk penginstalan](install-azure-cli.md).
 
-Setelah menginstal CLI untuk pertama kalinya, periksa apakah itu diinstal dan Anda memiliki versi yang benar dengan menjalankan `az --version`.
+Setelah menginstal CLI untuk pertama kalinya, periksa apakah ini diinstal dan Anda memiliki versi yang benar dengan menjalankan `az --version`.
 
 > [!NOTE]
-> Jika Anda menggunakan model penyebaran klasik Azure, [instal CLI klasik Azure](install-classic-cli.md).
+> Jika Anda menggunakan model penyebaran klasik Azure, [instal Azure classic CLI](install-classic-cli.md).
 
 ## <a name="how-to-sign-into-the-azure-cli"></a>Cara masuk ke Azure CLI
 
-Sebelum menggunakan perintah Azure CLI dengan instalasi lokal, Anda harus masuk dengan [az login](/cli/azure/reference-index#az-login).
+Sebelum menggunakan perintah Azure CLI dengan penginstalan lokal, Anda harus masuk menggunakan [az login](/cli/azure/reference-index#az-login).
 
 [!INCLUDE [interactive-login](includes/interactive-login.md)]
 
@@ -48,7 +48,7 @@ Ada beberapa cara untuk masuk secara non-interaktif, yang dibahas secara mendeta
 
 ## <a name="common-azure-cli-commands"></a>Perintah Azure CLI umum
 
-Tabel ini mencantumkan beberapa perintah umum yang digunakan dalam CLI dan tautan ke dokumentasi referensi mereka.
+Tabel ini mencantumkan beberapa perintah umum yang digunakan dalam CLI dan tautan ke dokumentasi referensinya.
 
 | Jenis Sumber Daya | Grup perintah Azure CLI |
 |---------------|-------------------------|
@@ -62,7 +62,7 @@ Tabel ini mencantumkan beberapa perintah umum yang digunakan dalam CLI dan tauta
 
 ## <a name="finding-commands"></a>Menemukan perintah
 
-Perintah Azure CLI diatur sebagai _perintah_ _grup_. Setiap grup mewakili layanan Azure, dan perintah beroperasi pada layanan tersebut.
+Perintah Azure CLI diatur sebagai _perintah_ _grup_. Setiap grup mewakili layanan Azure, dan perintah beroperasi di layanan tersebut.
 
 Untuk mencari perintah, gunakan [az find](/cli/azure/reference-index#az-find). Misalnya, untuk mencari nama perintah yang berisi `secret`, gunakan perintah berikut:
 
@@ -70,7 +70,7 @@ Untuk mencari perintah, gunakan [az find](/cli/azure/reference-index#az-find). M
 az find secret
 ```
 
-`--help` Gunakan argumen untuk mendapatkan daftar lengkap perintah dan subkelompok grup. Misalnya, untuk menemukan perintah CLI untuk bekerja dengan Grup Keamanan Jaringan (NSGs):
+Gunakan argumen `--help` untuk mendapatkan daftar lengkap perintah dan sub-kelompok dari grup. Misalnya, untuk menemukan perintah CLI untuk bekerja dengan Kelompok Keamanan Jaringan (NSG):
 
 ```azurecli-interactive
 az network nsg --help
@@ -82,44 +82,44 @@ CLI memiliki penyelesaian tab penuh untuk perintah di bawah shell bash.
 
 Ada beberapa argumen yang tersedia untuk setiap perintah.
 
-* `--help` mencetak informasi referensi CLI tentang perintah dan argumen dan daftar subkelompok dan perintah yang tersedia.
-* `--output` mengubah format output. Format output yang tersedia adalah `json`, `jsonc` (JSON berwarna), `tsv` (Tab-Separated Values), `table` (tabel ASCII yang dapat dibaca manusia), dan `yaml`. Secara default output `json`CLI . Untuk mempelajari selengkapnya tentang format output yang tersedia, lihat [Format output untuk Azure CLI](format-output-azure-cli.md).
-* `--query` menggunakan [bahasa kueri JMESPath](http://jmespath.org/) untuk memfilter output yang dikembalikan dari layanan Azure. Untuk mempelajari kueri selengkapnya, lihat [Hasil perintah Kueri dengan Azure CLI](query-azure-cli.md) dan [tutorial JMESPath](http://jmespath.org/tutorial.html).
-* `--verbose` mencetak informasi tentang sumber daya yang dibuat di Azure selama operasi, dan informasi berguna lainnya.
-* `--debug` mencetak lebih banyak informasi tentang operasi CLI, yang digunakan untuk tujuan debugging. Jika Anda menemukan bug, berikan output yang dihasilkan dengan `--debug` bendera saat mengirimkan laporan bug.
+* `--help` mencetak informasi referensi CLI tentang perintah beserta argumennya dan mencantumkan sub-grup dan perintah yang tersedia.
+* `--output` mengubah format output. Format output yang tersedia meliputi `json`, `jsonc` (JSON berwarna), `tsv` (Nilai yang Dipisahkan Tab), `table` (tabel ASCII yang dapat dibaca manusia), dan `yaml`. Secara default, CLI menghasilkan `json`. Untuk mempelajari lebih lanjut format output yang tersedia, lihat [Format output untuk Azure CLI](format-output-azure-cli.md).
+* `--query` menggunakan [bahasa kueri JMESPath](http://jmespath.org/) untuk memfilter output yang ditampilkan dari layanan Azure. Untuk mempelajari kueri lebih lanjut, lihat [Mengkueri hasil perintah dengan Azure CLI](query-azure-cli.md) dan [tutorial JMESPath](http://jmespath.org/tutorial.html).
+* `--verbose` mencetak informasi tentang sumber daya yang dibuat di Azure selama operasi, serta informasi yang berguna lainnya.
+* `--debug` mencetak lebih banyak informasi tentang operasi CLI, yang digunakan untuk tujuan penelusuran kesalahan. Jika Anda menemukan bug, masukkan output yang dihasilkan dengan bendera `--debug` saat menyerahkan laporan bug.
 
 ## <a name="interactive-mode"></a>Mode interaktif
 
-CLI menawarkan mode interaktif yang secara otomatis menampilkan informasi bantuan dan membuatnya lebih mudah untuk memilih subkomand. Anda memasukkan mode interaktif dengan perintah [interaktif az](/cli/azure/reference-index#az-interactive) .
+CLI menawarkan mode interaktif yang secara otomatis menampilkan informasi bantuan dan memudahkan pemilihan sub-perintah. Masuk ke mode interaktif dengan perintah [az interactive](/cli/azure/reference-index#az-interactive).
 
 ```azurecli-interactive
 az interactive
 ```
 
-Untuk informasi selengkapnya tentang mode interaktif, lihat [Azure CLI Interactive Mode](interactive-azure-cli.md).
+Untuk informasi selengkapnya tentang mode interaktif, lihat [Mode Interaktif Azure CLI](interactive-azure-cli.md).
 
-Ada juga [plugin Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode.azurecli) yang menawarkan pengalaman interaktif, termasuk pelengkapan otomatis dan dokumentasi mouse-over.
+Ada juga [plugin Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode.azurecli) yang menawarkan pengalaman interaktif, termasuk dokumentasi pengisian otomatis dan mouse-over.
 
 ## <a name="learn-cli-basics-with-quickstarts-and-tutorials"></a>Pelajari dasar-dasar CLI dengan mulai cepat dan tutorial
 
-Untuk mempelajari cara menggunakan Azure CLI, coba tutorial mendalam untuk menyiapkan mesin virtual dan menggunakan kekuatan CLI untuk mengkueri sumber daya Azure.
+Untuk mempelajari cara menggunakan Azure CLI, coba tutorial mendalam untuk menyiapkan mesin virtual dan menggunakan kelebihan CLI untuk mengkueri sumber daya Azure.
 
 > [!div class="nextstepaction"]
-> [Membuat mesin virtual dengan tutorial Azure CLI](azure-cli-vm-tutorial.yml)
+> [Tutorial membuat mesin virtual dengan Azure CLI](azure-cli-vm-tutorial.yml)
 
-Ada juga quickstarts untuk layanan populer lainnya.
+Ada juga panduan mulai cepat untuk layanan populer lainnya.
 
 * [Membuat akun penyimpanan menggunakan Azure CLI](/azure/storage/common/storage-quickstart-create-storage-account-cli)
 * [Mentransfer objek ke/dari penyimpanan Azure Blob menggunakan CLI](/azure/storage/blobs/storage-quickstart-blobs-cli)
 * [Membuat database Azure SQL tunggal menggunakan Azure CLI](/azure/sql-database/sql-database-get-started-cli)
 * [Membuat server Azure Database for MySQL menggunakan Azure CLI](/azure/mysql/quickstart-create-mysql-server-database-using-azure-cli)
-* [Membuat Azure Database for PostgreSQL menggunakan Azure CLI](/azure/postgresql/quickstart-create-server-database-azure-cli)
+* [Membuat server Azure Database for PostgreSQL menggunakan Azure CLI](/azure/postgresql/quickstart-create-server-database-azure-cli)
 * [Membuat aplikasi web Python di Azure](/azure/app-service/app-service-web-get-started-python)
-* [Menjalankan gambar Docker Hub kustom di Azure Web Apps for Containers](/azure/app-service/containers/quickstart-custom-docker-image)
+* [Menjalankan citra Docker Hub kustom di Azure Web Apps untuk Kontainer](/azure/app-service/containers/quickstart-custom-docker-image)
 
 ## <a name="give-feedback"></a>Berikan umpan balik
 
-Kami menyambut umpan balik Anda untuk CLI untuk membantu kami melakukan perbaikan dan menyelesaikan bug. Anda dapat [mengajukan masalah pada GitHub](https://github.com/azure/azure-cli/issues) atau menggunakan fitur bawaan CLI untuk meninggalkan umpan balik umum dengan perintah [umpan balik az](/cli/azure/reference-index#az-feedback).
+Kami menyambut tanggapan Anda untuk CLI untuk membantu kami melakukan perbaikan dan menangani bug. Anda dapat [mengajukan masalah di GitHub](https://github.com/azure/azure-cli/issues) atau menggunakan fitur bawaan CLI untuk memberikan tanggapan umum terkait perintah [az feedback](/cli/azure/reference-index#az-feedback).
 
 ```azurecli-interactive
 az feedback

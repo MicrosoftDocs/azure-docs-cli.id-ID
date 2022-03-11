@@ -7,14 +7,14 @@ ms.topic: include
 ms.custom: devx-track-azurecli
 ms.openlocfilehash: 64354fafa776303afe2998a8d4fbf9c4f4be09ae
 ms.sourcegitcommit: ad79327952adf0f8be8f1b9678e72434d9f03f0c
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: id-ID
 ms.lasthandoff: 02/12/2022
 ms.locfileid: "138606462"
 ---
 ## <a name="overview"></a>Gambaran Umum
 
-Untuk distribusi Linux dengan `dnf` seperti RHEL, Fedora, atau CentOS, ada paket untuk Azure CLI. Paket ini telah diuji dengan RHEL 7.7, RHEL 8, Fedora 24 dan lebih tinggi, CentOS 7 dan CentOS 8.
+Untuk distribusi Linux dengan `dnf` seperti RHEL, Fedora, atau CentOS, terdapat paket untuk Azure CLI. Paket ini telah diuji dengan RHEL 7.7, RHEL 8, Fedora 24 dan yang lebih baru, CentOS 7 dan CentOS 8.
 
 [!INCLUDE [current-version](current-version.md)]
 
@@ -22,7 +22,7 @@ Untuk distribusi Linux dengan `dnf` seperti RHEL, Fedora, atau CentOS, ada paket
 
 > [!NOTE]
 >
-> Gunakan `yum` manajer paket jika Anda menggunakan sistem Linux yang tidak mendukung `dnf` manajer paket.
+> Gunakan pengelola paket `yum` jika Anda menggunakan sistem Linux yang tidak mendukung pengelola paket `dnf`.
 
 ## <a name="install"></a>Instal
 
@@ -32,7 +32,7 @@ Untuk distribusi Linux dengan `dnf` seperti RHEL, Fedora, atau CentOS, ada paket
    sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
    ```
 
-2. Membuat informasi repositori lokal `azure-cli` .
+2. Buat informasi repositori `azure-cli` lokal.
 
    ```bash
    echo -e "[azure-cli]
@@ -43,7 +43,7 @@ Untuk distribusi Linux dengan `dnf` seperti RHEL, Fedora, atau CentOS, ada paket
    gpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/azure-cli.repo
    ```
 
-3. Instal dengan `dnf install` perintah.
+3. Instal dengan perintah `dnf install`.
 
    ```bash
    sudo dnf install azure-cli
@@ -51,7 +51,7 @@ Untuk distribusi Linux dengan `dnf` seperti RHEL, Fedora, atau CentOS, ada paket
 
 ## <a name="install-specific-version"></a>Menginstal versi tertentu
 
-Anda harus terlebih dahulu mengonfigurasi `azure-cli` informasi repositori seperti yang ditunjukkan di atas. Versi yang tersedia dapat ditemukan di [catatan rilis Azure CLI](/cli/azure/release-notes-azure-cli).
+Anda harus mengonfigurasi informasi repositori `azure-cli` terlebih dahulu seperti yang diperlihatkan di atas. Versi yang tersedia dapat ditemukan di [Catatan rilis Azure CLI](/cli/azure/release-notes-azure-cli).
 
 1. Untuk melihat versi yang tersedia dengan perintah:
 
@@ -67,11 +67,11 @@ Anda harus terlebih dahulu mengonfigurasi `azure-cli` informasi repositori seper
 
 ## <a name="troubleshooting"></a>Pemecahan Masalah
 
-Berikut adalah beberapa masalah umum yang terlihat saat menginstal dengan `dnf`. Jika Anda mengalami masalah yang tidak tercakup di sini, [ajukan masalah di GitHub](https://github.com/Azure/azure-cli/issues).
+Berikut beberapa masalah umum yang ditemukan saat menginstal dengan `dnf`. Jika masalah Anda tidak tercantum di sini, [ajukan masalah di GitHub](https://github.com/Azure/azure-cli/issues).
 
-### <a name="install-on-rhel-76-or-other-systems-without-python-3"></a>Instal di RHEL 7.6 atau sistem lain tanpa Python 3
+### <a name="install-on-rhel-76-or-other-systems-without-python-3"></a>Instal di RHEL 7.6 atau sistem lainnya tanpa Python 3
 
-Jika Anda bisa, silakan tingkatkan sistem Anda ke versi dengan dukungan resmi untuk `python 3.6+` paket. Jika tidak, Anda harus menginstal `python3` paket terlebih dahulu lalu menginstal Azure CLI tanpa dependensi.
+Jika memungkinkan, tingkatkan sistem Anda ke versi dengan dukungan resmi untuk paket `python 3.6+`. Jika tidak, Anda harus menginstal paket `python3` terlebih dahulu, lalu menginstal Azure CLI tanpa dependensi.
 
 Anda dapat menggunakan satu perintah berikut untuk menginstal Azure CLI dengan `python 3.6` bawaan dari sumber:
 
@@ -99,7 +99,7 @@ echo "/usr/local/ssl/lib" | sudo tee /etc/ld.so.conf.d/openssl-1.1.1d.conf
 sudo ldconfig -v
 ```
 
-Kemudian bangun Python 3 dari sumber:
+Kemudian, bangun Python 3 dari sumber:
 
 ```bash
 PYTHON_VERSION="3.6.9"
@@ -111,18 +111,18 @@ make
 sudo make install
 ```
 
-Terakhir, ikuti langkah 1 dan 2 dari [instruksi instal](#install) untuk menambahkan repositori Azure CLI. Anda sekarang dapat mengunduh paket dan menginstalnya tanpa ketergantungan.
+Terakhir, ikuti langkah 1 dan 2 dari [petunjuk penginstalan](#install) untuk menambahkan repositori Azure CLI. Anda kini dapat mengunduh paket dan menginstalnya tanpa dependensi.
 
 > [!NOTE]
 >
-> Jika Anda tidak menginstal plugin unduhan dnf, Anda akan menemukan perintah yang tidak ditemukan kesalahan dalam mengeksekusi kode di bawah ini. Gunakan `dnf install 'dnf-command(download)'` untuk menginstal plugin unduhan dnf.
+> Jika plugin unduhan dnf tidak diinstal, Anda akan menerima kesalahan perintah tidak ditemukan saat menjalankan kode berikut. Gunakan `dnf install 'dnf-command(download)'` untuk menginstal plugin unduhan dnf.
 
 ```bash
 sudo dnf download azure-cli
 sudo rpm -ivh --nodeps azure-cli-*.rpm
 ```
 
-Sebagai alternatif, Anda juga dapat menginstal Python 3 melalui beberapa [repo tambahan](https://developers.redhat.com/blog/2018/08/13/install-python3-rhel/). Dengan cara ini, jika Anda telah mengatur `python3` tetapi masih mendapatkan kesalahan `python3: command not found` ketika mencoba untuk menjalankan cli, Anda perlu menambahkannya ke jalur Anda.
+Sebagai alternatif, Anda juga dapat menginstal Python 3 melalui beberapa [repositori tambahan](https://developers.redhat.com/blog/2018/08/13/install-python3-rhel/). Dengan cara ini, jika Anda telah menyiapkan `python3` tetapi masih menerima kesalahan `python3: command not found` saat mencoba menjalankan cli, Anda perlu menambahkannya ke jalur Anda.
 
 ```bash
 scl enable rh-python36 bash
@@ -132,7 +132,7 @@ scl enable rh-python36 bash
 
 [!INCLUDE[configure-proxy](configure-proxy.md)]
 
-Anda mungkin juga ingin mengkonfigurasi `dnf` secara eksplisit untuk menggunakan proxy ini setiap saat. Pastikan baris berikut muncul di bawah `[main]` bagian `/etc/dnf/dnf.conf`:
+Sebaiknya Anda juga mengonfigurasi `dnf` secara eksplisit untuk menggunakan proksi ini setiap saat. Pastikan baris berikut muncul di bawah `[main]` di bagian `/etc/dnf/dnf.conf`:
 
 ```dnf.conf
 [main]
@@ -142,7 +142,7 @@ proxy_username=[username] # Only required for basic auth
 proxy_password=[password] # Only required for basic auth
 ```
 
-Untuk mendapatkan kunci penandatanganan Microsoft dan mendapatkan paket dari repositori kami, proxy Anda perlu mengizinkan koneksi HTTPS ke alamat berikut:
+Untuk mendapatkan kunci penandatanganan Microsoft dan memperoleh paket dari repositori kami, proksi Anda perlu mengizinkan koneksi HTTPS ke alamat berikut:
 
 * `https://packages.microsoft.com`
 
@@ -152,7 +152,7 @@ Untuk mendapatkan kunci penandatanganan Microsoft dan mendapatkan paket dari rep
 
 [!INCLUDE [az-upgrade](az-upgrade.md)]
 
-Anda juga dapat memperbarui Azure CLI dengan `dnf update` perintah.
+Anda juga dapat memperbarui Azure CLI dengan perintah `dnf update`.
 
 ```bash
 sudo dnf update azure-cli
@@ -168,7 +168,7 @@ sudo dnf update azure-cli
    sudo dnf remove azure-cli
    ```
 
-2. Jika Anda tidak berencana untuk menginstal ulang CLI, hapus informasi repositori.
+2. Jika Anda tidak ingin memasang ulang CLI, hapus informasi repositori.
 
    ```bash
    sudo rm /etc/yum.repos.d/azure-cli.repo
