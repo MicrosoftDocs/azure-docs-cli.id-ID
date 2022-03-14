@@ -12,7 +12,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli docker, docker azure cli
 ms.openlocfilehash: 3c574978fe7d24666f3566c8c3777e66440e56b9
 ms.sourcegitcommit: d2227bc475235bf86193e9cae5e02f349a6342e2
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 11/02/2021
 ms.locfileid: "132439120"

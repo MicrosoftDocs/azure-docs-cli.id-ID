@@ -13,7 +13,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, azure data share cli
 ms.openlocfilehash: ed44ea5707a17aec75d9bd7ee396eb4c7f96a2ab
 ms.sourcegitcommit: 82cb7af10a689b9b485859552d2f834bd593f6a1
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 10/06/2021
 ms.locfileid: "132439104"
@@ -64,6 +64,6 @@ az datashare account create --location westus --tags tag1=Red tag2=White --name 
 
 ## <a name="see-also"></a>Lihat juga
 
-* [Mulai menggunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari tentang penginstalan dan proses masuk.
+* [Mulai gunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari penginstalan dan aktivitas masuk.
 
 * Temukan referensi [core](/cli/azure/reference-index) dan [ekstensi](./azure-cli-extensions-list.md) tambahan dalam dokumentasi Azure CLI.

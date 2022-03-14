@@ -8,7 +8,7 @@ ms.prod: azure
 ms.technology: azure-cli
 ms.openlocfilehash: 2c37a51ed3d3d63111cb741224f6592bc84a0effd9b39755ea833455234f5d87
 ms.sourcegitcommit: 16753e7a57048868e186c49e44c1877406530fa5
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 08/06/2021
 ms.locfileid: "132439036"

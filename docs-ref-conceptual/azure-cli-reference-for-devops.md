@@ -13,7 +13,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, azure devops
 ms.openlocfilehash: bffb993971c565dde95c50fa1e393513329923c9
 ms.sourcegitcommit: 82cb7af10a689b9b485859552d2f834bd593f6a1
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 10/06/2021
 ms.locfileid: "132439103"
@@ -146,8 +146,8 @@ Perintah Azure CLI untuk [Azure DevOps](/azure/devops) memungkinkan Anda menyede
 
 ## <a name="see-also"></a>Lihat juga
 
-- [Mulai menggunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari tentang penginstalan dan proses masuk.
+- [Mulai gunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari penginstalan dan aktivitas masuk.
 
-- Temukan [referensi](/cli/azure/reference-index) dan [ekstensi yang tersedia](./azure-cli-extensions-list.md) tambahan di dokumentasi Azure CLI.
+- Temukan [referensi](/cli/azure/reference-index) tambahan dan [ekstensi yang tersedia](./azure-cli-extensions-list.md) di dokumentasi Azure CLI.
 
 - Pelajari referensi ekstensi lebih lanjut di [Menggunakan ekstensi dengan Azure CLI](./azure-cli-extensions-overview.md).

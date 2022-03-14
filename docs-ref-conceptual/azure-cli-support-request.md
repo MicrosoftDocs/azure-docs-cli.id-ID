@@ -10,7 +10,7 @@ ms.custom: template-how-to, devx-track-azurecli, seo-azure-cli
 keywords: permintaan dukungan azure, dukungan azure, tiket dukungan azure, manajemen tiket dukungan
 ms.openlocfilehash: c466acdadbf2ee04062390ed9b15ec93c48b58b6
 ms.sourcegitcommit: ecad34e4d4654660377050fccba7861e942e03de
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 09/13/2021
 ms.locfileid: "132439046"

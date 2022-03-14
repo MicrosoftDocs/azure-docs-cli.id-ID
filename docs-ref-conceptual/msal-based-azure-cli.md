@@ -12,7 +12,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: msal, msal-based azure cli
 ms.openlocfilehash: 54a57a3246178fa4bf47623524121c61ad4aec4a
 ms.sourcegitcommit: 9d7e461f68914e3d66f29d030bdf50ae58a4ef8b
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 01/19/2022
 ms.locfileid: "136921360"

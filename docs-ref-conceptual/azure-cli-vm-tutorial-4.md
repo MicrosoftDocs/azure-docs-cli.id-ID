@@ -13,7 +13,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: informasi vm tampilan azure cli, kueri di azure cli
 ms.openlocfilehash: dc4ffce9bbeda4e26a0cdc811e55a55f7d93f8e1
 ms.sourcegitcommit: 766c21c494eb7fbdc5160c437868c187c0b6e587
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 02/17/2022
 ms.locfileid: "138922106"

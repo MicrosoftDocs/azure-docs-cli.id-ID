@@ -12,7 +12,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure, cli, baris perintah
 ms.openlocfilehash: f8b989b907353b83e6f3d48ca89a8db246ca16aa
 ms.sourcegitcommit: 82cb7af10a689b9b485859552d2f834bd593f6a1
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 10/06/2021
 ms.locfileid: "132439082"

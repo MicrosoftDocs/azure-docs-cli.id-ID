@@ -13,7 +13,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: mesin virtual di azure cli, atur variabel shell dari output cli
 ms.openlocfilehash: abc99d9c47da49b75a4ea596f2016da1fc1d172f
 ms.sourcegitcommit: 766c21c494eb7fbdc5160c437868c187c0b6e587
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 02/17/2022
 ms.locfileid: "138989714"

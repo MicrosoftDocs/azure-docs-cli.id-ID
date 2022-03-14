@@ -12,7 +12,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, jenis referensi, status referensi
 ms.openlocfilehash: ac6ab55c3db777b83877de34f2570b9d8d70b040
 ms.sourcegitcommit: ad79327952adf0f8be8f1b9678e72434d9f03f0c
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 02/12/2022
 ms.locfileid: "138554942"

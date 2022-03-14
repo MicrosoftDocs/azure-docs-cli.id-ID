@@ -12,7 +12,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: az login, jenis autentikasi, metode autentikasi, azure, cli login, az login powershell, cli login
 ms.openlocfilehash: 1272165a031169b2b3fcdee79d16ae4dd1b091f5
 ms.sourcegitcommit: ad79327952adf0f8be8f1b9678e72434d9f03f0c
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 02/12/2022
 ms.locfileid: "138520331"

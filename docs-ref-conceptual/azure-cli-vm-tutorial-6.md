@@ -13,7 +13,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli membersihkan sumber daya, mesin virtual di azure cli
 ms.openlocfilehash: 3bb61e9ede907c1e95fb21b85d51c225161fa957
 ms.sourcegitcommit: 62469e9c1ad07f215129ece5db89c530f1a77968
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 12/15/2021
 ms.locfileid: "135157667"

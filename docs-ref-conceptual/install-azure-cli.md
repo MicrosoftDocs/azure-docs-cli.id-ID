@@ -12,7 +12,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli, menginstal azure cli, unduhan azure cli, mengunduh azure cli
 ms.openlocfilehash: c0316630d648a4541a8b69b8ee8997d2d81d067a
 ms.sourcegitcommit: ad79327952adf0f8be8f1b9678e72434d9f03f0c
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 02/12/2022
 ms.locfileid: "138560558"

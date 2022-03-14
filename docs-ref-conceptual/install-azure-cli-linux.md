@@ -14,7 +14,7 @@ zone_pivot_groups: cli-linux-installation-method
 keywords: linux cli, azure cli linux, menginstal azure cli ubuntu, menginstal azure cli linux
 ms.openlocfilehash: 755389f7b5119e0cc984f469943ec659157e3857
 ms.sourcegitcommit: ecad34e4d4654660377050fccba7861e942e03de
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 09/13/2021
 ms.locfileid: "132439054"

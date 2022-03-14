@@ -13,7 +13,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: Menginstal azure cli, unduhan azure cli, cli untuk windows, menginstal azure cli di windows, azure cli windows, menginstal azure cli windows
 ms.openlocfilehash: fc6abf32252584188c5bb4c6328a0822f1f8710a
 ms.sourcegitcommit: d2227bc475235bf86193e9cae5e02f349a6342e2
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 11/02/2021
 ms.locfileid: "132439126"

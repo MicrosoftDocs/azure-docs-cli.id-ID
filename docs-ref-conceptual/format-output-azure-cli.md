@@ -12,7 +12,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: perintah azure cli
 ms.openlocfilehash: be163b4355f8bcb6b23ba54ba8078a9762abe433
 ms.sourcegitcommit: 30e08311cdf7da0ca3107ce8e802128615b2345b
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 11/17/2021
 ms.locfileid: "132729659"

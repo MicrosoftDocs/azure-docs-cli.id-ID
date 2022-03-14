@@ -5,12 +5,12 @@ manager: barbkess
 ms.date: 09/29/2020
 ms.topic: include
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 723cbe31cef71b6a28465f6bb1f71deb9d8f02e6
-ms.sourcegitcommit: 766c21c494eb7fbdc5160c437868c187c0b6e587
-ms.translationtype: HT
+ms.openlocfilehash: ca9e0d757818a583b70cb3b57ae53d393cc91d19
+ms.sourcegitcommit: 49c01a527543e5de52f51ee19f930c78842c349e
+ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 02/17/2022
-ms.locfileid: "139035256"
+ms.lasthandoff: 03/08/2022
+ms.locfileid: "139497998"
 ---
 ## <a name="overview"></a>Gambaran Umum
 
@@ -18,11 +18,11 @@ Manajer paket `apt` berisi paket x86_64 untuk Azure CLI yang telah diuji pada di
 
 | Distribusi | Versi |
 |:-------------|:--------|
-| Ubuntu       | 14.04 LTS (Trusty Tahir), 16.04 LTS (Xenial Xerus), 18.04 LTS (Bionic Beaver), 20.04 LTS (Focal Fossa), 21.04 (Hirsute Hippo) |
-| Debian       | Debian 8 (Jessie), Debian 9 (Stretch), Debian 10 (Buster), Debian 11 (Bullseye) |
+| Ubuntu       | 16.04 LTS (Xenial Xerus), 18.04 LTS (Bionic Beaver), 20.04 LTS (Fossa Fokus) |
+| Debian       | 9 (Peregangan), 10 (Buster), 11 (Bullseye) |
 
 > [!WARNING]
-> Mulai dari Azure CLI 2.34.0, tidak ada paket DEB yang akan dirilis untuk Ubuntu 14.04 (Trusty Tahir) dan Debian 8 (Jessie). Anda dapat terus menggunakan versi historis Azure CLI pada sistem ini, tetapi tidak akan ada pembaruan atau perbaikan bug. Pertimbangkan untuk memutakhirkan ke versi Ubuntu atau Debian yang lebih baru untuk menggunakan Azure CLI terbaru.
+> Mulai dari Azure CLI 2.34.0, tidak ada paket DEB yang dirilis untuk Ubuntu 14.04 (Trusty Tahir) dan Debian 8 (Jessie). Anda dapat terus menggunakan versi historis Azure CLI pada sistem ini, tetapi tidak akan ada pembaruan atau perbaikan bug. Pertimbangkan untuk memutakhirkan ke versi Ubuntu atau Debian yang lebih baru untuk menggunakan Azure CLI terbaru.
 
 > [!WARNING]
 > Ubuntu 20.04 (Focal Fossa) dan 20.10 (Groovy Gorilla) menyertakan paket `azure-cli` dengan versi `2.0.81` yang disediakan oleh repositori `universe`. Paket ini sudah tidak digunakan dan tidak direkomendasikan. Jika paket ini terinstal, hapus paket tersebut sebelum melanjutkan dengan menjalankan perintah `sudo apt remove azure-cli -y && sudo apt autoremove -y`.

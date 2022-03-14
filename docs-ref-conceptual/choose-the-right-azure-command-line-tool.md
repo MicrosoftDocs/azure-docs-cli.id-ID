@@ -11,7 +11,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli, mode-api
 Keywords: alat baris perintah azure, alat azure cli, azure cli vs powershell, azure cli powershell, powershell cli, azure cli vs cloud shell, lingkungan shell
 ms.openlocfilehash: a0d2ebac85d01f49bd3bdb7a6d1ab49054ae4e5d
 ms.sourcegitcommit: 23211f978c3a7079b2884355be102a9f18fea713
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 12/01/2021
 ms.locfileid: "133330517"

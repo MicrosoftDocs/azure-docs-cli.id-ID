@@ -13,7 +13,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: informasi selengkapnya tentang azure cli dan vm, mesin virtual di azure cli
 ms.openlocfilehash: 01300f8a1b3b564676c2b522200567098651598d
 ms.sourcegitcommit: 62469e9c1ad07f215129ece5db89c530f1a77968
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 12/15/2021
 ms.locfileid: "135157753"
@@ -28,7 +28,7 @@ Langkah selanjutnya bergantung pada tujuan penggunaan CLI. Ada berbagai materi y
 
 Jika Anda ingin segera memulai dengan tugas tertentu, lihat beberapa contoh skrip.
 
-* Bekerja dengan [VM Linux](/azure/virtual-machines/linux/cli-samples?toc=%2fcli%2fazure%2ftoc.json) dan [VM Windows](/azure/virtual-machines/windowcli-samples?toc=%2fcli%2fazure%2ftoc.json)
+* Menggunakan [VM Linux](/azure/virtual-machines/linux/cli-samples?toc=%2fcli%2fazure%2ftoc.json) dan [VM Windows](/azure/virtual-machines/windowcli-samples?toc=%2fcli%2fazure%2ftoc.json)
 * Bekerja dengan [webapps](/azure/app-service/app-service-cli-samples?toc=%2Fcli%2Fazure%2Ftoc.json) dan [Azure Functions](/azure/azure-functionfunctions-cli-samples?toc=%2fcli%2fazure%2ftoc.json)
 * Bekerja dengan database - [Database Azure SQL](/azure/sql-database/sql-database-cli-samples?toc=%2fcli%2fazure%2ftoc.json), [PostgreSQL](/azurpostgresql/sample-scripts-azure-cli?toc=%2fcli%2fazure%2ftoc.json), [MySQL](/azure/mysql/sample-scripts-azure-cli?toc=%2fcli%2fazure%2ftoc.json), dan [CosmosDB](/azure/cosmos-db/cli-samples?toc=%2fcli%2fazure%2ftoc.json).
 

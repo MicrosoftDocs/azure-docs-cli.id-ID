@@ -13,7 +13,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli create vnet, jaringan virtual di azure cli, subnet di jaringan virtual
 ms.openlocfilehash: de38d4517734bbe1843ad93c3e0d0de6d11cda96
 ms.sourcegitcommit: 62469e9c1ad07f215129ece5db89c530f1a77968
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 12/15/2021
 ms.locfileid: "135157723"

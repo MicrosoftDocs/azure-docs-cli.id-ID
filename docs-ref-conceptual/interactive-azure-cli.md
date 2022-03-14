@@ -12,7 +12,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 Keywords: mode interaktif azure cli
 ms.openlocfilehash: 1018b845e9a04458540f913b69e0908eaaac6893
 ms.sourcegitcommit: ecad34e4d4654660377050fccba7861e942e03de
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 09/13/2021
 ms.locfileid: "132439040"

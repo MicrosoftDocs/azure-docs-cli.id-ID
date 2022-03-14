@@ -12,7 +12,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: ''
 ms.openlocfilehash: 3203b0204f4495f4590be549abc19ad1903f93ed
 ms.sourcegitcommit: 766c21c494eb7fbdc5160c437868c187c0b6e587
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 02/17/2022
 ms.locfileid: "138934616"

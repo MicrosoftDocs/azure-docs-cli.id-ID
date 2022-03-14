@@ -12,7 +12,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: ekstensi alias azure cli, ekstensi alias, perintah alias
 ms.openlocfilehash: a4cc624fd8f71297248bc2b67b94fc882d9f4e8e
 ms.sourcegitcommit: 82cb7af10a689b9b485859552d2f834bd593f6a1
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 10/06/2021
 ms.locfileid: "132439098"

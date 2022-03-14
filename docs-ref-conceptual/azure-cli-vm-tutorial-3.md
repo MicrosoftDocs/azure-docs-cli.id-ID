@@ -13,7 +13,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli create vm, mesin virtual di azure cli
 ms.openlocfilehash: 6fd9b399424db7a4ce9dce5f6fa56e5a5d23b18e
 ms.sourcegitcommit: 62469e9c1ad07f215129ece5db89c530f1a77968
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 12/15/2021
 ms.locfileid: "135157679"

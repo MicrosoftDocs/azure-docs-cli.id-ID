@@ -13,7 +13,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, mesin virtual azure, virtualisasi desktop, gambar, galeri gambar bersama
 ms.openlocfilehash: b1b7fc7d32ca3aeff2c32f535386a6ebb6b35ba9
 ms.sourcegitcommit: 82cb7af10a689b9b485859552d2f834bd593f6a1
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 10/06/2021
 ms.locfileid: "132439101"
@@ -138,8 +138,8 @@ Beberapa referensi dalam tabel ini adalah bagian dari ekstensi [serial-console](
 
 ## <a name="see-also"></a>Lihat juga
 
-- [Mulai menggunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari tentang penginstalan dan proses masuk.
+- [Mulai gunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari penginstalan dan aktivitas masuk.
 
-- Temukan [referensi](/cli/azure/reference-index) dan [ekstensi yang tersedia](./azure-cli-extensions-list.md) tambahan di dokumentasi Azure CLI.
+- Temukan [referensi](/cli/azure/reference-index) tambahan dan [ekstensi yang tersedia](./azure-cli-extensions-list.md) di dokumentasi Azure CLI.
 
-- Pelajari selengkapnya tentang ekstensi di [Menggunakan ekstensi dengan Azure CLI](./azure-cli-extensions-overview.md).
+- Pelajari ekstensi lebih lanjut di [Menggunakan ekstensi dengan Azure CLI](./azure-cli-extensions-overview.md).

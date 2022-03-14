@@ -7,7 +7,7 @@ ms.topic: include
 ms.custom: devx-track-azurecli
 ms.openlocfilehash: 64354fafa776303afe2998a8d4fbf9c4f4be09ae
 ms.sourcegitcommit: ad79327952adf0f8be8f1b9678e72434d9f03f0c
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 02/12/2022
 ms.locfileid: "138606462"
@@ -51,7 +51,7 @@ Untuk distribusi Linux dengan `dnf` seperti RHEL, Fedora, atau CentOS, terdapat 
 
 ## <a name="install-specific-version"></a>Menginstal versi tertentu
 
-Anda harus mengonfigurasi informasi repositori `azure-cli` terlebih dahulu seperti yang diperlihatkan di atas. Versi yang tersedia dapat ditemukan di [Catatan rilis Azure CLI](/cli/azure/release-notes-azure-cli).
+Anda harus terlebih dahulu mengonfigurasi `azure-cli` informasi repositori seperti yang ditunjukkan di atas. Versi yang tersedia dapat ditemukan di [catatan rilis Azure CLI](/cli/azure/release-notes-azure-cli).
 
 1. Untuk melihat versi yang tersedia dengan perintah:
 

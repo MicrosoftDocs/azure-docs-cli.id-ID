@@ -13,7 +13,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, azure iot, azure maps, azure tsi
 ms.openlocfilehash: aa50cced3f624c973973a30b53fa12ad798afb09
 ms.sourcegitcommit: 82cb7af10a689b9b485859552d2f834bd593f6a1
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 10/06/2021
 ms.locfileid: "132439095"
@@ -65,7 +65,7 @@ Daftar referensi Azure CLI yang dapat digunakan untuk mengelola Azure IoT, jenis
 
 ## <a name="azure-cli-reference-examples"></a>Contoh referensi Azure CLI
 
-Contoh dilengkapi dengan setiap referensi Azure CLI. Meskipun Anda juga dapat menyelesaikan tugas ini melalui portal Azure, penggunaan Azure CLI memerlukan baris perintah. Berikut beberapa blok kode untuk memberi gambaran tentang mudahnya menggunakan Azure CLI.
+Contoh dilengkapi dengan setiap referensi Azure CLI. Meskipun Anda juga dapat menyelesaikan tugas ini melalui portal Azure, menggunakan Azure CLI memerlukan baris perintah. Berikut beberapa blok kode untuk memberi gambaran tentang mudahnya menggunakan Azure CLI.
 
 Untuk bekerja dengan Azure IoT, Anda harus membuat grup sumber daya terlebih dahulu. Grup sumber daya Azure mudah dibuat dan dikelola dengan Azure CLI.  
 
@@ -90,4 +90,4 @@ az iot hub create --resource-group MyResourceGroup --name MyIotHub --location we
 
 - [Mulai gunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari penginstalan dan aktivitas masuk.
 
-- Temukan referensi [inti](/cli/azure/reference-index) dan [ekstensi](./azure-cli-extensions-list.md) lainnya di dokumentasi Azure CLI.
+- Temukan referensi [core](/cli/azure/reference-index) dan [ekstensi](./azure-cli-extensions-list.md) tambahan dalam dokumentasi Azure CLI.

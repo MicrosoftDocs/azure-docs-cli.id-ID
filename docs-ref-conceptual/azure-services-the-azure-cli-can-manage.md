@@ -13,7 +13,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: pengelolaan layanan azure, daftar layanan azure, daftar sumber daya azure
 ms.openlocfilehash: 821eda50dc30fe0f0975cfcd66be9c1fc9ec8182
 ms.sourcegitcommit: 133f901f17aebce8976e4751bcadf0758a9a1c76
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 02/14/2022
 ms.locfileid: "138622133"

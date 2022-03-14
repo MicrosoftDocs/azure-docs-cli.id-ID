@@ -9,7 +9,7 @@ ms.devlang: azurecli
 ms.custom: devx-track-azurecli
 ms.openlocfilehash: 812b436586580c10aac94965d54ad485d095e936
 ms.sourcegitcommit: d2227bc475235bf86193e9cae5e02f349a6342e2
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 11/02/2021
 ms.locfileid: "132439114"

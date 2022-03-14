@@ -10,7 +10,7 @@ ms.custom: template-how-to, devx-track-azurecli, seo-azure-cli
 keywords: variabel azure cli, perintah azure cli, nilai variabel, variabel shell
 ms.openlocfilehash: 7e524e834be80117d4e2e69b69a07019b7f12389
 ms.sourcegitcommit: 62469e9c1ad07f215129ece5db89c530f1a77968
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 12/15/2021
 ms.locfileid: "135155922"

@@ -12,7 +12,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: variabel lingkungan, file konfigurasi, pengaturan konfigurasi, konfigurasi pengguna, variabel azure cli, konfigurasi azure cli, konfigurasi cli
 ms.openlocfilehash: 080323052b92b3a0fcc68f644889bc48aaeff8d6
 ms.sourcegitcommit: ad79327952adf0f8be8f1b9678e72434d9f03f0c
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 02/12/2022
 ms.locfileid: "138540908"

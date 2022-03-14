@@ -12,7 +12,7 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: Menginstal azure cli, azure cli macos, macos cli, menginstal azure cli macos
 ms.openlocfilehash: 548fe7d9c8632249aa478eab3335d9b000d9c094
 ms.sourcegitcommit: 9d7e461f68914e3d66f29d030bdf50ae58a4ef8b
-ms.translationtype: HT
+ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 01/19/2022
 ms.locfileid: "136921378"
