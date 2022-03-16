@@ -4,18 +4,18 @@ description: Pelajari tentang migrasi Microsoft Graph Azure CLI.
 author: jiasli
 ms.author: jiasli
 manager: yonzhan
-ms.date: 02/24/2022
+ms.date: 03/08/2022
 ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: grafik microsoft, grafik ms, grafik direktori aktif, grafik iklan
-ms.openlocfilehash: 397656ab4e0d90328f93a62445f8dcf901e3f06f
-ms.sourcegitcommit: 49c01a527543e5de52f51ee19f930c78842c349e
+ms.openlocfilehash: 228bdc63de8db5500af36ffd25f509900aaec8e8
+ms.sourcegitcommit: 33b0da5ec548656e6730121e0440e79383d10749
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 03/08/2022
-ms.locfileid: "139366218"
+ms.lasthandoff: 03/16/2022
+ms.locfileid: "140636840"
 ---
 # <a name="microsoft-graph-migration"></a>Migrasi Graph Microsoft
 
@@ -29,22 +29,23 @@ Argumen perintah dan perubahan pelanggaran perilaku tercantum di bawah ini.
 
 ### `az ad app create`
 
-- `--reply-urls` Argumen dibagi menjadi `--web-redirect-uris` dan `--public-client-redirect-uris`
-- `--homepage` Argumen digantikan oleh `--web-home-page-url`
-- `--available-to-other-tenants` Digantikan oleh `--sign-in-audience`
-- `--native-app` Digantikan oleh `--is-fallback-public-client`
-- `--oauth2-allow-implicit-flow` Digantikan oleh `--enable-access-token-issuance`
-- `--enable-id-token-issuance` diperkenalkan untuk mengatur `web/implicitGrantSettings/enableIdTokenIssuance`
-- `--password` dihapus. Gunakan `az ad app credential reset` untuk membiarkan Graph membuat kata sandi untuk Anda (https://github.com/Azure/azure-cli/issues/20675)
+- Dibagi `--reply-urls` menjadi `--web-redirect-uris` dan `--public-client-redirect-uris`
+- Ganti `--homepage`dengan `--web-home-page-url`
+- Ganti `--available-to-other-tenants`dengan `--sign-in-audience`
+- Ganti `--native-app`dengan `--is-fallback-public-client`
+- Ganti `--oauth2-allow-implicit-flow`dengan `--enable-access-token-issuance`
+- Tambahkan `--enable-id-token-issuance` ke set `web/implicitGrantSettings/enableIdTokenIssuance`
+- Hapus `--password` dan `--credential-description`. Gunakan `az ad app credential reset` untuk mengizinkan layanan Graph membuat kata sandi untuk Anda (https://github.com/Azure/azure-cli/issues/20675)
+- Tambahkan `--key-display-name` ke set `keyCredential`'s `displayName`
 
 ### `az ad app permission grant`
 
-- `--expires` argumen dihapus
+- Hapus `--expires`
 
 ### `az ad app credential reset`
 
-- `--credential-description` Digantikan oleh `--display-name` (https://github.com/Azure/azure-cli/issues/20561)
-- `--password` dihapus. Tanpa menentukan argumen sertifikat, layanan Graph membuat kata sandi untuk Anda (https://github.com/Azure/azure-cli/issues/20675)
+- Ganti `--credential-description` dengan `--display-name` (https://github.com/Azure/azure-cli/issues/20561)
+- Hapus `--password`. Tanpa menentukan argumen sertifikat, layanan Graph membuat kata sandi untuk Anda (https://github.com/Azure/azure-cli/issues/20675)
 
 ### `az ad sp delete`
 
@@ -57,15 +58,15 @@ Argumen perintah dan perubahan pelanggaran perilaku tercantum di bawah ini.
 
 ### `az ad sp credential reset`
 
-- `--password` dihapus. Tanpa menentukan argumen sertifikat, layanan Graph membuat kata sandi untuk Anda (https://github.com/Azure/azure-cli/issues/20675)
+- Hapus `--password`. Tanpa menentukan argumen sertifikat, layanan Graph membuat kata sandi untuk Anda (https://github.com/Azure/azure-cli/issues/20675)
 
 ### `az ad group get-member-groups`
 
-- `--additional-properties` argumen dihapus
+- Hapus `--additional-properties`
 
 ### `az ad group member add`
 
-- `--additional-properties` argumen dihapus
+- Hapus `--additional-properties`
 
 ## <a name="known-issues"></a>Masalah yang diketahui
 
@@ -111,7 +112,7 @@ Untuk menghindari menimpa Azure CLI yang Anda instal, sebaiknya instal versi bet
    pip install --extra-index-url https://azurecliprod.blob.core.windows.net/beta/simple/ azure-cli
    ```
    Anda sekarang dapat mulai menggunakan Azure CLI beta.
-   
+
 4. Jika ada pembaruan, Anda dapat meningkatkan Azure CLI beta
 
    ```bash

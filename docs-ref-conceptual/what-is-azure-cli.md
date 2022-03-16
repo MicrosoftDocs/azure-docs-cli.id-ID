@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: antarmuka baris perintah, azure cli, baris perintah azure, antarmuka baris perintah azure, apa itu cli, contoh azure cli
-ms.openlocfilehash: 91dfce42e36c30658451a0426d9e5146bb9c7c5f
-ms.sourcegitcommit: 82cb7af10a689b9b485859552d2f834bd593f6a1
+ms.openlocfilehash: d3e2aa9d668fdc65fa23d41f1ee58cb6cb682e99
+ms.sourcegitcommit: 33b0da5ec548656e6730121e0440e79383d10749
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 10/06/2021
-ms.locfileid: "132439097"
+ms.lasthandoff: 03/16/2022
+ms.locfileid: "140636714"
 ---
 # <a name="what-is-the-azure-cli"></a>Apa itu Azure CLI?
 
@@ -57,7 +57,7 @@ Sekarang, betapa mudahnya itu?!  Lihat [Mengelola langganan dengan Azure CLI](ma
 Penggunaan umum Azure CLI lainnya adalah mengelola penetapan peran. 
 
 ```azurecli
-az role assignment create --assignee servicePrincipalName --role Reader
+az role assignment create --assignee servicePrincipalName --role Reader --scope /subscriptions/mySubscriptionID/resourceGroups/myResourceGroupName
 az role assignment delete --assignee userSign-inName --role Contributor
 ```
 
