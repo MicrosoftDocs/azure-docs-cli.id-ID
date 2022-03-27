@@ -10,16 +10,16 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: grafik microsoft, grafik ms, grafik direktori aktif, grafik iklan
-ms.openlocfilehash: 228bdc63de8db5500af36ffd25f509900aaec8e8
-ms.sourcegitcommit: 33b0da5ec548656e6730121e0440e79383d10749
+ms.openlocfilehash: efcd7d3e89e38d8956707a41b939bc65abd65634
+ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 03/16/2022
-ms.locfileid: "140636840"
+ms.lasthandoff: 03/25/2022
+ms.locfileid: "140883860"
 ---
 # <a name="microsoft-graph-migration"></a>Migrasi Graph Microsoft
 
-Karena [penghentian Graph Azure Active Directory (Azure AD),](/graph/migrate-azure-ad-graph-overview) Azure CLI akan dimigrasikan dari Graph IKLAN ke Microsoft Graph.
+Karena [penghentian Graph Azure Active Directory (Azure AD),](/graph/migrate-azure-ad-graph-overview) API Graph Active Directory yang mendasarinya akan digantikan oleh Microsoft Graph API di Azure CLI 2.37.0.
 
 ## <a name="breaking-changes"></a>Perubahan mencolok
 
@@ -70,8 +70,8 @@ Argumen perintah dan perubahan pelanggaran perilaku tercantum di bawah ini.
 
 ## <a name="known-issues"></a>Masalah yang diketahui
 
-- Argumen `--add`pembaruan generik, `--set` dan `--remove` saat ini tidak berfungsi
-- `az ad`dan Microsoft Graph perintah terkait seperti `az role` akan gagal di lingkungan Azure Stack yang tidak memiliki dukungan Microsoft Graph
+- Argumen `--add`pembaruan generik, `--set` dan `--remove` saat ini tidak berfungsi. Anda dapat menggunakan `az rest` untuk langsung memanggil Microsoft Graph API untuk properti yang tidak didukung.
+- Microsoft Graph perintah terkait suka `az ad` dan `az role` akan gagal di lingkungan Azure Stack yang tidak memiliki dukungan Graph Microsoft. Silakan gunakan Azure CLI 3.36.0 atau versi ealier untuk lingkungan Azure Stack.
 
 ## <a name="try-azure-cli-beta-with-microsoft-graph"></a>Coba Azure CLI beta dengan Microsoft Graph
 
