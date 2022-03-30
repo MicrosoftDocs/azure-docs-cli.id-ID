@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
-ms.openlocfilehash: 754bf5e88f4bb21bebf969958b3e0c838238e3cf
-ms.sourcegitcommit: cde031ad132485950ceade0811e5b771e7236a22
+ms.openlocfilehash: 5421f3af0156a6ca6929f3c15254352573dc342b
+ms.sourcegitcommit: 5bcf8b3ce57c77be609202bbbd62d441d94b47df
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 03/12/2022
-ms.locfileid: "139798821"
+ms.lasthandoff: 03/30/2022
+ms.locfileid: "141259466"
 ---
 # <a name="how-to-use-azure-cli-effectively"></a>Cara menggunakan Azure CLI secara efektif
 
@@ -212,7 +212,7 @@ az vm update --resource-group VMResources --name virtual-machine-01 \
 
 Layanan yang ingin digunakan untuk bekerja mungkin belum memiliki dukungan Azure CLI. Anda dapat menggunakan perintah [az resource](/cli/azure/resource) untuk bekerja dengan sumber daya ini.
 
-Jika Anda hanya memerlukan perintah buat dan perbarui, gunakan [az deployment group create](/cli/azure/deployment/group#az-deployment-group-create). Sebagai contoh kerja, lihat [Template Mulai Cepat Azure](/resources/templates/).
+Jika Anda hanya memerlukan perintah buat dan perbarui, gunakan [az deployment group create](/cli/azure/deployment/group#az-deployment-group-create). Sebagai contoh kerja, lihat [Template Mulai Cepat Azure](https://azure.microsoft.com/resources/templates/).
 
 ## <a name="rest-api-commands"></a>Perintah REST API
 
