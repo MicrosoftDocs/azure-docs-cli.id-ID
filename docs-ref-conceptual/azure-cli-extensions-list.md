@@ -4,19 +4,19 @@ description: Daftar lengkap ekstensi resmi Azure Command-Line Interface (CLI) ya
 author: haroldrandom
 ms.author: jianzen
 manager: yonzhan,yungezz
-ms.date: 03/29/2022
+ms.date: 03/31/2022
 ms.topic: article
 ms.prod: azure
 ms.technology: azure-cli
 ms.devlang: azure-cli
 ms.custom: devx-track-azurecli
 keywords: ekstensi az, ekstensi azure cli, ekstensi azure
-ms.openlocfilehash: 5c77e4d8ba9b138c400bf4c26a21ec4c2f2be162
-ms.sourcegitcommit: 5bcf8b3ce57c77be609202bbbd62d441d94b47df
+ms.openlocfilehash: fcee1c3c81c066386b092f442984325443d7c959
+ms.sourcegitcommit: b179e8c36fc1222f584a3780aaf61c99bf78a40d
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 03/30/2022
-ms.locfileid: "141259502"
+ms.lasthandoff: 04/01/2022
+ms.locfileid: "141308890"
 ---
 # <a name="available-azure-cli-extensions"></a>Ekstensi Azure CLI yang tersedia
 
@@ -48,7 +48,7 @@ Anda akan diminta untuk menginstal ekstensi saat digunakan pertama kali.
 |[Automation](https://github.com/Azure/azure-cli-extensions/tree/master/src/automation) | 2.13.0 | Alat Baris Perintah Microsoft Azure Ekstensi AutomationClient | Eksperimental | [0.1.1](https://github.com/Azure/azure-cli-extensions/tree/master/src/automation/HISTORY.rst) |
 |[azure-batch-cli-extensions](https://github.com/Azure/azure-batch-cli-extensions) | 2.0.74 | Perintah lain yang berfungsi dengan layanan Azure Batch | GA | [6.0.0](https://github.com/Azure/azure-batch-cli-extensions) |
 |[azure-cli-ml](https://docs.microsoft.com/python/api/overview/azure/ml/?view=azure-ml-py) | 2.3.1 | Alat Baris Perintah Microsoft Azure Modul Perintah AzureML | GA | [1.37.0](https://docs.microsoft.com/python/api/overview/azure/ml/?view=azure-ml-py/HISTORY.rst) |
-|[azure-devops](https://github.com/Microsoft/azure-devops-cli-extension) | 2.30.0 | Alat untuk mengelola Azure DevOps. | GA | [0.24.0](https://github.com/Microsoft/azure-devops-cli-extension) |
+|[azure-devops](https://github.com/Microsoft/azure-devops-cli-extension) | 2.30.0 | Alat untuk mengelola Azure DevOps. | GA | [0.25.0](https://github.com/Microsoft/azure-devops-cli-extension) |
 |[azure-firewall](https://github.com/Azure/azure-cli-extensions/tree/master/src/azure-firewall) | 2.15.0 | Mengelola sumber daya Azure Firewall. | Pratinjau | [0.13.0](https://github.com/Azure/azure-cli-extensions/tree/master/src/azure-firewall/HISTORY.rst) |
 |[azure-iot](https://github.com/azure/azure-iot-cli-extension) | 2.24.1 | Ekstensi Azure IoT untuk Azure CLI. | GA | [0.14.0](https://github.com/azure/azure-iot-cli-extension) |
 |[azurestackhci](https://github.com/Azure/azure-cli-extensions/tree/master/src/azurestackhci) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi AzureStackHCI | Eksperimental | [0.2.3](https://github.com/Azure/azure-cli-extensions/tree/master/src/azurestackhci) |
@@ -107,8 +107,8 @@ Anda akan diminta untuk menginstal ekstensi saat digunakan pertama kali.
 |[interactive](https://github.com/Azure/azure-cli) | 2.0.62 | Shell Interaktif Baris Perintah Microsoft Azure | Pratinjau | [0.4.5](https://github.com/Azure/azure-cli) |
 |[internet-analyzer](https://github.com/Azure/azure-cli-extensions/tree/master/src/internet-analyzer) | 2.0.67 | Alat Baris Perintah Microsoft Azure Ekstensi Internet Analyzer | Pratinjau | [0.1.0rc6](https://github.com/Azure/azure-cli-extensions/tree/master/src/internet-analyzer/HISTORY.rst) |
 |[ip-group](https://github.com/Azure/azure-cli-extensions) | 2.0.67 | Alat Baris Perintah Microsoft Azure Ekstensi IpGroup | Pratinjau | [0.1.2](https://github.com/Azure/azure-cli-extensions) |
-|[k8s-configuration](https://github.com/Azure/azure-cli-extensions/tree/master/src/k8s-configuration) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi K8s-configuration | GA | [1.4.1](https://github.com/Azure/azure-cli-extensions/tree/master/src/k8s-configuration/HISTORY.rst) |
-|[k8s-extension](https://github.com/Azure/azure-cli-extensions) | 2.24.0 | Alat Baris Perintah Microsoft Azure Ekstensi K8s-extension | GA | [1.0.4](https://github.com/Azure/azure-cli-extensions) |
+|[k8s-configuration](https://github.com/Azure/azure-cli-extensions/tree/main/src/k8s-configuration) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi K8s-configuration | GA | [1.5.0](https://github.com/Azure/azure-cli-extensions/tree/main/src/k8s-configuration/HISTORY.rst) |
+|[k8s-extension](https://github.com/Azure/azure-cli-extensions/tree/main/src/k8s-extension) | 2.24.0 | Alat Baris Perintah Microsoft Azure Ekstensi K8s-extension | GA | [1.1.0](https://github.com/Azure/azure-cli-extensions/tree/main/src/k8s-extension/HISTORY.rst) |
 |[k8sconfiguration](https://github.com/Azure/azure-cli-extensions/tree/master/src/k8sconfiguration) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi K8sconfiguration | Pratinjau | [0.2.4](https://github.com/Azure/azure-cli-extensions/tree/master/src/k8sconfiguration/HISTORY.rst) |
 |[kusto](https://github.com/Azure/azure-cli-extensions/tree/master/src/kusto) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi KustoManagementClient | GA | [0.4.0](https://github.com/Azure/azure-cli-extensions/tree/master/src/kusto/HISTORY.rst) |
 |[log-analytics](https://github.com/Azure/azure-cli-extensions/tree/master/src/log-analytics) | 2.0.0 | Dukungan untuk kemampuan kueri Azure Log Analytics. | Pratinjau | [0.2.2](https://github.com/Azure/azure-cli-extensions/tree/master/src/log-analytics/HISTORY.rst) |
@@ -119,11 +119,11 @@ Anda akan diminta untuk menginstal ekstensi saat digunakan pertama kali.
 |[managementpartner](https://github.com/Azure/azure-cli-extensions) | 2.0.67 | Dukungan untuk pratinjau Mitra Manajemen | GA | [0.1.3](https://github.com/Azure/azure-cli-extensions) |
 |[mesh](https://github.com/Azure/azure-cli-extensions/tree/master/src/mesh) | 2.0.67 | Dukungan untuk Microsoft Azure Service Fabric Mesh - Pratinjau Umum | Pratinjau | [0.10.7](https://github.com/Azure/azure-cli-extensions/tree/master/src/mesh/HISTORY.rst) |
 |[mixed-reality](https://github.com/Azure/azure-cli-extensions/tree/master/src/mixed-reality) | 2.15.0 | Ekstensi Mixed Reality Azure CLI. | Pratinjau | [0.0.4](https://github.com/Azure/azure-cli-extensions/tree/master/src/mixed-reality/HISTORY.rst) |
-|[ml](https://github.com/Azure/azure-cli-extensions/tree/master/src/machinelearningservices) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi AzureMachineLearningWorkspaces | Pratinjau | [2.1.2](https://github.com/Azure/azure-cli-extensions/tree/master/src/machinelearningservices) |
+|[ml](https://github.com/Azure/azure-cli-extensions/tree/master/src/machinelearningservices) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi AzureMachineLearningWorkspaces | Pratinjau | [2.1.2](https://github.com/Azure/azure-cli-extensions/tree/master/src/machinelearningservices/HISTORY.rst) |
 |[monitor-control-service](https://github.com/Azure/azure-cli-extensions/tree/master/src/monitor-control-service) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi MonitorClient | GA | [0.2.0](https://github.com/Azure/azure-cli-extensions/tree/master/src/monitor-control-service/HISTORY.rst) |
 |[netappfiles-preview](https://github.com/Azure/azure-cli-extensions/tree/master/src/netappfiles-preview) | 2.0.56 | Menyediakan pratinjau untuk fitur Azure NetApp Files (ANF) mendatang. | Pratinjau | [0.3.2](https://github.com/Azure/azure-cli-extensions/tree/master/src/netappfiles-preview/HISTORY.rst) |
-|[next](https://github.com/Azure/azure-cli-extensions) | 2.20.0 | Alat Baris Perintah Microsoft Azure Ekstensi Next | Eksperimental | [0.1.2](https://github.com/Azure/azure-cli-extensions) |
-|[notification-hub](https://github.com/Azure/azure-cli-extensions) | 2.3.1 | Alat Baris Perintah Microsoft Azure Ekstensi Notification Hub | Eksperimental | [0.2.0](https://github.com/Azure/azure-cli-extensions) |
+|[next](https://github.com/Azure/azure-cli-extensions) | 2.20.0 | Alat Baris Perintah Microsoft Azure Ekstensi Next | Eksperimental | [0.1.2](https://github.com/Azure/azure-cli-extensions/HISTORY.rst) |
+|[notification-hub](https://github.com/Azure/azure-cli-extensions) | 2.3.1 | Alat Baris Perintah Microsoft Azure Ekstensi Notification Hub | Eksperimental | [0.2.0](https://github.com/Azure/azure-cli-extensions/HISTORY.rst) |
 |[offazure](https://github.com/Azure/azure-cli-extensions/tree/master/src/offazure) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi AzureMigrateV2 | Eksperimental | [0.1.0](https://github.com/Azure/azure-cli-extensions/tree/master/src/offazure/HISTORY.rst) |
 |[peering](https://github.com/Azure/azure-cli-extensions/tree/master/src/peering) | 2.3.1 | Alat Baris Perintah Microsoft Azure Ekstensi PeeringManagementClient | GA | [0.2.1](https://github.com/Azure/azure-cli-extensions/tree/master/src/peering/HISTORY.rst) |
 |[portal](https://github.com/Azure/azure-cli-extensions/tree/master/src/portal) | 2.3.1 | Alat Baris Perintah Microsoft Azure Ekstensi Portal | Eksperimental | [0.1.2](https://github.com/Azure/azure-cli-extensions/tree/master/src/portal/HISTORY.rst) |
@@ -150,7 +150,7 @@ Anda akan diminta untuk menginstal ekstensi saat digunakan pertama kali.
 |[langganan](https://github.com/Azure/azure-cli-extensions) | 2.0.30 | Dukungan untuk pratinjau pengelolaan langganan. | Pratinjau | [0.1.4](https://github.com/Azure/azure-cli-extensions/HISTORY.rst) |
 |[support](https://github.com/azure/azure-cli-extensions/tree/master/src/support) | 2.0.81 | Alat Baris Perintah Microsoft Azure Ekstensi Support | GA | [1.0.3](https://github.com/azure/azure-cli-extensions/tree/master/src/support/HISTORY.rst) |
 |[timeseriesinsights](https://github.com/Azure/azure-cli-extensions/tree/master/src/timeseriesinsights) | 2.11.0 | Alat Baris Perintah Microsoft Azure Ekstensi TimeSeriesInsightsClient | GA | [0.2.1](https://github.com/Azure/azure-cli-extensions/tree/master/src/timeseriesinsights/HISTORY.rst) |
-|[virtual-network-manager](https://github.com/Azure/azure-cli-extensions/tree/main/src/network-manager) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi NetworkManagementClient | Pratinjau | [0.4.0](https://github.com/Azure/azure-cli-extensions/tree/main/src/network-manager/HISTORY.rst) |
+|[virtual-network-manager](https://github.com/Azure/azure-cli-extensions/tree/main/src/network-manager) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi NetworkManagementClient | Pratinjau | [0.4.1](https://github.com/Azure/azure-cli-extensions/tree/main/src/network-manager/HISTORY.rst) |
 |[virtual-network-tap](https://github.com/Azure/azure-cli-extensions/tree/master/src/virtual-network-tap) | 2.0.46 | Mengelola pengetukan jaringan virtual (VTAP). | Pratinjau | [0.1.0](https://github.com/Azure/azure-cli-extensions/tree/master/src/virtual-network-tap/HISTORY.rst) |
 |[virtual-wan](https://github.com/Azure/azure-cli-extensions/tree/master/src/virtual-wan) | 2.0.67 | Mengelola WAN virtual, hub, gateway VPN, dan situs VPN. | Pratinjau | [0.2.11](https://github.com/Azure/azure-cli-extensions/tree/master/src/virtual-wan/HISTORY.rst) |
 |[vm-repair](https://github.com/Azure/azure-cli-extensions/tree/main/src/vm-repair) | 2.0.67 | Perintah perbaikan otomatis untuk memperbaiki VM. | GA | [0.4.2](https://github.com/Azure/azure-cli-extensions/tree/main/src/vm-repair/HISTORY.rst) |
