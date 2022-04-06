@@ -5,12 +5,12 @@ manager: barbkess
 ms.date: 09/29/2020
 ms.topic: include
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: ca9e0d757818a583b70cb3b57ae53d393cc91d19
-ms.sourcegitcommit: 49c01a527543e5de52f51ee19f930c78842c349e
+ms.openlocfilehash: 2afcf12c4b20d4562ffdcdb57cf191f1edebc2d4
+ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 03/08/2022
-ms.locfileid: "139497998"
+ms.lasthandoff: 04/06/2022
+ms.locfileid: "141477368"
 ---
 ## <a name="overview"></a>Gambaran Umum
 
@@ -18,8 +18,8 @@ Manajer paket `apt` berisi paket x86_64 untuk Azure CLI yang telah diuji pada di
 
 | Distribusi | Versi |
 |:-------------|:--------|
-| Ubuntu       | 16.04 LTS (Xenial Xerus), 18.04 LTS (Bionic Beaver), 20.04 LTS (Fossa Fokus) |
-| Debian       | 9 (Peregangan), 10 (Buster), 11 (Bullseye) |
+| Ubuntu       | 16.04 LTS (Xenial Xerus), 18.04 LTS (Bionic Beaver), 20.04 LTS (Focal Fossa), 21.10 (Impish Indri) |
+| Debian       | 9 (Stretch), 10 (Buster), 11 (Bullseye) |
 
 > [!WARNING]
 > Mulai dari Azure CLI 2.34.0, tidak ada paket DEB yang dirilis untuk Ubuntu 14.04 (Trusty Tahir) dan Debian 8 (Jessie). Anda dapat terus menggunakan versi historis Azure CLI pada sistem ini, tetapi tidak akan ada pembaruan atau perbaikan bug. Pertimbangkan untuk memutakhirkan ke versi Ubuntu atau Debian yang lebih baru untuk menggunakan Azure CLI terbaru.
@@ -79,7 +79,7 @@ Jika Anda lebih memilih proses penginstalan langkah demi langkah, selesaikan lan
 
 ## <a name="install-specific-version"></a>Menginstal versi tertentu
 
-Anda harus terlebih dahulu mengonfigurasi `azure-cli` informasi repositori seperti yang ditunjukkan di atas. Versi yang tersedia dapat ditemukan di [catatan rilis Azure CLI](/cli/azure/release-notes-azure-cli).
+Anda harus terlebih dahulu mengonfigurasi `azure-cli` informasi repositori seperti yang ditunjukkan di atas. Versi yang tersedia dapat ditemukan di [catatan rilis Azure CLI](../release-notes-azure-cli.md).
 
 1. Untuk melihat versi yang tersedia dengan perintah:
 

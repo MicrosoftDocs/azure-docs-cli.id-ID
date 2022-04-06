@@ -7,12 +7,12 @@ ms.topic: include
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 9f7734c22b4401bf704e270f17bf46b42360f060
-ms.sourcegitcommit: d2227bc475235bf86193e9cae5e02f349a6342e2
+ms.openlocfilehash: c6a067cb44c12f83e6a57044c1c18e65ee30e4c4
+ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 11/02/2021
-ms.locfileid: "132439113"
+ms.lasthandoff: 04/06/2022
+ms.locfileid: "141477885"
 ---
 ## <a name="overview"></a>Gambaran Umum
 
@@ -52,7 +52,7 @@ Untuk distribusi Linux dengan `zypper`, seperti openSUSE atau SLES, ada paket ya
 
 ## <a name="install-specific-version"></a>Menginstal versi tertentu
 
-Anda harus terlebih dahulu mengonfigurasi `azure-cli` informasi repositori seperti yang ditunjukkan di atas. Versi yang tersedia dapat ditemukan di [catatan rilis Azure CLI](/cli/azure/release-notes-azure-cli).
+Anda harus terlebih dahulu mengonfigurasi `azure-cli` informasi repositori seperti yang ditunjukkan di atas. Versi yang tersedia dapat ditemukan di [catatan rilis Azure CLI](../release-notes-azure-cli.md).
 
 1. Untuk melihat versi yang tersedia dengan perintah:
 
