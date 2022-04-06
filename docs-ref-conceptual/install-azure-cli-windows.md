@@ -11,12 +11,12 @@ ms.devlang: azurecli
 ms.technology: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: Menginstal azure cli, unduhan azure cli, cli untuk windows, menginstal azure cli di windows, azure cli windows, menginstal azure cli windows
-ms.openlocfilehash: fc6abf32252584188c5bb4c6328a0822f1f8710a
-ms.sourcegitcommit: d2227bc475235bf86193e9cae5e02f349a6342e2
+ms.openlocfilehash: 028fe7dc7bd45aa82f166c0043a3d73151350615
+ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 11/02/2021
-ms.locfileid: "132439126"
+ms.lasthandoff: 04/06/2022
+ms.locfileid: "141397558"
 ---
 # <a name="install-azure-cli-on-windows"></a>Instal Azure CLI di Windows
 
@@ -42,7 +42,7 @@ Unduh dan instal Azure CLI rilis terbaru. Jika alat penginstal bertanya apakah d
 
 ### <a name="specific-version"></a>Versi spesifik
 
-Untuk mengunduh alat penginstal MSI untuk versi tertentu, ubah segmen versi di URL `https://azcliprod.blob.core.windows.net/msi/azure-cli-<version>.msi` dan unduh. Versi yang tersedia dapat ditemukan di [Catatan rilis Azure CLI](/cli/azure/release-notes-azure-cli).
+Untuk mengunduh alat penginstal MSI untuk versi tertentu, ubah segmen versi di URL `https://azcliprod.blob.core.windows.net/msi/azure-cli-<version>.msi` dan unduh. Versi yang tersedia dapat ditemukan di [Catatan rilis Azure CLI](./release-notes-azure-cli.md).
 
 # <a name="microsoft-installer-msi-with-command"></a>[Alat penginstal Microsoft (MSI) dengan Perintah](#tab/azure-powershell)
 
@@ -61,7 +61,7 @@ Mulai PowerShell sebagai administrator dan jalankan perintah berikut:
 
 Ini akan mengunduh dan menginstal Azure CLI versi terbaru untuk Windows. Jika Anda sudah menginstal versi, alat penginstal akan memperbarui versi yang ada.
 
-Untuk menginstal versi tertentu, ganti argumen `-Uri` dengan `https://azcliprod.blob.core.windows.net/msi/azure-cli-<version>.msi` berserta segmen versi yang diubah. Versi yang tersedia dapat ditemukan di [Catatan rilis Azure CLI](/cli/azure/release-notes-azure-cli).
+Untuk menginstal versi tertentu, ganti argumen `-Uri` dengan `https://azcliprod.blob.core.windows.net/msi/azure-cli-<version>.msi` berserta segmen versi yang diubah. Versi yang tersedia dapat ditemukan di [Catatan rilis Azure CLI](./release-notes-azure-cli.md).
 
 > [!Note]
 > Setelah selesai menginstal, Anda harus membuka kembali PowerShell untuk menggunakan Azure CLI.

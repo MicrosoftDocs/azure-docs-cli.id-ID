@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: pembaruan Azure cli, catatan Azure cli, versi Azure cli
-ms.openlocfilehash: b80a95dbf5795454789c13fb7c73fbd93758a9b3
-ms.sourcegitcommit: 49c01a527543e5de52f51ee19f930c78842c349e
+ms.openlocfilehash: b34ff5217b3fc7fee9b728d3c217fa8b65304c19
+ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 03/08/2022
-ms.locfileid: "139320306"
+ms.lasthandoff: 04/06/2022
+ms.locfileid: "141397528"
 ---
 # <a name="azure-cli-release-notes"></a>Catatan rilis Azure CLI
 
@@ -25,11 +25,11 @@ Versi 2.34.1
 
 ### <a name="app-service"></a>App Service
 
-* Hotfix: Perbaiki #20489: `az webapp log tail`: Perbaiki AttributeError bahwa objek 'NoneType' tidak memiliki atribut 'host_name_ssl_states'
-* Hotfix: Perbaiki #20747: `az webapp create-remote-connection`: Perbaiki EOFError yang kehabisan input
-* Hotfix: Perbaiki #20544: `az webapp config snapshot restore`: Perbaiki AttributeError bahwa objek 'WebAppsOperations' tidak memiliki atribut 'restore_snapshot'
-* Hotfix: Perbaiki #20011: `az webapp config ssl bind`: Perbaiki AttributeError bahwa objek 'str' tidak memiliki atribut 'value'
-* Hotfix: Perbaiki #19492: `az webapp config backup restore`: Perbaiki AttributeError bahwa objek 'WebAppsOperations' tidak memiliki atribut 'restore'
+* Perbaikan: Perbaikan #20489: `az webapp log tail`: Perbaiki AttributeError bahwa objek 'NoneType' tidak memiliki atribut 'host_name_ssl_states'
+* Perbaikan: Perbaikan #20747: `az webapp create-remote-connection`: Perbaiki EOFError yang kehabisan input
+* Perbaikan: Perbaikan #20544: `az webapp config snapshot restore`: Perbaiki AttributeError bahwa objek 'WebAppsOperations' tidak memiliki atribut 'restore_snapshot'
+* Perbaikan: Perbaikan #20011: `az webapp config ssl bind`: Perbaiki AttributeError bahwa objek 'str' tidak memiliki atribut 'value'
+* Perbaikan: Perbaikan #19492: `az webapp config backup restore`: Perbaiki AttributeError bahwa objek 'WebAppsOperations' tidak memiliki atribut 'restore'
 
 ### <a name="storage"></a>Penyimpanan
 
@@ -42,18 +42,18 @@ Versi 2.34.0
 ### <a name="acr"></a>Azure Container Registry
 
 * `az acr manifest`: Tambahkan grup perintah baru untuk mendukung pengelolaan manifes artefak di Azure Container Registries
-* `az acr repository show-manifests` Perintah mencela dan mengganti dengan `acr manifest metadata list` perintah
+* Perintah penghentian `az acr repository show-manifests` dan ganti dengan `acr manifest metadata list` perintah
 
 ### <a name="aks"></a>AKS
 
-* `az aks nodepool update`: Tambahkan `--node-taints` untuk memungkinkan memodifikasi noda node
+* `az aks nodepool update`: Tambahkan `--node-taints` untuk mengizinkan modifikasi taint simpul
 * `az aks get-credentials`: Tambahkan parameter `--format` baru untuk mendukung penentuan format kredensial yang dikembalikan
-* `az aks nodepool`: Izinkan menentukan `--scale-down-mode` di nodepool buat dan perbarui
+* `az aks nodepool`: Izinkan menentukan `--scale-down-mode` dalam nodepool membuat dan memperbarui
 
 ### <a name="apim"></a>APIM
 
-* `az apim api import`: Perbarui deskripsi api-id #18306
-* Perbaiki #21187: `az apim api create/update/import`: Perbaiki nama param header dan kueri yang ditukar
+* `az apim api import`: Memperbarui deskripsi api-id #18306
+* Perbaikan #21187: `az apim api create/update/import`: Perbaiki nama param header dan kueri yang ditukar
 
 ### <a name="app-config"></a>Konfigurasi Aplikasi
 
@@ -61,12 +61,12 @@ Versi 2.34.0
 
 ### <a name="app-service"></a>App Service
 
-* [BREAKING CHANGE] `az webapp up`: Ubah runtime yang didukung
-* [BREAKING CHANGE] `az webapp create`: Ubah runtime yang didukung
-* [BREAKING CHANGE] `az webapp list-runtimes`: Tambahkan `--os`/`--os-type` argumen, ubah runtime, ubah perilaku default untuk mengembalikan tumpukan linux dan windows, dan menghentikan argumen `--linux`
-* [BREAKING CHANGE] `az functionapp create`: Ambil nama dan versi runtime dari API alih-alih daftar hardcoded
-* `az functionapp plan`: Perbarui nilai `--max-burst` maksimal hingga 100
-* `az functionapp list-runtimes`: Menambahkan perintah baru untuk menampilkan runtime aplikasi fungsi, versi, dan versi fungsi yang kompatibel
+* [BREAKING CHANGE] `az webapp up`: Mengubah runtime yang didukung
+* [BREAKING CHANGE] `az webapp create`: Mengubah runtime yang didukung
+* [BREAKING CHANGE] `az webapp list-runtimes`: Menambahkan `--os`/`--os-type` argumen, mengubah runtime, mengubah perilaku default untuk mengembalikan tumpukan linux dan windows, dan menghentikan argumen `--linux`
+* [BREAKING CHANGE] `az functionapp create`: Mengambil nama dan versi runtime dari API alih-alih daftar hardcoded
+* `az functionapp plan`: Perbarui nilai `--max-burst` maksimum hingga 100
+* `az functionapp list-runtimes`: Tambahkan perintah baru untuk menampilkan runtime aplikasi fungsi, versi, dan versi fungsi yang kompatibel
 * `az webapp create`: Berikan bendera dukungan `--https-only`
 * `az webapp deployment github-actions remove`: Perbaiki bug yang jalurnya tidak dapat dimulai dengan garis miring
 
@@ -74,11 +74,11 @@ Versi 2.34.0
 
 * `az account management-group entities`: Menambahkan grup perintah baru untuk mendukung operasi entitas (Grup Manajemen dan Langganan) untuk pengguna yang diautentikasi
 * `az account management-group hierarchy-settings`: Menambahkan grup perintah baru untuk mendukung operasi pada pengaturan hierarki yang ditentukan pada tingkat grup manajemen
-* `az account management-group tenant-backfill`: Menambahkan grup perintah baru untuk mendukung langganan pengisian ulang untuk penyewa
-* `az account management-group subscription show`: Dapatkan detail langganan yang diberikan di bawah grup manajemen tertentu
-* `az account management-group subscription show-sub-under-mg`: Tampilkan langganan apa yang ada di bawah grup manajemen tertentu
+* `az account management-group tenant-backfill`: Menambahkan grup perintah baru untuk mendukung langganan backfilling untuk penyewa
+* `az account management-group subscription show`: Mendapatkan detail langganan tertentu di bawah grup manajemen tertentu
+* `az account management-group subscription show-sub-under-mg`: Menampilkan langganan apa yang berada di bawah grup manajemen tertentu
 * `az account management-group check-name-availability`: Periksa apakah nama grup manajemen valid dan tersedia
-* `az deployment`: Perbaiki bug 'objek byte tidak memiliki atribut get' untuk penanganan kesalahan dalam kasus coba lagi
+* `az deployment`: Perbaiki bug objek 'byte tidak memiliki atribut get' untuk penanganan kesalahan dalam kasus coba lagi
 
 ### <a name="backup"></a>Cadangan
 
@@ -86,11 +86,11 @@ Versi 2.34.0
 
 ### <a name="compute"></a>Compute
 
-* `az vm create`: Perbaiki masalah bahwa VMCustomization tidak diaktifkan
+* `az vm create`: Memperbaiki masalah bahwa VMCustomization tidak diaktifkan
 * `az vm disk attach`: Ubah deskripsi bantuan untuk memandu cara menggunakan `--ids` parameter dengan benar
 * `az restore-point`: Tambahkan grup perintah baru untuk mendukung pengelolaan titik pemulihan
-* `az vmss create/update`: Tambahkan parameter `--security-type`baru, `--enable-secure-boot` dan `--enable-vtpm` untuk mendukung Peluncuran Tepercaya
-* `az vmss create/update`: Tambahkan parameter `--automatic-repairs-action` baru untuk mendukung tindakan perbaikan
+* `az vmss create/update`: Tambahkan parameter `--security-type`baru , `--enable-secure-boot` dan `--enable-vtpm` untuk mendukung Peluncuran Tepercaya
+* `az vmss create/update`: Menambahkan parameter `--automatic-repairs-action` baru untuk mendukung tindakan perbaikan
 * `az vmss create/update`: Menambahkan parameter baru `--v-cpus-available` dan `--v-cpus-per-core` untuk mendukung penyesuaian VMSize
 
 ### <a name="cosmos-db"></a>Cosmos DB
@@ -100,63 +100,63 @@ Versi 2.34.0
 ### <a name="eventhub"></a>Eventhub
 
 * `az eventhubs namespace create`: Tambahkan `--user-assigned`, `--system-assigned`, `--encryption-config`
-* `az eventhubs namespace identity`: Cmdlets untuk identitas hub acara
-* `az eventhubs namespace encryption`: Cmdlets untuk enkripsi hub acara
+* `az eventhubs namespace identity`: Cmdlet untuk identitas pusat aktivitas
+* `az eventhubs namespace encryption`: Cmdlet untuk enkripsi pusat aktivitas
 * `az servicebus namespace create`: Tambahkan `--user-assigned`, `--system-assigned`, `--encryption-config`
-* `az servicebus namespace identity`: Cmdlets untuk identitas hub acara
-* `az servicebus namespace encryption`: Cmdlets untuk enkripsi hub acara
+* `az servicebus namespace identity`: Cmdlet untuk identitas pusat aktivitas
+* `az servicebus namespace encryption`: Cmdlet untuk enkripsi pusat aktivitas
 
 ### <a name="iot"></a>IoT
 
-* `az iot hub create`: Tambahkan `--enforce-data-residency` parameter untuk mendukung pembuatan sumber daya dengan residensi data diberlakukan (dan pemulihan bencana lintas wilayah dinonaktifkan)
-* `az iot dps create`: Tambahkan `--enforce-data-residency` parameter untuk mendukung pembuatan sumber daya dengan residensi data diberlakukan (dan pemulihan bencana lintas wilayah dinonaktifkan)
+* `az iot hub create`: Tambahkan `--enforce-data-residency` parameter untuk mendukung pembuatan sumber daya dengan residensi data yang diberlakukan (dan pemulihan bencana lintas wilayah dinonaktifkan)
+* `az iot dps create`: Tambahkan `--enforce-data-residency` parameter untuk mendukung pembuatan sumber daya dengan residensi data yang diberlakukan (dan pemulihan bencana lintas wilayah dinonaktifkan)
 
 ### <a name="key-vault"></a>Key Vault
 
-* Perbaiki #21341: `az keyvault update`: Mendukung pembaruan tag
-* `az keyvault key create/import/set-attributes`: Dukungan `--immutable` untuk menandai kebijakan rilis yang tidak berubah
+* Perbaikan #21341: `az keyvault update`: Mendukung pembaruan tag
+* `az keyvault key create/import/set-attributes`: Dukungan `--immutable` untuk menandai kebijakan rilis tidak dapat diubah
 * `az keyvault key import`: Dukungan `--kty oct` untuk mengimpor kunci AES
 
 ### <a name="monitor"></a>Monitor
 
-* `az monitor log-analytics workspace table`: Tambahkan perintah `create`baru , `delete` dan `search-job create` untuk mendukung operasi tabel Microsoft/Custom log/Search Results
+* `az monitor log-analytics workspace table`: Tambahkan perintah `create`baru , `delete` dan `search-job create` untuk mendukung operasi tabel Log/Hasil Pencarian Microsoft/Kustom
 * `az monitor log-analytics workspace update`: Tambahkan parameter `--data-collection-rule` baru untuk mendukung pembaruan defaultDataCollectionRuleResourceId
-* `az monitor log-analytics workspace table`: Tambahkan perintah `restore create` baru dan `migrate` untuk mendukung operasi tabel/migrasi log yang dipulihkan
+* `az monitor log-analytics workspace table`: Tambahkan perintah `restore create` baru dan `migrate` untuk mendukung tabel log yang dipulihkan/operasi migrasi
 
 ### <a name="network"></a>Jaringan
 
 * `az bastion ssh`: Memberikan dukungan untuk akses Bastion SSH di Darwin dan Linux
-* `az network private-endpoint`: Kaitkan konfigurasi IP dan ASG saat membuat PE
+* `az network private-endpoint`: Mengaitkan konfigurasi IP dan ASG saat membuat PE
 
 ### <a name="packaging"></a>Pengemasan
 
-* [MELANGGAR PERUBAHAN] Drop Ubuntu 14.04 Dukungan Trusty Tahr dan Debian 8 Jessie
-* [MELANGGAR PERUBAHAN] Turunkan dukungan Ubuntu 21.04 Hirsute Hippo
-* Tambahkan dukungan Ubuntu 21.10 Impish Indri
-* Bump tertanam Python ke 3.8 untuk paket deb
+* [MELANGGAR PERUBAHAN] Drop Ubuntu 14.04 Trusty Tahr dan Debian 8 Dukungan Jessie
+* [MELANGGAR PERUBAHAN] Hilangkan dukungan Hirsute Hippo Ubuntu 21.04
+* Menambahkan dukungan Ubuntu 21.10 Impish Indri
+* Bump embedded Python ke 3.8 untuk paket deb
 
 ### <a name="profile"></a>Profil
 
-* [BREAKING CHANGE] `az account show`: Jatuhkan `--sdk-auth`
+* [MELANGGAR PERUBAHAN] `az account show`: Hilangkan `--sdk-auth`
 
 ### <a name="rdbms"></a>RDBMS
 
-* Memperbaiki bug untuk penyediaan zona dns privat ke grup sumber daya vnet dalam langganan yang berbeda
+* Memperbaiki bug untuk provisi zona dns privat ke grup sumber daya vnet di langganan yang berbeda
 * Aktifkan ekstensi rdbms-connect di Cloud Shell
 
 ### <a name="role"></a>Peran
 
-* Menambahkan peringatan dan `role` `ad` perintah tentang migrasi Microsoft Graph
+* Menambahkan peringatan ke `role` perintah dan `ad` tentang migrasi Microsoft Graph
 
 ### <a name="sql"></a>SQL
 
-* `az sql server create/update`: Tambahkan dukungan id klien federasi
+* `az sql server create/update`: Menambahkan dukungan id klien federasi
 
 ### <a name="storage"></a>Penyimpanan
 
 * `az storage account create/update`: Dukungan `--sam-account-name` dan `--account-type`
-* `az storage blob upload`: Tambahkan `--tier`, migrasi ke track2
-* `az storage blob upload-batch`: Migrasi ke track2
+* `az storage blob upload`: Tambahkan `--tier`, migrasikan ke track2
+* `az storage blob upload-batch`: Bermigrasi ke track2
 
 ## <a name="february-14-2022"></a>14 Februari 2022
 
@@ -474,7 +474,7 @@ Versi 2.30.0
 
 ### <a name="core"></a>Core
 
-* [BREAKING CHANGE] Memigrasikan dari ADAL ke MSAL. Untuk detail selengkapnya, lihat [Azure CLI berbasis MSAL](/cli/azure/msal-based-azure-cli)
+* [BREAKING CHANGE] Memigrasikan dari ADAL ke MSAL. Untuk detail selengkapnya, lihat [Azure CLI berbasis MSAL](./msal-based-azure-cli.md)
 
 ### <a name="acr"></a>Azure Container Registry
 
@@ -811,7 +811,7 @@ Versi 2.28.0
 * Meningkatkan versi api untuk Mesin Virtual dan VMSS dari `2021-03-01` ke `2021-04-01`
 * `az vmss create/update`: Mendukung kebijakan pemulihan spot ke VM scale sets
 * Menambahkan contoh baru untuk membuat disk dari galeri gambar bersama
-* `az vm image list/list-offers/list-skus/list-publishers/show`: Menambahkan parameter baru `--edge-zone` untuk mendukung kueri gambar di bawah zona tepi
+* `az vm image list/list-offers/list-skus/list-publishers/show`: Tambahkan parameter `--edge-zone` baru untuk mendukung kueri gambar di bawah zona tepi
 * Memperbaiki masalah yang disebabkan oleh kurangnya `os_type` saat membuat Mesin Virtual dari id galeri bersama
 * Memperbarui dokumen galeri gambar bersama
 * `az capacity reservation`: Menambahkan perintah baru untuk mengelola reservasi kapasitas

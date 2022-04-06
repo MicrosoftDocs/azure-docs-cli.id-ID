@@ -11,12 +11,12 @@ ms.technology: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: pengelolaan layanan azure, daftar layanan azure, daftar sumber daya azure
-ms.openlocfilehash: 821eda50dc30fe0f0975cfcd66be9c1fc9ec8182
-ms.sourcegitcommit: 133f901f17aebce8976e4751bcadf0758a9a1c76
+ms.openlocfilehash: d66239cf198b2cd7c409f8577625a7bbae2e8ae1
+ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 02/14/2022
-ms.locfileid: "138622133"
+ms.lasthandoff: 04/06/2022
+ms.locfileid: "141398418"
 ---
 # <a name="list-of-azure-services-the-azure-cli-can-manage"></a>Daftar layanan Azure yang dapat dikelola Azure CLI
 
@@ -63,7 +63,7 @@ Gunakan Azure Analytics untuk mengumpulkan, menyimpan, memproses, menganalisis, 
 |[Azure Stream Analytics](/cli/azure/service-page/azure%20stream%20analytics) | [Membuat pekerjaan Azure Stream Analytics](/azure/stream-analytics/quick-create-azure-cli)
 |[Azure Synapse Analytics](/cli/azure/service-page/azure%20synapse%20analytics) | [Membuat ruang kerja Azure Synapse](/azure/synapse-analytics/quickstart-create-workspace-cli)
 || [Membuat kumpulan Synapse SQL](/azure/synapse-analytics/sql-data-warehouse/create-data-warehouse-azure-cli)
-|[Power BI Embedded](/cli/azure/powerbi) | [Membuat kapasitas Power BI Embedded](/power-bi/developer/embedded/azure-pbie-create-capacity?tabs=CLI)
+|[Power BI Embedded](../latest/docs-ref-autogen/powerbi.yml) | [Membuat kapasitas Power BI Embedded](/power-bi/developer/embedded/azure-pbie-create-capacity?tabs=CLI)
 
 ## <a name="blockchain"></a>Blockchain
 
@@ -98,10 +98,10 @@ Akses kapasitas komputasi cloud dan skalakan sesuai permintaan—dan hanya bayar
 |[Struktur Layanan Azure](/cli/azure/service-page/azure%20service%20fabric) | [Menyebarkan kontainer Linux untuk Service Fabric](/azure/service-fabric/service-fabric-quickstart-containers-linux#create-a-service-fabric-cluster)
 | |[Membuat kluster Microsoft Azure Service Fabric](/azure/service-fabric/service-fabric-cluster-creation-via-arm)
 |[Azure Spring Cloud](/cli/azure/service-page/azure%20spring%20cloud) | [Baca rahasia dari Azure Key Vault di aplikasi Spring Boot](/azure/developer/java/spring-framework/configure-spring-boot-starter-java-app-with-azure-key-vault#deploy-to-azure-spring-cloud)
-|[Azure Static Web Apps](/cli/azure/staticwebapp) | [Membangun situs statik pertama](/azure/static-web-apps/get-started-cli?tabs=vanilla-javascript)
-|[Komputer Virtual Azure](/cli/azure/azure-cli-reference-for-virtual-machines) | [Membuat Linux VM](/azure/virtual-machines/linux/quick-create-cli)
+|[Azure Static Web Apps](../latest/docs-ref-autogen/staticwebapp.yml) | [Membangun situs statik pertama](/azure/static-web-apps/get-started-cli?tabs=vanilla-javascript)
+|[Komputer Virtual Azure](./azure-cli-reference-for-virtual-machines.md) | [Membuat Linux VM](/azure/virtual-machines/linux/quick-create-cli)
 | |[Membuat VM Windows](/azure/virtual-machines/windows/quick-create-cli)
-|[Azure Virtual Machine Scale Sets (VMSS)](/cli/azure/vmss) | [Membuat VM Linux dengan Jaringan yang Dipercepat](/azure/virtual-network/create-vm-accelerated-networking-cli#vmss)
+|[Azure Virtual Machine Scale Sets (VMSS)](../latest/docs-ref-autogen/vmss.yml) | [Membuat VM Linux dengan Jaringan yang Dipercepat](/azure/virtual-network/create-vm-accelerated-networking-cli#vmss)
 |[Azure VMWare Solution](/cli/azure/service-page/azure%20vmware%20solution) | [Melampirkan gabungan disk ke host Azure VMware Solution](/azure/azure-vmware/attach-disk-pools-to-azure-vmware-solution-hosts)
 |[Azure Web Apps](/cli/azure/service-page/azure%20web%20apps) | [Cara menggunakan identitas terkelola untuk App Service dan Azure Functions](/azure/app-service/overview-managed-identity?tabs=dotnet#using-the-azure-cli)
 | |[Mengonfigurasikan kontainer kustom untuk Azure App Service ](/azure/app-service/configure-custom-container?pivots=container-linux)
@@ -138,7 +138,7 @@ Mendukung pertumbuhan yang pesat dan berinovasi lebih cepat dengan layanan datab
 |[Azure Database untuk MariaDB](/cli/azure/service-page/azure%20database%20for%20mariadb) | [Membuat server Azure Database for MariaDB](/azure/mariadb/quickstart-create-mariadb-server-database-using-azure-cli)
 |[Azure Database untuk MySQL](/cli/azure/service-page/azure%20database%20for%20mysql) | [Membuat Server Fleksibel MySQL](/azure/mysql/flexible-server/tutorial-php-database-app#create-a-mysql-flexible-server-preview)
 |[Azure Database untuk PostgreSQL](/cli/azure/service-page/azure%20database%20for%20postgresql) | [Membuat server Azure DB for PostgreSQL](/azure/postgresql/quickstart-create-server-database-azure-cli)
-|[Azure SQL Database](/cli/azure/azure-cli-reference-for-sql#sql-database) | [Membuat Azure SQL Database](/azure/azure-sql/database/single-database-create-quickstart?tabs=azure-cli)
+|[Azure SQL Database](./azure-cli-reference-for-sql.md) | [Membuat Azure SQL Database](/azure/azure-sql/database/single-database-create-quickstart?tabs=azure-cli)
 | |[Mengelola aturan firewall IP tingkat layanan](/azure/azure-sql/database/firewall-configure#use-cli-to-manage-server-level-ip-firewall-rules)
 
 ## <a name="developer-tools"></a>Alat Pengembang
@@ -147,12 +147,12 @@ Gunakan seperangkat alat pengembangan komprehensif Microsoft untuk membangun, me
 
 | Referensi Azure CLI untuk layanan | Microsoft Docs
 |-|-|
-|[Konfigurasi Aplikasi](/cli/azure/azure-cli-reference-for-hosted-apps#azure-web-app-configuration) | [Memigrasikan perangkat lunak kustom ke Azure App Service menggunakan kontainer kustom](/azure/app-service/tutorial-custom-container?pivots=container-linux)
+|[Konfigurasi Aplikasi](./azure-cli-reference-for-hosted-apps.md) | [Memigrasikan perangkat lunak kustom ke Azure App Service menggunakan kontainer kustom](/azure/app-service/tutorial-custom-container?pivots=container-linux)
 | |[Membangun aplikasi ASP.NET Core dan Azure SQL Database di Azure App Service](/azure/app-service/tutorial-dotnetcore-sqldb-app?pivots=platform-linux)
 |[Azure DevOps](azure-cli-reference-for-devops.md) | Lihat tautan dalam ringkasan referensi.
 |[Azure DevTest Labs](/cli/azure/service-page/azure%20devtest%20labs) | [Membuat dan mengelola mesin virtual dengan DevTest Labs](/azure/devtest-labs/devtest-lab-vmcli)
 |[Azure Lab Services](/cli/azure/service-page/azure%20lab%20services) |
-|[Azure Pipelines](/cli/azure/azure-cli-reference-for-devops#azure-pipelines) | [Cara menentukan variabel alur](/azure/devops/pipelines/process/variables?view=azure-devops&preserve-view=true&tabs=azure-devops-cli)
+|[Azure Pipelines](./azure-cli-reference-for-devops.md) | [Cara menentukan variabel alur](/azure/devops/pipelines/process/variables?view=azure-devops&preserve-view=true&tabs=azure-devops-cli)
 | |[Agen Azure Pipelines](/azure/devops/pipelines/agents/agents?view=azure-devops&preserve-view=true&tabs=azure-devops-cli)
 | |[Membuat alur pertama Anda](/azure/devops/pipelines/create-first-pipeline?view=azure-devops&preserve-view=true&tabs=azure-cli)
 |[Visual Studio](/cli/azure/service-page/visual%20studio) |
@@ -163,16 +163,16 @@ Teknologi Azure DevOps menghadirkan inovasi lebih cepat dengan alat yang sederha
 
 | Referensi Azure CLI untuk layanan | Microsoft Docs
 |-|-|
-|[Azure Artifacts](/cli/azure/azure-cli-reference-for-devops#azure-artifacts) | [Menerbitkan dan mengunduh paket universal](/azure/devops/artifacts/quickstarts/universal-packages?view=azure-devops&preserve-view=true)
-|[Azure Boards](/cli/azure/azure-cli-reference-for-devops#azure-boards) | [Menentukan jalur area dan menetapkan ke tim](/azure/devops/organizations/settings/set-area-paths?view=azure-devops&preserve-view=true&tabs=azure-devops-cli#open-project-settings-list-project-areas)
-|[Azure DevOps](/cli/azure/azure-cli-reference-for-devops) | Lihat tautan dalam ringkasan referensi.
+|[Azure Artifacts](./azure-cli-reference-for-devops.md) | [Menerbitkan dan mengunduh paket universal](/azure/devops/artifacts/quickstarts/universal-packages?view=azure-devops&preserve-view=true)
+|[Azure Boards](./azure-cli-reference-for-devops.md) | [Menentukan jalur area dan menetapkan ke tim](/azure/devops/organizations/settings/set-area-paths?view=azure-devops&preserve-view=true&tabs=azure-devops-cli#open-project-settings-list-project-areas)
+|[Azure DevOps](./azure-cli-reference-for-devops.md) | Lihat tautan dalam ringkasan referensi.
 |[Azure DevTest Labs](/cli/azure/service-page/azure%20devtest%20labs) | [Membuat dan mengelola mesin virtual dengan DevTest Labs](/azure/devtest-labs/devtest-lab-vmcli)
 |[Azure Monitor](azure-cli-reference-for-monitor.md) | [Membuat pengaturan diagnostik untuk mengirim log dan metrik platform ke tujuan yang berbeda](/azure/azure-monitor/essentials/diagnostic-settings?tabs=CMD#create-using-azure-cli)
 | |[Cara mengonfigurasi profil Log aktivitas Azure](/azure/azure-monitor/essentials/activity-log#configure-log-profile-using-azure-cli)
-|[Azure Pipelines](/cli/azure/azure-cli-reference-for-devops#azure-pipelines) | [Cara menentukan variabel alur](/azure/devops/pipelines/process/variables?view=azure-devops&preserve-view=true&tabs=azure-devops-cli)
+|[Azure Pipelines](./azure-cli-reference-for-devops.md) | [Cara menentukan variabel alur](/azure/devops/pipelines/process/variables?view=azure-devops&preserve-view=true&tabs=azure-devops-cli)
 | |[Agen Azure Pipelines](/azure/devops/pipelines/agents/agents?view=azure-devops&preserve-view=true&tabs=azure-devops-cli)
 | |[Membuat alur pertama Anda](/azure/devops/pipelines/create-first-pipeline?view=azure-devops&preserve-view=true&tabs=azure-cli)
-|[Azure Repos](/cli/azure/azure-cli-reference-for-devops#azure-repos) | [Mulai menggunakan Git dengan Azure CLI](/azure/devops/repos/git/share-your-code-in-git-cmdline?view=azure-devops&preserve-view=true)
+|[Azure Repos](./azure-cli-reference-for-devops.md) | [Mulai menggunakan Git dengan Azure CLI](/azure/devops/repos/git/share-your-code-in-git-cmdline?view=azure-devops&preserve-view=true)
 
 ## <a name="hybrid"></a>Hibrid
 
@@ -182,11 +182,11 @@ Teknologi Azure DevOps menghadirkan inovasi lebih cepat dengan alat yang sederha
 |[Azure Arc](/cli/azure/service-page/azure%20arc) | [Menghapus pengontrol data Azure Arc](/azure/azure-arc/data/uninstall-azure-arc-data-controller)
 |[Azure Database untuk PostgreSQL](/cli/azure/service-page/azure%20database%20for%20postgresql) | [Menyebarkan aplikasi web Django dengan PostgreSQL di Azure App Service](/azure/app-service/tutorial-python-postgresql-app?tabs=cmd%2Cclone&pivots=postgres-single-server)
 |[Azure DevOps](azure-cli-reference-for-devops.md) | Lihat tautan dalam ringkasan referensi.
-|[Azure IoT Edge](/cli/azure/iot/edge) | [Menyebarkan modul IoT Edge pertama Anda ke perangkat Linux virtual](/azure/iot-edge/quickstart-linux)
+|[Azure IoT Edge](../latest/docs-ref-autogen/iot/edge.yml) | [Menyebarkan modul IoT Edge pertama Anda ke perangkat Linux virtual](/azure/iot-edge/quickstart-linux)
 |[Azure Security Center](/cli/azure/service-page/azure%20security%20center) |
 |[Azure Sentinel](/cli/azure/service-page/azure%20sentinel) |
-|[Azure SQL Database](/cli/azure/azure-cli-reference-for-sql#sql-database) | [Memulihkan database tunggal di Azure SQL Database ke titik waktu sebelumnya](/azure/sql-database/scripts/sql-database-restore-database-cli)
-|[Azure Stack HCI](/cli/azure/stack-hci) |
+|[Azure SQL Database](./azure-cli-reference-for-sql.md) | [Memulihkan database tunggal di Azure SQL Database ke titik waktu sebelumnya](/azure/sql-database/scripts/sql-database-restore-database-cli)
+|[Azure Stack HCI](../latest/docs-ref-autogen/stack-hci.yml) |
 
 ## <a name="identity"></a>Identitas
 
@@ -213,14 +213,14 @@ Teknologi Azure DevOps menghadirkan inovasi lebih cepat dengan alat yang sederha
 |[Azure Cosmos DB](azure-cli-reference-for-cosmos-db.md) | [Sampel untuk Azure Cosmos DB Core (SQL) API](/azure/cosmos-db/cli-samples)
 |[Azure Functions](/cli/azure/service-page/azure%20functions) | [Mengelola aplikasi fungsi Anda](/azure/azure-functions/functions-how-to-use-azure-function-app-settings?tabs=azure-cli)
 | |[Cara menargetkan versi runtime Azure Functions](/azure/azure-functions/set-runtime-version?tabs=azurecli)
-|[Azure IoT Central](/cli/azure/iot/central) | [Mengelola IoT Central](/azure/iot-central/core/howto-manage-iot-central-from-cli?tabs=azure-cli)
-|[Azure IoT Edge](/cli/azure/iot/edge) | [Menyebarkan dan memantau modul IoT Edge dalam skala besar](/azure/iot-edge/how-to-deploy-cli-at-scale)
+|[Azure IoT Central](../latest/docs-ref-autogen/iot/central.yml) | [Mengelola IoT Central](/azure/iot-central/core/howto-manage-iot-central-from-cli?tabs=azure-cli)
+|[Azure IoT Edge](../latest/docs-ref-autogen/iot/edge.yml) | [Menyebarkan dan memantau modul IoT Edge dalam skala besar](/azure/iot-edge/how-to-deploy-cli-at-scale)
 | |[Menyebarkan modul IoT Edge pertama Anda ke perangkat Linux virtual](/azure/iot-edge/quickstart-linux)
-|[Azure IoT Hub](/cli/azure/iot/hub) | [Mengonfigurasi perutean pesan IoT Hub](/azure/iot-hub/tutorial-routing)
+|[Azure IoT Hub](../latest/docs-ref-autogen/iot/hub.yml) | [Mengonfigurasi perutean pesan IoT Hub](/azure/iot-hub/tutorial-routing)
 |[Azure Logic Apps](/cli/azure/service-page/azure%20logic%20apps) | [Buat dan kelola akun integrasi untuk integrasi perusahaan B2B di Azure Logic Apps](/azure/logic-apps/logic-apps-enterprise-integration-create-integration-account?tabs=azure-cli)
 |[Pembelajaran Mesin Azure](/cli/azure/service-page/azure%20machine%20learning) | [Membuat dan mengelolar instans komputasi Azure Machine Learning](/azure/machine-learning/how-to-create-manage-compute-instance?tabs=azure-cli)
 | |[Kelola akses ke ruang kerja Azure Machine Learning](/azure/machine-learning/how-to-assign-roles)
-|[Azure Maps](/cli/azure/maps) |
+|[Azure Maps](../latest/docs-ref-autogen/maps.yml) |
 |[Azure Notification Hubs](/cli/azure/service-page/azure%20notification%20hubs) | [Menyiapkan pemberitahuan push di hub pemberitahuan](/azure/notification-hubs/configure-notification-hub-portal-pns-settings?tabs=azure-cli)
 | | [Membuat hub pemberitahuan Azure menggunakan Azure CLI](/azure/notification-hubs/create-notification-hub-azure-cli)
 |[Azure Stream Analytics](/cli/azure/service-page/azure%20stream%20analytics) | [Membuat pekerjaan Azure Stream Analytics menggunakan Azure CLI](/azure/stream-analytics/quick-create-azure-cli)
@@ -232,11 +232,11 @@ Teknologi Azure DevOps menghadirkan inovasi lebih cepat dengan alat yang sederha
 
 | Referensi Azure CLI untuk layanan | Microsoft Docs
 |-|-|
-|[Automation](/cli/azure/automation) | [Aktifkan Manajemen Pembaruan menggunakan template Azure Resource Manager](/azure/automation/update-management/enable-from-template)
-|[Azure Advisor](/cli/azure/advisor) | [Membuat peringatan Azure Advisor tentang rekomendasi baru menggunakan template ARM](/azure/advisor/advisor-alerts-arm?tabs=CLI)
-|[Pencadangan Azure](/cli/azure/backup) | [Pencadangan dan pemulihan disk selektif untuk komputer virtual Azure](/azure/backup/selective-disk-backup-restore)
+|[Automation](../latest/docs-ref-autogen/automation.yml) | [Aktifkan Manajemen Pembaruan menggunakan template Azure Resource Manager](/azure/automation/update-management/enable-from-template)
+|[Azure Advisor](../latest/docs-ref-autogen/advisor.yml) | [Membuat peringatan Azure Advisor tentang rekomendasi baru menggunakan template ARM](/azure/advisor/advisor-alerts-arm?tabs=CLI)
+|[Pencadangan Azure](../latest/docs-ref-autogen/backup.yml) | [Pencadangan dan pemulihan disk selektif untuk komputer virtual Azure](/azure/backup/selective-disk-backup-restore)
 | | [Mencadangkan komputer virtual di Azure dengan Azure CLI](/azure/backup/quick-backup-vm-cli)
-|[Azure Blueprint](/cli/azure/blueprint) | [Menentukan dan Menetapkan Azure Blueprint dengan Azure CLI](/azure/governance/blueprints/create-blueprint-azurecli)
+|[Azure Blueprint](../latest/docs-ref-autogen/blueprint.yml) | [Menentukan dan Menetapkan Azure Blueprint dengan Azure CLI](/azure/governance/blueprints/create-blueprint-azurecli)
 |[Azure Cost Management and Billing](/cli/azure/service-page/azure%20cost%20management%20+%20billing) | [Membuat dan mengelola data yang diekspor](/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-cli)
 | |[Membuat langganan Perjanjian Enterprise Azure dengan API terbaru secara terprogram](/azure/cost-management-billing/manage/programmatically-create-subscription-enterprise-agreement?tabs=azure-cli)
 |[Azure Managed Applications](/cli/azure/service-page/azure%20managed%20applications) | [Membuat dan menerbitkan definisi aplikasi terkelola](/azure/azure-resource-manager/managed-applications/publish-service-catalog-app?tabs=azure-cli)
@@ -247,9 +247,9 @@ Teknologi Azure DevOps menghadirkan inovasi lebih cepat dengan alat yang sederha
 | |[Meremediasi sumber daya yang tidak mematuhi tugas remediasi Azure Policy](/azure/governance/policy/how-to/remediate-resources#create-a-remediation-task-through-azure-cli)
 |[Azure Resource Manager](/cli/azure/service-page/azure%20resource%20manager) | [Menggunakan tag untuk menata hierarki sumber daya dan manajemen Azure Anda](/azure/azure-resource-manager/management/tag-resources#azure-cli)
 | | [Kelola grup sumber daya Azure Resource Manager dengan menggunakan Azure CLI](/azure/azure-resource-manager/management/manage-resource-groups-cli)
-|[Templat Azure Resource Manager](/cli/azure/group) | [Spesifikasi templat Azure Resource Manager](/azure/azure-resource-manager/templates/template-specs?tabs=azure-cli)
+|[Templat Azure Resource Manager](../latest/docs-ref-autogen/group.yml) | [Spesifikasi templat Azure Resource Manager](/azure/azure-resource-manager/templates/template-specs?tabs=azure-cli)
 | | [Membuat dan menerapkan spesifikasi templat](/azure/azure-resource-manager/templates/quickstart-create-template-specs?tabs=azure-cli)
-|[Traffic Manager](/cli/azure/network/traffic-manager/) | [Membuat profil Traffic Manager untuk aplikasi web dengan ketersediaan tinggi menggunakan Azure CLI](/azure/traffic-manager/quickstart-create-traffic-manager-profile-cli)
+|[Traffic Manager](../latest/docs-ref-autogen/network/traffic-manager.yml) | [Membuat profil Traffic Manager untuk aplikasi web dengan ketersediaan tinggi menggunakan Azure CLI](/azure/traffic-manager/quickstart-create-traffic-manager-profile-cli)
 
 ## <a name="media"></a>Media
 
@@ -286,14 +286,14 @@ Teknologi Azure DevOps menghadirkan inovasi lebih cepat dengan alat yang sederha
 
 | Referensi Azure CLI untuk layanan | Microsoft Docs
 |-|-|
-|[Azure DNS](/cli/azure/network/dns) | [Mengimpor dan mengekspor file zona DNS menggunakan Azure CLI](/azure/dns/dns-import-export)
+|[Azure DNS](../latest/docs-ref-autogen/network/dns.yml) | [Mengimpor dan mengekspor file zona DNS menggunakan Azure CLI](/azure/dns/dns-import-export)
 | | [Menghosting zona pencarian reverse DNS di Azure DNS](/azure/dns/dns-reverse-dns-hosting)
-|[Tautan Privat Azure](/cli/azure/network/private-link-service) | [Membuat layanan Private Link menggunakan Azure CLI](/azure/private-link/create-private-link-service-cli)
+|[Tautan Privat Azure](../latest/docs-ref-autogen/network/private-link-service.yml) | [Membuat layanan Private Link menggunakan Azure CLI](/azure/private-link/create-private-link-service-cli)
 |[Jaringan Pengiriman Konten](/cli/azure/service-page/content%20delivery%20network) | [Membuat profil dan titik akhir Azure CDN menggunakan Azure CLI](/azure/cdn/scripts/cli/cdn-azure-cli-create-endpoint)
-|[Load Balancer](/cli/azure/network/lb) | [Pengelolaan kumpulan backend](/azure/load-balancer/backend-pool-management)
+|[Load Balancer](../latest/docs-ref-autogen/network/lb.yml) | [Pengelolaan kumpulan backend](/azure/load-balancer/backend-pool-management)
 | | [Memantau load balancer](/azure/load-balancer/monitor-load-balancer)
-|[Traffic Manager](/cli/azure/network/traffic-manager/) | [Membuat profil Traffic Manager untuk aplikasi web dengan ketersediaan tinggi menggunakan Azure CLI](/azure/traffic-manager/quickstart-create-traffic-manager-profile-cli)
-|[Jaringan Virtual](/cli/azure/network/vnet) | [Membuat komputer virtual Linux dengan Jaringan yang Dipercepat menggunakan Azure CLI](/azure/virtual-network/create-vm-accelerated-networking-cli)
+|[Traffic Manager](../latest/docs-ref-autogen/network/traffic-manager.yml) | [Membuat profil Traffic Manager untuk aplikasi web dengan ketersediaan tinggi menggunakan Azure CLI](/azure/traffic-manager/quickstart-create-traffic-manager-profile-cli)
+|[Jaringan Virtual](../latest/docs-ref-autogen/network/vnet.yml) | [Membuat komputer virtual Linux dengan Jaringan yang Dipercepat menggunakan Azure CLI](/azure/virtual-network/create-vm-accelerated-networking-cli)
 | | [Membuat peering jaringan virtual - Resource Manager, langganan yang berbeda, dan penyewa Azure Active Directory](/azure/virtual-network/create-peering-different-subscriptions)
 | | [Menambahkan atau menghapus delegasi subnet](/azure/virtual-network/manage-subnet-delegation#azure-cli)
 
@@ -313,7 +313,7 @@ Teknologi Azure DevOps menghadirkan inovasi lebih cepat dengan alat yang sederha
 
 | Referensi Azure CLI untuk layanan | Microsoft Docs
 |-|-|
-|[Pencadangan Azure](/cli/azure/backup) | [Pencadangan dan pemulihan disk selektif untuk komputer virtual Azure](/azure/backup/selective-disk-backup-restore)
+|[Pencadangan Azure](../latest/docs-ref-autogen/backup.yml) | [Pencadangan dan pemulihan disk selektif untuk komputer virtual Azure](/azure/backup/selective-disk-backup-restore)
 | | [Mencadangkan komputer virtual di Azure dengan Azure CLI](/azure/backup/quick-backup-vm-cli)
 |[Azure Data Lake Storage](/cli/azure/service-page/azure%20data%20lake%20storage) |[Memulai dengan Azure Data Lake Storage Gen1](/azure/data-lake-store/data-lake-store-get-started-cli-2.0)
 || [Mulai menggunakan Azure Data Lake Analytics](/azure/data-lake-analytics/data-lake-analytics-get-started-cli)
@@ -323,10 +323,10 @@ Teknologi Azure DevOps menghadirkan inovasi lebih cepat dengan alat yang sederha
 |[Azure HPC Cache](/cli/azure/service-page/azure%20hpc%20cache) | [Membuat Azure HPC Cache](/azure/hpc-cache/hpc-cache-create?tabs=azure-cli)
 | | [Mengelola cache Anda](/azure/hpc-cache/hpc-cache-manage?tabs=azure-cli)
 |[File Azure NetApp](/cli/azure/service-page/azure%20netapp%20files) | [Menyiapkan Azure NetApp Files dan membuat Volume NFS](/azure/azure-netapp-files/azure-netapp-files-quickstart-set-up-account-create-volumes?tabs=azure-cli)
-|[Azure Storage](/cli/azure/azure-cli-reference-for-storage) | [Mengonfigurasi firewall dan jaringan virtual Azure Storage](/azure/storage/common/storage-network-security?tabs=azure-cli)
+|[Azure Storage](./azure-cli-reference-for-storage.md) | [Mengonfigurasi firewall dan jaringan virtual Azure Storage](/azure/storage/common/storage-network-security?tabs=azure-cli)
 | | [Buat akun penyimpanan](/azure/storage/common/storage-account-create?tabs=azure-cli)
 | | [Membuat berbagi file Azure](/azure/storage/files/storage-how-to-create-file-share?tabs=azure-cli)
-|[Akun Penyimpanan](/cli/azure/azure-cli-reference-for-storage#storage-accounts) | [Buat akun penyimpanan](/azure/storage/common/storage-account-create?tabs=azure-cli)
+|[Akun Penyimpanan](./azure-cli-reference-for-storage.md) | [Buat akun penyimpanan](/azure/storage/common/storage-account-create?tabs=azure-cli)
 | | [Mengelola kunci akses akun penyimpanan](/azure/storage/common/storage-account-keys-manage?tabs=azure-cli).
 
 ## <a name="web"></a>Web
@@ -348,9 +348,9 @@ Teknologi Azure DevOps menghadirkan inovasi lebih cepat dengan alat yang sederha
 |[Azure Web Apps](/cli/azure/service-page/azure%20web%20apps) | [Cara menggunakan identitas terkelola untuk App Service dan Azure Functions](/azure/app-service/overview-managed-identity?tabs=dotnet#using-the-azure-cli)
 | |[Mengonfigurasikan kontainer kustom untuk Azure App Service ](/azure/app-service/configure-custom-container?pivots=container-linux)
 |[Jaringan Pengiriman Konten](/cli/azure/service-page/content%20delivery%20network) | [Membuat profil dan titik akhir Azure CDN menggunakan Azure CLI](/azure/cdn/scripts/cli/cdn-azure-cli-create-endpoint)
-|[Azure Static Web Apps](/cli/azure/staticwebapp) | [Membangun situs statik pertama](/azure/static-web-apps/get-started-cli?tabs=vanilla-javascript)
+|[Azure Static Web Apps](../latest/docs-ref-autogen/staticwebapp.yml) | [Membangun situs statik pertama](/azure/static-web-apps/get-started-cli?tabs=vanilla-javascript)
 
 ## <a name="see-also"></a>Lihat juga
 
 - [Mulai menggunakan Azure CLI](get-started-with-azure-cli.md)
-- [Daftar referensi perintah untuk Azure CLI](/cli/azure/reference-index)
+- [Daftar referensi perintah untuk Azure CLI](../latest/docs-ref-autogen/reference-index.yml)

@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli docker, docker azure cli
-ms.openlocfilehash: 3c574978fe7d24666f3566c8c3777e66440e56b9
-ms.sourcegitcommit: d2227bc475235bf86193e9cae5e02f349a6342e2
+ms.openlocfilehash: ae1774f73d3db81b48aa363b84b8d5b60cab41fd
+ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 11/02/2021
-ms.locfileid: "132439120"
+ms.lasthandoff: 04/06/2022
+ms.locfileid: "141400653"
 ---
 # <a name="how-to-run-the-azure-cli-in-a-docker-container"></a>Cara menjalankan Azure CLI di kontainer Docker
 
@@ -44,7 +44,7 @@ CLI diinstal pada citra sebagai perintah `az` dalam `/usr/local/bin`.
 
 ## <a name="install-specific-version"></a>Menginstal versi tertentu
 
-Versi yang tersedia dapat ditemukan di [Catatan rilis Azure CLI](/cli/azure/release-notes-azure-cli).
+Versi yang tersedia dapat ditemukan di [Catatan rilis Azure CLI](./release-notes-azure-cli.md).
 
 Untuk menginstal versi tertentu:
 

@@ -11,12 +11,12 @@ ms.prod: azure
 ms.technology: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli create vm, mesin virtual di azure cli, variabel shell
-ms.openlocfilehash: 77249be43452151eeaa147912f9e76489fb56441
-ms.sourcegitcommit: 62469e9c1ad07f215129ece5db89c530f1a77968
+ms.openlocfilehash: ad9fc5a6149d74cabd85ca353dd475db2d9e3277
+ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 12/15/2021
-ms.locfileid: "135157733"
+ms.lasthandoff: 04/06/2022
+ms.locfileid: "141398433"
 ---
 # <a name="1---overview-and-prerequisites"></a>1 - Ringkasan dan Prasyarat
 
@@ -30,7 +30,7 @@ Gunakan __ctrl-shift-v__ (__cmd-shift-v__ di macOS) untuk menempelkan teks tutor
 
 ## <a name="shell-variables"></a>Variabel shell
 
-Variabel Shell menyimpan nilai untuk digunakan di lain waktu dan dapat digunakan untuk meneruskan nilai ke parameter perintah. Variabel Shell memungkinkan penggunaan kembali perintah, baik secara mandiri maupun dalam skrip. Tutorial ini menggunakan variabel shell untuk penyesuaian parameter perintah yang lebih mudah. Untuk menggunakan nilai parameter Anda sendiri alih-alih menggunakan nilai yang disediakan, ubah nilai yang ditetapkan untuk variabel shell. Untuk informasi selengkapnya tentang variabel shell, lihat [Menggunakan variabel shell](/cli/azure/azure-cli-variables#use-shell-variables).
+Variabel Shell menyimpan nilai untuk digunakan di lain waktu dan dapat digunakan untuk meneruskan nilai ke parameter perintah. Variabel Shell memungkinkan penggunaan kembali perintah, baik secara mandiri maupun dalam skrip. Tutorial ini menggunakan variabel shell untuk penyesuaian parameter perintah yang lebih mudah. Untuk menggunakan nilai parameter Anda sendiri alih-alih menggunakan nilai yang disediakan, ubah nilai yang ditetapkan untuk variabel shell. Untuk informasi selengkapnya tentang variabel shell, lihat [Menggunakan variabel shell](./azure-cli-variables.md#use-shell-variables).
 
 ## <a name="create-a-resource-group"></a>Buat grup sumber daya
 

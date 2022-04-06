@@ -11,12 +11,12 @@ ms.date: 09/21/2021
 ms.author: dbradish
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, azure data share cli
-ms.openlocfilehash: ed44ea5707a17aec75d9bd7ee396eb4c7f96a2ab
-ms.sourcegitcommit: 82cb7af10a689b9b485859552d2f834bd593f6a1
+ms.openlocfilehash: ee3c14f9590662bd5590156da2174a20505117e1
+ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 10/06/2021
-ms.locfileid: "132439104"
+ms.lasthandoff: 04/06/2022
+ms.locfileid: "141405711"
 ---
 # <a name="azure-cli-reference-commands-for-azure-data-share"></a>Perintah referensi Azure CLI untuk Azure Data Share
 
@@ -30,13 +30,13 @@ Daftar referensi Azure Data Share CLI yang dapat digunakan untuk mengelola Azure
 
 |Referensi Azure CLI |Deskripsi
 |-|-|
-| [az datashare](/cli/azure/datashare) | Semua perintah untuk mengelola Azure Data Share.
-| [az datashare account](/cli/azure/datashare/account) | Perintah untuk mengelola akun Azure Data Share.
+| [az datashare](../latest/docs-ref-autogen/datashare.yml) | Semua perintah untuk mengelola Azure Data Share.
+| [az datashare account](../latest/docs-ref-autogen/datashare/account.yml) | Perintah untuk mengelola akun Azure Data Share.
 | [az datashare consumer](/cli/azure/datashare/consumer) | Perintah bagi konsumen untuk mengelola Azure Data Share.
 | [az datashare dataset](/cli/azure/datashare/dataset) | Perintah bagi penyedia untuk mengelola kumpulan data Azure Data Share.
 | [az datashare invitation](/cli/azure/datashare/invitation) | Perintah bagi konsumen untuk mengelola undangan Azure Data Share.
 | [az datashare provider-share-subscription](/cli/azure/datashare/provider-share-subscription) | Perintah bagi penyedia untuk mengelola langganan Azure Data Share.
-| [az datashare synchronization](/cli/azure/datashare/synchronization) | Perintah untuk mengelola sinkronisasi Azure Data Share.
+| [az datashare synchronization](/cli/azure/datashare) | Perintah untuk mengelola sinkronisasi Azure Data Share.
 | [az datashare synchronization-setting](/cli/azure/datashare/synchronization-setting) | Perintah bagi penyedia untuk mengelola pengaturan sinkronisasi Azure Data Share.
 
 ## <a name="reference-examples"></a>Contoh referensi
@@ -66,4 +66,4 @@ az datashare account create --location westus --tags tag1=Red tag2=White --name 
 
 * [Mulai gunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari penginstalan dan aktivitas masuk.
 
-* Temukan referensi [core](/cli/azure/reference-index) dan [ekstensi](./azure-cli-extensions-list.md) tambahan dalam dokumentasi Azure CLI.
+* Temukan referensi [core](../latest/docs-ref-autogen/reference-index.yml) dan [ekstensi](./azure-cli-extensions-list.md) tambahan dalam dokumentasi Azure CLI.

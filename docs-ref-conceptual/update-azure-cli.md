@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: update azure cli
-ms.openlocfilehash: 17770cca3553f91a701e6fdd710abda99ccc2487
-ms.sourcegitcommit: 82cb7af10a689b9b485859552d2f834bd593f6a1
+ms.openlocfilehash: 9c3d9a7946fefaaf5ebf927a90b6046121ee8cac
+ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 10/06/2021
-ms.locfileid: "132439089"
+ms.lasthandoff: 04/06/2022
+ms.locfileid: "141397513"
 ---
 # <a name="how-to-update-the-azure-cli"></a>Cara memperbarui Azure CLI
 
@@ -30,7 +30,7 @@ Jika `azure-cli` sudah menjadi versi terbaru, eksekusi `az upgrade` akan memerik
 
 ## <a name="automatic-update"></a>Pembaruan Otomatis
 
-Secara default, peningkatan otomatis untuk Azure CLI dinonaktifkan. Jika Anda ingin menggunakan versi terbaru, Anda dapat mengaktifkan peningkatan otomatis melalui [konfigurasi](/cli/azure/config).
+Secara default, peningkatan otomatis untuk Azure CLI dinonaktifkan. Jika Anda ingin menggunakan versi terbaru, Anda dapat mengaktifkan peningkatan otomatis melalui [konfigurasi](../latest/docs-ref-autogen/config.yml).
 
 ```azurecli
 az config set auto-upgrade.enable=yes

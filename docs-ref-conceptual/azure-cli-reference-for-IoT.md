@@ -11,12 +11,12 @@ ms.service: azure-cli
 ms.reviewer: paymaun.heidari
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, azure iot, azure maps, azure tsi
-ms.openlocfilehash: aa50cced3f624c973973a30b53fa12ad798afb09
-ms.sourcegitcommit: 82cb7af10a689b9b485859552d2f834bd593f6a1
+ms.openlocfilehash: 73901b20392fcb39ff55fc6a22b8366def0ee1f4
+ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 10/06/2021
-ms.locfileid: "132439095"
+ms.lasthandoff: 04/06/2022
+ms.locfileid: "141405681"
 ---
 # <a name="azure-cli-reference-commands-for-azure-iot"></a>Perintah referensi Azure CLI untuk Azure IoT
 
@@ -37,21 +37,21 @@ Daftar referensi Azure CLI yang dapat digunakan untuk mengelola Azure IoT, jenis
 
 | Referensi | Inti atau ekstensi | Deskripsi
 |-|-|-|
-| [az iot](/cli/azure/iot) | Keduanya  | Semua perintah inti Azure CLI yang tersedia untuk Azure IoT.
-| [az iot central](/cli/azure/iot/central) | Keduanya | Mengelola aset IoT Central.
-| [az iot device](/cli/azure/iot/device) | Extensi | Manfaatkan kemampuan olahpesan perangkat-ke-cloud dan cloud-ke-perangkat.
-| [az iot dps](/cli/azure/iot/dps) | Keduanya | Mengelola Azure IoT Hub Device Provisioning Service.
-| [az dt](/cli/azure/dt) | Extensi | Mengelola solusi & infrastruktur Azure Digital Twins.
-| [az iot edge](/cli/azure/iot/edge) | Extensi | Mengelola solusi IoT di Edge.
-| [az iot hub](/cli/azure/iot/hub) | Keduanya | Mengelola infrastruktur Azure IoT Hub.
-| [az iot product](/cli/azure/iot/product) | Extensi | Mengelola pengujian perangkat untuk sertifikasi produk.
+| [az iot](../latest/docs-ref-autogen/iot.yml) | Keduanya  | Semua perintah inti Azure CLI yang tersedia untuk Azure IoT.
+| [az iot central](../latest/docs-ref-autogen/iot/central.yml) | Keduanya | Mengelola aset IoT Central.
+| [az iot device](../latest/docs-ref-autogen/iot/device.yml) | Extensi | Manfaatkan kemampuan olahpesan perangkat-ke-cloud dan cloud-ke-perangkat.
+| [az iot dps](../latest/docs-ref-autogen/iot/dps.yml) | Keduanya | Mengelola Azure IoT Hub Device Provisioning Service.
+| [az dt](../latest/docs-ref-autogen/dt.yml) | Extensi | Mengelola solusi & infrastruktur Azure Digital Twins.
+| [az iot edge](../latest/docs-ref-autogen/iot/edge.yml) | Extensi | Mengelola solusi IoT di Edge.
+| [az iot hub](../latest/docs-ref-autogen/iot/hub.yml) | Keduanya | Mengelola infrastruktur Azure IoT Hub.
+| [az iot product](../latest/docs-ref-autogen/iot/product.yml) | Extensi | Mengelola pengujian perangkat untuk sertifikasi produk.
 
 ## <a name="additional-azure-cli-commands-for-azure-services-used-by-iot"></a>Perintah Azure CLI lainnya untuk layanan Azure yang digunakan oleh IoT
 
 | Referensi | Jenis | Deskripsi
 |-|-|-|
-| [az maps](/cli/azure/maps) | core | Mengelola Azure Maps.
-| [az tsi](/cli/azure/tsi) | extension | Mengelola Azure Time Series Insights.
+| [az maps](../latest/docs-ref-autogen/maps.yml) | core | Mengelola Azure Maps.
+| [az tsi](../latest/docs-ref-autogen/tsi.yml) | extension | Mengelola Azure Time Series Insights.
 
 ## <a name="popular-iot-articles-using-the-azure-cli"></a>Artikel IoT populer yang menggunakan Azure CLI
 
@@ -90,4 +90,4 @@ az iot hub create --resource-group MyResourceGroup --name MyIotHub --location we
 
 - [Mulai gunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari penginstalan dan aktivitas masuk.
 
-- Temukan referensi [core](/cli/azure/reference-index) dan [ekstensi](./azure-cli-extensions-list.md) tambahan dalam dokumentasi Azure CLI.
+- Temukan referensi [core](../latest/docs-ref-autogen/reference-index.yml) dan [ekstensi](./azure-cli-extensions-list.md) tambahan dalam dokumentasi Azure CLI.

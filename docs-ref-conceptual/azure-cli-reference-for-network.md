@@ -11,12 +11,12 @@ ms.devlang: azurecli
 ms.reviewer: mohnader
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, jaringan azure
-ms.openlocfilehash: 6e9736fd0a203977aa134881492986d613c0c7bb
-ms.sourcegitcommit: 82cb7af10a689b9b485859552d2f834bd593f6a1
+ms.openlocfilehash: fa0f100250321a7db8ae98a5097e05334cd400bc
+ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 10/06/2021
-ms.locfileid: "132439087"
+ms.lasthandoff: 04/06/2022
+ms.locfileid: "141410308"
 ---
 # <a name="azure-cli-reference-commands-for-azure-network"></a>Perintah referensi Azure CLI untuk Azure Network
 
@@ -24,7 +24,7 @@ Azure Command-Line Interface ([CLI](./what-is-azure-cli.md)) adalah sekumpulan p
 
 Perintah Azure CLI untuk [Azure Network](/azure/networking/) terdiri dari dua bagian: **inti** dan **ekstensi**. Perintah Azure CLI inti dikirimkan sebagai bagian dari CLI dan didukung sepenuhnya. Ekstensi memberi Anda akses ke perintah percobaan dan pra-rilis, dan otomatis diinstal saat Anda menjalankan referensi ekstensi untuk pertama kali. Untuk informasi selengkapnya tentang ekstensi, lihat [Menggunakan ekstensi dengan Azure CLI](./azure-cli-extensions-overview.md).
 
-Lihat [az network](/cli/azure/network) untuk mengetahui daftar alfabetik referensi inti dan ekstensi Azure CLI yang tersedia untuk layanan Azure Network. Untuk referensi setiap sub-grup, lihat tabel di bagian berikut:
+Lihat [az network](../latest/docs-ref-autogen/network.yml) untuk mengetahui daftar alfabetik referensi inti dan ekstensi Azure CLI yang tersedia untuk layanan Azure Network. Untuk referensi setiap sub-grup, lihat tabel di bagian berikut:
 
 - [Jaringan virtual](#virtual-network-references)
 - [WAN dan Konektivitas lokal](#wan-and-on-premise-connectivity-references)
@@ -40,70 +40,70 @@ Lihat [az network](/cli/azure/network) untuk mengetahui daftar alfabetik referen
 
 | Subgrup | Referensi | Penggunaan | Berupa ekstensi
 |-|-|-|-|
-| Appliance | [az network virtual-appliance](/cli/azure/network/virtual-appliance) | Mengelola Azure Network Virtual Appliance.
-| DNS | [az network private-dns](/cli/azure/network/private-dns) | Mengelola domain DNS Privat di Azure. |
-| Titik akhir | [az network service-endpoint](/cli/azure/network/service-endpoint) | Mengelola kebijakan yang terkait dengan titik akhir layanan. |
-| NAT | [az network nat](/cli/azure/network/nat) | Mengelola sumber daya terjemahan alamat jaringan. |
-| NIC | [az network nic](/cli/azure/network/nic) | Mengelola antarmuka jaringan. |
-| NIC | [az network nic vtap-config](/cli/azure/network/nic/vtap-config) | Mengelola konfigurasi pengetukan jaringan virtual. | ya
-| Peering | [az peering](/cli/azure/peering) | Mengelola peering. | ya
-| Profil | [az network profile](/cli/azure/network/profile) | Mengelola profil jaringan. |
-| Rute | [az network route-filter](/cli/azure/network/route-filter) | Mengelola filter rute. |
-| Rute | [az network routeserver](/cli/azure/network/routeserver) | Mengelola server rute. |
-| Rute | [az network route-table](/cli/azure/network/route-table) | Mengelola tabel rute. |
-| VMware | [az network vmware](/cli/azure/vmware) | Perintah untuk mengelola Azure VMware Solution. | ya
-| vNet | [az network vnet](/cli/azure/network/vnet) | Mengelola Azure Virtual Networks. |
-| vNet | [az network vnet-tap](/cli/azure/network/vnet/tap) | Mengelola pengetukan jaringan virtual. | ya
-| vNet | [az network vnet-gateway](/cli/azure/network/vnet-gateway) | Gunakan Azure Virtual Network Gateway untuk membangun konektivitas lintas lokal yang aman. |
+| Appliance | [az network virtual-appliance](../latest/docs-ref-autogen/network/virtual-appliance.yml) | Mengelola Azure Network Virtual Appliance.
+| DNS | [az network private-dns](../latest/docs-ref-autogen/network/private-dns.yml) | Mengelola domain DNS Privat di Azure. |
+| Titik akhir | [az network service-endpoint](../latest/docs-ref-autogen/network/service-endpoint.yml) | Mengelola kebijakan yang terkait dengan titik akhir layanan. |
+| NAT | [az network nat](../latest/docs-ref-autogen/network/nat.yml) | Mengelola sumber daya terjemahan alamat jaringan. |
+| NIC | [az network nic](../latest/docs-ref-autogen/network/nic.yml) | Mengelola antarmuka jaringan. |
+| NIC | [az network nic vtap-config](../latest/docs-ref-autogen/network/nic/vtap-config.yml) | Mengelola konfigurasi pengetukan jaringan virtual. | ya
+| Peering | [az peering](../latest/docs-ref-autogen/peering.yml) | Mengelola peering. | ya
+| Profil | [az network profile](../latest/docs-ref-autogen/network/profile.yml) | Mengelola profil jaringan. |
+| Rute | [az network route-filter](../latest/docs-ref-autogen/network/route-filter.yml) | Mengelola filter rute. |
+| Rute | [az network routeserver](../latest/docs-ref-autogen/network/routeserver.yml) | Mengelola server rute. |
+| Rute | [az network route-table](../latest/docs-ref-autogen/network/route-table.yml) | Mengelola tabel rute. |
+| VMware | [az network vmware](../latest/docs-ref-autogen/vmware.yml) | Perintah untuk mengelola Azure VMware Solution. | ya
+| vNet | [az network vnet](../latest/docs-ref-autogen/network/vnet.yml) | Mengelola Azure Virtual Networks. |
+| vNet | [az network vnet-tap](../latest/docs-ref-autogen/network/vnet/tap.yml) | Mengelola pengetukan jaringan virtual. | ya
+| vNet | [az network vnet-gateway](../latest/docs-ref-autogen/network/vnet-gateway.yml) | Gunakan Azure Virtual Network Gateway untuk membangun konektivitas lintas lokal yang aman. |
 
 ## <a name="wan-and-on-premise-connectivity-references"></a>Referensi WAN dan Konektivitas lokal
 
 | Subgrup | Referensi | Penggunaan | Berupa ekstensi
 |-|-|-|-|
-| Lintas koneksi | [az network cross-connection](/cli/azure/network/cross-connection) | Mengelola sumber daya Azure Network. | ya
-| ExpressRoute | [az network express-route](/cli/azure/network/express-route) | Mengelola koneksi fiber jaringan privat khusus ke Azure. |
-| vHub | [az network vhub](/cli/azure/network/vhub) | Mengelola hub virtual. | ya
-| VPN | [az network p2s-vpn-gateway](/cli/azure/network/p2s-vpn-gateway) | Mengelola gateway VPN titik-ke-situs. | ya
-| VPN | [az network vpn-connection](/cli/azure/network/vpn-connection) | Mengelola koneksi VPN. |
-| VPN | [az network vpn-gateway](/cli/azure/network/vpn-gateway) | Mengelola gateway VPN. | ya
-| VPN | [az network vpn-server-config](/cli/azure/network/vpn-server-config) | Mengelola konfigurasi server VPN. | ya
-| VPN | [az network vpn-site](/cli/azure/network/vpn-site) | Mengelola konfigurasi situs VPN. | ya
-| vRouter | [az network vrouter](/cli/azure/network/vrouter) | Mengelola router virtual. |
-| vWAN | [az network vwan](/cli/azure/network/vwan) | Mengelola WAN virtual. | ya
+| Lintas koneksi | [az network cross-connection](../latest/docs-ref-autogen/network/cross-connection.yml) | Mengelola sumber daya Azure Network. | ya
+| ExpressRoute | [az network express-route](../latest/docs-ref-autogen/network/express-route.yml) | Mengelola koneksi fiber jaringan privat khusus ke Azure. |
+| vHub | [az network vhub](../latest/docs-ref-autogen/network/vhub.yml) | Mengelola hub virtual. | ya
+| VPN | [az network p2s-vpn-gateway](../latest/docs-ref-autogen/network/p2s-vpn-gateway.yml) | Mengelola gateway VPN titik-ke-situs. | ya
+| VPN | [az network vpn-connection](../latest/docs-ref-autogen/network/vpn-connection.yml) | Mengelola koneksi VPN. |
+| VPN | [az network vpn-gateway](../latest/docs-ref-autogen/network/vpn-gateway.yml) | Mengelola gateway VPN. | ya
+| VPN | [az network vpn-server-config](../latest/docs-ref-autogen/network/vpn-server-config.yml) | Mengelola konfigurasi server VPN. | ya
+| VPN | [az network vpn-site](../latest/docs-ref-autogen/network/vpn-site.yml) | Mengelola konfigurasi situs VPN. | ya
+| vRouter | [az network vrouter](../latest/docs-ref-autogen/network/vrouter.yml) | Mengelola router virtual. |
+| vWAN | [az network vwan](../latest/docs-ref-autogen/network/vwan.yml) | Mengelola WAN virtual. | ya
 
 ## <a name="load-balancing-and-ip-references"></a>Referensi penyeimbangan beban dan IP
 
 | Subgrup | Referensi | Penggunaan | Berupa ekstensi
 |-|-|-|-|
-| Gateway aplikasi | [az network application-gateway](/cli/azure/network/application-gateway) | Mengelola layanan penyeimbangan beban dan perutean tingkat aplikasi. |
-| Front Door | [az network front-door](/cli/azure/network/front-door) | Mengelola sumber daya Front Door jaringan. | ya
-| IP | [az network ip-group](/cli/azure/network/ip-group) | Mengelola IpGroups. | ya
-| IP | [az network public-ip](/cli/azure/network/public-ip) | Mengelola alamat IP publik. |
-| Keseimbangan beban | [az network cross-region-lb](/cli/azure/network/cross-region-lb) | Mengelola dan mengonfigurasi penyeimbang beban lintas wilayah. |
-| Keseimbangan beban | [az network lb](/cli/azure/network/lb) | Mengelola dan mengonfigurasi penyeimbang beban. |
-| Gateway lokal | [az network local-gateway](/cli/azure/network/local-gateway) | Mengelola gateway lokal. |
-| Traffic manager | [az network traffic-manager](/cli/azure/network/traffic-manager) | Mengelola perutean lalu lintas masuk. |
+| Gateway aplikasi | [az network application-gateway](../latest/docs-ref-autogen/network/application-gateway.yml) | Mengelola layanan penyeimbangan beban dan perutean tingkat aplikasi. |
+| Front Door | [az network front-door](../latest/docs-ref-autogen/network/front-door.yml) | Mengelola sumber daya Front Door jaringan. | ya
+| IP | [az network ip-group](../latest/docs-ref-autogen/network/ip-group.yml) | Mengelola IpGroups. | ya
+| IP | [az network public-ip](../latest/docs-ref-autogen/network/public-ip.yml) | Mengelola alamat IP publik. |
+| Keseimbangan beban | [az network cross-region-lb](../latest/docs-ref-autogen/network/cross-region-lb.yml) | Mengelola dan mengonfigurasi penyeimbang beban lintas wilayah. |
+| Keseimbangan beban | [az network lb](../latest/docs-ref-autogen/network/lb.yml) | Mengelola dan mengonfigurasi penyeimbang beban. |
+| Gateway lokal | [az network local-gateway](../latest/docs-ref-autogen/network/local-gateway.yml) | Mengelola gateway lokal. |
+| Traffic manager | [az network traffic-manager](../latest/docs-ref-autogen/network/traffic-manager.yml) | Mengelola perutean lalu lintas masuk. |
 
 ## <a name="security-references"></a>Referensi keamanan
 
 | Subgrup | Referensi | Penggunaan | Berupa ekstensi
 |-|-|-|-|
-| ASG | [az asg](/cli/azure/network/asg) | Mengelola kelompok keamanan aplikasi. |
-| Bastion | [az network bastion](/cli/azure/network/bastion) | Mengelola host bastion Azure. |
-| DDoS | [az network ddos-protection](/cli/azure/network/ddos-protection) | Mengelola Paket DDoS Protection. |
-| Firewall | [az network firewall](/cli/azure/network/firewall) | Mengelola dan mengonfigurasi Azure Firewalls. | ya
-| Firewall | [az network security-partner-provider](/cli/azure/network/security-partner-provider) | Mengelola penyedia mitra keamanan Azure. |
-| NSG | [az network nsg](/cli/azure/network/nsg)| Mengelola Kelompok keamanan Jaringan Azure. |
-| Titik akhir privat | [az network private-endpoint](/cli/azure/network/private-endpoint) | Mengelola titik akhir privat. |
-| Titik akhir privat | [az network private-endpoint-connection](/cli/azure/network/private-endpoint-connection) | Mengelola koneksi titik akhir privat. |
-| Tautan privat | [az network private-link-resource](/cli/azure/network/private-link-resource) | Mengelola sumber daya tautan privat. |
-| Tautan privat | [az network private-link-service](/cli/azure/network/private-link-service) | Mengelola layanan tautan privat. |
+| ASG | [az asg](../latest/docs-ref-autogen/network/asg.yml) | Mengelola kelompok keamanan aplikasi. |
+| Bastion | [az network bastion](../latest/docs-ref-autogen/network/bastion.yml) | Mengelola host bastion Azure. |
+| DDoS | [az network ddos-protection](../latest/docs-ref-autogen/network/ddos-protection.yml) | Mengelola Paket DDoS Protection. |
+| Firewall | [az network firewall](../latest/docs-ref-autogen/network/firewall.yml) | Mengelola dan mengonfigurasi Azure Firewalls. | ya
+| Firewall | [az network security-partner-provider](../latest/docs-ref-autogen/network/security-partner-provider.yml) | Mengelola penyedia mitra keamanan Azure. |
+| NSG | [az network nsg](../latest/docs-ref-autogen/network/nsg.yml)| Mengelola Kelompok keamanan Jaringan Azure. |
+| Titik akhir privat | [az network private-endpoint](../latest/docs-ref-autogen/network/private-endpoint.yml) | Mengelola titik akhir privat. |
+| Titik akhir privat | [az network private-endpoint-connection](../latest/docs-ref-autogen/network/private-endpoint-connection.yml) | Mengelola koneksi titik akhir privat. |
+| Tautan privat | [az network private-link-resource](../latest/docs-ref-autogen/network/private-link-resource.yml) | Mengelola sumber daya tautan privat. |
+| Tautan privat | [az network private-link-service](../latest/docs-ref-autogen/network/private-link-service.yml) | Mengelola layanan tautan privat. |
 
 ## <a name="monitoring-references"></a>Referensi pemantauan
 
 | Subgrup | Referensi | Penggunaan | Berupa ekstensi
 |-|-|-|-|
-| Watcher | [az network watcher](/cli/azure/network/watcher) | Mengelola Azure Network Watcher. |
+| Watcher | [az network watcher](../latest/docs-ref-autogen/network/watcher.yml) | Mengelola Azure Network Watcher. |
 
 ## <a name="list-references"></a>Referensi daftar
 
@@ -115,7 +115,7 @@ Lihat [az network](/cli/azure/network) untuk mengetahui daftar alfabetik referen
 
 ## <a name="popular-azure-network-articles-using-the-azure-cli"></a>Artikel Populer Azure Network menggunakan Azure CLI
 
-- [Membuat komputer virtual](/cli/azure/azure-cli-vm-tutorial)
+- [Membuat komputer virtual](./azure-cli-vm-tutorial.yml)
 - [Membuat jaringan virtual](/azure/virtual-network/quick-create-cli)
 - [Sampel Azure CLI untuk komputer virtual Windows](/azure/virtual-machines/windows/cli-samples?toc=%2Fcli%2Fazure%2Ftoc.json&bc=%2Fcli%2Fazure%2Fbreadcrumb%2Ftoc.json)
 - [Membuat set skala komputer virtual](/azure/virtual-machine-scale-sets/quick-create-cli)
@@ -128,6 +128,6 @@ Lihat [az network](/cli/azure/network) untuk mengetahui daftar alfabetik referen
 
 - [Mulai gunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari penginstalan dan aktivitas masuk.
 
-- Temukan referensi [inti](/cli/azure/reference-index) dan [ekstensi](./azure-cli-extensions-list.md) lainnya di dokumentasi Azure CLI.
+- Temukan referensi [inti](../latest/docs-ref-autogen/reference-index.yml) dan [ekstensi](./azure-cli-extensions-list.md) lainnya di dokumentasi Azure CLI.
 
-- Kelola mesin virtual Linux atau Windows dengan [az vm](/cli/azure/vm).
+- Kelola mesin virtual Linux atau Windows dengan [az vm](../latest/docs-ref-autogen/vm.yml).

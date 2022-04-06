@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
-ms.openlocfilehash: 5421f3af0156a6ca6929f3c15254352573dc342b
-ms.sourcegitcommit: 5bcf8b3ce57c77be609202bbbd62d441d94b47df
+ms.openlocfilehash: 94bbf10fcc7137e2f8ca6a71d39eb828f3f3e859
+ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 03/30/2022
-ms.locfileid: "141259466"
+ms.lasthandoff: 04/06/2022
+ms.locfileid: "141408544"
 ---
 # <a name="how-to-use-azure-cli-effectively"></a>Cara menggunakan Azure CLI secara efektif
 
@@ -24,7 +24,7 @@ Artikel ini membahas tips yang berguna tentang cara menggunakan Azure CLI dan ca
 
 [!INCLUDE [azure-cli-prepare-your-environment.md](includes/azure-cli-prepare-your-environment.md)]
 
-Jika Anda memiliki pertanyaan tentang perintah Azure CLI apa pun, cari di [Referensi Azure CLI](/cli/azure/reference-index).
+Jika Anda memiliki pertanyaan tentang perintah Azure CLI apa pun, cari di [Referensi Azure CLI](../latest/docs-ref-autogen/reference-index.yml).
 
 ## <a name="output-formatting"></a>Pemformatan output
 
@@ -50,7 +50,7 @@ az account list --output table
 
 Berikut tiga format umum:
 
-* Format `json` menampilkan informasi sebagai string JSON. Format ini memberi Anda informasi paling komprehensif. Ini adalah format default. Anda dapat mengubah format default dengan menggunakan perintah [az config](/cli/azure/config).
+* Format `json` menampilkan informasi sebagai string JSON. Format ini memberi Anda informasi paling komprehensif. Ini adalah format default. Anda dapat mengubah format default dengan menggunakan perintah [az config](../latest/docs-ref-autogen/config.yml).
 * Format `table` menampilkan output sebagai tabel yang dapat dibaca manusia. Anda dapat menentukan nilai mana yang akan muncul dalam tabel dan menggunakan kueri untuk menyesuaikan output.
 * Format `tsv` menampilkan nilai yang dipisahkan tab dan dipisahkan baris baru tanpa pemformatan tambahan, kunci, atau simbol lainnya.
 
@@ -210,13 +210,13 @@ az vm update --resource-group VMResources --name virtual-machine-01 \
 
 ## <a name="generic-resource-commands"></a>Perintah sumber daya generik
 
-Layanan yang ingin digunakan untuk bekerja mungkin belum memiliki dukungan Azure CLI. Anda dapat menggunakan perintah [az resource](/cli/azure/resource) untuk bekerja dengan sumber daya ini.
+Layanan yang ingin digunakan untuk bekerja mungkin belum memiliki dukungan Azure CLI. Anda dapat menggunakan perintah [az resource](../latest/docs-ref-autogen/resource.yml) untuk bekerja dengan sumber daya ini.
 
 Jika Anda hanya memerlukan perintah buat dan perbarui, gunakan [az deployment group create](/cli/azure/deployment/group#az-deployment-group-create). Sebagai contoh kerja, lihat [Template Mulai Cepat Azure](https://azure.microsoft.com/resources/templates/).
 
 ## <a name="rest-api-commands"></a>Perintah REST API
 
-Jika argumen pembaruan generik dan [az resource](/cli/azure/resource) tidak memenuhi kebutuhan Anda, gunakan perintah [az rest](/cli/azure/reference-index#az-rest) untuk memanggil REST API. Perintah secara otomatis melakukan autentikasi menggunakan info masuk dimasukkan dan mengatur header `Content-Type: application/json`. Untuk informasi selengkapnya, lihat [Referensi Azure REST API](/rest/api/azure/).
+Jika argumen pembaruan generik dan [az resource](../latest/docs-ref-autogen/resource.yml) tidak memenuhi kebutuhan Anda, gunakan perintah [az rest](/cli/azure/reference-index#az-res) untuk memanggil REST API. Perintah secara otomatis melakukan autentikasi menggunakan info masuk dimasukkan dan mengatur header `Content-Type: application/json`. Untuk informasi selengkapnya, lihat [Referensi Azure REST API](/rest/api/azure/).
 
 Contoh ini berfungsi dengan [Microsoft Graph API](/graph/api/overview?toc=./ref/toc.json). Untuk memperbarui URI pengalihan untuk [Aplikasi](/graph/api/resources/application), kita memanggil REST API [Perbarui aplikasi](/graph/api/application-update?tabs=http), seperti dalam kode ini:
 

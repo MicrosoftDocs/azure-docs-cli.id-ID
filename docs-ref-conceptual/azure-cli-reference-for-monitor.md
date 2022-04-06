@@ -11,12 +11,12 @@ ms.service: azure-cli
 ms.reviewer: robb
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure, azure monitor
-ms.openlocfilehash: 1fb28dcfc4fdc914a760dbc2e28fc46e6967b3ab
-ms.sourcegitcommit: 82cb7af10a689b9b485859552d2f834bd593f6a1
+ms.openlocfilehash: 6af75b674cbfdfd032916ebdbfdc31e767920125
+ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 10/06/2021
-ms.locfileid: "132439079"
+ms.lasthandoff: 04/06/2022
+ms.locfileid: "141398394"
 ---
 # <a name="azure-cli-reference-commands-for-azure-monitor"></a>Perintah referensi Azure CLI untuk Azure Monitor
 
@@ -36,7 +36,7 @@ Daftar referensi Azure CLI yang dapat digunakan untuk mengelola Azure Monitor, d
 |-|-|-|-|
 | [az monitor](/cli/azure/monitor) | | Grup perintah tingkat atas untuk semua perintah Azure CLI untuk Azure Monitor. | [Gambaran umum Azure Monitor](/azure/azure-monitor/overview)
 | [az monitor action-group](/cli/azure/monitor/action-group) | | Mengelola grup tindakan, yang terkait dengan notifikasi setelah peringatan dipicu. | [Peringatan Azure Monitor](/azure/azure-monitor/platform/alerts-overview)
-| [az monitor action-rule](/cli/azure/monitor/action-rule) | ya | Mengelola aturan tindakan, yang memungkinkan Anda menambahkan atau menekan grup tindakan pada peringatan yang dipicu. | [Peringatan Azure Monitor](/azure/azure-monitor/alerts/alerts-action-rules)
+| [az monitor action-rule](/azure/azure-monitor/alerts/alerts-action-rules) | ya | Mengelola aturan tindakan, yang memungkinkan Anda menambahkan atau menekan grup tindakan pada peringatan yang dipicu. | [Peringatan Azure Monitor](/azure/azure-monitor/alerts/alerts-action-rules)
 | [az monitor activity-log](/cli/azure/monitor/activity-log) | | Mengelola log aktivitas, termasuk peringatan log aktivitas. | [Log aktivitas Azure](/azure/azure-monitor/platform/activity-log)
 | [az monitor app-insights](/cli/azure/monitor/app-insights) | ya | Mengelola Application Insights untuk pemantauan aplikasi. | [Gambaran umum Application insights](/azure/azure-monitor/app/app-insights-overview)
 | [az monitor autoscale](/cli/azure/monitor/autoscale) | | Mengelola pengaturan skala otomatis. | [Ringkasan skala otomatis](/azure/azure-monitor/platform/autoscale-overview)
@@ -80,6 +80,6 @@ az monitor activity-log alert create --name MyAlertName --resource-group MyResou
 
 - [Mulai gunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari penginstalan dan aktivitas masuk.
 
-- Temukan referensi [inti](/cli/azure/reference-index) dan [ekstensi](./azure-cli-extensions-list.md) lainnya di dokumentasi Azure CLI.
+- Temukan referensi [inti](../latest/docs-ref-autogen/reference-index.yml) dan [ekstensi](./azure-cli-extensions-list.md) lainnya di dokumentasi Azure CLI.
 
 - Pelajari referensi ekstensi lebih lanjut di [Menggunakan ekstensi dengan Azure CLI](./azure-cli-extensions-overview.md).

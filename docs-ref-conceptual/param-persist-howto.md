@@ -11,16 +11,16 @@ ms.devlang: azurecli
 ms.technology: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: parameter tetap azure, parameter tetap
-ms.openlocfilehash: e296260b5d621b6d22f99718bec673cadddc9625
-ms.sourcegitcommit: ecad34e4d4654660377050fccba7861e942e03de
+ms.openlocfilehash: a47c533f15f7f745a64bc77762f084fe2498750f
+ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 09/13/2021
-ms.locfileid: "132439068"
+ms.lasthandoff: 04/06/2022
+ms.locfileid: "141397550"
 ---
 # <a name="azure-cli-persisted-parameter"></a>Parameter tetap Azure CLI
 
-Referensi [az config param-persist](/cli/azure/config/param-persist) Azure CLI menyediakan kemampuan untuk mempertahankan nilai parameter tetap lokal untuk perintah Azure CLI.  Dengan demikian,parameter umum tidak lagi perlu diketik ulang terus-menerus. Misalnya, lokasi dan grup sumber daya adalah parameter yang diperlukan dalam berbagai perintah CLI, tetapi tidak berkontribusi terhadap _niat_ perintah.  Jika Anda menyimpan nilai parameter dengan parameter tetap, berarti Anda mengurangi redundansi dan dapat mempersingkat sintaks perintah CLI secara signifikan.
+Referensi [az config param-persist](../latest/docs-ref-autogen/config/param-persist.yml) Azure CLI menyediakan kemampuan untuk mempertahankan nilai parameter tetap lokal untuk perintah Azure CLI.  Dengan demikian,parameter umum tidak lagi perlu diketik ulang terus-menerus. Misalnya, lokasi dan grup sumber daya adalah parameter yang diperlukan dalam berbagai perintah CLI, tetapi tidak berkontribusi terhadap _niat_ perintah.  Jika Anda menyimpan nilai parameter dengan parameter tetap, berarti Anda mengurangi redundansi dan dapat mempersingkat sintaks perintah CLI secara signifikan.
 
 Nilai konfigurasi yang digunakan oleh CLI dievaluasi dengan prioritas berikut, di mana item yang lebih tinggi diprioritaskan dalam daftar.
 
@@ -86,8 +86,8 @@ Ada dua perintah Azure CLI yang dapat digunakan untuk nilai parameter default: `
 
 | Referensi | Cakupan | Set | Penggunaan
 |-|-|-|-|
-[`az config set defaults.<option>=<value>`](/cli/azure/config) | Dicakup secara global di seluruh CLI | Diatur secara eksplisit menggunakan `az config set defaults.<option>=<value>` | Digunakan untuk pengaturan seperti pengelogan, pengumpulan data, dan nilai argumen default
-[`az config param-persist`](/cli/azure/config/param-persist) | Dicakup secara lokal ke direktori kerja tertentu | Diatur otomatis setelah parameter tetap diaktifkan | Digunakan untuk perintah berurutan beban kerja individual.
+[`az config set defaults.<option>=<value>`](../latest/docs-ref-autogen/config.yml) | Dicakup secara global di seluruh CLI | Diatur secara eksplisit menggunakan `az config set defaults.<option>=<value>` | Digunakan untuk pengaturan seperti pengelogan, pengumpulan data, dan nilai argumen default
+[`az config param-persist`](../latest/docs-ref-autogen/config/param-persist.yml) | Dicakup secara lokal ke direktori kerja tertentu | Diatur otomatis setelah parameter tetap diaktifkan | Digunakan untuk perintah berurutan beban kerja individual.
 
 ### <a name="command-examples"></a>Contoh perintah
 
