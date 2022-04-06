@@ -15,7 +15,7 @@ ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
 ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 04/06/2022
-ms.locfileid: "141400653"
+ms.locfileid: "141412792"
 ---
 # <a name="how-to-run-the-azure-cli-in-a-docker-container"></a>Cara menjalankan Azure CLI di kontainer Docker
 

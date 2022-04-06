@@ -15,7 +15,7 @@ ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
 ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 04/06/2022
-ms.locfileid: "141399373"
+ms.locfileid: "141412000"
 ---
 # <a name="how-to-install-the-azure-cli"></a>Cara menginstal Azure CLI
 

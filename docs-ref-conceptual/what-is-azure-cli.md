@@ -15,7 +15,7 @@ ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
 ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 04/06/2022
-ms.locfileid: "141401050"
+ms.locfileid: "141411820"
 ---
 # <a name="what-is-the-azure-cli"></a>Apa itu Azure CLI?
 

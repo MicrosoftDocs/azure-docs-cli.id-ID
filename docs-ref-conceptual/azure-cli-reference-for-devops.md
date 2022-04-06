@@ -16,7 +16,7 @@ ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
 ms.translationtype: MT
 ms.contentlocale: id-ID
 ms.lasthandoff: 04/06/2022
-ms.locfileid: "141400649"
+ms.locfileid: "141406960"
 ---
 # <a name="azure-cli-reference-commands-for-azure-devops"></a>Perintah referensi Azure CLI untuk Azure DevOps
 
