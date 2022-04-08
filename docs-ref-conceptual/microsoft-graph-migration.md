@@ -1,5 +1,5 @@
 ---
-title: '| migrasi Graph Microsoft Microsoft Docs'
+title: '| migrasi Microsoft Graph Microsoft Docs'
 description: Pelajari tentang migrasi Microsoft Graph Azure CLI.
 author: jiasli
 ms.author: jiasli
@@ -9,34 +9,34 @@ ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
-keywords: grafik microsoft, grafik ms, grafik direktori aktif, grafik iklan
-ms.openlocfilehash: 6e426a7c559bacb6d3f07d3fb9fb3166eec80fba
-ms.sourcegitcommit: 5bcf8b3ce57c77be609202bbbd62d441d94b47df
+keywords: microsoft graph, ms graph, active directory graph, ad graph
+ms.openlocfilehash: 87a4bd1699474338aaf8927b36fb506d9e8949db
+ms.sourcegitcommit: bd63e04a53877fcd43d09e2de1229d90a99e645e
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 03/30/2022
-ms.locfileid: "141259448"
+ms.lasthandoff: 04/08/2022
+ms.locfileid: "141536405"
 ---
-# <a name="microsoft-graph-migration"></a>Migrasi Graph Microsoft
+# <a name="microsoft-graph-migration"></a>Microsoft Graph migrasi
 
-Karena [penghentian Graph Azure Active Directory (Azure AD](/graph/migrate-azure-ad-graph-overview)), API Graph Active Directory yang mendasarinya akan digantikan oleh Microsoft Graph API di Azure CLI 2.37.0.
+Karena [penghentian Graph Azure Active Directory (Azure AD),](/graph/migrate-azure-ad-graph-overview) ACTIVE Directory Graph API yang mendasar akan digantikan oleh Microsoft Graph API di Azure CLI 2.37.0.
 
 ## <a name="breaking-changes"></a>Perubahan mencolok
 
-Untuk perbedaan perubahan pemecahan API dan output JSON yang mendasarinya, silakan lihat [perbedaan Properti antara Azure AD Graph dan Microsoft Graph](/graph/migrate-azure-ad-graph-property-differences).
+Untuk perbedaan PERUBAHAN pemecahan JSON API dan output yang [mendasar, lihat Perbedaan properti antara Azure AD Graph dan Microsoft Graph](/graph/migrate-azure-ad-graph-property-differences).
 
-Argumen perintah dan perubahan pelanggaran perilaku tercantum di bawah ini.
+Argumen perintah dan perubahan pemecahan perilaku tercantum di bawah ini.
 
 ### `az ad app create`
 
-- Dibagi `--reply-urls` menjadi `--web-redirect-uris` dan `--public-client-redirect-uris`
+- Pisahkan `--reply-urls` menjadi `--web-redirect-uris` dan `--public-client-redirect-uris`
 - Ganti `--homepage`dengan `--web-home-page-url`
 - Ganti `--available-to-other-tenants`dengan `--sign-in-audience`
 - Ganti `--native-app`dengan `--is-fallback-public-client`
 - Ganti `--oauth2-allow-implicit-flow`dengan `--enable-access-token-issuance`
 - Tambahkan `--enable-id-token-issuance` ke set `web/implicitGrantSettings/enableIdTokenIssuance`
-- Hapus `--password` dan `--credential-description`. Gunakan `az ad app credential reset` untuk mengizinkan layanan Graph membuat kata sandi untuk Anda (https://github.com/Azure/azure-cli/issues/20675)
-- Tambahkan `--key-display-name` ke set `keyCredential`'s `displayName`
+- Hapus `--password` dan `--credential-description`. Gunakan `az ad app credential reset` untuk membiarkan layanan Graph membuat kata sandi untuk Anda (https://github.com/Azure/azure-cli/issues/20675)
+- Tambahkan `--key-display-name` untuk mengatur `keyCredential``displayName`
 
 ### `az ad app permission grant`
 
@@ -70,20 +70,20 @@ Argumen perintah dan perubahan pelanggaran perilaku tercantum di bawah ini.
 
 ## <a name="known-issues"></a>Masalah yang diketahui
 
-- Argumen `--add`pembaruan generik, `--set` dan `--remove` saat ini tidak berfungsi. Anda dapat menggunakan `az rest` untuk langsung memanggil Microsoft Graph API untuk properti yang tidak didukung.
-- Microsoft Graph perintah terkait suka `az ad` dan `az role` akan gagal di lingkungan Azure Stack yang tidak memiliki dukungan Graph Microsoft. Silakan gunakan Azure CLI 3.36.0 atau versi yang lebih lama untuk lingkungan Azure Stack.
+- Argumen `--add`pembaruan generik , `--set` dan `--remove` saat ini tidak berfungsi. Anda dapat menggunakan `az rest` untuk langsung memanggil Microsoft Graph API untuk properti yang tidak didukung.
+- Microsoft Graph perintah terkait seperti `az ad` dan `az role` akan gagal di lingkungan Azure Stack yang tidak memiliki dukungan Microsoft Graph. Silakan gunakan Azure CLI 3.36.0 atau versi yang lebih lama untuk lingkungan Azure Stack.
 
 ## <a name="try-azure-cli-beta-with-microsoft-graph"></a>Coba Azure CLI beta dengan Microsoft Graph
 
-Azure CLI dibangun di atas [Python](https://www.python.org/). Versi Python yang didukung adalah 3.7, 3.8, 3.9, 3.10. Pada Windows, Anda harus [menginstal Python terlebih dahulu](https://www.python.org/downloads/windows/).
+Azure CLI dibangun di [Python](https://www.python.org/). Versi Python yang didukung adalah 3.7, 3.8, 3.9, 3.10. Pada Windows, Anda harus [menginstal Python](https://www.python.org/downloads/windows/) terlebih dahulu.
 
-Azure CLI beta hanya dapat diinstal dari `pip` repositori Microsoft. Gunakan `python` atau `python3` untuk menjalankan perintah berikut, tergantung pada distribusi Linux atau versi Python yang Anda instal.
+Azure CLI beta hanya dapat diinstal dengan `pip` dari repositori Microsoft. Gunakan `python` atau `python3` untuk menjalankan perintah berikut, tergantung pada distribusi Linux atau versi Python yang diinstal.
 
-Untuk menghindari menimpa Azure CLI yang Anda instal, sebaiknya instal versi beta di [lingkungan virtual](https://docs.python.org/3/tutorial/venv.html).
+Untuk menghindari penimpaan Azure CLI yang diinstal, sebaiknya instal versi beta di [lingkungan virtual](https://docs.python.org/3/tutorial/venv.html).
 
 1. Membuat lingkungan virtual
 
-   Navigasikan ke folder tempat Anda ingin membuat lingkungan virtual, lalu jalankan:
+   Navigasi ke folder tempat Anda ingin membuat lingkungan virtual, lalu jalankan:
 
    ```bash
    python -m venv <env_name>
@@ -91,7 +91,7 @@ Untuk menghindari menimpa Azure CLI yang Anda instal, sebaiknya instal versi bet
 
 2. Mengaktifkan lingkungan virtual
 
-   ### <a name="windows-powershell"></a>[Windows PowerShell](#tab/powershell)
+   ### <a name="powershell"></a>[PowerShell](#tab/powershell)
 
    ```powershell
    . .\<env_name>\Scripts\Activate.ps1
@@ -105,7 +105,7 @@ Untuk menghindari menimpa Azure CLI yang Anda instal, sebaiknya instal versi bet
    ---
    Perintah ini juga dapat digunakan untuk mengaktifkan kembali lingkungan virtual Anda.
 
-3. Install Azure CLI beta
+3. Menginstal Azure CLI beta
 
    ```bash
    python -m pip install --upgrade pip
@@ -113,7 +113,7 @@ Untuk menghindari menimpa Azure CLI yang Anda instal, sebaiknya instal versi bet
    ```
    Anda sekarang dapat mulai menggunakan Azure CLI beta.
 
-4. Jika ada pembaruan, Anda dapat meningkatkan Azure CLI beta
+4. Jika ada pembaruan, Anda dapat meningkatkan versi beta Azure CLI
 
    ```bash
    pip install --extra-index-url https://azurecliprod.blob.core.windows.net/beta/simple/ --upgrade azure-cli
@@ -121,17 +121,17 @@ Untuk menghindari menimpa Azure CLI yang Anda instal, sebaiknya instal versi bet
 
 5. Menonaktifkan lingkungan virtual
 
-   Setelah Selesai menggunakan Azure CLI beta, Anda dapat menutup jendela terminal, atau menggunakan perintah.`deactivate`
+   Setelah selesai menggunakan Azure CLI beta, Anda dapat menutup jendela terminal, atau menggunakan `deactivate` perintah .
 
    ```bash
    deactivate
    ```
 
-## <a name="uninstall-azure-cli-beta"></a>Uninstall Azure CLI beta
+## <a name="uninstall-azure-cli-beta"></a>Mencopot pemasangan beta Azure CLI
 
-Untuk menghapus instalasi Azure CLI beta, hapus folder lingkungan virtual.
+Untuk menghapus instalan Azure CLI beta, hapus folder lingkungan virtual.
 
-### <a name="windows-powershell"></a>[Windows PowerShell](#tab/powershell)
+### <a name="powershell"></a>[PowerShell](#tab/powershell)
 
 ```powershell
 Remove-Item -Force -Recurse <env_name>

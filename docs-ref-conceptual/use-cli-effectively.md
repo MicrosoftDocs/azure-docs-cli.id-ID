@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
-ms.openlocfilehash: 94bbf10fcc7137e2f8ca6a71d39eb828f3f3e859
-ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+ms.openlocfilehash: 5599eeb4c0da6d9243a2211963d143deecc37e22
+ms.sourcegitcommit: bd63e04a53877fcd43d09e2de1229d90a99e645e
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/06/2022
-ms.locfileid: "141408544"
+ms.lasthandoff: 04/08/2022
+ms.locfileid: "141542265"
 ---
 # <a name="how-to-use-azure-cli-effectively"></a>Cara menggunakan Azure CLI secara efektif
 
@@ -246,7 +246,7 @@ FOR /F "tokens=* USEBACKQ" %%F IN (
 az vm stop --ids %vm_ids% :: CLI stops all VMs in parallel
 ```
 
-Gunakan skrip Windows PowerShell ini untuk menyimpan ID ke variabel:
+Gunakan skrip PowerShell ini untuk menyimpan ID ke variabel:
 
 ```powershell
 $vm_ids=(az vm list --resource-group VMResources --show-details --query "[?powerState=='VM running'].id" --output tsv)
@@ -266,7 +266,7 @@ FOR /F "tokens=* USEBACKQ" %%F IN (
 )
 ```
 
-Gunakan skrip Windows PowerShell ini untuk menelusuri daftar:
+Gunakan skrip PowerShell ini untuk mengulang daftar:
 
 ```powershell
 $vm_ids=(az vm list --resource-group VMResources --show-details --query "[?powerState=='VM running'].id" --output tsv)
