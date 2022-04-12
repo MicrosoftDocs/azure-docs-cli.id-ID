@@ -4,30 +4,30 @@ description: Pelajari cara menjalankan kontainer Docker yang meng-host Azure CLI
 author: dbradish-microsoft
 ms.author: dbradish
 manager: barbkess
-ms.date: 08/19/2021
+ms.date: 04/08/2022
 ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli docker, docker azure cli
-ms.openlocfilehash: ae1774f73d3db81b48aa363b84b8d5b60cab41fd
-ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+ms.openlocfilehash: bee7c9ecaf1f3efc0cc5f39c0cb6c5f8cd23f95d
+ms.sourcegitcommit: 36a23229659359ef8c1a6dc8011b039306fe6717
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/06/2022
-ms.locfileid: "141412792"
+ms.lasthandoff: 04/12/2022
+ms.locfileid: "141656118"
 ---
 # <a name="how-to-run-the-azure-cli-in-a-docker-container"></a>Cara menjalankan Azure CLI di kontainer Docker
 
 Anda dapat menggunakan Docker untuk menjalankan kontainer Linux mandiri dengan Azure CLI pra-instal. Dengan Docker, Anda dapat mulai menggunakan lingkungan terisolasi dengan cepat untuk menjalankan CLI. Citra ini juga dapat digunakan sebagai dasar untuk penyebaran Anda sendiri.
 
-## <a name="install-azure-cli-in-docker"></a>Menginstal Azure CLI di Docker
+## <a name="start-the-docker-container-with-azure-cli-pre-installed"></a>Mulai kontainer Docker dengan Azure CLI yang telah diinstal sebelumnya
 
 > [!NOTE]
 > Azure CLI telah dimigrasikan ke [Microsoft Container Registry](https://azure.microsoft.com/services/container-registry).
 > Dukungan untuk tag yang ada di Hub Docker masih tersedia, tetapi rilis baru hanya akan tersedia sebagai mcr.microsoft.com/azure-cli.
 
-Instal CLI menggunakan `docker run`.
+Buka perintah lalu mulai kontainer Docker dengan Azure CLI yang telah diinstal sebelumnya menggunakan perintah berikut.
 
    ```bash
    docker run -it mcr.microsoft.com/azure-cli
@@ -42,11 +42,11 @@ Instal CLI menggunakan `docker run`.
 
 CLI diinstal pada citra sebagai perintah `az` dalam `/usr/local/bin`.
 
-## <a name="install-specific-version"></a>Menginstal versi tertentu
+## <a name="run-the-docker-container-with-a-specific-version-of-the-azure-cli"></a>Jalankan kontainer Docker dengan versi Azure CLI tertentu
 
-Versi yang tersedia dapat ditemukan di [Catatan rilis Azure CLI](./release-notes-azure-cli.md).
+Versi yang tersedia dapat ditemukan di [catatan rilis Azure CLI](./release-notes-azure-cli.md).
 
-Untuk menginstal versi tertentu:
+Untuk menjalankan versi azure CLI tertentu di kontainer Docker, gunakan yang berikut ini:
 
 ```bash
 docker run -it mcr.microsoft.com/azure-cli:<version>
