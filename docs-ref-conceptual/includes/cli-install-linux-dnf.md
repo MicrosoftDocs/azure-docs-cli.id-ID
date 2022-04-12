@@ -5,16 +5,16 @@ manager: barbkess
 ms.date: 11/24/2020
 ms.topic: include
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: a26706ff2a1e80aff24d75eec329c76e667a4f1b
-ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+ms.openlocfilehash: 17d6f87e189cab5d78a6e6e46d13c8ffe9d2275e
+ms.sourcegitcommit: 36a23229659359ef8c1a6dc8011b039306fe6717
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/06/2022
-ms.locfileid: "141477419"
+ms.lasthandoff: 04/12/2022
+ms.locfileid: "141656349"
 ---
 ## <a name="overview"></a>Gambaran Umum
 
-Untuk distribusi Linux dengan `dnf` seperti RHEL, Fedora, atau CentOS, terdapat paket untuk Azure CLI. Paket ini telah diuji dengan RHEL 7.7, RHEL 8, Fedora 24 dan yang lebih baru, CentOS 7 dan CentOS 8.
+Untuk distribusi Linux dengan `dnf` seperti RHEL, Fedora, atau CentOS, terdapat paket untuk Azure CLI. Paket ini telah diuji dengan RHEL 7.7, RHEL 8, Fedora 24 dan yang lebih tinggi, CentOS 7 dan CentOS Stream 8.
 
 [!INCLUDE [current-version](current-version.md)]
 
@@ -32,7 +32,13 @@ Untuk distribusi Linux dengan `dnf` seperti RHEL, Fedora, atau CentOS, terdapat 
    sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
    ```
 
-2. Buat informasi repositori `azure-cli` lokal.
+2. Untuk RHEL 8 atau CentOS Stream 8, tambahkan `packages-microsoft-com-prod` repositori:
+
+   ```bash
+   sudo dnf install -y https://packages.microsoft.com/config/rhel/8/packages-microsoft-prod.rpm
+   ```
+
+   Untuk RHEL 7 atau CentOS 7, tambahkan `azure-cli` repositori:
 
    ```bash
    echo -e "[azure-cli]
