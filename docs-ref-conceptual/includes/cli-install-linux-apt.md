@@ -5,12 +5,12 @@ manager: barbkess
 ms.date: 09/29/2020
 ms.topic: include
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 2afcf12c4b20d4562ffdcdb57cf191f1edebc2d4
-ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+ms.openlocfilehash: 41bd9e223e3be325194a97d61119cb481e207c2a
+ms.sourcegitcommit: d016676aca62d5461b07446d98cf38e30bba07cd
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/06/2022
-ms.locfileid: "141477368"
+ms.lasthandoff: 04/19/2022
+ms.locfileid: "143910268"
 ---
 ## <a name="overview"></a>Gambaran Umum
 
@@ -18,7 +18,7 @@ Manajer paket `apt` berisi paket x86_64 untuk Azure CLI yang telah diuji pada di
 
 | Distribusi | Versi |
 |:-------------|:--------|
-| Ubuntu       | 16.04 LTS (Xenial Xerus), 18.04 LTS (Bionic Beaver), 20.04 LTS (Focal Fossa), 21.10 (Impish Indri) |
+| Ubuntu       | 16.04 LTS (Xenial Xerus), 18.04 LTS (Bionic Beaver), 20.04 LTS (Focal Fossa), 21.10 (Impish Indri), 22.04 (Jammy Jellyfish) |
 | Debian       | 9 (Stretch), 10 (Buster), 11 (Bullseye) |
 
 > [!WARNING]
