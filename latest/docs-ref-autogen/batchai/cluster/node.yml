@@ -1,0 +1,117 @@
+### YamlMime:AzureCLIGroup
+uid: az_batchai_cluster_node
+name: az batchai cluster node
+summary: Perintah untuk bekerja dengan node kluster.
+description: ''
+directCommands:
+- uid: az_batchai_cluster_node_exec
+  name: az batchai cluster node exec
+  summary: Menjalankan baris perintah pada node kluster dengan penerusan port opsional.
+  description: ''
+  syntax: >-
+    az batchai cluster node exec --cluster
+                                 --resource-group
+                                 --workspace
+                                 [--address]
+                                 [--exec]
+                                 [--node-id]
+                                 [--password]
+                                 [--ssh-private-key]
+  examples:
+  - summary: Laporkan rekam jepret dari proses saat ini.
+    syntax: >-
+      az batchai cluster node exec -g MyResourceGroup -w MyWorkspace -c MyCluster \
+          -n tvm-xxx --exec "ps axu"
+  - summary: Laporkan informasi GPU untuk simpul.
+    syntax: >-
+      az batchai cluster node exec -g MyResourceGroup -w MyWorkspace -c MyCluster \
+          -n tvm-xxx --exec "nvidia-smi"
+  - summary: Teruskan lokal 9000 ke port 9001 pada simpul.
+    syntax: >-
+      az batchai cluster node exec -g MyResourceGroup -w MyWorkspace -c MyCluster \
+          -n tvm-xxx -L 9000:localhost:9001
+  requiredParameters:
+  - isRequired: true
+    name: --cluster -c
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace -w
+    summary: Nama ruang kerja.
+    description: ''
+  optionalParameters:
+  - name: --address -L
+    summary: Menentukan bahwa koneksi ke port TCP atau soket Unix yang diberikan pada host lokal (klien) akan diteruskan ke host dan port yang diberikan, atau soket Unix, di sisi jarak jauh. misalnya -L 8080:localhost:8080.
+    description: ''
+  - name: --exec
+    summary: Baris perintah opsional yang akan dijalankan pada simpul. Jika tidak disediakan, perintah hanya akan melakukan penerusan port.
+    description: ''
+  - name: --node-id -n
+    summary: ID simpul untuk meneruskan port. Jika tidak disediakan, perintah akan dijalankan pada simpul pertama yang tersedia.
+    description: ''
+  - name: --password -p
+    summary: Kata sandi opsional untuk membuat koneksi SSH.
+    description: ''
+  - name: --ssh-private-key -k
+    summary: Jalur kunci privat SSH opsional untuk membuat koneksi SSH. Jika dihilangkan, kunci privat SSH default akan digunakan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batchai/_help.py
+- uid: az_batchai_cluster_node_list
+  name: az batchai cluster node list
+  summary: Mencantumkan informasi login jarak jauh untuk node kluster.
+  description: Mencantumkan informasi masuk jarak jauh untuk node kluster. Anda dapat melakukan ssh ke simpul tertentu menggunakan alamat IP publik yang disediakan dan nomor port. Mis. nomor port SSH simpul ssh <admin user name>@<public ip> -p <>.
+  syntax: >-
+    az batchai cluster node list --cluster
+                                 --resource-group
+                                 --workspace
+  examples:
+  - summary: Mencantumkan informasi masuk jarak jauh untuk kluster.
+    syntax: az batchai cluster node list -g MyResourceGroup -w MyWorkspace -c MyCluster -o table
+  requiredParameters:
+  - isRequired: true
+    name: --cluster -c
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace -w
+    summary: Nama ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batchai/_help.py
+commands:
+- az_batchai_cluster_node_exec
+- az_batchai_cluster_node_list
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 07/13/2021
+  description: Perintah untuk bekerja dengan node kluster.
+  ms.openlocfilehash: 25d8aa358d861a23c23afc53e186babeda5b70ec
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141118129"

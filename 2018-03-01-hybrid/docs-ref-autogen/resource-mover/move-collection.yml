@@ -1,0 +1,510 @@
+### YamlMime:AzureCLIGroup
+uid: az_resource-mover_move-collection
+name: az resource-mover move-collection
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **resource-mover** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az resource-mover move-collection** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Kelola kumpulan pemindahan.
+description: ''
+directCommands:
+- uid: az_resource-mover_move-collection_bulk-remove
+  name: az resource-mover move-collection bulk-remove
+  summary: Hapus kumpulan move-resources dari move-collection.
+  description: ''
+  syntax: >-
+    az resource-mover move-collection bulk-remove --move-collection-name
+                                                  --resource-group
+                                                  [--input-type {MoveResourceId, MoveResourceSourceId}]
+                                                  [--move-resources]
+                                                  [--no-wait]
+                                                  [--validate-only {false, true}]
+  examples:
+  - summary: Menghapus move-resource dalam kumpulan pemindahan.
+    syntax: az resource-mover move-collection bulk-remove --move-resources "/subscriptions/subID/resourceGroups/myRG/providers/Microsoft.Migrate/MoveCollections/movecollection1/MoveResources/moveresource1" --validate-only false --name MyMoveCollection --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --move-collection-name --name -n
+    summary: Nama kumpulan pemindahan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --input-type
+    parameterValueGroup: MoveResourceId, MoveResourceSourceId
+    summary: Tentukan jenis input --move-resources.
+    description: ''
+  - name: --move-resources
+    summary: Daftar Id sumber daya, secara default menerima id move-resource kecuali jenis input dialihkan melalui --input-type.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --validate-only
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah operasi hanya perlu menjalankan prasyarat.
+    description: ''
+- uid: az_resource-mover_move-collection_commit
+  name: az resource-mover move-collection commit
+  summary: Terapkan kumpulan sumber daya. Operasi penerapan dipicu pada move-resources dalam move-state 'CommitPending' atau 'CommitFailed', pada penyelesaian yang berhasil, move-resource move-state melakukan transisi ke Committed.
+  description: ''
+  syntax: >-
+    az resource-mover move-collection commit --move-collection-name
+                                             --move-resources
+                                             --resource-group
+                                             [--input-type {MoveResourceId, MoveResourceSourceId}]
+                                             [--no-wait]
+                                             [--validate-only {false, true}]
+  examples:
+  - summary: Menerapkan move-resource.
+    syntax: az resource-mover move-collection commit --move-resources "/subscriptions/subID/resourceGroups/myRG/providers/Microsoft.Migrate/MoveCollections/movecollection1/MoveResources/moveresource1" --validate-only false --name MyMoveCollection --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --move-collection-name --name -n
+    summary: Nama kumpulan pemindahan.
+    description: ''
+  - isRequired: true
+    name: --move-resources
+    summary: Daftar Id sumber daya, secara default menerima id move-resource kecuali jenis input dialihkan melalui --input-type.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --input-type
+    parameterValueGroup: MoveResourceId, MoveResourceSourceId
+    summary: Tentukan jenis input --move-resources.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --validate-only
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah operasi hanya perlu menjalankan prasyarat.
+    description: ''
+- uid: az_resource-mover_move-collection_create
+  name: az resource-mover move-collection create
+  summary: Membuat kumpulan pemindahan.
+  description: ''
+  syntax: >-
+    az resource-mover move-collection create --move-collection-name
+                                             --resource-group
+                                             [--identity]
+                                             [--location]
+                                             [--source-region]
+                                             [--tags]
+                                             [--target-region]
+  examples:
+  - summary: Buat kumpulan pemindahan dengan identitas yang ditetapkan sistem.
+    syntax: az resource-mover move-collection create --identity type=SystemAssigned --location eastus2 --source-region eastus --target-region westus --name MyMoveCollection --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --move-collection-name --name -n
+    summary: Nama kumpulan pemindahan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --identity
+    summary: Tentukan properti MSI dari kumpulan pemindahan.
+    description: >-
+      Penggunaan: --identity type=XX principal-id=XX tenant-id=XX
+
+
+      jenis: Jenis identitas yang digunakan untuk layanan pemindah sumber daya.
+
+      principal-id: Id utama. tenant-id: Id penyewa.
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --source-region
+    summary: Wilayah sumber.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --target-region
+    summary: Wilayah target.
+    description: ''
+- uid: az_resource-mover_move-collection_delete
+  name: az resource-mover move-collection delete
+  summary: Menghapus kumpulan pemindahan.
+  description: ''
+  syntax: >-
+    az resource-mover move-collection delete --move-collection-name
+                                             --resource-group
+                                             [--no-wait]
+                                             [--yes]
+  examples:
+  - summary: Menghapus kumpulan pemindahan.
+    syntax: az resource-mover move-collection delete --name MyMoveCollection --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --move-collection-name --name -n
+    summary: Nama kumpulan pemindahan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_resource-mover_move-collection_discard
+  name: az resource-mover move-collection discard
+  summary: Buang set sumber daya. Operasi buang dipicu pada move-resources dalam move-state 'CommitPending' atau 'DiscardFailed', pada penyelesaian yang berhasil, move-resource move-state melakukan transisi ke MovePending.
+  description: ''
+  syntax: >-
+    az resource-mover move-collection discard --move-collection-name
+                                              --move-resources
+                                              --resource-group
+                                              [--input-type {MoveResourceId, MoveResourceSourceId}]
+                                              [--no-wait]
+                                              [--validate-only {false, true}]
+  examples:
+  - summary: Buang remove-resource.
+    syntax: az resource-mover move-collection discard --move-resources "/subscriptions/subID/resourceGroups/myRG/providers/Microsoft.Migrate/MoveCollections/movecollection1/MoveResources/moveresource1" --validate-only false --name MyMoveCollection --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --move-collection-name --name -n
+    summary: Nama kumpulan pemindahan.
+    description: ''
+  - isRequired: true
+    name: --move-resources
+    summary: Daftar Id sumber daya, secara default menerima id move-resource kecuali jenis input dialihkan melalui --input-type.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --input-type
+    parameterValueGroup: MoveResourceId, MoveResourceSourceId
+    summary: Tentukan jenis input --move-resources.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --validate-only
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah operasi hanya perlu menjalankan prasyarat.
+    description: ''
+- uid: az_resource-mover_move-collection_initiate-move
+  name: az resource-mover move-collection initiate-move
+  summary: Pindahkan kumpulan sumber daya. Operasi pemindahan dipicu setelah move-resources berada dalam status pindah 'MovePending' atau 'MoveFailed', pada penyelesaian yang berhasil, move-resource move-state melakukan transisi ke CommitPending.
+  description: ''
+  syntax: >-
+    az resource-mover move-collection initiate-move --move-collection-name
+                                                    --move-resources
+                                                    --resource-group
+                                                    [--input-type {MoveResourceId, MoveResourceSourceId}]
+                                                    [--no-wait]
+                                                    [--validate-only {false, true}]
+  examples:
+  - summary: Pindahkan kumpulan sumber daya.
+    syntax: az resource-mover move-collection initiate-move --move-resources "/subscriptions/subID/resourceGroups/myRG/providers/Microsoft.Migrate/MoveCollections/movecollection1/MoveResources/moveresource1" --validate-only false --name MyMoveCollection --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --move-collection-name --name -n
+    summary: Nama kumpulan pemindahan.
+    description: ''
+  - isRequired: true
+    name: --move-resources
+    summary: Daftar Id sumber daya, secara default menerima id move-resource kecuali jenis input dialihkan melalui --input-type.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --input-type
+    parameterValueGroup: MoveResourceId, MoveResourceSourceId
+    summary: Tentukan jenis input --move-resources.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --validate-only
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah operasi hanya perlu menjalankan prasyarat.
+    description: ''
+- uid: az_resource-mover_move-collection_list
+  name: az resource-mover move-collection list
+  summary: Mencantumkan detail kumpulan pemindahan.
+  description: ''
+  syntax: az resource-mover move-collection list [--resource-group]
+  examples:
+  - summary: Mencantumkan semua kumpulan pemindahan.
+    syntax: az resource-mover move-collection list
+  - summary: Mencantumkan semua kumpulan pemindahan menurut grup sumber daya.
+    syntax: az resource-mover move-collection list -g MyResourceGroup
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_resource-mover_move-collection_list-required-for
+  name: az resource-mover move-collection list-required-for
+  summary: Cantumkan sumber daya pemindahan tempat sumber daya arm diperlukan.
+  description: ''
+  syntax: >-
+    az resource-mover move-collection list-required-for --move-collection-name
+                                                        --resource-group
+                                                        --source-id
+  examples:
+  - summary: Cantumkan sumber daya pemindahan tempat sumber daya arm diperlukan.
+    syntax: az resource-mover move-collection list-required-for --name MyMoveCollection --resource-group MyResourceGroup --source-id "/subscriptions/subID/resourceGroups/myRG/providers/Microsoft.Network/virtualNetworks/nic1"
+  requiredParameters:
+  - isRequired: true
+    name: --move-collection-name --name -n
+    summary: Nama Kumpulan Pemindahan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --source-id
+    summary: SourceId tempat api dipanggil.
+    description: ''
+- uid: az_resource-mover_move-collection_list-unresolved-dependency
+  name: az resource-mover move-collection list-unresolved-dependency
+  summary: Cantumkan detail dependensi yang belum terselesaikan dalam kumpulan pemindahan.
+  description: ''
+  syntax: >-
+    az resource-mover move-collection list-unresolved-dependency --move-collection-name
+                                                                 --resource-group
+                                                                 [--dependency-level {Descendant, Direct}]
+  examples:
+  - summary: Cantumkan dependensi yang belum terselesaikan.
+    syntax: az resource-mover move-collection list-unresolved-dependency --move-collection-name MyMoveCollection --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --move-collection-name
+    summary: Nama kumpulan pemindahan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --dependency-level
+    parameterValueGroup: Descendant, Direct
+    summary: Tingkat dependensi.
+    description: ''
+- uid: az_resource-mover_move-collection_prepare
+  name: az resource-mover move-collection prepare
+  summary: Siapkan set sumber daya. Operasi persiapan ada pada move-resources yang berada dalam status pindah 'PreparePending' atau 'PrepareFailed', pada penyelesaian yang berhasil, move-resource move-state melakukan transisi ke MovePending.
+  description: ''
+  syntax: >-
+    az resource-mover move-collection prepare --move-collection-name
+                                              --move-resources
+                                              --resource-group
+                                              [--input-type {MoveResourceId, MoveResourceSourceId}]
+                                              [--no-wait]
+                                              [--validate-only {false, true}]
+  examples:
+  - summary: Siapkan sumber daya pemindahan.
+    syntax: az resource-mover move-collection prepare --move-resources "/subscriptions/subID/resourceGroups/myRG/providers/Microsoft.Migrate/MoveCollections/movecollection1/MoveResources/moveresource1" --validate-only false --name MyMoveCollection --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --move-collection-name --name -n
+    summary: Nama kumpulan pemindahan.
+    description: ''
+  - isRequired: true
+    name: --move-resources
+    summary: Daftar Id sumber daya, secara default menerima id move-resource kecuali jenis input dialihkan melalui --input-type.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --input-type
+    parameterValueGroup: MoveResourceId, MoveResourceSourceId
+    summary: Tentukan jenis input --move-resources.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --validate-only
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah operasi hanya perlu menjalankan prasyarat.
+    description: ''
+- uid: az_resource-mover_move-collection_resolve-dependency
+  name: az resource-mover move-collection resolve-dependency
+  summary: Komputasi, atasi, dan validasi dependensi sumber daya pemindahan dalam kumpulan pemindahan.
+  description: ''
+  syntax: >-
+    az resource-mover move-collection resolve-dependency --move-collection-name
+                                                         --resource-group
+                                                         [--no-wait]
+  examples:
+  - summary: Atasi dependensi sumber daya pemindahan.
+    syntax: az resource-mover move-collection resolve-dependency --name MyMoveCollection --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --move-collection-name --name -n
+    summary: Nama kumpulan pemindahan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_resource-mover_move-collection_show
+  name: az resource-mover move-collection show
+  summary: Dapatkan detail kumpulan pemindahan.
+  description: ''
+  syntax: >-
+    az resource-mover move-collection show --move-collection-name
+                                           --resource-group
+  examples:
+  - summary: Perlihatkan informasi tentang kumpulan pemindahan.
+    syntax: az resource-mover move-collection show --name MyMoveCollection --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --move-collection-name --name -n
+    summary: Nama kumpulan pemindahan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_resource-mover_move-collection_update
+  name: az resource-mover move-collection update
+  summary: Memperbarui kumpulan pemindahan.
+  description: ''
+  syntax: >-
+    az resource-mover move-collection update --move-collection-name
+                                             --resource-group
+                                             [--identity]
+                                             [--tags]
+  examples:
+  - summary: Memperbarui kumpulan pemindahan.
+    syntax: az resource-mover move-collection update --identity type=SystemAssigned --tags key1=value1 --name MyMoveCollection --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --move-collection-name --name -n
+    summary: Nama kumpulan pemindahan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --identity
+    summary: Tentukan properti MSI dari kumpulan pemindahan.
+    description: >-
+      Penggunaan: --identity type=XX principal-id=XX tenant-id=XX
+
+
+      jenis: Jenis identitas yang digunakan untuk layanan pemindah sumber daya.
+
+      principal-id: Id utama. tenant-id: Id penyewa.
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+- uid: az_resource-mover_move-collection_wait
+  name: az resource-mover move-collection wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi kumpulan pemindahan terpenuhi.
+  description: ''
+  syntax: >-
+    az resource-mover move-collection wait --move-collection-name
+                                           --resource-group
+                                           [--created]
+                                           [--custom]
+                                           [--deleted]
+                                           [--exists]
+                                           [--interval]
+                                           [--timeout]
+                                           [--updated]
+  examples:
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga kumpulan pemindahan berhasil dihapus.
+    syntax: az resource-mover move-collection wait --name MyMoveCollection --resource-group MyResourceGroup --deleted
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga kumpulan pemindahan berhasil dibuat.
+    syntax: az resource-mover move-collection wait --name MyMoveCollection --resource-group MyResourceGroup --created
+  requiredParameters:
+  - isRequired: true
+    name: --move-collection-name --name -n
+    summary: Nama kumpulan pemindahan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_resource-mover_move-collection_bulk-remove
+- az_resource-mover_move-collection_commit
+- az_resource-mover_move-collection_create
+- az_resource-mover_move-collection_delete
+- az_resource-mover_move-collection_discard
+- az_resource-mover_move-collection_initiate-move
+- az_resource-mover_move-collection_list
+- az_resource-mover_move-collection_list-required-for
+- az_resource-mover_move-collection_list-unresolved-dependency
+- az_resource-mover_move-collection_prepare
+- az_resource-mover_move-collection_resolve-dependency
+- az_resource-mover_move-collection_show
+- az_resource-mover_move-collection_update
+- az_resource-mover_move-collection_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Kelola kumpulan pemindahan.
+  ms.openlocfilehash: 50875fb28e028a52980b9b11b73f212caa596c65
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141087457"
