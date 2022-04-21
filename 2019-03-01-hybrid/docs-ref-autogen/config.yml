@@ -1,0 +1,116 @@
+### YamlMime:AzureCLIGroup
+uid: az_config
+name: az config
+summary: Mengelola konfigurasi Azure CLI.
+description: Tersedia sejak Azure CLI 2.10.0.
+directCommands:
+- uid: az_config_get
+  name: az config get
+  summary: Dapatkan konfigurasi.
+  description: ''
+  syntax: >-
+    az config get [--local]
+                  [<KEY>]
+  examples:
+  - summary: Dapatkan semua konfigurasi.
+    syntax: az config get
+  - summary: Dapatkan konfigurasi di `core` bagian .
+    syntax: az config get core
+  - summary: Dapatkan konfigurasi kunci `core.no_color`.
+    syntax: az config get core.no_color
+  optionalParameters:
+  - name: --local
+    summary: Sertakan konfigurasi lokal. Pindai dari direktori kerja hingga drive root, lalu konfigurasi global dan kembalikan kemunculan pertama.
+    description: ''
+  - name: <KEY>
+    summary: Konfigurasi yang akan didapatkan. Jika tidak disediakan, semua bagian dan konfigurasi akan dicantumkan. Jika `section` disediakan, semua konfigurasi di bawah bagian yang ditentukan akan dicantumkan. Jika `<section>.<key>` disediakan, hanya konfigurasi yang sesuai yang ditampilkan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/config/_help.py
+- uid: az_config_set
+  name: az config set
+  summary: Atur konfigurasi.
+  description: >-
+    Untuk opsi konfigurasi yang tersedia, lihat https://docs.microsoft.com/cli/azure/azure-cli-configuration.
+
+    Secara default tanpa menentukan --local, konfigurasi akan disimpan ke `~/.azure/config`.
+  syntax: >-
+    az config set [--local]
+                  [<KEY_VALUE>]
+  examples:
+  - summary: Nonaktifkan warna dengan `core.no_color`.
+    syntax: az config set core.no_color=true
+  - summary: Sembunyikan peringatan dan hanya tampilkan kesalahan dengan `core.only_show_errors`.
+    syntax: az config set core.only_show_errors=true
+  - summary: Aktifkan telemetri sisi klien.
+    syntax: az config set core.collect_telemetry=true
+  - summary: Aktifkan pengelogan file dan atur lokasinya.
+    syntax: >-
+      az config set logging.enable_log_file=true
+
+      az config set logging.log_dir=~/az-logs
+  - summary: Atur lokasi default ke `westus2` dan grup sumber daya default ke `myRG`.
+    syntax: az config set defaults.location=westus2 defaults.group=MyResourceGroup
+  - summary: Atur grup sumber daya default ke `myRG` pada cakupan lokal.
+    syntax: az config set defaults.group=myRG --local
+  optionalParameters:
+  - name: --local
+    summary: Atur sebagai konfigurasi lokal di direktori kerja.
+    description: ''
+  - name: <KEY_VALUE>
+    summary: Konfigurasi yang dipisahkan spasi dalam bentuk <section>.<key>=<value>.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/config/_help.py
+- uid: az_config_unset
+  name: az config unset
+  summary: Batalkan pengaturan konfigurasi.
+  description: ''
+  syntax: >-
+    az config unset [--local]
+                    [<KEY>]
+  examples:
+  - summary: Batalkan pengaturan konfigurasi kunci `core.no_color`.
+    syntax: az config unset core.no_color
+  optionalParameters:
+  - name: --local
+    summary: Sertakan konfigurasi lokal. Pindai dari direktori kerja hingga drive root, lalu konfigurasi global dan batalkan pengaturan kemunculan pertama.
+    description: ''
+  - name: <KEY>
+    summary: Konfigurasi yang akan dilepas, dalam bentuk <section>.<key>.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/config/_help.py
+commands:
+- az_config_get
+- az_config_param-persist
+- az_config_param-persist_delete
+- az_config_param-persist_off
+- az_config_param-persist_on
+- az_config_param-persist_show
+- az_config_set
+- az_config_unset
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/17/2021
+  description: Tersedia sejak Azure CLI 2.10.0.
+  ms.openlocfilehash: fb5dc0772b0ddac1d3378fdd758cfa05ddd6470b
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140979242"

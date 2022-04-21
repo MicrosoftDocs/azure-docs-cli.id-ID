@@ -1,0 +1,318 @@
+### YamlMime:AzureCLIGroup
+uid: az_k8sconfiguration
+name: az k8sconfiguration
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **konfigurasi k8** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az k8sconfiguration** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Perintah untuk mengelola konfigurasi Kubernetes.
+description: ''
+directCommands:
+- uid: az_k8sconfiguration_create
+  name: az k8sconfiguration create
+  summary: Buat konfigurasi Kubernetes.
+  description: ''
+  syntax: >-
+    az k8sconfiguration create --cluster-name
+                               --cluster-type {connectedClusters, managedClusters}
+                               --name
+                               --repository-url
+                               --resource-group
+                               --scope {cluster, namespace}
+                               [--enable-helm-operator {false, true}]
+                               [--helm-operator-params]
+                               [--helm-operator-version]
+                               [--https-key]
+                               [--https-user]
+                               [--operator-instance-name]
+                               [--operator-namespace]
+                               [--operator-params]
+                               [--operator-type]
+                               [--ssh-known-hosts]
+                               [--ssh-known-hosts-file]
+                               [--ssh-private-key]
+                               [--ssh-private-key-file]
+  examples:
+  - summary: Membuat konfigurasi Kubernetes
+    syntax: >-
+      az k8sconfiguration create --resource-group MyResourceGroup --cluster-name MyClusterName \
+
+      --cluster-type connectedClusters --name MyGitConfig --operator-instance-name OperatorInst01 \
+
+      --operator-namespace OperatorNamespace01 --operator-type flux --operator-params "'--git-readonly'" \
+
+      --repository-url git://github.com/fluxHowTo/flux-get-started --enable-helm-operator  \
+
+      --helm-operator-version 1.2.0 --scope namespace --helm-operator-params '--set helm.versions=v3' \
+
+      --ssh-private-key '' --ssh-private-key-file '' --https-user '' --https-key '' \
+
+      --ssh-known-hosts '' --ssh-known-hosts-file ''
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Nama kluster Kubernetes.
+    description: ''
+  - isRequired: true
+    name: --cluster-type
+    parameterValueGroup: connectedClusters, managedClusters
+    summary: Tentukan kluster Arc atau kluster terkelola AKS.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama Konfigurasi Kubernetes.
+    description: ''
+  - isRequired: true
+    name: --repository-url -u
+    summary: Url repositori kontrol sumber.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --scope
+    parameterValueGroup: cluster, namespace
+    summary: Tentukan cakupan operator untuk menjadi 'namespace' atau 'kluster'.
+    description: ''
+  optionalParameters:
+  - name: --enable-helm-operator
+    parameterValueGroup: false, true
+    summary: Aktifkan dukungan untuk penyebaran bagan Helm.
+    description: ''
+  - name: --helm-operator-params
+    summary: Nilai bagan untuk Operator Helm (jika diaktifkan).
+    description: ''
+  - name: --helm-operator-version
+    defaultValue: 1.2.0
+    summary: Versi bagan Operator Helm (jika diaktifkan).
+    description: ''
+  - name: --https-key
+    summary: Tentukan token/kata sandi HTTPS untuk sinkronisasi repositori privat.
+    description: ''
+  - name: --https-user
+    summary: Tentukan nama pengguna HTTPS untuk sinkronisasi repositori privat.
+    description: ''
+  - name: --operator-instance-name
+    summary: Nama instans Operator.
+    description: ''
+  - name: --operator-namespace
+    defaultValue: default
+    summary: Namespace untuk menginstal Operator.
+    description: ''
+  - name: --operator-params
+    summary: Parameter untuk Operator.
+    description: ''
+  - name: --operator-type
+    defaultValue: flux
+    summary: Jenis operator. Nilai yang valid adalah 'flux'.
+    description: ''
+  - name: --ssh-known-hosts
+    summary: Tentukan konten known_hosts yang dikodekan Base64 yang berisi kunci SSH publik yang diperlukan untuk mengakses instans Git privat.
+    description: ''
+  - name: --ssh-known-hosts-file
+    summary: Tentukan jalur file untuk known_hosts konten yang berisi kunci SSH publik yang diperlukan untuk mengakses instans Git privat.
+    description: ''
+  - name: --ssh-private-key
+    summary: Tentukan kunci ssh privat yang dikodekan Base64 untuk sinkronisasi repositori privat.
+    description: ''
+  - name: --ssh-private-key-file
+    summary: Tentukan jalur file ke kunci ssh privat untuk sinkronisasi repositori privat.
+    description: ''
+- uid: az_k8sconfiguration_delete
+  name: az k8sconfiguration delete
+  summary: Menghapus konfigurasi Kubernetes.
+  description: ''
+  syntax: >-
+    az k8sconfiguration delete --cluster-name
+                               --cluster-type {connectedClusters, managedClusters}
+                               --name
+                               --resource-group
+                               [--yes]
+  examples:
+  - summary: Menghapus konfigurasi Kubernetes
+    syntax: >-
+      az k8sconfiguration delete --resource-group MyResourceGroup --cluster-name MyClusterName \
+
+      --cluster-type connectedClusters --name MyConfigurationName
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Nama kluster Kubernetes.
+    description: ''
+  - isRequired: true
+    name: --cluster-type
+    parameterValueGroup: connectedClusters, managedClusters
+    summary: Tentukan kluster Arc atau kluster terkelola AKS.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama Konfigurasi Kubernetes.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_k8sconfiguration_list
+  name: az k8sconfiguration list
+  summary: Mencantumkan konfigurasi Kubernetes.
+  description: ''
+  syntax: >-
+    az k8sconfiguration list --cluster-name
+                             --cluster-type {connectedClusters, managedClusters}
+                             --resource-group
+  examples:
+  - summary: Mencantumkan semua konfigurasi Kubernetes dari kluster
+    syntax: >-
+      az k8sconfiguration list --resource-group MyResourceGroup --cluster-name MyClusterName \
+
+      --cluster-type connectedClusters
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Nama kluster Kubernetes.
+    description: ''
+  - isRequired: true
+    name: --cluster-type
+    parameterValueGroup: connectedClusters, managedClusters
+    summary: Tentukan kluster Arc atau kluster terkelola AKS.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_k8sconfiguration_show
+  name: az k8sconfiguration show
+  summary: Menampilkan detail konfigurasi Kubernetes.
+  description: ''
+  syntax: >-
+    az k8sconfiguration show --cluster-name
+                             --cluster-type {connectedClusters, managedClusters}
+                             --name
+                             --resource-group
+  examples:
+  - summary: Menampilkan konfigurasi Kubernetes
+    syntax: >-
+      az k8sconfiguration show --resource-group MyResourceGroup --cluster-name MyClusterName \
+
+      --cluster-type connectedClusters --name MyConfigurationName
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Nama kluster Kubernetes.
+    description: ''
+  - isRequired: true
+    name: --cluster-type
+    parameterValueGroup: connectedClusters, managedClusters
+    summary: Tentukan kluster Arc atau kluster terkelola AKS.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama Konfigurasi Kubernetes.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_k8sconfiguration_update
+  name: az k8sconfiguration update
+  summary: Memperbarui konfigurasi Kubernetes.
+  description: ''
+  syntax: >-
+    az k8sconfiguration update --cluster-name
+                               --cluster-type {connectedClusters, managedClusters}
+                               --name
+                               --resource-group
+                               [--enable-helm-operator {false, true}]
+                               [--helm-operator-params]
+                               [--helm-operator-version]
+                               [--operator-params]
+                               [--repository-url]
+                               [--ssh-known-hosts]
+                               [--ssh-known-hosts-file]
+  examples:
+  - summary: Memperbarui konfigurasi Kubernetes yang ada
+    syntax: >-
+      az k8sconfiguration update --resource-group MyResourceGroup --cluster-name MyClusterName \
+
+      --cluster-type connectedClusters --name MyConfigurationName --enable-helm-operator \
+
+      --repository-url git://github.com/fluxHowTo/flux-get-started --operator-params "'--git-readonly'" \
+
+      --helm-operator-version 1.2.0 --helm-operator-params '--set helm.versions=v3'
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Nama kluster Kubernetes.
+    description: ''
+  - isRequired: true
+    name: --cluster-type
+    parameterValueGroup: connectedClusters, managedClusters
+    summary: Tentukan kluster Arc atau kluster terkelola AKS.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama Konfigurasi Kubernetes.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --enable-helm-operator
+    parameterValueGroup: false, true
+    summary: Aktifkan dukungan untuk penyebaran bagan Helm.
+    description: ''
+  - name: --helm-operator-params
+    summary: Nilai bagan untuk Operator Helm (jika diaktifkan).
+    description: ''
+  - name: --helm-operator-version
+    summary: Versi bagan Operator Helm (jika diaktifkan).
+    description: ''
+  - name: --operator-params
+    summary: Parameter untuk Operator.
+    description: ''
+  - name: --repository-url -u
+    summary: Url repositori kontrol sumber.
+    description: ''
+  - name: --ssh-known-hosts
+    summary: Tentukan konten known_hosts yang dikodekan Base64 yang berisi kunci SSH publik yang diperlukan untuk mengakses instans Git privat.
+    description: ''
+  - name: --ssh-known-hosts-file
+    summary: Tentukan jalur file untuk known_hosts konten yang berisi kunci SSH publik yang diperlukan untuk mengakses instans Git privat.
+    description: ''
+commands:
+- az_k8sconfiguration_create
+- az_k8sconfiguration_delete
+- az_k8sconfiguration_list
+- az_k8sconfiguration_show
+- az_k8sconfiguration_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Perintah untuk mengelola konfigurasi Kubernetes.
+  ms.openlocfilehash: 95089ad0e5267dc20d60e1899d711f1ec9af0130
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140897324"

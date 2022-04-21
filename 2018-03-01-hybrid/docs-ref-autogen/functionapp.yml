@@ -1,0 +1,223 @@
+### YamlMime:AzureCLIGroup
+uid: az_functionapp
+name: az functionapp
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **appservice-kube** untuk Azure CLI (versi 2.34.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az functionapp** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola aplikasi fungsi. Untuk menginstal alat Azure Functions Core, lihat https://github.com/Azure/azure-functions-core-tools.
+description: ''
+directCommands:
+- uid: az_functionapp_create
+  name: az functionapp create
+  summary: Buat aplikasi fungsi.
+  description: Nama aplikasi fungsi harus dapat menghasilkan FQDN unik sebagai AppName.azurewebsites.net.
+  syntax: >-
+    az functionapp create --name
+                          --resource-group
+                          --storage-account
+                          [--app-insights]
+                          [--app-insights-key]
+                          [--assign-identity]
+                          [--consumption-plan-location]
+                          [--custom-location]
+                          [--deployment-container-image-name]
+                          [--deployment-local-git]
+                          [--deployment-source-branch]
+                          [--deployment-source-url]
+                          [--disable-app-insights {false, true}]
+                          [--docker-registry-server-password]
+                          [--docker-registry-server-user]
+                          [--functions-version {2, 3, 4}]
+                          [--max-worker-count]
+                          [--min-worker-count]
+                          [--os-type {Linux, Windows}]
+                          [--plan]
+                          [--role]
+                          [--runtime]
+                          [--runtime-version]
+                          [--scope]
+                          [--tags]
+  examples:
+  - summary: Membuat aplikasi fungsi dasar.
+    syntax: az functionapp create -g MyResourceGroup  -p MyPlan -n MyUniqueAppName -s MyStorageAccount
+  - summary: Buat aplikasi fungsi. (dibuat otomatis)
+    syntax: az functionapp create --consumption-plan-location westus --name MyUniqueAppName --os-type Windows --resource-group MyResourceGroup --runtime dotnet --storage-account MyStorageAccount
+  - summary: Buat aplikasi fungsi menggunakan gambar ACR privat.
+    syntax: az functionapp create -g MyResourceGroup -p MyPlan -n MyUniqueAppName --runtime node --storage-account MyStorageAccount --deployment-container-image-name myacr.azurecr.io/myimage:tag --docker-registry-server-password passw0rd --docker-registry-server-user MyUser
+  - summary: Membuat aplikasi fungsi di lingkungan kubernetes layanan aplikasi
+    syntax: az functionapp create -g MyResourceGroup  -p MyPlan -n MyUniqueAppName -s MyStorageAccount --custom-location /subscriptions/sub_id/resourcegroups/group_name/providers/microsoft.extendedlocation/customlocations/custom_location_name
+  - summary: Membuat aplikasi fungsi di lingkungan kubernetes layanan aplikasi dan dalam grup sumber daya yang sama dengan lokasi kustom
+    syntax: az functionapp create -g MyResourceGroup  -p MyPlan -n MyUniqueAppName -s MyStorageAccount --custom-location custom_location_name
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi fungsi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --storage-account -s
+    summary: Berikan nilai string akun Storage di Grup Sumber Daya yang disediakan. Atau ID Sumber Daya dari Akun Storage di Grup Sumber Daya yang berbeda.
+    description: ''
+  optionalParameters:
+  - name: --app-insights
+    summary: Nama proyek app Insights yang ada untuk ditambahkan ke aplikasi Function. Harus berada dalam grup sumber daya yang sama.
+    description: ''
+  - name: --app-insights-key
+    summary: Kunci instrumentasi Insights Aplikasi yang akan ditambahkan.
+    description: ''
+  - name: --assign-identity
+    summary: Terima identitas yang ditetapkan sistem atau pengguna yang dipisahkan oleh spasi. Gunakan '[system]' untuk merujuk identitas yang ditetapkan sistem, atau id sumber daya untuk merujuk identitas yang ditetapkan pengguna. Lihat bantuan untuk contoh selengkapnya.
+    description: ''
+  - name: --consumption-plan-location -c
+    summary: Lokasi geografis tempat Aplikasi Fungsi akan dihosting. Gunakan `az functionapp list-consumption-locations` untuk melihat lokasi yang tersedia.
+    description: ''
+  - name: --custom-location
+    summary: Nama atau ID lokasi kustom. Gunakan ID untuk lokasi kustom di grup sumber daya yang berbeda dari aplikasi.
+    description: ''
+  - name: --deployment-container-image-name -i
+    summary: Hanya Linux. Nama gambar kontainer dari Docker Hub, misalnya publisher/image-name:tag.
+    description: ''
+  - name: --deployment-local-git -l
+    summary: Aktifkan git lokal.
+    description: ''
+  - name: --deployment-source-branch -b
+    defaultValue: master
+    summary: Cabang yang akan disebarkan.
+    description: ''
+  - name: --deployment-source-url -u
+    summary: URL repositori Git untuk ditautkan dengan integrasi manual.
+    description: ''
+  - name: --disable-app-insights
+    parameterValueGroup: false, true
+    summary: Nonaktifkan pembuatan sumber daya application insights selama pembuatan functionapp. Tidak ada log yang akan tersedia.
+    description: ''
+  - name: --docker-registry-server-password
+    summary: Kata sandi server registri kontainer. Diperlukan untuk registri privat.
+    description: ''
+  - name: --docker-registry-server-user
+    summary: Nama pengguna server registri kontainer.
+    description: ''
+  - name: --functions-version
+    parameterValueGroup: 2, 3, 4
+    summary: Versi aplikasi fungsi.  Gunakan "az functionapp list-runtimes" untuk memeriksa kompatibilitas dengan runtime dan versi runtime.
+    description: ''
+  - name: --max-worker-count
+    summary: Jumlah maksimum pekerja yang akan dialokasikan.
+    description: ''
+  - name: --min-worker-count
+    summary: Jumlah minimum pekerja yang akan dialokasikan.
+    description: ''
+  - name: --os-type
+    parameterValueGroup: Linux, Windows
+    summary: Atur jenis OS untuk aplikasi yang akan dibuat.
+    description: ''
+  - name: --plan -p
+    summary: Nama atau id sumber daya dari paket layanan aplikasi fungsi. Gunakan 'appservice plan create' untuk mendapatkannya.
+    description: ''
+  - name: --role
+    defaultValue: Contributor
+    summary: Nama peran atau id yang akan dimiliki identitas yang ditetapkan sistem.
+    description: ''
+  - name: --runtime
+    summary: Tumpukan runtime fungsi. Gunakan "az functionapp list-runtimes" untuk memeriksa runtime dan versi yang didukung.
+    description: ''
+  - name: --runtime-version
+    summary: Versi tumpukan runtime fungsi. Gunakan "az functionapp list-runtimes" untuk memeriksa runtime dan versi yang didukung.
+    description: ''
+  - name: --scope
+    summary: Cakupan yang dapat diakses oleh identitas yang ditetapkan sistem.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+- uid: az_functionapp_restart
+  name: az functionapp restart
+  summary: Mulai ulang aplikasi fungsi.
+  description: ''
+  syntax: >-
+    az functionapp restart --name
+                           --resource-group
+                           [--slot]
+  examples:
+  - summary: Mulai ulang aplikasi fungsi. (dibuat otomatis)
+    syntax: az functionapp restart --name MyFunctionApp --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi fungsi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+- uid: az_functionapp_show
+  name: az functionapp show
+  summary: Dapatkan detail aplikasi fungsi.
+  description: ''
+  syntax: >-
+    az functionapp show --name
+                        --resource-group
+                        [--slot]
+  examples:
+  - summary: Dapatkan detail aplikasi fungsi. (dibuat otomatis)
+    syntax: az functionapp show --name MyFunctionApp --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi fungsi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+commands:
+- az_functionapp_app
+- az_functionapp_app_up
+- az_functionapp_config
+- az_functionapp_config_container
+- az_functionapp_config_container_set
+- az_functionapp_create
+- az_functionapp_deployment
+- az_functionapp_deployment_source
+- az_functionapp_deployment_source_config-zip
+- az_functionapp_devops-pipeline
+- az_functionapp_devops-pipeline_create
+- az_functionapp_restart
+- az_functionapp_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola aplikasi fungsi. Untuk menginstal alat Azure Functions Core, lihat https://github.com/Azure/azure-functions-core-tools.
+  ms.openlocfilehash: 199cbcfb5f54eb8833aa491cdc5fe551129cd3ec
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140948372"

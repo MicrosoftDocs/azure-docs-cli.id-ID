@@ -1,0 +1,223 @@
+### YamlMime:AzureCLIGroup
+uid: az_webapp_auth-classic
+name: az webapp auth-classic
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **authV2** untuk Azure CLI (versi 2.23.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **az webapp auth-classic** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola autentikasi dan otorisasi aplikasi web dalam format klasik.
+description: ''
+directCommands:
+- uid: az_webapp_auth-classic_show
+  name: az webapp auth-classic show
+  summary: Perlihatkan pengaturan autentikasi untuk aplikasi web dalam format klasik.
+  description: ''
+  syntax: >-
+    az webapp auth-classic show --name
+                                --resource-group
+                                [--slot]
+  examples:
+  - summary: Perlihatkan pengaturan autentikasi untuk aplikasi web. (dibuat otomatis)
+    syntax: az webapp auth-classic show --name MyWebApp --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi web.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+- uid: az_webapp_auth-classic_update
+  name: az webapp auth-classic update
+  summary: Perbarui pengaturan autentikasi untuk aplikasi web dalam format klasik.
+  description: ''
+  syntax: >-
+    az webapp auth-classic update --name
+                                  --resource-group
+                                  [--aad-allowed-token-audiences]
+                                  [--aad-client-id]
+                                  [--aad-client-secret]
+                                  [--aad-client-secret-certificate-thumbprint]
+                                  [--aad-client-secret-setting-name]
+                                  [--aad-token-issuer-url]
+                                  [--action {AllowAnonymous, LoginWithAzureActiveDirectory, LoginWithFacebook, LoginWithGoogle, LoginWithMicrosoftAccount, LoginWithTwitter}]
+                                  [--allowed-redirect-urls]
+                                  [--enabled {false, true}]
+                                  [--facebook-app-id]
+                                  [--facebook-app-secret]
+                                  [--facebook-app-secret-setting-name]
+                                  [--facebook-oauth-scopes]
+                                  [--github-client-id]
+                                  [--github-client-secret]
+                                  [--github-client-secret-setting-name]
+                                  [--github-oauth-scopes]
+                                  [--google-client-id]
+                                  [--google-client-secret]
+                                  [--google-client-secret-setting-name]
+                                  [--google-oauth-scopes]
+                                  [--microsoft-account-client-id]
+                                  [--microsoft-account-client-secret]
+                                  [--microsoft-account-client-secret-setting-name]
+                                  [--microsoft-account-oauth-scopes]
+                                  [--runtime-version]
+                                  [--slot]
+                                  [--token-refresh-extension-hours]
+                                  [--token-store {false, true}]
+                                  [--twitter-consumer-key]
+                                  [--twitter-consumer-secret]
+                                  [--twitter-consumer-secret-setting-name]
+  examples:
+  - summary: Aktifkan Azure Active Directory dengan mengaktifkan autentikasi dan mengatur parameter terkait Azure Active Directory. Penyedia default diatur ke AAD. Harus telah membuat perwakilan layanan AAD sebelumnya.
+    syntax: >-
+      az webapp auth-classic update  -g myResourceGroup --name MyWebApp --enabled true \
+        --action LoginWithAzureActiveDirectory \
+        --aad-allowed-token-audiences https://webapp_name.azurewebsites.net/.auth/login/aad/callback \
+        --aad-client-id my-client-id --aad-client-secret very_secret_password \
+        --aad-token-issuer-url https://sts.windows.net/54826b22-38d6-4fb2-bad9-b7983a3e9c5a/
+  - summary: Aktifkan autentikasi Facebook dengan mengatur parameter terkait FB dan mengaktifkan cakupan profil publik dan email; mengizinkan pengguna anonim
+    syntax: >-
+      az webapp auth-classic update -g myResourceGroup --name MyWebApp --action AllowAnonymous \
+        --facebook-app-id my_fb_id --facebook-app-secret my_fb_secret \
+        --facebook-oauth-scopes public_profile email
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi web.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --aad-allowed-token-audiences --allowed-audiences
+    summary: Satu atau beberapa audiens token (dibatasi spasi).
+    description: ''
+  - name: --aad-client-id
+    summary: ID Aplikasi untuk mengintegrasikan AAD akun organisasi Masuk ke aplikasi web Anda.
+    description: ''
+  - name: --aad-client-secret
+    summary: AAD rahasia aplikasi.
+    description: ''
+  - name: --aad-client-secret-certificate-thumbprint --thumbprint
+    summary: Alternatif untuk AAD Client Secret, thumbprint sertifikat yang digunakan untuk tujuan penandatanganan.
+    description: ''
+  - name: --aad-client-secret-setting-name --aad-secret-setting
+    summary: Nama pengaturan aplikasi yang berisi rahasia klien dari aplikasi pihak yang mengandalkan.
+    description: ''
+  - name: --aad-token-issuer-url
+    summary: Url ini dapat ditemukan dalam output JSON yang dikembalikan dari titik akhir direktori aktif Anda menggunakan tenantID Anda. Titik akhir dapat dikueri dari `az cloud show` "endpoints.activeDirectory". TenantID dapat ditemukan menggunakan `az account show`. Dapatkan "penerbit" dari JSON di <active directory endpoint>/<tenantId>/.well-known/openid-configuration.
+    description: ''
+  - name: --action
+    parameterValueGroup: AllowAnonymous, LoginWithAzureActiveDirectory, LoginWithFacebook, LoginWithGoogle, LoginWithMicrosoftAccount, LoginWithTwitter
+    summary: Tindakan yang harus diambil ketika klien yang tidak diaauthenticated mencoba mengakses aplikasi.
+    description: ''
+  - name: --allowed-redirect-urls
+    summary: Satu atau beberapa url (dibatasi spasi).
+    description: ''
+  - name: --enabled
+    parameterValueGroup: false, true
+    summary: True jika fitur Autentikasi/ Otorisasi diaktifkan untuk aplikasi saat ini; jika tidak, salah.
+    description: ''
+  - name: --facebook-app-id
+    summary: ID Aplikasi untuk mengintegrasikan Masuk Facebook ke aplikasi web Anda.
+    description: ''
+  - name: --facebook-app-secret
+    summary: Rahasia klien Aplikasi Facebook.
+    description: ''
+  - name: --facebook-app-secret-setting-name --fb-secret-setting
+    summary: Nama pengaturan aplikasi yang berisi rahasia aplikasi yang digunakan untuk Masuk Facebook.
+    description: ''
+  - name: --facebook-oauth-scopes
+    summary: Satu atau beberapa cakupan autentikasi facebook (dibatasi spasi).
+    description: ''
+  - name: --github-client-id
+    summary: Id Klien aplikasi GitHub yang digunakan untuk masuk.
+    description: ''
+  - name: --github-client-secret
+    summary: Rahasia Klien aplikasi GitHub yang digunakan untuk masuk.
+    description: ''
+  - name: --github-client-secret-setting-name --github-secret-setting
+    summary: Nama pengaturan aplikasi yang berisi rahasia klien aplikasi Github yang digunakan untuk GitHub Login.
+    description: ''
+  - name: --github-oauth-scopes --github-scopes
+    summary: Cakupan OAuth 2.0 yang akan diminta sebagai bagian dari autentikasi GitHub Login.
+    description: ''
+  - name: --google-client-id
+    summary: ID Aplikasi untuk mengintegrasikan Masuk Google ke aplikasi web Anda.
+    description: ''
+  - name: --google-client-secret
+    summary: Rahasia klien Aplikasi Google.
+    description: ''
+  - name: --google-client-secret-setting-name --google-secret-setting
+    summary: Nama pengaturan aplikasi yang berisi rahasia klien yang terkait dengan aplikasi web Google.
+    description: ''
+  - name: --google-oauth-scopes
+    summary: Satu atau beberapa cakupan autentikasi Google (dibatasi spasi).
+    description: ''
+  - name: --microsoft-account-client-id --msa-client
+    summary: AAD ID Aplikasi V2 untuk mengintegrasikan Masuk akun Microsoft ke aplikasi web Anda.
+    description: ''
+  - name: --microsoft-account-client-secret --msa-secret
+    summary: AAD rahasia klien Aplikasi V2.
+    description: ''
+  - name: --microsoft-account-client-secret-setting-name --msa-secret-setting
+    summary: Nama pengaturan aplikasi yang berisi rahasia klien OAuth 2.0 yang dibuat untuk aplikasi yang digunakan untuk autentikasi.
+    description: ''
+  - name: --microsoft-account-oauth-scopes --msa-scopes
+    summary: Satu atau beberapa cakupan autentikasi Microsoft (dibatasi spasi).
+    description: ''
+  - name: --runtime-version
+    summary: Versi runtime fitur Autentikasi/Otorisasi yang digunakan untuk aplikasi saat ini.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+  - name: --token-refresh-extension-hours --token-refresh-hours
+    summary: Jam, harus dapat diformat ke dalam float.
+    description: ''
+  - name: --token-store
+    parameterValueGroup: false, true
+    summary: Gunakan App Service Token Store.
+    description: ''
+  - name: --twitter-consumer-key
+    summary: ID Aplikasi untuk mengintegrasikan Masuk Twitter ke aplikasi web Anda.
+    description: ''
+  - name: --twitter-consumer-secret --twitter-secret
+    summary: Rahasia klien Aplikasi Twitter.
+    description: ''
+  - name: --twitter-consumer-secret-setting-name --twitter-secret-setting
+    summary: Nama pengaturan aplikasi yang berisi rahasia konsumen OAuth 1.0a dari aplikasi Twitter yang digunakan untuk masuk.
+    description: ''
+commands:
+- az_webapp_auth-classic_show
+- az_webapp_auth-classic_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola autentikasi dan otorisasi aplikasi web dalam format klasik.
+  ms.openlocfilehash: ce764b92061e1f219e8340d96c14dcb74b920996
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140907026"

@@ -1,0 +1,240 @@
+### YamlMime:AzureCLIGroup
+uid: az_dataprotection_backup-instance_restore
+name: az dataprotection backup-instance restore
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **perlindungan data** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az dataprotection backup-instance restore** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Pulihkan instans yang dicadangkan dari titik pemulihan di vault cadangan.
+description: ''
+directCommands:
+- uid: az_dataprotection_backup-instance_restore_initialize-for-data-recovery
+  name: az dataprotection backup-instance restore initialize-for-data-recovery
+  summary: Menginisialisasi objek permintaan pemulihan untuk memulihkan semua data yang dicadangkan dalam vault cadangan.
+  description: ''
+  syntax: >-
+    az dataprotection backup-instance restore initialize-for-data-recovery --datasource-type {AzureBlob, AzureDatabaseForPostgreSQL, AzureDisk}
+                                                                           --restore-location
+                                                                           --source-datastore {ArchiveStore, OperationalStore, VaultStore}
+                                                                           --target-resource-id
+                                                                           [--point-in-time]
+                                                                           [--recovery-point-id]
+                                                                           [--rehydration-duration]
+                                                                           [--rehydration-priority {Standard}]
+                                                                           [--secret-store-type {AzureKeyVault}]
+                                                                           [--secret-store-uri]
+  examples:
+  - summary: menginisialisasi permintaan pemulihan untuk instans cadangan disk azure
+    syntax: az dataprotection backup-instance restore initialize-for-data-recovery --datasource-type AzureDisk --restore-location centraluseuap --source-datastore OperationalStore --target-resource-id {restore_disk_id} --recovery-point-id b7e6f082-b310-11eb-8f55-9cfce85d4fae
+  requiredParameters:
+  - isRequired: true
+    name: --datasource-type
+    parameterValueGroup: AzureBlob, AzureDatabaseForPostgreSQL, AzureDisk
+    summary: Tentukan jenis sumber data.
+    description: ''
+  - isRequired: true
+    name: --restore-location
+    summary: Tentukan lokasi pemulihan.
+    description: ''
+  - isRequired: true
+    name: --source-datastore
+    parameterValueGroup: ArchiveStore, OperationalStore, VaultStore
+    summary: Tentukan jenis datastore dari titik pemulihan atau titik waktu yang diberikan.
+    description: ''
+  - isRequired: true
+    name: --target-resource-id
+    summary: Tentukan ID sumber daya tempat data akan dipulihkan.
+    description: ''
+  optionalParameters:
+  - name: --point-in-time
+    summary: Tentukan titik waktu yang akan digunakan untuk memulihkan data dalam UTC (yyyy-mm-ddTHH:MM:SS).
+    description: ''
+  - name: --recovery-point-id
+    summary: Tentukan ID titik pemulihan yang akan digunakan untuk memulihkan data.
+    description: ''
+  - name: --rehydration-duration
+    defaultValue: "15"
+    summary: Tentukan durasi rehidrasi untuk pemulihan rehidrasi.
+    description: ''
+  - name: --rehydration-priority
+    parameterValueGroup: Standard
+    summary: Tentukan prioritas rehidrasi untuk pemulihan rehidrasi.
+    description: ''
+  - name: --secret-store-type
+    parameterValueGroup: AzureKeyVault
+    summary: Tentukan jenis penyimpanan rahasia yang akan digunakan untuk autentikasi.
+    description: ''
+  - name: --secret-store-uri
+    summary: Tentukan uri penyimpanan rahasia yang akan digunakan untuk autentikasi.
+    description: ''
+- uid: az_dataprotection_backup-instance_restore_initialize-for-data-recovery-as-files
+  name: az dataprotection backup-instance restore initialize-for-data-recovery-as-files
+  summary: Inisialisasi objek permintaan pemulihan untuk memulihkan semua data yang dicadangkan sebagai file dalam vault cadangan.
+  description: ''
+  syntax: >-
+    az dataprotection backup-instance restore initialize-for-data-recovery-as-files --datasource-type {AzureBlob, AzureDatabaseForPostgreSQL, AzureDisk}
+                                                                                    --restore-location
+                                                                                    --source-datastore {ArchiveStore, OperationalStore, VaultStore}
+                                                                                    --target-blob-container-url
+                                                                                    --target-file-name
+                                                                                    [--point-in-time]
+                                                                                    [--recovery-point-id]
+                                                                                    [--rehydration-duration]
+                                                                                    [--rehydration-priority {Standard}]
+  examples:
+  - summary: menginisialisasi permintaan pemulihan untuk database azure sebagai file untuk instans cadangan server postgresql
+    syntax: az dataprotection backup-instance restore initialize-for-data-recovery-as-files --datasource-type AzureDatabaseForPostgreSQL --restore-location centraluseuap --source-datastore VaultStore --target-blob-container-url {target_blob_container_url} --target-file-name {target_file_name} --recovery-point-id 9a4ab128e2d441d6a575ecd85903bd81
+  requiredParameters:
+  - isRequired: true
+    name: --datasource-type
+    parameterValueGroup: AzureBlob, AzureDatabaseForPostgreSQL, AzureDisk
+    summary: Tentukan jenis sumber data.
+    description: ''
+  - isRequired: true
+    name: --restore-location
+    summary: Tentukan lokasi pemulihan.
+    description: ''
+  - isRequired: true
+    name: --source-datastore
+    parameterValueGroup: ArchiveStore, OperationalStore, VaultStore
+    summary: Tentukan jenis datastore dari titik pemulihan atau titik waktu yang diberikan.
+    description: ''
+  - isRequired: true
+    name: --target-blob-container-url
+    summary: Tentukan url kontainer blob tempat data akan dipulihkan.
+    description: ''
+  - isRequired: true
+    name: --target-file-name
+    summary: Tentukan nama file tempat data akan dipulihkan.
+    description: ''
+  optionalParameters:
+  - name: --point-in-time
+    summary: Tentukan titik waktu yang akan digunakan untuk memulihkan data dalam UTC (yyyy-mm-ddTHH:MM:SS).
+    description: ''
+  - name: --recovery-point-id
+    summary: Tentukan ID titik pemulihan yang akan digunakan untuk memulihkan data.
+    description: ''
+  - name: --rehydration-duration
+    defaultValue: "15"
+    summary: Tentukan durasi rehidrasi untuk pemulihan rehidrasi.
+    description: ''
+  - name: --rehydration-priority
+    parameterValueGroup: Standard
+    summary: Tentukan prioritas rehidrasi untuk pemulihan rehidrasi.
+    description: ''
+- uid: az_dataprotection_backup-instance_restore_initialize-for-item-recovery
+  name: az dataprotection backup-instance restore initialize-for-item-recovery
+  summary: Menginisialisasi objek permintaan pemulihan untuk memulihkan item tertentu dari data yang dicadangkan dalam vault cadangan.
+  description: ''
+  syntax: >-
+    az dataprotection backup-instance restore initialize-for-item-recovery --backup-instance-id
+                                                                           --datasource-type {AzureBlob, AzureDatabaseForPostgreSQL, AzureDisk}
+                                                                           --restore-location
+                                                                           --source-datastore {ArchiveStore, OperationalStore, VaultStore}
+                                                                           [--container-list]
+                                                                           [--from-prefix-pattern]
+                                                                           [--point-in-time]
+                                                                           [--recovery-point-id]
+                                                                           [--to-prefix-pattern]
+  examples:
+  - summary: menginisialisasi permintaan pemulihan untuk instans cadangan blob azure
+    syntax: az dataprotection backup-instance restore initialize-for-item-recovery --datasource-type AzureBlob --restore-location centraluseuap --source-datastore OperationalStore --backup-instance-id {backup_instance_id}  --point-in-time 2021-05-26T15:00:00 --container-list container1 container2
+  requiredParameters:
+  - isRequired: true
+    name: --backup-instance-id
+    summary: Tentukan ID instans cadangan.
+    description: ''
+  - isRequired: true
+    name: --datasource-type
+    parameterValueGroup: AzureBlob, AzureDatabaseForPostgreSQL, AzureDisk
+    summary: Tentukan jenis sumber data.
+    description: ''
+  - isRequired: true
+    name: --restore-location
+    summary: Tentukan lokasi pemulihan.
+    description: ''
+  - isRequired: true
+    name: --source-datastore
+    parameterValueGroup: ArchiveStore, OperationalStore, VaultStore
+    summary: Tentukan jenis datastore dari titik pemulihan atau titik waktu yang diberikan.
+    description: ''
+  optionalParameters:
+  - name: --container-list
+    summary: Tentukan daftar kontainer yang akan dipulihkan.
+    description: ''
+  - name: --from-prefix-pattern
+    summary: Tentukan pola awalan untuk rentang mulai.
+    description: ''
+  - name: --point-in-time
+    summary: Tentukan titik waktu yang akan digunakan untuk memulihkan data dalam UTC (yyyy-mm-ddTHH:MM:SS).
+    description: ''
+  - name: --recovery-point-id
+    summary: Tentukan ID titik pemulihan yang akan digunakan untuk memulihkan data.
+    description: ''
+  - name: --to-prefix-pattern
+    summary: Tentukan pola awalan untuk rentang akhir.
+    description: ''
+- uid: az_dataprotection_backup-instance_restore_trigger
+  name: az dataprotection backup-instance restore trigger
+  summary: Memicu pemulihan untuk BackupInstance.
+  description: ''
+  syntax: >-
+    az dataprotection backup-instance restore trigger --backup-instance-name
+                                                      --resource-group
+                                                      --restore-request-object
+                                                      --vault-name
+                                                      [--no-wait]
+  examples:
+  - summary: Pemulihan pemicu
+    syntax: az dataprotection backup-instance restore trigger -g sarath-rg --vault-name sarath-vault --backup-instance-name {backup_instance_name} --restore-request-object restore_request.json
+  requiredParameters:
+  - isRequired: true
+    name: --backup-instance-name --name -n
+    summary: Nama instans cadangan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --restore-request-object
+    summary: 'Isi permintaan untuk operasi Nilai yang diharapkan: json-string/@json-file.'
+    description: ''
+  - isRequired: true
+    name: --vault-name
+    summary: Nama brankas cadangan.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+commands:
+- az_dataprotection_backup-instance_restore_initialize-for-data-recovery
+- az_dataprotection_backup-instance_restore_initialize-for-data-recovery-as-files
+- az_dataprotection_backup-instance_restore_initialize-for-item-recovery
+- az_dataprotection_backup-instance_restore_trigger
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Pulihkan instans yang dicadangkan dari titik pemulihan di vault cadangan.
+  ms.openlocfilehash: 009099a51a22f75926f256c2034aeb3ef1ad4155
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140988980"

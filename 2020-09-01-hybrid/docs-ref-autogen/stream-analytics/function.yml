@@ -1,0 +1,317 @@
+### YamlMime:AzureCLIGroup
+uid: az_stream-analytics_function
+name: az stream-analytics function
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **analisis aliran** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **fungsi az stream-analytics** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola fungsi dengan analisis aliran.
+description: ''
+directCommands:
+- uid: az_stream-analytics_function_create
+  name: az stream-analytics function create
+  summary: Buat fungsi atau ganti fungsi yang sudah ada di bawah pekerjaan streaming yang ada.
+  description: ''
+  syntax: >-
+    az stream-analytics function create --function-name
+                                        --job-name
+                                        --resource-group
+                                        [--if-match]
+                                        [--if-none-match]
+                                        [--properties]
+  examples:
+  - summary: Membuat fungsi JavaScript
+    syntax: az stream-analytics function create --properties "{\"type\":\"Scalar\",\"properties\":{\"binding\":{\"type\":\"Microsoft.StreamAnalytics/JavascriptUdf\",\"properties\":{\"script\":\"function (x, y) { return x + y; }\"}},\"inputs\":[{\"dataType\":\"Any\"}],\"output\":{\"dataType\":\"Any\"}}}" --function-name "function8197" --job-name "sj8653" --resource-group "sjrg1637"
+  - summary: Membuat fungsi Azure ML
+    syntax: az stream-analytics function create --properties "{\"type\":\"Scalar\",\"properties\":{\"binding\":{\"type\":\"Microsoft.MachineLearning/WebService\",\"properties\":{\"apiKey\":\"someApiKey==\",\"batchSize\":1000,\"endpoint\":\"someAzureMLEndpointURL\",\"inputs\":{\"name\":\"input1\",\"columnNames\":[{\"name\":\"tweet\",\"dataType\":\"string\",\"mapTo\":0}]},\"outputs\":[{\"name\":\"Sentiment\",\"dataType\":\"string\"}]}},\"inputs\":[{\"dataType\":\"nvarchar(max)\"}],\"output\":{\"dataType\":\"nvarchar(max)\"}}}" --function-name "function588" --job-name "sj9093" --resource-group "sjrg7"
+  requiredParameters:
+  - isRequired: true
+    name: --function-name --name -n
+    summary: Nama fungsi.
+    description: ''
+  - isRequired: true
+    name: --job-name
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --if-match
+    summary: ETag fungsi. Hilangkan nilai ini untuk selalu menimpa fungsi saat ini. Tentukan nilai ETag yang terakhir dilihat untuk mencegah penimpaan perubahan bersamaan secara tidak sengaja.
+    description: ''
+  - name: --if-none-match
+    summary: Atur ke '\*' untuk mengizinkan fungsi baru dibuat, tetapi untuk mencegah pembaruan fungsi yang ada. Nilai lain akan menghasilkan respons 412 Pra-kondisi Gagal.
+    description: ''
+  - name: --properties
+    summary: 'Properti yang terkait dengan fungsi. Nilai yang diharapkan: json-string/json-file/@json-file.'
+    description: ''
+- uid: az_stream-analytics_function_delete
+  name: az stream-analytics function delete
+  summary: Menghapus fungsi dari pekerjaan streaming.
+  description: ''
+  syntax: >-
+    az stream-analytics function delete --function-name
+                                        --job-name
+                                        --resource-group
+                                        [--yes]
+  examples:
+  - summary: Menghapus fungsi
+    syntax: az stream-analytics function delete --name "function8197" --job-name "sj8653" --resource-group "sjrg1637"
+  requiredParameters:
+  - isRequired: true
+    name: --function-name --name -n
+    summary: Nama fungsi.
+    description: ''
+  - isRequired: true
+    name: --job-name
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_stream-analytics_function_inspect
+  name: az stream-analytics function inspect
+  summary: Ambil definisi default fungsi berdasarkan parameter yang ditentukan.
+  description: ''
+  syntax: >-
+    az stream-analytics function inspect --function-name
+                                         --job-name
+                                         --resource-group
+                                         [--ml-properties]
+  requiredParameters:
+  - isRequired: true
+    name: --function-name --name -n
+    summary: Nama fungsi.
+    description: ''
+  - isRequired: true
+    name: --job-name
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --ml-properties
+    summary: Parameter yang diperlukan untuk mengambil definisi fungsi default untuk fungsi layanan web Azure Machine Learning.
+    description: >-
+      Penggunaan: --ml-properties execute-endpoint=XX
+
+
+      execute-endpoint: Titik akhir eksekusi Request-Response layanan web Azure Machine Learning. Cari tahu lebih lanjut di sini: https://docs.microsoft.com/en-us/azure/stream-analytics/machine-learning-udf.
+- uid: az_stream-analytics_function_list
+  name: az stream-analytics function list
+  summary: Cantumkan semua fungsi di bawah pekerjaan streaming yang ditentukan.
+  description: ''
+  syntax: >-
+    az stream-analytics function list --job-name
+                                      --resource-group
+                                      [--select]
+  examples:
+  - summary: Mencantumkan semua fungsi dalam pekerjaan streaming
+    syntax: az stream-analytics function list --job-name "sj8653" --resource-group "sjrg1637"
+  requiredParameters:
+  - isRequired: true
+    name: --job-name
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --select
+    summary: Parameter kueri $select OData. Ini adalah daftar properti struktural yang dipisahkan koma untuk disertakan dalam respons, atau "\*" untuk menyertakan semua properti. Secara default, semua properti dikembalikan kecuali diagnostik. Saat ini hanya menerima '\*' sebagai nilai yang valid.
+    description: ''
+- uid: az_stream-analytics_function_show
+  name: az stream-analytics function show
+  summary: Dapatkan detail tentang fungsi yang ditentukan.
+  description: ''
+  syntax: >-
+    az stream-analytics function show --function-name
+                                      --job-name
+                                      --resource-group
+  examples:
+  - summary: Mendapatkan fungsi JavaScript
+    syntax: az stream-analytics function show --name "function8197" --job-name "sj8653" --resource-group "sjrg1637"
+  - summary: Mendapatkan fungsi Azure ML
+    syntax: az stream-analytics function show --name "function588" --job-name "sj9093" --resource-group "sjrg7"
+  requiredParameters:
+  - isRequired: true
+    name: --function-name --name -n
+    summary: Nama fungsi.
+    description: ''
+  - isRequired: true
+    name: --job-name
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_stream-analytics_function_test
+  name: az stream-analytics function test
+  summary: Uji apakah informasi yang diberikan untuk fungsi valid. Ini dapat berkisar dari menguji koneksi ke layanan web yang mendasar di belakang fungsi atau memastikan kode fungsi yang disediakan secara sintaksis benar.
+  description: ''
+  syntax: >-
+    az stream-analytics function test --function-name
+                                      --job-name
+                                      --resource-group
+                                      [--no-wait]
+                                      [--properties]
+  examples:
+  - summary: Menguji koneksi untuk fungsi JavaScript
+    syntax: az stream-analytics function test --function-name "function8197" --job-name "sj8653" --resource-group "sjrg1637"
+  - summary: Menguji koneksi untuk fungsi Azure ML
+    syntax: az stream-analytics function test --function-name "function588" --job-name "sj9093" --resource-group "sjrg7"
+  requiredParameters:
+  - isRequired: true
+    name: --function-name --name -n
+    summary: Nama fungsi.
+    description: ''
+  - isRequired: true
+    name: --job-name
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --properties
+    summary: 'Properti yang terkait dengan fungsi. Nilai yang diharapkan: json-string/json-file/@json-file.'
+    description: ''
+- uid: az_stream-analytics_function_update
+  name: az stream-analytics function update
+  summary: Perbarui fungsi yang ada di bawah pekerjaan streaming yang ada. Ini dapat digunakan untuk memperbarui sebagian (yaitu. memperbarui satu atau dua properti) fungsi tanpa memengaruhi sisa definisi pekerjaan atau fungsi.
+  description: ''
+  syntax: >-
+    az stream-analytics function update --function-name
+                                        --job-name
+                                        --resource-group
+                                        [--if-match]
+                                        [--properties]
+  examples:
+  - summary: Memperbarui fungsi JavaScript
+    syntax: az stream-analytics function update --properties "{\"type\":\"Scalar\",\"properties\":{\"binding\":{\"type\":\"Microsoft.StreamAnalytics/JavascriptUdf\",\"properties\":{\"script\":\"function (a, b) { return a * b; }\"}}}}" --function-name "function8197" --job-name "sj8653" --resource-group "sjrg1637"
+  - summary: Memperbarui fungsi Azure ML
+    syntax: az stream-analytics function update --properties "{\"type\":\"Scalar\",\"properties\":{\"binding\":{\"type\":\"Microsoft.MachineLearning/WebService\",\"properties\":{\"batchSize\":5000}}}}" --function-name "function588" --job-name "sj9093" --resource-group "sjrg7"
+  requiredParameters:
+  - isRequired: true
+    name: --function-name --name -n
+    summary: Nama fungsi.
+    description: ''
+  - isRequired: true
+    name: --job-name
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --if-match
+    summary: ETag fungsi. Hilangkan nilai ini untuk selalu menimpa fungsi saat ini. Tentukan nilai ETag yang terakhir dilihat untuk mencegah penimpaan perubahan bersamaan secara tidak sengaja.
+    description: ''
+  - name: --properties
+    summary: 'Properti yang terkait dengan fungsi. Nilai yang diharapkan: json-string/json-file/@json-file.'
+    description: ''
+- uid: az_stream-analytics_function_wait
+  name: az stream-analytics function wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi fungsi analisis aliran terpenuhi.
+  description: ''
+  syntax: >-
+    az stream-analytics function wait --function-name
+                                      --job-name
+                                      --resource-group
+                                      [--created]
+                                      [--custom]
+                                      [--deleted]
+                                      [--exists]
+                                      [--interval]
+                                      [--timeout]
+                                      [--updated]
+  examples:
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga fungsi analisis aliran berhasil dibuat.
+    syntax: az stream-analytics function wait --name "function588" --job-name "sj9093" --resource-group "sjrg7" --created
+  requiredParameters:
+  - isRequired: true
+    name: --function-name --name -n
+    summary: Nama fungsi.
+    description: ''
+  - isRequired: true
+    name: --job-name
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_stream-analytics_function_create
+- az_stream-analytics_function_delete
+- az_stream-analytics_function_inspect
+- az_stream-analytics_function_list
+- az_stream-analytics_function_show
+- az_stream-analytics_function_test
+- az_stream-analytics_function_update
+- az_stream-analytics_function_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola fungsi dengan analisis aliran.
+  ms.openlocfilehash: 85b960329a1243736644db2fc4e468323e390776
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140996342"

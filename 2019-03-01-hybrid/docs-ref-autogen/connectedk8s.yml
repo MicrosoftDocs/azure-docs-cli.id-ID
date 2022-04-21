@@ -1,0 +1,445 @@
+### YamlMime:AzureCLIGroup
+uid: az_connectedk8s
+name: az connectedk8s
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **connectedk8s** untuk Azure CLI (versi 2.16.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az connectedk8s** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Perintah untuk mengelola kluster kubernetes yang terhubung.
+description: ''
+directCommands:
+- uid: az_connectedk8s_connect
+  name: az connectedk8s connect
+  summary: Onboard kluster kubernetes yang terhubung ke azure.
+  description: ''
+  syntax: >-
+    az connectedk8s connect --name
+                            --resource-group
+                            [--custom-locations-oid]
+                            [--disable-auto-upgrade]
+                            [--distribution {aks, aks_engine, aks_management, aks_workload, auto, capz, eks, generic, gke, k3s, kind, minikube, openshift, rancher_rke, tkg}]
+                            [--infrastructure {auto, aws, azure, azure_stack_edge, azure_stack_hci, azure_stack_hub, gcp, generic, vsphere, windows_server}]
+                            [--kube-config]
+                            [--kube-context]
+                            [--location]
+                            [--no-wait]
+                            [--onboarding-timeout]
+                            [--proxy-cert]
+                            [--proxy-http]
+                            [--proxy-https]
+                            [--proxy-skip-range]
+                            [--tags]
+  examples:
+  - summary: Onboarding kluster kubernetes yang terhubung dengan konfigurasi kube default dan konteks kube.
+    syntax: az connectedk8s connect -g resourceGroupName -n connectedClusterName
+  - summary: Onboarding kluster kubernetes yang terhubung dengan konfigurasi kube default dan konteks kube dan menonaktifkan peningkatan otomatis agen arc.
+    syntax: az connectedk8s connect -g resourceGroupName -n connectedClusterName --disable-auto-upgrade
+  - summary: Onboarding kluster kubernetes yang terhubung dengan menentukan kubeconfig dan kubecontext.
+    syntax: az connectedk8s connect -g resourceGroupName -n connectedClusterName --kube-config /path/to/kubeconfig --kube-context kubeContextName
+  - summary: Onboard kluster kubernetes yang terhubung dengan menentukan proksi https, proksi http, tidak ada pengaturan proksi.
+    syntax: az connectedk8s connect -g resourceGroupName -n connectedClusterName --proxy-https https://proxy-url --proxy-http http://proxy-url --proxy-skip-range excludedIP,excludedCIDR,exampleCIDRfollowed,10.0.0.0/24
+  - summary: Onboard kluster kubernetes yang terhubung dengan menentukan proksi https, proksi http, tidak ada proksi dengan pengaturan sertifikasi.
+    syntax: az connectedk8s connect -g resourceGroupName -n connectedClusterName --proxy-cert /path/to/crt --proxy-https https://proxy-url --proxy-http http://proxy-url --proxy-skip-range excludedIP,excludedCIDR,exampleCIDRfollowed,10.0.0.0/24
+  - summary: Onboarding kluster kubernetes yang terhubung dengan batas waktu onboarding kustom.
+    syntax: az connectedk8s connect -g resourceGroupName -n connectedClusterName --onboarding-timeout 600
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster yang terhubung.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --custom-locations-oid
+    summary: OID aplikasi 'lokasi kustom'.
+    description: ''
+  - name: --disable-auto-upgrade
+    summary: Bendera untuk menonaktifkan peningkatan otomatis agen arc.
+    description: ''
+  - name: --distribution
+    defaultValue: auto
+    parameterValueGroup: aks, aks_engine, aks_management, aks_workload, auto, capz, eks, generic, gke, k3s, kind, minikube, openshift, rancher_rke, tkg
+    summary: Distribusi Kubernetes yang akan berjalan pada kluster yang terhubung ini.
+    description: ''
+  - name: --infrastructure
+    defaultValue: auto
+    parameterValueGroup: auto, aws, azure, azure_stack_edge, azure_stack_hci, azure_stack_hub, gcp, generic, vsphere, windows_server
+    summary: Infrastruktur tempat kluster Kubernetes yang diwakili oleh kluster yang terhubung ini akan berjalan.
+    description: ''
+  - name: --kube-config
+    summary: Jalur ke file konfigurasi kube.
+    description: ''
+  - name: --kube-context
+    summary: Konteks Kubconfig dari komputer saat ini.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --onboarding-timeout
+    defaultValue: "600"
+    summary: Waktu yang diperlukan (dalam detik) agar pod agen arc diinstal pada kluster kubernetes. Ambil alih nilai ini jika batasan perangkat keras/jaringan pada kluster Anda membutuhkan lebih banyak waktu untuk menginstal pod agen busur.
+    description: ''
+  - name: --proxy-cert
+    summary: Jalur ke file sertifikat untuk proksi.
+    description: ''
+  - name: --proxy-http
+    summary: URL proksi http yang akan digunakan.
+    description: ''
+  - name: --proxy-https
+    summary: URL proksi https yang akan digunakan.
+    description: ''
+  - name: --proxy-skip-range
+    summary: Daftar URL/CIDR yang proksinya tidak boleh digunakan.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+- uid: az_connectedk8s_delete
+  name: az connectedk8s delete
+  summary: Hapus kluster kubernetes yang terhubung bersama dengan agen kluster yang terhubung.
+  description: ''
+  syntax: >-
+    az connectedk8s delete --name
+                           --resource-group
+                           [--kube-config]
+                           [--kube-context]
+                           [--no-wait]
+                           [--yes]
+  examples:
+  - summary: Hapus kluster kubernetes yang terhubung dan agen kluster yang terhubung dengan kubeconfig dan kubecontext default.
+    syntax: az connectedk8s delete -g resourceGroupName -n connectedClusterName
+  - summary: Hapus kluster kubernetes yang terhubung dengan menentukan kubeconfig dan kubecontext untuk penghapusan agen kluster yang terhubung.
+    syntax: az connectedk8s delete -g resourceGroupName -n connectedClusterName --kube-config /path/to/kubeconfig --kube-context kubeContextName
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster yang terhubung.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --kube-config
+    summary: Jalur ke file konfigurasi kube.
+    description: ''
+  - name: --kube-context
+    summary: Konteks Kubconfig dari komputer saat ini.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_connectedk8s_disable-features
+  name: az connectedk8s disable-features
+  summary: Menonaktifkan fitur selektif pada kluster yang terhubung.
+  description: ''
+  syntax: >-
+    az connectedk8s disable-features --features {azure-rbac, cluster-connect, custom-locations}
+                                     --name
+                                     --resource-group
+                                     [--kube-config]
+                                     [--kube-context]
+                                     [--yes]
+  examples:
+  - summary: Menonaktifkan fitur azure-rbac.
+    syntax: az connectedk8s disable-features -n clusterName -g resourceGroupName --features azure-rbac
+  - summary: Nonaktifkan beberapa fitur.
+    syntax: az connectedk8s disable-features -n clusterName -g resourceGroupName --features custom-locations azure-rbac
+  requiredParameters:
+  - isRequired: true
+    name: --features
+    parameterValueGroup: azure-rbac, cluster-connect, custom-locations
+    summary: Daftar fitur yang dipisahkan spasi yang ingin Anda nonaktifkan.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster yang terhubung.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --kube-config
+    summary: Jalur ke file konfigurasi kube.
+    description: ''
+  - name: --kube-context
+    summary: Konteks Kubconfig dari komputer saat ini.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_connectedk8s_enable-features
+  name: az connectedk8s enable-features
+  summary: Mengaktifkan fitur selektif pada kluster yang terhubung.
+  description: ''
+  syntax: >-
+    az connectedk8s enable-features --features {azure-rbac, cluster-connect, custom-locations}
+                                    --name
+                                    --resource-group
+                                    [--app-id]
+                                    [--app-secret]
+                                    [--custom-locations-oid]
+                                    [--kube-config]
+                                    [--kube-context]
+                                    [--skip-azure-rbac-list]
+  examples:
+  - summary: Mengaktifkan fitur Cluster-Connect.
+    syntax: az connectedk8s enable-features -n clusterName -g resourceGroupName --features cluster-connect
+  - summary: Aktifkan fitur Azure RBAC.
+    syntax: az connectedk8s enable-features -n clusterName -g resourceGroupName --features azure-rbac --app-id appID --app-secret="appSecret" --skip-azure-rbac-list "user1@domain.com,spn_oid"
+  - summary: Aktifkan beberapa fitur.
+    syntax: az connectedk8s enable-features -n clusterName -g resourceGroupName --features cluster-connect custom-locations
+  requiredParameters:
+  - isRequired: true
+    name: --features
+    parameterValueGroup: azure-rbac, cluster-connect, custom-locations
+    summary: Daftar fitur yang dipisahkan spasi yang ingin Anda aktifkan.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster yang terhubung.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --app-id
+    summary: ID aplikasi untuk mengaktifkan Azure RBAC. Tentukan saat mengaktifkan azure-rbac.
+    description: ''
+  - name: --app-secret
+    summary: Rahasia aplikasi untuk mengaktifkan Azure RBAC. Tentukan saat mengaktifkan azure-rbac.
+    description: ''
+  - name: --custom-locations-oid
+    summary: OID aplikasi 'lokasi kustom'.
+    description: ''
+  - name: --kube-config
+    summary: Jalur ke file konfigurasi kube.
+    description: ''
+  - name: --kube-context
+    summary: Konteks Kubconfig dari komputer saat ini.
+    description: ''
+  - name: --skip-azure-rbac-list
+    summary: Daftar nama nama pengguna/email/oid yang dipisahkan koma. Azure RBAC akan dilewati untuk pengguna ini. Tentukan saat mengaktifkan azure-rbac.
+    description: ''
+- uid: az_connectedk8s_list
+  name: az connectedk8s list
+  summary: Mencantumkan kluster kubernetes yang terhubung.
+  description: ''
+  syntax: az connectedk8s list [--resource-group]
+  examples:
+  - summary: Cantumkan semua kluster kubernetes yang terhubung dalam grup sumber daya.
+    syntax: az connectedk8s list -g resourceGroupName --subscription subscriptionName
+  - summary: Cantumkan semua kluster kubernetes yang terhubung dalam langganan.
+    syntax: az connectedk8s list --subscription subscriptionName
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_connectedk8s_proxy
+  name: az connectedk8s proxy
+  summary: Dapatkan akses ke kluster kubernetes yang terhubung.
+  description: ''
+  syntax: >-
+    az connectedk8s proxy --name
+                          --resource-group
+                          [--file]
+                          [--kube-context]
+                          [--port]
+                          [--token]
+  examples:
+  - summary: Dapatkan akses ke kluster kubernetes yang terhubung.
+    syntax: az connectedk8s proxy -n clusterName -g resourceGroupName
+  - summary: Mendapatkan akses ke kluster kubernetes yang terhubung dengan port kustom
+    syntax: az connectedk8s proxy -n clusterName -g resourceGroupName --port portValue
+  - summary: Mendapatkan akses ke kluster kubernetes yang terhubung dengan token akun layanan
+    syntax: az connectedk8s proxy -n clusterName -g resourceGroupName --token tokenValue
+  - summary: Mendapatkan akses ke kluster kubernetes yang terhubung dengan menentukan lokasi kubeconfig kustom
+    syntax: az connectedk8s proxy -n clusterName -g resourceGroupName -f path/to/kubeconfig
+  - summary: Mendapatkan akses ke kluster kubernetes yang terhubung dengan menentukan konteks kustom
+    syntax: az connectedk8s proxy -n clusterName -g resourceGroupName --kube-context contextName
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster yang terhubung.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --file -f
+    defaultValue: ~/.kube/config
+    summary: File konfigurasi Kubernetes untuk diperbarui. Jika tidak disediakan, perbarui file '~/.kube/config'. Gunakan '-' untuk mencetak YAML ke stdout sebagai gantinya.
+    description: ''
+  - name: --kube-context
+    summary: Jika ditentukan, timpa nama konteks default.
+    description: ''
+  - name: --port
+    defaultValue: "47011"
+    summary: Port yang digunakan untuk mengakses kluster yang terhubung.
+    description: ''
+  - name: --token
+    summary: Token akun layanan yang digunakan untuk mengautentikasi ke kluster kubernetes.
+    description: ''
+- uid: az_connectedk8s_show
+  name: az connectedk8s show
+  summary: Menampilkan detail kluster kubernetes yang terhubung.
+  description: ''
+  syntax: >-
+    az connectedk8s show --name
+                         --resource-group
+  examples:
+  - summary: Menampilkan detail untuk kluster kubernetes yang terhubung
+    syntax: az connectedk8s show -g resourceGroupName -n connectedClusterName
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster yang terhubung.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_connectedk8s_update
+  name: az connectedk8s update
+  summary: Memperbarui properti agen onboarding.
+  description: ''
+  syntax: >-
+    az connectedk8s update --name
+                           --resource-group
+                           [--auto-upgrade {false, true}]
+                           [--disable-proxy]
+                           [--kube-config]
+                           [--kube-context]
+                           [--proxy-cert]
+                           [--proxy-http]
+                           [--proxy-https]
+                           [--proxy-skip-range]
+  examples:
+  - summary: Memperbarui nilai proksi untuk agen
+    syntax: az connectedk8s update -g resourceGroupName -n connectedClusterName  --proxy-cert /path/to/crt --proxy-https https://proxy-url --proxy-http http://proxy-url --proxy-skip-range excludedIP,excludedCIDR,exampleCIDRfollowed,10.0.0.0/24
+  - summary: Menonaktifkan pengaturan proksi untuk agen
+    syntax: az connectedk8s update -g resourceGroupName -n connectedClusterName --disable-proxy
+  - summary: Menonaktifkan peningkatan otomatis agen
+    syntax: az connectedk8s update -g resourceGroupName -n connectedClusterName --auto-upgrade false
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster yang terhubung.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --auto-upgrade
+    parameterValueGroup: false, true
+    summary: Benderai untuk mengaktifkan/menonaktifkan peningkatan otomatis agen arc. Secara default, peningkatan otomatis agen diaktifkan.
+    description: ''
+  - name: --disable-proxy
+    summary: Menonaktifkan pengaturan proksi untuk agen.
+    description: ''
+  - name: --kube-config
+    summary: Jalur ke file konfigurasi kube.
+    description: ''
+  - name: --kube-context
+    summary: Konteks Kubconfig dari komputer saat ini.
+    description: ''
+  - name: --proxy-cert
+    summary: Jalur ke file sertifikat tambahan apa pun (untuk proksi juga).
+    description: ''
+  - name: --proxy-http
+    summary: URL proksi http yang akan digunakan.
+    description: ''
+  - name: --proxy-https
+    summary: URL proksi https yang akan digunakan.
+    description: ''
+  - name: --proxy-skip-range
+    summary: Daftar URL/CIDR yang proksinya tidak boleh digunakan.
+    description: ''
+- uid: az_connectedk8s_upgrade
+  name: az connectedk8s upgrade
+  summary: Tingkatkan agen onboarding secara atomik ke versi tertentu atau default ke versi terbaru.
+  description: ''
+  syntax: >-
+    az connectedk8s upgrade --name
+                            --resource-group
+                            [--agent-version]
+                            [--kube-config]
+                            [--kube-context]
+                            [--upgrade-timeout]
+  examples:
+  - summary: Meningkatkan agen ke versi terbaru
+    syntax: az connectedk8s upgrade -g resourceGroupName -n connectedClusterName
+  - summary: Meningkatkan agen ke versi tertentu
+    syntax: az connectedk8s upgrade -g resourceGroupName -n connectedClusterName --agent-version 0.2.62
+  - summary: Tingkatkan agen dengan batas waktu peningkatan kustom.
+    syntax: az connectedk8s upgrade -g resourceGroupName -n connectedClusterName --upgrade-timeout 600
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster yang terhubung.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --agent-version
+    summary: Versi agen untuk memperbarui bagan helm.
+    description: ''
+  - name: --kube-config
+    summary: Jalur ke file konfigurasi kube.
+    description: ''
+  - name: --kube-context
+    summary: Konteks Kubconfig dari komputer saat ini.
+    description: ''
+  - name: --upgrade-timeout
+    defaultValue: "600"
+    summary: Waktu yang diperlukan (dalam detik) agar pod agen arc ditingkatkan pada kluster kubernetes. Ambil alih nilai ini jika batasan perangkat keras/jaringan pada kluster Anda membutuhkan lebih banyak waktu untuk meningkatkan pod agen busur.
+    description: ''
+commands:
+- az_connectedk8s_connect
+- az_connectedk8s_delete
+- az_connectedk8s_disable-features
+- az_connectedk8s_enable-features
+- az_connectedk8s_list
+- az_connectedk8s_proxy
+- az_connectedk8s_show
+- az_connectedk8s_update
+- az_connectedk8s_upgrade
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Perintah untuk mengelola kluster kubernetes yang terhubung.
+  ms.openlocfilehash: 1ae51ec4f1d9e2fc66635b611d76b421e690990a
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140979080"

@@ -1,0 +1,471 @@
+### YamlMime:AzureCLIGroup
+uid: az_k8s-configuration_flux
+name: az k8s-configuration flux
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **konfigurasi k8s** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **fluks konfigurasi az k8s** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Perintah untuk mengelola konfigurasi Flux v2 Kubernetes.
+description: ''
+directCommands:
+- uid: az_k8s-configuration_flux_create
+  name: az k8s-configuration flux create
+  summary: Buat konfigurasi Flux v2 Kubernetes.
+  description: ''
+  syntax: >-
+    az k8s-configuration flux create --cluster-name
+                                     --cluster-type {connectedClusters, managedClusters}
+                                     --name
+                                     --resource-group
+                                     --url
+                                     [--branch]
+                                     [--bucket-access-key]
+                                     [--bucket-insecure {false, true}]
+                                     [--bucket-name]
+                                     [--bucket-secret-key]
+                                     [--commit]
+                                     [--https-ca-cert]
+                                     [--https-ca-cert-file]
+                                     [--https-key]
+                                     [--https-user]
+                                     [--interval]
+                                     [--kind {bucket, git}]
+                                     [--known-hosts]
+                                     [--known-hosts-file]
+                                     [--kustomization]
+                                     [--local-auth-ref]
+                                     [--namespace]
+                                     [--no-wait]
+                                     [--scope {cluster, namespace}]
+                                     [--semver]
+                                     [--ssh-private-key]
+                                     [--ssh-private-key-file]
+                                     [--suspend {false, true}]
+                                     [--tag]
+                                     [--timeout]
+  examples:
+  - summary: Membuat konfigurasi Flux v2 Kubernetes
+    syntax: >-
+      az k8s-configuration flux create --resource-group my-resource-group \
+
+      --cluster-name mycluster --cluster-type connectedClusters \
+
+      --name myconfig --scope cluster --namespace my-namespace \
+
+      --kind git --url https://github.com/Azure/arc-k8s-demo \
+
+      --branch main --kustomization name=my-kustomization
+  - summary: Membuat Konfigurasi Fluks Kubernetes v2 dengan Jenis Sumber Bucket
+    syntax: >-
+      az k8s-configuration flux create --resource-group my-resource-group \
+
+      --cluster-name mycluster --cluster-type connectedClusters \
+
+      --name myconfig --scope cluster --namespace my-namespace \
+
+      --kind bucket --url https://bucket-provider.minio.io \
+
+      --bucket-name my-bucket --kustomization name=my-kustomization \
+
+      --bucket-access-key my-access-key --bucket-secret-key my-secret-key
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Nama kluster Kubernetes.
+    description: ''
+  - isRequired: true
+    name: --cluster-type -t
+    parameterValueGroup: connectedClusters, managedClusters
+    summary: Tentukan kluster yang terhubung dengan Arc atau kluster terkelola AKS.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama konfigurasi fluks.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --url -u
+    summary: URL sumber untuk direkonsiliasi.
+    description: ''
+  optionalParameters:
+  - name: --branch
+    summary: Cabang dalam sumber git untuk menyesuaikan dengan kluster.
+    description: ''
+  - name: --bucket-access-key
+    summary: ID Kunci Akses yang digunakan untuk mengautentikasi dengan wadah.
+    description: ''
+  - name: --bucket-insecure
+    parameterValueGroup: false, true
+    summary: Berkomunikasi dengan wadah tanpa TLS.
+    description: ''
+  - name: --bucket-name
+    summary: Nama wadah S3 yang akan disinkronkan.
+    description: ''
+  - name: --bucket-secret-key
+    summary: Kunci Rahasia yang digunakan untuk mengautentikasi dengan wadah.
+    description: ''
+  - name: --commit
+    summary: Terapkan dalam sumber git untuk menyesuaikan dengan kluster.
+    description: ''
+  - name: --https-ca-cert
+    summary: Sertifikat HTTPS CA yang dikodekan Base64 untuk komunikasi TLS dengan sinkronisasi repositori privat.
+    description: ''
+  - name: --https-ca-cert-file
+    summary: Jalur file ke file sertifikat HTTPS CA untuk komunikasi TLS dengan sinkronisasi repositori privat.
+    description: ''
+  - name: --https-key
+    summary: Token/kata sandi HTTPS untuk sinkronisasi repositori privat.
+    description: ''
+  - name: --https-user
+    summary: Nama pengguna HTTPS untuk sinkronisasi repositori privat.
+    description: ''
+  - name: --interval --sync-interval
+    summary: Waktu antara rekonsiliasi sumber pada kluster.
+    description: ''
+  - name: --kind
+    defaultValue: git
+    parameterValueGroup: bucket, git
+    summary: Jenis sumber untuk direkonsiliasi.
+    description: ''
+  - name: --known-hosts
+    summary: Data known_hosts yang dikodekan Base64 yang berisi kunci SSH publik yang diperlukan untuk mengakses instans Git privat.
+    description: ''
+  - name: --known-hosts-file
+    summary: Jalur file ke konten known_hosts yang berisi kunci SSH publik yang diperlukan untuk mengakses instans Git privat.
+    description: ''
+  - name: --kustomization -k
+    summary: Tentukan kustomisasi untuk menyinkronkan sumber dengan parameter ['name', 'path', 'depends_on', 'timeout', 'sync_interval', 'retry_interval', 'prune', 'force'].
+    description: ''
+  - name: --local-auth-ref --local-ref
+    summary: Referensi lokal ke rahasia kubernetes di namespace konfigurasi yang akan digunakan untuk komunikasi ke sumber.
+    description: ''
+  - name: --namespace --ns
+    defaultValue: default
+    summary: Namespace layanan untuk menyebarkan konfigurasi.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --scope -s
+    defaultValue: cluster
+    parameterValueGroup: cluster, namespace
+    summary: Tentukan cakupan operator untuk menjadi 'namespace' atau 'kluster'.
+    description: ''
+  - name: --semver
+    summary: Rentang Semver dalam sumber git untuk menyesuaikan dengan kluster.
+    description: ''
+  - name: --ssh-private-key
+    summary: Kunci ssh privat yang dikodekan Base64 untuk sinkronisasi repositori privat.
+    description: ''
+  - name: --ssh-private-key-file
+    summary: Jalur file ke kunci ssh privat untuk sinkronisasi repositori privat.
+    description: ''
+  - name: --suspend
+    parameterValueGroup: false, true
+    summary: Tangguhkan rekonsiliasi sumber dan kustomisasi yang terkait dengan konfigurasi ini.
+    description: ''
+  - name: --tag
+    summary: Tag dalam sumber git untuk menyesuaikan dengan kluster.
+    description: ''
+  - name: --timeout
+    summary: Waktu maksimum untuk mendamaikan sumber sebelum waktu habis.
+    description: ''
+- uid: az_k8s-configuration_flux_delete
+  name: az k8s-configuration flux delete
+  summary: Hapus konfigurasi Flux v2 Kubernetes.
+  description: ''
+  syntax: >-
+    az k8s-configuration flux delete --cluster-name
+                                     --cluster-type {connectedClusters, managedClusters}
+                                     --name
+                                     --resource-group
+                                     [--force {false, true}]
+                                     [--no-wait]
+                                     [--yes]
+  examples:
+  - summary: Menghapus konfigurasi Flux v2 Kubernetes yang ada
+    syntax: >-
+      az k8s-configuration flux delete --resource-group my-resource-group \
+
+      --cluster-name mycluster --cluster-type connectedClusters --name myconfig
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Nama kluster Kubernetes.
+    description: ''
+  - isRequired: true
+    name: --cluster-type -t
+    parameterValueGroup: connectedClusters, managedClusters
+    summary: Tentukan kluster yang terhubung dengan Arc atau kluster terkelola AKS.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama konfigurasi fluks.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --force
+    parameterValueGroup: false, true
+    summary: Hapus paksa konfigurasi fluks dari kluster.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_k8s-configuration_flux_list
+  name: az k8s-configuration flux list
+  summary: Cantumkan semua konfigurasi Flux v2 Kubernetes.
+  description: ''
+  syntax: >-
+    az k8s-configuration flux list --cluster-name
+                                   --cluster-type {connectedClusters, managedClusters}
+                                   --resource-group
+  examples:
+  - summary: Mencantumkan konfigurasi Flux v2 Kubernetes pada kluster
+    syntax: >-
+      az k8s-configuration flux list --resource-group my-resource-group \
+
+      --cluster-name mycluster --cluster-type connectedClusters
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Nama kluster Kubernetes.
+    description: ''
+  - isRequired: true
+    name: --cluster-type -t
+    parameterValueGroup: connectedClusters, managedClusters
+    summary: Tentukan kluster yang terhubung dengan Arc atau kluster terkelola AKS.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_k8s-configuration_flux_show
+  name: az k8s-configuration flux show
+  summary: Tampilkan konfigurasi Flux v2 Kubernetes.
+  description: ''
+  syntax: >-
+    az k8s-configuration flux show --cluster-name
+                                   --cluster-type {connectedClusters, managedClusters}
+                                   --name
+                                   --resource-group
+  examples:
+  - summary: Menampilkan detail konfigurasi Flux v2 Kubernetes
+    syntax: >-
+      az k8s-configuration flux show --resource-group my-resource-group \
+
+      --cluster-name mycluster --cluster-type connectedClusters --name myconfig
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Nama kluster Kubernetes.
+    description: ''
+  - isRequired: true
+    name: --cluster-type -t
+    parameterValueGroup: connectedClusters, managedClusters
+    summary: Tentukan kluster yang terhubung dengan Arc atau kluster terkelola AKS.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama konfigurasi fluks.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_k8s-configuration_flux_update
+  name: az k8s-configuration flux update
+  summary: Memperbarui konfigurasi Flux v2 Kubernetes.
+  description: ''
+  syntax: >-
+    az k8s-configuration flux update --cluster-name
+                                     --cluster-type {connectedClusters, managedClusters}
+                                     --name
+                                     --resource-group
+                                     [--branch]
+                                     [--bucket-access-key]
+                                     [--bucket-insecure {false, true}]
+                                     [--bucket-name]
+                                     [--bucket-secret-key]
+                                     [--commit]
+                                     [--https-ca-cert]
+                                     [--https-ca-cert-file]
+                                     [--https-key]
+                                     [--https-user]
+                                     [--interval]
+                                     [--kind {bucket, git}]
+                                     [--known-hosts]
+                                     [--known-hosts-file]
+                                     [--kustomization]
+                                     [--local-auth-ref]
+                                     [--no-wait]
+                                     [--semver]
+                                     [--ssh-private-key]
+                                     [--ssh-private-key-file]
+                                     [--suspend {false, true}]
+                                     [--tag]
+                                     [--timeout]
+                                     [--url]
+                                     [--yes]
+  examples:
+  - summary: Memperbarui konfigurasi Flux v2 Kubernetes
+    syntax: >-
+      az k8s-configuration flux update --resource-group my-resource-group \
+
+      --cluster-name mycluster --cluster-type connectedClusters --name myconfig \
+
+      --url https://github.com/Azure/arc-k8s-demo --branch main \
+
+      --kustomization name=my-kustomization path=./my/new-path
+  - summary: Memperbarui konfigurasi Flux v2 Kubernetse dengan Bucket Source Kind untuk terhubung dengan tidak aman
+    syntax: >-
+      az k8s-configuration flux update --resource-group my-resource-group \
+
+      --cluster-name mycluster --cluster-type connectedClusters --name myconfig \
+
+      --bucket-insecure
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Nama kluster Kubernetes.
+    description: ''
+  - isRequired: true
+    name: --cluster-type -t
+    parameterValueGroup: connectedClusters, managedClusters
+    summary: Tentukan kluster yang terhubung dengan Arc atau kluster terkelola AKS.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama konfigurasi fluks.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --branch
+    summary: Cabang dalam sumber git untuk menyesuaikan dengan kluster.
+    description: ''
+  - name: --bucket-access-key
+    summary: ID Kunci Akses yang digunakan untuk mengautentikasi dengan wadah.
+    description: ''
+  - name: --bucket-insecure
+    parameterValueGroup: false, true
+    summary: Berkomunikasi dengan wadah tanpa TLS.
+    description: ''
+  - name: --bucket-name
+    summary: Nama wadah S3 yang akan disinkronkan.
+    description: ''
+  - name: --bucket-secret-key
+    summary: Kunci Rahasia yang digunakan untuk mengautentikasi dengan wadah.
+    description: ''
+  - name: --commit
+    summary: Terapkan dalam sumber git untuk menyesuaikan dengan kluster.
+    description: ''
+  - name: --https-ca-cert
+    summary: Sertifikat HTTPS CA yang dikodekan Base64 untuk komunikasi TLS dengan sinkronisasi repositori privat.
+    description: ''
+  - name: --https-ca-cert-file
+    summary: Jalur file ke file sertifikat HTTPS CA untuk komunikasi TLS dengan sinkronisasi repositori privat.
+    description: ''
+  - name: --https-key
+    summary: Token/kata sandi HTTPS untuk sinkronisasi repositori privat.
+    description: ''
+  - name: --https-user
+    summary: Nama pengguna HTTPS untuk sinkronisasi repositori privat.
+    description: ''
+  - name: --interval --sync-interval
+    summary: Waktu antara rekonsiliasi sumber pada kluster.
+    description: ''
+  - name: --kind
+    parameterValueGroup: bucket, git
+    summary: Jenis sumber untuk direkonsiliasi.
+    description: ''
+  - name: --known-hosts
+    summary: Data known_hosts yang dikodekan Base64 yang berisi kunci SSH publik yang diperlukan untuk mengakses instans Git privat.
+    description: ''
+  - name: --known-hosts-file
+    summary: Jalur file ke konten known_hosts yang berisi kunci SSH publik yang diperlukan untuk mengakses instans Git privat.
+    description: ''
+  - name: --kustomization -k
+    summary: Tentukan kustomisasi untuk menyinkronkan sumber dengan parameter ['name', 'path', 'depends_on', 'timeout', 'sync_interval', 'retry_interval', 'prune', 'force'].
+    description: ''
+  - name: --local-auth-ref --local-ref
+    summary: Referensi lokal ke rahasia kubernetes di namespace konfigurasi yang akan digunakan untuk komunikasi ke sumber.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --semver
+    summary: Rentang Semver dalam sumber git untuk menyesuaikan dengan kluster.
+    description: ''
+  - name: --ssh-private-key
+    summary: Kunci ssh privat yang dikodekan Base64 untuk sinkronisasi repositori privat.
+    description: ''
+  - name: --ssh-private-key-file
+    summary: Jalur file ke kunci ssh privat untuk sinkronisasi repositori privat.
+    description: ''
+  - name: --suspend
+    parameterValueGroup: false, true
+    summary: Tangguhkan rekonsiliasi sumber dan kustomisasi yang terkait dengan konfigurasi ini.
+    description: ''
+  - name: --tag
+    summary: Tag dalam sumber git untuk menyesuaikan dengan kluster.
+    description: ''
+  - name: --timeout
+    summary: Waktu maksimum untuk mendamaikan sumber sebelum waktu habis.
+    description: ''
+  - name: --url -u
+    summary: URL sumber untuk direkonsiliasi.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+commands:
+- az_k8s-configuration_flux_create
+- az_k8s-configuration_flux_delete
+- az_k8s-configuration_flux_deployed-object
+- az_k8s-configuration_flux_deployed-object_list
+- az_k8s-configuration_flux_deployed-object_show
+- az_k8s-configuration_flux_kustomization
+- az_k8s-configuration_flux_kustomization_create
+- az_k8s-configuration_flux_kustomization_delete
+- az_k8s-configuration_flux_kustomization_list
+- az_k8s-configuration_flux_kustomization_show
+- az_k8s-configuration_flux_kustomization_update
+- az_k8s-configuration_flux_list
+- az_k8s-configuration_flux_show
+- az_k8s-configuration_flux_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Perintah untuk mengelola konfigurasi Flux v2 Kubernetes.
+  ms.openlocfilehash: 14af76dd35fb6711b17ecef44dcd4fd2c893700d
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140988260"
