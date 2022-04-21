@@ -1,0 +1,249 @@
+### YamlMime:AzureCLIGroup
+uid: az_servicebus_namespace
+name: az servicebus namespace
+summary: Kelola Azure Service Bus Namespace.
+description: ''
+directCommands:
+- uid: az_servicebus_namespace_create
+  name: az servicebus namespace create
+  summary: Buat Namespace Bus Layanan.
+  description: ''
+  syntax: >-
+    az servicebus namespace create --name
+                                   --resource-group
+                                   [--capacity {1, 16, 2, 4, 8}]
+                                   [--default-action]
+                                   [--encryption-config]
+                                   [--location]
+                                   [--mi-system-assigned {false, true}]
+                                   [--mi-user-assigned]
+                                   [--sku {Basic, Premium, Standard}]
+                                   [--tags]
+  examples:
+  - summary: Buat Namespace Bus Layanan.
+    syntax: az servicebus namespace create --resource-group myresourcegroup --name mynamespace --location westus --tags tag1=value1 tag2=value2 --sku Standard
+  - summary: Buat namespace baru dengan Identitas dan Enkripsi diaktifkan.
+    syntax: az servicebus namespace create --resource-group myresourcegroup --name mynamespace --location westus --sku Premium --mi-user-assigned /subscriptions/{subscriptionId}/resourceGroups/{resourcegroup}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/MSIName --encryption-config key-name=key1 key-vault-uri=https://mykeyvault.vault.azure.net/ user-assigned-identity=/subscriptions/{subscriptionId}}/resourceGroups/{resourcegroup}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/MSIName --encryption-config key-name=key1 key-vault-uri=https://mykeyvault.vault.azure.net/ user-assigned-identity=/subscriptions/{subscriptionId}}/resourceGroups/{resourcegroup}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/MSIName
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Namespace.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --capacity
+    parameterValueGroup: 1, 16, 2, 4, 8
+    summary: Jumlah unit pesan. Properti ini hanya berlaku untuk namespace Premium SKU.
+    description: ''
+  - name: --default-action
+    summary: Tindakan default untuk seperangkat aturan jaringan.
+    description: ''
+  - name: --encryption-config
+    summary: Daftar objek KeyVaultProperties.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --mi-system-assigned
+    parameterValueGroup: false, true
+    summary: Aktifkan Identitas yang Ditetapkan Sistem.
+    description: ''
+  - name: --mi-user-assigned
+    summary: Daftar id Identitas yang Ditetapkan Pengguna.
+    description: ''
+  - name: --sku
+    defaultValue: Standard
+    parameterValueGroup: Basic, Premium, Standard
+    summary: Namespace SKU.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/servicebus/_help.py
+- uid: az_servicebus_namespace_delete
+  name: az servicebus namespace delete
+  summary: Menghapus namespace Bus Layanan.
+  description: ''
+  syntax: >-
+    az servicebus namespace delete [--ids]
+                                   [--name]
+                                   [--resource-group]
+  examples:
+  - summary: Menghapus Namespace Bus Layanan
+    syntax: az servicebus namespace delete --resource-group myresourcegroup --name mynamespace
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Namespace.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/servicebus/_help.py
+- uid: az_servicebus_namespace_exists
+  name: az servicebus namespace exists
+  summary: Periksa ketersediaan nama yang diberikan untuk Namespace.
+  description: ''
+  syntax: az servicebus namespace exists --name
+  examples:
+  - summary: periksa ketersediaan mynamespace untuk Namespace
+    syntax: az servicebus namespace exists --name mynamespace
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama namespace. Nama hanya boleh berisi huruf, angka, dan tanda hubung. Namespace harus dimulai dengan huruf, dan harus diakhir dengan huruf atau angka.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/servicebus/_help.py
+- uid: az_servicebus_namespace_list
+  name: az servicebus namespace list
+  summary: Cantumkan namespace Bus Layanan.
+  description: ''
+  syntax: az servicebus namespace list [--resource-group]
+  examples:
+  - summary: Mendapatkan Bus Layanan Namespace menurut grup sumber daya
+    syntax: az servicebus namespace list --resource-group myresourcegroup
+  - summary: Dapatkan namespace Bus Layanan berdasarkan Langganan.
+    syntax: az servicebus namespace list
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/servicebus/_help.py
+- uid: az_servicebus_namespace_show
+  name: az servicebus namespace show
+  summary: Memperlihatkan detail namespace Bus Layanan.
+  description: ''
+  syntax: >-
+    az servicebus namespace show [--ids]
+                                 [--name]
+                                 [--resource-group]
+  examples:
+  - summary: memperlihatkan detail Namespace.
+    syntax: az servicebus namespace show --resource-group myresourcegroup --name mynamespace
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Namespace.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/servicebus/_help.py
+- uid: az_servicebus_namespace_update
+  name: az servicebus namespace update
+  summary: Memperbarui Namespace Bus Layanan.
+  description: ''
+  syntax: >-
+    az servicebus namespace update [--add]
+                                   [--capacity {1, 16, 2, 4, 8}]
+                                   [--default-action]
+                                   [--force-string]
+                                   [--ids]
+                                   [--name]
+                                   [--remove]
+                                   [--resource-group]
+                                   [--set]
+                                   [--sku {Basic, Premium, Standard}]
+                                   [--tags]
+  examples:
+  - summary: Memperbarui Namespace Bus Layanan.
+    syntax: az servicebus namespace update --resource-group myresourcegroup --name mynamespace --tags tag=value
+  - summary: Memperbarui Namespace Bus Layanan (dibuat otomatis)
+    syntax: az servicebus namespace update --name mynamespace --resource-group myresourcegroup --sku Basic
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --capacity
+    parameterValueGroup: 1, 16, 2, 4, 8
+    summary: Jumlah unit pesan. Properti ini hanya berlaku untuk namespace Premium SKU.
+    description: ''
+  - name: --default-action
+    summary: Tindakan default untuk seperangkat aturan jaringan.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Namespace.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --sku
+    parameterValueGroup: Basic, Premium, Standard
+    summary: Namespace SKU.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/servicebus/_help.py
+commands:
+- az_servicebus_namespace_authorization-rule
+- az_servicebus_namespace_authorization-rule_create
+- az_servicebus_namespace_authorization-rule_delete
+- az_servicebus_namespace_authorization-rule_keys
+- az_servicebus_namespace_authorization-rule_keys_list
+- az_servicebus_namespace_authorization-rule_keys_renew
+- az_servicebus_namespace_authorization-rule_list
+- az_servicebus_namespace_authorization-rule_show
+- az_servicebus_namespace_authorization-rule_update
+- az_servicebus_namespace_create
+- az_servicebus_namespace_delete
+- az_servicebus_namespace_encryption
+- az_servicebus_namespace_encryption_add
+- az_servicebus_namespace_encryption_remove
+- az_servicebus_namespace_exists
+- az_servicebus_namespace_identity
+- az_servicebus_namespace_identity_assign
+- az_servicebus_namespace_identity_remove
+- az_servicebus_namespace_list
+- az_servicebus_namespace_network-rule
+- az_servicebus_namespace_network-rule_add
+- az_servicebus_namespace_network-rule_list
+- az_servicebus_namespace_network-rule_remove
+- az_servicebus_namespace_show
+- az_servicebus_namespace_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 02/23/2022
+  description: Kelola Azure Service Bus Namespace.
+  ms.openlocfilehash: d8c1a03f6b793f0380e9adb0a161c908219db586
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140998646"

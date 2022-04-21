@@ -1,0 +1,566 @@
+### YamlMime:AzureCLIGroup
+uid: az_resource
+name: az resource
+summary: Mengelola sumber daya Azure.
+description: ''
+directCommands:
+- uid: az_resource_create
+  name: az resource create
+  summary: Membuat sumber daya.
+  description: ''
+  syntax: >-
+    az resource create --properties
+                       [--api-version]
+                       [--id]
+                       [--is-full-object]
+                       [--latest-include-preview]
+                       [--location]
+                       [--name]
+                       [--namespace]
+                       [--parent]
+                       [--resource-group]
+                       [--resource-type]
+  examples:
+  - summary: Buat aplikasi API dengan menyediakan konfigurasi JSON lengkap.
+    syntax: >-
+      az resource create -g myRG -n myApiApp --resource-type Microsoft.web/sites \
+          --is-full-object --properties "{ \"kind\": \"api\", \"location\": \
+              \"West US\", \"properties\": { \"serverFarmId\": \
+                  \"/subscriptions/{SubID}/resourcegroups/{ResourceGroup} \
+                      /providers/Microsoft.Web/serverfarms/{ServicePlan}\" } }"
+  - summary: Buat sumber daya dengan memuat konfigurasi JSON dari file.
+    syntax: az resource create -g myRG -n myApiApp --resource-type Microsoft.web/sites --is-full-object --properties @jsonConfigFile
+  - summary: Buat aplikasi web dengan informasi konfigurasi minimum yang diperlukan.
+    syntax: >-
+      az resource create -g myRG -n myWeb --resource-type Microsoft.web/sites \
+          --properties "{ \"serverFarmId\":\"/subscriptions/{SubID}/resourcegroups/ \
+              {ResourceGroup}/providers/Microsoft.Web/serverfarms/{ServicePlan}\" }"
+  - summary: Buat sumber daya dengan menggunakan versi api terbaru apakah versi ini adalah versi pratinjau.
+    syntax: az resource create -g myRG -n myApiApp --resource-type Microsoft.web/sites --is-full-object --properties @jsonConfigFile --latest-include-preview
+  - summary: Membuat ekstensi situs ke aplikasi web
+    syntax: >-
+      az resource create -g myRG --api-version "2018-02-01" \
+          --name "{sitename+slot}/siteextensions/Contrast.NetCore.Azure.SiteExtension"  \
+              --resource-type Microsoft.Web/sites/siteextensions --is-full-object \
+                  --properties "{ \"id\": \"Contrast.NetCore.Azure.SiteExtension\", \
+                      \"location\": \"West US\", \"version\": \"1.9.0\" }"
+  requiredParameters:
+  - isRequired: true
+    name: --properties -p
+    summary: String berformat JSON yang berisi properti sumber daya.
+    description: ''
+  optionalParameters:
+  - name: --api-version
+    summary: Versi api sumber daya (hilangkan untuk versi stabil terbaru).
+    description: ''
+  - name: --id
+    summary: ID Sumber Daya.
+    description: ''
+  - name: --is-full-object
+    summary: Tunjukkan bahwa objek properti menyertakan opsi lain seperti lokasi, tag, sku, dan/atau paket.
+    description: ''
+  - name: --latest-include-preview -v
+    summary: 'Tunjukkan bahwa versi api terbaru akan digunakan terlepas dari apakah itu versi pratinjau (seperti 2020-01-01-preview) atau tidak. Misalnya, jika versi api yang didukung dari penyedia sumber daya adalah 2020-01-01-preview dan 2019-01-01: ketika meneruskan parameter ini, ia akan mengambil versi terbaru 2020-01-01-preview, jika tidak, itu akan mengambil versi stabil terbaru 2019-01-01 tanpa melewati parameter ini.'
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --name -n
+    summary: 'Nama sumber daya. (Misalnya: myC).'
+    description: ''
+  - name: --namespace
+    summary: "Namespace penyedia (Misalnya: 'Microsoft.Provider')."
+    description: ''
+  - name: --parent
+    summary: "Jalur induk (Mis: 'resA/myA/resB/myB')."
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-type
+    summary: "Jenis sumber daya (Misalnya: 'resC'). Dapat juga menerima format namespace/type (Mis: 'Microsoft.Provider/resC')."
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_resource_delete
+  name: az resource delete
+  summary: Menghapus sumber daya.
+  description: ''
+  syntax: >-
+    az resource delete [--api-version]
+                       [--ids]
+                       [--latest-include-preview]
+                       [--name]
+                       [--namespace]
+                       [--parent]
+                       [--resource-group]
+                       [--resource-type]
+  examples:
+  - summary: Hapus komputer virtual bernama 'MyVm'.
+    syntax: az resource delete -g MyResourceGroup -n MyVm --resource-type "Microsoft.Compute/virtualMachines"
+  - summary: Menghapus aplikasi web menggunakan pengidentifikasi sumber daya.
+    syntax: az resource delete --ids /subscriptions/0b1f6471-1bf0-4dda-aec3-111111111111/resourceGroups/MyResourceGroup/providers/Microsoft.Web/sites/MyWebapp
+  - summary: Menghapus subnet menggunakan pengidentifikasi sumber daya.
+    syntax: az resource delete --ids /subscriptions/0b1f6471-1bf0-4dda-aec3-111111111111/resourceGroups/MyResourceGroup/providers/Microsoft.Network/virtualNetworks/MyVnet/subnets/MySubnet
+  - summary: Hapus komputer virtual bernama 'MyVm' dengan menggunakan versi api terbaru apakah versi ini adalah versi pratinjau.
+    syntax: az resource delete -g MyResourceGroup -n MyVm --resource-type "Microsoft.Compute/virtualMachines" --latest-include-preview
+  optionalParameters:
+  - name: --api-version
+    summary: Versi api sumber daya (hilangkan untuk versi stabil terbaru).
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Jika disediakan, tidak ada argumen "Id Sumber Daya" lain yang harus ditentukan.
+    description: ''
+  - name: --latest-include-preview -v
+    summary: 'Tunjukkan bahwa versi api terbaru akan digunakan terlepas dari apakah itu versi pratinjau (seperti 2020-01-01-preview) atau tidak. Misalnya, jika versi api yang didukung dari penyedia sumber daya adalah 2020-01-01-preview dan 2019-01-01: ketika meneruskan parameter ini, ia akan mengambil versi terbaru 2020-01-01-preview, jika tidak, itu akan mengambil versi stabil terbaru 2019-01-01 tanpa melewati parameter ini.'
+    description: ''
+  - name: --name -n
+    summary: 'Nama sumber daya. (Misalnya: myC).'
+    description: ''
+  - name: --namespace
+    summary: "Namespace penyedia (Misalnya: 'Microsoft.Provider')."
+    description: ''
+  - name: --parent
+    summary: "Jalur induk (Mis: 'resA/myA/resB/myB')."
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-type
+    summary: "Jenis sumber daya (Misalnya: 'resC'). Dapat juga menerima format namespace/type (Mis: 'Microsoft.Provider/resC')."
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_resource_invoke-action
+  name: az resource invoke-action
+  summary: Panggil tindakan pada sumber daya.
+  description: Daftar kemungkinan tindakan yang sesuai dengan sumber daya dapat ditemukan di https://docs.microsoft.com/rest/api/. Semua permintaan POST adalah tindakan yang dapat dipanggil dan ditentukan di akhir jalur URI. Misalnya, untuk menghentikan VM, permintaan URI adalah https://management.azure.com/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroup}/providers/Microsoft.Compute/virtualMachines/{VM}/powerOff?api-version={APIVersion} dan tindakan yang sesuai adalah `powerOff`. Ini dapat ditemukan di https://docs.microsoft.com/rest/api/compute/virtualmachines/virtualmachines-stop.
+  syntax: >-
+    az resource invoke-action --action
+                              [--api-version]
+                              [--ids]
+                              [--latest-include-preview]
+                              [--name]
+                              [--namespace]
+                              [--parent]
+                              [--request-body]
+                              [--resource-group]
+                              [--resource-type]
+  examples:
+  - summary: Mematikan vm, ditentukan oleh Id.
+    syntax: >-
+      az resource invoke-action --action powerOff \
+        --ids /subscriptions/{SubID}/resourceGroups/{ResourceGroup}/providers/Microsoft.Compute/virtualMachines/{VMName}
+  - summary: Ambil informasi untuk vm yang dihentikan.
+    syntax: >-
+      az resource invoke-action --action capture \
+        --ids /subscriptions/{SubID}/resourceGroups/{ResourceGroup}/providers/ \
+          Microsoft.Compute/virtualMachines/{VMName} \
+        --request-body "{ \"vhdPrefix\": \"myPrefix\", \"destinationContainerName\": \
+          \"myContainer\", \"overwriteVhds\": true }"
+  - summary: Panggil tindakan pada sumber daya. (dibuat otomatis)
+    syntax: az resource invoke-action --action capture --name MyResource --resource-group MyResourceGroup --resource-type Microsoft.web/sites
+  requiredParameters:
+  - isRequired: true
+    name: --action
+    summary: Tindakan yang akan dipanggil pada sumber daya yang ditentukan.
+    description: ''
+  optionalParameters:
+  - name: --api-version
+    summary: Versi api sumber daya (hilangkan untuk versi stabil terbaru).
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Jika disediakan, tidak ada argumen "Id Sumber Daya" lain yang harus ditentukan.
+    description: ''
+  - name: --latest-include-preview -v
+    summary: 'Tunjukkan bahwa versi api terbaru akan digunakan terlepas dari apakah itu versi pratinjau (seperti 2020-01-01-preview) atau tidak. Misalnya, jika versi api yang didukung dari penyedia sumber daya adalah 2020-01-01-preview dan 2019-01-01: ketika meneruskan parameter ini, ia akan mengambil versi terbaru 2020-01-01-preview, jika tidak, itu akan mengambil versi stabil terbaru 2019-01-01 tanpa melewati parameter ini.'
+    description: ''
+  - name: --name -n
+    summary: 'Nama sumber daya. (Misalnya: myC).'
+    description: ''
+  - name: --namespace
+    summary: "Namespace penyedia (Misalnya: 'Microsoft.Provider')."
+    description: ''
+  - name: --parent
+    summary: "Jalur induk (Mis: 'resA/myA/resB/myB')."
+    description: ''
+  - name: --request-body
+    summary: Argumen parameter yang dikodekan JSON untuk tindakan yang akan diteruskan di isi permintaan pos. Gunakan @{file} untuk memuat dari file.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-type
+    summary: "Jenis sumber daya (Misalnya: 'resC'). Dapat juga menerima format namespace/type (Mis: 'Microsoft.Provider/resC')."
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_resource_list
+  name: az resource list
+  summary: Cantumkan sumber daya.
+  description: ''
+  syntax: >-
+    az resource list [--location]
+                     [--name]
+                     [--namespace]
+                     [--resource-group]
+                     [--resource-type]
+                     [--tag]
+  examples:
+  - summary: Mencantumkan semua sumber daya di wilayah US Barat.
+    syntax: az resource list --location westus
+  - summary: Cantumkan semua sumber daya dengan nama 'resourceName'.
+    syntax: az resource list --name 'resourceName'
+  - summary: Cantumkan semua sumber daya dengan tag 'uji'.
+    syntax: az resource list --tag test
+  - summary: Cantumkan semua sumber daya dengan tag yang dimulai dengan 'uji'.
+    syntax: az resource list --tag 'test*'
+  - summary: Cantumkan semua sumber daya dengan tag 'uji' yang memiliki nilai 'contoh'.
+    syntax: az resource list --tag test=example
+  optionalParameters:
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --name -n
+    summary: 'Nama sumber daya. (Misalnya: myC).'
+    description: ''
+  - name: --namespace
+    summary: "Namespace penyedia (Misalnya: 'Microsoft.Provider')."
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-type
+    summary: "Jenis sumber daya (Misalnya: 'resC'). Dapat juga menerima format namespace/type (Mis: 'Microsoft.Provider/resC')."
+    description: ''
+  - name: --tag
+    summary: Tag tunggal dalam format 'key[=value]'. Gunakan "" untuk menghapus tag yang ada.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_resource_move
+  name: az resource move
+  summary: Memindahkan sumber daya dari satu grup sumber daya ke grup sumber daya lainnya (dapat berada di bawah langganan yang berbeda).
+  description: ''
+  syntax: >-
+    az resource move --destination-group
+                     --ids
+                     [--destination-subscription-id]
+  requiredParameters:
+  - isRequired: true
+    name: --destination-group
+    summary: Nama grup sumber daya tujuan.
+    description: ''
+  - isRequired: true
+    name: --ids
+    summary: Id sumber daya yang dipisahkan spasi yang akan dipindahkan.
+    description: ''
+  optionalParameters:
+  - name: --destination-subscription-id
+    summary: Pengidentifikasi langganan tujuan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_resource_show
+  name: az resource show
+  summary: Dapatkan detail sumber daya.
+  description: ''
+  syntax: >-
+    az resource show [--api-version]
+                     [--ids]
+                     [--include-response-body {false, true}]
+                     [--latest-include-preview]
+                     [--name]
+                     [--namespace]
+                     [--parent]
+                     [--resource-group]
+                     [--resource-type]
+  examples:
+  - summary: Tampilkan sumber daya komputer virtual bernama 'MyVm'.
+    syntax: az resource show -g MyResourceGroup -n MyVm --resource-type "Microsoft.Compute/virtualMachines"
+  - summary: Menampilkan aplikasi web menggunakan pengidentifikasi sumber daya.
+    syntax: az resource show --ids /subscriptions/0b1f6471-1bf0-4dda-aec3-111111111111/resourceGroups/MyResourceGroup/providers/Microsoft.Web/sites/MyWebapp
+  - summary: Perlihatkan subnet.
+    syntax: az resource show -g MyResourceGroup -n MySubnet --namespace Microsoft.Network --parent virtualnetworks/MyVnet --resource-type subnets
+  - summary: Tampilkan subnet menggunakan pengidentifikasi sumber daya.
+    syntax: az resource show --ids /subscriptions/0b1f6471-1bf0-4dda-aec3-111111111111/resourceGroups/MyResourceGroup/providers/Microsoft.Network/virtualNetworks/MyVnet/subnets/MySubnet
+  - summary: Perlihatkan aturan jalur gateway aplikasi.
+    syntax: az resource show -g MyResourceGroup --namespace Microsoft.Network --parent applicationGateways/ag1/urlPathMaps/map1 --resource-type pathRules -n rule1
+  - summary: Tampilkan sumber daya komputer virtual bernama 'MyVm' dengan menggunakan versi api terbaru apakah versi ini adalah versi pratinjau.
+    syntax: az resource show -g MyResourceGroup -n MyVm --resource-type "Microsoft.Compute/virtualMachines" --latest-include-preview
+  optionalParameters:
+  - name: --api-version
+    summary: Versi api sumber daya (hilangkan untuk versi stabil terbaru).
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Jika disediakan, tidak ada argumen "Id Sumber Daya" lain yang harus ditentukan.
+    description: ''
+  - name: --include-response-body
+    parameterValueGroup: false, true
+    summary: Gunakan jika output perintah default tidak mengambil semua data properti.
+    description: ''
+  - name: --latest-include-preview -v
+    summary: 'Tunjukkan bahwa versi api terbaru akan digunakan terlepas dari apakah itu versi pratinjau (seperti 2020-01-01-preview) atau tidak. Misalnya, jika versi api yang didukung dari penyedia sumber daya adalah 2020-01-01-preview dan 2019-01-01: ketika meneruskan parameter ini, ia akan mengambil versi terbaru 2020-01-01-preview, jika tidak, itu akan mengambil versi stabil terbaru 2019-01-01 tanpa meneruskan parameter ini.'
+    description: ''
+  - name: --name -n
+    summary: 'Nama sumber daya. (Misalnya: myC).'
+    description: ''
+  - name: --namespace
+    summary: "Namespace penyedia (Misalnya: 'Microsoft.Provider')."
+    description: ''
+  - name: --parent
+    summary: "Jalur induk (Misalnya: 'resA/myA/resB/myB')."
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-type
+    summary: "Jenis sumber daya (Misalnya: 'resC'). Dapat juga menerima format namespace layanan/jenis (Misalnya: 'Microsoft.Provider/resC')."
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_resource_tag
+  name: az resource tag
+  summary: Menandai sumber daya.
+  description: ''
+  syntax: >-
+    az resource tag --tags
+                    [--api-version]
+                    [--ids]
+                    [--is-incremental]
+                    [--latest-include-preview]
+                    [--name]
+                    [--namespace]
+                    [--parent]
+                    [--resource-group]
+                    [--resource-type]
+  examples:
+  - summary: Tandai komputer virtual 'MyVm' dengan kunci 'vmlist' dan nilai 'vm1'.
+    syntax: az resource tag --tags vmlist=vm1 -g MyResourceGroup -n MyVm --resource-type "Microsoft.Compute/virtualMachines"
+  - summary: Tandai aplikasi web dengan kunci 'vmlist' dan nilai 'vm1', menggunakan pengidentifikasi sumber daya.
+    syntax: az resource tag --tags vmlist=vm1 --ids /subscriptions/{SubID}/resourceGroups/{ResourceGroup}/providers/Microsoft.Web/sites/{WebApp}
+  - summary: Tandai komputer virtual 'MyVm' dengan kunci 'vmlist' dan nilai 'vm1' secara bertahap. Ini tidak mengosongkan tag yang ada.
+    syntax: az resource tag --tags vmlist=vm1 -g MyResourceGroup -n MyVm --resource-type "Microsoft.Compute/virtualMachines" -i
+  - summary: Tandai komputer virtual 'MyVm' dengan kunci 'vmlist' dan nilai 'vm1' dengan menggunakan versi api terbaru apakah versi ini adalah versi pratinjau.
+    syntax: az resource tag --tags vmlist=vm1 -g MyResourceGroup -n MyVm --resource-type "Microsoft.Compute/virtualMachines" --latest-include-preview
+  requiredParameters:
+  - isRequired: true
+    name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  optionalParameters:
+  - name: --api-version
+    summary: Versi api sumber daya (hilangkan untuk versi stabil terbaru).
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Jika disediakan, tidak ada argumen "Id Sumber Daya" lain yang harus ditentukan.
+    description: ''
+  - name: --is-incremental -i
+    summary: Opsi untuk menambahkan tag secara bertahap tanpa menghapus tag asli. Jika kunci tag baru dan tag asli diduplikasi, nilai asli akan ditimpa.
+    description: ''
+  - name: --latest-include-preview -v
+    summary: 'Tunjukkan bahwa versi api terbaru akan digunakan terlepas dari apakah itu versi pratinjau (seperti 2020-01-01-preview) atau tidak. Misalnya, jika versi api yang didukung dari penyedia sumber daya adalah 2020-01-01-preview dan 2019-01-01: ketika meneruskan parameter ini, ia akan mengambil versi terbaru 2020-01-01-preview, jika tidak, itu akan mengambil versi stabil terbaru 2019-01-01 tanpa meneruskan parameter ini.'
+    description: ''
+  - name: --name -n
+    summary: 'Nama sumber daya. (Misalnya: myC).'
+    description: ''
+  - name: --namespace
+    summary: "Namespace penyedia (Misalnya: 'Microsoft.Provider')."
+    description: ''
+  - name: --parent
+    summary: "Jalur induk (Misalnya: 'resA/myA/resB/myB')."
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-type
+    summary: "Jenis sumber daya (Misalnya: 'resC'). Dapat juga menerima format namespace layanan/jenis (Misalnya: 'Microsoft.Provider/resC')."
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_resource_update
+  name: az resource update
+  summary: Memperbarui sumber daya.
+  description: ''
+  syntax: >-
+    az resource update [--add]
+                       [--api-version]
+                       [--force-string]
+                       [--ids]
+                       [--include-response-body {false, true}]
+                       [--latest-include-preview]
+                       [--name]
+                       [--namespace]
+                       [--parent]
+                       [--remove]
+                       [--resource-group]
+                       [--resource-type]
+                       [--set]
+  examples:
+  - summary: Perbarui aplikasi web dengan menggunakan versi api terbaru apakah versi ini adalah versi pratinjau.
+    syntax: az resource update --ids /subscriptions/{SubID}/resourceGroups/{ResourceGroup}/providers/Microsoft.Web/sites/{WebApp} --set tags.key=value --latest-include-preview
+  - summary: Memperbarui sumber daya. (dibuat otomatis)
+    syntax: az resource update --ids $id --set properties.connectionType=Proxy
+  - summary: Memperbarui sumber daya. (dibuat otomatis)
+    syntax: az resource update --name myresource --resource-group myresourcegroup --resource-type subnets --set tags.key=value
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --api-version
+    summary: Versi api sumber daya (hilangkan untuk versi stabil terbaru).
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Jika disediakan, tidak ada argumen "Id Sumber Daya" lain yang harus ditentukan.
+    description: ''
+  - name: --include-response-body
+    parameterValueGroup: false, true
+    summary: Gunakan jika output perintah default tidak mengambil semua data properti.
+    description: ''
+  - name: --latest-include-preview -v
+    summary: 'Tunjukkan bahwa versi api terbaru akan digunakan terlepas dari apakah itu versi pratinjau (seperti 2020-01-01-preview) atau tidak. Misalnya, jika versi api yang didukung dari penyedia sumber daya adalah 2020-01-01-preview dan 2019-01-01: ketika meneruskan parameter ini, ia akan mengambil versi terbaru 2020-01-01-preview, jika tidak, itu akan mengambil versi stabil terbaru 2019-01-01 tanpa meneruskan parameter ini.'
+    description: ''
+  - name: --name -n
+    summary: 'Nama sumber daya. (Misalnya: myC).'
+    description: ''
+  - name: --namespace
+    summary: "Namespace penyedia (Misalnya: 'Microsoft.Provider')."
+    description: ''
+  - name: --parent
+    summary: "Jalur induk (Misalnya: 'resA/myA/resB/myB')."
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-type
+    summary: "Jenis sumber daya (Misalnya: 'resC'). Dapat juga menerima format namespace layanan/jenis (Misalnya: 'Microsoft.Provider/resC')."
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_resource_wait
+  name: az resource wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi sumber daya terpenuhi.
+  description: ''
+  syntax: >-
+    az resource wait [--api-version]
+                     [--created]
+                     [--custom]
+                     [--deleted]
+                     [--exists]
+                     [--ids]
+                     [--include-response-body {false, true}]
+                     [--interval]
+                     [--name]
+                     [--namespace]
+                     [--parent]
+                     [--resource-group]
+                     [--resource-type]
+                     [--timeout]
+                     [--updated]
+  examples:
+  - summary: Tempatkan CLI dalam status menunggu hingga kondisi sumber daya terpenuhi. (dibuat otomatis)
+    syntax: az resource wait --exists --ids /subscriptions/{SubID}/resourceGroups/{ResourceGroup}/providers/Microsoft.Web/sites/{WebApp}
+  - summary: Tempatkan CLI dalam status menunggu hingga kondisi sumber daya terpenuhi. (dibuat otomatis)
+    syntax: az resource wait --exists --ids /subscriptions/{SubID}/resourceGroups/{ResourceGroup}/providers/Microsoft.Web/sites/{WebApp} --include-response-body true
+  - summary: Tempatkan CLI dalam status menunggu hingga kondisi sumber daya terpenuhi. (dibuat otomatis)
+    syntax: az resource wait --exists --name MyResource --resource-group MyResourceGroup --resource-type subnets
+  optionalParameters:
+  - name: --api-version
+    summary: Versi api sumber daya (hilangkan untuk versi stabil terbaru).
+    description: ''
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Jika disediakan, tidak ada argumen "Id Sumber Daya" lain yang harus ditentukan.
+    description: ''
+  - name: --include-response-body
+    parameterValueGroup: false, true
+    summary: Gunakan jika output perintah default tidak mengambil semua data properti.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --name -n
+    summary: 'Nama sumber daya. (Misalnya: myC).'
+    description: ''
+  - name: --namespace
+    summary: "Namespace penyedia (Misalnya: 'Microsoft.Provider')."
+    description: ''
+  - name: --parent
+    summary: "Jalur induk (Misalnya: 'resA/myA/resB/myB')."
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-type
+    summary: "Jenis sumber daya (Misalnya: 'resC'). Dapat juga menerima format namespace layanan/jenis (Misalnya: 'Microsoft.Provider/resC')."
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+commands:
+- az_resource_create
+- az_resource_delete
+- az_resource_invoke-action
+- az_resource_link
+- az_resource_link_create
+- az_resource_link_delete
+- az_resource_link_list
+- az_resource_link_show
+- az_resource_link_update
+- az_resource_list
+- az_resource_lock
+- az_resource_lock_create
+- az_resource_lock_delete
+- az_resource_lock_list
+- az_resource_lock_show
+- az_resource_lock_update
+- az_resource_move
+- az_resource_show
+- az_resource_tag
+- az_resource_update
+- az_resource_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 02/22/2022
+  description: Mengelola sumber daya Azure.
+  ms.openlocfilehash: 6eeea4e3fdc298f60500483d81148f5e9e9012a3
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141018124"

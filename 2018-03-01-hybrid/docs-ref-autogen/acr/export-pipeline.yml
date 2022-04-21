@@ -1,0 +1,152 @@
+### YamlMime:AzureCLIGroup
+uid: az_acr_export-pipeline
+name: az acr export-pipeline
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **acrtransfer** untuk Azure CLI (versi 2.0.67 atau lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az acr export-pipeline** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola alur ekspor ACR.
+description: ''
+directCommands:
+- uid: az_acr_export-pipeline_create
+  name: az acr export-pipeline create
+  summary: Membuat alur ekspor.
+  description: ''
+  syntax: >-
+    az acr export-pipeline create --name
+                                  --registry
+                                  --resource-group
+                                  --secret-uri
+                                  --storage-container-uri
+                                  [--assign-identity]
+                                  [--options]
+  examples:
+  - summary: Membuat alur ekspor.
+    syntax: az acr export-pipeline create --resource-group $MyRG --registry $MyReg --name $MyPipeline --secret-uri https://$MyKV.vault.azure.net/secrets/$MySecret --storage-container-uri https://$MyStorage.blob.core.windows.net/$MyContainer
+  - summary: Buat alur ekspor dengan identitas yang ditetapkan pengguna dan semua opsi yang tersedia.
+    syntax: az acr export-pipeline create --resource-group $MyRG --registry $MyReg --name $MyPipeline --secret-uri https://$MyKV.vault.azure.net/secrets/$MySecret --storage-container-uri https://$MyStorage.blob.core.windows.net/$MyContainer --options OverwriteBlobs ContinueOnErrors --assign-identity /subscriptions/$MySubID/resourceGroups/$MyRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/$MyIdentity
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama alur ekspor.
+    description: ''
+  - isRequired: true
+    name: --registry -r
+    summary: Nama registri.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --secret-uri -s
+    summary: URI rahasia Keyvault yang berisi token SAS yang valid ke akun penyimpanan terkait dari formulir https://$MyKeyvault.vault.azure.net/secrets/$MySecret. Perhatikan bahwa URI mungkin berbeda di luar AzureCloud.
+    description: ''
+  - isRequired: true
+    name: --storage-container-uri -c
+    summary: Storage URI kontainer akun dari kontainer akun penyimpanan sumber atau target formulir https://$MyStorageAccount.blob.core.windows.net/$MyContainer. Perhatikan bahwa URI mungkin berbeda di luar AzureCloud.
+    description: ''
+  optionalParameters:
+  - name: --assign-identity -i
+    summary: ID sumber daya identitas yang ditetapkan pengguna dari formulir /subscriptions/$MySubID/resourceGroups/$MyRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/$MyIdentity.
+    description: ''
+  - name: --options -z
+    summary: 'Daftar opsi yang dipisahkan spasi. Mungkin hanya kontainer opsi berikut: OverwriteBlobs,ContinueOnErrors.'
+    description: ''
+- uid: az_acr_export-pipeline_delete
+  name: az acr export-pipeline delete
+  summary: Menghapus alur ekspor.
+  description: ''
+  syntax: >-
+    az acr export-pipeline delete --name
+                                  --registry
+                                  --resource-group
+  examples:
+  - summary: Menghapus alur ekspor.
+    syntax: az acr export-pipeline delete --resource-group $MyRG --registry $MyReg --name $MyPipeline
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama alur ekspor.
+    description: ''
+  - isRequired: true
+    name: --registry -r
+    summary: Nama registri.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_acr_export-pipeline_list
+  name: az acr export-pipeline list
+  summary: Mencantumkan alur ekspor pada Container Registry.
+  description: ''
+  syntax: >-
+    az acr export-pipeline list --registry
+                                --resource-group
+  examples:
+  - summary: Mencantumkan alur ekspor pada registri kontainer
+    syntax: az acr export-pipeline list --resource-group $MyRG --registry $MyReg
+  requiredParameters:
+  - isRequired: true
+    name: --registry -r
+    summary: Nama registri.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_acr_export-pipeline_show
+  name: az acr export-pipeline show
+  summary: Perlihatkan alur ekspor secara rinci.
+  description: ''
+  syntax: >-
+    az acr export-pipeline show --name
+                                --registry
+                                --resource-group
+  examples:
+  - summary: Perlihatkan alur ekspor tertentu secara rinci.
+    syntax: az acr export-pipeline show --resource-group $MyRG --registry $MyReg --name $MyPipeline
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama alur ekspor.
+    description: ''
+  - isRequired: true
+    name: --registry -r
+    summary: Nama registri.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+commands:
+- az_acr_export-pipeline_create
+- az_acr_export-pipeline_delete
+- az_acr_export-pipeline_list
+- az_acr_export-pipeline_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola alur ekspor ACR.
+  ms.openlocfilehash: 830a9ba46bc63ea41c41d10a8ac2e8af562b85ae
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141028186"

@@ -1,0 +1,383 @@
+### YamlMime:AzureCLIGroup
+uid: az_logz_monitor
+name: az logz monitor
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **logz** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az logz monitor** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola monitor dengan logz.
+description: ''
+directCommands:
+- uid: az_logz_monitor_create
+  name: az logz monitor create
+  summary: Membuat sumber daya monitor. Operasi pembuatan ini dapat mengambil Get untuk menyelesaikan.
+  description: ''
+  syntax: >-
+    az logz monitor create --monitor-name
+                           --resource-group
+                           [--location]
+                           [--monitoring-status {Disabled, Enabled}]
+                           [--no-wait]
+                           [--org-properties]
+                           [--plan-data]
+                           [--subscription-status {Active, Suspended}]
+                           [--tags]
+                           [--type {SystemAssigned, UserAssigned}]
+                           [--user-info]
+  examples:
+  - summary: Monitors_Create
+    syntax: az logz monitor create --name "myMonitor" --location "West US" --plan-data billing-cycle="Monthly" effective-date="2019-08-30T15:14:33+02:00" plan-details="logzapitestplan" usage-type="Committed" --user-info email-address="alice@microsoft.com" first-name="Alice" last-name="Bob" phone-number="123456" --tags Environment="Dev" --resource-group "myResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name --name -n
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --monitoring-status
+    parameterValueGroup: Disabled, Enabled
+    summary: Bendera yang menentukan apakah pemantauan sumber daya diaktifkan atau dinonaktifkan.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --org-properties
+    summary: ''
+    description: >-
+      Penggunaan: --org-properties company-name=XX enterprise-app-id=XX single-sign-on-url=XX
+
+
+      nama perusahaan: Nama organisasi Logz.
+
+      enterprise-app-id: Id Aplikasi Perusahaan yang digunakan untuk Akses menyeluruh.
+
+      single-sign-on-url: URL masuk khusus untuk Organisasi Logz ini.
+  - name: --plan-data
+    summary: ''
+    description: >-
+      Penggunaan: --plan-data usage-type=XX billing-cycle=XX plan-details=XX effective-date=XX
+
+
+      jenis penggunaan: jenis penggunaan yang berbeda seperti PAYG/COMMITTED. ini bisa berupa siklus penagihan enum: siklus penagihan yang berbeda seperti BULANAN/MINGGUAN. ini bisa berupa detail rencana enum: id paket seperti yang diterbitkan oleh tanggal efektif Logz: tanggal ketika paket diterapkan.
+  - name: --subscription-status
+    parameterValueGroup: Active, Suspended
+    summary: Bendera yang menentukan Status Langganan Marketplace sumber daya. Jika pembayaran tidak dilakukan tepat waktu, sumber daya akan masuk dalam status Ditangguhkan.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --type
+    parameterValueGroup: SystemAssigned, UserAssigned
+    summary: Jenis identitas.
+    description: ''
+  - name: --user-info
+    summary: ''
+    description: >-
+      Penggunaan: --user-info first-name=XX last-name=XX email-address=XX phone-number=XX
+
+
+      nama depan: Nama Depan nama belakang pengguna: Nama Belakang alamat email pengguna: Email pengguna yang digunakan oleh Logz untuk menghubungi mereka jika diperlukan nomor telepon: Telepon nomor pengguna yang digunakan oleh Logz untuk menghubungi mereka jika diperlukan.
+- uid: az_logz_monitor_delete
+  name: az logz monitor delete
+  summary: Menghapus sumber daya monitor.
+  description: ''
+  syntax: >-
+    az logz monitor delete --monitor-name
+                           --resource-group
+                           [--no-wait]
+                           [--yes]
+  examples:
+  - summary: Monitors_Delete
+    syntax: az logz monitor delete --name "myMonitor" --resource-group "myResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name --name -n
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_logz_monitor_list
+  name: az logz monitor list
+  summary: Cantumkan semua monitor di bawah grup sumber daya yang ditentukan. Dan Cantumkan semua monitor di bawah langganan yang ditentukan.
+  description: ''
+  syntax: az logz monitor list [--resource-group]
+  examples:
+  - summary: Monitors_ListByResourceGroup
+    syntax: az logz monitor list --resource-group "myResourceGroup"
+  - summary: Monitors_List
+    syntax: az logz monitor list
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_logz_monitor_list-payload
+  name: az logz monitor list-payload
+  summary: Cantumkan payload yang perlu diteruskan dalam isi permintaan untuk menginstal agen Logz.io pada VM.
+  description: ''
+  syntax: >-
+    az logz monitor list-payload --monitor-name
+                                 --resource-group
+  examples:
+  - summary: MainAccount_VMHosts_Payload
+    syntax: az logz monitor list-payload --name "myMonitor" --resource-group "myResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name --name -n
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_logz_monitor_list-resource
+  name: az logz monitor list-resource
+  summary: Cantumkan sumber daya yang saat ini sedang dipantau oleh sumber daya monitor Logz.
+  description: ''
+  syntax: >-
+    az logz monitor list-resource --monitor-name
+                                  --resource-group
+  examples:
+  - summary: MonitoredResources_List
+    syntax: az logz monitor list-resource --name "myMonitor" --resource-group "myResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name --name -n
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_logz_monitor_list-role
+  name: az logz monitor list-role
+  summary: Cantumkan peran pengguna yang dikonfigurasi di sisi Logz.io untuk akun yang sesuai dengan sumber daya monitor.
+  description: ''
+  syntax: >-
+    az logz monitor list-role --monitor-name
+                              --resource-group
+                              [--email-address]
+  examples:
+  - summary: MainAccount_VMHosts_Update
+    syntax: az logz monitor list-role --name "myMonitor" --resource-group "myResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name --name -n
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --email-address
+    summary: Email pengguna yang digunakan oleh Logz untuk menghubungi mereka jika diperlukan.
+    description: ''
+- uid: az_logz_monitor_list-vm
+  name: az logz monitor list-vm
+  summary: Cantumkan sumber daya komputasi yang saat ini sedang dipantau oleh sumber daya akun utama Logz.
+  description: ''
+  syntax: >-
+    az logz monitor list-vm --monitor-name
+                            --resource-group
+  examples:
+  - summary: MainAccount_VMHosts_List
+    syntax: az logz monitor list-vm --name "myMonitor" --resource-group "myResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name --name -n
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_logz_monitor_show
+  name: az logz monitor show
+  summary: Mendapatkan properti sumber daya monitor tertentu.
+  description: ''
+  syntax: >-
+    az logz monitor show --monitor-name
+                         --resource-group
+  examples:
+  - summary: Monitors_Get
+    syntax: az logz monitor show --name "myMonitor" --resource-group "myResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name --name -n
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_logz_monitor_update
+  name: az logz monitor update
+  summary: Memperbarui sumber daya monitor.
+  description: ''
+  syntax: >-
+    az logz monitor update --monitor-name
+                           --resource-group
+                           [--monitoring-status {Disabled, Enabled}]
+                           [--tags]
+  examples:
+  - summary: Monitors_Update
+    syntax: az logz monitor update --name "myMonitor" --monitoring-status "Enabled" --tags Environment="Dev" --resource-group "myResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name --name -n
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --monitoring-status
+    parameterValueGroup: Disabled, Enabled
+    summary: Bendera yang menentukan apakah pemantauan sumber daya diaktifkan atau dinonaktifkan.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+- uid: az_logz_monitor_update-vm
+  name: az logz monitor update-vm
+  summary: Perbarui koleksi saat agen Logz.io telah diinstal pada VM untuk monitor tertentu.
+  description: ''
+  syntax: >-
+    az logz monitor update-vm --monitor-name
+                              --resource-group
+                              [--state {Delete, Install}]
+                              [--vm-resource-ids]
+  examples:
+  - summary: MainAccount_VMHosts_Update
+    syntax: az logz monitor update-vm --name "myMonitor" --state "Install" --resource-group "myResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name --name -n
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --state
+    parameterValueGroup: Delete, Install
+    summary: Menentukan status operasi - instal/hapus.
+    description: ''
+  - name: --vm-resource-ids
+    summary: Permintaan daftar operasi pembaruan host vm.
+    description: >-
+      Penggunaan: --vm-resource-ids id=XX agent-version=XX
+
+
+      id: Permintaan daftar operasi pembaruan host vm.
+
+      versi agen: Versi agen Logz yang diinstal pada VM.
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --vm-resource-ids.
+- uid: az_logz_monitor_wait
+  name: az logz monitor wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi monitor logz terpenuhi.
+  description: ''
+  syntax: >-
+    az logz monitor wait --monitor-name
+                         --resource-group
+                         [--created]
+                         [--custom]
+                         [--deleted]
+                         [--exists]
+                         [--interval]
+                         [--timeout]
+                         [--updated]
+  examples:
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga monitor logz berhasil dibuat.
+    syntax: az logz monitor wait --name "myMonitor" --resource-group "myResourceGroup" --created
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga monitor logz berhasil dihapus.
+    syntax: az logz monitor wait --name "myMonitor" --resource-group "myResourceGroup" --deleted
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name --name -n
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_logz_monitor_create
+- az_logz_monitor_delete
+- az_logz_monitor_list
+- az_logz_monitor_list-payload
+- az_logz_monitor_list-resource
+- az_logz_monitor_list-role
+- az_logz_monitor_list-vm
+- az_logz_monitor_show
+- az_logz_monitor_update
+- az_logz_monitor_update-vm
+- az_logz_monitor_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola monitor dengan logz.
+  ms.openlocfilehash: 942e67d8bb1bfc7c35a3be90b2ed418146f07d75
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140908376"

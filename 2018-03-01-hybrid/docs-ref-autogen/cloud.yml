@@ -1,0 +1,297 @@
+### YamlMime:AzureCLIGroup
+uid: az_cloud
+name: az cloud
+summary: Mengelola cloud Azure terdaftar.
+description: ''
+directCommands:
+- uid: az_cloud_list
+  name: az cloud list
+  summary: Mencantumkan cloud terdaftar.
+  description: ''
+  syntax: az cloud list
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cloud/_help.py
+- uid: az_cloud_list-profiles
+  name: az cloud list-profiles
+  summary: Mencantumkan profil yang didukung untuk cloud.
+  description: ''
+  syntax: >-
+    az cloud list-profiles [--name]
+                           [--show-all]
+  optionalParameters:
+  - name: --name -n
+    defaultValue: AzureCloud
+    summary: Nama cloud terdaftar.
+    description: ''
+  - name: --show-all
+    summary: Tampilkan semua profil yang tersedia yang didukung di CLI.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cloud/_help.py
+- uid: az_cloud_register
+  name: az cloud register
+  summary: Daftarkan cloud.
+  description: Saat mendaftarkan cloud, tentukan hanya titik akhir manajer sumber daya untuk deteksi otomatis titik akhir lainnya.
+  syntax: >-
+    az cloud register --name
+                      [--cloud-config]
+                      [--endpoint-active-directory]
+                      [--endpoint-active-directory-data-lake-resource-id]
+                      [--endpoint-active-directory-graph-resource-id]
+                      [--endpoint-active-directory-resource-id]
+                      [--endpoint-gallery]
+                      [--endpoint-management]
+                      [--endpoint-resource-manager]
+                      [--endpoint-sql-management]
+                      [--endpoint-vm-image-alias-doc]
+                      [--profile {2017-03-09-profile, 2018-03-01-hybrid, 2019-03-01-hybrid, 2020-09-01-hybrid, latest}]
+                      [--suffix-acr-login-server-endpoint]
+                      [--suffix-azure-datalake-analytics-catalog-and-job-endpoint]
+                      [--suffix-azure-datalake-store-file-system-endpoint]
+                      [--suffix-keyvault-dns]
+                      [--suffix-sql-server-hostname]
+                      [--suffix-storage-endpoint]
+  examples:
+  - summary: Mendaftarkan cloud dengan file konfigurasi
+    syntax: >-
+      az cloud register -n MyCloud --cloud-config @"cloud.json"
+
+      ("cloud.json" supports all the endpoint and suffix options in camel case or the JSON output format from az cloud show. See the example content below.)
+
+      {
+        "endpointActiveDirectory": "https://login.microsoftonline.us",
+        "suffixAcrLoginServerEndpoint": ".azurecr.us"
+      }
+
+      or
+
+      {
+        "endpoints":{
+          "activeDirectory": "https://login.microsoftonline.us"
+        },
+        "suffixes":{
+          "acrLoginServerEndpoint": ".azurecr.us"
+        }
+      }
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama cloud terdaftar.
+    description: ''
+  optionalParameters:
+  - name: --cloud-config
+    summary: Konfigurasi cloud yang dikodekan JSON. Gunakan @{file} untuk memuat dari file.
+    description: ''
+  - name: --endpoint-active-directory
+    summary: Titik akhir masuk Direktori Aktif.
+    description: ''
+  - name: --endpoint-active-directory-data-lake-resource-id
+    summary: ID sumber daya Direktori Aktif untuk layanan data lake.
+    description: ''
+  - name: --endpoint-active-directory-graph-resource-id
+    summary: ID sumber daya Active Directory.
+    description: ''
+  - name: --endpoint-active-directory-resource-id
+    summary: ID sumber daya untuk mendapatkan token AD.
+    description: ''
+  - name: --endpoint-gallery
+    summary: Titik akhir galeri templat.
+    description: ''
+  - name: --endpoint-management
+    summary: Titik akhir layanan manajemen.
+    description: ''
+  - name: --endpoint-resource-manager
+    summary: Titik akhir pengelolaan sumber daya.
+    description: ''
+  - name: --endpoint-sql-management
+    summary: Titik akhir pengelolaan server sql.
+    description: ''
+  - name: --endpoint-vm-image-alias-doc
+    summary: Uri dokumen yang menyimpan cache gambar komputer virtual yang umum digunakan.
+    description: ''
+  - name: --profile
+    parameterValueGroup: 2017-03-09-profile, 2018-03-01-hybrid, 2019-03-01-hybrid, 2020-09-01-hybrid, latest
+    summary: Profil untuk digunakan untuk cloud ini.
+    description: ''
+  - name: --suffix-acr-login-server-endpoint
+    summary: Akhiran server masuk Azure Container Registry.
+    description: ''
+  - name: --suffix-azure-datalake-analytics-catalog-and-job-endpoint
+    summary: Akhiran dns layanan analitik Data Lake dan layanan katalog.
+    description: ''
+  - name: --suffix-azure-datalake-store-file-system-endpoint
+    summary: Akhiran dns layanan sistem file penyimpanan Data Lake.
+    description: ''
+  - name: --suffix-keyvault-dns
+    summary: Akhiran dns layanan Key Vault.
+    description: ''
+  - name: --suffix-sql-server-hostname
+    summary: Akhiran dns untuk server sql.
+    description: ''
+  - name: --suffix-storage-endpoint
+    summary: Akhiran titik akhir untuk akun penyimpanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cloud/_help.py
+- uid: az_cloud_set
+  name: az cloud set
+  summary: Atur cloud aktif.
+  description: ''
+  syntax: >-
+    az cloud set --name
+                 [--profile {2017-03-09-profile, 2018-03-01-hybrid, 2019-03-01-hybrid, 2020-09-01-hybrid, latest}]
+  examples:
+  - summary: Atur cloud aktif. (dibuat otomatis)
+    syntax: az cloud set --name MyRegisteredCloud
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama cloud terdaftar.
+    description: ''
+  optionalParameters:
+  - name: --profile
+    parameterValueGroup: 2017-03-09-profile, 2018-03-01-hybrid, 2019-03-01-hybrid, 2020-09-01-hybrid, latest
+    summary: Profil untuk digunakan untuk cloud ini.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cloud/_help.py
+- uid: az_cloud_show
+  name: az cloud show
+  summary: Dapatkan detail cloud terdaftar.
+  description: ''
+  syntax: az cloud show [--name]
+  optionalParameters:
+  - name: --name -n
+    defaultValue: AzureCloud
+    summary: Nama cloud terdaftar.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cloud/_help.py
+- uid: az_cloud_unregister
+  name: az cloud unregister
+  summary: Membatalkan pendaftaran cloud.
+  description: ''
+  syntax: az cloud unregister --name
+  examples:
+  - summary: Membatalkan pendaftaran cloud. (dibuat otomatis)
+    syntax: az cloud unregister --name MyRegisteredCloud
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama cloud terdaftar.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cloud/_help.py
+- uid: az_cloud_update
+  name: az cloud update
+  summary: Memperbarui konfigurasi cloud.
+  description: ''
+  syntax: >-
+    az cloud update [--cloud-config]
+                    [--endpoint-active-directory]
+                    [--endpoint-active-directory-data-lake-resource-id]
+                    [--endpoint-active-directory-graph-resource-id]
+                    [--endpoint-active-directory-resource-id]
+                    [--endpoint-gallery]
+                    [--endpoint-management]
+                    [--endpoint-resource-manager]
+                    [--endpoint-sql-management]
+                    [--endpoint-vm-image-alias-doc]
+                    [--name]
+                    [--profile {2017-03-09-profile, 2018-03-01-hybrid, 2019-03-01-hybrid, 2020-09-01-hybrid, latest}]
+                    [--suffix-acr-login-server-endpoint]
+                    [--suffix-azure-datalake-analytics-catalog-and-job-endpoint]
+                    [--suffix-azure-datalake-store-file-system-endpoint]
+                    [--suffix-keyvault-dns]
+                    [--suffix-sql-server-hostname]
+                    [--suffix-storage-endpoint]
+  examples:
+  - summary: Memperbarui konfigurasi cloud. (dibuat otomatis)
+    syntax: az cloud update --profile latest
+  optionalParameters:
+  - name: --cloud-config
+    summary: Konfigurasi cloud yang dikodekan JSON. Gunakan @{file} untuk memuat dari file.
+    description: ''
+  - name: --endpoint-active-directory
+    summary: Titik akhir masuk Direktori Aktif.
+    description: ''
+  - name: --endpoint-active-directory-data-lake-resource-id
+    summary: ID sumber daya Direktori Aktif untuk layanan data lake.
+    description: ''
+  - name: --endpoint-active-directory-graph-resource-id
+    summary: ID sumber daya Active Directory.
+    description: ''
+  - name: --endpoint-active-directory-resource-id
+    summary: ID sumber daya untuk mendapatkan token AD.
+    description: ''
+  - name: --endpoint-gallery
+    summary: Titik akhir galeri templat.
+    description: ''
+  - name: --endpoint-management
+    summary: Titik akhir layanan manajemen.
+    description: ''
+  - name: --endpoint-resource-manager
+    summary: Titik akhir pengelolaan sumber daya.
+    description: ''
+  - name: --endpoint-sql-management
+    summary: Titik akhir pengelolaan server sql.
+    description: ''
+  - name: --endpoint-vm-image-alias-doc
+    summary: Uri dokumen yang menyimpan cache gambar komputer virtual yang umum digunakan.
+    description: ''
+  - name: --name -n
+    defaultValue: AzureCloud
+    summary: Nama cloud terdaftar.
+    description: ''
+  - name: --profile
+    parameterValueGroup: 2017-03-09-profile, 2018-03-01-hybrid, 2019-03-01-hybrid, 2020-09-01-hybrid, latest
+    summary: Profil untuk digunakan untuk cloud ini.
+    description: ''
+  - name: --suffix-acr-login-server-endpoint
+    summary: Akhiran server masuk Azure Container Registry.
+    description: ''
+  - name: --suffix-azure-datalake-analytics-catalog-and-job-endpoint
+    summary: Akhiran dns layanan analitik Data Lake dan layanan katalog.
+    description: ''
+  - name: --suffix-azure-datalake-store-file-system-endpoint
+    summary: Akhiran dns layanan sistem file penyimpanan Data Lake.
+    description: ''
+  - name: --suffix-keyvault-dns
+    summary: Akhiran dns layanan Key Vault.
+    description: ''
+  - name: --suffix-sql-server-hostname
+    summary: Akhiran dns untuk server sql.
+    description: ''
+  - name: --suffix-storage-endpoint
+    summary: Akhiran titik akhir untuk akun penyimpanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cloud/_help.py
+commands:
+- az_cloud_list
+- az_cloud_list-profiles
+- az_cloud_register
+- az_cloud_set
+- az_cloud_show
+- az_cloud_unregister
+- az_cloud_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 10/30/2020
+  description: Mengelola cloud Azure terdaftar.
+  ms.openlocfilehash: e0bafb1ecb12dd86d9f60c6338564e27de12d9e6
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141027970"
