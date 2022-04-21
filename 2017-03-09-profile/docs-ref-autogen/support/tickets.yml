@@ -1,0 +1,579 @@
+### YamlMime:AzureCLIGroup
+uid: az_support_tickets
+name: az support tickets
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **dukungan** untuk Azure CLI (versi 2.0.81 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **tiket dukungan az** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Membuat dan mengelola tiket dukungan Azure.
+description: ''
+directCommands:
+- uid: az_support_tickets_create
+  name: az support tickets create
+  summary: Membuat tiket dukungan baru untuk masalah Penambahan Kuota, Teknis, Penagihan, dan Manajemen Langganan untuk langganan yang ditentukan.
+  description: ''
+  syntax: >-
+    az support tickets create --contact-country
+                              --contact-email
+                              --contact-first-name
+                              --contact-language
+                              --contact-last-name
+                              --contact-method {email, phone}
+                              --contact-timezone
+                              --description
+                              --problem-classification
+                              --severity {critical, highestcriticalimpact, minimal, moderate}
+                              --ticket-name
+                              --title
+                              [--contact-additional-emails]
+                              [--contact-phone-number]
+                              [--partner-tenant-id]
+                              [--quota-change-payload]
+                              [--quota-change-regions]
+                              [--quota-change-subtype]
+                              [--quota-change-version]
+                              [--require-24-by-7-response {false, true}]
+                              [--start-time]
+                              [--technical-resource]
+  examples:
+  - summary: Buat tiket untuk masalah terkait Penagihan.
+    syntax: >-
+      az support tickets create \
+        --contact-country "USA" \
+        --contact-email "abc@contoso.com" \
+        --contact-first-name "Foo" \
+        --contact-language "en-US" \
+        --contact-last-name "Bar" \
+        --contact-method "email" \
+        --contact-timezone "Pacific Standard Time" \
+        --description "BillingTicketDescription" \
+        --problem-classification "/providers/Microsoft.Support/services/BillingServiceNameGuid/problemClassifications/BillingProblemClassificationNameGuid" \
+        --severity "minimal" \
+        --ticket-name "BillingTestTicketName" \
+        --title "BillingTicketTitle"
+  - summary: Buat tiket untuk masalah terkait Manajemen Langganan.
+    syntax: >-
+      az support tickets create \
+        --contact-country "USA" \
+        --contact-email "abc@contoso.com" \
+        --contact-first-name "Foo" \
+        --contact-language "en-US" \
+        --contact-last-name "Bar" \
+        --contact-method "email" \
+        --contact-timezone "Pacific Standard Time" \
+        --description "SubMgmtTicketDescription" \
+        --problem-classification "/providers/Microsoft.Support/services/SubMgmtServiceNameGuid/problemClassifications/SubMgmtProblemClassificationNameGuid" \
+        --severity "minimal" \
+        --ticket-name "SubMgmtTestTicketName" \
+        --title "SubMgmtTicketTitle"
+  - summary: Buat tiket untuk Masalah teknis yang terkait dengan sumber daya tertentu.
+    syntax: >-
+      az support tickets create \
+        --contact-country "USA" \
+        --contact-email "abc@contoso.com" \
+        --contact-first-name "Foo" \
+        --contact-language "en-US" \
+        --contact-last-name "Bar" \
+        --contact-method "email" \
+        --contact-timezone "Pacific Standard Time" \
+        --description "TechnicalTicketDescription" \
+        --problem-classification "/providers/Microsoft.Support/services/TechnicalServiceNameGuid/problemClassifications/TechnicalProblemClassificationNameGuid" \
+        --severity "minimal" \
+        --ticket-name "TechnicalTestTicketName" \
+        --title "TechnicalTicketTitle" \
+        --contact-additional-emails "xyz@contoso.com" "devs@contoso.com" \
+        --technical-resource "/subscriptions/SubscriptionGuid/resourceGroups/RgName/providers/Microsoft.Compute/virtualMachines/RName"
+  - summary: Buat tiket untuk masalah terkait Penagihan dalam mode admin atas nama (AOBO).
+    syntax: >-
+      az support tickets create \
+        --contact-country "USA" \
+        --contact-email "abc@contoso.com" \
+        --contact-first-name "Foo" \
+        --contact-language "en-US" \
+        --contact-last-name "Bar" \
+        --contact-method "email" \
+        --contact-timezone "Pacific Standard Time" \
+        --description "BillingTicketDescription" \
+        --problem-classification "/providers/Microsoft.Support/services/BillingServiceNameGuid/problemClassifications/BillingProblemClassificationNameGuid" \
+        --severity "minimal" \
+        --ticket-name "BillingTestTicketName" \
+        --title "BillingTicketTitle" \
+        --partner-tenant-id "CSPPartnerTenantIdGuid"
+  - summary: Buat tiket untuk peningkatan Kuota Generik untuk Layanan Azure apa pun.
+    syntax: >-
+      az support tickets create \
+        --contact-country "USA" \
+        --contact-email "abc@contoso.com" \
+        --contact-first-name "Foo" \
+        --contact-language "en-US" \
+        --contact-last-name "Bar" \
+        --contact-method "email" \
+        --contact-timezone "Pacific Standard Time" \
+        --description "QuotaTicketDescription" \
+        --problem-classification "/providers/Microsoft.Support/services/QuotaServiceNameGuid/problemClassifications/GenericProblemClassificationNameGuid" \
+        --severity "minimal" \
+        --ticket-name "QuotaTestTicketName" \
+        --title "QuotaTicketTitle"
+  - summary: Buat tiket untuk meminta peningkatan Kuota untuk Compute VM Cores.
+    syntax: >-
+      az support tickets create \
+        --contact-country "USA" \
+        --contact-email "abc@contoso.com" \
+        --contact-first-name "Foo" \
+        --contact-language "en-US" \
+        --contact-last-name "Bar" \
+        --contact-method "email" \
+        --contact-timezone "Pacific Standard Time" \
+        --description "QuotaTicketDescription" \
+        --problem-classification "/providers/Microsoft.Support/services/QuotaServiceNameGuid/problemClassifications/CoresQuotaProblemClassificationNameGuid" \
+        --severity "minimal" \
+        --ticket-name "QuotaTestTicketName" \
+        --title "QuotaTicketTitle" \
+        --quota-change-payload "{\"SKU\":\"DSv3 Series\", \"NewLimit\":104}" \
+        --quota-change-regions "EastUS" \
+        --quota-change-version "1.0"
+  - summary: Buat tiket untuk meminta peningkatan Kuota untuk Inti berprioritas rendah untuk akun Batch.
+    syntax: >-
+      az support tickets create \
+        --contact-country "USA" \
+        --contact-email "abc@contoso.com" \
+        --contact-first-name "Foo" \
+        --contact-language "en-US" \
+        --contact-last-name "Bar" \
+        --contact-method "email" \
+        --contact-timezone "Pacific Standard Time" \
+        --description "QuotaTicketDescription" \
+        --problem-classification "/providers/Microsoft.Support/services/QuotaServiceNameGuid/problemClassifications/BatchQuotaProblemClassificationNameGuid" \
+        --severity "minimal" \
+        --ticket-name "QuotaTestTicketName" \
+        --title "QuotaTicketTitle" \
+        --quota-change-payload "{\"AccountName\":\"test\", \"NewLimit\":200, \"Type\":\"LowPriority\"}" \
+        --quota-change-regions "EastUS" \
+        --quota-change-version "1.0" \
+        --quota-change-subtype "Account"
+  - summary: Buat tiket untuk meminta peningkatan Kuota untuk inti keluarga VM tertentu untuk akun Batch.
+    syntax: >-
+      az support tickets create \
+        --contact-country "USA" \
+        --contact-email "abc@contoso.com" \
+        --contact-first-name "Foo" \
+        --contact-language "en-US" \
+        --contact-last-name "Bar" \
+        --contact-method "email" \
+        --contact-timezone "Pacific Standard Time" \
+        --description "QuotaTicketDescription" \
+        --problem-classification "/providers/Microsoft.Support/services/QuotaServiceNameGuid/problemClassifications/BatchQuotaProblemClassificationNameGuid" \
+        --severity "minimal" \
+        --ticket-name "QuotaTestTicketName" \
+        --title "QuotaTicketTitle" \
+        --quota-change-payload "{\"AccountName\":\"test\", \"VMFamily\":\"standardA0_A7Family\", \"NewLimit\":200, \"Type\":\"Dedicated\"}" \
+        --quota-change-regions "EastUS" \
+        --quota-change-version "1.0" \
+        --quota-change-subtype "Account"
+  - summary: Buat tiket untuk meminta peningkatan Kuota untuk Kumpulan untuk akun Batch.
+    syntax: >-
+      az support tickets create \
+        --contact-country "USA" \
+        --contact-email "abc@contoso.com" \
+        --contact-first-name "Foo" \
+        --contact-language "en-US" \
+        --contact-last-name "Bar" \
+        --contact-method "email" \
+        --contact-timezone "Pacific Standard Time" \
+        --description "QuotaTicketDescription" \
+        --problem-classification "/providers/Microsoft.Support/services/QuotaServiceNameGuid/problemClassifications/BatchQuotaProblemClassificationNameGuid" \
+        --severity "minimal" \
+        --ticket-name "QuotaTestTicketName" \
+        --title "QuotaTicketTitle" \
+        --quota-change-payload "{\"AccountName\":\"test\", \"NewLimit\":200, \"Type\":\"Pools\"}" \
+        --quota-change-regions "EastUS" \
+        --quota-change-version "1.0" \
+        --quota-change-subtype "Account"
+  - summary: Buat tiket untuk meminta peningkatan Kuota untuk Pekerjaan Aktif dan Jadwal Pekerjaan untuk akun Batch.
+    syntax: >-
+      az support tickets create \
+        --contact-country "USA" \
+        --contact-email "abc@contoso.com" \
+        --contact-first-name "Foo" \
+        --contact-language "en-US" \
+        --contact-last-name "Bar" \
+        --contact-method "email" \
+        --contact-timezone "Pacific Standard Time" \
+        --description "QuotaTicketDescription" \
+        --problem-classification "/providers/Microsoft.Support/services/QuotaServiceNameGuid/problemClassifications/BatchQuotaProblemClassificationNameGuid" \
+        --severity "minimal" \
+        --ticket-name "QuotaTestTicketName" \
+        --title "QuotaTicketTitle" \
+        --quota-change-payload "{\"AccountName\":\"test\", \"NewLimit\":200, \"Type\":\"Jobs\"}" \
+        --quota-change-regions "EastUS" \
+        --quota-change-version "1.0" \
+        --quota-change-subtype "Account"
+  - summary: Buat tiket untuk meminta penambahan Kuota untuk jumlah akun Batch untuk langganan.
+    syntax: >-
+      az support tickets create \
+        --contact-country "USA" \
+        --contact-email "abc@contoso.com" \
+        --contact-first-name "Foo" \
+        --contact-language "en-US" \
+        --contact-last-name "Bar" \
+        --contact-method "email" \
+        --contact-timezone "Pacific Standard Time" \
+        --description "QuotaTicketDescription" \
+        --problem-classification "/providers/Microsoft.Support/services/QuotaServiceNameGuid/problemClassifications/BatchQuotaProblemClassificationNameGuid" \
+        --severity "minimal" \
+        --ticket-name "QuotaTestTicketName" \
+        --title "QuotaTicketTitle" \
+        --quota-change-payload "{\"NewLimit\":200, \"Type\":\"Account\"}" \
+        --quota-change-regions "EastUS" \
+        --quota-change-version "1.0" \
+        --quota-change-subtype "Subscription"
+  - summary: Buat tiket untuk meminta peningkatan Kuota untuk DTU untuk SQL Database.
+    syntax: >-
+      az support tickets create \
+        --contact-country "USA" \
+        --contact-email "abc@contoso.com" \
+        --contact-first-name "Foo" \
+        --contact-language "en-US" \
+        --contact-last-name "Bar" \
+        --contact-method "email" \
+        --contact-timezone "Pacific Standard Time" \
+        --description "QuotaTicketDescription" \
+        --problem-classification "/providers/Microsoft.Support/services/QuotaServiceNameGuid/problemClassifications/SqlDatabaseQuotaProblemClassificationNameGuid" \
+        --severity "minimal" \
+        --ticket-name "QuotaTestTicketName" \
+        --title "QuotaTicketTitle" \
+        --quota-change-payload "{\"ServerName\":\"testserver\", \"NewLimit\":54000}" \
+        --quota-change-regions "EastUS" \
+        --quota-change-version "1.0" \
+        --quota-change-subtype "DTUs"
+  - summary: Buat tiket untuk meminta peningkatan Kuota untuk Server untuk SQL Database.
+    syntax: >-
+      az support tickets create \
+        --contact-country "USA" \
+        --contact-email "abc@contoso.com" \
+        --contact-first-name "Foo" \
+        --contact-language "en-US" \
+        --contact-last-name "Bar" \
+        --contact-method "email" \
+        --contact-timezone "Pacific Standard Time" \
+        --description "QuotaTicketDescription" \
+        --problem-classification "/providers/Microsoft.Support/services/QuotaServiceNameGuid/problemClassifications/SqlDatabaseQuotaProblemClassificationNameGuid" \
+        --severity "minimal" \
+        --ticket-name "QuotaTestTicketName" \
+        --title "QuotaTicketTitle" \
+        --quota-change-payload "{\"NewLimit\":54000}" \
+        --quota-change-regions "EastUS" \
+        --quota-change-version "1.0" \
+        --quota-change-subtype "Servers"
+  - summary: Buat tiket untuk meminta peningkatan Kuota untuk DTU untuk SQL Data Warehouse.
+    syntax: >-
+      az support tickets create \
+        --contact-country "USA" \
+        --contact-email "abc@contoso.com" \
+        --contact-first-name "Foo" \
+        --contact-language "en-US" \
+        --contact-last-name "Bar" \
+        --contact-method "email" \
+        --contact-timezone "Pacific Standard Time" \
+        --description "QuotaTicketDescription" \
+        --problem-classification "/providers/Microsoft.Support/services/QuotaServiceNameGuid/problemClassifications/SqlDataWarehouseQuotaProblemClassificationNameGuid" \
+        --severity "minimal" \
+        --ticket-name "QuotaTestTicketName" \
+        --title "QuotaTicketTitle" \
+        --quota-change-payload "{\"ServerName\":\"testserver\", \"NewLimit\":54000}" \
+        --quota-change-regions "EastUS" \
+        --quota-change-version "1.0" \
+        --quota-change-subtype "DTUs"
+  - summary: Buat tiket untuk meminta peningkatan Kuota untuk Server untuk SQL Data Warehouse.
+    syntax: >-
+      az support tickets create \
+        --contact-country "USA" \
+        --contact-email "abc@contoso.com" \
+        --contact-first-name "Foo" \
+        --contact-language "en-US" \
+        --contact-last-name "Bar" \
+        --contact-method "email" \
+        --contact-timezone "Pacific Standard Time" \
+        --description "QuotaTicketDescription" \
+        --problem-classification "/providers/Microsoft.Support/services/QuotaServiceNameGuid/problemClassifications/SqlDataWarehouseQuotaProblemClassificationNameGuid" \
+        --severity "minimal" \
+        --ticket-name "QuotaTestTicketName" \
+        --title "QuotaTicketTitle" \
+        --quota-change-payload "{\"NewLimit\":200}" \
+        --quota-change-regions "EastUS" \
+        --quota-change-version "1.0" \
+        --quota-change-subtype "Servers"
+  - summary: Buat tiket untuk meminta peningkatan Kuota untuk inti keluarga VM tertentu untuk layanan Pembelajaran Mesin.
+    syntax: >-
+      az support tickets create \
+        --contact-country "USA" \
+        --contact-email "abc@contoso.com" \
+        --contact-first-name "Foo" \
+        --contact-language "en-US" \
+        --contact-last-name "Bar" \
+        --contact-method "email" \
+        --contact-timezone "Pacific Standard Time" \
+        --description "QuotaTicketDescription" \
+        --problem-classification "/providers/Microsoft.Support/services/QuotaServiceNameGuid/problemClassifications/MachineLearningQuotaProblemClassificationNameGuid" \
+        --severity "minimal" \
+        --ticket-name "QuotaTestTicketName" \
+        --title "QuotaTicketTitle" \
+        --quota-change-payload "{\"VMFamily\":\"standardA0_A7Family\", \"NewLimit\":200, \"Type\":\"Dedicated\"}" \
+        --quota-change-regions "EastUS" \
+        --quota-change-version "1.0" \
+        --quota-change-subtype "BatchAml"
+  - summary: Buat tiket untuk meminta peningkatan Kuota untuk Inti berprioritas rendah untuk layanan Pembelajaran Mesin.
+    syntax: >-
+      az support tickets create \
+        --contact-country "USA" \
+        --contact-email "abc@contoso.com" \
+        --contact-first-name "Foo" \
+        --contact-language "en-US" \
+        --contact-last-name "Bar" \
+        --contact-method "email" \
+        --contact-timezone "Pacific Standard Time" \
+        --description "QuotaTicketDescription" \
+        --problem-classification "/providers/Microsoft.Support/services/QuotaServiceNameGuid/problemClassifications/MachineLearningQuotaProblemClassificationNameGuid" \
+        --severity "minimal" \
+        --ticket-name "QuotaTestTicketName" \
+        --title "QuotaTicketTitle" \
+        --quota-change-payload "{\"NewLimit\":200, \"Type\":\"LowPriority\"}" \
+        --quota-change-regions "EastUS" \
+        --quota-change-version "1.0" \
+        --quota-change-subtype "BatchAml"
+  requiredParameters:
+  - isRequired: true
+    name: --contact-country
+    summary: Negara pengguna. Ini adalah kode ISO Alpha-3.
+    description: ''
+  - isRequired: true
+    name: --contact-email
+    summary: Alamat email utama.
+    description: ''
+  - isRequired: true
+    name: --contact-first-name
+    summary: Nama Depan.
+    description: ''
+  - isRequired: true
+    name: --contact-language
+    summary: Bahasa dukungan pilihan dari Azure. Bahasa dukungan bervariasi berdasarkan tingkat keparahan yang Anda pilih untuk tiket dukungan Anda. Ini adalah kode bahasa negara standar.
+    description: ''
+  - isRequired: true
+    name: --contact-last-name
+    summary: Nama Belakang.
+    description: ''
+  - isRequired: true
+    name: --contact-method
+    parameterValueGroup: email, phone
+    summary: Metode kontak yang disukai.
+    description: ''
+  - isRequired: true
+    name: --contact-timezone
+    summary: Zona waktu pengguna. Ini adalah nama zona waktu dari Nilai Indeks Zona Waktu Microsoft.
+    description: ''
+  - isRequired: true
+    name: --description
+    summary: Deskripsi terperinci tentang pertanyaan atau masalah.
+    description: ''
+  - isRequired: true
+    name: --problem-classification
+    summary: Setiap layanan Azure memiliki serangkaian kategori masalah sendiri yang disebut klasifikasi masalah yang sesuai dengan jenis masalah yang Anda alami. Parameter ini adalah id sumber daya sumber daya ProblemClassification.
+    description: ''
+  - isRequired: true
+    name: --severity
+    parameterValueGroup: critical, highestcriticalimpact, minimal, moderate
+    summary: Nilai yang menunjukkan urgensi kasus, yang pada gilirannya menentukan waktu respons sesuai dengan perjanjian tingkat layanan dari paket dukungan teknis yang Anda miliki dengan Azure.
+    description: ''
+  - isRequired: true
+    name: --ticket-name
+    summary: Nama tiket dukungan.
+    description: ''
+  - isRequired: true
+    name: --title
+    summary: Judul tiket dukungan.
+    description: ''
+  optionalParameters:
+  - name: --contact-additional-emails
+    summary: Daftar alamat email tambahan yang dipisahkan spasi. Alamat email tambahan akan disalin pada korespondensi apa pun tentang tiket dukungan.
+    description: ''
+  - name: --contact-phone-number
+    summary: Nomor telepon. Ini diperlukan jika metode kontak yang disukai adalah telepon.
+    description: ''
+  - name: --partner-tenant-id
+    summary: Id penyewa mitra untuk skenario Admin Atas Nama (AOBO). Selain masuk ke penyewa pelanggan, masuk ke penyewa mitra (PT) menggunakan "az login -t PT --allow-no-subscriptions" diperlukan.
+    description: ''
+  - name: --quota-change-payload
+    summary: Daftar payload berseri yang dipisahkan ruang dari permintaan peningkatan kuota yang sesuai dengan wilayah. Kunjungi https://aka.ms/supportrpquotarequestpayload untuk detailnya.
+    description: ''
+  - name: --quota-change-regions
+    summary: Daftar wilayah yang dipisahkan spasi tempat permintaan penambahan kuota dibuat.
+    description: ''
+  - name: --quota-change-subtype
+    summary: 'Diperlukan untuk jenis kuota tertentu ketika ada subjenis yang Anda minta penambahan kuotanya. Contoh: Batch.'
+    description: ''
+  - name: --quota-change-version
+    summary: Versi permintaan perubahan kuota.
+    description: ''
+  - name: --require-24-by-7-response
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah ini memerlukan respons 24x7 dari Azure. Defaultnya adalah false.
+    description: ''
+  - name: --start-time
+    summary: Waktu dalam tanggalwaktu UTC (Y-m-d'T'H:M:S'Z') saat masalah dimulai. Defaultnya adalah hari ini.
+    description: ''
+  - name: --technical-resource
+    summary: Ini adalah id sumber daya sumber daya layanan Azure tempat tiket dukungan dibuat.
+    description: ''
+- uid: az_support_tickets_list
+  name: az support tickets list
+  summary: Mencantumkan semua tiket dukungan untuk langganan Azure.
+  description: ''
+  syntax: az support tickets list [--filters]
+  examples:
+  - summary: Mencantumkan tiket dukungan untuk langganan.
+    syntax: az support tickets list
+  - summary: Mencantumkan tiket dukungan dalam status terbuka untuk langganan.
+    syntax: az support tickets list --filters "Status eq 'Open'"
+  - summary: Mencantumkan tiket dukungan yang dibuat pada atau setelah tanggal tertentu dan dalam status terbuka untuk langganan.
+    syntax: az support tickets list --filters "CreatedDate ge 2020-01-01 and Status eq 'Open'"
+  optionalParameters:
+  - name: --filters
+    summary: Filter yang akan diterapkan pada operasi. Kami mendukung semtantik OData v4.0. Filter dapat ditentukan pada properti "Status" menggunakan operator eq atau pada "CreatedDate" menggunakan gt/ge. Untuk menggabungkan kedua filter, gunakan logis dan operator. Defaultnya adalah CreatedDate >= satu minggu.
+    description: ''
+- uid: az_support_tickets_show
+  name: az support tickets show
+  summary: Mendapatkan detail tiket dukungan untuk langganan Azure.
+  description: ''
+  syntax: az support tickets show --ticket-name
+  examples:
+  - summary: Mendapatkan detail tiket langganan.
+    syntax: az support tickets show --ticket-name "TestTicketName"
+  requiredParameters:
+  - isRequired: true
+    name: --ticket-name
+    summary: Nama tiket dukungan.
+    description: ''
+- uid: az_support_tickets_update
+  name: az support tickets update
+  summary: Memperbarui tingkat keparahan, status, dan informasi kontak pelanggan untuk tiket dukungan.
+  description: ''
+  syntax: >-
+    az support tickets update --ticket-name
+                              [--contact-additional-emails]
+                              [--contact-country]
+                              [--contact-email]
+                              [--contact-first-name]
+                              [--contact-language]
+                              [--contact-last-name]
+                              [--contact-method {email, phone}]
+                              [--contact-phone-number]
+                              [--contact-timezone]
+                              [--severity {critical, highestcriticalimpact, minimal, moderate}]
+                              [--status {closed, open}]
+  examples:
+  - summary: Memperbarui tingkat keparahan tiket dukungan.
+    syntax: az support tickets update --ticket-name "TestTicketName" --severity "moderate"
+  - summary: Memperbarui status tiket dukungan.
+    syntax: az support tickets update --ticket-name "TestTicketName" --status "closed"
+  - summary: Memperbarui properti detail kontak pelanggan tiket dukungan.
+    syntax: >-
+      az support tickets update --ticket-name "TestTicketName" \
+        --contact-additional-emails "xyz@contoso.com" "devs@contoso.com" \
+        --contact-country "USA" \
+        --contact-email "abc@contoso.com" \
+        --contact-first-name "Foo" \
+        --contact-language "en-US" \
+        --contact-last-name "Bar" \
+        --contact-method "phone" \
+        --contact-phone-number "123-456-7890" \
+        --contact-timezone "Pacific Standard Time"
+  - summary: Memperbarui properti tingkat keparahan tiket dukungan, status, dan detail kontak pelanggan.
+    syntax: >-
+      az support tickets update --ticket-name "TestTicketName" \
+        --status "open" \
+        --contact-additional-emails "xyz@contoso.com" "devs@contoso.com" \
+        --contact-country "USA" \
+        --contact-email "abc@contoso.com" \
+        --contact-first-name "Foo" \
+        --contact-language "en-US" \
+        --contact-last-name "Bar" \
+        --contact-method "phone" \
+        --contact-phone-number "123-456-7890" \
+        --contact-timezone "Pacific Standard Time" \
+        --severity "moderate"
+  requiredParameters:
+  - isRequired: true
+    name: --ticket-name
+    summary: Nama tiket dukungan.
+    description: ''
+  optionalParameters:
+  - name: --contact-additional-emails
+    summary: Daftar alamat email tambahan yang dipisahkan spasi. Alamat email tambahan akan disalin pada korespondensi apa pun tentang tiket dukungan.
+    description: ''
+  - name: --contact-country
+    summary: Negara pengguna. Ini adalah kode ISO Alpha-3.
+    description: ''
+  - name: --contact-email
+    summary: Alamat email utama.
+    description: ''
+  - name: --contact-first-name
+    summary: Nama Depan.
+    description: ''
+  - name: --contact-language
+    summary: Bahasa dukungan pilihan dari Azure. Bahasa dukungan bervariasi berdasarkan tingkat keparahan yang Anda pilih untuk tiket dukungan Anda. Ini adalah kode bahasa negara standar.
+    description: ''
+  - name: --contact-last-name
+    summary: Nama Belakang.
+    description: ''
+  - name: --contact-method
+    parameterValueGroup: email, phone
+    summary: Metode kontak yang disukai.
+    description: ''
+  - name: --contact-phone-number
+    summary: Nomor telepon. Ini diperlukan jika metode kontak yang disukai adalah telepon.
+    description: ''
+  - name: --contact-timezone
+    summary: Zona waktu pengguna. Ini adalah nama zona waktu dari Nilai Indeks Zona Waktu Microsoft.
+    description: ''
+  - name: --severity
+    parameterValueGroup: critical, highestcriticalimpact, minimal, moderate
+    summary: Nilai yang menunjukkan urgensi kasus, yang pada gilirannya menentukan waktu respons sesuai dengan perjanjian tingkat layanan dari paket dukungan teknis yang Anda miliki dengan Azure.
+    description: ''
+  - name: --status
+    parameterValueGroup: closed, open
+    summary: Status yang akan diperbarui pada tiket.
+    description: ''
+commands:
+- az_support_tickets_communications
+- az_support_tickets_communications_create
+- az_support_tickets_communications_list
+- az_support_tickets_communications_show
+- az_support_tickets_create
+- az_support_tickets_list
+- az_support_tickets_show
+- az_support_tickets_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Membuat dan mengelola tiket dukungan Azure.
+  ms.openlocfilehash: d41625292d50656a7990c2f2d351f07ace77dc64
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141047140"

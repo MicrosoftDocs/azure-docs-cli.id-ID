@@ -1,0 +1,132 @@
+### YamlMime:AzureCLIGroup
+uid: az_iot_product_test_task
+name: az iot product test task
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **azure-iot** untuk Azure CLI (versi 2.24.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **az iot product test task** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola tugas sertifikasi pengujian produk.
+description: ''
+directCommands:
+- uid: az_iot_product_test_task_create
+  name: az iot product test task create
+  summary: Mengantrekan tugas pengujian baru. Hanya satu tugas pengujian yang dapat berjalan pada satu waktu.
+  description: ''
+  syntax: >-
+    az iot product test task create --test-id
+                                    [--base-url]
+                                    [--interval]
+                                    [--type {GenerateTestCases, QueueTestRun}]
+                                    [--wait {false, true}]
+  examples:
+  - summary: Penggunaan dasar
+    syntax: az iot product test task create --test-id {test_id}
+  - summary: Tunggu penyelesaian dan kembalikan kasus pengujian
+    syntax: az iot product test task create --test-id {test_id} --wait
+  - summary: Tunggu hingga selesai dengan interval polling kustom hingga selesai dan kembalikan kasus pengujian
+    syntax: az iot product test task create --test-id {test_id} --wait --poll-interval 5
+  requiredParameters:
+  - isRequired: true
+    name: --test-id -t
+    summary: Id yang dihasilkan untuk pengujian sertifikasi perangkat.
+    description: ''
+  optionalParameters:
+  - name: --base-url
+    summary: Ambil alih URL layanan sertifikasi untuk memungkinkan pengujian di lingkungan non-produksi.
+    description: ''
+  - name: --interval --poll-interval
+    defaultValue: "3"
+    summary: Digunakan bersama dengan --wait. Memisahkan seberapa sering (dalam detik) polling terjadi.
+    description: ''
+  - name: --type
+    defaultValue: QueueTestRun
+    parameterValueGroup: GenerateTestCases, QueueTestRun
+    summary: Jenis tugas untuk pengujian perangkat.
+    description: ''
+  - name: --wait -w
+    parameterValueGroup: false, true
+    summary: Tunggu penyelesaian tugas dan kembalikan data kasus pengujian saat tersedia.
+    description: ''
+- uid: az_iot_product_test_task_delete
+  name: az iot product test task delete
+  summary: Batalkan tugas yang sedang berjalan yang cocok dengan --task-id yang ditentukan.
+  description: ''
+  syntax: >-
+    az iot product test task delete --task-id
+                                    --test-id
+                                    [--base-url]
+  examples:
+  - summary: Penggunaan dasar
+    syntax: az iot product test task delete --test-id {test_id} --task-id {task_id}
+  requiredParameters:
+  - isRequired: true
+    name: --task-id
+    summary: Id yang dihasilkan dari tugas pengujian.
+    description: ''
+  - isRequired: true
+    name: --test-id -t
+    summary: Id yang dihasilkan untuk pengujian sertifikasi perangkat.
+    description: ''
+  optionalParameters:
+  - name: --base-url
+    summary: Ambil alih URL layanan sertifikasi untuk memungkinkan pengujian di lingkungan non-produksi.
+    description: ''
+- uid: az_iot_product_test_task_show
+  name: az iot product test task show
+  summary: Perlihatkan status tugas pengujian. Gunakan --running untuk tugas yang sedang berjalan saat ini atau --task-id.
+  description: ''
+  syntax: >-
+    az iot product test task show --test-id
+                                  [--base-url]
+                                  [--running {false, true}]
+                                  [--task-id]
+  examples:
+  - summary: Status tugas menurut --task-id
+    syntax: az iot product test task show --test-id {test_id} --task-id {task_id}
+  - summary: Saat ini menjalankan tugas pengujian produk
+    syntax: az iot product test task show --test-id {test_id} --running
+  requiredParameters:
+  - isRequired: true
+    name: --test-id -t
+    summary: Id yang dihasilkan untuk pengujian sertifikasi perangkat.
+    description: ''
+  optionalParameters:
+  - name: --base-url
+    summary: Ambil alih URL layanan sertifikasi untuk memungkinkan pengujian di lingkungan non-produksi.
+    description: ''
+  - name: --running
+    parameterValueGroup: false, true
+    summary: Dapatkan tugas yang sedang berjalan dari pengujian perangkat.
+    description: ''
+  - name: --task-id
+    summary: Id yang dihasilkan dari tugas pengujian.
+    description: ''
+commands:
+- az_iot_product_test_task_create
+- az_iot_product_test_task_delete
+- az_iot_product_test_task_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola tugas sertifikasi pengujian produk.
+  ms.openlocfilehash: b3a4ee9e7ed808285292b965704f7222d1c521ed
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140982680"
