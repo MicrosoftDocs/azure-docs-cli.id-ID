@@ -1,0 +1,267 @@
+### YamlMime:AzureCLIGroup
+uid: az_monitor_app-insights_component_continues-export
+name: az monitor app-insights component continues-export
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **application-insights** untuk Azure CLI (versi 2.0.79 atau lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az monitor app-insights component continues-export** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola konfigurasi Ekspor Berkelanjutan untuk komponen Insights Aplikasi.
+description: ''
+directCommands:
+- uid: az_monitor_app-insights_component_continues-export_create
+  name: az monitor app-insights component continues-export create
+  summary: Buat konfigurasi Ekspor Berkelanjutan untuk komponen Insights Aplikasi.
+  description: ''
+  syntax: >-
+    az monitor app-insights component continues-export create --app
+                                                              --dest-account
+                                                              --dest-container
+                                                              --dest-sas
+                                                              --dest-sub-id
+                                                              --record-types {Availability, Event, Exceptions, Messages, Metrics, PageViewPerformance, PageViews, PerformanceCounters, Rdd, Requests}
+                                                              --resource-group
+                                                              [--dest-type {Blob}]
+                                                              [--is-enabled {false, true}]
+  examples:
+  - summary: Membuat konfigurasi Ekspor Berkelanjutan.
+    syntax: >-
+      az monitor app-insights component continues-export create -g rg \
+
+      --app 578f0e27-12e9-4631-bc02-50b965da2633 \
+
+      --record-types Requests Event Exceptions Metrics PageViews \
+
+      --dest-account account --dest-container container --dest-sub-id sub-id \
+
+      --dest-sas se=2020-10-27&sp=w&sv=2018-11-09&sr=c
+  requiredParameters:
+  - isRequired: true
+    name: --app -a
+    summary: GUID, nama aplikasi, atau nama sumber daya Azure yang sepenuhnya memenuhi syarat dari komponen Insights Aplikasi. GUID aplikasi dapat diperoleh dari item menu Akses API pada sumber daya Insights Aplikasi apa pun di portal Azure. Jika menggunakan nama aplikasi, tentukan grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --dest-account
+    summary: Nama akun penyimpanan tujuan.
+    description: ''
+  - isRequired: true
+    name: --dest-container
+    summary: Nama kontainer penyimpanan tujuan.
+    description: ''
+  - isRequired: true
+    name: --dest-sas
+    summary: Token SAS untuk kontainer penyimpanan tujuan. Ini harus memberikan izin tulis.
+    description: ''
+  - isRequired: true
+    name: --dest-sub-id
+    summary: ID langganan akun penyimpanan tujuan.
+    description: ''
+  - isRequired: true
+    name: --record-types
+    parameterValueGroup: Availability, Event, Exceptions, Messages, Metrics, PageViewPerformance, PageViews, PerformanceCounters, Rdd, Requests
+    summary: Jenis dokumen yang akan diekspor, sebagai nilai yang dipisahkan koma. Nilai yang diizinkan termasuk 'Requests', 'Event', 'Exceptions', 'Metrics', 'PageViews', 'PageViewPerformance', 'Rdd', 'PerformanceCounters', 'Availability', 'Messages'.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --dest-type
+    defaultValue: Blob
+    parameterValueGroup: Blob
+    summary: Jenis tujuan Ekspor Berkelanjutan. Ini harus menjadi 'Blob'.
+    description: ''
+  - name: --is-enabled
+    defaultValue: "true"
+    parameterValueGroup: false, true
+    summary: Atur ke 'true' untuk membuat konfigurasi Ekspor Berkelanjutan sebagai diaktifkan, jika tidak, atur ke 'false'.
+    description: ''
+- uid: az_monitor_app-insights_component_continues-export_delete
+  name: az monitor app-insights component continues-export delete
+  summary: Menghapus konfigurasi Ekspor Berkelanjutan tertentu dari komponen Insights Aplikasi.
+  description: ''
+  syntax: >-
+    az monitor app-insights component continues-export delete --app
+                                                              --id
+                                                              --resource-group
+                                                              [--yes]
+  examples:
+  - summary: Menghapus konfigurasi Ekspor Berkelanjutan menurut ID.
+    syntax: >-
+      az monitor app-insights component continues-export delete -g rg \
+
+      --app 578f0e27-12e9-4631-bc02-50b965da2633 \
+
+      --id exportid
+  requiredParameters:
+  - isRequired: true
+    name: --app -a
+    summary: GUID, nama aplikasi, atau nama sumber daya Azure yang sepenuhnya memenuhi syarat dari komponen Insights Aplikasi. GUID aplikasi dapat diperoleh dari item menu Akses API pada sumber daya Insights Aplikasi apa pun di portal Azure. Jika menggunakan nama aplikasi, tentukan grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --id
+    summary: ID konfigurasi Ekspor Berkelanjutan. Ini unik dalam komponen Insights Aplikasi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_monitor_app-insights_component_continues-export_list
+  name: az monitor app-insights component continues-export list
+  summary: Mencantumkan konfigurasi Ekspor Berkelanjutan untuk komponen Insights Aplikasi.
+  description: ''
+  syntax: >-
+    az monitor app-insights component continues-export list --app
+                                                            --resource-group
+  examples:
+  - summary: ExportConfigurationsList
+    syntax: >-
+      az monitor app-insights component continues-export list -g rg \
+
+      --app 578f0e27-12e9-4631-bc02-50b965da2633
+  requiredParameters:
+  - isRequired: true
+    name: --app -a
+    summary: GUID, nama aplikasi, atau nama sumber daya Azure yang sepenuhnya memenuhi syarat dari komponen Insights Aplikasi. GUID aplikasi dapat diperoleh dari item menu Akses API pada sumber daya Insights Aplikasi apa pun di portal Azure. Jika menggunakan nama aplikasi, tentukan grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_monitor_app-insights_component_continues-export_show
+  name: az monitor app-insights component continues-export show
+  summary: Dapatkan konfigurasi Ekspor Berkelanjutan tertentu dari komponen Insights Aplikasi.
+  description: ''
+  syntax: >-
+    az monitor app-insights component continues-export show --app
+                                                            --id
+                                                            --resource-group
+  examples:
+  - summary: Dapatkan konfigurasi Ekspor Berkelanjutan berdasarkan ID.
+    syntax: >-
+      az monitor app-insights component continues-export show -g rg \
+
+      --app 578f0e27-12e9-4631-bc02-50b965da2633 \
+
+      --id exportid
+  requiredParameters:
+  - isRequired: true
+    name: --app -a
+    summary: GUID, nama aplikasi, atau nama sumber daya Azure yang sepenuhnya memenuhi syarat dari komponen Insights Aplikasi. GUID aplikasi dapat diperoleh dari item menu Akses API pada sumber daya Insights Aplikasi apa pun di portal Azure. Jika menggunakan nama aplikasi, tentukan grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --id
+    summary: ID konfigurasi Ekspor Berkelanjutan. Ini unik dalam komponen Insights Aplikasi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_monitor_app-insights_component_continues-export_update
+  name: az monitor app-insights component continues-export update
+  summary: Memperbarui konfigurasi Ekspor Berkelanjutan untuk komponen Insights Aplikasi.
+  description: ''
+  syntax: >-
+    az monitor app-insights component continues-export update --app
+                                                              --id
+                                                              --resource-group
+                                                              [--dest-account]
+                                                              [--dest-container]
+                                                              [--dest-sas]
+                                                              [--dest-sub-id]
+                                                              [--dest-type {Blob}]
+                                                              [--is-enabled {false, true}]
+                                                              [--record-types {Availability, Event, Exceptions, Messages, Metrics, PageViewPerformance, PageViews, PerformanceCounters, Rdd, Requests}]
+  examples:
+  - summary: Memperbarui jenis rekaman konfigurasi Ekspor Berkelanjutan.
+    syntax: >-
+      az monitor app-insights component continues-export update -g rg \
+
+      --app 578f0e27-12e9-4631-bc02-50b965da2633 \
+
+      --id exportid \
+
+      --record-types Requests Event Exceptions Metrics PageViews
+  - summary: Memperbarui tujuan penyimpanan konfigurasi Ekspor Berkelanjutan.
+    syntax: >-
+      az monitor app-insights component continues-export update -g rg \
+
+      --app 578f0e27-12e9-4631-bc02-50b965da2633 \
+
+      --id exportid \
+
+      --dest-account account --dest-container container --dest-sub-id sub-id \
+
+      --dest-sas se=2020-10-27&sp=w&sv=2018-11-09&sr=c
+  requiredParameters:
+  - isRequired: true
+    name: --app -a
+    summary: GUID, nama aplikasi, atau nama sumber daya Azure yang sepenuhnya memenuhi syarat dari komponen Insights Aplikasi. GUID aplikasi dapat diperoleh dari item menu Akses API pada sumber daya Insights Aplikasi apa pun di portal Azure. Jika menggunakan nama aplikasi, tentukan grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --id
+    summary: ID konfigurasi Ekspor Berkelanjutan. Ini unik dalam komponen Insights Aplikasi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --dest-account
+    summary: Nama akun penyimpanan tujuan.
+    description: ''
+  - name: --dest-container
+    summary: Nama kontainer penyimpanan tujuan.
+    description: ''
+  - name: --dest-sas
+    summary: Token SAS untuk kontainer penyimpanan tujuan. Ini harus memberikan izin tulis.
+    description: ''
+  - name: --dest-sub-id
+    summary: ID langganan akun penyimpanan tujuan.
+    description: ''
+  - name: --dest-type
+    parameterValueGroup: Blob
+    summary: Jenis tujuan Ekspor Berkelanjutan. Ini harus menjadi 'Blob'.
+    description: ''
+  - name: --is-enabled
+    parameterValueGroup: false, true
+    summary: Atur ke 'true' untuk membuat konfigurasi Ekspor Berkelanjutan sebagai diaktifkan, jika tidak, atur ke 'false'.
+    description: ''
+  - name: --record-types
+    parameterValueGroup: Availability, Event, Exceptions, Messages, Metrics, PageViewPerformance, PageViews, PerformanceCounters, Rdd, Requests
+    summary: Jenis dokumen yang akan diekspor, sebagai nilai yang dipisahkan koma. Nilai yang diizinkan termasuk 'Requests', 'Event', 'Exceptions', 'Metrics', 'PageViews', 'PageViewPerformance', 'Rdd', 'PerformanceCounters', 'Availability', 'Messages'.
+    description: ''
+commands:
+- az_monitor_app-insights_component_continues-export_create
+- az_monitor_app-insights_component_continues-export_delete
+- az_monitor_app-insights_component_continues-export_list
+- az_monitor_app-insights_component_continues-export_show
+- az_monitor_app-insights_component_continues-export_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola konfigurasi Ekspor Berkelanjutan untuk komponen Insights Aplikasi.
+  ms.openlocfilehash: b62131e6e07dbfb92ad2a6bd27486c7cb4d17b36
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140993714"

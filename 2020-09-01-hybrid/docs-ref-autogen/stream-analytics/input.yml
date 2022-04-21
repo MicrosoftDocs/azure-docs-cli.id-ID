@@ -1,0 +1,298 @@
+### YamlMime:AzureCLIGroup
+uid: az_stream-analytics_input
+name: az stream-analytics input
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **analisis aliran** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **input az stream-analytics** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola input dengan analisis aliran.
+description: ''
+directCommands:
+- uid: az_stream-analytics_input_create
+  name: az stream-analytics input create
+  summary: Buat input atau ganti input yang sudah ada di bawah pekerjaan streaming yang ada.
+  description: ''
+  syntax: >-
+    az stream-analytics input create --input-name
+                                     --job-name
+                                     --resource-group
+                                     [--if-match]
+                                     [--if-none-match]
+                                     [--properties]
+  examples:
+  - summary: Membuat input blob referensi dengan serialisasi CSV
+    syntax: az stream-analytics input create --properties "{\"type\":\"Reference\",\"datasource\":{\"type\":\"Microsoft.Storage/Blob\",\"properties\":{\"container\":\"state\",\"dateFormat\":\"yyyy/MM/dd\",\"pathPattern\":\"{date}/{time}\",\"storageAccounts\":[{\"accountKey\":\"someAccountKey==\",\"accountName\":\"someAccountName\"}],\"timeFormat\":\"HH\"}},\"serialization\":{\"type\":\"Csv\",\"properties\":{\"encoding\":\"UTF8\",\"fieldDelimiter\":\",\"}}}" --input-name "input7225" --job-name "sj9597" --resource-group "sjrg8440"
+  - summary: Membuat input Stream Event Hub dengan serialisasi JSON
+    syntax: az stream-analytics input create --properties "{\"type\":\"Stream\",\"datasource\":{\"type\":\"Microsoft.ServiceBus/EventHub\",\"properties\":{\"consumerGroupName\":\"sdkconsumergroup\",\"eventHubName\":\"sdkeventhub\",\"serviceBusNamespace\":\"sdktest\",\"sharedAccessPolicyKey\":\"someSharedAccessPolicyKey==\",\"sharedAccessPolicyName\":\"RootManageSharedAccessKey\"}},\"serialization\":{\"type\":\"Json\",\"properties\":{\"encoding\":\"UTF8\"}}}" --input-name "input7425" --job-name "sj197" --resource-group "sjrg3139"
+  - summary: Membuat input IoT Hub aliran dengan serialisasi Avro
+    syntax: az stream-analytics input create --properties "{\"type\":\"Stream\",\"datasource\":{\"type\":\"Microsoft.Devices/IotHubs\",\"properties\":{\"consumerGroupName\":\"sdkconsumergroup\",\"endpoint\":\"messages/events\",\"iotHubNamespace\":\"iothub\",\"sharedAccessPolicyKey\":\"sharedAccessPolicyKey=\",\"sharedAccessPolicyName\":\"owner\"}},\"serialization\":{\"type\":\"Avro\"}}" --input-name "input7970" --job-name "sj9742" --resource-group "sjrg3467"
+  - summary: Membuat input blob aliran dengan serialisasi CSV
+    syntax: az stream-analytics input create --properties "{\"type\":\"Stream\",\"datasource\":{\"type\":\"Microsoft.Storage/Blob\",\"properties\":{\"container\":\"state\",\"dateFormat\":\"yyyy/MM/dd\",\"pathPattern\":\"{date}/{time}\",\"sourcePartitionCount\":16,\"storageAccounts\":[{\"accountKey\":\"someAccountKey==\",\"accountName\":\"someAccountName\"}],\"timeFormat\":\"HH\"}},\"serialization\":{\"type\":\"Csv\",\"properties\":{\"encoding\":\"UTF8\",\"fieldDelimiter\":\",\"}}}" --input-name "input8899" --job-name "sj6695" --resource-group "sjrg8161"
+  requiredParameters:
+  - isRequired: true
+    name: --input-name --name -n
+    summary: Nama input.
+    description: ''
+  - isRequired: true
+    name: --job-name
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --if-match
+    summary: ETag input. Hilangkan nilai ini untuk selalu menimpa input saat ini. Tentukan nilai ETag yang terakhir dilihat untuk mencegah penimpaan perubahan bersamaan secara tidak sengaja.
+    description: ''
+  - name: --if-none-match
+    summary: Atur ke '\*' untuk mengizinkan input baru dibuat, tetapi untuk mencegah pembaruan input yang ada. Nilai lain akan menghasilkan respons 412 Pra-kondisi Gagal.
+    description: ''
+  - name: --properties
+    summary: 'Properti yang terkait dengan input. Diperlukan pada permintaan PUT (CreateOrReplace). Nilai yang diharapkan: json-string/json-file/@json-file.'
+    description: ''
+- uid: az_stream-analytics_input_delete
+  name: az stream-analytics input delete
+  summary: Menghapus input dari pekerjaan streaming.
+  description: ''
+  syntax: >-
+    az stream-analytics input delete --input-name
+                                     --job-name
+                                     --resource-group
+                                     [--yes]
+  examples:
+  - summary: Menghapus input
+    syntax: az stream-analytics input delete --input-name "input7225" --job-name "sj9597" --resource-group "sjrg8440"
+  requiredParameters:
+  - isRequired: true
+    name: --input-name --name -n
+    summary: Nama input.
+    description: ''
+  - isRequired: true
+    name: --job-name
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_stream-analytics_input_list
+  name: az stream-analytics input list
+  summary: Cantumkan semua input di bawah pekerjaan streaming yang ditentukan.
+  description: ''
+  syntax: >-
+    az stream-analytics input list --job-name
+                                   --resource-group
+                                   [--select]
+  examples:
+  - summary: Mencantumkan semua input dalam pekerjaan streaming
+    syntax: az stream-analytics input list --job-name "sj9597" --resource-group "sjrg8440"
+  - summary: Mencantumkan semua input dalam pekerjaan streaming dan menyertakan informasi diagnostik menggunakan parameter kueri $select OData
+    syntax: az stream-analytics input list --select "*" --job-name "sj7804" --resource-group "sjrg3276"
+  requiredParameters:
+  - isRequired: true
+    name: --job-name
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --select
+    summary: Parameter kueri $select OData. Ini adalah daftar properti struktural yang dipisahkan koma untuk disertakan dalam respons, atau "\*" untuk menyertakan semua properti. Secara default, semua properti dikembalikan kecuali diagnostik. Saat ini hanya menerima '\*' sebagai nilai yang valid.
+    description: ''
+- uid: az_stream-analytics_input_show
+  name: az stream-analytics input show
+  summary: Dapatkan detail tentang input yang ditentukan.
+  description: ''
+  syntax: >-
+    az stream-analytics input show --input-name
+                                   --job-name
+                                   --resource-group
+  examples:
+  - summary: Mendapatkan input blob referensi dengan serialisasi CSV
+    syntax: az stream-analytics input show --input-name "input7225" --job-name "sj9597" --resource-group "sjrg8440"
+  - summary: Mendapatkan input Stream Event Hub dengan serialisasi JSON
+    syntax: az stream-analytics input show --input-name "input7425" --job-name "sj197" --resource-group "sjrg3139"
+  - summary: Mendapatkan input IoT Hub aliran dengan serialisasi Avro
+    syntax: az stream-analytics input show --input-name "input7970" --job-name "sj9742" --resource-group "sjrg3467"
+  - summary: Mendapatkan input blob aliran dengan serialisasi CSV
+    syntax: az stream-analytics input show --input-name "input8899" --job-name "sj6695" --resource-group "sjrg8161"
+  requiredParameters:
+  - isRequired: true
+    name: --input-name --name -n
+    summary: Nama input.
+    description: ''
+  - isRequired: true
+    name: --job-name
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_stream-analytics_input_test
+  name: az stream-analytics input test
+  summary: Uji apakah sumber data input dapat dijangkau dan dapat digunakan oleh layanan Azure Stream Analytics.
+  description: ''
+  syntax: >-
+    az stream-analytics input test --input-name
+                                   --job-name
+                                   --resource-group
+                                   [--no-wait]
+                                   [--properties]
+  examples:
+  - summary: Menguji koneksi untuk input
+    syntax: az stream-analytics input test --input-name "input7225" --job-name "sj9597" --resource-group "sjrg8440"
+  requiredParameters:
+  - isRequired: true
+    name: --input-name --name -n
+    summary: Nama input.
+    description: ''
+  - isRequired: true
+    name: --job-name
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --properties
+    summary: 'Properti yang terkait dengan input. Diperlukan pada permintaan PUT (CreateOrReplace). Nilai yang diharapkan: json-string/json-file/@json-file.'
+    description: ''
+- uid: az_stream-analytics_input_update
+  name: az stream-analytics input update
+  summary: Perbarui input yang ada di bawah pekerjaan streaming yang ada. Ini dapat digunakan untuk memperbarui sebagian (yaitu. memperbarui satu atau dua properti) input tanpa memengaruhi sisa definisi pekerjaan atau input.
+  description: ''
+  syntax: >-
+    az stream-analytics input update --input-name
+                                     --job-name
+                                     --resource-group
+                                     [--if-match]
+                                     [--properties]
+  examples:
+  - summary: Memperbarui input blob referensi
+    syntax: az stream-analytics input update --properties "{\"type\":\"Reference\",\"datasource\":{\"type\":\"Microsoft.Storage/Blob\",\"properties\":{\"container\":\"differentContainer\"}},\"serialization\":{\"type\":\"Csv\",\"properties\":{\"encoding\":\"UTF8\",\"fieldDelimiter\":\"|\"}}}" --input-name "input7225" --job-name "sj9597" --resource-group "sjrg8440"
+  - summary: Memperbarui input Azure Event Hubs stream
+    syntax: az stream-analytics input update --properties "{\"type\":\"Stream\",\"datasource\":{\"type\":\"Microsoft.ServiceBus/EventHub\",\"properties\":{\"consumerGroupName\":\"differentConsumerGroupName\"}},\"serialization\":{\"type\":\"Avro\"}}" --input-name "input7425" --job-name "sj197" --resource-group "sjrg3139"
+  - summary: Memperbarui input IoT Hub aliran
+    syntax: az stream-analytics input update --properties "{\"type\":\"Stream\",\"datasource\":{\"type\":\"Microsoft.Devices/IotHubs\",\"properties\":{\"endpoint\":\"messages/operationsMonitoringEvents\"}},\"serialization\":{\"type\":\"Csv\",\"properties\":{\"encoding\":\"UTF8\",\"fieldDelimiter\":\"|\"}}}" --input-name "input7970" --job-name "sj9742" --resource-group "sjrg3467"
+  - summary: Memperbarui input blob aliran
+    syntax: az stream-analytics input update --properties "{\"type\":\"Stream\",\"datasource\":{\"type\":\"Microsoft.Storage/Blob\",\"properties\":{\"sourcePartitionCount\":32}},\"serialization\":{\"type\":\"Csv\",\"properties\":{\"encoding\":\"UTF8\",\"fieldDelimiter\":\"|\"}}}" --input-name "input8899" --job-name "sj6695" --resource-group "sjrg8161"
+  requiredParameters:
+  - isRequired: true
+    name: --input-name --name -n
+    summary: Nama input.
+    description: ''
+  - isRequired: true
+    name: --job-name
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --if-match
+    summary: ETag input. Hilangkan nilai ini untuk selalu menimpa input saat ini. Tentukan nilai ETag yang terakhir dilihat untuk mencegah penimpaan perubahan bersamaan secara tidak sengaja.
+    description: ''
+  - name: --properties
+    summary: 'Properti yang terkait dengan input. Diperlukan pada permintaan PUT (CreateOrReplace). Nilai yang diharapkan: json-string/json-file/@json-file.'
+    description: ''
+- uid: az_stream-analytics_input_wait
+  name: az stream-analytics input wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi input analisis aliran terpenuhi.
+  description: ''
+  syntax: >-
+    az stream-analytics input wait --input-name
+                                   --job-name
+                                   --resource-group
+                                   [--created]
+                                   [--custom]
+                                   [--deleted]
+                                   [--exists]
+                                   [--interval]
+                                   [--timeout]
+                                   [--updated]
+  examples:
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga input analisis aliran berhasil dibuat.
+    syntax: az stream-analytics input wait --input-name "input8899" --job-name "sj6695" --resource-group "sjrg8161" --created
+  requiredParameters:
+  - isRequired: true
+    name: --input-name --name -n
+    summary: Nama input.
+    description: ''
+  - isRequired: true
+    name: --job-name
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_stream-analytics_input_create
+- az_stream-analytics_input_delete
+- az_stream-analytics_input_list
+- az_stream-analytics_input_show
+- az_stream-analytics_input_test
+- az_stream-analytics_input_update
+- az_stream-analytics_input_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola input dengan analisis aliran.
+  ms.openlocfilehash: 8f856297a3e2ef6582a2f835421a825fe8adfe2a
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141058989"

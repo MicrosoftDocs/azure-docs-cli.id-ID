@@ -1,0 +1,597 @@
+### YamlMime:AzureCLIGroup
+uid: az_keyvault
+name: az keyvault
+summary: Mengelola kunci, rahasia, dan sertifikat KeyVault.
+description: ''
+directCommands:
+- uid: az_keyvault_create
+  name: az keyvault create
+  summary: Buat Vault atau HSM.
+  description: Jika `--enable-rbac-authorization` tidak ditentukan, maka izin default dibuat untuk pengguna atau perwakilan layanan saat ini kecuali `--no-self-perms` bendera ditentukan.
+  syntax: >-
+    az keyvault create --resource-group
+                       [--administrators]
+                       [--enable-purge-protection {false, true}]
+                       [--enable-rbac-authorization {false, true}]
+                       [--enable-soft-delete {false, true}]
+                       [--enabled-for-deployment {false, true}]
+                       [--enabled-for-disk-encryption {false, true}]
+                       [--enabled-for-template-deployment {false, true}]
+                       [--hsm-name]
+                       [--location]
+                       [--name]
+                       [--network-acls]
+                       [--network-acls-ips]
+                       [--network-acls-vnets]
+                       [--no-self-perms {false, true}]
+                       [--no-wait]
+                       [--public-network-access]
+                       [--retention-days]
+                       [--sku]
+                       [--tags]
+  examples:
+  - summary: Buat brankas kunci dengan ACL jaringan yang ditentukan (gunakan --network-acls untuk menentukan aturan IP dan VNet dengan menggunakan string JSON).
+    syntax: 'az keyvault create --location westus2 --name MyKeyVault --resource-group MyResourceGroup --network-acls "{\"ip\": [\"1.2.3.4\", \"2.3.4.0/24\"], \"vnet\": [\"vnet_name_1/subnet_name1\", \"vnet_name_2/subnet_name2\", \"/subscriptions/000000-0000-0000/resourceGroups/MyResourceGroup/providers/Microsoft.Network/virtualNetworks/MyVNet/subnets/MySubnet\"]}"'
+  - summary: Buat brankas kunci dengan ACL jaringan yang ditentukan (gunakan --network-acls untuk menentukan aturan IP dan VNet dengan menggunakan file JSON).
+    syntax: az keyvault create --location westus2 --name MyKeyVault --resource-group MyResourceGroup --network-acls network-acls-example.json
+  - summary: Buat brankas kunci dengan ACL jaringan yang ditentukan (gunakan --network-acls-ips untuk menentukan aturan IP).
+    syntax: az keyvault create --location westus2 --name MyKeyVault --resource-group MyResourceGroup --network-acls-ips 3.4.5.0/24 4.5.6.0/24
+  - summary: Buat brankas kunci dengan ACL jaringan yang ditentukan (gunakan --network-acls-vnets untuk menentukan aturan VNet).
+    syntax: az keyvault create --location westus2 --name MyKeyVault --resource-group MyResourceGroup --network-acls-vnets vnet_name_2/subnet_name_2 vnet_name_3/subnet_name_3 /subscriptions/000000-0000-0000/resourceGroups/MyResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet_name_4/subnets/subnet_name_4
+  - summary: Buat brankas kunci dengan ACL jaringan yang ditentukan (gunakan --network-acls, --network-acls-ips dan --network-acls-vnets bersama-sama, aturan redundan akan dihapus, akhirnya akan ada 4 aturan IP dan 3 aturan VNet).
+    syntax: 'az keyvault create --location westus2 --name MyKeyVault --resource-group MyResourceGroup --network-acls "{\"ip\": [\"1.2.3.4\", \"2.3.4.0/24\"], \"vnet\": [\"vnet_name_1/subnet_name1\", \"vnet_name_2/subnet_name2\"]}" --network-acls-ips 3.4.5.0/24 4.5.6.0/24 --network-acls-vnets vnet_name_2/subnet_name_2 vnet_name_3/subnet_name_3 /subscriptions/000000-0000-0000/resourceGroups/MyResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet_name_4/subnets/subnet_name_4'
+  - summary: Buat brankas kunci. (dibuat otomatis)
+    syntax: az keyvault create --location westus2 --name MyKeyVault --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --administrators
+    summary: '[Hanya HSM] Peran administrator untuk operasi sarana data untuk HSM Terkelola. Ini menerima daftar OID yang dipisahkan spasi yang akan ditetapkan.'
+    description: ''
+  - name: --enable-purge-protection
+    parameterValueGroup: false, true
+    summary: Properti yang menentukan apakah perlindungan terhadap penghapusan menyeluruh diaktifkan untuk vault ini. Mengatur properti ini ke true akan mengaktifkan perlindungan terhadap penghapusan menyeluruh untuk brankas ini dan isinya - hanya layanan Key Vault yang dapat memulai penghapusan yang sulit dan tidak dapat dipulihkan. Pengaturan ini hanya efektif jika penghapusan sementara juga diaktifkan. Mengaktifkan fungsionalitas ini tidak dapat diubah - artinya, properti tidak menerima false sebagai nilainya.
+    description: ''
+  - name: --enable-rbac-authorization
+    parameterValueGroup: false, true
+    summary: ''
+    description: ''
+  - name: --enable-soft-delete
+    parameterValueGroup: false, true
+    summary: "[Vault Saja] Properti untuk menentukan apakah fungsionalitas 'penghapusan sementara' diaktifkan untuk brankas kunci ini. Jika tidak diatur ke nilai apa pun (benar atau salah) saat membuat brankas kunci baru, nilai tersebut akan diatur ke true secara default. Setelah diatur ke true, itu tidak dapat dikembalikan ke false."
+    description: ''
+  - name: --enabled-for-deployment
+    parameterValueGroup: false, true
+    summary: '[Vault Saja] Properti untuk menentukan apakah Azure Virtual Machines diizinkan untuk mengambil sertifikat yang disimpan sebagai rahasia dari brankas kunci.'
+    description: ''
+  - name: --enabled-for-disk-encryption
+    parameterValueGroup: false, true
+    summary: '[Vault Saja] Properti untuk menentukan apakah Azure Disk Encryption diizinkan untuk mengambil rahasia dari brankas dan membuka bungkus kunci.'
+    description: ''
+  - name: --enabled-for-template-deployment
+    parameterValueGroup: false, true
+    summary: '[Vault Saja] Properti untuk menentukan apakah Azure Resource Manager diizinkan untuk mengambil rahasia dari brankas kunci.'
+    description: ''
+  - name: --hsm-name
+    summary: Nama HSM. (--hsm-name dan --name/-n saling eksklusif, tentukan hanya salah satunya).
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --name -n
+    summary: Nama Vault.
+    description: ''
+  - name: --network-acls
+    summary: 'ACL jaringan. Ini menerima nama file JSON atau string JSON. Format JSON: `{"ip":[<ip1>, <ip2>...],"vnet":[<vnet_name_1>/<subnet_name_1>,<subnet_id2>...]}`.'
+    description: ''
+  - name: --network-acls-ips
+    summary: Aturan IP ACL jaringan. Daftar alamat IP yang dipisahkan spasi.
+    description: ''
+  - name: --network-acls-vnets
+    summary: Aturan VNet ACLS jaringan. Daftar pasangan Vnet/subnet yang dipisahkan spasi atau id sumber daya subnet.
+    description: ''
+  - name: --no-self-perms
+    parameterValueGroup: false, true
+    summary: '[Vault Saja] Jangan tambahkan izin untuk perwakilan pengguna/layanan saat ini di vault baru.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --public-network-access
+    summary: Properti untuk menentukan apakah vault akan menerima lalu lintas dari internet publik. Jika diatur ke 'dinonaktifkan' semua lalu lintas kecuali lalu lintas titik akhir privat dan yang berasal dari layanan tepercaya akan diblokir. Ini akan mengambil alih aturan firewall yang ditetapkan, yang berarti bahwa bahkan jika aturan firewall ada, kami tidak akan mematuhi aturan.
+    description: ''
+  - name: --retention-days
+    defaultValue: "90"
+    summary: Penghapusan sementara hari retensi data. Ini menerima >=7 dan <=90.
+    description: ''
+  - name: --sku
+    summary: 'Wajib diisi. Detail SKU. Nilai yang diizinkan untuk Vault: premium, standar. Default: standar. Nilai yang diizinkan untuk HSM: Standard_B1, Custom_B32. Default: Standard_B1.'
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_delete
+  name: az keyvault delete
+  summary: Menghapus Vault atau HSM.
+  description: ''
+  syntax: >-
+    az keyvault delete [--hsm-name]
+                       [--name]
+                       [--no-wait]
+                       [--resource-group]
+  examples:
+  - summary: Menghapus brankas kunci. (dibuat otomatis)
+    syntax: az keyvault delete --name MyKeyVault --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --hsm-name
+    summary: Nama HSM. (--hsm-name dan --name/-n saling eksklusif, tentukan hanya salah satunya).
+    description: ''
+  - name: --name -n
+    summary: Nama Vault.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Lanjutkan hanya jika Key Vault termasuk dalam grup sumber daya yang ditentukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_delete-policy
+  name: az keyvault delete-policy
+  summary: Menghapus pengaturan kebijakan keamanan untuk Key Vault.
+  description: ''
+  syntax: >-
+    az keyvault delete-policy --name
+                              [--application-id]
+                              [--no-wait]
+                              [--object-id]
+                              [--resource-group]
+                              [--spn]
+                              [--upn]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Vault.
+    description: ''
+  optionalParameters:
+  - name: --application-id
+    summary: ID aplikasi klien yang membuat permintaan atas nama prinsipal. Diekspos untuk identitas majemuk menggunakan alur autentikasi atas nama.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --object-id
+    summary: GUID yang mengidentifikasi prinsipal yang akan menerima izin.
+    description: ''
+  - name: --resource-group -g
+    summary: Lanjutkan hanya jika Key Vault termasuk dalam grup sumber daya yang ditentukan.
+    description: ''
+  - name: --spn
+    summary: Nama perwakilan layanan yang akan menerima izin.
+    description: ''
+  - name: --upn
+    summary: Nama prinsipal pengguna yang akan menerima izin.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_list
+  name: az keyvault list
+  summary: Mencantumkan Vault dan/atau HSM.
+  description: ''
+  syntax: >-
+    az keyvault list [--resource-group]
+                     [--resource-type]
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-type
+    summary: Ketika --resource-type tidak ada, perintah akan mencantumkan semua Vault dan HSM. Nilai yang mungkin untuk --resource-type adalah vault dan hsm.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_list-deleted
+  name: az keyvault list-deleted
+  summary: Dapatkan informasi tentang Vault atau HSM yang dihapus dalam langganan.
+  description: ''
+  syntax: az keyvault list-deleted [--resource-type]
+  optionalParameters:
+  - name: --resource-type
+    summary: Ketika --resource-type tidak ada, perintah akan mencantumkan semua Vault dan HSM yang dihapus. Nilai yang mungkin untuk --resource-type adalah vault dan hsm.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_purge
+  name: az keyvault purge
+  summary: Hapus Vault atau HSM yang ditentukan secara permanen. Alias Hapus Menyeluruh Vault atau HSM yang dihapus.
+  description: ''
+  syntax: >-
+    az keyvault purge [--hsm-name]
+                      [--location]
+                      [--name]
+                      [--no-wait]
+  optionalParameters:
+  - name: --hsm-name
+    summary: Nama HSM yang dihapus. (--hsm-name dan --name/-n saling eksklusif, tentukan hanya salah satunya).
+    description: ''
+  - name: --location -l
+    summary: Lokasi Vault atau HSM yang dihapus.
+    description: ''
+  - name: --name -n
+    summary: Nama Vault yang dihapus.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_recover
+  name: az keyvault recover
+  summary: Memulihkan Vault atau HSM.
+  description: Pulihkan Vault atau HSM yang dihapus sebelumnya yang penghapusan sementaranya diaktifkan.
+  syntax: >-
+    az keyvault recover [--hsm-name]
+                        [--location]
+                        [--name]
+                        [--no-wait]
+                        [--resource-group]
+  examples:
+  - summary: Pulihkan brankas kunci. (dibuat otomatis)
+    syntax: az keyvault recover --location westus2 --name MyKeyVault --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --hsm-name
+    summary: Nama HSM yang dihapus. (--hsm-name dan --name/-n saling eksklusif, tentukan hanya salah satunya).
+    description: ''
+  - name: --location -l
+    summary: Lokasi Vault atau HSM yang dihapus.
+    description: ''
+  - name: --name -n
+    summary: Nama Vault yang dihapus.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya Vault atau HSM yang dihapus.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_set-policy
+  name: az keyvault set-policy
+  summary: Memperbarui pengaturan kebijakan keamanan untuk Key Vault.
+  description: ''
+  syntax: >-
+    az keyvault set-policy --name
+                           [--application-id]
+                           [--certificate-permissions {create, delete, deleteissuers, get, getissuers, import, list, listissuers, managecontacts, manageissuers, purge, recover, setissuers, update}]
+                           [--key-permissions {backup, create, decrypt, delete, encrypt, get, import, list, purge, recover, restore, sign, unwrapKey, update, verify, wrapKey}]
+                           [--no-wait]
+                           [--object-id]
+                           [--resource-group]
+                           [--secret-permissions {backup, delete, get, list, purge, recover, restore, set}]
+                           [--spn]
+                           [--storage-permissions {backup, delete, deletesas, get, getsas, list, listsas, purge, recover, regeneratekey, restore, set, setsas, update}]
+                           [--upn]
+  examples:
+  - summary: Tetapkan izin `get`kunci , `list`, dan `import` izin `backup`rahasia , `restore` ke id objek.
+    syntax: az keyvault set-policy -n MyVault --key-permissions get list import --secret-permissions backup restore --object-id {GUID}
+  - summary: Tetapkan izin `get`kunci , `list` ke UPN (Nama Prinsipal Pengguna).
+    syntax: az keyvault set-policy -n MyVault --key-permissions get list --upn {UPN}
+  - summary: Tetapkan izin `get`utama , `list` ke SPN (Nama Perwakilan Layanan).
+    syntax: az keyvault set-policy -n MyVault --key-permissions get list --spn {SPN}
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Vault.
+    description: ''
+  optionalParameters:
+  - name: --application-id
+    summary: ID aplikasi klien yang membuat permintaan atas nama prinsipal. Diekspos untuk identitas majemuk menggunakan alur autentikasi atas nama.
+    description: ''
+  - name: --certificate-permissions
+    parameterValueGroup: create, delete, deleteissuers, get, getissuers, import, list, listissuers, managecontacts, manageissuers, purge, recover, setissuers, update
+    summary: Daftar izin sertifikat yang dipisahkan spasi untuk ditetapkan.
+    description: ''
+  - name: --key-permissions
+    parameterValueGroup: backup, create, decrypt, delete, encrypt, get, import, list, purge, recover, restore, sign, unwrapKey, update, verify, wrapKey
+    summary: Daftar izin kunci yang dipisahkan spasi untuk ditetapkan.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --object-id
+    summary: GUID yang mengidentifikasi prinsipal yang akan menerima izin.
+    description: ''
+  - name: --resource-group -g
+    summary: Lanjutkan hanya jika Key Vault milik grup sumber daya yang ditentukan.
+    description: ''
+  - name: --secret-permissions
+    parameterValueGroup: backup, delete, get, list, purge, recover, restore, set
+    summary: Daftar izin rahasia yang dipisahkan spasi untuk ditetapkan.
+    description: ''
+  - name: --spn
+    summary: Nama perwakilan layanan yang akan menerima izin.
+    description: ''
+  - name: --storage-permissions
+    parameterValueGroup: backup, delete, deletesas, get, getsas, list, listsas, purge, recover, regeneratekey, restore, set, setsas, update
+    summary: Daftar izin penyimpanan yang dipisahkan spasi untuk ditetapkan.
+    description: ''
+  - name: --upn
+    summary: Nama prinsipal pengguna yang akan menerima izin.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_show
+  name: az keyvault show
+  summary: Menampilkan detail Vault atau HSM.
+  description: ''
+  syntax: >-
+    az keyvault show [--hsm-name]
+                     [--name]
+                     [--resource-group]
+  examples:
+  - summary: Menampilkan detail brankas kunci. (dibuat otomatis)
+    syntax: az keyvault show --name MyKeyVault
+  optionalParameters:
+  - name: --hsm-name
+    summary: Nama HSM. (--hsm-name dan --name/-n saling eksklusif, tentukan hanya salah satunya).
+    description: ''
+  - name: --name -n
+    summary: Nama Vault.
+    description: ''
+  - name: --resource-group -g
+    summary: Lanjutkan hanya jika Key Vault milik grup sumber daya yang ditentukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_show-deleted
+  name: az keyvault show-deleted
+  summary: Menampilkan detail Vault atau HSM yang dihapus.
+  description: ''
+  syntax: >-
+    az keyvault show-deleted [--hsm-name]
+                             [--location]
+                             [--name]
+  examples:
+  - summary: Menampilkan detail brankas kunci yang dihapus.
+    syntax: az keyvault show-deleted --name MyKeyVault
+  optionalParameters:
+  - name: --hsm-name
+    summary: Nama HSM yang dihapus. (--hsm-name dan --name/-n saling eksklusif, tentukan hanya salah satunya).
+    description: ''
+  - name: --location -l
+    summary: Lokasi Vault atau HSM yang dihapus.
+    description: ''
+  - name: --name -n
+    summary: Nama Vault yang dihapus.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_update
+  name: az keyvault update
+  summary: Memperbarui properti Vault.
+  description: ''
+  syntax: >-
+    az keyvault update --name
+                       [--add]
+                       [--enable-purge-protection {false, true}]
+                       [--enable-rbac-authorization {false, true}]
+                       [--enable-soft-delete {false, true}]
+                       [--enabled-for-deployment {false, true}]
+                       [--enabled-for-disk-encryption {false, true}]
+                       [--enabled-for-template-deployment {false, true}]
+                       [--force-string]
+                       [--no-wait]
+                       [--public-network-access]
+                       [--remove]
+                       [--resource-group]
+                       [--retention-days]
+                       [--set]
+  examples:
+  - summary: Memperbarui properti Vault. (dibuat otomatis)
+    syntax: az keyvault update --enabled-for-disk-encryption true --name MyKeyVault --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Vault.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --enable-purge-protection
+    parameterValueGroup: false, true
+    summary: Properti yang menentukan apakah perlindungan terhadap penghapusan menyeluruh diaktifkan untuk vault ini. Mengatur properti ini ke true akan mengaktifkan perlindungan terhadap penghapusan menyeluruh untuk brankas ini dan kontennya - hanya layanan Key Vault yang dapat memulai penghapusan yang sulit dan tidak dapat dipulihkan. Pengaturan ini hanya efektif jika penghapusan sementara juga diaktifkan. Mengaktifkan fungsionalitas ini tidak dapat diubah - yaitu, properti tidak menerima false sebagai nilainya.
+    description: ''
+  - name: --enable-rbac-authorization
+    parameterValueGroup: false, true
+    summary: ''
+    description: ''
+  - name: --enable-soft-delete
+    parameterValueGroup: false, true
+    summary: "[Vault Saja] Properti untuk menentukan apakah fungsionalitas 'penghapusan sementara' diaktifkan untuk brankas kunci ini. Jika tidak diatur ke nilai apa pun (benar atau salah) saat membuat brankas kunci baru, nilai tersebut akan diatur ke true secara default. Setelah diatur ke true, tidak dapat dikembalikan ke false."
+    description: ''
+  - name: --enabled-for-deployment
+    parameterValueGroup: false, true
+    summary: '[Vault Saja] Properti untuk menentukan apakah Azure Virtual Machines diizinkan untuk mengambil sertifikat yang disimpan sebagai rahasia dari brankas kunci.'
+    description: ''
+  - name: --enabled-for-disk-encryption
+    parameterValueGroup: false, true
+    summary: '[Vault Saja] Properti untuk menentukan apakah Azure Disk Encryption diizinkan untuk mengambil rahasia dari brankas dan membuka kunci.'
+    description: ''
+  - name: --enabled-for-template-deployment
+    parameterValueGroup: false, true
+    summary: '[Vault Saja] Properti untuk menentukan apakah Azure Resource Manager diizinkan untuk mengambil rahasia dari brankas kunci.'
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --public-network-access
+    summary: Properti untuk menentukan apakah vault akan menerima lalu lintas dari internet publik. Jika diatur ke 'dinonaktifkan' semua lalu lintas kecuali lalu lintas titik akhir privat dan yang berasal dari layanan tepercaya akan diblokir. Ini akan mengesampingkan aturan firewall yang ditetapkan, yang berarti bahwa bahkan jika aturan firewall ada, kami tidak akan mematuhi aturan.
+    description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Lanjutkan hanya jika Key Vault milik grup sumber daya yang ditentukan.
+    description: ''
+  - name: --retention-days
+    summary: Penghapusan sementara hari retensi data. Ini menerima >=7 dan <=90.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_wait
+  name: az keyvault wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi Vault terpenuhi.
+  description: ''
+  syntax: >-
+    az keyvault wait --name
+                     [--created]
+                     [--custom]
+                     [--deleted]
+                     [--exists]
+                     [--interval]
+                     [--resource-group]
+                     [--timeout]
+                     [--updated]
+  examples:
+  - summary: Jeda CLI hingga vault dibuat.
+    syntax: az keyvault wait --name MyVault --created
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Vault.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --resource-group -g
+    summary: Lanjutkan hanya jika Key Vault milik grup sumber daya yang ditentukan.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+commands:
+- az_keyvault_certificate
+- az_keyvault_certificate_contact
+- az_keyvault_certificate_contact_add
+- az_keyvault_certificate_contact_delete
+- az_keyvault_certificate_contact_list
+- az_keyvault_certificate_create
+- az_keyvault_certificate_delete
+- az_keyvault_certificate_download
+- az_keyvault_certificate_get-default-policy
+- az_keyvault_certificate_import
+- az_keyvault_certificate_issuer
+- az_keyvault_certificate_issuer_admin
+- az_keyvault_certificate_issuer_admin_add
+- az_keyvault_certificate_issuer_admin_delete
+- az_keyvault_certificate_issuer_admin_list
+- az_keyvault_certificate_issuer_create
+- az_keyvault_certificate_issuer_delete
+- az_keyvault_certificate_issuer_list
+- az_keyvault_certificate_issuer_show
+- az_keyvault_certificate_issuer_update
+- az_keyvault_certificate_list
+- az_keyvault_certificate_list-deleted
+- az_keyvault_certificate_list-versions
+- az_keyvault_certificate_pending
+- az_keyvault_certificate_pending_delete
+- az_keyvault_certificate_pending_merge
+- az_keyvault_certificate_pending_show
+- az_keyvault_certificate_purge
+- az_keyvault_certificate_recover
+- az_keyvault_certificate_set-attributes
+- az_keyvault_certificate_show
+- az_keyvault_certificate_show-deleted
+- az_keyvault_create
+- az_keyvault_delete
+- az_keyvault_delete-policy
+- az_keyvault_key
+- az_keyvault_key_backup
+- az_keyvault_key_create
+- az_keyvault_key_decrypt
+- az_keyvault_key_delete
+- az_keyvault_key_download
+- az_keyvault_key_encrypt
+- az_keyvault_key_get-policy-template
+- az_keyvault_key_import
+- az_keyvault_key_list
+- az_keyvault_key_list-deleted
+- az_keyvault_key_list-versions
+- az_keyvault_key_purge
+- az_keyvault_key_recover
+- az_keyvault_key_restore
+- az_keyvault_key_set-attributes
+- az_keyvault_key_show
+- az_keyvault_key_show-deleted
+- az_keyvault_list
+- az_keyvault_list-deleted
+- az_keyvault_purge
+- az_keyvault_recover
+- az_keyvault_secret
+- az_keyvault_secret_backup
+- az_keyvault_secret_delete
+- az_keyvault_secret_download
+- az_keyvault_secret_list
+- az_keyvault_secret_list-deleted
+- az_keyvault_secret_list-versions
+- az_keyvault_secret_purge
+- az_keyvault_secret_recover
+- az_keyvault_secret_restore
+- az_keyvault_secret_set
+- az_keyvault_secret_set-attributes
+- az_keyvault_secret_show
+- az_keyvault_secret_show-deleted
+- az_keyvault_set-policy
+- az_keyvault_show
+- az_keyvault_show-deleted
+- az_keyvault_update
+- az_keyvault_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 11/30/2021
+  description: Mengelola kunci, rahasia, dan sertifikat KeyVault.
+  ms.openlocfilehash: cb030e422750b639f75a537fb6c7af580bc0de1b
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141012130"
