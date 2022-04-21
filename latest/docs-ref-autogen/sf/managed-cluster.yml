@@ -1,0 +1,218 @@
+### YamlMime:AzureCLIGroup
+uid: az_sf_managed-cluster
+name: az sf managed-cluster
+summary: Mengelola kluster terkelola Azure Service Fabric.
+description: ''
+directCommands:
+- uid: az_sf_managed-cluster_create
+  name: az sf managed-cluster create
+  summary: Menghapus kluster terkelola.
+  description: ''
+  syntax: >-
+    az sf managed-cluster create --admin-password
+                                 --cluster-name
+                                 --resource-group
+                                 [--admin-user-name]
+                                 [--cert-common-name]
+                                 [--cert-is-admin {false, true}]
+                                 [--cert-issuer-thumbprint]
+                                 [--cert-thumbprint]
+                                 [--client-connection-port]
+                                 [--cluster-code-version]
+                                 [--cluster-upgrade-cadence {Wave0, Wave1, Wave2}]
+                                 [--cluster-upgrade-mode {Automatic, Manual}]
+                                 [--dns-name]
+                                 [--gateway-connection-port]
+                                 [--location]
+                                 [--sku]
+                                 [--tags]
+  examples:
+  - summary: Buat kluster dengan sku standar dan sertifikasi klien dengan thumbprint.
+    syntax: az sf managed-cluster create -g testRG -c testCluster -l eastus2 --cert-thumbprint XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX --cert-is-admin --admin-password PassTest123@ --sku Standard
+  - summary: Buat kluster dengan sku standar dan sertifikasi klien berdasarkan nama umum.
+    syntax: az sf managed-cluster create -g testRG -c testCluster -l eastus2 --cert-common-name Contoso.com --cert-issuer-thumbprint XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX --cert-is-admin --admin-password PassTest123@ --sku Standard
+  requiredParameters:
+  - isRequired: true
+    name: --admin-password
+    summary: Kata sandi admin yang digunakan untuk komputer virtual.
+    description: ''
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Tentukan nama kluster, jika tidak diberikan akan sama dengan nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --admin-user-name
+    defaultValue: vmadmin
+    summary: Pengguna admin yang digunakan untuk komputer virtual.
+    description: ''
+  - name: --cert-common-name --client-cert-common-name
+    summary: Nama umum sertifikat klien.
+    description: ''
+  - name: --cert-is-admin --client-cert-is-admin
+    parameterValueGroup: false, true
+    summary: Jenis autentikasi klien.
+    description: ''
+  - name: --cert-issuer-thumbprint --cert-issuer-tp --client-cert-issuer-thumbprint
+    summary: Daftar thumbprint penerbit yang dipisahkan spasi.
+    description: ''
+  - name: --cert-thumbprint --client-cert-thumbprint
+    summary: Thumbprint sertifikat klien.
+    description: ''
+  - name: --client-connection-port --client-port
+    defaultValue: "19000"
+    summary: Port yang digunakan untuk koneksi klien ke kluster.
+    description: ''
+  - name: --cluster-code-version --code-version
+    summary: Versi kode fabric layanan kluster. Hanya gunakan jika mode peningkatan adalah Manual.
+    description: ''
+  - name: --cluster-upgrade-cadence --upgrade-cadence
+    parameterValueGroup: Wave0, Wave1, Wave2
+    summary: 'Mode peningkatan kluster ketika versi runtime Service Fabric baru tersedia Wave0: Peningkatan kluster dimulai segera setelah versi baru diluncurkan. Direkomendasikan untuk kluster Test/Dev. Wave1: Peningkatan kluster dimulai 7 hari setelah versi baru diluncurkan. Direkomendasikan untuk kluster Pra-prod. Wave2: Peningkatan kluster dimulai 14 hari setelah versi baru diluncurkan. Direkomendasikan untuk kluster Produksi.'
+    description: ''
+  - name: --cluster-upgrade-mode --upgrade-mode
+    parameterValueGroup: Automatic, Manual
+    summary: 'Mode peningkatan kluster ketika versi runtime Service Fabric baru tersedia Otomatis: Kluster akan secara otomatis ditingkatkan ke versi runtime Service Fabric terbaru, upgrade_cadence akan menentukan kapan peningkatan dimulai setelah versi baru tersedia. Manual: Kluster tidak akan ditingkatkan secara otomatis ke versi runtime Service Fabric terbaru. Kluster ditingkatkan dengan mengatur properti code_version di sumber daya kluster.'
+    description: ''
+  - name: --dns-name
+    summary: Nama dns kluster.
+    description: ''
+  - name: --gateway-connection-port --gateway-port
+    defaultValue: "19080"
+    summary: Port yang digunakan untuk koneksi http ke kluster.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --sku
+    defaultValue: Basic
+    summary: 'Sku kluster, opsinya adalah Dasar: akan memiliki minimal 3 node seed dan hanya memungkinkan 1 jenis node dan Standar: akan memiliki minimal 5 node seed dan memungkinkan beberapa jenis node.'
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+- uid: az_sf_managed-cluster_delete
+  name: az sf managed-cluster delete
+  summary: Menghapus kluster terkelola.
+  description: ''
+  syntax: >-
+    az sf managed-cluster delete --cluster-name
+                                 --resource-group
+  examples:
+  - summary: Hapus kluster.
+    syntax: az sf managed-cluster delete -g testRG -c testCluster
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Tentukan nama kluster, jika tidak diberikan akan sama dengan nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_sf_managed-cluster_list
+  name: az sf managed-cluster list
+  summary: Mencantumkan kluster terkelola.
+  description: ''
+  syntax: az sf managed-cluster list [--resource-group]
+  examples:
+  - summary: Mencantumkan kluster menurut grup sumber daya.
+    syntax: az sf managed-cluster list -g testRG
+  - summary: Mencantumkan kluster menurut langganan.
+    syntax: az sf managed-cluster list
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_sf_managed-cluster_show
+  name: az sf managed-cluster show
+  summary: Memperlihatkan properti kluster terkelola Azure Service Fabric.
+  description: ''
+  syntax: >-
+    az sf managed-cluster show --cluster-name
+                               --resource-group
+  examples:
+  - summary: Dapatkan kluster.
+    syntax: az sf managed-cluster show -g testRG -c testCluster
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Tentukan nama kluster, jika tidak diberikan akan sama dengan nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_sf_managed-cluster_update
+  name: az sf managed-cluster update
+  summary: Memperbarui kluster terkelola.
+  description: ''
+  syntax: >-
+    az sf managed-cluster update --cluster-name
+                                 --resource-group
+                                 [--client-connection-port]
+                                 [--dns-name]
+                                 [--gateway-connection-port]
+                                 [--tags]
+  examples:
+  - summary: Perbarui port klien kluster dan nama dns.
+    syntax: az sf managed-cluster update -g testRG -c testCluster --client-port 50000 --dns-name testnewdns
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Tentukan nama kluster, jika tidak diberikan akan sama dengan nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --client-connection-port --client-port
+    summary: Port yang digunakan untuk koneksi klien ke kluster.
+    description: ''
+  - name: --dns-name
+    summary: Nama dns kluster.
+    description: ''
+  - name: --gateway-connection-port --gateway-port
+    summary: Port yang digunakan untuk koneksi http ke kluster.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+commands:
+- az_sf_managed-cluster_client-certificate
+- az_sf_managed-cluster_client-certificate_add
+- az_sf_managed-cluster_client-certificate_delete
+- az_sf_managed-cluster_create
+- az_sf_managed-cluster_delete
+- az_sf_managed-cluster_list
+- az_sf_managed-cluster_show
+- az_sf_managed-cluster_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola kluster terkelola Azure Service Fabric.
+  ms.openlocfilehash: e51f4e630fbcb753e181959da28ceb4099254e9b
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140911850"

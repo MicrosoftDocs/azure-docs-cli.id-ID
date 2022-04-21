@@ -1,0 +1,233 @@
+### YamlMime:AzureCLIGroup
+uid: az_eventgrid_domain
+name: az eventgrid domain
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **eventgrid** untuk Azure CLI (versi 2.0.49 atau lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **domain az eventgrid** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola domain peristiwa.
+description: ''
+directCommands:
+- uid: az_eventgrid_domain_create
+  name: az eventgrid domain create
+  summary: Membuat domain.
+  description: ''
+  syntax: >-
+    az eventgrid domain create --location
+                               --name
+                               --resource-group
+                               [--identity {noidentity, systemassigned}]
+                               [--inbound-ip-rules]
+                               [--input-mapping-default-values]
+                               [--input-mapping-fields]
+                               [--input-schema {cloudeventschemav1_0, customeventschema, eventgridschema}]
+                               [--public-network-access {disabled, enabled}]
+                               [--sku {basic, premium}]
+                               [--tags]
+  examples:
+  - summary: Buat domain baru.
+    syntax: az eventgrid domain create -g rg1 --name domain1 -l westus2
+  - summary: Buat domain baru dengan pemetaan input kustom.
+    syntax: az eventgrid domain create -g rg1 --name domain1 -l westus2 --input-schema customeventschema --input-mapping-fields topic=mytopicField eventType=myEventTypeField --input-mapping-default-values subject=DefaultSubject dataVersion=1.0
+  - summary: Buat domain baru yang menerima peristiwa yang diterbitkan dalam skema CloudEvents V1.0 dan memetakan properti mytopicfield ke nama topik.
+    syntax: az eventgrid domain create -g rg1 --name domain1 -l westus2 --input-schema cloudeventschemav1_0 --input-mapping-fields topic=mytopicfield
+  - summary: Buat domain baru yang memungkinkan aturan ip masuk tertentu.
+    syntax: az eventgrid domain create -g rg1 --name domain1 -l westus2 --public-network-access enabled --inbound-ip-rules 10.0.0.0/8 Allow --inbound-ip-rules 10.2.0.0/8 Allow --sku basic
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama domain.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --identity
+    parameterValueGroup: noidentity, systemassigned
+    summary: Jenis identitas sumber daya (misalnya, topik atau domain).
+    description: ''
+  - name: --inbound-ip-rules
+    summary: Daftar aturan IP masuk.
+    description: Daftar aturan IP masuk yang menentukan Alamat IP dalam notasi CIDR misalnya, 10.0.0.0/8 bersama dengan Tindakan yang sesuai untuk dilakukan berdasarkan kecocokan atau tidak ada kecocokan dari IpMask. Nilai yang mungkin termasuk - Izinkan.
+  - name: --input-mapping-default-values
+    summary: Ketika skema input ditentukan sebagai customeventschema, parameter ini dapat digunakan untuk menentukan pemetaan input berdasarkan nilai default. Anda dapat menggunakan parameter ini saat skema kustom Anda tidak menyertakan bidang yang sesuai dengan salah satu dari tiga bidang yang didukung oleh parameter ini. Tentukan pemetaan yang dipisahkan spasi dalam format 'key=value'. Nama kunci yang diizinkan adalah 'subjek', 'eventtype', 'dataversion'. Nama nilai terkait harus menentukan nilai default yang akan digunakan untuk pemetaan dan hanya akan digunakan ketika peristiwa yang diterbitkan tidak memiliki pemetaan yang valid untuk bidang tertentu.
+    description: ''
+  - name: --input-mapping-fields
+    summary: Ketika skema input ditentukan sebagai customeventschema, parameter ini digunakan untuk menentukan pemetaan input berdasarkan nama bidang. Tentukan pemetaan yang dipisahkan spasi dalam format 'key=value'. Nama kunci yang diizinkan adalah 'id', 'topic', 'eventtime', 'subject', 'eventtype', 'dataversion'. Nama nilai yang sesuai harus menentukan nama bidang dalam skema input kustom. Jika pemetaan untuk 'id' atau 'eventtime' tidak disediakan, Event Grid akan secara otomatis menghasilkan nilai default untuk kedua bidang ini.
+    description: ''
+  - name: --input-schema
+    defaultValue: eventgridschema
+    parameterValueGroup: cloudeventschemav1_0, customeventschema, eventgridschema
+    summary: Skema di mana peristiwa masuk akan diterbitkan ke topik/domain ini. Jika Anda menentukan customeventschema sebagai nilai untuk parameter ini, Anda juga harus memberikan nilai untuk setidaknya salah satu dari --input_mapping_default_values / --input_mapping_fields.
+    description: ''
+  - name: --public-network-access
+    parameterValueGroup: disabled, enabled
+    summary: Ini menentukan apakah lalu lintas diizinkan melalui jaringan publik. Secara default diaktifkan. Anda dapat membatasi IP tertentu lebih lanjut dengan mengonfigurasi.
+    description: ''
+  - name: --sku
+    defaultValue: Basic
+    parameterValueGroup: basic, premium
+    summary: Nama Sku sumber daya.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+- uid: az_eventgrid_domain_delete
+  name: az eventgrid domain delete
+  summary: Menghapus domain.
+  description: ''
+  syntax: >-
+    az eventgrid domain delete --name
+                               --resource-group
+  examples:
+  - summary: Menghapus domain.
+    syntax: az eventgrid domain delete -g rg1 --name domain1
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama domain.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_eventgrid_domain_list
+  name: az eventgrid domain list
+  summary: Mencantumkan domain yang tersedia.
+  description: ''
+  syntax: >-
+    az eventgrid domain list [--odata-query]
+                             [--resource-group]
+  examples:
+  - summary: Mencantumkan semua domain di langganan Azure saat ini.
+    syntax: az eventgrid domain list
+  - summary: Mencantumkan semua domain dalam grup sumber daya.
+    syntax: az eventgrid domain list -g rg1
+  - summary: Mencantumkan semua domain dalam grup sumber daya yang namanya berisi pola "XYZ"
+    syntax: az eventgrid domain list -g rg1 --odata-query "Contains(name, 'XYZ')"
+  - summary: Mencantumkan semua domain dalam grup sumber daya kecuali domain dengan nama "name1"
+    syntax: az eventgrid domain list -g rg1 --odata-query "NOT (name eq 'name1')"
+  optionalParameters:
+  - name: --odata-query
+    summary: Kueri yang digunakan untuk memfilter hasil menggunakan sintaks OData.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_eventgrid_domain_show
+  name: az eventgrid domain show
+  summary: Mendapatkan detail domain.
+  description: ''
+  syntax: >-
+    az eventgrid domain show --name
+                             --resource-group
+  examples:
+  - summary: Perlihatkan detail domain.
+    syntax: az eventgrid domain show -g rg1 -n domain1
+  - summary: Tampilkan detail domain berdasarkan ID sumber daya.
+    syntax: az eventgrid domain show --ids /subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.EventGrid/domains/domain1
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama domain.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_eventgrid_domain_update
+  name: az eventgrid domain update
+  summary: Memperbarui domain.
+  description: ''
+  syntax: >-
+    az eventgrid domain update --name
+                               --resource-group
+                               [--identity {noidentity, systemassigned}]
+                               [--inbound-ip-rules]
+                               [--public-network-access {disabled, enabled}]
+                               [--sku {basic, premium}]
+                               [--tags]
+  examples:
+  - summary: Memperbarui properti domain yang sudah ada.
+    syntax: az eventgrid domain update -g rg1 --name domain1 --sku Basic --identity noidentity --public-network-access enabled --inbound-ip-rules 10.0.0.0/8 Allow --inbound-ip-rules 10.2.0.0/8 Allow --tags Dept=IT --sku basic
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama domain.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --identity
+    parameterValueGroup: noidentity, systemassigned
+    summary: Jenis identitas sumber daya (misalnya, topik atau domain).
+    description: ''
+  - name: --inbound-ip-rules
+    summary: Daftar aturan IP masuk.
+    description: Daftar aturan IP masuk yang menentukan Alamat IP dalam notasi CIDR misalnya, 10.0.0.0/8 bersama dengan Tindakan yang sesuai untuk dilakukan berdasarkan kecocokan atau tidak ada kecocokan dari IpMask. Nilai yang mungkin termasuk - Izinkan.
+  - name: --public-network-access
+    parameterValueGroup: disabled, enabled
+    summary: Ini menentukan apakah lalu lintas diizinkan melalui jaringan publik. Secara default diaktifkan. Anda dapat membatasi IP tertentu lebih lanjut dengan mengonfigurasi.
+    description: ''
+  - name: --sku
+    parameterValueGroup: basic, premium
+    summary: Nama Sku sumber daya.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+commands:
+- az_eventgrid_domain_create
+- az_eventgrid_domain_delete
+- az_eventgrid_domain_key
+- az_eventgrid_domain_key_list
+- az_eventgrid_domain_key_regenerate
+- az_eventgrid_domain_list
+- az_eventgrid_domain_private-endpoint-connection
+- az_eventgrid_domain_private-endpoint-connection_approve
+- az_eventgrid_domain_private-endpoint-connection_delete
+- az_eventgrid_domain_private-endpoint-connection_list
+- az_eventgrid_domain_private-endpoint-connection_reject
+- az_eventgrid_domain_private-endpoint-connection_show
+- az_eventgrid_domain_private-link-resource
+- az_eventgrid_domain_private-link-resource_list
+- az_eventgrid_domain_private-link-resource_show
+- az_eventgrid_domain_show
+- az_eventgrid_domain_topic
+- az_eventgrid_domain_topic_create
+- az_eventgrid_domain_topic_delete
+- az_eventgrid_domain_topic_list
+- az_eventgrid_domain_topic_show
+- az_eventgrid_domain_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola domain peristiwa.
+  ms.openlocfilehash: a49291d1cbe3773078c77a47e4c0f044a25fdd71
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140929526"

@@ -1,0 +1,364 @@
+### YamlMime:AzureCLIGroup
+uid: az_stream-analytics_output
+name: az stream-analytics output
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **analisis aliran** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **output az stream-analytics** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola output dengan analisis aliran.
+description: ''
+directCommands:
+- uid: az_stream-analytics_output_create
+  name: az stream-analytics output create
+  summary: Buat output atau ganti output yang sudah ada di bawah pekerjaan streaming yang ada.
+  description: ''
+  syntax: >-
+    az stream-analytics output create --job-name
+                                      --name
+                                      --resource-group
+                                      [--datasource]
+                                      [--if-match]
+                                      [--if-none-match]
+                                      [--serialization]
+                                      [--size-window]
+                                      [--time-window]
+  examples:
+  - summary: Membuat output DocumentDB
+    syntax: az stream-analytics output create --job-name "sj2331" --datasource "{\"type\":\"Microsoft.Storage/DocumentDB\",\"properties\":{\"accountId\":\"someAccountId\",\"accountKey\":\"accountKey==\",\"collectionNamePattern\":\"collection\",\"database\":\"db01\",\"documentId\":\"documentId\",\"partitionKey\":\"key\"}}" --output-name "output3022" --resource-group "sjrg7983"
+  - summary: Membuat output Power BI
+    syntax: az stream-analytics output create --job-name "sj2331" --datasource "{\"type\":\"PowerBI\",\"properties\":{\"dataset\":\"someDataset\",\"groupId\":\"ac40305e-3e8d-43ac-8161-c33799f43e95\",\"groupName\":\"MyPowerBIGroup\",\"refreshToken\":\"someRefreshToken==\",\"table\":\"someTable\",\"tokenUserDisplayName\":\"Bob Smith\",\"tokenUserPrincipalName\":\"bobsmith@contoso.com\"}}" --output-name "output3022" --resource-group "sjrg7983"
+  - summary: Membuat output antrean Bus Layanan dengan serialisasi Avro
+    syntax: az stream-analytics output create --job-name "sj5095" --datasource "{\"type\":\"Microsoft.ServiceBus/Queue\",\"properties\":{\"propertyColumns\":[\"column1\",\"column2\"],\"queueName\":\"sdkqueue\",\"serviceBusNamespace\":\"sdktest\",\"sharedAccessPolicyKey\":\"sharedAccessPolicyKey=\",\"sharedAccessPolicyName\":\"RootManageSharedAccessKey\",\"systemPropertyColumns\":{\"MessageId\":\"col3\",\"PartitionKey\":\"col4\"}}}" --serialization "{\"type\":\"Avro\"}" --output-name "output3456" --resource-group "sjrg3410"
+  - summary: Membuat output Topik Bus Layanan dengan serialisasi CSV
+    syntax: az stream-analytics output create --job-name "sj7094" --datasource "{\"type\":\"Microsoft.ServiceBus/Topic\",\"properties\":{\"propertyColumns\":[\"column1\",\"column2\"],\"serviceBusNamespace\":\"sdktest\",\"sharedAccessPolicyKey\":\"sharedAccessPolicyKey=\",\"sharedAccessPolicyName\":\"RootManageSharedAccessKey\",\"topicName\":\"sdktopic\"}}" --serialization "{\"type\":\"Csv\",\"properties\":{\"encoding\":\"UTF8\",\"fieldDelimiter\":\",\"}}" --output-name "output7886" --resource-group "sjrg6450"
+  - summary: Membuat output blob dengan serialisasi CSV
+    syntax: az stream-analytics output create --job-name "sj900" --datasource "{\"type\":\"Microsoft.Storage/Blob\",\"properties\":{\"container\":\"state\",\"dateFormat\":\"yyyy/MM/dd\",\"pathPattern\":\"{date}/{time}\",\"storageAccounts\":[{\"accountKey\":\"accountKey==\",\"accountName\":\"someAccountName\"}],\"timeFormat\":\"HH\"}}" --serialization "{\"type\":\"Csv\",\"properties\":{\"encoding\":\"UTF8\",\"fieldDelimiter\":\",\"}}" --output-name "output1623" --resource-group "sjrg5023"
+  - summary: Membuat output Azure Data Lake Store dengan serialisasi JSON
+    syntax: az stream-analytics output create --job-name "sj3310" --datasource "{\"type\":\"Microsoft.DataLake/Accounts\",\"properties\":{\"accountName\":\"someaccount\",\"dateFormat\":\"yyyy/MM/dd\",\"filePathPrefix\":\"{date}/{time}\",\"refreshToken\":\"someRefreshToken==\",\"tenantId\":\"cea4e98b-c798-49e7-8c40-4a2b3beb47dd\",\"timeFormat\":\"HH\",\"tokenUserDisplayName\":\"Bob Smith\",\"tokenUserPrincipalName\":\"bobsmith@contoso.com\"}}" --serialization "{\"type\":\"Json\",\"properties\":{\"format\":\"Array\",\"encoding\":\"UTF8\"}}" --output-name "output5195" --resource-group "sjrg6912"
+  - summary: Membuat output database Azure SQL
+    syntax: az stream-analytics output create --job-name "sj6458" --datasource "{\"type\":\"Microsoft.Sql/Server/Database\",\"properties\":{\"database\":\"someDatabase\",\"password\":\"somePassword\",\"server\":\"someServer\",\"table\":\"someTable\",\"user\":\"<user>\"}}" --output-name "output1755" --resource-group "sjrg2157"
+  - summary: Membuat output Azure Table
+    syntax: az stream-analytics output create --job-name "sj2790" --datasource "{\"type\":\"Microsoft.Storage/Table\",\"properties\":{\"accountKey\":\"accountKey==\",\"accountName\":\"someAccountName\",\"batchSize\":25,\"columnsToRemove\":[\"column1\",\"column2\"],\"partitionKey\":\"partitionKey\",\"rowKey\":\"rowKey\",\"table\":\"samples\"}}" --output-name "output958" --resource-group "sjrg5176"
+  - summary: Membuat output Event Hub dengan serialisasi JSON
+    syntax: az stream-analytics output create --job-name "sj3310" --datasource "{\"type\":\"Microsoft.ServiceBus/EventHub\",\"properties\":{\"eventHubName\":\"sdkeventhub\",\"partitionKey\":\"partitionKey\",\"serviceBusNamespace\":\"sdktest\",\"sharedAccessPolicyKey\":\"sharedAccessPolicyKey=\",\"sharedAccessPolicyName\":\"RootManageSharedAccessKey\"}}" --serialization "{\"type\":\"Json\",\"properties\":{\"format\":\"Array\",\"encoding\":\"UTF8\"}}" --output-name "output5195" --resource-group "sjrg6912"
+  requiredParameters:
+  - isRequired: true
+    name: --job-name
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --name --output-name -n
+    summary: Nama output.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --datasource
+    summary: 'Menjelaskan sumber data tempat output akan ditulis. Diperlukan pada permintaan PUT (CreateOrReplace). Nilai yang diharapkan: json-string/json-file/@json-file.'
+    description: ''
+  - name: --if-match
+    summary: ETag output. Hilangkan nilai ini untuk selalu menimpa output saat ini. Tentukan nilai ETag yang terakhir dilihat untuk mencegah penimpaan perubahan bersamaan secara tidak sengaja.
+    description: ''
+  - name: --if-none-match
+    summary: Atur ke '\*' untuk memungkinkan output baru dibuat, tetapi untuk mencegah pembaruan output yang ada. Nilai lain akan menghasilkan respons 412 Pra-kondisi Gagal.
+    description: ''
+  - name: --serialization
+    summary: 'Menjelaskan bagaimana data dari input diserialisasikan atau bagaimana data diserialisasikan saat ditulis ke output. Diperlukan pada permintaan PUT (CreateOrReplace). Nilai yang diharapkan: json-string/json-file/@json-file.'
+    description: ''
+  - name: --size-window
+    summary: Jendela ukuran untuk membatasi output Azure Stream Analytics.
+    description: ''
+  - name: --time-window
+    summary: Jangka waktu untuk memfilter output pekerjaan Azure Stream Analytics.
+    description: ''
+- uid: az_stream-analytics_output_delete
+  name: az stream-analytics output delete
+  summary: Menghapus output dari pekerjaan streaming.
+  description: ''
+  syntax: >-
+    az stream-analytics output delete --job-name
+                                      --name
+                                      --resource-group
+                                      [--yes]
+  examples:
+  - summary: Menghapus output
+    syntax: az stream-analytics output delete --job-name "sj6458" --name "output1755" --resource-group "sjrg2157"
+  requiredParameters:
+  - isRequired: true
+    name: --job-name
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --name --output-name -n
+    summary: Nama output.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_stream-analytics_output_list
+  name: az stream-analytics output list
+  summary: Cantumkan semua output di bawah pekerjaan streaming yang ditentukan.
+  description: ''
+  syntax: >-
+    az stream-analytics output list --job-name
+                                    --resource-group
+                                    [--select]
+  examples:
+  - summary: Mencantumkan semua output dalam pekerjaan streaming
+    syntax: az stream-analytics output list --job-name "sj6458" --resource-group "sjrg2157"
+  requiredParameters:
+  - isRequired: true
+    name: --job-name
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --select
+    summary: Parameter kueri $select OData. Ini adalah daftar properti struktural yang dipisahkan koma untuk disertakan dalam respons, atau "\*" untuk menyertakan semua properti. Secara default, semua properti dikembalikan kecuali diagnostik. Saat ini hanya menerima '\*' sebagai nilai yang valid.
+    description: ''
+- uid: az_stream-analytics_output_show
+  name: az stream-analytics output show
+  summary: Dapatkan detail tentang output yang ditentukan.
+  description: ''
+  syntax: >-
+    az stream-analytics output show --job-name
+                                    --name
+                                    --resource-group
+  examples:
+  - summary: Mendapatkan output DocumentDB
+    syntax: az stream-analytics output show --job-name "sj2331" --output-name "output3022" --resource-group "sjrg7983"
+  - summary: Mendapatkan output Power BI
+    syntax: az stream-analytics output show --job-name "sj2331" --output-name "output3022" --resource-group "sjrg7983"
+  - summary: Mendapatkan output antrean Bus Layanan dengan serialisasi Avro
+    syntax: az stream-analytics output show --job-name "sj5095" --output-name "output3456" --resource-group "sjrg3410"
+  - summary: Mendapatkan output Topik Bus Layanan dengan serialisasi CSV
+    syntax: az stream-analytics output show --job-name "sj7094" --output-name "output7886" --resource-group "sjrg6450"
+  - summary: Mendapatkan output blob dengan serialisasi CSV
+    syntax: az stream-analytics output show --job-name "sj900" --output-name "output1623" --resource-group "sjrg5023"
+  - summary: Mendapatkan output Azure Data Lake Store dengan serialisasi JSON
+    syntax: az stream-analytics output show --job-name "sj3310" --output-name "output5195" --resource-group "sjrg6912"
+  - summary: Mendapatkan output Azure Data Warehouse
+    syntax: az stream-analytics output show --job-name "sjName" --output-name "output958" --resource-group "sjrg"
+  - summary: Mendapatkan output database Azure SQL
+    syntax: az stream-analytics output show --job-name "sj6458" --output-name "output1755" --resource-group "sjrg2157"
+  - summary: Mendapatkan output Azure Table
+    syntax: az stream-analytics output show --job-name "sj2790" --output-name "output958" --resource-group "sjrg5176"
+  - summary: Mendapatkan output Event Hub dengan serialisasi JSON
+    syntax: az stream-analytics output show --job-name "sj3310" --output-name "output5195" --resource-group "sjrg6912"
+  requiredParameters:
+  - isRequired: true
+    name: --job-name
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --name --output-name -n
+    summary: Nama output.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_stream-analytics_output_test
+  name: az stream-analytics output test
+  summary: Uji apakah sumber data output dapat dijangkau dan dapat digunakan oleh layanan Azure Stream Analytics.
+  description: ''
+  syntax: >-
+    az stream-analytics output test --job-name
+                                    --name
+                                    --resource-group
+                                    [--datasource]
+                                    [--no-wait]
+                                    [--serialization]
+                                    [--size-window]
+                                    [--time-window]
+  examples:
+  - summary: Menguji koneksi untuk output
+    syntax: az stream-analytics output test --job-name "sj6458" --output-name "output1755" --resource-group "sjrg2157"
+  requiredParameters:
+  - isRequired: true
+    name: --job-name
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --name --output-name -n
+    summary: Nama output.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --datasource
+    summary: 'Menjelaskan sumber data tempat output akan ditulis. Diperlukan pada permintaan PUT (CreateOrReplace). Nilai yang diharapkan: json-string/json-file/@json-file.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --serialization
+    summary: 'Menjelaskan bagaimana data dari input diserialisasikan atau bagaimana data diserialisasikan saat ditulis ke output. Diperlukan pada permintaan PUT (CreateOrReplace). Nilai yang diharapkan: json-string/json-file/@json-file.'
+    description: ''
+  - name: --size-window
+    summary: Jendela ukuran untuk membatasi output Azure Stream Analytics.
+    description: ''
+  - name: --time-window
+    summary: Jangka waktu untuk memfilter output pekerjaan Azure Stream Analytics.
+    description: ''
+- uid: az_stream-analytics_output_update
+  name: az stream-analytics output update
+  summary: Perbarui output yang ada di bawah pekerjaan streaming yang ada. Ini dapat digunakan untuk memperbarui sebagian (yaitu. memperbarui satu atau dua properti) output tanpa memengaruhi sisa definisi pekerjaan atau output.
+  description: ''
+  syntax: >-
+    az stream-analytics output update --job-name
+                                      --name
+                                      --resource-group
+                                      [--datasource]
+                                      [--if-match]
+                                      [--serialization]
+                                      [--size-window]
+                                      [--time-window]
+  examples:
+  - summary: Memperbarui output DocumentDB
+    syntax: az stream-analytics output update --job-name "sj2331" --datasource "{\"type\":\"Microsoft.Storage/DocumentDB\",\"properties\":{\"partitionKey\":\"differentPartitionKey\"}}" --output-name "output3022" --resource-group "sjrg7983"
+  - summary: Memperbarui output Power BI
+    syntax: az stream-analytics output update --job-name "sj2331" --datasource "{\"type\":\"PowerBI\",\"properties\":{\"dataset\":\"differentDataset\"}}" --output-name "output3022" --resource-group "sjrg7983"
+  - summary: Memperbarui output antrean Bus Layanan dengan serialisasi Avro
+    syntax: az stream-analytics output update --job-name "sj5095" --datasource "{\"type\":\"Microsoft.ServiceBus/Queue\",\"properties\":{\"queueName\":\"differentQueueName\"}}" --serialization "{\"type\":\"Json\",\"properties\":{\"format\":\"LineSeparated\",\"encoding\":\"UTF8\"}}" --output-name "output3456" --resource-group "sjrg3410"
+  - summary: Memperbarui output Topik Bus Layanan dengan serialisasi CSV
+    syntax: az stream-analytics output update --job-name "sj7094" --datasource "{\"type\":\"Microsoft.ServiceBus/Topic\",\"properties\":{\"topicName\":\"differentTopicName\"}}" --serialization "{\"type\":\"Csv\",\"properties\":{\"encoding\":\"UTF8\",\"fieldDelimiter\":\"|\"}}" --output-name "output7886" --resource-group "sjrg6450"
+  - summary: Memperbarui output blob dengan serialisasi CSV
+    syntax: az stream-analytics output update --job-name "sj900" --datasource "{\"type\":\"Microsoft.Storage/Blob\",\"properties\":{\"container\":\"differentContainer\"}}" --serialization "{\"type\":\"Csv\",\"properties\":{\"encoding\":\"UTF8\",\"fieldDelimiter\":\"|\"}}" --output-name "output1623" --resource-group "sjrg5023"
+  - summary: Memperbarui output Azure Data Lake Store dengan serialisasi JSON
+    syntax: az stream-analytics output update --job-name "sj3310" --datasource "{\"type\":\"Microsoft.DataLake/Accounts\",\"properties\":{\"accountName\":\"differentaccount\"}}" --serialization "{\"type\":\"Json\",\"properties\":{\"format\":\"LineSeparated\",\"encoding\":\"UTF8\"}}" --output-name "output5195" --resource-group "sjrg6912"
+  - summary: Memperbarui output database Azure SQL
+    syntax: az stream-analytics output update --job-name "sj6458" --datasource "{\"type\":\"Microsoft.Sql/Server/Database\",\"properties\":{\"table\":\"differentTable\"}}" --output-name "output1755" --resource-group "sjrg2157"
+  - summary: Memperbarui output Tabel Azure
+    syntax: az stream-analytics output update --job-name "sj2790" --datasource "{\"type\":\"Microsoft.Storage/Table\",\"properties\":{\"partitionKey\":\"differentPartitionKey\"}}" --output-name "output958" --resource-group "sjrg5176"
+  - summary: Memperbarui output Event Hub dengan serialisasi JSON
+    syntax: az stream-analytics output update --job-name "sj3310" --datasource "{\"type\":\"Microsoft.ServiceBus/EventHub\",\"properties\":{\"partitionKey\":\"differentPartitionKey\"}}" --serialization "{\"type\":\"Json\",\"properties\":{\"format\":\"LineSeparated\",\"encoding\":\"UTF8\"}}" --output-name "output5195" --resource-group "sjrg6912"
+  requiredParameters:
+  - isRequired: true
+    name: --job-name
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --name --output-name -n
+    summary: Nama output.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --datasource
+    summary: 'Menjelaskan sumber data tempat output akan ditulis. Diperlukan pada permintaan PUT (CreateOrReplace). Nilai yang diharapkan: json-string/json-file/@json-file.'
+    description: ''
+  - name: --if-match
+    summary: ETag output. Hilangkan nilai ini untuk selalu menimpa output saat ini. Tentukan nilai ETag yang terakhir dilihat untuk mencegah penimpaan perubahan bersamaan secara tidak sengaja.
+    description: ''
+  - name: --serialization
+    summary: 'Menjelaskan bagaimana data dari input diserialisasikan atau bagaimana data diserialisasikan saat ditulis ke output. Diperlukan pada permintaan PUT (CreateOrReplace). Nilai yang diharapkan: json-string/json-file/@json-file.'
+    description: ''
+  - name: --size-window
+    summary: Jendela ukuran untuk membatasi output Azure Stream Analytics.
+    description: ''
+  - name: --time-window
+    summary: Jangka waktu untuk memfilter output pekerjaan Azure Stream Analytics.
+    description: ''
+- uid: az_stream-analytics_output_wait
+  name: az stream-analytics output wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi output analisis aliran terpenuhi.
+  description: ''
+  syntax: >-
+    az stream-analytics output wait --job-name
+                                    --name
+                                    --resource-group
+                                    [--created]
+                                    [--custom]
+                                    [--deleted]
+                                    [--exists]
+                                    [--interval]
+                                    [--timeout]
+                                    [--updated]
+  examples:
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga output analisis aliran berhasil dibuat.
+    syntax: az stream-analytics output wait --job-name "sj3310" --output-name "output5195" --resource-group "sjrg6912" --created
+  requiredParameters:
+  - isRequired: true
+    name: --job-name
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --name --output-name -n
+    summary: Nama output.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_stream-analytics_output_create
+- az_stream-analytics_output_delete
+- az_stream-analytics_output_list
+- az_stream-analytics_output_show
+- az_stream-analytics_output_test
+- az_stream-analytics_output_update
+- az_stream-analytics_output_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola output dengan analisis aliran.
+  ms.openlocfilehash: 0fac33fb61b6697de213c8301610db0c3d412aa7
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140940182"

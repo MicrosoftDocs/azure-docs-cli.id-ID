@@ -1,0 +1,444 @@
+### YamlMime:AzureCLIGroup
+uid: az_image_builder
+name: az image builder
+summary: Mengelola dan membangun templat penyusun gambar.
+description: ''
+directCommands:
+- uid: az_image_builder_cancel
+  name: az image builder cancel
+  summary: Batalkan build gambar yang berjalan lama berdasarkan templat gambar.
+  description: ''
+  syntax: >-
+    az image builder cancel [--ids]
+                            [--name]
+                            [--resource-group]
+  examples:
+  - summary: Membatalkan build gambar.
+    syntax: az image builder cancel -n mytemplate -g my-group
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama templat gambar.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_image_builder_create
+  name: az image builder create
+  summary: Membuat templat penyusun gambar.
+  description: ''
+  syntax: >-
+    az image builder create --name
+                            --resource-group
+                            [--build-timeout]
+                            [--build-vm-identities]
+                            [--checksum]
+                            [--defer]
+                            [--identity]
+                            [--image-source]
+                            [--image-template]
+                            [--location]
+                            [--managed-image-destinations]
+                            [--no-wait]
+                            [--os-disk-size]
+                            [--proxy-vm-size]
+                            [--scripts]
+                            [--shared-image-destinations]
+                            [--subnet]
+                            [--tags]
+                            [--vm-size]
+                            [--vnet]
+  examples:
+  - summary: Buat templat penyusun gambar dari gambar UbuntuLTS 18.04. Mendistribusikannya sebagai gambar terkelola dan versi gambar galeri gambar bersama
+    syntax: >-
+      scripts="https://my-script-url.net/customize_script.sh"
+
+      imagesource="Canonical:UbuntuServer:18.04-LTS:18.04.201903060"
+
+
+      az image builder create --image-source $imagesource -n mytemplate -g my-group \
+          --scripts $scripts --managed-image-destinations image_1=westus \
+          --shared-image-destinations my_shared_gallery/linux_image_def=westus,brazilsouth \
+          --identity myidentity
+  - summary: Buat templat penyusun gambar menggunakan file templat gambar.
+    syntax: az image builder create -g my-group -n mytemplate --image-template filename
+  - summary: '[Tingkat Lanjut] Buat templat gambar dengan beberapa penyesuai dan distributor menggunakan cache objek CLI melalui --defer. Mendukung fitur seperti: nama penyesuai dan output, kode keluar powershell, skrip sebaris, mulai ulang windows, penyesuai file, tag artefak, dan distributor output vhd.'
+    syntax: >-
+      script="https://my-script-url.com/customize_script.ps1"
+
+      imagesource="MicrosoftWindowsServer:WindowsServer:2019-Datacenter:2019.0.20190214"
+
+
+      # create and update template object in local cli cache. Defers put request to ARM
+
+      # Cache object ttl set via az configure.
+
+      az image builder create --image-source $imagesource -n mytemplate \
+          -g my-group --scripts $script --identity myidentity --defer
+
+      # add customizers
+
+      az image builder customizer add -n mytemplate -g my-group  \
+          --customizer-name my-pwsh-script --exit-codes 0 1 --inline-script \
+          "mkdir c:\buildActions" "echo Azure-Image-Builder-Was-Here \
+           > c:\buildActions\Output.txt" --type powershell --defer
+
+      az image builder customizer add -n mytemplate -g my-group \
+          --customizer-name my-file-customizer --type file \
+          --file-source "https://my-file-source.net/file.txt"  \
+          --dest-path "c:\buildArtifacts\file.txt" --defer
+
+      # add distributors
+
+      az image builder output add -n mytemplate -g my-group --is-vhd \
+          --output-name my-win-image-vhd --artifact-tags "is_vhd=True" --defer
+
+      az image builder output add -n mytemplate -g my-group \
+          --output-name my-win-image-managed --managed-image winImage \
+          --managed-image-location eastus \
+          --artifact-tags "is_vhd=False" --defer
+
+      # Stop deferring put request to ARM. Create the template from the object cache.
+
+      # Cache object will be deleted.
+
+      az image builder update -n mytemplate -g my-group
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama templat gambar.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --build-timeout
+    summary: Durasi maksimum untuk menunggu saat membangun templat gambar, dalam menit. Defaultnya adalah 60.
+    description: ''
+  - name: --build-vm-identities
+    summary: Konfigurasi opsional jaringan virtual yang akan digunakan untuk menyebarkan komputer virtual build. Hilangkan jika tidak ada jaringan virtual tertentu yang perlu digunakan.
+    description: ''
+  - name: --checksum
+    summary: Checksum SHA256 dari gambar ISO Red Hat.
+    description: ''
+  - name: --defer
+    summary: Simpan sementara objek di cache lokal alih-alih mengirim ke Azure. Gunakan `az cache` perintah untuk melihat/menghapus.
+    description: ''
+  - name: --identity
+    summary: Daftar identitas yang ditetapkan pengguna (nama atau ID, ruang yang dibatasi) dari templat gambar.
+    description: ''
+  - name: --image-source -i
+    summary: Gambar dasar yang akan disesuaikan. Harus berupa URN gambar platform yang valid, alias gambar platform, URI gambar ISO Red Hat, nama/ID gambar terkelola, atau ID versi gambar bersama.
+    description: ''
+    valueFrom: az vm image list, az vm image show
+  - name: --image-template
+    summary: 'Jalur lokal atau URL ke file templat gambar. Saat menggunakan --image-template, semua parameter lain diabaikan kecuali -g dan -n. Referensi: https://docs.microsoft.com/azure/virtual-machines/linux/image-builder-json.'
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --managed-image-destinations
+    summary: Informasi distributor output gambar terkelola. Daftar pasangan kunci-nilai yang dipisahkan spasi. Misalnya "image_1=westus2 image_2=westus". Setiap kunci adalah nama atau ID sumber daya dari gambar terkelola yang akan dibuat. Setiap nilai adalah lokasi gambar.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --os-disk-size
+    summary: Ukuran disk OS dalam GB. Hilangkan atau tentukan 0 untuk menggunakan ukuran disk OS default Azure.
+    description: ''
+  - name: --proxy-vm-size
+    summary: Ukuran komputer virtual yang digunakan untuk membangun, menyesuaikan, dan mengambil gambar (Standard_D1_v2 untuk gambar Gen1 dan Standard_D2ds_v4 untuk gambar Gen2).
+    description: ''
+  - name: --scripts
+    summary: "Daftar skrip shell atau powershell yang dipisahkan spasi untuk menyesuaikan gambar. Setiap skrip harus berupa URL yang dapat diakses publik. Menyimpulkan jenis skrip dari ekstensi file ('.sh' atau'.ps1') atau dari jenis sumber. Opsi dan fleksibilitas penyesuai lainnya, lihat: 'az image template customizer add'."
+    description: ''
+  - name: --shared-image-destinations
+    summary: Informasi distributor output shared image gallery (sig). Daftar pasangan kunci-nilai yang dipisahkan spasi. Misalnya "my_gallery_1/image_def_1=eastus,westus my_gallery_2/image_def_2=uksouth,canadaeast,francesouth." Setiap kunci adalah ID definisi gambar sig atau nama galeri sig dan definisi gambar sig yang dibatasi oleh "/". Setiap nilai adalah daftar lokasi replika yang dibatasi koma.
+    description: ''
+  - name: --subnet
+    summary: Nama atau ID subnet untuk menyebarkan komputer virtual build.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --vm-size
+    summary: Ukuran komputer virtual yang digunakan untuk membangun, menyesuaikan, dan menangkap gambar. Hilangkan atau tentukan string kosong untuk menggunakan default (Standard_D1_v2).
+    description: ''
+  - name: --vnet
+    summary: Nama VNET untuk menyebarkan komputer virtual build. Anda seharusnya hanya menentukannya ketika subnet adalah nama.
+    description: ''
+- uid: az_image_builder_delete
+  name: az image builder delete
+  summary: Menghapus templat penyusun gambar.
+  description: ''
+  syntax: >-
+    az image builder delete [--ids]
+                            [--name]
+                            [--resource-group]
+  examples:
+  - summary: Menghapus templat penyusun gambar. (dibuat otomatis)
+    syntax: az image builder delete --name MyImageTemplate --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama templat gambar.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_image_builder_list
+  name: az image builder list
+  summary: Mencantumkan templat penyusun gambar.
+  description: ''
+  syntax: az image builder list [--resource-group]
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_image_builder_run
+  name: az image builder run
+  summary: Buat templat penyusun gambar.
+  description: ''
+  syntax: >-
+    az image builder run [--ids]
+                         [--name]
+                         [--no-wait]
+                         [--resource-group]
+  examples:
+  - summary: Mulai eksekusi build templat lalu tunggu hingga selesai.
+    syntax: >-
+      az image builder run -n mytemplate -g my-group --no-wait
+
+
+      az image builder wait -n mytemplate -g aibmdi \
+          --custom "lastRunStatus.runState!='running'"
+
+      az image builder show -n mytemplate -g my-group
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama templat gambar.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_image_builder_show
+  name: az image builder show
+  summary: Perlihatkan templat penyusun gambar.
+  description: ''
+  syntax: >-
+    az image builder show [--ids]
+                          [--name]
+                          [--resource-group]
+  examples:
+  - summary: Menampilkan templat penyusun gambar (dibuat secara otomatis)
+    syntax: az image builder show --name mytemplate  --resource-group my-group
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama templat gambar.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_image_builder_show-runs
+  name: az image builder show-runs
+  summary: Menampilkan output eksekusi templat penyusun gambar.
+  description: ''
+  syntax: >-
+    az image builder show-runs [--ids]
+                               [--name]
+                               [--output-name]
+                               [--resource-group]
+  examples:
+  - summary: Jalankan eksekusi build templat lalu lihat output eksekusinya.
+    syntax: >-
+      az image builder run -n mytemplate -g my-group --no-wait
+
+
+      az image builder wait -n mytemplate -g aibmdi \
+          --custom "lastRunStatus.runState!='running'"
+
+      az image builder show-runs -n mytemplate -g my-group
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama templat gambar.
+    description: ''
+  - name: --output-name
+    summary: Nama output eksekusi pembangun gambar.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_image_builder_update
+  name: az image builder update
+  summary: Perbarui templat penyusun gambar.
+  description: Memperbarui templat penyusun gambar saat ini tidak didukung. Perintah ini dapat digunakan bersama dengan --defer untuk memperbarui objek templat gambar dalam cache CLI. Tanpa --defer itu mengambil templat gambar yang ditentukan dari cache dan mengirim permintaan ke Azure untuk membuat templat gambar.
+  syntax: >-
+    az image builder update [--add]
+                            [--defer]
+                            [--force-string]
+                            [--ids]
+                            [--name]
+                            [--remove]
+                            [--resource-group]
+                            [--set]
+  examples:
+  - summary: Buat sumber daya templat dari objek templat di cache cli.
+    syntax: >-
+      # create and write template object to local cli cache
+
+      az image builder create --image-source {image_source} -n mytemplate -g my-group \
+          --scripts {script} --managed-image-destinations image_1=westus --identity myidentity --defer
+
+      # add customizers and outputs to local cache template object via az image template output / customizer add
+
+      # one can also update cache object properties through generic update options, such as: --set
+
+      az image builder output add -n mytemplate -g my-group --output-name my-win-image-managed \
+          --artifact-tags "is_vhd=False"  --managed-image winImage --managed-image-location eastus --defer
+
+      # send template create request to azure to create template resource
+
+      az image builder update -n mytemplate -g my-group
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --defer
+    summary: Simpan sementara objek di cache lokal alih-alih mengirim ke Azure. Gunakan `az cache` perintah untuk melihat/menghapus.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama templat gambar.
+    description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+- uid: az_image_builder_wait
+  name: az image builder wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi templat terpenuhi.
+  description: ''
+  syntax: >-
+    az image builder wait [--created]
+                          [--custom]
+                          [--deleted]
+                          [--exists]
+                          [--ids]
+                          [--interval]
+                          [--name]
+                          [--resource-group]
+                          [--timeout]
+                          [--updated]
+  examples:
+  - summary: Mulai eksekusi build templat lalu tunggu hingga selesai.
+    syntax: >-
+      az image builder run -n mytemplate -g my-group --no-wait
+
+
+      az image builder wait -n mytemplate -g aibmdi \
+          --custom "lastRunStatus.runState!='running'"
+
+      az image builder show -n mytemplate -g my-group
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --name -n
+    summary: Nama templat gambar.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_image_builder_cancel
+- az_image_builder_create
+- az_image_builder_customizer
+- az_image_builder_customizer_add
+- az_image_builder_customizer_clear
+- az_image_builder_customizer_remove
+- az_image_builder_delete
+- az_image_builder_list
+- az_image_builder_output
+- az_image_builder_output_add
+- az_image_builder_output_clear
+- az_image_builder_output_remove
+- az_image_builder_run
+- az_image_builder_show
+- az_image_builder_show-runs
+- az_image_builder_update
+- az_image_builder_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola dan membangun templat penyusun gambar.
+  ms.openlocfilehash: f6fb0160c59124b80ee1bd11868c50a9a2b29196
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140901500"

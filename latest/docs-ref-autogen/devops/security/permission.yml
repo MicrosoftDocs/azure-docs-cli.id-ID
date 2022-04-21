@@ -1,0 +1,230 @@
+### YamlMime:AzureCLIGroup
+uid: az_devops_security_permission
+name: az devops security permission
+summary: Mengelola izin keamanan.
+description: ''
+directCommands:
+- uid: az_devops_security_permission_list
+  name: az devops security permission list
+  summary: Mencantumkan token untuk pengguna/grup dan namespace yang diberikan.
+  description: ''
+  syntax: >-
+    az devops security permission list --id
+                                       --subject
+                                       [--detect {false, true}]
+                                       [--org]
+                                       [--recurse]
+                                       [--token]
+  requiredParameters:
+  - isRequired: true
+    name: --id --namespace-id
+    summary: ID namespace keamanan.
+    description: ''
+  - isRequired: true
+    name: --subject
+    summary: ID Email Pengguna atau Deskriptor grup.
+    description: ''
+  optionalParameters:
+  - name: --detect
+    parameterValueGroup: false, true
+    summary: Mendeteksi organisasi secara otomatis.
+    description: ''
+  - name: --org --organization
+    summary: 'Azure DevOps URL organisasi. Anda dapat mengonfigurasi organisasi default menggunakan az devops configure -d organization=ORG_URL. Diperlukan jika tidak dikonfigurasi sebagai default atau diambil melalui konfigurasi git. Contoh: https://dev.azure.com/MyOrganizationName/.'
+    description: ''
+  - name: --recurse
+    summary: Jika true dan ini adalah namespace hierarkis, kembalikan ACL anak dari token yang ditentukan.
+    description: ''
+  - name: --token
+    summary: Token keamanan.
+    description: ''
+- uid: az_devops_security_permission_reset
+  name: az devops security permission reset
+  summary: Reset izin untuk bit izin yang diberikan.
+  description: ''
+  syntax: >-
+    az devops security permission reset --id
+                                        --permission-bit
+                                        --subject
+                                        --token
+                                        [--detect {false, true}]
+                                        [--org]
+  requiredParameters:
+  - isRequired: true
+    name: --id --namespace-id
+    summary: ID namespace keamanan.
+    description: ''
+  - isRequired: true
+    name: --permission-bit
+    summary: Bit izin atau penambahan bit izin yang perlu diatur ulang untuk pengguna/grup dan token tertentu.
+    description: ''
+  - isRequired: true
+    name: --subject
+    summary: ID Email Pengguna atau Deskriptor grup.
+    description: ''
+  - isRequired: true
+    name: --token
+    summary: Token keamanan.
+    description: ''
+  optionalParameters:
+  - name: --detect
+    parameterValueGroup: false, true
+    summary: Mendeteksi organisasi secara otomatis.
+    description: ''
+  - name: --org --organization
+    summary: 'Azure DevOps URL organisasi. Anda dapat mengonfigurasi organisasi default menggunakan az devops configure -d organization=ORG_URL. Diperlukan jika tidak dikonfigurasi sebagai default atau diambil melalui konfigurasi git. Contoh: https://dev.azure.com/MyOrganizationName/.'
+    description: ''
+- uid: az_devops_security_permission_reset-all
+  name: az devops security permission reset-all
+  summary: Hapus semua izin token ini untuk pengguna/grup.
+  description: ''
+  syntax: >-
+    az devops security permission reset-all --id
+                                            --subject
+                                            --token
+                                            [--detect {false, true}]
+                                            [--org]
+                                            [--yes]
+  requiredParameters:
+  - isRequired: true
+    name: --id --namespace-id
+    summary: ID namespace keamanan.
+    description: ''
+  - isRequired: true
+    name: --subject
+    summary: ID Email Pengguna atau Deskriptor grup.
+    description: ''
+  - isRequired: true
+    name: --token
+    summary: Token keamanan.
+    description: ''
+  optionalParameters:
+  - name: --detect
+    parameterValueGroup: false, true
+    summary: Mendeteksi organisasi secara otomatis.
+    description: ''
+  - name: --org --organization
+    summary: 'Azure DevOps URL organisasi. Anda dapat mengonfigurasi organisasi default menggunakan az devops configure -d organization=ORG_URL. Diperlukan jika tidak dikonfigurasi sebagai default atau diambil melalui konfigurasi git. Contoh: https://dev.azure.com/MyOrganizationName/.'
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_devops_security_permission_show
+  name: az devops security permission show
+  summary: Perlihatkan izin untuk token, namespace, dan pengguna/grup yang diberikan.
+  description: ''
+  syntax: >-
+    az devops security permission show --id
+                                       --subject
+                                       --token
+                                       [--detect {false, true}]
+                                       [--org]
+  requiredParameters:
+  - isRequired: true
+    name: --id --namespace-id
+    summary: ID namespace keamanan.
+    description: ''
+  - isRequired: true
+    name: --subject
+    summary: ID Email Pengguna atau Deskriptor grup.
+    description: ''
+  - isRequired: true
+    name: --token
+    summary: Token keamanan.
+    description: ''
+  optionalParameters:
+  - name: --detect
+    parameterValueGroup: false, true
+    summary: Mendeteksi organisasi secara otomatis.
+    description: ''
+  - name: --org --organization
+    summary: 'Azure DevOps URL organisasi. Anda dapat mengonfigurasi organisasi default menggunakan az devops configure -d organization=ORG_URL. Diperlukan jika tidak dikonfigurasi sebagai default atau diambil melalui konfigurasi git. Contoh: https://dev.azure.com/MyOrganizationName/.'
+    description: ''
+- uid: az_devops_security_permission_update
+  name: az devops security permission update
+  summary: Tetapkan izin izinkan atau tolak untuk pengguna/grup yang diberikan.
+  description: Pelajari lebih lanjut di https://aka.ms/azure-devops-cli-security-permission.
+  syntax: >-
+    az devops security permission update --id
+                                         --subject
+                                         --token
+                                         [--allow-bit]
+                                         [--deny-bit]
+                                         [--detect {false, true}]
+                                         [--merge {false, true}]
+                                         [--org]
+  examples:
+  - summary: Tetapkan izin tampilan, edit, dan hapus untuk proyek tim.
+    syntax: >-
+      az devops security permission update  --allow-bit 7 --namespace-id            52d39943-cb85-4d7f-8fa8-c6baac873819 --subject user@fabrikam.com            --token "$PROJECT:vstfs:///Classification/TeamProject/e479xxxx-2be8-xxxx-bb0b-3a0209cxxxx"
+
+
+      You would need to add the bit value of the various permission bits to
+
+      simultaneously allow/deny multiple permissions.
+  requiredParameters:
+  - isRequired: true
+    name: --id --namespace-id
+    summary: ID namespace keamanan.
+    description: ''
+  - isRequired: true
+    name: --subject
+    summary: ID Email Pengguna atau Deskriptor grup.
+    description: ''
+  - isRequired: true
+    name: --token
+    summary: Token keamanan.
+    description: ''
+  optionalParameters:
+  - name: --allow-bit
+    summary: Izinkan bit atau penambahan bit. Diperlukan jika --deny-bit hilang.
+    description: ''
+  - name: --deny-bit
+    summary: Tolak bit atau penambahan bit. Diperlukan jika --allow-bit hilang.
+    description: ''
+  - name: --detect
+    parameterValueGroup: false, true
+    summary: Mendeteksi organisasi secara otomatis.
+    description: ''
+  - name: --merge
+    defaultValue: "1"
+    parameterValueGroup: false, true
+    summary: Jika diatur, ACE yang ada memiliki izin dan tolak yang digabungkan dengan izin dan tolak ACE yang masuk. Jika tidak diatur, ACE yang ada akan dipindahkan.
+    description: ''
+  - name: --org --organization
+    summary: 'Azure DevOps URL organisasi. Anda dapat mengonfigurasi organisasi default menggunakan az devops configure -d organization=ORG_URL. Diperlukan jika tidak dikonfigurasi sebagai default atau diambil melalui konfigurasi git. Contoh: https://dev.azure.com/MyOrganizationName/.'
+    description: ''
+commands:
+- az_devops_security_permission_list
+- az_devops_security_permission_namespace
+- az_devops_security_permission_namespace_list
+- az_devops_security_permission_namespace_show
+- az_devops_security_permission_reset
+- az_devops_security_permission_reset-all
+- az_devops_security_permission_show
+- az_devops_security_permission_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola izin keamanan.
+  ms.openlocfilehash: a7a6d9149634618c6a04c158534cce34a830a265
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140973140"

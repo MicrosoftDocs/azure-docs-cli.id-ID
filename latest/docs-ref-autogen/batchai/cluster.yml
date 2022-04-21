@@ -1,0 +1,348 @@
+### YamlMime:AzureCLIGroup
+uid: az_batchai_cluster
+name: az batchai cluster
+summary: Perintah untuk mengelola kluster.
+description: ''
+directCommands:
+- uid: az_batchai_cluster_auto-scale
+  name: az batchai cluster auto-scale
+  summary: Atur parameter skala otomatis untuk kluster.
+  description: ''
+  syntax: >-
+    az batchai cluster auto-scale --max
+                                  --min
+                                  [--ids]
+                                  [--name]
+                                  [--resource-group]
+                                  [--workspace]
+  examples:
+  - summary: Buat kluster untuk menskalakan otomatis antara 0 dan 10 simpul tergantung pada jumlah pekerjaan yang diantrekan dan berjalan.
+    syntax: az batchai cluster auto-scale -g MyResourceGroup -w MyWorkspace -n MyCluster --min 0 --max 10
+  requiredParameters:
+  - isRequired: true
+    name: --max
+    summary: Jumlah maksimum simpul.
+    description: ''
+  - isRequired: true
+    name: --min
+    summary: Jumlah minimum simpul.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama kluster.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --workspace -w
+    summary: Nama ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batchai/_help.py
+- uid: az_batchai_cluster_create
+  name: az batchai cluster create
+  summary: Buat kluster.
+  description: ''
+  syntax: >-
+    az batchai cluster create --name
+                              --resource-group
+                              --workspace
+                              [--afs-mount-path]
+                              [--afs-name]
+                              [--bfs-mount-path]
+                              [--bfs-name]
+                              [--config-file]
+                              [--custom-image]
+                              [--generate-ssh-keys]
+                              [--image]
+                              [--max]
+                              [--min]
+                              [--nfs]
+                              [--nfs-mount-path]
+                              [--password]
+                              [--setup-task]
+                              [--setup-task-output]
+                              [--ssh-key]
+                              [--storage-account-key]
+                              [--storage-account-name]
+                              [--subnet]
+                              [--target]
+                              [--use-auto-storage]
+                              [--user-name]
+                              [--vm-priority {dedicated, lowpriority}]
+                              [--vm-size]
+  examples:
+  - summary: Buat kluster GPU simpul tunggal dengan gambar default dan akun penyimpanan otomatis.
+    syntax: >-
+      az batchai cluster create -g MyResourceGroup -w MyWorkspace -n MyCluster \
+          -s Standard_NC6 -t 1 --use-auto-storage --generate-ssh-keys
+  - summary: Buat kluster dengan perintah penyiapan yang menginstal unzip pada setiap simpul, output perintah akan disimpan di akun penyimpanan otomatis Azure File Share.
+    syntax: >-
+      az batchai cluster create -g MyResourceGroup -w MyWorkspace -n MyCluster \
+          --use-auto-storage \
+          -s Standard_NC6 -t 1 -k id_rsa.pub \
+          --setup-task 'apt update; apt install unzip -y' \
+          --setup-task-output '$AZ_BATCHAI_MOUNT_ROOT/autoafs'
+  - summary: Buat kluster yang menyediakan semua parameter secara manual.
+    syntax: >-
+      az batchai cluster create -g MyResourceGroup -w MyWorkspace -n MyCluster \
+          -i UbuntuLTS -s Standard_NC6 --vm-priority lowpriority \
+          --min 0 --target 1 --max 10 \
+          --storage-account-name MyStorageAccount \
+          --nfs MyNfsToMount --afs-name MyAzureFileShareToMount \
+          --bfs-name MyBlobContainerNameToMount \
+          -u AdminUserName -k id_rsa.pub -p ImpossibleToGuessPassword
+  - summary: Buat kluster menggunakan file konfigurasi.
+    syntax: az batchai cluster create -g MyResourceGroup -w MyWorkspace -n MyCluster -f cluster.json
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace -w
+    summary: Nama ruang kerja.
+    description: ''
+  optionalParameters:
+  - name: --afs-mount-path
+    defaultValue: afs
+    summary: Jalur pemasangan relatif untuk berbagi File Azure. Berbagi file akan tersedia di folder $AZ_BATCHAI_MOUNT_ROOT/<relative_mount_path>.
+    description: ''
+  - name: --afs-name
+    summary: Nama Azure File Share yang akan dipasang pada setiap node kluster. Harus digunakan bersama dengan --storage-account-name. Beberapa berbagi dapat dipasang menggunakan file konfigurasi (lihat opsi --config-file).
+    description: ''
+  - name: --bfs-mount-path
+    defaultValue: bfs
+    summary: Jalur pemasangan relatif untuk kontainer Azure Storage. Kontainer akan tersedia di folder $AZ_BATCHAI_MOUNT_ROOT/<relative_mount_path>.
+    description: ''
+  - name: --bfs-name
+    summary: Nama kontainer Azure Storage yang akan dipasang pada setiap node kluster. Harus digunakan bersama dengan --storage-account-name. Beberapa kontainer dapat dipasang menggunakan file konfigurasi (lihat opsi --config-file).
+    description: ''
+  - name: --config-file -f
+    summary: Jalur ke file json yang berisi parameter pembuatan kluster (representasi json dari azure.mgmt.batchai.models.ClusterCreateParameters).
+    description: ''
+  - name: --custom-image
+    summary: ARM ID citra komputer virtual yang akan digunakan untuk pembuatan simpul. Catatan, Anda perlu memberikan --image yang berisi informasi tentang gambar dasar yang digunakan untuk pembuatan gambar ini.
+    description: ''
+  - name: --generate-ssh-keys
+    summary: Hasilkan file kunci publik dan privat SSH di direktori ~/.ssh (jika hilang).
+    description: ''
+  - name: --image -i
+    summary: Gambar sistem operasi untuk node kluster. Nilai mungkin berisi alias (UbuntuLTS, UbuntuDSVM) atau menentukan detail gambar dalam formulir "publisher:offer:sku:version". Jika konfigurasi gambar tidak disediakan melalui baris perintah atau file konfigurasi, Batch AI akan memilih gambar OS default.
+    description: ''
+  - name: --max
+    summary: Jumlah simpul maksimum untuk kluster skala otomatis.
+    description: ''
+  - name: --min
+    summary: Jumlah simpul min untuk kluster skala otomatis.
+    description: ''
+  - name: --nfs
+    summary: Nama atau ID ARM dari server file yang akan dipasang pada setiap node kluster. Anda perlu memberikan ID ARM lengkap jika server file milik ruang kerja yang berbeda. Beberapa NFS dapat dipasang menggunakan file konfigurasi (lihat opsi --config-file).
+    description: ''
+  - name: --nfs-mount-path
+    defaultValue: nfs
+    summary: Jalur pemasangan relatif untuk NFS. NFS akan tersedia di folder $AZ_BATCHAI_MOUNT_ROOT/<relative_mount_path>.
+    description: ''
+  - name: --password -p
+    summary: Kata sandi opsional untuk akun pengguna admin yang akan dibuat pada setiap simpul komputasi.
+    description: ''
+  - name: --setup-task
+    summary: Baris perintah yang harus dijalankan pada setiap simpul komputasi ketika dialokasikan atau di-boot ulang. Tugas dijalankan dalam subshell bash di bawah akun root.
+    description: ''
+  - name: --setup-task-output
+    summary: Jalur direktori untuk menyimpan di mana log tugas penyiapan. Perhatikan, Batch AI akan membuat beberapa direktori pembantu di bawah jalur ini. Direktori yang dibuat dilaporkan sebagai stdOutErrPathSuffix oleh perintah 'az cluster show'.
+    description: ''
+  - name: --ssh-key -k
+    summary: Nilai atau jalur kunci publik SSH opsional. Jika ommited dan tidak ada kata sandi yang ditentukan, kunci SSH default (~/.ssh/id_rsa.pub) akan digunakan.
+    description: ''
+  - name: --storage-account-key
+    summary: Kunci akun penyimpanan. Diperlukan jika akun penyimpanan milik langganan yang berbeda. Dapat ditentukan menggunakan variabel lingkungan AZURE_BATCHAI_STORAGE_KEY.
+    description: ''
+  - name: --storage-account-name
+    summary: Storage nama akun untuk Azure File Shares dan/atau Azure Storage Containers yang akan dipasang pada setiap node kluster. Dapat ditentukan menggunakan variabel lingkungan AZURE_BATCHAI_STORAGE_ACCOUNT.
+    description: ''
+  - name: --subnet
+    summary: ARM ID subnet jaringan virtual untuk memasukkan kluster.
+    description: ''
+  - name: --target -t
+    summary: Jumlah simpul yang harus dialokasikan segera setelah pembuatan kluster. Jika kluster dalam mode skala otomatis, BatchAI dapat mengubah jumlah simpul nanti berdasarkan jumlah pekerjaan yang berjalan dan diantrekan.
+    description: ''
+  - name: --use-auto-storage
+    summary: Jika disediakan, perintah akan membuat akun penyimpanan di grup sumber daya baru atau yang sudah ada bernama "batchaiautostorage". Ini juga akan membuat Azure File Share dengan nama "batchaishare", Azure Blob Container dengan nama "batchaicontainer". File Share dan Blob Container akan dipasang pada setiap node kluster di $AZ_BATCHAI_MOUNT_ROOT/autoafs dan $AZ_BATCHAI_MOUNT_ROOT/autobfs. Jika grup sumber daya sudah ada dan berisi akun penyimpanan yang disetujui milik wilayah yang sama dengan kluster, perintah ini akan menggunakan kembali akun penyimpanan yang ada.
+    description: ''
+  - name: --user-name -u
+    summary: Nama akun pengguna admin yang akan dibuat pada setiap simpul komputasi. Jika nilai tidak disediakan dan tidak ada konfigurasi pengguna yang disediakan dalam file konfigurasi, nama pengguna saat ini akan digunakan.
+    description: ''
+  - name: --vm-priority
+    parameterValueGroup: dedicated, lowpriority
+    summary: Prioritas VM.
+    description: ''
+  - name: --vm-size -s
+    summary: Ukuran VM untuk node kluster (misalnya Standard_NC6 untuk 1 node GPU).
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batchai/_help.py
+- uid: az_batchai_cluster_delete
+  name: az batchai cluster delete
+  summary: Menghapus kluster.
+  description: ''
+  syntax: >-
+    az batchai cluster delete [--ids]
+                              [--name]
+                              [--no-wait]
+                              [--resource-group]
+                              [--workspace]
+                              [--yes]
+  examples:
+  - summary: Hapus kluster dan tunggu penghapusan selesai.
+    syntax: az batchai cluster delete -g MyResourceGroup -w MyWorkspace -n MyCluster
+  - summary: Kirim perintah hapus untuk kluster dan jangan tunggu penghapusan selesai.
+    syntax: az batchai cluster delete -g MyResourceGroup -w MyWorkspace -n MyCluster --no-wait
+  - summary: Hapus kluster tanpa meminta konfirmasi (untuk skenario non-interaktif).
+    syntax: az batchai cluster delete -g MyResourceGroup -w MyWorkspace -n MyCluster -y
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama kluster.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --workspace -w
+    summary: Nama ruang kerja.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batchai/_help.py
+- uid: az_batchai_cluster_list
+  name: az batchai cluster list
+  summary: Mencantumkan kluster.
+  description: ''
+  syntax: >-
+    az batchai cluster list --resource-group
+                            --workspace
+  examples:
+  - summary: Mencantumkan semua kluster di ruang kerja.
+    syntax: az batchai cluster list -g MyResourceGroup -w MyWorkspace -o table
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace -w
+    summary: Nama ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batchai/_help.py
+- uid: az_batchai_cluster_resize
+  name: az batchai cluster resize
+  summary: Mengubah ukuran kluster.
+  description: ''
+  syntax: >-
+    az batchai cluster resize --target
+                              [--ids]
+                              [--name]
+                              [--resource-group]
+                              [--workspace]
+  examples:
+  - summary: Mengubah ukuran kluster menjadi ukuran nol untuk berhenti membayarnya.
+    syntax: az batchai cluster resize -g MyResourceGroup -w MyWorkspace -n MyCluster -t 0
+  - summary: Mengubah ukuran kluster agar memiliki 10 simpul.
+    syntax: az batchai cluster resize -g MyResourceGroup -w MyWorkspace -n MyCluster -t 10
+  requiredParameters:
+  - isRequired: true
+    name: --target -t
+    summary: Jumlah target simpul komputasi.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama kluster.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --workspace -w
+    summary: Nama ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batchai/_help.py
+- uid: az_batchai_cluster_show
+  name: az batchai cluster show
+  summary: Tampilkan informasi tentang kluster.
+  description: ''
+  syntax: >-
+    az batchai cluster show [--ids]
+                            [--name]
+                            [--resource-group]
+                            [--workspace]
+  examples:
+  - summary: Tampilkan informasi lengkap tentang kluster.
+    syntax: az batchai cluster show -g MyResourceGroup -w MyWorkspace -n MyCluster
+  - summary: Tampilkan ringkasan kluster.
+    syntax: az batchai cluster show -g MyResourceGroup -w MyWorkspace -n MyCluster -o table
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama kluster.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --workspace -w
+    summary: Nama ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batchai/_help.py
+commands:
+- az_batchai_cluster_auto-scale
+- az_batchai_cluster_create
+- az_batchai_cluster_delete
+- az_batchai_cluster_file
+- az_batchai_cluster_file_list
+- az_batchai_cluster_list
+- az_batchai_cluster_node
+- az_batchai_cluster_node_exec
+- az_batchai_cluster_node_list
+- az_batchai_cluster_resize
+- az_batchai_cluster_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 07/13/2021
+  description: Perintah untuk mengelola kluster.
+  ms.openlocfilehash: 30e1f243ae128142681979cf494f03ac09a6066b
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140973356"
