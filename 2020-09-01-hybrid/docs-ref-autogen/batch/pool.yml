@@ -1,0 +1,143 @@
+### YamlMime:AzureCLIGroup
+uid: az_batch_pool
+name: az batch pool
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **azure-batch-cli-extensions** untuk Azure CLI (versi 2.0.74 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **kumpulan batch az** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola kumpulan Batch.
+description: ''
+directCommands:
+- uid: az_batch_pool_create
+  name: az batch pool create
+  summary: Buat kumpulan Batch di akun. Saat membuat kumpulan, pilih argumen dari Konfigurasi Cloud Services atau Konfigurasi Komputer Virtual.
+  description: ''
+  syntax: >-
+    az batch pool create [--account-endpoint]
+                         [--account-key]
+                         [--account-name]
+                         [--application-licenses]
+                         [--application-package-references]
+                         [--auto-scale-formula]
+                         [--certificate-references]
+                         [--disk-encryption-targets]
+                         [--enable-inter-node-communication]
+                         [--id]
+                         [--image]
+                         [--json-file]
+                         [--metadata]
+                         [--node-agent-sku-id]
+                         [--os-family]
+                         [--parameters]
+                         [--resize-timeout]
+                         [--resource-group]
+                         [--start-task-command-line]
+                         [--start-task-resource-files]
+                         [--start-task-wait-for-success]
+                         [--target-dedicated-nodes]
+                         [--target-low-priority-nodes]
+                         [--template]
+                         [--vm-size]
+  optionalParameters:
+  - name: --account-endpoint
+    summary: 'Titik akhir layanan batch. Atau, diatur berdasarkan variabel lingkungan: AZURE_BATCH_ENDPOINT.'
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun Batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCESS_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun Batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCOUNT.'
+    description: ''
+  - name: --application-licenses
+    summary: Daftar lisensi aplikasi harus merupakan subset dari lisensi aplikasi layanan Batch yang tersedia. Jika lisensi diminta yang tidak didukung, pembuatan Kumpulan akan gagal.
+    description: ''
+  - name: --application-package-references
+    summary: Perubahan pada referensi Paket memengaruhi semua Simpul baru yang bergabung dengan Kumpulan, tetapi tidak memengaruhi Simpul Komputasi yang sudah ada di Kumpulan hingga di-boot ulang atau digambut ulang. Ada maksimum 10 referensi Paket pada Kumpulan tertentu.
+    description: ''
+  - name: --auto-scale-formula
+    summary: Properti ini tidak boleh ditentukan jika enableAutoScale diatur ke false. Diperlukan jika enableAutoScale diatur ke true. Rumus diperiksa validitasnya sebelum Kumpulan dibuat. Jika rumus tidak valid, layanan Batch menolak permintaan dengan informasi kesalahan terperinci. Untuk informasi selengkapnya tentang menentukan rumus ini, lihat 'Menskalakan Simpul Komputasi secara otomatis dalam Kumpulan Azure Batch' (https://azure.microsoft.com/documentation/articles/batch-automatic-scaling/).
+    description: ''
+  - name: --certificate-references
+    summary: Untuk simpul Windows, layanan Batch menginstal Sertifikat ke penyimpanan dan lokasi Sertifikat yang ditentukan. Untuk Simpul Komputasi Linux, Sertifikat disimpan dalam direktori di dalam direktori kerja Tugas dan variabel lingkungan AZ_BATCH_CERTIFICATES_DIR disediakan ke Tugas untuk mengkueri lokasi ini. Untuk Sertifikat dengan visibilitas 'remoteUser', direktori 'certs' dibuat di direktori beranda pengguna (misalnya, /home/{user-name}/certs) dan Sertifikat ditempatkan di direktori tersebut.
+    description: ''
+  - name: --disk-encryption-targets
+    summary: Daftar ruang yang dipisahkan dari DiskEncryptionTargets. nilai saat ini yang mungkin termasuk OsDisk dan TemporaryDisk.
+    description: ''
+  - name: --enable-inter-node-communication
+    summary: Apakah Kumpulan mengizinkan komunikasi langsung antara Simpul Komputasi. Mengaktifkan komunikasi antar-simpul membatasi ukuran maksimum Kumpulan karena pembatasan penyebaran pada Simpul Komputasi Kumpulan. Ini dapat mengakibatkan Kumpulan tidak mencapai ukuran yang diinginkan. Nilai defaultnya adalah false.
+    description: ''
+  - name: --id
+    summary: Wajib diisi. ID dapat berisi kombinasi karakter alfanumerik termasuk tanda hubung dan garis bawah, dan tidak boleh berisi lebih dari 64 karakter. ID adalah mempertahankan huruf besar/kecil dan tidak peka huruf besar/kecil (artinya, Anda mungkin tidak memiliki dua ID Kumpulan dalam Akun yang hanya berbeda menurut kasus).
+    description: ''
+  - name: --image
+    summary: "Referensi gambar OS. Ini bisa berupa format 'publisher:offer:sku[:version]', atau id gambar ARM yang sepenuhnya memenuhi syarat dari formulir '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}'. Jika format 'publisher:offer:sku[:version]', versi bersifat opsional dan jika dihilangkan terbaru akan digunakan. Nilai yang valid dapat diambil melalui 'az batch pool node-agent-skus list'. Misalnya: 'MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:latest'."
+    description: ''
+  - name: --json-file
+    summary: File yang berisi kumpulan untuk dibuat dalam format JSON, jika parameter ini ditentukan, semua parameter lainnya diabaikan.
+    description: ''
+  - name: --metadata
+    summary: Layanan Batch tidak menetapkan arti apa pun untuk metadata; hanya untuk penggunaan kode pengguna.
+    description: ''
+  - name: --node-agent-sku-id
+    summary: SKU agen simpul Batch yang akan disediakan pada simpul komputasi di kumpulan. Agen simpul Batch adalah program yang berjalan pada setiap simpul di kumpulan, dan menyediakan antarmuka perintah dan kontrol antara simpul dan layanan Batch. Ada implementasi yang berbeda dari agen simpul, yang dikenal sebagai SKU, untuk sistem operasi yang berbeda. Anda harus menentukan SKU agen simpul yang cocok dengan referensi gambar yang dipilih. Untuk mendapatkan daftar SKU agen simpul yang didukung bersama dengan daftar referensi gambar terverifikasi mereka, lihat operasi 'Daftar SKU agen simpul yang didukung'.
+    description: ''
+  - name: --os-family
+    summary: 'Keluarga Azure Guest OS akan dipasang di komputer virtual di kumpulan. Nilai yang mungkin adalah: 2 - OS Family 2, setara dengan Windows Server 2008 R2 SP1. 3 - OS Family 3, setara dengan Windows Server 2012. 4 - OS Family 4, setara dengan Windows Server 2012 R2. 5 - OS Family 5, setara dengan Windows Server 2016. Untuk informasi selengkapnya, lihat Rilis OS Tamu Azure (https://azure.microsoft.com/documentation/articles/cloud-services-guestos-update-matrix/#releases). Nilai yang diizinkan: 2, 3, 4, 5.'
+    description: ''
+  - name: --parameters
+    summary: Nilai parameter untuk file templat JSON kumpulan Batch. Hanya dapat digunakan dengan --template.
+    description: ''
+  - name: --resize-timeout
+    summary: Batas waktu ini hanya berlaku untuk penskalakan manual; tidak berpengaruh ketika enableAutoScale diatur ke true. Nilai defaultnya adalah 15 menit. Nilai minimum adalah 5 menit. Jika Anda menentukan nilai kurang dari 5 menit, layanan Batch mengembalikan kesalahan; jika Anda memanggil REST API secara langsung, kode status HTTP adalah 400 (Permintaan Buruk).
+    description: ''
+  - name: --resource-group
+    summary: Grup sumber daya akun Batch.
+    description: ''
+  - name: --start-task-command-line
+    summary: Baris perintah tugas mulai. Baris perintah tidak berjalan di bawah shell, dan karena itu tidak dapat memanfaatkan fitur shell seperti ekspansi variabel lingkungan. Jika Anda ingin memanfaatkan fitur tersebut, Anda harus memanggil shell di baris perintah, misalnya menggunakan "cmd /c MyCommand" di Windows atau "/bin/sh -c MyCommand" di Linux.
+    description: ''
+  - name: --start-task-resource-files
+    summary: Daftar file yang akan diunduh layanan Batch ke simpul komputasi sebelum menjalankan baris perintah. Referensi sumber daya yang dipisahkan spasi dalam format filename=httpurl.
+    description: ''
+  - name: --start-task-wait-for-success
+    summary: Apakah layanan Batch harus menunggu tugas mulai berhasil diselesaikan (yaitu, untuk keluar dengan kode keluar 0) sebelum menjadwalkan tugas apa pun pada simpul komputasi. Jika true dan tugas mulai gagal pada simpul komputasi, layanan Batch mencoba kembali tugas mulai hingga jumlah percobaan kembali maksimumnya (maxTaskRetryCount). Jika tugas masih belum berhasil diselesaikan setelah semua percobaan ulang, maka layanan Batch menandai simpul komputasi tidak dapat digunakan, dan tidak akan menjadwalkan tugas untuk itu. Kondisi ini dapat dideteksi melalui status simpul dan detail kesalahan penjadwalan. Jika false, layanan Batch tidak akan menunggu tugas mulai selesai. Dalam hal ini, tugas lain dapat mulai dijalankan pada simpul komputasi saat tugas mulai masih berjalan; dan bahkan jika tugas mulai gagal, tugas baru akan terus dijadwalkan pada simpul. Defaultnya adalah false. True jika bendera ada.
+    description: ''
+  - name: --target-dedicated-nodes
+    summary: Jumlah Simpul Komputasi khusus yang diinginkan di Kumpulan. Properti ini tidak boleh ditentukan jika enableAutoScale diatur ke true. Jika enableAutoScale diatur ke false, maka Anda harus mengatur targetDedicatedNodes, targetLowPriorityNodes, atau keduanya.
+    description: ''
+  - name: --target-low-priority-nodes
+    summary: Jumlah Simpul Komputasi Spot/Prioritas rendah yang diinginkan di Kumpulan. Properti ini tidak boleh ditentukan jika enableAutoScale diatur ke true. Jika enableAutoScale diatur ke false, maka Anda harus mengatur targetDedicatedNodes, targetLowPriorityNodes, atau keduanya.
+    description: ''
+  - name: --template
+    summary: File templat JSON kumpulan Batch. Jika parameter ini ditentukan, semua parameter lainnya diabaikan.
+    description: ''
+  - name: --vm-size
+    summary: Wajib diisi. Untuk informasi tentang ukuran komputer virtual yang tersedia untuk kumpulan Cloud Services (kumpulan yang dibuat dengan cloudServiceConfiguration), lihat Ukuran untuk Cloud Services (https://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch mendukung semua ukuran VM Cloud Services kecuali ExtraSmall, A1V2, dan A2V2. Untuk informasi tentang ukuran VM yang tersedia untuk Kumpulan menggunakan Gambar dari Virtual Machines Marketplace (kumpulan yang dibuat dengan virtualMachineConfiguration) lihat Ukuran untuk Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) atau Ukuran untuk Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch mendukung semua ukuran Azure VM kecuali STANDARD_A0 dan yang memiliki penyimpanan premium (STANDARD_GS, STANDARD_DS, dan seri STANDARD_DSV2).
+    description: ''
+commands:
+- az_batch_pool_create
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola kumpulan Batch.
+  ms.openlocfilehash: c45638cc30836a12e6e7d65b1394046f1ed26150
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140905226"

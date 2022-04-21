@@ -1,0 +1,297 @@
+### YamlMime:AzureCLIGroup
+uid: az_aks_addon
+name: az aks addon
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **aks-preview** untuk Azure CLI (versi 2.32.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **addon az aks** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Perintah untuk mengelola dan melihat kondisi addon tunggal.
+description: ''
+directCommands:
+- uid: az_aks_addon_disable
+  name: az aks addon disable
+  summary: Nonaktifkan addon Kubernetes yang diaktifkan dalam kluster.
+  description: ''
+  syntax: >-
+    az aks addon disable --addon
+                         --name
+                         --resource-group
+                         [--no-wait]
+  examples:
+  - summary: Nonaktifkan addon "pemantauan".
+    syntax: az aks addon disable -g myResourceGroup -n myAKSCluster -a monitoring
+  requiredParameters:
+  - isRequired: true
+    name: --addon -a
+    summary: Tentukan addon Kubernetes untuk dinonaktifkan.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster terkelola.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_aks_addon_enable
+  name: az aks addon enable
+  summary: Aktifkan addon Kubernetes.
+  description: >-
+    Addon ini tersedia: http_application_routing - konfigurasikan ingress dengan pembuatan nama DNS publik otomatis.
+
+    pemantauan - aktifkan pemantauan Analitik Log. Menggunakan Ruang Kerja Default Analitik Log jika ada, atau membuatnya. Tentukan "--workspace-resource-id" untuk menggunakan ruang kerja yang ada.
+
+    Jika addon pemantauan diaktifkan --no-wait argumen tidak akan berpengaruh virtual-node - aktifkan AKS Virtual Node. Memerlukan --subnet-name untuk memberikan nama subnet yang ada untuk digunakan oleh Simpul Virtual.
+
+    azure-policy - aktifkan kebijakan Azure. Add-on Azure Policy untuk AKS memungkinkan penegakan dan perlindungan dalam skala besar pada kluster Anda secara terpusat dan konsisten.
+
+    Pelajari lebih lanjut di aka.ms/aks/policy.
+
+    ingress-appgw - aktifkan addon Pengontrol Ingress Application Gateway (PRATINJAU).
+
+    open-service-mesh - aktifkan addon Mesh Open Service (PRATINJAU).
+
+    gitops - aktifkan GitOps (PREVIEW).
+
+    azure-keyvault-secrets-provider - aktifkan addon Penyedia Rahasia Azure Keyvault (PRATINJAU).
+  syntax: >-
+    az aks addon enable --addon
+                        --name
+                        --resource-group
+                        [--appgw-id]
+                        [--appgw-name]
+                        [--appgw-subnet-cidr]
+                        [--appgw-subnet-id]
+                        [--appgw-subnet-prefix]
+                        [--appgw-watch-namespace]
+                        [--enable-msi-auth-for-monitoring {false, true}]
+                        [--enable-secret-rotation]
+                        [--enable-sgxquotehelper]
+                        [--no-wait]
+                        [--rotation-poll-interval]
+                        [--subnet-name]
+                        [--workspace-resource-id]
+  examples:
+  - summary: Aktifkan addon Kubernetes. (dibuat otomatis)
+    syntax: az aks addon enable --addon virtual-node --name MyManagedCluster --resource-group MyResourceGroup --subnet-name VirtualNodeSubnet
+  - summary: Aktifkan addon ingress-appgw dengan awalan subnet.
+    syntax: az aks addon enable --name MyManagedCluster --resource-group MyResourceGroup --addon ingress-appgw --appgw-subnet-cidr 10.2.0.0/16 --appgw-name gateway
+  - summary: Aktifkan addon open-service-mesh.
+    syntax: az aks addon enable --name MyManagedCluster --resource-group MyResourceGroup -a open-service-mesh
+  requiredParameters:
+  - isRequired: true
+    name: --addon -a
+    summary: Tentukan addon Kubernetes untuk diaktifkan.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster terkelola.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --appgw-id
+    summary: Id Sumber Daya dari Application Gateway yang ada untuk digunakan dengan AGIC. Gunakan dengan addon ingress-azure.
+    description: ''
+  - name: --appgw-name
+    summary: Nama gateway aplikasi untuk dibuat/digunakan dalam grup sumber daya simpul. Gunakan dengan addon ingress-azure.
+    description: ''
+  - name: --appgw-subnet-cidr
+    summary: CIDR subnet yang akan digunakan untuk subnet baru yang dibuat untuk menyebarkan Application Gateway. Gunakan dengan addon ingress-azure.
+    description: ''
+  - name: --appgw-subnet-id
+    summary: Id Sumber Daya dari Subnet yang ada yang digunakan untuk menyebarkan Application Gateway. Gunakan dengan addon ingress-azure.
+    description: ''
+  - name: --appgw-subnet-prefix
+    summary: Awalan Subnet yang akan digunakan untuk subnet baru yang dibuat untuk menyebarkan Application Gateway. Gunakan dengan addon ingress-azure.
+    description: ''
+  - name: --appgw-watch-namespace
+    summary: Tentukan namespace layanan, yang harus ditonton AGIC. Ini bisa menjadi nilai untai (karakter) tunggal, atau daftar kumpulan nama XML yang dipisahkan koma. Gunakan dengan addon ingress-azure.
+    description: ''
+  - name: --enable-msi-auth-for-monitoring
+    parameterValueGroup: false, true
+    summary: Kirim data pemantauan ke Analitik Log menggunakan identitas yang ditetapkan kluster (bukan kunci bersama Ruang Kerja Analitik Log).
+    description: ''
+  - name: --enable-secret-rotation
+    summary: Aktifkan rotasi rahasia. Gunakan dengan addon azure-keyvault-secrets-provider.
+    description: ''
+  - name: --enable-sgxquotehelper
+    summary: Aktifkan pembantu kuotasi SGX untuk addon confcom.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --rotation-poll-interval
+    summary: Atur interval polling rotasi. Gunakan dengan addon azure-keyvault-secrets-provider.
+    description: ''
+  - name: --subnet-name -s
+    summary: Nama subnet untuk simpul virtual yang akan digunakan.
+    description: ''
+  - name: --workspace-resource-id
+    summary: ID sumber daya dari Ruang Kerja Analitik Log yang ada untuk digunakan untuk menyimpan data pemantauan.
+    description: ''
+- uid: az_aks_addon_list
+  name: az aks addon list
+  summary: Mencantumkan status semua addon Kubernetes dalam kluster tertentu.
+  description: ''
+  syntax: >-
+    az aks addon list --name
+                      --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster terkelola.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_aks_addon_list-available
+  name: az aks addon list-available
+  summary: Mencantumkan addon Kubernetes yang tersedia.
+  description: ''
+  syntax: az aks addon list-available
+- uid: az_aks_addon_show
+  name: az aks addon show
+  summary: Tampilkan status dan konfigurasi untuk addon Kubernetes yang diaktifkan dalam kluster tertentu.
+  description: ''
+  syntax: >-
+    az aks addon show --addon
+                      --name
+                      --resource-group
+  examples:
+  - summary: Tampilkan konfigurasi untuk addon "pemantauan".
+    syntax: az aks addon show -g myResourceGroup -n myAKSCluster -a monitoring
+  requiredParameters:
+  - isRequired: true
+    name: --addon -a
+    summary: Tentukan addon Kubernetes.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster terkelola.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_aks_addon_update
+  name: az aks addon update
+  summary: Perbarui addon Kubernetes yang sudah diaktifkan.
+  description: ''
+  syntax: >-
+    az aks addon update --addon
+                        --name
+                        --resource-group
+                        [--appgw-id]
+                        [--appgw-name]
+                        [--appgw-subnet-cidr]
+                        [--appgw-subnet-id]
+                        [--appgw-subnet-prefix]
+                        [--appgw-watch-namespace]
+                        [--enable-msi-auth-for-monitoring {false, true}]
+                        [--enable-secret-rotation]
+                        [--enable-sgxquotehelper]
+                        [--no-wait]
+                        [--rotation-poll-interval]
+                        [--subnet-name]
+                        [--workspace-resource-id]
+  examples:
+  - summary: Memperbarui addon Kubernetes. (dibuat otomatis)
+    syntax: az aks addon update --addon virtual-node --name MyManagedCluster --resource-group MyResourceGroup --subnet-name VirtualNodeSubnet
+  - summary: Perbarui addon ingress-appgw dengan awalan subnet.
+    syntax: az aks addon update --name MyManagedCluster --resource-group MyResourceGroup --addon ingress-appgw --appgw-subnet-cidr 10.2.0.0/16 --appgw-name gateway
+  - summary: Perbarui addon pemantauan dengan id sumber daya ruang kerja.
+    syntax: az aks addon update -g $rg -n $cn -a monitoring --workspace-resource-id=/subscriptions/0000000-00000000-00000-000-000/resourcegroups/myresourcegroup/providers/microsoft.operationalinsights/workspaces/defaultlaworkspace
+  requiredParameters:
+  - isRequired: true
+    name: --addon -a
+    summary: Tentukan addon Kubernetes yang akan diperbarui.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster terkelola.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --appgw-id
+    summary: Id Sumber Daya dari Application Gateway yang ada untuk digunakan dengan AGIC. Gunakan dengan addon ingress-azure.
+    description: ''
+  - name: --appgw-name
+    summary: Nama gateway aplikasi untuk dibuat/digunakan dalam grup sumber daya simpul. Gunakan dengan addon ingress-azure.
+    description: ''
+  - name: --appgw-subnet-cidr
+    summary: CIDR subnet yang akan digunakan untuk subnet baru yang dibuat untuk menyebarkan Application Gateway. Gunakan dengan addon ingress-azure.
+    description: ''
+  - name: --appgw-subnet-id
+    summary: Id Sumber Daya dari Subnet yang ada yang digunakan untuk menyebarkan Application Gateway. Gunakan dengan addon ingress-azure.
+    description: ''
+  - name: --appgw-subnet-prefix
+    summary: Awalan Subnet yang akan digunakan untuk subnet baru yang dibuat untuk menyebarkan Application Gateway. Gunakan dengan addon ingress-azure.
+    description: ''
+  - name: --appgw-watch-namespace
+    summary: Tentukan namespace layanan, yang harus ditonton AGIC. Ini bisa menjadi nilai untai (karakter) tunggal, atau daftar kumpulan nama XML yang dipisahkan koma. Gunakan dengan addon ingress-azure.
+    description: ''
+  - name: --enable-msi-auth-for-monitoring
+    parameterValueGroup: false, true
+    summary: Kirim data pemantauan ke Analitik Log menggunakan identitas yang ditetapkan kluster (bukan kunci bersama Ruang Kerja Analitik Log).
+    description: ''
+  - name: --enable-secret-rotation
+    summary: Aktifkan rotasi rahasia. Gunakan dengan addon azure-keyvault-secrets-provider.
+    description: ''
+  - name: --enable-sgxquotehelper
+    summary: Aktifkan pembantu kuotasi SGX untuk addon confcom.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --rotation-poll-interval
+    summary: Atur interval polling rotasi. Gunakan dengan addon azure-keyvault-secrets-provider.
+    description: ''
+  - name: --subnet-name -s
+    summary: Nama subnet untuk simpul virtual yang akan digunakan.
+    description: ''
+  - name: --workspace-resource-id
+    summary: ID sumber daya dari Ruang Kerja Analitik Log yang ada untuk digunakan untuk menyimpan data pemantauan.
+    description: ''
+commands:
+- az_aks_addon_disable
+- az_aks_addon_enable
+- az_aks_addon_list
+- az_aks_addon_list-available
+- az_aks_addon_show
+- az_aks_addon_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Perintah untuk mengelola dan melihat kondisi addon tunggal.
+  ms.openlocfilehash: c05fba34400a5b0138f6b5a1ec43f35f52cb7633
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141000428"

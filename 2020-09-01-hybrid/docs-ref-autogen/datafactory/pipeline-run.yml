@@ -1,0 +1,155 @@
+### YamlMime:AzureCLIGroup
+uid: az_datafactory_pipeline-run
+name: az datafactory pipeline-run
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **datafactory** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az datafactory pipeline-run** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola eksekusi alur dengan datafactory.
+description: ''
+directCommands:
+- uid: az_datafactory_pipeline-run_cancel
+  name: az datafactory pipeline-run cancel
+  summary: Batalkan eksekusi alur dengan ID eksekusinya.
+  description: ''
+  syntax: >-
+    az datafactory pipeline-run cancel --factory-name
+                                       --resource-group
+                                       --run-id
+                                       [--is-recursive {false, true}]
+  examples:
+  - summary: PipelineRuns_Cancel
+    syntax: az datafactory pipeline-run cancel --factory-name "exampleFactoryName" --resource-group "exampleResourceGroup" --run-id "16ac5348-ff82-4f95-a80d-638c1d47b721"
+  requiredParameters:
+  - isRequired: true
+    name: --factory-name
+    summary: Nama pabrik.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --run-id
+    summary: Pengidentifikasi eksekusi alur.
+    description: ''
+  optionalParameters:
+  - name: --is-recursive
+    parameterValueGroup: false, true
+    summary: Jika true, batalkan semua alur Anak yang dipicu oleh alur saat ini.
+    description: ''
+- uid: az_datafactory_pipeline-run_query-by-factory
+  name: az datafactory pipeline-run query-by-factory
+  summary: Alur kueri berjalan di pabrik berdasarkan kondisi filter input.
+  description: ''
+  syntax: >-
+    az datafactory pipeline-run query-by-factory --factory-name
+                                                 --last-updated-after
+                                                 --last-updated-before
+                                                 --resource-group
+                                                 [--continuation-token]
+                                                 [--filters]
+                                                 [--order-by]
+  examples:
+  - summary: PipelineRuns_QueryByFactory
+    syntax: az datafactory pipeline-run query-by-factory --factory-name "exampleFactoryName" --filters operand="PipelineName" operator="Equals" values="examplePipeline" --last-updated-after "2018-06-16T00:36:44.3345758Z" --last-updated-before "2018-06-16T00:49:48.3686473Z" --resource-group "exampleResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --factory-name
+    summary: Nama pabrik.
+    description: ''
+  - isRequired: true
+    name: --last-updated-after
+    summary: Waktu pada atau setelah peristiwa eksekusi diperbarui dalam format 'ISO 8601'.
+    description: ''
+  - isRequired: true
+    name: --last-updated-before
+    summary: Waktu pada atau sebelum peristiwa eksekusi diperbarui dalam format 'ISO 8601'.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --continuation-token
+    summary: Token kelanjutan untuk mendapatkan halaman hasil berikutnya. Null untuk halaman pertama.
+    description: ''
+  - name: --filters
+    summary: Daftar filter.
+    description: >-
+      Penggunaan: --filters operand=XX operator=XX values=XX
+
+
+      operan: Diperlukan. Nama parameter yang akan digunakan untuk filter. Operan yang diizinkan untuk mengkueri eksekusi alur adalah PipelineName, RunStart, RunEnd, dan Status; untuk mengkueri eksekusi aktivitas adalah ActivityName, ActivityRunStart, ActivityRunEnd, ActivityType dan Status, dan untuk mengkueri eksekusi pemicu adalah TriggerName, TriggerRunTimestamp dan Status.
+
+      operator: Diperlukan. Operator yang akan digunakan untuk filter.
+
+      nilai: Diperlukan. Daftar nilai filter.
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --filters.
+  - name: --order-by
+    summary: Daftar opsi OrderBy.
+    description: >-
+      Penggunaan: --order-by order-by=XX order=XX
+
+
+      order-by: Diperlukan. Nama parameter yang akan digunakan untuk urutan berdasarkan. Parameter yang diizinkan untuk diurutkan menurut untuk eksekusi alur adalah PipelineName, RunStart, RunEnd, dan Status; untuk eksekusi aktivitas adalah ActivityName, ActivityRunStart, ActivityRunEnd dan Status; untuk eksekusi pemicu adalah TriggerName, TriggerRunTimestamp, dan Status.
+
+      urutan: Diperlukan. Mengurutkan urutan parameter.
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --order-by.
+- uid: az_datafactory_pipeline-run_show
+  name: az datafactory pipeline-run show
+  summary: Dapatkan eksekusi alur dengan ID eksekusinya.
+  description: ''
+  syntax: >-
+    az datafactory pipeline-run show --factory-name
+                                     --resource-group
+                                     --run-id
+  examples:
+  - summary: PipelineRuns_Get
+    syntax: az datafactory pipeline-run show --factory-name "exampleFactoryName" --resource-group "exampleResourceGroup" --run-id "2f7fdb90-5df1-4b8e-ac2f-064cfa58202b"
+  requiredParameters:
+  - isRequired: true
+    name: --factory-name
+    summary: Nama pabrik.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --run-id
+    summary: Pengidentifikasi eksekusi alur.
+    description: ''
+commands:
+- az_datafactory_pipeline-run_cancel
+- az_datafactory_pipeline-run_query-by-factory
+- az_datafactory_pipeline-run_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola eksekusi alur dengan datafactory.
+  ms.openlocfilehash: 00703e55caf1a8e49bd53f99de30839d8adec4fa
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140885300"

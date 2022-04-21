@@ -1,0 +1,260 @@
+### YamlMime:AzureCLIGroup
+uid: az_lock
+name: az lock
+summary: Mengelola kunci Azure.
+description: ''
+directCommands:
+- uid: az_lock_create
+  name: az lock create
+  summary: Buat kunci.
+  description: 'Kunci dapat ada di tiga cakupan yang berbeda: langganan, grup sumber daya, dan sumber daya.                 Untuk cara menambahkan kunci pada tingkat yang berbeda, silakan lihat contoh berikut.'
+  syntax: >-
+    az lock create --lock-type {CanNotDelete, ReadOnly}
+                   --name
+                   [--namespace]
+                   [--notes]
+                   [--parent]
+                   [--resource]
+                   [--resource-group]
+                   [--resource-type]
+  examples:
+  - summary: Buat kunci tingkat langganan baca-saja.
+    syntax: az lock create --name lockName --lock-type ReadOnly
+  - summary: Buat kunci tingkat grup sumber daya baca-saja.
+    syntax: az lock create --name lockName --resource-group group --lock-type ReadOnly
+  - summary: Buat kunci tingkat sumber daya baca-saja pada sumber daya vnet.
+    syntax: >-
+      az lock create --name lockName --resource-group group --lock-type ReadOnly --resource-type \
+          Microsoft.Network/virtualNetworks --resource myVnet
+  - summary: Buat kunci tingkat sumber daya baca-saja pada sumber daya subnet dengan induk tertentu.
+    syntax: >-
+      az lock create --name lockName --resource-group group --lock-type ReadOnly --resource-type \
+          Microsoft.Network/subnets --parent virtualNetworks/myVnet --resource mySubnet
+  requiredParameters:
+  - isRequired: true
+    name: --lock-type -t
+    parameterValueGroup: CanNotDelete, ReadOnly
+    summary: Jenis pembatasan kunci.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kunci.
+    description: ''
+  optionalParameters:
+  - name: --namespace
+    summary: "Namespace penyedia (Misalnya: 'Microsoft.Provider')."
+    description: ''
+  - name: --notes
+    summary: Catatan tentang kunci ini.
+    description: ''
+  - name: --parent
+    summary: "Jalur induk (Misalnya: 'resA/myA/resB/myB')."
+    description: ''
+  - name: --resource --resource-name
+    summary: Nama atau ID sumber daya yang dikunci. Jika ID diberikan, argumen sumber daya lainnya tidak boleh diberikan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-type
+    summary: "Jenis sumber daya (Misalnya: 'resC'). Dapat juga menerima format namespace layanan/jenis (Misalnya: 'Microsoft.Provider/resC')."
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_lock_delete
+  name: az lock delete
+  summary: Hapus kunci.
+  description: 'Kunci dapat ada di tiga cakupan yang berbeda: langganan, grup sumber daya, dan sumber daya.                 Untuk cara menghapus kunci pada tingkat yang berbeda, silakan lihat contoh berikut.'
+  syntax: >-
+    az lock delete [--ids]
+                   [--name]
+                   [--namespace]
+                   [--parent]
+                   [--resource]
+                   [--resource-group]
+                   [--resource-type]
+  examples:
+  - summary: Menghapus kunci tingkat langganan
+    syntax: az lock delete --name lockName
+  - summary: Menghapus kunci tingkat grup sumber daya
+    syntax: az lock delete --name lockName --resource-group group
+  - summary: Menghapus kunci tingkat sumber daya
+    syntax: az lock delete --name lockName --resource-group group --resource resourceName --resource-type resourceType
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Jika disediakan, tidak ada argumen "Id Sumber Daya" lain yang harus ditentukan.
+    description: ''
+  - name: --name -n
+    summary: Nama kunci.
+    description: ''
+  - name: --namespace
+    summary: "Namespace penyedia (Misalnya: 'Microsoft.Provider')."
+    description: ''
+  - name: --parent
+    summary: "Jalur induk (Misalnya: 'resA/myA/resB/myB')."
+    description: ''
+  - name: --resource --resource-name
+    summary: Nama atau ID sumber daya yang dikunci. Jika ID diberikan, argumen sumber daya lainnya tidak boleh diberikan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-type
+    summary: "Jenis sumber daya (Misalnya: 'resC'). Dapat juga menerima format namespace layanan/jenis (Misalnya: 'Microsoft.Provider/resC')."
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_lock_list
+  name: az lock list
+  summary: Mencantumkan informasi kunci.
+  description: ''
+  syntax: >-
+    az lock list [--filter-string]
+                 [--namespace]
+                 [--parent]
+                 [--resource]
+                 [--resource-group]
+                 [--resource-type]
+  examples:
+  - summary: Mencantumkan kunci pada sumber daya vnet. Menyertakan kunci dalam grup dan langganan terkait.
+    syntax: az lock list --resource myvnet --resource-type Microsoft.Network/virtualNetworks -g group
+  - summary: Mencantumkan semua kunci pada tingkat langganan
+    syntax: az lock list
+  optionalParameters:
+  - name: --filter-string
+    summary: Filter kueri yang digunakan untuk membatasi hasil.
+    description: ''
+  - name: --namespace
+    summary: "Namespace penyedia (Misalnya: 'Microsoft.Provider')."
+    description: ''
+  - name: --parent
+    summary: "Jalur induk (Misalnya: 'resA/myA/resB/myB')."
+    description: ''
+  - name: --resource --resource-name
+    summary: Nama atau ID sumber daya yang dikunci. Jika ID diberikan, argumen sumber daya lainnya tidak boleh diberikan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-type
+    summary: "Jenis sumber daya (Misalnya: 'resC'). Dapat juga menerima format namespace layanan/jenis (Misalnya: 'Microsoft.Provider/resC')."
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_lock_show
+  name: az lock show
+  summary: Tampilkan properti kunci.
+  description: ''
+  syntax: >-
+    az lock show [--ids]
+                 [--name]
+                 [--namespace]
+                 [--parent]
+                 [--resource]
+                 [--resource-group]
+                 [--resource-type]
+  examples:
+  - summary: Perlihatkan kunci tingkat langganan
+    syntax: az lock show -n lockname
+  - summary: Perlihatkan properti kunci (dibuat otomatis)
+    syntax: az lock show --name lockname --resource-group MyResourceGroup --resource-name MyResource --resource-type Microsoft.Network/virtualNetworks
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Jika disediakan, tidak ada argumen "Id Sumber Daya" lain yang harus ditentukan.
+    description: ''
+  - name: --name -n
+    summary: Nama kunci.
+    description: ''
+  - name: --namespace
+    summary: "Namespace penyedia (Misalnya: 'Microsoft.Provider')."
+    description: ''
+  - name: --parent
+    summary: "Jalur induk (Misalnya: 'resA/myA/resB/myB')."
+    description: ''
+  - name: --resource --resource-name
+    summary: Nama atau ID sumber daya yang dikunci. Jika ID diberikan, argumen sumber daya lainnya tidak boleh diberikan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-type
+    summary: "Jenis sumber daya (Misalnya: 'resC'). Dapat juga menerima format namespace layanan/jenis (Misalnya: 'Microsoft.Provider/resC')."
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_lock_update
+  name: az lock update
+  summary: Perbarui kunci.
+  description: ''
+  syntax: >-
+    az lock update [--ids]
+                   [--lock-type {CanNotDelete, ReadOnly}]
+                   [--name]
+                   [--namespace]
+                   [--notes]
+                   [--parent]
+                   [--resource]
+                   [--resource-group]
+                   [--resource-type]
+  examples:
+  - summary: Memperbarui kunci tingkat grup sumber daya dengan catatan dan jenis baru
+    syntax: az lock update --name lockName --resource-group group --notes newNotesHere --lock-type CanNotDelete
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Jika disediakan, tidak ada argumen "Id Sumber Daya" lain yang harus ditentukan.
+    description: ''
+  - name: --lock-type -t
+    parameterValueGroup: CanNotDelete, ReadOnly
+    summary: Jenis pembatasan kunci.
+    description: ''
+  - name: --name -n
+    summary: Nama kunci.
+    description: ''
+  - name: --namespace
+    summary: "Namespace penyedia (Misalnya: 'Microsoft.Provider')."
+    description: ''
+  - name: --notes
+    summary: Catatan tentang kunci ini.
+    description: ''
+  - name: --parent
+    summary: "Jalur induk (Misalnya: 'resA/myA/resB/myB')."
+    description: ''
+  - name: --resource --resource-name
+    summary: Nama atau ID sumber daya yang dikunci. Jika ID diberikan, argumen sumber daya lainnya tidak boleh diberikan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-type
+    summary: "Jenis sumber daya (Misalnya: 'resC'). Dapat juga menerima format namespace layanan/jenis (Misalnya: 'Microsoft.Provider/resC')."
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+commands:
+- az_lock_create
+- az_lock_delete
+- az_lock_list
+- az_lock_show
+- az_lock_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 02/22/2022
+  description: Mengelola kunci Azure.
+  ms.openlocfilehash: e25a2909cad34f8b6f293946c75d717cf43c3f46
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140986244"
