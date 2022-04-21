@@ -1,0 +1,167 @@
+### YamlMime:AzureCLIGroup
+uid: az_billing_account
+name: az billing account
+summary: Akun penagihan.
+description: ''
+directCommands:
+- uid: az_billing_account_list
+  name: az billing account list
+  summary: Mencantumkan akun penagihan yang dapat diakses pengguna.
+  description: ''
+  syntax: az billing account list [--expand]
+  examples:
+  - summary: Mencantumkan akun penagihan
+    syntax: az billing account list
+  - summary: Mencantumkan akun penagihan dengan argumen yang diperluas yang diinginkan
+    syntax: az billing account list --expand "soldTo,billingProfiles,billingProfiles/invoiceSections"
+  - summary: Mencantumkan akun penagihan dengan argumen yang diperluas yang diinginkan
+    syntax: az billing account list --expand "enrollmentDetails,departments,enrollmentAccounts"
+  optionalParameters:
+  - name: --expand
+    summary: Dapat digunakan untuk memperluas soldTo, bagian faktur, dan profil penagihan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/billing/_help.py
+- uid: az_billing_account_show
+  name: az billing account show
+  summary: Dapatkan akun penagihan dengan ID-nya.
+  description: ''
+  syntax: >-
+    az billing account show --name
+                            [--expand]
+  examples:
+  - summary: Menampilkan akun penagihan dengan properti yang diperluas
+    syntax: az billing account show --expand "soldTo,billingProfiles,billingProfiles/invoiceSections" --name "{billingAccountName}"
+  - summary: Menampilkan akun penagihan dengan properti default
+    syntax: az billing account show --name "{billingAccountName}"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: ID yang secara unik mengidentifikasi akun penagihan.
+    description: ''
+  optionalParameters:
+  - name: --expand
+    summary: Dapat digunakan untuk memperluas soldTo, bagian faktur, dan profil penagihan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/billing/_help.py
+- uid: az_billing_account_update
+  name: az billing account update
+  summary: Memperbarui properti akun penagihan. Saat ini, displayName dan alamat dapat diperbarui. Operasi ini hanya didukung untuk akun penagihan dengan jenis perjanjian Perjanjian Pelanggan Microsoft.
+  description: ''
+  syntax: >-
+    az billing account update --name
+                              [--billing-profiles-value]
+                              [--departments]
+                              [--display-name]
+                              [--enrollment-accounts]
+                              [--no-wait]
+                              [--sold-to]
+  examples:
+  - summary: Memperbarui akun penagihan
+    syntax: az billing account update --name "{billingAccountName}" --display-name "Test Account" --sold-to address-line1="Test Address 1" city="Redmond" company-name="Contoso" country="US" first-name="Test" last-name="User" postal-code="12345" region="WA"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: ID yang secara unik mengidentifikasi akun penagihan.
+    description: ''
+  optionalParameters:
+  - name: --billing-profiles-value
+    summary: 'Profil penagihan yang terkait dengan akun penagihan. Nilai yang diharapkan: json-string/@json-file.'
+    description: ''
+  - name: --departments
+    summary: 'Departemen yang terkait dengan pendaftaran. Nilai yang diharapkan: json-string/@json-file.'
+    description: ''
+  - name: --display-name
+    summary: Nama akun penagihan.
+    description: ''
+  - name: --enrollment-accounts
+    summary: 'Akun yang terkait dengan pendaftaran. Nilai yang diharapkan: json-string/@json-file.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --sold-to
+    summary: Alamat individu atau organisasi yang bertanggung jawab atas akun penagihan.
+    description: 'Penggunaan: --sold-to first-name=XX last-name=XX company-name=XX address-line1=XX address-line2=XX address-line3=XX city=XX district=XX region=XX country=XX postal-code=XX email=XX phone-number=XX.'
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/billing/_help.py
+- uid: az_billing_account_wait
+  name: az billing account wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi akun penagihan terpenuhi.
+  description: ''
+  syntax: >-
+    az billing account wait --name
+                            [--created]
+                            [--custom]
+                            [--deleted]
+                            [--exists]
+                            [--expand]
+                            [--interval]
+                            [--timeout]
+                            [--updated]
+  examples:
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga akun penagihan berhasil diperbarui.
+    syntax: az billing account wait --name "{billingAccountName}" --updated
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: ID yang secara unik mengidentifikasi akun penagihan.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --expand
+    summary: Dapat digunakan untuk memperluas soldTo, bagian faktur, dan profil penagihan.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/billing/_help.py
+commands:
+- az_billing_account_list
+- az_billing_account_show
+- az_billing_account_update
+- az_billing_account_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 10/26/2020
+  description: Akun penagihan.
+  ms.openlocfilehash: 05cee49e4a28b6b9157f72ccf2ebcb332cb9858e
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140995388"

@@ -1,0 +1,259 @@
+### YamlMime:AzureCLIGroup
+uid: az_hdinsight_autoscale
+name: az hdinsight autoscale
+summary: Mengelola konfigurasi Autoscale kluster HDInsight.
+description: ''
+directCommands:
+- uid: az_hdinsight_autoscale_create
+  name: az hdinsight autoscale create
+  summary: Aktifkan Autoscale untuk kluster yang sedang berjalan.
+  description: ''
+  syntax: >-
+    az hdinsight autoscale create --cluster-name
+                                  --resource-group
+                                  --type {Load, Schedule}
+                                  [--days {Friday, Monday, Saturday, Sunday, Thursday, Tuesday, Wednesday}]
+                                  [--max-workernode-count]
+                                  [--min-workernode-count]
+                                  [--no-wait]
+                                  [--time]
+                                  [--timezone]
+                                  [--workernode-count]
+                                  [--yes]
+  examples:
+  - summary: Aktifkan Autoscale berbasis beban untuk kluster yang sedang berjalan.
+    syntax: >-
+      az hdinsight autoscale create --resource-group MyResourceGroup --cluster-name MyCluster --type Load \
+
+      --min-workernode-count 3 --max-workernode-count 5
+  - summary: Aktifkan Autoscale berbasis Jadwal untuk kluster yang sedang berjalan.
+    syntax: >-
+      az hdinsight autoscale create --resource-group MyResourceGroup --cluster-name MyCluster --type Schedule \
+
+      --timezone "Pacific Standard Time" --days Monday Tuesday --time 09:00 --workernode-count 5
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --type
+    parameterValueGroup: Load, Schedule
+    summary: Jenis skala otomatis.
+    description: ''
+  optionalParameters:
+  - name: --days
+    parameterValueGroup: Friday, Monday, Saturday, Sunday, Thursday, Tuesday, Wednesday
+    summary: Daftar hari jadwal yang dibatasi spasi.
+    description: ''
+  - name: --max-workernode-count
+    summary: Jumlah workernode maks untuk atuoscale berbasis beban.
+    description: ''
+  - name: --min-workernode-count
+    summary: Jumlah simpul pekerja minimal untuk atuoscale berbasis beban.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --time
+    summary: Waktu 24 jam dalam bentuk xx:xx dalam hari.
+    description: ''
+  - name: --timezone
+    summary: Zona waktu untuk menjadwalkan jenis skala otomatis. Nilai dari `az hdinsight autoscale list-timezones`.
+    description: ''
+  - name: --workernode-count
+    summary: Jumlah simpul pekerja jadwal.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/hdinsight/_help.py
+- uid: az_hdinsight_autoscale_delete
+  name: az hdinsight autoscale delete
+  summary: Nonaktifkan Autoscale untuk kluster yang sedang berjalan.
+  description: ''
+  syntax: >-
+    az hdinsight autoscale delete --cluster-name
+                                  --resource-group
+                                  [--no-wait]
+                                  [--yes]
+  examples:
+  - summary: Nonaktifkan Autoscale untuk kluster yang sedang berjalan.
+    syntax: az hdinsight autoscale delete --resource-group MyResourceGroup --cluster-name MyCluster
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/hdinsight/_help.py
+- uid: az_hdinsight_autoscale_list-timezones
+  name: az hdinsight autoscale list-timezones
+  summary: Cantumkan nama zona waktu yang tersedia saat mengaktifkan Skala Otomatis berbasis Jadwal.
+  description: ''
+  syntax: az hdinsight autoscale list-timezones
+  examples:
+  - summary: Cantumkan nama zona waktu yang tersedia.
+    syntax: az hdinsight autoscale list-timezones
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/hdinsight/_help.py
+- uid: az_hdinsight_autoscale_show
+  name: az hdinsight autoscale show
+  summary: Dapatkan konfigurasi Autoscale dari kluster tertentu.
+  description: ''
+  syntax: >-
+    az hdinsight autoscale show --cluster-name
+                                --resource-group
+  examples:
+  - summary: Dapatkan konfigurasi Autoscale.
+    syntax: az hdinsight autoscale show --resource-group MyResourceGroup --cluster-name MyCluster
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/hdinsight/_help.py
+- uid: az_hdinsight_autoscale_update
+  name: az hdinsight autoscale update
+  summary: Perbarui konfigurasi Autoscale.
+  description: ''
+  syntax: >-
+    az hdinsight autoscale update --cluster-name
+                                  --resource-group
+                                  [--max-workernode-count]
+                                  [--min-workernode-count]
+                                  [--no-wait]
+                                  [--timezone]
+  examples:
+  - summary: Memperbarui konfigurasi terkait Autoscale berbasis beban.
+    syntax: az hdinsight autoscale update --resource-group MyResourceGroup --cluster-name MyCluster --max-workernode-count 5
+  - summary: Perbarui konfigurasi terkait Skala Otomatis berbasis Jadwal.
+    syntax: az hdinsight autoscale update --resource-group MyResourceGroup --cluster-name MyCluster --timezone "China Standard Time"
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --max-workernode-count
+    summary: Jumlah workernode maks untuk atuoscale berbasis beban.
+    description: ''
+  - name: --min-workernode-count
+    summary: Jumlah simpul pekerja minimal untuk atuoscale berbasis beban.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --timezone
+    summary: Zona waktu untuk menjadwalkan jenis skala otomatis. Nilai dari `az hdinsight autoscale list-timezones`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/hdinsight/_help.py
+- uid: az_hdinsight_autoscale_wait
+  name: az hdinsight autoscale wait
+  summary: Tempatkan CLI dalam status menunggu hingga operasi selesai.
+  description: ''
+  syntax: >-
+    az hdinsight autoscale wait --name
+                                --resource-group
+                                [--created]
+                                [--custom]
+                                [--deleted]
+                                [--exists]
+                                [--interval]
+                                [--timeout]
+                                [--updated]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/hdinsight/_help.py
+commands:
+- az_hdinsight_autoscale_condition
+- az_hdinsight_autoscale_condition_create
+- az_hdinsight_autoscale_condition_delete
+- az_hdinsight_autoscale_condition_list
+- az_hdinsight_autoscale_condition_update
+- az_hdinsight_autoscale_condition_wait
+- az_hdinsight_autoscale_create
+- az_hdinsight_autoscale_delete
+- az_hdinsight_autoscale_list-timezones
+- az_hdinsight_autoscale_show
+- az_hdinsight_autoscale_update
+- az_hdinsight_autoscale_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 06/23/2021
+  description: Mengelola konfigurasi Autoscale kluster HDInsight.
+  ms.openlocfilehash: 9833acc0f78d36ad85d8e602fab24a0278ab8d37
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140948084"

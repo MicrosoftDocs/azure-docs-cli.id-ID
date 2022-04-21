@@ -1,0 +1,341 @@
+### YamlMime:AzureCLIGroup
+uid: az_eventgrid_partner_topic_event-subscription
+name: az eventgrid partner topic event-subscription
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **eventgrid** untuk Azure CLI (versi 2.0.49 atau lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az eventgrid partner topic event-subscription** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola langganan peristiwa topik mitra.
+description: ''
+directCommands:
+- uid: az_eventgrid_partner_topic_event-subscription_create
+  name: az eventgrid partner topic event-subscription create
+  summary: Buat langganan peristiwa baru untuk topik mitra.
+  description: ''
+  syntax: >-
+    az eventgrid partner topic event-subscription create --name
+                                                         --partner-topic-name
+                                                         --resource-group
+                                                         [--advanced-filter]
+                                                         [--azure-active-directory-application-id-or-uri]
+                                                         [--azure-active-directory-tenant-id]
+                                                         [--deadletter-endpoint]
+                                                         [--endpoint]
+                                                         [--endpoint-type {azurefunction, eventhub, hybridconnection, servicebusqueue, servicebustopic, storagequeue, webhook}]
+                                                         [--event-delivery-schema {cloudeventschemav1_0, custominputschema, eventgridschema}]
+                                                         [--event-ttl]
+                                                         [--expiration-date]
+                                                         [--included-event-types]
+                                                         [--labels]
+                                                         [--max-delivery-attempts]
+                                                         [--max-events-per-batch]
+                                                         [--preferred-batch-size-in-kilobytes]
+                                                         [--subject-begins-with]
+                                                         [--subject-case-sensitive {false, true}]
+                                                         [--subject-ends-with]
+  examples:
+  - summary: Buat langganan peristiwa baru untuk topik mitra Event Grid, menggunakan filter default.
+    syntax: >-
+      az eventgrid partner topic event-subscription create --name es1 \
+          -g rg1 --partner-topic-name partnertopic1 \
+          --endpoint https://contoso.azurewebsites.net/api/f1?code=code
+  - summary: Buat langganan peristiwa baru untuk topik mitra Event Grid, dengan filter yang menentukan awalan subjek.
+    syntax: >-
+      az eventgrid partner topic event-subscription create --name es4 \
+          -g rg1 --partner-topic-name partnertopic1 \
+          --endpoint https://contoso.azurewebsites.net/api/f1?code=code \
+          --subject-begins-with mysubject_prefix
+  - summary: Buat langganan peristiwa baru untuk topik mitra Event Grid, menggunakan filter default, dan CloudEvent V 1.0 sebagai skema pengiriman.
+    syntax: >-
+      az eventgrid partner topic event-subscription create -n es2 \
+          -g rg1 --partner-topic-name partnertopic1 \
+          --endpoint https://contoso.azurewebsites.net/api/f1?code=code \
+          --event-delivery-schema cloudeventschemav1_0
+  - summary: Buat langganan peristiwa baru untuk topik mitra Event Grid, dengan tujuan deadletter dan kebijakan percobaan kembali kustom maksimum 10 upaya pengiriman dan TTL Peristiwa 2 jam (mana pun yang terjadi sebelumnya) dan tanggal kedaluwarsa.
+    syntax: >-
+      az eventgrid partner topic event-subscription create --name es2 \
+          -g rg1 --partner-topic-name partnertopic1 \
+          --endpoint https://contoso.azurewebsites.net/api/f1?code=code \
+          --deadletter-endpoint /subscriptions/{SubID}/resourceGroups/TestRG/providers/Microsoft.Storage/storageAccounts/s2/blobServices/default/containers/blobcontainer1 \
+          --max-delivery-attempts 10 --event-ttl 120 --expiration-date "2022-10-31"
+  - summary: Buat langganan acara baru untuk topik mitra Event Grid, menggunakan Webhook yang diaktifkan Azure Active Directory sebagai tujuan .
+    syntax: >-
+      az eventgrid partner topic event-subscription create --name es1 \
+          -g rg1 --partner-topic-name partnertopic1 \
+          --endpoint https://contoso.azurewebsites.net/api/f1?code=code
+          --azure-active-directory-tenant-id azureactivedirectorytenantid
+          --azure-active-directory-application-id-or-uri azureactivedirectoryapplicationidoruri
+  - summary: Buat langganan peristiwa baru untuk topik mitra Event Grid, menggunakan Azure Function sebagai tujuan.
+    syntax: >-
+      az eventgrid partner topic event-subscription create -n es1 \
+          -g rg1 --partner-topic-name partnertopic1 \
+          --endpoint /subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.Web/sites/{functionappname}/functions/{functionname} --endpoint-type azurefunction
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama langganan kejadian.
+    description: ''
+  - isRequired: true
+    name: --partner-topic-name
+    summary: Nama topik mitra.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --advanced-filter
+    summary: Filter tingkat lanjut memungkinkan pemfilteran peristiwa berdasarkan properti peristiwa tertentu.
+    description: 'Penggunaan: --advanced-filter KEY[. INNERKEY] FILTEROPERATOR VALUE [VALUE ...] StringIn: --advanced-filter data. String WarnaIn Merah Oranye Kuning StringNotIn: --advanced-filter data. String WarnaNotIn Biru Untai Kuning Oranye MerahKontains: --advanced-filter subject StringContains Blue Red StringBeginsWith: --advanced-filter subject StringBeginsWith Blue Red StringEndsWith: --advanced-filter subject StringEndsWith img png jpg NumberIn: --advanced-filter data.property1 NumberIn 5 10 20 NumberNotIn: --advanced-filter data.property2 NumberNotIn 100 200 300 NumberLessThan: --advanced-filter data.property3  NumberLessThan 100 NumberLessThanOrEquals: --advanced-filter data.property2 NumberLessThanOrEquals 100 NumberGreaterThan: --advanced-filter data.property3 NumberGreaterThan 100 NumberGreaterThanOrEquals: --advanced-filter data.property2 NumberGreaterThanOrEquals 100 BoolEquals: --advanced-filter data.property3 BoolEquals true Beberapa filter tingkat lanjut dapat ditentukan dengan menggunakan lebih dari satu `--advanced-filter` argumen.'
+  - name: --azure-active-directory-application-id-or-uri
+    summary: Id Aplikasi Azure Active Directory atau Uri untuk mendapatkan token akses yang akan disertakan sebagai token pembawa dalam permintaan pengiriman. Hanya berlaku untuk webhook sebagai tujuan.
+    description: ''
+  - name: --azure-active-directory-tenant-id
+    summary: Id Penyewa Azure Active Directory untuk mendapatkan token akses yang akan disertakan sebagai token pembawa dalam permintaan pengiriman. Hanya berlaku untuk webhook sebagai tujuan.
+    description: ''
+  - name: --deadletter-endpoint
+    summary: ID sumber daya Azure dari tujuan kontainer blob Azure Storage di mana EventGrid harus mematikan peristiwa yang tidak dapat terkirim untuk langganan peristiwa ini.
+    description: 'Contoh: --deadletter-endpoint /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft. Storage/storageAccounts/sa1/blobServices/default/containers/containerName.'
+  - name: --endpoint
+    summary: Titik akhir tempat EventGrid harus mengirimkan peristiwa yang cocok dengan langganan kejadian ini. Untuk jenis titik akhir webhook, ini harus menjadi URL webhook yang sesuai. Untuk jenis titik akhir lainnya, ini harus menjadi pengidentifikasi sumber daya Azure dari titik akhir.
+    description: ''
+  - name: --endpoint-type
+    defaultValue: webhook
+    parameterValueGroup: azurefunction, eventhub, hybridconnection, servicebusqueue, servicebustopic, storagequeue, webhook
+    summary: Jenis titik akhir tujuan.
+    description: ''
+  - name: --event-delivery-schema
+    parameterValueGroup: cloudeventschemav1_0, custominputschema, eventgridschema
+    summary: Skema di mana peristiwa harus dikirimkan untuk langganan kejadian ini. Secara default, peristiwa akan dikirimkan dalam skema yang sama tempat peristiwa diterbitkan (berdasarkan skema input topik yang sesuai).
+    description: ''
+  - name: --event-ttl
+    defaultValue: "1440"
+    summary: Waktu acara aktif (dalam menit). Harus berupa angka antara 1 dan 1440.
+    description: ''
+  - name: --expiration-date
+    summary: Tanggal atau tanggalwaktu (dalam UTC, misalnya '2018-11-30T11:59:59+00:00' atau '2018-11-30') setelah itu langganan peristiwa akan kedaluwarsa. Secara default, tidak ada kedaluwarsa untuk langganan peristiwa.
+    description: ''
+  - name: --included-event-types
+    summary: 'Daftar jenis peristiwa yang dipisahkan spasi. Contoh: Microsoft. Storage. BlobCreated Microsoft. Storage. BlobDeleted. Untuk berlangganan semua jenis peristiwa default, jangan tentukan nilai apa pun untuk argumen ini.'
+    description: ''
+  - name: --labels
+    summary: Daftar label yang dipisahkan spasi untuk dikaitkan dengan langganan kejadian ini.
+    description: ''
+  - name: --max-delivery-attempts
+    defaultValue: "30"
+    summary: Jumlah maksimum upaya pengiriman. Harus berupa angka antara 1 dan 30.
+    description: ''
+  - name: --max-events-per-batch
+    summary: Jumlah maksimum peristiwa dalam batch. Harus berupa angka antara 1 hingga 5000.
+    description: ''
+  - name: --preferred-batch-size-in-kilobytes
+    summary: Ukuran batch pilihan dalam kilobyte. Harus berupa angka antara 1 hingga 1024.
+    description: ''
+  - name: --subject-begins-with
+    summary: String opsional untuk memfilter peristiwa untuk langganan peristiwa berdasarkan awalan. Karakter kartubebas tidak didukung.
+    description: ''
+  - name: --subject-case-sensitive
+    parameterValueGroup: false, true
+    summary: Tentukan untuk menunjukkan apakah bidang subjek harus dibandingkan dengan cara yang peka huruf besar/kecil. Benar jika bendera ada.
+    description: ''
+  - name: --subject-ends-with
+    summary: String opsional untuk memfilter peristiwa untuk langganan peristiwa berdasarkan akhiran. Karakter kartubebas tidak didukung.
+    description: ''
+- uid: az_eventgrid_partner_topic_event-subscription_delete
+  name: az eventgrid partner topic event-subscription delete
+  summary: Menghapus langganan peristiwa topik mitra.
+  description: ''
+  syntax: >-
+    az eventgrid partner topic event-subscription delete --name
+                                                         --partner-topic-name
+                                                         --resource-group
+  examples:
+  - summary: Menghapus langganan acara untuk topik mitra Event Grid.
+    syntax: >-
+      az eventgrid partner topic event-subscription delete --name es1 \
+          -g rg1 --partner-topic-name partnertopic1 \
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama langganan kejadian.
+    description: ''
+  - isRequired: true
+    name: --partner-topic-name
+    summary: Nama topik mitra.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_eventgrid_partner_topic_event-subscription_list
+  name: az eventgrid partner topic event-subscription list
+  summary: Mencantumkan langganan peristiwa dari topik mitra tertentu.
+  description: ''
+  syntax: >-
+    az eventgrid partner topic event-subscription list --partner-topic-name
+                                                       --resource-group
+                                                       [--odata-query]
+  examples:
+  - summary: Mencantumkan semua langganan peristiwa yang dibuat untuk topik mitra Event Grid.
+    syntax: az eventgrid partner topic event-subscription list -g rg1 --partner-topic-name partnertopic1
+  requiredParameters:
+  - isRequired: true
+    name: --partner-topic-name
+    summary: Nama topik mitra.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --odata-query
+    summary: Kueri yang digunakan untuk memfilter hasil menggunakan sintaks OData.
+    description: ''
+- uid: az_eventgrid_partner_topic_event-subscription_show
+  name: az eventgrid partner topic event-subscription show
+  summary: Dapatkan detail langganan peristiwa topik mitra.
+  description: ''
+  syntax: >-
+    az eventgrid partner topic event-subscription show --name
+                                                       --partner-topic-name
+                                                       --resource-group
+                                                       [--include-full-endpoint-url {false, true}]
+  examples:
+  - summary: Menampilkan detail langganan peristiwa untuk topik mitra Event Grid.
+    syntax: >-
+      az eventgrid partner topic event-subscription show --name es1 \
+           -g rg1 --partner-topic-name partnertopic1
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama langganan kejadian.
+    description: ''
+  - isRequired: true
+    name: --partner-topic-name
+    summary: Nama topik mitra.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --include-full-endpoint-url
+    parameterValueGroup: false, true
+    summary: Tentukan untuk menunjukkan apakah URL titik akhir lengkap harus dikembalikan. Benar jika bendera ada.
+    description: ''
+- uid: az_eventgrid_partner_topic_event-subscription_update
+  name: az eventgrid partner topic event-subscription update
+  summary: Memperbarui langganan peristiwa topik mitra.
+  description: ''
+  syntax: >-
+    az eventgrid partner topic event-subscription update --name
+                                                         --partner-topic-name
+                                                         --resource-group
+                                                         [--advanced-filter]
+                                                         [--deadletter-endpoint]
+                                                         [--endpoint]
+                                                         [--endpoint-type {azurefunction, eventhub, hybridconnection, servicebusqueue, servicebustopic, storagequeue, webhook}]
+                                                         [--included-event-types]
+                                                         [--labels]
+                                                         [--subject-begins-with]
+                                                         [--subject-ends-with]
+  examples:
+  - summary: Perbarui langganan peristiwa untuk topik mitra Event Grid untuk menentukan titik akhir baru.
+    syntax: >-
+      az eventgrid partner topic event-subscription update --name es1 \
+          -g rg1 --partner-topic-name partnertopic1 --endpoint https://contoso.azurewebsites.net/api/f1?code=code
+  - summary: Perbarui langganan peristiwa untuk topik mitra Event Grid untuk menentukan filter subjek-ends-with baru.
+    syntax: >-
+      az eventgrid partner topic event-subscription update --name es2 \
+          -g rg1 --partner-topic-name partnertopic1 \
+          --subject-ends-with .jpg
+  - summary: Perbarui langganan peristiwa untuk topik mitra Event Grid untuk menentukan titik akhir baru dan subjek baru-berakhir-dengan memfilter daftar baru jenis peristiwa yang disertakan.
+    syntax: >-
+      az eventgrid partner topic event-subscription update --name es3 \
+          -g rg1 --partner-topic-name partnertopic1 \
+          --subject-ends-with .png \
+          --endpoint https://contoso.azurewebsites.net/api/f1?code=code
+          --included-event-types Microsoft.Storage.BlobCreated Microsoft.Storage.BlobDeleted
+  - summary: Perbarui langganan peristiwa untuk topik mitra Azure Event Grid, untuk menyertakan tujuan deadletter.
+    syntax: >-
+      az eventgrid partner topic event-subscription update --name es2 \
+          -g rg1 --partner-topic-name partnertopic1 \
+          --deadletter-endpoint /subscriptions/{SubID}/resourceGroups/TestRG/providers/Microsoft.Storage/storageAccounts/sa1/blobServices/default/containers/blobcontainer1
+  - summary: Perbarui langganan peristiwa untuk topik mitra Azure Event Grid, menggunakan filter tingkat lanjut.
+    syntax: >-
+      az eventgrid partner topic event-subscription update --name es3 \
+          -g rg1 --partner-topic-name partnertopic1 \
+          --endpoint https://contoso.azurewebsites.net/api/f1?code=code
+          --advanced-filter data.blobType StringIn BlockBlob
+          --advanced-filter data.url StringBeginsWith https://myaccount.blob.core.windows.net
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama langganan kejadian.
+    description: ''
+  - isRequired: true
+    name: --partner-topic-name
+    summary: Nama topik mitra.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --advanced-filter
+    summary: Filter tingkat lanjut memungkinkan pemfilteran peristiwa berdasarkan properti peristiwa tertentu.
+    description: 'Penggunaan: --advanced-filter KEY[. INNERKEY] FILTEROPERATOR VALUE [VALUE ...] StringIn: --advanced-filter data. String WarnaIn Merah Oranye Kuning StringNotIn: --advanced-filter data. String WarnaNotIn Biru Untai Kuning Oranye MerahKontains: --advanced-filter subject StringContains Blue Red StringBeginsWith: --advanced-filter subject StringBeginsWith Blue Red StringEndsWith: --advanced-filter subject StringEndsWith img png jpg NumberIn: --advanced-filter data.property1 NumberIn 5 10 20 NumberNotIn: --advanced-filter data.property2 NumberNotIn 100 200 300 NumberLessThan: --advanced-filter data.property3  NumberLessThan 100 NumberLessThanOrEquals: --advanced-filter data.property2 NumberLessThanOrEquals 100 NumberGreaterThan: --advanced-filter data.property3 NumberGreaterThan 100 NumberGreaterThanOrEquals: --advanced-filter data.property2 NumberGreaterThanOrEquals 100 BoolEquals: --advanced-filter data.property3 BoolEquals true Beberapa filter tingkat lanjut dapat ditentukan dengan menggunakan lebih dari satu `--advanced-filter` argumen.'
+  - name: --deadletter-endpoint
+    summary: ID sumber daya Azure dari tujuan kontainer blob Azure Storage di mana EventGrid harus mematikan peristiwa yang tidak dapat terkirim untuk langganan peristiwa ini.
+    description: ''
+  - name: --endpoint
+    summary: Titik akhir tempat EventGrid harus mengirimkan peristiwa yang cocok dengan langganan kejadian ini. Untuk jenis titik akhir webhook, ini harus menjadi URL webhook yang sesuai. Untuk jenis titik akhir lainnya, ini harus menjadi pengidentifikasi sumber daya Azure dari titik akhir.
+    description: ''
+  - name: --endpoint-type
+    defaultValue: webhook
+    parameterValueGroup: azurefunction, eventhub, hybridconnection, servicebusqueue, servicebustopic, storagequeue, webhook
+    summary: Jenis titik akhir tujuan.
+    description: ''
+  - name: --included-event-types
+    summary: 'Daftar jenis peristiwa yang dipisahkan spasi. Contoh: Microsoft. Storage. BlobCreated Microsoft. Storage. BlobDeleted. Untuk berlangganan semua jenis peristiwa default, jangan tentukan nilai apa pun untuk argumen ini.'
+    description: ''
+  - name: --labels
+    summary: Daftar label yang dipisahkan spasi untuk dikaitkan dengan langganan kejadian ini.
+    description: ''
+  - name: --subject-begins-with
+    summary: String opsional untuk memfilter peristiwa untuk langganan peristiwa berdasarkan awalan. Karakter kartubebas tidak didukung.
+    description: ''
+  - name: --subject-ends-with
+    summary: String opsional untuk memfilter peristiwa untuk langganan peristiwa berdasarkan akhiran. Karakter kartubebas tidak didukung.
+    description: ''
+commands:
+- az_eventgrid_partner_topic_event-subscription_create
+- az_eventgrid_partner_topic_event-subscription_delete
+- az_eventgrid_partner_topic_event-subscription_list
+- az_eventgrid_partner_topic_event-subscription_show
+- az_eventgrid_partner_topic_event-subscription_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola langganan peristiwa topik mitra.
+  ms.openlocfilehash: 10d95c2d13106e2e71e8587c6f242365d21d8055
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140976106"
