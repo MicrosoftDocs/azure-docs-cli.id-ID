@@ -1,0 +1,208 @@
+### YamlMime:AzureCLIGroup
+uid: az_reservations_reservation-order
+name: az reservations reservation-order
+summary: Kelola pesanan reservasi, yang merupakan kontainer untuk reservasi.
+description: ''
+directCommands:
+- uid: az_reservations_reservation-order_calculate
+  name: az reservations reservation-order calculate
+  summary: Menghitung harga untuk pesanan reservasi.
+  description: Hitung harga untuk menempatkan pesanan reservasi.
+  syntax: >-
+    az reservations reservation-order calculate --applied-scope-type {Shared, Single}
+                                                --billing-scope
+                                                --display-name
+                                                --quantity
+                                                --reserved-resource-type {CosmosDb, RedHat, RedHatOsa, SqlDataWarehouse, SqlDatabases, SuseLinux, VMwareCloudSimple, VirtualMachines}
+                                                --sku
+                                                --term {P1Y, P3Y}
+                                                [--applied-scope]
+                                                [--billing-plan {Monthly, Upfront}]
+                                                [--instance-flexibility]
+                                                [--location]
+                                                [--renew {false, true}]
+  examples:
+  - summary: Hitung harga dan dapatkan penawaran untuk jenis sumber daya tertentu.
+    syntax: az reservations reservation-order calculate --sku standard_b1ls --location westus --reserved-resource-type VirtualMachines --billing-scope {SubId} --term P1Y --billing-plan Upfront --quantity 1 --applied-scope-type Single --applied-scope SubId --display-name test
+  requiredParameters:
+  - isRequired: true
+    name: --applied-scope-type
+    parameterValueGroup: Shared, Single
+    summary: Jenis Cakupan yang Diterapkan untuk memperbarui reservasi.
+    description: ''
+  - isRequired: true
+    name: --billing-scope
+    summary: Langganan yang akan dikenakan untuk membeli Reservasi.
+    description: ''
+  - isRequired: true
+    name: --display-name
+    summary: Nama yang mudah diingat bagi pengguna untuk mengidentifikasi reservasi dengan mudah.
+    description: ''
+  - isRequired: true
+    name: --quantity
+    summary: Kuantitas produk untuk menghitung harga atau pembelian.
+    description: ''
+  - isRequired: true
+    name: --reserved-resource-type
+    parameterValueGroup: CosmosDb, RedHat, RedHatOsa, SqlDataWarehouse, SqlDatabases, SuseLinux, VMwareCloudSimple, VirtualMachines
+    summary: Jenis sumber daya tempat sku harus disediakan.
+    description: ''
+  - isRequired: true
+    name: --sku
+    summary: Nama Sku, dapatkan daftar sku dengan menggunakan perintah az reservations catalog show.
+    description: ''
+  - isRequired: true
+    name: --term
+    parameterValueGroup: P1Y, P3Y
+    summary: Ketentuan reservasi yang tersedia untuk sumber daya ini.
+    description: ''
+  optionalParameters:
+  - name: --applied-scope
+    summary: Langganan yang akan diterapkan manfaatnya. Diperlukan jika --applied-scope-type adalah Tunggal. Jangan tentukan apakah --applied-scope-type dibagikan.
+    description: ''
+  - name: --billing-plan
+    parameterValueGroup: Monthly, Upfront
+    summary: Opsi paket penagihan tersedia untuk SKU ini.
+    description: ''
+  - name: --instance-flexibility
+    summary: Jenis Fleksibilitas Instans untuk memperbarui reservasi.
+    description: ''
+  - name: --location
+    summary: 'Nilai dari: `az account list-locations`.'
+    description: ''
+  - name: --renew
+    parameterValueGroup: false, true
+    summary: Atur ini ke true akan secara otomatis membeli reservasi baru pada waktu tanggal kedaluwarsa.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/reservations/_help.py
+- uid: az_reservations_reservation-order_list
+  name: az reservations reservation-order list
+  summary: Dapatkan semua pesanan reservasi.
+  description: Daftar semua pesanan reservasi yang dapat diakses pengguna di penyewa saat ini.
+  syntax: az reservations reservation-order list
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/reservations/_help.py
+- uid: az_reservations_reservation-order_purchase
+  name: az reservations reservation-order purchase
+  summary: Beli pesanan reservasi.
+  description: Beli pesanan reservasi dan buat sumber daya di bawah URI yang ditentukan.
+  syntax: >-
+    az reservations reservation-order purchase --applied-scope-type {Shared, Single}
+                                               --billing-scope
+                                               --display-name
+                                               --quantity
+                                               --reservation-order-id
+                                               --reserved-resource-type {CosmosDb, RedHat, RedHatOsa, SqlDataWarehouse, SqlDatabases, SuseLinux, VMwareCloudSimple, VirtualMachines}
+                                               --sku
+                                               --term {P1Y, P3Y}
+                                               [--applied-scope]
+                                               [--billing-plan {Monthly, Upfront}]
+                                               [--instance-flexibility]
+                                               [--location]
+                                               [--renew {false, true}]
+  examples:
+  - summary: Beli pesanan reservasi
+    syntax: az reservations reservation-order purchase --reservation-order-id {reservationOrderId} --sku standard_b1ls --location westus --reserved-resource-type VirtualMachines --billing-scope {SubId} --term P1Y --billing-plan Upfront --quantity 1 --applied-scope-type Single --applied-scope {SubId} --display-name test
+  requiredParameters:
+  - isRequired: true
+    name: --applied-scope-type
+    parameterValueGroup: Shared, Single
+    summary: Jenis Cakupan yang Diterapkan untuk memperbarui reservasi.
+    description: ''
+  - isRequired: true
+    name: --billing-scope
+    summary: Langganan yang akan dikenakan untuk membeli Reservasi.
+    description: ''
+  - isRequired: true
+    name: --display-name
+    summary: Nama yang mudah diingat bagi pengguna untuk mengidentifikasi reservasi dengan mudah.
+    description: ''
+  - isRequired: true
+    name: --quantity
+    summary: Kuantitas produk untuk menghitung harga atau pembelian.
+    description: ''
+  - isRequired: true
+    name: --reservation-order-id
+    summary: Id pesanan reservasi untuk dibeli, dihasilkan oleh `az reservations reservation-order calculate`.
+    description: ''
+  - isRequired: true
+    name: --reserved-resource-type
+    parameterValueGroup: CosmosDb, RedHat, RedHatOsa, SqlDataWarehouse, SqlDatabases, SuseLinux, VMwareCloudSimple, VirtualMachines
+    summary: Jenis sumber daya tempat sku harus disediakan.
+    description: ''
+  - isRequired: true
+    name: --sku
+    summary: Nama Sku, dapatkan daftar sku dengan menggunakan perintah az reservations catalog show.
+    description: ''
+  - isRequired: true
+    name: --term
+    parameterValueGroup: P1Y, P3Y
+    summary: Ketentuan reservasi yang tersedia untuk sumber daya ini.
+    description: ''
+  optionalParameters:
+  - name: --applied-scope
+    summary: Langganan yang akan diterapkan manfaatnya. Diperlukan jika --applied-scope-type adalah Tunggal. Jangan tentukan apakah --applied-scope-type dibagikan.
+    description: ''
+  - name: --billing-plan
+    parameterValueGroup: Monthly, Upfront
+    summary: Opsi paket penagihan tersedia untuk SKU ini.
+    description: ''
+  - name: --instance-flexibility
+    summary: Jenis Fleksibilitas Instans untuk memperbarui reservasi.
+    description: ''
+  - name: --location
+    summary: 'Nilai dari: `az account list-locations`.'
+    description: ''
+  - name: --renew
+    parameterValueGroup: false, true
+    summary: Atur ini ke true akan secara otomatis membeli reservasi baru pada waktu tanggal kedaluwarsa.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/reservations/_help.py
+- uid: az_reservations_reservation-order_show
+  name: az reservations reservation-order show
+  summary: Dapatkan pesanan reservasi tertentu.
+  description: Dapatkan detail pesanan reservasi.
+  syntax: >-
+    az reservations reservation-order show --reservation-order-id
+                                           [--expand]
+  requiredParameters:
+  - isRequired: true
+    name: --reservation-order-id
+    summary: Id pesanan reservasi untuk mencari.
+    description: ''
+  optionalParameters:
+  - name: --expand
+    summary: Dapat digunakan untuk memperluas planInformation.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/reservations/_help.py
+commands:
+- az_reservations_reservation-order_calculate
+- az_reservations_reservation-order_list
+- az_reservations_reservation-order_purchase
+- az_reservations_reservation-order_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 11/21/2019
+  description: Kelola pesanan reservasi, yang merupakan kontainer untuk reservasi.
+  ms.openlocfilehash: bd1a9867e9feb12afc92ee4d7650563bdbac2264
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141039632"

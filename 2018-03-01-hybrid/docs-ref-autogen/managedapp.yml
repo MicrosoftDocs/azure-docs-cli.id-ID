@@ -1,0 +1,169 @@
+### YamlMime:AzureCLIGroup
+uid: az_managedapp
+name: az managedapp
+summary: Kelola solusi templat yang disediakan dan dikelola oleh Vendor Perangkat Lunak Independen (ISV).
+description: ''
+directCommands:
+- uid: az_managedapp_create
+  name: az managedapp create
+  summary: Buat aplikasi terkelola.
+  description: ''
+  syntax: >-
+    az managedapp create --kind
+                         --managed-rg-id
+                         --name
+                         --resource-group
+                         [--location]
+                         [--managedapp-definition-id]
+                         [--parameters]
+                         [--plan-name]
+                         [--plan-product]
+                         [--plan-publisher]
+                         [--plan-version]
+                         [--tags]
+  examples:
+  - summary: Buat aplikasi terkelola jenis 'ServiceCatalog'. Ini memerlukan ID definisi aplikasi terkelola yang valid.
+    syntax: >-
+      az managedapp create -g MyResourceGroup -n MyManagedApp -l westcentralus --kind ServiceCatalog \
+          -m "/subscriptions/{SubID}/resourceGroups/{ManagedResourceGroup}" \
+          -d "/subscriptions/{SubID}/resourceGroups/{ResourceGroup}/providers/Microsoft.Solutions/applianceDefinitions/{ApplianceDefinition}"
+  - summary: Buat aplikasi terkelola jenis 'MarketPlace'. Ini memerlukan paket yang valid, berisi detail tentang paket marketplace yang ada seperti nama paket, versi, penerbit, dan produk.
+    syntax: >-
+      az managedapp create -g MyResourceGroup -n MyManagedApp -l westcentralus --kind MarketPlace \
+          -m "/subscriptions/{SubID}/resourceGroups/{ManagedResourceGroup}" \
+          --plan-name ContosoAppliance --plan-version "1.0" --plan-product "contoso-appliance" --plan-publisher Contoso
+  requiredParameters:
+  - isRequired: true
+    name: --kind
+    summary: Jenis aplikasi terkelola. dapat berupa marketplace atau servicecatalog.
+    description: ''
+  - isRequired: true
+    name: --managed-rg-id -m
+    summary: Grup sumber daya yang dikelola oleh aplikasi terkelola.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi terkelola.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Grup sumber daya aplikasi terkelola.
+    description: ''
+  optionalParameters:
+  - name: --location -l
+    summary: Lokasi aplikasi terkelola.
+    description: ''
+  - name: --managedapp-definition-id -d
+    summary: Id definisi aplikasi terkelola yang memenuhi syarat lengkap.
+    description: ''
+  - name: --parameters
+    summary: String berformat JSON atau jalur ke file dengan konten tersebut.
+    description: ''
+  - name: --plan-name
+    summary: Nama paket aplikasi terkelola.
+    description: ''
+  - name: --plan-product
+    summary: Produk paket aplikasi terkelola.
+    description: ''
+  - name: --plan-publisher
+    summary: Penerbit paket aplikasi terkelola.
+    description: ''
+  - name: --plan-version
+    summary: Versi paket aplikasi terkelola.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_managedapp_delete
+  name: az managedapp delete
+  summary: Menghapus aplikasi terkelola.
+  description: ''
+  syntax: >-
+    az managedapp delete [--ids]
+                         [--name]
+                         [--resource-group]
+  examples:
+  - summary: Menghapus aplikasi terkelola. (dibuat otomatis)
+    syntax: az managedapp delete --name MyManagedApplication --resource-group MyResourceGroup --subscription MySubscription
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi terkelola.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya aplikasi terkelola.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_managedapp_list
+  name: az managedapp list
+  summary: Cantumkan aplikasi terkelola.
+  description: ''
+  syntax: az managedapp list [--resource-group]
+  examples:
+  - summary: Cantumkan aplikasi terkelola. (dibuat otomatis)
+    syntax: az managedapp list --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Grup sumber daya aplikasi terkelola.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_managedapp_show
+  name: az managedapp show
+  summary: Mendapatkan aplikasi terkelola.
+  description: ''
+  syntax: >-
+    az managedapp show [--ids]
+                       [--name]
+                       [--resource-group]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi terkelola.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya aplikasi terkelola.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+commands:
+- az_managedapp_create
+- az_managedapp_definition
+- az_managedapp_definition_create
+- az_managedapp_definition_delete
+- az_managedapp_definition_list
+- az_managedapp_definition_show
+- az_managedapp_definition_update
+- az_managedapp_delete
+- az_managedapp_list
+- az_managedapp_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 02/22/2022
+  description: Kelola solusi templat yang disediakan dan dikelola oleh Vendor Perangkat Lunak Independen (ISV).
+  ms.openlocfilehash: a04d6c9958fbe26150e71a7b578cc38cec34b744
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141037456"

@@ -1,0 +1,1584 @@
+### YamlMime:AzureCLIGroup
+uid: az_storage_blob
+name: az storage blob
+summary: Mengelola penyimpanan objek untuk data tidak terstruktur (blob).
+description: 'Tentukan salah satu parameter autentikasi berikut untuk perintah Anda: --auth-mode, --account-key, --connection-string, --sas-token. Anda juga dapat menggunakan variabel lingkungan yang sesuai untuk menyimpan kredensial autentikasi Anda, misalnya AZURE_STORAGE_KEY, AZURE_STORAGE_CONNECTION_STRING, dan AZURE_STORAGE_SAS_TOKEN.'
+directCommands:
+- uid: az_storage_blob_delete
+  name: penghapusan az storage blob
+  summary: Tandai blob atau rekam jepret untuk dihapus.
+  description: Blob ditandai untuk penghapusan nanti selama pengumpulan sampah.  Untuk menghapus blob, semua rekam jepretnya juga harus dihapus. Keduanya dapat dihapus secara bersamaan.
+  syntax: >-
+    az storage blob delete --container-name
+                           --name
+                           [--account-key]
+                           [--account-name]
+                           [--auth-mode {key, login}]
+                           [--connection-string]
+                           [--delete-snapshots {include, only}]
+                           [--if-match]
+                           [--if-modified-since]
+                           [--if-none-match]
+                           [--if-unmodified-since]
+                           [--lease-id]
+                           [--sas-token]
+                           [--snapshot]
+                           [--timeout]
+  examples:
+  - summary: Hapus blob.
+    syntax: az storage blob delete -c mycontainer -n MyBlob
+  - summary: Menghapus blob menggunakan kredensial masuk.
+    syntax: az storage blob delete -c mycontainer -n MyBlob --account-name mystorageaccount --auth-mode login
+  requiredParameters:
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama blob.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --delete-snapshots
+    parameterValueGroup: include, only
+    summary: Diperlukan jika blob memiliki rekam jepret terkait.
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya cocok dengan nilai yang ditentukan.
+    description: ''
+  - name: --if-modified-since
+    summary: Dimulai hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya tidak cocok dengan nilai yang ditentukan. Tentukan karakter kartubebas (\*) untuk melakukan operasi hanya jika sumber daya tidak ada, dan gagalkan operasi jika memang ada.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Dimulai hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --lease-id
+    summary: Diperlukan jika blob memiliki sewa aktif.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --snapshot
+    summary: Parameter rekam jepret adalah nilai DateTime buram yang, saat ada, menentukan rekam jepret blob yang akan dihapus.
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_blob_delete-batch
+  name: batch penghapusan az storage blob
+  summary: Hapus blob dari kontainer blob secara rekursif.
+  description: ''
+  syntax: >-
+    az storage blob delete-batch --source
+                                 [--account-key]
+                                 [--account-name]
+                                 [--auth-mode {key, login}]
+                                 [--connection-string]
+                                 [--delete-snapshots {include, only}]
+                                 [--dryrun]
+                                 [--if-match]
+                                 [--if-modified-since]
+                                 [--if-none-match]
+                                 [--if-unmodified-since]
+                                 [--lease-id]
+                                 [--pattern]
+                                 [--sas-token]
+                                 [--timeout]
+  examples:
+  - summary: Hapus semua blob yang berakhiran ".py" dalam kontainer yang belum dimodifikasi selama 10 hari.
+    syntax: >-
+      date=`date -d "10 days ago" '+%Y-%m-%dT%H:%MZ'`
+
+      az storage blob delete-batch -s mycontainer --account-name mystorageaccount --pattern *.py --if-unmodified-since $date --auth-mode login
+  - summary: Hapus semua blob dalam direktori bernama "dir" dalam kontainer bernama "mycontainer".
+    syntax: az storage blob delete-batch -s mycontainer --pattern dir/*
+  - summary: Hapus blob dengan format 'cli-2018-xx-xx.txt' atau 'cli-2019-xx-xx.txt' dalam kontainer.
+    syntax: az storage blob delete-batch -s mycontainer --pattern cli-201[89]-??-??.txt
+  - summary: Hapus semua blob dengan format 'cli-201x-xx-xx.txt' kecuali cli-2018-xx-xx.txt' dan 'cli-2019-xx-xx.txt' dalam kontainer.
+    syntax: az storage blob delete-batch -s mycontainer --pattern cli-201[!89]-??-??.txt
+  requiredParameters:
+  - isRequired: true
+    name: --source -s
+    summary: Kontainer blob dari mana file akan dihapus.
+    description: Sumbernya bisa menjadi URL kontainer atau nama kontainer. Ketika sumbernya adalah URL kontainer, nama akun penyimpanan akan diurai dari URL.
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --delete-snapshots
+    parameterValueGroup: include, only
+    summary: Diperlukan jika blob memiliki rekam jepret terkait.
+    description: ''
+  - name: --dryrun
+    summary: Tampilkan ringkasan operasi yang akan diambil alih-alih benar-benar menghapus file.
+    description: Jika ditentukan, ini akan mengabaikan semua Argumen Prasyarat yang menyertakan --if-modified-since dan --if-unmodified-since. Jadi file akan dihapus dengan perintah tanpa --dryrun mungkin berbeda dari daftar hasil dengan bendera --dryrun aktif.
+  - name: --if-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya cocok dengan nilai yang ditentukan.
+    description: ''
+  - name: --if-modified-since
+    summary: Dimulai hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag, atau karakter kartubebas (\*).
+    description: Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya tidak cocok dengan nilai yang ditentukan. Tentukan karakter kartubebas (*) untuk melakukan operasi hanya jika sumber daya tidak ada, dan gagalkan operasi jika memang ada.
+  - name: --if-unmodified-since
+    summary: Dimulai hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --lease-id
+    summary: Id sewa aktif untuk blob.
+    description: ''
+  - name: --pattern
+    summary: Pola yang digunakan untuk globbing file atau blob di sumbernya. Pola yang didukung adalah '\*', '?', '[seq]', dan '[!seq]'. Untuk informasi lebih lanjut, silakan merujuk ke https://docs.python.org/3.7/library/fnmatch.html.
+    description: Ketika Anda menggunakan '*' dalam --pattern, itu akan cocok dengan karakter apa pun termasuk pemisah direktori '/'. Anda juga dapat mencoba perintah "az storage remove" dengan --include dan --exclude dengan azure cli >= 2.0.70 agar sesuai dengan beberapa pola.
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_blob_download
+  name: pengunduhan az storage blob
+  summary: Unduh blob ke jalur file.
+  description: ''
+  syntax: >-
+    az storage blob download --container-name
+                             --file
+                             --name
+                             [--account-key]
+                             [--account-name]
+                             [--auth-mode {key, login}]
+                             [--connection-string]
+                             [--end-range]
+                             [--if-match]
+                             [--if-modified-since]
+                             [--if-none-match]
+                             [--if-unmodified-since]
+                             [--lease-id]
+                             [--max-connections]
+                             [--no-progress]
+                             [--open-mode]
+                             [--sas-token]
+                             [--snapshot]
+                             [--socket-timeout]
+                             [--start-range]
+                             [--timeout]
+                             [--validate-content]
+  examples:
+  - summary: Unduh blob.
+    syntax: az storage blob download -f /path/to/file -c mycontainer -n MyBlob
+  requiredParameters:
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --file -f
+    summary: Jalur file yang akan ditulis.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama blob.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --end-range
+    summary: 'Akhir rentang byte yang digunakan untuk mengunduh bagian blob. Jika end_range diberikan, start_range harus disediakan. Param start_range dan end_range inklusif. Misalnya: start_range=0, end_range=511 akan mengunduh 512 byte blob pertama.'
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya cocok dengan nilai yang ditentukan.
+    description: ''
+  - name: --if-modified-since
+    summary: Dimulai hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya tidak cocok dengan nilai yang ditentukan. Tentukan karakter kartubebas (\*) untuk melakukan operasi hanya jika sumber daya tidak ada, dan gagalkan operasi jika memang ada.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Dimulai hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --lease-id
+    summary: Diperlukan jika blob memiliki sewa aktif.
+    description: ''
+  - name: --max-connections
+    defaultValue: "2"
+    summary: Jika diatur ke 2 atau lebih besar, get awal akan dilakukan untuk diri pertama. MAX_SINGLE_GET_SIZE byte blob. Jika ini adalah seluruh blob, metode akan kembali pada titik ini. Jika tidak, itu akan mengunduh paralel data yang tersisa menggunakan jumlah utas yang sama dengan max_connections. Setiap gugus akan berukuran sendiri. MAX_CHUNK_GET_SIZE. Jika diatur ke 1, satu permintaan get besar akan dilakukan. Ini umumnya tidak direkomendasikan tetapi tersedia jika sangat sedikit utas yang harus digunakan, permintaan jaringan sangat mahal, atau aliran yang tidak dapat dicari mencegah unduhan paralel. Ini mungkin juga berguna jika banyak blob diharapkan kosong karena permintaan tambahan diperlukan untuk blob kosong jika max_connections lebih besar dari 1.
+    description: ''
+  - name: --no-progress
+    summary: Sertakan bendera ini untuk menonaktifkan pelaporan kemajuan untuk perintah.
+    description: ''
+  - name: --open-mode
+    defaultValue: wb
+    summary: Mode yang digunakan saat membuka file. Perhatikan bahwa menentukan penambahan hanya open_mode mencegah pengunduhan paralel. Jadi, max_connections harus diatur ke 1 jika open_mode ini digunakan.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --snapshot
+    summary: Parameter rekam jepret adalah nilai DateTime buram yang, saat ada, menentukan rekam jepret blob untuk diambil.
+    description: ''
+  - name: --socket-timeout
+    summary: Batas waktu soket(detik), digunakan oleh layanan untuk mengatur aliran data.
+    description: ''
+  - name: --start-range
+    summary: 'Mulai rentang byte yang digunakan untuk mengunduh bagian blob. Jika tidak ada end_range yang diberikan, semua byte setelah start_range akan diunduh. Param start_range dan end_range inklusif. Misalnya: start_range=0, end_range=511 akan mengunduh 512 byte blob pertama.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  - name: --validate-content
+    summary: Jika diatur ke true, memvalidasi hash MD5 untuk setiap bagian blob yang diambil. Ini terutama berharga untuk mendeteksi bitflip pada kawat jika menggunakan http alih-alih https sebagai https (default) sudah akan memvalidasi. Perhatikan bahwa layanan hanya akan mengembalikan MD5 transaksional untuk potongan 4MB atau kurang sehingga permintaan get pertama akan berukuran sendiri. MAX_CHUNK_GET_SIZE bukan diri sendiri. MAX_SINGLE_GET_SIZE. Jika diri sendiri. MAX_CHUNK_GET_SIZE diatur ke lebih besar dari 4MB, kesalahan akan dilemparkan. Karena komputasi MD5 membutuhkan waktu pemrosesan dan lebih banyak permintaan perlu dilakukan karena ukuran gugus yang berkurang mungkin ada beberapa peningkatan latensi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_blob_download-batch
+  name: az storage blob download-batch
+  summary: Unduh blob dari kontainer blob secara rekursif.
+  description: ''
+  syntax: >-
+    az storage blob download-batch --destination
+                                   --source
+                                   [--account-key]
+                                   [--account-name]
+                                   [--auth-mode {key, login}]
+                                   [--connection-string]
+                                   [--dryrun]
+                                   [--max-connections]
+                                   [--no-progress]
+                                   [--pattern]
+                                   [--sas-token]
+                                   [--socket-timeout]
+  examples:
+  - summary: Unduh semua blob yang diakhir dengan .py
+    syntax: az storage blob download-batch -d . --pattern *.py -s mycontainer --account-name mystorageaccount --account-key 00000000
+  - summary: Unduh semua blob dalam direktori bernama "dir" dari kontainer bernama "mycontainer".
+    syntax: az storage blob download-batch -d . -s mycontainer --pattern dir/*
+  - summary: Unduh semua blob dengan format 'cli-2018-xx-xx.txt' atau 'cli-2019-xx-xx.txt' dalam kontainer ke jalur saat ini.
+    syntax: az storage blob download-batch -d . -s mycontainer --pattern cli-201[89]-??-??.txt
+  - summary: Unduh semua blob dengan format 'cli-201x-xx-xx.txt' kecuali cli-2018-xx-xx.txt' dan 'cli-2019-xx-xx.txt' dalam kontainer ke jalur saat ini.
+    syntax: az storage blob download-batch -d . -s mycontainer --pattern cli-201[!89]-??-??.txt
+  requiredParameters:
+  - isRequired: true
+    name: --destination -d
+    summary: Folder tujuan yang ada untuk operasi pengunduhan ini.
+    description: ''
+  - isRequired: true
+    name: --source -s
+    summary: Kontainer blob dari tempat file akan diunduh.
+    description: Sumbernya bisa menjadi URL kontainer atau nama kontainer. Ketika sumbernya adalah URL kontainer, nama akun penyimpanan akan diurai dari URL.
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --dryrun
+    summary: Tampilkan ringkasan operasi yang akan diambil alih-alih benar-benar mengunduh file.
+    description: ''
+  - name: --max-connections
+    defaultValue: "2"
+    summary: Jumlah maksimum koneksi paralel yang akan digunakan ketika ukuran blob melebihi 64MB.
+    description: ''
+  - name: --no-progress
+    summary: Sertakan bendera ini untuk menonaktifkan pelaporan kemajuan untuk perintah.
+    description: ''
+  - name: --pattern
+    summary: Pola yang digunakan untuk globbing file atau blob di sumbernya. Pola yang didukung adalah '\*', '?', '[seq]', dan '[!seq]'. Untuk informasi lebih lanjut, silakan merujuk ke https://docs.python.org/3.7/library/fnmatch.html.
+    description: Ketika Anda menggunakan '*' dalam --pattern, itu akan cocok dengan karakter apa pun termasuk pemisah direktori '/'.
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --socket-timeout
+    summary: Batas waktu soket(detik), digunakan oleh layanan untuk mengatur aliran data.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_blob_exists
+  name: blob penyimpanan az ada
+  summary: Periksa keberadaan blob dalam kontainer.
+  description: ''
+  syntax: >-
+    az storage blob exists --container-name
+                           --name
+                           [--account-key]
+                           [--account-name]
+                           [--auth-mode {key, login}]
+                           [--connection-string]
+                           [--sas-token]
+                           [--snapshot]
+                           [--timeout]
+  examples:
+  - summary: Periksa keberadaan blob dalam kontainer. (dibuat otomatis)
+    syntax: az storage blob exists --account-key 00000000 --account-name MyAccount --container-name mycontainer --name MyBlob
+  requiredParameters:
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama blob.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --snapshot
+    summary: Parameter rekam jepret adalah nilai DateTime buram yang, saat ada, menentukan rekam jepret.
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_blob_filter
+  name: filter blob penyimpanan az
+  summary: Mencantumkan blob di semua kontainer yang tagnya cocok dengan ekspresi pencarian tertentu.
+  description: Blob filter mencari di semua kontainer dalam akun penyimpanan tetapi dapat dilingkupkan dalam ekspresi ke satu kontainer.
+  syntax: >-
+    az storage blob filter --tag-filter
+                           [--account-key]
+                           [--account-name]
+                           [--auth-mode {key, login}]
+                           [--connection-string]
+                           [--sas-token]
+  requiredParameters:
+  - isRequired: true
+    name: --tag-filter
+    summary: Ekspresi untuk menemukan blob yang tagnya cocok dengan kondisi yang ditentukan. misalnya. ""yourtagname"='firsttag' and "yourtagname2"='secondtag'" Untuk menentukan kontainer, misalnya. "@container='containerName' dan "Name"='C'".
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+- uid: az_storage_blob_generate-sas
+  name: az storage blob generate-sas
+  summary: Buat tanda tangan akses bersama untuk blob.
+  description: ''
+  syntax: >-
+    az storage blob generate-sas --container-name
+                                 --name
+                                 [--account-key]
+                                 [--account-name]
+                                 [--as-user]
+                                 [--auth-mode {key, login}]
+                                 [--cache-control]
+                                 [--connection-string]
+                                 [--content-disposition]
+                                 [--content-encoding]
+                                 [--content-language]
+                                 [--content-type]
+                                 [--expiry]
+                                 [--full-uri]
+                                 [--https-only]
+                                 [--ip]
+                                 [--permissions]
+                                 [--policy-name]
+                                 [--sas-token]
+                                 [--start]
+  examples:
+  - summary: Buat token sas untuk blob dengan izin baca-saja.
+    syntax: >-
+      end=`date -u -d "30 minutes" '+%Y-%m-%dT%H:%MZ'`
+
+      az storage blob generate-sas -c myycontainer -n MyBlob --permissions r --expiry $end --https-only
+  - summary: Buat token sas untuk blob dengan rentang ip yang ditentukan.
+    syntax: >-
+      end=`date -u -d "30 minutes" '+%Y-%m-%dT%H:%MZ'`
+
+      az storage blob generate-sas -c myycontainer -n MyBlob --ip "176.134.171.0-176.134.171.255" --permissions r --expiry $end --https-only
+  - summary: Buat tanda tangan akses bersama untuk blob. (dibuat otomatis)
+    syntax: az storage blob generate-sas --account-key 00000000 --account-name MyStorageAccount --container-name mycontainer --expiry 2018-01-01T00:00:00Z --name MyBlob --permissions r
+  requiredParameters:
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama blob.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --as-user
+    summary: Menunjukkan bahwa perintah ini mengembalikan SAS yang ditandatangani dengan kunci delegasi pengguna. Parameter kedaluwarsa dan '--auth-mode login' diperlukan jika argumen ini ditentukan.
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --cache-control
+    summary: Nilai header respons untuk Cache-Control saat sumber daya diakses menggunakan tanda tangan akses bersama ini.
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --content-disposition
+    summary: Nilai header respons untuk Content-Disposition saat sumber daya diakses menggunakan tanda tangan akses bersama ini.
+    description: ''
+  - name: --content-encoding
+    summary: Nilai header respons untuk Pengodean Konten saat sumber daya diakses menggunakan tanda tangan akses bersama ini.
+    description: ''
+  - name: --content-language
+    summary: Nilai header respons untuk Content-Language saat sumber daya diakses menggunakan tanda tangan akses bersama ini.
+    description: ''
+  - name: --content-type
+    summary: Nilai header respons untuk Content-Type saat sumber daya diakses menggunakan tanda tangan akses bersama ini.
+    description: ''
+  - name: --kedaluwarsa
+    summary: Menentukan tanggalwaktu UTC (Y-m-d'T'H:M'Z') di mana SAS menjadi tidak valid. Jangan gunakan jika kebijakan akses tersimpan dirujuk dengan --policy-name yang menentukan nilai ini.
+    description: ''
+  - name: --full-uri
+    summary: Menunjukkan bahwa perintah ini mengembalikan URI blob lengkap dan token tanda tangan akses bersama.
+    description: ''
+  - name: --https-only
+    summary: Hanya izinkan permintaan yang dibuat dengan protokol HTTPS. Jika dihilangkan, permintaan dari protokol HTTP dan HTTPS diizinkan.
+    description: ''
+  - name: --ip
+    summary: Menentukan alamat IP atau rentang alamat IP tempat menerima permintaan. Hanya mendukung alamat gaya IPv4.
+    description: ''
+  - name: --permissions
+    summary: 'Izin yang diberikan SAS. Nilai yang diizinkan: (a)dd (a)dd (c)reate (c)reate (d)elete (d)elete (r)ead (r)ead (w)rite (w)rite. Jangan gunakan jika kebijakan akses tersimpan dirujuk dengan --id yang menentukan nilai ini. Dapat digabungkan.'
+    description: ''
+  - name: --policy-name
+    summary: Nama kebijakan akses tersimpan dalam ACL kontainer.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --start
+    summary: Menentukan tanggalwaktu UTC (Y-m-d'T'H:M'Z') di mana SAS menjadi valid. Jangan gunakan jika kebijakan akses tersimpan dirujuk dengan --policy-name yang menentukan nilai ini. Default ke waktu permintaan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_blob_list
+  name: unggah blob penyimpanan az
+  summary: Mencantumkan blob dalam kontainer tertentu.
+  description: ''
+  syntax: >-
+    az storage blob list --container-name
+                         [--account-key]
+                         [--account-name]
+                         [--auth-mode {key, login}]
+                         [--connection-string]
+                         [--delimiter]
+                         [--include]
+                         [--marker]
+                         [--num-results]
+                         [--prefix]
+                         [--sas-token]
+                         [--timeout]
+  examples:
+  - summary: Cantumkan semua blob penyimpanan dalam kontainer yang namanya dimulai dengan 'foo'; akan cocok dengan nama seperti 'foo', 'foobar', dan 'foo/bar'
+    syntax: az storage blob list -c mycontainer --prefix foo
+  requiredParameters:
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --pemisah
+    summary: Ketika permintaan menyertakan parameter ini, operasi mengembalikan elemen BlobPrefix dalam daftar hasil yang bertindak sebagai tempat penampung untuk semua blob yang namanya dimulai dengan substring yang sama hingga tampilan karakter pemisah. Pemisah mungkin satu karakter atau string.
+    description: ''
+  - name: --include
+    summary: Menentukan satu atau beberapa himpunan data tambahan untuk disertakan dalam respons.
+    description: ''
+  - name: --penanda
+    summary: Token kelanjutan buram. Nilai ini dapat diambil dari bidang next_marker dari objek generator sebelumnya jika num_results ditentukan dan generator tersebut telah selesai menghitung hasil. Jika ditentukan, generator ini akan mulai mengembalikan hasil dari titik di mana generator sebelumnya berhenti.
+    description: ''
+  - name: --num-results
+    defaultValue: "5000"
+    summary: Menentukan jumlah maksimum hasil yang akan dikembalikan. Sediakan "\*" untuk mengembalikan semua.
+    description: ''
+  - name: --prefix
+    summary: Memfilter hasil untuk mengembalikan hanya blob yang namanya dimulai dengan awalan yang ditentukan.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_blob_move
+  name: az storage blob move
+  summary: Memindahkan blob dalam kontainer penyimpanan.
+  description: ''
+  syntax: >-
+    az storage blob move --container-name
+                         --destination-blob
+                         --source-blob
+                         [--account-key]
+                         [--account-name]
+                         [--auth-mode {key, login}]
+                         [--connection-string]
+                         [--lease-id]
+                         [--sas-token]
+                         [--source-if-match]
+                         [--source-if-modified-since]
+                         [--source-if-none-match]
+                         [--source-if-unmodified-since]
+                         [--source-lease-id]
+                         [--timeout]
+  examples:
+  - summary: Memindahkan blob dalam kontainer penyimpanan.
+    syntax: az storage blob move -c MyContainer -d DestinationBlobPath -s SourceBlobPath --account-name MyStorageAccount
+  requiredParameters:
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --destination-blob -d
+    summary: Nama blob tujuan. Ini harus menjadi jalur absolut di bawah kontainer. misalnya'topdir1/dirbar'.
+    description: ''
+  - isRequired: true
+    name: --source-blob -s
+    summary: Nama blob sumber. Ini harus menjadi jalur absolut di bawah kontainer. misalnya topdir1/dirsubfoo'.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --lease-id
+    summary: Opsional. ID sewa untuk new_path. new_path harus memiliki sewa aktif dan ID sewa harus cocok.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --source-if-match
+    summary: Opsional. Nilai ETag. Tentukan header ini untuk melakukan operasi ganti nama hanya jika ETag sumber cocok dengan nilai yang ditentukan.
+    description: ''
+  - name: --source-if-modified-since
+    summary: Opsional. Nilai tanggal dan waktu. Tentukan header ini untuk melakukan operasi ganti nama hanya jika sumber telah dimodifikasi sejak tanggal dan waktu yang ditentukan.
+    description: ''
+  - name: --source-if-none-match
+    summary: Opsional. Nilai ETag atau nilai wildcard khusus ("\*"). Tentukan header ini untuk melakukan operasi ganti nama hanya jika ETag sumber tidak cocok dengan nilai yang ditentukan.
+    description: ''
+  - name: --source-if-unmodified-since
+    summary: Opsional. Nilai tanggal dan waktu. Tentukan header ini untuk melakukan operasi ganti nama hanya jika sumber belum dimodifikasi sejak tanggal dan waktu yang ditentukan.
+    description: ''
+  - name: --source-lease-id
+    summary: Opsional. ID sewa untuk source_path. source_path harus memiliki sewa aktif dan ID sewa harus cocok.
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+- uid: az_storage_blob_restore
+  name: az storage blob restore
+  summary: Pulihkan blob dalam rentang blob yang ditentukan.
+  description: ''
+  syntax: >-
+    az storage blob restore --account-name
+                            --time-to-restore
+                            [--blob-range]
+                            [--no-wait]
+                            [--resource-group]
+  examples:
+  - summary: Pulihkan blob dalam dua rentang blob yang ditentukan. Misalnya, (container1/blob1, container2/blob2) dan (container2/blob3.. kontainer2/blob4).
+    syntax: az storage blob restore --account-name mystorageaccount -g MyResourceGroup -t 2020-02-27T03:59:59Z -r container1/blob1 container2/blob2 -r container2/blob3 container2/blob4
+  - summary: Pulihkan blob dalam rentang blob yang ditentukan dari akun mulai hingga akhir akun.
+    syntax: az storage blob restore --account-name mystorageaccount -g MyResourceGroup -t 2020-02-27T03:59:59Z -r "" ""
+  - summary: Pulihkan blob dalam rentang blob yang ditentukan.
+    syntax: >-
+      time=`date -u -d "30 minutes" '+%Y-%m-%dT%H:%MZ'`
+
+      az storage blob restore --account-name mystorageaccount -g MyResourceGroup -t $time -r container0/blob1 container0/blob2
+  - summary: Pulihkan blob dalam rentang blob yang ditentukan tanpa status pemulihan blob tunggu dan kueri dengan 'az storage account show'.
+    syntax: >-
+      time=`date -u -d "30 minutes" '+%Y-%m-%dT%H:%MZ'`
+
+      az storage blob restore --account-name mystorageaccount -g MyResourceGroup -t $time -r container0/blob1 container0/blob2 --no-wait
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -n
+    summary: Nama akun penyimpanan.
+    description: ''
+  - isRequired: true
+    name: --time-to-restore -t
+    summary: Pulihkan blob ke waktu yang ditentukan, yang harus merupakan tanggalwaktu UTC dalam (Y-m-d'T'H:M:S'Z').
+    description: ''
+  optionalParameters:
+  - name: --blob-range -r
+    summary: 'Rentang blob untuk dipulihkan. Anda perlu dua nilai untuk menentukan start_range dan end_range untuk setiap rentang blob, misalnya -r blob1 blob2. Catatan: Kosong berarti akun dimulai sebagai nilai rentang mulai, dan berarti akhir akun untuk rentang akhir.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_blob_set-legal-hold
+  name: az storage blob set-legal-hold
+  summary: Atur penahanan legal blob.
+  description: ''
+  syntax: >-
+    az storage blob set-legal-hold --legal-hold {false, true}
+                                   [--account-key]
+                                   [--account-name]
+                                   [--auth-mode {key, login}]
+                                   [--blob-url]
+                                   [--connection-string]
+                                   [--container-name]
+                                   [--name]
+                                   [--sas-token]
+                                   [--timeout]
+  examples:
+  - summary: Mengonfigurasi penahanan legal blob.
+    syntax: az storage blob set-legal-hold --legal-hold -c mycontainer -n myblob --account-name mystorageaccount --account-key 0000-0000
+  - summary: Hapus penahanan legal blob.
+    syntax: az storage blob set-legal-hold --legal-hold false -c mycontainer -n myblob --account-name mystorageaccount --account-key 0000-0000
+  requiredParameters:
+  - isRequired: true
+    name: --legal-hold
+    parameterValueGroup: false, true
+    summary: Ditentukan jika penahanan legal harus diatur pada blob.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --blob-url
+    summary: URL titik akhir lengkap ke Blob, termasuk token SAS dan rekam jepret jika digunakan. Ini bisa berupa titik akhir utama, atau titik akhir sekunder tergantung pada saat ini `location_mode`.
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - name: --name -n
+    summary: Nama blob.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+- uid: az_storage_blob_set-tier
+  name: az storage blob set-tier
+  summary: Atur tingkat blok atau halaman pada blob.
+  description: Untuk blob blok, perintah ini hanya mendukung blob blok pada akun penyimpanan standar. Untuk blob halaman, perintah ini hanya mendukung blob halaman pada akun premium.
+  syntax: >-
+    az storage blob set-tier --container-name
+                             --name
+                             --tier
+                             [--account-key]
+                             [--account-name]
+                             [--auth-mode {key, login}]
+                             [--connection-string]
+                             [--sas-token]
+                             [--timeout]
+                             [--type {block, page}]
+  examples:
+  - summary: Atur tingkat blok atau halaman pada blob. (dibuat otomatis)
+    syntax: az storage blob set-tier --account-key 00000000 --account-name MyAccount --container-name mycontainer --name MyBlob --tier P10
+  requiredParameters:
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama blob.
+    description: ''
+  - isRequired: true
+    name: --tier
+    summary: Nilai tingkat untuk mengatur blob ke.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Parameter batas waktu dinyatakan dalam hitung detik. Metode ini dapat melakukan beberapa panggilan ke layanan Azure dan batas waktu akan berlaku untuk setiap panggilan satu per satu.
+    description: ''
+  - name: --type -t
+    defaultValue: block
+    parameterValueGroup: block, page
+    summary: Jenis blob.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_blob_show
+  name: az storage blob show
+  summary: Dapatkan detail blob.
+  description: ''
+  syntax: >-
+    az storage blob show --container-name
+                         --name
+                         [--account-key]
+                         [--account-name]
+                         [--auth-mode {key, login}]
+                         [--connection-string]
+                         [--if-match]
+                         [--if-modified-since]
+                         [--if-none-match]
+                         [--if-unmodified-since]
+                         [--lease-id]
+                         [--sas-token]
+                         [--snapshot]
+                         [--timeout]
+  examples:
+  - summary: Tampilkan semua properti blob.
+    syntax: az storage blob show -c mycontainer -n MyBlob
+  - summary: Mendapatkan detail blob (dibuat secara otomatis)
+    syntax: az storage blob show --account-name mystorageccount --account-key 00000000 --container-name mycontainer --name MyBlob
+  requiredParameters:
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama blob.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya cocok dengan nilai yang ditentukan.
+    description: ''
+  - name: --if-modified-since
+    summary: Dimulai hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya tidak cocok dengan nilai yang ditentukan. Tentukan karakter kartubebas (\*) untuk melakukan operasi hanya jika sumber daya tidak ada, dan gagalkan operasi jika memang ada.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Dimulai hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --lease-id
+    summary: Diperlukan jika blob memiliki sewa aktif.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --snapshot
+    summary: Parameter rekam jepret adalah nilai DateTime buram yang, saat ada, menentukan rekam jepret blob untuk diambil.
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_blob_snapshot
+  name: rekam jepret blob penyimpanan az
+  summary: Membuat rekam jepret baca-saja dari blob.
+  description: ''
+  syntax: >-
+    az storage blob snapshot --container-name
+                             --name
+                             [--account-key]
+                             [--account-name]
+                             [--auth-mode {key, login}]
+                             [--connection-string]
+                             [--if-match]
+                             [--if-modified-since]
+                             [--if-none-match]
+                             [--if-unmodified-since]
+                             [--lease-id]
+                             [--metadata]
+                             [--sas-token]
+                             [--timeout]
+  requiredParameters:
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama blob.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya cocok dengan nilai yang ditentukan.
+    description: ''
+  - name: --if-modified-since
+    summary: Dimulai hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya tidak cocok dengan nilai yang ditentukan. Tentukan karakter kartubebas (\*) untuk melakukan operasi hanya jika sumber daya tidak ada, dan gagalkan operasi jika memang ada.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Dimulai hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --lease-id
+    summary: Diperlukan jika blob memiliki sewa aktif.
+    description: ''
+  - name: --metadata
+    summary: Metadata dalam pasangan key=value yang dipisahkan spasi. Ini menimpa metadata yang ada.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_blob_sync
+  name: sinkronisasi blob penyimpanan az
+  summary: Sinkronkan blob secara rekursif ke kontainer blob penyimpanan.
+  description: ''
+  syntax: >-
+    az storage blob sync --container
+                         --source
+                         [--account-key]
+                         [--account-name]
+                         [--auth-mode {key, login}]
+                         [--connection-string]
+                         [--destination]
+                         [--exclude-path]
+                         [--exclude-pattern]
+                         [--include-pattern]
+                         [--sas-token]
+  examples:
+  - summary: Sinkronkan satu blob ke kontainer.
+    syntax: az storage blob sync -c mycontainer -s "path/to/file" -d NewBlob
+  - summary: Menyinkronkan direktori ke kontainer.
+    syntax: az storage blob sync -c mycontainer --account-name mystorageccount --account-key 00000000 -s "path/to/directory"
+  requiredParameters:
+  - isRequired: true
+    name: --container -c
+    summary: Kontainer tujuan sinkronisasi.
+    description: ''
+  - isRequired: true
+    name: --source -s
+    summary: Jalur file sumber untuk disinkronkan.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --destination -d
+    summary: Jalur tujuan yang akan ditambahkan ke nama blob.
+    description: ''
+  - name: --exclude-path
+    summary: 'Kecualikan jalur ini. Opsi ini tidak mendukung karakter kartubebas (\*). Memeriksa awalan jalur relatif. Misalnya: myFolder;myFolder/subDirName/file.pdf.'
+    description: ''
+  - name: --exclude-pattern
+    summary: 'Kecualikan file-file ini di mana nama cocok dengan daftar pola. Misalnya: \*.jpg;\*.pdf;exactName. Opsi ini mendukung karakter kartubebas (\*).'
+    description: ''
+  - name: --include-pattern
+    summary: 'Sertakan hanya file-file ini di mana nama cocok dengan daftar pola. Misalnya: \*.jpg;\*.pdf;exactName. Opsi ini mendukung karakter kartubebas (\*).'
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_blob_undelete
+  name: az storage blob undelete
+  summary: Operasi batal hapus Blob memulihkan konten dan metadata blob atau rekam jepret yang dihapus sementara.
+  description: Mencoba membatalkan penghapusan blob atau rekam jepret yang tidak dihapus sementara akan berhasil tanpa perubahan apa pun.
+  syntax: >-
+    az storage blob undelete --container-name
+                             --name
+                             [--account-key]
+                             [--account-name]
+                             [--auth-mode {key, login}]
+                             [--connection-string]
+                             [--sas-token]
+                             [--timeout]
+  requiredParameters:
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama blob.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_blob_update
+  name: az storage blob update
+  summary: Mengatur properti sistem pada blob.
+  description: Jika satu properti diatur untuk content_settings, semua properti akan ditimpa.
+  syntax: >-
+    az storage blob update --container-name
+                           --name
+                           [--account-key]
+                           [--account-name]
+                           [--auth-mode {key, login}]
+                           [--clear-content-settings {false, true}]
+                           [--connection-string]
+                           [--content-cache]
+                           [--content-disposition]
+                           [--content-encoding]
+                           [--content-language]
+                           [--content-md5]
+                           [--content-type]
+                           [--if-match]
+                           [--if-modified-since]
+                           [--if-none-match]
+                           [--if-unmodified-since]
+                           [--lease-id]
+                           [--sas-token]
+                           [--timeout]
+  requiredParameters:
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama blob.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --clear-content-settings
+    parameterValueGroup: false, true
+    summary: Jika bendera ini diatur, maka jika ada satu atau beberapa properti berikut (--content-cache-control, --content-disposition, --content-encoding, --content-language, --content-md5, --content-type) diatur, maka semua properti ini diatur bersama-sama. Jika nilai tidak disediakan untuk properti tertentu ketika setidaknya salah satu properti yang tercantum di bawah ini diatur, maka properti tersebut akan dibersihkan.
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --content-cache --content-cache-control
+    summary: String kontrol cache.
+    description: ''
+  - name: --content-disposition
+    summary: Menyampaikan informasi tambahan tentang cara memproses payload respons, dan juga dapat digunakan untuk melampirkan metadata tambahan.
+    description: ''
+  - name: --content-encoding
+    summary: Jenis pengodean konten.
+    description: ''
+  - name: --content-language
+    summary: Bahasa konten.
+    description: ''
+  - name: --content-md5
+    summary: Hash MD5 konten.
+    description: ''
+  - name: --content-type
+    summary: Jenis MIME konten.
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya cocok dengan nilai yang ditentukan.
+    description: ''
+  - name: --if-modified-since
+    summary: Dimulai hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya tidak cocok dengan nilai yang ditentukan. Tentukan karakter kartubebas (\*) untuk melakukan operasi hanya jika sumber daya tidak ada, dan gagalkan operasi jika memang ada.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Dimulai hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --lease-id
+    summary: Diperlukan jika blob memiliki sewa aktif.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_blob_upload
+  name: unggah blob penyimpanan az
+  summary: Upload file ke blob penyimpanan.
+  description: Buat blob baru dari jalur file, atau perbarui konten blob yang ada dengan pemberitahuan penggugusan dan kemajuan otomatis.
+  syntax: >-
+    az storage blob upload --container-name
+                           --file
+                           --name
+                           [--account-key]
+                           [--account-name]
+                           [--auth-mode {key, login}]
+                           [--connection-string]
+                           [--content-cache]
+                           [--content-disposition]
+                           [--content-encoding]
+                           [--content-language]
+                           [--content-md5]
+                           [--content-type]
+                           [--encryption-scope]
+                           [--if-match]
+                           [--if-modified-since]
+                           [--if-none-match]
+                           [--if-unmodified-since]
+                           [--lease-id]
+                           [--max-connections]
+                           [--maxsize-condition]
+                           [--metadata]
+                           [--no-progress]
+                           [--sas-token]
+                           [--socket-timeout]
+                           [--tier {P10, P20, P30, P4, P40, P50, P6, P60}]
+                           [--timeout]
+                           [--type {append, block, page}]
+                           [--validate-content]
+  examples:
+  - summary: Upload ke blob.
+    syntax: az storage blob upload -f /path/to/file -c mycontainer -n MyBlob
+  - summary: Upload ke blob dengan url sas blob.
+    syntax: az storage blob upload -f /path/to/file --blob-url https://mystorageaccount.blob.core.windows.net/mycontainer/myblob?sv=2019-02-02&st=2020-12-22T07%3A07%3A29Z&se=2020-12-23T07%3A07%3A29Z&sr=b&sp=racw&sig=redacted
+  - summary: Upload file ke blob penyimpanan. (dibuat otomatis)
+    syntax: az storage blob upload --account-name mystorageaccount --account-key 0000-0000 --container-name mycontainer --file /path/to/file --name myblob
+  - summary: Upload string ke blob.
+    syntax: az storage blob upload --data "teststring" -c mycontainer -n myblob --account-name mystorageaccount --account-key 0000-0000
+  - summary: Upload ke pipa.
+    syntax: echo $data | az storage blob upload --data @- -c mycontainer -n myblob --account-name mystorageaccount --account-key 0000-0000
+  requiredParameters:
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --file -f
+    summary: Jalur file untuk diunggah sebagai konten blob.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama blob.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --content-cache --content-cache-control
+    summary: String kontrol cache.
+    description: ''
+  - name: --content-disposition
+    summary: Menyampaikan informasi tambahan tentang cara memproses payload respons, dan juga dapat digunakan untuk melampirkan metadata tambahan.
+    description: ''
+  - name: --content-encoding
+    summary: Jenis pengodean konten.
+    description: ''
+  - name: --content-language
+    summary: Bahasa konten.
+    description: ''
+  - name: --content-md5
+    summary: Hash MD5 konten.
+    description: ''
+  - name: --content-type
+    summary: Jenis MIME konten.
+    description: ''
+  - name: --encryption-scope
+    summary: Cakupan enkripsi yang telah ditentukan sebelumnya yang digunakan untuk mengenkripsi data pada layanan.
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya cocok dengan nilai yang ditentukan.
+    description: ''
+  - name: --if-modified-since
+    summary: Dimulai hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya tidak cocok dengan nilai yang ditentukan. Tentukan karakter kartubebas (\*) untuk melakukan operasi hanya jika sumber daya tidak ada, dan gagalkan operasi jika memang ada.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Dimulai hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --lease-id
+    summary: Diperlukan jika blob memiliki sewa aktif.
+    description: ''
+  - name: --max-connections
+    defaultValue: "2"
+    summary: Jumlah maksimum koneksi paralel yang akan digunakan ketika ukuran blob melebihi 64MB.
+    description: ''
+  - name: --maxsize-condition
+    summary: Panjang maksimum dalam byte yang diizinkan untuk blob tambahan.
+    description: ''
+  - name: --metadata
+    summary: Metadata dalam pasangan key=value yang dipisahkan spasi. Ini menimpa metadata yang ada.
+    description: ''
+  - name: --no-progress
+    summary: Sertakan bendera ini untuk menonaktifkan pelaporan kemajuan untuk perintah.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --socket-timeout
+    summary: Batas waktu soket(detik), digunakan oleh layanan untuk mengatur aliran data.
+    description: ''
+  - name: --tier
+    parameterValueGroup: P10, P20, P30, P4, P40, P50, P6, P60
+    summary: ''
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  - name: --type -t
+    parameterValueGroup: append, block, page
+    summary: Default ke 'halaman' untuk \*file .vhd, atau 'blokir' jika tidak.
+    description: ''
+  - name: --validate-content
+    summary: Tentukan bahwa hash MD5 harus dihitung untuk setiap gugus blob dan diverifikasi oleh layanan ketika gugus telah tiba.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_blob_upload-batch
+  name: az storage blob upload-batch
+  summary: Upload file dari direktori lokal ke kontainer blob.
+  description: ''
+  syntax: >-
+    az storage blob upload-batch --destination
+                                 --source
+                                 [--account-key]
+                                 [--account-name]
+                                 [--auth-mode {key, login}]
+                                 [--connection-string]
+                                 [--content-cache]
+                                 [--content-disposition]
+                                 [--content-encoding]
+                                 [--content-language]
+                                 [--content-md5]
+                                 [--content-type]
+                                 [--destination-path]
+                                 [--dryrun]
+                                 [--if-match]
+                                 [--if-modified-since]
+                                 [--if-none-match]
+                                 [--if-unmodified-since]
+                                 [--lease-id]
+                                 [--max-connections]
+                                 [--maxsize-condition]
+                                 [--metadata]
+                                 [--no-progress]
+                                 [--pattern]
+                                 [--sas-token]
+                                 [--socket-timeout]
+                                 [--timeout]
+                                 [--type {append, block, page}]
+                                 [--validate-content]
+  examples:
+  - summary: Upload semua file yang diakhir dengan .py kecuali blob ada dan telah dimodifikasi sejak tanggal yang diberikan.
+    syntax: az storage blob upload-batch -d mycontainer --account-name mystorageaccount --account-key 00000000 -s <path-to-directory> --pattern *.py --if-unmodified-since 2018-08-27T20:51Z
+  - summary: Upload semua file dari direktori jalur lokal ke kontainer bernama "mycontainer".
+    syntax: az storage blob upload-batch -d mycontainer -s <path-to-directory>
+  - summary: Upload semua file dengan format 'cli-2018-xx-xx.txt' atau 'cli-2019-xx-xx.txt' di direktori jalur lokal.
+    syntax: az storage blob upload-batch -d mycontainer -s <path-to-directory> --pattern cli-201[89]-??-??.txt
+  - summary: Upload semua file dengan format 'cli-201x-xx-xx.txt' kecuali cli-2018-xx-xx.txt' dan 'cli-2019-xx-xx.txt' dalam kontainer.
+    syntax: az storage blob upload-batch -d mycontainer -s <path-to-directory> --pattern cli-201[!89]-??-??.txt
+  requiredParameters:
+  - isRequired: true
+    name: --destination -d
+    summary: Kontainer blob tempat file akan diunggah.
+    description: Tujuannya dapat berupa URL kontainer atau nama kontainer. Ketika tujuan adalah URL kontainer, nama akun penyimpanan akan diurai dari URL.
+  - isRequired: true
+    name: --source -s
+    summary: Direktori tempat file yang akan diunggah berada.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --content-cache --content-cache-control
+    summary: String kontrol cache.
+    description: ''
+  - name: --content-disposition
+    summary: Menyampaikan informasi tambahan tentang cara memproses payload respons, dan juga dapat digunakan untuk melampirkan metadata tambahan.
+    description: ''
+  - name: --content-encoding
+    summary: Jenis pengodean konten.
+    description: ''
+  - name: --content-language
+    summary: Bahasa konten.
+    description: ''
+  - name: --content-md5
+    summary: Hash MD5 konten.
+    description: ''
+  - name: --content-type
+    summary: Jenis MIME konten.
+    description: ''
+  - name: --destination-path
+    summary: Jalur tujuan yang akan ditambahkan sebelumnya ke nama blob.
+    description: ''
+  - name: --dryrun
+    summary: Tampilkan ringkasan operasi yang akan diambil alih-alih benar-benar mengunggah file.
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya cocok dengan nilai yang ditentukan.
+    description: ''
+  - name: --if-modified-since
+    summary: Dimulai hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag, atau karakter kartubebas (\*).
+    description: Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya tidak cocok dengan nilai yang ditentukan. Tentukan karakter kartubebas (*) untuk melakukan operasi hanya jika sumber daya tidak ada, dan gagalkan operasi jika memang ada.
+  - name: --if-unmodified-since
+    summary: Dimulai hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --lease-id
+    summary: Id sewa aktif untuk blob.
+    description: ''
+  - name: --max-connections
+    defaultValue: "2"
+    summary: Jumlah maksimum koneksi paralel yang akan digunakan ketika ukuran blob melebihi 64MB.
+    description: ''
+  - name: --maxsize-condition
+    summary: Panjang maksimum dalam byte yang diizinkan untuk blob tambahan.
+    description: ''
+  - name: --metadata
+    summary: Metadata dalam pasangan key=value yang dipisahkan spasi. Ini menimpa metadata yang ada.
+    description: ''
+  - name: --no-progress
+    summary: Sertakan bendera ini untuk menonaktifkan pelaporan kemajuan untuk perintah.
+    description: ''
+  - name: --pattern
+    summary: Pola yang digunakan untuk globbing file atau blob di sumbernya. Pola yang didukung adalah '\*', '?', '[seq]', dan '[!seq]'. Untuk informasi lebih lanjut, silakan merujuk ke https://docs.python.org/3.7/library/fnmatch.html.
+    description: Ketika Anda menggunakan '*' dalam --pattern, itu akan cocok dengan karakter apa pun termasuk pemisah direktori '/'.
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --socket-timeout
+    summary: Batas waktu soket(detik), digunakan oleh layanan untuk mengatur aliran data.
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  - name: --type -t
+    parameterValueGroup: append, block, page
+    summary: Default ke 'halaman' untuk \*file .vhd, atau 'blokir' sebaliknya. Pengaturan akan mengambil alih jenis blob untuk setiap file.
+    description: ''
+  - name: --validate-content
+    summary: Menentukan bahwa hash MD5 harus dihitung untuk setiap gugus blob dan diverifikasi oleh layanan ketika gugus telah tiba.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_blob_url
+  name: url blob penyimpanan az
+  summary: Buat url untuk mengakses blob.
+  description: ''
+  syntax: >-
+    az storage blob url --container-name
+                        --name
+                        [--account-key]
+                        [--account-name]
+                        [--auth-mode {key, login}]
+                        [--connection-string]
+                        [--protocol {http, https}]
+                        [--sas-token]
+                        [--snapshot]
+  examples:
+  - summary: Membuat url untuk mengakses blob (dibuat secara otomatis)
+    syntax: az storage blob url --connection-string $connectionString --container-name container1 --name blob1
+  - summary: Membuat url untuk mengakses blob (dibuat secara otomatis)
+    syntax: az storage blob url --account-name storageacct --account-key 00000000 --container-name container1 --name blob1
+  requiredParameters:
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama blob.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --protocol
+    defaultValue: https
+    parameterValueGroup: http, https
+    summary: Protokol yang akan digunakan.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --snapshot
+    summary: Nilai string yang secara unik mengidentifikasi rekam jepret. Nilai parameter kueri ini menunjukkan versi rekam jepret.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+commands:
+- az_storage_blob_access
+- az_storage_blob_access_set
+- az_storage_blob_access_show
+- az_storage_blob_access_update
+- az_storage_blob_copy
+- az_storage_blob_copy_cancel
+- az_storage_blob_copy_start
+- az_storage_blob_copy_start-batch
+- az_storage_blob_delete
+- az_storage_blob_delete-batch
+- az_storage_blob_directory
+- az_storage_blob_directory_access
+- az_storage_blob_directory_access_set
+- az_storage_blob_directory_access_show
+- az_storage_blob_directory_access_update
+- az_storage_blob_directory_create
+- az_storage_blob_directory_delete
+- az_storage_blob_directory_download
+- az_storage_blob_directory_exists
+- az_storage_blob_directory_list
+- az_storage_blob_directory_metadata
+- az_storage_blob_directory_metadata_show
+- az_storage_blob_directory_metadata_update
+- az_storage_blob_directory_move
+- az_storage_blob_directory_show
+- az_storage_blob_directory_upload
+- az_storage_blob_download
+- az_storage_blob_download-batch
+- az_storage_blob_exists
+- az_storage_blob_filter
+- az_storage_blob_generate-sas
+- az_storage_blob_immutability-policy
+- az_storage_blob_immutability-policy_delete
+- az_storage_blob_immutability-policy_set
+- az_storage_blob_incremental-copy
+- az_storage_blob_incremental-copy_cancel
+- az_storage_blob_incremental-copy_start
+- az_storage_blob_lease
+- az_storage_blob_lease_acquire
+- az_storage_blob_lease_break
+- az_storage_blob_lease_change
+- az_storage_blob_lease_release
+- az_storage_blob_lease_renew
+- az_storage_blob_list
+- az_storage_blob_metadata
+- az_storage_blob_metadata_show
+- az_storage_blob_metadata_update
+- az_storage_blob_move
+- az_storage_blob_restore
+- az_storage_blob_service-properties
+- az_storage_blob_service-properties_delete-policy
+- az_storage_blob_service-properties_delete-policy_show
+- az_storage_blob_service-properties_delete-policy_update
+- az_storage_blob_service-properties_show
+- az_storage_blob_service-properties_update
+- az_storage_blob_set-legal-hold
+- az_storage_blob_set-tier
+- az_storage_blob_show
+- az_storage_blob_snapshot
+- az_storage_blob_sync
+- az_storage_blob_tag
+- az_storage_blob_tag_list
+- az_storage_blob_tag_set
+- az_storage_blob_undelete
+- az_storage_blob_update
+- az_storage_blob_upload
+- az_storage_blob_upload-batch
+- az_storage_blob_url
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/29/2022
+  description: 'Tentukan salah satu parameter autentikasi berikut untuk perintah Anda: --auth-mode, --account-key, --connection-string, --sas-token. Anda juga dapat menggunakan variabel lingkungan yang sesuai untuk menyimpan kredensial autentikasi Anda, misalnya AZURE_STORAGE_KEY, AZURE_STORAGE_CONNECTION_STRING, dan AZURE_STORAGE_SAS_TOKEN.'
+  ms.openlocfilehash: 4ee75500ddd3ea997fa17c8492c1057b0dc72b7c
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141424727"

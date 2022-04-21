@@ -1,0 +1,477 @@
+### YamlMime:AzureCLIGroup
+uid: az_iot_hub_device-identity
+name: az iot hub device-identity
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **azure-iot** untuk Azure CLI (versi 2.24.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **az iot hub device-identity** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola perangkat IoT.
+description: ''
+directCommands:
+- uid: az_iot_hub_device-identity_create
+  name: az iot hub device-identity create
+  summary: Membuat perangkat dalam IoT Hub.
+  description: >-
+    Saat menggunakan metode autentikasi shared_private_key (juga dikenal sebagai kunci konten), jika tidak ada kunci kustom yang disediakan, layanan akan menghasilkannya untuk perangkat.
+
+
+    Jika cakupan perangkat disediakan untuk perangkat edge, nilai akan secara otomatis dikonversi ke cakupan induk.
+  syntax: >-
+    az iot hub device-identity create --device-id
+                                      [--am {shared_private_key, x509_ca, x509_thumbprint}]
+                                      [--auth-type {key, login}]
+                                      [--device-scope]
+                                      [--edge-enabled {false, true}]
+                                      [--hub-name]
+                                      [--login]
+                                      [--od]
+                                      [--pk]
+                                      [--primary-thumbprint]
+                                      [--resource-group]
+                                      [--secondary-key]
+                                      [--secondary-thumbprint]
+                                      [--sta {disabled, enabled}]
+                                      [--star]
+                                      [--valid-days]
+  examples:
+  - summary: Buat perangkat IoT berkemampuan edge dengan otorisasi default (kunci privat bersama).
+    syntax: az iot hub device-identity create -n {iothub_name} -d {device_id} --ee
+  - summary: Buat perangkat IoT dengan otorisasi sertifikat yang ditandatangani sendiri, hasilkan sertifikat yang valid selama 10 hari lalu gunakan thumbprint-nya.
+    syntax: az iot hub device-identity create -n {iothub_name} -d {device_id} --am x509_thumbprint --valid-days 10
+  - summary: Buat perangkat IoT dengan otorisasi sertifikat yang ditandatangani sendiri, hasilkan sertifikasi kedaluwarsa default (365 hari) dan output ke direktori target.
+    syntax: az iot hub device-identity create -n {iothub_name} -d {device_id} --am x509_thumbprint --output-dir /path/to/output
+  - summary: Buat perangkat IoT dengan otorisasi sertifikat yang ditandatangani sendiri dan secara eksplisit menyediakan thumbprint primer dan sekunder.
+    syntax: az iot hub device-identity create -n {iothub_name} -d {device_id} --am x509_thumbprint --ptp {thumbprint_1} --stp {thumbprint_2}
+  - summary: Buat perangkat IoT dengan otorisasi OS root dengan status dan alasan yang dinonaktifkan.
+    syntax: az iot hub device-identity create -n {iothub_name} -d {device_id} --am x509_ca --status disabled --status-reason 'for reasons'
+  - summary: Membuat perangkat IoT dengan cakupan perangkat.
+    syntax: az iot hub device-identity create -n {iothub_name} -d {device_id} --device-scope 'ms-azure-iot-edge://edge0-123456789123456789'
+  requiredParameters:
+  - isRequired: true
+    name: --device-id -d
+    summary: Perangkat Target.
+    description: ''
+  optionalParameters:
+  - name: --am --auth-method
+    defaultValue: shared_private_key
+    parameterValueGroup: shared_private_key, x509_ca, x509_thumbprint
+    summary: Metode otorisasi yang akan dibuat entitas.
+    description: ''
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --device-scope
+    summary: Cakupan perangkat. Untuk perangkat edge, ini dibuat secara otomatis dan tidak dapat diubah. Untuk perangkat daun, atur ini untuk membuat hubungan anak/induk.
+    description: ''
+  - name: --edge-enabled --ee
+    parameterValueGroup: false, true
+    summary: Bendera yang menunjukkan pengaktifan tepi.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string dan nama koneksi entitas disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --od --output-dir
+    summary: Hasilkan sertifikasi yang ditandatangani sendiri dan gunakan thumbprint-nya. Output ke direktori target yang ditentukan.
+    description: ''
+  - name: --pk --primary-key
+    summary: Kunci akses bersama simetris utama yang disimpan dalam format base64.
+    description: ''
+  - name: --primary-thumbprint --ptp
+    summary: Thumbprint sertifikat yang ditandatangani sendiri untuk digunakan untuk thumbprint utama.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --secondary-key --sk
+    summary: Kunci akses bersama simetris sekunder yang disimpan dalam format base64.
+    description: ''
+  - name: --secondary-thumbprint --stp
+    summary: Thumbprint sertifikat yang ditandatangani sendiri untuk digunakan untuk thumbprint sekunder.
+    description: ''
+  - name: --sta --status
+    defaultValue: enabled
+    parameterValueGroup: disabled, enabled
+    summary: Atur status perangkat saat pembuatan.
+    description: ''
+  - name: --star --status-reason
+    summary: Deskripsi untuk status perangkat.
+    description: ''
+  - name: --valid-days --vd
+    summary: 'Hasilkan sertifikasi yang ditandatangani sendiri dan gunakan thumbprint-nya. Berlaku untuk jumlah hari yang ditentukan. Default: 365.'
+    description: ''
+- uid: az_iot_hub_device-identity_delete
+  name: az iot hub device-identity delete
+  summary: Menghapus perangkat IoT Hub.
+  description: ''
+  syntax: >-
+    az iot hub device-identity delete --device-id
+                                      [--auth-type {key, login}]
+                                      [--etag]
+                                      [--hub-name]
+                                      [--login]
+                                      [--resource-group]
+  requiredParameters:
+  - isRequired: true
+    name: --device-id -d
+    summary: Perangkat Target.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --etag -e
+    summary: Tag Etag atau entitas yang sesuai dengan status terakhir sumber daya. Jika tidak ada etag yang disediakan, nilai '\*' digunakan.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string dan nama koneksi entitas disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_iot_hub_device-identity_export
+  name: az iot hub device-identity export
+  summary: Ekspor semua identitas perangkat dari IoT Hub ke kontainer blob Azure Storage. Untuk input uri SAS kontainer blob sebaris, harap tinjau aturan input lingkungan Anda.
+  description: Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities.
+  syntax: >-
+    az iot hub device-identity export --bcu
+                                      --hub-name
+                                      [--auth-type {identity, key}]
+                                      [--identity]
+                                      [--ik {false, true}]
+                                      [--resource-group]
+  examples:
+  - summary: Ekspor semua identitas perangkat ke kontainer blob yang dikonfigurasi dan sertakan kunci perangkat. Menggunakan contoh uri SAS sebaris.
+    syntax: az iot hub device-identity export -n {iothub_name} --ik --bcu 'https://mystorageaccount.blob.core.windows.net/devices?sv=2019-02-02&st=2020-08-23T22%3A35%3A00Z&se=2020-08-24T22%3A35%3A00Z&sr=c&sp=rwd&sig=VrmJ5sQtW3kLzYg10VqmALGCp4vtYKSLNjZDDJBSh9s%3D'
+  - summary: Ekspor semua identitas perangkat ke kontainer blob yang dikonfigurasi menggunakan jalur file yang berisi uri SAS.
+    syntax: az iot hub device-identity export -n {iothub_name} --bcu {sas_uri_filepath}
+  - summary: Ekspor semua identitas perangkat ke kontainer blob yang dikonfigurasi dan sertakan kunci perangkat. Menggunakan identitas yang ditetapkan sistem yang memiliki peran Kontributor Data Blob Storage untuk akun penyimpanan. Uri kontainer blob tidak memerlukan token SAS blob.
+    syntax: az iot hub device-identity export -n {iothub_name} --ik --bcu 'https://mystorageaccount.blob.core.windows.net/devices' --auth-type identity --identity [system]
+  - summary: Ekspor semua identitas perangkat ke kontainer blob yang dikonfigurasi dan sertakan kunci perangkat. Menggunakan identitas terkelola yang ditetapkan pengguna yang memiliki peran Kontributor Data Blob Storage untuk akun penyimpanan dan kontributor untuk hub IoT. Uri kontainer blob tidak memerlukan token SAS blob.
+    syntax: az iot hub device-identity export -n {iothub_name} --ik --bcu 'https://mystorageaccount.blob.core.windows.net/devices' --auth-type identity --identity {managed_identity_resource_id}
+  requiredParameters:
+  - isRequired: true
+    name: --bcu --blob-container-uri
+    summary: 'URI Tanda Tangan Akses Bersama Blob dengan akses tulis, baca, dan hapus ke kontainer blob. Ini digunakan untuk menghasilkan status pekerjaan dan hasilnya. Catatan: saat menggunakan autentikasi berbasis identitas, URI https:// masih diperlukan - tetapi tidak ada token SAS yang diperlukan. Input untuk argumen ini bisa sebaris atau dari jalur file.'
+    description: ''
+  - isRequired: true
+    name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  optionalParameters:
+  - name: --auth-type --storage-authentication-type
+    parameterValueGroup: identity, key
+    summary: Jenis autentikasi untuk berkomunikasi dengan kontainer penyimpanan.
+    description: ''
+  - name: --identity
+    summary: Jenis identitas terkelola untuk menentukan apakah identitas terkelola yang ditetapkan sistem atau identitas terkelola yang ditetapkan pengguna digunakan. Untuk identitas terkelola yang ditetapkan sistem, gunakan [sistem]. Untuk identitas terkelola yang ditetapkan pengguna, berikan id sumber daya identitas terkelola yang ditetapkan pengguna. Identitas ini memerlukan peran Kontributor Data Blob Storage untuk Akun Storage.
+    description: ''
+  - name: --ik --include-keys
+    parameterValueGroup: false, true
+    summary: Jika diatur, kunci diekspor secara normal. Jika tidak, kunci diatur ke null dalam output ekspor.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_iot_hub_device-identity_import
+  name: az iot hub device-identity import
+  summary: Impor identitas perangkat ke IoT Hub dari blob. Untuk input uri SAS kontainer blob sebaris, harap tinjau aturan input lingkungan Anda.
+  description: Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities.
+  syntax: >-
+    az iot hub device-identity import --hub-name
+                                      --ibcu
+                                      --obcu
+                                      [--auth-type {identity, key}]
+                                      [--identity]
+                                      [--resource-group]
+  examples:
+  - summary: Impor semua identitas perangkat dari blob menggunakan uri SAS sebaris.
+    syntax: az iot hub device-identity import -n {iothub_name} --ibcu {input_sas_uri} --obcu {output_sas_uri}
+  - summary: Impor semua identitas perangkat dari blob menggunakan jalur file yang berisi SAS uri.
+    syntax: az iot hub device-identity import -n {iothub_name} --ibcu {input_sas_uri_filepath} --obcu {output_sas_uri_filepath}
+  - summary: Impor semua identitas perangkat dari blob menggunakan identitas yang ditetapkan sistem yang memiliki peran Kontributor Data Blob Storage untuk kedua akun penyimpanan. Uri kontainer blob tidak memerlukan token SAS blob.
+    syntax: az iot hub device-identity import -n {iothub_name} --ibcu {input_sas_uri} --obcu {output_sas_uri} --auth-type identity --identity [system]
+  - summary: Impor semua identitas perangkat dari blob menggunakan identitas terkelola yang ditetapkan pengguna yang memiliki peran Storage Kontributor Data Blob untuk akun penyimpanan dan kontributor untuk hub IoT. Uri kontainer blob tidak memerlukan token SAS blob.
+    syntax: az iot hub device-identity import -n {iothub_name} --ibcu {input_sas_uri} --obcu {output_sas_uri} --auth-type identity --identity {managed_identity_resource_id}
+  requiredParameters:
+  - isRequired: true
+    name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - isRequired: true
+    name: --ibcu --input-blob-container-uri
+    summary: 'URI Tanda Tangan Akses Bersama Blob dengan akses baca ke kontainer blob. Blob ini berisi operasi yang akan dilakukan pada registri identitas. Catatan: saat menggunakan autentikasi berbasis identitas, URI https:// masih diperlukan - tetapi tidak ada token SAS yang diperlukan. Input untuk argumen ini bisa sebaris atau dari jalur file.'
+    description: ''
+  - isRequired: true
+    name: --obcu --output-blob-container-uri
+    summary: 'URI Tanda Tangan Akses Bersama Blob dengan akses tulis ke kontainer blob. Ini digunakan untuk menghasilkan status pekerjaan dan hasilnya. Catatan: saat menggunakan autentikasi berbasis identitas, URI https:// tanpa token SAS masih diperlukan. Input untuk argumen ini bisa sebaris atau dari jalur file.'
+    description: ''
+  optionalParameters:
+  - name: --auth-type --storage-authentication-type
+    parameterValueGroup: identity, key
+    summary: Jenis autentikasi untuk berkomunikasi dengan kontainer penyimpanan.
+    description: ''
+  - name: --identity
+    summary: Jenis identitas terkelola untuk menentukan apakah identitas terkelola yang ditetapkan sistem atau identitas terkelola yang ditetapkan pengguna digunakan. Untuk identitas terkelola yang ditetapkan sistem, gunakan [sistem]. Untuk identitas terkelola yang ditetapkan pengguna, berikan id sumber daya identitas terkelola yang ditetapkan pengguna. Identitas ini memerlukan peran Kontributor Data Blob Storage untuk peran Akun Storage target dan Kontributor untuk IoT Hub.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_iot_hub_device-identity_list
+  name: az iot hub device-identity list
+  summary: Mencantumkan perangkat dalam IoT Hub.
+  description: ''
+  syntax: >-
+    az iot hub device-identity list [--auth-type {key, login}]
+                                    [--edge-enabled {false, true}]
+                                    [--hub-name]
+                                    [--login]
+                                    [--resource-group]
+                                    [--top]
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --edge-enabled --ee
+    parameterValueGroup: false, true
+    summary: Bendera yang menunjukkan pengaktifan tepi.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --top
+    defaultValue: "1000"
+    summary: Jumlah maksimum elemen yang akan dikembalikan. Gunakan -1 untuk tidak terbatas.
+    description: ''
+- uid: az_iot_hub_device-identity_renew-key
+  name: az iot hub device-identity renew-key
+  summary: Perbarui kunci target perangkat IoT Hub dengan autentikasi sas.
+  description: ''
+  syntax: >-
+    az iot hub device-identity renew-key --device-id
+                                         --hub-name
+                                         --key-type {primary, secondary, swap}
+                                         [--auth-type {key, login}]
+                                         [--etag]
+                                         [--login]
+                                         [--resource-group]
+  examples:
+  - summary: Perbarui kunci primer.
+    syntax: az iot hub device-identity renew-key -d {device_id} -n {iothub_name} --kt primary
+  - summary: Tukar kunci primer dan sekunder.
+    syntax: az iot hub device-identity renew-key -d {device_id} -n {iothub_name} --kt swap
+  requiredParameters:
+  - isRequired: true
+    name: --device-id -d
+    summary: Perangkat Target.
+    description: ''
+  - isRequired: true
+    name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - isRequired: true
+    name: --key-type --kt
+    parameterValueGroup: primary, secondary, swap
+    summary: Jenis kunci target untuk diregenerasi.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --etag -e
+    summary: Tag Etag atau entitas yang sesuai dengan status terakhir sumber daya. Jika tidak ada etag yang disediakan, nilai '\*' digunakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_iot_hub_device-identity_show
+  name: az iot hub device-identity show
+  summary: Dapatkan detail perangkat IoT Hub.
+  description: ''
+  syntax: >-
+    az iot hub device-identity show --device-id
+                                    [--auth-type {key, login}]
+                                    [--hub-name]
+                                    [--login]
+                                    [--resource-group]
+  requiredParameters:
+  - isRequired: true
+    name: --device-id -d
+    summary: Perangkat Target.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_iot_hub_device-identity_update
+  name: az iot hub device-identity update
+  summary: Memperbarui perangkat IoT Hub.
+  description: Gunakan --set diikuti oleh penetapan properti untuk memperbarui perangkat. Manfaatkan parameter yang dikembalikan dari 'iot hub device-identity show'.
+  syntax: >-
+    az iot hub device-identity update --device-id
+                                      [--add]
+                                      [--am {shared_private_key, x509_ca, x509_thumbprint}]
+                                      [--auth-type {key, login}]
+                                      [--edge-enabled {false, true}]
+                                      [--etag]
+                                      [--force-string]
+                                      [--hub-name]
+                                      [--login]
+                                      [--pk]
+                                      [--primary-thumbprint]
+                                      [--remove]
+                                      [--resource-group]
+                                      [--secondary-key]
+                                      [--secondary-thumbprint]
+                                      [--set]
+                                      [--sta {disabled, enabled}]
+                                      [--star]
+  examples:
+  - summary: Mengaktifkan kapabilitas edge untuk perangkat
+    syntax: az iot hub device-identity update -d {device_id} -n {iothub_name} --set capabilities.iotEdge=true
+  - summary: Aktifkan kemampuan edge untuk perangkat menggunakan argumen kenyamanan.
+    syntax: az iot hub device-identity update -d {device_id} -n {iothub_name} --ee
+  - summary: Menonaktifkan status perangkat
+    syntax: az iot hub device-identity update -d {device_id} -n {iothub_name} --set status=disabled
+  - summary: Nonaktifkan status perangkat menggunakan argumen kenyamanan.
+    syntax: az iot hub device-identity update -d {device_id} -n {iothub_name} --status disabled
+  - summary: Dalam satu perintah
+    syntax: az iot hub device-identity update -d {device_id} -n {iothub_name} --set status=disabled capabilities.iotEdge=true
+  requiredParameters:
+  - isRequired: true
+    name: --device-id -d
+    summary: Perangkat Target.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --am --auth-method
+    parameterValueGroup: shared_private_key, x509_ca, x509_thumbprint
+    summary: Metode otorisasi yang akan dibuat entitas.
+    description: ''
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --edge-enabled --ee
+    parameterValueGroup: false, true
+    summary: Bendera yang menunjukkan pengaktifan tepi.
+    description: ''
+  - name: --etag -e
+    summary: Tag Etag atau entitas yang sesuai dengan status terakhir sumber daya. Jika tidak ada etag yang disediakan, nilai '\*' digunakan.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --pk --primary-key
+    summary: Kunci akses bersama simetris utama yang disimpan dalam format base64.
+    description: ''
+  - name: --primary-thumbprint --ptp
+    summary: Thumbprint sertifikat yang ditandatangani sendiri untuk digunakan untuk thumbprint utama.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --secondary-key --sk
+    summary: Kunci akses bersama simetris sekunder yang disimpan dalam format base64.
+    description: ''
+  - name: --secondary-thumbprint --stp
+    summary: Thumbprint sertifikat yang ditandatangani sendiri untuk digunakan untuk thumbprint sekunder.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --sta --status
+    parameterValueGroup: disabled, enabled
+    summary: Atur status perangkat saat pembuatan.
+    description: ''
+  - name: --star --status-reason
+    summary: Deskripsi untuk status perangkat.
+    description: ''
+commands:
+- az_iot_hub_device-identity_children
+- az_iot_hub_device-identity_children_add
+- az_iot_hub_device-identity_children_list
+- az_iot_hub_device-identity_children_remove
+- az_iot_hub_device-identity_connection-string
+- az_iot_hub_device-identity_connection-string_show
+- az_iot_hub_device-identity_create
+- az_iot_hub_device-identity_delete
+- az_iot_hub_device-identity_export
+- az_iot_hub_device-identity_import
+- az_iot_hub_device-identity_list
+- az_iot_hub_device-identity_parent
+- az_iot_hub_device-identity_parent_set
+- az_iot_hub_device-identity_parent_show
+- az_iot_hub_device-identity_renew-key
+- az_iot_hub_device-identity_show
+- az_iot_hub_device-identity_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola perangkat IoT.
+  ms.openlocfilehash: 069c3d8b590cb68b71d81e7e30bae191af0bbd15
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141110425"

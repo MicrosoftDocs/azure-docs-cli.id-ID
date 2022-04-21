@@ -1,0 +1,125 @@
+### YamlMime:AzureCLIGroup
+uid: az_alias
+name: az alias
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **alias** untuk Azure CLI (versi 2.0.31.dev0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **alias az** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola Alias Azure CLI.
+description: ''
+directCommands:
+- uid: az_alias_create
+  name: az alias create
+  summary: Membuat alias.
+  description: ''
+  syntax: >-
+    az alias create --command
+                    --name
+  examples:
+  - summary: Buat perintah alias sederhana.
+    syntax: >-
+      az alias create --name rg --command group
+
+
+      az alias create --name ls --command list
+  - summary: Buat alias kompleks.
+    syntax: az alias create --name list-vm --command 'vm list --resource-group myResourceGroup'
+  - summary: Buat perintah alias dengan argumen.
+    syntax: >-
+      az alias create --name 'list-vm {{ resource_group }}' \
+        --command 'vm list --resource-group {{ resource_group }}'
+  - summary: Memproses argumen menggunakan templat Jinja2.
+    syntax: >-
+      az alias create --name 'storage-ls {{ url }}' \
+        --command 'storage blob list
+          --account-name {{ url.replace("https://", "").split(".")[0] }}
+          --container-name {{ url.replace("https://", "").split("/")[1] }}'
+  requiredParameters:
+  - isRequired: true
+    name: --command -c
+    summary: Perintah yang ditunjukkan alias.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama alias.
+    description: ''
+- uid: az_alias_export
+  name: az alias export
+  summary: Ekspor semua alias terdaftar ke jalur tertentu, sebagai file konfigurasi INI. Jika tidak ada jalur ekspor yang ditentukan, file konfigurasi alias diekspor ke direktori kerja saat ini.
+  description: ''
+  syntax: >-
+    az alias export [--exclude]
+                    [--path]
+  optionalParameters:
+  - name: --exclude -e
+    summary: Alias yang dipisahkan spasi dikecualikan dari ekspor.
+    description: ''
+  - name: --path -p
+    summary: Jalur file konfigurasi alias yang akan diekspor.
+    description: ''
+- uid: az_alias_import
+  name: az alias import
+  summary: Impor alias dari file konfigurasi INI atau URL.
+  description: ''
+  syntax: az alias import --source
+  requiredParameters:
+  - isRequired: true
+    name: --source -s
+    summary: Sumber alias untuk diimpor.
+    description: ''
+- uid: az_alias_list
+  name: az alias list
+  summary: Cantumkan alias terdaftar.
+  description: ''
+  syntax: az alias list
+- uid: az_alias_remove
+  name: az alias remove
+  summary: Hapus satu atau beberapa alias. Alias yang akan dihapus dibatasi spasi.
+  description: ''
+  syntax: az alias remove --name
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Alias yang dipisahkan spasi.
+    description: ''
+- uid: az_alias_remove-all
+  name: az alias remove-all
+  summary: Hapus semua alias terdaftar.
+  description: ''
+  syntax: az alias remove-all [--yes]
+  optionalParameters:
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+commands:
+- az_alias_create
+- az_alias_export
+- az_alias_import
+- az_alias_list
+- az_alias_remove
+- az_alias_remove-all
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola Alias Azure CLI.
+  ms.openlocfilehash: 3dc55811098f3b20a0b4b7c5765cd52729f9b0ba
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141109615"

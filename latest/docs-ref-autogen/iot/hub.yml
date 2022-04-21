@@ -1,0 +1,1020 @@
+### YamlMime:AzureCLIGroup
+uid: az_iot_hub
+name: az iot hub
+summary: Mengelola hub Azure IoT.
+description: ''
+directCommands:
+- uid: az_iot_hub_create
+  name: az iot hub create
+  summary: Membuat hub Azure IoT.
+  description: Untuk pengenalan Azure IoT Hub, lihat https://docs.microsoft.com/azure/iot-hub/.
+  syntax: >-
+    az iot hub create --name
+                      --resource-group
+                      [--c2d-max-delivery-count]
+                      [--c2d-ttl]
+                      [--dds {false, true}]
+                      [--disable-local-auth {false, true}]
+                      [--disable-module-sas {false, true}]
+                      [--edr {false, true}]
+                      [--fc]
+                      [--fcs]
+                      [--fcu]
+                      [--fd]
+                      [--feedback-lock-duration]
+                      [--feedback-ttl]
+                      [--fileupload-notification-lock-duration]
+                      [--fileupload-notification-max-delivery-count]
+                      [--fileupload-notification-ttl]
+                      [--fileupload-notifications {false, true}]
+                      [--fileupload-sas-ttl]
+                      [--fileupload-storage-auth-type {identityBased, keyBased}]
+                      [--fileupload-storage-identity]
+                      [--location]
+                      [--mi-system-assigned {false, true}]
+                      [--mi-user-assigned]
+                      [--min-tls-version]
+                      [--partition-count]
+                      [--rd]
+                      [--role]
+                      [--scopes]
+                      [--sku {B1, B2, B3, F1, S1, S2, S3}]
+                      [--tags]
+                      [--unit]
+  examples:
+  - summary: Buat IoT Hub dengan tingkat harga gratis F1, di wilayah grup sumber daya.
+    syntax: az iot hub create --resource-group MyResourceGroup --name MyIotHub --sku F1 --partition-count 2
+  - summary: Buat IoT Hub dengan tingkat harga standar partisi S1 dan 4, di wilayah 'westus', dengan tag.
+    syntax: az iot hub create --resource-group MyResourceGroup --name MyIotHub --location westus --tags a=b c=d
+  - summary: Buat IoT Hub dengan identitas terkelola yang ditetapkan sistem, dan tetapkan peran dan cakupan ke akun penyimpanan untuk identitas yang dibuat.
+    syntax: az iot hub create --resource-group MyResourceGroup --name MyIotHub --location westus --mi-system-assigned --role "Storage Blob Data Contributor" --scopes {resourceId}
+  - summary: Buat IoT Hub dengan autentikasi lokal, kunci SAS perangkat, dan kunci SAS modul semuanya dinonaktifkan
+    syntax: az iot hub create --resource-group MyResourceGroup --name MyIotHub --location westus --disable-local-auth --disable-device-sas --disable-module-sas
+  - summary: Buat IoT Hub dengan residensi data diberlakukan. Ini akan menonaktifkan pemulihan bencana lintas wilayah.
+    syntax: az iot hub create --resource-group MyResourceGroup --name MyIoTHub --edr
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: nama IoT Hub.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --c2d-max-delivery-count --cdd
+    defaultValue: "10"
+    summary: Berapa kali hub IoT akan mencoba mengirimkan pesan cloud-ke-perangkat ke perangkat, antara 1 dan 100.
+    description: ''
+  - name: --c2d-ttl --ct
+    defaultValue: "1"
+    summary: Jumlah waktu pesan tersedia untuk dikonsumsi perangkat sebelum kedaluwarsa oleh IoT Hub, antara 1 dan 48 jam.
+    description: ''
+  - name: --dds --disable-device-sas
+    parameterValueGroup: false, true
+    summary: Boolean yang menunjukkan apakah akan menonaktifkan semua perangkat (termasuk perangkat Edge atau tidak, tetapi tidak termasuk modul) kunci SAS tercakup untuk autentikasi.
+    description: ''
+  - name: --disable-local-auth --dla
+    parameterValueGroup: false, true
+    summary: Boolean yang menunjukkan apakah akan menonaktifkan kunci SAS tercakup IoT hub untuk autentikasi atau tidak.
+    description: ''
+  - name: --disable-module-sas --dms
+    parameterValueGroup: false, true
+    summary: Boolean yang menunjukkan apakah akan menonaktifkan kunci SAS cakupan modul untuk autentikasi atau tidak.
+    description: ''
+  - name: --edr --enforce-data-residency
+    parameterValueGroup: false, true
+    summary: Berlakukan residensi data untuk IoT Hub ini dengan menonaktifkan pemulihan bencana lintas wilayah. Properti ini tidak dapat diubah setelah diatur pada sumber daya. Hanya tersedia di wilayah tertentu. Pelajari lebih lanjut di https://aka.ms/iothubdisabledr.
+    description: ''
+  - name: --fc --fileupload-storage-container-name
+    summary: Nama kontainer akar tempat Anda mengunggah file. Kontainer tidak perlu ada tetapi harus dapat dikremasi menggunakan connectionString yang ditentukan.
+    description: ''
+  - name: --fcs --fileupload-storage-connectionstring
+    summary: String koneksi untuk akun Azure Storage tempat file diunggah.
+    description: ''
+  - name: --fcu --fileupload-storage-container-uri
+    summary: URI kontainer untuk akun Azure Storage tempat file diunggah.
+    description: ''
+  - name: --fd --feedback-max-delivery-count
+    defaultValue: "10"
+    summary: Frekuensi hub IoT mencoba mengirimkan pesan pada antrean umpan balik, antara 1 dan 100.
+    description: ''
+  - name: --feedback-lock-duration --fld
+    defaultValue: "5"
+    summary: Durasi kunci untuk antrean umpan balik, antara 5 dan 300 detik.
+    description: ''
+  - name: --feedback-ttl --ft
+    defaultValue: "1"
+    summary: Periode waktu di mana hub IoT akan mempertahankan umpan balik untuk kedaluwarsa atau pengiriman pesan cloud-ke-perangkat, antara 1 dan 48 jam.
+    description: ''
+  - name: --fileupload-notification-lock-duration --fnld
+    defaultValue: "5"
+    summary: Durasi kunci untuk antrean pemberitahuan unggahan file, antara 5 dan 300 detik.
+    description: ''
+  - name: --fileupload-notification-max-delivery-count --fnd
+    defaultValue: "10"
+    summary: Berapa kali hub IoT akan mencoba mengirimkan pesan pemberitahuan file, antara 1 dan 100.
+    description: ''
+  - name: --fileupload-notification-ttl --fnt
+    defaultValue: "1"
+    summary: Jumlah waktu pemberitahuan pengunggahan file tersedia untuk digunakan layanan sebelum kedaluwarsa oleh IoT Hub, antara 1 dan 48 jam.
+    description: ''
+  - name: --fileupload-notifications --fn
+    parameterValueGroup: false, true
+    summary: Boolean yang menunjukkan apakah akan mencatat informasi tentang file yang diunggah ke pesan/servicebound/filenotifications IoT Hub titik akhir.
+    description: ''
+  - name: --fileupload-sas-ttl --fst
+    defaultValue: "1"
+    summary: Jumlah waktu URI SAS yang dihasilkan oleh IoT Hub berlaku sebelum kedaluwarsa, antara 1 dan 24 jam.
+    description: ''
+  - name: --fileupload-storage-auth-type --fsa
+    parameterValueGroup: identityBased, keyBased
+    summary: Jenis autentikasi untuk akun Azure Storage tempat file diunggah.
+    description: ''
+  - name: --fileupload-storage-identity --fsi
+    summary: Identitas terkelola yang digunakan untuk autentikasi unggahan file. Gunakan '[system]' untuk merujuk ke identitas terkelola yang ditetapkan sistem atau ID sumber daya untuk merujuk ke identitas terkelola yang ditetapkan pengguna.
+    description: ''
+  - name: --location -l
+    summary: Lokasi IoT Hub Anda. Default adalah lokasi grup sumber daya target.
+    description: ''
+  - name: --mi-system-assigned
+    parameterValueGroup: false, true
+    summary: Aktifkan identitas terkelola yang ditetapkan sistem untuk hub ini.
+    description: ''
+  - name: --mi-user-assigned
+    summary: Aktifkan identitas terkelola yang ditetapkan pengguna untuk hub ini. Terima daftar ID sumber daya identitas yang dipisahkan ruang.
+    description: ''
+  - name: --min-tls-version --mintls
+    summary: Tentukan versi TLS minimum yang akan didukung untuk hub ini. Dapat diatur ke "1.2" agar klien yang menggunakan versi TLS di bawah 1.2 untuk ditolak.
+    description: ''
+  - name: --partition-count
+    defaultValue: "4"
+    summary: Jumlah partisi Pusat Aktivitas yang mendukung pesan perangkat-ke-cloud.
+    description: ''
+  - name: --rd --retention-day
+    defaultValue: "1"
+    summary: Menentukan berapa lama hub IoT ini akan mempertahankan peristiwa perangkat ke cloud, antara 1 dan 7 hari.
+    description: ''
+  - name: --role
+    summary: Peran untuk ditetapkan ke identitas terkelola yang ditetapkan sistem hub.
+    description: ''
+  - name: --scopes
+    summary: Daftar cakupan yang dipisahkan spasi untuk menetapkan peran (--peran) untuk identitas terkelola yang ditetapkan sistem.
+    description: ''
+  - name: --sku
+    defaultValue: S1
+    parameterValueGroup: B1, B2, B3, F1, S1, S2, S3
+    summary: Tingkat harga untuk Azure IoT Hub. Perhatikan bahwa hanya satu instans hub IoT gratis (F1) yang diizinkan di setiap langganan. Pengecualian akan dilemparkan jika instans gratis melebihi satu instans.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --unit
+    defaultValue: "1"
+    summary: Unit di IoT Hub Anda.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_hub_delete
+  name: az iot hub delete
+  summary: Menghapus hub IoT.
+  description: ''
+  syntax: >-
+    az iot hub delete [--ids]
+                      [--name]
+                      [--resource-group]
+  examples:
+  - summary: Menghapus hub IoT. (dibuat otomatis)
+    syntax: az iot hub delete --name MyIoTHub --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: nama IoT Hub.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_hub_generate-sas-token
+  name: az iot hub generate-sas-token
+  summary: Buat token SAS untuk IoT Hub target, perangkat, atau modul.
+  description: Untuk token SAS perangkat, parameter kebijakan digunakan untuk mengakses registri perangkat saja. Oleh karena itu kebijakan harus memiliki akses baca ke registri. Untuk token IoT Hub, kebijakan adalah bagian dari SAS.
+  syntax: >-
+    az iot hub generate-sas-token [--auth-type {key, login}]
+                                  [--connection-string]
+                                  [--device-id]
+                                  [--du]
+                                  [--hub-name]
+                                  [--key-type {primary, secondary}]
+                                  [--login]
+                                  [--module-id]
+                                  [--pn]
+                                  [--resource-group]
+  examples:
+  - summary: Buat token SAS IoT Hub menggunakan kebijakan iothubowner dan kunci primer.
+    syntax: az iot hub generate-sas-token -n {iothub_name}
+  - summary: Hasilkan token SAS IoT Hub menggunakan kebijakan registriRead dan kunci sekunder.
+    syntax: az iot hub generate-sas-token -n {iothub_name} --policy registryRead --key-type secondary
+  - summary: Buat token SAS perangkat menggunakan kebijakan iothubowner untuk mengakses registri perangkat {iothub_name}.
+    syntax: az iot hub generate-sas-token -d {device_id} -n {iothub_name}
+  - summary: Membuat token SAS perangkat menggunakan string koneksi IoT Hub (dengan akses registri)
+    syntax: az iot hub generate-sas-token -d {device_id} --login 'HostName=myhub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=12345'
+  - summary: Membuat token SAS Iot Hub menggunakan string koneksi IoT Hub
+    syntax: az iot hub generate-sas-token --connection-string 'HostName=myhub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=12345'
+  - summary: Membuat token SAS Perangkat menggunakan string koneksi Perangkat
+    syntax: az iot hub generate-sas-token --connection-string 'HostName=myhub.azure-devices.net;DeviceId=mydevice;SharedAccessKeyName=iothubowner;SharedAccessKey=12345'
+  - summary: Membuat token MODUL SAS menggunakan string koneksi Modul
+    syntax: az iot hub generate-sas-token --connection-string 'HostName=myhub.azure-devices.net;DeviceId=mydevice;ModuleId=mymodule;SharedAccessKeyName=iothubowner;SharedAccessKey=12345'
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --connection-string --cs
+    summary: 'String koneksi target. Ini melewati registri IoT Hub dan menghasilkan token SAS langsung dari kunci simetris yang disediakan tanpa validasi lebih lanjut. Semua parameter perintah lainnya selain dari durasi akan diabaikan. Jenis string koneksi yang didukung: Iot Hub, Perangkat, Modul.'
+    description: ''
+  - name: --device-id -d
+    summary: Perangkat Target.
+    description: ''
+  - name: --du --duration
+    defaultValue: "3600"
+    summary: Durasi token yang valid dalam hitung detik.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --key-type --kt
+    defaultValue: primary
+    parameterValueGroup: primary, secondary
+    summary: Jenis kunci kebijakan akses bersama untuk autentikasi.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --module-id -m
+    summary: Modul Target.
+    description: ''
+  - name: --pn --policy-name
+    defaultValue: iothubowner
+    summary: Kebijakan akses bersama dengan izin operasi untuk entitas IoT Hub target.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_iot_hub_invoke-device-method
+  name: az iot hub invoke-device-method
+  summary: Memanggil metode perangkat.
+  description: ''
+  syntax: >-
+    az iot hub invoke-device-method --device-id
+                                    --method-name
+                                    [--auth-type {key, login}]
+                                    [--hub-name]
+                                    [--login]
+                                    [--method-payload]
+                                    [--resource-group]
+                                    [--timeout]
+  examples:
+  - summary: Panggil metode langsung pada perangkat dari cloud.
+    syntax: az iot hub invoke-device-method --hub-name {iothub_name} --device-id {device_id} --method-name Reboot --method-payload '{"version":"1.0"}'
+  requiredParameters:
+  - isRequired: true
+    name: --device-id -d
+    summary: Perangkat Target.
+    description: ''
+  - isRequired: true
+    name: --method-name --mn
+    summary: Metode target untuk pemanggilan.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --method-payload --mp
+    defaultValue: '{}'
+    summary: Payload Json yang akan diteruskan ke metode . Harus jalur file atau json mentah.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --timeout --to
+    defaultValue: "30"
+    summary: Jumlah detik maksimum untuk menunggu hasil metode perangkat.
+    description: ''
+- uid: az_iot_hub_invoke-module-method
+  name: az iot hub invoke-module-method
+  summary: Panggil metode modul Edge.
+  description: ''
+  syntax: >-
+    az iot hub invoke-module-method --device-id
+                                    --method-name
+                                    --module-id
+                                    [--auth-type {key, login}]
+                                    [--hub-name]
+                                    [--login]
+                                    [--method-payload]
+                                    [--resource-group]
+                                    [--timeout]
+  examples:
+  - summary: Panggil metode langsung pada perangkat edge menggunakan modul dari cloud.
+    syntax: "az iot hub invoke-module-method -n {iothub_name} -d {device_id} -m '$edgeAgent' --method-name 'RestartModule' --method-payload '{\"schemaVersion\": \"1.0\"}'"
+  requiredParameters:
+  - isRequired: true
+    name: --device-id -d
+    summary: Perangkat Target.
+    description: ''
+  - isRequired: true
+    name: --method-name --mn
+    summary: Metode target untuk pemanggilan.
+    description: ''
+  - isRequired: true
+    name: --module-id -m
+    summary: Modul Target.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --method-payload --mp
+    defaultValue: '{}'
+    summary: Payload Json yang akan diteruskan ke metode . Harus jalur file atau json mentah.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --timeout --to
+    defaultValue: "30"
+    summary: Jumlah detik maksimum untuk menunggu hasil metode perangkat.
+    description: ''
+- uid: az_iot_hub_list
+  name: az iot hub list
+  summary: Mencantumkan hub IoT.
+  description: ''
+  syntax: az iot hub list [--resource-group]
+  examples:
+  - summary: Mencantumkan semua hub IoT dalam langganan.
+    syntax: az iot hub list
+  - summary: Mencantumkan semua hub IoT di grup sumber daya 'MyGroup'
+    syntax: az iot hub list --resource-group MyGroup
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_hub_list-skus
+  name: az iot hub list-skus
+  summary: Mencantumkan tingkat harga yang tersedia.
+  description: ''
+  syntax: >-
+    az iot hub list-skus [--ids]
+                         [--name]
+                         [--resource-group]
+  examples:
+  - summary: Mencantumkan tingkat harga yang tersedia. (dibuat otomatis)
+    syntax: az iot hub list-skus --name MyIoTHub
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: nama IoT Hub.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_hub_manual-failover
+  name: az iot hub manual-failover
+  summary: Memulai failover manual untuk IoT Hub ke wilayah pemulihan bencana yang dipasangkan secara geografis.
+  description: ''
+  syntax: >-
+    az iot hub manual-failover [--ids]
+                               [--name]
+                               [--no-wait]
+                               [--resource-group]
+  examples:
+  - summary: Memulai failover "myhub" dari wilayah primer ke sekunder.
+    syntax: az iot hub manual-failover -n myhub
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: nama IoT Hub.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_hub_monitor-events
+  name: az iot hub monitor-events
+  summary: Pantau telemetri perangkat & pesan yang dikirim ke IoT Hub.
+  description: >-
+    EXPERIMENTAL memerlukan Python 3.5+ Perintah ini bergantung pada dan dapat menginstal paket Cython dependen (uamqp) pada eksekusi pertama.
+
+    https://github.com/Azure/azure-uamqp-python.
+  syntax: >-
+    az iot hub monitor-events [--cg]
+                              [--content-type]
+                              [--device-id]
+                              [--device-query]
+                              [--enqueued-time]
+                              [--hub-name]
+                              [--interface]
+                              [--login]
+                              [--module-id]
+                              [--properties {all, anno, app, sys}]
+                              [--repair {false, true}]
+                              [--resource-group]
+                              [--timeout]
+                              [--yes {false, true}]
+  examples:
+  - summary: Penggunaan dasar
+    syntax: az iot hub monitor-events -n {iothub_name}
+  - summary: Penggunaan dasar dengan string koneksi IoT Hub
+    syntax: az iot hub monitor-events -n {iothub_name} --login 'HostName=myhub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=12345'
+  - summary: Penggunaan dasar saat memfilter pada perangkat target
+    syntax: az iot hub monitor-events -n {iothub_name} -d {device_id}
+  - summary: Penggunaan dasar saat memfilter perangkat yang ditargetkan dengan kartubebas di ID
+    syntax: az iot hub monitor-events -n {iothub_name} -d Device*
+  - summary: Memfilter perangkat menggunakan bahasa kueri IoT Hub
+    syntax: az iot hub monitor-events -n {iothub_name} -q "select * from devices where tags.location.region = 'US'"
+  - summary: Filter perangkat dan tentukan grup konsumen Pusat Aktivitas yang akan diikat.
+    syntax: az iot hub monitor-events -n {iothub_name} -d {device_id} --cg {consumer_group_name}
+  - summary: Menerima anotasi pesan (header pesan)
+    syntax: az iot hub monitor-events -n {iothub_name} -d {device_id} --properties anno
+  - summary: Menerima anotasi pesan + properti sistem. Tidak pernah kehabisan waktu.
+    syntax: az iot hub monitor-events -n {iothub_name} -d {device_id} --properties anno sys --timeout 0
+  - summary: Menerima semua atribut pesan dari semua pesan perangkat
+    syntax: az iot hub monitor-events -n {iothub_name} --props all
+  - summary: Menerima semua pesan dan mengurai payload pesan sebagai JSON
+    syntax: az iot hub monitor-events -n {iothub_name} --content-type application/json
+  optionalParameters:
+  - name: --cg --consumer-group -c
+    defaultValue: $Default
+    summary: Tentukan grup konsumen yang akan digunakan saat menyambungkan ke titik akhir hub peristiwa.
+    description: ''
+  - name: --content-type --ct
+    summary: Tentukan Tipe Konten payload pesan untuk memformat output secara otomatis ke jenis tersebut.
+    description: ''
+  - name: --device-id -d
+    summary: Perangkat Target.
+    description: ''
+  - name: --device-query -q
+    summary: Tentukan kueri kustom untuk memfilter perangkat.
+    description: ''
+  - name: --enqueued-time --et -e
+    summary: Menunjukkan waktu yang harus digunakan sebagai titik awal untuk membaca pesan dari partisi. Unit adalah milidetik sejak zaman unix. Jika tidak ada waktu yang ditunjukkan "sekarang" digunakan.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --interface -i
+    summary: 'Pengidentifikasi antarmuka target untuk difilter. Misalnya: dtmi:com:example:TemperatureController;1.'
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --module-id -m
+    summary: Modul Target.
+    description: ''
+  - name: --properties --props -p
+    parameterValueGroup: all, anno, app, sys
+    summary: Menunjukkan properti pesan utama ke output. sys = properti sistem, aplikasi = properti aplikasi, ano = anotasi.
+    description: ''
+  - name: --repair -r
+    parameterValueGroup: false, true
+    summary: 'Instal ulang dependensi uamqp yang kompatibel dengan versi ekstensi. Default: false.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --timeout --to -t
+    defaultValue: "300"
+    summary: Detik maksimum untuk mempertahankan koneksi tanpa menerima pesan. Gunakan 0 untuk tak terbatas.
+    description: ''
+  - name: --yes -y
+    parameterValueGroup: false, true
+    summary: 'Lewati perintah pengguna. Menunjukkan penerimaan penginstalan dependensi (jika diperlukan). Digunakan terutama untuk skenario otomatisasi. Default: false.'
+    description: ''
+- uid: az_iot_hub_monitor-feedback
+  name: az iot hub monitor-feedback
+  summary: Memantau umpan balik yang dikirim oleh perangkat untuk menyetujui pesan cloud-to-device (C2D).
+  description: >-
+    EXPERIMENTAL memerlukan Python 3.4+ Perintah ini bergantung pada dan dapat menginstal paket Cython dependen (uamqp) pada eksekusi pertama.
+
+    https://github.com/Azure/azure-uamqp-python.
+  syntax: >-
+    az iot hub monitor-feedback [--auth-type {key, login}]
+                                [--device-id]
+                                [--hub-name]
+                                [--login]
+                                [--repair {false, true}]
+                                [--resource-group]
+                                [--wait-on-msg]
+                                [--yes {false, true}]
+  examples:
+  - summary: Penggunaan dasar
+    syntax: az iot hub monitor-feedback -n {iothub_name}
+  - summary: Penggunaan dasar dengan string koneksi IoT Hub
+    syntax: az iot hub monitor-feedback -n {iothub_name} --login 'HostName=myhub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=12345'
+  - summary: Penggunaan dasar saat memfilter pada perangkat target
+    syntax: az iot hub monitor-feedback -n {iothub_name} -d {device_id}
+  - summary: Keluar dari monitor umpan balik saat menerima pesan dengan id tertentu (uuid)
+    syntax: az iot hub monitor-feedback -n {iothub_name} -d {device_id} -w {message_id}
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --device-id -d
+    summary: Perangkat Target.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string dan nama koneksi entitas disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --repair -r
+    parameterValueGroup: false, true
+    summary: 'Instal ulang dependensi uamqp yang kompatibel dengan versi ekstensi. Default: false.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --wait-on-msg -w
+    summary: Monitor umpan balik akan memblokir hingga pesan dengan id tertentu (uuid) diterima.
+    description: ''
+  - name: --yes -y
+    parameterValueGroup: false, true
+    summary: 'Lewati perintah pengguna. Menunjukkan penerimaan penginstalan dependensi (jika diperlukan). Digunakan terutama untuk skenario otomatisasi. Default: false.'
+    description: ''
+- uid: az_iot_hub_query
+  name: az iot hub query
+  summary: Buat kueri IoT Hub menggunakan bahasa seperti SQL yang kuat.
+  description: Kueri IoT Hub menggunakan bahasa yang canggih seperti SQL untuk mengambil informasi mengenai perangkat dan modul kembar, pekerjaan, dan perutean pesan. Lihat https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language untuk informasi lebih lanjut.
+  syntax: >-
+    az iot hub query --query-command
+                     [--auth-type {key, login}]
+                     [--hub-name]
+                     [--login]
+                     [--resource-group]
+                     [--top]
+  examples:
+  - summary: Mengkueri semua data kembar perangkat dalam Azure IoT Hub.
+    syntax: az iot hub query -n {iothub_name} -q "select * from devices"
+  - summary: Kueri semua data kembar modul pada perangkat target.
+    syntax: az iot hub query -n {iothub_name} -q "select * from devices.modules where devices.deviceId = '{device_id}'"
+  requiredParameters:
+  - isRequired: true
+    name: --query-command -q
+    summary: Kueri pengguna yang akan dijalankan.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string dan nama koneksi entitas disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --top
+    summary: Jumlah maksimum elemen yang akan dikembalikan. Secara default kueri tidak memiliki batas.
+    description: ''
+- uid: az_iot_hub_show
+  name: az iot hub show
+  summary: Dapatkan detail hub IoT.
+  description: ''
+  syntax: >-
+    az iot hub show [--ids]
+                    [--name]
+                    [--resource-group]
+  examples:
+  - summary: Dapatkan detail hub IoT. (dibuat otomatis)
+    syntax: az iot hub show --name MyIoTHub
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: nama IoT Hub.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_hub_show-connection-string
+  name: az iot hub show-connection-string
+  summary: Tampilkan string koneksi untuk hub IoT.
+  description: ''
+  syntax: >-
+    az iot hub show-connection-string [--all]
+                                      [--hub-name]
+                                      [--ids]
+                                      [--key {primary, secondary}]
+                                      [--policy-name]
+                                      [--resource-group]
+  examples:
+  - summary: Tampilkan string koneksi hub IoT menggunakan kebijakan default dan kunci primer.
+    syntax: az iot hub show-connection-string --name MyIotHub
+  - summary: Tampilkan string koneksi IoT Hub menggunakan kebijakan 'layanan' dan kunci sekunder.
+    syntax: az iot hub show-connection-string --name MyIotHub --policy-name service --key secondary
+  - summary: Tampilkan string koneksi untuk semua hub IoT dalam grup sumber daya.
+    syntax: az iot hub show-connection-string --resource-group MyResourceGroup
+  - summary: Tampilkan string koneksi untuk semua hub IoT dalam langganan.
+    syntax: az iot hub show-connection-string
+  - summary: Tampilkan string koneksi untuk hub IoT. (dibuat otomatis)
+    syntax: az iot hub show-connection-string --key primary --policy-name MyPolicy
+  optionalParameters:
+  - name: --all
+    summary: Izinkan untuk menampilkan semua kebijakan akses bersama.
+    description: ''
+  - name: --hub-name --name -n
+    summary: nama IoT Hub.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --key
+    defaultValue: primary
+    parameterValueGroup: primary, secondary
+    summary: Kunci yang akan digunakan.
+    description: ''
+  - name: --policy-name
+    defaultValue: iothubowner
+    summary: Kebijakan akses bersama untuk digunakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_hub_show-quota-metrics
+  name: az iot hub show-quota-metrics
+  summary: Dapatkan metrik kuota untuk hub IoT.
+  description: ''
+  syntax: >-
+    az iot hub show-quota-metrics [--ids]
+                                  [--name]
+                                  [--resource-group]
+  examples:
+  - summary: Dapatkan metrik kuota untuk hub IoT. (dibuat otomatis)
+    syntax: az iot hub show-quota-metrics --ids {ids}
+  - summary: Dapatkan metrik kuota untuk hub IoT. (dibuat otomatis)
+    syntax: az iot hub show-quota-metrics --name MyIoTHub
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: nama IoT Hub.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_hub_show-stats
+  name: az iot hub show-stats
+  summary: Dapatkan statistik untuk hub IoT.
+  description: ''
+  syntax: >-
+    az iot hub show-stats [--ids]
+                          [--name]
+                          [--resource-group]
+  examples:
+  - summary: Dapatkan statistik untuk hub IoT. (dibuat otomatis)
+    syntax: az iot hub show-stats --name MyIoTHub
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: nama IoT Hub.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_hub_update
+  name: az iot hub update
+  summary: Memperbarui metadata untuk hub IoT.
+  description: ''
+  syntax: >-
+    az iot hub update [--add]
+                      [--c2d-max-delivery-count]
+                      [--c2d-ttl]
+                      [--dds {false, true}]
+                      [--disable-local-auth {false, true}]
+                      [--disable-module-sas {false, true}]
+                      [--fc]
+                      [--fcs]
+                      [--fcu]
+                      [--fd]
+                      [--feedback-lock-duration]
+                      [--feedback-ttl]
+                      [--fileupload-notification-lock-duration]
+                      [--fileupload-notification-max-delivery-count]
+                      [--fileupload-notification-ttl]
+                      [--fileupload-notifications {false, true}]
+                      [--fileupload-sas-ttl]
+                      [--fileupload-storage-auth-type {identityBased, keyBased}]
+                      [--fileupload-storage-identity]
+                      [--force-string]
+                      [--ids]
+                      [--name]
+                      [--rd]
+                      [--remove]
+                      [--resource-group]
+                      [--set]
+                      [--sku {B1, B2, B3, F1, S1, S2, S3}]
+                      [--tags]
+                      [--unit]
+  examples:
+  - summary: Menambahkan pengaturan kontainer penyimpanan ke unggahan file
+    syntax: az iot hub update --name MyIotHub --fileupload-storage-connectionstring "connection-string" \ --fileupload-storage-container-name "container_name"
+  - summary: Tambahkan aturan filter firewall untuk menerima lalu lintas dari masker IP 127.0.0.0/31.
+    syntax: az iot hub update --name MyIotHub --add properties.ipFilterRules filter_name=test-rule action=Accept ip_mask=127.0.0.0/31
+  - summary: Memperbarui metadata untuk hub IoT. (dibuat otomatis)
+    syntax: az iot hub update --name MyIotHub --set properties.allocationPolicy="GeoLatency"
+  - summary: Memperbarui unit IoT Hub ke 2 dan menambahkan tag
+    syntax: az iot hub update -n MyIotHub --unit 2 --tags a=b c=d
+  - summary: Memperbarui tingkat harga untuk IoT Hub sebagai S2
+    syntax: az iot hub update -n MyIotHub --sku S2
+  - summary: Perbarui hari retensi IoT Hub peristiwa perangkat ke cloud sebagai 3 hari
+    syntax: az iot hub update -n MyIotHub --retention-day 3
+  - summary: Memperbarui pengaturan olahpesan cloud-ke-perangkat IoT Hub
+    syntax: az iot hub update --name MyIotHub --c2d-max-delivery-count 30 --c2d-ttl 5
+  - summary: Memperbarui pengaturan antrean umpan balik IoT Hub
+    syntax: az iot hub update --name MyIoTHub --feedback-max-delivery-count 20 --feedback-lock-duration 100 --feedback-ttl 4
+  - summary: Perbarui pengaturan unggahan file IoT Hub, dan tetapkan identitas terkelola kepada pengguna untuk unggahan file
+    syntax: az iot hub update -n MyIoTHub --fileupload-sas-ttl 5 --fileupload-storage-auth-type identityBased --fileupload-storage-identity [system]
+  - summary: Memperbarui pengaturan pemberitahuan unggahan file IoT Hub dan durasi kunci antrean
+    syntax: az iot hub update -n MyIoTHub --fileupload-notification-max-delivery-count 50 --fileupload-notification-ttl 48 --fileupload-notifications --fileupload-notification-lock-duration 10
+  - summary: Memperbarui pengaturan SAS autentikasi lokal, SAS perangkat, dan modul IoT Hub
+    syntax: az iot hub update -n MyIoTHub --disable-local-auth --disable-device-sas false --disable-module-sas true
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --c2d-max-delivery-count --cdd
+    summary: Frekuensi hub IoT akan mencoba mengirimkan pesan cloud-ke-perangkat ke perangkat, antara 1 dan 100.
+    description: ''
+  - name: --c2d-ttl --ct
+    summary: Jumlah waktu pesan tersedia untuk dikonsumsi perangkat sebelum kedaluwarsa oleh IoT Hub, antara 1 dan 48 jam.
+    description: ''
+  - name: --dds --disable-device-sas
+    parameterValueGroup: false, true
+    summary: Boolean yang menunjukkan apakah akan menonaktifkan semua perangkat (termasuk perangkat Edge atau tidak, tetapi tidak termasuk modul) kunci SAS tercakup untuk autentikasi.
+    description: ''
+  - name: --disable-local-auth --dla
+    parameterValueGroup: false, true
+    summary: Boolean yang menunjukkan apakah akan menonaktifkan atau tidak kunci SAS tercakup IoT hub untuk autentikasi.
+    description: ''
+  - name: --disable-module-sas --dms
+    parameterValueGroup: false, true
+    summary: Boolean yang menunjukkan apakah akan menonaktifkan kunci SAS dengan cakupan modul atau tidak untuk autentikasi.
+    description: ''
+  - name: --fc --fileupload-storage-container-name
+    summary: Nama kontainer akar tempat Anda mengunggah file. Kontainer tidak perlu ada tetapi harus dapat dikremasi menggunakan connectionString yang ditentukan.
+    description: ''
+  - name: --fcs --fileupload-storage-connectionstring
+    summary: String koneksi untuk akun Azure Storage tempat file diunggah.
+    description: ''
+  - name: --fcu --fileupload-storage-container-uri
+    summary: URI kontainer untuk akun Azure Storage tempat file diunggah.
+    description: ''
+  - name: --fd --feedback-max-delivery-count
+    summary: Frekuensi hub IoT mencoba mengirimkan pesan pada antrean umpan balik, antara 1 dan 100.
+    description: ''
+  - name: --feedback-lock-duration --fld
+    summary: Durasi kunci untuk antrean umpan balik, antara 5 dan 300 detik.
+    description: ''
+  - name: --feedback-ttl --ft
+    summary: Periode waktu di mana hub IoT akan mempertahankan umpan balik untuk kedaluwarsa atau pengiriman pesan cloud-ke-perangkat, antara 1 dan 48 jam.
+    description: ''
+  - name: --fileupload-notification-lock-duration --fnld
+    summary: Durasi kunci untuk antrean pemberitahuan unggahan file, antara 5 dan 300 detik.
+    description: ''
+  - name: --fileupload-notification-max-delivery-count --fnd
+    summary: Berapa kali hub IoT akan mencoba mengirimkan pesan pemberitahuan file, antara 1 dan 100.
+    description: ''
+  - name: --fileupload-notification-ttl --fnt
+    summary: Jumlah waktu pemberitahuan pengunggahan file tersedia untuk digunakan layanan sebelum kedaluwarsa oleh IoT Hub, antara 1 dan 48 jam.
+    description: ''
+  - name: --fileupload-notifications --fn
+    parameterValueGroup: false, true
+    summary: Boolean yang menunjukkan apakah akan mencatat informasi tentang file yang diunggah ke pesan/servicebound/filenotifications IoT Hub titik akhir.
+    description: ''
+  - name: --fileupload-sas-ttl --fst
+    summary: Jumlah waktu URI SAS yang dihasilkan oleh IoT Hub berlaku sebelum kedaluwarsa, antara 1 dan 24 jam.
+    description: ''
+  - name: --fileupload-storage-auth-type --fsa
+    parameterValueGroup: identityBased, keyBased
+    summary: Jenis autentikasi untuk akun Azure Storage tempat file diunggah.
+    description: ''
+  - name: --fileupload-storage-identity --fsi
+    summary: Identitas terkelola yang digunakan untuk autentikasi unggahan file. Gunakan '[system]' untuk merujuk ke identitas terkelola yang ditetapkan sistem atau ID sumber daya untuk merujuk ke identitas terkelola yang ditetapkan pengguna.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: nama IoT Hub.
+    description: ''
+  - name: --rd --retention-day
+    summary: Menentukan berapa lama hub IoT ini akan mempertahankan peristiwa perangkat ke cloud, antara 1 dan 7 hari.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --sku
+    parameterValueGroup: B1, B2, B3, F1, S1, S2, S3
+    summary: Tingkat harga untuk Azure IoT Hub. Perhatikan bahwa hanya satu instans hub IoT gratis (F1) yang diizinkan di setiap langganan. Pengecualian akan dilemparkan jika instans gratis melebihi satu instans.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --unit
+    summary: Unit di IoT Hub Anda.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+commands:
+- az_iot_hub_certificate
+- az_iot_hub_certificate_create
+- az_iot_hub_certificate_delete
+- az_iot_hub_certificate_generate-verification-code
+- az_iot_hub_certificate_list
+- az_iot_hub_certificate_show
+- az_iot_hub_certificate_update
+- az_iot_hub_certificate_verify
+- az_iot_hub_configuration
+- az_iot_hub_configuration_create
+- az_iot_hub_configuration_delete
+- az_iot_hub_configuration_list
+- az_iot_hub_configuration_show
+- az_iot_hub_configuration_show-metric
+- az_iot_hub_configuration_update
+- az_iot_hub_connection-string
+- az_iot_hub_connection-string_show
+- az_iot_hub_consumer-group
+- az_iot_hub_consumer-group_create
+- az_iot_hub_consumer-group_delete
+- az_iot_hub_consumer-group_list
+- az_iot_hub_consumer-group_show
+- az_iot_hub_create
+- az_iot_hub_delete
+- az_iot_hub_device-identity
+- az_iot_hub_device-identity_children
+- az_iot_hub_device-identity_children_add
+- az_iot_hub_device-identity_children_list
+- az_iot_hub_device-identity_children_remove
+- az_iot_hub_device-identity_connection-string
+- az_iot_hub_device-identity_connection-string_show
+- az_iot_hub_device-identity_create
+- az_iot_hub_device-identity_delete
+- az_iot_hub_device-identity_export
+- az_iot_hub_device-identity_import
+- az_iot_hub_device-identity_list
+- az_iot_hub_device-identity_parent
+- az_iot_hub_device-identity_parent_set
+- az_iot_hub_device-identity_parent_show
+- az_iot_hub_device-identity_renew-key
+- az_iot_hub_device-identity_show
+- az_iot_hub_device-identity_update
+- az_iot_hub_devicestream
+- az_iot_hub_devicestream_show
+- az_iot_hub_device-twin
+- az_iot_hub_device-twin_replace
+- az_iot_hub_device-twin_show
+- az_iot_hub_device-twin_update
+- az_iot_hub_digital-twin
+- az_iot_hub_digital-twin_invoke-command
+- az_iot_hub_digital-twin_show
+- az_iot_hub_digital-twin_update
+- az_iot_hub_distributed-tracing
+- az_iot_hub_distributed-tracing_show
+- az_iot_hub_distributed-tracing_update
+- az_iot_hub_generate-sas-token
+- az_iot_hub_identity
+- az_iot_hub_identity_assign
+- az_iot_hub_identity_remove
+- az_iot_hub_identity_show
+- az_iot_hub_invoke-device-method
+- az_iot_hub_invoke-module-method
+- az_iot_hub_job
+- az_iot_hub_job_cancel
+- az_iot_hub_job_create
+- az_iot_hub_job_list
+- az_iot_hub_job_show
+- az_iot_hub_list
+- az_iot_hub_list-skus
+- az_iot_hub_manual-failover
+- az_iot_hub_message-enrichment
+- az_iot_hub_message-enrichment_create
+- az_iot_hub_message-enrichment_delete
+- az_iot_hub_message-enrichment_list
+- az_iot_hub_message-enrichment_update
+- az_iot_hub_module-identity
+- az_iot_hub_module-identity_connection-string
+- az_iot_hub_module-identity_connection-string_show
+- az_iot_hub_module-identity_create
+- az_iot_hub_module-identity_delete
+- az_iot_hub_module-identity_list
+- az_iot_hub_module-identity_renew-key
+- az_iot_hub_module-identity_show
+- az_iot_hub_module-identity_update
+- az_iot_hub_module-twin
+- az_iot_hub_module-twin_replace
+- az_iot_hub_module-twin_show
+- az_iot_hub_module-twin_update
+- az_iot_hub_monitor-events
+- az_iot_hub_monitor-feedback
+- az_iot_hub_policy
+- az_iot_hub_policy_create
+- az_iot_hub_policy_delete
+- az_iot_hub_policy_list
+- az_iot_hub_policy_renew-key
+- az_iot_hub_policy_show
+- az_iot_hub_query
+- az_iot_hub_route
+- az_iot_hub_route_create
+- az_iot_hub_route_delete
+- az_iot_hub_route_list
+- az_iot_hub_route_show
+- az_iot_hub_route_test
+- az_iot_hub_route_update
+- az_iot_hub_routing-endpoint
+- az_iot_hub_routing-endpoint_create
+- az_iot_hub_routing-endpoint_delete
+- az_iot_hub_routing-endpoint_list
+- az_iot_hub_routing-endpoint_show
+- az_iot_hub_show
+- az_iot_hub_show-connection-string
+- az_iot_hub_show-quota-metrics
+- az_iot_hub_show-stats
+- az_iot_hub_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 02/24/2022
+  description: Mengelola hub Azure IoT.
+  ms.openlocfilehash: 5e686f53c48d00d54cbf166475ef3fe6018b972d
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140921336"

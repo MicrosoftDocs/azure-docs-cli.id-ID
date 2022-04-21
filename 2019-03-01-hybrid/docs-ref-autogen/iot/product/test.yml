@@ -1,0 +1,224 @@
+### YamlMime:AzureCLIGroup
+uid: az_iot_product_test
+name: az iot product test
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **azure-iot** untuk Azure CLI (versi 2.24.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **uji produk az iot** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola pengujian perangkat untuk sertifikasi produk.
+description: ''
+directCommands:
+- uid: az_iot_product_test_create
+  name: az iot product test create
+  summary: Buat pengujian produk baru untuk sertifikasi produk.
+  description: ''
+  syntax: >-
+    az iot product test create [--at {ConnectionString, SymmetricKey, TPM, X509}]
+                               [--badge-type {IotDevice, IotEdgeCompatible, Pnp}]
+                               [--base-url]
+                               [--certificate-path]
+                               [--cf]
+                               [--connection-string]
+                               [--device-type {DevKit, FinishedProduct}]
+                               [--ek]
+                               [--models]
+                               [--product-id]
+                               [--skip-provisioning]
+                               [--validation-type {Certification, Test}]
+  examples:
+  - summary: Penggunaan dasar
+    syntax: az iot product test create --configuration-file {configuration_file}
+  - summary: Tidak memiliki konfigurasi provisi pembuatan layanan
+    syntax: az iot product test create --configuration-file {configuration_file} --skip-provisioning
+  - summary: Membuat pengujian dengan pengesahan kunci konten
+    syntax: az iot product test create --attestation-type SymmetricKey --device-type {device_type}
+  - summary: Membuat pengujian dengan pengesahan TPM
+    syntax: az iot product test create --attestation-type TPM --device-type {device_type} --endorsement-key {endorsement_key}
+  - summary: Membuat pengujian dengan pengesahan x509
+    syntax: az iot product test create --attestation-type x509 --device-type {device_type} --certificate-path {certificate_path}
+  - summary: Membuat pengujian untuk modul Edge
+    syntax: az iot product test create --attestation-type ConnectionString --device-type {device_type} --badge-type IotEdgeCompatible --connection-string {connection_string}
+  - summary: Membuat pengujian dengan pengesahan kunci konten dan jenis validasi yang ditentukan
+    syntax: az iot product test create --attestation-type SymmetricKey --device-type {device_type} --validation-type Certification --product-id {product_id}
+  optionalParameters:
+  - name: --at --attestation-type
+    parameterValueGroup: ConnectionString, SymmetricKey, TPM, X509
+    summary: Bagaimana perangkat akan mengautentikasi ke layanan pengujian Device Provisioning Service.
+    description: ''
+  - name: --badge-type --bt
+    defaultValue: IotDevice
+    parameterValueGroup: IotDevice, IotEdgeCompatible, Pnp
+    summary: Jenis lencana sertifikasi.
+    description: ''
+  - name: --base-url
+    summary: Ambil alih URL layanan sertifikasi untuk memungkinkan pengujian di lingkungan non-produksi.
+    description: ''
+  - name: --certificate-path --cp
+    summary: Jalur ke file yang berisi sertifikat utama. Saat memilih x509 sebagai jenis pengesahan, salah satu jalur sertifikat diperlukan.
+    description: ''
+  - name: --cf --configuration-file
+    summary: Jalur ke file JSON pengujian perangkat. Jika tidak ditentukan, parameter pengesahan dan definisi perangkat harus ditentukan.
+    description: ''
+  - name: --connection-string --cs
+    summary: String koneksi modul EdgeSaat memilih jenis lencana IotEdgeCompatible, string koneksi, dan jenis attestaion string koneksi diperlukan.
+    description: ''
+  - name: --device-type --dt
+    parameterValueGroup: DevKit, FinishedProduct
+    summary: Menentukan jenis perangkat yang akan diuji.
+    description: ''
+  - name: --ek --endorsement-key
+    summary: Kunci dukungan TPM untuk perangkat TPM. Saat memilih TPM sebagai jenis pengesahan, kunci dukungan diperlukan.
+    description: ''
+  - name: --models -m
+    summary: Jalur yang berisi antarmuka Azure IoT Plug and Play yang diimplementasikan oleh perangkat yang sedang diuji. Ketika jenis lencana adalah Pnp, model diperlukan.
+    description: ''
+  - name: --product-id -p
+    summary: Id produk yang dikirimkan. Diperlukan saat jenis validasi adalah 'Sertifikasi'.
+    description: ''
+  - name: --skip-provisioning --sp
+    summary: Menentukan apakah layanan melompati pembuatan konfigurasi provisi. Hanya berlaku untuk jenis provisi SymmetricKey dan ConnectionString.
+    description: ''
+  - name: --validation-type --vt
+    defaultValue: Test
+    parameterValueGroup: Certification, Test
+    summary: Jenis pengujian validasi yang akan dilakukan.
+    description: ''
+- uid: az_iot_product_test_search
+  name: az iot product test search
+  summary: Cari repositori produk untuk data pengujian.
+  description: ''
+  syntax: >-
+    az iot product test search [--base-url]
+                               [--certificate-name]
+                               [--product-id]
+                               [--registration-id]
+  examples:
+  - summary: Cari menurut id produk
+    syntax: az iot product test search --product-id {product_id}
+  - summary: Cari berdasarkan pendaftaran DPS
+    syntax: az iot product test search --registration-id {registration_id}
+  - summary: Cari berdasarkan x509 certifcate common name (CN)
+    syntax: az iot product test search --certificate-name {certificate_name}
+  - summary: Cari berdasarkan beberapa nilai
+    syntax: az iot product test search --product-id {product_id} --certificate-name {certificate_name}
+  optionalParameters:
+  - name: --base-url
+    summary: Ambil alih URL layanan sertifikasi untuk memungkinkan pengujian di lingkungan non-produksi.
+    description: ''
+  - name: --certificate-name --cn
+    summary: Nama Umum Sertifikat (cn) x509 yang digunakan untuk pengesahan Device Provisioning Service.
+    description: ''
+  - name: --product-id -p
+    summary: Id produk yang dikirimkan.
+    description: ''
+  - name: --registration-id -r
+    summary: Id regstrasi untuk Device Provisioning Service.
+    description: ''
+- uid: az_iot_product_test_show
+  name: az iot product test show
+  summary: Lihat data pengujian produk.
+  description: ''
+  syntax: >-
+    az iot product test show --test-id
+                             [--base-url]
+  examples:
+  - summary: Penggunaan dasar
+    syntax: az iot product test show --test-id {test_id}
+  requiredParameters:
+  - isRequired: true
+    name: --test-id -t
+    summary: Id yang dihasilkan untuk pengujian sertifikasi perangkat.
+    description: ''
+  optionalParameters:
+  - name: --base-url
+    summary: Ambil alih URL layanan sertifikasi untuk memungkinkan pengujian di lingkungan non-produksi.
+    description: ''
+- uid: az_iot_product_test_update
+  name: az iot product test update
+  summary: Perbarui data pengujian sertifikasi produk.
+  description: ''
+  syntax: >-
+    az iot product test update --test-id
+                               [--at {ConnectionString, SymmetricKey, TPM, X509}]
+                               [--badge-type {IotDevice, IotEdgeCompatible, Pnp}]
+                               [--base-url]
+                               [--certificate-path]
+                               [--cf]
+                               [--connection-string]
+                               [--ek]
+                               [--models]
+  examples:
+  - summary: Penggunaan dasar
+    syntax: az iot product test update --test-id {test_id} --configuration-file {configuration_file}
+  requiredParameters:
+  - isRequired: true
+    name: --test-id -t
+    summary: Id yang dihasilkan untuk pengujian sertifikasi perangkat.
+    description: ''
+  optionalParameters:
+  - name: --at --attestation-type
+    parameterValueGroup: ConnectionString, SymmetricKey, TPM, X509
+    summary: Bagaimana perangkat akan mengautentikasi ke layanan pengujian Device Provisioning Service.
+    description: ''
+  - name: --badge-type --bt
+    parameterValueGroup: IotDevice, IotEdgeCompatible, Pnp
+    summary: Jenis lencana sertifikasi.
+    description: ''
+  - name: --base-url
+    summary: Ambil alih URL layanan sertifikasi untuk memungkinkan pengujian di lingkungan non-produksi.
+    description: ''
+  - name: --certificate-path --cp
+    summary: Jalur ke file yang berisi sertifikat utama. Saat memilih x509 sebagai jenis pengesahan, salah satu jalur sertifikat diperlukan.
+    description: ''
+  - name: --cf --configuration-file
+    summary: Jalur ke file JSON pengujian perangkat. Jika tidak ditentukan, parameter pengesahan dan definisi perangkat harus ditentukan.
+    description: ''
+  - name: --connection-string --cs
+    summary: String koneksi modul EdgeSaat memilih jenis lencana IotEdgeCompatible, string koneksi, dan jenis attestaion string koneksi diperlukan.
+    description: ''
+  - name: --ek --endorsement-key
+    summary: Kunci dukungan TPM untuk perangkat TPM. Saat memilih TPM sebagai jenis pengesahan, kunci dukungan diperlukan.
+    description: ''
+  - name: --models -m
+    summary: Jalur yang berisi antarmuka Azure IoT Plug and Play yang diimplementasikan oleh perangkat yang sedang diuji. Ketika jenis lencana adalah Pnp, model diperlukan.
+    description: ''
+commands:
+- az_iot_product_test_case
+- az_iot_product_test_case_list
+- az_iot_product_test_case_update
+- az_iot_product_test_create
+- az_iot_product_test_run
+- az_iot_product_test_run_show
+- az_iot_product_test_run_submit
+- az_iot_product_test_search
+- az_iot_product_test_show
+- az_iot_product_test_task
+- az_iot_product_test_task_create
+- az_iot_product_test_task_delete
+- az_iot_product_test_task_show
+- az_iot_product_test_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola pengujian perangkat untuk sertifikasi produk.
+  ms.openlocfilehash: c28ff10756e395948841bab80101303446562b79
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140887217"
