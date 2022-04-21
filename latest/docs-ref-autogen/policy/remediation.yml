@@ -1,0 +1,251 @@
+### YamlMime:AzureCLIGroup
+uid: az_policy_remediation
+name: az policy remediation
+summary: Mengelola remediasi kebijakan sumber daya.
+description: ''
+directCommands:
+- uid: az_policy_remediation_cancel
+  name: az policy remediation cancel
+  summary: Membatalkan remediasi kebijakan sumber daya.
+  description: ''
+  syntax: >-
+    az policy remediation cancel --name
+                                 [--management-group]
+                                 [--namespace]
+                                 [--parent]
+                                 [--resource]
+                                 [--resource-group]
+                                 [--resource-type]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama remediasi.
+    description: ''
+  optionalParameters:
+  - name: --management-group -m
+    summary: Nama grup manajemen.
+    description: ''
+  - name: --namespace
+    summary: 'Namespace penyedia (Misalnya: Microsoft.Provider).'
+    description: ''
+  - name: --parent
+    summary: 'Jalur induk (Misalnya: resourceTypeA/nameA/resourceTypeB/nameB).'
+    description: ''
+  - name: --resource
+    summary: ID sumber daya atau nama sumber daya. Jika nama diberikan, berikan grup sumber daya dan argumen id sumber daya lain yang relevan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-type
+    summary: 'Jenis sumber daya (Misalnya: resourceTypeC).'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_policy_remediation_create
+  name: az policy remediation create
+  summary: Buat remediasi kebijakan sumber daya.
+  description: ''
+  syntax: >-
+    az policy remediation create --name
+                                 --policy-assignment
+                                 [--definition-reference-id]
+                                 [--location-filters]
+                                 [--management-group]
+                                 [--namespace]
+                                 [--parent]
+                                 [--resource]
+                                 [--resource-discovery-mode {ExistingNonCompliant, ReEvaluateCompliance}]
+                                 [--resource-group]
+                                 [--resource-type]
+  examples:
+  - summary: Membuat remediasi di cakupan grup sumber daya untuk penetapan kebijakan
+    syntax: az policy remediation create -g myRg -n myRemediation --policy-assignment eeb18edc813c42d0ad5a9eab
+  - summary: Membuat remediasi di cakupan grup sumber daya untuk penetapan kebijakan menggunakan ID sumber daya penetapan kebijakan
+    syntax: az policy remediation create -g myRg -n myRemediation --policy-assignment "/subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/providers/Microsoft.Authorization/policyAssignments/myPa"
+  - summary: Membuat remediasi pada cakupan langganan untuk penetapan kumpulan kebijakan
+    syntax: az policy remediation create -n myRemediation --policy-assignment eeb18edc813c42d0ad5a9eab --definition-reference-id auditVMPolicyReference
+  - summary: Membuat remediasi di cakupan grup manajemen untuk lokasi sumber daya tertentu
+    syntax: az policy remediation create -m myMg -n myRemediation --policy-assignment eeb18edc813c42d0ad5a9eab --location-filters eastus westeurope
+  - summary: Membuat remediasi untuk sumber daya tertentu menggunakan ID sumber daya
+    syntax: az policy remediation create --resource "/subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/myVm" -n myRemediation --policy-assignment eeb18edc813c42d0ad5a9eab
+  - summary: Membuat remediasi yang akan mengevaluasi ulang kepatuhan sebelum memulihkan
+    syntax: az policy remediation create -g myRg -n myRemediation --policy-assignment eeb18edc813c42d0ad5a9eab --resource-discovery-mode ReEvaluateCompliance
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama remediasi.
+    description: ''
+  - isRequired: true
+    name: --policy-assignment -a
+    summary: Nama atau ID sumber daya dari penetapan kebijakan.
+    description: ''
+  optionalParameters:
+  - name: --definition-reference-id
+    summary: ID referensi definisi kebijakan di dalam definisi kumpulan kebijakan. Hanya diperlukan ketika penetapan kebijakan menetapkan definisi yang ditetapkan kebijakan.
+    description: ''
+  - name: --location-filters
+    summary: 'Daftar lokasi sumber daya yang dipisahkan ruang yang harus diperbaiki (Misalnya: centralus westeurope).'
+    description: ''
+  - name: --management-group -m
+    summary: Nama grup manajemen.
+    description: ''
+  - name: --namespace
+    summary: 'Namespace penyedia (Misalnya: Microsoft.Provider).'
+    description: ''
+  - name: --parent
+    summary: 'Jalur induk (Misalnya: resourceTypeA/nameA/resourceTypeB/nameB).'
+    description: ''
+  - name: --resource
+    summary: ID sumber daya atau nama sumber daya. Jika nama diberikan, berikan grup sumber daya dan argumen id sumber daya lain yang relevan.
+    description: ''
+  - name: --resource-discovery-mode
+    parameterValueGroup: ExistingNonCompliant, ReEvaluateCompliance
+    summary: Cara sumber daya untuk memulihkan ditemukan. Default ke ExistingNonCompliant jika tidak ditentukan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-type
+    summary: 'Jenis sumber daya (Misalnya: resourceTypeC).'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_policy_remediation_delete
+  name: az policy remediation delete
+  summary: Menghapus remediasi kebijakan sumber daya.
+  description: ''
+  syntax: >-
+    az policy remediation delete --name
+                                 [--management-group]
+                                 [--namespace]
+                                 [--parent]
+                                 [--resource]
+                                 [--resource-group]
+                                 [--resource-type]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama remediasi.
+    description: ''
+  optionalParameters:
+  - name: --management-group -m
+    summary: Nama grup manajemen.
+    description: ''
+  - name: --namespace
+    summary: 'Namespace penyedia (Misalnya: Microsoft.Provider).'
+    description: ''
+  - name: --parent
+    summary: 'Jalur induk (Misalnya: resourceTypeA/nameA/resourceTypeB/nameB).'
+    description: ''
+  - name: --resource
+    summary: ID sumber daya atau nama sumber daya. Jika nama diberikan, berikan grup sumber daya dan argumen id sumber daya lain yang relevan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-type
+    summary: 'Jenis sumber daya (Misalnya: resourceTypeC).'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_policy_remediation_list
+  name: az policy remediation list
+  summary: Mencantumkan remediasi kebijakan sumber daya.
+  description: ''
+  syntax: >-
+    az policy remediation list [--management-group]
+                               [--namespace]
+                               [--parent]
+                               [--resource]
+                               [--resource-group]
+                               [--resource-type]
+  optionalParameters:
+  - name: --management-group -m
+    summary: Nama grup manajemen.
+    description: ''
+  - name: --namespace
+    summary: 'Namespace penyedia (Misalnya: Microsoft.Provider).'
+    description: ''
+  - name: --parent
+    summary: 'Jalur induk (Misalnya: resourceTypeA/nameA/resourceTypeB/nameB).'
+    description: ''
+  - name: --resource
+    summary: ID sumber daya atau nama sumber daya. Jika nama diberikan, berikan grup sumber daya dan argumen id sumber daya lain yang relevan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-type
+    summary: 'Jenis sumber daya (Misalnya: resourceTypeC).'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_policy_remediation_show
+  name: az policy remediation show
+  summary: Tampilkan remediasi kebijakan sumber daya.
+  description: ''
+  syntax: >-
+    az policy remediation show --name
+                               [--management-group]
+                               [--namespace]
+                               [--parent]
+                               [--resource]
+                               [--resource-group]
+                               [--resource-type]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama remediasi.
+    description: ''
+  optionalParameters:
+  - name: --management-group -m
+    summary: Nama grup manajemen.
+    description: ''
+  - name: --namespace
+    summary: 'Namespace penyedia (Misalnya: Microsoft.Provider).'
+    description: ''
+  - name: --parent
+    summary: 'Jalur induk (Misalnya: resourceTypeA/nameA/resourceTypeB/nameB).'
+    description: ''
+  - name: --resource
+    summary: ID sumber daya atau nama sumber daya. Jika nama diberikan, berikan grup sumber daya dan argumen id sumber daya lain yang relevan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-type
+    summary: 'Jenis sumber daya (Misalnya: resourceTypeC).'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+commands:
+- az_policy_remediation_cancel
+- az_policy_remediation_create
+- az_policy_remediation_delete
+- az_policy_remediation_deployment
+- az_policy_remediation_deployment_list
+- az_policy_remediation_list
+- az_policy_remediation_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 02/22/2022
+  description: Mengelola remediasi kebijakan sumber daya.
+  ms.openlocfilehash: bba13318271e6018ed2816d98938a9fe4bbda89f
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141067531"

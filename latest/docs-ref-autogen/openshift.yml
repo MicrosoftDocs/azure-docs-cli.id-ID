@@ -1,0 +1,261 @@
+### YamlMime:AzureCLIGroup
+uid: az_openshift
+name: az openshift
+summary: Mengelola kluster Azure Red Hat OpenShift 3.11.
+description: Perintah az openshift tidak digunakan lagi dan telah digantikan oleh az aro untuk kluster ARO 4. Lihat http://aka.ms/aro/4 untuk informasi tentang beralih ke ARO 4.
+directCommands:
+- uid: az_openshift_create
+  name: az openshift create
+  summary: Buat kluster Azure Red Hat OpenShift 3.11 baru.
+  description: Dukungan untuk pembuatan kluster ARO 3.11 berakhir 30 Nov 2020. Silakan lihat aka.ms/aro/4 untuk informasi tentang beralih ke ARO 4.
+  syntax: >-
+    az openshift create --name
+                        --resource-group
+                        [--aad-client-app-id]
+                        [--aad-client-app-secret]
+                        [--aad-tenant-id]
+                        [--compute-count]
+                        [--compute-vm-size]
+                        [--customer-admin-group-id]
+                        [--location]
+                        [--no-wait]
+                        [--subnet-prefix]
+                        [--tags]
+                        [--vnet-peer]
+                        [--vnet-prefix]
+                        [--workspace-id]
+  examples:
+  - summary: Membuat kluster OpenShift dan membuat Klien AAD secara otomatis
+    syntax: az openshift create -g MyResourceGroup -n MyManagedCluster
+  - summary: Membuat kluster OpenShift dan membuat klien AAD secara otomatis dan menyiapkan grup admin kluster
+    syntax: az openshift create -g MyResourceGroup -n MyManagedCluster --customer-admin-group-id {GROUP_ID}
+  - summary: Buat kluster OpenShift dengan 5 simpul komputasi dan klien AAD kustom.
+    syntax: az openshift create -g MyResourceGroup -n MyManagedCluster --aad-client-app-id {APP_ID} --aad-client-app-secret {APP_SECRET} --aad-tenant-id {TENANT_ID} --compute-count 5
+  - summary: Membuat kluster Openshift menggunakan vnet kustom
+    syntax: az openshift create -g MyResourceGroup -n MyManagedCluster --vnet-peer "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/openshift-vnet/providers/Microsoft.Network/virtualNetworks/test"
+  - summary: Membuat kluster Openshift dengan pemantauan Analitik Log diaktifkan
+    syntax: az openshift create -g MyResourceGroup -n MyManagedCluster --workspace-id "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.OperationalInsights/workspaces/{workspace-id}"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster OpenShift terkelola.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --aad-client-app-id
+    summary: ID aplikasi klien Azure Active Directory. Jika tidak ditentukan, klien Azure Active Directory baru akan dibuat.
+    description: ''
+  - name: --aad-client-app-secret
+    summary: Rahasia aplikasi klien Azure Active Directory.
+    description: ''
+  - name: --aad-tenant-id
+    summary: ID penyewa Azure Active Directory.
+    description: ''
+  - name: --compute-count -c
+    defaultValue: "4"
+    summary: Jumlah simpul di kumpulan simpul OpenShift.
+    description: ''
+  - name: --compute-vm-size -s
+    defaultValue: Standard_D4s_v3
+    summary: Ukuran Virtual Machines untuk dibuat sebagai simpul OpenShift.
+    description: ''
+  - name: --customer-admin-group-id
+    summary: ID Objek dari Grup Azure Active Directory yang akan disinkronkan keanggotaan ke dalam grup OpenShift "osa-customer-admins". Jika tidak ditentukan, tidak ada akses admin kluster yang akan diberikan.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --subnet-prefix
+    defaultValue: 10.0.0.0/24
+    summary: CIDR yang digunakan pada Subnet untuk menyebarkan kluster.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --vnet-peer
+    summary: ID atau nama subnet di VNet yang ada untuk melakukan peering pada kluster.
+    description: ''
+  - name: --vnet-prefix
+    defaultValue: 10.0.0.0/8
+    summary: CIDR yang digunakan pada VNet untuk menyebarkan kluster.
+    description: ''
+  - name: --workspace-id
+    summary: Id sumber daya Ruang Kerja Analitik Log yang ada untuk digunakan untuk menyimpan data pemantauan.
+    description: ''
+- uid: az_openshift_delete
+  name: az openshift delete
+  summary: Menghapus kluster Azure Red Hat OpenShift 3.11.
+  description: Perintah az openshift tidak digunakan lagi dan telah digantikan oleh az aro untuk kluster ARO 4. Lihat http://aka.ms/aro/4 untuk informasi tentang beralih ke ARO 4.
+  syntax: >-
+    az openshift delete --name
+                        --resource-group
+                        [--no-wait]
+                        [--yes]
+  examples:
+  - summary: Menghapus kluster Azure Red Hat OpenShift 3.11.
+    syntax: az openshift delete --name MyManagedOpenShiftCluster --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster OpenShift terkelola.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_openshift_list
+  name: az openshift list
+  summary: Mencantumkan kluster Azure Red Hat OpenShift 3.11.
+  description: Perintah az openshift tidak digunakan lagi dan telah digantikan oleh az aro untuk kluster ARO 4. Lihat http://aka.ms/aro/4 untuk informasi tentang beralih ke ARO 4.
+  syntax: az openshift list [--resource-group]
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_openshift_scale
+  name: az openshift scale
+  summary: Skalakan kumpulan komputasi dalam kluster Azure Red Hat OpenShift 3.11.
+  description: Perintah az openshift tidak digunakan lagi dan telah digantikan oleh az aro untuk kluster ARO 4. Lihat http://aka.ms/aro/4 untuk informasi tentang beralih ke ARO 4.
+  syntax: >-
+    az openshift scale --compute-count
+                       --name
+                       --resource-group
+                       [--no-wait]
+  examples:
+  - summary: Skalakan kumpulan komputasi dalam kluster Azure Red Hat OpenShift 3.11.
+    syntax: az openshift scale --compute-count 5 --name MyManagedOpenShiftCluster --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --compute-count -c
+    defaultValue: "4"
+    summary: Jumlah simpul di kumpulan komputasi OpenShift.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster OpenShift terkelola.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_openshift_show
+  name: az openshift show
+  summary: Tampilkan detail untuk kluster Azure Red Hat OpenShift 3.11.
+  description: Dukungan untuk kluster ARO 3.11 yang ada berakhir Juni 2022. Silakan lihat aka.ms/aro/4 untuk informasi tentang beralih ke ARO 4.
+  syntax: >-
+    az openshift show --name
+                      --resource-group
+  examples:
+  - summary: Tampilkan detail untuk kluster Azure Red Hat OpenShift 3.11.
+    syntax: az openshift show --name MyManagedOpenShiftCluster --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster OpenShift terkelola.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_openshift_wait
+  name: az openshift wait
+  summary: Tunggu hingga kluster Azure Red Hat OpenShift 3.11 mencapai status yang diinginkan.
+  description: Perintah az openshift tidak digunakan lagi dan telah digantikan oleh az aro untuk kluster ARO 4. Lihat http://aka.ms/aro/4 untuk informasi tentang beralih ke ARO 4.
+  syntax: >-
+    az openshift wait --name
+                      --resource-group
+                      [--created]
+                      [--custom]
+                      [--deleted]
+                      [--exists]
+                      [--interval]
+                      [--timeout]
+                      [--updated]
+  examples:
+  - summary: Tunggu hingga kluster ditingkatkan, polling setiap menit hingga tiga puluh menit.
+    syntax: az openshift wait -g MyResourceGroup -n MyManagedCluster --updated --interval 60 --timeout 1800
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster OpenShift terkelola.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_openshift_create
+- az_openshift_delete
+- az_openshift_list
+- az_openshift_monitor
+- az_openshift_monitor_disable
+- az_openshift_monitor_enable
+- az_openshift_scale
+- az_openshift_show
+- az_openshift_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Perintah az openshift tidak digunakan lagi dan telah digantikan oleh az aro untuk kluster ARO 4. Lihat http://aka.ms/aro/4 untuk informasi tentang beralih ke ARO 4.
+  ms.openlocfilehash: 7e09175f49982fd552d61d121df3b10beb800b04
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141067603"
