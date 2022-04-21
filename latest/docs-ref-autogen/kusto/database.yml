@@ -1,0 +1,379 @@
+### YamlMime:AzureCLIGroup
+uid: az_kusto_database
+name: az kusto database
+summary: Mengelola database Azure Kusto.
+description: Perintah Azure CLI untuk Kusto sekarang menjadi ekstensi.  Jalankan "az extension add -n kusto" untuk menginstal ekstensi.  Modul inti asli untuk Kusto tidak lagi didukung.
+directCommands:
+- uid: az_kusto_database_add-principal
+  name: az kusto database add-principal
+  summary: Tambahkan izin Prinsipal database.
+  description: ''
+  syntax: >-
+    az kusto database add-principal --cluster-name
+                                    --database-name
+                                    --resource-group
+                                    [--value]
+  examples:
+  - summary: KustoDatabaseAddPrincipals
+    syntax: az kusto database add-principal --cluster-name "kustoclusterrptest4" --database-name "KustoDatabase8" --value name="Some User" type="User" app-id="" email="user@microsoft.com" fqn="aaduser=some_guid" role="Admin" --value name="Kusto" type="Group" app-id="" email="kusto@microsoft.com" fqn="aadgroup=some_guid" role="Viewer" --value name="SomeApp" type="App" app-id="some_guid_app_id" email="" fqn="aadapp=some_guid_app_id" role="Admin" --resource-group "kustorptest"
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name
+    summary: Nama kluster Kusto.
+    description: ''
+  - isRequired: true
+    name: --database-name
+    summary: Nama database di kluster Kusto.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --value
+    summary: Daftar prinsipal database Kusto.
+    description: >-
+      Penggunaan: --value role=XX name=XX type=XX fqn=XX email=XX app-id=XX
+
+
+      peran: Diperlukan. Peran utama database.
+
+      nama: Diperlukan. Nama prinsipal database.
+
+      jenis: Diperlukan. Jenis prinsipal database.
+
+      fqn: Nama prinsipal database yang sepenuhnya memenuhi syarat.
+
+      email: Email utama database jika ada.
+
+      app-id: Id aplikasi - hanya relevan untuk jenis perwakilan aplikasi.
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --value.
+- uid: az_kusto_database_create
+  name: az kusto database create
+  summary: Buat database Kusto.
+  description: ''
+  syntax: >-
+    az kusto database create --cluster-name
+                             --name
+                             --resource-group
+                             [--hot-cache-period]
+                             [--no-wait]
+                             [--soft-delete-period]
+  examples:
+  - summary: membuat Database Kusto.
+    syntax: az kusto database create --cluster-name myclustername -g myrgname -n mydbname  --soft-delete-period P365D --hot-cache-period P31D
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama database.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --hot-cache-period
+    summary: Jumlah waktu data harus disimpan dalam cache. Durasi dalam format ISO8601 (misalnya, 100 hari adalah P100D).
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --soft-delete-period
+    summary: Jumlah waktu data harus disimpan sehingga tersedia untuk kueri. Durasi dalam format ISO8601 (misalnya, 100 hari adalah P100D).
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/kusto/_help.py
+- uid: az_kusto_database_delete
+  name: az kusto database delete
+  summary: Menghapus database Kusto.
+  description: ''
+  syntax: >-
+    az kusto database delete [--cluster-name]
+                             [--ids]
+                             [--name]
+                             [--resource-group]
+                             [--yes]
+  optionalParameters:
+  - name: --cluster-name
+    summary: Nama kluster.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama database.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/kusto/_help.py
+- uid: az_kusto_database_list
+  name: az kusto database list
+  summary: Mencantumkan database Kusto.
+  description: ''
+  syntax: >-
+    az kusto database list --cluster-name
+                           --resource-group
+  examples:
+  - summary: Mencantumkan database Kusto. (dibuat otomatis)
+    syntax: az kusto database list --cluster-name MyCluster --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/kusto/_help.py
+- uid: az_kusto_database_list-principal
+  name: az kusto database list-principal
+  summary: Mengembalikan daftar prinsipal database dari kluster dan database Kusto yang diberikan.
+  description: ''
+  syntax: >-
+    az kusto database list-principal --cluster-name
+                                     --database-name
+                                     --resource-group
+  examples:
+  - summary: KustoDatabaseListPrincipals
+    syntax: az kusto database list-principal --cluster-name "kustoclusterrptest4" --database-name "KustoDatabase8" --resource-group "kustorptest"
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name
+    summary: Nama kluster Kusto.
+    description: ''
+  - isRequired: true
+    name: --database-name
+    summary: Nama database di kluster Kusto.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_kusto_database_remove-principal
+  name: az kusto database remove-principal
+  summary: Menghapus izin Prinsipal database.
+  description: ''
+  syntax: >-
+    az kusto database remove-principal --cluster-name
+                                       --database-name
+                                       --resource-group
+                                       [--value]
+  examples:
+  - summary: KustoDatabaseRemovePrincipals
+    syntax: az kusto database remove-principal --cluster-name "kustoclusterrptest4" --database-name "KustoDatabase8" --value name="Some User" type="User" app-id="" email="user@microsoft.com" fqn="aaduser=some_guid" role="Admin" --value name="Kusto" type="Group" app-id="" email="kusto@microsoft.com" fqn="aadgroup=some_guid" role="Viewer" --value name="SomeApp" type="App" app-id="some_guid_app_id" email="" fqn="aadapp=some_guid_app_id" role="Admin" --resource-group "kustorptest"
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name
+    summary: Nama kluster Kusto.
+    description: ''
+  - isRequired: true
+    name: --database-name
+    summary: Nama database di kluster Kusto.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --value
+    summary: Daftar prinsipal database Kusto.
+    description: >-
+      Penggunaan: --value role=XX name=XX type=XX fqn=XX email=XX app-id=XX
+
+
+      peran: Diperlukan. Peran utama database.
+
+      nama: Diperlukan. Nama prinsipal database.
+
+      jenis: Diperlukan. Jenis prinsipal database.
+
+      fqn: Nama prinsipal database yang sepenuhnya memenuhi syarat.
+
+      email: Email utama database jika ada.
+
+      app-id: Id aplikasi - hanya relevan untuk jenis perwakilan aplikasi.
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --value.
+- uid: az_kusto_database_show
+  name: az kusto database show
+  summary: Dapatkan database Kusto.
+  description: ''
+  syntax: >-
+    az kusto database show [--cluster-name]
+                           [--ids]
+                           [--name]
+                           [--resource-group]
+  examples:
+  - summary: Dapatkan database Kusto. (dibuat otomatis)
+    syntax: az kusto database show --cluster-name MyCluster --name MyDatabase --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --cluster-name
+    summary: Nama kluster.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama database.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/kusto/_help.py
+- uid: az_kusto_database_update
+  name: az kusto database update
+  summary: Memperbarui database Kusto.
+  description: ''
+  syntax: >-
+    az kusto database update --soft-delete-period
+                             [--add]
+                             [--cluster-name]
+                             [--force-string]
+                             [--hot-cache-period]
+                             [--ids]
+                             [--name]
+                             [--no-wait]
+                             [--remove]
+                             [--resource-group]
+                             [--set]
+  examples:
+  - summary: membuat Database Kusto.
+    syntax: az kusto database update --cluster-name myclustername -g myrgname -n mydbname  --soft-delete-period P365D --hot-cache-period P30D
+  requiredParameters:
+  - isRequired: true
+    name: --soft-delete-period
+    summary: Jumlah waktu data harus disimpan sehingga tersedia untuk kueri. Durasi dalam format ISO8601 (misalnya, 100 hari adalah P100D).
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --cluster-name
+    summary: Nama kluster.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --hot-cache-period
+    summary: Jumlah waktu data harus disimpan dalam cache. Durasi dalam format ISO8601 (misalnya, 100 hari adalah P100D).
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama database.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/kusto/_help.py
+- uid: az_kusto_database_wait
+  name: az kusto database wait
+  summary: Tunggu hingga database Kusto terkelola mencapai status yang diinginkan.
+  description: Jika operasi pada database terganggu atau dimulai dengan `--no-wait`, gunakan perintah ini untuk menunggunya selesai.
+  syntax: >-
+    az kusto database wait [--cluster-name]
+                           [--created]
+                           [--custom]
+                           [--deleted]
+                           [--exists]
+                           [--ids]
+                           [--interval]
+                           [--name]
+                           [--resource-group]
+                           [--timeout]
+                           [--updated]
+  optionalParameters:
+  - name: --cluster-name
+    summary: Nama kluster.
+    description: ''
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --name -n
+    summary: Nama database.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/kusto/_help.py
+commands:
+- az_kusto_database_add-principal
+- az_kusto_database_create
+- az_kusto_database_delete
+- az_kusto_database_list
+- az_kusto_database_list-principal
+- az_kusto_database_remove-principal
+- az_kusto_database_show
+- az_kusto_database_update
+- az_kusto_database_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 05/18/2021
+  description: Perintah Azure CLI untuk Kusto sekarang menjadi ekstensi.  Jalankan "az extension add -n kusto" untuk menginstal ekstensi.  Modul inti asli untuk Kusto tidak lagi didukung.
+  ms.openlocfilehash: 8c8dcee25837872804622d929a0fcc8b86c3d409
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140891078"

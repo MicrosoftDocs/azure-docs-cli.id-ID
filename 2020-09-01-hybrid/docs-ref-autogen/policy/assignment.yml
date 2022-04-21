@@ -1,0 +1,207 @@
+### YamlMime:AzureCLIGroup
+uid: az_policy_assignment
+name: az policy assignment
+summary: Mengelola penetapan kebijakan sumber daya.
+description: ''
+directCommands:
+- uid: az_policy_assignment_create
+  name: az policy assignment create
+  summary: Membuat penetapan kebijakan sumber daya.
+  description: ''
+  syntax: >-
+    az policy assignment create [--description]
+                                [--display-name]
+                                [--name]
+                                [--not-scopes]
+                                [--params]
+                                [--policy]
+                                [--resource-group]
+                                [--scope]
+  examples:
+  - summary: Membuat penetapan kebijakan sumber daya pada cakupan
+    syntax: >-
+      Valid scopes are management group, subscription, resource group, and resource, for example
+         management group:  /providers/Microsoft.Management/managementGroups/MyManagementGroup
+         subscription:      /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333
+         resource group:    /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup
+         resource:          /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM
+           az policy assignment create --scope \
+              "/providers/Microsoft.Management/managementGroups/MyManagementGroup" \
+                  --policy {PolicyName} -p "{ \"allowedLocations\": \
+                      { \"value\": [ \"australiaeast\", \"eastus\", \"japaneast\" ] } }"
+  - summary: Buat penetapan kebijakan sumber daya dan berikan nilai parameter aturan.
+    syntax: >-
+      az policy assignment create --policy {PolicyName} -p "{ \"allowedLocations\": \
+          { \"value\": [ \"australiaeast\", \"eastus\", \"japaneast\" ] } }"
+  - summary: Buat penetapan kebijakan sumber daya dengan identitas yang ditetapkan sistem.
+    syntax: az policy assignment create --name myPolicy --policy {PolicyName} --mi-system-assigned --location eastus
+  - summary: Buat penetapan kebijakan sumber daya dengan identitas yang ditetapkan sistem. Identitas akan memiliki akses peran 'Kontributor' ke langganan.
+    syntax: az policy assignment create --name myPolicy --policy {PolicyName} --mi-system-assigned --identity-scope /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx --role Contributor --location eastus
+  - summary: Buat penetapan kebijakan sumber daya dengan identitas yang ditetapkan pengguna.
+    syntax: az policy assignment create --name myPolicy --policy {PolicyName} -g MyResourceGroup --mi-user-assigned myAssignedId --location westus
+  - summary: Buat penetapan kebijakan sumber daya dengan mode penegakan. Ini menunjukkan apakah efek kebijakan akan diberlakukan atau tidak selama pembuatan dan pembaruan penugasan. Silakan kunjungi https://aka.ms/azure-policyAssignment-enforcement-mode untuk informasi lebih lanjut.
+    syntax: az policy assignment create --name myPolicy --policy {PolicyName} --enforcement-mode 'DoNotEnforce'
+  optionalParameters:
+  - name: --description
+    summary: Deskripsi penetapan kebijakan.
+    description: ''
+  - name: --display-name
+    summary: Nama tampilan penetapan kebijakan.
+    description: ''
+  - name: --name -n
+    summary: Nama penetapan kebijakan baru.
+    description: ''
+  - name: --not-scopes
+    summary: Cakupan yang dipisahkan spasi di mana penetapan kebijakan tidak berlaku.
+    description: ''
+  - name: --params -p
+    summary: String berformat JSON atau jalur ke file atau uri dengan nilai parameter aturan kebijakan.
+    description: ''
+  - name: --policy
+    summary: Nama atau id definisi kebijakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya tempat kebijakan akan diterapkan.
+    description: ''
+  - name: --scope
+    summary: Cakupan yang berlaku untuk penetapan kebijakan ini.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_policy_assignment_delete
+  name: az policy assignment delete
+  summary: Menghapus penetapan kebijakan sumber daya.
+  description: ''
+  syntax: >-
+    az policy assignment delete --name
+                                [--resource-group]
+                                [--scope]
+  examples:
+  - summary: Menghapus penetapan kebijakan sumber daya. (dibuat otomatis)
+    syntax: az policy assignment delete --name MyPolicyAssignment
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama penetapan kebijakan.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Grup sumber daya tempat kebijakan akan diterapkan.
+    description: ''
+  - name: --scope
+    summary: Cakupan yang berlaku untuk penetapan kebijakan ini.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_policy_assignment_list
+  name: az policy assignment list
+  summary: Mencantumkan penetapan kebijakan sumber daya.
+  description: ''
+  syntax: >-
+    az policy assignment list [--disable-scope-strict-match]
+                              [--resource-group]
+                              [--scope]
+  optionalParameters:
+  - name: --disable-scope-strict-match
+    summary: Sertakan penetapan kebijakan yang diwarisi dari cakupan induk atau pada cakupan anak.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya tempat kebijakan akan diterapkan.
+    description: ''
+  - name: --scope
+    summary: Cakupan yang berlaku untuk penetapan kebijakan ini.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_policy_assignment_show
+  name: az policy assignment show
+  summary: Menampilkan penetapan kebijakan sumber daya.
+  description: ''
+  syntax: >-
+    az policy assignment show --name
+                              [--resource-group]
+                              [--scope]
+  examples:
+  - summary: Menampilkan penetapan kebijakan sumber daya. (dibuat otomatis)
+    syntax: az policy assignment show --name MyPolicyAssignment
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama penetapan kebijakan.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Grup sumber daya tempat kebijakan akan diterapkan.
+    description: ''
+  - name: --scope
+    summary: Cakupan yang berlaku untuk penetapan kebijakan ini.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_policy_assignment_update
+  name: az policy assignment update
+  summary: Memperbarui penetapan kebijakan sumber daya.
+  description: ''
+  syntax: >-
+    az policy assignment update [--description]
+                                [--display-name]
+                                [--name]
+                                [--not-scopes]
+                                [--params]
+                                [--resource-group]
+                                [--scope]
+  examples:
+  - summary: Perbarui deskripsi penetapan kebijakan sumber daya.
+    syntax: az policy assignment update --name myPolicy --description 'My policy description'
+  optionalParameters:
+  - name: --description
+    summary: Deskripsi penetapan kebijakan.
+    description: ''
+  - name: --display-name
+    summary: Nama tampilan penetapan kebijakan.
+    description: ''
+  - name: --name -n
+    summary: Nama penetapan kebijakan.
+    description: ''
+  - name: --not-scopes
+    summary: Cakupan yang dipisahkan spasi di mana penetapan kebijakan tidak berlaku.
+    description: ''
+  - name: --params -p
+    summary: String berformat JSON atau jalur ke file atau uri dengan nilai parameter aturan kebijakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya tempat kebijakan akan diterapkan.
+    description: ''
+  - name: --scope
+    summary: Cakupan yang berlaku untuk penetapan kebijakan ini.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+commands:
+- az_policy_assignment_create
+- az_policy_assignment_delete
+- az_policy_assignment_list
+- az_policy_assignment_show
+- az_policy_assignment_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 02/22/2022
+  description: Mengelola penetapan kebijakan sumber daya.
+  ms.openlocfilehash: ac86e000b4e5d90f0c018195efa73ff81e901b93
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140924468"

@@ -1,0 +1,118 @@
+### YamlMime:AzureCLIGroup
+uid: az_monitor_app-insights_metrics
+name: az monitor app-insights metrics
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **application-insights** untuk Azure CLI (versi 2.0.79 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **metrik app-insights monitor az** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengambil metrik dari aplikasi.
+description: ''
+directCommands:
+- uid: az_monitor_app-insights_metrics_get-metadata
+  name: az monitor app-insights metrics get-metadata
+  summary: Dapatkan metadata untuk metrik pada aplikasi tertentu.
+  description: ''
+  syntax: >-
+    az monitor app-insights metrics get-metadata --app
+                                                 [--resource-group]
+  examples:
+  - summary: Melihat metadata untuk aplikasi yang disediakan.
+    syntax: az monitor app-insights metrics get-metadata --app e292531c-eb03-4079-9bb0-fe6b56b99f8b
+  requiredParameters:
+  - isRequired: true
+    name: --app -a
+    summary: GUID, nama aplikasi, atau nama sumber daya Azure yang sepenuhnya memenuhi syarat dari komponen Insights Aplikasi. GUID aplikasi dapat diperoleh dari item menu Akses API pada sumber daya Insights Aplikasi apa pun di portal Azure. Jika menggunakan nama aplikasi, tentukan grup sumber daya.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_monitor_app-insights_metrics_show
+  name: az monitor app-insights metrics show
+  summary: Menampilkan nilai satu metrik.
+  description: ''
+  syntax: >-
+    az monitor app-insights metrics show --app
+                                         --metrics
+                                         [--aggregation]
+                                         [--end-time]
+                                         [--filter]
+                                         [--interval]
+                                         [--offset]
+                                         [--orderby]
+                                         [--resource-group]
+                                         [--segment]
+                                         [--start-time]
+                                         [--top]
+  examples:
+  - summary: Lihat jumlah peristiwa availabilityResults.
+    syntax: az monitor app-insights metrics show --app e292531c-eb03-4079-9bb0-fe6b56b99f8b --metric availabilityResults/count
+  requiredParameters:
+  - isRequired: true
+    name: --app -a
+    summary: GUID, nama aplikasi, atau nama sumber daya Azure yang sepenuhnya memenuhi syarat dari komponen Insights Aplikasi. GUID aplikasi dapat diperoleh dari item menu Akses API pada sumber daya Insights Aplikasi apa pun di portal Azure. Jika menggunakan nama aplikasi, tentukan grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --metrics -m
+    summary: Metrik yang akan diambil. Mungkin metrik AI standar atau metrik kustom khusus aplikasi.
+    description: ''
+  optionalParameters:
+  - name: --aggregation
+    summary: Agregasi yang digunakan saat menghitung nilai metrik. Untuk mengambil lebih dari satu agregasi pada satu waktu, pisahkan dengan koma. Jika tidak ada agregasi yang ditentukan, maka agregasi default untuk metrik akan digunakan.
+    description: ''
+  - name: --end-time
+    summary: 'Rentang waktu akhir untuk operasi saat ini. Default ke waktu saat ini. Format: tanggal (yyyy-mm-dd) waktu (hh:mm:ss.xxxxx) zona waktu (+/-hh:mm).'
+    description: ''
+  - name: --filter
+    summary: Ekspresi yang digunakan untuk memfilter hasil.  Nilai ini harus berupa ekspresi filter OData yang valid di mana kunci setiap klausa harus berupa dimensi yang berlaku untuk metrik yang Anda ambil.
+    description: ''
+  - name: --interval
+    summary: 'Interval untuk mengagregasi metrik, dalam format ##h##m.'
+    description: ''
+  - name: --offset
+    defaultValue: 1h
+    summary: 'Offset waktu rentang kueri, dalam format ##d##h.'
+    description: Dapat digunakan dengan --start-time atau --end-time. Jika digunakan dengan --start-time, maka waktu akhir akan dihitung dengan menambahkan offset. Jika digunakan dengan --end-time (default), maka waktu mulai akan dihitung dengan mengurangi offset. Jika --start-time dan --end-time disediakan, maka --offset akan diabaikan.
+  - name: --orderby
+    summary: Fungsi dan arah agregasi untuk mengurutkan segmen.  Nilai ini hanya valid ketika segmen ditentukan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --segment
+    summary: Nama dimensi untuk mensegmentasi nilai metrik. Dimensi ini harus berlaku untuk metrik yang Anda ambil. Untuk segmentasi lebih dari satu dimensi pada satu waktu, pisahkan dengan koma (,). Dalam hal ini, data metrik akan disegmentasi dalam urutan dimensi tercantum dalam parameter .
+    description: ''
+  - name: --start-time
+    summary: 'Rentang waktu mulai untuk mengambil data. Format: tanggal (yyyy-mm-dd) waktu (hh:mm:ss.xxxxx) zona waktu (+/-hh:mm).'
+    description: ''
+  - name: --top
+    summary: Jumlah segmen yang akan dikembalikan.  Nilai ini hanya valid ketika segmen ditentukan.
+    description: ''
+commands:
+- az_monitor_app-insights_metrics_get-metadata
+- az_monitor_app-insights_metrics_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengambil metrik dari aplikasi.
+  ms.openlocfilehash: 6fb9b2ed2d58281e27dddb2e600764cd5964ec58
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140924900"

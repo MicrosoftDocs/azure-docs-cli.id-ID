@@ -1,0 +1,177 @@
+### YamlMime:AzureCLIGroup
+uid: az_eventgrid_partner_namespace_event-channel
+name: az eventgrid partner namespace event-channel
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **eventgrid** untuk Azure CLI (versi 2.0.49 atau lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az eventgrid partner namespace event-channel** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola saluran peristiwa mitra.
+description: ''
+directCommands:
+- uid: az_eventgrid_partner_namespace_event-channel_create
+  name: az eventgrid partner namespace event-channel create
+  summary: Buat saluran acara di bawah namespace mitra.
+  description: ''
+  syntax: >-
+    az eventgrid partner namespace event-channel create --desination-topic-name
+                                                        --destination-resource-group
+                                                        --destination-subscription-id
+                                                        --name
+                                                        --partner-namespace-name
+                                                        --resource-group
+                                                        --source
+                                                        [--activation-expiration-date]
+                                                        [--partner-topic-description]
+                                                        [--publisher-filter]
+  examples:
+  - summary: Membuat saluran peristiwa tertentu.
+    syntax: az eventgrid partner namespace event-channel create -g rg1 --partner-namespace-name partnernamespace1 -n eventChannelName1 --source SourceExample1 --destination-subscription-id 61f7c265-374d-499e-866d-5f4cc302b888 --destination-resource-group rg2 --desination-topic-name topicName1
+  - summary: Buat saluran acara tertentu dengan waktu kedaluwarsa aktivasi dan deskripsi ramah topik mitra.
+    syntax: az eventgrid partner namespace event-channel create -g rg1 --partner-namespace-name partnernamespace1 -n eventChannelName1 --source SourceExample1 --destination-subscription-id 61f7c265-374d-499e-866d-5f4cc302b888 --destination-resource-group rg2 --desination-topic-name topicName1 --activation-expiration-date '2020-05-20T10:00' --partner-topic-description 'This topic is created by Costoco corp on user behavior.'
+  - summary: Buat saluran peristiwa tertentu dengan filter penerbit.
+    syntax: az eventgrid partner namespace event-channel create -g rg1 --partner-namespace-name partnernamespace1 -n eventChannelName1 --source SourceExample1 --destination-subscription-id 61f7c265-374d-499e-866d-5f4cc302b888 --destination-resource-group rg2 --desination-topic-name topicName1 --publisher-filter data.key1 NumberIn 2 3 4 100 200 --publisher-filter data.key2 StringIn 2 3 4 100 200
+  requiredParameters:
+  - isRequired: true
+    name: --desination-topic-name
+    summary: Nama topik mitra yang terkait dengan saluran acara.
+    description: ''
+  - isRequired: true
+    name: --destination-resource-group
+    summary: Grup Sumber Daya Azure pelanggan yang membuat saluran peristiwa. Topik mitra yang terkait dengan saluran peristiwa akan dibuat di bawah grup sumber daya ini.
+    description: ''
+  - isRequired: true
+    name: --destination-subscription-id
+    summary: Id langganan Azure pelanggan yang membuat saluran peristiwa. Topik mitra yang terkait dengan saluran peristiwa akan dibuat di bawah langganan Azure ini.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama saluran acara.
+    description: ''
+  - isRequired: true
+    name: --partner-namespace-name
+    summary: Nama namespace mitra.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --source
+    summary: Pengidentifikasi sumber daya yang membentuk sumber mitra peristiwa. Ini mewakili sumber daya unik dalam model sumber daya mitra.
+    description: ''
+  optionalParameters:
+  - name: --activation-expiration-date
+    summary: Tanggal atau tanggalwaktu dalam format UTC ISO 8601 (misalnya, '2022-02-17T01:59:59+00:00' atau '2022-02-17') setelah itu saluran peristiwa dan topik mitra yang sesuai akan kedaluwarsa dan dihapus secara otomatis. Jika waktu ini tidak ditentukan, tanggal kedaluwarsa diatur ke tujuh hari secara default.
+    description: ''
+  - name: --partner-topic-description
+    summary: Deskripsi yang ramah tentang topik mitra yang sesuai. Ini akan sangat membantu untuk menghapus ambiguitas asal pembuatan topik mitra untuk pelanggan.
+    description: ''
+  - name: --publisher-filter
+    summary: Filter penerbit yang digunakan untuk mengaktifkan pemfilteran peristiwa berdasarkan properti peristiwa tertentu. Kumpulan filter ini yang ditentukan oleh penerbit untuk menentukan peristiwa mana yang akan diterima oleh pelanggan.
+    description: 'Penggunaan: --publisher-filter KEY[. INNERKEY] FILTEROPERATOR VALUE [VALUE ...] StringIn: --publisher-filter data. String WarnaIn String Kuning Oranye Merah BiruNotIn: --publisher-filter data. String WarnaNotIn String Kuning Oranye Merah BiruKontains: --publisher-filter subjek StringContains Biru Merah StringBeginsWith: --publisher-filter subjek StringBeginsWith Biru Merah StringEndsWith: --publisher-filter subjek StringEndsWith img png jpg NumberIn: --publisher-filter data.property1 NumberIn 5 10 20 NumberNotIn: --publisher-filter data.property2 NumberNotIn 100 200 300 NumberLessThan: --publisher-filter data. property3 NumberLessThan 100 NumberLessThanOrEquals: --publisher-filter data.property2 NumberLessThanOrEquals 100 NumberGreaterThan: --publisher-filter data.property3 NumberGreaterThan 100 NumberGreaterThanOrEquals: --publisher-filter data.property2 NumberGreaterThanOrEquals 100 BoolEquals: --publisher-filter data.property3 BoolEquals true Beberapa filter penerbit dapat ditentukan dengan menggunakan lebih dari satu `--publisher-filter` argumen.'
+- uid: az_eventgrid_partner_namespace_event-channel_delete
+  name: az eventgrid partner namespace event-channel delete
+  summary: Menghapus namespace mitra.
+  description: ''
+  syntax: >-
+    az eventgrid partner namespace event-channel delete --name
+                                                        --partner-namespace-name
+                                                        --resource-group
+  examples:
+  - summary: Menghapus namespace mitra tertentu.
+    syntax: az eventgrid partner namespace event-channel delete -g rg1 --partner-namespace-name partnernamespace1 -n eventChannelName1
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama saluran acara.
+    description: ''
+  - isRequired: true
+    name: --partner-namespace-name
+    summary: Nama namespace mitra.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_eventgrid_partner_namespace_event-channel_list
+  name: az eventgrid partner namespace event-channel list
+  summary: Mencantumkan saluran peristiwa mitra yang tersedia.
+  description: ''
+  syntax: >-
+    az eventgrid partner namespace event-channel list --partner-namespace-name
+                                                      --resource-group
+                                                      [--odata-query]
+  examples:
+  - summary: Mencantumkan semua saluran peristiwa di namespace mitra tertentu.
+    syntax: az eventgrid partner namespace event-channel list -g rg1 --partner-namespace-name partnernamespace1
+  - summary: Mencantumkan semua saluran peristiwa di bawah namespace mitra yang namanya berisi pola "XYZ"
+    syntax: az eventgrid partner namespace event-channel list -g rg1 --partner-namespace-name partnernamespace1  --odata-query "Contains(name, 'XYZ')"
+  requiredParameters:
+  - isRequired: true
+    name: --partner-namespace-name
+    summary: Nama namespace mitra.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --odata-query
+    summary: Kueri yang digunakan untuk memfilter hasil menggunakan sintaks OData.
+    description: ''
+- uid: az_eventgrid_partner_namespace_event-channel_show
+  name: az eventgrid partner namespace event-channel show
+  summary: Dapatkan detail saluran peristiwa di bawah namespace mitra.
+  description: ''
+  syntax: >-
+    az eventgrid partner namespace event-channel show --name
+                                                      --partner-namespace-name
+                                                      --resource-group
+  examples:
+  - summary: Menampilkan detail saluran acara.
+    syntax: az eventgrid partner namespace event-channel show -g rg1 --partner-namespace-name partnernamespace1 -n eventChannelName1
+  - summary: Menampilkan detail saluran peristiwa berdasarkan ID sumber daya.
+    syntax: az eventgrid partner namespace event-channel show --ids /subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.EventGrid/partnenamespaces/partnernamespace1/eventChannels/eventChannelName1
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama saluran acara.
+    description: ''
+  - isRequired: true
+    name: --partner-namespace-name
+    summary: Nama namespace mitra.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+commands:
+- az_eventgrid_partner_namespace_event-channel_create
+- az_eventgrid_partner_namespace_event-channel_delete
+- az_eventgrid_partner_namespace_event-channel_list
+- az_eventgrid_partner_namespace_event-channel_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola saluran peristiwa mitra.
+  ms.openlocfilehash: 8ec6b297cd3f4196124c9d31f1c79b6784d987fc
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140988602"

@@ -1,0 +1,124 @@
+### YamlMime:AzureCLIGroup
+uid: az_backup_recoveryconfig
+name: az backup recoveryconfig
+summary: Mengelola konfigurasi pemulihan item yang dicadangkan beban kerja Azure.
+description: ''
+directCommands:
+- uid: az_backup_recoveryconfig_show
+  name: az backup recoveryconfig show
+  summary: Buat konfigurasi pemulihan item yang dicadangkan beban kerja Azure.
+  description: ''
+  syntax: >-
+    az backup recoveryconfig show --restore-mode {AlternateWorkloadRestore, OriginalWorkloadRestore, RestoreAsFiles}
+                                  [--backup-management-type {AzureIaasVM, AzureStorage, AzureWorkload}]
+                                  [--container-name]
+                                  [--filepath]
+                                  [--from-full-rp-name]
+                                  [--ids]
+                                  [--item-name]
+                                  [--log-point-in-time]
+                                  [--resource-group]
+                                  [--rp-name]
+                                  [--target-container-name]
+                                  [--target-item-name]
+                                  [--target-resource-group]
+                                  [--target-server-name]
+                                  [--target-server-type {HANAInstance, SAPHanaDatabase, SAPHanaSystem, SQLAG, SQLDatabase, SQLInstance}]
+                                  [--target-vault-name]
+                                  [--vault-name]
+                                  [--workload-type {MSSQL, SAPASE, SAPHANA, SAPHanaDatabase, SQLDataBase}]
+  examples:
+  - summary: Buat konfigurasi pemulihan item yang dicadangkan beban kerja Azure. Objek konfigurasi menyimpan semua detail seperti mode pemulihan, tujuan target untuk pemulihan dan parameter spesifik aplikasi seperti jalur fisik target untuk SQL.
+    syntax: az backup recoveryconfig show --container-name MyContainer --item-name MyItem --resource-group MyResourceGroup --vault-name MyVault --restore-mode OriginalWorkloadRestore
+  requiredParameters:
+  - isRequired: true
+    name: --restore-mode
+    parameterValueGroup: AlternateWorkloadRestore, OriginalWorkloadRestore, RestoreAsFiles
+    summary: Tentukan mode pemulihan.
+    description: ''
+  optionalParameters:
+  - name: --backup-management-type
+    defaultValue: AzureWorkload
+    parameterValueGroup: AzureIaasVM, AzureStorage, AzureWorkload
+    summary: 'Tentukan jenis manajemen cadangan. Tentukan bagaimana Azure Backup mengelola cadangan entitas dalam sumber daya ARM. Misalnya: AzureWorkloads mengacu pada beban kerja yang diinstal dalam Azure VM, AzureStorage mengacu pada entitas dalam akun Storage. Diperlukan hanya jika nama yang mudah diingat digunakan sebagai Nama kontainer.'
+    description: ''
+  - name: --container-name -c
+    summary: Nama kontainer cadangan. Menerima 'Nama' atau 'FriendlyName' dari output perintah az backup container list. Jika 'FriendlyName' diteruskan maka BackupManagementType diperlukan.
+    description: ''
+  - name: --filepath
+    summary: Jalur tempat DB harus dipulihkan sebagai file.
+    description: ''
+  - name: --from-full-rp-name
+    summary: Nama titik Pemulihan awal.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --item-name -i
+    summary: Nama item yang dicadangkan.
+    description: ''
+  - name: --log-point-in-time
+    summary: Tentukan titik waktu (dalam UTC) yang akan dipulihkan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --rp-name -r
+    summary: Nama titik pemulihan.
+    description: ''
+  - name: --target-container-name
+    summary: Kontainer target tempat titik pemulihan DB harus diunduh sebagai file.
+    description: ''
+  - name: --target-item-name
+    summary: Tentukan nama item target untuk operasi pemulihan.
+    description: ''
+  - name: --target-resource-group
+    summary: Tentukan grup sumber daya item target untuk Pemulihan Lintas Wilayah. Nilai default akan sama dengan --resource-group jika tidak ditentukan.
+    description: ''
+  - name: --target-server-name
+    summary: Tentukan nama server induk dari item target.
+    description: ''
+  - name: --target-server-type
+    parameterValueGroup: HANAInstance, SAPHanaDatabase, SAPHanaSystem, SQLAG, SQLDatabase, SQLInstance
+    summary: Tentukan jenis server yang harus ditemukan.
+    description: ''
+  - name: --target-vault-name
+    summary: Tentukan nama vault item target untuk Pemulihan Lintas Wilayah. Nilai default akan sama dengan --vault-name jika tidak ditentukan.
+    description: ''
+  - name: --vault-name -v
+    summary: Nama vault layanan Pemulihan.
+    description: ''
+  - name: --workload-type
+    parameterValueGroup: MSSQL, SAPASE, SAPHANA, SAPHanaDatabase, SQLDataBase
+    summary: Tentukan jenis aplikasi dalam Sumber Daya yang harus ditemukan dan dilindungi oleh Azure Backup.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/backup/_help.py
+commands:
+- az_backup_recoveryconfig_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 10/26/2021
+  description: Mengelola konfigurasi pemulihan item yang dicadangkan beban kerja Azure.
+  ms.openlocfilehash: fdae52c7788d77b1d56cae64394674b50d38641f
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140952944"

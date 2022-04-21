@@ -1,0 +1,226 @@
+### YamlMime:AzureCLIGroup
+uid: az_quota
+name: az quota
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **kuota** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **kuota az** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola API Ekstensi Kuota Azure.
+description: ''
+directCommands:
+- uid: az_quota_create
+  name: az quota create
+  summary: Buat batas kuota untuk sumber daya yang ditentukan dengan nilai yang diminta.
+  description: ''
+  syntax: >-
+    az quota create --resource-name
+                    --scope
+                    [--limit-object]
+                    [--no-wait]
+                    [--properties]
+                    [--resource-type]
+  examples:
+  - summary: Quotas_PutRequest_ForNetwork
+    syntax: az quota create --resource-name "MinPublicIpInterNetworkPrefixLength" --scope "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus" --limit-object value=10 limit-object-type=LimitValue --resource-type MinPublicIpInterNetworkPrefixLength
+  - summary: Quotas_PutRequest_ForNetwork_StandardSkuPublicIpAddressesResource
+    syntax: az quota create --resource-name "StandardSkuPublicIpAddresses" --scope "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus" --limit-object value=10 limit-object-type=LimitValue --resource-type PublicIpAddresses
+  - summary: Quotas_Put_Request_ForCompute
+    syntax: az quota create --resource-name "standardFSv2Family" --scope "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus" --limit-object value=10 limit-object-type=LimitValue --resource-type dedicated
+  - summary: Quotas_Request_ForMachineLearningServices_LowPriorityResource
+    syntax: az quota create  --resource-name "TotalLowPriorityCores" --scope "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.MachineLearning/Services/locations/eastus" --limit-object value=10 limit-object-type=LimitValue --resource-type lowPriority
+  requiredParameters:
+  - isRequired: true
+    name: --resource-name
+    summary: Nama sumber daya untuk penyedia sumber daya tertentu.
+    description: ''
+  - isRequired: true
+    name: --scope
+    summary: URI sumber daya Azure target.
+    description: ''
+  optionalParameters:
+  - name: --limit-object
+    summary: Nilai batas kuota sumber daya.
+    description: >-
+      Penggunaan: --limit-object value=XX limit-type=XX limit-object-type=XX value: Required. Jenis batas nilai kuota/batas: Jenis batas kuota atau penggunaan.
+
+      limit-object-type: Diperlukan. Jenis objek batas.
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --properties
+    summary: Properti tambahan untuk penyedia sumber daya tertentu.
+    description: ''
+  - name: --resource-type
+    summary: Nama jenis sumber daya.
+    description: ''
+- uid: az_quota_list
+  name: az quota list
+  summary: Dapatkan daftar batas kuota saat ini dari semua sumber daya untuk cakupan yang ditentukan. Respons dari operasi GET ini dapat dimanfaatkan untuk mengirimkan permintaan untuk memperbarui kuota.
+  description: ''
+  syntax: az quota list --scope
+  examples:
+  - summary: Quotas_listQuotaLimitsForCompute
+    syntax: az quota list --scope "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus"
+  - summary: Quotas_listQuotaLimitsForNetwork
+    syntax: az quota list --scope "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus"
+  - summary: Quotas_listQuotaLimitsMachineLearningServices
+    syntax: az quota list --scope "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.MachineLearningServices/locations/eastus"
+  requiredParameters:
+  - isRequired: true
+    name: --scope
+    summary: URI sumber daya Azure target.
+    description: ''
+- uid: az_quota_show
+  name: az quota show
+  summary: Dapatkan batas kuota sumber daya. Respons dapat digunakan untuk menentukan sisa kuota untuk menghitung batas kuota baru yang dapat dikirimkan dengan permintaan PUT.
+  description: ''
+  syntax: >-
+    az quota show --resource-name
+                  --scope
+  examples:
+  - summary: Quotas_Get_Request_ForCompute
+    syntax: az quota show --resource-name "standardNDSFamily" --scope "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus"
+  - summary: Quotas_UsagesRequest_ForNetwork
+    syntax: az quota show --resource-name "MinPublicIpInterNetworkPrefixLength" --scope "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus"
+  requiredParameters:
+  - isRequired: true
+    name: --resource-name
+    summary: Nama sumber daya untuk penyedia sumber daya tertentu.
+    description: ''
+  - isRequired: true
+    name: --scope
+    summary: URI sumber daya Azure target.
+    description: ''
+- uid: az_quota_update
+  name: az quota update
+  summary: Perbarui batas kuota untuk sumber daya tertentu ke nilai yang ditentukan.
+  description: ''
+  syntax: >-
+    az quota update --resource-name
+                    --scope
+                    [--limit-object]
+                    [--no-wait]
+                    [--properties]
+                    [--resource-type]
+  examples:
+  - summary: Quotas_Request_PatchForCompute
+    syntax: az quota update --resource-name "standardFSv2Family" --scope "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus" --limit-object value=10 limit-object-type=LimitValue --resource-type dedicated
+  - summary: Quotas_Request_PatchForNetwork
+    syntax: az quota update --resource-name "MinPublicIpInterNetworkPrefixLength" --scope "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus" --limit-object value=10 limit-object-type=LimitValue --resource-type MinPublicIpInterNetworkPrefixLength
+  requiredParameters:
+  - isRequired: true
+    name: --resource-name
+    summary: Nama sumber daya untuk penyedia sumber daya tertentu.
+    description: ''
+  - isRequired: true
+    name: --scope
+    summary: URI sumber daya Azure target.
+    description: ''
+  optionalParameters:
+  - name: --limit-object
+    summary: Nilai batas kuota sumber daya.
+    description: >-
+      Penggunaan: --limit-object value=XX limit-type=XX limit-object-type=XX value: Required. Jenis batas nilai kuota/batas: Jenis batas kuota atau penggunaan.
+
+      limit-object-type: Diperlukan. Jenis objek batas.
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --properties
+    summary: Properti tambahan untuk penyedia sumber daya tertentu.
+    description: ''
+  - name: --resource-type
+    summary: Nama jenis sumber daya.
+    description: ''
+- uid: az_quota_wait
+  name: az quota wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi kuota terpenuhi.
+  description: ''
+  syntax: >-
+    az quota wait --resource-name
+                  --scope
+                  [--created]
+                  [--custom]
+                  [--deleted]
+                  [--exists]
+                  [--interval]
+                  [--timeout]
+                  [--updated]
+  examples:
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga kuota berhasil dibuat.
+    syntax: az quota wait --resource-name "MinPublicIpInterNetworkPrefixLength" --scope "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus" --created
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga kuota berhasil diperbarui.
+    syntax: az quota wait --resource-name "MinPublicIpInterNetworkPrefixLength" --scope "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus" --updated
+  requiredParameters:
+  - isRequired: true
+    name: --resource-name
+    summary: Nama sumber daya untuk penyedia sumber daya tertentu.
+    description: ''
+  - isRequired: true
+    name: --scope
+    summary: URI sumber daya Azure target.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_quota_create
+- az_quota_list
+- az_quota_operation
+- az_quota_operation_list
+- az_quota_request
+- az_quota_request_status
+- az_quota_request_status_list
+- az_quota_request_status_show
+- az_quota_show
+- az_quota_update
+- az_quota_usage
+- az_quota_usage_list
+- az_quota_usage_show
+- az_quota_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola API Ekstensi Kuota Azure.
+  ms.openlocfilehash: ee7ad0fb5e26508af96fb2ceafc2d40217bfff44
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140924198"

@@ -1,0 +1,207 @@
+### YamlMime:AzureCLIGroup
+uid: az_account
+name: az account
+summary: Mengelola informasi langganan Azure.
+description: ''
+directCommands:
+- uid: az_account_clear
+  name: az account clear
+  summary: Hapus semua langganan dari cache lokal CLI.
+  description: Untuk menghapus langganan saat ini, gunakan 'az logout'.
+  syntax: az account clear
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/profile/_help.py
+- uid: az_account_create
+  name: az account create
+  summary: Membuat langganan.
+  description: ''
+  syntax: >-
+    az account create --enrollment-account-name
+                      --offer-type {MS-AZR-0017P, MS-AZR-0148P}
+                      [--display-name]
+                      [--owner-object-id]
+                      [--owner-spn]
+                      [--owner-upn]
+  requiredParameters:
+  - isRequired: true
+    name: --enrollment-account-name --enrollment-account-object-id
+    summary: Nama akun pendaftaran yang harus digunakan untuk membuat langganan.
+    description: ''
+  - isRequired: true
+    name: --offer-type
+    parameterValueGroup: MS-AZR-0017P, MS-AZR-0148P
+    summary: Jenis penawaran langganan. Misalnya, MS-AZR-0017P (EnterpriseAgreement) dan MS-AZR-0148P (EnterpriseAgreement devTest) tersedia.
+    description: ''
+  optionalParameters:
+  - name: --display-name
+    summary: Nama tampilan langganan.
+    description: ''
+  - name: --owner-object-id
+    summary: Id objek pemilik yang harus diberikan akses ke langganan baru.
+    description: ''
+  - name: --owner-spn
+    summary: Nama perwakilan layanan pemilik yang harus diberikan akses ke langganan baru.
+    description: ''
+  - name: --owner-upn
+    summary: Nama utama pengguna pemilik yang harus diberikan akses ke langganan baru.
+    description: ''
+- uid: az_account_get-access-token
+  name: az account get-access-token
+  summary: Dapatkan token untuk utilitas untuk mengakses Azure.
+  description: Token akan berlaku setidaknya selama 5 menit dengan maksimum pada 60 menit. Jika argumen langganan tidak ditentukan, akun saat ini akan digunakan.
+  syntax: >-
+    az account get-access-token [--name]
+                                [--resource]
+                                [--resource-type {aad-graph, arm, batch, data-lake, media, ms-graph, oss-rdbms}]
+                                [--scope]
+                                [--tenant]
+  examples:
+  - summary: Mendapatkan token akses untuk akun saat ini
+    syntax: az account get-access-token
+  - summary: Mendapatkan token akses untuk langganan tertentu
+    syntax: az account get-access-token --subscription 00000000-0000-0000-0000-000000000000
+  - summary: Mendapatkan token akses untuk penyewa tertentu
+    syntax: az account get-access-token --tenant 00000000-0000-0000-0000-000000000000
+  - summary: Dapatkan token akses untuk digunakan dengan MS Graph API
+    syntax: az account get-access-token --resource-type ms-graph
+  optionalParameters:
+  - name: --name --subscription -n -s
+    summary: Nama atau ID langganan.
+    description: ''
+  - name: --resource
+    summary: Titik akhir sumber daya Azure di AAD v1.0.
+    description: ''
+  - name: --resource-type
+    parameterValueGroup: aad-graph, arm, batch, data-lake, media, ms-graph, oss-rdbms
+    summary: Jenis sumber daya terkenal.
+    description: ''
+  - name: --scope
+    summary: Cakupan AAD yang dipisahkan spasi di AAD v2.0. Default ke Azure Resource Manager.
+    description: ''
+  - name: --tenant -t
+    summary: ID Penyewa tempat token diperoleh. Hanya tersedia untuk akun pengguna dan perwakilan layanan, bukan untuk akun MSI atau Cloud Shell.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/profile/_help.py
+- uid: az_account_list
+  name: az account list
+  summary: Dapatkan daftar langganan untuk akun yang masuk. Secara default, hanya langganan 'Diaktifkan' dari cloud saat ini yang ditampilkan.
+  description: ''
+  syntax: >-
+    az account list [--all]
+                    [--refresh]
+  optionalParameters:
+  - name: --all
+    summary: Cantumkan semua langganan dari semua cloud, bukan hanya yang 'Diaktifkan'.
+    description: ''
+  - name: --refresh
+    summary: Ambil langganan terbaru dari server.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/profile/_help.py
+- uid: az_account_list-locations
+  name: az account list-locations
+  summary: Mencantumkan wilayah yang didukung untuk langganan saat ini.
+  description: ''
+  syntax: az account list-locations
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/profile/_help.py
+- uid: az_account_set
+  name: az account set
+  summary: Atur langganan menjadi langganan aktif saat ini.
+  description: ''
+  syntax: az account set --name
+  requiredParameters:
+  - isRequired: true
+    name: --name --subscription -n -s
+    summary: Nama atau ID langganan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/profile/_help.py
+- uid: az_account_show
+  name: az account show
+  summary: Dapatkan detail langganan.
+  description: >-
+    Jika langganan tidak ditentukan, tampilkan detail langganan default.
+
+
+    Ketika --sdk-auth digunakan, output menyertakan kredensial yang harus Anda lindungi. Pastikan Anda tidak menyertakan info masuk ini dalam kode atau memasukkan info masuk ke dalam kontrol sumber Anda. Sebagai alternatif, pertimbangkan untuk menggunakan [identitas terkelola](https://aka.ms/azadsp-managed-identities) jika tersedia untuk mencegah penggunaan info masuk.
+  syntax: az account show [--name]
+  optionalParameters:
+  - name: --name --subscription -n -s
+    summary: Nama atau ID langganan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/profile/_help.py
+commands:
+- az_account_alias
+- az_account_alias_create
+- az_account_alias_delete
+- az_account_alias_list
+- az_account_alias_show
+- az_account_alias_wait
+- az_account_clear
+- az_account_create
+- az_account_get-access-token
+- az_account_list
+- az_account_list-locations
+- az_account_lock
+- az_account_lock_create
+- az_account_lock_delete
+- az_account_lock_list
+- az_account_lock_show
+- az_account_lock_update
+- az_account_management-group
+- az_account_management-group_check-name-availability
+- az_account_management-group_create
+- az_account_management-group_delete
+- az_account_management-group_entities
+- az_account_management-group_entities_list
+- az_account_management-group_hierarchy-settings
+- az_account_management-group_hierarchy-settings_create
+- az_account_management-group_hierarchy-settings_delete
+- az_account_management-group_hierarchy-settings_list
+- az_account_management-group_hierarchy-settings_update
+- az_account_management-group_list
+- az_account_management-group_show
+- az_account_management-group_subscription
+- az_account_management-group_subscription_add
+- az_account_management-group_subscription_remove
+- az_account_management-group_subscription_show
+- az_account_management-group_subscription_show-sub-under-mg
+- az_account_management-group_tenant-backfill
+- az_account_management-group_tenant-backfill_get
+- az_account_management-group_tenant-backfill_start
+- az_account_management-group_update
+- az_account_set
+- az_account_show
+- az_account_subscription
+- az_account_subscription_cancel
+- az_account_subscription_enable
+- az_account_subscription_list
+- az_account_subscription_list-location
+- az_account_subscription_rename
+- az_account_subscription_show
+- az_account_tenant
+- az_account_tenant_list
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 10/15/2021
+  description: Mengelola informasi langganan Azure.
+  ms.openlocfilehash: f1677b076be51b6f2c9148af99c6805334201aa8
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140953258"

@@ -1,0 +1,436 @@
+### YamlMime:AzureCLIGroup
+uid: az_synapse_workspace
+name: az synapse workspace
+summary: Mengelola ruang kerja Synapse.
+description: ''
+directCommands:
+- uid: az_synapse_workspace_activate
+  name: az synapse workspace activate
+  summary: Mengaktifkan ruang kerja dan mengubah statusnya dari tertunda menjadi status keberhasilan saat ruang kerja pertama kali disediakan dan enkripsi ganda diaktifkan.
+  description: Saat membuat ruang kerja Azure Synapse Analytics, Anda dapat memilih untuk mengenkripsi semua data tidak aktif di ruang kerja dengan kunci yang dikelola pelanggan yang akan menyediakan enkripsi ganda ke ruang kerja. Anda mungkin perlu menyiapkan lingkungan enkripsi terlebih dahulu, seperti untuk membuat brankas kunci dengan perlindungan penghapusan menyeluruh diaktifkan dan menentukan Kebijakan Akses ke brankas kunci. Kemudian gunakan cmdlet ini untuk mengaktifkan ruang kerja Azure Synapse Analytics baru yang mengaktifkan enkripsi ganda menggunakan kunci yang dikelola pelanggan.
+  syntax: >-
+    az synapse workspace activate --key-identifier
+                                  [--ids]
+                                  [--name]
+                                  [--no-wait]
+                                  [--resource-group]
+                                  [--workspace-name]
+  examples:
+  - summary: mengaktifkan ruang kerja.
+    syntax: >-
+      az synapse workspace activate --name newkey --workspace-name testsynapseworkspace \
+
+      --resource-group rg --key-identifier https://{keyvaultname}.vault.azure.net/keys/{keyname}
+  requiredParameters:
+  - isRequired: true
+    name: --key-identifier
+    summary: 'Url Key Vault kunci enkripsi ruang kerja. harus dalam format: https://{keyvaultname}.vault.azure.net/keys/{keyname}.'
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama tampilan kunci yang dikelola pelanggan ruang kerja. Semua kunci yang ada dapat ditemukan menggunakan cmdlet /"az synapse workspace key list/".
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_workspace_check-name
+  name: az synapse workspace check-name
+  summary: Periksa apakah nama ruang kerja Synapse tersedia atau tidak.
+  description: ''
+  syntax: az synapse workspace check-name --name
+  examples:
+  - summary: Periksa apakah nama ruang kerja Synapse tersedia atau tidak.
+    syntax: az synapse workspace check-name --name testsynapseworkspace
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama yang ingin Anda periksa.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_workspace_create
+  name: az synapse workspace create
+  summary: Membuat ruang kerja Synapse.
+  description: ''
+  syntax: >-
+    az synapse workspace create --file-system
+                                --name
+                                --resource-group
+                                --sql-admin-login-password
+                                --sql-admin-login-user
+                                --storage-account
+                                [--account-name]
+                                [--allowed-tenant-ids]
+                                [--cmk]
+                                [--collaboration-branch]
+                                [--enable-managed-virtual-network {false, true}]
+                                [--host-name]
+                                [--key-name]
+                                [--location]
+                                [--no-wait]
+                                [--prevent-data-exfiltration {false, true}]
+                                [--project-name]
+                                [--repository-name]
+                                [--repository-type {AzureDevOpsGit, GitHub}]
+                                [--root-folder]
+                                [--tags]
+                                [--tenant-id]
+  examples:
+  - summary: Membuat ruang kerja Synapse
+    syntax: >-
+      az synapse workspace create --name testworkspace --resource-group rg \
+        --storage-account testadlsgen2 --file-system testfilesystem \
+        --sql-admin-login-user cliuser1 --sql-admin-login-password Password123! --location "East US"
+  - summary: Membuat ruang kerja Synapse dengan id sumber daya penyimpanan
+    syntax: >-
+      az synapse workspace create --name testworkspace --resource-group rg \
+        --storage-account /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Storage/storageAccounts/testadlsgen2 --file-system testfilesystem \
+        --sql-admin-login-user cliuser1 --sql-admin-login-password Password123! --location "East US"
+  - summary: Membuat ruang kerja Synapse menggunakan kunci yang dikelola pelanggan
+    syntax: >-
+      az synapse workspace create --name testworkspace --resource-group rg \
+        --storage-account testadlsgen2 --file-system testfilesystem \
+        --sql-admin-login-user cliuser1 --sql-admin-login-password Password123! --location "East US" \
+        --key-identifier https://{keyvaultname}.vault.azure.net/keys/{keyname} --key-name testcmk
+  - summary: Membuat ruang kerja Synapse yang menyambungkan ke azure devops
+    syntax: >-
+      az synapse workspace create --name testworkspace --resource-group rg \
+        --storage-account testadlsgen2 --file-system testfilesystem \
+        --sql-admin-login-user cliuser1 --sql-admin-login-password Password123! --location "East US" \
+        --repository-type AzureDevOpsGit --account-name testuser --project-name testprj \
+        --repository-name testrepo --collaboration-branch main
+  requiredParameters:
+  - isRequired: true
+    name: --file-system
+    summary: Sistem file akun penyimpanan data lake.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama ruang kerja.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --sql-admin-login-password -p
+    summary: Kata sandi masuk administrator sql.
+    description: ''
+  - isRequired: true
+    name: --sql-admin-login-user -u
+    summary: Nama pengguna masuk administrator sql.
+    description: ''
+  - isRequired: true
+    name: --storage-account
+    summary: Nama akun penyimpanan data lake atau id sumber daya.
+    description: ''
+  optionalParameters:
+  - name: --account-name
+    summary: GitHub nama akun yang digunakan untuk repositori atau nama organisasi Azure devops.
+    description: ''
+  - name: --allowed-tenant-ids
+    summary: Penyewa Azure AD yang disetujui yang diizinkan oleh lalu lintas data keluar. Penyewa Azure AD pengguna saat ini akan disertakan secara default. Gunakan ('' di PowerShell) untuk menonaktifkan semua id penyewa yang diizinkan.
+    description: ''
+  - name: --cmk --key-identifier
+    summary: 'Kunci yang dikelola pelanggan digunakan untuk mengenkripsi semua data tidak aktif di ruang kerja. Pengidentifikasi kunci harus dalam format: https://{keyvaultname}.vault.azure.net/keys/{keyname}.'
+    description: ''
+  - name: --collaboration-branch
+    summary: Nama cabang tempat Anda akan berkolaborasi dengan orang lain dan dari mana Anda akan menerbitkan.
+    description: ''
+  - name: --enable-managed-virtual-network --enable-managed-vnet
+    parameterValueGroup: false, true
+    summary: Bendera menunjukkan apakah mengaktifkan jaringan virtual terkelola.
+    description: ''
+  - name: --host-name
+    summary: Jika menggunakan github Enterprise Server, berikan URL sever seperti https://github.mydomain.com.Do tidak menggunakan opsi ini dengan GitHub Enterprise Cloud.
+    description: ''
+  - name: --key-name
+    defaultValue: default
+    summary: Nama tampilan kunci yang dikelola pelanggan ruang kerja. Semua kunci yang ada dapat ditemukan menggunakan cmdlet "az synapse workspace key list".
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --prevent-data-exfiltration --prevent-exfiltration
+    parameterValueGroup: false, true
+    summary: Bendera menunjukkan apakah mengaktifkan penyelundupan data.
+    description: ''
+  - name: --project-name
+    summary: Nama proyek yang Anda sambungkan.
+    description: ''
+  - name: --repository-name
+    summary: Nama repositori yang Anda sambungkan.
+    description: ''
+  - name: --repository-type
+    parameterValueGroup: AzureDevOpsGit, GitHub
+    summary: Jenis konfigurasi repositori.
+    description: ''
+  - name: --root-folder
+    defaultValue: /
+    summary: Nama folder ke lokasi sumber daya JSON Azure synapse Anda diimpor. Defaultnya adalah /.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --tenant-id
+    summary: Id penyewa yang digunakan untuk menyambungkan azure devops.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_workspace_delete
+  name: az synapse workspace delete
+  summary: Menghapus ruang kerja Synapse.
+  description: ''
+  syntax: >-
+    az synapse workspace delete [--ids]
+                                [--name]
+                                [--no-wait]
+                                [--resource-group]
+                                [--yes]
+  examples:
+  - summary: Menghapus ruang kerja Synapse.
+    syntax: az synapse workspace delete --name testsynapseworkspace --resource-group rg
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama ruang kerja.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_workspace_list
+  name: az synapse workspace list
+  summary: Mencantumkan semua ruang kerja Synapse.
+  description: ''
+  syntax: az synapse workspace list [--resource-group]
+  examples:
+  - summary: Mencantumkan semua ruang kerja Synapse di bawah langganan
+    syntax: az synapse workspace list
+  - summary: Mencantumkan semua ruang kerja Synapse di bawah grup sumber daya tertentu
+    syntax: az synapse workspace list --resource-group rg
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_workspace_show
+  name: az synapse workspace show
+  summary: Dapatkan ruang kerja Synapse.
+  description: ''
+  syntax: >-
+    az synapse workspace show [--ids]
+                              [--name]
+                              [--resource-group]
+  examples:
+  - summary: Dapatkan ruang kerja Synapse.
+    syntax: az synapse workspace show --name testsynapseworkspace --resource-group rg
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama ruang kerja.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_workspace_update
+  name: az synapse workspace update
+  summary: Memperbarui ruang kerja Synapse.
+  description: ''
+  syntax: >-
+    az synapse workspace update [--account-name]
+                                [--allowed-tenant-ids]
+                                [--collaboration-branch]
+                                [--host-name]
+                                [--ids]
+                                [--key-name]
+                                [--name]
+                                [--no-wait]
+                                [--project-name]
+                                [--repository-name]
+                                [--repository-type {AzureDevOpsGit, GitHub}]
+                                [--resource-group]
+                                [--root-folder]
+                                [--sql-admin-login-password]
+                                [--tags]
+                                [--tenant-id]
+  examples:
+  - summary: Memperbarui ruang kerja Synapse
+    syntax: >-
+      az synapse workspace update --name fromcli4 --resource-group rg \
+        --tags key1=value1
+  optionalParameters:
+  - name: --account-name
+    summary: GitHub nama akun yang digunakan untuk repositori atau nama organisasi Azure devops.
+    description: ''
+  - name: --allowed-tenant-ids
+    summary: Penyewa Azure AD yang disetujui yang diizinkan oleh lalu lintas data keluar. Penyewa Azure AD pengguna saat ini akan disertakan secara default. Gunakan ('' di PowerShell) untuk menonaktifkan semua id penyewa yang diizinkan.
+    description: ''
+  - name: --collaboration-branch
+    summary: Nama cabang tempat Anda akan berkolaborasi dengan orang lain dan dari mana Anda akan menerbitkan.
+    description: ''
+  - name: --host-name
+    summary: Jika menggunakan github Enterprise Server, berikan URL sever seperti https://github.mydomain.com.Do tidak menggunakan opsi ini dengan GitHub Enterprise Cloud.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --key-name
+    summary: Nama tampilan kunci yang dikelola pelanggan ruang kerja. Semua kunci yang ada dapat ditemukan menggunakan cmdlet "az synapse workspace key list".
+    description: ''
+  - name: --name -n
+    summary: Nama ruang kerja.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --project-name
+    summary: Nama proyek yang Anda sambungkan.
+    description: ''
+  - name: --repository-name
+    summary: Nama repositori yang Anda sambungkan.
+    description: ''
+  - name: --repository-type
+    parameterValueGroup: AzureDevOpsGit, GitHub
+    summary: Jenis konfigurasi repositori.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --root-folder
+    summary: Nama folder ke lokasi sumber daya JSON Azure synapse Anda diimpor. Defaultnya adalah /.
+    description: ''
+  - name: --sql-admin-login-password -p
+    summary: Kata sandi masuk administrator sql.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --tenant-id
+    summary: Id penyewa yang digunakan untuk menyambungkan azure devops.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_workspace_wait
+  name: az synapse workspace wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi ruang kerja terpenuhi.
+  description: ''
+  syntax: >-
+    az synapse workspace wait --resource-group
+                              --workspace-name
+                              [--created]
+                              [--custom]
+                              [--deleted]
+                              [--exists]
+                              [--interval]
+                              [--timeout]
+                              [--updated]
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+commands:
+- az_synapse_workspace_activate
+- az_synapse_workspace_check-name
+- az_synapse_workspace_create
+- az_synapse_workspace_delete
+- az_synapse_workspace_firewall-rule
+- az_synapse_workspace_firewall-rule_create
+- az_synapse_workspace_firewall-rule_delete
+- az_synapse_workspace_firewall-rule_list
+- az_synapse_workspace_firewall-rule_show
+- az_synapse_workspace_firewall-rule_update
+- az_synapse_workspace_firewall-rule_wait
+- az_synapse_workspace_key
+- az_synapse_workspace_key_create
+- az_synapse_workspace_key_delete
+- az_synapse_workspace_key_list
+- az_synapse_workspace_key_show
+- az_synapse_workspace_key_wait
+- az_synapse_workspace_list
+- az_synapse_workspace_managed-identity
+- az_synapse_workspace_managed-identity_grant-sql-access
+- az_synapse_workspace_managed-identity_revoke-sql-access
+- az_synapse_workspace_managed-identity_show-sql-access
+- az_synapse_workspace_managed-identity_wait
+- az_synapse_workspace_show
+- az_synapse_workspace_update
+- az_synapse_workspace_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 10/27/2021
+  description: Mengelola ruang kerja Synapse.
+  ms.openlocfilehash: d7c77bd94f15b652d3857d69f74ab5c8819076bf
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140968838"
