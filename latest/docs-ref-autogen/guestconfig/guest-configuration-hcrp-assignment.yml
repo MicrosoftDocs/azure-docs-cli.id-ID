@@ -1,0 +1,331 @@
+### YamlMime:AzureCLIGroup
+uid: az_guestconfig_guest-configuration-hcrp-assignment
+name: az guestconfig guest-configuration-hcrp-assignment
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **guestconfig** untuk Azure CLI (versi 2.3.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az guestconfig guest-configuration-hcrp-assignment** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Guestconfig guest-configuration-hcrp-assignment.
+description: ''
+directCommands:
+- uid: az_guestconfig_guest-configuration-hcrp-assignment_create
+  name: az guestconfig guest-configuration-hcrp-assignment create
+  summary: Membuat hubungan antara mesin ARC dan konfigurasi tamu.
+  description: ''
+  syntax: >-
+    az guestconfig guest-configuration-hcrp-assignment create --guest-configuration-assignment-name
+                                                              --machine-name
+                                                              --resource-group
+                                                              [--context]
+                                                              [--guest-configuration-configuration-parameter]
+                                                              [--guest-configuration-configuration-setting]
+                                                              [--guest-configuration-name]
+                                                              [--guest-configuration-version]
+                                                              [--latest-assignment-report-assignment]
+                                                              [--location]
+                                                              [--name]
+                                                              [--no-wait]
+  examples:
+  - summary: Membuat atau memperbarui penetapan konfigurasi tamu
+    syntax: az guestconfig guest-configuration-hcrp-assignment create --guest-configuration-assignment-name "WhitelistedApplication" --machine-name "myMachineName" --guest-configuration-name "WhitelistedApplication" --location "westcentralus" --context "Azure policy" --guest-configuration-name "WhitelistedApplication" --guest-configuration-configuration-parameter name="[InstalledApplication]bwhitelistedapp;Name" value="NotePad,sql" --guest-configuration-configuration-setting action-after-reboot="ContinueConfiguration" configuration-mode="MonitorOnly" configuration-mode-frequency-mins=15 reboot-if-needed="False" --guest-configuration-version "1.*" --resource-group "myResourceGroupName"
+  requiredParameters:
+  - isRequired: true
+    name: --guest-configuration-assignment-name
+    summary: Nama penugasan konfigurasi tamu.
+    description: ''
+  - isRequired: true
+    name: --machine-name
+    summary: Nama mesin ARC.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --context
+    summary: 'Sumber yang memulai penetapan konfigurasi tamu. Misalnya: Azure Policy.'
+    description: ''
+  - name: --guest-configuration-configuration-parameter
+    summary: Parameter konfigurasi untuk konfigurasi tamu.
+    description: >-
+      Penggunaan: --guest-configuration-configuration-parameter name=XX value=XX
+
+
+      nama: Nama parameter konfigurasi.
+
+      nilai: Nilai parameter konfigurasi.
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --guest-configuration-configuration-parameter.
+  - name: --guest-configuration-configuration-setting
+    summary: Pengaturan konfigurasi untuk konfigurasi tamu.
+    description: >-
+      Penggunaan: --guest-configuration-configuration-setting configuration-mode=XX allow-module-overwrite=XX action-after-reboot=XX refresh-frequency-mins=XX reboot-if-needed=XX configuration-mode-frequency-mins=XX
+
+
+      mode konfigurasi: Menentukan bagaimana LCM(Local Configuration Manager) benar-benar menerapkan konfigurasi ke simpul target. Nilai yang mungkin berlaku adalah ApplyOnly, ApplyAndMonitor, dan ApplyAndAutoCorrect.
+
+      allow-module-overwrite: Jika true - konfigurasi baru yang diunduh dari layanan penarikan diizinkan untuk menimpa yang lama pada simpul target. Jika tidak, false action-after-reboot: Menentukan apa yang terjadi setelah reboot selama penerapan konfigurasi. Nilai yang mungkin adalah ContinueConfiguration dan StopConfiguration refresh-frequency-mins: Interval waktu, dalam menit, di mana LCM memeriksa layanan penarikan untuk mendapatkan konfigurasi yang diperbarui. Nilai ini diabaikan jika LCM tidak dikonfigurasi dalam mode penarikan. Nilai default adalah 30.
+
+      reboot-if-needed: Atur ini ke true untuk secara otomatis me-reboot node setelah konfigurasi yang memerlukan reboot diterapkan. Jika tidak, Anda harus me-reboot simpul secara manual untuk konfigurasi apa pun yang memerlukannya. Nilai defaultnya adalah false. Untuk menggunakan pengaturan ini ketika kondisi reboot diberlakukan oleh sesuatu selain DSC (seperti Windows Installer), gabungkan pengaturan ini dengan modul xPendingReboot.
+
+      configuration-mode-frequency-mins: Seberapa sering, dalam menit, konfigurasi saat ini diperiksa dan diterapkan. Properti ini diabaikan jika properti ConfigurationMode diatur ke ApplyOnly. Nilai default-nya adalah 15.
+  - name: --guest-configuration-name
+    summary: Nama konfigurasi tamu.
+    description: ''
+  - name: --guest-configuration-version
+    summary: Versi konfigurasi tamu.
+    description: ''
+  - name: --latest-assignment-report-assignment
+    summary: 'Detail konfigurasi penetapan konfigurasi tamu. Nilai yang diharapkan: json-string/@json-file.'
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --name
+    summary: Nama penugasan konfigurasi tamu.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_guestconfig_guest-configuration-hcrp-assignment_delete
+  name: az guestconfig guest-configuration-hcrp-assignment delete
+  summary: Menghapus penetapan konfigurasi tamu.
+  description: ''
+  syntax: >-
+    az guestconfig guest-configuration-hcrp-assignment delete --guest-configuration-assignment-name
+                                                              --machine-name
+                                                              --resource-group
+                                                              [--no-wait]
+  examples:
+  - summary: Menghapus penugasan konfigurasi tamu
+    syntax: az guestconfig guest-configuration-hcrp-assignment delete --guest-configuration-assignment-name "SecureProtocol" --machine-name "myMachineName" --resource-group "myResourceGroupName"
+  requiredParameters:
+  - isRequired: true
+    name: --guest-configuration-assignment-name
+    summary: Nama penugasan konfigurasi tamu.
+    description: ''
+  - isRequired: true
+    name: --machine-name
+    summary: Nama mesin ARC.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_guestconfig_guest-configuration-hcrp-assignment_list
+  name: az guestconfig guest-configuration-hcrp-assignment list
+  summary: Mencantumkan semua penugasan konfigurasi tamu untuk komputer ARC.
+  description: ''
+  syntax: >-
+    az guestconfig guest-configuration-hcrp-assignment list --machine-name
+                                                            --resource-group
+  examples:
+  - summary: Mencantumkan semua penugasan konfigurasi tamu untuk komputer virtual
+    syntax: az guestconfig guest-configuration-hcrp-assignment list --machine-name "myMachineName" --resource-group "myResourceGroupName"
+  requiredParameters:
+  - isRequired: true
+    name: --machine-name
+    summary: Nama mesin ARC.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_guestconfig_guest-configuration-hcrp-assignment_show
+  name: az guestconfig guest-configuration-hcrp-assignment show
+  summary: Dapatkan informasi tentang penugasan konfigurasi tamu.
+  description: ''
+  syntax: >-
+    az guestconfig guest-configuration-hcrp-assignment show --guest-configuration-assignment-name
+                                                            --machine-name
+                                                            --resource-group
+  examples:
+  - summary: Mendapatkan penugasan konfigurasi tamu
+    syntax: az guestconfig guest-configuration-hcrp-assignment show --guest-configuration-assignment-name "SecureProtocol" --machine-name "myMachineName" --resource-group "myResourceGroupName"
+  requiredParameters:
+  - isRequired: true
+    name: --guest-configuration-assignment-name
+    summary: Nama penetapan konfigurasi tamu.
+    description: ''
+  - isRequired: true
+    name: --machine-name
+    summary: Nama mesin ARC.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_guestconfig_guest-configuration-hcrp-assignment_update
+  name: az guestconfig guest-configuration-hcrp-assignment update
+  summary: Membuat hubungan antara mesin ARC dan konfigurasi tamu.
+  description: ''
+  syntax: >-
+    az guestconfig guest-configuration-hcrp-assignment update --guest-configuration-assignment-name
+                                                              --machine-name
+                                                              --resource-group
+                                                              [--context]
+                                                              [--guest-configuration-configuration-parameter]
+                                                              [--guest-configuration-configuration-setting]
+                                                              [--guest-configuration-name]
+                                                              [--guest-configuration-version]
+                                                              [--latest-assignment-report-assignment]
+                                                              [--location]
+                                                              [--name]
+                                                              [--no-wait]
+  examples:
+  - summary: Membuat atau memperbarui penetapan konfigurasi tamu
+    syntax: az guestconfig guest-configuration-hcrp-assignment update --guest-configuration-assignment-name "WhitelistedApplication" --machine-name "myMachineName" --guest-configuration-name "WhitelistedApplication" --location "westcentralus" --context "Azure policy" --guest-configuration-name "WhitelistedApplication" --guest-configuration-configuration-parameter name="[InstalledApplication]bwhitelistedapp;Name" value="NotePad,sql" --guest-configuration-configuration-setting action-after-reboot="ContinueConfiguration" configuration-mode="MonitorOnly" configuration-mode-frequency-mins=15 reboot-if-needed="False" --guest-configuration-version "1.*" --resource-group "myResourceGroupName"
+  requiredParameters:
+  - isRequired: true
+    name: --guest-configuration-assignment-name
+    summary: Nama penugasan konfigurasi tamu.
+    description: ''
+  - isRequired: true
+    name: --machine-name
+    summary: Nama mesin ARC.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --context
+    summary: 'Sumber yang memulai penetapan konfigurasi tamu. Misalnya: Azure Policy.'
+    description: ''
+  - name: --guest-configuration-configuration-parameter
+    summary: Parameter konfigurasi untuk konfigurasi tamu.
+    description: >-
+      Penggunaan: --guest-configuration-configuration-parameter name=XX value=XX
+
+
+      nama: Nama parameter konfigurasi.
+
+      nilai: Nilai parameter konfigurasi.
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --guest-configuration-configuration-parameter.
+  - name: --guest-configuration-configuration-setting
+    summary: Pengaturan konfigurasi untuk konfigurasi tamu.
+    description: >-
+      Penggunaan: --guest-configuration-configuration-setting configuration-mode=XX allow-module-overwrite=XX action-after-reboot=XX refresh-frequency-mins=XX reboot-if-needed=XX configuration-mode-frequency-mins=XX
+
+
+      mode konfigurasi: Menentukan bagaimana LCM(Local Configuration Manager) benar-benar menerapkan konfigurasi ke simpul target. Nilai yang mungkin berlaku adalah ApplyOnly, ApplyAndMonitor, dan ApplyAndAutoCorrect.
+
+      allow-module-overwrite: Jika true - konfigurasi baru yang diunduh dari layanan penarikan diizinkan untuk menimpa yang lama pada simpul target. Jika tidak, false action-after-reboot: Menentukan apa yang terjadi setelah reboot selama penerapan konfigurasi. Nilai yang mungkin adalah ContinueConfiguration dan StopConfiguration refresh-frequency-mins: Interval waktu, dalam menit, di mana LCM memeriksa layanan penarikan untuk mendapatkan konfigurasi yang diperbarui. Nilai ini diabaikan jika LCM tidak dikonfigurasi dalam mode penarikan. Nilai default adalah 30.
+
+      reboot-if-needed: Atur ini ke true untuk secara otomatis me-reboot node setelah konfigurasi yang memerlukan reboot diterapkan. Jika tidak, Anda harus me-reboot simpul secara manual untuk konfigurasi apa pun yang memerlukannya. Nilai defaultnya adalah false. Untuk menggunakan pengaturan ini ketika kondisi reboot diberlakukan oleh sesuatu selain DSC (seperti Windows Installer), gabungkan pengaturan ini dengan modul xPendingReboot.
+
+      configuration-mode-frequency-mins: Seberapa sering, dalam menit, konfigurasi saat ini diperiksa dan diterapkan. Properti ini diabaikan jika properti ConfigurationMode diatur ke ApplyOnly. Nilai default-nya adalah 15.
+  - name: --guest-configuration-name
+    summary: Nama konfigurasi tamu.
+    description: ''
+  - name: --guest-configuration-version
+    summary: Versi konfigurasi tamu.
+    description: ''
+  - name: --latest-assignment-report-assignment
+    summary: 'Detail konfigurasi penetapan konfigurasi tamu. Nilai yang diharapkan: json-string/@json-file.'
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --name
+    summary: Nama penugasan konfigurasi tamu.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_guestconfig_guest-configuration-hcrp-assignment_wait
+  name: az guestconfig guest-configuration-hcrp-assignment wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi guestconfig guest-configuration-hcrp-assignment terpenuhi.
+  description: ''
+  syntax: >-
+    az guestconfig guest-configuration-hcrp-assignment wait --guest-configuration-assignment-name
+                                                            --machine-name
+                                                            --resource-group
+                                                            [--created]
+                                                            [--custom]
+                                                            [--deleted]
+                                                            [--exists]
+                                                            [--interval]
+                                                            [--timeout]
+                                                            [--updated]
+  examples:
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga guestconfig guest-configuration-hcrp-assignment berhasil dibuat.
+    syntax: az guestconfig guest-configuration-hcrp-assignment wait --guest-configuration-assignment-name "SecureProtocol" --machine-name "myMachineName" --resource-group "myResourceGroupName" --created
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga guestconfig guest-configuration-hcrp-assignment berhasil dihapus.
+    syntax: az guestconfig guest-configuration-hcrp-assignment wait --guest-configuration-assignment-name "SecureProtocol" --machine-name "myMachineName" --resource-group "myResourceGroupName" --deleted
+  requiredParameters:
+  - isRequired: true
+    name: --guest-configuration-assignment-name
+    summary: Nama penetapan konfigurasi tamu.
+    description: ''
+  - isRequired: true
+    name: --machine-name
+    summary: Nama mesin ARC.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_guestconfig_guest-configuration-hcrp-assignment_create
+- az_guestconfig_guest-configuration-hcrp-assignment_delete
+- az_guestconfig_guest-configuration-hcrp-assignment_list
+- az_guestconfig_guest-configuration-hcrp-assignment_show
+- az_guestconfig_guest-configuration-hcrp-assignment_update
+- az_guestconfig_guest-configuration-hcrp-assignment_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Guestconfig guest-configuration-hcrp-assignment.
+  ms.openlocfilehash: 5315330f8f7384374732274f4bc58da81567fd8e
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140951721"

@@ -1,0 +1,320 @@
+### YamlMime:AzureCLIGroup
+uid: az_aro
+name: az aro
+summary: Mengelola kluster Azure Red Hat OpenShift.
+description: ''
+directCommands:
+- uid: az_aro_create
+  name: az aro create
+  summary: Buat kluster.
+  description: ''
+  syntax: >-
+    az aro create --master-subnet
+                  --name
+                  --resource-group
+                  --worker-subnet
+                  [--apiserver-visibility {Private, Public}]
+                  [--client-id]
+                  [--client-secret]
+                  [--cluster-resource-group]
+                  [--domain]
+                  [--ingress-visibility {Private, Public}]
+                  [--location]
+                  [--master-vm-size]
+                  [--no-wait]
+                  [--pod-cidr]
+                  [--pull-secret]
+                  [--service-cidr]
+                  [--tags]
+                  [--vnet]
+                  [--vnet-resource-group]
+                  [--worker-count]
+                  [--worker-vm-disk-size-gb]
+                  [--worker-vm-size]
+  examples:
+  - summary: Buat kluster.
+    syntax: az aro create --resource-group MyResourceGroup --name MyCluster --vnet MyVnet --master-subnet MyMasterSubnet --worker-subnet MyWorkerSubnet
+  - summary: Buat kluster dengan 5 simpul komputasi dan rahasia penarikan Red Hat.
+    syntax: az aro create --resource-group MyResourceGroup --name MyCluster --vnet MyVnet --master-subnet MyMasterSubnet --worker-subnet MyWorkerSubnet --worker-count 5 --pull-secret @pullsecret.txt
+  - summary: Membuat kluster privat.
+    syntax: az aro create --resource-group MyResourceGroup --name MyCluster --vnet MyVnet --master-subnet MyMasterSubnet --worker-subnet MyWorkerSubnet --apiserver-visibility Private --ingress-visibility Private
+  requiredParameters:
+  - isRequired: true
+    name: --master-subnet
+    summary: Nama atau ID subnet vnet master.  Jika nama disediakan, `--vnet` harus disediakan.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --worker-subnet
+    summary: Nama atau ID subnet vnet pekerja.  Jika nama disediakan, `--vnet` harus disediakan.
+    description: ''
+  optionalParameters:
+  - name: --apiserver-visibility
+    parameterValueGroup: Private, Public
+    summary: Visibilitas server API.
+    description: ''
+  - name: --client-id
+    summary: ID klien perwakilan layanan kluster.
+    description: ''
+  - name: --client-secret
+    summary: Rahasia klien perwakilan layanan kluster.
+    description: ''
+  - name: --cluster-resource-group
+    summary: Grup sumber daya kluster.
+    description: ''
+  - name: --domain
+    summary: Domain kluster.
+    description: ''
+  - name: --ingress-visibility
+    parameterValueGroup: Private, Public
+    summary: Visibilitas masuk.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --master-vm-size
+    summary: Ukuran VM master.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --pod-cidr
+    summary: CIDR jaringan pod. Harus minimal /18 atau lebih besar.
+    description: ''
+  - name: --pull-secret
+    summary: Tarik rahasia kluster.
+    description: ''
+  - name: --service-cidr
+    summary: CIDR jaringan layanan. Harus minimal /18 atau lebih besar.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --vnet
+    summary: Nama atau ID vnet.  Jika nama disediakan, `--vnet-resource-group` harus disediakan.
+    description: ''
+  - name: --vnet-resource-group
+    summary: Nama grup sumber daya vnet.
+    description: ''
+  - name: --worker-count
+    summary: Jumlah VM pekerja.
+    description: ''
+  - name: --worker-vm-disk-size-gb
+    summary: Ukuran disk dalam GB VM pekerja.
+    description: ''
+  - name: --worker-vm-size
+    summary: Ukuran VM pekerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/aro/_help.py
+- uid: az_aro_delete
+  name: az aro delete
+  summary: Menghapus kluster.
+  description: ''
+  syntax: >-
+    az aro delete --name
+                  --resource-group
+                  [--no-wait]
+                  [--yes]
+  examples:
+  - summary: Menghapus kluster.
+    syntax: az aro delete --name MyCluster --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/aro/_help.py
+- uid: az_aro_list
+  name: az aro list
+  summary: Mencantumkan kluster.
+  description: ''
+  syntax: az aro list [--resource-group]
+  examples:
+  - summary: Mencantumkan kluster.
+    syntax: az aro list
+  - summary: Mencantumkan kluster dengan tampilan tabel.
+    syntax: az aro list -o table
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/aro/_help.py
+- uid: az_aro_list-credentials
+  name: az aro list-credentials
+  summary: Mencantumkan kredensial kluster.
+  description: ''
+  syntax: >-
+    az aro list-credentials --name
+                            --resource-group
+  examples:
+  - summary: Mencantumkan kredensial kluster.
+    syntax: az aro list-credentials --name MyCluster --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/aro/_help.py
+- uid: az_aro_show
+  name: az aro show
+  summary: Dapatkan detail kluster.
+  description: ''
+  syntax: >-
+    az aro show --name
+                --resource-group
+  examples:
+  - summary: Dapatkan detail kluster.
+    syntax: az aro show --name MyCluster --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/aro/_help.py
+- uid: az_aro_update
+  name: az aro update
+  summary: Memperbarui kluster.
+  description: ''
+  syntax: >-
+    az aro update --name
+                  --resource-group
+                  [--client-id]
+                  [--client-secret]
+                  [--no-wait]
+                  [--refresh-credentials {false, true}]
+  examples:
+  - summary: Memperbarui kluster.
+    syntax: az aro update --name MyCluster --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --client-id
+    summary: ID klien perwakilan layanan kluster.
+    description: ''
+  - name: --client-secret
+    summary: Rahasia klien perwakilan layanan kluster.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --refresh-credentials
+    parameterValueGroup: false, true
+    summary: Refresh kredensial aplikasi kluster.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/aro/_help.py
+- uid: az_aro_wait
+  name: az aro wait
+  summary: Tunggu hingga kluster mencapai status yang diinginkan.
+  description: Jika operasi pada kluster terganggu atau dimulai dengan `--no-wait`, gunakan perintah ini untuk menunggunya selesai.
+  syntax: >-
+    az aro wait --name
+                --resource-group
+                [--created]
+                [--custom]
+                [--deleted]
+                [--exists]
+                [--interval]
+                [--timeout]
+                [--updated]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/aro/_help.py
+commands:
+- az_aro_create
+- az_aro_delete
+- az_aro_list
+- az_aro_list-credentials
+- az_aro_show
+- az_aro_update
+- az_aro_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 12/11/2020
+  description: Mengelola kluster Azure Red Hat OpenShift.
+  ms.openlocfilehash: a949dbba5df45c778cd80933cda598911ebc7e1f
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140902850"

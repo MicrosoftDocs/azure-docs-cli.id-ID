@@ -1,0 +1,161 @@
+### YamlMime:AzureCLIGroup
+uid: az_attestation_policy
+name: az attestation policy
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **pengesahan** untuk Azure CLI (versi 2.11.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **kebijakan pengesahan az** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola kebijakan.
+description: ''
+directCommands:
+- uid: az_attestation_policy_reset
+  name: az attestation policy reset
+  summary: Mengatur ulang kebijakan pengesahan untuk penyewa yang ditentukan dan kembali ke kebijakan default.
+  description: ''
+  syntax: >-
+    az attestation policy reset --attestation-type {SGX-IntelSDK, SGX-OpenEnclaveSDK, TPM}
+                                [--id]
+                                [--name]
+                                [--policy-jws]
+                                [--resource-group]
+  examples:
+  - summary: Mengatur ulang kebijakan pengesahan untuk penyewa yang ditentukan dan kembali ke kebijakan default.
+    syntax: >-
+      az attestation policy reset -n "myattestationprovider" -g "MyResourceGroup" \
+
+      --attestation-type SGX-OpenEnclaveSDK --policy-jws "eyJhbGciOiJub25lIn0.."
+  requiredParameters:
+  - isRequired: true
+    name: --attestation-type
+    parameterValueGroup: SGX-IntelSDK, SGX-OpenEnclaveSDK, TPM
+    summary: Jenis pengesahan.
+    description: ''
+  optionalParameters:
+  - name: --id
+    summary: ID sumber daya penyedia. Silakan hilangkan --resource-group/-g atau --name/-n jika Anda telah menentukan --id.
+    description: ''
+  - name: --name -n
+    summary: Nama penyedia pengesahan.
+    description: ''
+  - name: --policy-jws
+    defaultValue: eyJhbGciOiJub25lIn0..
+    summary: JSON Web Signature dengan dokumen kebijakan kosong.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_attestation_policy_set
+  name: az attestation policy set
+  summary: Menetapkan kebijakan untuk jenis pengesahan tertentu.
+  description: ''
+  syntax: >-
+    az attestation policy set --attestation-type {SGX-IntelSDK, SGX-OpenEnclaveSDK, TPM}
+                              [--id]
+                              [--name]
+                              [--new-attestation-policy]
+                              [--new-attestation-policy-file]
+                              [--policy-format {JWT, Text}]
+                              [--resource-group]
+  examples:
+  - summary: Menetapkan kebijakan untuk jenis pengesahan tertentu menggunakan konten JWT.
+    syntax: >-
+      az attestation policy set -n "myattestationprovider" -g "MyResourceGroup" \
+
+      --attestation-type SGX-OpenEnclaveSDK --new-attestation-policy "{JWT}" --policy-format JWT
+  - summary: Mengatur kebijakan untuk jenis pengesahan tertentu menggunakan konten Teks.
+    syntax: >-
+      az attestation policy set -n "myattestationprovider" -g "MyResourceGroup" \
+
+      --attestation-type SGX-OpenEnclaveSDK --new-attestation-policy "{json_text}"
+  - summary: Mengatur kebijakan untuk jenis pengesahan tertentu menggunakan nama file.
+    syntax: >-
+      az attestation policy set -n "myattestationprovider" -g "MyResourceGroup" \
+
+      --attestation-type SGX-OpenEnclaveSDK --new-attestation-policy-file "{file_name}" --policy-format JWT
+  requiredParameters:
+  - isRequired: true
+    name: --attestation-type
+    parameterValueGroup: SGX-IntelSDK, SGX-OpenEnclaveSDK, TPM
+    summary: Jenis pengesahan.
+    description: ''
+  optionalParameters:
+  - name: --id
+    summary: ID sumber daya penyedia. Silakan hilangkan --resource-group/-g atau --name/-n jika Anda telah menentukan --id.
+    description: ''
+  - name: --name -n
+    summary: Nama penyedia pengesahan.
+    description: ''
+  - name: --new-attestation-policy
+    summary: Konten kebijakan pengesahan baru (Teks atau JWT).
+    description: ''
+  - name: --new-attestation-policy-file -f
+    summary: Nama file kebijakan pengesahan baru.
+    description: ''
+  - name: --policy-format
+    defaultValue: Text
+    parameterValueGroup: JWT, Text
+    summary: Menentukan format untuk kebijakan, baik Teks atau JWT (JSON Web Token).
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_attestation_policy_show
+  name: az attestation policy show
+  summary: Mengambil kebijakan saat ini untuk jenis pengesahan tertentu.
+  description: ''
+  syntax: >-
+    az attestation policy show --attestation-type {SGX-IntelSDK, SGX-OpenEnclaveSDK, TPM}
+                               [--id]
+                               [--name]
+                               [--resource-group]
+  examples:
+  - summary: Mengambil kebijakan saat ini untuk jenis pengesahan tertentu.
+    syntax: >-
+      az attestation policy show -n "myattestationprovider" -g "MyResourceGroup" \
+
+      --attestation-type SGX-OpenEnclaveSDK
+  requiredParameters:
+  - isRequired: true
+    name: --attestation-type
+    parameterValueGroup: SGX-IntelSDK, SGX-OpenEnclaveSDK, TPM
+    summary: Jenis pengesahan.
+    description: ''
+  optionalParameters:
+  - name: --id
+    summary: ID sumber daya penyedia. Silakan hilangkan --resource-group/-g atau --name/-n jika Anda telah menentukan --id.
+    description: ''
+  - name: --name -n
+    summary: Nama penyedia pengesahan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+commands:
+- az_attestation_policy_reset
+- az_attestation_policy_set
+- az_attestation_policy_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola kebijakan.
+  ms.openlocfilehash: 7304cd04a96e3a89c69e08384c374c1c571618da
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140902796"

@@ -1,0 +1,309 @@
+### YamlMime:AzureCLIGroup
+uid: az_healthcareapis_service
+name: az healthcareapis service
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **healthcareapis** untuk Azure CLI (versi 2.11.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **layanan az healthcareapis** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Layanan kesehatan.
+description: ''
+directCommands:
+- uid: az_healthcareapis_service_create
+  name: az healthcareapis service create
+  summary: Membuat metadata instans layanan.
+  description: ''
+  syntax: >-
+    az healthcareapis service create --kind {fhir, fhir-R4, fhir-Stu3}
+                                     --location
+                                     --resource-group
+                                     --resource-name
+                                     [--access-policies]
+                                     [--authentication-configuration]
+                                     [--cors-configuration]
+                                     [--cosmos-db-configuration]
+                                     [--etag]
+                                     [--export-configuration-storage-account-name]
+                                     [--identity-type {None, SystemAssigned}]
+                                     [--no-wait]
+                                     [--private-endpoint-connections]
+                                     [--public-network-access {Disabled, Enabled}]
+                                     [--tags]
+  examples:
+  - summary: Membuat atau Memperbarui layanan dengan semua parameter
+    syntax: az healthcareapis service create --resource-group "rg1" --resource-name "service1" --identity-type "SystemAssigned" --kind "fhir-R4" --location "westus2" --access-policies object-id="c487e7d1-3210-41a3-8ccc-e9372b78da47" --access-policies object-id="5b307da8-43d4-492b-8b66-b0294ade872f" --authentication-configuration audience="https://azurehealthcareapis.com" authority="https://login.microsoftonline.com/abfde7b2-df0f-47e6-aabf-2462b07508dc" smart-proxy-enabled=true --cors-configuration allow-credentials=false headers="*" max-age=1440 methods="DELETE" methods="GET" methods="OPTIONS" methods="PATCH" methods="POST" methods="PUT" origins="*" --cosmos-db-configuration key-vault-key-uri="https://my-vault.vault.azure.net/keys/my-key" offer-throughput=1000 --export-configuration-storage-account-name "existingStorageAccount" --public-network-access "Disabled"
+  - summary: Membuat atau Memperbarui layanan dengan parameter minimum
+    syntax: az healthcareapis service create --resource-group "rg1" --resource-name "service2" --kind "fhir-R4" --location "westus2" --access-policies object-id="c487e7d1-3210-41a3-8ccc-e9372b78da47"
+  requiredParameters:
+  - isRequired: true
+    name: --kind
+    parameterValueGroup: fhir, fhir-R4, fhir-Stu3
+    summary: Jenis layanan.
+    description: ''
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-name
+    summary: Nama instans layanan.
+    description: ''
+  optionalParameters:
+  - name: --access-policies
+    summary: Kebijakan akses instans layanan.
+    description: >-
+      Penggunaan: --access-policies object-id=XX
+
+
+      object-id: Diperlukan. ID objek Azure AD (Pengguna atau Aplikasi) yang diizinkan mengakses layanan FHIR.
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --access-policies.
+  - name: --authentication-configuration
+    summary: Konfigurasi autentikasi untuk instans layanan.
+    description: >-
+      Penggunaan: --authentication-configuration authority=XX audience=XX smart-proxy-enabled=XX
+
+
+      otoritas: Url otoritas untuk audiens layanan: Url audiens untuk layanan yang diaktifkan proksi pintar: Jika proksi SMART di FHIR diaktifkan.
+  - name: --cors-configuration
+    summary: Pengaturan untuk konfigurasi CORS instans layanan.
+    description: >-
+      Penggunaan: --cors-configuration origins=XX headers=XX methods=XX max-age=XX allow-credentials=XX
+
+
+      origins: Asal-usul yang diizinkan melalui CORS.
+
+      header: Header yang akan diizinkan melalui CORS.
+
+      metode: Metode yang akan diizinkan melalui CORS.
+
+      usia maksimal: Usia maksimal yang diizinkan melalui CORS.
+
+      allow-credentials: Jika kredensial diizinkan melalui CORS.
+  - name: --cosmos-db-configuration
+    summary: Pengaturan untuk database Cosmos DB yang mendukung layanan.
+    description: >-
+      Penggunaan: --cosmos-db-configuration offer-throughput=XX key-vault-key-uri=XX
+
+
+      throughput penawaran: Throughput yang disediakan untuk database cadangan.
+
+      key-vault-key-uri: URI kunci yang dikelola pelanggan untuk database cadangan.
+  - name: --etag
+    summary: Etag yang terkait dengan sumber daya, digunakan untuk konkurensi optimis saat mengeditnya.
+    description: ''
+  - name: --export-configuration-storage-account-name
+    summary: Nama akun penyimpanan ekspor default.
+    description: ''
+  - name: --identity-type
+    parameterValueGroup: None, SystemAssigned
+    summary: Jenis identitas yang ditentukan, saat ini SystemAssigned dan None diperbolehkan.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --private-endpoint-connections
+    summary: Daftar koneksi titik akhir privat yang disiapkan untuk sumber daya ini.
+    description: >-
+      Penggunaan: --private-endpoint-connections status=XX description=XX actions-required=XX
+
+
+      status: Menunjukkan apakah koneksi telah Disetujui/Ditolak/Dihapus oleh pemilik layanan.
+
+      deskripsi: Alasan persetujuan/penolakan koneksi.
+
+      tindakan yang diperlukan: Pesan yang menunjukkan apakah perubahan pada penyedia layanan memerlukan pembaruan pada konsumen.
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --private-endpoint-connections.
+  - name: --public-network-access
+    parameterValueGroup: Disabled, Enabled
+    summary: Izin kontrol untuk lalu lintas sarana data yang berasal dari jaringan publik saat titik akhir privat diaktifkan.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+- uid: az_healthcareapis_service_delete
+  name: az healthcareapis service delete
+  summary: Menghapus instans layanan.
+  description: ''
+  syntax: >-
+    az healthcareapis service delete --resource-group
+                                     --resource-name
+                                     [--no-wait]
+                                     [--yes]
+  examples:
+  - summary: Hapus layanan
+    syntax: az healthcareapis service delete --resource-group "rg1" --resource-name "service1"
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-name
+    summary: Nama instans layanan.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_healthcareapis_service_list
+  name: az healthcareapis service list
+  summary: Dapatkan semua instans layanan dalam grup sumber daya. Dan Dapatkan semua instans layanan dalam langganan.
+  description: ''
+  syntax: az healthcareapis service list [--resource-group]
+  examples:
+  - summary: Mencantumkan semua layanan dalam grup sumber daya
+    syntax: az healthcareapis service list --resource-group "rgname"
+  - summary: Mencantumkan semua layanan dalam langganan
+    syntax: az healthcareapis service list
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_healthcareapis_service_show
+  name: az healthcareapis service show
+  summary: Mendapatkan metadata instans layanan.
+  description: ''
+  syntax: >-
+    az healthcareapis service show --resource-group
+                                   --resource-name
+  examples:
+  - summary: Mendapatkan metadata
+    syntax: az healthcareapis service show --resource-group "rg1" --resource-name "service1"
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-name
+    summary: Nama instans layanan.
+    description: ''
+- uid: az_healthcareapis_service_update
+  name: az healthcareapis service update
+  summary: Memperbarui metadata instans layanan.
+  description: ''
+  syntax: >-
+    az healthcareapis service update --resource-group
+                                     --resource-name
+                                     [--no-wait]
+                                     [--public-network-access {Disabled, Enabled}]
+                                     [--tags]
+  examples:
+  - summary: Layanan patch
+    syntax: az healthcareapis service update --resource-group "rg1" --resource-name "service1" --tags tag1="value1" tag2="value2"
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-name
+    summary: Nama instans layanan.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --public-network-access
+    parameterValueGroup: Disabled, Enabled
+    summary: Izin kontrol untuk lalu lintas sarana data yang berasal dari jaringan publik saat titik akhir privat diaktifkan.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+- uid: az_healthcareapis_service_wait
+  name: az healthcareapis service wait
+  summary: Tempatkan CLI dalam keadaan menunggu sampai kondisi layanan healthcareapis terpenuhi.
+  description: ''
+  syntax: >-
+    az healthcareapis service wait --resource-group
+                                   --resource-name
+                                   [--created]
+                                   [--custom]
+                                   [--deleted]
+                                   [--exists]
+                                   [--interval]
+                                   [--timeout]
+                                   [--updated]
+  examples:
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga layanan healthcareapis berhasil dibuat.
+    syntax: az healthcareapis service wait --resource-group "rg1" --resource-name "service1" --created
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga layanan healthcareapis berhasil diperbarui.
+    syntax: az healthcareapis service wait --resource-group "rg1" --resource-name "service1" --updated
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga layanan healthcareapis berhasil dihapus.
+    syntax: az healthcareapis service wait --resource-group "rg1" --resource-name "service1" --deleted
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-name
+    summary: Nama instans layanan.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_healthcareapis_service_create
+- az_healthcareapis_service_delete
+- az_healthcareapis_service_list
+- az_healthcareapis_service_show
+- az_healthcareapis_service_update
+- az_healthcareapis_service_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Layanan kesehatan.
+  ms.openlocfilehash: b68e2b34e64a9c532607e3b15b286b353a200305
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140940758"
