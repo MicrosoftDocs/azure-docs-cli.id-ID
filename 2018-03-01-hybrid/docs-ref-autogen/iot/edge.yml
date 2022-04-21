@@ -1,0 +1,91 @@
+### YamlMime:AzureCLIGroup
+uid: az_iot_edge
+name: az iot edge
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **azure-iot** untuk Azure CLI (versi 2.24.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **az iot edge** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola solusi IoT di Edge.
+description: ''
+directCommands:
+- uid: az_iot_edge_set-modules
+  name: az iot edge set-modules
+  summary: Atur modul edge pada satu perangkat.
+  description: >-
+    Konten modul adalah json dan dalam bentuk {"modulesContent":{...}} atau {"content":{"modulesContent":{...}}}.
+
+
+    Secara default properti modul sistem $edgeAgent dan $edgeHub divalidasi terhadap skema yang diinstal dengan ekstensi IoT.
+
+    Ini dapat dinonaktifkan dengan menggunakan sakelar --no-validation.
+
+
+    Catatan: Setelah eksekusi, perintah akan menghasilkan pengumpulan modul yang diterapkan ke perangkat.
+  syntax: >-
+    az iot edge set-modules --content
+                            --device-id
+                            [--auth-type {key, login}]
+                            [--hub-name]
+                            [--login]
+                            [--resource-group]
+  examples:
+  - summary: Uji modul edge saat dalam pengembangan dengan mengatur modul pada perangkat target.
+    syntax: az iot edge set-modules --hub-name {iothub_name} --device-id {device_id} --content ../modules_content.json
+  requiredParameters:
+  - isRequired: true
+    name: --content -k
+    summary: IoT Edge konten penyebaran. Sediakan jalur file atau json mentah.
+    description: ''
+  - isRequired: true
+    name: --device-id -d
+    summary: Perangkat Target.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+commands:
+- az_iot_edge_deployment
+- az_iot_edge_deployment_create
+- az_iot_edge_deployment_delete
+- az_iot_edge_deployment_list
+- az_iot_edge_deployment_show
+- az_iot_edge_deployment_show-metric
+- az_iot_edge_deployment_update
+- az_iot_edge_set-modules
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola solusi IoT di Edge.
+  ms.openlocfilehash: b2f390564f237ebccf888ebcde34ac7ac2731325
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141017062"

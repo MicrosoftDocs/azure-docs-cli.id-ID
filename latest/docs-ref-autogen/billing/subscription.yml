@@ -1,0 +1,204 @@
+### YamlMime:AzureCLIGroup
+uid: az_billing_subscription
+name: az billing subscription
+summary: Langganan penagihan.
+description: ''
+directCommands:
+- uid: az_billing_subscription_list
+  name: az billing subscription list
+  summary: Mencantumkan langganan untuk akun penagihan. Operasi ini didukung untuk akun penagihan dengan jenis perjanjian Perjanjian Pelanggan Microsoft atau Perjanjian Mitra Microsoft.
+  description: ''
+  syntax: >-
+    az billing subscription list --account-name
+                                 [--customer-name]
+                                 [--invoice-section-name]
+                                 [--profile-name]
+  examples:
+  - summary: Mencantumkan langganan untuk bagian faktur
+    syntax: az billing subscription list --account-name "{billingAccountName}" --profile-name "{billingProfileName}" --invoice-section-name "{invoiceSectionName}"
+  requiredParameters:
+  - isRequired: true
+    name: --account-name
+    summary: ID yang secara unik mengidentifikasi akun penagihan.
+    description: ''
+  optionalParameters:
+  - name: --customer-name
+    summary: ID yang secara unik mengidentifikasi pelanggan.
+    description: ''
+  - name: --invoice-section-name
+    summary: ID yang secara unik mengidentifikasi bagian faktur.
+    description: ''
+  - name: --profile-name
+    summary: ID yang secara unik mengidentifikasi profil penagihan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/billing/_help.py
+- uid: az_billing_subscription_move
+  name: az billing subscription move
+  summary: Memindahkan biaya langganan ke bagian faktur baru. Bagian faktur baru harus milik profil penagihan yang sama dengan bagian faktur yang sudah ada. Operasi ini didukung untuk akun penagihan dengan jenis perjanjian Perjanjian Pelanggan Microsoft.
+  description: ''
+  syntax: >-
+    az billing subscription move --account-name
+                                 --destination-invoice-section-id
+                                 [--no-wait]
+  examples:
+  - summary: Memindahkan langganan ke bagian faktur lain
+    syntax: az billing subscription move --account-name "{billingAccountName}" --destination-invoice-section-id "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{newInvoiceSectionName}"
+  requiredParameters:
+  - isRequired: true
+    name: --account-name
+    summary: ID yang secara unik mengidentifikasi akun penagihan.
+    description: ''
+  - isRequired: true
+    name: --destination-invoice-section-id
+    summary: Id bagian faktur tujuan.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/billing/_help.py
+- uid: az_billing_subscription_show
+  name: az billing subscription show
+  summary: Dapatkan langganan dengan ID-nya. Operasi ini didukung untuk akun penagihan dengan jenis perjanjian Perjanjian Pelanggan Microsoft dan Perjanjian Mitra Microsoft.
+  description: ''
+  syntax: az billing subscription show --account-name
+  examples:
+  - summary: Menampilkan informasi langganan akun penagihan
+    syntax: az billing subscription show --account-name "{billingAccountName}"
+  requiredParameters:
+  - isRequired: true
+    name: --account-name
+    summary: ID yang secara unik mengidentifikasi akun penagihan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/billing/_help.py
+- uid: az_billing_subscription_update
+  name: az billing subscription update
+  summary: Memperbarui properti langganan penagihan. Saat ini, pusat biaya dapat diperbarui. Operasi ini hanya didukung untuk akun penagihan dengan jenis perjanjian Perjanjian Pelanggan Microsoft.
+  description: ''
+  syntax: >-
+    az billing subscription update --account-name
+                                   [--cost-center]
+                                   [--sku-id]
+                                   [--subscription-billing-status {Abandoned, Active, Deleted, Inactive, Warning}]
+  examples:
+  - summary: Memperbarui properti akun penagihan
+    syntax: az billing subscription update --account-name "{billingAccountName}" --cost-center "ABC1234"
+  requiredParameters:
+  - isRequired: true
+    name: --account-name
+    summary: ID yang secara unik mengidentifikasi akun penagihan.
+    description: ''
+  optionalParameters:
+  - name: --cost-center
+    summary: Pusat biaya diterapkan ke langganan.
+    description: ''
+  - name: --sku-id
+    summary: ID sku paket Azure untuk langganan.
+    description: ''
+  - name: --subscription-billing-status
+    parameterValueGroup: Abandoned, Active, Deleted, Inactive, Warning
+    summary: Status penagihan langganan saat ini.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/billing/_help.py
+- uid: az_billing_subscription_validate-move
+  name: az billing subscription validate-move
+  summary: Validasi apakah biaya langganan dapat dipindahkan ke bagian faktur baru. Operasi ini didukung untuk akun penagihan dengan jenis perjanjian Perjanjian Pelanggan Microsoft.
+  description: ''
+  syntax: >-
+    az billing subscription validate-move --account-name
+                                          --destination-invoice-section-id
+  examples:
+  - summary: Memvalidasi apakah pemindahan langganan ke bagian faktur lain valid atau tidak
+    syntax: az billing subscription validate-move --account-name "{billingAccountName}" --destination-invoice-section-id "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{newInvoiceSectionName}"
+  - summary: Memvalidasi apakah pemindahan langganan ke bagian faktur lain valid atau tidak
+    syntax: az billing subscription validate-move --account-name "{billingAccountName}" --destination-invoice-section-id "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{newInvoiceSectionName}"
+  requiredParameters:
+  - isRequired: true
+    name: --account-name
+    summary: ID yang secara unik mengidentifikasi akun penagihan.
+    description: ''
+  - isRequired: true
+    name: --destination-invoice-section-id
+    summary: Id bagian faktur tujuan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/billing/_help.py
+- uid: az_billing_subscription_wait
+  name: az billing subscription wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi langganan penagihan terpenuhi.
+  description: ''
+  syntax: >-
+    az billing subscription wait --account-name
+                                 [--created]
+                                 [--custom]
+                                 [--deleted]
+                                 [--exists]
+                                 [--interval]
+                                 [--timeout]
+                                 [--updated]
+  examples:
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga langganan penagihan berhasil dibuat.
+    syntax: az billing subscription wait --account-name "{billingAccountName}" --created
+  requiredParameters:
+  - isRequired: true
+    name: --account-name
+    summary: ID yang secara unik mengidentifikasi akun penagihan.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/billing/_help.py
+commands:
+- az_billing_subscription_list
+- az_billing_subscription_move
+- az_billing_subscription_show
+- az_billing_subscription_update
+- az_billing_subscription_validate-move
+- az_billing_subscription_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 10/26/2020
+  description: Langganan penagihan.
+  ms.openlocfilehash: 5a727dd5a894135eee50eb70463fb6943290b394
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141050038"

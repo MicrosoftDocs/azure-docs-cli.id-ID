@@ -1,0 +1,203 @@
+### YamlMime:AzureCLIGroup
+uid: az_dms_project
+name: az dms project
+summary: Mengelola proyek untuk instans Data Migration Service.
+description: ''
+directCommands:
+- uid: az_dms_project_check-name
+  name: az dms project check-name
+  summary: Periksa apakah nama proyek tertentu tersedia dalam instans DMS tertentu serta validitas nama.
+  description: ''
+  syntax: >-
+    az dms project check-name --name
+                              --resource-group
+                              --service-name
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama proyek yang akan diperiksa.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama Layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dms/_help.py
+- uid: az_dms_project_create
+  name: az dms project create
+  summary: Buat proyek migrasi yang dapat berisi beberapa tugas.
+  description: >-
+    Konfigurasi proyek berikut didukung: -) sumber -> target
+      1) SQL -> SQLDB
+      2) PostgreSQL -> AzureDbForPostgreSQL
+      3) MySQL -> AzureDbForMySQL.
+  syntax: >-
+    az dms project create --location
+                          --name
+                          --resource-group
+                          --service-name
+                          --source-platform
+                          --target-platform
+                          [--tags]
+  examples:
+  - summary: Buat SQL ke proyek SQLDB untuk instans DMS.
+    syntax: az dms project create -l westus -n sqlproject -g myresourcegroup --service-name mydms --source-platform SQL --target-platform SQLDB --tags tagName1=tagValue1 tagWithNoValue
+  - summary: Buat PostgreSql ke proyek AzureDbForPostgreSql untuk instans DMS.
+    syntax: az dms project create -l westus -n pgproject -g myresourcegroup --service-name mydms --source-platform PostgreSQL --target-platform AzureDbForPostgreSQL --tags tagName1=tagValue1 tagWithNoValue
+  - summary: Buat proyek MySQL ke AzureDbForMySQL untuk instans DMS.
+    syntax: az dms project create -l westus -n mysqlproject -g myresourcegroup --service-name mydms --source-platform MySQL --target-platform AzureDbForMySQL --tags tagName1=tagValue1 tagWithNoValue
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama Project.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama Layanan.
+    description: ''
+  - isRequired: true
+    name: --source-platform
+    summary: 'Jenis server untuk database sumber. Jenis yang didukung adalah: SQL, PostgreSQL, MySQL.'
+    description: ''
+  - isRequired: true
+    name: --target-platform
+    summary: 'Jenis layanan untuk database target. Jenis yang didukung adalah: SQLDB, AzureDbForPostgreSQL, AzureDbForMySQL.'
+    description: ''
+  optionalParameters:
+  - name: --tags
+    summary: Daftar tag yang dibatasi spasi dalam format "tag1[=value1]".
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dms/_help.py
+- uid: az_dms_project_delete
+  name: az dms project delete
+  summary: Menghapus proyek.
+  description: ''
+  syntax: >-
+    az dms project delete --name
+                          --resource-group
+                          --service-name
+                          [--delete-running-tasks]
+                          [--yes]
+  examples:
+  - summary: Menghapus proyek. (dibuat otomatis)
+    syntax: az dms project delete --name MyProject --resource-group MyResourceGroup --service-name MyService
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Project.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama Layanan.
+    description: ''
+  optionalParameters:
+  - name: --delete-running-tasks
+    summary: Batalkan tugas yang sedang berjalan sebelum menghapus proyek.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dms/_help.py
+- uid: az_dms_project_list
+  name: az dms project list
+  summary: Mencantumkan proyek dalam instans DMS.
+  description: ''
+  syntax: >-
+    az dms project list --resource-group
+                        --service-name
+  examples:
+  - summary: Mencantumkan proyek dalam instans DMS. (dibuat otomatis)
+    syntax: az dms project list --resource-group MyResourceGroup --service-name MyService
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama Layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dms/_help.py
+- uid: az_dms_project_show
+  name: az dms project show
+  summary: Menampilkan detail proyek migrasi.
+  description: ''
+  syntax: >-
+    az dms project show --name
+                        --resource-group
+                        --service-name
+  examples:
+  - summary: Menampilkan detail proyek migrasi. (dibuat otomatis)
+    syntax: az dms project show --name MyProject --resource-group MyResourceGroup --service-name MyService
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Project.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama Layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dms/_help.py
+commands:
+- az_dms_project_check-name
+- az_dms_project_create
+- az_dms_project_delete
+- az_dms_project_list
+- az_dms_project_show
+- az_dms_project_task
+- az_dms_project_task_cancel
+- az_dms_project_task_check-name
+- az_dms_project_task_create
+- az_dms_project_task_cutover
+- az_dms_project_task_delete
+- az_dms_project_task_list
+- az_dms_project_task_restart
+- az_dms_project_task_show
+- az_dms_project_task_stop
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 10/14/2021
+  description: Mengelola proyek untuk instans Data Migration Service.
+  ms.openlocfilehash: 6ef060c85fe39d76ffe478b4022cb7ae0d5e1f7f
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141031804"

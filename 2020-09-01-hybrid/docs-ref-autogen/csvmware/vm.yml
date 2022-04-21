@@ -1,0 +1,285 @@
+### YamlMime:AzureCLIGroup
+uid: az_csvmware_vm
+name: az csvmware vm
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **csvmware** untuk Azure CLI (versi 2.0.67 atau lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az csvmware vm** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola komputer virtual VMware.
+description: ''
+directCommands:
+- uid: az_csvmware_vm_create
+  name: az csvmware vm create
+  summary: Buat komputer virtual VMware.
+  description: ''
+  syntax: >-
+    az csvmware vm create --name
+                          --private-cloud
+                          --resource-group
+                          --resource-pool
+                          --template
+                          [--cores]
+                          [--disk]
+                          [--expose-to-guest-vm {false, true}]
+                          [--location]
+                          [--nic]
+                          [--ram]
+  examples:
+  - summary: Membuat VM dengan parameter default dari templat vm.
+    syntax: az csvmware vm create -n MyVm -g MyResourceGroup -p MyPrivateCloud -r MyResourcePool --template MyVmTemplate
+  - summary: Membuat VM dan menambahkan nic ekstra ke VM dengan jaringan virtual MyVirtualNetwork, adaptor VMXNET3, yang menyala saat boot. Nama yang dimasukkan dalam nic hanya untuk tujuan identifikasi, untuk melihat apakah nama nic seperti itu ada di templat vm, jika tidak, nic dibuat dan nama baru ditetapkan. Katakanlah templat vm berisi nic dengan nama "Adaptor jaringan 1".
+    syntax: az csvmware vm create -n MyVm -g MyResourceGroup -p MyPrivateCloud -r MyResourcePool --template MyVmTemplate --nic name=NicNameWouldBeAssigned virtual-network=MyVirtualNetwork adapter=VMXNET3 power-on-boot=True
+  - summary: Menyesuaikan properti tertentu dari VM. Mengubah jumlah inti menjadi 2 dan adaptor "Adaptor jaringan 1" nic ke E1000E, dari yang ditentukan dalam templat. Semua properti lainnya akan diatur ke default dari templat.
+    syntax: az csvmware vm create -n MyVm -g MyResourceGroup -p MyPrivateCloud -r MyResourcePool --template MyVmTemplate --cores 2 --nic name="Network adapter 1" adapter=E1000E
+  - summary: Menyesuaikan properti tertentu dari VM. Mengubah adaptor nic "Network adapter 1" menjadi E1000E, dari yang ditentukan dalam templat, dan juga menambahkan nic lain dengan jaringan virtual MyVirtualNetwork, adaptor VMXNET3, yang menyala saat boot.
+    syntax: az csvmware vm create -n MyVm -g MyResourceGroup -p MyPrivateCloud -r MyResourcePool --template MyVmTemplate --nic name="Network adapter 1" adapter=E1000E --nic name=NicNameWouldBeAssigned virtual-network=MyVirtualNetwork adapter=VMXNET3 power-on-boot=True
+  - summary: Membuat VM dan menambahkan disk tambahan ke VM dengan pengontrol SCSI 0, mode persisten, dan ukuran KB 41943040. Nama yang dimasukkan dalam disk hanya untuk tujuan identifikasi, untuk melihat apakah nama disk tersebut ada di templat vm, jika tidak, disk dibuat dan nama baru ditetapkan. Katakanlah templat vm berisi disk dengan nama "Hard disk 1".
+    syntax: az csvmware vm create -n MyVm -g MyResourceGroup -p MyPrivateCloud -r MyResourcePool --template MyVmTemplate --disk name=DiskNameWouldBeAssigned controller=1000 mode=persistent size=41943040
+  - summary: Menyesuaikan properti tertentu dari VM. Mengubah ukuran disk "Hard disk 1" menjadi 21943040 KB, dari yang ditentukan dalam templat, dan juga menambahkan disk lain dengan pengontrol SCSI 0, mode persisten, dan ukuran 41943040 KB.
+    syntax: az csvmware vm create -n MyVm -g MyResourceGroup -p MyPrivateCloud -r MyResourcePool --template MyVmTemplate --disk name="Hard disk 1" size=21943040 --disk name=DiskNameWouldBeAssigned controller=1000 mode=persistent size=41943040
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama komputer virtual.
+    description: ''
+  - isRequired: true
+    name: --private-cloud -p
+    summary: Nama atau ID cloud privat CloudSimple.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-pool -r
+    summary: ID kumpulan sumber daya VMware untuk komputer virtual ini di CloudSimple Private Cloud Anda. Anda juga dapat meneruskan nama dasar ID.
+    description: ''
+  - isRequired: true
+    name: --template
+    summary: ID templat vSphere tempat komputer virtual ini akan dibuat. Anda juga dapat meneruskan nama dasar ID.
+    description: ''
+  optionalParameters:
+  - name: --cores
+    summary: Jumlah inti CPU yang diperlukan. Default diambil dari templat VM vSphere yang ditentukan.
+    description: ''
+  - name: --disk
+    summary: Tambah atau ubah disk.
+    description: >-
+      Secara default, disk akan ditambahkan sesuai dengan templat VM vSphere.
+
+      Anda dapat menambahkan lebih banyak disk, atau mengubah beberapa properti disk yang ditentukan dalam templat VM.
+
+      Beberapa disk dapat ditentukan dengan menggunakan lebih dari satu `--disk` argumen.
+
+      Jika nama disk sudah ada di templat VM, disk tersebut akan dimodifikasi sesuai dengan input pengguna.
+
+      Jika nama disk tidak ada di templat VM, disk baru akan dibuat dan nama baru akan ditetapkan untuk itu.
+
+      Penggunaan: --disk name=MyDiskName controller=SCSIControllerID mode=IndependenceMode size=DiskSizeInKB.
+  - name: --expose-to-guest-vm
+    parameterValueGroup: false, true
+    summary: Akan mengekspos virtualisasi CPU penuh ke sistem operasi tamu. Default diambil dari templat VM vSphere yang ditentukan.
+    description: ''
+  - name: --location -l
+    summary: Wilayah tempat cloud privat berada. Jika lokasi default tidak dikonfigurasi, akan default ke lokasi grup sumber daya.
+    description: ''
+  - name: --nic
+    summary: Menambahkan atau mengubah NIC.
+    description: >-
+      Secara default, nic akan ditambahkan sesuai dengan templat VM vSphere.
+
+      Anda dapat menambahkan lebih banyak nic, atau memodifikasi beberapa properti nic yang ditentukan dalam templat VM.
+
+      Beberapa nic dapat ditentukan dengan menggunakan lebih dari satu `--nic` argumen.
+
+      Jika nama nic sudah ada di templat VM, nic tersebut akan dimodifikasi sesuai dengan input pengguna.
+
+      Jika nama nic tidak ada di templat VM, nic baru akan dibuat dan nama baru akan ditetapkan ke dalamnya.
+
+      Penggunaan: --nic name=MyNicName virtual-network=MyNetwork adapter=MyAdapter power-on-boot=True/False.
+  - name: --ram
+    summary: Jumlah memori dalam MB. Default diambil dari templat VM vSphere yang ditentukan.
+    description: ''
+- uid: az_csvmware_vm_delete
+  name: az csvmware vm delete
+  summary: Menghapus komputer virtual VMware.
+  description: ''
+  syntax: >-
+    az csvmware vm delete --name
+                          --resource-group
+  examples:
+  - summary: Menghapus VMware VM.
+    syntax: az csvmware vm delete -n MyVm -g MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama komputer virtual.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_csvmware_vm_list
+  name: az csvmware vm list
+  summary: Mencantumkan detail komputer virtual VMware dalam langganan saat ini. Jika grup sumber daya ditentukan, hanya detail komputer virtual dalam grup sumber daya tersebut yang akan dicantumkan.
+  description: ''
+  syntax: az csvmware vm list [--resource-group]
+  examples:
+  - summary: Mencantumkan detail VMware VM dalam langganan saat ini.
+    syntax: az csvmware vm list
+  - summary: Mencantumkan detail VMware VM dalam grup sumber daya tertentu.
+    syntax: az csvmware vm list -g MyResourceGroup
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_csvmware_vm_show
+  name: az csvmware vm show
+  summary: Dapatkan detail komputer virtual VMware.
+  description: ''
+  syntax: >-
+    az csvmware vm show --name
+                        --resource-group
+  examples:
+  - summary: Dapatkan detail VMware VM.
+    syntax: az csvmware vm show -n MyVm -g MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama komputer virtual.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_csvmware_vm_start
+  name: az csvmware vm start
+  summary: Mulai komputer virtual VMware.
+  description: ''
+  syntax: >-
+    az csvmware vm start --name
+                         --resource-group
+  examples:
+  - summary: Mulai VMware VM.
+    syntax: az csvmware vm start -n MyVm -g MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama komputer virtual.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_csvmware_vm_stop
+  name: az csvmware vm stop
+  summary: Hentikan/Reboot/Tangguhkan komputer virtual VMware.
+  description: ''
+  syntax: >-
+    az csvmware vm stop --mode {poweroff, reboot, shutdown, suspend}
+                        --name
+                        --resource-group
+  examples:
+  - summary: Matikan VMware VM.
+    syntax: az csvmware vm stop -n MyVm -g MyResourceGroup --mode poweroff
+  - summary: Mulai ulang VMware VM.
+    syntax: az csvmware vm stop -n MyVm -g MyResourceGroup --mode reboot
+  requiredParameters:
+  - isRequired: true
+    name: --mode
+    parameterValueGroup: poweroff, reboot, shutdown, suspend
+    summary: Mode berhenti.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama komputer virtual.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_csvmware_vm_update
+  name: az csvmware vm update
+  summary: Perbarui bidang tag komputer virtual VMware.
+  description: ''
+  syntax: >-
+    az csvmware vm update --name
+                          --resource-group
+                          [--add]
+                          [--force-string]
+                          [--no-wait]
+                          [--remove]
+                          [--set]
+  examples:
+  - summary: Menambahkan atau memperbarui tag.
+    syntax: az csvmware vm update -n MyVm -g MyResourceGroup --set tags.tagName=tagValue
+  - summary: Menghapus tag.
+    syntax: az csvmware vm update -n MyVm -g MyResourceGroup --remove tags.tagName
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama komputer virtual.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+commands:
+- az_csvmware_vm_create
+- az_csvmware_vm_delete
+- az_csvmware_vm_disk
+- az_csvmware_vm_disk_add
+- az_csvmware_vm_disk_delete
+- az_csvmware_vm_disk_list
+- az_csvmware_vm_disk_show
+- az_csvmware_vm_list
+- az_csvmware_vm_nic
+- az_csvmware_vm_nic_add
+- az_csvmware_vm_nic_delete
+- az_csvmware_vm_nic_list
+- az_csvmware_vm_nic_show
+- az_csvmware_vm_show
+- az_csvmware_vm_start
+- az_csvmware_vm_stop
+- az_csvmware_vm_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola komputer virtual VMware.
+  ms.openlocfilehash: 927217d38baea4b0d94251eb66c155e8b4fb6890
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141061497"
