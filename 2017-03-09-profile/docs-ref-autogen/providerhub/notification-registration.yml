@@ -1,0 +1,139 @@
+### YamlMime:AzureCLIGroup
+uid: az_providerhub_notification-registration
+name: az providerhub notification-registration
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **providerhub** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **az providerhub notification-registration** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola pendaftaran pemberitahuan dengan providerhub.
+description: ''
+directCommands:
+- uid: az_providerhub_notification-registration_create
+  name: az providerhub notification-registration create
+  summary: Membuat pendaftaran pemberitahuan.
+  description: ''
+  syntax: >-
+    az providerhub notification-registration create --name
+                                                    --provider-namespace
+                                                    [--included-events]
+                                                    [--message-scope {NotSpecified, RegisteredSubscriptions}]
+                                                    [--notification-endpoints]
+                                                    [--notification-mode {EventHub, NotSpecified, WebHook}]
+  examples:
+  - summary: NotificationRegistrations_CreateOrUpdate
+    syntax: az providerhub notification-registration create --name "testNotificationRegistration" --included-events "*/write" "Microsoft.Contoso/employees/delete" --message-scope "RegisteredSubscriptions" --notification-endpoints locations="" locations="East US" notification-destination="/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mgmtexp-eastus/providers/Microsoft.EventHub/namespaces/unitedstates-mgmtexpint/eventhubs/armlinkednotifications" --notification-endpoints locations="North Europe" notification-destination="/subscriptions/00000000-0000-0000-0000-000000000000   /resourceGroups/mgmtexp-northeurope/providers/Microsoft.EventHub/namespaces/europe-mgmtexpint/eventhubs/armlinkednotifications" --notification-mode "EventHub" --provider-namespace "Microsoft.Contoso"
+  requiredParameters:
+  - isRequired: true
+    name: --name --notification-registration-name -n
+    summary: Pendaftaran pemberitahuan.
+    description: ''
+  - isRequired: true
+    name: --provider-namespace
+    summary: Nama penyedia sumber daya yang dihosting dalam ProviderHub.
+    description: ''
+  optionalParameters:
+  - name: --included-events
+    summary: 'Ini adalah peristiwa yang harus disampaikan RP. Format pesan dalam bentuk {RP Namespace}/{Resource Type}/{action}. Tindakan availabe adalah: tulis, hapus, dan pindahkan/tindakan.'
+    description: ''
+  - name: --message-scope
+    parameterValueGroup: NotSpecified, RegisteredSubscriptions
+    summary: Membatasi pesan yang dikirim ke RP. Nilai defaultnya adalah RegisteredSubscriptions. Nilai yang tersedia adalah Global (semua pesan di Azure) dan RegisteredSubscriptions (hanya pesan dalam langganan yang didaftarkan oleh RP).
+    description: ''
+  - name: --notification-endpoints
+    summary: Ini adalah lokasi untuk pesan pemberitahuan. Pemberitahuan akan dikirim ke wilayah lokasi sumber daya peristiwa (misalnya VM di Us Timur akan mengirim pesan ke titik akhir yang ditentukan di AS Timur).
+    description: >-
+      Penggunaan: --notification-endpoints notification-destination=XX locations=XX
+
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --notification-endpoints.
+  - name: --notification-mode
+    parameterValueGroup: EventHub, NotSpecified, WebHook
+    summary: Menentukan bagaimana pemberitahuan dikirim ke RP. Dua mode yang tersedia adalah EventHub dan Webhook.
+    description: ''
+- uid: az_providerhub_notification-registration_delete
+  name: az providerhub notification-registration delete
+  summary: Menghapus pendaftaran pemberitahuan.
+  description: ''
+  syntax: >-
+    az providerhub notification-registration delete --name
+                                                    --provider-namespace
+                                                    [--yes]
+  examples:
+  - summary: NotificationRegistrations_Delete
+    syntax: az providerhub notification-registration delete --name "testNotificationRegistration" --provider-namespace "Microsoft.Contoso"
+  requiredParameters:
+  - isRequired: true
+    name: --name --notification-registration-name -n
+    summary: Pendaftaran pemberitahuan.
+    description: ''
+  - isRequired: true
+    name: --provider-namespace
+    summary: Nama penyedia sumber daya yang dihosting dalam ProviderHub.
+    description: ''
+  optionalParameters:
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_providerhub_notification-registration_list
+  name: az providerhub notification-registration list
+  summary: Mendapatkan daftar pendaftaran pemberitahuan untuk penyedia yang diberikan.
+  description: ''
+  syntax: az providerhub notification-registration list --provider-namespace
+  examples:
+  - summary: NotificationRegistrations_ListByProviderRegistration
+    syntax: az providerhub notification-registration list --provider-namespace "Microsoft.Contoso"
+  requiredParameters:
+  - isRequired: true
+    name: --provider-namespace
+    summary: Nama penyedia sumber daya yang dihosting dalam ProviderHub.
+    description: ''
+- uid: az_providerhub_notification-registration_show
+  name: az providerhub notification-registration show
+  summary: Mendapatkan detail pendaftaran pemberitahuan.
+  description: ''
+  syntax: >-
+    az providerhub notification-registration show --name
+                                                  --provider-namespace
+  examples:
+  - summary: NotificationRegistrations_Get
+    syntax: az providerhub notification-registration show --name "testNotificationRegistration" --provider-namespace "Microsoft.Contoso"
+  requiredParameters:
+  - isRequired: true
+    name: --name --notification-registration-name -n
+    summary: Pendaftaran pemberitahuan.
+    description: ''
+  - isRequired: true
+    name: --provider-namespace
+    summary: Nama penyedia sumber daya yang dihosting dalam ProviderHub.
+    description: ''
+commands:
+- az_providerhub_notification-registration_create
+- az_providerhub_notification-registration_delete
+- az_providerhub_notification-registration_list
+- az_providerhub_notification-registration_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola pendaftaran pemberitahuan dengan providerhub.
+  ms.openlocfilehash: 2e9481c7be419f461bb43406aac07a0aeaa72a1b
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140959514"

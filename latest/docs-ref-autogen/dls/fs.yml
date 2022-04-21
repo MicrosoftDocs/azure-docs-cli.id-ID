@@ -1,0 +1,461 @@
+### YamlMime:AzureCLIGroup
+uid: az_dls_fs
+name: az dls fs
+summary: Mengelola sistem file Data Lake Store.
+description: ''
+directCommands:
+- uid: az_dls_fs_append
+  name: az dls fs append
+  summary: Tambahkan konten ke file di akun Data Lake Store.
+  description: ''
+  syntax: >-
+    az dls fs append --content
+                     --path
+                     [--account]
+                     [--ids]
+  requiredParameters:
+  - isRequired: true
+    name: --content
+    summary: Konten yang akan ditambahkan ke file.
+    description: ''
+  - isRequired: true
+    name: --path
+    summary: Jalur di akun Data Lake Store yang ditentukan tempat tindakan harus dilakukan. Dalam format '/folder/file.txt', di mana '/' pertama setelah DNS menunjukkan akar sistem file.
+    description: ''
+  optionalParameters:
+  - name: --account -n
+    summary: Nama akun Data Lake Store.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dls/_help.py
+- uid: az_dls_fs_create
+  name: az dls fs create
+  summary: Membuat file atau folder di akun Data Lake Store.
+  description: ''
+  syntax: >-
+    az dls fs create --account
+                     --path
+                     [--content]
+                     [--folder]
+                     [--force]
+  examples:
+  - summary: Membuat file atau folder di akun Data Lake Store. (dibuat otomatis)
+    syntax: az dls fs create --account {account} --folder  --path {path}
+  requiredParameters:
+  - isRequired: true
+    name: --account -n
+    summary: Nama akun Data Lake Store.
+    description: ''
+  - isRequired: true
+    name: --path
+    summary: Jalur di akun Data Lake Store yang ditentukan tempat tindakan harus dilakukan. Dalam format '/folder/file.txt', di mana '/' pertama setelah DNS menunjukkan akar sistem file.
+    description: ''
+  optionalParameters:
+  - name: --content
+    summary: Konten untuk file yang akan dimuat saat dibuat.
+    description: ''
+  - name: --folder
+    summary: Menunjukkan bahwa item baru ini adalah folder dan bukan file.
+    description: ''
+  - name: --force
+    summary: Menunjukkan bahwa, jika file atau folder ada, file atau folder harus ditimpa.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dls/_help.py
+- uid: az_dls_fs_delete
+  name: az dls fs delete
+  summary: Menghapus file atau folder di akun Data Lake Store.
+  description: ''
+  syntax: >-
+    az dls fs delete --path
+                     [--account]
+                     [--ids]
+                     [--recurse]
+  examples:
+  - summary: Menghapus file atau folder di akun Data Lake Store. (dibuat otomatis)
+    syntax: az dls fs delete --account {account} --path {path}
+  requiredParameters:
+  - isRequired: true
+    name: --path
+    summary: Jalur di akun Data Lake Store yang ditentukan tempat tindakan harus dilakukan. Dalam format '/folder/file.txt', di mana '/' pertama setelah DNS menunjukkan akar sistem file.
+    description: ''
+  optionalParameters:
+  - name: --account -n
+    summary: Nama akun Data Lake Store.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --recurse
+    summary: Menunjukkan ini harus menjadi penghapusan rekursif folder.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dls/_help.py
+- uid: az_dls_fs_download
+  name: az dls fs download
+  summary: Unduh file atau folder dari akun Data Lake Store ke komputer lokal.
+  description: ''
+  syntax: >-
+    az dls fs download --destination-path
+                       --source-path
+                       [--account]
+                       [--block-size]
+                       [--buffer-size]
+                       [--chunk-size]
+                       [--ids]
+                       [--overwrite]
+                       [--thread-count]
+  examples:
+  - summary: Unduh file atau folder dari akun Data Lake Store ke komputer lokal. (dibuat otomatis)
+    syntax: az dls fs download --account {account} --destination-path {destination-path} --source-path {source-path}
+  requiredParameters:
+  - isRequired: true
+    name: --destination-path
+    summary: Jalur lokal tempat file atau folder akan diunduh.
+    description: ''
+  - isRequired: true
+    name: --source-path
+    summary: Jalur lengkap di sistem file Data Lake Store untuk mengunduh file atau folder.
+    description: ''
+  optionalParameters:
+  - name: --account -n
+    summary: Nama akun Data Lake Store.
+    description: ''
+  - name: --block-size
+    defaultValue: "4194304"
+    summary: Ukuran blok, dalam byte.
+    description: Dalam setiap gugus, blok yang lebih kecil ditulis untuk setiap panggilan API. Blok tidak boleh lebih besar dari gugus dan harus lebih besar dari buffer.
+  - name: --buffer-size
+    defaultValue: "4194304"
+    summary: Ukuran buffer transfer, dalam byte.
+    description: Buffer tidak boleh lebih besar dari gugus dan tidak boleh lebih kecil dari blok.
+  - name: --chunk-size
+    defaultValue: "268435456"
+    summary: Ukuran gugus, dalam byte.
+    description: File besar dibagi menjadi beberapa potongan. File yang lebih kecil dari ukuran ini akan selalu ditransfer dalam satu utas.
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --overwrite
+    summary: Menunjukkan bahwa, jika file atau folder tujuan ada, file atau folder tersebut harus ditimpa.
+    description: ''
+  - name: --thread-count
+    summary: 'Paralelisme unduhan. Default: Jumlah inti di komputer lokal.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dls/_help.py
+- uid: az_dls_fs_join
+  name: az dls fs join
+  summary: Gabungkan file dalam akun Data Lake Store ke dalam satu file.
+  description: ''
+  syntax: >-
+    az dls fs join --destination-path
+                   --source-paths
+                   [--account]
+                   [--force]
+                   [--ids]
+  requiredParameters:
+  - isRequired: true
+    name: --destination-path
+    summary: Jalur tujuan di akun Data Lake Store.
+    description: ''
+  - isRequired: true
+    name: --source-paths
+    summary: Daftar file yang dipisahkan spasi di akun Data Lake Store untuk bergabung.
+    description: ''
+  optionalParameters:
+  - name: --account -n
+    summary: Nama akun Data Lake Store.
+    description: ''
+  - name: --force
+    summary: Menunjukkan bahwa, jika file tujuan sudah ada, file tersebut harus ditimpa.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dls/_help.py
+- uid: az_dls_fs_list
+  name: az dls fs list
+  summary: Mencantumkan file dan folder di akun Data Lake Store.
+  description: ''
+  syntax: >-
+    az dls fs list --path
+                   [--account]
+                   [--ids]
+  examples:
+  - summary: Mencantumkan file dan folder di akun Data Lake Store. (dibuat otomatis)
+    syntax: az dls fs list --account {account} --path {path}
+  requiredParameters:
+  - isRequired: true
+    name: --path
+    summary: Jalur di akun Data Lake Store yang ditentukan tempat tindakan harus dilakukan. Dalam format '/folder/file.txt', di mana '/' pertama setelah DNS menunjukkan akar sistem file.
+    description: ''
+  optionalParameters:
+  - name: --account -n
+    summary: Nama akun Data Lake Store.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dls/_help.py
+- uid: az_dls_fs_move
+  name: az dls fs move
+  summary: Memindahkan file atau folder di akun Data Lake Store.
+  description: ''
+  syntax: >-
+    az dls fs move --destination-path
+                   --source-path
+                   [--account]
+                   [--force]
+                   [--ids]
+  examples:
+  - summary: Memindahkan file atau folder di akun Data Lake Store. (dibuat otomatis)
+    syntax: az dls fs move --account {account} --destination-path {destination-path} --source-path {source-path}
+  requiredParameters:
+  - isRequired: true
+    name: --destination-path
+    summary: Jalur tujuan di akun Data Lake Store.
+    description: ''
+  - isRequired: true
+    name: --source-path
+    summary: File atau folder yang akan dipindahkan.
+    description: ''
+  optionalParameters:
+  - name: --account -n
+    summary: Nama akun Data Lake Store.
+    description: ''
+  - name: --force
+    summary: Menunjukkan bahwa, jika file atau folder tujuan sudah ada, file atau folder tersebut harus ditimpa dan diganti dengan file atau folder yang sedang dipindahkan.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dls/_help.py
+- uid: az_dls_fs_preview
+  name: az dls fs preview
+  summary: Pratinjau konten file di akun Data Lake Store.
+  description: ''
+  syntax: >-
+    az dls fs preview --path
+                      [--account]
+                      [--force]
+                      [--ids]
+                      [--length]
+                      [--offset]
+  requiredParameters:
+  - isRequired: true
+    name: --path
+    summary: Jalur di akun Data Lake Store yang ditentukan tempat tindakan harus dilakukan. Dalam format '/folder/file.txt', di mana '/' pertama setelah DNS menunjukkan akar sistem file.
+    description: ''
+  optionalParameters:
+  - name: --account -n
+    summary: Nama akun Data Lake Store.
+    description: ''
+  - name: --force
+    summary: Menunjukkan bahwa, jika pratinjau lebih besar dari 1MB, masih mengambilnya. Ini berpotensi sangat lambat, tergantung pada seberapa besar file tersebut.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --length
+    summary: Jumlah data yang akan dipratinjau dalam byte.
+    description: Jika tidak ditentukan, upaya untuk mempratinjau file lengkap. Jika file > 1MB `--force` harus ditentukan.
+  - name: --offset
+    summary: Posisi dalam byte untuk memulai pratinjau.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dls/_help.py
+- uid: az_dls_fs_remove-expiry
+  name: az dls fs remove-expiry
+  summary: Hapus waktu kedaluwarsa untuk file.
+  description: ''
+  syntax: >-
+    az dls fs remove-expiry --path
+                            [--account]
+                            [--ids]
+  requiredParameters:
+  - isRequired: true
+    name: --path
+    summary: Jalur di akun Data Lake Store yang ditentukan tempat tindakan harus dilakukan. Dalam format '/folder/file.txt', di mana '/' pertama setelah DNS menunjukkan akar sistem file.
+    description: ''
+  optionalParameters:
+  - name: --account -n
+    summary: Nama akun Data Lake Store.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dls/_help.py
+- uid: az_dls_fs_set-expiry
+  name: az dls fs set-expiry
+  summary: Atur waktu kedaluwarsa untuk file.
+  description: ''
+  syntax: >-
+    az dls fs set-expiry --expiration-time
+                         --path
+                         [--account]
+                         [--ids]
+  requiredParameters:
+  - isRequired: true
+    name: --expiration-time
+    summary: Nilai absolut dari waktu kedaluwarsa yang dinyatakan sebagai milidetik sejak zaman.
+    description: ''
+  - isRequired: true
+    name: --path
+    summary: Jalur di akun Data Lake Store yang ditentukan tempat tindakan harus dilakukan. Dalam format '/folder/file.txt', di mana '/' pertama setelah DNS menunjukkan akar sistem file.
+    description: ''
+  optionalParameters:
+  - name: --account -n
+    summary: Nama akun Data Lake Store.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dls/_help.py
+- uid: az_dls_fs_show
+  name: az dls fs show
+  summary: Dapatkan informasi file atau folder di akun Data Lake Store.
+  description: ''
+  syntax: >-
+    az dls fs show --path
+                   [--account]
+                   [--ids]
+  examples:
+  - summary: Dapatkan informasi file atau folder di akun Data Lake Store. (dibuat otomatis)
+    syntax: az dls fs show --account {account} --path {path}
+  requiredParameters:
+  - isRequired: true
+    name: --path
+    summary: Jalur di akun Data Lake Store yang ditentukan tempat tindakan harus dilakukan. Dalam format '/folder/file.txt', di mana '/' pertama setelah DNS menunjukkan akar sistem file.
+    description: ''
+  optionalParameters:
+  - name: --account -n
+    summary: Nama akun Data Lake Store.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dls/_help.py
+- uid: az_dls_fs_test
+  name: az dls fs test
+  summary: Uji keberadaan file atau folder di akun Data Lake Store.
+  description: ''
+  syntax: >-
+    az dls fs test --path
+                   [--account]
+                   [--ids]
+  examples:
+  - summary: Uji keberadaan file atau folder di akun Data Lake Store. (dibuat otomatis)
+    syntax: az dls fs test --account {account} --path {path}
+  requiredParameters:
+  - isRequired: true
+    name: --path
+    summary: Jalur di akun Data Lake Store yang ditentukan tempat tindakan harus dilakukan. Dalam format '/folder/file.txt', di mana '/' pertama setelah DNS menunjukkan akar sistem file.
+    description: ''
+  optionalParameters:
+  - name: --account -n
+    summary: Nama akun Data Lake Store.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dls/_help.py
+- uid: az_dls_fs_upload
+  name: az dls fs upload
+  summary: Upload file atau folder ke akun Data Lake Store.
+  description: ''
+  syntax: >-
+    az dls fs upload --destination-path
+                     --source-path
+                     [--account]
+                     [--block-size]
+                     [--buffer-size]
+                     [--chunk-size]
+                     [--ids]
+                     [--overwrite]
+                     [--thread-count]
+  examples:
+  - summary: Upload file atau folder ke akun Data Lake Store. (dibuat otomatis)
+    syntax: az dls fs upload --account {account} --destination-path {destination-path} --overwrite  --source-path {source-path}
+  requiredParameters:
+  - isRequired: true
+    name: --destination-path
+    summary: Jalur lengkap di sistem file Data Lake Store untuk mengunggah file atau folder.
+    description: ''
+  - isRequired: true
+    name: --source-path
+    summary: Jalur ke file atau folder yang akan diunggah.
+    description: ''
+  optionalParameters:
+  - name: --account -n
+    summary: Nama akun Data Lake Store.
+    description: ''
+  - name: --block-size
+    defaultValue: "4194304"
+    summary: Ukuran blok, dalam byte.
+    description: Dalam setiap gugus, blok yang lebih kecil ditulis untuk setiap panggilan API. Blok tidak boleh lebih besar dari gugus dan harus lebih besar dari buffer.
+  - name: --buffer-size
+    defaultValue: "4194304"
+    summary: Ukuran buffer transfer, dalam byte.
+    description: Buffer tidak boleh lebih besar dari gugus dan tidak boleh lebih kecil dari blok.
+  - name: --chunk-size
+    defaultValue: "268435456"
+    summary: Ukuran gugus, dalam byte.
+    description: File besar dibagi menjadi beberapa potongan. File yang lebih kecil dari ukuran ini akan selalu ditransfer dalam satu utas.
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --overwrite
+    summary: Menunjukkan bahwa, jika file atau folder tujuan ada, file atau folder tersebut harus ditimpa.
+    description: ''
+  - name: --thread-count
+    summary: 'Paralelisme unggahan. Default: Jumlah inti di komputer lokal.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dls/_help.py
+commands:
+- az_dls_fs_access
+- az_dls_fs_access_remove-all
+- az_dls_fs_access_remove-entry
+- az_dls_fs_access_set
+- az_dls_fs_access_set-entry
+- az_dls_fs_access_set-owner
+- az_dls_fs_access_set-permission
+- az_dls_fs_access_show
+- az_dls_fs_append
+- az_dls_fs_create
+- az_dls_fs_delete
+- az_dls_fs_download
+- az_dls_fs_join
+- az_dls_fs_list
+- az_dls_fs_move
+- az_dls_fs_preview
+- az_dls_fs_remove-expiry
+- az_dls_fs_set-expiry
+- az_dls_fs_show
+- az_dls_fs_test
+- az_dls_fs_upload
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 06/21/2019
+  description: Mengelola sistem file Data Lake Store.
+  ms.openlocfilehash: 3be70e14376b47395ca2aa69194a0a65bc8b898f
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140987180"
