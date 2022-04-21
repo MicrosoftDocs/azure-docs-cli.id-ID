@@ -1,0 +1,523 @@
+### YamlMime:AzureCLIGroup
+uid: az_eventgrid_event-subscription
+name: az eventgrid event-subscription
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **eventgrid** untuk Azure CLI (versi 2.0.49 atau lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az eventgrid event-subscription** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola langganan peristiwa.
+description: Mengelola langganan peristiwa untuk topik Event Grid, domain, topik domain, langganan Azure, grup sumber daya, atau untuk sumber daya Azure lainnya yang mendukung pemberitahuan peristiwa.
+directCommands:
+- uid: az_eventgrid_event-subscription_create
+  name: az eventgrid event-subscription create
+  summary: Buat langganan peristiwa baru.
+  description: ''
+  syntax: >-
+    az eventgrid event-subscription create --name
+                                           [--advanced-filter]
+                                           [--azure-active-directory-application-id-or-uri]
+                                           [--azure-active-directory-tenant-id]
+                                           [--deadletter-endpoint]
+                                           [--deadletter-identity {systemassigned}]
+                                           [--deadletter-identity-endpoint]
+                                           [--delivery-identity {systemassigned}]
+                                           [--delivery-identity-endpoint]
+                                           [--delivery-identity-endpoint-type {azurefunction, eventhub, hybridconnection, servicebusqueue, servicebustopic, storagequeue, webhook}]
+                                           [--endpoint]
+                                           [--endpoint-type {azurefunction, eventhub, hybridconnection, servicebusqueue, servicebustopic, storagequeue, webhook}]
+                                           [--event-delivery-schema {cloudeventschemav1_0, custominputschema, eventgridschema}]
+                                           [--event-ttl]
+                                           [--expiration-date]
+                                           [--included-event-types]
+                                           [--labels]
+                                           [--max-delivery-attempts]
+                                           [--max-events-per-batch]
+                                           [--preferred-batch-size-in-kilobytes]
+                                           [--source-resource-id]
+                                           [--subject-begins-with]
+                                           [--subject-case-sensitive {false, true}]
+                                           [--subject-ends-with]
+  examples:
+  - summary: Buat langganan peristiwa baru untuk topik Event Grid, menggunakan filter default.
+    syntax: >-
+      az eventgrid event-subscription create --name es1 \
+          --source-resource-id /subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.EventGrid/topics/topic1 \
+          --endpoint https://contoso.azurewebsites.net/api/f1?code=code
+  - summary: Buat langganan peristiwa baru untuk langganan langganan Azure, menggunakan filter default.
+    syntax: >-
+      az eventgrid event-subscription create --name es2 \
+          --source-resource-id /subscriptions/{SubID} \
+          --endpoint https://contoso.azurewebsites.net/api/f1?code=code
+  - summary: Buat langganan peristiwa baru untuk grup sumber daya, menggunakan filter default.
+    syntax: >-
+      az eventgrid event-subscription create --name es3 \
+          --source-resource-id /subscriptions/{SubID}/resourceGroups/{RG} \
+          --endpoint https://contoso.azurewebsites.net/api/f1?code=code
+  - summary: Buat langganan peristiwa baru untuk akun penyimpanan, menggunakan filter default.
+    syntax: >-
+      az eventgrid event-subscription create --name es3 \
+          --source-resource-id "/subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.Storage/storageaccounts/s1"  \
+          --endpoint https://contoso.azurewebsites.net/api/f1?code=code
+  - summary: Buat langganan peristiwa baru untuk akun penyimpanan, menggunakan filter tingkat lanjut.
+    syntax: >-
+      az eventgrid event-subscription create  --name es3 \
+          --source-resource-id "/subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.Storage/storageaccounts/s1" \
+          --endpoint https://contoso.azurewebsites.net/api/f1?code=code
+          --advanced-filter data.blobType StringIn BlockBlob
+          --advanced-filter data.url StringBeginsWith https://myaccount.blob.core.windows.net
+  - summary: Buat langganan peristiwa baru untuk langganan Azure, dengan filter yang menentukan awalan subjek.
+    syntax: >-
+      az eventgrid event-subscription create --name es4 \
+          --source-resource-id /subscriptions/{SubID} \
+          --endpoint https://contoso.azurewebsites.net/api/f1?code=code \
+          --subject-begins-with mysubject_prefix
+  - summary: Buat langganan peristiwa baru untuk grup sumber daya, dengan filter yang menentukan akhiran subjek.
+    syntax: >-
+      az eventgrid event-subscription create --name es5 \
+          --source-resource-id /subscriptions/{SubID}/resourceGroups/{RG} \
+          --endpoint https://contoso.azurewebsites.net/api/f1?code=code \
+          --subject-ends-with mysubject_suffix
+  - summary: Buat langganan peristiwa baru untuk langganan Azure, menggunakan filter default, dan EventHub sebagai tujuan.
+    syntax: >-
+      az eventgrid event-subscription create --name es2 \
+          --source-resource-id /subscriptions/{SubID} \
+          --endpoint-type eventhub \
+          --endpoint /subscriptions/{SubID}/resourceGroups/TestRG/providers/Microsoft.EventHub/namespaces/n1/eventhubs/EH1
+  - summary: Buat langganan peristiwa baru untuk langganan Azure, menggunakan filter default, dan antrean Azure Storage sebagai tujuan.
+    syntax: >-
+      az eventgrid event-subscription create --name es2 \
+          --source-resource-id /subscriptions/{SubID} \
+          --endpoint-type storagequeue \
+          --endpoint /subscriptions/{SubID}/resourceGroups/TestRG/providers/Microsoft.Storage/storageAccounts/sa1/queueservices/default/queues/q1
+  - summary: Buat langganan peristiwa baru untuk langganan Azure, menggunakan filter default, dan Azure ServiceBusQueue sebagai tujuan.
+    syntax: >-
+      az eventgrid event-subscription create --name es2 \
+          --source-resource-id /subscriptions/{SubID} \
+          --endpoint-type servicebusqueue \
+          --endpoint /subscriptions/{SubID}/resourceGroups/TestRG/providers/Microsoft.ServiceBus/namespaces/ns1/queues/queue1
+  - summary: Buat langganan peristiwa baru untuk domain Event Grid, menggunakan filter default, dan CloudEvent V 1.0 sebagai skema pengiriman.
+    syntax: >-
+      az eventgrid event-subscription create --name es2 \
+          --source-resource-id /subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.EventGrid/domains/d1 \
+          --endpoint https://contoso.azurewebsites.net/api/f1?code=code \
+          --event-delivery-schema cloudeventschemav1_0
+  - summary: Buat langganan peristiwa baru untuk akun penyimpanan, dengan tujuan deadletter dan kebijakan coba lagi kustom maksimum 10 upaya pengiriman dan TTL Peristiwa 2 jam (mana pun yang terjadi sebelumnya).
+    syntax: >-
+      az eventgrid event-subscription create --name es2 \
+          --source-resource-id "/subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.Storage/storageaccounts/s1" \
+          --endpoint https://contoso.azurewebsites.net/api/f1?code=code \
+          --deadletter-endpoint /subscriptions/{SubID}/resourceGroups/TestRG/providers/Microsoft.Storage/storageAccounts/s2/blobServices/default/containers/blobcontainer1 \
+          --max-delivery-attempts 10 --event-ttl 120
+  - summary: Buat langganan peristiwa baru untuk topik domain.
+    syntax: >-
+      az eventgrid event-subscription create --name es2 \
+          --source-resource-id "/subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.EventGrid/domains/domain1/topics/t1" \
+          --endpoint https://contoso.azurewebsites.net/api/f1?code=code
+  - summary: Buat langganan peristiwa baru (untuk akun penyimpanan) dengan tanggal kedaluwarsa.
+    syntax: >-
+      az eventgrid event-subscription create --name es2 \
+          --source-resource-id "/subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.Storage/storageaccounts/sa1" \
+          --endpoint https://contoso.azurewebsites.net/api/f1?code=code
+          --expiration-date "2018-10-31"
+  - summary: Buat langganan peristiwa baru untuk topik Event Grid, menggunakan Webhook yang diaktifkan Azure Active Directory sebagai tujuan .
+    syntax: >-
+      az eventgrid event-subscription create --name es1 \
+          --source-resource-id /subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.EventGrid/topics/topic1 \
+          --endpoint https://contoso.azurewebsites.net/api/f1?code=code
+          --azure-active-directory-tenant-id azureactivedirectorytenantid
+          --azure-active-directory-application-id-or-uri azureactivedirectoryapplicationidoruri
+  - summary: Buat langganan peristiwa baru untuk topik Event Grid, menggunakan Azure Function sebagai tujuan.
+    syntax: >-
+      az eventgrid event-subscription create --name es1 \
+          --source-resource-id /subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.EventGrid/topics/topic1 \
+          --endpoint /subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.Web/sites/{functionappname}/functions/{functionname} --endpoint-type azurefunction
+  - summary: Buat langganan peristiwa baru untuk topik Event Grid, menggunakan Eventhub dengan identitas MSI yang ditetapkan sistem sebagai tujuan dan dengan deadletter dengan identitas MSI
+    syntax: >-
+      az eventgrid event-subscription create --source-resource-id /subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.EventGrid/topics/topic1 \
+          --delivery-identity-endpoint-type eventhub --delivery-identity systemassigned --delivery-identity-endpoint /subscriptions/{SubId2|}/resourceGroups/{RG2}/providers/Microsoft.eventhub/namespaces/{EventHubNamespace}/eventhubs/{EventhubName} \
+          --deadletter-identity-endpoint /subscriptions/{SubID}/resourceGroups/TestRG/providers/Microsoft.Storage/storageAccounts/s2/blobServices/default/containers/blobcontainer1 --deadletter-identity systemassigned -n {EventSubscriptionName}
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama langganan kejadian.
+    description: ''
+  optionalParameters:
+  - name: --advanced-filter
+    summary: Filter tingkat lanjut memungkinkan pemfilteran peristiwa berdasarkan properti peristiwa tertentu.
+    description: 'Penggunaan: --advanced-filter KEY[. INNERKEY] FILTEROPERATOR VALUE [VALUE ...] StringIn: --advanced-filter data. String WarnaIn Merah Oranye Kuning StringNotIn: --advanced-filter data. String WarnaNotIn Biru Untai Kuning Oranye MerahKontains: --advanced-filter subject StringContains Blue Red StringBeginsWith: --advanced-filter subject StringBeginsWith Blue Red StringEndsWith: --advanced-filter subject StringEndsWith img png jpg NumberIn: --advanced-filter data.property1 NumberIn 5 10 20 NumberNotIn: --advanced-filter data.property2 NumberNotIn 100 200 300 NumberLessThan: --advanced-filter data.property3  NumberLessThan 100 NumberLessThanOrEquals: --advanced-filter data.property2 NumberLessThanOrEquals 100 NumberGreaterThan: --advanced-filter data.property3 NumberGreaterThan 100 NumberGreaterThanOrEquals: --advanced-filter data.property2 NumberGreaterThanOrEquals 100 BoolEquals: --advanced-filter data.property3 BoolEquals true Beberapa filter tingkat lanjut dapat ditentukan dengan menggunakan lebih dari satu `--advanced-filter` argumen.'
+  - name: --azure-active-directory-application-id-or-uri
+    summary: Id Aplikasi Azure Active Directory atau Uri untuk mendapatkan token akses yang akan disertakan sebagai token pembawa dalam permintaan pengiriman. Hanya berlaku untuk webhook sebagai tujuan.
+    description: ''
+  - name: --azure-active-directory-tenant-id
+    summary: Id Penyewa Azure Active Directory untuk mendapatkan token akses yang akan disertakan sebagai token pembawa dalam permintaan pengiriman. Hanya berlaku untuk webhook sebagai tujuan.
+    description: ''
+  - name: --deadletter-endpoint
+    summary: ID sumber daya Azure dari tujuan kontainer blob Azure Storage di mana EventGrid harus mematikan peristiwa yang tidak dapat terkirim untuk langganan peristiwa ini.
+    description: 'Contoh: --deadletter-endpoint /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft. Storage/storageAccounts/sa1/blobServices/default/containers/containerName.'
+  - name: --deadletter-identity
+    parameterValueGroup: systemassigned
+    summary: Jenis identitas sumber daya tujuan deadletter.
+    description: ''
+  - name: --deadletter-identity-endpoint
+    summary: ID sumber daya Azure dari tujuan kontainer blob Azure Storage dengan identitas di mana EventGrid harus mematikan peristiwa yang tidak terkirim untuk langganan peristiwa ini.
+    description: ''
+  - name: --delivery-identity
+    parameterValueGroup: systemassigned
+    summary: Jenis identitas sumber daya tujuan pengiriman (misalnya, antrean penyimpanan, atau eventhub).
+    description: ''
+  - name: --delivery-identity-endpoint
+    summary: Titik akhir dengan identitas tempat EventGrid harus mengirimkan peristiwa yang cocok dengan langganan peristiwa ini. Untuk jenis titik akhir webhook, ini harus menjadi URL webhook yang sesuai. Untuk jenis titik akhir lainnya, ini harus menjadi pengidentifikasi sumber daya Azure dari titik akhir.
+    description: ''
+  - name: --delivery-identity-endpoint-type
+    parameterValueGroup: azurefunction, eventhub, hybridconnection, servicebusqueue, servicebustopic, storagequeue, webhook
+    summary: Jenis titik akhir tujuan dengan identitas sumber daya.
+    description: ''
+  - name: --endpoint
+    summary: Titik akhir tempat EventGrid harus mengirimkan peristiwa yang cocok dengan langganan kejadian ini. Untuk jenis titik akhir webhook, ini harus menjadi URL webhook yang sesuai. Untuk jenis titik akhir lainnya, ini harus menjadi pengidentifikasi sumber daya Azure dari titik akhir.
+    description: ''
+  - name: --endpoint-type
+    defaultValue: webhook
+    parameterValueGroup: azurefunction, eventhub, hybridconnection, servicebusqueue, servicebustopic, storagequeue, webhook
+    summary: Jenis titik akhir tujuan.
+    description: ''
+  - name: --event-delivery-schema
+    parameterValueGroup: cloudeventschemav1_0, custominputschema, eventgridschema
+    summary: Skema di mana peristiwa harus dikirimkan untuk langganan kejadian ini. Secara default, peristiwa akan dikirimkan dalam skema yang sama tempat peristiwa diterbitkan (berdasarkan skema input topik yang sesuai).
+    description: ''
+  - name: --event-ttl
+    defaultValue: "1440"
+    summary: Waktu acara aktif (dalam menit). Harus berupa angka antara 1 dan 1440.
+    description: ''
+  - name: --expiration-date
+    summary: Tanggal atau tanggalwaktu (dalam UTC, misalnya '2018-11-30T11:59:59+00:00' atau '2018-11-30') setelah itu langganan peristiwa akan kedaluwarsa. Secara default, tidak ada kedaluwarsa untuk langganan peristiwa.
+    description: ''
+  - name: --included-event-types
+    summary: 'Daftar jenis peristiwa yang dipisahkan spasi. Contoh: Microsoft. Storage. BlobCreated Microsoft. Storage. BlobDeleted. Untuk berlangganan semua jenis peristiwa default, jangan tentukan nilai apa pun untuk argumen ini.'
+    description: ''
+  - name: --labels
+    summary: Daftar label yang dipisahkan spasi untuk dikaitkan dengan langganan kejadian ini.
+    description: ''
+  - name: --max-delivery-attempts
+    defaultValue: "30"
+    summary: Jumlah maksimum upaya pengiriman. Harus berupa angka antara 1 dan 30.
+    description: ''
+  - name: --max-events-per-batch
+    summary: Jumlah maksimum peristiwa dalam batch. Harus berupa angka antara 1 hingga 5000.
+    description: ''
+  - name: --preferred-batch-size-in-kilobytes
+    summary: Ukuran batch pilihan dalam kilobyte. Harus berupa angka antara 1 hingga 1024.
+    description: ''
+  - name: --source-resource-id
+    summary: Pengidentifikasi sumber daya Azure yang sepenuhnya memenuhi syarat tempat langganan peristiwa perlu dibuat.
+    description: 'Penggunaan: --source-resource-id Azure-Resource-ID Untuk langganan Azure: --source-resource-id /subscriptions/{SubID} Untuk grup sumber daya: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1 Untuk topik EventGrid: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft.EventGrid/topics/t1 Untuk akun penyimpanan: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft. Storage/storageaccounts/sa1 Untuk domain EventGrid: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft.EventGrid/domains/d1 Untuk topik domain EventGrid: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft.EventGrid/domains/d1/topics/t1.'
+  - name: --subject-begins-with
+    summary: String opsional untuk memfilter peristiwa untuk langganan peristiwa berdasarkan awalan. Karakter kartubebas tidak didukung.
+    description: ''
+  - name: --subject-case-sensitive
+    parameterValueGroup: false, true
+    summary: Tentukan untuk menunjukkan apakah bidang subjek harus dibandingkan dengan cara yang peka huruf besar/kecil. Benar jika bendera ada.
+    description: ''
+  - name: --subject-ends-with
+    summary: String opsional untuk memfilter peristiwa untuk langganan peristiwa berdasarkan akhiran. Karakter kartubebas tidak didukung.
+    description: ''
+- uid: az_eventgrid_event-subscription_delete
+  name: az eventgrid event-subscription delete
+  summary: Menghapus langganan peristiwa.
+  description: ''
+  syntax: >-
+    az eventgrid event-subscription delete --name
+                                           [--source-resource-id]
+  examples:
+  - summary: Menghapus langganan peristiwa untuk topik Event Grid.
+    syntax: >-
+      az eventgrid event-subscription delete --name es1 \
+          --source-resource-id /subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.EventGrid/topics/topic1
+  - summary: Menghapus langganan peristiwa untuk topik domain Event Grid.
+    syntax: >-
+      az eventgrid event-subscription delete --name es1 \
+          --source-resource-id /subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.EventGrid/domains/domain1/topics/topic1
+  - summary: Menghapus langganan peristiwa untuk domain Event Grid.
+    syntax: >-
+      az eventgrid event-subscription delete --name es1 \
+          --source-resource-id /subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.EventGrid/domains/domain1
+  - summary: Menghapus langganan peristiwa untuk langganan Azure.
+    syntax: >-
+      az eventgrid event-subscription delete --name es2 \
+          --source-resource-id /subscriptions/{SubID}
+  - summary: Menghapus langganan peristiwa untuk grup sumber daya.
+    syntax: >-
+      az eventgrid event-subscription delete --name es3 \
+          --source-resource-id /subscriptions/{SubID}/resourceGroups/{RG}
+  - summary: Menghapus langganan peristiwa untuk akun penyimpanan.
+    syntax: >-
+      az eventgrid event-subscription delete --name es3 \
+          --source-resource-id /subscriptions/{SubID}/resourceGroups/{RG}/providers/microsoft.storage/storageaccounts/kalsegblob
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama langganan kejadian.
+    description: ''
+  optionalParameters:
+  - name: --source-resource-id
+    summary: Pengidentifikasi sumber daya Azure yang sepenuhnya memenuhi syarat yang langganan peristiwanya perlu dihapus.
+    description: 'Penggunaan: --source-resource-id Azure-Resource-ID Untuk langganan Azure: --source-resource-id /subscriptions/{SubID} Untuk grup sumber daya: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1 Untuk topik EventGrid: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft.EventGrid/topics/t1 Untuk akun penyimpanan: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft. Storage/storageaccounts/sa1 Untuk domain EventGrid: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft.EventGrid/domains/d1 Untuk topik domain EventGrid: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft.EventGrid/domains/d1/topics/t1.'
+- uid: az_eventgrid_event-subscription_list
+  name: az eventgrid event-subscription list
+  summary: Mencantumkan langganan peristiwa.
+  description: >-
+    Event Grid mendukung langganan acara regional dan global: Langganan peristiwa pada sumber daya regional (seperti akun Storage atau topik Event Grid) bersifat regional, sementara langganan peristiwa pada sumber daya global (seperti langganan Azure atau grup sumber daya) bersifat global.
+
+    Oleh karena itu, Anda dapat mencantumkan langganan peristiwa dengan beberapa cara berbeda:
+
+    1. Untuk mencantumkan menurut ID sumber daya sumber daya yang langganan peristiwanya ingin Anda cantumkan, tentukan parameter --source-resource-id. Tidak ada parameter lain yang harus ditentukan.
+
+    2. Untuk mencantumkan menurut jenis topik (misalnya akun penyimpanan), tentukan parameter --topic-type bersama dengan parameter --location (misalnya "westus2"). Untuk jenis topik global (misalnya, "Microsoft.Resources.Subscriptions"), tentukan nilai lokasi sebagai "global".
+
+    3. Untuk mencantumkan semua langganan peristiwa di suatu wilayah (di semua jenis topik), tentukan hanya parameter --location.
+
+    4. Untuk #2 dan #3 di atas, untuk memfilter hanya menurut grup sumber daya, Anda juga dapat menentukan parameter --resource-group.
+  syntax: >-
+    az eventgrid event-subscription list [--location]
+                                         [--odata-query]
+                                         [--resource-group]
+                                         [--source-resource-id]
+                                         [--topic-type-name]
+  examples:
+  - summary: Mencantumkan semua langganan peristiwa yang dibuat untuk topik Event Grid.
+    syntax: az eventgrid event-subscription list --source-resource-id /subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.EventGrid/topics/topic1
+  - summary: Mencantumkan semua langganan peristiwa yang dibuat untuk akun penyimpanan.
+    syntax: az eventgrid event-subscription list --source-resource-id /subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.Storage/storageaccounts/kalsegblob
+  - summary: Mencantumkan semua langganan peristiwa yang dibuat untuk langganan Azure.
+    syntax: az eventgrid event-subscription list --source-resource-id /subscriptions/{SubID}
+  - summary: Mencantumkan semua langganan peristiwa yang dibuat untuk grup sumber daya.
+    syntax: az eventgrid event-subscription list --source-resource-id /subscriptions/{SubID}/resourceGroups/{RG}
+  - summary: Mencantumkan semua langganan peristiwa untuk domain Event Grid.
+    syntax: az eventgrid event-subscription list --source-resource-id /subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.EventGrid/domains/d1
+  - summary: Mencantumkan semua langganan peristiwa untuk topik domain Event Grid.
+    syntax: az eventgrid event-subscription list --source-resource-id /subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.EventGrid/domains/d1/topics/topic1
+  - summary: Cantumkan semua langganan peristiwa Storage (di bawah langganan Azure yang saat ini dipilih) di westus2.
+    syntax: az eventgrid event-subscription list --topic-type Microsoft.Storage.StorageAccounts --location westus2
+  - summary: Cantumkan semua langganan peristiwa Storage (di bawah grup sumber daya tertentu) di westus2.
+    syntax: az eventgrid event-subscription list --topic-type Microsoft.Storage.StorageAccounts --location westus2 --resource-group {RG}
+  - summary: Cantumkan semua langganan peristiwa regional atau global (di bawah langganan Azure yang saat ini dipilih).
+    syntax: >-
+      az eventgrid event-subscription list --location westus2
+
+      az eventgrid event-subscription list --location global
+  - summary: Cantumkan semua langganan peristiwa regional atau global di bawah grup sumber daya tertentu.
+    syntax: >-
+      az eventgrid event-subscription list --location westus2 --resource-group {RG}
+
+      az eventgrid event-subscription list --location global --resource-group {RG}
+  - summary: Mencantumkan semua langganan peristiwa untuk domain Event Grid yang namanya berisi pola "XYZ"
+    syntax: az eventgrid event-subscription list --source-resource-id /subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.EventGrid/domains/d1 --odata-query "Contains(name, 'XYZ')"
+  - summary: Mencantumkan semua langganan peristiwa untuk domain Event Grid kecuali langganan peristiwa dengan nama "name1"
+    syntax: az eventgrid event-subscription list --source-resource-id /subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.EventGrid/domains/d1 --odata-query "NOT (name eq 'name1')"
+  optionalParameters:
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --odata-query
+    summary: Kueri yang digunakan untuk memfilter hasil menggunakan sintaks OData.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --source-resource-id
+    summary: Pengidentifikasi sumber daya Azure yang sepenuhnya memenuhi syarat yang langganan peristiwanya perlu dicantumkan.
+    description: 'Penggunaan: --source-resource-id Azure-Resource-ID Untuk langganan Azure: --source-resource-id /subscriptions/{SubID} Untuk grup sumber daya: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1 Untuk topik EventGrid: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft.EventGrid/topics/t1 Untuk akun penyimpanan: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft. Storage/storageaccounts/sa1 Untuk domain EventGrid: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft.EventGrid/domains/d1 Untuk topik domain EventGrid: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft.EventGrid/domains/d1/topics/t1.'
+  - name: --topic-type-name
+    summary: Nama jenis topik yang langganan peristiwanya perlu dicantumkan. Ketika ini ditentukan, Anda juga harus menentukan --location.
+    description: 'Contoh 1: Mencantumkan semua langganan peristiwa Storage di WestUS2 --resource-group TestRG --topic-type-name Microsoft.Storage. StorageAccounts --location westus2 Contoh 2: Mencantumkan semua langganan peristiwa di langganan Azure --topic-type-name Microsoft.Resources.Subscriptions --location global.'
+- uid: az_eventgrid_event-subscription_show
+  name: az eventgrid event-subscription show
+  summary: Dapatkan detail langganan peristiwa.
+  description: ''
+  syntax: >-
+    az eventgrid event-subscription show --name
+                                         [--include-full-endpoint-url {false, true}]
+                                         [--source-resource-id]
+  examples:
+  - summary: Menampilkan detail langganan peristiwa untuk topik Event Grid.
+    syntax: >-
+      az eventgrid event-subscription show --name es1 \
+          --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft.EventGrid/topics/topic1
+  - summary: Memperlihatkan detail langganan peristiwa untuk langganan Azure.
+    syntax: >-
+      az eventgrid event-subscription show --name es2 \
+          --source-resource-id /subscriptions/{SubID}
+  - summary: Memperlihatkan detail langganan peristiwa untuk grup sumber daya.
+    syntax: >-
+      az eventgrid event-subscription show --name es3 \
+          --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1
+  - summary: Menampilkan detail langganan peristiwa untuk akun penyimpanan.
+    syntax: >-
+      az eventgrid event-subscription show --name es3 \
+          --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/microsoft.storage/storageaccounts/kalsegblob
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama langganan kejadian.
+    description: ''
+  optionalParameters:
+  - name: --include-full-endpoint-url
+    parameterValueGroup: false, true
+    summary: Tentukan untuk menunjukkan apakah URL titik akhir lengkap harus dikembalikan. True jika bendera ada.
+    description: ''
+  - name: --source-resource-id
+    summary: Pengidentifikasi sumber daya Azure yang sepenuhnya memenuhi syarat yang langganan peristiwanya perlu ditampilkan.
+    description: 'Penggunaan: --source-resource-id Azure-Resource-ID Untuk langganan Azure: --source-resource-id /subscriptions/{SubID} Untuk grup sumber daya: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1 Untuk topik EventGrid: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft.EventGrid/topics/t1 Untuk akun penyimpanan: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft. Storage/storageaccounts/sa1 Untuk domain EventGrid: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft.EventGrid/domains/d1 Untuk topik domain EventGrid: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft.EventGrid/domains/d1/topics/t1.'
+- uid: az_eventgrid_event-subscription_update
+  name: az eventgrid event-subscription update
+  summary: Memperbarui langganan peristiwa.
+  description: ''
+  syntax: >-
+    az eventgrid event-subscription update --name
+                                           [--add]
+                                           [--advanced-filter]
+                                           [--deadletter-endpoint]
+                                           [--deadletter-identity {systemassigned}]
+                                           [--deadletter-identity-endpoint]
+                                           [--delivery-identity {systemassigned}]
+                                           [--delivery-identity-endpoint]
+                                           [--delivery-identity-endpoint-type {azurefunction, eventhub, hybridconnection, servicebusqueue, servicebustopic, storagequeue, webhook}]
+                                           [--endpoint]
+                                           [--endpoint-type {azurefunction, eventhub, hybridconnection, servicebusqueue, servicebustopic, storagequeue, webhook}]
+                                           [--force-string]
+                                           [--included-event-types]
+                                           [--labels]
+                                           [--remove]
+                                           [--set]
+                                           [--source-resource-id]
+                                           [--subject-begins-with]
+                                           [--subject-ends-with]
+  examples:
+  - summary: Perbarui langganan peristiwa untuk topik Event Grid untuk menentukan titik akhir baru.
+    syntax: >-
+      az eventgrid event-subscription update --name es1 \
+          --source-resource-id /subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.EventGrid/topics/topic1 \
+          --endpoint https://contoso.azurewebsites.net/api/f1?code=code
+  - summary: Perbarui langganan peristiwa untuk langganan Azure untuk menentukan filter subjek-dengan subjek baru.
+    syntax: >-
+      az eventgrid event-subscription update --name es2 \
+          --source-resource-id /subscriptions/{SubID} \
+          --subject-ends-with .jpg
+  - summary: Perbarui langganan peristiwa untuk grup sumber daya untuk menentukan titik akhir baru dan filter dengan subjek baru.
+    syntax: >-
+      az eventgrid event-subscription update --name es3 \
+          --source-resource-id /subscriptions/{SubID}/resourceGroups/{RG} \
+          --subject-ends-with .png \
+          --endpoint https://contoso.azurewebsites.net/api/f1?code=code
+  - summary: Perbarui langganan peristiwa untuk akun penyimpanan untuk menentukan daftar baru jenis peristiwa yang disertakan.
+    syntax: >-
+      az eventgrid event-subscription update --name es3 \
+          --source-resource-id "/subscriptions/{SubID}/resourceGroups/{RG}/providers/microsoft.storage/storageaccounts/kalsegblob" \
+          --included-event-types Microsoft.Storage.BlobCreated Microsoft.Storage.BlobDeleted
+  - summary: Perbarui langganan peristiwa untuk akun penyimpanan, untuk menyertakan tujuan deadletter.
+    syntax: >-
+      az eventgrid event-subscription update --name es2 \
+          --source-resource-id "/subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.Storage/storageaccounts/kalsegblob" \
+          --deadletter-endpoint /subscriptions/{SubID}/resourceGroups/TestRG/providers/Microsoft.Storage/storageAccounts/sa1/blobServices/default/containers/blobcontainer1
+  - summary: Perbarui langganan peristiwa untuk akun penyimpanan, menggunakan filter tingkat lanjut.
+    syntax: >-
+      az eventgrid event-subscription update --name es3 \
+          --source-resource-id "/subscriptions/{SubID}/resourceGroups/{RG}/providers/Microsoft.Storage/storageaccounts/s1" \
+          --endpoint https://contoso.azurewebsites.net/api/f1?code=code
+          --advanced-filter data.blobType StringIn BlockBlob
+          --advanced-filter data.url StringBeginsWith https://myaccount.blob.core.windows.net
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama langganan kejadian.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --advanced-filter
+    summary: Filter tingkat lanjut memungkinkan pemfilteran peristiwa berdasarkan properti peristiwa tertentu.
+    description: 'Penggunaan: --advanced-filter KEY[. INNERKEY] FILTEROPERATOR VALUE [VALUE ...] StringIn: --advanced-filter data. String WarnaIn String Kuning Oranye Merah BiruNotIn: --advanced-filter data. String WarnaNotIn String Kuning Oranye Merah BiruKontains: --advanced-filter subject StringContains Blue Red StringBeginsWith: --advanced-filter subject StringBeginsWith Blue Red StringEndsWith: --advanced-filter subject StringEndsWith img png jpg NumberIn: --advanced-filter data.property1 NumberIn 5 10 20 NumberNotIn: --advanced-filter data.property2 NumberNotIn 100 200 300 NumberLessThan: --advanced-filter data.property3  NumberLessThan 100 NumberLessThanOrEquals: --advanced-filter data.property2 NumberLessThanOrEquals 100 NumberGreaterThan: --advanced-filter data.property3 NumberGreaterThan 100 NumberGreaterThanOrEquals: --advanced-filter data.property2 NumberGreaterThanOrEquals 100 BoolEquals: --advanced-filter data.property3 BoolEquals true Beberapa filter tingkat lanjut dapat ditentukan dengan menggunakan lebih dari satu `--advanced-filter` argumen.'
+  - name: --deadletter-endpoint
+    summary: ID sumber daya Azure dari tujuan kontainer blob Azure Storage di mana EventGrid harus mematikan peristiwa yang tidak terkirim untuk langganan peristiwa ini.
+    description: ''
+  - name: --deadletter-identity
+    parameterValueGroup: systemassigned
+    summary: Jenis identitas sumber daya tujuan deadletter.
+    description: ''
+  - name: --deadletter-identity-endpoint
+    summary: ID sumber daya Azure dari tujuan kontainer blob Azure Storage dengan identitas di mana EventGrid harus mematikan peristiwa yang tidak terkirim untuk langganan peristiwa ini.
+    description: ''
+  - name: --delivery-identity
+    parameterValueGroup: systemassigned
+    summary: Jenis identitas sumber daya tujuan pengiriman (misalnya, antrean penyimpanan, atau eventhub).
+    description: ''
+  - name: --delivery-identity-endpoint
+    summary: Titik akhir dengan identitas di mana EventGrid harus mengirimkan peristiwa yang cocok dengan langganan peristiwa ini. Untuk jenis titik akhir webhook, ini harus menjadi URL webhook yang sesuai. Untuk jenis titik akhir lainnya, ini harus menjadi pengidentifikasi sumber daya Azure dari titik akhir.
+    description: ''
+  - name: --delivery-identity-endpoint-type
+    parameterValueGroup: azurefunction, eventhub, hybridconnection, servicebusqueue, servicebustopic, storagequeue, webhook
+    summary: Jenis titik akhir tujuan dengan identitas sumber daya.
+    description: ''
+  - name: --endpoint
+    summary: Titik akhir tempat EventGrid harus mengirimkan peristiwa yang cocok dengan langganan peristiwa ini. Untuk jenis titik akhir webhook, ini harus menjadi URL webhook yang sesuai. Untuk jenis titik akhir lainnya, ini harus menjadi pengidentifikasi sumber daya Azure dari titik akhir.
+    description: ''
+  - name: --endpoint-type
+    defaultValue: webhook
+    parameterValueGroup: azurefunction, eventhub, hybridconnection, servicebusqueue, servicebustopic, storagequeue, webhook
+    summary: Jenis titik akhir tujuan.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --included-event-types
+    summary: 'Daftar jenis peristiwa yang dipisahkan spasi. Contoh: Microsoft. Storage. BlobCreated Microsoft. Storage. BlobDeleted. Untuk berlangganan semua jenis peristiwa default, jangan tentukan nilai apa pun untuk argumen ini.'
+    description: ''
+  - name: --labels
+    summary: Daftar label yang dipisahkan spasi untuk dikaitkan dengan langganan kejadian ini.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --source-resource-id
+    summary: Pengidentifikasi sumber daya Azure yang sepenuhnya memenuhi syarat yang langganan peristiwanya perlu diperbarui.
+    description: 'Penggunaan: --source-resource-id Azure-Resource-ID Untuk langganan Azure: --source-resource-id /subscriptions/{SubID} Untuk grup sumber daya: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1 Untuk topik EventGrid: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft.EventGrid/topics/t1 Untuk akun penyimpanan: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft. Storage/storageaccounts/sa1 Untuk domain EventGrid: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft.EventGrid/domains/d1 Untuk topik domain EventGrid: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft.EventGrid/domains/d1/topics/t1.'
+  - name: --subject-begins-with
+    summary: String opsional untuk memfilter peristiwa untuk langganan peristiwa berdasarkan awalan. Karakter kartubebas tidak didukung.
+    description: ''
+  - name: --subject-ends-with
+    summary: String opsional untuk memfilter peristiwa untuk langganan peristiwa berdasarkan akhiran. Karakter kartubebas tidak didukung.
+    description: ''
+commands:
+- az_eventgrid_event-subscription_create
+- az_eventgrid_event-subscription_delete
+- az_eventgrid_event-subscription_list
+- az_eventgrid_event-subscription_show
+- az_eventgrid_event-subscription_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola langganan peristiwa untuk topik Event Grid, domain, topik domain, langganan Azure, grup sumber daya, atau untuk sumber daya Azure lainnya yang mendukung pemberitahuan peristiwa.
+  ms.openlocfilehash: a15164d8cedddb1fc82b08c9a154a1e06c9bd7d3
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140910100"

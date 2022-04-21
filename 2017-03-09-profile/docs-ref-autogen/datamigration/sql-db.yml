@@ -1,0 +1,300 @@
+### YamlMime:AzureCLIGroup
+uid: az_datamigration_sql-db
+name: az datamigration sql-db
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **datamigrasi** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az datamigration sql-db** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola migrasi database ke SQL DB.
+description: ''
+directCommands:
+- uid: az_datamigration_sql-db_cancel
+  name: az datamigration sql-db cancel
+  summary: Hentikan migrasi database yang sedang berlangsung untuk SQL DB.
+  description: ''
+  syntax: >-
+    az datamigration sql-db cancel --migration-operation-id
+                                   --resource-group
+                                   --sqldb-instance-name
+                                   --target-db-name
+                                   [--no-wait]
+  examples:
+  - summary: Hentikan migrasi yang sedang berlangsung untuk database.
+    syntax: az datamigration sql-db cancel --migration-operation-id "9a90bb84-e70f-46f7-b0ae-1aef5b3b9f07" --resource-group "testrg" --sqldb-instance-name "sqldbinstance" --target-db-name "db1"
+  requiredParameters:
+  - isRequired: true
+    name: --migration-operation-id
+    summary: Operasi migrasi pelacakan ID.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --sqldb-instance-name
+    summary: Nama server SQL Database target.
+    description: ''
+  - isRequired: true
+    name: --target-db-name
+    summary: Nama database target.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_datamigration_sql-db_create
+  name: az datamigration sql-db create
+  summary: Buat migrasi database baru ke SQL DB tertentu.
+  description: ''
+  syntax: >-
+    az datamigration sql-db create --resource-group
+                                   --sqldb-instance-name
+                                   --target-db-name
+                                   [--migration-service]
+                                   [--no-wait]
+                                   [--scope]
+                                   [--source-database-name]
+                                   [--source-sql-connection]
+                                   [--table-list]
+                                   [--target-db-collation]
+                                   [--target-sql-connection]
+  examples:
+  - summary: Membuat atau Memperbarui sumber daya Migrasi Database dengan Parameter maksimum.
+    syntax: az datamigration sql-db create --migration-service "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/sqlMigrationServices/testagent" --scope "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/servers/sqldbinstance" --source-database-name "aaa" --source-sql-connection authentication="WindowsAuthentication" data-source="aaa" encrypt-connection=true password="placeholder" trust-server-certificate=true user-name="bbb" --table-list "[Schema1].[TableName1]" "[Schema2].[TableName2]" --target-sql-connection authentication="SqlAuthentication" data-source="sqldbinstance" encrypt-connection=true password="placeholder" trust-server-certificate=true user-name="bbb" --resource-group "testrg" --sqldb-instance-name "sqldbinstance" --target-db-name "db1"
+  - summary: Membuat atau Memperbarui sumber daya Migrasi Database dengan parameter Minimum.
+    syntax: az datamigration sql-db create --migration-service "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/sqlMigrationServices/testagent" --scope "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/servers/sqldbinstance" --source-database-name "aaa" --source-sql-connection authentication="WindowsAuthentication" data-source="aaa" encrypt-connection=true password="placeholder" trust-server-certificate=true user-name="bbb" --target-sql-connection authentication="SqlAuthentication" data-source="sqldbinstance" encrypt-connection=true password="placeholder" trust-server-certificate=true user-name="bbb" --resource-group "testrg" --sqldb-instance-name "sqldbinstance" --target-db-name "db1"
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --sqldb-instance-name
+    summary: Nama server SQL Database target.
+    description: ''
+  - isRequired: true
+    name: --target-db-name
+    summary: Nama database target.
+    description: ''
+  optionalParameters:
+  - name: --migration-service
+    summary: Id Sumber Daya Layanan Migrasi.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --scope
+    summary: Id sumber daya sumber daya target (SQL VM, SQL Managed Instance, atau SQL DB).
+    description: ''
+  - name: --source-database-name
+    summary: Nama database sumber.
+    description: ''
+  - name: --source-sql-connection
+    summary: Detail koneksi SQL Server sumber.
+    description: >-
+      Penggunaan: --source-sql-connection data-source=XX authentication=XX user-name=XX password=XX encrypt-connection=XX trust-server-certificate=XX
+
+
+      sumber data: Sumber data.
+
+      autentikasi: Jenis autentikasi.
+
+      nama pengguna: Nama pengguna untuk menyambungkan ke SQL sumber.
+
+      kata sandi: Kata sandi untuk menyambungkan ke SQL sumber.
+
+      encrypt-connection: Apakah akan mengenkripsi koneksi atau tidak.
+
+      trust-server-certificate: Apakah akan mempercayai sertifikat server atau tidak.
+  - name: --table-list
+    summary: Daftar tabel yang akan disalin.
+    description: ''
+  - name: --target-db-collation
+    summary: Kolase database yang akan digunakan untuk database target.
+    description: ''
+  - name: --target-sql-connection
+    summary: Targetkan SQL detail koneksi DB.
+    description: >-
+      Penggunaan: --target-sql-connection data-source=XX authentication=XX user-name=XX password=XX encrypt-connection=XX trust-server-certificate=XX
+
+
+      sumber data: Sumber data.
+
+      autentikasi: Jenis autentikasi.
+
+      nama pengguna: Nama pengguna untuk menyambungkan ke SQL sumber.
+
+      kata sandi: Kata sandi untuk menyambungkan ke SQL sumber.
+
+      encrypt-connection: Apakah akan mengenkripsi koneksi atau tidak.
+
+      trust-server-certificate: Apakah akan mempercayai sertifikat server atau tidak.
+- uid: az_datamigration_sql-db_delete
+  name: az datamigration sql-db delete
+  summary: Hapus migrasi database yang sedang berlangsung atau selesai untuk SQL DB.
+  description: ''
+  syntax: >-
+    az datamigration sql-db delete --resource-group
+                                   --sqldb-instance-name
+                                   --target-db-name
+                                   [--force {false, true}]
+                                   [--no-wait]
+                                   [--yes]
+  examples:
+  - summary: Menghapus sumber daya Migrasi Database.
+    syntax: az datamigration sql-db delete --resource-group "testrg" --sqldb-instance-name "sqldbinstance" --target-db-name "db1"
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --sqldb-instance-name
+    summary: Nama server SQL Database target.
+    description: ''
+  - isRequired: true
+    name: --target-db-name
+    summary: Nama database target.
+    description: ''
+  optionalParameters:
+  - name: --force
+    parameterValueGroup: false, true
+    summary: Hapus boolean paksa opsional. Jika ini disediakan sebagai true, migrasi akan dihapus meskipun aktif.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_datamigration_sql-db_show
+  name: az datamigration sql-db show
+  summary: Ambil migrasi database yang ditentukan untuk SQL DB tertentu.
+  description: ''
+  syntax: >-
+    az datamigration sql-db show --resource-group
+                                 --sqldb-instance-name
+                                 --target-db-name
+                                 [--expand]
+                                 [--migration-operation-id]
+  examples:
+  - summary: Dapatkan Migrasi database Sql DB dengan parameter perluas.
+    syntax: az datamigration sql-db show --expand "MigrationStatusDetails" --resource-group "testrg" --sqldb-instance-name "sqldbinstance" --target-db-name "db1"
+  - summary: Dapatkan Migrasi database Sql DB tanpa parameter perluas.
+    syntax: az datamigration sql-db show --resource-group "testrg" --sqldb-instance-name "sqldbinstance" --target-db-name "db1"
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --sqldb-instance-name
+    summary: Nama server SQL Database target.
+    description: ''
+  - isRequired: true
+    name: --target-db-name
+    summary: Nama database target.
+    description: ''
+  optionalParameters:
+  - name: --expand
+    summary: Detail migrasi lengkap disertakan dalam respons.
+    description: ''
+  - name: --migration-operation-id
+    summary: ID operasi migrasi opsional. Jika ini disediakan, maka detail operasi migrasi untuk ID tersebut diambil. Jika tidak disediakan (default), maka detail yang terkait dengan operasi terbaru atau saat ini diambil.
+    description: ''
+- uid: az_datamigration_sql-db_wait
+  name: az datamigration sql-db wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi datamigrasi sql-db terpenuhi.
+  description: ''
+  syntax: >-
+    az datamigration sql-db wait --resource-group
+                                 --sqldb-instance-name
+                                 --target-db-name
+                                 [--created]
+                                 [--custom]
+                                 [--deleted]
+                                 [--exists]
+                                 [--expand]
+                                 [--interval]
+                                 [--migration-operation-id]
+                                 [--timeout]
+                                 [--updated]
+  examples:
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga datamigration sql-db berhasil dibuat.
+    syntax: az datamigration sql-db wait --resource-group "testrg" --sqldb-instance-name "sqldbinstance" --target-db-name "db1" --created
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga datamigration sql-db berhasil dihapus.
+    syntax: az datamigration sql-db wait --resource-group "testrg" --sqldb-instance-name "sqldbinstance" --target-db-name "db1" --deleted
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --sqldb-instance-name
+    summary: Nama server SQL Database target.
+    description: ''
+  - isRequired: true
+    name: --target-db-name
+    summary: Nama database target.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --expand
+    summary: Detail migrasi lengkap disertakan dalam respons.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --migration-operation-id
+    summary: ID operasi migrasi opsional. Jika ini disediakan, maka detail operasi migrasi untuk ID tersebut diambil. Jika tidak disediakan (default), maka detail yang terkait dengan operasi terbaru atau saat ini diambil.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_datamigration_sql-db_cancel
+- az_datamigration_sql-db_create
+- az_datamigration_sql-db_delete
+- az_datamigration_sql-db_show
+- az_datamigration_sql-db_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola migrasi database ke SQL DB.
+  ms.openlocfilehash: a8c96bff49158b5de20f0a1e78841e144401d852
+  ms.sourcegitcommit: d016676aca62d5461b07446d98cf38e30bba07cd
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/19/2022
+  ms.locfileid: "143906227"

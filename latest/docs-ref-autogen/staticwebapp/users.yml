@@ -1,0 +1,139 @@
+### YamlMime:AzureCLIGroup
+uid: az_staticwebapp_users
+name: az staticwebapp users
+summary: Mengelola pengguna aplikasi statis.
+description: ''
+directCommands:
+- uid: az_staticwebapp_users_invite
+  name: az staticwebapp users invite
+  summary: Buat tautan undangan untuk pengguna tertentu ke aplikasi statis.
+  description: ''
+  syntax: >-
+    az staticwebapp users invite --authentication-provider
+                                 --domain
+                                 --invitation-expiration-in-hours
+                                 --name
+                                 --roles
+                                 --user-details
+                                 [--resource-group]
+  examples:
+  - summary: Buat tautan undangan untuk pengguna tertentu ke aplikasi statis.
+    syntax: az staticwebapp users invite -n MyStaticAppName --authentication-provider GitHub --user-details JohnDoe --role Contributor --domain static-app-001.azurestaticapps.net --invitation-expiration-in-hours 1
+  requiredParameters:
+  - isRequired: true
+    name: --authentication-provider
+    summary: Penyedia autentikasi identitas pengguna seperti AAD, Facebook, GitHub, Google, Twitter.
+    description: ''
+  - isRequired: true
+    name: --domain
+    summary: Domain ditambahkan ke aplikasi statis dalam tanda kutip.
+    description: ''
+  - isRequired: true
+    name: --invitation-expiration-in-hours
+    summary: Nilai ini menetapkan kapan tautan akan kedaluwarsa dalam jam. Maksimum adalah 168 (7 hari).
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama situs statis.
+    description: ''
+  - isRequired: true
+    name: --roles
+    summary: Nama peran default atau yang ditentukan pengguna yang dipisahkan koma. Peran yang dapat ditetapkan kepada pengguna dipisahkan koma dan tidak peka huruf besar/kecil (paling banyak 50 peran masing-masing hingga 25 karakter dan dibatasi hingga 0-9,A-Z,a-z, dan _). Tentukan peran di routes.json selama direktori akar repositori GitHub Anda.
+    description: ''
+  - isRequired: true
+    name: --user-details
+    summary: Email untuk AAD, Facebook, dan Google. Nama akun (handel) untuk GitHub dan Twitter.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_staticwebapp_users_list
+  name: az staticwebapp users list
+  summary: Mencantumkan pengguna dan peran yang ditetapkan, terbatas pada pengguna yang menerima undangan mereka.
+  description: ''
+  syntax: >-
+    az staticwebapp users list --name
+                               [--authentication-provider]
+                               [--resource-group]
+  examples:
+  - summary: Mencantumkan pengguna dan peran yang ditetapkan.
+    syntax: az staticwebapp users list -n MyStaticAppName
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama situs statis.
+    description: ''
+  optionalParameters:
+  - name: --authentication-provider
+    defaultValue: all
+    summary: Penyedia autentikasi identitas pengguna seperti AAD, Facebook, GitHub, Google, Twitter.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_staticwebapp_users_update
+  name: az staticwebapp users update
+  summary: Memperbarui entri pengguna dengan peran yang tercantum. Detail pengguna atau id pengguna diperlukan.
+  description: ''
+  syntax: >-
+    az staticwebapp users update --name
+                                 --roles
+                                 [--authentication-provider]
+                                 [--resource-group]
+                                 [--user-details]
+                                 [--user-id]
+  examples:
+  - summary: Memperbarui entri pengguna dengan peran yang tercantum.
+    syntax: az staticwebapp users update -n MyStaticAppName --user-details JohnDoe --role Contributor
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama situs statis.
+    description: ''
+  - isRequired: true
+    name: --roles
+    summary: Nama peran default atau yang ditentukan pengguna yang dipisahkan koma. Peran yang dapat ditetapkan kepada pengguna dipisahkan koma dan tidak peka huruf besar/kecil (paling banyak 50 peran masing-masing hingga 25 karakter dan dibatasi hingga 0-9,A-Z,a-z, dan _). Tentukan peran di routes.json selama direktori akar repositori GitHub Anda.
+    description: ''
+  optionalParameters:
+  - name: --authentication-provider
+    summary: Penyedia autentikasi identitas pengguna seperti AAD, Facebook, GitHub, Google, Twitter.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --user-details
+    summary: Email untuk AAD, Facebook, dan Google. Nama akun (handel) untuk GitHub dan Twitter.
+    description: ''
+  - name: --user-id
+    summary: Id yang diberikan dari pengguna terdaftar.
+    description: ''
+commands:
+- az_staticwebapp_users_invite
+- az_staticwebapp_users_list
+- az_staticwebapp_users_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola pengguna aplikasi statis.
+  ms.openlocfilehash: 7326075e0571cd7e86907542e75d310a34c8ebf0
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140911221"

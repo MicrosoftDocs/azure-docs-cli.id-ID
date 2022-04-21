@@ -1,0 +1,478 @@
+### YamlMime:AzureCLIGroup
+uid: az_storage
+name: penyimpanan az
+summary: Mengelola sumber daya Azure Cloud Storage.
+description: ''
+directCommands:
+- uid: az_storage_copy
+  name: az storage copy
+  summary: Salin file atau direktori ke atau dari penyimpanan Azure.
+  description: ''
+  syntax: >-
+    az storage copy --destination
+                    --source
+                    [--blob-type {AppendBlob, BlockBlob, PageBlob}]
+                    [--cap-mbps]
+                    [--content-type]
+                    [--exclude-path]
+                    [--exclude-pattern]
+                    [--extra-options]
+                    [--follow-symlinks]
+                    [--include-path]
+                    [--include-pattern]
+                    [--preserve-s2s-access-tier {false, true}]
+                    [--put-md5]
+                    [--recursive]
+  examples:
+  - summary: Upload satu file ke Azure Blob menggunakan url.
+    syntax: az storage copy -s /path/to/file.txt -d https://[account].blob.core.windows.net/[container]/[path/to/blob]
+  - summary: Upload satu file ke Azure Blob menggunakan nama akun dan nama kontainer.
+    syntax: az storage copy -s /path/to/file.txt --destination-account-name mystorageaccount --destination-container mycontainer
+  - summary: Upload satu file ke Azure Blob dengan hash MD5 dari konten file dan simpan sebagai properti Content-MD5 blob.
+    syntax: az storage copy -s /path/to/file.txt -d https://[account].blob.core.windows.net/[container]/[path/to/blob] --put-md5
+  - summary: Upload seluruh direktori ke Azure Blob menggunakan url.
+    syntax: az storage copy -s /path/to/dir -d https://[account].blob.core.windows.net/[container]/[path/to/directory] --recursive
+  - summary: Upload seluruh direktori ke Azure Blob menggunakan nama akun dan nama kontainer.
+    syntax: az storage copy -s /path/to/dir --destination-account-name mystorageaccount --destination-container mycontainer --recursive
+  - summary: Upload sekumpulan file ke Azure Blob menggunakan wildcard dengan url.
+    syntax: az storage copy -s /path/*foo/*bar/*.pdf -d https://[account].blob.core.windows.net/[container]/[path/to/directory]
+  - summary: Upload sekumpulan file ke Azure Blob menggunakan wildcard dengan nama akun dan nama kontainer.
+    syntax: az storage copy -s /path/*foo/*bar/*.pdf --destination-account-name mystorageaccount --destination-container mycontainer
+  - summary: Upload file dan direktori ke Azure Blob menggunakan wildcard dengan url.
+    syntax: az storage copy -s /path/*foo/*bar* -d https://[account].blob.core.windows.net/[container]/[path/to/directory] --recursive
+  - summary: Upload file dan direktori ke Azure Blob menggunakan kartubebas dengan nama akun dan nama kontainer.
+    syntax: az storage copy -s /path/*foo/*bar* --destination-account-name mystorageaccount --destination-container mycontainer --recursive
+  - summary: Unduh satu file dari Azure Blob menggunakan url, dan Anda juga dapat menentukan akun penyimpanan dan informasi kontainer seperti di atas.
+    syntax: az storage copy -s https://[account].blob.core.windows.net/[container]/[path/to/blob] -d /path/to/file.txt
+  - summary: Unduh seluruh direktori dari Azure Blob, dan Anda juga dapat menentukan akun penyimpanan dan informasi kontainer seperti di atas.
+    syntax: az storage copy -s https://[account].blob.core.windows.net/[container]/[path/to/directory] -d /path/to/dir --recursive
+  - summary: Unduh subset kontainer dalam akun penyimpanan dengan menggunakan simbol kartubebas (*) dalam nama kontainer, dan Anda juga dapat menentukan akun penyimpanan dan informasi kontainer seperti di atas.
+    syntax: az storage copy -s https://[account].blob.core.windows.net/[container*name] -d /path/to/dir --recursive
+  - summary: Unduh subset file dari Azure Blob. (Hanya file jpg dan nama file yang tidak dimulai dengan pengujian yang akan disertakan.)
+    syntax: az storage copy -s https://[account].blob.core.windows.net/[container] --include-pattern "*.jpg" --exclude-pattern test* -d /path/to/dir --recursive
+  - summary: Salin satu blob ke blob lain, dan Anda juga dapat menentukan akun penyimpanan dan informasi kontainer sumber dan tujuan seperti di atas.
+    syntax: az storage copy -s https://[srcaccount].blob.core.windows.net/[container]/[path/to/blob] -d https://[destaccount].blob.core.windows.net/[container]/[path/to/blob]
+  - summary: Salin seluruh data akun dari akun blob ke akun blob lain, dan Anda juga dapat menentukan akun penyimpanan dan informasi kontainer sumber dan tujuan seperti di atas.
+    syntax: az storage copy -s https://[srcaccount].blob.core.windows.net -d https://[destaccount].blob.core.windows.net --recursive
+  - summary: Salin satu objek dari S3 dengan kunci akses ke blob, dan Anda juga dapat menentukan akun penyimpanan dan informasi kontainer Seperti di atas.
+    syntax: az storage copy -s https://s3.amazonaws.com/[bucket]/[object] -d https://[destaccount].blob.core.windows.net/[container]/[path/to/blob]
+  - summary: Salin seluruh direktori dari S3 dengan kunci akses ke direktori virtual blob, dan Anda juga dapat menentukan akun penyimpanan dan informasi kontainer seperti di atas.
+    syntax: az storage copy -s https://s3.amazonaws.com/[bucket]/[folder] -d https://[destaccount].blob.core.windows.net/[container]/[path/to/directory] --recursive
+  - summary: Salin semua wadah dalam layanan S3 dengan kunci akses ke akun blob, dan Anda juga dapat menentukan informasi akun penyimpanan Seperti di atas.
+    syntax: az storage copy -s https://s3.amazonaws.com/ -d https://[destaccount].blob.core.windows.net --recursive
+  - summary: Salin semua wadah di wilayah S3 dengan kunci akses ke akun blob, dan Anda juga dapat menentukan informasi akun penyimpanan Seperti di atas.
+    syntax: az storage copy -s https://s3-[region].amazonaws.com/ -d https://[destaccount].blob.core.windows.net --recursive
+  - summary: Upload satu file ke Azure File Share menggunakan url.
+    syntax: az storage copy -s /path/to/file.txt -d https://[account].file.core.windows.net/[share]/[path/to/file]
+  - summary: Upload satu file ke Azure File Share menggunakan nama akun dan nama berbagi.
+    syntax: az storage copy -s /path/to/file.txt --destination-account-name mystorageaccount --destination-share myshare
+  - summary: Upload seluruh direktori ke Azure File Share menggunakan url.
+    syntax: az storage copy -s /path/to/dir -d https://[account].file.core.windows.net/[share]/[path/to/directory] --recursive
+  - summary: Upload seluruh direktori ke Azure File Share menggunakan nama akun dan nama kontainer.
+    syntax: az storage copy -s /path/to/dir --destination-account-name mystorageaccount --destination-share myshare --recursive
+  - summary: Upload sekumpulan file ke Azure File Share menggunakan kartubebas dengan nama akun dan nama berbagi.
+    syntax: az storage copy -s /path/*foo/*bar/*.pdf --destination-account-name mystorageaccount --destination-share myshare
+  - summary: Upload file dan direktori ke Azure File Share menggunakan kartubebas dengan url.
+    syntax: az storage copy -s /path/*foo/*bar* -d https://[account].file.core.windows.net/[share]/[path/to/directory] --recursive
+  - summary: Upload file dan direktori ke Azure File Share menggunakan kartubebas dengan nama akun dan nama berbagi.
+    syntax: az storage copy -s /path/*foo/*bar* --destination-account-name mystorageaccount --destination-share myshare --recursive
+  - summary: Unduh satu file dari Azure File Share menggunakan url, dan Anda juga dapat menentukan akun penyimpanan Anda dan berbagi informasi seperti di atas.
+    syntax: az storage copy -s https://[account].file.core.windows.net/[share]/[path/to/file] -d /path/to/file.txt
+  - summary: Unduh seluruh direktori dari Azure File Share, dan Anda juga dapat menentukan akun penyimpanan Anda dan berbagi informasi seperti di atas.
+    syntax: az storage copy -s https://[account].file.core.windows.net/[share]/[path/to/directory] -d /path/to/dir --recursive
+  - summary: Unduh sekumpulan file dari Azure File Share menggunakan wildcard, dan Anda juga dapat menentukan akun penyimpanan Anda dan berbagi informasi seperti di atas.
+    syntax: az storage copy -s https://[account].file.core.windows.net/[share]/ --include-pattern foo* -d /path/to/dir --recursive
+  - summary: Upload satu file ke Azure Blob menggunakan url dengan pass-through opsi azcopy.
+    syntax: az storage copy -s /path/to/file.txt -d https://[account].blob.core.windows.net/[container]/[path/to/blob] -- --block-size-mb=0.25 --check-length
+  requiredParameters:
+  - isRequired: true
+    name: --destination -d
+    summary: Jalur/url tujuan salin. Ini bisa menjadi jalur lokal, url ke server penyimpanan azure. Jika Anda menyediakan parameter tujuan di sini, Anda tidak perlu memberikan argumen dalam grup argumen tujuan salin dan menyalin argumen tujuan akan ditolak di masa mendatang.
+    description: ''
+  - isRequired: true
+    name: --source -s
+    summary: Jalur/url sumber salin. Ini bisa menjadi jalur lokal, url ke server penyimpanan azure atau wadah AWS S3. Jika Anda menyediakan parameter sumber di sini, Anda tidak perlu memberikan argumen dalam grup argumen sumber salin dan argumen sumber salin tidak akan digunakan lagi di masa mendatang.
+    description: ''
+  optionalParameters:
+  - name: --blob-type
+    parameterValueGroup: AppendBlob, BlockBlob, PageBlob
+    summary: Jenis blob di tujuan.
+    description: ''
+  - name: --cap-mbps
+    summary: Batasi tingkat transfer, dalam megabit per detik. Throughput moment-by-moment mungkin sedikit berbeda dibandingkan tutup. Jika opsi ini diatur ke nol, atau dihilangkan, throughput tidak dibatasi.
+    description: ''
+  - name: --content-type
+    summary: Tentukan tipe isi file.
+    description: ''
+  - name: --exclude-path
+    summary: 'Kecualikan jalur ini. Opsi ini tidak mendukung karakter kartubebas (\*). Memeriksa awalan jalur relatif. Misalnya: myFolder;myFolder/subDirName/file.pdf.'
+    description: ''
+  - name: --exclude-pattern
+    summary: 'Kecualikan file-file ini di mana nama cocok dengan daftar pola. Misalnya: \*.jpg;\*.pdf;exactName. Opsi ini mendukung karakter kartubebas (\*).'
+    description: ''
+  - name: --extra-options
+    summary: ''
+    description: ''
+  - name: --follow-symlinks
+    summary: Ikuti tautan simbolis saat mengunggah dari sistem file lokal.
+    description: ''
+  - name: --include-path
+    summary: Sertakan hanya jalur ini. Opsi ini tidak mendukung karakter kartubebas (\*). Memeriksa awalan jalur relatif. Misalnya:myFolder;myFolder/subDirName/file.pdf.
+    description: ''
+  - name: --include-pattern
+    summary: 'Sertakan hanya file-file ini di mana nama cocok dengan daftar pola. Misalnya: \*.jpg;\*.pdf;exactName. Opsi ini mendukung karakter kartubebas (\*).'
+    description: ''
+  - name: --preserve-s2s-access-tier
+    parameterValueGroup: false, true
+    summary: Pertahankan tingkat akses selama layanan ke salinan layanan. Silakan lihat https://docs.microsoft.com/azure/storage/blobs/storage-blob-storage-tiers untuk memastikan tingkat akses pengaturan dukungan akun penyimpanan tujuan. Jika setelan tingkat akses tidak didukung, gunakan `--preserve-s2s-access-tier false` untuk mengabaikan penyalinan tingkat akses. (Default true).
+    description: ''
+  - name: --put-md5
+    summary: Buat hash MD5 dari setiap file, dan simpan hash sebagai properti Content-MD5 dari blob/file tujuan. Hanya tersedia saat mengunggah.
+    description: ''
+  - name: --recursive -r
+    summary: Lihat subdirektori secara rekursif.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_remove
+  name: az storage remove
+  summary: Hapus blob atau file dari Azure Storage.
+  description: ''
+  syntax: >-
+    az storage remove [--account-key]
+                      [--account-name]
+                      [--connection-string]
+                      [--container-name]
+                      [--exclude-path]
+                      [--exclude-pattern]
+                      [--include-path]
+                      [--include-pattern]
+                      [--name]
+                      [--path]
+                      [--recursive]
+                      [--sas-token]
+                      [--share-name]
+  examples:
+  - summary: Hapus satu blob.
+    syntax: az storage remove -c mycontainer -n MyBlob
+  - summary: Menghapus seluruh direktori virtual.
+    syntax: az storage remove -c mycontainer -n path/to/directory --recursive
+  - summary: Hapus hanya blob teratas di dalam direktori virtual tetapi bukan sub-direktorinya.
+    syntax: az storage remove -c mycontainer --recursive
+  - summary: Hapus semua blob dalam Kontainer Storage.
+    syntax: az storage remove -c mycontainer -n path/to/directory
+  - summary: Hapus subset blob di direktori virtual (Misalnya, hanya file jpg dan pdf, atau jika nama blob adalah "exactName" dan nama file tidak dimulai dengan "pengujian").
+    syntax: az storage remove -c mycontainer --include-path path/to/directory --include-pattern "*.jpg;*.pdf;exactName" --exclude-pattern "test*" --recursive
+  - summary: Hapus seluruh direktori virtual tetapi kecualikan blob tertentu dari cakupan (Misalnya, setiap blob yang dimulai dengan foo atau diakhir dengan bilah).
+    syntax: az storage remove -c mycontainer --include-path path/to/directory --exclude-pattern "foo*;*bar" --recursive
+  - summary: Hapus satu file.
+    syntax: az storage remove -s MyShare -p MyFile
+  - summary: Menghapus seluruh direktori.
+    syntax: az storage remove -s MyShare -p path/to/directory --recursive
+  - summary: Hapus semua file dalam Berbagi File Storage.
+    syntax: az storage remove -s MyShare --recursive
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - name: --exclude-path
+    summary: 'Kecualikan jalur ini. Opsi ini tidak mendukung karakter kartubebas (\*). Memeriksa awalan jalur relatif. Misalnya: myFolder;myFolder/subDirName/file.pdf.'
+    description: ''
+  - name: --exclude-pattern
+    summary: 'Kecualikan file-file ini di mana nama cocok dengan daftar pola. Misalnya: \*.jpg;\*.pdf;exactName. Opsi ini mendukung karakter kartubebas (\*).'
+    description: ''
+  - name: --include-path
+    summary: Sertakan hanya jalur ini. Opsi ini tidak mendukung karakter kartubebas (\*). Memeriksa awalan jalur relatif. Misalnya:myFolder;myFolder/subDirName/file.pdf.
+    description: ''
+  - name: --include-pattern
+    summary: 'Sertakan hanya file-file ini di mana nama cocok dengan daftar pola. Misalnya: \*.jpg;\*.pdf;exactName. Opsi ini mendukung karakter kartubebas (\*).'
+    description: ''
+  - name: --name -n
+    summary: Nama blob.
+    description: ''
+  - name: --path -p
+    summary: Jalur ke file dalam berbagi file.
+    description: ''
+  - name: --recursive -r
+    summary: Lihat subdirektori secara rekursif.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --share-name -s
+    summary: Nama berbagi file.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+commands:
+- az_storage_account
+- az_storage_account_check-name
+- az_storage_account_create
+- az_storage_account_delete
+- az_storage_account_generate-sas
+- az_storage_account_keys
+- az_storage_account_keys_list
+- az_storage_account_keys_renew
+- az_storage_account_list
+- az_storage_account_local-user
+- az_storage_account_local-user_create
+- az_storage_account_local-user_delete
+- az_storage_account_local-user_list
+- az_storage_account_local-user_list-keys
+- az_storage_account_local-user_regenerate-password
+- az_storage_account_local-user_show
+- az_storage_account_local-user_update
+- az_storage_account_network-rule
+- az_storage_account_network-rule_add
+- az_storage_account_network-rule_list
+- az_storage_account_network-rule_remove
+- az_storage_account_show
+- az_storage_account_show-connection-string
+- az_storage_account_show-usage
+- az_storage_account_update
+- az_storage_azcopy
+- az_storage_azcopy_blob
+- az_storage_azcopy_blob_delete
+- az_storage_azcopy_blob_download
+- az_storage_azcopy_blob_sync
+- az_storage_azcopy_blob_upload
+- az_storage_azcopy_run-command
+- az_storage_blob
+- az_storage_blob_access
+- az_storage_blob_access_set
+- az_storage_blob_access_show
+- az_storage_blob_access_update
+- az_storage_blob_copy
+- az_storage_blob_copy_cancel
+- az_storage_blob_copy_start
+- az_storage_blob_copy_start-batch
+- az_storage_blob_delete
+- az_storage_blob_delete-batch
+- az_storage_blob_directory
+- az_storage_blob_directory_access
+- az_storage_blob_directory_access_set
+- az_storage_blob_directory_access_show
+- az_storage_blob_directory_access_update
+- az_storage_blob_directory_create
+- az_storage_blob_directory_delete
+- az_storage_blob_directory_download
+- az_storage_blob_directory_exists
+- az_storage_blob_directory_list
+- az_storage_blob_directory_metadata
+- az_storage_blob_directory_metadata_show
+- az_storage_blob_directory_metadata_update
+- az_storage_blob_directory_move
+- az_storage_blob_directory_show
+- az_storage_blob_directory_upload
+- az_storage_blob_download
+- az_storage_blob_download-batch
+- az_storage_blob_exists
+- az_storage_blob_filter
+- az_storage_blob_generate-sas
+- az_storage_blob_immutability-policy
+- az_storage_blob_immutability-policy_delete
+- az_storage_blob_immutability-policy_set
+- az_storage_blob_incremental-copy
+- az_storage_blob_incremental-copy_cancel
+- az_storage_blob_incremental-copy_start
+- az_storage_blob_lease
+- az_storage_blob_lease_acquire
+- az_storage_blob_lease_break
+- az_storage_blob_lease_change
+- az_storage_blob_lease_release
+- az_storage_blob_lease_renew
+- az_storage_blob_list
+- az_storage_blob_metadata
+- az_storage_blob_metadata_show
+- az_storage_blob_metadata_update
+- az_storage_blob_move
+- az_storage_blob_service-properties
+- az_storage_blob_service-properties_delete-policy
+- az_storage_blob_service-properties_delete-policy_show
+- az_storage_blob_service-properties_delete-policy_update
+- az_storage_blob_service-properties_show
+- az_storage_blob_service-properties_update
+- az_storage_blob_set-legal-hold
+- az_storage_blob_set-tier
+- az_storage_blob_show
+- az_storage_blob_snapshot
+- az_storage_blob_sync
+- az_storage_blob_tag
+- az_storage_blob_tag_list
+- az_storage_blob_tag_set
+- az_storage_blob_undelete
+- az_storage_blob_update
+- az_storage_blob_upload
+- az_storage_blob_upload-batch
+- az_storage_blob_url
+- az_storage_container
+- az_storage_container_create
+- az_storage_container_delete
+- az_storage_container_exists
+- az_storage_container_generate-sas
+- az_storage_container_lease
+- az_storage_container_lease_acquire
+- az_storage_container_lease_break
+- az_storage_container_lease_change
+- az_storage_container_lease_release
+- az_storage_container_lease_renew
+- az_storage_container_list
+- az_storage_container_metadata
+- az_storage_container_metadata_show
+- az_storage_container_metadata_update
+- az_storage_container_policy
+- az_storage_container_policy_create
+- az_storage_container_policy_delete
+- az_storage_container_policy_list
+- az_storage_container_policy_show
+- az_storage_container_policy_update
+- az_storage_container_restore
+- az_storage_container_set-permission
+- az_storage_container_show
+- az_storage_container_show-permission
+- az_storage_copy
+- az_storage_cors
+- az_storage_cors_add
+- az_storage_cors_clear
+- az_storage_cors_list
+- az_storage_directory
+- az_storage_directory_create
+- az_storage_directory_delete
+- az_storage_directory_exists
+- az_storage_directory_list
+- az_storage_directory_metadata
+- az_storage_directory_metadata_show
+- az_storage_directory_metadata_update
+- az_storage_directory_show
+- az_storage_entity
+- az_storage_entity_delete
+- az_storage_entity_insert
+- az_storage_entity_merge
+- az_storage_entity_query
+- az_storage_entity_replace
+- az_storage_entity_show
+- az_storage_file
+- az_storage_file_copy
+- az_storage_file_copy_cancel
+- az_storage_file_copy_start
+- az_storage_file_copy_start-batch
+- az_storage_file_delete
+- az_storage_file_delete-batch
+- az_storage_file_download
+- az_storage_file_download-batch
+- az_storage_file_exists
+- az_storage_file_generate-sas
+- az_storage_file_list
+- az_storage_file_metadata
+- az_storage_file_metadata_show
+- az_storage_file_metadata_update
+- az_storage_file_resize
+- az_storage_file_show
+- az_storage_file_update
+- az_storage_file_upload
+- az_storage_file_upload-batch
+- az_storage_file_url
+- az_storage_fs
+- az_storage_fs_list-deleted-path
+- az_storage_fs_service-properties
+- az_storage_fs_service-properties_show
+- az_storage_fs_service-properties_update
+- az_storage_fs_undelete-path
+- az_storage_logging
+- az_storage_logging_off
+- az_storage_logging_show
+- az_storage_logging_update
+- az_storage_message
+- az_storage_message_clear
+- az_storage_message_delete
+- az_storage_message_get
+- az_storage_message_peek
+- az_storage_message_put
+- az_storage_message_update
+- az_storage_metrics
+- az_storage_metrics_show
+- az_storage_metrics_update
+- az_storage_queue
+- az_storage_queue_create
+- az_storage_queue_delete
+- az_storage_queue_exists
+- az_storage_queue_generate-sas
+- az_storage_queue_list
+- az_storage_queue_metadata
+- az_storage_queue_metadata_show
+- az_storage_queue_metadata_update
+- az_storage_queue_policy
+- az_storage_queue_policy_create
+- az_storage_queue_policy_delete
+- az_storage_queue_policy_list
+- az_storage_queue_policy_show
+- az_storage_queue_policy_update
+- az_storage_queue_stats
+- az_storage_remove
+- az_storage_share
+- az_storage_share_create
+- az_storage_share_delete
+- az_storage_share_exists
+- az_storage_share_generate-sas
+- az_storage_share_list
+- az_storage_share_metadata
+- az_storage_share_metadata_show
+- az_storage_share_metadata_update
+- az_storage_share_policy
+- az_storage_share_policy_create
+- az_storage_share_policy_delete
+- az_storage_share_policy_list
+- az_storage_share_policy_show
+- az_storage_share_policy_update
+- az_storage_share_show
+- az_storage_share_snapshot
+- az_storage_share_stats
+- az_storage_share_update
+- az_storage_share_url
+- az_storage_table
+- az_storage_table_create
+- az_storage_table_delete
+- az_storage_table_exists
+- az_storage_table_generate-sas
+- az_storage_table_list
+- az_storage_table_policy
+- az_storage_table_policy_create
+- az_storage_table_policy_delete
+- az_storage_table_policy_list
+- az_storage_table_policy_show
+- az_storage_table_policy_update
+- az_storage_table_stats
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/29/2022
+  description: Mengelola sumber daya Azure Cloud Storage.
+  ms.openlocfilehash: 4d4695dc2993161f93bc91e0a420e132a71a3f46
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141443159"

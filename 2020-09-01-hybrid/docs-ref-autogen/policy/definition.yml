@@ -1,0 +1,196 @@
+### YamlMime:AzureCLIGroup
+uid: az_policy_definition
+name: az policy definition
+summary: Mengelola definisi kebijakan sumber daya.
+description: ''
+directCommands:
+- uid: az_policy_definition_create
+  name: az policy definition create
+  summary: Buat definisi kebijakan.
+  description: ''
+  syntax: >-
+    az policy definition create --name
+                                [--description]
+                                [--display-name]
+                                [--management-group]
+                                [--mode]
+                                [--params]
+                                [--rules]
+  examples:
+  - summary: Buat kebijakan baca-saja.
+    syntax: >-
+      az policy definition create --name readOnlyStorage --rules "{ \"if\": \
+          { \"field\": \"type\", \"equals\": \"Microsoft.Storage/storageAccounts/write\" }, \
+              \"then\": { \"effect\": \"deny\" } }"
+  - summary: Buat definisi parameter kebijakan.
+    syntax: >-
+      az policy definition create --name allowedLocations \
+          --rules "{ \"if\": { \"allOf\": [ \
+              { \"field\": \"location\",\"notIn\": \"[parameters('listOfAllowedLocations')]\" }, \
+                  { \"field\": \"location\", \"notEquals\": \"global\" }, \
+                      { \"field\": \"type\", \"notEquals\": \
+                          \"Microsoft.AzureActiveDirectory/b2cDirectories\"} \
+                              ] }, \"then\": { \"effect\": \"deny\" } }" \
+          --params "{ \"allowedLocations\": { \
+              \"type\": \"array\", \"metadata\": { \"description\": \
+                  \"The list of locations that can be specified when deploying resources\", \
+                      \"strongType\": \"location\", \"displayName\": \"Allowed locations\" } } }"
+  - summary: Buat kebijakan baca-saja yang dapat diterapkan dalam grup manajemen.
+    syntax: >-
+      az policy definition create -n readOnlyStorage --management-group "MyManagementGroup" \
+          --rules "{ \"if\": { \"field\": \"type\", \
+              \"equals\": \"Microsoft.Storage/storageAccounts/write\" }, \
+                  \"then\": { \"effect\": \"deny\" } }"
+  - summary: Buat definisi kebijakan dengan mode. Mode 'Terindeks' menunjukkan kebijakan harus dievaluasi hanya untuk jenis sumber daya yang mendukung tag dan lokasi.
+    syntax: >-
+      az policy definition create --name TagsPolicyDefinition --subscription "MySubscription" \
+          --mode Indexed --rules "{ \"if\": { \"field\": \"tags\", \"exists\": \"false\" }, \
+              \"then\": { \"effect\": \"deny\" } }"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama definisi kebijakan baru.
+    description: ''
+  optionalParameters:
+  - name: --description
+    summary: Deskripsi definisi kebijakan.
+    description: ''
+  - name: --display-name
+    summary: Nama tampilan definisi kebijakan.
+    description: ''
+  - name: --management-group
+    summary: Nama grup manajemen tempat definisi kebijakan baru dapat ditetapkan.
+    description: ''
+  - name: --mode -m
+    summary: Mode definisi kebijakan, misalnya Semua, Terindeks. Silakan kunjungi https://aka.ms/azure-policy-mode untuk informasi lebih lanjut.
+    description: ''
+  - name: --params
+    summary: String berformat JSON atau jalur ke file atau uri dengan definisi parameter.
+    description: ''
+  - name: --rules
+    summary: Aturan kebijakan dalam format JSON, atau jalur ke file yang berisi aturan JSON.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_policy_definition_delete
+  name: az policy definition delete
+  summary: Menghapus definisi kebijakan.
+  description: ''
+  syntax: >-
+    az policy definition delete --name
+                                [--management-group]
+  examples:
+  - summary: Menghapus definisi kebijakan. (dibuat otomatis)
+    syntax: az policy definition delete --name MyPolicyDefinition
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama definisi kebijakan.
+    description: ''
+  optionalParameters:
+  - name: --management-group
+    summary: Nama grup manajemen definisi kebijakan [set].
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_policy_definition_list
+  name: az policy definition list
+  summary: Mencantumkan definisi kebijakan.
+  description: ''
+  syntax: az policy definition list [--management-group]
+  optionalParameters:
+  - name: --management-group
+    summary: Nama grup manajemen definisi kebijakan [set].
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_policy_definition_show
+  name: az policy definition show
+  summary: Tampilkan definisi kebijakan.
+  description: ''
+  syntax: >-
+    az policy definition show --name
+                              [--management-group]
+  examples:
+  - summary: Tampilkan definisi kebijakan. (dibuat otomatis)
+    syntax: az policy definition show --name MyPolicyDefinition
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama definisi kebijakan.
+    description: ''
+  optionalParameters:
+  - name: --management-group
+    summary: Nama grup manajemen definisi kebijakan [set].
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_policy_definition_update
+  name: az policy definition update
+  summary: Memperbarui definisi kebijakan.
+  description: ''
+  syntax: >-
+    az policy definition update --name
+                                [--description]
+                                [--display-name]
+                                [--management-group]
+                                [--mode]
+                                [--params]
+                                [--rules]
+  examples:
+  - summary: Memperbarui definisi kebijakan. (dibuat otomatis)
+    syntax: az policy definition update --name MyPolicyDefinition
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama definisi kebijakan.
+    description: ''
+  optionalParameters:
+  - name: --description
+    summary: Deskripsi definisi kebijakan.
+    description: ''
+  - name: --display-name
+    summary: Nama tampilan definisi kebijakan.
+    description: ''
+  - name: --management-group
+    summary: Nama grup manajemen definisi kebijakan [set].
+    description: ''
+  - name: --mode -m
+    summary: Mode definisi kebijakan, misalnya Semua, Terindeks. Silakan kunjungi https://aka.ms/azure-policy-mode untuk informasi lebih lanjut.
+    description: ''
+  - name: --params
+    summary: String berformat JSON atau jalur ke file atau uri dengan definisi parameter.
+    description: ''
+  - name: --rules
+    summary: String berformat JSON atau jalur ke file dengan konten tersebut.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+commands:
+- az_policy_definition_create
+- az_policy_definition_delete
+- az_policy_definition_list
+- az_policy_definition_show
+- az_policy_definition_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 02/22/2022
+  description: Mengelola definisi kebijakan sumber daya.
+  ms.openlocfilehash: 28daf442740d9b180e8c81af708697a0a2310f8e
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140914730"

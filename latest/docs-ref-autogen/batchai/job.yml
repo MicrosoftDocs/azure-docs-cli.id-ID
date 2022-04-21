@@ -1,0 +1,314 @@
+### YamlMime:AzureCLIGroup
+uid: az_batchai_job
+name: az batchai job
+summary: Perintah untuk mengelola pekerjaan.
+description: ''
+directCommands:
+- uid: az_batchai_job_create
+  name: az batchai job create
+  summary: Buat pekerjaan.
+  description: ''
+  syntax: >-
+    az batchai job create --cluster
+                          --config-file
+                          --experiment
+                          --name
+                          --resource-group
+                          --workspace
+                          [--afs-mount-path]
+                          [--afs-name]
+                          [--bfs-mount-path]
+                          [--bfs-name]
+                          [--nfs]
+                          [--nfs-mount-path]
+                          [--storage-account-key]
+                          [--storage-account-name]
+  examples:
+  - summary: Buat pekerjaan untuk dijalankan pada kluster dalam grup sumber daya yang sama.
+    syntax: >-
+      az batchai job create -g MyResourceGroup -w MyWorkspace -e MyExperiment -n MyJob \
+          -c MyCluster -f job.json
+  - summary: Buat pekerjaan untuk dijalankan pada kluster di ruang kerja yang berbeda.
+    syntax: >-
+      az batchai job create -g MyJobResourceGroup -w MyJobWorkspace -e MyExperiment -n MyJob \
+          -f job.json \
+          -c "/subscriptions/00000000-0000-0000-0000-000000000000/\
+          resourceGroups/MyClusterResourceGroup/\
+          providers/Microsoft.BatchAI/workspaces/MyClusterWorkspace/clusters/MyCluster"
+  - summary: Buat pekerjaan. (dibuat otomatis)
+    syntax: >-
+      az batchai job create --cluster "/subscriptions/00000000-0000-0000-0000-000000000000/\
+          resourceGroups/MyClusterResourceGroup/\
+          providers/Microsoft.BatchAI/workspaces/MyClusterWorkspace/clusters/MyCluster" --config-file job.json --experiment MyExperiment --name MyJob --resource-group MyJobResourceGroup --storage-account-name MyStorageAccount --workspace MyJobWorkspace
+  requiredParameters:
+  - isRequired: true
+    name: --cluster -c
+    summary: Nama atau ID ARM kluster untuk menjalankan pekerjaan. Anda perlu memberikan ID ARM jika kluster milik ruang kerja yang berbeda.
+    description: ''
+  - isRequired: true
+    name: --config-file -f
+    summary: Jalur ke file json yang berisi parameter buat pekerjaan (representasi json dari azure.mgmt.batchai.models.JobCreateParameters).
+    description: ''
+  - isRequired: true
+    name: --experiment -e
+    summary: Nama eksperimen.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama pekerjaan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace -w
+    summary: Nama ruang kerja.
+    description: ''
+  optionalParameters:
+  - name: --afs-mount-path
+    defaultValue: afs
+    summary: Jalur pemasangan relatif untuk Azure File Share. Berbagi File akan tersedia di folder $AZ_BATCHAI_JOB_MOUNT_ROOT/<relative_mount_path>.
+    description: ''
+  - name: --afs-name
+    summary: Nama Berbagi File Azure untuk dipasang selama eksekusi pekerjaan. Berbagi File hanya akan dipasang pada simpul yang menjalankan pekerjaan. Harus digunakan bersama dengan --storage-account-name.  Beberapa berbagi dapat dipasang menggunakan file konfigurasi (lihat opsi --config-file).
+    description: ''
+  - name: --bfs-mount-path
+    defaultValue: bfs
+    summary: Jalur pemasangan relatif untuk kontainer blob Azure Storage. Kontainer akan tersedia di folder $AZ_BATCHAI_JOB_MOUNT_ROOT/<relative_mount_path>.
+    description: ''
+  - name: --bfs-name
+    summary: Nama Azure Storage Kontainer Blob untuk dipasang selama eksekusi pekerjaan. Kontainer hanya akan dipasang pada simpul yang menjalankan pekerjaan. Harus digunakan bersama dengan --storage-account-name. Beberapa kontainer dapat dipasang menggunakan file konfigurasi (lihat opsi --config-file).
+    description: ''
+  - name: --nfs
+    summary: Nama atau ID ARM server file yang akan dipasang selama eksekusi pekerjaan. Anda perlu memberikan ID ARM jika server file milik ruang kerja yang berbeda. Anda dapat mengonfigurasi beberapa server file menggunakan file konfigurasi pekerjaan.
+    description: ''
+  - name: --nfs-mount-path
+    defaultValue: nfs
+    summary: Jalur pemasangan relatif untuk NFS. NFS akan tersedia di folder $AZ_BATCHAI_JOB_MOUNT_ROOT/<relative_mount_path>.
+    description: ''
+  - name: --storage-account-key
+    summary: Kunci akun penyimpanan. Diperlukan jika akun penyimpanan milik langganan yang berbeda. Dapat ditentukan menggunakan variabel lingkungan AZURE_BATCHAI_STORAGE_KEY.
+    description: ''
+  - name: --storage-account-name
+    summary: Storage nama akun untuk Azure File Shares dan/atau Azure Storage Containers yang akan dipasang pada setiap node kluster. Dapat ditentukan menggunakan variabel lingkungan AZURE_BATCHAI_STORAGE_ACCOUNT.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batchai/_help.py
+- uid: az_batchai_job_delete
+  name: az batchai job delete
+  summary: Menghapus pekerjaan.
+  description: ''
+  syntax: >-
+    az batchai job delete [--experiment]
+                          [--ids]
+                          [--name]
+                          [--no-wait]
+                          [--resource-group]
+                          [--workspace]
+                          [--yes]
+  examples:
+  - summary: Menghapus pekerjaan. Pekerjaan akan dihentikan jika saat ini sedang berjalan.
+    syntax: az batchai job delete -g MyResourceGroup -w MyWorkspace -e MyExperiment -n MyJob
+  - summary: Hapus pekerjaan tanpa meminta konfirmasi (untuk skenario non-interaktif).
+    syntax: az batchai job delete -g MyResourceGroup -w MyWorkspace -e MyExperiment -n MyJob -y
+  - summary: Minta penghapusan pekerjaan tanpa menunggu pekerjaan dihapus.
+    syntax: az batchai job delete -g MyResourceGroup -w MyWorkspace -e MyExperiment -n MyJob --no-wait
+  optionalParameters:
+  - name: --experiment -e
+    summary: Nama eksperimen.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama pekerjaan.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --workspace -w
+    summary: Nama ruang kerja.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batchai/_help.py
+- uid: az_batchai_job_list
+  name: az batchai job list
+  summary: Mencantumkan pekerjaan.
+  description: ''
+  syntax: >-
+    az batchai job list --experiment
+                        --resource-group
+                        --workspace
+  examples:
+  - summary: Mencantumkan pekerjaan.
+    syntax: az batchai job list -g MyResourceGroup -w MyWorkspace -e MyExperiment -o table
+  requiredParameters:
+  - isRequired: true
+    name: --experiment -e
+    summary: Nama eksperimen.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace -w
+    summary: Nama ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batchai/_help.py
+- uid: az_batchai_job_show
+  name: az batchai job show
+  summary: Tampilkan informasi tentang pekerjaan.
+  description: ''
+  syntax: >-
+    az batchai job show [--experiment]
+                        [--ids]
+                        [--name]
+                        [--resource-group]
+                        [--workspace]
+  examples:
+  - summary: Tampilkan informasi lengkap tentang pekerjaan.
+    syntax: az batchai job show -g MyResourceGroup -w MyWorkspace -e MyExperiment -n MyJob
+  - summary: Perlihatkan ringkasan pekerjaan.
+    syntax: az batchai job show -g MyResourceGroup -w MyWorkspace -e MyExperiment -n MyJob -o table
+  optionalParameters:
+  - name: --experiment -e
+    summary: Nama eksperimen.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama pekerjaan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --workspace -w
+    summary: Nama ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batchai/_help.py
+- uid: az_batchai_job_terminate
+  name: az batchai job terminate
+  summary: Menghentikan pekerjaan.
+  description: ''
+  syntax: >-
+    az batchai job terminate [--experiment]
+                             [--ids]
+                             [--name]
+                             [--no-wait]
+                             [--resource-group]
+                             [--workspace]
+                             [--yes]
+  examples:
+  - summary: Menghentikan pekerjaan dan menunggu pekerjaan dihentikan.
+    syntax: az batchai job terminate -g MyResourceGroup -w MyWorkspace -e MyExperiment -n MyJob
+  - summary: Hentikan pekerjaan tanpa meminta konfirmasi (untuk skenario non-interaktif).
+    syntax: az batchai job terminate -g MyResourceGroup  -w MyWorkspace -e MyExperiment -n MyJob -y
+  - summary: Minta penghentian pekerjaan tanpa menunggu pekerjaan dihentikan.
+    syntax: >-
+      az batchai job terminate -g MyResourceGroup -e MyExperiment -w MyWorkspace -n MyJob \
+          --no-wait
+  optionalParameters:
+  - name: --experiment -e
+    summary: Nama eksperimen.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama pekerjaan.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --workspace -w
+    summary: Nama ruang kerja.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batchai/_help.py
+- uid: az_batchai_job_wait
+  name: az batchai job wait
+  summary: Menunggu penyelesaian pekerjaan yang ditentukan dan menyiapkan kode keluar ke kode keluar pekerjaan.
+  description: ''
+  syntax: >-
+    az batchai job wait [--experiment]
+                        [--ids]
+                        [--interval]
+                        [--name]
+                        [--resource-group]
+                        [--workspace]
+  examples:
+  - summary: Tunggu penyelesaian pekerjaan.
+    syntax: az batchai job wait -g MyResourceGroup -w MyWorkspace -n MyJob
+  optionalParameters:
+  - name: --experiment -e
+    summary: Nama eksperimen.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --interval
+    defaultValue: "15"
+    summary: Interval polling dalam detik.
+    description: ''
+  - name: --name -n
+    summary: Nama pekerjaan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --workspace -w
+    summary: Nama ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batchai/_help.py
+commands:
+- az_batchai_job_create
+- az_batchai_job_delete
+- az_batchai_job_file
+- az_batchai_job_file_list
+- az_batchai_job_file_stream
+- az_batchai_job_list
+- az_batchai_job_node
+- az_batchai_job_node_exec
+- az_batchai_job_node_list
+- az_batchai_job_show
+- az_batchai_job_terminate
+- az_batchai_job_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 07/13/2021
+  description: Perintah untuk mengelola pekerjaan.
+  ms.openlocfilehash: b26079b881e58a9d259471fe4582e6f1f695f6a7
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140913110"

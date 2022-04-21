@@ -1,0 +1,486 @@
+### YamlMime:AzureCLIGroup
+uid: az_cosmosdb
+name: az cosmosdb
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **cosmosdb-preview** untuk Azure CLI (versi 2.17.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az cosmosdb** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola akun database Azure Cosmos DB.
+description: ''
+directCommands:
+- uid: az_cosmosdb_create
+  name: az cosmosdb create
+  summary: Membuat akun database Azure Cosmos DB baru.
+  description: ''
+  syntax: >-
+    az cosmosdb create --name
+                       --resource-group
+                       [--analytical-storage-schema-type {FullFidelity, WellDefined}]
+                       [--assign-identity]
+                       [--backup-interval]
+                       [--backup-policy-type {Continuous, Periodic}]
+                       [--backup-redundancy {Geo, Local, Zone}]
+                       [--backup-retention]
+                       [--capabilities]
+                       [--databases-to-restore]
+                       [--default-consistency-level {BoundedStaleness, ConsistentPrefix, Eventual, Session, Strong}]
+                       [--default-identity]
+                       [--disable-key-based-metadata-write-access {false, true}]
+                       [--enable-analytical-storage {false, true}]
+                       [--enable-automatic-failover {false, true}]
+                       [--enable-free-tier {false, true}]
+                       [--enable-materialized-views {false, true}]
+                       [--enable-multiple-write-locations {false, true}]
+                       [--enable-public-network {false, true}]
+                       [--enable-virtual-network {false, true}]
+                       [--gremlin-databases-to-restore]
+                       [--ip-range-filter]
+                       [--is-restore-request {false, true}]
+                       [--key-uri]
+                       [--kind {GlobalDocumentDB, MongoDB, Parse}]
+                       [--locations]
+                       [--max-interval]
+                       [--max-staleness-prefix]
+                       [--network-acl-bypass {AzureServices, None}]
+                       [--network-acl-bypass-resource-ids]
+                       [--restore-source]
+                       [--restore-timestamp]
+                       [--server-version {3.2, 3.6, 4.0, 4.2}]
+                       [--tables-to-restore]
+                       [--tags]
+                       [--virtual-network-rules]
+  examples:
+  - summary: Akun database DB. (dibuat otomatis)
+    syntax: az cosmosdb create --name MyCosmosDBDatabaseAccount --resource-group MyResourceGroup --subscription MySubscription
+  - summary: Membuat akun database Azure Cosmos DB baru dengan dua wilayah. UK Selatan adalah zona redundan.
+    syntax: az cosmosdb create -n myaccount -g mygroup --locations regionName=eastus failoverPriority=0 isZoneRedundant=False --locations regionName=uksouth failoverPriority=1 isZoneRedundant=True --enable-multiple-write-locations --network-acl-bypass AzureServices --network-acl-bypass-resource-ids /subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Synapse/workspaces/wsName
+  - summary: Membuat akun database Azure Cosmos DB baru dengan memulihkan dari akun yang sudah ada di lokasi tertentu
+    syntax: az cosmosdb create -n restoredaccount -g mygroup --is-restore-request true --restore-source /subscriptions/2296c272-5d55-40d9-bc05-4d56dc2d7588/providers/Microsoft.DocumentDB/locations/westus/restorableDatabaseAccounts/d056a4f8-044a-436f-80c8-cd3edbc94c68 --restore-timestamp 2020-07-13T16:03:41+0000 --locations regionName=westus failoverPriority=0 isZoneRedundant=False
+  - summary: Membuat akun database Azure Cosmos DB baru dengan tampilan materialisasi dan kemampuan cassandra diaktifkan.
+    syntax: az cosmosdb create --name MyCosmosDBDatabaseAccount --resource-group MyResourceGroup --enable-materialized-views true --capabilities EnableCassandra CassandraEnableMaterializedViews
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama akun database Cosmos DB.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --analytical-storage-schema-type --as-schema
+    parameterValueGroup: FullFidelity, WellDefined
+    summary: Jenis skema untuk penyimpanan analitis.
+    description: ''
+  - name: --assign-identity
+    summary: Tetapkan identitas yang ditetapkan sistem atau pengguna yang dipisahkan oleh spasi. Gunakan '[system]' untuk merujuk identitas yang ditetapkan sistem.
+    description: ''
+  - name: --backup-interval
+    summary: Frekuensi(dalam menit) tempat pencadangan diambil (hanya untuk akun dengan cadangan mode berkala).
+    description: ''
+  - name: --backup-policy-type
+    parameterValueGroup: Continuous, Periodic
+    summary: Jenis kebijakan pencadangan akun yang akan dibuat.
+    description: ''
+  - name: --backup-redundancy
+    parameterValueGroup: Geo, Local, Zone
+    summary: Jenis redundansi akun Storage cadangan.
+    description: ''
+  - name: --backup-retention
+    summary: Waktu(dalam jam) di mana setiap cadangan dipertahankan (hanya untuk akun dengan cadangan mode berkala).
+    description: ''
+  - name: --capabilities
+    summary: Atur kemampuan kustom pada akun database Cosmos DB.
+    description: ''
+  - name: --databases-to-restore
+    summary: Tambahkan database dan nama koleksinya untuk dipulihkan.
+    description: 'Penggunaan: --databases-to-restore name=DatabaseName collections=collection1 [collection2 ...].'
+  - name: --default-consistency-level
+    parameterValueGroup: BoundedStaleness, ConsistentPrefix, Eventual, Session, Strong
+    summary: Tingkat konsistensi default akun database Cosmos DB.
+    description: ''
+  - name: --default-identity
+    summary: Identitas utama untuk mengakses brankas kunci dalam fitur terkait CMK. misalnya 'FirstPartyIdentity', 'SystemAssignedIdentity' dan banyak lagi.
+    description: ''
+  - name: --disable-key-based-metadata-write-access
+    parameterValueGroup: false, true
+    summary: Nonaktifkan operasi tulis pada sumber daya metadata (database, kontainer, throughput) melalui kunci akun.
+    description: ''
+  - name: --enable-analytical-storage
+    parameterValueGroup: false, true
+    summary: Benderai untuk mengaktifkan penyimpanan log di akun.
+    description: ''
+  - name: --enable-automatic-failover
+    parameterValueGroup: false, true
+    summary: Mengaktifkan failover otomatis wilayah tulis jika wilayah tersebut tidak tersedia karena pemadaman. Failover otomatis akan menghasilkan wilayah tulis baru untuk akun dan dipilih berdasarkan prioritas failover yang dikonfigurasi untuk akun tersebut.
+    description: ''
+  - name: --enable-free-tier
+    parameterValueGroup: false, true
+    summary: Jika diaktifkan, akun adalah tingkat gratis.
+    description: ''
+  - name: --enable-materialized-views --enable-mv
+    parameterValueGroup: false, true
+    summary: Bendera untuk mengaktifkan MaterializedViews pada akun.
+    description: ''
+  - name: --enable-multiple-write-locations
+    parameterValueGroup: false, true
+    summary: Aktifkan Beberapa Lokasi Tulis.
+    description: ''
+  - name: --enable-public-network -e
+    parameterValueGroup: false, true
+    summary: Aktifkan atau nonaktifkan akses jaringan publik ke server.
+    description: ''
+  - name: --enable-virtual-network
+    parameterValueGroup: false, true
+    summary: Mengaktifkan jaringan virtual pada akun database Cosmos DB.
+    description: ''
+  - name: --gremlin-databases-to-restore
+    summary: Tambahkan database gremlin dan nama grafiknya untuk dipulihkan.
+    description: 'Penggunaan: --gremlin-databases-to-restore name=DatabaseName graphs=graph1 [graph2 ...].'
+  - name: --ip-range-filter
+    summary: Dukungan firewall. Menentukan sekumpulan alamat IP atau rentang alamat IP dalam formulir CIDR untuk disertakan sebagai daftar IP klien yang diizinkan untuk akun database tertentu. Alamat/rentang IP harus dipisahkan koma dan tidak boleh berisi spasi apa pun.
+    description: ''
+  - name: --is-restore-request -r
+    parameterValueGroup: false, true
+    summary: Pulihkan dari akun yang sudah ada/dihapus.
+    description: ''
+  - name: --key-uri
+    summary: URI brankas kunci.
+    description: ''
+  - name: --kind
+    defaultValue: GlobalDocumentDB
+    parameterValueGroup: GlobalDocumentDB, MongoDB, Parse
+    summary: Jenis akun database Cosmos DB yang akan dibuat.
+    description: ''
+  - name: --locations
+    summary: Tambahkan lokasi ke akun database Cosmos DB.
+    description: >-
+      Penggunaan: --locations KEY=VALUE [KEY=VALUE ...] Kunci yang Diperlukan: regionName, failoverPriority Optional Key: isZoneRedundant Default: akun wilayah tunggal di lokasi grup sumber daya yang ditentukan.
+
+      Nilai prioritas failover adalah 0 untuk wilayah tulis dan lebih besar dari 0 untuk wilayah baca. Nilai prioritas failover harus unik dan kurang dari jumlah total wilayah.
+
+      Beberapa lokasi dapat ditentukan dengan menggunakan lebih dari satu `--locations` argumen.
+  - name: --max-interval
+    defaultValue: "5"
+    summary: Ketika digunakan dengan konsistensi Keusangan Terikat, nilai ini menunjukkan jumlah waktu kedaluarsa (dalam detik) yang ditoleransi. Rentang yang diterima untuk nilai ini adalah 1 - 100.
+    description: ''
+  - name: --max-staleness-prefix
+    defaultValue: "100"
+    summary: Saat digunakan dengan konsistensi Keusangan Terikat, nilai ini menunjukkan jumlah permintaan kedaluarsa yang ditoleransi. Rentang yang diterima untuk nilai ini adalah 1 - 2.147.483.647.
+    description: ''
+  - name: --network-acl-bypass
+    parameterValueGroup: AzureServices, None
+    summary: Bendera untuk mengaktifkan atau menonaktifkan Bypass Acl Jaringan.
+    description: ''
+  - name: --network-acl-bypass-resource-ids -i
+    summary: Daftar Id Sumber Daya untuk mengizinkan Bypass Acl Jaringan.
+    description: ''
+  - name: --restore-source
+    summary: Id akun database yang dapat dipulihkan dari akun sumber tempat akun harus dipulihkan. Diperlukan jika --is-restore-request diatur ke true.
+    description: ''
+  - name: --restore-timestamp
+    summary: Tanda waktu tempat akun harus dipulihkan. Diperlukan jika --is-restore-request diatur ke true.
+    description: ''
+  - name: --server-version
+    parameterValueGroup: 3.2, 3.6, 4.0, 4.2
+    summary: Hanya berlaku untuk akun MongoDB.
+    description: ''
+  - name: --tables-to-restore
+    summary: Tambahkan nama tabel untuk dipulihkan.
+    description: 'Penggunaan: --tables-to-restore tables=table1 [table2 ...].'
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --virtual-network-rules
+    summary: ACL untuk jaringan virtual.
+    description: ''
+- uid: az_cosmosdb_list
+  name: az cosmosdb list
+  summary: Mencantumkan akun database Azure Cosmos DB.
+  description: ''
+  syntax: az cosmosdb list [--resource-group]
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_cosmosdb_restore
+  name: az cosmosdb restore
+  summary: Buat akun database Azure Cosmos DB baru dengan memulihkan dari akun database yang sudah ada.
+  description: ''
+  syntax: >-
+    az cosmosdb restore --account-name
+                        --location
+                        --resource-group
+                        --restore-timestamp
+                        --target-database-account-name
+                        [--databases-to-restore]
+                        [--gremlin-databases-to-restore]
+                        [--tables-to-restore]
+  examples:
+  - summary: Buat akun database Azure Cosmos DB baru dengan memulihkan dari akun database yang sudah ada.
+    syntax: az cosmosdb restore --target-database-account-name MyRestoredCosmosDBDatabaseAccount --account-name MySourceAccount --restore-timestamp 2020-07-13T16:03:41+0000 -g MyResourceGroup --location westus
+  - summary: Buat akun database Azure Cosmos DB Sql atau MongoDB baru dengan memulihkan hanya database dan koleksi yang dipilih dari akun database yang sudah ada.
+    syntax: az cosmosdb restore -g MyResourceGroup --target-database-account-name MyRestoredCosmosDBDatabaseAccount --account-name MySourceAccount --restore-timestamp 2020-07-13T16:03:41+0000 --location westus --databases-to-restore name=MyDB1 collections=collection1 collection2 --databases-to-restore name=MyDB2 collections=collection3 collection4
+  - summary: Buat akun database Gremlin Azure Cosmos DB baru dengan memulihkan hanya database atau grafik yang dipilih dari akun database yang sudah ada.
+    syntax: az cosmosdb restore -g MyResourceGroup --target-database-account-name MyRestoredCosmosDBDatabaseAccount --account-name MySourceAccount --restore-timestamp 2020-07-13T16:03:41+0000 --location westus --gremlin-databases-to-restore name=graphdb1 graphs=graph1 graph2
+  - summary: Buat akun database Tabel Azure Cosmos DB baru dengan memulihkan hanya tabel yang dipilih dari akun database yang sudah ada.
+    syntax: az cosmosdb restore -g MyResourceGroup --target-database-account-name MyRestoredCosmosDBDatabaseAccount --account-name MySourceAccount --restore-timestamp 2020-07-13T16:03:41+0000 --location westus --tables-to-restore table1,table2
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun database Cosmos DB sumber untuk pemulihan.
+    description: ''
+  - isRequired: true
+    name: --location -l
+    summary: Lokasi akun sumber tempat pemulihan dipicu. Ini juga akan menjadi wilayah tulis dari akun yang dipulihkan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --restore-timestamp -t
+    summary: Tanda waktu tempat akun harus dipulihkan.
+    description: ''
+  - isRequired: true
+    name: --target-database-account-name -n
+    summary: Nama akun database Cosmos DB target baru setelah pemulihan.
+    description: ''
+  optionalParameters:
+  - name: --databases-to-restore
+    summary: Tambahkan database dan nama koleksinya untuk dipulihkan.
+    description: 'Penggunaan: --databases-to-restore name=DatabaseName collections=collection1 [collection2 ...] Beberapa database dapat ditentukan dengan menggunakan lebih dari satu `--databases-to-restore` argumen.'
+  - name: --gremlin-databases-to-restore
+    summary: Tambahkan database gremlin dan nama grafiknya untuk dipulihkan.
+    description: 'Penggunaan: --gremlin-databases-to-restore name=DatabaseName graphs=graph1 [graph2 ...].'
+  - name: --tables-to-restore
+    summary: Tambahkan nama tabel untuk dipulihkan.
+    description: 'Penggunaan: --tables-to-restore table1 [table2 ...].'
+- uid: az_cosmosdb_show
+  name: az cosmosdb show
+  summary: Dapatkan detail akun database Azure Cosmos DB.
+  description: ''
+  syntax: >-
+    az cosmosdb show --name
+                     --resource-group
+  examples:
+  - summary: Dapatkan detail akun database Azure Cosmos DB. (dibuat otomatis)
+    syntax: az cosmosdb show --name MyCosmosDBDatabaseAccount --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama akun database Cosmos DB.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_cosmosdb_update
+  name: az cosmosdb update
+  summary: Memperbarui akun database Azure Cosmos DB.
+  description: ''
+  syntax: >-
+    az cosmosdb update --name
+                       --resource-group
+                       [--analytical-storage-schema-type {FullFidelity, WellDefined}]
+                       [--backup-interval]
+                       [--backup-policy-type {Continuous, Periodic}]
+                       [--backup-redundancy {Geo, Local, Zone}]
+                       [--backup-retention]
+                       [--capabilities]
+                       [--default-consistency-level {BoundedStaleness, ConsistentPrefix, Eventual, Session, Strong}]
+                       [--default-identity]
+                       [--disable-key-based-metadata-write-access {false, true}]
+                       [--enable-analytical-storage {false, true}]
+                       [--enable-automatic-failover {false, true}]
+                       [--enable-materialized-views {false, true}]
+                       [--enable-multiple-write-locations {false, true}]
+                       [--enable-public-network {false, true}]
+                       [--enable-virtual-network {false, true}]
+                       [--ip-range-filter]
+                       [--locations]
+                       [--max-interval]
+                       [--max-staleness-prefix]
+                       [--network-acl-bypass {AzureServices, None}]
+                       [--network-acl-bypass-resource-ids]
+                       [--server-version {3.2, 3.6, 4.0, 4.2}]
+                       [--tags]
+                       [--virtual-network-rules]
+  examples:
+  - summary: Memperbarui akun database Azure Cosmos DB. (dibuat otomatis)
+    syntax: az cosmosdb update --capabilities EnableGremlin --name MyCosmosDBDatabaseAccount --resource-group MyResourceGroup
+  - summary: Perbarui akun database Azure Cosmos DB untuk mengaktifkan tampilan materialisasi.
+    syntax: az cosmosdb update --name MyCosmosDBDatabaseAccount --resource-group MyResourceGroup --enable-materialized-views true
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama akun database Cosmos DB.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --analytical-storage-schema-type --as-schema
+    parameterValueGroup: FullFidelity, WellDefined
+    summary: Jenis skema untuk penyimpanan analitis.
+    description: ''
+  - name: --backup-interval
+    summary: Frekuensi(dalam menit) tempat pencadangan diambil (hanya untuk akun dengan cadangan mode berkala).
+    description: ''
+  - name: --backup-policy-type
+    parameterValueGroup: Continuous, Periodic
+    summary: Jenis kebijakan pencadangan akun yang akan dibuat.
+    description: ''
+  - name: --backup-redundancy
+    parameterValueGroup: Geo, Local, Zone
+    summary: Jenis redundansi akun Storage cadangan.
+    description: ''
+  - name: --backup-retention
+    summary: Waktu(dalam jam) di mana setiap cadangan dipertahankan (hanya untuk akun dengan cadangan mode berkala).
+    description: ''
+  - name: --capabilities
+    summary: Atur kemampuan kustom pada akun database Cosmos DB.
+    description: ''
+  - name: --default-consistency-level
+    parameterValueGroup: BoundedStaleness, ConsistentPrefix, Eventual, Session, Strong
+    summary: Tingkat konsistensi default akun database Cosmos DB.
+    description: ''
+  - name: --default-identity
+    summary: Identitas utama untuk mengakses brankas kunci dalam fitur terkait CMK. misalnya 'FirstPartyIdentity', 'SystemAssignedIdentity' dan banyak lagi.
+    description: ''
+  - name: --disable-key-based-metadata-write-access
+    parameterValueGroup: false, true
+    summary: Nonaktifkan operasi tulis pada sumber daya metadata (database, kontainer, throughput) melalui kunci akun.
+    description: ''
+  - name: --enable-analytical-storage
+    parameterValueGroup: false, true
+    summary: Benderai untuk mengaktifkan penyimpanan log di akun.
+    description: ''
+  - name: --enable-automatic-failover
+    parameterValueGroup: false, true
+    summary: Mengaktifkan failover otomatis wilayah tulis jika wilayah tersebut tidak tersedia karena pemadaman. Failover otomatis akan menghasilkan wilayah tulis baru untuk akun dan dipilih berdasarkan prioritas failover yang dikonfigurasi untuk akun tersebut.
+    description: ''
+  - name: --enable-materialized-views --enable-mv
+    parameterValueGroup: false, true
+    summary: Bendera untuk mengaktifkan MaterializedViews pada akun.
+    description: ''
+  - name: --enable-multiple-write-locations
+    parameterValueGroup: false, true
+    summary: Aktifkan Beberapa Lokasi Tulis.
+    description: ''
+  - name: --enable-public-network -e
+    parameterValueGroup: false, true
+    summary: Aktifkan atau nonaktifkan akses jaringan publik ke server.
+    description: ''
+  - name: --enable-virtual-network
+    parameterValueGroup: false, true
+    summary: Mengaktifkan jaringan virtual pada akun database Cosmos DB.
+    description: ''
+  - name: --ip-range-filter
+    summary: Dukungan firewall. Menentukan sekumpulan alamat IP atau rentang alamat IP dalam formulir CIDR untuk disertakan sebagai daftar IP klien yang diizinkan untuk akun database tertentu. Alamat/rentang IP harus dipisahkan koma dan tidak boleh berisi spasi apa pun.
+    description: ''
+  - name: --locations
+    summary: Tambahkan lokasi ke akun database Cosmos DB.
+    description: >-
+      Penggunaan: --locations KEY=VALUE [KEY=VALUE ...] Kunci yang Diperlukan: regionName, failoverPriority Optional Key: isZoneRedundant Default: akun wilayah tunggal di lokasi grup sumber daya yang ditentukan.
+
+      Nilai prioritas failover adalah 0 untuk wilayah tulis dan lebih besar dari 0 untuk wilayah baca. Nilai prioritas failover harus unik dan kurang dari jumlah total wilayah.
+
+      Beberapa lokasi dapat ditentukan dengan menggunakan lebih dari satu `--locations` argumen.
+  - name: --max-interval
+    summary: Ketika digunakan dengan konsistensi Keusangan Terikat, nilai ini menunjukkan jumlah waktu kedaluarsa (dalam detik) yang ditoleransi. Rentang yang diterima untuk nilai ini adalah 1 - 100.
+    description: ''
+  - name: --max-staleness-prefix
+    summary: Saat digunakan dengan konsistensi Keusangan Terikat, nilai ini menunjukkan jumlah permintaan kedaluarsa yang ditoleransi. Rentang yang diterima untuk nilai ini adalah 1 - 2.147.483.647.
+    description: ''
+  - name: --network-acl-bypass
+    parameterValueGroup: AzureServices, None
+    summary: Bendera untuk mengaktifkan atau menonaktifkan Bypass Acl Jaringan.
+    description: ''
+  - name: --network-acl-bypass-resource-ids -i
+    summary: Daftar Id Sumber Daya untuk mengizinkan Bypass Acl Jaringan.
+    description: ''
+  - name: --server-version
+    parameterValueGroup: 3.2, 3.6, 4.0, 4.2
+    summary: Hanya berlaku untuk akun MongoDB.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --virtual-network-rules
+    summary: ACL untuk jaringan virtual.
+    description: ''
+commands:
+- az_cosmosdb_create
+- az_cosmosdb_gremlin
+- az_cosmosdb_gremlin_restorable-database
+- az_cosmosdb_gremlin_restorable-database_list
+- az_cosmosdb_gremlin_restorable-graph
+- az_cosmosdb_gremlin_restorable-graph_list
+- az_cosmosdb_gremlin_restorable-resource
+- az_cosmosdb_gremlin_restorable-resource_list
+- az_cosmosdb_gremlin_retrieve-latest-backup-time
+- az_cosmosdb_list
+- az_cosmosdb_mongodb
+- az_cosmosdb_mongodb_restorable-collection
+- az_cosmosdb_mongodb_restorable-collection_list
+- az_cosmosdb_mongodb_role
+- az_cosmosdb_mongodb_role_definition
+- az_cosmosdb_mongodb_role_definition_create
+- az_cosmosdb_mongodb_role_definition_delete
+- az_cosmosdb_mongodb_role_definition_exists
+- az_cosmosdb_mongodb_role_definition_list
+- az_cosmosdb_mongodb_role_definition_show
+- az_cosmosdb_mongodb_role_definition_update
+- az_cosmosdb_mongodb_user
+- az_cosmosdb_mongodb_user_definition
+- az_cosmosdb_mongodb_user_definition_create
+- az_cosmosdb_mongodb_user_definition_delete
+- az_cosmosdb_mongodb_user_definition_exists
+- az_cosmosdb_mongodb_user_definition_list
+- az_cosmosdb_mongodb_user_definition_show
+- az_cosmosdb_mongodb_user_definition_update
+- az_cosmosdb_restore
+- az_cosmosdb_service
+- az_cosmosdb_service_create
+- az_cosmosdb_service_delete
+- az_cosmosdb_service_list
+- az_cosmosdb_service_show
+- az_cosmosdb_service_update
+- az_cosmosdb_show
+- az_cosmosdb_sql
+- az_cosmosdb_sql_restorable-container
+- az_cosmosdb_sql_restorable-container_list
+- az_cosmosdb_table
+- az_cosmosdb_table_restorable-resource
+- az_cosmosdb_table_restorable-resource_list
+- az_cosmosdb_table_restorable-table
+- az_cosmosdb_table_restorable-table_list
+- az_cosmosdb_table_retrieve-latest-backup-time
+- az_cosmosdb_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola akun database Azure Cosmos DB.
+  ms.openlocfilehash: ac97e028e89d4c744e971d64c3753703ea2944a2
+  ms.sourcegitcommit: d016676aca62d5461b07446d98cf38e30bba07cd
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/19/2022
+  ms.locfileid: "143880679"

@@ -1,0 +1,953 @@
+### YamlMime:AzureCLIGroup
+uid: az_vmss
+name: az vmss
+summary: Mengelola pengelompokan komputer virtual dalam Azure Virtual Machine Scale Set (VMSS).
+description: ''
+directCommands:
+- uid: az_vmss_create
+  name: buat vmss az
+  summary: Membuat Set Skala Komputer Virtual Azure.
+  description: Untuk tutorial end-to-end, lihat https://docs.microsoft.com/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-linux-create-cli.
+  syntax: >-
+    az vmss create --name
+                   --resource-group
+                   [--accept-term]
+                   [--admin-password]
+                   [--admin-username]
+                   [--app-gateway]
+                   [--app-gateway-capacity]
+                   [--app-gateway-sku]
+                   [--app-gateway-subnet-address-prefix]
+                   [--assign-identity]
+                   [--authentication-type {all, password, ssh}]
+                   [--backend-pool-name]
+                   [--backend-port]
+                   [--computer-name-prefix]
+                   [--custom-data]
+                   [--data-disk-caching]
+                   [--data-disk-sizes-gb]
+                   [--disable-overprovision]
+                   [--encryption-at-host {false, true}]
+                   [--generate-ssh-keys]
+                   [--health-probe]
+                   [--image]
+                   [--instance-count]
+                   [--lb]
+                   [--lb-nat-pool-name]
+                   [--license-type {None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server}]
+                   [--location]
+                   [--no-wait]
+                   [--nsg]
+                   [--orchestration-mode {Flexible, Uniform}]
+                   [--os-disk-caching {None, ReadOnly, ReadWrite}]
+                   [--os-disk-name]
+                   [--os-disk-size-gb]
+                   [--os-type {linux, windows}]
+                   [--plan-name]
+                   [--plan-product]
+                   [--plan-promotion-code]
+                   [--plan-publisher]
+                   [--public-ip-address]
+                   [--public-ip-address-allocation {dynamic, static}]
+                   [--public-ip-address-dns-name]
+                   [--role]
+                   [--scale-in-policy]
+                   [--scope]
+                   [--secrets]
+                   [--single-placement-group {false, true}]
+                   [--specialized {false, true}]
+                   [--ssh-dest-key-path]
+                   [--ssh-key-values]
+                   [--storage-container-name]
+                   [--storage-sku]
+                   [--subnet]
+                   [--subnet-address-prefix]
+                   [--tags]
+                   [--upgrade-policy-mode {Automatic, Manual}]
+                   [--use-unmanaged-disk]
+                   [--validate]
+                   [--vm-sku]
+                   [--vnet-address-prefix]
+                   [--vnet-name]
+  examples:
+  - summary: Buat set skala VM Windows dengan 5 instans, load balancer, alamat IP publik, disk data 2GB, dan disk OS 40GB.
+    syntax: az vmss create -n MyVmss -g MyResourceGroup --instance-count 5 --image Win2016Datacenter --data-disk-sizes-gb 2 --os-disk-size-gb 40
+  - summary: Buat set skala VM Linux dengan pasangan kunci ssh yang dihasilkan secara otomatis, alamat IP publik, entri DNS, load balancer yang ada, dan jaringan virtual yang ada.
+    syntax: >-
+      az vmss create -n MyVmss -g MyResourceGroup --public-ip-address-dns-name my-globally-dns-name \
+          --load-balancer MyLoadBalancer --vnet-name MyVnet --subnet MySubnet --image UbuntuLTS \
+          --generate-ssh-keys
+  - summary: Buat set skala VM Linux dari gambar kustom menggunakan kunci SSH publik default yang ada.
+    syntax: az vmss create -n MyVmss -g MyResourceGroup --image MyImage
+  - summary: Buat set skala VM Linux dengan load balancer dan server DNS kustom. Setiap VM memiliki alamat ip publik dan nama domain kustom.
+    syntax: >-
+      az vmss create -n MyVmss -g MyResourceGroup --image centos \
+          --public-ip-per-vm --vm-domain-name myvmss --dns-servers 10.0.0.6 10.0.0.5
+  - summary: 'Buat set skala VM Linux menggunakan skrip cloud-init untuk konfigurasi. Melihat: https://docs.microsoft.com/azure/virtual-machines/linux/using-cloud-init'
+    syntax: az vmss create -g MyResourceGroup -n MyVmss --image debian --custom-data MyCloudInitScript.yml
+  - summary: Buat VMSS dari versi gambar galeri umum.
+    syntax: az vmss create -g MyResourceGroup -n MyVmss --image /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.Compute/galleries/myGallery/images/myImage/versions/1.0.0
+  - summary: Buat VMSS dari versi gambar galeri khusus.
+    syntax: az vmss create -g MyResourceGroup -n MyVmss --image /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.Compute/galleries/myGallery/images/myImage/versions/1.0.0 --specialized
+  - summary: Membuat VMSS dari versi terbaru gambar galeri
+    syntax: az vmss create -g MyResourceGroup -n MyVmss --image /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.Compute/galleries/myGallery/images/myImage
+  - summary: Buat set skala VM Debian menggunakan rahasia Key Vault.
+    syntax: >-
+      az keyvault certificate create --vault-name vaultname -n cert1 \
+        -p "$(az keyvault certificate get-default-policy)"
+
+      secrets=$(az keyvault secret list-versions --vault-name vaultname \
+        -n cert1 --query "[?attributes.enabled].id" -o tsv)
+
+      vm_secrets=$(az vm secret format -s "$secrets")
+
+
+      az vmss create -g group-name -n vm-name --admin-username deploy  \
+        --image debian --secrets "$vm_secrets"
+  - summary: Buat set skala VM dengan identitas yang ditetapkan sistem. VM akan memiliki Peran 'Kontributor' dengan akses ke akun penyimpanan.
+    syntax: az vmss create -n MyVmss -g MyResourceGroup --image centos --assign-identity --scope /subscriptions/99999999-1bf0-4dda-aec3-cb9272f09590/MyResourceGroup/myRG/providers/Microsoft.Storage/storageAccounts/storage1 --role Contributor
+  - summary: Buat set skala VM debian dengan identitas yang ditetapkan pengguna.
+    syntax: az vmss create -n MyVmss -g rg1 --image debian --assign-identity  /subscriptions/99999999-1bf0-4dda-aec3-cb9272f09590/resourcegroups/myRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myID
+  - summary: Buat set skala VM debian dengan sistem dan identitas yang ditetapkan pengguna.
+    syntax: az vmss create -n MyVmss -g rg1 --image debian --assign-identity  [system] /subscriptions/99999999-1bf0-4dda-aec3-cb9272f09590/resourcegroups/myRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myID
+  - summary: Buat VMSS yang mendukung SpotRestore.
+    syntax: az vmss create -n MyVmss -g MyResourceGroup  --location NorthEurope --instance-count 2 --image Centos --priority Spot --eviction-policy Deallocate --single-placement-group --enable-spot-restore True --spot-restore-timeout PT1H
+  - summary: Buat VMSS dari gambar galeri bersama. (fitur pratinjau privat, silakan hubungi tim galeri gambar bersama melalui email sigpmdev@microsoft.com untuk mendaftar pratinjau jika Anda tertarik menggunakan fitur ini).
+    syntax: az vmss create -n MyVmss -g MyResourceGroup --image /SharedGalleries/{gallery_unique_name}/Images/{image}/Versions/{version}
+  - summary: Buat VMSS dari gambar galeri komunitas (fitur pratinjau pribadi, silakan hubungi tim galeri gambar komunitas melalui email sigpmdev@microsoft.com untuk mendaftar pratinjau jika Anda tertarik menggunakan fitur ini).
+    syntax: az vmss create -n MyVmss -g MyResourceGroup --image /CommunityGalleries/{gallery_unique_name}/Images/{image}/Versions/{version}
+  - summary: Membuat VMSS Windows dengan mode patch 'Manual' (Mode patch 'AutomaticByPlatform' saat ini tidak didukung selama pembuatan VMSS sebagai ekstensi kesehatan yang diperlukan untuk mode 'AutomaticByPlatform' tidak dapat diatur selama pembuatan VMSS).
+    syntax: az vmss create -n MyVmss -g MyResourceGroup --image Win2019Datacenter --enable-agent --enable-auto-update false --patch-mode Manual --orchestration-mode Flexible
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama set skala komputer virtual.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --accept-term
+    summary: Terima perjanjian lisensi dan pernyataan privasi.
+    description: ''
+  - name: --admin-password
+    summary: Kata sandi untuk VM jika jenis autentikasi adalah 'Kata Sandi'.
+    description: ''
+  - name: --admin-username
+    summary: Nama pengguna untuk VM. Nilai default adalah nama pengguna OS saat ini. Jika nilai default adalah sistem yang dicadangkan, maka nilai default akan diatur ke azureuser. Silakan merujuk ke https://docs.microsoft.com/rest/api/compute/virtualmachines/createorupdate#osprofile untuk mendapatkan daftar lengkap nilai yang dipesan.
+    description: ''
+  - name: --app-gateway
+    summary: Nama yang akan digunakan saat membuat gateway aplikasi baru (default) atau mereferensikan yang sudah ada. Dapat juga mereferensikan gateway aplikasi yang ada berdasarkan ID atau menentukan "" untuk tidak ada.
+    description: ''
+  - name: --app-gateway-capacity
+    defaultValue: "10"
+    summary: Jumlah instans yang akan digunakan saat membuat gateway aplikasi baru.
+    description: ''
+  - name: --app-gateway-sku
+    defaultValue: Standard_Large
+    summary: SKU saat membuat gateway aplikasi baru.
+    description: ''
+  - name: --app-gateway-subnet-address-prefix
+    summary: Awalan alamat IP subnet yang akan digunakan saat membuat gateway aplikasi baru dalam format CIDR.
+    description: ''
+  - name: --assign-identity
+    summary: Terima identitas yang ditetapkan sistem atau pengguna yang dipisahkan oleh spasi. Gunakan '[system]' untuk merujuk identitas yang ditetapkan sistem, atau id sumber daya untuk merujuk identitas yang ditetapkan pengguna. Lihat bantuan untuk contoh selengkapnya.
+    description: ''
+  - name: --authentication-type
+    parameterValueGroup: all, password, ssh
+    summary: Jenis autentikasi yang akan digunakan dengan VM. Default ke kata sandi untuk kunci umum Windows dan SSH untuk Linux. "all" memungkinkan autentikasi ssh dan kata sandi.
+    description: ''
+  - name: --backend-pool-name
+    summary: Nama yang akan digunakan untuk kumpulan backend saat membuat load balancer atau gateway aplikasi baru.
+    description: ''
+  - name: --backend-port
+    summary: Saat membuat load balancer baru, port backend untuk dibuka dengan aturan NAT (Default ke 22 di Linux dan 3389 di Windows). Saat membuat gateway aplikasi, port backend yang akan digunakan untuk pengaturan HTTP backend.
+    description: ''
+  - name: --computer-name-prefix
+    summary: Awalan nama komputer untuk semua komputer virtual dalam set skala. Panjang awalan nama komputer harus 1 hingga 15 karakter.
+    description: ''
+  - name: --custom-data
+    summary: File atau teks skrip init kustom (cloud-init, cloud-config, dll..).
+    description: ''
+  - name: --data-disk-caching
+    summary: Storage jenis penembolokan untuk disk data, termasuk 'None', 'ReadOnly', 'ReadWrite', dll. Gunakan nilai tunggal untuk diterapkan pada semua disk, atau gunakan `<lun>=<vaule1> <lun>=<value2>` untuk mengonfigurasi disk individual.
+    description: ''
+  - name: --data-disk-sizes-gb
+    summary: Ukuran disk data terkelola kosong yang dipisahkan spasi dalam GB untuk dibuat.
+    description: ''
+  - name: --disable-overprovision
+    summary: Opsi provisi berlebih (lihat https://azure.microsoft.com/documentation/articles/virtual-machine-scale-sets-overview/ untuk detailnya).
+    description: ''
+  - name: --encryption-at-host
+    parameterValueGroup: false, true
+    summary: Aktifkan Enkripsi Host untuk VM atau VMSS. Ini akan mengaktifkan enkripsi untuk semua disk termasuk disk Sumber Daya/Temp di host itu sendiri.
+    description: ''
+  - name: --generate-ssh-keys
+    summary: Buat file kunci publik dan privat SSH jika hilang. Kunci akan disimpan di direktori ~/.ssh.
+    description: ''
+  - name: --health-probe
+    summary: Nama pemeriksaan dari load balancer yang ada, terutama digunakan untuk peningkatan bergulir atau perbaikan otomatis.
+    description: ''
+  - name: --image
+    summary: 'Nama citra sistem operasi sebagai alias URN, URN, nama gambar kustom atau ID, atau URI blob VHD. Selain itu, ini juga mendukung gambar galeri bersama. Format URN yang valid: "Publisher:Offer:Sku:Version".'
+    description: ''
+    valueFrom: az vm image list, az vm image show, az sig image-version show-shared
+  - name: --instance-count
+    defaultValue: "2"
+    summary: Jumlah VM dalam set skala.
+    description: ''
+  - name: --lb --load-balancer
+    summary: Nama yang akan digunakan saat membuat load balancer baru (default) atau mereferensikan yang sudah ada. Dapat juga mereferensikan load balancer yang ada dengan ID atau menentukan "" untuk tidak ada.
+    description: ''
+  - name: --lb-nat-pool-name --nat-pool-name
+    summary: Nama yang akan digunakan untuk kumpulan NAT saat membuat load balancer baru.
+    description: ''
+  - name: --license-type
+    parameterValueGroup: None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server
+    summary: Menentukan bahwa gambar atau disk Windows dilisensikan secara lokal. Untuk mengaktifkan Azure Hybrid Benefit untuk Windows Server, gunakan 'Windows_Server'. Untuk mengaktifkan Hak Hosting Multi-penyewa untuk Windows 10, gunakan 'Windows_Client'. Untuk informasi selengkapnya, lihat dokumen online Azure Windows VM.
+    description: ''
+  - name: --location -l
+    summary: Lokasi untuk membuat VM dan sumber daya terkait. Jika lokasi default tidak dikonfigurasi, akan default ke lokasi grup sumber daya.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --nsg
+    summary: Nama atau ID Grup Keamanan Jaringan yang ada.
+    description: ''
+  - name: --orchestration-mode
+    defaultValue: Uniform
+    parameterValueGroup: Flexible, Uniform
+    summary: Pilih bagaimana komputer virtual dikelola oleh set skala. Dalam mode Seragam, Anda menentukan model komputer virtual dan Azure akan menghasilkan instans yang identik berdasarkan model tersebut. Dalam mode Fleksibel, Anda membuat dan menambahkan komputer virtual secara manual dari konfigurasi apa pun ke set skala atau menghasilkan instans yang identik berdasarkan model komputer virtual yang ditentukan untuk set skala.
+    description: ''
+  - name: --os-disk-caching
+    parameterValueGroup: None, ReadOnly, ReadWrite
+    summary: 'Storage jenis penembolokan untuk disk OS VM. Default: ReadWrite.'
+    description: ''
+  - name: --os-disk-name
+    summary: Nama disk OS VM baru.
+    description: ''
+  - name: --os-disk-size-gb
+    summary: Ukuran disk OS dalam GB untuk dibuat.
+    description: ''
+  - name: --os-type
+    parameterValueGroup: linux, windows
+    summary: Jenis OS yang diinstal pada VHD kustom. Jangan gunakan saat menentukan alias URN atau URN.
+    description: ''
+  - name: --plan-name
+    summary: Nama rencana.
+    description: ''
+  - name: --plan-product
+    summary: Rencanakan produk.
+    description: ''
+  - name: --plan-promotion-code
+    summary: Rencanakan kode promosi.
+    description: ''
+  - name: --plan-publisher
+    summary: Merencanakan penerbit.
+    description: ''
+  - name: --public-ip-address
+    summary: Nama alamat IP publik saat membuat satu (default) atau mereferensikan yang sudah ada. Dapat juga mereferensikan IP publik yang ada berdasarkan ID atau menentukan "" untuk Tidak Ada ('"' di Azure CLI menggunakan operator PowerShell atau --%).
+    description: ''
+  - name: --public-ip-address-allocation
+    parameterValueGroup: dynamic, static
+    summary: ''
+    description: ''
+  - name: --public-ip-address-dns-name
+    summary: Nama DNS unik global untuk IP publik yang baru dibuat.
+    description: ''
+  - name: --role
+    summary: Nama peran atau id yang akan dimiliki identitas yang ditetapkan sistem.
+    description: ''
+  - name: --scale-in-policy
+    summary: Tentukan kebijakan penyempurnaan skala (dibatasi ruang) yang memutuskan komputer virtual mana yang dipilih untuk dihapus saat Set Skala Komputer Virtual diskalakan.
+    description: ''
+  - name: --cakupan
+    summary: Cakupan yang dapat diakses oleh identitas yang ditetapkan sistem.
+    description: ''
+  - name: --secrets
+    summary: 'Satu atau banyak rahasia Key Vault sebagai string atau file JSON melalui `@{path}` yang berisi `[{ "sourceVault": { "id": "value" }, "vaultCertificates": [{ "certificateUrl": "value", "certificateStore": "cert store name (only on windows)"}] }]`.'
+    description: ''
+  - name: --single-placement-group
+    parameterValueGroup: false, true
+    summary: Batasi set skala ke satu grup penempatan. Lihat https://docs.microsoft.com/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-placement-groups untuk detailnya.
+    description: ''
+  - name: --specialized
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah gambar sumber dikhususkan.
+    description: ''
+  - name: --ssh-dest-key-path
+    summary: Jalur file tujuan pada VM untuk kunci SSH. Jika file sudah ada, kunci yang ditentukan ditambahkan ke file. Jalur tujuan untuk kunci umum SSH saat ini terbatas pada nilai defaultnya "/home/username/.ssh/authorized_keys" karena masalah yang diketahui di agen provisi Linux.
+    description: ''
+  - name: --ssh-key-values
+    summary: Daftar kunci umum SSH yang dipisahkan spasi atau jalur file kunci publik.
+    description: ''
+  - name: --storage-container-name
+    defaultValue: vhds
+    summary: 'Hanya berlaku saat digunakan dengan `--use-unmanaged-disk`. Nama kontainer penyimpanan untuk disk OS VM. Default: vhds.'
+    description: ''
+  - name: --storage-sku
+    summary: 'SKU akun penyimpanan untuk mempertahankan VM. Gunakan sku tunggal yang akan diterapkan di semua disk, atau tentukan disk individual. Penggunaan: [--storage-sku SKU | --storage-sku ID=SKU ID=SKU ID=SKU...], di mana setiap ID adalah "os" atau lun yang diindeks 0. Nilai yang diizinkan: Premium_LRS, Standard_LRS.'
+    description: ''
+  - name: --subnet
+    summary: Nama subnet saat membuat VNet baru atau mereferensikan yang sudah ada. Dapat juga mereferensikan subnet yang ada berdasarkan ID. Jika nama vnet dan subnet dihilangkan, VNet dan subnet yang sesuai akan dipilih secara otomatis, atau yang baru akan dibuat.
+    description: ''
+  - name: --subnet-address-prefix
+    summary: Awalan alamat IP subnet yang akan digunakan saat membuat VNet baru dalam format CIDR.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --upgrade-policy-mode
+    defaultValue: manual
+    parameterValueGroup: Automatic, Manual
+    summary: ''
+    description: ''
+  - name: --use-unmanaged-disk
+    summary: Jangan gunakan disk terkelola untuk mempertahankan VM.
+    description: ''
+  - name: --validate
+    summary: Buat dan validasi templat ARM tanpa membuat sumber daya apa pun.
+    description: ''
+  - name: --vm-sku
+    summary: Ukuran VM dalam set skala. Default ke "Standard_DS1_v2". Lihat https://azure.microsoft.com/pricing/details/virtual-machines/ untuk info ukuran.
+    description: ''
+  - name: --vnet-address-prefix
+    defaultValue: 10.0.0.0/16
+    summary: Awalan alamat IP yang akan digunakan saat membuat VNet baru dalam format CIDR.
+    description: ''
+  - name: --vnet-name
+    summary: Nama jaringan virtual saat membuat jaringan baru atau mereferensikan yang sudah ada.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_deallocate
+  name: az vmss deallocate
+  summary: Batalkan alokasi VM dalam VMSS.
+  description: ''
+  syntax: >-
+    az vmss deallocate --name
+                       --resource-group
+                       [--instance-ids]
+                       [--no-wait]
+  examples:
+  - summary: Batalkan alokasi VM dalam VMSS. (dibuat otomatis)
+    syntax: az vmss deallocate --instance-ids 1 --name MyScaleSet --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama set skala. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vmss=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --instance-ids
+    summary: 'Daftar ID yang dipisahkan spasi (misalnya: 1 2 3 ...) atau \* untuk semua instans. Jika tidak disediakan, tindakan akan diterapkan pada set skala itu sendiri.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_delete
+  name: az vmss delete
+  summary: Menghapus set skala VM.
+  description: ''
+  syntax: >-
+    az vmss delete [--ids]
+                   [--name]
+                   [--no-wait]
+                   [--resource-group]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama set skala. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vmss=<name>`.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_delete-instances
+  name: az vmss delete-instances
+  summary: Menghapus VM dalam VMSS.
+  description: ''
+  syntax: >-
+    az vmss delete-instances --instance-ids
+                             --name
+                             --resource-group
+                             [--no-wait]
+  examples:
+  - summary: Menghapus VM dalam VMSS. (dibuat otomatis)
+    syntax: az vmss delete-instances --instance-ids 0 --name MyScaleSet --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --instance-ids
+    summary: 'Daftar ID yang dipisahkan spasi (misalnya: 1 2 3 ...) atau \* untuk semua instans.'
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama set skala. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vmss=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_get-instance-view
+  name: az vmss get-instance-view
+  summary: Lihat instans VMSS.
+  description: ''
+  syntax: >-
+    az vmss get-instance-view [--ids]
+                              [--instance-id]
+                              [--name]
+                              [--resource-group]
+  examples:
+  - summary: Lihat instans VMSS. (dibuat otomatis)
+    syntax: az vmss get-instance-view --name MyScaleSet --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --instance-id
+    summary: ID instans VM atau "\*" untuk mencantumkan tampilan instans untuk semua VM dalam set skala.
+    description: ''
+  - name: --name -n
+    summary: Nama set skala. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vmss=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_list
+  name: az vmss list
+  summary: Mencantumkan VMSS.
+  description: ''
+  syntax: az vmss list [--resource-group]
+  examples:
+  - summary: Daftar VMSS (dibuat otomatis)
+    syntax: az vmss list --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_list-instance-connection-info
+  name: az vmss list-instance-connection-info
+  summary: Dapatkan alamat IP dan nomor port yang digunakan untuk menyambungkan ke instans VM individual dalam satu set.
+  description: ''
+  syntax: >-
+    az vmss list-instance-connection-info [--ids]
+                                          [--name]
+                                          [--resource-group]
+  examples:
+  - summary: Dapatkan alamat IP dan nomor port yang digunakan untuk menyambungkan ke instans VM individual dalam satu set. (dibuat otomatis)
+    syntax: az vmss list-instance-connection-info --name MyScaleSet --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama set skala. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vmss=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_list-instance-public-ips
+  name: az vmss list-instance-public-ips
+  summary: Mencantumkan alamat IP publik instans VM dalam satu set.
+  description: ''
+  syntax: >-
+    az vmss list-instance-public-ips [--ids]
+                                     [--name]
+                                     [--resource-group]
+  examples:
+  - summary: Mencantumkan alamat IP publik instans VM dalam satu set. (dibuat otomatis)
+    syntax: az vmss list-instance-public-ips --name MyScaleSet --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama set skala. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vmss=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_list-instances
+  name: az vmss list-instances
+  summary: Dapatkan daftar semua komputer virtual dalam set skala VM.
+  description: Mengembalikan daftar komputer virtual yang dikelola oleh VMSS. Untuk VMSS dalam mode Orkestrasi Fleksibel, silakan gunakan "az vm list" untuk mendapatkan detail lengkap.
+  syntax: >-
+    az vmss list-instances [--expand]
+                           [--filter]
+                           [--ids]
+                           [--name]
+                           [--resource-group]
+                           [--select]
+  optionalParameters:
+  - name: --expand
+    summary: Ekspresi perluas untuk diterapkan ke operasi. Nilai yang diizinkan adalah 'instanceView'.
+    description: ''
+  - name: --filter
+    summary: Filter yang akan diterapkan ke operasi. Nilai yang diizinkan adalah 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama set skala. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vmss=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --select
+    summary: Parameter daftar. Nilai yang diizinkan adalah 'instanceView', 'instanceView/statuses'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_list-skus
+  name: az vmss list-skus
+  summary: Mendapatkan daftar SKU yang tersedia untuk set skala VM Anda, termasuk instans VM minimum dan maksimum yang diizinkan untuk setiap SKU.
+  description: ''
+  syntax: >-
+    az vmss list-skus [--ids]
+                      [--name]
+                      [--resource-group]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama set skala. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vmss=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_restart
+  name: az vmss restart
+  summary: Hidupkan ulang VM dalam VMSS.
+  description: ''
+  syntax: >-
+    az vmss restart --name
+                    --resource-group
+                    [--instance-ids]
+                    [--no-wait]
+  examples:
+  - summary: Hidupkan ulang VM dalam VMSS. (dibuat otomatis)
+    syntax: az vmss restart --instance-ids 1 --name MyScaleSet --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama set skala. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vmss=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --instance-ids
+    summary: 'Daftar ID yang dipisahkan spasi (misalnya: 1 2 3 ...) atau \* untuk semua instans. Jika tidak disediakan, tindakan akan diterapkan pada set skala itu sendiri.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_scale
+  name: skala az vmss
+  summary: Ubah jumlah VM dalam VMSS.
+  description: ''
+  syntax: >-
+    az vmss scale --new-capacity
+                  [--ids]
+                  [--name]
+                  [--no-wait]
+                  [--resource-group]
+  examples:
+  - summary: Ubah jumlah VM dalam VMSS. (dibuat otomatis)
+    syntax: az vmss scale --name MyScaleSet --new-capacity 6 --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --new-capacity
+    summary: Jumlah VM di VMSS.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama set skala. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vmss=<name>`.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_set-orchestration-service-state
+  name: az vmss set-orchestration-service-state
+  summary: Ubah properti ServiceState untuk layanan tertentu dalam VMSS.
+  description: ''
+  syntax: >-
+    az vmss set-orchestration-service-state --action
+                                            --service-name
+                                            [--ids]
+                                            [--name]
+                                            [--no-wait]
+                                            [--resource-group]
+  examples:
+  - summary: Mengubah properti ServiceState untuk AutomaticRepairs
+    syntax: az vmss set-orchestration-service-state --service-name AutomaticRepairs --action Resume --name MyScaleSet --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --action
+    summary: Tindakan yang akan dilakukan.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama layanan orkestrasi.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama set skala. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vmss=<name>`.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_show
+  name: az vmss show
+  summary: Dapatkan detail tentang VM dalam VMSS.
+  description: ''
+  syntax: >-
+    az vmss show --name
+                 --resource-group
+                 [--instance-id]
+  examples:
+  - summary: Dapatkan detail tentang VM dalam VMSS. (dibuat otomatis)
+    syntax: az vmss show --name MyScaleSet --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama set skala. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vmss=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --instance-id
+    summary: ID instans VM. Jika hilang, tampilkan VMSS.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_start
+  name: az vmss start
+  summary: Mulai VM dalam VMSS.
+  description: ''
+  syntax: >-
+    az vmss start --name
+                  --resource-group
+                  [--instance-ids]
+                  [--no-wait]
+  examples:
+  - summary: Mulai VM dalam VMSS. (dibuat otomatis)
+    syntax: az vmss start --instance-ids 1 --name MyScaleSet --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama set skala. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vmss=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --instance-ids
+    summary: 'Daftar ID yang dipisahkan spasi (misalnya: 1 2 3 ...) atau \* untuk semua instans. Jika tidak disediakan, tindakan akan diterapkan pada set skala itu sendiri.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_stop
+  name: az vmss stop
+  summary: Mematikan (menghentikan) VM dalam VMSS.
+  description: VM akan terus ditagih. Untuk menghindari hal ini, Anda dapat membatalkan alokasi instans VM dalam VMSS melalui "az vmss deallocate".
+  syntax: >-
+    az vmss stop --name
+                 --resource-group
+                 [--instance-ids]
+                 [--no-wait]
+  examples:
+  - summary: Matikan VM dalam VMSS tanpa mematikan.
+    syntax: az vmss stop --name MyScaleSet --resource-group MyResourceGroup --skip-shutdown
+  - summary: Mematikan (menghentikan) VM dalam VMSS. (dibuat otomatis)
+    syntax: az vmss stop --instance-ids 1 --name MyScaleSet --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama set skala. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vmss=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --instance-ids
+    summary: 'Daftar ID yang dipisahkan spasi (misalnya: 1 2 3 ...) atau \* untuk semua instans. Jika tidak disediakan, tindakan akan diterapkan pada set skala itu sendiri.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_update
+  name: az vmss update
+  summary: Memperbarui VMSS. Jalankan perintah 'az vmss update-instances' untuk meluncurkan perubahan pada VM jika Anda belum mengonfigurasi kebijakan peningkatan.
+  description: ''
+  syntax: >-
+    az vmss update [--add]
+                   [--force-deletion]
+                   [--force-string]
+                   [--ids]
+                   [--instance-id]
+                   [--license-type {None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server}]
+                   [--name]
+                   [--no-wait]
+                   [--remove]
+                   [--resource-group]
+                   [--scale-in-policy]
+                   [--set]
+                   [--vm-sku]
+  examples:
+  - summary: Perbarui jenis lisensi VMSS untuk Azure Hybrid Benefit.
+    syntax: az vmss update --name MyScaleSet --resource-group MyResourceGroup --license-type windows_server
+  - summary: Memperbarui kebijakan perlindungan instans VM.
+    syntax: az vmss update --name MyScaleSet --resource-group MyResourceGroup --instance-id 4 --protect-from-scale-set-actions False --protect-from-scale-in
+  - summary: Memperbarui kebijakan perlindungan instans VM.
+    syntax: az vmss update --name MyScaleSet --resource-group MyResourceGroup --instance-id 4 --set protectionPolicy.protectFromScaleIn=True protectionPolicy.protectFromScaleSetActions=False
+  - summary: Perbarui IOPS Read-Write instans VM dari disk terkelola.
+    syntax: az vmss update --name MyScaleSet --resource-group MyResourceGroup --set virtualMachineProfile.storageProfile.dataDisks[0].diskIOPSReadWrite=444
+  - summary: Perbarui bandwidth instans VM dalam MB per detik dari disk terkelola.
+    syntax: az vmss update --name MyScaleSet --resource-group MyResourceGroup --set virtualMachineProfile.storageProfile.dataDisks[0].diskMBpsReadWrite=66
+  - summary: Perbarui VM untuk menggunakan gambar kustom.
+    syntax: az vmss update --name MyScaleSet --resource-group MyResourceGroup --set virtualMachineProfile.storageProfile.imageReference.id=imageID
+  - summary: Perbarui VMSS Linux ke mode patch 'AutomaticByPlatform'.
+    syntax: az vmss update -n MyVmss -g MyResourceGroup --set virtualMachineProfile.osProfile.linuxConfiguration.patchSettings.patchMode=AutomaticByPlatform
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --force-deletion
+    summary: Properti ini memungkinkan Anda menentukan apakah komputer virtual yang dipilih untuk penghapusan harus dihapus paksa ketika set skala komputer virtual sedang diskalakan.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --instance-id
+    summary: Perbarui instans VM dengan ID ini. Jika hilang, Perbarui VMSS.
+    description: ''
+  - name: --license-type
+    parameterValueGroup: None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server
+    summary: Menentukan bahwa gambar atau disk Windows dilisensikan secara lokal. Untuk mengaktifkan Azure Hybrid Benefit untuk Windows Server, gunakan 'Windows_Server'. Untuk mengaktifkan Hak Hosting Multi-penyewa untuk Windows 10, gunakan 'Windows_Client'. Untuk informasi selengkapnya, lihat dokumen online Azure Windows VM.
+    description: ''
+  - name: --name -n
+    summary: Nama set skala. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vmss=<name>`.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --scale-in-policy
+    summary: Tentukan kebijakan penyempurnaan skala (dibatasi ruang) yang memutuskan komputer virtual mana yang dipilih untuk dihapus saat Set Skala Komputer Virtual diskalakan.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --vm-sku
+    summary: Ukuran baru instans komputer virtual dalam set skala. Default ke "Standard_DS1_v2". Lihat https://azure.microsoft.com/pricing/details/virtual-machines/ untuk info ukuran.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_update-instances
+  name: az vmss update-instances
+  summary: Meningkatkan VM dalam VMSS.
+  description: ''
+  syntax: >-
+    az vmss update-instances --instance-ids
+                             --name
+                             --resource-group
+                             [--no-wait]
+  examples:
+  - summary: Meningkatkan VM dalam VMSS. (dibuat otomatis)
+    syntax: az vmss update-instances --instance-ids 1 --name MyScaleSet --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --instance-ids
+    summary: 'Daftar ID yang dipisahkan spasi (misalnya: 1 2 3 ...) atau \* untuk semua instans.'
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama set skala. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vmss=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_wait
+  name: az vmss wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi set skala terpenuhi.
+  description: ''
+  syntax: >-
+    az vmss wait [--created]
+                 [--custom]
+                 [--deleted]
+                 [--exists]
+                 [--ids]
+                 [--instance-id]
+                 [--interval]
+                 [--name]
+                 [--resource-group]
+                 [--timeout]
+                 [--updated]
+  examples:
+  - summary: Tempatkan CLI dalam status menunggu hingga VMSS telah diperbarui.
+    syntax: az vmss wait --updated --name MyScaleSet --resource-group MyResourceGroup
+  - summary: Tempatkan CLI dalam status menunggu hingga instans VMSS telah diperbarui.
+    syntax: az vmss wait --updated --instance-id 1 --name MyScaleSet --resource-group MyResourceGroup
+  - summary: Tempatkan CLI dalam status menunggu hingga kondisi set skala terpenuhi. (dibuat otomatis)
+    syntax: az vmss wait --created --name MyScaleSet --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --instance-id
+    summary: Tunggu instans VM dengan ID ini. Jika hilang, Tunggu di VMSS.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --name -n
+    summary: Nama set skala. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vmss=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --diperbarui
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+commands:
+- az_vmss_create
+- az_vmss_deallocate
+- az_vmss_delete
+- az_vmss_delete-instances
+- az_vmss_diagnostics
+- az_vmss_diagnostics_get-default-config
+- az_vmss_diagnostics_set
+- az_vmss_extension
+- az_vmss_extension_delete
+- az_vmss_extension_image
+- az_vmss_extension_image_list
+- az_vmss_extension_image_list-names
+- az_vmss_extension_image_list-versions
+- az_vmss_extension_image_show
+- az_vmss_extension_list
+- az_vmss_extension_set
+- az_vmss_extension_show
+- az_vmss_get-instance-view
+- az_vmss_identity
+- az_vmss_identity_assign
+- az_vmss_identity_show
+- az_vmss_list
+- az_vmss_list-instance-connection-info
+- az_vmss_list-instance-public-ips
+- az_vmss_list-instances
+- az_vmss_list-skus
+- az_vmss_nic
+- az_vmss_nic_list
+- az_vmss_nic_list-vm-nics
+- az_vmss_nic_show
+- az_vmss_restart
+- az_vmss_scale
+- az_vmss_set-orchestration-service-state
+- az_vmss_show
+- az_vmss_start
+- az_vmss_stop
+- az_vmss_update
+- az_vmss_update-instances
+- az_vmss_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 04/01/2022
+  description: Mengelola pengelompokan komputer virtual dalam Azure Virtual Machine Scale Set (VMSS).
+  ms.openlocfilehash: a48166e24fb7681982d6ca436f23e54670cb55d3
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141422855"

@@ -1,0 +1,225 @@
+### YamlMime:AzureCLIGroup
+uid: az_grafana_dashboard
+name: az grafana dashboard
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **amg** untuk Azure CLI (versi 2.30.0 atau lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **dasbor az grafana** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Perintah untuk mengelola dasbor instans.
+description: ''
+directCommands:
+- uid: az_grafana_dashboard_create
+  name: az grafana dashboard create
+  summary: Buat dasbor baru.
+  description: ''
+  syntax: >-
+    az grafana dashboard create --definition
+                                --name
+                                [--folder]
+                                [--overwrite {false, true}]
+                                [--resource-group]
+                                [--title]
+  examples:
+  - summary: Buat dasbor dengan definisi dalam file json. Untuk mulai cepat, kloning dari output "az grafana dashboard show", hapus "id" dan "uid", dan terapkan perubahan.
+    syntax: >-
+      az grafana dashboard create -g MyResourceGroup -n MyGrafana --title "My dashboard" --folder folder1 --definition '{
+        "dashboard": {
+          "annotations": {
+              ...
+          },
+          "panels": {
+              ...
+          }
+        },
+        "message": "Create a new test dashboard"
+      }'
+  requiredParameters:
+  - isRequired: true
+    name: --definition
+    summary: Model dasbor lengkap dalam string json, jalur atau url ke file dengan konten tersebut.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama Dasbor Terkelola Azure untuk Grafana.
+    description: ''
+  optionalParameters:
+  - name: --folder
+    summary: Id, uid, judul yang dapat mengidentifikasi folder. CLI akan mencari dalam urutan id, uid, dan judul, sampai menemukan kecocokan.
+    description: ''
+  - name: --overwrite
+    parameterValueGroup: false, true
+    summary: Timpa dasbor dengan uid yang sama.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --title
+    summary: Judul dasbor.
+    description: ''
+- uid: az_grafana_dashboard_delete
+  name: az grafana dashboard delete
+  summary: Menghapus dasbor.
+  description: ''
+  syntax: >-
+    az grafana dashboard delete --dashboard
+                                --name
+                                [--resource-group]
+  examples:
+  - summary: Menghapus dasbor yang ditentukan oleh pengidentifikasi unik (gunakan perintah "az grafana dashboard list" untuk mengambil uid)
+    syntax: az grafana dashboard delete -g MyResourceGroup -n MyGrafana --dashboard VdrOA7jGz
+  requiredParameters:
+  - isRequired: true
+    name: --dashboard
+    summary: Uid dasbor.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama Dasbor Terkelola Azure untuk Grafana.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_grafana_dashboard_import
+  name: az grafana dashboard import
+  summary: Mengimpor dasbor.
+  description: Perintah CLI akan mengisi parameter yang diperlukan untuk sumber data jika dikonfigurasi.
+  syntax: >-
+    az grafana dashboard import --definition
+                                --name
+                                [--folder]
+                                [--overwrite {false, true}]
+                                [--resource-group]
+  examples:
+  - summary: impor dasbor "AKS Container Insights" dari galeri Grafana.
+    syntax: az grafana dashboard import -g MyResourceGroup -n MyGrafana --definition 12180
+  - summary: impor dasbor dari file.
+    syntax: az grafana dashboard import -g MyResourceGroup -n MyGrafana --definition @c:\temp\dashboard.json
+  requiredParameters:
+  - isRequired: true
+    name: --definition
+    summary: Model dasbor lengkap dalam string json, id galeri Grafana, jalur atau url ke file dengan konten tersebut.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama Dasbor Terkelola Azure untuk Grafana.
+    description: ''
+  optionalParameters:
+  - name: --folder
+    summary: Id, uid, judul yang dapat mengidentifikasi folder. CLI akan mencari dalam urutan id, uid, dan judul, sampai menemukan kecocokan.
+    description: ''
+  - name: --overwrite
+    parameterValueGroup: false, true
+    summary: Timpa dasbor dengan uid yang sama.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_grafana_dashboard_list
+  name: az grafana dashboard list
+  summary: Mencantumkan semua dasbor instans.
+  description: ''
+  syntax: >-
+    az grafana dashboard list --name
+                              [--resource-group]
+  examples:
+  - summary: Temukan dasbor untuk K8s API Server dan ambil pengidentifikasi unik (untuk memanggil perintah "az grafana dashboard show"))
+    syntax: az grafana dashboard list -g MyResourceGroup -n MyGrafana --query "[?contains(@.title, 'API server')].uid"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Dasbor Terkelola Azure untuk Grafana.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_grafana_dashboard_show
+  name: az grafana dashboard show
+  summary: Menampilkan detail dasbor.
+  description: ''
+  syntax: >-
+    az grafana dashboard show --dashboard
+                              --name
+                              [--resource-group]
+  examples:
+  - summary: Dapatkan detail dasbor yang ditentukan oleh pengidentifikasi unik (gunakan perintah "az grafana dashboard list" untuk mengambil uid)
+    syntax: az grafana dashboard show -g MyResourceGroup -n MyGrafana --dashboard VdrOA7jGz
+  requiredParameters:
+  - isRequired: true
+    name: --dashboard
+    summary: Uid dasbor.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama Dasbor Terkelola Azure untuk Grafana.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_grafana_dashboard_update
+  name: az grafana dashboard update
+  summary: Memperbarui dasbor.
+  description: ''
+  syntax: >-
+    az grafana dashboard update --definition
+                                --name
+                                [--folder]
+                                [--overwrite {false, true}]
+                                [--resource-group]
+  examples:
+  - summary: Memperbarui dasbor dengan definisi dalam file json. Untuk mulai cepat, dapatkan konfigurasi yang ada dari "az grafana dashboard show", dan terapkan perubahan. Bidang "versi" perlu diperbarui, dan bidang "timpa" harus benar.
+    syntax: az grafana dashboard update -g MyResourceGroup -n MyGrafana --definition @c:\temp\dashboard.json
+  requiredParameters:
+  - isRequired: true
+    name: --definition
+    summary: Model dasbor lengkap dalam string json, jalur atau url ke file dengan konten tersebut.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama Dasbor Terkelola Azure untuk Grafana.
+    description: ''
+  optionalParameters:
+  - name: --folder
+    summary: Id, uid, judul yang dapat mengidentifikasi folder. CLI akan mencari dalam urutan id, uid, dan judul, sampai menemukan kecocokan.
+    description: ''
+  - name: --overwrite
+    parameterValueGroup: false, true
+    summary: Timpa dasbor dengan uid yang sama.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+commands:
+- az_grafana_dashboard_create
+- az_grafana_dashboard_delete
+- az_grafana_dashboard_import
+- az_grafana_dashboard_list
+- az_grafana_dashboard_show
+- az_grafana_dashboard_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Perintah untuk mengelola dasbor instans.
+  ms.openlocfilehash: 3c7d8b5e8b149e8ad17dff642bb0ac65142e6815
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141140422"

@@ -1,0 +1,195 @@
+### YamlMime:AzureCLIGroup
+uid: az_ad_app_permission
+name: izin aplikasi az ad
+summary: Mengelola izin OAuth2 aplikasi.
+description: ''
+directCommands:
+- uid: az_ad_app_permission_add
+  name: az ad app permission add
+  summary: Tambahkan izin API.
+  description: >-
+    Memanggil "pemberian izin aplikasi iklan az" diperlukan untuk mengaktifkannya.
+
+
+    Untuk mendapatkan izin aplikasi sumber daya yang tersedia, jalankan `az ad sp show --id <resource-appId>`. Misalnya, untuk mendapatkan izin yang tersedia untuk API Graph:
+      - Azure Active Directory Graph:`az ad sp show --id 00000002-0000-0000-c000-000000000000`
+      - Microsoft Graph: `az ad sp show --id 00000003-0000-0000-c000-000000000000` Izin aplikasi di `appRoles` bawah properti sesuai `Role` dengan --api-permissions. Izin yang didelegasikan di `oauth2Permissions` bawah properti sesuai dengan `Scope` --api-permissions.
+  syntax: >-
+    az ad app permission add --api
+                             --api-permissions
+                             --id
+  examples:
+  - summary: Tambahkan izin yang didelegasikan Azure Active Directory Graph User.Read (Masuk dan baca profil pengguna).
+    syntax: az ad app permission add --id eeba0b46-78e5-4a1a-a1aa-cafe6c123456 --api 00000002-0000-0000-c000-000000000000 --api-permissions 311a71cc-e848-46a1-bdf8-97ff7156d8e6=Scope
+  - summary: Tambahkan izin aplikasi Azure Active Directory Graph Application.ReadWrite.All (Baca dan tulis semua aplikasi).
+    syntax: az ad app permission add --id eeba0b46-78e5-4a1a-a1aa-cafe6c123456 --api 00000002-0000-0000-c000-000000000000 --api-permissions 1cda74f2-2616-4834-b122-5cb1b07f8a59=Role
+  requiredParameters:
+  - isRequired: true
+    name: --api
+    summary: Tentukan `RequiredResourceAccess.resourceAppId` - Pengidentifikasi unik untuk sumber daya yang memerlukan akses aplikasi. Ini harus sama dengan appId yang dideklarasikan pada aplikasi sumber daya target.
+    description: ''
+  - isRequired: true
+    name: --api-permissions
+    summary: Tentukan `ResourceAccess.id` - Pengidentifikasi unik untuk salah satu instans OAuth2Permission atau AppRole yang diekspos aplikasi sumber daya. Daftar yang dipisahkan spasi dari `<resource-access-id>=<type>`.
+    description: ''
+  - isRequired: true
+    name: --id
+    summary: Uri pengidentifikasi, id aplikasi, atau id objek.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+- uid: az_ad_app_permission_admin-consent
+  name: az ad app permission admin-consent
+  summary: Berikan Izin yang didelegasikan & Aplikasi melalui persetujuan admin.
+  description: Anda harus masuk sebagai administrator global.
+  syntax: az ad app permission admin-consent --id
+  examples:
+  - summary: Berikan Izin yang didelegasikan & Aplikasi melalui persetujuan admin. (dibuat otomatis)
+    syntax: az ad app permission admin-consent --id 00000000-0000-0000-0000-000000000000
+  requiredParameters:
+  - isRequired: true
+    name: --id
+    summary: Uri pengidentifikasi, id aplikasi, atau id objek.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+- uid: az_ad_app_permission_delete
+  name: az ad app permission delete
+  summary: Menghapus izin API.
+  description: ''
+  syntax: >-
+    az ad app permission delete --api
+                                --id
+                                [--api-permissions]
+  examples:
+  - summary: Hapus izin Azure Active Directory Graph.
+    syntax: az ad app permission delete --id eeba0b46-78e5-4a1a-a1aa-cafe6c123456 --api 00000002-0000-0000-c000-000000000000
+  - summary: Hapus Azure Active Directory Graph izin yang didelegasikan User.Read (Masuk dan baca profil pengguna).
+    syntax: az ad app permission delete --id eeba0b46-78e5-4a1a-a1aa-cafe6c123456 --api 00000002-0000-0000-c000-000000000000 --api-permissions 311a71cc-e848-46a1-bdf8-97ff7156d8e6
+  requiredParameters:
+  - isRequired: true
+    name: --api
+    summary: Tentukan `RequiredResourceAccess.resourceAppId` - Pengidentifikasi unik untuk sumber daya yang memerlukan akses aplikasi. Ini harus sama dengan appId yang dideklarasikan pada aplikasi sumber daya target.
+    description: ''
+  - isRequired: true
+    name: --id
+    summary: Uri pengidentifikasi, id aplikasi, atau id objek.
+    description: ''
+  optionalParameters:
+  - name: --api-permissions
+    summary: Tentukan `ResourceAccess.id` - Pengidentifikasi unik untuk salah satu instans OAuth2Permission atau AppRole yang diekspos aplikasi sumber daya. Daftar yang dipisahkan spasi dari `<resource-access-id>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+- uid: az_ad_app_permission_grant
+  name: pemberian izin aplikasi az ad
+  summary: Berikan aplikasi izin yang Didelegasikan API.
+  description: >-
+    Perwakilan layanan harus ada untuk aplikasi saat menjalankan perintah ini. Untuk membuat perwakilan layanan yang sesuai, gunakan `az ad sp create --id {appId}`.
+
+    Untuk izin Aplikasi, silakan gunakan "izin aplikasi iklan admin-consent".
+  syntax: >-
+    az ad app permission grant --api
+                               --id
+                               [--consent-type {AllPrincipals, Principal}]
+                               [--expires]
+                               [--principal-id]
+                               [--scope]
+  examples:
+  - summary: Memberikan aplikasi asli dengan izin untuk mengakses API yang ada dengan TTL 2 tahun
+    syntax: az ad app permission grant --id e042ec79-34cd-498f-9d9f-1234234 --api a0322f79-57df-498f-9d9f-12678 --expires 2
+  requiredParameters:
+  - isRequired: true
+    name: --api
+    summary: Tentukan `RequiredResourceAccess.resourceAppId` - Pengidentifikasi unik untuk sumber daya yang memerlukan akses aplikasi. Ini harus sama dengan appId yang dideklarasikan pada aplikasi sumber daya target.
+    description: ''
+  - isRequired: true
+    name: --id
+    summary: Uri pengidentifikasi, id aplikasi, atau id objek.
+    description: ''
+  optionalParameters:
+  - name: --consent-type
+    defaultValue: AllPrincipals
+    parameterValueGroup: AllPrincipals, Principal
+    summary: Menunjukkan apakah persetujuan diberikan oleh administrator (atas nama organisasi) atau oleh individu.
+    description: ''
+  - name: --kedaluwarsa
+    defaultValue: "1"
+    summary: Tanggal kedaluwarsa untuk izin dalam tahun. misalnya 1, 2 atau "tidak pernah".
+    description: ''
+  - name: --principal-id
+    summary: Jika --consent-type adalah "Principal", argumen ini menentukan objek pengguna yang memberikan persetujuan dan hanya berlaku untuk pengguna tersebut.
+    description: ''
+  - name: --cakupan
+    defaultValue: user_impersonation
+    summary: Menentukan nilai klaim cakupan yang harus diharapkan aplikasi sumber daya dalam token akses OAuth 2.0, misalnya User.Read.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+- uid: az_ad_app_permission_list
+  name: az ad app permission list
+  summary: Mencantumkan izin API yang diminta aplikasi.
+  description: ''
+  syntax: az ad app permission list --id
+  examples:
+  - summary: Mencantumkan izin OAuth2 untuk aplikasi AAD yang sudah ada
+    syntax: az ad app permission list --id e042ec79-34cd-498f-9d9f-1234234
+  requiredParameters:
+  - isRequired: true
+    name: --id
+    summary: Pengidentifikasi uri, id aplikasi, atau id objek dari aplikasi terkait.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+- uid: az_ad_app_permission_list-grants
+  name: az ad app permission list-grants
+  summary: Mencantumkan pemberian izin Oauth2.
+  description: ''
+  syntax: >-
+    az ad app permission list-grants [--filter]
+                                     [--id]
+                                     [--show-resource-name {false, true}]
+  examples:
+  - summary: daftar izin oauth2 yang diberikan kepada perwakilan layanan
+    syntax: az ad app permission list-grants --id e042ec79-34cd-498f-9d9f-1234234123456
+  optionalParameters:
+  - name: --filter
+    summary: Filter OData, misalnya --filter "displayname eq 'test' dan servicePrincipalType eq 'Application'".
+    description: ''
+  - name: --id
+    summary: Uri pengidentifikasi, id aplikasi, atau id objek.
+    description: ''
+  - name: --show-resource-name -r
+    parameterValueGroup: false, true
+    summary: Tampilkan nama tampilan sumber daya.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+commands:
+- az_ad_app_permission_add
+- az_ad_app_permission_admin-consent
+- az_ad_app_permission_delete
+- az_ad_app_permission_grant
+- az_ad_app_permission_list
+- az_ad_app_permission_list-grants
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/09/2022
+  description: Mengelola izin OAuth2 aplikasi.
+  ms.openlocfilehash: 276367d9fedd795a62fc15de07bbe7e5c10f818d
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141423863"

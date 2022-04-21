@@ -1,0 +1,594 @@
+### YamlMime:AzureCLIGroup
+uid: az_sig_image-definition
+name: az sig image-definition
+summary: Mengelola gambar galeri bersama dengan VM.
+description: ''
+directCommands:
+- uid: az_sig_image-definition_create
+  name: az sig image-definition create
+  summary: Membuat definisi gambar galeri.
+  description: ''
+  syntax: >-
+    az sig image-definition create --gallery-image-definition
+                                   --gallery-name
+                                   --offer
+                                   --os-type {Linux, Windows}
+                                   --publisher
+                                   --resource-group
+                                   --sku
+                                   [--architecture {Arm64, x64}]
+                                   [--description]
+                                   [--disallowed-disk-types]
+                                   [--end-of-life-date]
+                                   [--eula]
+                                   [--features]
+                                   [--hyper-v-generation {V1, V2}]
+                                   [--location]
+                                   [--maximum-cpu-core]
+                                   [--maximum-memory]
+                                   [--minimum-cpu-core]
+                                   [--minimum-memory]
+                                   [--os-state {Generalized, Specialized}]
+                                   [--plan-name]
+                                   [--plan-product]
+                                   [--plan-publisher]
+                                   [--privacy-statement-uri]
+                                   [--release-note-uri]
+                                   [--tags]
+  examples:
+  - summary: Membuat definisi gambar untuk gambar linux khusus
+    syntax: >-
+      az sig image-definition create --resource-group MyResourceGroup \
+
+      --gallery-name MyGallery --gallery-image-definition MyImage \
+
+      --publisher GreatPublisher --offer GreatOffer --sku GreatSku \
+
+      --os-type linux --os-state Specialized
+  - summary: Membuat definisi gambar untuk gambar linux umum
+    syntax: >-
+      az sig image-definition create --resource-group MyResourceGroup \
+
+      --gallery-name MyGallery --gallery-image-definition MyImage \
+
+      --publisher GreatPublisher --offer GreatOffer --sku GreatSku \
+
+      --os-type linux --os-state Generalized
+  - summary: Membuat definisi gambar untuk gambar windows khusus
+    syntax: >-
+      az sig image-definition create --resource-group MyResourceGroup \
+
+      --gallery-name MyGallery --gallery-image-definition MyImage \
+
+      --publisher GreatPublisher --offer GreatOffer --sku GreatSku \
+
+      --os-type windows --os-state Specialized
+  - summary: Membuat definisi gambar untuk gambar jendela umum
+    syntax: >-
+      az sig image-definition create --resource-group MyResourceGroup \
+
+      --gallery-name MyGallery --gallery-image-definition MyImage \
+
+      --publisher GreatPublisher --offer GreatOffer --sku GreatSku \
+
+      --os-type windows --os-state Generalized
+  - summary: Membuat definisi gambar dengan informasi rencana
+    syntax: >-
+      az sig image-definition create --resource-group MyResourceGroup \
+
+      --gallery-name MyGallery --gallery-image-definition MyImage \
+
+      --publisher GreatPublisher --offer GreatOffer --sku GreatSku \
+
+      --os-type linux --os-state Specialized --plan-name PlanName \
+
+      --plan-product PlanProduct --plan-publisher PlanPublisher
+  - summary: Membuat definisi gambar untuk gambar yang mendukung fitur hibernasi
+    syntax: >-
+      az sig image-definition create --resource-group MyResourceGroup \
+
+      --gallery-name MyGallery --gallery-image-definition MyImage \
+
+      --publisher GreatPublisher --offer GreatOffer --sku GreatSku \
+
+      --os-type linux --os-state Specialized \
+
+      --features IsHibernateSupported=true
+  - summary: Membuat definisi gambar untuk gambar yang mendukung jaringan yang dipercepat
+    syntax: >-
+      az sig image-definition create --resource-group MyResourceGroup \
+
+      --gallery-name MyGallery --gallery-image-definition MyImage \
+
+      --publisher GreatPublisher --offer GreatOffer --sku GreatSku \
+
+      --os-type linux --os-state Specialized \
+
+      --features IsAcceleratedNetworkSupported=true
+  - summary: Membuat definisi gambar untuk gambar yang dapat digunakan untuk membuat VM Tepercaya
+    syntax: >-
+      az sig image-definition create --resource-group MyResourceGroup \
+
+      --gallery-name MyGallery --gallery-image-definition MyImage \
+
+      --publisher GreatPublisher --offer GreatOffer --sku GreatSku \
+
+      --os-type linux --os-state Specialized \
+
+      --features SecurityType=TrustedLaunchSupported
+  - summary: Buat definisi gambar untuk gambar yang hanya dapat digunakan untuk membuat VM Tepercaya. Hanya VM Tepercaya yang dapat dibuat dari gambar ini.
+    syntax: >-
+      az sig image-definition create --resource-group MyResourceGroup \
+
+      --gallery-name MyGallery --gallery-image-definition MyImage \
+
+      --publisher GreatPublisher --offer GreatOffer --sku GreatSku \
+
+      --os-type linux --os-state Specialized \
+
+      --features SecurityType=TrustedLaunch
+  - summary: Buat definisi gambar untuk gambar yang dapat digunakan untuk membuat VM Rahasia.
+    syntax: >-
+      az sig image-definition create --resource-group MyResourceGroup \
+
+      --gallery-name MyGallery --gallery-image-definition MyImage \
+
+      --publisher GreatPublisher --offer GreatOffer --sku GreatSku \
+
+      --os-type linux --os-state Specialized \
+
+      --features SecurityType=ConfidentialVmSupported
+  - summary: Buat definisi gambar untuk gambar yang hanya dapat digunakan untuk membuat VM Rahasia. Hanya VM Rahasia yang dapat dibuat dari gambar ini.
+    syntax: >-
+      az sig image-definition create --resource-group MyResourceGroup \
+
+      --gallery-name MyGallery --gallery-image-definition MyImage \
+
+      --publisher GreatPublisher --offer GreatOffer --sku GreatSku \
+
+      --os-type linux --os-state Specialized \
+
+      --features SecurityType=ConfidentialVM
+  - summary: Membuat definisi gambar untuk gambar yang dapat digunakan untuk membuat VM Tepercaya atau Rahasia
+    syntax: >-
+      az sig image-definition create --resource-group MyResourceGroup \
+
+      --gallery-name MyGallery --gallery-image-definition MyImage \
+
+      --publisher GreatPublisher --offer GreatOffer --sku GreatSku \
+
+      --os-type linux --os-state Specialized \
+
+      --features SecurityType=TrustedLaunchAndConfidentialVmSupported
+  - summary: Membuat definisi gambar untuk gambar yang dapat digunakan untuk membuat VM Tepercaya atau Rahasia
+    syntax: >-
+      az sig image-definition create --resource-group MyResourceGroup \
+
+      --gallery-name MyGallery --gallery-image-definition MyImage \
+
+      --publisher GreatPublisher --offer GreatOffer --sku GreatSku \
+
+      --os-type linux --os-state Specialized \
+
+      --features SecurityType=TrustedLaunchAndConfidentialVmSupported
+  - summary: Membuat definisi gambar dan menunjukkan tanggal akhir masa pakai
+    syntax: >-
+      az sig image-definition create --resource-group MyResourceGroup \
+
+      --gallery-name MyGallery --gallery-image-definition MyImage \
+
+      --publisher GreatPublisher --offer GreatOffer --sku GreatSku \
+
+      --os-type linux --os-state Specialized \
+
+      --end-of-life-date YYYY-MM-DDTHH:MM:SS+00:00
+  - summary: Membuat definisi gambar dan merekomendasikan CPU dan memori minimum dan maksimum (GB)
+    syntax: >-
+      az sig image-definition create --resource-group MyResourceGroup \
+
+      --gallery-name MyGallery --gallery-image-definition MyImage \
+
+      --publisher GreatPublisher --offer GreatOffer --sku GreatSku \
+
+      --os-type linux --os-state Specialized \
+
+      --minimum-cpu-core myMinCPU --maximum-cpu-core myMaxCPU \
+
+      --minimum-memory myMinMemory --maximum-memory myMaxMemory
+  - summary: Membuat definisi gambar dan menunjukkan jenis disk OS mana yang tidak disarankan untuk gambar
+    syntax: >-
+      az sig image-definition create --resource-group MyResourceGroup \
+
+      --gallery-name MyGallery --gallery-image-definition MyImage \
+
+      --publisher GreatPublisher --offer GreatOffer --sku GreatSku \
+
+      --os-type linux --os-state Specialized \
+
+      --disallowed-disk-types Standard_LRS
+  - summary: Membuat definisi gambar dan menyediakan URI EULA, pernyataan privasi, dan catatan rilis URI
+    syntax: >-
+      az sig image-definition create --resource-group MyResourceGroup \
+
+      --gallery-name MyGallery --gallery-image-definition MyImage \
+
+      --publisher GreatPublisher --offer GreatOffer --sku GreatSku \
+
+      --os-type linux --os-state Specialized \
+
+      --eula path_to_eula --privacy-statement-uri path_to_statement \
+
+      --release-note-uri path_to_release_notes
+  requiredParameters:
+  - isRequired: true
+    name: --gallery-image-definition -i
+    summary: Definisi gambar galeri.
+    description: ''
+  - isRequired: true
+    name: --gallery-name -r
+    summary: Nama galeri.
+    description: ''
+  - isRequired: true
+    name: --offer -f
+    summary: Penawaran gambar.
+    description: ''
+  - isRequired: true
+    name: --os-type
+    parameterValueGroup: Linux, Windows
+    summary: Jenis OS yang disertakan dalam disk jika membuat VM dari gambar pengguna atau VHD khusus.
+    description: ''
+  - isRequired: true
+    name: --publisher -p
+    summary: Penerbit gambar.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --sku -s
+    summary: Gambar sku.
+    description: ''
+  optionalParameters:
+  - name: --architecture
+    parameterValueGroup: Arm64, x64
+    summary: Arsitektur CPU.
+    description: ''
+  - name: --description
+    summary: Deskripsi definisi gambar galeri.
+    description: ''
+  - name: --disallowed-disk-type
+    summary: Jenis disk yang tidak akan berfungsi dengan gambar, misalnya, Standard_LRS.
+    description: ''
+  - name: --end-of-life-date
+    summary: Tanggal akhir masa pakai, misalnya '2020-12-31'.
+    description: ''
+  - name: --eula
+    summary: Perjanjian Eula untuk gambar galeri.
+    description: ''
+  - name: --features
+    summary: Daftar fitur gambar galeri. Mis. "IsSecureBootSupported=true IsMeasuredBootSupported=false".
+    description: ''
+  - name: --hyper-v-generation
+    defaultValue: V1
+    parameterValueGroup: V1, V2
+    summary: Generasi hypervisor Komputer Virtual. Hanya berlaku untuk disk OS.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --maximum-cpu-core
+    summary: Inti cpu maksimum.
+    description: ''
+  - name: --maximum-memory
+    summary: Memori maksimum dalam MB.
+    description: ''
+  - name: --minimum-cpu-core
+    summary: Inti cpu minimum.
+    description: ''
+  - name: --minimum-memory
+    summary: Memori minimum dalam MB.
+    description: ''
+  - name: --os-state
+    defaultValue: Generalized
+    parameterValueGroup: Generalized, Specialized
+    summary: Properti ini memungkinkan pengguna untuk menentukan apakah komputer virtual yang dibuat di bawah gambar ini adalah 'Generalized' atau 'Specialized'.
+    description: ''
+  - name: --plan-name
+    summary: Nama rencana.
+    description: ''
+  - name: --plan-product
+    summary: Rencanakan produk.
+    description: ''
+  - name: --plan-publisher
+    summary: Merencanakan penerbit.
+    description: ''
+  - name: --privacy-statement-uri
+    summary: Pernyataan privasi uri.
+    description: ''
+  - name: --release-note-uri
+    summary: Catatan rilis uri.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+- uid: az_sig_image-definition_delete
+  name: az sig image-definition delete
+  summary: Menghapus gambar galeri.
+  description: ''
+  syntax: >-
+    az sig image-definition delete [--gallery-image-definition]
+                                   [--gallery-name]
+                                   [--ids]
+                                   [--resource-group]
+  optionalParameters:
+  - name: --gallery-image-definition -i
+    summary: Definisi gambar galeri.
+    description: ''
+  - name: --gallery-name -r
+    summary: Nama galeri.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_sig_image-definition_list
+  name: az sig image-definition list
+  summary: Mencantumkan definisi gambar galeri di galeri.
+  description: ''
+  syntax: >-
+    az sig image-definition list --gallery-name
+                                 --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --gallery-name -r
+    summary: Nama galeri.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_sig_image-definition_list-community
+  name: az sig image-definition list-community
+  summary: Mencantumkan definisi Gambar VM di komunitas galeri (pratinjau).
+  description: Cantumkan definisi Gambar VM di komunitas galeri (fitur pratinjau pribadi, silakan hubungi tim galeri gambar komunitas melalui email sigpmdev@microsoft.com untuk mendaftar pratinjau jika Anda tertarik menggunakan fitur ini).
+  syntax: >-
+    az sig image-definition list-community --location
+                                           --public-gallery-name
+                                           [--marker]
+                                           [--show-next-marker]
+  examples:
+  - summary: Mencantumkan definisi gambar di komunitas galeri.
+    syntax: >-
+      az sig image-definition list-community --public-gallery-name publicGalleryName \
+
+      --location myLocation
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --public-gallery-name
+    summary: Nama publik galeri komunitas.
+    description: ''
+  optionalParameters:
+  - name: --penanda
+    summary: Nilai string yang mengidentifikasi bagian dari daftar kontainer yang akan dikembalikan dengan operasi daftar berikutnya. Operasi mengembalikan nilai NextMarker dalam isi respons jika operasi daftar tidak mengembalikan semua kontainer yang tersisa untuk dicantumkan dengan halaman saat ini. Jika ditentukan, generator ini akan mulai mengembalikan hasil dari titik di mana generator sebelumnya berhenti.
+    description: ''
+  - name: --show-next-marker
+    summary: Perlihatkan nextMarker dalam hasil ketika ditentukan.
+    description: ''
+- uid: az_sig_image-definition_list-shared
+  name: az sig image-definition list-shared
+  summary: Mencantumkan definisi Gambar VM di galeri yang dibagikan langsung ke langganan atau penyewa Anda (pratinjau).
+  description: Mencantumkan definisi Gambar VM di galeri yang dibagikan langsung ke langganan atau penyewa Anda (fitur pratinjau privat, silakan hubungi tim galeri gambar bersama melalui email sigpmdev@microsoft.com untuk mendaftar pratinjau jika Anda tertarik menggunakan fitur ini).
+  syntax: >-
+    az sig image-definition list-shared [--gallery-unique-name]
+                                        [--ids]
+                                        [--location]
+                                        [--marker]
+                                        [--shared-to {tenant}]
+                                        [--show-next-marker]
+  examples:
+  - summary: Mencantumkan definisi gambar di galeri yang dibagikan langsung ke langganan Anda di lokasi tertentu.
+    syntax: >-
+      az sig image-definition list-shared --gallery-unique-name galleryUniqueName \
+
+      --location myLocation
+  - summary: Mencantumkan definisi gambar di galeri yang dibagikan langsung ke penyewa Anda di lokasi tertentu.
+    syntax: >-
+      az sig image-definition list-shared --gallery-unique-name galleryUniqueName \
+
+      --location myLocation --shared-to tenant
+  optionalParameters:
+  - name: --gallery-unique-name
+    summary: Nama unik Shared Gallery.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --penanda
+    summary: Nilai string yang mengidentifikasi bagian dari daftar kontainer yang akan dikembalikan dengan operasi daftar berikutnya. Operasi mengembalikan nilai NextMarker dalam isi respons jika operasi daftar tidak mengembalikan semua kontainer yang tersisa untuk dicantumkan dengan halaman saat ini. Jika ditentukan, generator ini akan mulai mengembalikan hasil dari titik di mana generator sebelumnya berhenti.
+    description: ''
+  - name: --shared-to
+    parameterValueGroup: tenant
+    summary: Parameter kueri untuk memutuskan galeri bersama apa yang akan diambil saat melakukan operasi daftar. Jika tidak ditentukan, cantumkan menurut id langganan.
+    description: ''
+  - name: --show-next-marker
+    summary: Perlihatkan nextMarker dalam hasil ketika ditentukan.
+    description: ''
+- uid: az_sig_image-definition_show
+  name: az sig image-definition show
+  summary: Mengambil informasi tentang definisi gambar galeri.
+  description: ''
+  syntax: >-
+    az sig image-definition show [--gallery-image-definition]
+                                 [--gallery-name]
+                                 [--ids]
+                                 [--resource-group]
+  optionalParameters:
+  - name: --gallery-image-definition -i
+    summary: Definisi gambar galeri.
+    description: ''
+  - name: --gallery-name -r
+    summary: Nama galeri.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_sig_image-definition_show-community
+  name: az sig image-definition show-community
+  summary: Mendapatkan gambar di komunitas galeri (pratinjau).
+  description: Dapatkan gambar di komunitas galeri (fitur pratinjau pribadi, silakan hubungi tim galeri gambar komunitas melalui email sigpmdev@microsoft.com untuk mendaftar pratinjau jika Anda tertarik menggunakan fitur ini).
+  syntax: >-
+    az sig image-definition show-community --gallery-image-definition
+                                           --location
+                                           --public-gallery-name
+  examples:
+  - summary: Dapatkan definisi gambar di komunitas galeri di lokasi tertentu.
+    syntax: >-
+      az sig image-definition show-community --public-gallery-name publicGalleryName \
+
+      --gallery-image-definition myGalleryImageName --location myLocation
+  requiredParameters:
+  - isRequired: true
+    name: --gallery-image-definition -i
+    summary: Nama definisi gambar galeri komunitas tempat versi gambar akan dicantumkan.
+    description: ''
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --public-gallery-name
+    summary: Nama publik galeri komunitas.
+    description: ''
+- uid: az_sig_image-definition_show-shared
+  name: az sig image-definition show-shared
+  summary: Mendapatkan gambar galeri bersama (pratinjau).
+  description: Dapatkan gambar galeri bersama yang telah dibagikan langsung ke langganan atau penyewa Anda (fitur pratinjau privat, silakan hubungi tim galeri gambar bersama melalui email sigpmdev@microsoft.com untuk mendaftar pratinjau jika Anda tertarik menggunakan fitur ini).
+  syntax: >-
+    az sig image-definition show-shared [--gallery-image-definition]
+                                        [--gallery-unique-name]
+                                        [--ids]
+                                        [--location]
+  examples:
+  - summary: Dapatkan definisi gambar di galeri yang dibagikan langsung ke langganan atau penyewa Anda di lokasi tertentu.
+    syntax: >-
+      az sig image-definition show-shared --gallery-unique-name galleryUniqueName \
+
+      --gallery-image-definition myGalleryImageName --location myLocation
+  optionalParameters:
+  - name: --gallery-image-definition -i
+    summary: Nama Definisi Gambar Shared Gallery tempat Versi Gambar akan dicantumkan.
+    description: ''
+  - name: --gallery-unique-name
+    summary: Nama unik Shared Gallery.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+- uid: az_sig_image-definition_update
+  name: az sig image-definition update
+  summary: Memperbarui definisi Gambar VM.
+  description: ''
+  syntax: >-
+    az sig image-definition update --gallery-image-definition
+                                   --gallery-name
+                                   --resource-group
+                                   [--add]
+                                   [--force-string]
+                                   [--remove]
+                                   [--set]
+  examples:
+  - summary: Mengubah konfigurasi definisi gambar bersama yang direkomendasikan
+    syntax: >-
+      az sig image-definition update --resource-group MyResourceGroup \
+
+      --gallery-name MyGallery --gallery-image-definition MyImage \
+
+      --resource-group MyResourceGroup --set recommended.vCpUs.min=myNewvCpUsMin \
+
+      recommended.vCpUs.max=myNewvCpUsMax recommended.memory.min=myNewMemoryMin \
+
+      recommended.memory.max=myNewMemoryMax description="newDescription"
+  - summary: Menghapus properti konfigurasi definisi gambar bersama
+    syntax: >-
+      az sig image-definition update --resource-group MyResourceGroup \
+
+      --gallery-name MyGallery --gallery-image-definition MyImage \
+
+      --resource-group MyResourceGroup --remove recommended.vCpUs.min
+  requiredParameters:
+  - isRequired: true
+    name: --gallery-image-definition -i
+    summary: Definisi gambar galeri.
+    description: ''
+  - isRequired: true
+    name: --gallery-name -r
+    summary: Nama galeri.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+commands:
+- az_sig_image-definition_create
+- az_sig_image-definition_delete
+- az_sig_image-definition_list
+- az_sig_image-definition_list-community
+- az_sig_image-definition_list-shared
+- az_sig_image-definition_show
+- az_sig_image-definition_show-community
+- az_sig_image-definition_show-shared
+- az_sig_image-definition_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola gambar galeri bersama dengan VM.
+  ms.openlocfilehash: 5b59b3c1b5a5d0d68a5f7e1bc57c00fcba4ca837
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141417220"

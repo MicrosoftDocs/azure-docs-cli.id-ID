@@ -1,0 +1,481 @@
+### YamlMime:AzureCLIGroup
+uid: az_apim
+name: az apim
+summary: Mengelola layanan Azure API Management.
+description: ''
+directCommands:
+- uid: az_apim_apply-network-updates
+  name: az apim apply-network-update
+  summary: Memperbarui Microsoft.
+  description: Sumber daya ApiManagement yang berjalan di Jaringan virtual untuk memilih perubahan DNS yang diperbarui.
+  syntax: >-
+    az apim apply-network-updates --name
+                                  --resource-group
+                                  [--location]
+                                  [--no-wait]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama instans layanan api management.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/apim/_help.py
+- uid: az_apim_backup
+  name: az apim backup
+  summary: Membuat cadangan layanan API Management ke Akun Azure Storage yang diberikan. Ini adalah operasi yang berjalan lama dan bisa memakan waktu beberapa menit untuk diselesaikan.
+  description: ''
+  syntax: >-
+    az apim backup --backup-name
+                   --container-name
+                   --name
+                   --resource-group
+                   --storage-account-key
+                   --storage-account-name
+                   [--no-wait]
+  examples:
+  - summary: Membuat cadangan instans layanan API Management
+    syntax: az apim backup --name MyApim -g MyResourceGroup --backup-name myBackup              --storage-account-name mystorageaccount --storage-account-container backups              --storage-account-key Ay2ZbdxLnD4OJPT29F6jLPkB6KynOzx85YCObhrw==
+  requiredParameters:
+  - isRequired: true
+    name: --backup-name
+    summary: Nama file cadangan yang akan dibuat.
+    description: ''
+  - isRequired: true
+    name: --container-name --storage-account-container
+    summary: Nama kontainer akun penyimpanan yang digunakan untuk menempatkan cadangan.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama instans layanan api management.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --storage-account-key
+    summary: Kunci akses akun penyimpanan yang digunakan untuk menempatkan cadangan.
+    description: ''
+  - isRequired: true
+    name: --storage-account-name
+    summary: Nama akun penyimpanan yang digunakan untuk menempatkan cadangan.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/apim/_help.py
+- uid: az_apim_check-name
+  name: az apim check-name
+  summary: Memeriksa untuk melihat apakah nama layanan tersedia untuk digunakan.
+  description: ''
+  syntax: az apim check-name --name
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama instans layanan api management.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/apim/_help.py
+- uid: az_apim_create
+  name: az apim create
+  summary: Buat sebuah instans layanan API Management.
+  description: ''
+  syntax: >-
+    az apim create --name
+                   --publisher-email
+                   --publisher-name
+                   --resource-group
+                   [--enable-client-certificate {false, true}]
+                   [--enable-managed-identity {false, true}]
+                   [--location]
+                   [--no-wait]
+                   [--sku-capacity]
+                   [--sku-name {Basic, Consumption, Developer, Isolated, Premium, Standard}]
+                   [--tags]
+                   [--virtual-network {External, Internal, None}]
+  examples:
+  - summary: Membuat layanan API Management tingkat Pengembang.
+    syntax: az apim create --name MyApim -g MyResourceGroup -l eastus --publisher-email email@mydomain.com --publisher-name Microsoft
+  - summary: Membuat layanan API Management tingkat Konsumsi.
+    syntax: >-
+      az apim create --name MyApim -g MyResourceGroup -l eastus --sku-name Consumption --enable-client-certificate \
+          --publisher-email email@mydomain.com --publisher-name Microsoft
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama unik instans layanan yang akan dibuat.
+    description: Nama harus unik secara global karena akan disertakan sebagai nama host gateway seperti' https://my-api-servicename.azure-api.net'.  Lihat contoh.
+  - isRequired: true
+    name: --publisher-email
+    summary: Alamat email untuk menerima semua pemberitahuan sistem.
+    description: ''
+  - isRequired: true
+    name: --publisher-name
+    summary: Nama organisasi Anda untuk digunakan di portal pengembang dan pemberitahuan email.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --enable-client-certificate
+    parameterValueGroup: false, true
+    summary: Memberlakukan sertifikat klien untuk disajikan pada setiap permintaan ke gateway dan juga memungkinkan kemampuan untuk mengautentikasi sertifikat dalam kebijakan di gateway.
+    description: ''
+  - name: --enable-managed-identity
+    parameterValueGroup: false, true
+    summary: Buat identitas terkelola untuk layanan API Management untuk mengakses sumber daya Azure lainnya.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --sku-capacity
+    defaultValue: "1"
+    summary: Jumlah unit SKU yang disebarkan.
+    description: ''
+  - name: --sku-name
+    defaultValue: Developer
+    parameterValueGroup: Basic, Consumption, Developer, Isolated, Premium, Standard
+    summary: Sku instans manajemen api.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --virtual-network -v
+    defaultValue: None
+    parameterValueGroup: External, Internal, None
+    summary: Jenis jaringan virtual.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/apim/_help.py
+- uid: az_apim_delete
+  name: az apim delete
+  summary: Menghapus layanan API Management.
+  description: ''
+  syntax: >-
+    az apim delete --name
+                   --resource-group
+                   [--no-wait]
+                   [--yes]
+  examples:
+  - summary: Menghapus layanan API Management.
+    syntax: az apim delete -n MyApim -g MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama instans layanan api management.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/apim/_help.py
+- uid: az_apim_list
+  name: az apim list
+  summary: Mencantumkan instans layanan API Management.
+  description: ''
+  syntax: az apim list [--resource-group]
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/apim/_help.py
+- uid: az_apim_restore
+  name: az apim restore
+  summary: Memulihkan cadangan layanan API Management yang dibuat menggunakan operasi ApiManagementService_Backup pada layanan saat ini. Ini adalah operasi yang berjalan lama dan bisa memakan waktu beberapa menit untuk diselesaikan.
+  description: ''
+  syntax: >-
+    az apim restore --backup-name
+                    --container-name
+                    --name
+                    --resource-group
+                    --storage-account-key
+                    --storage-account-name
+                    [--no-wait]
+  examples:
+  - summary: Memulihkan cadangan instans layanan API Management
+    syntax: az apim restore --name MyApim -g MyResourceGroup --backup-name myBackup              --storage-account-name mystorageaccount --storage-account-container backups              --storage-account-key Ay2ZbdxLnD4OJPT29F6jLPkB6KynOzx85YCObhrw==
+  requiredParameters:
+  - isRequired: true
+    name: --backup-name
+    summary: Nama file cadangan yang akan dipulihkan.
+    description: ''
+  - isRequired: true
+    name: --container-name --storage-account-container
+    summary: Nama kontainer akun penyimpanan yang digunakan untuk mengambil cadangan.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama instans layanan api management.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --storage-account-key
+    summary: Kunci akses akun penyimpanan yang digunakan untuk mengambil cadangan.
+    description: ''
+  - isRequired: true
+    name: --storage-account-name
+    summary: Nama akun penyimpanan yang digunakan untuk mengambil cadangan.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/apim/_help.py
+- uid: az_apim_show
+  name: az apim show
+  summary: Menampilkan detail instans layanan API Management.
+  description: ''
+  syntax: >-
+    az apim show --name
+                 --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama instans layanan api management.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/apim/_help.py
+- uid: az_apim_update
+  name: az apim update
+  summary: Memperbarui instans layanan API Management.
+  description: ''
+  syntax: >-
+    az apim update --name
+                   --resource-group
+                   [--add]
+                   [--enable-client-certificate {false, true}]
+                   [--enable-managed-identity {false, true}]
+                   [--force-string]
+                   [--no-wait]
+                   [--publisher-email]
+                   [--publisher-name]
+                   [--remove]
+                   [--set]
+                   [--sku-capacity]
+                   [--sku-name {Basic, Consumption, Developer, Isolated, Premium, Standard}]
+                   [--tags]
+                   [--virtual-network {External, Internal, None}]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama instans layanan api management.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --enable-client-certificate
+    parameterValueGroup: false, true
+    summary: Memberlakukan sertifikat klien untuk disajikan pada setiap permintaan ke gateway dan juga memungkinkan kemampuan untuk mengautentikasi sertifikat dalam kebijakan di gateway.
+    description: ''
+  - name: --enable-managed-identity
+    parameterValueGroup: false, true
+    summary: Buat identitas terkelola untuk layanan API Management untuk mengakses sumber daya Azure lainnya.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --publisher-email
+    summary: Alamat email untuk menerima semua pemberitahuan sistem.
+    description: ''
+  - name: --publisher-name
+    summary: Nama organisasi Anda untuk digunakan di portal pengembang dan pemberitahuan email.
+    description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --sku-capacity
+    summary: Jumlah unit SKU yang disebarkan.
+    description: ''
+  - name: --sku-name
+    parameterValueGroup: Basic, Consumption, Developer, Isolated, Premium, Standard
+    summary: Sku instans api management.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --virtual-network -v
+    parameterValueGroup: External, Internal, None
+    summary: Jenis jaringan virtual.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/apim/_help.py
+- uid: az_apim_wait
+  name: az apim wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi apim terpenuhi.
+  description: ''
+  syntax: >-
+    az apim wait --name
+                 --resource-group
+                 [--created]
+                 [--custom]
+                 [--deleted]
+                 [--exists]
+                 [--interval]
+                 [--timeout]
+                 [--updated]
+  examples:
+  - summary: Tempatkan CLI dalam status menunggu hingga kondisi apim terpenuhi. (dibuat otomatis)
+    syntax: az apim wait --created --name MyApim --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama instans layanan api management.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --diperbarui
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/apim/_help.py
+commands:
+- az_apim_api
+- az_apim_api_create
+- az_apim_api_delete
+- az_apim_api_import
+- az_apim_api_list
+- az_apim_api_operation
+- az_apim_api_operation_create
+- az_apim_api_operation_delete
+- az_apim_api_operation_list
+- az_apim_api_operation_show
+- az_apim_api_operation_update
+- az_apim_api_release
+- az_apim_api_release_create
+- az_apim_api_release_delete
+- az_apim_api_release_list
+- az_apim_api_release_show
+- az_apim_api_release_update
+- az_apim_api_revision
+- az_apim_api_revision_create
+- az_apim_api_revision_list
+- az_apim_api_schema
+- az_apim_api_schema_create
+- az_apim_api_schema_delete
+- az_apim_api_schema_get-etag
+- az_apim_api_schema_list
+- az_apim_api_schema_show
+- az_apim_api_schema_wait
+- az_apim_api_show
+- az_apim_api_update
+- az_apim_api_versionset
+- az_apim_api_versionset_create
+- az_apim_api_versionset_delete
+- az_apim_api_versionset_list
+- az_apim_api_versionset_show
+- az_apim_api_versionset_update
+- az_apim_api_wait
+- az_apim_apply-network-updates
+- az_apim_backup
+- az_apim_check-name
+- az_apim_create
+- az_apim_delete
+- az_apim_list
+- az_apim_nv
+- az_apim_nv_create
+- az_apim_nv_delete
+- az_apim_nv_list
+- az_apim_nv_show
+- az_apim_nv_show-secret
+- az_apim_nv_update
+- az_apim_product
+- az_apim_product_api
+- az_apim_product_api_add
+- az_apim_product_api_check
+- az_apim_product_api_delete
+- az_apim_product_api_list
+- az_apim_product_create
+- az_apim_product_delete
+- az_apim_product_list
+- az_apim_product_show
+- az_apim_product_update
+- az_apim_product_wait
+- az_apim_restore
+- az_apim_show
+- az_apim_update
+- az_apim_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/24/2022
+  description: Mengelola layanan Azure API Management.
+  ms.openlocfilehash: 71ddc4bbd5865c3b1ffd7360e9ec8ace8031d219
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141424511"
