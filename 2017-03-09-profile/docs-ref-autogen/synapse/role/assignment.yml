@@ -1,0 +1,285 @@
+### YamlMime:AzureCLIGroup
+uid: az_synapse_role_assignment
+name: az synapse role assignment
+summary: Mengelola penetapan peran Synapse.
+description: ''
+directCommands:
+- uid: az_synapse_role_assignment_create
+  name: az synapse role assignment create
+  summary: Buat penetapan peran.
+  description: ''
+  syntax: >-
+    az synapse role assignment create --role
+                                      --workspace-name
+                                      [--assignee]
+                                      [--assignee-object-id]
+                                      [--assignee-principal-type {Group, ServicePrincipal, User}]
+                                      [--assignment-id]
+                                      [--item]
+                                      [--item-type {bigDataPools, credentials, integrationRuntimes, linkedServices}]
+                                      [--scope]
+  examples:
+  - summary: Buat penetapan peran menggunakan nama perwakilan layanan.
+    syntax: >-
+      az synapse role assignment create --workspace-name testsynapseworkspace \
+
+      --role "Synapse Administrator" --assignee sp_name
+  - summary: Buat penetapan peran menggunakan nama prinsipal pengguna.
+    syntax: >-
+      az synapse role assignment create --workspace-name testsynapseworkspace \
+
+      --role "Synapse Administrator" --assignee username@contoso.com
+  - summary: Buat penetapan peran menggunakan objectId Pengguna, Grup, atau Perwakilan Layanan.
+    syntax: >-
+      az synapse role assignment create --workspace-name testsynapseworkspace \
+
+      --role "Synapse Administrator" --assignee 00000000-0000-0000-0000-000000000000
+  - summary: Buat penetapan peran pada cakupan.
+    syntax: >-
+      az synapse role assignment create --workspace-name testsynapseworkspace \
+
+      --scope "workspaces/{workspaceName}" --role "Synapse Administrator" --assignee username@contoso.com
+  - summary: Buat penetapan peran pada cakupan kombinasi jenis item dan nama item tersebut.
+    syntax: >-
+      az synapse role assignment create --workspace-name testsynapseworkspace \
+
+      --item-type "bigDataPools" --item "bigDataPoolName" --role "Synapse Administrator" \
+
+      --assignee username@contoso.com
+  requiredParameters:
+  - isRequired: true
+    name: --role
+    summary: Nama peran/id yang ditetapkan ke prinsipal.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  optionalParameters:
+  - name: --assignee
+    summary: 'Mewakili pengguna atau perwakilan layanan. Format yang didukung: id objek, nama masuk pengguna, atau nama perwakilan layanan.'
+    description: ''
+  - name: --assignee-object-id
+    summary: Gunakan parameter ini alih-alih '--assignee' untuk melewati Graph pemanggilan API jika hak istimewa tidak mencukupi. Parameter ini hanya berfungsi dengan id objek untuk pengguna, grup, perwakilan layanan, dan identitas terkelola. Untuk identitas terkelola, gunakan id utama. Untuk perwakilan layanan, gunakan id objek dan bukan id aplikasi.
+    description: ''
+  - name: --assignee-principal-type --assignee-type
+    parameterValueGroup: Group, ServicePrincipal, User
+    summary: Gunakan dengan --assignee-object-id untuk menghindari kesalahan yang disebabkan oleh latensi penyebaran dalam AAD Graph.
+    description: ''
+  - name: --assignment-id
+    summary: Id penetapan peran kustom dalam format guid, jika tidak ditentukan, id penugasan akan dihasilkan secara acak.
+    description: ''
+  - name: --item
+    summary: Item yang diberikan akses di ruang kerja. Menggunakan dengan --item-type untuk menggabungkan cakupan penugasan.
+    description: ''
+  - name: --item-type
+    parameterValueGroup: bigDataPools, credentials, integrationRuntimes, linkedServices
+    summary: Jenis item yang diberikan akses di ruang kerja. Menggunakan dengan --item untuk menggabungkan cakupan penugasan.
+    description: ''
+  - name: --scope
+    summary: Cakupan menentukan sumber daya atau artefak yang berlaku untuk akses. Synapse mendukung cakupan hierarkis. Izin yang diberikan pada cakupan dengan tingkat yang lebih tinggi diwarisi oleh objek pada tingkat yang lebih rendah. Di RBAC Synapse, cakupan tingkat atas adalah ruang kerja. Menetapkan peran dengan cakupan ruang kerja memberikan izin ke semua objek yang berlaku di ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_role_assignment_delete
+  name: az synapse role assignment delete
+  summary: Menghapus penetapan peran ruang kerja.
+  description: ''
+  syntax: >-
+    az synapse role assignment delete --workspace-name
+                                      [--assignee]
+                                      [--assignee-object-id]
+                                      [--ids]
+                                      [--item]
+                                      [--item-type {bigDataPools, credentials, integrationRuntimes, linkedServices}]
+                                      [--role]
+                                      [--scope]
+                                      [--yes]
+  examples:
+  - summary: Menghapus penetapan peran berdasarkan peran dan penerima tugas.
+    syntax: >-
+      az synapse role assignment delete --workspace-name testsynapseworkspace \
+
+      --role "Synapse Administrator" --assignee sp_name
+  - summary: Hapus penetapan peran menurut id/nama peran.
+    syntax: >-
+      az synapse role assignment delete --workspace-name testsynapseworkspace \
+
+      --role "Synapse Administrator"
+  - summary: Hapus penetapan peran menurut nama perwakilan layanan.
+    syntax: >-
+      az synapse role assignment delete --workspace-name testsynapseworkspace \
+
+      --assignee sp_name
+  - summary: Hapus penetapan peran menurut nama prinsipal pengguna.
+    syntax: >-
+      az synapse role assignment delete --workspace-name testsynapseworkspace \
+
+      --assignee username@contoso.com
+  - summary: Hapus penetapan peran menurut objectId Pengguna, Grup, atau Perwakilan Layanan.
+    syntax: >-
+      az synapse role assignment delete --workspace-name testsynapseworkspace \
+
+      --assignee 00000000-0000-0000-0000-000000000001
+  - summary: Menghapus penetapan peran menurut id.
+    syntax: >-
+      az synapse role assignment delete --workspace-name testsynapseworkspace \
+
+      --ids 10000000-0000-0000-0000-10000000-10000000-0000-0000-0000-10000000
+  - summary: Menghapus penetapan peran menurut cakupan.
+    syntax: >-
+      az synapse role assignment delete --workspace-name testsynapseworkspace \
+
+      --scope "workspaces/testsynapseworkspace/linkedServices/testlinkedServices"
+  requiredParameters:
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  optionalParameters:
+  - name: --assignee
+    summary: 'Mewakili pengguna atau perwakilan layanan. Format yang didukung: id objek, nama masuk pengguna, atau nama perwakilan layanan.'
+    description: ''
+  - name: --assignee-object-id
+    summary: Gunakan parameter ini alih-alih '--assignee' untuk melewati Graph pemanggilan API jika hak istimewa tidak mencukupi. Parameter ini hanya berfungsi dengan id objek untuk pengguna, grup, perwakilan layanan, dan identitas terkelola. Untuk identitas terkelola, gunakan id utama. Untuk perwakilan layanan, gunakan id objek dan bukan id aplikasi.
+    description: ''
+  - name: --ids
+    summary: Id penetapan peran yang dipisahkan spasi. Anda tidak boleh menyediakan --role atau --assignee ketika --ids disediakan.
+    description: ''
+  - name: --item
+    summary: Item yang diberikan akses di ruang kerja. Menggunakan dengan --item-type untuk menggabungkan cakupan penugasan. Menggunakan penetapan peran az dengan kondisi filter sebelum menjalankan operasi penghapusan untuk mengetahui dengan jelas penetapan mana yang akan dihapus.
+    description: ''
+  - name: --item-type
+    parameterValueGroup: bigDataPools, credentials, integrationRuntimes, linkedServices
+    summary: Jenis item yang diberikan akses di ruang kerja. Menggunakan dengan --item untuk menggabungkan cakupan penugasan. Menggunakan penetapan peran az dengan kondisi filter sebelum menjalankan operasi penghapusan untuk mengetahui dengan jelas penetapan mana yang akan dihapus.
+    description: ''
+  - name: --role
+    summary: Nama peran/id yang ditetapkan ke prinsipal.
+    description: ''
+  - name: --scope
+    summary: Cakupan menentukan sumber daya atau artefak yang berlaku untuk akses. Synapse mendukung cakupan hierarkis. Izin yang diberikan pada cakupan dengan tingkat yang lebih tinggi diwarisi oleh objek pada tingkat yang lebih rendah. Di RBAC Synapse, cakupan tingkat atas adalah ruang kerja. Menggunakan penetapan peran az dengan kondisi filter sebelum menjalankan operasi penghapusan untuk mengetahui dengan jelas penetapan mana yang akan dihapus.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_role_assignment_list
+  name: az synapse role assignment list
+  summary: Mencantumkan penetapan peran.
+  description: ''
+  syntax: >-
+    az synapse role assignment list --workspace-name
+                                    [--assignee]
+                                    [--assignee-object-id]
+                                    [--item]
+                                    [--item-type {bigDataPools, credentials, integrationRuntimes, linkedServices}]
+                                    [--role]
+                                    [--scope]
+  examples:
+  - summary: Mencantumkan penetapan peran.
+    syntax: az synapse role assignment list --workspace-name testsynapseworkspace
+  - summary: Mencantumkan penetapan peran menurut id/nama peran.
+    syntax: >-
+      az synapse role assignment list --workspace-name testsynapseworkspace \
+
+      --role "Synapse Apache Spark Administrator"
+  - summary: Mencantumkan penetapan peran menurut penerima tugas.
+    syntax: >-
+      az synapse role assignment list --workspace-name testsynapseworkspace \
+
+      --assignee sp_name
+  - summary: Mencantumkan penetapan peran menurut objectId Pengguna, Grup, atau Perwakilan Layanan.
+    syntax: >-
+      az synapse role assignment list --workspace-name testsynapseworkspace \
+
+      --assignee-object-id 00000000-0000-0000-0000-000000000000
+  - summary: Mencantumkan penetapan peran menurut cakupan.
+    syntax: >-
+      az synapse role assignment list --workspace-name testsynapseworkspace \
+
+      --scope "workspaces/{workspaceName}"
+  - summary: Mencantumkan penetapan peran menurut jenis item dan nama item.
+    syntax: >-
+      az synapse role assignment list --workspace-name testsynapseworkspace \
+
+      --item-type "bigDataPools" --item "bigDataPoolName"
+  requiredParameters:
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  optionalParameters:
+  - name: --assignee
+    summary: 'Mewakili pengguna atau perwakilan layanan. Format yang didukung: id objek, nama masuk pengguna, atau nama perwakilan layanan.'
+    description: ''
+  - name: --assignee-object-id
+    summary: Gunakan parameter ini alih-alih '--assignee' untuk melewati Graph pemanggilan API jika hak istimewa tidak mencukupi. Parameter ini hanya berfungsi dengan id objek untuk pengguna, grup, perwakilan layanan, dan identitas terkelola. Untuk identitas terkelola, gunakan id utama. Untuk perwakilan layanan, gunakan id objek dan bukan id aplikasi.
+    description: ''
+  - name: --item
+    summary: Item yang diberikan akses di ruang kerja. Menggunakan dengan --item-type untuk menggabungkan cakupan penugasan.
+    description: ''
+  - name: --item-type
+    parameterValueGroup: bigDataPools, credentials, integrationRuntimes, linkedServices
+    summary: Jenis item yang diberikan akses di ruang kerja. Menggunakan dengan --item untuk menggabungkan cakupan penugasan.
+    description: ''
+  - name: --role
+    summary: Nama peran/id yang ditetapkan ke prinsipal.
+    description: ''
+  - name: --scope
+    summary: Cakupan menentukan sumber daya atau artefak yang berlaku untuk akses. Synapse mendukung cakupan hierarkis. Izin yang diberikan pada cakupan dengan tingkat yang lebih tinggi diwarisi oleh objek pada tingkat yang lebih rendah. Di RBAC Synapse, cakupan tingkat atas adalah ruang kerja. Menetapkan peran dengan cakupan ruang kerja memberikan izin ke semua objek yang berlaku di ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_role_assignment_show
+  name: az synapse role assignment show
+  summary: Dapatkan penetapan peran berdasarkan id.
+  description: ''
+  syntax: >-
+    az synapse role assignment show --id
+                                    --workspace-name
+  examples:
+  - summary: Dapatkan penetapan peran berdasarkan id.
+    syntax: >-
+      az synapse role assignment show --workspace-name testsynapseworkspace \
+
+      --id 00000000-0000-0000-0000-000000000000
+  requiredParameters:
+  - isRequired: true
+    name: --id
+    summary: Id peran yang ditetapkan ke prinsipal.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+commands:
+- az_synapse_role_assignment_create
+- az_synapse_role_assignment_delete
+- az_synapse_role_assignment_list
+- az_synapse_role_assignment_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 10/27/2021
+  description: Mengelola penetapan peran Synapse.
+  ms.openlocfilehash: 9c4bed494442e33cae38512acad288cbc36c496e
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140909078"

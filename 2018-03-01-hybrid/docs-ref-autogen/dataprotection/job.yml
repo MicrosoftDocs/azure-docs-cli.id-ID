@@ -1,0 +1,134 @@
+### YamlMime:AzureCLIGroup
+uid: az_dataprotection_job
+name: az dataprotection job
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **perlindungan data** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **az dataprotection job** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola pekerjaan dengan perlindungan data.
+description: ''
+directCommands:
+- uid: az_dataprotection_job_list
+  name: az dataprotection job list
+  summary: Mengembalikan daftar pekerjaan milik vault cadangan.
+  description: ''
+  syntax: >-
+    az dataprotection job list --resource-group
+                               --vault-name
+  examples:
+  - summary: Mendapatkan Pekerjaan
+    syntax: az dataprotection job list --resource-group "BugBash1" --vault-name "BugBashVaultForCCYv11"
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vault-name
+    summary: Nama brankas cadangan.
+    description: ''
+- uid: az_dataprotection_job_list-from-resourcegraph
+  name: az dataprotection job list-from-resourcegraph
+  summary: Mencantumkan pekerjaan pencadangan di seluruh langganan, grup sumber daya, dan vault.
+  description: ''
+  syntax: >-
+    az dataprotection job list-from-resourcegraph --datasource-type {AzureBlob, AzureDatabaseForPostgreSQL, AzureDisk}
+                                                  [--datasource-id]
+                                                  [--end-time]
+                                                  [--operation {OnDemandBackup, Restore, ScheduledBackup}]
+                                                  [--resource-groups]
+                                                  [--start-time]
+                                                  [--status {Completed, Failed, InProgress}]
+                                                  [--subscriptions]
+                                                  [--vaults]
+  examples:
+  - summary: Mendapatkan pekerjaan pencadangan di semua grup sumber daya dalam langganan saat ini yang telah selesai
+    syntax: az dataprotection job list-from-resourcegraph --datasource-type AzureDisk --status Completed
+  - summary: Mendapatkan pekerjaan pencadangan dalam sekumpulan vault tertentu dan dalam timerange tertentu
+    syntax: az dataprotection job list-from-resourcegraph --datasource-type AzureDisk --vaults MyVault1 MyVault2 --start-time 2020-11-11T01:01:00 --end-time 2020-11-14T01:01:00
+  requiredParameters:
+  - isRequired: true
+    name: --datasource-type
+    parameterValueGroup: AzureBlob, AzureDatabaseForPostgreSQL, AzureDisk
+    summary: Tentukan jenis sumber data.
+    description: ''
+  optionalParameters:
+  - name: --datasource-id
+    summary: Tentukan filter id sumber data untuk diterapkan.
+    description: ''
+  - name: --end-time
+    summary: Tentukan waktu akhir pekerjaan dalam UTC (yyyy-mm-ddTHH:MM:SS).
+    description: ''
+  - name: --operation
+    parameterValueGroup: OnDemandBackup, Restore, ScheduledBackup
+    summary: Tentukan nilai operasi pekerjaan untuk filter.
+    description: ''
+  - name: --resource-groups
+    summary: Daftar grup sumber daya.
+    description: ''
+  - name: --start-time
+    summary: Tentukan waktu mulai pekerjaan dalam UTC (yyyy-mm-ddTHH:MM:SS).
+    description: ''
+  - name: --status
+    parameterValueGroup: Completed, Failed, InProgress
+    summary: Tentukan nilai status pekerjaan untuk filter.
+    description: ''
+  - name: --subscriptions
+    summary: Daftar Id langganan.
+    description: ''
+  - name: --vaults
+    summary: Daftar nama vault.
+    description: ''
+- uid: az_dataprotection_job_show
+  name: az dataprotection job show
+  summary: Mendapatkan pekerjaan dengan id di brankas cadangan.
+  description: ''
+  syntax: >-
+    az dataprotection job show --job-id
+                               --resource-group
+                               --vault-name
+  examples:
+  - summary: Dapatkan Pekerjaan
+    syntax: az dataprotection job show --job-id "3c60cb49-63e8-4b21-b9bd-26277b3fdfae" --resource-group "BugBash1" --vault-name "BugBashVaultForCCYv11"
+  requiredParameters:
+  - isRequired: true
+    name: --job-id
+    summary: ID Pekerjaan. Ini adalah string berformat GUID (misalnya 000000000-0000-0000-0000-00000000000).
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vault-name
+    summary: Nama brankas cadangan.
+    description: ''
+commands:
+- az_dataprotection_job_list
+- az_dataprotection_job_list-from-resourcegraph
+- az_dataprotection_job_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola pekerjaan dengan perlindungan data.
+  ms.openlocfilehash: 0f6910e0709c21fcd3c707d57f66acdb411d1cd2
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140928842"

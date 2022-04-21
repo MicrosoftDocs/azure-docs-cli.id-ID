@@ -1,0 +1,248 @@
+### YamlMime:AzureCLIGroup
+uid: az_netappfiles_volume
+name: az netappfiles volume
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **netappfiles-preview** untuk Azure CLI (versi 2.0.56 atau lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **volume az netappfiles** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola Sumber Daya Volume Azure NetApp Files (ANF).
+description: ''
+directCommands:
+- uid: az_netappfiles_volume_create
+  name: az netappfiles volume create
+  summary: Buat volume Azure NetApp Files (ANF) baru.
+  description: ''
+  syntax: >-
+    az netappfiles volume create --account-name
+                                 --creation-token
+                                 --location
+                                 --pool-name
+                                 --resource-group
+                                 --service-level
+                                 --subnet-id
+                                 --usage-threshold
+                                 --volume-name
+                                 [--export-policy]
+                                 [--tags]
+  examples:
+  - summary: Membuat volume ANF
+    syntax: "az netappfiles volume create -g group --account-name aname --pool-name pname --volume-name vname -l location --service-level \"Premium\" --usage-threshold 107374182400 --creation-token \"unique-token\" --subnet-id \"/subscriptions/mysubsid/resourceGroups/myrg/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/default\" --export-policy '[{\"allowed_clients\":\"0.0.0.0/0\", \"rule_index\": \"1\", \"unix_read_only\": \"true\", \"unix_read_write\": \"false\", \"cifs\": \"false\", \"nfsv3\": \"true\", \"nfsv3\": \"true\", \"nfsv4\": \"false\"}]'"
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun ANF.
+    description: ''
+  - isRequired: true
+    name: --creation-token
+    summary: Pengidentifikasi jalur file unik, dari 1 hingga 80 karakter.
+    description: ''
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --pool-name -p
+    summary: Nama kumpulan ANF.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-level
+    summary: Tingkat layanan ["Standard"|" Premium"|" Ekstrim"].
+    description: ''
+  - isRequired: true
+    name: --subnet-id
+    summary: Pengidentifikasi subnet.
+    description: ''
+  - isRequired: true
+    name: --usage-threshold
+    summary: Kuota penyimpanan maksimum yang diizinkan untuk sistem file dalam byte. Min 100 GiB, maks 100TiB".
+    description: ''
+  - isRequired: true
+    name: --volume-name -n -v
+    summary: Nama volume ANF.
+    description: ''
+  optionalParameters:
+  - name: --export-policy
+    summary: Daftar json parameter untuk kebijakan ekspor yang berisi rule_index (Indeks pesanan), unix_read_only (Akses baca saja), unix_read_write (Akses baca dan tulis), cifs (Memungkinkan protokol CIFS), nfsv3 (Memungkinkan protokol NFSv3), nfsv4 (Memungkinkan protokol NFSv4) dan allowedClients (Spesifikasi masuk klien sebagai string yang dipisahkan koma dengan CIDR IPv4, Alamat host IPv4 dan nama host).
+    description: ''
+  - name: --tags
+    summary: Daftar tag yang dipisahkan spasi untuk diterapkan ke volume.
+    description: ''
+- uid: az_netappfiles_volume_delete
+  name: az netappfiles volume delete
+  summary: Hapus volume ANF yang ditentukan.
+  description: ''
+  syntax: >-
+    az netappfiles volume delete --account-name
+                                 --pool-name
+                                 --resource-group
+                                 --volume-name
+  examples:
+  - summary: Menghapus volume ANF
+    syntax: az netappfiles volume delete -g group --account-name aname --pool-name pname --volume-name vname
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun ANF.
+    description: ''
+  - isRequired: true
+    name: --pool-name -p
+    summary: Nama kumpulan ANF.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --volume-name -n -v
+    summary: Nama volume ANF.
+    description: ''
+- uid: az_netappfiles_volume_list
+  name: az netappfiles volume list
+  summary: Cantumkan Kumpulan ANF untuk akun yang ditentukan.
+  description: ''
+  syntax: >-
+    az netappfiles volume list --account-name
+                               --pool-name
+                               --resource-group
+  examples:
+  - summary: Mencantumkan volume ANF kumpulan
+    syntax: az netappfiles volume list -g group --account-name aname --pool-name pname
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun ANF.
+    description: ''
+  - isRequired: true
+    name: --pool-name -n -p
+    summary: Nama kumpulan ANF.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_netappfiles_volume_show
+  name: az netappfiles volume show
+  summary: Dapatkan volume ANF yang ditentukan.
+  description: ''
+  syntax: >-
+    az netappfiles volume show --account-name
+                               --pool-name
+                               --resource-group
+                               --volume-name
+  examples:
+  - summary: Mengembalikan properti volume ANF yang diberikan
+    syntax: az netappfiles volume show -g group --account-name aname --pool-name pname --volume-name vname
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun ANF.
+    description: ''
+  - isRequired: true
+    name: --pool-name -p
+    summary: Nama kumpulan ANF.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --volume-name -n -v
+    summary: Nama kumpulan ANF.
+    description: ''
+- uid: az_netappfiles_volume_update
+  name: az netappfiles volume update
+  summary: Perbarui volume ANF yang ditentukan dengan nilai yang disediakan. Nilai yang tidak ditentukan akan tetap tidak berubah.
+  description: ''
+  syntax: >-
+    az netappfiles volume update --account-name
+                                 --pool-name
+                                 --resource-group
+                                 --volume-name
+                                 [--add]
+                                 [--export-policy]
+                                 [--force-string]
+                                 [--remove]
+                                 [--service-level]
+                                 [--set]
+                                 [--tags]
+                                 [--usage-threshold]
+  examples:
+  - summary: Membuat volume ANF
+    syntax: "az netappfiles volume update -g group --account-name aname --pool-name pname --volume-name vname --service-level level --usage-threshold 107374182400 --tags 'key[=value] key[=value]' --export-policy '[{\"allowed_clients\":\"1.2.3.0/24\", \"rule_index\": \"1\", \"unix_read_only\": \"true\", \"unix_read_write\": \"false\", \"cifs\": \"false\", \"nfsv3\": \"true\", \"nfsv3\": \"true\", \"nfsv4\": \"false\"}, {\"allowed_clients\":\"1.2.4.0/24\", \"rule_index\": \"2\", \"unix_read_only\": \"true\", \"unix_read_write\": \"false\", \"cifs\": \"false\", \"nfsv3\": \"true\", \"nfsv3\": \"true\", \"nfsv4\": \"false\"}]'"
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun ANF.
+    description: ''
+  - isRequired: true
+    name: --pool-name -p
+    summary: Nama kumpulan ANF.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --volume-name -n -v
+    summary: Nama volume ANF.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --export-policy
+    summary: Daftar json parameter untuk kebijakan ekspor yang berisi rule_index (Indeks pesanan), unix_read_only (Akses baca saja), unix_read_write (Akses baca dan tulis), cifs (Memungkinkan protokol CIFS), nfsv3 (Memungkinkan protokol NFSv3), nfsv4 (Memungkinkan protokol NFSv4) dan allowedClients (Spesifikasi masuk klien sebagai string yang dipisahkan koma dengan CIDR IPv4, Alamat host IPv4 dan nama host).
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --service-level
+    summary: Tingkat layanan ["Standard"|" Premium"|" Ekstrim"].
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --tags
+    summary: Daftar tag yang dipisahkan spasi untuk diterapkan ke volume.
+    description: ''
+  - name: --usage-threshold
+    summary: Kuota penyimpanan maksimum yang diizinkan untuk sistem file dalam byte. Min 100 GiB, maks 100TiB".
+    description: ''
+commands:
+- az_netappfiles_volume_create
+- az_netappfiles_volume_delete
+- az_netappfiles_volume_list
+- az_netappfiles_volume_show
+- az_netappfiles_volume_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola Sumber Daya Volume Azure NetApp Files (ANF).
+  ms.openlocfilehash: d17378ec717cf3c6b77cb2ba471135544fed5bb6
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140939408"
