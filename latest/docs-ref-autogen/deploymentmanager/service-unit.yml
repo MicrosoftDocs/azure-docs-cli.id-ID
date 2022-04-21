@@ -1,0 +1,262 @@
+### YamlMime:AzureCLIGroup
+uid: az_deploymentmanager_service-unit
+name: az deploymentmanager service-unit
+summary: Mengelola unit layanan.
+description: Unit layanan digabungkan untuk membentuk layanan dalam topologi layanan.
+directCommands:
+- uid: az_deploymentmanager_service-unit_create
+  name: az deploymentmanager service-unit create
+  summary: Membuat unit layanan di bawah topologi layanan dan layanan yang ditentukan.
+  description: ''
+  syntax: >-
+    az deploymentmanager service-unit create --deployment-mode {Complete, Incremental}
+                                             --name
+                                             --parameters-path
+                                             --resource-group
+                                             --service-name
+                                             --service-topology-name
+                                             --target-resource-group
+                                             --template-path
+                                             [--location]
+                                             [--tags]
+  examples:
+  - summary: Buat unit layanan baru menggunakan jalur relatif ke sumber artefak.
+    syntax: az deploymentmanager service-unit create -g rg1 -l location --service-topology-name contosoServiceTopology --service-name contosoService1 -n ContosoService1Storage --target-resource-group service1ResourceGroup --deployment-mode Incremental --template-path "Templates/Service1.Storage.json" --parameters-path "Parameters/Service1.Storage.Parameters.json"
+  - summary: Buat unit layanan baru menggunakan SAS Uri untuk templat dan parameter.
+    syntax: >-
+      az deploymentmanager service-unit create -g rg1 -l location --service-topology-name contosoServiceTopology --service-name contosoService1 -n ContosoService1Storage \
+          --target-resource-group service1ResourceGroup --deployment-mode Incremental \
+          --template-path "https://ContosoStorage.blob.core.windows.net/ContosoArtifacts/Templates/Service2.Storage.json?sasParameters" \
+          --parameters-path "https://ContosoStorage.blob.core.windows.net/ContosoArtifacts/Parameters/Service2Storage.Parameters.json?sasParameters"
+  requiredParameters:
+  - isRequired: true
+    name: --deployment-mode
+    defaultValue: DeploymentMode.incremental
+    parameterValueGroup: Complete, Incremental
+    summary: 'Jenis mode depoyment yang akan digunakan saat menyebarkan unit layanan. Nilai yang mungkin: Inkremental, Selesai.'
+    description: ''
+  - isRequired: true
+    name: --name --service-unit-name -n
+    summary: Nama unit layanan.
+    description: ''
+  - isRequired: true
+    name: --parameters-path
+    summary: Jalur ke file parameter ARM. Baik SAS Uri lengkap atau jalur relatif di sumber artefak untuk topologi ini.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama layanan.
+    description: ''
+  - isRequired: true
+    name: --service-topology-name
+    summary: Nama topologi layanan.
+    description: ''
+  - isRequired: true
+    name: --target-resource-group
+    summary: Grup sumber daya tempat sumber daya di unit layanan harus disebarkan.
+    description: ''
+  - isRequired: true
+    name: --template-path
+    summary: Jalur ke file templat ARM. Baik SAS Uri lengkap atau jalur relatif di sumber artefak untuk topologi ini.
+    description: ''
+  optionalParameters:
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/deploymentmanager/_help.py
+- uid: az_deploymentmanager_service-unit_delete
+  name: az deploymentmanager service-unit delete
+  summary: Menghapus unit layanan.
+  description: ''
+  syntax: >-
+    az deploymentmanager service-unit delete --name
+                                             --resource-group
+                                             --service-name
+                                             --service-topology-name
+  examples:
+  - summary: Menghapus unit layanan.
+    syntax: az deploymentmanager service-unit delete -g rg1 --service-topology-name contosoServiceTopology --service-name contosoService1 -n ContosoService1Storage
+  requiredParameters:
+  - isRequired: true
+    name: --name --service-unit-name -n
+    summary: Nama unit layanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama layanan.
+    description: ''
+  - isRequired: true
+    name: --service-topology-name
+    summary: Nama topologi layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/deploymentmanager/_help.py
+- uid: az_deploymentmanager_service-unit_list
+  name: az deploymentmanager service-unit list
+  summary: Mencantumkan semua unit layanan dalam layanan.
+  description: ''
+  syntax: >-
+    az deploymentmanager service-unit list --resource-group
+                                           --service-name
+                                           --service-topology-name
+  examples:
+  - summary: Cantumkan unit layanan dalam topologi dan layanan layanan yang diberikan.
+    syntax: az deploymentmanager service-unit list -g rg1 --service-topology-name contosoServiceTopology --service-name contosoService1
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama layanan.
+    description: ''
+  - isRequired: true
+    name: --service-topology-name
+    summary: Nama topologi layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/deploymentmanager/_help.py
+- uid: az_deploymentmanager_service-unit_show
+  name: az deploymentmanager service-unit show
+  summary: Dapatkan detail unit layanan.
+  description: ''
+  syntax: >-
+    az deploymentmanager service-unit show --name
+                                           --resource-group
+                                           --service-name
+                                           --service-topology-name
+  examples:
+  - summary: Dapatkan unit layanan.
+    syntax: az deploymentmanager service-unit show -g rg1 --service-topology-name contosoServiceTopology --service-name contosoService1 -n ContosoService1Storage
+  requiredParameters:
+  - isRequired: true
+    name: --name --service-unit-name -n
+    summary: Nama unit layanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama layanan.
+    description: ''
+  - isRequired: true
+    name: --service-topology-name
+    summary: Nama topologi layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/deploymentmanager/_help.py
+- uid: az_deploymentmanager_service-unit_update
+  name: az deploymentmanager service-unit update
+  summary: Memperbarui unit layanan.
+  description: ''
+  syntax: >-
+    az deploymentmanager service-unit update --name
+                                             --resource-group
+                                             --service-name
+                                             --service-topology-name
+                                             [--add]
+                                             [--deployment-mode {Complete, Incremental}]
+                                             [--force-string]
+                                             [--parameters-path]
+                                             [--remove]
+                                             [--set]
+                                             [--tags]
+                                             [--target-resource-group]
+                                             [--template-path]
+  examples:
+  - summary: Memperbarui unit layanan.
+    syntax: az deploymentmanager service-unit update -g rg1 --service-topology-name contosoServiceTopology --service-name contosoService1 -n ContosoService1Storage --target-resource-group service1ResourceGroupUpdated
+  - summary: Memperbarui unit layanan. (dibuat otomatis)
+    syntax: az deploymentmanager service-unit update --deployment-mode Incremental --resource-group rg1 --service-name contosoService1 --service-topology-name contosoServiceTopology --service-unit-name ContosoService1Storage
+  requiredParameters:
+  - isRequired: true
+    name: --name --service-unit-name -n
+    summary: Nama unit layanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama layanan.
+    description: ''
+  - isRequired: true
+    name: --service-topology-name
+    summary: Nama topologi layanan.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --deployment-mode
+    defaultValue: DeploymentMode.incremental
+    parameterValueGroup: Complete, Incremental
+    summary: 'Jenis mode depoyment yang akan digunakan saat menyebarkan unit layanan. Nilai yang mungkin: Inkremental, Selesai.'
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --parameters-path
+    summary: Jalur ke file parameter ARM. Baik SAS Uri lengkap atau jalur relatif di sumber artefak untuk topologi ini.
+    description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --target-resource-group
+    summary: Grup sumber daya tempat sumber daya di unit layanan harus disebarkan.
+    description: ''
+  - name: --template-path
+    summary: Jalur ke file templat ARM. Baik SAS Uri lengkap atau jalur relatif di sumber artefak untuk topologi ini.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/deploymentmanager/_help.py
+commands:
+- az_deploymentmanager_service-unit_create
+- az_deploymentmanager_service-unit_delete
+- az_deploymentmanager_service-unit_list
+- az_deploymentmanager_service-unit_show
+- az_deploymentmanager_service-unit_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 01/30/2020
+  description: Unit layanan digabungkan untuk membentuk layanan dalam topologi layanan.
+  ms.openlocfilehash: 2c756e80fcbfd610aab2161d28c24c4540c5604a
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140942162"

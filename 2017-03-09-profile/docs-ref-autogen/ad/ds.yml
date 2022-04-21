@@ -1,0 +1,418 @@
+### YamlMime:AzureCLIGroup
+uid: az_ad_ds
+name: az ad ds
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **iklan** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **az ad ds** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola layanan domain dengan azure active directory.
+description: ''
+directCommands:
+- uid: az_ad_ds_create
+  name: az ad ds create
+  summary: Buat layanan domain baru dengan parameter yang ditentukan.
+  description: ''
+  syntax: >-
+    az ad ds create --domain
+                    --name
+                    --replica-sets
+                    --resource-group
+                    [--domain-config-type {FullySynced, ResourceTrusting}]
+                    [--external-access {Disabled, Enabled}]
+                    [--filtered-sync {Disabled, Enabled}]
+                    [--ldaps {Disabled, Enabled}]
+                    [--no-wait]
+                    [--notify-dc-admins {Disabled, Enabled}]
+                    [--notify-global-admins {Disabled, Enabled}]
+                    [--notify-others]
+                    [--ntlm-v1 {Disabled, Enabled}]
+                    [--pfx-cert]
+                    [--pfx-cert-pwd]
+                    [--resource-forest {Disabled, Enabled}]
+                    [--settings]
+                    [--sku {Enterprise, Premium, Standard}]
+                    [--sync-kerberos-pwd {Disabled, Enabled}]
+                    [--sync-ntlm-pwd {Disabled, Enabled}]
+                    [--sync-on-prem-pwd {Disabled, Enabled}]
+                    [--tags]
+                    [--tls-v1 {Disabled, Enabled}]
+  examples:
+  - summary: Membuat Layanan Domain
+    syntax: az ad ds create --domain "TestDS.com" --replica-sets location="West US" subnet-id="<subnetId>" --name "TestDS.com" --resource-group "rg"
+  - summary: Membuat Layanan Domain dengan pengaturan tertentu (Hentian baris hanya untuk keterbagian)
+    syntax: >-
+      az ad ds create --domain "TestDS.com" --replica-sets location="West US" subnet-id="<subnetId>" --name "TestDS.com" --resource-group "rg"
+
+      --ntlm-v1 "Enabled" --sync-ntlm-pwd "Enabled" --tls-v1 "Disabled" --filtered-sync "Enabled" --external-access "Enabled"
+
+      --ldaps "Enabled" --pfx-cert "cert or path to cert" --pfx-cert-pwd "<pfxCertificatePassword>"
+
+      --notify-others "a@gmail.com" "b@gmail.com" --notify-dc-admins "Enabled" --notify-global-admins "Enabled"
+  requiredParameters:
+  - isRequired: true
+    name: --domain
+    summary: Nama domain Azure tempat pengguna ingin menyebarkan Domain Services.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama layanan domain.
+    description: ''
+  - isRequired: true
+    name: --replica-sets
+    summary: Daftar ReplicaSets.
+    description: >-
+      Penggunaan: --replica-sets location=XX subnet-id=XX
+
+
+      lokasi: Subnet-id lokasi jaringan virtual: Id subnet tempat Domain Services akan disebarkan.
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --replica-sets.
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --domain-config-type
+    parameterValueGroup: FullySynced, ResourceTrusting
+    summary: Jenis Konfigurasi Domain.
+    description: ''
+  - name: --external-access
+    parameterValueGroup: Disabled, Enabled
+    summary: Bendera untuk menentukan apakah akses LDAP Aman melalui internet diaktifkan atau dinonaktifkan atau tidak.
+    description: ''
+  - name: --filtered-sync
+    parameterValueGroup: Disabled, Enabled
+    summary: Bendera Diaktifkan atau Dinonaktifkan untuk mengaktifkan sinkronisasi terfilter berbasis Grup.
+    description: ''
+  - name: --ldaps
+    parameterValueGroup: Disabled, Enabled
+    summary: Bendera untuk menentukan apakah LDAP Aman diaktifkan atau dinonaktifkan atau tidak.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --notify-dc-admins
+    parameterValueGroup: Disabled, Enabled
+    summary: Jika admin pengontrol domain akan diberi tahu.
+    description: ''
+  - name: --notify-global-admins
+    parameterValueGroup: Disabled, Enabled
+    summary: Haruskah admin global diberi tahu.
+    description: ''
+  - name: --notify-others
+    summary: Daftar penerima tambahan.
+    description: ''
+  - name: --ntlm-v1
+    parameterValueGroup: Disabled, Enabled
+    summary: Bendera untuk menentukan apakah NtlmV1 diaktifkan atau tidak.
+    description: ''
+  - name: --pfx-cert
+    summary: Sertifikat yang diperlukan untuk mengonfigurasi Secure LDAP. Parameter yang diteruskan di sini harus menjadi jalur file ke file pfx sertifikat atau representasi base64encoded dari file pfx sertifikat.
+    description: ''
+  - name: --pfx-cert-pwd
+    summary: Kata sandi untuk mendekripsi file pfx sertifikat LDAP Aman yang disediakan.
+    description: ''
+  - name: --resource-forest
+    parameterValueGroup: Disabled, Enabled
+    summary: Hutan Sumber Daya.
+    description: ''
+  - name: --settings
+    summary: Daftar pengaturan untuk Resource Forest. Ini dapat berupa string berformat JSON atau lokasi ke file yang berisi objek JSON.
+    description: 'Format objek JSON pengaturan untuk Resource Forest: [ { "trusted_domain_fqdn": "XX", "trust_direction": "XX", "friendly_name": "XX", "remote_dns_ips": "XX", "trust_password": "XX" }, ... n ].'
+  - name: --sku
+    parameterValueGroup: Enterprise, Premium, Standard
+    summary: Jenis Sku.
+    description: ''
+  - name: --sync-kerberos-pwd
+    parameterValueGroup: Disabled, Enabled
+    summary: Bendera untuk menentukan apakah SyncKerberosPasswords diaktifkan atau dinonaktifkan atau tidak.
+    description: ''
+  - name: --sync-ntlm-pwd
+    parameterValueGroup: Disabled, Enabled
+    summary: Bendera untuk menentukan apakah SyncNtlmPasswords diaktifkan atau dinonaktifkan atau tidak.
+    description: ''
+  - name: --sync-on-prem-pwd
+    parameterValueGroup: Disabled, Enabled
+    summary: Bendera untuk menentukan apakah SyncOnPremPasswords diaktifkan atau dinonaktifkan atau tidak.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --tls-v1
+    parameterValueGroup: Disabled, Enabled
+    summary: Bendera untuk menentukan apakah TlsV1 diaktifkan atau tidak.
+    description: ''
+- uid: az_ad_ds_delete
+  name: az ad ds delete
+  summary: Operasi Hapus Layanan Domain menghapus Layanan Domain yang sudah ada.
+  description: ''
+  syntax: >-
+    az ad ds delete --name
+                    --resource-group
+                    [--no-wait]
+                    [--yes]
+  examples:
+  - summary: Menghapus Layanan Domain
+    syntax: az ad ds delete --name "TestDomainService.com" --resource-group "TestResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama layanan domain.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_ad_ds_list
+  name: az ad ds list
+  summary: Mencantumkan layanan domain dalam grup sumber daya atau dalam langganan.
+  description: ''
+  syntax: az ad ds list [--resource-group]
+  examples:
+  - summary: Mencantumkan Layanan Domain Menurut Grup
+    syntax: az ad ds list --resource-group "TestResourceGroup"
+  - summary: Mencantumkan Layanan Domain Menurut Sub
+    syntax: az ad ds list
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_ad_ds_show
+  name: az ad ds show
+  summary: Dapatkan layanan domain yang ditentukan.
+  description: ''
+  syntax: >-
+    az ad ds show --name
+                  --resource-group
+  examples:
+  - summary: Dapatkan Layanan Domain
+    syntax: az ad ds show --name "TestDomainService.com" --resource-group "TestResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama layanan domain.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_ad_ds_update
+  name: az ad ds update
+  summary: Perbarui properti penyebaran yang ada untuk layanan domain.
+  description: ''
+  syntax: >-
+    az ad ds update --name
+                    --resource-group
+                    [--domain-config-type {FullySynced, ResourceTrusting}]
+                    [--external-access {Disabled, Enabled}]
+                    [--filtered-sync {Disabled, Enabled}]
+                    [--ldaps {Disabled, Enabled}]
+                    [--no-wait]
+                    [--notify-dc-admins {Disabled, Enabled}]
+                    [--notify-global-admins {Disabled, Enabled}]
+                    [--notify-others]
+                    [--ntlm-v1 {Disabled, Enabled}]
+                    [--pfx-cert]
+                    [--pfx-cert-pwd]
+                    [--replica-sets]
+                    [--resource-forest {Disabled, Enabled}]
+                    [--settings]
+                    [--sku {Enterprise, Premium, Standard}]
+                    [--sync-kerberos-pwd {Disabled, Enabled}]
+                    [--sync-ntlm-pwd {Disabled, Enabled}]
+                    [--sync-on-prem-pwd {Disabled, Enabled}]
+                    [--tags]
+                    [--tls-v1 {Disabled, Enabled}]
+  examples:
+  - summary: Memperbarui sku
+    syntax: az ad ds update --name "TestDS.com" --resource-group "rg" --sku "Enterprise"
+  - summary: Memperbarui pengaturan keamanan domain
+    syntax: az ad ds update --name "TestDS.com" --resource-group "rg" --ntlm-v1 "Enabled" --tls-v1 "Disabled"
+  - summary: Memperbarui pengaturan ldaps
+    syntax: az ad ds update --name "TestDS.com" --resource-group "rg" --external-access "Enabled" --ldaps "Enabled" --pfx-cert "MIIDPDCCAiSg..." --pfx-cert-pwd "<pfxCertificatePassword>"
+  - summary: Memperbarui pengaturan pemberitahuan
+    syntax: az ad ds update --name "TestDS.com" --resource-group "rg" --notify-dc-admins "Enabled" --notify-global-admins "Disabled"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama layanan domain.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --domain-config-type
+    parameterValueGroup: FullySynced, ResourceTrusting
+    summary: Jenis Konfigurasi Domain.
+    description: ''
+  - name: --external-access
+    parameterValueGroup: Disabled, Enabled
+    summary: Bendera untuk menentukan apakah akses LDAP Aman melalui internet diaktifkan atau dinonaktifkan atau tidak.
+    description: ''
+  - name: --filtered-sync
+    parameterValueGroup: Disabled, Enabled
+    summary: Bendera Diaktifkan atau Dinonaktifkan untuk mengaktifkan sinkronisasi terfilter berbasis Grup.
+    description: ''
+  - name: --ldaps
+    parameterValueGroup: Disabled, Enabled
+    summary: Bendera untuk menentukan apakah LDAP Aman diaktifkan atau dinonaktifkan atau tidak.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --notify-dc-admins
+    parameterValueGroup: Disabled, Enabled
+    summary: Jika admin pengontrol domain akan diberi tahu.
+    description: ''
+  - name: --notify-global-admins
+    parameterValueGroup: Disabled, Enabled
+    summary: Haruskah admin global diberi tahu.
+    description: ''
+  - name: --notify-others
+    summary: Daftar penerima tambahan.
+    description: ''
+  - name: --ntlm-v1
+    parameterValueGroup: Disabled, Enabled
+    summary: Bendera untuk menentukan apakah NtlmV1 diaktifkan atau tidak.
+    description: ''
+  - name: --pfx-cert
+    summary: Sertifikat yang diperlukan untuk mengonfigurasi Secure LDAP. Parameter yang diteruskan di sini harus menjadi jalur file ke file pfx sertifikat atau representasi base64encoded dari file pfx sertifikat.
+    description: ''
+  - name: --pfx-cert-pwd
+    summary: Kata sandi untuk mendekripsi file pfx sertifikat LDAP Aman yang disediakan.
+    description: ''
+  - name: --replica-sets
+    summary: Daftar ReplicaSets.
+    description: >-
+      Penggunaan: --replica-sets location=XX subnet-id=XX
+
+
+      lokasi: Subnet-id lokasi jaringan virtual: Id subnet tempat Domain Services akan disebarkan.
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --replica-sets.
+  - name: --resource-forest
+    parameterValueGroup: Disabled, Enabled
+    summary: Hutan Sumber Daya.
+    description: ''
+  - name: --settings
+    summary: Daftar pengaturan untuk Resource Forest. Ini dapat berupa string berformat JSON atau lokasi ke file yang berisi objek JSON.
+    description: 'Format objek JSON pengaturan untuk Resource Forest: [ { "trusted_domain_fqdn": "XX", "trust_direction": "XX", "friendly_name": "XX", "remote_dns_ips": "XX", "trust_password": "XX" }, ... n ].'
+  - name: --sku
+    parameterValueGroup: Enterprise, Premium, Standard
+    summary: Jenis Sku.
+    description: ''
+  - name: --sync-kerberos-pwd
+    parameterValueGroup: Disabled, Enabled
+    summary: Bendera untuk menentukan apakah SyncKerberosPasswords diaktifkan atau dinonaktifkan atau tidak.
+    description: ''
+  - name: --sync-ntlm-pwd
+    parameterValueGroup: Disabled, Enabled
+    summary: Bendera untuk menentukan apakah SyncNtlmPasswords diaktifkan atau dinonaktifkan atau tidak.
+    description: ''
+  - name: --sync-on-prem-pwd
+    parameterValueGroup: Disabled, Enabled
+    summary: Bendera untuk menentukan apakah SyncOnPremPasswords diaktifkan atau dinonaktifkan atau tidak.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --tls-v1
+    parameterValueGroup: Disabled, Enabled
+    summary: Bendera untuk menentukan apakah TlsV1 diaktifkan atau tidak.
+    description: ''
+- uid: az_ad_ds_wait
+  name: az ad ds wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi ad ds terpenuhi.
+  description: ''
+  syntax: >-
+    az ad ds wait --name
+                  --resource-group
+                  [--created]
+                  [--custom]
+                  [--deleted]
+                  [--exists]
+                  [--interval]
+                  [--timeout]
+                  [--updated]
+  examples:
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga ad ds berhasil dibuat.
+    syntax: az ad ds wait --name "TestDomainService.com" --resource-group "TestResourceGroup" --created
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga ad ds berhasil diperbarui.
+    syntax: az ad ds wait --name "TestDomainService.com" --resource-group "TestResourceGroup" --updated
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga ad ds berhasil dihapus.
+    syntax: az ad ds wait --name "TestDomainService.com" --resource-group "TestResourceGroup" --deleted
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama layanan domain.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_ad_ds_create
+- az_ad_ds_delete
+- az_ad_ds_list
+- az_ad_ds_show
+- az_ad_ds_update
+- az_ad_ds_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola layanan domain dengan azure active directory.
+  ms.openlocfilehash: debb0421b3df3a416bd7c2cc8fe459789be51263
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140932838"
