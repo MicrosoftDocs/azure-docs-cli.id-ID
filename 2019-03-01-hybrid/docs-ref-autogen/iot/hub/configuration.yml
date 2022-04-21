@@ -1,0 +1,315 @@
+### YamlMime:AzureCLIGroup
+uid: az_iot_hub_configuration
+name: az iot hub configuration
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **azure-iot** untuk Azure CLI (versi 2.24.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **konfigurasi hub az iot** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola konfigurasi manajemen perangkat otomatis IoT dalam skala besar.
+description: ''
+directCommands:
+- uid: az_iot_hub_configuration_create
+  name: az iot hub configuration create
+  summary: Buat konfigurasi manajemen perangkat otomatis IoT di IoT Hub target.
+  description: >-
+    Konten konfigurasi adalah json dan sedikit bervariasi berdasarkan niat perangkat atau modul.
+
+
+    Konfigurasi perangkat dalam bentuk {"deviceContent":{...}} atau {"content":{"deviceContent":{...}}}
+
+
+    Konfigurasi modul dalam bentuk {"moduleContent":{...}} atau {"content":{"moduleContent":{...}}}
+
+
+    Konfigurasi dapat ditentukan dengan metrik yang disediakan pengguna untuk evaluasi sesuai permintaan.
+
+    Metrik pengguna adalah json dan dalam bentuk {"kueri":{...}} atau {"metrik":{"kueri":{...}}}.
+
+
+    Catatan: Kondisi target untuk modul harus dimulai dengan "dari devices.modules where".
+  syntax: >-
+    az iot hub configuration create --config-id
+                                    --content
+                                    [--auth-type {key, login}]
+                                    [--hub-name]
+                                    [--lab]
+                                    [--login]
+                                    [--metrics]
+                                    [--pri]
+                                    [--resource-group]
+                                    [--target-condition]
+  examples:
+  - summary: Buat konfigurasi perangkat dengan prioritas 3 yang berlaku pada kondisi saat perangkat ditandai dalam bangunan 9 dan lingkungannya adalah 'uji'.
+    syntax: az iot hub configuration create -c {config_name} -n {iothub_name} --content device_content.json --target-condition "tags.building=9 and tags.environment='test'" --priority 3
+  - summary: Membuat konfigurasi perangkat dengan label dan menyediakan metrik pengguna sebaris (contoh sintaks bash)
+    syntax: "az iot hub configuration create -c {config_name} -n {iothub_name} --content device_content.json --target-condition \"tags.building=9\" --labels '{\"key0\":\"value0\", \"key1\":\"value1\"}' --priority 10 --metrics '{\"metrics\": {\"queries\": {\"mymetric\": \"select deviceId from devices where tags.location='US'\"}}}'"
+  - summary: Membuat konfigurasi modul dengan label dan menyediakan metrik pengguna sebaris (contoh sintaks cmd)
+    syntax: "az iot hub configuration create -c {config_name} -n {iothub_name} --content module_content.json --target-condition \"from devices.modules where tags.building=9\" --labels \"{\\\"key0\\\":\\\"value0\\\", \\\"key1\\\":\\\"value1\\\"}\" --metrics \"{\\\"metrics\\\": {\\\"queries\\\": {\\\"mymetric\\\": \\\"select moduleId from devices.modules where tags.location='US'\\\"}}}\""
+  - summary: Membuat konfigurasi modul dengan konten dan metrik pengguna sebaris (contoh sintaks powershell)
+    syntax: "az iot hub configuration create -c {config_name} -n {iothub_name} --content '{\\\"moduleContent\\\": {\\\"properties.desired.chillerWaterSettings\\\": {\\\"temperature\\\": 38, \\\"pressure\\\": 78}}}' --target-condition \"from devices.modules where tags.building=9\" --priority 1 --metrics '{\\\"metrics\\\": {\\\"queries\\\": {\\\"mymetric\\\":\\\"select moduleId from devices.modules where tags.location=''US''\\\"}}}'"
+  requiredParameters:
+  - isRequired: true
+    name: --config-id -c
+    summary: Nama konfigurasi perangkat target.
+    description: ''
+  - isRequired: true
+    name: --content -k
+    summary: Konten konfigurasi perangkat. Sediakan jalur file atau json mentah.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --lab --labels
+    summary: 'Peta label yang akan diterapkan ke konfigurasi target. Contoh format: {"key0":"value0", "key1":"value1"}.'
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --metrics -m
+    summary: Definisi metrik konfigurasi perangkat. Sediakan jalur file atau json mentah.
+    description: ''
+  - name: --pri --priority
+    summary: Bobot konfigurasi perangkat jika terjadi aturan yang bersaing (kemenangan tertinggi).
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --target-condition --tc -t
+    summary: Kondisi target tempat konfigurasi perangkat atau modul berlaku. Konfigurasi tanpa kondisi target tidak akan menargetkan perangkat atau modul.
+    description: ''
+- uid: az_iot_hub_configuration_delete
+  name: az iot hub configuration delete
+  summary: Menghapus konfigurasi perangkat IoT.
+  description: ''
+  syntax: >-
+    az iot hub configuration delete --config-id
+                                    [--auth-type {key, login}]
+                                    [--etag]
+                                    [--hub-name]
+                                    [--login]
+                                    [--resource-group]
+  requiredParameters:
+  - isRequired: true
+    name: --config-id -c
+    summary: Nama konfigurasi perangkat target.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --etag -e
+    summary: Tag Etag atau entitas yang sesuai dengan status terakhir sumber daya. Jika tidak ada etag yang disediakan, nilai '\*' digunakan.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_iot_hub_configuration_list
+  name: az iot hub configuration list
+  summary: Mencantumkan konfigurasi manajemen perangkat otomatis IoT dalam IoT Hub.
+  description: ''
+  syntax: >-
+    az iot hub configuration list [--auth-type {key, login}]
+                                  [--hub-name]
+                                  [--login]
+                                  [--resource-group]
+                                  [--top]
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --top
+    summary: Jumlah maksimum konfigurasi yang akan dikembalikan. Secara default semua konfigurasi dikembalikan.
+    description: ''
+- uid: az_iot_hub_configuration_show
+  name: az iot hub configuration show
+  summary: Dapatkan detail konfigurasi manajemen perangkat otomatis IoT.
+  description: ''
+  syntax: >-
+    az iot hub configuration show --config-id
+                                  [--auth-type {key, login}]
+                                  [--hub-name]
+                                  [--login]
+                                  [--resource-group]
+  requiredParameters:
+  - isRequired: true
+    name: --config-id -c
+    summary: Nama konfigurasi perangkat target.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_iot_hub_configuration_show-metric
+  name: az iot hub configuration show-metric
+  summary: Mengevaluasi pengguna target atau metrik sistem yang ditentukan dalam konfigurasi perangkat IoT.
+  description: ''
+  syntax: >-
+    az iot hub configuration show-metric --config-id
+                                         --metric-id
+                                         [--auth-type {key, login}]
+                                         [--hub-name]
+                                         [--login]
+                                         [--metric-type {system, user}]
+                                         [--resource-group]
+  examples:
+  - summary: Mengevaluasi metrik 'warningLimit' yang ditentukan pengguna
+    syntax: az iot hub configuration show-metric -m warningLimit -c {configuration_name} -n {iothub_name}
+  - summary: Mengevaluasi metrik sistem 'appliedCount'
+    syntax: az iot hub configuration show-metric --metric-id appliedCount -c {configuration_name} -n {iothub_name} --metric-type system
+  requiredParameters:
+  - isRequired: true
+    name: --config-id -c
+    summary: Nama konfigurasi perangkat target.
+    description: ''
+  - isRequired: true
+    name: --metric-id -m
+    summary: Metrik target untuk evaluasi.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --metric-type --mt
+    defaultValue: user
+    parameterValueGroup: system, user
+    summary: Menunjukkan koleksi metrik mana yang harus digunakan untuk mencari metrik.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_iot_hub_configuration_update
+  name: az iot hub configuration update
+  summary: >-
+    Memperbarui properti yang ditentukan dari konfigurasi manajemen perangkat otomatis IoT.
+
+
+    Gunakan --set diikuti oleh penetapan properti untuk memperbarui konfigurasi.
+
+
+    Catatan: Konten konfigurasi tidak dapat diubah. Properti konfigurasi yang dapat diperbarui adalah 'label', 'metrik', 'prioritas' dan 'targetCondition'.
+  description: ''
+  syntax: >-
+    az iot hub configuration update --config-id
+                                    [--add]
+                                    [--auth-type {key, login}]
+                                    [--etag]
+                                    [--force-string]
+                                    [--hub-name]
+                                    [--login]
+                                    [--remove]
+                                    [--resource-group]
+                                    [--set]
+  examples:
+  - summary: Mengubah prioritas konfigurasi perangkat dan memperbarui kondisi targetnya
+    syntax: az iot hub configuration update -c {configuration_name} -n {iothub_name} --set priority=10 targetCondition="tags.building=43 and tags.environment='dev'"
+  requiredParameters:
+  - isRequired: true
+    name: --config-id -c
+    summary: Nama konfigurasi perangkat target.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --etag -e
+    summary: Tag Etag atau entitas yang sesuai dengan status terakhir sumber daya. Jika tidak ada etag yang disediakan, nilai '\*' digunakan.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string dan nama koneksi entitas disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+commands:
+- az_iot_hub_configuration_create
+- az_iot_hub_configuration_delete
+- az_iot_hub_configuration_list
+- az_iot_hub_configuration_show
+- az_iot_hub_configuration_show-metric
+- az_iot_hub_configuration_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola konfigurasi manajemen perangkat otomatis IoT dalam skala besar.
+  ms.openlocfilehash: 35863692969d56bd250e5b48673ad933ebea51fd
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141098545"
