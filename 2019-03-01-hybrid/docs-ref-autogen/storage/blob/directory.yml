@@ -1,0 +1,563 @@
+### YamlMime:AzureCLIGroup
+uid: az_storage_blob_directory
+name: az storage blob directory
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **pratinjau penyimpanan** untuk Azure CLI (versi 2.25.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **direktori blob penyimpanan az** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola direktori blob dalam kontainer akun penyimpanan.
+description: Untuk menggunakan perintah direktori, pastikan jenis akun penyimpanan Anda adalah StorageV2.
+directCommands:
+- uid: az_storage_blob_directory_create
+  name: az storage blob directory create
+  summary: Buat direktori blob penyimpanan dalam kontainer penyimpanan.
+  description: Buat direktori blob penyimpanan yang dapat berisi direktori atau blob lain dalam kontainer penyimpanan.
+  syntax: >-
+    az storage blob directory create --container-name
+                                     --directory-path
+                                     [--account-key]
+                                     [--account-name]
+                                     [--auth-mode {key, login}]
+                                     [--connection-string]
+                                     [--lease-id]
+                                     [--metadata]
+                                     [--permissions]
+                                     [--sas-token]
+                                     [--timeout]
+                                     [--umask]
+  examples:
+  - summary: Buat direktori blob penyimpanan dalam kontainer penyimpanan.
+    syntax: az storage blob directory create -c MyContainer -d MyDirectoryPath --account-name MyStorageAccount
+  - summary: Buat direktori blob penyimpanan dengan izin dan umask.
+    syntax: az storage blob directory create -c MyContainer -d MyDirectoryPath --account-name MyStorageAccount --permissions rwxrwxrwx --umask 0000
+  requiredParameters:
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --directory-path -d
+    summary: Nama jalur direktori.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --lease-id
+    summary: Diperlukan jika direktori yang akan ditimpa memiliki sewa aktif.
+    description: ''
+  - name: --metadata
+    summary: Metadata dalam pasangan key=value yang dipisahkan spasi. Ini menimpa metadata yang ada.
+    description: ''
+  - name: --permissions
+    summary: Opsional dan hanya valid jika Namespace Hierarki diaktifkan untuk akun tersebut. Mengatur izin akses POSIX untuk pemilik file, grup pemilik file, dan lainnya. Setiap kelas dapat diberikan izin baca, tulis, atau eksekusi. Bit lengket juga didukung. Baik simbolis (rwxrw-rw-) dan notasi oktal 4 digit (misalnya 0766) didukung.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  - name: --umask
+    defaultValue: "0027"
+    summary: Opsional dan hanya valid jika Namespace Hierarki diaktifkan untuk akun tersebut. Umask membatasi pengaturan izin untuk file dan direktori, dan hanya akan diterapkan ketika Acl default tidak ada di direktori induk. Jika bit umask telah ditetapkan, itu berarti bahwa izin yang sesuai akan dinonaktifkan. Dengan cara ini, izin yang dihasilkan diberikan oleh p & ^u, di mana p adalah izin dan Anda adalah umask. Hanya notasi oktal 4 digit (misalnya 0022) yang didukung di sini.
+    description: ''
+- uid: az_storage_blob_directory_delete
+  name: az storage blob directory delete
+  summary: Menghapus direktori blob penyimpanan dalam kontainer penyimpanan.
+  description: Perilaku operasi ini berbeda tergantung pada apakah Namespace Hierarki diaktifkan; jika ya, maka operasi penghapusan dapat atomik dan seketika; jika tidak, operasi dilakukan dalam batch dan token kelanjutan dapat dikembalikan.
+  syntax: >-
+    az storage blob directory delete --container-name
+                                     --directory-path
+                                     [--account-key]
+                                     [--account-name]
+                                     [--auth-mode {key, login}]
+                                     [--connection-string]
+                                     [--fail-not-exist]
+                                     [--if-match]
+                                     [--if-modified-since]
+                                     [--if-none-match]
+                                     [--if-unmodified-since]
+                                     [--lease-id]
+                                     [--marker]
+                                     [--recursive]
+                                     [--sas-token]
+                                     [--timeout]
+  examples:
+  - summary: Menghapus direktori blob penyimpanan dalam kontainer penyimpanan.
+    syntax: az storage blob directory delete -c MyContainer -d MyDirectoryPath --account-name MyStorageAccount
+  requiredParameters:
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --directory-path -d
+    summary: Nama jalur direktori.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --fail-not-exist
+    summary: Tentukan apakah akan melemparkan pengecualian ketika direktori tidak ada.
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya cocok dengan nilai yang ditentukan.
+    description: ''
+  - name: --if-modified-since
+    summary: Ubah hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya tidak cocok dengan nilai yang ditentukan.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Ubah hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --lease-id
+    summary: Diperlukan jika direktori memiliki sewa aktif.
+    description: ''
+  - name: --marker
+    summary: Opsional. Saat menghapus direktori tanpa Namespace Hierarkis, jumlah jalur yang dihapus dengan setiap pemanggilan dibatasi. Jika jumlah jalur yang akan dihapus melebihi batas ini, token kelanjutan akan dikembalikan. Ketika token kelanjutan dikembalikan, token tersebut harus ditentukan dalam pemanggilan operasi penghapusan berikutnya untuk terus menghapus direktori.
+    description: ''
+  - name: --recursive
+    summary: Jika "true", semua jalur di bawah direktori akan dihapus. Jika "false" dan direktori tidak kosong, kesalahan terjadi.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+- uid: az_storage_blob_directory_download
+  name: az storage blob directory download
+  summary: Unduh blob ke jalur file lokal.
+  description: ''
+  syntax: >-
+    az storage blob directory download --container
+                                       --destination-path
+                                       --source-path
+                                       [--account-key]
+                                       [--account-name]
+                                       [--auth-mode {key, login}]
+                                       [--connection-string]
+                                       [--recursive]
+                                       [--sas-token]
+  examples:
+  - summary: Unduh satu blob dalam direktori blob penyimpanan.
+    syntax: az storage blob directory download -c MyContainer --account-name MyStorageAccount -s "path/to/blob" -d "<local-path>"
+  - summary: Unduh seluruh direktori dalam kontainer penyimpanan.
+    syntax: az storage blob directory download -c MyContainer --account-name MyStorageAccount -s SourceDirectoryPath -d "<local-path>" --recursive
+  - summary: Unduh seluruh subdirektori direktori blob penyimpanan.
+    syntax: az storage blob directory download -c MyContainer --account-name MyStorageAccount -s "path/to/subdirectory" -d "<local-path>" --recursive
+  requiredParameters:
+  - isRequired: true
+    name: --container -c
+    summary: Kontainer sumber unduhan.
+    description: ''
+  - isRequired: true
+    name: --destination-path -d
+    summary: Jalur direktori lokal tujuan untuk diunduh.
+    description: ''
+  - isRequired: true
+    name: --source-path -s
+    summary: Jalur direktori sumber unduhan. Ini harus menjadi jalur absolut ke kontainer.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --recursive -r
+    summary: Mengunduh blob secara rekursif. Jika diaktifkan, semua blob termasuk blob dalam subdirektori akan diunduh.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+- uid: az_storage_blob_directory_exists
+  name: az storage blob directory exists
+  summary: Periksa keberadaan direktori blob dalam kontainer penyimpanan.
+  description: ''
+  syntax: >-
+    az storage blob directory exists --container-name
+                                     --directory-path
+                                     [--account-key]
+                                     [--account-name]
+                                     [--auth-mode {key, login}]
+                                     [--connection-string]
+                                     [--sas-token]
+                                     [--snapshot]
+                                     [--timeout]
+  examples:
+  - summary: Periksa keberadaan direktori blob dalam kontainer penyimpanan.
+    syntax: az storage blob directory exists -c MyContainer -d MyDirectoryPath --account-name MyStorageAccount
+  requiredParameters:
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --directory-path -d
+    summary: Nama jalur direktori.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --snapshot
+    summary: Parameter rekam jepret adalah nilai DateTime buram yang, saat ada, menentukan rekam jepret.
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+- uid: az_storage_blob_directory_list
+  name: az storage blob directory list
+  summary: Mencantumkan subdirektori blob dan blob dalam direktori penyimpanan.
+  description: ''
+  syntax: >-
+    az storage blob directory list --container-name
+                                   --directory-path
+                                   [--account-key]
+                                   [--account-name]
+                                   [--auth-mode {key, login}]
+                                   [--connection-string]
+                                   [--delimiter]
+                                   [--include]
+                                   [--marker]
+                                   [--num-results]
+                                   [--prefix]
+                                   [--sas-token]
+                                   [--timeout]
+  examples:
+  - summary: Mencantumkan subdirektori blob dan blob dalam direktori penyimpanan.
+    syntax: az storage blob directory list -c MyContainer -d DestinationDirectoryPath --account-name MyStorageAccount
+  requiredParameters:
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --directory-path -d
+    summary: Nama jalur direktori.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --delimiter
+    summary: Ketika permintaan menyertakan parameter ini, operasi mengembalikan elemen BlobPrefix dalam daftar hasil yang bertindak sebagai tempat penampung untuk semua blob yang namanya dimulai dengan substring yang sama hingga tampilan karakter pemisah. Pemisah mungkin satu karakter atau string.
+    description: ''
+  - name: --include
+    defaultValue: mc
+    summary: Menentukan satu atau beberapa himpunan data tambahan untuk disertakan dalam respons.
+    description: ''
+  - name: --marker
+    summary: Token kelanjutan buram. Nilai ini dapat diambil dari bidang next_marker dari objek generator sebelumnya jika num_results ditentukan dan generator tersebut telah selesai menghitung hasil. Jika ditentukan, generator ini akan mulai mengembalikan hasil dari titik di mana generator sebelumnya berhenti.
+    description: ''
+  - name: --num-results
+    defaultValue: "5000"
+    summary: Menentukan jumlah maksimum hasil yang akan dikembalikan. Sediakan "\*" untuk mengembalikan semua.
+    description: ''
+  - name: --prefix
+    summary: Memfilter hasil untuk mengembalikan hanya blob yang namanya dimulai dengan awalan yang ditentukan.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+- uid: az_storage_blob_directory_move
+  name: az storage blob directory move
+  summary: Pindahkan direktori penyimpanan ke direktori blob penyimpanan lain dalam kontainer penyimpanan.
+  description: Pindahkan direktori penyimpanan dan semua kontennya (yang dapat berisi direktori atau blob lain) ke direktori blob penyimpanan lain dalam kontainer penyimpanan. Perilaku operasi ini berbeda tergantung pada apakah Namespace Hierarki diaktifkan; jika ya, operasi pemindahan adalah atomik dan tidak ada penanda yang dikembalikan; jika tidak, operasi dilakukan dalam batch dan token kelanjutan dapat dikembalikan.
+  syntax: >-
+    az storage blob directory move --container-name
+                                   --destination-path
+                                   --source-path
+                                   [--account-key]
+                                   [--account-name]
+                                   [--auth-mode {key, login}]
+                                   [--connection-string]
+                                   [--lease-id]
+                                   [--move-mode {legacy, posix}]
+                                   [--sas-token]
+                                   [--source-if-match]
+                                   [--source-if-modified-since]
+                                   [--source-if-none-match]
+                                   [--source-if-unmodified-since]
+                                   [--source-lease-id]
+                                   [--timeout]
+  examples:
+  - summary: Pindahkan direktori penyimpanan ke direktori blob penyimpanan lain dalam kontainer penyimpanan.
+    syntax: az storage blob directory move -c MyContainer -d my-new-directory -s dir --account-name MyStorageAccount
+  - summary: Pindahkan subdirektori penyimpanan ke direktori blob penyimpanan lain dalam kontainer penyimpanan.
+    syntax: az storage blob directory move -c MyContainer -d my-new-directory -s dir/subdirectory --account-name MyStorageAccount
+  requiredParameters:
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --destination-path -d
+    summary: Jalur direktori blob tujuan. Ini bisa menjadi nama direktori atau subdirektori, misalnya dir, dir/subdir. Jika jalur tujuan ada dan kosong, sumber akan dipindahkan ke jalur tujuan. Jika jalur tujuan tidak ada, jalur tujuan akan dibuat dan ditimpa oleh sumbernya. Untuk mengontrol operasi pemindahan untuk jalur yang tidak kosong, Anda dapat menggunakan --move-mode untuk menentukan perilakunya.
+    description: ''
+  - isRequired: true
+    name: --source-path -s
+    summary: Jalur direktori blob sumber.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --lease-id
+    summary: ID sewa untuk directory_path tujuan. Tujuan directory_path harus memiliki sewa aktif dan ID sewa harus cocok.
+    description: ''
+  - name: --move-mode
+    defaultValue: posix
+    parameterValueGroup: legacy, posix
+    summary: Valid hanya ketika namespace diaktifkan. Parameter ini menentukan perilaku operasi pemindahan. Jika direktori tujuan kosong, untuk kedua mode, direktori tujuan akan ditimpa. Tetapi jika direktori tujuan tidak kosong, dalam mode warisan, operasi pemindahan akan gagal dan dalam mode posix, direktori sumber akan dipindahkan ke direktori tujuan.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --source-if-match
+    summary: Opsional. Nilai ETag. Tentukan header ini untuk melakukan operasi pemindahan hanya jika ETag sumber cocok dengan nilai yang ditentukan.
+    description: ''
+  - name: --source-if-modified-since
+    summary: Opsional. Nilai tanggal dan waktu. Tentukan header ini untuk melakukan operasi pemindahan hanya jika sumber telah dimodifikasi sejak tanggal dan waktu yang ditentukan.
+    description: ''
+  - name: --source-if-none-match
+    summary: Opsional. Nilai ETag atau nilai wildcard khusus ("\*"). Tentukan header ini untuk melakukan operasi pemindahan hanya jika ETag sumber tidak cocok dengan nilai yang ditentukan.
+    description: ''
+  - name: --source-if-unmodified-since
+    summary: Opsional. Nilai tanggal dan waktu. Tentukan header ini untuk melakukan operasi pemindahan hanya jika sumber belum diubah sejak tanggal dan waktu yang ditentukan.
+    description: ''
+  - name: --source-lease-id
+    summary: Opsional. ID sewa untuk source_path. source_path harus memiliki sewa aktif dan ID sewa harus cocok.
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+- uid: az_storage_blob_directory_show
+  name: az storage blob directory show
+  summary: Menampilkan properti direktori blob penyimpanan dalam kontainer penyimpanan.
+  description: ''
+  syntax: >-
+    az storage blob directory show --container-name
+                                   --directory-path
+                                   [--account-key]
+                                   [--account-name]
+                                   [--auth-mode {key, login}]
+                                   [--connection-string]
+                                   [--if-match]
+                                   [--if-modified-since]
+                                   [--if-none-match]
+                                   [--if-unmodified-since]
+                                   [--lease-id]
+                                   [--sas-token]
+                                   [--timeout]
+  examples:
+  - summary: Menampilkan properti direktori blob penyimpanan dalam kontainer penyimpanan.
+    syntax: az storage blob directory show -c MyContainer -d MyDirectoryPath --account-name MyStorageAccount
+  requiredParameters:
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --directory-path -d
+    summary: Nama jalur direktori.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya cocok dengan nilai yang ditentukan.
+    description: ''
+  - name: --if-modified-since
+    summary: Ubah hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya tidak cocok dengan nilai yang ditentukan. Tentukan wildcardcharacter (\*) untuk melakukan operasi hanya jika sumber daya tidak ada, dan gagal operasijika memang ada.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Ubah hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --lease-id
+    summary: Diperlukan jika blob memiliki sewa aktif.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+- uid: az_storage_blob_directory_upload
+  name: az storage blob directory upload
+  summary: Upload blob atau subdirektori ke direktori blob penyimpanan.
+  description: ''
+  syntax: >-
+    az storage blob directory upload --container
+                                     --destination-path
+                                     --source
+                                     [--account-key]
+                                     [--account-name]
+                                     [--auth-mode {key, login}]
+                                     [--connection-string]
+                                     [--recursive]
+                                     [--sas-token]
+  examples:
+  - summary: Upload satu blob ke direktori blob penyimpanan.
+    syntax: az storage blob directory upload -c MyContainer --account-name MyStorageAccount -s "path/to/file" -d directory
+  - summary: Upload direktori lokal ke direktori blob penyimpanan.
+    syntax: az storage blob directory upload -c MyContainer --account-name MyStorageAccount -s "path/to/directory" -d directory --recursive
+  - summary: Upload sekumpulan file di direktori lokal ke direktori blob penyimpanan.
+    syntax: az storage blob directory upload -c MyContainer --account-name MyStorageAccount -s "path/to/file*" -d directory --recursive
+  requiredParameters:
+  - isRequired: true
+    name: --container -c
+    summary: Kontainer tujuan unggahan.
+    description: ''
+  - isRequired: true
+    name: --destination-path -d
+    summary: Jalur direktori tujuan unggahan. Ini harus menjadi jalur absolut ke kontainer. Jika jalur tujuan yang ditentukan tidak ada, jalur direktori baru akan dibuat.
+    description: ''
+  - isRequired: true
+    name: --source -s
+    summary: Jalur file sumber untuk diunggah.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --recursive -r
+    summary: Mengunggah blob secara rekursif. Jika diaktifkan, semua blob termasuk blob dalam subdirektori akan diunggah.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+commands:
+- az_storage_blob_directory_access
+- az_storage_blob_directory_access_set
+- az_storage_blob_directory_access_show
+- az_storage_blob_directory_access_update
+- az_storage_blob_directory_create
+- az_storage_blob_directory_delete
+- az_storage_blob_directory_download
+- az_storage_blob_directory_exists
+- az_storage_blob_directory_list
+- az_storage_blob_directory_metadata
+- az_storage_blob_directory_metadata_show
+- az_storage_blob_directory_metadata_update
+- az_storage_blob_directory_move
+- az_storage_blob_directory_show
+- az_storage_blob_directory_upload
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Untuk menggunakan perintah direktori, pastikan jenis akun penyimpanan Anda adalah StorageV2.
+  ms.openlocfilehash: 7e41a933048f7b83dcc75dd222004f5b4cdaadb4
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141071203"

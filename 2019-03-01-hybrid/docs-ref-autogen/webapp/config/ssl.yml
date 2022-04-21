@@ -1,0 +1,255 @@
+### YamlMime:AzureCLIGroup
+uid: az_webapp_config_ssl
+name: az webapp config ssl
+summary: Mengonfigurasi sertifikat SSL untuk aplikasi web.
+description: ''
+directCommands:
+- uid: az_webapp_config_ssl_bind
+  name: az webapp config ssl bind
+  summary: Mengikat sertifikat SSL ke aplikasi web.
+  description: ''
+  syntax: >-
+    az webapp config ssl bind --certificate-thumbprint
+                              --ssl-type {IP, SNI}
+                              [--ids]
+                              [--name]
+                              [--resource-group]
+                              [--slot]
+  examples:
+  - summary: Mengikat sertifikat SSL ke aplikasi web. (dibuat otomatis)
+    syntax: az webapp config ssl bind --certificate-thumbprint {certificate-thumbprint} --name MyWebapp --resource-group MyResourceGroup --ssl-type SNI
+  requiredParameters:
+  - isRequired: true
+    name: --certificate-thumbprint
+    summary: Sidik jari ssl cert.
+    description: ''
+  - isRequired: true
+    name: --ssl-type
+    parameterValueGroup: IP, SNI
+    summary: Jenis sertifikasi ssl.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi web. Jika dibiarkan tidak ditentukan, nama akan dibuat secara acak. Anda dapat mengonfigurasi default menggunakan `az configure --defaults web=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+- uid: az_webapp_config_ssl_create
+  name: az webapp config ssl create
+  summary: Buat Sertifikat Terkelola untuk nama host di aplikasi webapp.
+  description: ''
+  syntax: >-
+    az webapp config ssl create --hostname
+                                --name
+                                --resource-group
+                                [--slot]
+  examples:
+  - summary: Buat Sertifikat Terkelola untuk cname.mycustomdomain.com.
+    syntax: az webapp config ssl create --resource-group MyResourceGroup --name MyWebapp --hostname cname.mycustomdomain.com
+  requiredParameters:
+  - isRequired: true
+    name: --hostname
+    summary: Nama domain kustom.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi web.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+- uid: az_webapp_config_ssl_delete
+  name: az webapp config ssl delete
+  summary: Menghapus sertifikat SSL dari aplikasi web.
+  description: ''
+  syntax: >-
+    az webapp config ssl delete --certificate-thumbprint
+                                --resource-group
+  examples:
+  - summary: Menghapus sertifikat SSL dari aplikasi web. (dibuat otomatis)
+    syntax: az webapp config ssl delete --certificate-thumbprint {certificate-thumbprint} --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --certificate-thumbprint
+    summary: Sidik jari ssl cert.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_webapp_config_ssl_import
+  name: az webapp config ssl import
+  summary: Impor Sertifikat SSL atau App Service ke aplikasi web dari Key Vault.
+  description: ''
+  syntax: >-
+    az webapp config ssl import --key-vault
+                                --key-vault-certificate-name
+                                [--ids]
+                                [--name]
+                                [--resource-group]
+  examples:
+  - summary: Impor sertifikat Sertifikat SSL atau App Service ke aplikasi web dari Key Vault.
+    syntax: az webapp config ssl import --resource-group MyResourceGroup --name MyWebapp --key-vault MyKeyVault --key-vault-certificate-name MyCertificateName
+  - summary: Impor Sertifikat SSL atau App Service ke aplikasi web dari Key Vault menggunakan id sumber daya (biasanya jika Key Vault berada di langganan lain).
+    syntax: az webapp config ssl import --resource-group MyResourceGroup --name MyWebapp --key-vault '/subscriptions/[sub id]/resourceGroups/[rg]/providers/Microsoft.KeyVault/vaults/[vault name]' --key-vault-certificate-name MyCertificateName
+  requiredParameters:
+  - isRequired: true
+    name: --key-vault
+    summary: Nama atau ID sumber daya Key Vault.
+    description: ''
+  - isRequired: true
+    name: --key-vault-certificate-name
+    summary: Nama sertifikat dalam Key Vault.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi web. Jika dibiarkan tidak ditentukan, nama akan dibuat secara acak. Anda dapat mengonfigurasi default menggunakan `az configure --defaults web=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_webapp_config_ssl_list
+  name: az webapp config ssl list
+  summary: Mencantumkan sertifikat SSL untuk aplikasi web.
+  description: ''
+  syntax: az webapp config ssl list --resource-group
+  examples:
+  - summary: Mencantumkan sertifikat SSL untuk aplikasi web. (dibuat otomatis)
+    syntax: az webapp config ssl list --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_webapp_config_ssl_show
+  name: az webapp config ssl show
+  summary: Menampilkan detail sertifikat SSL untuk aplikasi web.
+  description: ''
+  syntax: >-
+    az webapp config ssl show --certificate-name
+                              --resource-group
+  examples:
+  - summary: Menampilkan detail sertifikat SSL untuk aplikasi web. (dibuat otomatis)
+    syntax: az webapp config ssl show --resource-group MyResourceGroup --certificate-name cname.mycustomdomain.com
+  requiredParameters:
+  - isRequired: true
+    name: --certificate-name
+    summary: Nama sertifikat.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_webapp_config_ssl_unbind
+  name: az webapp config ssl unbind
+  summary: Batalkan ikatan sertifikat SSL dari aplikasi web.
+  description: ''
+  syntax: >-
+    az webapp config ssl unbind --certificate-thumbprint
+                                [--ids]
+                                [--name]
+                                [--resource-group]
+                                [--slot]
+  requiredParameters:
+  - isRequired: true
+    name: --certificate-thumbprint
+    summary: Sidik jari ssl cert.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi web. Jika dibiarkan tidak ditentukan, nama akan dibuat secara acak. Anda dapat mengonfigurasi default menggunakan `az configure --defaults web=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+- uid: az_webapp_config_ssl_upload
+  name: az webapp config ssl upload
+  summary: Upload sertifikat SSL ke aplikasi web.
+  description: ''
+  syntax: >-
+    az webapp config ssl upload --certificate-file
+                                --certificate-password
+                                [--ids]
+                                [--name]
+                                [--resource-group]
+                                [--slot]
+  examples:
+  - summary: Upload sertifikat SSL ke aplikasi web. (dibuat otomatis)
+    syntax: az webapp config ssl upload --certificate-file {certificate-file} --certificate-password {certificate-password} --name MyWebapp     --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --certificate-file
+    summary: Jalur file untuk file .pfx.
+    description: ''
+  - isRequired: true
+    name: --certificate-password
+    summary: Kata sandi sertifikasi ssl.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi web. Jika dibiarkan tidak ditentukan, nama akan dibuat secara acak. Anda dapat mengonfigurasi default menggunakan `az configure --defaults web=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+commands:
+- az_webapp_config_ssl_bind
+- az_webapp_config_ssl_create
+- az_webapp_config_ssl_delete
+- az_webapp_config_ssl_import
+- az_webapp_config_ssl_list
+- az_webapp_config_ssl_show
+- az_webapp_config_ssl_unbind
+- az_webapp_config_ssl_upload
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengonfigurasi sertifikat SSL untuk aplikasi web.
+  ms.openlocfilehash: 5a9125ffd6e12faf13a5dd8232aaf187c2b9fb07
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141070843"

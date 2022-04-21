@@ -1,0 +1,244 @@
+### YamlMime:AzureCLIGroup
+uid: az_webapp_deployment_source
+name: az webapp deployment source
+summary: Mengelola penyebaran aplikasi web melalui kontrol sumber.
+description: ''
+directCommands:
+- uid: az_webapp_deployment_source_config
+  name: az webapp deployment source config
+  summary: Mengelola penyebaran dari git atau repositori Mercurial.
+  description: ''
+  syntax: >-
+    az webapp deployment source config --repo-url
+                                       [--branch]
+                                       [--git-token]
+                                       [--github-action]
+                                       [--ids]
+                                       [--manual-integration]
+                                       [--name]
+                                       [--repository-type {externalgit, git, github, localgit, mercurial}]
+                                       [--resource-group]
+                                       [--slot]
+  examples:
+  - summary: Mengelola penyebaran dari git atau repositori Mercurial. (dibuat otomatis)
+    syntax: az webapp deployment source config --branch master --manual-integration --name MyWebApp --repo-url https://github.com/Azure-Samples/function-image-upload-resize --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --repo-url -u
+    summary: Url repositori untuk menarik sumber terbaru dari, misalnya https://github.com/foo/foo-web.
+    description: ''
+  optionalParameters:
+  - name: --branch
+    summary: Nama cabang repositori.
+    description: ''
+  - name: --git-token
+    summary: Token akses Git diperlukan untuk sinkronisasi otomatis.
+    description: ''
+  - name: --github-action
+    summary: Jika menggunakan tindakan github, default ke False.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --manual-integration
+    summary: Nonaktifkan sinkronisasi otomatis antara kontrol sumber dan web.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi web. Jika dibiarkan tidak ditentukan, nama akan dibuat secara acak. Anda dapat mengonfigurasi default menggunakan `az configure --defaults web=<name>`.
+    description: ''
+  - name: --repository-type
+    defaultValue: git
+    parameterValueGroup: externalgit, git, github, localgit, mercurial
+    summary: Jenis repositori.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+- uid: az_webapp_deployment_source_config-local-git
+  name: az webapp deployment source config-local-git
+  summary: Mendapatkan URL untuk titik akhir repositori git guna mengkloning dan mendorong untuk penyebaran aplikasi web.
+  description: ''
+  syntax: >-
+    az webapp deployment source config-local-git [--ids]
+                                                 [--name]
+                                                 [--resource-group]
+                                                 [--slot]
+  examples:
+  - summary: Dapatkan titik akhir dan tambahkan sebagai remote git.
+    syntax: >-
+      az webapp deployment source config-local-git \
+          -g MyResourceGroup -n MyUniqueApp
+
+      git remote add azure \
+          https://{deploy_user_name}@MyUniqueApp.scm.azurewebsites.net/MyUniqueApp.git
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi web. Jika dibiarkan tidak ditentukan, nama akan dibuat secara acak. Anda dapat mengonfigurasi default menggunakan `az configure --defaults web=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+- uid: az_webapp_deployment_source_config-zip
+  name: az webapp deployment source config-zip
+  summary: Lakukan penyebaran menggunakan penyebaran kudu zip push untuk aplikasi web.
+  description: Secara default Kudu mengasumsikan bahwa penyebaran zip tidak memerlukan tindakan terkait build seperti penginstalan npm atau penerbitan dotnet. Ini dapat ditimpa dengan menyertakan file .deployment dalam file zip Anda dengan konten berikut '[config] SCM_DO_BUILD_DURING_DEPLOYMENT = true', untuk mengaktifkan logika deteksi Kudu dan membangun proses pembuatan skrip. Lihat https://github.com/projectkudu/kudu/wiki/Configurable-settings#enabledisable-build-actions-preview. Secara bergantian pengaturan dapat diaktifkan menggunakan perintah az webapp config appsettings set.
+  syntax: >-
+    az webapp deployment source config-zip --src
+                                           [--ids]
+                                           [--name]
+                                           [--resource-group]
+                                           [--slot]
+                                           [--timeout]
+  examples:
+  - summary: Lakukan penyebaran dengan menggunakan konten file zip.
+    syntax: >-
+      az webapp deployment source config-zip \
+          -g {myRG} -n {myAppName} \
+          --src {zipFilePathLocation}
+  requiredParameters:
+  - isRequired: true
+    name: --src
+    summary: Jalur file zip untuk penyebaran.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi web. Jika dibiarkan tidak ditentukan, nama akan dibuat secara acak. Anda dapat mengonfigurasi default menggunakan `az configure --defaults web=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+  - name: --timeout -t
+    summary: Batas waktu yang dapat dikonfigurasi dalam hitungan detik untuk memeriksa status penyebaran.
+    description: ''
+- uid: az_webapp_deployment_source_delete
+  name: az webapp deployment source delete
+  summary: Menghapus konfigurasi penyebaran kontrol sumber.
+  description: ''
+  syntax: >-
+    az webapp deployment source delete [--ids]
+                                       [--name]
+                                       [--resource-group]
+                                       [--slot]
+  examples:
+  - summary: Menghapus konfigurasi penyebaran kontrol sumber. (dibuat otomatis)
+    syntax: az webapp deployment source delete --name MyWebApp --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi web. Jika dibiarkan tidak ditentukan, nama akan dibuat secara acak. Anda dapat mengonfigurasi default menggunakan `az configure --defaults web=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+- uid: az_webapp_deployment_source_show
+  name: az webapp deployment source show
+  summary: Dapatkan detail konfigurasi penyebaran kontrol sumber.
+  description: ''
+  syntax: >-
+    az webapp deployment source show [--ids]
+                                     [--name]
+                                     [--resource-group]
+                                     [--slot]
+  examples:
+  - summary: Dapatkan detail konfigurasi penyebaran kontrol sumber. (dibuat otomatis)
+    syntax: az webapp deployment source show --name MyWebApp --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi web. Jika dibiarkan tidak ditentukan, nama akan dibuat secara acak. Anda dapat mengonfigurasi default menggunakan `az configure --defaults web=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+- uid: az_webapp_deployment_source_sync
+  name: az webapp deployment source sync
+  summary: Sinkronkan dari repositori. Hanya diperlukan dalam mode integrasi manual.
+  description: ''
+  syntax: >-
+    az webapp deployment source sync [--ids]
+                                     [--name]
+                                     [--resource-group]
+                                     [--slot]
+  examples:
+  - summary: Sinkronkan dari repositori. Hanya diperlukan dalam mode integrasi manual. (dibuat otomatis)
+    syntax: az webapp deployment source sync --name MyWebapp --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi web. Jika dibiarkan tidak ditentukan, nama akan dibuat secara acak. Anda dapat mengonfigurasi default menggunakan `az configure --defaults web=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+- uid: az_webapp_deployment_source_update-token
+  name: az webapp deployment source update-token
+  summary: Memperbarui token kontrol sumber yang di-cache di layanan aplikasi Azure.
+  description: Jika tidak ada token yang disediakan, perintah akan membersihkan token yang ada.
+  syntax: az webapp deployment source update-token [--git-token]
+  optionalParameters:
+  - name: --git-token
+    summary: Token akses Git diperlukan untuk sinkronisasi otomatis.
+    description: ''
+commands:
+- az_webapp_deployment_source_config
+- az_webapp_deployment_source_config-local-git
+- az_webapp_deployment_source_config-zip
+- az_webapp_deployment_source_delete
+- az_webapp_deployment_source_show
+- az_webapp_deployment_source_sync
+- az_webapp_deployment_source_update-token
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola penyebaran aplikasi web melalui kontrol sumber.
+  ms.openlocfilehash: 3d08186d44c07d721ab3a7f611de559c60edc104
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141006424"

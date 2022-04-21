@@ -1,0 +1,122 @@
+### YamlMime:AzureCLIGroup
+uid: az_serial-console_send
+name: az serial-console send
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **konsol serial** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **az serial-console send** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Kirim NMI/SysRq/Reset ke Instans VM atau VMSS.
+description: ''
+directCommands:
+- uid: az_serial-console_send_nmi
+  name: az serial-console send nmi
+  summary: Kirim Interupsi yang Tidak Dapat Ditutupi (NMI) ke Instans VM atau VMSS.
+  description: Non-Maskable Interrupt (NMI) digunakan dalam skenario penelusuran kesalahan dan dirancang untuk merusak Komputer Virtual target Anda.
+  syntax: >-
+    az serial-console send nmi --name
+                               --resource-group
+                               [--instance-id]
+  examples:
+  - summary: Mengirim NMI ke VM
+    syntax: az serial-console send nmi -n MyVM -g MyResourceGroup
+  - summary: Mengirim NMI ke Instans VMSS dengan ID 2
+    syntax: az serial-console send nmi -n MyVMSS -g MyResourceGroup --instance-id 2
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Virtual Machine atau Virtual Machine Scale Set.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --instance-id
+    summary: ID instans VMSS. Tidak diperlukan saat menyambungkan ke serialport Komputer Virtual.
+    description: ''
+- uid: az_serial-console_send_reset
+  name: az serial-console send reset
+  summary: Lakukan hidupkan ulang "keras" instans VM atau VMSS.
+  description: Ini menghasilkan mulai ulang "keras", seperti mematikan komputer, lalu mencadangkan lagi. Ini dapat mengakibatkan kehilangan data di komputer virtual. Anda seharusnya hanya melakukan operasi ini jika hidupkan ulang yang baik tidak efektif.
+  syntax: >-
+    az serial-console send reset --name
+                                 --resource-group
+                                 [--instance-id]
+  examples:
+  - summary: Mengatur ulang VM secara permanen
+    syntax: az serial-console send reset -n MyVM -g MyResourceGroup
+  - summary: Meng-hard rest Instans VMSS dengan ID 2
+    syntax: az serial-console send reset -n MyVMSS -g MyResourceGroup --instance-id 2
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Virtual Machine atau Virtual Machine Scale Set.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --instance-id
+    summary: ID instans VMSS. Tidak diperlukan saat menyambungkan ke serialport Komputer Virtual.
+    description: ''
+- uid: az_serial-console_send_sysrq
+  name: az serial-console send sysrq
+  summary: Kirim urutan SysRq ke Instans VM atau VMSS.
+  description: SysRq adalah urutan kunci yang dipahami oleh kernel sistem operasi Linux, yang dapat memicu serangkaian tindakan yang telah ditentukan sebelumnya. Perintah ini sering digunakan ketika pemecahan masalah atau pemulihan komputer virtual tidak dapat dilakukan melalui administrasi tradisional (misalnya, jika VM tidak merespons).
+  syntax: >-
+    az serial-console send sysrq --input
+                                 --name
+                                 --resource-group
+                                 [--instance-id]
+  examples:
+  - summary: Mengirim SysRq ke VM ke sistem crash
+    syntax: az serial-console send sysrq -n MyVM -g MyResourceGroup --input c
+  - summary: Mengirim SysRq ke Instans VMSS dengan ID 2 ke sistem crash
+    syntax: az serial-console send sysrq -n MyVMSS -g MyResourceGroup --instance-id 2 --input c
+  requiredParameters:
+  - isRequired: true
+    name: --input
+    summary: Kunci input untuk dikirim melalui konsol serial. Harus satu karakter.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama Virtual Machine atau Virtual Machine Scale Set.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --instance-id
+    summary: ID instans VMSS. Tidak diperlukan saat menyambungkan ke serialport Komputer Virtual.
+    description: ''
+commands:
+- az_serial-console_send_nmi
+- az_serial-console_send_reset
+- az_serial-console_send_sysrq
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Kirim NMI/SysRq/Reset ke Instans VM atau VMSS.
+  ms.openlocfilehash: 9c07a618904fa4a9c6a639d852c3658b55b90b6d
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141082561"

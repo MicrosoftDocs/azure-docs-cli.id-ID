@@ -1,0 +1,208 @@
+### YamlMime:AzureCLIGroup
+uid: az_custom-providers_resource-provider
+name: az custom-providers resource-provider
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **penyedia kustom** untuk Azure CLI (versi 2.3.1 atau lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **penyedia sumber daya penyedia kustom az** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Perintah untuk mengelola penyedia sumber daya kustom.
+description: ''
+directCommands:
+- uid: az_custom-providers_resource-provider_create
+  name: az custom-providers resource-provider create
+  summary: Membuat atau memperbarui penyedia sumber daya kustom.
+  description: ''
+  syntax: >-
+    az custom-providers resource-provider create --name
+                                                 --resource-group
+                                                 [--action]
+                                                 [--location]
+                                                 [--no-wait]
+                                                 [--resource-type]
+                                                 [--tags]
+                                                 [--validation]
+  examples:
+  - summary: Membuat atau memperbarui penyedia sumber daya kustom.
+    syntax: >-
+      az custom-providers resource-provider create -n MyRP -g MyRG \
+
+      --action name=ping endpoint=https://test.azurewebsites.net/api routing_type=Proxy \
+
+      --resource-type name=users endpoint=https://test.azurewebsites.net/api routing_type="Proxy, Cache" \
+
+      --validation validation_type=swagger specification=https://raw.githubusercontent.com/test.json
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama penyedia sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --action -a
+    summary: Tambahkan tindakan ke penyedia sumber daya kustom.
+    description: >-
+      Penggunaan: --action name=ping endpoint="https://test.azurewebsites.net/api/{requestPath}" routing_type=Proxy
+
+
+      nama: Diperlukan. Nama tindakan.
+
+      titik akhir: Diperlukan. URI titik akhir tempat penyedia sumber daya kustom akan memproksi permintaan.
+
+      routing_type: Jenis perutean yang didukung untuk permintaan tindakan. Nilai yang mungkin termasuk: 'Proksi'.
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu `--action` argumen.
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-type -r
+    summary: Tambahkan jenis sumber daya kustom ke penyedia sumber daya kustom.
+    description: >-
+      Penggunaan: --resource-type name=user endpoint="https://test.azurewebsites.net/api/{requestPath}" routing_type="Proxy, Cache"
+
+
+      nama: Diperlukan. Nama jenis sumber daya.
+
+      titik akhir: Diperlukan. URI titik akhir tempat penyedia sumber daya kustom akan memproksi permintaan.
+
+      routing_type: Jenis perutean yang didukung untuk permintaan sumber daya. Nilai yang mungkin termasuk: 'Proxy', 'Proxy,Cache'.
+
+
+      Beberapa jenis sumber daya dapat ditentukan dengan menggunakan lebih dari satu `--resource-type` argumen.
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --validation -v
+    summary: Tambahkan validasi ke penyedia sumber daya kustom.
+    description: >-
+      Penggunaan: --validation specification="https://raw.githubusercontent.com/" validation_type="Swagger"
+
+
+      spesifikasi: Tautan ke spesifikasi validasi.v Spesifikasi harus dihosting di raw.githubusercontent.com.
+
+      validation_type: Jenis validasi yang akan dijalankan terhadap permintaan yang cocok. Nilai yang mungkin termasuk: 'Swagger'.
+
+
+      Beberapa validasi dapat ditentukan dengan menggunakan lebih dari satu `--validation` argumen.
+- uid: az_custom-providers_resource-provider_delete
+  name: az custom-providers resource-provider delete
+  summary: Hapus penyedia sumber daya kustom.
+  description: ''
+  syntax: >-
+    az custom-providers resource-provider delete --name
+                                                 --resource-group
+                                                 [--no-wait]
+                                                 [--yes]
+  examples:
+  - summary: Menghapus penyedia sumber daya kustom.
+    syntax: az custom-providers resource-provider delete -g MyRG -n MyRP
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama penyedia sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_custom-providers_resource-provider_list
+  name: az custom-providers resource-provider list
+  summary: Dapatkan semua penyedia sumber daya kustom dalam grup sumber daya atau di langganan saat ini.
+  description: ''
+  syntax: az custom-providers resource-provider list [--resource-group]
+  examples:
+  - summary: Mencantumkan semua penyedia sumber daya kustom dalam grup sumber daya.
+    syntax: az custom-providers resource-provider list -g MyRG
+  - summary: Mencantumkan semua penyedia sumber daya kustom dalam langganan saat ini.
+    syntax: az custom-providers resource-provider list
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_custom-providers_resource-provider_show
+  name: az custom-providers resource-provider show
+  summary: Dapatkan properti untuk penyedia sumber daya kustom.
+  description: ''
+  syntax: >-
+    az custom-providers resource-provider show --name
+                                               --resource-group
+  examples:
+  - summary: Mendapatkan penyedia sumber daya kustom.
+    syntax: az custom-providers resource-provider show -g MyRG -n MyRP
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama penyedia sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_custom-providers_resource-provider_update
+  name: az custom-providers resource-provider update
+  summary: Perbarui penyedia sumber daya kustom. Hanya tag yang dapat diperbarui.
+  description: ''
+  syntax: >-
+    az custom-providers resource-provider update --name
+                                                 --resource-group
+                                                 [--tags]
+  examples:
+  - summary: Perbarui tag untuk penyedia sumber daya kustom.
+    syntax: az custom-providers resource-provider update -g MyRG -n MyRP --tags a=b
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama penyedia sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+commands:
+- az_custom-providers_resource-provider_create
+- az_custom-providers_resource-provider_delete
+- az_custom-providers_resource-provider_list
+- az_custom-providers_resource-provider_show
+- az_custom-providers_resource-provider_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Perintah untuk mengelola penyedia sumber daya kustom.
+  ms.openlocfilehash: 2dc8fd3a1f6e70f9a0a1668e449e1a951ac3f0a0
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141033640"

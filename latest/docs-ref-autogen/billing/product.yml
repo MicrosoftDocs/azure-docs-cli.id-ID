@@ -1,0 +1,179 @@
+### YamlMime:AzureCLIGroup
+uid: az_billing_product
+name: az billing product
+summary: Produk penagihan.
+description: ''
+directCommands:
+- uid: az_billing_product_list
+  name: az billing product list
+  summary: Mencantumkan produk untuk akun penagihan. Ini tidak termasuk produk yang ditagih berdasarkan penggunaan. Operasi ini didukung untuk akun penagihan dengan jenis perjanjian Perjanjian Pelanggan Microsoft atau Perjanjian Mitra Microsoft.
+  description: ''
+  syntax: >-
+    az billing product list --account-name
+                            [--customer-name]
+                            [--filter]
+                            [--invoice-section-name]
+                            [--profile-name]
+  examples:
+  - summary: Mencantumkan produk menurut nama faktur
+    syntax: az billing product list --account-name "{billingAccountName}" --profile-name "{billingProfileName}" --invoice-section-name "{invoiceSectionName}"
+  requiredParameters:
+  - isRequired: true
+    name: --account-name
+    summary: ID yang secara unik mengidentifikasi akun penagihan.
+    description: ''
+  optionalParameters:
+  - name: --customer-name
+    summary: ID yang secara unik mengidentifikasi pelanggan.
+    description: ''
+  - name: --filter
+    summary: Dapat digunakan untuk memfilter menurut jenis produk. Filter ini mendukung 'eq', 'lt', 'gt', 'le', 'ge', dan 'and'. Saat ini tidak mendukung 'ne', 'or', atau 'not'. Filter tag adalah string pasangan nilai kunci di mana kunci dan nilai dipisahkan oleh titik dua (:).
+    description: ''
+  - name: --invoice-section-name
+    summary: ID yang secara unik mengidentifikasi bagian faktur.
+    description: ''
+  - name: --profile-name
+    summary: ID yang secara unik mengidentifikasi profil penagihan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/billing/_help.py
+- uid: az_billing_product_move
+  name: az billing product move
+  summary: Memindahkan biaya produk ke bagian faktur baru. Bagian faktur baru harus milik profil penagihan yang sama dengan bagian faktur yang sudah ada. Operasi ini hanya didukung untuk produk yang dibeli dengan biaya berulang dan untuk akun penagihan dengan jenis perjanjian Perjanjian Pelanggan Microsoft.
+  description: ''
+  syntax: >-
+    az billing product move --account-name
+                            --name
+                            [--destination-invoice-section-id]
+  examples:
+  - summary: Memindahkan biaya produk ke bagian faktur baru
+    syntax: az billing product move --account-name "{billingAccountName}" --destination-invoice-section-id "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{newInvoiceSectionName}" --name "{productName}"
+  requiredParameters:
+  - isRequired: true
+    name: --account-name
+    summary: ID yang secara unik mengidentifikasi akun penagihan.
+    description: ''
+  - isRequired: true
+    name: --name --product-name -n
+    summary: ID yang secara unik mengidentifikasi produk.
+    description: ''
+  optionalParameters:
+  - name: --destination-invoice-section-id
+    summary: Id bagian faktur tujuan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/billing/_help.py
+- uid: az_billing_product_show
+  name: az billing product show
+  summary: Dapatkan produk berdasarkan ID. Operasi ini hanya didukung untuk akun penagihan dengan jenis perjanjian Perjanjian Pelanggan Microsoft.
+  description: ''
+  syntax: >-
+    az billing product show --account-name
+                            --name
+  examples:
+  - summary: Shgow informasi produk
+    syntax: az billing product show --account-name "{billingAccountName}" --name "{productName}"
+  requiredParameters:
+  - isRequired: true
+    name: --account-name
+    summary: ID yang secara unik mengidentifikasi akun penagihan.
+    description: ''
+  - isRequired: true
+    name: --name --product-name -n
+    summary: ID yang secara unik mengidentifikasi produk.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/billing/_help.py
+- uid: az_billing_product_update
+  name: az billing product update
+  summary: Memperbarui properti Produk. Saat ini, perpanjangan otomatis dapat diperbarui. Operasi ini hanya didukung untuk akun penagihan dengan jenis perjanjian Perjanjian Pelanggan Microsoft.
+  description: ''
+  syntax: >-
+    az billing product update --account-name
+                              --name
+                              [--auto-renew {Off, On}]
+                              [--billing-frequency {Monthly, OneTime, UsageBased}]
+                              [--status {Active, AutoRenew, Cancelled, Disabled, Expired, Expiring, Inactive, PastDue}]
+  examples:
+  - summary: Memperbarui properti produk
+    syntax: az billing product update --account-name "{billingAccountName}" --auto-renew "Off" --name "{productName}"
+  requiredParameters:
+  - isRequired: true
+    name: --account-name
+    summary: ID yang secara unik mengidentifikasi akun penagihan.
+    description: ''
+  - isRequired: true
+    name: --name --product-name -n
+    summary: ID yang secara unik mengidentifikasi produk.
+    description: ''
+  optionalParameters:
+  - name: --auto-renew
+    parameterValueGroup: Off, On
+    summary: Menunjukkan apakah perpanjangan otomatis diaktifkan atau dinonaktifkan untuk produk.
+    description: ''
+  - name: --billing-frequency
+    parameterValueGroup: Monthly, OneTime, UsageBased
+    summary: Frekuensi di mana produk akan ditagih.
+    description: ''
+  - name: --status
+    parameterValueGroup: Active, AutoRenew, Cancelled, Disabled, Expired, Expiring, Inactive, PastDue
+    summary: Status produk saat ini.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/billing/_help.py
+- uid: az_billing_product_validate-move
+  name: az billing product validate-move
+  summary: Validasi apakah biaya produk dapat dipindahkan ke bagian faktur baru. Operasi ini hanya didukung untuk produk yang dibeli dengan biaya berulang dan untuk akun penagihan dengan jenis perjanjian Perjanjian Pelanggan Microsoft.
+  description: ''
+  syntax: >-
+    az billing product validate-move --account-name
+                                     --name
+                                     [--destination-invoice-section-id]
+  examples:
+  - summary: Memvalidasi apakah biaya produk dapat dipindahkan ke bagian faktur baru
+    syntax: az billing product validate-move --account-name "{billingAccountName}" --destination-invoice-section-id "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{newInvoiceSectionName}" --name "{productName}"
+  - summary: Memvalidasi apakah biaya produk dapat dipindahkan ke bagian faktur baru
+    syntax: az billing product validate-move --account-name "{billingAccountName}" --destination-invoice-section-id "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{newInvoiceSectionName}" --name "{productName}"
+  requiredParameters:
+  - isRequired: true
+    name: --account-name
+    summary: ID yang secara unik mengidentifikasi akun penagihan.
+    description: ''
+  - isRequired: true
+    name: --name --product-name -n
+    summary: ID yang secara unik mengidentifikasi produk.
+    description: ''
+  optionalParameters:
+  - name: --destination-invoice-section-id
+    summary: Id bagian faktur tujuan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/billing/_help.py
+commands:
+- az_billing_product_list
+- az_billing_product_move
+- az_billing_product_show
+- az_billing_product_update
+- az_billing_product_validate-move
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 10/26/2020
+  description: Produk penagihan.
+  ms.openlocfilehash: d04209771f68162e82e8b48d2d0b80ab69647a24
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141006046"
