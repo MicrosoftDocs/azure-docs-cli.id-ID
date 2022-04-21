@@ -1,0 +1,367 @@
+### YamlMime:AzureCLIGroup
+uid: az_lab_vm
+name: az lab vm
+summary: Mengelola VM di Azure DevTest Lab.
+description: ''
+directCommands:
+- uid: az_lab_vm_apply-artifacts
+  name: az lab vm apply-artifacts
+  summary: Terapkan artefak ke komputer virtual di Azure DevTest Lab.
+  description: ''
+  syntax: >-
+    az lab vm apply-artifacts --lab-name
+                              --name
+                              --resource-group
+                              [--artifacts]
+  examples:
+  - summary: Terapkan artefak ke komputer virtual di Azure DevTest Lab. (dibuat otomatis)
+    syntax: az lab vm apply-artifacts --artifacts '@artifacts.json' --lab-name MyLab --name MyVirtualMachine --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --lab-name
+    summary: Nama Lab.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama komputer virtual.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya lab.
+    description: ''
+  optionalParameters:
+  - name: --artifacts
+    summary: Array artefak yang dikodekan JSON yang akan diterapkan. Gunakan '@{file}' untuk memuat dari file.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/lab/_help.py
+- uid: az_lab_vm_claim
+  name: az lab vm claim
+  summary: Klaim komputer virtual dari Lab.
+  description: ''
+  syntax: >-
+    az lab vm claim [--ids]
+                    [--lab-name]
+                    [--name]
+                    [--resource-group]
+  examples:
+  - summary: Klaim komputer virtual apa pun yang tersedia di lab.
+    syntax: az lab vm claim -g {ResourceGroup} --lab-name {LabName}
+  - summary: Klaim komputer virtual tertentu di lab.
+    syntax: az lab vm claim -g {ResourceGroup} --lab-name {LabName} --name {VMName}
+  - summary: Klaim beberapa komputer virtual di lab oleh ID.
+    syntax: >-
+      az lab vm claim --ids \
+          /subscriptions/{SubID}/resourcegroups/{ResourceGroup}/providers/microsoft.devtestlab/labs/{LabName}/virtualmachines/{VMName1} \
+          /subscriptions/{SubID}/resourcegroups/{ResourceGroup}/providers/microsoft.devtestlab/labs/{LabName}/virtualmachines/{VMName2}
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --lab-name
+    summary: Nama lab.
+    description: ''
+  - name: --name -n
+    summary: Nama komputer virtual yang akan diklaim.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya lab.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/lab/_help.py
+- uid: az_lab_vm_create
+  name: az lab vm create
+  summary: Membuat VM di lab.
+  description: ''
+  syntax: >-
+    az lab vm create --lab-name
+                     --name
+                     --resource-group
+                     [--admin-password]
+                     [--admin-username]
+                     [--allow-claim]
+                     [--artifacts]
+                     [--authentication-type]
+                     [--disk-type]
+                     [--expiration-date]
+                     [--formula]
+                     [--generate-ssh-keys]
+                     [--image]
+                     [--image-type]
+                     [--ip-configuration]
+                     [--notes]
+                     [--saved-secret]
+                     [--size]
+                     [--ssh-key]
+                     [--subnet]
+                     [--tags]
+                     [--vnet-name]
+  examples:
+  - summary: Buat VM di lab dari gambar galeri.
+    syntax: az lab vm create --lab-name {LabName} -g {ResourceGroup} --name {VMName} --image "Ubuntu Server 16.04 LTS" --image-type gallery --size Standard_DS1_v2
+  - summary: Buat VM di lab dari gambar galeri dengan autentikasi SSH.
+    syntax: az lab vm create --lab-name {LabName} -g {ResourceGroup} --name {VMName} --image "Ubuntu Server 16.04 LTS" --image-type gallery --size Standard_DS1_v2 --authentication-type ssh
+  - summary: Buat VM yang dapat diklaim di lab dari gambar galeri dengan autentikasi kata sandi.
+    syntax: az lab vm create --lab-name {LabName} -g {ResourceGroup} --name {VMName} --image "Ubuntu Server 16.04 LTS" --image-type gallery --size Standard_DS1_v2 --allow-claim
+  - summary: Buat VM windows di lab dari gambar galeri dengan autentikasi kata sandi.
+    syntax: az lab vm create --lab-name {LabName} -g {ResourceGroup} --name {VMName} --image "Windows Server 2008 R2 SP1" --image-type gallery --size Standard_DS1_v2
+  - summary: Buat VM di lab dari gambar kustom.
+    syntax: az lab vm create --lab-name {LabName} -g {ResourceGroup} --name {VMName} --image "jenkins_custom" --image-type custom --size Standard_DS1_v2
+  - summary: Buat VM di lab dengan IP publik.
+    syntax: az lab vm create --lab-name {LabName} -g {ResourceGroup} --name {VMName} --image "Ubuntu Server 16.04 LTS" --image-type gallery --size Standard_DS1_v2 --ip-configuration public
+  - summary: Membuat VM dari rumus.
+    syntax: az lab vm create --lab-name {LabName} -g {ResourceGroup} --name {VMName} --formula MyFormula --artifacts '@artifacts.json'
+  requiredParameters:
+  - isRequired: true
+    name: --lab-name
+    summary: Nama lab.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama komputer virtual.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --admin-password
+    summary: Kata sandi untuk admin VM.
+    description: ''
+  - name: --admin-username
+    defaultValue: your_system_user_login_name
+    summary: Nama pengguna untuk admin VM.
+    description: ''
+  - name: --allow-claim
+    summary: Bendera yang menunjukkan apakah VM harus dibuat sebagai dapat diklaim.
+    description: ''
+  - name: --artifacts
+    summary: Array artefak yang dikodekan JSON yang akan diterapkan. Gunakan '@{file}' untuk memuat dari file.
+    description: ''
+  - name: --authentication-type
+    defaultValue: password
+    summary: 'Jenis autentikasi yang diizinkan untuk VM. Nilai yang diizinkan adalah: kata sandi, ssh.'
+    description: ''
+  - name: --disk-type
+    summary: Storage yang digunakan untuk komputer virtual.
+    description: ''
+  - name: --expiration-date
+    summary: Tanggal kedaluwarsa dalam UTC(yyyy-MM-ddTHH:mm:ss) untuk VM.
+    description: ''
+  - name: --formula
+    summary: Nama rumus. Gunakan `az lab formula list` untuk rumus yang tersedia.
+    description: Gunakan `az lab formula` dengan `--export-artifacts` bendera untuk mengekspor dan memperbarui artefak, lalu berikan hasilnya melalui `--artifacts` argumen .
+  - name: --generate-ssh-keys
+    summary: Buat file kunci publik dan privat SSH jika hilang.
+    description: ''
+  - name: --image
+    summary: Nama gambar sistem operasi (nama gambar galeri atau nama/ID gambar kustom).
+    description: Gunakan `az lab gallery-image list` untuk gambar galeri yang tersedia atau `az lab custom-image list` untuk gambar kustom yang tersedia.
+  - name: --image-type
+    summary: 'Jenis gambar. Nilai yang diizinkan adalah: galeri, kustom.'
+    description: ''
+  - name: --ip-configuration
+    summary: 'Jenis konfigurasi IP yang akan digunakan untuk VM. Nilai yang diizinkan adalah: bersama, publik, privat.'
+    description: Jika dihilangkan, akan dipilih berdasarkan vnet VM.
+  - name: --notes
+    summary: Catatan untuk komputer virtual.
+    description: ''
+  - name: --saved-secret
+    summary: Nama rahasia tersimpan yang akan digunakan untuk autentikasi.
+    description: Ketika nilai ini disediakan, nilai ini digunakan sebagai pengganti metode autentikasi lainnya.
+  - name: --size
+    summary: Ukuran VM yang akan dibuat. Lihat https://azure.microsoft.com/pricing/details/virtual-machines/ untuk info ukuran.
+    description: ''
+  - name: --ssh-key
+    summary: Kunci umum SSH atau jalur file kunci publik. Gunakan `--generate-ssh-keys` untuk menghasilkan kunci SSH.
+    description: ''
+  - name: --subnet
+    summary: Nama subnet untuk menambahkan VM.
+    description: ''
+  - name: --tags
+    summary: Tag yang dipisahkan spasi dalam `key[=value]` format.
+    description: Tag dapat dibersihkan dengan menetapkan nilai kosong "" kepada mereka.
+  - name: --vnet-name
+    summary: Nama jaringan virtual untuk menambahkan VM.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/lab/_help.py
+- uid: az_lab_vm_delete
+  name: az lab vm delete
+  summary: Hapus komputer virtual.
+  description: Penyelesaian operasi ini bisa memakan waktu cukup lama.
+  syntax: >-
+    az lab vm delete --lab-name
+                     --name
+                     --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --lab-name
+    summary: Nama lab.
+    description: ''
+  - isRequired: true
+    name: --name
+    summary: Nama komputer virtual.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/lab/_help.py
+- uid: az_lab_vm_list
+  name: az lab vm list
+  summary: Mencantumkan VM di Azure DevTest Lab.
+  description: ''
+  syntax: >-
+    az lab vm list --lab-name
+                   --resource-group
+                   [--all]
+                   [--claimable]
+                   [--environment]
+                   [--expand]
+                   [--filters]
+                   [--object-id]
+                   [--order-by]
+                   [--top]
+  examples:
+  - summary: Mencantumkan VM di Azure DevTest Lab. (dibuat otomatis)
+    syntax: az lab vm list --lab-name MyLab --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --lab-name
+    summary: Nama lab.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --all
+    summary: Mencantumkan semua komputer virtual di lab. Tidak dapat digunakan dengan `--filters`.
+    description: ''
+  - name: --claimable
+    summary: Cantumkan hanya komputer virtual yang dapat diklaim di lab. Tidak dapat digunakan dengan `--filters`.
+    description: ''
+  - name: --environment
+    summary: Nama atau ID lingkungan untuk mencantumkan komputer virtual. Tidak dapat digunakan dengan `--filters`.
+    description: ''
+  - name: --expand
+    summary: Kueri perluas.
+    description: ''
+  - name: --filters
+    summary: Filter yang akan diterapkan.
+    description: ''
+  - name: --object-id
+    summary: ID objek pemilik untuk mencantumkan VM.
+    description: ''
+  - name: --order-by
+    summary: Ekspresi pemesanan untuk hasil menggunakan notasi OData.
+    description: ''
+  - name: --top
+    summary: Jumlah maksimum sumber daya yang akan dikembalikan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/lab/_help.py
+- uid: az_lab_vm_show
+  name: az lab vm show
+  summary: Dapatkan komputer virtual.
+  description: ''
+  syntax: >-
+    az lab vm show --lab-name
+                   --name
+                   --resource-group
+                   [--expand]
+  requiredParameters:
+  - isRequired: true
+    name: --lab-name
+    summary: Nama lab.
+    description: ''
+  - isRequired: true
+    name: --name
+    summary: Nama komputer virtual.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --expand
+    summary: "Tentukan kueri $expand. Contoh: 'properties($expand=artifacts,computeVm,networkInterface,applicableSchedule)'."
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/lab/_help.py
+- uid: az_lab_vm_start
+  name: az lab vm start
+  summary: Mulai komputer virtual.
+  description: Penyelesaian operasi ini bisa memakan waktu cukup lama.
+  syntax: >-
+    az lab vm start --lab-name
+                    --name
+                    --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --lab-name
+    summary: Nama lab.
+    description: ''
+  - isRequired: true
+    name: --name
+    summary: Nama komputer virtual.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/lab/_help.py
+- uid: az_lab_vm_stop
+  name: az lab vm stop
+  summary: Hentikan komputer virtual Operasi ini bisa memakan waktu cukup lama untuk diselesaikan.
+  description: ''
+  syntax: >-
+    az lab vm stop --lab-name
+                   --name
+                   --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --lab-name
+    summary: Nama lab.
+    description: ''
+  - isRequired: true
+    name: --name
+    summary: Nama komputer virtual.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/lab/_help.py
+commands:
+- az_lab_vm_apply-artifacts
+- az_lab_vm_claim
+- az_lab_vm_create
+- az_lab_vm_delete
+- az_lab_vm_list
+- az_lab_vm_show
+- az_lab_vm_start
+- az_lab_vm_stop
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 10/20/2019
+  description: Mengelola VM di Azure DevTest Lab.
+  ms.openlocfilehash: 4ff203b8c2ac2be413b9001849ad2f8e8e4327e5
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140941856"

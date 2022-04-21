@@ -1,0 +1,270 @@
+### YamlMime:AzureCLIGroup
+uid: az_iot_hub_route
+name: az iot hub route
+summary: Mengelola rute hub IoT.
+description: ''
+directCommands:
+- uid: az_iot_hub_route_create
+  name: az iot hub route create
+  summary: Buat rute di IoT Hub.
+  description: Buat rute untuk mengirim sumber data dan kondisi tertentu ke titik akhir yang diinginkan.
+  syntax: >-
+    az iot hub route create --en
+                            --hub-name
+                            --name
+                            --source {deviceconnectionstateevents, devicejoblifecycleevents, devicelifecycleevents, devicemessages, digitaltwinchangeevents, invalid, twinchangeevents}
+                            [--condition]
+                            [--enabled {false, true}]
+                            [--resource-group]
+  examples:
+  - summary: Buat rute baru "R1".
+    syntax: az iot hub route create -g MyResourceGroup --hub-name MyIotHub --endpoint-name E2 --source DeviceMessages --route-name R1
+  - summary: Buat rute baru "R1" dengan semua parameter.
+    syntax: az iot hub route create -g MyResourceGroup --hub-name MyIotHub --endpoint-name E2 --source DeviceMessages --route-name R1 --condition true --enabled true
+  requiredParameters:
+  - isRequired: true
+    name: --en --endpoint --endpoint-name
+    summary: Nama titik akhir perutean.
+    description: ''
+  - isRequired: true
+    name: --hub-name
+    summary: nama IoT Hub.
+    description: ''
+  - isRequired: true
+    name: --name --route-name -n
+    summary: Nama Rute.
+    description: ''
+  - isRequired: true
+    name: --source --source-type --type -s
+    parameterValueGroup: deviceconnectionstateevents, devicejoblifecycleevents, devicelifecycleevents, devicemessages, digitaltwinchangeevents, invalid, twinchangeevents
+    summary: Sumber rute.
+    description: ''
+  optionalParameters:
+  - name: --condition -c
+    summary: Kondisi yang dievaluasi untuk menerapkan aturan perutean.
+    description: ''
+  - name: --enabled -e
+    parameterValueGroup: false, true
+    summary: Boolean yang menunjukkan apakah akan mengaktifkan rute ke hub Iot.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_hub_route_delete
+  name: az iot hub route delete
+  summary: Hapus semua atau rute yang disebutkan untuk IoT Hub Anda.
+  description: Hapus rute atau semua rute untuk IoT Hub Anda.
+  syntax: >-
+    az iot hub route delete [--hub-name]
+                            [--ids]
+                            [--name]
+                            [--resource-group]
+                            [--source {deviceconnectionstateevents, devicejoblifecycleevents, devicelifecycleevents, devicemessages, digitaltwinchangeevents, invalid, twinchangeevents}]
+  examples:
+  - summary: Hapus rute "R1" dari IoT Hub "MyIotHub".
+    syntax: az iot hub route delete -g MyResourceGroup --hub-name MyIotHub --route-name R1
+  - summary: Hapus semua rute jenis sumber "DeviceMessages" dari "MyIotHub" IoT Hub.
+    syntax: az iot hub route delete -g MyResourceGroup --hub-name MyIotHub --source DeviceMessages
+  - summary: Hapus semua rute dari IoT Hub "MyIotHub".
+    syntax: az iot hub route delete -g MyResourceGroup --hub-name MyIotHub
+  optionalParameters:
+  - name: --hub-name
+    summary: nama IoT Hub.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name --route-name -n
+    summary: Nama Rute.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --source --source-type --type -s
+    parameterValueGroup: deviceconnectionstateevents, devicejoblifecycleevents, devicelifecycleevents, devicemessages, digitaltwinchangeevents, invalid, twinchangeevents
+    summary: Sumber rute.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_hub_route_list
+  name: az iot hub route list
+  summary: Dapatkan semua rute di IoT Hub.
+  description: Dapatkan informasi tentang semua rute dari IoT Hub.
+  syntax: >-
+    az iot hub route list [--hub-name]
+                          [--ids]
+                          [--resource-group]
+                          [--source {deviceconnectionstateevents, devicejoblifecycleevents, devicelifecycleevents, devicemessages, digitaltwinchangeevents, invalid, twinchangeevents}]
+  examples:
+  - summary: Dapatkan semua rute dari IoT Hub "MyIotHub".
+    syntax: az iot hub route list -g MyResourceGroup --hub-name MyIotHub
+  - summary: Dapatkan semua rute jenis sumber "DeviceMessages" dari "MyIotHub" IoT Hub.
+    syntax: az iot hub route list -g MyResourceGroup --hub-name MyIotHub --source DeviceMessages
+  optionalParameters:
+  - name: --hub-name
+    summary: nama IoT Hub.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --source --source-type --type -s
+    parameterValueGroup: deviceconnectionstateevents, devicejoblifecycleevents, devicelifecycleevents, devicemessages, digitaltwinchangeevents, invalid, twinchangeevents
+    summary: Sumber rute.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_hub_route_show
+  name: az iot hub route show
+  summary: Dapatkan informasi tentang rute di IoT Hub.
+  description: Dapatkan informasi tentang rute tertentu di IoT Hub Anda.
+  syntax: >-
+    az iot hub route show --name
+                          [--hub-name]
+                          [--ids]
+                          [--resource-group]
+  examples:
+  - summary: Dapatkan informasi rute dari IoT Hub "MyIotHub".
+    syntax: az iot hub route show -g MyResourceGroup --hub-name MyIotHub --route-name {routeName}
+  requiredParameters:
+  - isRequired: true
+    name: --name --route-name -n
+    summary: Nama Rute.
+    description: ''
+  optionalParameters:
+  - name: --hub-name
+    summary: nama IoT Hub.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_hub_route_test
+  name: az iot hub route test
+  summary: Uji semua rute atau rute yang disebutkan di IoT Hub.
+  description: Uji semua rute yang ada atau rute yang disebutkan di IoT Hub Anda. Anda dapat memberikan contoh pesan untuk menguji rute Anda.
+  syntax: >-
+    az iot hub route test [--ap]
+                          [--body]
+                          [--hub-name]
+                          [--ids]
+                          [--name]
+                          [--resource-group]
+                          [--source {deviceconnectionstateevents, devicejoblifecycleevents, devicelifecycleevents, devicemessages, digitaltwinchangeevents, invalid, twinchangeevents}]
+                          [--sp]
+  examples:
+  - summary: Uji rute "R1" dari IoT Hub "MyIotHub".
+    syntax: az iot hub route test -g MyResourceGroup --hub-name MyIotHub --route-name R1
+  - summary: Uji semua rute jenis sumber "DeviceMessages" dari "MyIotHub" IoT Hub.
+    syntax: az iot hub route test -g MyResourceGroup --hub-name MyIotHub --source DeviceMessages
+  optionalParameters:
+  - name: --ap --app-properties
+    summary: Properti aplikasi pesan rute.
+    description: ''
+  - name: --body -b
+    summary: Isi pesan rute.
+    description: ''
+  - name: --hub-name
+    summary: nama IoT Hub.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name --route-name -n
+    summary: Nama Rute.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --source --source-type --type -s
+    parameterValueGroup: deviceconnectionstateevents, devicejoblifecycleevents, devicelifecycleevents, devicemessages, digitaltwinchangeevents, invalid, twinchangeevents
+    summary: Sumber rute.
+    description: ''
+  - name: --sp --system-properties
+    summary: Properti sistem pesan rute.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_hub_route_update
+  name: az iot hub route update
+  summary: Perbarui rute di IoT Hub.
+  description: Memperbarui rute di IoT Hub. Anda dapat mengubah sumber, titik akhir, atau kueri pada rute.
+  syntax: >-
+    az iot hub route update --name
+                            [--condition]
+                            [--en]
+                            [--enabled {false, true}]
+                            [--hub-name]
+                            [--ids]
+                            [--resource-group]
+                            [--source {deviceconnectionstateevents, devicejoblifecycleevents, devicelifecycleevents, devicemessages, digitaltwinchangeevents, invalid, twinchangeevents}]
+  examples:
+  - summary: Perbarui jenis sumber rute "R1" dari IoT Hub "MyIotHub".
+    syntax: az iot hub route update -g MyResourceGroup --hub-name MyIotHub --source DeviceMessages --route-name R1
+  requiredParameters:
+  - isRequired: true
+    name: --name --route-name -n
+    summary: Nama Rute.
+    description: ''
+  optionalParameters:
+  - name: --condition -c
+    summary: Kondisi yang dievaluasi untuk menerapkan aturan perutean.
+    description: ''
+  - name: --en --endpoint --endpoint-name
+    summary: Nama titik akhir perutean.
+    description: ''
+  - name: --enabled -e
+    parameterValueGroup: false, true
+    summary: Boolean yang menunjukkan apakah akan mengaktifkan rute ke hub Iot.
+    description: ''
+  - name: --hub-name
+    summary: nama IoT Hub.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --source --source-type --type -s
+    parameterValueGroup: deviceconnectionstateevents, devicejoblifecycleevents, devicelifecycleevents, devicemessages, digitaltwinchangeevents, invalid, twinchangeevents
+    summary: Sumber rute.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+commands:
+- az_iot_hub_route_create
+- az_iot_hub_route_delete
+- az_iot_hub_route_list
+- az_iot_hub_route_show
+- az_iot_hub_route_test
+- az_iot_hub_route_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 02/24/2022
+  description: Mengelola rute hub IoT.
+  ms.openlocfilehash: 269f3d3556d471905de8bd6a3c8d1a596e7c1831
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140978378"

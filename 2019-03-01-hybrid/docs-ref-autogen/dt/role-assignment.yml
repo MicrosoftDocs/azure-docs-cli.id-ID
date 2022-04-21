@@ -1,0 +1,139 @@
+### YamlMime:AzureCLIGroup
+uid: az_dt_role-assignment
+name: az dt role-assignment
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **azure-iot** untuk Azure CLI (versi 2.24.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az dt role-assignment** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola penetapan peran RBAC untuk instans Digital Twins.
+description: >-
+  Perhatikan bahwa untuk melakukan penetapan peran, prinsipal yang masuk memerlukan izin seperti Pemilik atau Administrator Akses Pengguna pada cakupan yang ditetapkan.
+
+
+  Grup perintah ini disediakan untuk kenyamanan. Untuk skenario penetapan peran yang lebih kompleks, gunakan grup perintah 'az role assignment'.
+directCommands:
+- uid: az_dt_role-assignment_create
+  name: az dt role-assignment create
+  summary: Tetapkan pengguna, grup, atau perwakilan layanan ke peran terhadap instans Digital Twins.
+  description: Perhatikan bahwa untuk melakukan penetapan peran, prinsipal yang masuk memerlukan izin seperti Pemilik atau Administrator Akses Pengguna pada cakupan yang ditetapkan.
+  syntax: >-
+    az dt role-assignment create --assignee
+                                 --dt-name
+                                 --role
+                                 [--resource-group]
+  examples:
+  - summary: Tetapkan pengguna (melalui email) peran Pemilik Digital Twins bawaan terhadap instans target.
+    syntax: az dt role-assignment create -n {instance_name} --assignee "owneruser@microsoft.com" --role "Azure Digital Twins Data Owner"
+  - summary: Tetapkan pengguna (menurut ID objek) peran Pembaca Digital Twins bawaan terhadap instans target.
+    syntax: az dt role-assignment create -n {instance_name} --assignee "97a89267-0966-4054-a156-b7d86ef8e216" --role "Azure Digital Twins Data Reader"
+  - summary: Tetapkan perwakilan layanan peran kustom terhadap instans target.
+    syntax: az dt role-assignment create -n {instance_name} --assignee {service_principal_name_or_id} --role {role_name_or_id}
+  requiredParameters:
+  - isRequired: true
+    name: --assignee
+    summary: 'Mewakili pengguna, grup, atau perwakilan layanan. format yang didukung: id objek, nama masuk pengguna, atau nama perwakilan layanan.'
+    description: ''
+  - isRequired: true
+    name: --dt-name --dtn -n
+    summary: Nama instans Digital Twins.
+    description: ''
+  - isRequired: true
+    name: --role
+    summary: Nama peran atau Id.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Grup sumber daya instans Digital Twins. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_dt_role-assignment_delete
+  name: az dt role-assignment delete
+  summary: Menghapus penetapan peran pengguna, grup, atau perwakilan layanan dari instans Digital Twins.
+  description: Perhatikan bahwa untuk melakukan penetapan peran, prinsipal yang masuk memerlukan izin seperti Pemilik atau Administrator Akses Pengguna pada cakupan yang ditetapkan.
+  syntax: >-
+    az dt role-assignment delete --dt-name
+                                 [--assignee]
+                                 [--resource-group]
+                                 [--role]
+  examples:
+  - summary: Menghapus pengguna dari penetapan peran tertentu dari instans Digital Twins.
+    syntax: az dt role-assignment delete -n {instance_name} --assignee "removeuser@microsoft.com" --role "Azure Digital Twins Data Reader"
+  - summary: Menghapus pengguna dari semua peran yang ditetapkan dari instans Digital Twins.
+    syntax: az dt role-assignment delete -n {instance_name} --assignee "removeuser@microsoft.com"
+  requiredParameters:
+  - isRequired: true
+    name: --dt-name --dtn -n
+    summary: Nama instans Digital Twins.
+    description: ''
+  optionalParameters:
+  - name: --assignee
+    summary: 'Mewakili pengguna, grup, atau perwakilan layanan. format yang didukung: id objek, nama masuk pengguna, atau nama perwakilan layanan.'
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya instans Digital Twins. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --role
+    summary: Nama peran atau Id.
+    description: ''
+- uid: az_dt_role-assignment_list
+  name: az dt role-assignment list
+  summary: Mencantumkan penetapan peran yang ada dari instans Digital Twins.
+  description: ''
+  syntax: >-
+    az dt role-assignment list --dt-name
+                               [--include-inherited {false, true}]
+                               [--resource-group]
+                               [--role]
+  examples:
+  - summary: Mencantumkan penetapan peran pada instans target.
+    syntax: az dt role-assignment list -n {instance_name}
+  - summary: Cantumkan penetapan peran pada instans target dan filter menurut peran.
+    syntax: az dt role-assignment list -n {instance_name} --role {role_name_or_id}
+  requiredParameters:
+  - isRequired: true
+    name: --dt-name --dtn -n
+    summary: Nama instans Digital Twins.
+    description: ''
+  optionalParameters:
+  - name: --include-inherited
+    parameterValueGroup: false, true
+    summary: Sertakan tugas yang diterapkan pada cakupan induk.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya instans Digital Twins. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --role
+    summary: Nama peran atau Id.
+    description: ''
+commands:
+- az_dt_role-assignment_create
+- az_dt_role-assignment_delete
+- az_dt_role-assignment_list
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: >-
+    Perhatikan bahwa untuk melakukan penetapan peran, prinsipal yang masuk memerlukan izin seperti Pemilik atau Administrator Akses Pengguna pada cakupan yang ditetapkan.
+
+
+    Grup perintah ini disediakan untuk kenyamanan. Untuk skenario penetapan peran yang lebih kompleks, gunakan grup perintah 'az role assignment'.
+  ms.openlocfilehash: 7f1b74afccaa4d21e76e9d3af096120e88c2bd3a
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140937626"
