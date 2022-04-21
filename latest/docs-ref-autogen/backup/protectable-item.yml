@@ -1,0 +1,158 @@
+### YamlMime:AzureCLIGroup
+uid: az_backup_protectable-item
+name: az backup protectable-item
+summary: Kelola item yang belum dilindungi atau dicadangkan ke vault layanan Azure Recovery dengan kebijakan terkait.
+description: ''
+directCommands:
+- uid: az_backup_protectable-item_initialize
+  name: az backup protectable-item initialize
+  summary: Picu penemuan item yang tidak terlindungi dari jenis beban kerja yang diberikan dalam kontainer yang diberikan.
+  description: ''
+  syntax: >-
+    az backup protectable-item initialize --container-name
+                                          --resource-group
+                                          --vault-name
+                                          --workload-type {MSSQL, SAPASE, SAPHANA, SAPHanaDatabase, SQLDataBase}
+  examples:
+  - summary: Picu penemuan item yang tidak terlindungi dari jenis beban kerja yang diberikan dalam kontainer yang diberikan. Gunakan perintah ini untuk menemukan DB baru secara manual dan lanjutkan untuk melindunginya.
+    syntax: az backup protectable-item initialize --resource-group MyResourceGroup --vault-name MyVault --workload-type MSSQL --container-name MyContainer
+  requiredParameters:
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer cadangan. Menerima 'Nama' atau 'FriendlyName' dari output perintah az backup container list. Jika 'FriendlyName' diteruskan maka BackupManagementType diperlukan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vault-name -v
+    summary: Nama vault layanan Pemulihan.
+    description: ''
+  - isRequired: true
+    name: --workload-type
+    parameterValueGroup: MSSQL, SAPASE, SAPHANA, SAPHanaDatabase, SQLDataBase
+    summary: Tentukan jenis aplikasi dalam Sumber Daya yang harus ditemukan dan dilindungi oleh Azure Backup.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/backup/_help.py
+- uid: az_backup_protectable-item_list
+  name: az backup protectable-item list
+  summary: Ambil semua item yang dapat dilindungi dalam kontainer tertentu atau di semua kontainer terdaftar.
+  description: ''
+  syntax: >-
+    az backup protectable-item list --resource-group
+                                    --vault-name
+                                    --workload-type {MSSQL, SAPASE, SAPHANA, SAPHanaDatabase, SQLDataBase}
+                                    [--backup-management-type {AzureIaasVM, AzureStorage, AzureWorkload}]
+                                    [--container-name]
+                                    [--protectable-item-type {HANAInstance, SAPHanaDatabase, SAPHanaSystem, SQLAG, SQLDatabase, SQLInstance}]
+                                    [--server-name]
+  examples:
+  - summary: Ambil semua item yang dapat dilindungi dalam kontainer tertentu atau di semua kontainer terdaftar. Ini terdiri dari semua elemen dalam hierarki aplikasi. Mengembalikan DB dan entitas tingkat atasnya seperti Instans, AvailabilityGroup, dll.
+    syntax: az backup protectable-item list --resource-group MyResourceGroup --vault-name MyVault --backup-management-type AzureWorkload --workload-type MSSQL --container-name MyContainer
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vault-name -v
+    summary: Nama vault layanan Pemulihan.
+    description: ''
+  - isRequired: true
+    name: --workload-type
+    parameterValueGroup: MSSQL, SAPASE, SAPHANA, SAPHanaDatabase, SQLDataBase
+    summary: Tentukan jenis aplikasi dalam Sumber Daya yang harus ditemukan dan dilindungi oleh Azure Backup.
+    description: ''
+  optionalParameters:
+  - name: --backup-management-type
+    defaultValue: AzureWorkload
+    parameterValueGroup: AzureIaasVM, AzureStorage, AzureWorkload
+    summary: 'Tentukan jenis manajemen cadangan. Tentukan bagaimana Azure Backup mengelola cadangan entitas dalam sumber daya ARM. Misalnya: AzureWorkloads mengacu pada beban kerja yang diinstal dalam Azure VM, AzureStorage mengacu pada entitas dalam akun Storage. Diperlukan hanya jika nama yang mudah diingat digunakan sebagai Nama kontainer.'
+    description: ''
+  - name: --container-name -c
+    summary: Nama kontainer cadangan. Menerima 'Nama' atau 'FriendlyName' dari output perintah az backup container list. Jika 'FriendlyName' diteruskan maka BackupManagementType diperlukan.
+    description: ''
+  - name: --protectable-item-type
+    parameterValueGroup: HANAInstance, SAPHanaDatabase, SAPHanaSystem, SQLAG, SQLDatabase, SQLInstance
+    summary: Tentukan jenis aplikasi dalam Sumber Daya yang harus ditemukan dan dilindungi oleh Azure Backup.
+    description: ''
+  - name: --server-name
+    summary: Nama Server Induk item.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/backup/_help.py
+- uid: az_backup_protectable-item_show
+  name: az backup protectable-item show
+  summary: Ambil item yang dapat dilindungi yang ditentukan dalam kontainer yang diberikan.
+  description: ''
+  syntax: >-
+    az backup protectable-item show --protectable-item-type {HANAInstance, SAPHanaDatabase, SAPHanaSystem, SQLAG, SQLDatabase, SQLInstance}
+                                    --server-name
+                                    --workload-type {MSSQL, SAPASE, SAPHANA, SAPHanaDatabase, SQLDataBase}
+                                    [--ids]
+                                    [--name]
+                                    [--resource-group]
+                                    [--vault-name]
+  examples:
+  - summary: Ambil item yang dapat dilindungi yang ditentukan dalam kontainer yang diberikan.
+    syntax: az backup protectable-item show --resource-group MyResourceGroup --vault-name MyVault --workload-type MSSQL --protectable-item-type SQLAG --name Name  --server-name MyServerName
+  requiredParameters:
+  - isRequired: true
+    name: --protectable-item-type
+    parameterValueGroup: HANAInstance, SAPHanaDatabase, SAPHanaSystem, SQLAG, SQLDatabase, SQLInstance
+    summary: Tentukan jenis aplikasi dalam Sumber Daya yang harus ditemukan dan dilindungi oleh Azure Backup.
+    description: ''
+  - isRequired: true
+    name: --server-name
+    summary: Nama Server Induk item.
+    description: ''
+  - isRequired: true
+    name: --workload-type
+    parameterValueGroup: MSSQL, SAPASE, SAPHANA, SAPHanaDatabase, SQLDataBase
+    summary: Tentukan jenis aplikasi dalam Sumber Daya yang harus ditemukan dan dilindungi oleh Azure Backup.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama item yang dapat dilindungi.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --vault-name -v
+    summary: Nama vault layanan Pemulihan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/backup/_help.py
+commands:
+- az_backup_protectable-item_initialize
+- az_backup_protectable-item_list
+- az_backup_protectable-item_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 10/26/2021
+  description: Kelola item yang belum dilindungi atau dicadangkan ke vault layanan Azure Recovery dengan kebijakan terkait.
+  ms.openlocfilehash: 3393df5da226ca3f3352f41d691999291d0f66d7
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141022769"

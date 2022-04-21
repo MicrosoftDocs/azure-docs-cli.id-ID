@@ -1,0 +1,173 @@
+### YamlMime:AzureCLIGroup
+uid: az_lab_custom-image
+name: az lab custom-image
+summary: Mengelola gambar kustom DevTest Lab.
+description: ''
+directCommands:
+- uid: az_lab_custom-image_create
+  name: az lab custom-image create
+  summary: Buat gambar kustom di DevTest Lab.
+  description: ''
+  syntax: >-
+    az lab custom-image create --lab-name
+                               --name
+                               --os-state
+                               --os-type
+                               --resource-group
+                               --source-vm-id
+                               [--author]
+                               [--description]
+  examples:
+  - summary: Buat gambar kustom di lab dari komputer virtual Windows yang sedang berjalan tanpa menerapkan sysprep.
+    syntax: >-
+      az lab custom-image create --lab-name {LabName} -g {ResourceGroup} --name {VMName} \
+          --os-type Windows --os-state NonSysprepped \
+          --source-vm-id "/subscriptions/{SubID}/resourcegroups/{ResourceGroup}/microsoft.devtestlab/labs/{LabName}/virtualmachines/{VMName}"
+  requiredParameters:
+  - isRequired: true
+    name: --lab-name
+    summary: Nama Lab.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama gambar.
+    description: ''
+  - isRequired: true
+    name: --os-state
+    summary: Status komputer virtual saat ini.
+    description: 'Untuk komputer virtual Windows: NonSysprepped, SysprepRequested, SysprepApplied Untuk komputer virtual Linux: NonDeprovisioned, DeprovisionRequested, DeprovisionApplied.'
+  - isRequired: true
+    name: --os-type
+    summary: 'Jenis OS tempat gambar kustom didasarkan. Nilai yang diizinkan adalah: Windows, Linux.'
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --source-vm-id
+    summary: ID sumber daya komputer virtual di lab yang disediakan.
+    description: ''
+  optionalParameters:
+  - name: --author
+    summary: Penulis gambar kustom.
+    description: ''
+  - name: --description
+    summary: Deskripsi terperinci untuk gambar kustom.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/lab/_help.py
+- uid: az_lab_custom-image_delete
+  name: az lab custom-image delete
+  summary: Hapus gambar kustom.
+  description: Penyelesaian operasi ini bisa memakan waktu cukup lama.
+  syntax: >-
+    az lab custom-image delete --lab-name
+                               --name
+                               --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --lab-name
+    summary: Nama lab.
+    description: ''
+  - isRequired: true
+    name: --name
+    summary: Nama gambar kustom.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/lab/_help.py
+- uid: az_lab_custom-image_list
+  name: az lab custom-image list
+  summary: Mencantumkan gambar kustom di lab tertentu.
+  description: ''
+  syntax: >-
+    az lab custom-image list --lab-name
+                             --resource-group
+                             [--expand]
+                             [--filter]
+                             [--orderby]
+                             [--top]
+  requiredParameters:
+  - isRequired: true
+    name: --lab-name
+    summary: Nama lab.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --expand
+    summary: "Tentukan kueri $expand. Contoh: 'properties($select=vm)'."
+    description: ''
+  - name: --filter
+    summary: "Filter yang akan diterapkan ke operasi. Contoh: '$filter=contains(name,'myName')."
+    description: ''
+  - name: --orderby
+    summary: "Ekspresi pengurutan untuk hasil, menggunakan notasi OData. Contoh: '$orderby=name desc'."
+    description: ''
+  - name: --top
+    summary: "Jumlah maksimum sumber daya yang akan dikembalikan dari operasi. Contoh: '$top=10'."
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/lab/_help.py
+- uid: az_lab_custom-image_show
+  name: az lab custom-image show
+  summary: Dapatkan gambar kustom.
+  description: ''
+  syntax: >-
+    az lab custom-image show --lab-name
+                             --name
+                             --resource-group
+                             [--expand]
+  requiredParameters:
+  - isRequired: true
+    name: --lab-name
+    summary: Nama lab.
+    description: ''
+  - isRequired: true
+    name: --name
+    summary: Nama gambar kustom.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --expand
+    summary: "Tentukan kueri $expand. Contoh: 'properties($select=vm)'."
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/lab/_help.py
+commands:
+- az_lab_custom-image_create
+- az_lab_custom-image_delete
+- az_lab_custom-image_list
+- az_lab_custom-image_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 10/20/2019
+  description: Mengelola gambar kustom DevTest Lab.
+  ms.openlocfilehash: 7713cb356ba600587d91e4313c9550be009f2210
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141021748"
