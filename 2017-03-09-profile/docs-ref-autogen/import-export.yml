@@ -1,0 +1,274 @@
+### YamlMime:AzureCLIGroup
+uid: az_import-export
+name: az import-export
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **impor-ekspor** untuk Azure CLI (versi 2.3.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **impor-ekspor az** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Kelola Ekspor Impor.
+description: ''
+directCommands:
+- uid: az_import-export_create
+  name: az import-export create
+  summary: Membuat pekerjaan baru atau memperbarui pekerjaan yang sudah ada dalam langganan yang ditentukan.
+  description: ''
+  syntax: >-
+    az import-export create --name
+                            --resource-group
+                            [--backup-drive-manifest {false, true}]
+                            [--cancel-requested {false, true}]
+                            [--client-tenant-id]
+                            [--delivery-package]
+                            [--diagnostics-path]
+                            [--drive-list]
+                            [--export]
+                            [--incomplete-blob-list-uri]
+                            [--location]
+                            [--log-level]
+                            [--percent-complete]
+                            [--return-address]
+                            [--return-package]
+                            [--return-shipping]
+                            [--shipping-information]
+                            [--state]
+                            [--storage-account]
+                            [--tags]
+                            [--type]
+  examples:
+  - summary: Membuat tugas impor
+    syntax: >-
+      az import-export create --resource-group "myResourceGroup" --name "myJob"
+
+      --location "West US" --backup-drive-manifest true --diagnostics-path "waimportexport"
+
+      --drive-list bit-locker-key=238810-662376-448998-450120-652806-203390-606320-483076
+
+      drive-header-hash= drive-id=9CA995BB manifest-file=\\DriveManifest.xml
+
+      manifest-hash=109B21108597EF36D5785F08303F3638 --type "Import" --log-level "Verbose"
+
+      --return-address city=Redmond country-or-region=USA email=Test@contoso.com phone=4250000000
+
+      postal-code=98007 recipient-name=Tests state-or-province=wa street-address1=Street1
+
+      street-address2=street2 --storage-account "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-\
+
+      xxxxxxxxxxxx/resourceGroups/myResourceGroup/providers/Microsoft.ClassicStorage/storageAccounts/test"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama pekerjaan impor/ekspor.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --backup-drive-manifest
+    parameterValueGroup: false, true
+    summary: Nilai default-nya adalah false. Menunjukkan apakah file manifes pada drive harus disalin ke blob blok.
+    description: ''
+  - name: --cancel-requested
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah permintaan telah diajukan untuk membatalkan pekerjaan.
+    description: ''
+  - name: --client-tenant-id
+    summary: ID penyewa klien yang membuat permintaan.
+    description: ''
+  - name: --delivery-package
+    summary: Berisi informasi tentang paket yang dikirim oleh pelanggan ke pusat data Microsoft.
+    description: ''
+  - name: --diagnostics-path
+    summary: Direktori blob virtual tempat log salinan dan cadangan file manifes drive (jika diaktifkan) akan disimpan.
+    description: ''
+  - name: --drive-list
+    summary: Daftar hingga sepuluh drive yang terdiri dari pekerjaan. Daftar drive adalah elemen yang diperlukan untuk pekerjaan impor; tidak ditentukan untuk pekerjaan ekspor.
+    description: ''
+  - name: --export
+    summary: Properti yang berisi informasi tentang blob yang akan diekspor untuk pekerjaan ekspor. Properti ini diperlukan untuk pekerjaan ekspor, tetapi tidak boleh ditentukan untuk pekerjaan impor.
+    description: ''
+  - name: --incomplete-blob-list-uri
+    summary: Jalur blob yang menunjuk ke blob blok yang berisi daftar nama blob yang tidak diekspor karena ruang drive yang tidak cukup. Jika semua blob berhasil diekspor, maka elemen ini tidak disertakan dalam respons.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --log-level
+    summary: Nilai defaultnya adalah Kesalahan. Menunjukkan apakah pengelogan kesalahan atau pengelogan verbose akan diaktifkan.
+    description: ''
+  - name: --percent-complete
+    summary: Persentase keseluruhan selesai untuk pekerjaan tersebut.
+    description: ''
+  - name: --return-address
+    summary: Menentukan informasi alamat pengembalian untuk pekerjaan tersebut.
+    description: ''
+  - name: --return-package
+    summary: Berisi informasi tentang paket yang dikirim oleh pelanggan ke pusat data Microsoft.
+    description: ''
+  - name: --return-shipping
+    summary: Menentukan operator pengembalian dan akun pelanggan dengan operator.
+    description: ''
+  - name: --shipping-information
+    summary: Berisi informasi tentang pusat data Microsoft tempat drive harus dikirim.
+    description: ''
+  - name: --state
+    summary: Kondisi pekerjaan saat ini.
+    description: ''
+  - name: --storage-account
+    summary: Nama atau ID akun penyimpanan tempat data akan diimpor atau diekspor.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --type
+    summary: Jenis pekerjaan.
+    description: ''
+- uid: az_import-export_delete
+  name: az import-export delete
+  summary: Menghapus pekerjaan yang ada. Hanya pekerjaan dalam status Membuat atau Selesai yang dapat dihapus.
+  description: ''
+  syntax: >-
+    az import-export delete --name
+                            --resource-group
+  examples:
+  - summary: Menghapus pekerjaan
+    syntax: az import-export delete --resource-group "myResourceGroup" --name "myJob"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama pekerjaan impor/ekspor.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_import-export_list
+  name: az import-export list
+  summary: Mengembalikan semua pekerjaan aktif dan selesai dalam langganan.
+  description: ''
+  syntax: az import-export list [--resource-group]
+  examples:
+  - summary: Mencantumkan pekerjaan dalam grup sumber daya
+    syntax: az import-export list --resource-group "myResourceGroup"
+  - summary: Mencantumkan pekerjaan dalam langganan saat ini
+    syntax: az import-export list
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_import-export_show
+  name: az import-export show
+  summary: Mendapatkan informasi tentang pekerjaan yang sudah ada.
+  description: ''
+  syntax: >-
+    az import-export show --name
+                          --resource-group
+  examples:
+  - summary: Dapatkan pekerjaan
+    syntax: az import-export show --resource-group "myResourceGroup" --name "myJob"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama pekerjaan impor/ekspor.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_import-export_update
+  name: az import-export update
+  summary: Memperbarui properti tertentu dari pekerjaan. Anda dapat memanggil operasi ini untuk memberi tahu layanan Import/Export bahwa hard drive yang terdiri dari pekerjaan impor atau ekspor telah dikirim ke pusat data Microsoft. Ini juga dapat digunakan untuk membatalkan pekerjaan yang ada.
+  description: ''
+  syntax: >-
+    az import-export update --name
+                            --resource-group
+                            [--backup-drive-manifest {false, true}]
+                            [--cancel-requested {false, true}]
+                            [--delivery-package]
+                            [--drive-list]
+                            [--log-level]
+                            [--return-address]
+                            [--return-shipping]
+                            [--state]
+                            [--tags]
+  examples:
+  - summary: Memperbarui pekerjaan
+    syntax: >-
+      az import-export update --resource-group "myResourceGroup" --name "myJob"
+
+      --backup-drive-manifest true --log-level "Verbose" --state ""
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama pekerjaan impor/ekspor.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --backup-drive-manifest
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah file manifes pada drive harus disalin ke blob blok.
+    description: ''
+  - name: --cancel-requested
+    parameterValueGroup: false, true
+    summary: Jika ditentukan, nilainya harus benar. Layanan akan mencoba membatalkan pekerjaan.
+    description: ''
+  - name: --delivery-package
+    summary: Berisi informasi tentang paket yang dikirim oleh pelanggan ke pusat data Microsoft.
+    description: ''
+  - name: --drive-list
+    summary: Daftar drive yang terdiri dari pekerjaan.
+    description: ''
+  - name: --log-level
+    summary: Menunjukkan apakah pengelogan kesalahan atau pengelogan verbose diaktifkan.
+    description: ''
+  - name: --return-address
+    summary: Menentukan informasi alamat pengembalian untuk pekerjaan tersebut.
+    description: ''
+  - name: --return-shipping
+    summary: Menentukan operator pengembalian dan akun pelanggan dengan operator.
+    description: ''
+  - name: --state
+    summary: Jika ditentukan, nilainya harus Pengiriman, yang memberi tahu layanan Import/Export bahwa paket untuk pekerjaan telah dikirim. Properti ReturnAddress dan DeliveryPackage harus telah diatur baik dalam permintaan ini atau dalam permintaan sebelumnya, jika tidak, permintaan akan gagal.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+commands:
+- az_import-export_bit-locker-key
+- az_import-export_bit-locker-key_list
+- az_import-export_create
+- az_import-export_delete
+- az_import-export_list
+- az_import-export_location
+- az_import-export_location_list
+- az_import-export_location_show
+- az_import-export_show
+- az_import-export_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Kelola Ekspor Impor.
+  ms.openlocfilehash: 522149c99ef0e9b72f2493fdf6e575772f16cfe1
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140971502"
