@@ -1,0 +1,166 @@
+### YamlMime:AzureCLIGroup
+uid: az_backup_item
+name: az backup item
+summary: Item yang sudah dilindungi atau dicadangkan ke vault layanan Azure Recovery dengan kebijakan terkait.
+description: ''
+directCommands:
+- uid: az_backup_item_list
+  name: az backup item list
+  summary: Mencantumkan semua item yang dicadangkan dalam kontainer.
+  description: ''
+  syntax: >-
+    az backup item list --resource-group
+                        --vault-name
+                        [--backup-management-type {AzureIaasVM, AzureStorage, AzureWorkload, MAB}]
+                        [--container-name]
+                        [--use-secondary-region]
+                        [--workload-type {AzureFileShare, MSSQL, SAPHANA, SAPHanaDatabase, SQLDataBase, VM}]
+  examples:
+  - summary: Mencantumkan semua item yang dicadangkan dalam kontainer. (dibuat otomatis)
+    syntax: az backup item list --resource-group MyResourceGroup --vault-name MyVault
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vault-name -v
+    summary: Nama vault layanan Pemulihan.
+    description: ''
+  optionalParameters:
+  - name: --backup-management-type
+    parameterValueGroup: AzureIaasVM, AzureStorage, AzureWorkload, MAB
+    summary: 'Tentukan jenis manajemen cadangan. Tentukan bagaimana Azure Backup mengelola cadangan entitas dalam sumber daya ARM. Misalnya: AzureWorkloads mengacu pada beban kerja yang diinstal dalam Azure VM, AzureStorage mengacu pada entitas dalam akun Storage. Diperlukan hanya jika nama yang mudah diingat digunakan sebagai Nama kontainer.'
+    description: ''
+  - name: --container-name -c
+    summary: Nama kontainer cadangan. Menerima 'Name' atau 'FriendlyName' dari output perintah az backup container list. Jika 'FriendlyName' diteruskan maka BackupManagementType diperlukan.
+    description: ''
+  - name: --use-secondary-region
+    summary: Gunakan bendera ini untuk mencantumkan item di wilayah sekunder.
+    description: ''
+  - name: --workload-type
+    parameterValueGroup: AzureFileShare, MSSQL, SAPHANA, SAPHanaDatabase, SQLDataBase, VM
+    summary: Tentukan jenis aplikasi dalam Sumber Daya yang harus ditemukan dan dilindungi oleh Azure Backup.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/backup/_help.py
+- uid: az_backup_item_set-policy
+  name: az backup item set-policy
+  summary: Perbarui kebijakan yang terkait dengan item ini. Gunakan ini untuk mengubah kebijakan item cadangan.
+  description: ''
+  syntax: >-
+    az backup item set-policy --policy-name
+                              [--backup-management-type {AzureIaasVM, AzureStorage, AzureWorkload}]
+                              [--container-name]
+                              [--ids]
+                              [--name]
+                              [--resource-group]
+                              [--vault-name]
+                              [--workload-type {AzureFileShare, MSSQL, SAPHANA, SAPHanaDatabase, SQLDataBase, VM}]
+  examples:
+  - summary: Perbarui kebijakan yang terkait dengan item ini. Gunakan ini untuk mengubah kebijakan item cadangan.
+    syntax: az backup item set-policy --vault-name MyVault --resource-group MyResourceGroup --container-name MyContainer --name MyItem --policy-name MyPolicy --backup-management-type AzureIaasVM
+  requiredParameters:
+  - isRequired: true
+    name: --policy-name -p
+    summary: Nama kebijakan Pencadangan. Anda dapat menggunakan perintah daftar kebijakan cadangan untuk mendapatkan nama kebijakan pencadangan.
+    description: ''
+  optionalParameters:
+  - name: --backup-management-type
+    parameterValueGroup: AzureIaasVM, AzureStorage, AzureWorkload
+    summary: 'Tentukan jenis manajemen cadangan. Tentukan bagaimana Azure Backup mengelola cadangan entitas dalam sumber daya ARM. Misalnya: AzureWorkloads mengacu pada beban kerja yang diinstal dalam Azure VM, AzureStorage mengacu pada entitas dalam akun Storage. Diperlukan hanya jika nama yang mudah diingat digunakan sebagai Nama kontainer.'
+    description: ''
+  - name: --container-name -c
+    summary: Nama kontainer cadangan. Menerima 'Name' atau 'FriendlyName' dari output perintah az backup container list. Jika 'FriendlyName' diteruskan maka BackupManagementType diperlukan.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama item yang dicadangkan. Anda dapat menggunakan perintah daftar item cadangan untuk mendapatkan nama item yang dicadangkan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --vault-name -v
+    summary: Nama vault layanan Pemulihan.
+    description: ''
+  - name: --workload-type
+    parameterValueGroup: AzureFileShare, MSSQL, SAPHANA, SAPHanaDatabase, SQLDataBase, VM
+    summary: Tentukan jenis aplikasi dalam Sumber Daya yang harus ditemukan dan dilindungi oleh Azure Backup.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/backup/_help.py
+- uid: az_backup_item_show
+  name: az backup item show
+  summary: Perlihatkan detail item tertentu yang dicadangkan.
+  description: ''
+  syntax: >-
+    az backup item show [--backup-management-type {AzureIaasVM, AzureStorage, AzureWorkload, MAB}]
+                        [--container-name]
+                        [--ids]
+                        [--name]
+                        [--resource-group]
+                        [--use-secondary-region]
+                        [--vault-name]
+                        [--workload-type {AzureFileShare, MSSQL, SAPHANA, SAPHanaDatabase, SQLDataBase, VM}]
+  examples:
+  - summary: Perlihatkan detail item tertentu yang dicadangkan. (dibuat otomatis)
+    syntax: az backup item show --container-name MyContainer --name MyBackedUpItem --resource-group MyResourceGroup --vault-name MyVault
+  optionalParameters:
+  - name: --backup-management-type
+    parameterValueGroup: AzureIaasVM, AzureStorage, AzureWorkload, MAB
+    summary: 'Tentukan jenis manajemen cadangan. Tentukan bagaimana Azure Backup mengelola cadangan entitas dalam sumber daya ARM. Misalnya: AzureWorkloads mengacu pada beban kerja yang diinstal dalam Azure VM, AzureStorage mengacu pada entitas dalam akun Storage. Diperlukan hanya jika nama yang mudah diingat digunakan sebagai Nama kontainer.'
+    description: ''
+  - name: --container-name -c
+    summary: Nama kontainer cadangan. Menerima 'Name' atau 'FriendlyName' dari output perintah az backup container list. Jika 'FriendlyName' diteruskan maka BackupManagementType diperlukan.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama item yang dicadangkan. Anda dapat menggunakan perintah daftar item cadangan untuk mendapatkan nama item yang dicadangkan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --use-secondary-region
+    summary: Gunakan bendera ini untuk menampilkan item di wilayah sekunder.
+    description: ''
+  - name: --vault-name -v
+    summary: Nama vault layanan Pemulihan.
+    description: ''
+  - name: --workload-type
+    parameterValueGroup: AzureFileShare, MSSQL, SAPHANA, SAPHanaDatabase, SQLDataBase, VM
+    summary: Tentukan jenis aplikasi dalam Sumber Daya yang harus ditemukan dan dilindungi oleh Azure Backup.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/backup/_help.py
+commands:
+- az_backup_item_list
+- az_backup_item_set-policy
+- az_backup_item_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 10/26/2021
+  description: Item yang sudah dilindungi atau dicadangkan ke vault layanan Azure Recovery dengan kebijakan terkait.
+  ms.openlocfilehash: bb857f85ade5832b65436097631d303ebcf561f7
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140934356"

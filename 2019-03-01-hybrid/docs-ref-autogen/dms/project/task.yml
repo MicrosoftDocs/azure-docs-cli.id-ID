@@ -1,0 +1,250 @@
+### YamlMime:AzureCLIGroup
+uid: az_dms_project_task
+name: az dms project task
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **pratinjau dms** untuk Azure CLI (versi 2.27.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **tugas proyek az dms** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola tugas untuk proyek instans Data Migration Service.
+description: ''
+directCommands:
+- uid: az_dms_project_task_cancel
+  name: az dms project task cancel
+  summary: Perintah ini tidak digunakan lagi. Gunakan perintah hentikan sebagai gantinya.
+  description: 'Untuk menjaga pengalaman yang lebih konsisten dengan penggunaan UI portal Azure: az dms project task stop.'
+  syntax: >-
+    az dms project task cancel --name
+                               --project-name
+                               --resource-group
+                               --service-name
+                               [--object-name]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Tugas. Tugas Project DMS adalah aktivitas yang melakukan pekerjaan terkait migrasi. Mungkin ada beberapa Tugas yang terkait dengan Project.
+    description: ''
+  - isRequired: true
+    name: --project-name
+    summary: Nama Project. DMS Project adalah pengelompokan logis yang mencakup koneksi database sumber, koneksi database target, dan daftar database yang akan dimigrasikan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama Layanan. Layanan DMS adalah instans Azure yang melakukan migrasi database.
+    description: ''
+  optionalParameters:
+  - name: --object-name
+    summary: Didukung oleh migrasi MongoDB saja. Nama database atau koleksi yang memenuhi syarat yang ingin Anda hentikan. Biarkan kosong untuk menghentikan seluruh migrasi.
+    description: ''
+- uid: az_dms_project_task_create
+  name: az dms project task create
+  summary: Membuat dan memulai tugas migrasi.
+  description: >-
+    Konfigurasi tugas berikut didukung: -) sumber -> target :: jenis tugas
+        1) SQL -> SQLDB :: OfflineMigration
+        2) PostgreSQL -> AzureDbForPostgreSQL :: OnlineMigration
+        3) MongoDB -> MongoDB (untuk bermigrasi ke Cosmos DB melalui MongoDB API mereka) :: OfflineMigration.
+  syntax: >-
+    az dms project task create --database-options-json
+                               --name
+                               --project-name
+                               --resource-group
+                               --service-name
+                               --source-connection-json
+                               --target-connection-json
+                               [--enable-data-integrity-validation]
+                               [--enable-query-analysis-validation]
+                               [--enable-schema-validation]
+                               [--task-type]
+                               [--validate-only]
+                               [--validated-task-name]
+  examples:
+  - summary: Buat dan mulai Tugas SQL yang tidak melakukan pemeriksaan validasi.
+    syntax: "az dms project task create --database-options-json C:\\CliFiles\\databaseOptions.json -n mytask --project-name myproject -g myresourcegroup --service-name mydms --source-connection-json '{'dataSource': 'myserver', 'authentication': 'SqlAuthentication', 'encryptConnection': 'true', 'trustServerCertificate': 'true'}' --target-connection-json C:\\CliFiles\\targetConnection.json --task-type offlinemigration"
+  - summary: Buat dan mulai Tugas SQL yang melakukan semua pemeriksaan validasi.
+    syntax: az dms project task create --database-options-json C:\CliFiles\databaseOptions.json -n mytask --project-name myproject -g myresourcegroup --service-name mydms --source-connection-json C:\CliFiles\sourceConnection.json --target-connection-json C:\CliFiles\targetConnection.json --enable-data-integrity-validation --enable-query-analysis-validation --enable-schema-validation --task-type offlinemigration
+  requiredParameters:
+  - isRequired: true
+    name: --database-options-json
+    summary: Database dan informasi tabel. Ini dapat berupa string berformat JSON atau lokasi ke file yang berisi objek JSON. Lihat contoh di bawah ini untuk format .
+    description: >-
+      Untuk SQL kami mendukung migrasi per tabel. Untuk menggunakan ini, tentukan nama tabel di 'table_map' seperti di bawah ini. Anda juga dapat mengatur sumber sebagai baca saja.
+
+      [ { "name": "source database", "target_database_name": "target database", "make_source_db_read_only": false|true, "table_map": { "schema. SourceTableName1": "skema. TargetTableName1", "skema. SourceTableName2": "skema. TargetTableName2", ... n } }, ... n ]
+
+
+      Untuk PostgreSQL, format objek JSON opsi database.
+
+      [ { "name": "source database", "target_database_name": "target database", // Digunakan untuk memanipulasi mesin migrasi yang mendasar.
+
+      Hanya sediakan jika diinstruksikan untuk melakukannya atau jika Anda benar-benar tahu apa yang Anda lakukan.
+
+      "migrationSetting": { "setting1": "value1", ... n }, // Digunakan untuk memanipulasi mesin migrasi yang mendasar.
+
+      Hanya sediakan jika diinstruksikan untuk melakukannya atau jika Anda benar-benar tahu apa yang Anda lakukan.
+
+      "sourceSetting": { "setting1": "value1", ... n }, // Digunakan untuk memanipulasi mesin migrasi yang mendasar.
+
+      Hanya sediakan jika diinstruksikan untuk melakukannya atau jika Anda benar-benar tahu apa yang Anda lakukan.
+
+      "targetSetting": { "setting1": "value1", ... n }, // Parameter opsional untuk mencantumkan tabel yang ingin Anda sertakan dalam migrasi.
+
+      "selectedTables": [ "schemaName1.tableName1", ... n ] }, ... n ]
+
+
+      Untuk MongoDB, kami mendukung migrasi per koleksi. Untuk menggunakan ini, tentukan koleksi di dalam objek database seperti di bawah ini.
+
+      { // diatur ke nol untuk mendapatkan peningkatan default selama migrasi (disarankan) "boostRUs": 0, // "OneTime" atau "Continuous", hanya "OneTime" yang saat ini didukung "replikasi": "OneTime", // Atur ke null untuk menggunakan sumber daya maksimum yang tersedia.
+
+      "throttling": { // persentase CPU untuk mencoba menghindari penggunaan "minFreeCpu": 25, // jumlah RAM (dalam MB) untuk mencoba menghindari penggunaan "minFreeMemoryMb": 1024, // jumlah maksimum koleksi yang akan dimigrasikan pada satu waktu "maxParallelism": 2 }, "database": { "database_name": { // lihat https://docs.microsoft.com/th-th/azure/cosmos-db/request-units, || // diatur ke null untuk menggunakan default // atau 0 jika throughput tidak boleh disediakan di tingkat database "targetRUs":  0, "collections": { "collection_name_1": { // Apakah database/koleksi target akan dihapus jika ada "canDelete": true, // diatur ke null jika target tidak boleh dipecah // atau untuk menyalin kunci shard dari sumber (jika ada) "shardKey": null, // diatur ke null untuk menggunakan default (disarankan) "targetRUs": null }, "collection_name_2": { "canDelete": true, "shardKey": { "fields": [ { "name": "field_name",  menerima "Forward", "Reverse", atau "Hashed" tetapi CosmosDB hanya menerima satu bidang, hashed shard key "order": "Forward" }, ... n ], // apakah kunci shard unik // lihat https://docs.microsoft.com/azure/cosmos-db/partition-data "isUnique": false }, "targetRUs": 10000 }, ... n } }, ... n } }.
+  - isRequired: true
+    name: --name -n
+    summary: Nama Tugas. Tugas Project DMS adalah aktivitas yang melakukan pekerjaan terkait migrasi. Mungkin ada beberapa Tugas yang terkait dengan Project.
+    description: ''
+  - isRequired: true
+    name: --project-name
+    summary: Nama Project. DMS Project adalah pengelompokan logis yang mencakup koneksi database sumber, koneksi database target, dan daftar database yang akan dimigrasikan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama Layanan. Layanan DMS adalah instans Azure yang melakukan migrasi database.
+    description: ''
+  - isRequired: true
+    name: --source-connection-json
+    summary: Informasi koneksi ke server sumber. Ini dapat berupa string berformat JSON atau lokasi ke file yang berisi objek JSON. Lihat contoh di bawah ini untuk format .
+    description: >-
+      Format objek JSON koneksi untuk koneksi SQL.
+
+      { "userName": "user name", // if this is missing or null, you will be prompted "password": null, // if this is missing or null (highly recommended) You will be prompted "dataSource": "server name[,port]", "authentication": "SqlAuthentication| WindowsAuthentication", "encryptConnection": true, // sangat disarankan untuk meninggalkan sebagai benar "trustServerCertificate": false // sangat disarankan untuk meninggalkan sebagai false }
+
+
+      Format objek JSON koneksi untuk koneksi PostgreSQL.
+
+      { "userName": "user name", // if this is missing or null, Anda akan diminta "kata sandi": null, // jika ini hilang atau null (sangat disarankan) Anda akan diminta "serverName": "nama server", "databaseName": "nama database", // jika ini hilang, itu akan default ke database 'postgres' "port": 5432, // jika ini hilang, itu akan default ke 5432 "encryptConnection":  true, // sangat disarankan untuk meninggalkan sebagai benar "trustServerCertificate": false // sangat disarankan untuk meninggalkan sebagai false }
+
+
+      Format objek JSON koneksi untuk koneksi MongoDB.
+
+      { "userName": null, // if this is missing or null, you will be prompted "password": null, // if this is missing or null (highly recommended) you will be prompted "connectionString": "mongodb://hostOrIp:port" }.
+  - isRequired: true
+    name: --target-connection-json
+    summary: Informasi koneksi ke server target. Ini dapat berupa string berformat JSON atau lokasi ke file yang berisi objek JSON. Lihat 'source-connection-json' untuk contoh format koneksi.
+    description: ''
+  optionalParameters:
+  - name: --enable-data-integrity-validation
+    summary: Hanya untuk SQL. Apakah akan melakukan validasi integritas data berbasis checksum antara sumber dan target untuk database dan tabel yang dipilih.
+    description: ''
+  - name: --enable-query-analysis-validation
+    summary: Hanya untuk SQL. Apakah akan melakukan analisis kueri yang cepat dan cerdas dengan mengambil kueri dari database sumber dan menjalankannya di target. Hasilnya akan memiliki statistik eksekusi untuk eksekusi dalam database sumber dan target untuk kueri yang diekstrak.
+    description: ''
+  - name: --enable-schema-validation
+    summary: Hanya untuk SQL. Apakah membandingkan informasi skema antara sumber dan target.
+    description: ''
+  - name: --task-type
+    summary: 'Jenis pergerakan data yang akan didukung tugas. Jenis yang didukung adalah: OnlineMigration, OfflineMigration. Jika tidak disediakan, akan default ke OfflineMigration untuk SQL, MongoDB, dan OnlineMigration for PostgreSQL.'
+    description: ''
+  - name: --validate-only
+    summary: Hanya untuk MongoDB ke Cosmos DB. Apakah hanya menjalankan validasi dan TIDAK menjalankan migrasi. Anda wajib menjalankan tugas 'validasi saja' sebelum mencoba migrasi aktual. Setelah validasi selesai, berikan nama tugas 'validasi saja' ini ke argumen 'nama tugas tervalidasi' tugas baru.
+    description: ''
+  - name: --validated-task-name
+    summary: (Hanya untuk MongoDB ke Cosmos DB) Saat menjalankan migrasi, perlu untuk meneruskan nama tugas 'validasi saja' yang dijalankan sebelumnya.
+    description: ''
+- uid: az_dms_project_task_restart
+  name: az dms project task restart
+  summary: Mulai ulang seluruh migrasi atau hanya objek tertentu. Saat ini hanya didukung oleh migrasi MongoDB.
+  description: "Untuk melihat hasil permintaan, silakan gunakan perintah 'task show': az dms project task show ... --expand command."
+  syntax: >-
+    az dms project task restart --name
+                                --project-name
+                                --resource-group
+                                --service-name
+                                [--object-name]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Tugas. Tugas Project DMS adalah aktivitas yang melakukan pekerjaan terkait migrasi. Mungkin ada beberapa Tugas yang terkait dengan Project.
+    description: ''
+  - isRequired: true
+    name: --project-name
+    summary: Nama Project. DMS Project adalah pengelompokan logis yang mencakup koneksi database sumber, koneksi database target, dan daftar database yang akan dimigrasikan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama Layanan. Layanan DMS adalah instans Azure yang melakukan migrasi database.
+    description: ''
+  optionalParameters:
+  - name: --object-name
+    summary: Nama database atau koleksi yang memenuhi syarat yang ingin Anda mulai ulang. Biarkan kosong untuk memulai ulang seluruh migrasi.
+    description: ''
+- uid: az_dms_project_task_stop
+  name: az dms project task stop
+  summary: Menghentikan tugas, atau menghentikan migrasi pada objek yang ditentukan (hanya migrasi MongoDB).
+  description: "Untuk melihat hasil permintaan, silakan gunakan perintah 'task show': az dms project task show ... --expand command."
+  syntax: >-
+    az dms project task stop --name
+                             --project-name
+                             --resource-group
+                             --service-name
+                             [--object-name]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Tugas. Tugas Project DMS adalah aktivitas yang melakukan pekerjaan terkait migrasi. Mungkin ada beberapa Tugas yang terkait dengan Project.
+    description: ''
+  - isRequired: true
+    name: --project-name
+    summary: Nama Project. DMS Project adalah pengelompokan logis yang mencakup koneksi database sumber, koneksi database target, dan daftar database yang akan dimigrasikan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama Layanan. Layanan DMS adalah instans Azure yang melakukan migrasi database.
+    description: ''
+  optionalParameters:
+  - name: --object-name
+    summary: Didukung oleh migrasi MongoDB saja. Nama database atau koleksi yang memenuhi syarat yang ingin Anda hentikan. Biarkan kosong untuk menghentikan seluruh migrasi.
+    description: ''
+commands:
+- az_dms_project_task_cancel
+- az_dms_project_task_create
+- az_dms_project_task_restart
+- az_dms_project_task_stop
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola tugas untuk proyek instans Data Migration Service.
+  ms.openlocfilehash: 241590c31c7d6985e6c3d8208afeedad965e3a73
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140906806"
