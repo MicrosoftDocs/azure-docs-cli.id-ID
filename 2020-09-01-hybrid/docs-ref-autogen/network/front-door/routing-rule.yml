@@ -1,0 +1,341 @@
+### YamlMime:AzureCLIGroup
+uid: az_network_front-door_routing-rule
+name: az network front-door routing-rule
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **front-door** untuk Azure CLI (versi 2.0.68 atau lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah aturan **perutean pintu depan jaringan az** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola aturan perutean Front Door.
+description: ''
+directCommands:
+- uid: az_network_front-door_routing-rule_create
+  name: az network front-door routing-rule create
+  summary: Buat aturan perutean Front Door.
+  description: >-
+    Buat aturan perutean Front Door untuk meneruskan permintaan ke backend atau mengalihkan pengguna ke URL lain.
+
+
+    Contoh 1: az network front-door routing-rule create -f frontdoor1 -g rg1 --frontend-endpoints DefaultFrontendEndpoint --route-type Forward --backend-pool DefaultBackendPool -n forwardRoutingrule1 --patterns /forward1
+
+
+    Contoh 2: az network front-door routing-rule create -f frontdoor1 -g rg1 --frontend-endpoints DefaultFrontendEndpoint --route-type Redirect --custom-host redirecthost.com -n redirectRouteRule1 --patterns /redirect1 --custom-query-string querystring.
+  syntax: >-
+    az network front-door routing-rule create --front-door-name
+                                              --frontend-endpoints
+                                              --name
+                                              --resource-group
+                                              --route-type {Forward, Redirect}
+                                              [--accepted-protocols]
+                                              [--backend-pool]
+                                              [--cache-duration]
+                                              [--caching {Disabled, Enabled}]
+                                              [--custom-forwarding-path]
+                                              [--custom-fragment]
+                                              [--custom-host]
+                                              [--custom-path]
+                                              [--custom-query-string]
+                                              [--disabled {false, true}]
+                                              [--dynamic-compression {Disabled, Enabled}]
+                                              [--forwarding-protocol {HttpOnly, HttpsOnly, MatchRequest}]
+                                              [--patterns]
+                                              [--query-parameter-strip-directive {StripAll, StripAllExcept, StripNone, StripOnly}]
+                                              [--query-parameters]
+                                              [--redirect-protocol {HttpOnly, HttpsOnly, MatchRequest}]
+                                              [--redirect-type {Found, Moved, PermanentRedirect, TemporaryRedirect}]
+                                              [--rules-engine]
+  requiredParameters:
+  - isRequired: true
+    name: --front-door-name -f
+    summary: Nama Front Door.
+    description: ''
+  - isRequired: true
+    name: --frontend-endpoints
+    summary: Daftar nama atau ID titik akhir frontend yang dipisahkan spasi.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama aturan perutean.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --route-type
+    parameterValueGroup: Forward, Redirect
+    summary: Jenis rute untuk menentukan bagaimana Front Door harus menangani permintaan untuk rute ini yaitu meneruskannya ke backend atau mengalihkan pengguna ke URL yang berbeda.
+    description: ''
+  optionalParameters:
+  - name: --accepted-protocols
+    summary: 'Daftar protokol yang dipisahkan spasi untuk diterima. Default: Http.'
+    description: ''
+  - name: --backend-pool
+    summary: Nama atau ID kumpulan backend. Diperlukan untuk membuat aturan perutean Penerusan.
+    description: ''
+  - name: --cache-duration
+    summary: Durasi konten perlu di-cache. Format yang diizinkan adalah durasi ISO 8601.
+    description: ''
+  - name: --caching
+    parameterValueGroup: Disabled, Enabled
+    summary: Apakah akan mengaktifkan penembolokan untuk rute ini.
+    description: ''
+  - name: --custom-forwarding-path
+    summary: Jalur kustom yang digunakan untuk menulis ulang jalur sumber daya yang cocok dengan aturan ini. Biarkan kosong untuk menggunakan jalur masuk.
+    description: ''
+  - name: --custom-fragment
+    summary: 'Fragmen untuk ditambahkan ke URL pengalihan. Fragmen adalah bagian dari URL yang muncul setelah #. Jangan sertakan #.'
+    description: ''
+  - name: --custom-host
+    summary: Host untuk dialihkan. Biarkan kosong untuk menggunakan host masuk sebagai host tujuan.
+    description: ''
+  - name: --custom-path
+    summary: Jalur lengkap untuk mengalihkan. Jalur tidak boleh kosong dan harus dimulai dengan /. Biarkan kosong untuk menggunakan jalur masuk sebagai jalur tujuan.
+    description: ''
+  - name: --custom-query-string
+    summary: Kumpulan string kueri yang akan ditempatkan di URL pengalihan. Mengatur nilai ini akan menggantikan string kueri yang ada; biarkan kosong untuk mempertahankan string kueri masuk. String kueri harus ada di <key>=<value> format. Yang pertama? dan & akan ditambahkan secara otomatis sehingga jangan sertakan di depan, tetapi lakukan beberapa string kueri terpisah dengan &.
+    description: ''
+  - name: --disabled
+    parameterValueGroup: false, true
+    summary: Buat dalam status dinonaktifkan.
+    description: ''
+  - name: --dynamic-compression
+    parameterValueGroup: Disabled, Enabled
+    summary: Gunakan kompresi dinamis untuk konten cache.
+    description: ''
+  - name: --forwarding-protocol
+    parameterValueGroup: HttpOnly, HttpsOnly, MatchRequest
+    summary: Protokol yang digunakan untuk meneruskan lalu lintas.
+    description: ''
+  - name: --patterns
+    summary: "Daftar pola yang dipisahkan spasi untuk dicocokkan. Default: '/\\*'."
+    description: ''
+  - name: --query-parameter-strip-directive
+    parameterValueGroup: StripAll, StripAllExcept, StripNone, StripOnly
+    summary: Perlakuan istilah kueri URL saat membentuk kunci cache.
+    description: ''
+  - name: --query-parameters
+    summary: Parameter kueri untuk menyertakan atau mengecualikan (dipisahkan koma) saat menggunakan jenis query-parameter-strip-direktif StripAllExcept atau StripOnly masing-masing.
+    description: ''
+  - name: --redirect-protocol
+    defaultValue: MatchRequest
+    parameterValueGroup: HttpOnly, HttpsOnly, MatchRequest
+    summary: Protokol tujuan ke tempat lalu lintas dialihkan.
+    description: ''
+  - name: --redirect-type
+    defaultValue: Moved
+    parameterValueGroup: Found, Moved, PermanentRedirect, TemporaryRedirect
+    summary: Jenis pengalihan yang akan digunakan aturan saat mengalihkan lalu lintas.
+    description: ''
+  - name: --rules-engine
+    summary: Nama atau ID konfigurasi Mesin Aturan. Untuk membatalkan tautan properti, "--hapus rulesEngine".
+    description: ''
+- uid: az_network_front-door_routing-rule_delete
+  name: az network front-door routing-rule delete
+  summary: Menghapus aturan perutean Front Door.
+  description: ''
+  syntax: >-
+    az network front-door routing-rule delete --front-door-name
+                                              --name
+                                              --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --front-door-name -f
+    summary: Nama Front Door.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama aturan perutean.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_network_front-door_routing-rule_list
+  name: az network front-door routing-rule list
+  summary: Mencantumkan aturan perutean Front Door.
+  description: ''
+  syntax: >-
+    az network front-door routing-rule list --front-door-name
+                                            --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --front-door-name -f
+    summary: Nama Front Door.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_network_front-door_routing-rule_show
+  name: az network front-door routing-rule show
+  summary: Dapatkan detail aturan perutean Front Door.
+  description: ''
+  syntax: >-
+    az network front-door routing-rule show --front-door-name
+                                            --name
+                                            --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --front-door-name -f
+    summary: Nama Front Door.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama aturan perutean.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_network_front-door_routing-rule_update
+  name: az network front-door routing-rule update
+  summary: Memperbarui aturan perutean Front Door.
+  description: ''
+  syntax: >-
+    az network front-door routing-rule update --front-door-name
+                                              --name
+                                              --resource-group
+                                              [--accepted-protocols]
+                                              [--add]
+                                              [--backend-pool]
+                                              [--cache-duration]
+                                              [--caching {Disabled, Enabled}]
+                                              [--custom-forwarding-path]
+                                              [--custom-fragment]
+                                              [--custom-host]
+                                              [--custom-path]
+                                              [--custom-query-string]
+                                              [--dynamic-compression {Disabled, Enabled}]
+                                              [--enabled {Disabled, Enabled}]
+                                              [--force-string]
+                                              [--forwarding-protocol {HttpOnly, HttpsOnly, MatchRequest}]
+                                              [--frontend-endpoints]
+                                              [--patterns]
+                                              [--query-parameter-strip-directive {StripAll, StripAllExcept, StripNone, StripOnly}]
+                                              [--query-parameters]
+                                              [--redirect-protocol {HttpOnly, HttpsOnly, MatchRequest}]
+                                              [--redirect-type {Found, Moved, PermanentRedirect, TemporaryRedirect}]
+                                              [--remove]
+                                              [--rules-engine]
+                                              [--set]
+  requiredParameters:
+  - isRequired: true
+    name: --front-door-name -f
+    summary: Nama Front Door.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama aturan perutean.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --accepted-protocols
+    summary: 'Daftar protokol yang dipisahkan spasi untuk diterima. Default: Http.'
+    description: ''
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --backend-pool
+    summary: Nama atau ID kumpulan backend. Diperlukan untuk membuat aturan perutean Penerusan.
+    description: ''
+  - name: --cache-duration
+    summary: Durasi konten perlu di-cache. Format yang diizinkan adalah durasi ISO 8601.
+    description: ''
+  - name: --caching
+    parameterValueGroup: Disabled, Enabled
+    summary: Apakah akan mengaktifkan penembolokan untuk rute ini.
+    description: ''
+  - name: --custom-forwarding-path
+    summary: Jalur kustom yang digunakan untuk menulis ulang jalur sumber daya yang cocok dengan aturan ini. Biarkan kosong untuk menggunakan jalur masuk.
+    description: ''
+  - name: --custom-fragment
+    summary: 'Fragmen untuk ditambahkan ke URL pengalihan. Fragmen adalah bagian dari URL yang muncul setelah #. Jangan sertakan #.'
+    description: ''
+  - name: --custom-host
+    summary: Host untuk dialihkan. Biarkan kosong untuk menggunakan host masuk sebagai host tujuan.
+    description: ''
+  - name: --custom-path
+    summary: Jalur lengkap untuk mengalihkan. Jalur tidak boleh kosong dan harus dimulai dengan /. Biarkan kosong untuk menggunakan jalur masuk sebagai jalur tujuan.
+    description: ''
+  - name: --custom-query-string
+    summary: Kumpulan string kueri yang akan ditempatkan di URL pengalihan. Mengatur nilai ini akan menggantikan string kueri yang ada; biarkan kosong untuk mempertahankan string kueri masuk. String kueri harus ada di <key>=<value> format. Yang pertama? dan & akan ditambahkan secara otomatis sehingga jangan sertakan di depan, tetapi lakukan beberapa string kueri terpisah dengan &.
+    description: ''
+  - name: --dynamic-compression
+    parameterValueGroup: Disabled, Enabled
+    summary: Gunakan kompresi dinamis untuk konten cache.
+    description: ''
+  - name: --enabled
+    parameterValueGroup: Disabled, Enabled
+    summary: Status diaktifkan.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --forwarding-protocol
+    parameterValueGroup: HttpOnly, HttpsOnly, MatchRequest
+    summary: Protokol yang digunakan untuk meneruskan lalu lintas.
+    description: ''
+  - name: --frontend-endpoints
+    summary: Daftar nama atau ID titik akhir frontend yang dipisahkan spasi.
+    description: ''
+  - name: --patterns
+    summary: "Daftar pola yang dipisahkan spasi untuk dicocokkan. Default: '/\\*'."
+    description: ''
+  - name: --query-parameter-strip-directive
+    parameterValueGroup: StripAll, StripAllExcept, StripNone, StripOnly
+    summary: Perlakuan istilah kueri URL saat membentuk kunci cache.
+    description: ''
+  - name: --query-parameters
+    summary: Parameter kueri untuk menyertakan atau mengecualikan (dipisahkan koma) saat menggunakan jenis query-parameter-strip-direktif StripAllExcept atau StripOnly masing-masing.
+    description: ''
+  - name: --redirect-protocol
+    parameterValueGroup: HttpOnly, HttpsOnly, MatchRequest
+    summary: Protokol tujuan ke tempat lalu lintas dialihkan.
+    description: ''
+  - name: --redirect-type
+    parameterValueGroup: Found, Moved, PermanentRedirect, TemporaryRedirect
+    summary: Jenis pengalihan yang akan digunakan aturan saat mengalihkan lalu lintas.
+    description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --rules-engine
+    summary: Nama atau ID konfigurasi Mesin Aturan. Untuk membatalkan tautan properti, "--hapus rulesEngine".
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+commands:
+- az_network_front-door_routing-rule_create
+- az_network_front-door_routing-rule_delete
+- az_network_front-door_routing-rule_list
+- az_network_front-door_routing-rule_show
+- az_network_front-door_routing-rule_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola aturan perutean Front Door.
+  ms.openlocfilehash: 2c3ae4b2320ed99cd5b103ab98dcacea0e4c1173
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140966210"

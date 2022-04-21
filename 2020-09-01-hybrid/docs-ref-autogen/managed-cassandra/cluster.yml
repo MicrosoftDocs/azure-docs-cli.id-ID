@@ -1,0 +1,265 @@
+### YamlMime:AzureCLIGroup
+uid: az_managed-cassandra_cluster
+name: az managed-cassandra cluster
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **cosmosdb-preview** untuk Azure CLI (versi 2.17.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **kluster az managed-cassandra** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Kluster Azure Managed Cassandra.
+description: ''
+directCommands:
+- uid: az_managed-cassandra_cluster_create
+  name: az managed-cassandra cluster create
+  summary: Buat Kluster Cassandra Terkelola.
+  description: ''
+  syntax: >-
+    az managed-cassandra cluster create --cluster-name
+                                        --delegated-management-subnet-id
+                                        --location
+                                        --resource-group
+                                        [--authentication-method {Cassandra, Ldap, None}]
+                                        [--cassandra-version]
+                                        [--client-certificates]
+                                        [--cluster-name-override]
+                                        [--external-gossip-certificates]
+                                        [--external-seed-nodes]
+                                        [--hours-between-backups]
+                                        [--identity-type {None, SystemAssigned}]
+                                        [--initial-cassandra-admin-password]
+                                        [--no-wait]
+                                        [--repair-enabled]
+                                        [--restore-from-backup-id]
+                                        [--tags]
+  examples:
+  - summary: Buat Kluster Cassandra Terkelola di Langganan dan ResourceGroup tertentu. Diperlukan kata sandi admin cassandra atau kebutuhan benih eksternal.
+    syntax: >-
+      az managed-cassandra cluster create \
+
+      --resource-group MyResourceGroup \
+
+      --cluster-name MyCluster \
+
+      --location MyLocation \
+
+      --initial-cassandra-admin-password password \
+
+      --delegated-management-subnet-id /subscriptions/94d9b402-77b4-4049-b4c1-947bc6b7729b/resourceGroups/My-vnet/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-subnet
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Nama Kluster.
+    description: ''
+  - isRequired: true
+    name: --delegated-management-subnet-id -s
+    summary: Id sumber daya subnet tempat alamat ip server manajemen cassandra akan dialokasikan. Subnet ini harus memiliki konektivitas ke subnet delegated_subnet_id dari setiap pusat data.
+    description: ''
+  - isRequired: true
+    name: --location -l
+    summary: Lokasi Azure Kluster.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --authentication-method
+    parameterValueGroup: Cassandra, Ldap, None
+    summary: Mode autentikasi dapat berupa None, Cassandra, atau Ldap. Jika Tidak Ada, tidak ada autentikasi yang diperlukan untuk terhubung ke Cassandra API. Jika Cassandra, maka kata sandi akan digunakan. Ldap sedang dalam pratinjau.
+    description: ''
+  - name: --cassandra-version
+    summary: Versi Cassandra yang dipilih.
+    description: ''
+  - name: --client-certificates
+    summary: Jika ditentukan, mengaktifkan autentikasi sertifikat klien ke Cassandra API.
+    description: ''
+  - name: --cluster-name-override
+    summary: Jika kluster harus memiliki nama yang bukan nama sumber daya azure yang valid, bidang ini dapat ditentukan untuk memilih nama kluster Cassandra. Jika tidak, nama sumber daya akan digunakan sebagai nama kluster.
+    description: ''
+  - name: --external-gossip-certificates -e
+    summary: Daftar sertifikat yang harus diterima pusat data cassandra terkelola.
+    description: ''
+  - name: --external-seed-nodes
+    summary: Daftar alamat ip simpul benih pusat data lokal.
+    description: ''
+  - name: --hours-between-backups
+    summary: Jumlah jam antara upaya pencadangan.
+    description: ''
+  - name: --identity-type
+    defaultValue: None
+    parameterValueGroup: None, SystemAssigned
+    summary: Jenis identitas yang digunakan untuk Kunci Disk yang Dikelola Pelanggan.
+    description: ''
+  - name: --initial-cassandra-admin-password -i
+    summary: Kata sandi intial yang akan dikonfigurasi saat kluster dibuat untuk authentication_method Cassandra.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --repair-enabled
+    summary: Mengaktifkan perbaikan otomatis.
+    description: ''
+  - name: --restore-from-backup-id
+    summary: Id sumber daya cadangan. Jika disediakan saat dibuat, cadangan akan digunakan untuk mengisi kluster terlebih dahulu. Jumlah pusat data kluster dan jumlah simpul harus cocok dengan cadangan.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+- uid: az_managed-cassandra_cluster_delete
+  name: az managed-cassandra cluster delete
+  summary: Menghapus Kluster Cassandra Terkelola.
+  description: ''
+  syntax: >-
+    az managed-cassandra cluster delete --cluster-name
+                                        --resource-group
+                                        [--no-wait]
+                                        [--yes]
+  examples:
+  - summary: Menghapus Kluster Cassandra Terkelola di Langganan dan ResourceGroup yang diberikan.
+    syntax: az managed-cassandra cluster delete --resource-group MyResourceGroup --cluster-name MyCluster
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Nama Kluster.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_managed-cassandra_cluster_list
+  name: az managed-cassandra cluster list
+  summary: Cantumkan Kluster Cassandra Terkelola dalam ResourceGroup dan Langganan. Jika ResourceGroup tidak ditentukan, semua kluster dalam Langganan ini dikembalikan.
+  description: ''
+  syntax: az managed-cassandra cluster list [--resource-group]
+  examples:
+  - summary: Cantumkan semua Kluster Cassandra Terkelola dalam Langganan dan ResourceGroup tertentu.
+    syntax: az managed-cassandra cluster list --resource-group MyResourceGroup
+  - summary: Cantumkan semua Kluster Cassandra Terkelola dalam Langganan tertentu.
+    syntax: az managed-cassandra cluster list
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_managed-cassandra_cluster_show
+  name: az managed-cassandra cluster show
+  summary: Mendapatkan Sumber Daya Kluster Cassandra Terkelola.
+  description: ''
+  syntax: >-
+    az managed-cassandra cluster show --cluster-name
+                                      --resource-group
+  examples:
+  - summary: Mendapatkan Sumber Daya Kluster Cassandra Terkelola. ProvisioningState memberi tahu status kluster ini. Jika kluster tidak ada respons NotFound dikembalikan.
+    syntax: az managed-cassandra cluster show --resource-group MyResourceGroup --cluster-name MyCluster
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Nama Kluster.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_managed-cassandra_cluster_update
+  name: az managed-cassandra cluster update
+  summary: Memperbarui Kluster Cassandra Terkelola.
+  description: ''
+  syntax: >-
+    az managed-cassandra cluster update --cluster-name
+                                        --resource-group
+                                        [--authentication-method {Cassandra, Ldap, None}]
+                                        [--cassandra-version]
+                                        [--client-certificates]
+                                        [--external-gossip-certificates]
+                                        [--external-seed-nodes]
+                                        [--hours-between-backups]
+                                        [--identity-type {None, SystemAssigned}]
+                                        [--no-wait]
+                                        [--repair-enabled]
+                                        [--tags]
+  examples:
+  - summary: Perbarui Node Seed Eksternal dari kluster tertentu.
+    syntax: az managed-cassandra cluster update --resource-group MyResourceGroup --cluster-name MyCluster --external-seed-nodes 127.0.0.1 127.0.0.2
+  - summary: Perbarui Sertifikat Gosip Eksternal dari kluster tertentu. Sertifikat dapat diteruskan sebagai string atau lokasi file.
+    syntax: az managed-cassandra cluster update --resource-group MyResourceGroup --cluster-name MyCluster --external-gossip-certificates C:/MyFolder/test.pem BeginCert-MLXCF-EndCert
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Nama Kluster.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --authentication-method
+    parameterValueGroup: Cassandra, Ldap, None
+    summary: Mode autentikasi dapat berupa None, Cassandra, atau Ldap. Jika Tidak Ada, tidak ada autentikasi yang diperlukan untuk terhubung ke Cassandra API. Jika Cassandra, maka kata sandi akan digunakan. Ldap sedang dalam pratinjau.
+    description: ''
+  - name: --cassandra-version
+    summary: Versi Cassandra yang dipilih.
+    description: ''
+  - name: --client-certificates
+    summary: Jika ditentukan, mengaktifkan autentikasi sertifikat klien ke Cassandra API.
+    description: ''
+  - name: --external-gossip-certificates -e
+    summary: Daftar sertifikat yang harus diterima pusat data cassandra terkelola.
+    description: ''
+  - name: --external-seed-nodes
+    summary: Daftar alamat ip simpul benih pusat data lokal.
+    description: ''
+  - name: --hours-between-backups
+    summary: Jumlah jam antara upaya pencadangan.
+    description: ''
+  - name: --identity-type
+    parameterValueGroup: None, SystemAssigned
+    summary: Jenis identitas yang digunakan untuk Kunci Disk yang Dikelola Pelanggan.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --repair-enabled
+    summary: Mengaktifkan perbaikan otomatis.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+commands:
+- az_managed-cassandra_cluster_backup
+- az_managed-cassandra_cluster_backup_list
+- az_managed-cassandra_cluster_backup_show
+- az_managed-cassandra_cluster_create
+- az_managed-cassandra_cluster_delete
+- az_managed-cassandra_cluster_list
+- az_managed-cassandra_cluster_show
+- az_managed-cassandra_cluster_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Kluster Azure Managed Cassandra.
+  ms.openlocfilehash: 138f89853a5235539324e51c5d161816ca9ee171
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140935808"

@@ -1,0 +1,152 @@
+### YamlMime:AzureCLIGroup
+uid: az_tsi_environment_gen1
+name: az tsi environment gen1
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **timeseriesinsights** untuk Azure CLI (versi 2.11.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **az tsi environment gen1** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Kelola lingkungan gen1 di grup langganan dan sumber daya yang ditentukan.
+description: ''
+directCommands:
+- uid: az_tsi_environment_gen1_create
+  name: az tsi environment gen1 create
+  summary: Buat lingkungan gen1 di grup langganan dan sumber daya yang ditentukan.
+  description: ''
+  syntax: >-
+    az tsi environment gen1 create --data-retention-time
+                                   --environment-name
+                                   --location
+                                   --resource-group
+                                   --sku
+                                   [--exceeded-behavior {PauseIngress, PurgeOldData}]
+                                   [--key-properties]
+                                   [--no-wait]
+                                   [--tags]
+  examples:
+  - summary: EnvironmentsGen1Buat
+    syntax: az tsi environment gen1 create --name "env1" --location westus --data-retention-time "P31D" --partition-key-properties name="DeviceId1" type="String" --sku name="S1" capacity=1 --resource-group "rg1"
+  requiredParameters:
+  - isRequired: true
+    name: --data-retention-time
+    summary: Rentang waktu ISO8601 yang menentukan jumlah hari minimum peristiwa lingkungan akan tersedia untuk kueri.
+    description: ''
+  - isRequired: true
+    name: --environment-name --name -n
+    summary: Nama lingkungan.
+    description: ''
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --sku
+    summary: Sku menentukan jenis lingkungan, baik S1 atau S2. Untuk lingkungan Gen1, sku menentukan kapasitas lingkungan, tingkat masuk, dan tingkat penagihan.
+    description: >-
+      Penggunaan: --sku name=XX capacity=XX
+
+
+      nama: Diperlukan. Nama SKU ini.
+
+      kapasitas: Diperlukan. Kapasitas sku. Nilai ini dapat diubah untuk mendukung peluasan skala lingkungan setelah dibuat.
+  optionalParameters:
+  - name: --exceeded-behavior --storage-limit-exceeded-behavior
+    parameterValueGroup: PauseIngress, PurgeOldData
+    summary: Perilaku yang harus diambil layanan Insights Time Series ketika kapasitas lingkungan telah terlampaui. Jika "Jeda" ditentukan, peristiwa baru tidak akan dibaca dari sumber peristiwa. Jika "PurgeOldData" ditentukan, peristiwa baru akan terus dibaca dan peristiwa lama akan dihapus dari lingkungan. Perilaku defaultnya adalah PurgeOldData.
+    description: ''
+  - name: --key-properties --partition-key-properties
+    summary: Daftar properti peristiwa yang akan digunakan untuk mempartisi data di lingkungan. Saat ini, hanya properti kunci partisi tunggal yang didukung.
+    description: >-
+      Penggunaan: --partition-key-properties name=XX type=XX
+
+
+      nama: Nama properti.
+
+      jenis: Jenis properti.
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --partition-key-properties.
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+- uid: az_tsi_environment_gen1_update
+  name: az tsi environment gen1 update
+  summary: Perbarui lingkungan gen1 di grup langganan dan sumber daya yang ditentukan.
+  description: ''
+  syntax: >-
+    az tsi environment gen1 update --environment-name
+                                   --resource-group
+                                   [--data-retention-time]
+                                   [--exceeded-behavior {PauseIngress, PurgeOldData}]
+                                   [--no-wait]
+                                   [--sku]
+                                   [--tags]
+  examples:
+  - summary: EnvironmentsGen1Update
+    syntax: az tsi environment gen1 update --name "env1" --sku name="S1" capacity=2                --resource-group "rg1" --data-retention-time "P30D" --storage-limit-exceeded-behavior PurgeOldData
+  requiredParameters:
+  - isRequired: true
+    name: --environment-name --name -n
+    summary: Nama lingkungan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --data-retention-time
+    summary: Rentang waktu ISO8601 yang menentukan jumlah hari minimum peristiwa lingkungan akan tersedia untuk kueri.
+    description: ''
+  - name: --exceeded-behavior --storage-limit-exceeded-behavior
+    parameterValueGroup: PauseIngress, PurgeOldData
+    summary: Perilaku yang harus diambil layanan Insights Time Series ketika kapasitas lingkungan telah terlampaui. Jika "Jeda" ditentukan, peristiwa baru tidak akan dibaca dari sumber peristiwa. Jika "PurgeOldData" ditentukan, peristiwa baru akan terus dibaca dan peristiwa lama akan dihapus dari lingkungan. Perilaku defaultnya adalah PurgeOldData.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --sku
+    summary: Sku menentukan jenis lingkungan, baik S1 atau S2. Untuk lingkungan Gen1, sku menentukan kapasitas lingkungan, tingkat masuk, dan tingkat penagihan.
+    description: >-
+      Penggunaan: --sku name=XX capacity=XX
+
+
+      nama: Diperlukan. Nama SKU ini.
+
+      kapasitas: Diperlukan. Kapasitas sku. Nilai ini dapat diubah untuk mendukung peluasan skala lingkungan setelah dibuat.
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+commands:
+- az_tsi_environment_gen1_create
+- az_tsi_environment_gen1_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Kelola lingkungan gen1 di grup langganan dan sumber daya yang ditentukan.
+  ms.openlocfilehash: e4d8c57216611ec4a0a5d131224441d4f9425e60
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140917592"

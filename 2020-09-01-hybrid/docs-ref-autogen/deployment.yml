@@ -1,0 +1,353 @@
+### YamlMime:AzureCLIGroup
+uid: az_deployment
+name: az deployment
+summary: Mengelola penyebaran templat Azure Resource Manager di cakupan langganan.
+description: ''
+directCommands:
+- uid: az_deployment_cancel
+  name: az deployment cancel
+  summary: Membatalkan penyebaran di cakupan langganan.
+  description: ''
+  syntax: az deployment cancel --name
+  examples:
+  - summary: Membatalkan penyebaran di cakupan langganan.
+    syntax: az deployment cancel -n deployment01
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama penyebaran.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_deployment_create
+  name: az deployment create
+  summary: Mulai penyebaran di cakupan langganan.
+  description: ''
+  syntax: >-
+    az deployment create --location
+                         [--confirm-with-what-if]
+                         [--handle-extended-json-format]
+                         [--name]
+                         [--no-prompt {false, true}]
+                         [--no-wait]
+                         [--parameters]
+                         [--proceed-if-no-change]
+                         [--query-string]
+                         [--template-file]
+                         [--template-spec]
+                         [--template-uri]
+                         [--what-if]
+                         [--what-if-exclude-change-types {Create, Delete, Deploy, Ignore, Modify, NoChange}]
+                         [--what-if-result-format {FullResourcePayloads, ResourceIdOnly}]
+  examples:
+  - summary: Buat penyebaran di cakupan langganan dari file templat jarak jauh, menggunakan parameter dari file JSON lokal.
+    syntax: az deployment create --location WestUS --template-uri https://myresource/azuredeploy.json --parameters @myparameters.json
+  - summary: Buat penyebaran di cakupan langganan dari file templat lokal, menggunakan parameter dari string JSON.
+    syntax: >-
+      az deployment create --location WestUS --template-file azuredeploy.json  \
+          --parameters "{ \"policyName\": { \"value\": \"policy2\" }}"
+  - summary: Buat penyebaran pada cakupan langganan dari templat lokal, menggunakan file parameter, file parameter jarak jauh, dan secara selektif menimpa pasangan kunci/nilai.
+    syntax: >-
+      az deployment create --location WestUS --template-file azuredeploy.json  \
+          --parameters @params.json --parameters https://mysite/params.json --parameters MyValue=This MyArray=@array.json
+  - summary: Membuat penyebaran di cakupan langganan dari spesifikasi templat
+    syntax: az deployment create --location WestUS --template-spec "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.Resources/templateSpecs/myTemplateSpec/versions/1.0"
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: Lokasi untuk menyimpan metadata penyebaran.
+    description: ''
+  optionalParameters:
+  - name: --confirm-with-what-if -c
+    summary: Instruksikan perintah untuk menjalankan penyebaran What-If sebelum menjalankan penyebaran. Kemudian meminta Anda untuk mengakui perubahan sumber daya sebelum berlanjut.
+    description: ''
+  - name: --handle-extended-json-format -j
+    summary: Dukungan untuk menangani konten templat yang diperluas termasuk multibaris dan komentar dalam penyebaran.
+    description: ''
+  - name: --name -n
+    summary: Nama penyebaran.
+    description: ''
+  - name: --no-prompt
+    parameterValueGroup: false, true
+    summary: Opsi untuk menonaktifkan perintah parameter yang hilang untuk templat ARM. Ketika nilainya benar, perintah yang mengharuskan pengguna untuk memberikan parameter yang hilang akan diabaikan. Nilai defaultnya adalah false.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --parameters -p
+    summary: Berikan nilai parameter penyebaran.
+    description: Parameter dapat disediakan dari file menggunakan `@{path}` sintaks, string JSON, atau sebagai pasangan <KEY=VALUE>. Parameter dievaluasi secara berurutan, jadi ketika nilai ditetapkan dua kali, nilai terakhir akan digunakan. Disarankan agar Anda menyediakan file parameter terlebih dahulu, lalu mengambil alih secara selektif menggunakan sintaks KEY=VALUE.
+  - name: --proceed-if-no-change
+    summary: Instruksikan perintah untuk menjalankan penyebaran jika hasil What-If tidak berisi perubahan sumber daya. Berlaku ketika --confirm-with-what-if diatur.
+    description: ''
+  - name: --query-string -q
+    summary: String kueri (token SAS) yang akan digunakan dengan template-uri dalam kasus templat yang ditautkan.
+    description: ''
+  - name: --template-file -f
+    summary: Jalur ke file templat atau file Bicep.
+    description: ''
+  - name: --template-spec -s
+    summary: Id sumber daya spesifikasi templat.
+    description: ''
+  - name: --template-uri -u
+    summary: URI ke file templat.
+    description: ''
+  - name: --what-if -w
+    summary: Instruksikan perintah untuk menjalankan penyebaran Bagaimana-Jika.
+    description: ''
+  - name: --what-if-exclude-change-types -x
+    parameterValueGroup: Create, Delete, Deploy, Ignore, Modify, NoChange
+    summary: Daftar jenis perubahan sumber daya yang dipisahkan spasi yang akan dikecualikan dari hasil What-If. Berlaku ketika --confirm-with-what-if diatur.
+    description: ''
+  - name: --what-if-result-format -r
+    defaultValue: FullResourcePayloads
+    parameterValueGroup: FullResourcePayloads, ResourceIdOnly
+    summary: Format hasil What-If. Berlaku saat `--confirm-with-what-if` diatur.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_deployment_delete
+  name: az deployment delete
+  summary: Menghapus penyebaran di cakupan langganan.
+  description: ''
+  syntax: >-
+    az deployment delete --name
+                         [--no-wait]
+  examples:
+  - summary: Menghapus penyebaran di cakupan langganan.
+    syntax: az deployment delete -n deployment01
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama penyebaran.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_deployment_export
+  name: az deployment export
+  summary: Ekspor templat yang digunakan untuk penyebaran.
+  description: ''
+  syntax: az deployment export --name
+  examples:
+  - summary: Ekspor templat yang digunakan untuk penyebaran pada cakupan langganan.
+    syntax: az deployment export --name MyDeployment
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama penyebaran.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_deployment_list
+  name: az deployment list
+  summary: Mencantumkan penyebaran pada cakupan langganan.
+  description: ''
+  syntax: az deployment list [--filter]
+  examples:
+  - summary: Mencantumkan penyebaran pada cakupan langganan.
+    syntax: az deployment list
+  optionalParameters:
+  - name: --filter
+    summary: Filter ekspresi menggunakan notasi OData. Anda dapat menggunakan --filter "provisioningState eq '{state}'" untuk memfilter provisioningState. Untuk mendapatkan informasi lebih lanjut, silakan kunjungi https://docs.microsoft.com/rest/api/resources/deployments/listatsubscriptionscope#uri-parameters.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_deployment_show
+  name: az deployment show
+  summary: Menampilkan penyebaran pada cakupan langganan.
+  description: ''
+  syntax: az deployment show --name
+  examples:
+  - summary: Menampilkan penyebaran pada cakupan langganan.
+    syntax: az deployment show -n deployment01
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama penyebaran.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_deployment_validate
+  name: az deployment validate
+  summary: Validasi apakah templat valid pada cakupan langganan.
+  description: ''
+  syntax: >-
+    az deployment validate --location
+                           [--handle-extended-json-format]
+                           [--name]
+                           [--no-prompt {false, true}]
+                           [--parameters]
+                           [--query-string]
+                           [--template-file]
+                           [--template-spec]
+                           [--template-uri]
+  examples:
+  - summary: Validasi apakah templat valid pada cakupan langganan.
+    syntax: az deployment validate --location westus2 --parameters MyValue=This MyArray=@array.json --template-file azuredeploy.json
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: Lokasi untuk menyimpan metadata penyebaran.
+    description: ''
+  optionalParameters:
+  - name: --handle-extended-json-format -j
+    summary: Dukungan untuk menangani konten templat yang diperluas termasuk multibaris dan komentar dalam penyebaran.
+    description: ''
+  - name: --name -n
+    summary: Nama penyebaran.
+    description: ''
+  - name: --no-prompt
+    parameterValueGroup: false, true
+    summary: Opsi untuk menonaktifkan perintah parameter yang hilang untuk templat ARM. Ketika nilainya benar, perintah yang mengharuskan pengguna untuk memberikan parameter yang hilang akan diabaikan. Nilai defaultnya adalah false.
+    description: ''
+  - name: --parameters -p
+    summary: Berikan nilai parameter penyebaran.
+    description: Parameter dapat disediakan dari file menggunakan `@{path}` sintaks, string JSON, atau sebagai pasangan <KEY=VALUE>. Parameter dievaluasi secara berurutan, jadi ketika nilai ditetapkan dua kali, nilai terakhir akan digunakan. Disarankan agar Anda menyediakan file parameter terlebih dahulu, lalu mengambil alih secara selektif menggunakan sintaks KEY=VALUE.
+  - name: --query-string -q
+    summary: String kueri (token SAS) yang akan digunakan dengan template-uri dalam kasus templat yang ditautkan.
+    description: ''
+  - name: --template-file -f
+    summary: Jalur ke file templat atau file Bicep.
+    description: ''
+  - name: --template-spec -s
+    summary: Id sumber daya spesifikasi templat.
+    description: ''
+  - name: --template-uri -u
+    summary: URI ke file templat.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_deployment_wait
+  name: az deployment wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi penyebaran terpenuhi.
+  description: ''
+  syntax: >-
+    az deployment wait --name
+                       [--created]
+                       [--custom]
+                       [--deleted]
+                       [--exists]
+                       [--interval]
+                       [--timeout]
+                       [--updated]
+  examples:
+  - summary: Tempatkan CLI dalam status menunggu hingga kondisi penyebaran terpenuhi. (dibuat otomatis)
+    syntax: az deployment wait --deleted --name MyDeployment --subscription MySubscription
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama penyebaran.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+commands:
+- az_deployment_cancel
+- az_deployment_create
+- az_deployment_delete
+- az_deployment_export
+- az_deployment_group
+- az_deployment_group_cancel
+- az_deployment_group_create
+- az_deployment_group_delete
+- az_deployment_group_export
+- az_deployment_group_list
+- az_deployment_group_show
+- az_deployment_group_validate
+- az_deployment_group_wait
+- az_deployment_group_what-if
+- az_deployment_list
+- az_deployment_mg
+- az_deployment_mg_cancel
+- az_deployment_mg_create
+- az_deployment_mg_delete
+- az_deployment_mg_export
+- az_deployment_mg_list
+- az_deployment_mg_show
+- az_deployment_mg_validate
+- az_deployment_mg_wait
+- az_deployment_mg_what-if
+- az_deployment_operation
+- az_deployment_operation_group
+- az_deployment_operation_group_list
+- az_deployment_operation_group_show
+- az_deployment_operation_list
+- az_deployment_operation_mg
+- az_deployment_operation_mg_list
+- az_deployment_operation_mg_show
+- az_deployment_operation_show
+- az_deployment_operation_sub
+- az_deployment_operation_sub_list
+- az_deployment_operation_sub_show
+- az_deployment_operation_tenant
+- az_deployment_operation_tenant_list
+- az_deployment_operation_tenant_show
+- az_deployment_show
+- az_deployment_sub
+- az_deployment_sub_cancel
+- az_deployment_sub_create
+- az_deployment_sub_delete
+- az_deployment_sub_export
+- az_deployment_sub_list
+- az_deployment_sub_show
+- az_deployment_sub_validate
+- az_deployment_sub_wait
+- az_deployment_sub_what-if
+- az_deployment_tenant
+- az_deployment_tenant_cancel
+- az_deployment_tenant_create
+- az_deployment_tenant_delete
+- az_deployment_tenant_export
+- az_deployment_tenant_list
+- az_deployment_tenant_show
+- az_deployment_tenant_validate
+- az_deployment_tenant_wait
+- az_deployment_tenant_what-if
+- az_deployment_validate
+- az_deployment_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 02/22/2022
+  description: Mengelola penyebaran templat Azure Resource Manager di cakupan langganan.
+  ms.openlocfilehash: a50baddeb19b8496135a316dcbcd4c071c1cb883
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140976416"

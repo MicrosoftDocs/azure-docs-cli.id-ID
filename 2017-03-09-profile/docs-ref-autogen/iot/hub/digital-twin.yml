@@ -1,0 +1,161 @@
+### YamlMime:AzureCLIGroup
+uid: az_iot_hub_digital-twin
+name: az iot hub digital-twin
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **azure-iot** untuk Azure CLI (versi 2.24.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **az iot hub digital-twin** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Memanipulasi dan berinteraksi dengan kembar digital perangkat IoT Hub.
+description: ''
+directCommands:
+- uid: az_iot_hub_digital-twin_invoke-command
+  name: az iot hub digital-twin invoke-command
+  summary: Panggil perintah tingkat akar atau komponen dari perangkat kembar digital.
+  description: ''
+  syntax: >-
+    az iot hub digital-twin invoke-command --cn
+                                           --device-id
+                                           [--component-path]
+                                           [--connect-timeout]
+                                           [--hub-name]
+                                           [--login]
+                                           [--payload]
+                                           [--resource-group]
+                                           [--response-timeout]
+  examples:
+  - summary: Panggil perintah tingkat akar "reboot" yang mengambil payload yang mencakup properti "penundaan".
+    syntax: az iot hub digital-twin invoke-command --command-name reboot -n {iothub_name} -d {device_id} --payload '{"delay":5}'
+  - summary: Panggil perintah "getMaxMinReport" pada komponen "thermostat1" yang tidak mengambil input.
+    syntax: az iot hub digital-twin invoke-command --cn getMaxMinReport -n {iothub_name} -d {device_id} --component-path thermostat1
+  requiredParameters:
+  - isRequired: true
+    name: --cn --command-name
+    summary: Nama perintah digital twin.
+    description: ''
+  - isRequired: true
+    name: --device-id -d
+    summary: Perangkat Target.
+    description: ''
+  optionalParameters:
+  - name: --component-path
+    summary: 'Jalur komponen digital twin. Misalnya: termostat1.'
+    description: ''
+  - name: --connect-timeout --cto
+    summary: Interval waktu maksimum, dalam detik, yang IoT Hub akan mencoba menyambungkan ke perangkat.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string dan nama koneksi entitas disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --payload
+    defaultValue: '{}'
+    summary: Input payload JSON untuk perintah. Sediakan jalur file atau JSON sebaris.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --response-timeout --rto
+    summary: Interval waktu maksimum, dalam detik, bahwa perintah kembar digital akan menunggu hasilnya.
+    description: ''
+- uid: az_iot_hub_digital-twin_show
+  name: az iot hub digital-twin show
+  summary: Tampilkan kembar digital perangkat IoT Hub.
+  description: ''
+  syntax: >-
+    az iot hub digital-twin show --device-id
+                                 [--hub-name]
+                                 [--login]
+                                 [--resource-group]
+  examples:
+  - summary: Tampilkan perangkat target kembar digital.
+    syntax: az iot hub digital-twin show -n {iothub_name} -d {device_id}
+  requiredParameters:
+  - isRequired: true
+    name: --device-id -d
+    summary: Perangkat Target.
+    description: ''
+  optionalParameters:
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string dan nama koneksi entitas disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_iot_hub_digital-twin_update
+  name: az iot hub digital-twin update
+  summary: Perbarui properti baca-tulis perangkat kembar digital melalui spesifikasi patch JSON.
+  description: Saat ini operasi terbatas pada penambahan, penggantian, dan penghapusan.
+  syntax: >-
+    az iot hub digital-twin update --device-id
+                                   --json-patch
+                                   [--etag]
+                                   [--hub-name]
+                                   [--login]
+                                   [--resource-group]
+  examples:
+  - summary: Perbarui kembaran digital melalui spesifikasi patch JSON.
+    syntax: "az iot hub digital-twin update --hub-name {iothub_name} --device-id {device_id} --json-patch '{\"op\":\"add\", \"path\":\"/thermostat1/targetTemperature\", \"value\": 54}'"
+  - summary: Perbarui kembaran digital melalui spesifikasi patch JSON.
+    syntax: >-
+      az iot hub digital-twin update -n {iothub_name} -d {device_id} --json-patch '[
+        {"op":"remove", "path":"/thermostat1/targetTemperature"},
+        {"op":"add", "path":"/thermostat2/targetTemperature", "value": 22}
+      ]'
+  - summary: Perbarui properti kembar digital melalui spesifikasi patch JSON yang ditentukan dalam file.
+    syntax: az iot hub digital-twin update -n {iothub_name} -d {device_id} --json-patch ./my/patch/document.json
+  requiredParameters:
+  - isRequired: true
+    name: --device-id -d
+    summary: Perangkat Target.
+    description: ''
+  - isRequired: true
+    name: --json-patch --patch
+    summary: Spesifikasi pembaruan yang dijelaskan oleh JSON-patch. Operasi dibatasi untuk menambahkan, mengganti, dan menghapus. Sediakan jalur file atau JSON sebaris.
+    description: ''
+  optionalParameters:
+  - name: --etag -e
+    summary: Tag Etag atau entitas yang sesuai dengan status terakhir sumber daya. Jika tidak ada etag yang disediakan, nilai '\*' digunakan.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string dan nama koneksi entitas disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+commands:
+- az_iot_hub_digital-twin_invoke-command
+- az_iot_hub_digital-twin_show
+- az_iot_hub_digital-twin_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Memanipulasi dan berinteraksi dengan kembar digital perangkat IoT Hub.
+  ms.openlocfilehash: a320b1b1ceb9f79ddecbd66b09c3a17232ab8ebd
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "140918888"
