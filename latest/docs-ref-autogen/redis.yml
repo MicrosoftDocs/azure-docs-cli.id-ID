@@ -1,0 +1,458 @@
+### YamlMime:AzureCLIGroup
+uid: az_redis
+name: az redis
+summary: Kelola cache Redis khusus untuk aplikasi Azure Anda.
+description: ''
+directCommands:
+- uid: az_redis_create
+  name: az redis create
+  summary: Buat instans Redis Cache baru.
+  description: ''
+  syntax: >-
+    az redis create --location
+                    --name
+                    --resource-group
+                    --sku {Basic, Premium, Standard}
+                    --vm-size {c0, c1, c2, c3, c4, c5, c6, p1, p2, p3, p4, p5}
+                    [--enable-non-ssl-port]
+                    [--mi-system-assigned]
+                    [--mi-user-assigned]
+                    [--minimum-tls-version {1.0, 1.1, 1.2}]
+                    [--redis-configuration]
+                    [--redis-version]
+                    [--replicas-per-master]
+                    [--shard-count]
+                    [--static-ip]
+                    [--subnet-id]
+                    [--tags]
+                    [--tenant-settings]
+                    [--zones {1, 2, 3}]
+  examples:
+  - summary: Buat instans Redis Cache baru. (dibuat otomatis)
+    syntax: az redis create --location westus2 --name MyRedisCache --resource-group MyResourceGroup --sku Basic --vm-size c0
+  - summary: Mengonfigurasi beberapa zona untuk Premium Azure Cache for Redis baru
+    syntax: az redis create --location westus2 --name MyRedisCache --resource-group MyResourceGroup --sku Premium --vm-size p1 --zones 1 2
+  - summary: Konfigurasikan kebijakan memori untuk cache.
+    syntax: az redis create --resource-group resourceGroupName --name cacheName --location westus2 --sku Standard --vm-size c0 --redis-configuration @"config_max-memory.json"
+  - summary: Konfigurasikan dan aktifkan persistensi data cadangan RDB untuk Premium Azure Cache for Redis baru.
+    syntax: az redis create --location westus2 --name MyRedisCache --resource-group MyResourceGroup --sku Premium --vm-size p1 --redis-configuration @"config_rdb.json"
+  - summary: Mengonfigurasi dan mengaktifkan persistensi data cadangan AOF untuk Premium Azure Cache for Redis baru
+    syntax: az redis create --location westus2 --name MyRedisCache --resource-group MyResourceGroup --sku Premium --vm-size p1 --redis-configuration @"config_aof.json"
+  - summary: Membuat Premium Azure Cache for Redis dengan pengklusteran diaktifkan
+    syntax: az redis create --location westus2 --name MyRedisCache --resource-group MyResourceGroup --sku Premium --vm-size p1 --shard-count 2
+  - summary: Menyebarkan Premium Azure Cache for Redis di dalam azure Virtual Network yang sudah ada
+    syntax: az redis create --location westus2 --name MyRedisCache --resource-group MyResourceGroup --sku Premium --vm-size p1 --subnet-id "/subscriptions/{subid}/resourceGroups/{resourceGroupName}/providers/Microsoft.{Network|ClassicNetwork}/virtualNetworks/vnet1/subnets/subnet1"
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama cache Redis.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --sku
+    parameterValueGroup: Basic, Premium, Standard
+    summary: Jenis cache Redis.
+    description: ''
+  - isRequired: true
+    name: --vm-size
+    parameterValueGroup: c0, c1, c2, c3, c4, c5, c6, p1, p2, p3, p4, p5
+    summary: Ukuran cache Redis untuk disebarkan. Ukuran Cache Dasar dan Standar dimulai dengan ukuran C. Premium Cache dimulai dengan P.
+    description: ''
+  optionalParameters:
+  - name: --enable-non-ssl-port
+    summary: Jika ditentukan, maka port server non-ssl redis (6379) akan diaktifkan.
+    description: ''
+  - name: --mi-system-assigned
+    summary: Bendera untuk menentukan identitas yang ditetapkan sistem.
+    description: ''
+  - name: --mi-user-assigned
+    summary: Satu atau beberapa ID sumber daya yang dipisahkan ruang dari identitas yang ditetapkan pengguna.
+    description: ''
+  - name: --minimum-tls-version
+    parameterValueGroup: 1.0, 1.1, 1.2
+    summary: Menentukan versi TLS yang diperlukan oleh klien untuk menyambungkan ke cache.
+    description: ''
+  - name: --redis-configuration
+    summary: File json yang digunakan untuk mengatur pengaturan konfigurasi redis. Anda mungkin mengalami kesalahan penguraian jika file json tidak valid.
+    description: >-
+      Penggunaan: --redis-configuration @"{config_file.json}"
+
+
+      Contoh file json untuk mengonfigurasi kebijakan memori maks [ { "maxmemory-policy": "allkeys-lru" } ]
+
+
+      Contoh file json untuk mengaktifkan persistensi data cadangan RDB adalah [ { "rdb-storage-connection-string": "DefaultEndpointsProtocol=https; AccountName=mystorageaccount; AccountKey=myAccountKey; EndpointSuffix=core.windows.net", "rdb-backup-enabled": "true", "rdb-backup-frequency": "15", "rdb-backup-max-snapshot-count": "1" } ]
+
+
+      Contoh file json untuk mengaktifkan persistensi data cadangan AOF adalah [ { "aof-backup-enabled": "true", "aof-storage-connection-string-0": "DefaultEndpointsProtocol=https; AccountName=mystorageaccount; AccountKey=myAccountKey; EndpointSuffix=core.windows.net", "aof-storage-connection-string-1": "DefaultEndpointsProtocol=https; AccountName=mystorageaccount; AccountKey=myAccountKey; EndpointSuffix=core.windows.net" } ].
+  - name: --redis-version
+    summary: 'Versi Redis. Hanya versi utama yang akan digunakan dalam permintaan buat/perbarui dengan nilai yang valid saat ini: (4, 6).'
+    description: ''
+  - name: --replicas-per-master
+    summary: Jumlah replika yang akan dibuat per master.
+    description: ''
+  - name: --shard-count
+    summary: Jumlah pecahan yang akan dibuat pada Premium Cluster Cache.
+    description: ''
+  - name: --static-ip
+    summary: Tentukan ip statis jika diperlukan untuk VNET. Jika Anda tidak menentukan IP statis, maka alamat IP dipilih secara otomatis.
+    description: ''
+  - name: --subnet-id
+    summary: ID sumber daya lengkap subnet dalam jaringan virtual untuk menyebarkan cache redis. Contoh format /subscriptions/{subid}/resourceGroups/{resourceGroupName}/providers/Microsoft. {Jaringan| ClassicNetwork}/virtualNetworks/vnet1/subnets/subnet1.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --tenant-settings
+    summary: Pengaturan penyewa yang dipisahkan spasi dalam format key[=value].
+    description: ''
+  - name: --zones -z
+    parameterValueGroup: 1, 2, 3
+    summary: Daftar zona ketersediaan yang dipisahkan ruang untuk menyediakan sumber daya.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/redis/_help.py
+- uid: az_redis_delete
+  name: az redis delete
+  summary: Menghapus cache Redis.
+  description: ''
+  syntax: >-
+    az redis delete [--ids]
+                    [--name]
+                    [--resource-group]
+                    [--yes]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama cache Redis.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/redis/_help.py
+- uid: az_redis_export
+  name: az redis export
+  summary: Ekspor data yang disimpan dalam cache Redis.
+  description: ''
+  syntax: >-
+    az redis export --container
+                    --prefix
+                    [--file-format]
+                    [--ids]
+                    [--name]
+                    [--resource-group]
+  requiredParameters:
+  - isRequired: true
+    name: --container
+    summary: Url SAS untuk kontainer tempat data perlu diekspor.
+    description: ''
+  - isRequired: true
+    name: --prefix
+    summary: Awalan yang digunakan untuk file yang diekspor.
+    description: ''
+  optionalParameters:
+  - name: --file-format
+    summary: Format blob (Saat ini rdb adalah satu-satunya format yang didukung, dengan format lain yang diharapkan di masa mendatang).
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama cache Redis.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/redis/_help.py
+- uid: az_redis_force-reboot
+  name: az redis force-reboot
+  summary: Reboot simpul Redis yang ditentukan.
+  description: Contoh penggunaan - az redis force-reboot --name testCacheName --resource-group testResourceGroup --reboot-type {AllNodes, PrimaryNode, SecondaryNode} [--shard-id].
+  syntax: >-
+    az redis force-reboot --reboot-type {AllNodes, PrimaryNode, SecondaryNode}
+                          [--ids]
+                          [--name]
+                          [--resource-group]
+                          [--shard-id]
+  requiredParameters:
+  - isRequired: true
+    name: --reboot-type
+    parameterValueGroup: AllNodes, PrimaryNode, SecondaryNode
+    summary: Simpul Redis mana yang akan di-reboot. Bergantung pada nilai kehilangan data ini dimungkinkan.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama cache Redis.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --shard-id
+    summary: Jika pengklusteran diaktifkan, ID shard yang akan di-boot ulang.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/redis/_help.py
+- uid: az_redis_import
+  name: az redis import
+  summary: Mengimpor data ke dalam cache Redis.
+  description: ''
+  syntax: >-
+    az redis import --files
+                    [--file-format]
+                    [--ids]
+                    [--name]
+                    [--resource-group]
+  requiredParameters:
+  - isRequired: true
+    name: --files
+    summary: Url SAS untuk blob yang perlu diimpor.
+    description: ''
+  optionalParameters:
+  - name: --file-format
+    summary: Format blob (Saat ini rdb adalah satu-satunya format yang didukung, dengan format lain yang diharapkan di masa mendatang).
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama cache Redis.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/redis/_help.py
+- uid: az_redis_import-method
+  name: az redis import-method
+  summary: Impor data ke cache Redis.
+  description: Contoh penggunaan - az redis import-method --name testCacheName --resource-group testResourceGroup --files [--file-format].
+  syntax: >-
+    az redis import-method --files
+                           [--file-format]
+                           [--ids]
+                           [--name]
+                           [--resource-group]
+  requiredParameters:
+  - isRequired: true
+    name: --files
+    summary: Url SAS untuk blob yang perlu diimpor.
+    description: ''
+  optionalParameters:
+  - name: --file-format
+    summary: Format blob (Saat ini rdb adalah satu-satunya format yang didukung, dengan format lain yang diharapkan di masa mendatang).
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama cache Redis.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/redis/_help.py
+- uid: az_redis_list
+  name: az redis list
+  summary: Daftar Redis Caches.
+  description: Mencantumkan detail tentang semua cache dalam Langganan saat ini atau Grup Sumber Daya yang disediakan.
+  syntax: az redis list [--resource-group]
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/redis/_help.py
+- uid: az_redis_list-keys
+  name: az redis list-keys
+  summary: Ambil kunci akses cache Redis.
+  description: Operasi ini memerlukan izin tulis ke sumber daya cache.
+  syntax: >-
+    az redis list-keys [--ids]
+                       [--name]
+                       [--resource-group]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama cache Redis.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/redis/_help.py
+- uid: az_redis_regenerate-keys
+  name: az redis regenerate-keys
+  summary: Regenerasi kunci akses cache Redis.
+  description: Contoh penggunaan - az redis regenerate-keys --name testCacheName --resource-group testResourceGroup --key-type {Primary, Secondary}.
+  syntax: >-
+    az redis regenerate-keys --key-type {Primary, Secondary}
+                             [--ids]
+                             [--name]
+                             [--resource-group]
+  requiredParameters:
+  - isRequired: true
+    name: --key-type
+    parameterValueGroup: Primary, Secondary
+    summary: Kunci akses Redis untuk meregenerasi.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama cache Redis.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/redis/_help.py
+- uid: az_redis_show
+  name: az redis show
+  summary: Mendapatkan cache Redis (deskripsi sumber daya).
+  description: ''
+  syntax: >-
+    az redis show [--ids]
+                  [--name]
+                  [--resource-group]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama cache Redis.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/redis/_help.py
+- uid: az_redis_update
+  name: az redis update
+  summary: Memperbarui cache Redis.
+  description: Menskalakan atau memperbarui pengaturan cache Redis.
+  syntax: >-
+    az redis update [--add]
+                    [--force-string]
+                    [--ids]
+                    [--name]
+                    [--remove]
+                    [--resource-group]
+                    [--set]
+                    [--sku {Basic, Premium, Standard}]
+                    [--vm-size {c0, c1, c2, c3, c4, c5, c6, p1, p2, p3, p4, p5}]
+  examples:
+  - summary: Perbarui kebijakan maxmemory untuk Azure Cache for Redis Anda bernama MyRedisCache
+    syntax: az redis update --name MyRedisCache --resource-group MyResourceGroup --set "redisConfiguration.maxmemory-policy"="allkeys-lru"
+  - summary: Nonaktifkan RDB mencadangkan persistensi data untuk Premium Azure Cache for Redis
+    syntax: az redis update --name MyRedisCache --resource-group MyResourceGroup --set "redisConfiguration.rdb-backup-enabled"="false"
+  - summary: Mengonfigurasi persistensi data yang diaktifkan pencadangan RDB untuk Premium Azure Cache for Redis yang sudah dibuat
+    syntax: az redis update --name MyRedisCache --resource-group MyResourceGroup --set "redisConfiguration.rdb-storage-connection-string"="DefaultEndpointsProtocol=https;AccountName=mystorageaccount;AccountKey=myAccountKey;EndpointSuffix=core.windows.net" "redisConfiguration.rdb-backup-enabled"="true" "redisConfiguration.rdb-backup-frequency"="15" "redisConfiguration.rdb-backup-max-snapshot-count"="1"
+  - summary: Skalakan Instans Azure Cache for Redis - Perbarui ke ukuran yang berbeda (Contoh untuk menskalakan dari c0 ke c1).
+    syntax: az redis update --name MyRedisCache --resource-group MyResourceGroup --set "sku.capacity"="2"
+  - summary: Menskalakan Instans Azure Cache for Redis - Perbarui ke tingkat yang berbeda (Dari Dasar ke Standar atau Standar ke Premium).
+    syntax: az redis update --name MyRedisCache --resource-group MyResourceGroup --set "sku.name"="Premium" "sku.capacity"="1" "sku.family"="P"
+  - summary: Menskalakan Instans Azure Cache for Redis - Aktifkan Pengklusteran.
+    syntax: az redis update --name MyRedisCache --resource-group MyResourceGroup --set "shardCount"="1"
+  - summary: Menskalakan Instans Azure Cache for Redis masuk/keluar menggunakan Kluster Redis.
+    syntax: az redis update --name MyRedisCache --resource-group MyResourceGroup --set "shardCount"="2"
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama cache Redis.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --sku
+    parameterValueGroup: Basic, Premium, Standard
+    summary: Jenis cache Redis.
+    description: ''
+  - name: --vm-size
+    parameterValueGroup: c0, c1, c2, c3, c4, c5, c6, p1, p2, p3, p4, p5
+    summary: Ukuran cache Redis untuk disebarkan. Ukuran Cache Dasar dan Standar dimulai dengan ukuran C. Premium Cache dimulai dengan P.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/redis/_help.py
+commands:
+- az_redis_create
+- az_redis_delete
+- az_redis_export
+- az_redis_firewall-rules
+- az_redis_firewall-rules_create
+- az_redis_firewall-rules_delete
+- az_redis_firewall-rules_list
+- az_redis_firewall-rules_show
+- az_redis_firewall-rules_update
+- az_redis_force-reboot
+- az_redis_identity
+- az_redis_identity_assign
+- az_redis_identity_remove
+- az_redis_identity_show
+- az_redis_import
+- az_redis_import-method
+- az_redis_list
+- az_redis_list-keys
+- az_redis_patch-schedule
+- az_redis_patch-schedule_create
+- az_redis_patch-schedule_delete
+- az_redis_patch-schedule_show
+- az_redis_patch-schedule_update
+- az_redis_regenerate-keys
+- az_redis_server-link
+- az_redis_server-link_create
+- az_redis_server-link_delete
+- az_redis_server-link_list
+- az_redis_server-link_show
+- az_redis_show
+- az_redis_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 12/29/2021
+  description: Mengelola cache Redis khusus untuk aplikasi Azure Anda.
+  ms.openlocfilehash: 0e0c69d2fffd90509fda42079d268fb15da38d88
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141013241"

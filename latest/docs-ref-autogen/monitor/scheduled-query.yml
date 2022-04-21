@@ -1,0 +1,288 @@
+### YamlMime:AzureCLIGroup
+uid: az_monitor_scheduled-query
+name: az monitor scheduled-query
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **kueri terjadwal** untuk Azure CLI (versi 2.20.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az monitor scheduled-query** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Perintah untuk mengelola kueri terjadwal.
+description: ''
+directCommands:
+- uid: az_monitor_scheduled-query_create
+  name: az monitor scheduled-query create
+  summary: Membuat kueri terjadwal.
+  description: ''
+  syntax: >-
+    az monitor scheduled-query create --condition
+                                      --name
+                                      --resource-group
+                                      --scopes
+                                      [--action-groups]
+                                      [--auto-mitigate {false, true}]
+                                      [--check-ws-alerts-storage {false, true}]
+                                      [--condition-query]
+                                      [--custom-properties]
+                                      [--description]
+                                      [--disabled {false, true}]
+                                      [--evaluation-frequency]
+                                      [--location]
+                                      [--mad]
+                                      [--severity]
+                                      [--skip-query-validation {false, true}]
+                                      [--tags]
+                                      [--target-resource-type]
+                                      [--window-size]
+  examples:
+  - summary: Membuat kueri terjadwal untuk VM.
+    syntax: az monitor scheduled-query create -g {rg} -n {name1} --scopes {vm_id} --condition "count 'Placeholder_1' > 360 resource id _ResourceID at least 1 violations out of 5 aggregated points" --condition-query Placeholder_1="union Event, Syslog | where TimeGenerated > ago(1h) | where EventLevelName=='Error' or SeverityLevel=='err'" --description "Test rule"
+  - summary: Buat kueri terjadwal untuk VM dalam grup sumber daya.
+    syntax: az monitor scheduled-query create -g {rg} -n {name1} --scopes {rg_id} --condition "count 'Placeholder_1' > 360 resource id _ResourceID at least 1 violations out of 5 aggregated points" --condition-query Placeholder_1="union Event, Syslog | where TimeGenerated > ago(1h) | where EventLevelName=='Error' or SeverityLevel=='err'" --description "Test rule"
+  requiredParameters:
+  - isRequired: true
+    name: --condition
+    summary: Kondisi yang memicu aturan.
+    description: "Penggunaan: --condition {avg,min,max,total,count} [\"METRIC COLUMN\" from] \"QUERY_PLACEHOLDER\" {=,!=,>,>=,<,<=} THRESHOLD [resource id RESOURCEID] [where DIMENSION {includes,excludes} VALUE [or VALUE ...] [dan DIMENSION {includes,excludes} VALUE [atau VALUE ...] ...]] [setidaknya pelanggaran MinTimeToFail dari EvaluationPeriod aggregated points]' Tempat penampung kueri dapat didefinisikan dalam Dimensi argumen --condition-query dapat dikueri dengan menambahkan kata kunci 'where' dan beberapa dimensi dapat dikueri dengan menggabungkannya dengan kata kunci 'dan'."
+  - isRequired: true
+    name: --name -n
+    summary: Nama aturan kueri terjadwal.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --scopes
+    summary: Daftar cakupan yang dipisahkan spasi yang berlaku untuk aturan. Sumber daya yang ditentukan dalam parameter ini harus memiliki jenis yang sama dan ada di lokasi yang sama.
+    description: ''
+  optionalParameters:
+  - name: --action-groups
+    summary: Id sumber daya Grup Tindakan untuk dipanggil saat pemberitahuan diaktifkan.
+    description: 'Penggunaan: --action-groups ACTION_GROUP_NAME_OR_ID [NAME_OR_ID,...].'
+  - name: --auto-mitigate
+    defaultValue: "1"
+    parameterValueGroup: false, true
+    summary: Bendera yang menunjukkan apakah pemberitahuan harus diselesaikan secara otomatis atau tidak. Secara default adalah benar.
+    description: ''
+  - name: --check-ws-alerts-storage --cwas
+    parameterValueGroup: false, true
+    summary: Bendera yang menunjukkan apakah aturan kueri terjadwal ini harus disimpan di penyimpanan pelanggan.
+    description: ''
+  - name: --condition-query
+    summary: Kueri dihentikan untuk mengganti tempat penampung dalam `--condition` argumen.
+    description: ''
+  - name: --custom-properties
+    summary: Properti payload pemberitahuan.
+    description: 'Penggunaan: --custom-properties ALERT_PAYLOAD_PROPERTIES [KEY=VAL,KEY=VAL ...].'
+  - name: --description
+    summary: Deskripsi teks bebas dari aturan.
+    description: ''
+  - name: --disabled
+    parameterValueGroup: false, true
+    summary: Nonaktifkan kueri terjadwal.
+    description: ''
+  - name: --evaluation-frequency
+    defaultValue: 5m
+    summary: Frekuensi untuk mengevaluasi aturan dalam format "##h##m##s".
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --mad --mute-actions-duration
+    summary: Matikan suara tindakan untuk periode waktu yang dipilih (dalam format durasi ISO 8601) setelah pemberitahuan diaktifkan.
+    description: ''
+  - name: --severity
+    defaultValue: "2"
+    summary: Tingkat keparahan pemberitahuan dari 0 (kritis) hingga 4 (verbose).
+    description: ''
+  - name: --skip-query-validation
+    parameterValueGroup: false, true
+    summary: Bendera yang menunjukkan apakah kueri yang disediakan harus divalidasi atau tidak.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --target-resource-type --type
+    summary: Jenis sumber daya sumber daya target dalam cakupan. Ini harus disediakan ketika cakupan adalah grup sumber daya atau langganan.
+    description: ''
+  - name: --window-size
+    defaultValue: 5m
+    summary: Waktu untuk mengagregasi metrik dalam format "##h##m##s".
+    description: ''
+- uid: az_monitor_scheduled-query_delete
+  name: az monitor scheduled-query delete
+  summary: Menghapus kueri terjadwal.
+  description: ''
+  syntax: >-
+    az monitor scheduled-query delete --name
+                                      --resource-group
+                                      [--yes]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aturan kueri terjadwal.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_monitor_scheduled-query_list
+  name: az monitor scheduled-query list
+  summary: Mencantumkan semua kueri terjadwal.
+  description: ''
+  syntax: az monitor scheduled-query list [--resource-group]
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_monitor_scheduled-query_show
+  name: az monitor scheduled-query show
+  summary: Perlihatkan detail kueri terjadwal.
+  description: ''
+  syntax: >-
+    az monitor scheduled-query show --name
+                                    --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aturan kueri terjadwal.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_monitor_scheduled-query_update
+  name: az monitor scheduled-query update
+  summary: Memperbarui kueri terjadwal.
+  description: ''
+  syntax: >-
+    az monitor scheduled-query update --name
+                                      --resource-group
+                                      [--action-groups]
+                                      [--add]
+                                      [--auto-mitigate {false, true}]
+                                      [--check-ws-alerts-storage {false, true}]
+                                      [--condition]
+                                      [--condition-query]
+                                      [--custom-properties]
+                                      [--description]
+                                      [--disabled {false, true}]
+                                      [--evaluation-frequency]
+                                      [--force-string]
+                                      [--mad]
+                                      [--remove]
+                                      [--set]
+                                      [--severity]
+                                      [--skip-query-validation {false, true}]
+                                      [--tags]
+                                      [--target-resource-type]
+                                      [--window-size]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aturan kueri terjadwal.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --action-groups
+    summary: Id sumber daya Grup Tindakan untuk dipanggil saat pemberitahuan diaktifkan.
+    description: 'Penggunaan: --action-groups ACTION_GROUP_NAME_OR_ID [NAME_OR_ID,...].'
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --auto-mitigate
+    parameterValueGroup: false, true
+    summary: Bendera yang menunjukkan apakah pemberitahuan harus diselesaikan secara otomatis atau tidak. Secara default adalah benar.
+    description: ''
+  - name: --check-ws-alerts-storage --cwas
+    parameterValueGroup: false, true
+    summary: Bendera yang menunjukkan apakah aturan kueri terjadwal ini harus disimpan di penyimpanan pelanggan.
+    description: ''
+  - name: --condition
+    summary: Kondisi yang memicu aturan.
+    description: >-
+      Penggunaan: --condition {avg,min,max,total,count} ["METRIC COLUMN" from] "QUERY_PLACEHOLDER" {=,!=,>,>=,<,<=} THRESHOLD [resource id RESOURCEID] [where DIMENSION {includes,excludes} VALUE [or VALUE ...] [dan DIMENSION {includes,excludes} VALUE [atau VALUE ...] ...]] [setidaknya pelanggaran MinTimeToFail dari EvaluationPeriod titik agregat]'
+
+
+      Tempat penampung kueri dapat ditentukan dalam Dimensi argumen --condition-query dapat dikueri dengan menambahkan kata kunci 'where' dan beberapa dimensi dapat dikueri dengan menggabungkannya dengan kata kunci 'dan'.
+  - name: --condition-query
+    summary: Kueri dihentikan untuk mengganti tempat penampung dalam `--condition` argumen.
+    description: ''
+  - name: --custom-properties
+    summary: Properti payload pemberitahuan.
+    description: 'Penggunaan: --custom-properties ALERT_PAYLOAD_PROPERTIES [KEY=VAL,KEY=VAL ...].'
+  - name: --description
+    summary: Deskripsi teks bebas dari aturan.
+    description: ''
+  - name: --disabled
+    parameterValueGroup: false, true
+    summary: Nonaktifkan kueri terjadwal.
+    description: ''
+  - name: --evaluation-frequency
+    summary: Frekuensi untuk mengevaluasi aturan dalam format "##h##m##s".
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --mad --mute-actions-duration
+    summary: Matikan suara tindakan untuk periode waktu yang dipilih (dalam format durasi ISO 8601) setelah pemberitahuan diaktifkan.
+    description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --severity
+    summary: Tingkat keparahan pemberitahuan dari 0 (kritis) hingga 4 (verbose).
+    description: ''
+  - name: --skip-query-validation
+    parameterValueGroup: false, true
+    summary: Bendera yang menunjukkan apakah kueri yang disediakan harus divalidasi atau tidak.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --target-resource-type --type
+    summary: Jenis sumber daya sumber daya target dalam cakupan. Ini harus disediakan ketika cakupan adalah grup sumber daya atau langganan.
+    description: ''
+  - name: --window-size
+    summary: Waktu untuk mengagregasi metrik dalam format "##h##m##s".
+    description: ''
+commands:
+- az_monitor_scheduled-query_create
+- az_monitor_scheduled-query_delete
+- az_monitor_scheduled-query_list
+- az_monitor_scheduled-query_show
+- az_monitor_scheduled-query_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Perintah untuk mengelola kueri terjadwal.
+  ms.openlocfilehash: a0eb9ef472d1ec0bc7ebb6e04f89925b607f2c09
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141004966"

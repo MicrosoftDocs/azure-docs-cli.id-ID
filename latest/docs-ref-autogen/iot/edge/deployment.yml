@@ -1,0 +1,323 @@
+### YamlMime:AzureCLIGroup
+uid: az_iot_edge_deployment
+name: az iot edge deployment
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **azure-iot** untuk Azure CLI (versi 2.24.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **penyebaran az iot edge** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola penyebaran IoT Edge dalam skala besar.
+description: ''
+directCommands:
+- uid: az_iot_edge_deployment_create
+  name: az iot edge deployment create
+  summary: Buat penyebaran IoT Edge di IoT Hub target.
+  description: >-
+    Konten penyebaran adalah json dan dalam bentuk {"modulesContent":{...}} atau {"content":{"modulesContent":{...}}}.
+
+
+    Secara default properti modul sistem $edgeAgent dan $edgeHub divalidasi terhadap skema yang diinstal dengan ekstensi IoT.
+
+    Ini dapat dinonaktifkan dengan menggunakan sakelar --no-validation.
+
+
+    Penyebaran Edge dapat dibuat dengan metrik yang ditentukan pengguna untuk evaluasi sesuai permintaan.
+
+    Metrik pengguna adalah json dan dalam bentuk {"kueri":{...}} atau {"metrik":{"kueri":{...}}}.
+  syntax: >-
+    az iot edge deployment create --content
+                                  --deployment-id
+                                  [--auth-type {key, login}]
+                                  [--hub-name]
+                                  [--lab]
+                                  [--layered {false, true}]
+                                  [--login]
+                                  [--metrics]
+                                  [--no-validation {false, true}]
+                                  [--pri]
+                                  [--resource-group]
+                                  [--target-condition]
+  examples:
+  - summary: Buat penyebaran dengan label (contoh sintaks bash) yang berlaku untuk perangkat di 'building 9' dan lingkungannya adalah 'test'.
+    syntax: az iot edge deployment create -d {deployment_name} -n {iothub_name} --content modules_content.json --labels '{"key0":"value0", "key1":"value1"}' --target-condition "tags.building=9 and tags.environment='test'" --priority 3
+  - summary: Buat penyebaran dengan label (contoh sintaks powershell) yang berlaku untuk perangkat yang ditandai dengan lingkungan 'dev'.
+    syntax: az iot edge deployment create -d {deployment_name} -n {iothub_name} --content modules_content.json --labels "{'key':'value'}" --target-condition "tags.environment='dev'"
+  - summary: Buat penyebaran berlapis yang berlaku untuk perangkat yang ditandai dengan lingkungan 'dev'. Metrik pengguna dan konten modul yang ditentukan sebaris (contoh sintaks powershell).
+    syntax: az iot edge deployment create -d {deployment_name} -n {iothub_name} --content "{'modulesContent':{'`$edgeAgent':{'properties.desired.modules.mymodule0':{ }},'`$edgeHub':{'properties.desired.routes.myroute0':'FROM /messages/* INTO `$upstream'}}}" --target-condition "tags.environment='dev'" --priority 10 --metrics "{'queries':{'mymetrik':'SELECT deviceId from devices where properties.reported.lastDesiredStatus.code = 200'}}" --layered
+  - summary: Buat penyebaran berlapis yang berlaku untuk perangkat di 'building 9' dan lingkungan 'test'. Metrik pengguna dan konten modul yang ditentukan sebaris (contoh sintaks bash).
+    syntax: az iot edge deployment create -d {deployment_name} -n {iothub_name} --content '{"modulesContent":{"$edgeAgent":{"properties.desired.modules.mymodule0":{ }},"$edgeHub":{"properties.desired.routes.myroute0":"FROM /messages/* INTO $upstream"}}}' --target-condition "tags.building=9 and tags.environment='test'" --metrics '{"queries":{"mymetrik":"SELECT deviceId from devices where properties.reported.lastDesiredStatus.code = 200"}}' --layered
+  - summary: Buat penyebaran berlapis yang berlaku untuk perangkat di 'building 9' dan lingkungan 'test'. Metrik pengguna dan konten modul yang ditentukan dari file.
+    syntax: az iot edge deployment create -d {deployment_name} -n {iothub_name} --content layered_modules_content.json --target-condition "tags.building=9 and tags.environment='test'" --metrics metrics_content.json --layered
+  requiredParameters:
+  - isRequired: true
+    name: --content -k
+    summary: IoT Edge konten penyebaran. Sediakan jalur file atau json mentah.
+    description: ''
+  - isRequired: true
+    name: --deployment-id -d
+    summary: Nama penyebaran target.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --lab --labels
+    summary: "Peta label yang akan diterapkan ke penyebaran target. Gunakan format berikut: '{\"key0\":\"value0\", \"key1\":\"value1\"}'."
+    description: ''
+  - name: --layered
+    parameterValueGroup: false, true
+    summary: Penyebaran berlapis memungkinkan Anda menentukan properti yang diinginkan dalam modul $edgeAgent, $edgeHub, dan pengguna yang akan melapisi penyebaran dasar. Misalnya rute yang ditentukan dalam penyebaran berlapis akan digabungkan dengan rute penyebaran dasar. Rute dengan nama yang sama akan ditimpa berdasarkan prioritas penyebaran.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --metrics -m
+    summary: IoT Edge definisi metrik penyebaran. Sediakan jalur file atau json mentah.
+    description: ''
+  - name: --no-validation
+    parameterValueGroup: false, true
+    summary: Menonaktifkan validasi skema sisi klien untuk pembuatan penyebaran tepi.
+    description: ''
+  - name: --pri --priority
+    summary: Bobot penyebaran jika terjadi aturan yang bersaing (kemenangan tertinggi).
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --target-condition --tc -t
+    summary: Kondisi target tempat penyebaran tepi berlaku. Penyebaran tanpa kondisi target tidak akan menargetkan perangkat.
+    description: ''
+- uid: az_iot_edge_deployment_delete
+  name: az iot edge deployment delete
+  summary: Menghapus penyebaran IoT Edge.
+  description: ''
+  syntax: >-
+    az iot edge deployment delete --deployment-id
+                                  [--auth-type {key, login}]
+                                  [--etag]
+                                  [--hub-name]
+                                  [--login]
+                                  [--resource-group]
+  requiredParameters:
+  - isRequired: true
+    name: --deployment-id -d
+    summary: Nama penyebaran target.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --etag -e
+    summary: Tag Etag atau entitas yang sesuai dengan status terakhir sumber daya. Jika tidak ada etag yang disediakan, nilai '\*' digunakan.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_iot_edge_deployment_list
+  name: az iot edge deployment list
+  summary: Mencantumkan penyebaran IoT Edge dalam IoT Hub.
+  description: ''
+  syntax: >-
+    az iot edge deployment list [--auth-type {key, login}]
+                                [--hub-name]
+                                [--login]
+                                [--resource-group]
+                                [--top]
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --top
+    summary: Jumlah maksimum penyebaran yang akan dikembalikan. Secara default semua penyebaran dikembalikan.
+    description: ''
+- uid: az_iot_edge_deployment_show
+  name: az iot edge deployment show
+  summary: Dapatkan detail penyebaran IoT Edge.
+  description: ''
+  syntax: >-
+    az iot edge deployment show --deployment-id
+                                [--auth-type {key, login}]
+                                [--hub-name]
+                                [--login]
+                                [--resource-group]
+  requiredParameters:
+  - isRequired: true
+    name: --deployment-id -d
+    summary: Nama penyebaran target.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_iot_edge_deployment_show-metric
+  name: az iot edge deployment show-metric
+  summary: Mengevaluasi metrik sistem target yang ditentukan dalam penyebaran IoT Edge.
+  description: ''
+  syntax: >-
+    az iot edge deployment show-metric --deployment-id
+                                       --metric-id
+                                       [--auth-type {key, login}]
+                                       [--hub-name]
+                                       [--login]
+                                       [--metric-type {system, user}]
+                                       [--resource-group]
+  examples:
+  - summary: Mengevaluasi metrik sistem 'appliedCount'
+    syntax: az iot edge deployment show-metric -m appliedCount -d {deployment_name} -n {iothub_name} --mt system
+  - summary: Mengevaluasi metrik pengguna 'myCustomMetric'
+    syntax: az iot edge deployment show-metric -m myCustomMetric -d {deployment_name} -n {iothub_name}
+  requiredParameters:
+  - isRequired: true
+    name: --deployment-id -d
+    summary: Nama penyebaran target.
+    description: ''
+  - isRequired: true
+    name: --metric-id -m
+    summary: Metrik target untuk evaluasi.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --metric-type --mt
+    defaultValue: user
+    parameterValueGroup: system, user
+    summary: Menunjukkan koleksi metrik mana yang harus digunakan untuk mencari metrik.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_iot_edge_deployment_update
+  name: az iot edge deployment update
+  summary: >-
+    Memperbarui properti yang ditentukan dari penyebaran IoT Edge.
+
+
+    Gunakan --set diikuti oleh penetapan properti untuk memperbarui penyebaran.
+
+
+    Catatan: konten penyebaran IoT Edge tidak dapat diubah. Properti penyebaran yang dapat diperbarui adalah 'label', 'metrik', 'prioritas' dan 'targetCondition'.
+  description: ''
+  syntax: >-
+    az iot edge deployment update --deployment-id
+                                  [--add]
+                                  [--auth-type {key, login}]
+                                  [--etag]
+                                  [--force-string]
+                                  [--hub-name]
+                                  [--login]
+                                  [--remove]
+                                  [--resource-group]
+                                  [--set]
+  examples:
+  - summary: Mengubah label dan kondisi target penyebaran tepi yang ada
+    syntax: az iot edge deployment update -d {deployment_name} -n {iothub_name} --set labels='{"purpose":"dev", "owners":"IoTEngineering"}' targetCondition='tags.building=9'
+  requiredParameters:
+  - isRequired: true
+    name: --deployment-id -d
+    summary: Nama penyebaran target.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --etag -e
+    summary: Tag Etag atau entitas yang sesuai dengan status terakhir sumber daya. Jika tidak ada etag yang disediakan, nilai '\*' digunakan.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+commands:
+- az_iot_edge_deployment_create
+- az_iot_edge_deployment_delete
+- az_iot_edge_deployment_list
+- az_iot_edge_deployment_show
+- az_iot_edge_deployment_show-metric
+- az_iot_edge_deployment_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola penyebaran IoT Edge dalam skala besar.
+  ms.openlocfilehash: 97e6f85996cf589fe7d6f7d9a59fa57cb1915881
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141031102"
