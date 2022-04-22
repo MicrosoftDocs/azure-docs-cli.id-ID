@@ -1,0 +1,114 @@
+### YamlMime:AzureCLIGroup
+uid: az_mysql_flexible-server_deploy
+name: az mysql flexible-server deploy
+summary: Aktifkan dan jalankan alur kerja tindakan github untuk server MySQL.
+description: ''
+directCommands:
+- uid: az_mysql_flexible-server_deploy_run
+  name: az mysql flexible-server deploy run
+  summary: Jalankan alur kerja yang ada di repositori github Anda.
+  description: ''
+  syntax: >-
+    az mysql flexible-server deploy run --action-name
+                                        --branch
+  examples:
+  - summary: Menjalankan alur kerja yang sudah ada di repositori github Anda
+    syntax: az mysql flexible-server deploy run --action-name testAction --branch userBranch
+  requiredParameters:
+  - isRequired: true
+    name: --action-name
+    summary: Nama tindakan github.
+    description: ''
+  - isRequired: true
+    name: --branch
+    summary: Nama cabang yang ingin Anda unggah file tindakan github. Defaultnya adalah cabang Anda saat ini.
+    description: ''
+- uid: az_mysql_flexible-server_deploy_setup
+  name: az mysql flexible-server deploy setup
+  summary: Buat file alur kerja tindakan github untuk server MySQL.
+  description: ''
+  syntax: >-
+    az mysql flexible-server deploy setup --admin-password
+                                          --admin-user
+                                          --repo
+                                          --sql-file
+                                          [--action-name]
+                                          [--allow-push {false, true}]
+                                          [--branch]
+                                          [--database-name]
+                                          [--ids]
+                                          [--resource-group]
+                                          [--server-name]
+  examples:
+  - summary: Buat file alur kerja tindakan github untuk server MySQL.
+    syntax: az mysql flexible-server deploy setup -s testserver -g testGroup -u username -p password --sql-file test.sql --repo username/userRepo -d flexibleserverdb --action-name testAction
+  - summary: Membuat file alur kerja tindakan github untuk server MySQL dan mendorongnya ke repositori jarak jauh
+    syntax: az mysql flexible-server deploy setup -s testserver -g testGroup -u username -p password --sql-file test.sql --repo username/userRepo -d flexibleserverdb --action-name testAction --branch userBranch --allow-push
+  requiredParameters:
+  - isRequired: true
+    name: --admin-password -p
+    summary: 'Kata sandi administrator. Minimal 8 karakter dan maksimum 128 karakter. Sandi Anda harus berisi karakter dari tiga kategori berikut: huruf besar bahasa Inggris, huruf kecil bahasa Inggris, angka, dan karakter non-alfanumerik.'
+    description: ''
+  - isRequired: true
+    name: --admin-user -u
+    summary: Nama pengguna administrator untuk server. Setelah diatur, itu tidak dapat diubah.
+    description: ''
+  - isRequired: true
+    name: --repo
+    summary: Nama nama pengguna dan repositori github Anda misalnya, Azure/azure-cli.
+    description: ''
+  - isRequired: true
+    name: --sql-file
+    summary: Jalur file sql. File sql harus sudah ada di repositori.
+    description: ''
+  optionalParameters:
+  - name: --action-name
+    summary: Nama tindakan github.
+    description: ''
+  - name: --allow-push
+    parameterValueGroup: false, true
+    summary: Dorong file yml tindakan ke repositori jarak jauh. Perubahan akan didorong ke repositori asal, cabang yang di-speicified atau cabang saat ini jika tidak ditentukan.
+    description: ''
+  - name: --branch
+    summary: Nama cabang yang ingin Anda unggah file tindakan github. Defaultnya adalah cabang Anda saat ini.
+    description: ''
+  - name: --database-name -d
+    summary: Nama database yang akan dibuat saat menyediakan server database.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server-name -s
+    summary: Nama server. Nama hanya boleh berisi huruf kecil, angka, dan karakter tanda hubung (-). Minimal 3 karakter dan maksimum 63 karakter.
+    description: ''
+commands:
+- az_mysql_flexible-server_deploy_run
+- az_mysql_flexible-server_deploy_setup
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Aktifkan dan jalankan alur kerja tindakan github untuk server MySQL.
+  ms.openlocfilehash: 5852a554a8e6d258d70ca5652a6997091aa2858f
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141004930"

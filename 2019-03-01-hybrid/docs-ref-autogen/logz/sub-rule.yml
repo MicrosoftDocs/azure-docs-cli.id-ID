@@ -1,0 +1,261 @@
+### YamlMime:AzureCLIGroup
+uid: az_logz_sub-rule
+name: az logz sub-rule
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **logz** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **sub-aturan az logz** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola aturan tag sub akun dengan logz.
+description: ''
+directCommands:
+- uid: az_logz_sub-rule_create
+  name: az logz sub-rule create
+  summary: Buat seperangkat aturan tag untuk sumber daya sub akun tertentu.
+  description: ''
+  syntax: >-
+    az logz sub-rule create --monitor-name
+                            --resource-group
+                            --rule-set-name
+                            --sub-account-name
+                            [--filtering-tags]
+                            [--send-aad-logs {false, true}]
+                            [--send-activity-logs {false, true}]
+                            [--send-subscription-logs {false, true}]
+  examples:
+  - summary: SubAccountTagRules_CreateOrUpdate
+    syntax: az logz sub-rule create --monitor-name "myMonitor" --filtering-tags name="Environment" action="Include" value="Prod" --filtering-tags name="Environment" action="Exclude" value="Dev" --send-aad-logs false --send-activity-logs true --send-subscription-logs true --resource-group "myResourceGroup" --rule-set-name "default" --sub-account-name "SubAccount1"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --rule-set-name
+    summary: Nama seperangkat aturan sub akun.
+    description: ''
+  - isRequired: true
+    name: --sub-account-name
+    summary: Nama sumber daya Sub Akun.
+    description: ''
+  optionalParameters:
+  - name: --filtering-tags
+    summary: Daftar tag pemfilteran yang akan digunakan untuk menangkap log. Ini hanya berlaku jika bendera SendActivityLogs diaktifkan. Jika kosong, semua sumber daya akan ditangkap. Jika hanya tindakan Kecualikan yang ditentukan, aturan akan berlaku untuk daftar semua sumber daya yang tersedia. Jika Tindakan sertakan ditentukan, aturan hanya akan menyertakan sumber daya dengan tag terkait.
+    description: >-
+      Penggunaan: --filtering-tags name=XX value=XX action=XX
+
+
+      name: Nama (juga dikenal sebagai kunci) dari tag.
+
+      nilai: Nilai tag.
+
+      action: Tindakan yang valid untuk tag pemfilteran. Pengecualian lebih diprioritaskan daripada penyertaan.
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --filtering-tags.
+  - name: --send-aad-logs
+    parameterValueGroup: false, true
+    summary: Bendera yang menentukan apakah log AAD harus dikirim untuk sumber daya Monitor.
+    description: ''
+  - name: --send-activity-logs
+    parameterValueGroup: false, true
+    summary: Bendera yang menentukan apakah log aktivitas dari sumber daya Azure harus dikirim untuk sumber daya Monitor.
+    description: ''
+  - name: --send-subscription-logs
+    parameterValueGroup: false, true
+    summary: Bendera yang menentukan apakah log langganan harus dikirim untuk sumber daya Monitor.
+    description: ''
+- uid: az_logz_sub-rule_delete
+  name: az logz sub-rule delete
+  summary: Menghapus seperangkat aturan tag untuk sumber daya monitor tertentu.
+  description: ''
+  syntax: >-
+    az logz sub-rule delete --monitor-name
+                            --resource-group
+                            --rule-set-name
+                            --sub-account-name
+                            [--yes]
+  examples:
+  - summary: TagRules_Delete
+    syntax: az logz sub-rule delete --monitor-name "myMonitor" --resource-group "myResourceGroup" --rule-set-name "default" --sub-account-name "SubAccount1"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --rule-set-name
+    summary: Nama seperangkat aturan monitor.
+    description: ''
+  - isRequired: true
+    name: --sub-account-name
+    summary: Nama sumber daya Sub Akun.
+    description: ''
+  optionalParameters:
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_logz_sub-rule_list
+  name: az logz sub-rule list
+  summary: Mencantumkan aturan tag untuk sumber daya sub akun tertentu.
+  description: ''
+  syntax: >-
+    az logz sub-rule list --monitor-name
+                          --resource-group
+                          --sub-account-name
+  examples:
+  - summary: SubAccountTagRules_List
+    syntax: az logz sub-rule list --monitor-name "myMonitor" --resource-group "myResourceGroup" --sub-account-name "SubAccount1"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --sub-account-name
+    summary: Nama sumber daya Sub Akun.
+    description: ''
+- uid: az_logz_sub-rule_show
+  name: az logz sub-rule show
+  summary: Dapatkan seperangkat aturan tag untuk sumber daya monitor tertentu.
+  description: ''
+  syntax: >-
+    az logz sub-rule show --monitor-name
+                          --resource-group
+                          --rule-set-name
+                          --sub-account-name
+  examples:
+  - summary: SubAccountTagRules_Get
+    syntax: az logz sub-rule show --monitor-name "myMonitor" --resource-group "myResourceGroup" --rule-set-name "default" --sub-account-name "SubAccount1"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --rule-set-name
+    summary: Nama seperangkat aturan monitor.
+    description: ''
+  - isRequired: true
+    name: --sub-account-name
+    summary: Nama sumber daya Sub Akun.
+    description: ''
+- uid: az_logz_sub-rule_update
+  name: az logz sub-rule update
+  summary: Perbarui seperangkat aturan tag untuk sumber daya sub akun tertentu.
+  description: ''
+  syntax: >-
+    az logz sub-rule update --monitor-name
+                            --resource-group
+                            --rule-set-name
+                            --sub-account-name
+                            [--add]
+                            [--filtering-tags]
+                            [--force-string]
+                            [--remove]
+                            [--send-aad-logs {false, true}]
+                            [--send-activity-logs {false, true}]
+                            [--send-subscription-logs {false, true}]
+                            [--set]
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --rule-set-name
+    summary: Nama seperangkat aturan sub akun.
+    description: ''
+  - isRequired: true
+    name: --sub-account-name
+    summary: Nama sumber daya Sub Akun.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --filtering-tags
+    summary: Daftar tag pemfilteran yang akan digunakan untuk menangkap log. Ini hanya berlaku jika bendera SendActivityLogs diaktifkan. Jika kosong, semua sumber daya akan ditangkap. Jika hanya tindakan Kecualikan yang ditentukan, aturan akan berlaku untuk daftar semua sumber daya yang tersedia. Jika Tindakan sertakan ditentukan, aturan hanya akan menyertakan sumber daya dengan tag terkait.
+    description: >-
+      Penggunaan: --filtering-tags name=XX value=XX action=XX
+
+
+      name: Nama (juga dikenal sebagai kunci) dari tag.
+
+      nilai: Nilai tag.
+
+      action: Tindakan yang valid untuk tag pemfilteran. Pengecualian lebih diprioritaskan daripada penyertaan.
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --filtering-tags.
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --send-aad-logs
+    parameterValueGroup: false, true
+    summary: Bendera yang menentukan apakah log AAD harus dikirim untuk sumber daya Monitor.
+    description: ''
+  - name: --send-activity-logs
+    parameterValueGroup: false, true
+    summary: Bendera yang menentukan apakah log aktivitas dari sumber daya Azure harus dikirim untuk sumber daya Monitor.
+    description: ''
+  - name: --send-subscription-logs
+    parameterValueGroup: false, true
+    summary: Bendera yang menentukan apakah log langganan harus dikirim untuk sumber daya Monitor.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+commands:
+- az_logz_sub-rule_create
+- az_logz_sub-rule_delete
+- az_logz_sub-rule_list
+- az_logz_sub-rule_show
+- az_logz_sub-rule_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola aturan tag sub akun dengan logz.
+  ms.openlocfilehash: 65d9cdbf4987cac4ccf42680697eb41c53188711
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141108967"
