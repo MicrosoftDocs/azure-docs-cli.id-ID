@@ -1,0 +1,494 @@
+### YamlMime:AzureCLIGroup
+uid: az_kusto_cluster
+name: az kusto cluster
+summary: Mengelola kluster Azure Kusto.
+description: Modul ini tidak akan didukung mulai 1 Januari 2021. Silakan jalankan "az extension add -n kusto" untuk menginstal ekstensi Kusto yang didukung.
+directCommands:
+- uid: az_kusto_cluster_add-language-extension
+  name: az kusto cluster add-language-extension
+  summary: Tambahkan daftar ekstensi bahasa yang dapat berjalan dalam kueri KQL.
+  description: ''
+  syntax: >-
+    az kusto cluster add-language-extension --cluster-name
+                                            --resource-group
+                                            [--no-wait]
+                                            [--value]
+  examples:
+  - summary: KustoClusterAddLanguageExtensions
+    syntax: az kusto cluster add-language-extension --name "kustoclusterrptest4" --value language-extension-name="PYTHON" --value language-extension-name="R" --resource-group "kustorptest"
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name --name -n
+    summary: Nama kluster Kusto.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --value
+    summary: Daftar ekstensi bahasa.
+    description: >-
+      Penggunaan: --value language-extension-name=XX
+
+
+      language-extension-name: Nama ekstensi bahasa.
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --value.
+- uid: az_kusto_cluster_create
+  name: az kusto cluster create
+  summary: Buat kluster Kusto.
+  description: ''
+  syntax: >-
+    az kusto cluster create --name
+                            --resource-group
+                            --sku {Dev(No SLA)_Standard_D11_v2, Dev(No SLA)_Standard_E2a_v4, Standard_D11_v2, Standard_D12_v2, Standard_D13_v2, Standard_D14_v2, Standard_DS13_v2+1TB_PS, Standard_DS13_v2+2TB_PS, Standard_DS14_v2+3TB_PS, Standard_DS14_v2+4TB_PS, Standard_E16a_v4, Standard_E16as_v4+3TB_PS, Standard_E16as_v4+4TB_PS, Standard_E2a_v4, Standard_E4a_v4, Standard_E8a_v4, Standard_E8as_v4+1TB_PS, Standard_E8as_v4+2TB_PS, Standard_L16s, Standard_L4s, Standard_L8s}
+                            [--capacity]
+                            [--location]
+                            [--no-wait]
+  examples:
+  - summary: Membuat Kluster Kusto.
+    syntax: az kusto cluster create -l "Central US" -n myclustername -g myrgname --sku D13_v2 --capacity 10
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --sku
+    parameterValueGroup: Dev(No SLA)_Standard_D11_v2, Dev(No SLA)_Standard_E2a_v4, Standard_D11_v2, Standard_D12_v2, Standard_D13_v2, Standard_D14_v2, Standard_DS13_v2+1TB_PS, Standard_DS13_v2+2TB_PS, Standard_DS14_v2+3TB_PS, Standard_DS14_v2+4TB_PS, Standard_E16a_v4, Standard_E16as_v4+3TB_PS, Standard_E16as_v4+4TB_PS, Standard_E2a_v4, Standard_E4a_v4, Standard_E8a_v4, Standard_E8as_v4+1TB_PS, Standard_E8as_v4+2TB_PS, Standard_L16s, Standard_L4s, Standard_L8s
+    summary: Nama sku.
+    description: ''
+  optionalParameters:
+  - name: --capacity
+    summary: Nomor instans VM.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/kusto/_help.py
+- uid: az_kusto_cluster_delete
+  name: az kusto cluster delete
+  summary: Menghapus kluster Kusto.
+  description: ''
+  syntax: >-
+    az kusto cluster delete [--ids]
+                            [--name]
+                            [--resource-group]
+                            [--yes]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama kluster.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/kusto/_help.py
+- uid: az_kusto_cluster_detach-follower-database
+  name: az kusto cluster detach-follower-database
+  summary: Mencopot semua pengikut database yang dimiliki oleh kluster ini.
+  description: ''
+  syntax: >-
+    az kusto cluster detach-follower-database --attached-database-configuration-name
+                                              --cluster-name
+                                              --cluster-resource-id
+                                              --resource-group
+                                              [--no-wait]
+  examples:
+  - summary: KustoClusterDetachFollowerDatabases
+    syntax: az kusto cluster detach-follower-database --name "kustoclusterrptest4" --attached-database-configuration-name "myAttachedDatabaseConfiguration" --cluster-resource-id "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/leader4" --resource-group "kustorptest"
+  requiredParameters:
+  - isRequired: true
+    name: --attached-database-configuration-name
+    summary: Nama sumber daya konfigurasi database terlampir di kluster pengikut.
+    description: ''
+  - isRequired: true
+    name: --cluster-name --name -n
+    summary: Nama kluster Kusto.
+    description: ''
+  - isRequired: true
+    name: --cluster-resource-id
+    summary: Id sumber daya kluster yang mengikuti database yang dimiliki oleh kluster ini.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_kusto_cluster_diagnose-virtual-network
+  name: az kusto cluster diagnose-virtual-network
+  summary: Mendiagnosis status konektivitas jaringan untuk sumber daya eksternal tempat layanan bergantung.
+  description: ''
+  syntax: >-
+    az kusto cluster diagnose-virtual-network --cluster-name
+                                              --resource-group
+                                              [--no-wait]
+  examples:
+  - summary: KustoClusterDiagnoseVirtualNetwork
+    syntax: az kusto cluster diagnose-virtual-network --name "kustoclusterrptest4" --resource-group "kustorptest"
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name --name -n
+    summary: Nama kluster Kusto.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_kusto_cluster_list
+  name: az kusto cluster list
+  summary: Mencantumkan kluster Kusto.
+  description: ''
+  syntax: az kusto cluster list --resource-group
+  examples:
+  - summary: Mencantumkan kluster Kusto. (dibuat otomatis)
+    syntax: az kusto cluster list --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/kusto/_help.py
+- uid: az_kusto_cluster_list-follower-database
+  name: az kusto cluster list-follower-database
+  summary: Mengembalikan daftar database yang dimiliki oleh kluster ini dan diikuti oleh kluster lain.
+  description: ''
+  syntax: >-
+    az kusto cluster list-follower-database --cluster-name
+                                            --resource-group
+  examples:
+  - summary: KustoClusterListFollowerDatabases
+    syntax: az kusto cluster list-follower-database --name "kustoclusterrptest4" --resource-group "kustorptest"
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name --name -n
+    summary: Nama kluster Kusto.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_kusto_cluster_list-language-extension
+  name: az kusto cluster list-language-extension
+  summary: Mengembalikan daftar ekstensi bahasa yang dapat berjalan dalam kueri KQL.
+  description: ''
+  syntax: >-
+    az kusto cluster list-language-extension --cluster-name
+                                             --resource-group
+  examples:
+  - summary: KustoClusterListLanguageExtensions
+    syntax: az kusto cluster list-language-extension --name "kustoclusterrptest4" --resource-group "kustorptest"
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name --name -n
+    summary: Nama kluster Kusto.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_kusto_cluster_list-outbound-network-dependency-endpoint
+  name: az kusto cluster list-outbound-network-dependency-endpoint
+  summary: Mendapatkan titik akhir jaringan dari semua dependensi keluar dari kluster Kusto.
+  description: ''
+  syntax: >-
+    az kusto cluster list-outbound-network-dependency-endpoint --cluster-name
+                                                               --resource-group
+  examples:
+  - summary: Mendapatkan dependensi jaringan keluar kluster Kusto
+    syntax: az kusto cluster list-outbound-network-dependency-endpoint --name "kustoCluster" --resource-group "kustorptest"
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name --name -n
+    summary: Nama kluster Kusto.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_kusto_cluster_list-sku
+  name: az kusto cluster list-sku
+  summary: Mengembalikan SKU yang tersedia untuk sumber daya yang disediakan. Dan Mencantumkan SKU yang memenuhi syarat untuk penyedia sumber daya Kusto.
+  description: ''
+  syntax: >-
+    az kusto cluster list-sku [--cluster-name]
+                              [--resource-group]
+  examples:
+  - summary: KustoClustersListResourceSkus
+    syntax: az kusto cluster list-sku --name "kustoclusterrptest4" --resource-group "kustorptest"
+  - summary: KustoClustersListSkus
+    syntax: az kusto cluster list-sku
+  optionalParameters:
+  - name: --cluster-name --name -n
+    summary: Nama kluster Kusto.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_kusto_cluster_remove-language-extension
+  name: az kusto cluster remove-language-extension
+  summary: Hapus daftar ekstensi bahasa yang dapat berjalan dalam kueri KQL.
+  description: ''
+  syntax: >-
+    az kusto cluster remove-language-extension --cluster-name
+                                               --resource-group
+                                               [--no-wait]
+                                               [--value]
+  examples:
+  - summary: KustoClusterRemoveLanguageExtensions
+    syntax: az kusto cluster remove-language-extension --name "kustoclusterrptest4" --value language-extension-name="PYTHON" --value language-extension-name="R" --resource-group "kustorptest"
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name --name -n
+    summary: Nama kluster Kusto.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --value
+    summary: Daftar ekstensi bahasa.
+    description: >-
+      Penggunaan: --value language-extension-name=XX
+
+
+      language-extension-name: Nama ekstensi bahasa.
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --value.
+- uid: az_kusto_cluster_show
+  name: az kusto cluster show
+  summary: Dapatkan kluster Kusto.
+  description: ''
+  syntax: >-
+    az kusto cluster show [--ids]
+                          [--name]
+                          [--resource-group]
+  examples:
+  - summary: Dapatkan kluster Kusto. (dibuat otomatis)
+    syntax: az kusto cluster show --name MyCluster --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama kluster.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/kusto/_help.py
+- uid: az_kusto_cluster_start
+  name: az kusto cluster start
+  summary: Mulai kluster Kusto.
+  description: Ketika kluster dimulai ulang, dibutuhkan sekitar sepuluh menit agar kluster tersedia (seperti ketika awalnya disediakan). Dibutuhkan waktu tambahan bagi data untuk dimuat ke dalam cache panas.
+  syntax: >-
+    az kusto cluster start [--ids]
+                           [--name]
+                           [--no-wait]
+                           [--resource-group]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama kluster.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/kusto/_help.py
+- uid: az_kusto_cluster_stop
+  name: az kusto cluster stop
+  summary: Hentikan kluster Kusto.
+  description: Saat kluster dihentikan, data tidak tersedia untuk kueri, dan Anda tidak dapat menyerap data baru. Mulai kluster untuk mengaktifkan kueri.
+  syntax: >-
+    az kusto cluster stop [--ids]
+                          [--name]
+                          [--no-wait]
+                          [--resource-group]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama kluster.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/kusto/_help.py
+- uid: az_kusto_cluster_update
+  name: az kusto cluster update
+  summary: Memperbarui kluster Kusto.
+  description: ''
+  syntax: >-
+    az kusto cluster update [--add]
+                            [--capacity]
+                            [--force-string]
+                            [--ids]
+                            [--name]
+                            [--remove]
+                            [--resource-group]
+                            [--set]
+                            [--sku {Dev(No SLA)_Standard_D11_v2, Dev(No SLA)_Standard_E2a_v4, Standard_D11_v2, Standard_D12_v2, Standard_D13_v2, Standard_D14_v2, Standard_DS13_v2+1TB_PS, Standard_DS13_v2+2TB_PS, Standard_DS14_v2+3TB_PS, Standard_DS14_v2+4TB_PS, Standard_E16a_v4, Standard_E16as_v4+3TB_PS, Standard_E16as_v4+4TB_PS, Standard_E2a_v4, Standard_E4a_v4, Standard_E8a_v4, Standard_E8as_v4+1TB_PS, Standard_E8as_v4+2TB_PS, Standard_L16s, Standard_L4s, Standard_L8s}]
+  examples:
+  - summary: memperbarui Kluster Kusto.
+    syntax: az kusto cluster update -n myclustername -g myrgname --sku D14_v2 --capacity 4
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --capacity
+    summary: Nomor instans VM.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama kluster.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --sku
+    parameterValueGroup: Dev(No SLA)_Standard_D11_v2, Dev(No SLA)_Standard_E2a_v4, Standard_D11_v2, Standard_D12_v2, Standard_D13_v2, Standard_D14_v2, Standard_DS13_v2+1TB_PS, Standard_DS13_v2+2TB_PS, Standard_DS14_v2+3TB_PS, Standard_DS14_v2+4TB_PS, Standard_E16a_v4, Standard_E16as_v4+3TB_PS, Standard_E16as_v4+4TB_PS, Standard_E2a_v4, Standard_E4a_v4, Standard_E8a_v4, Standard_E8as_v4+1TB_PS, Standard_E8as_v4+2TB_PS, Standard_L16s, Standard_L4s, Standard_L8s
+    summary: Nama sku.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/kusto/_help.py
+- uid: az_kusto_cluster_wait
+  name: az kusto cluster wait
+  summary: Tunggu hingga kluster Kusto terkelola mencapai status yang diinginkan.
+  description: Jika operasi pada kluster terganggu atau dimulai dengan `--no-wait`, gunakan perintah ini untuk menunggunya selesai.
+  syntax: >-
+    az kusto cluster wait [--created]
+                          [--custom]
+                          [--deleted]
+                          [--exists]
+                          [--ids]
+                          [--interval]
+                          [--name]
+                          [--resource-group]
+                          [--timeout]
+                          [--updated]
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --name -n
+    summary: Nama kluster.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/kusto/_help.py
+commands:
+- az_kusto_cluster_add-language-extension
+- az_kusto_cluster_create
+- az_kusto_cluster_delete
+- az_kusto_cluster_detach-follower-database
+- az_kusto_cluster_diagnose-virtual-network
+- az_kusto_cluster_list
+- az_kusto_cluster_list-follower-database
+- az_kusto_cluster_list-language-extension
+- az_kusto_cluster_list-outbound-network-dependency-endpoint
+- az_kusto_cluster_list-sku
+- az_kusto_cluster_remove-language-extension
+- az_kusto_cluster_show
+- az_kusto_cluster_start
+- az_kusto_cluster_stop
+- az_kusto_cluster_update
+- az_kusto_cluster_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 05/18/2021
+  description: Modul ini tidak akan didukung mulai 1 Januari 2021. Silakan jalankan "az extension add -n kusto" untuk menginstal ekstensi Kusto yang didukung.
+  ms.openlocfilehash: bba824188ca845a57be100e6bafea5224fdb41f4
+  ms.sourcegitcommit: d016676aca62d5461b07446d98cf38e30bba07cd
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/19/2022
+  ms.locfileid: "143882083"

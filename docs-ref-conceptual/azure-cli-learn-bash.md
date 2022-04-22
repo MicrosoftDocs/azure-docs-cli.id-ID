@@ -1,21 +1,23 @@
 ---
-title: Pembelajaran Bash dengan Azure CLI
-description: Pembelajaran Bash dengan Azure CLI
+title: Cara mempelajari Bash dengan Azure CLI | Microsoft Docs
+description: Pelajari cara menggunakan Bash dengan Azure CLI.  Kueri, format output, filter, gunakan variabel, dan gunakan konstruksi Bash dari perulangan, jika/ada/lalu dan pernyataan kasus.
 author: dbradish-microsoft
 ms.author: dbradish
 ms.prod: non-product-specific
 ms.topic: sample
 ms.date: 04/18/2022
-ms.openlocfilehash: 3ebe4913deebc761cbd2f071ad2ca541d397023f
-ms.sourcegitcommit: d016676aca62d5461b07446d98cf38e30bba07cd
+ms.openlocfilehash: 86361bc0cc47b733aa45e547e8b707d2b858951f
+ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/19/2022
-ms.locfileid: "143905660"
+ms.lasthandoff: 04/22/2022
+ms.locfileid: "144003805"
 ---
-# <a name="learning-bash-with-azure-cli"></a>Pembelajaran Bash dengan Azure CLI
+# <a name="learn-to-use-bash-with-the-azure-cli"></a>Pelajari cara menggunakan Bash dengan Azure CLI
 
-Dalam artikel ini, Anda akan belajar membuat, mengkueri, dan menghapus sumber daya Azure menggunakan Bash dan Azure CLI. Anda akan mempelajari cara melakukan hal berikut:
+Perintah referensi Azure CLI dapat dijalankan di beberapa [lingkungan shell](choose-the-right-azure-command-line-tool.md#different-shell-environments) yang berbeda, tetapi Microsoft Docs terutama menggunakan lingkungan Bash. Jika Anda baru menggunakan Bash dan juga Azure CLI, Anda akan menemukan artikel ini tempat yang bagus untuk memulai perjalanan pembelajaran Anda.  Bekerja melalui artikel ini seperti yang Anda lakukan tutorial, dan Anda akan segera menggunakan Azure CLI di lingkungan Bash dengan mudah.
+
+Dalam artikel ini, Anda akan mempelajari cara melakukan hal berikut:
 
 > [!div class="checklist"]
 >
@@ -31,11 +33,11 @@ Jika Anda tidak memiliki langganan Azure, buat [akun gratis Azure](https://azure
 
 ## <a name="starting-bash"></a>Memulai Bash
 
-Mulai Bash menggunakan [Azure Cloud Shell](/azure/cloud-shell/quickstart) atau [penginstalan lokal Azure CLI](/cli/azure/install-azure-cli). Artikel ini mengasumsikan bahwa Anda menjalankan Bash baik menggunakan Azure Cloud Shell atau menjalankan Azure CLI secara lokal dalam kontainer docker.
+Mulai Bash menggunakan [Azure Cloud Shell](/azure/cloud-shell/quickstart) atau [penginstalan lokal Azure CLI](./install-azure-cli.md). Artikel ini mengasumsikan bahwa Anda menjalankan Bash baik menggunakan Azure Cloud Shell atau menjalankan Azure CLI secara lokal dalam kontainer docker.
 
 ## <a name="querying-dictionary-results"></a>Mengkueri hasil kamus
 
-Perintah yang selalu hanya mengembalikan satu objek mengembalikan kamus JSON. Kamus adalah objek yang tidak berurut yang diakses dengan kunci. Untuk artikel ini, kita akan mulai dengan mengkueri objek [Akun](/cli/azure/account) menggunakan perintah [Peragaan Akun](/cli/azure/account#az-account-show) .
+Perintah yang selalu mengembalikan hanya satu objek yang mengembalikan kamus JSON. Kamus adalah objek yang tidak berurut yang diakses dengan kunci. Untuk artikel ini, kita akan mulai dengan mengkueri objek [Akun](/cli/azure/account) menggunakan perintah [Perlihatkan Akun](/cli/azure/account#az-account-show) .
 
 ```azurecli-interactive
 az account show
@@ -67,7 +69,7 @@ bash-5.1# az account show
 az account show --output yaml
 ```
 
-Untuk informasi selengkapnya tentang memformat output sebagai yaml, lihat [format output YAML](/cli/azure/format-output-azure-cli#yaml-output-format).
+Untuk informasi selengkapnya tentang memformat output sebagai yaml, lihat [format output YAML](./format-output-azure-cli.md#yaml-output-format).
 
 ### <a name="formatting-the-output-as-a-table"></a>Memformat output sebagai tabel
 
@@ -77,11 +79,11 @@ Untuk informasi selengkapnya tentang memformat output sebagai yaml, lihat [forma
 az account show --output table
 ```
 
-Untuk informasi selengkapnya tentang memformat output sebagai tabel, lihat [Format output tabel](/cli/azure/format-output-azure-cli#table-output-format).
+Untuk informasi selengkapnya tentang memformat output sebagai tabel, lihat [Format output](./format-output-azure-cli.md#table-output-format) tabel.
 
 ### <a name="querying-and-formatting-single-values-and-nested-values"></a>Mengkueri dan memformat nilai tunggal dan nilai berlapis
 
-Kueri berikut menunjukkan kueri nilai tunggal, termasuk nilai berlapis dalam output kamus JSON. Kueri akhir dalam set ini menunjukkan pemformatan output menggunakan `-o tsv` argumen . Argumen ini mengembalikan hasil sebagai nilai yang dipisahkan tab dan baris baru. Ini berguna untuk menghapus tanda kutip dalam nilai yang dikembalikan - yang berguna untuk menggunakan output ke perintah dan alat lain yang perlu memproses teks dalam beberapa formulir (seperti yang akan kami tunjukkan nanti dalam artikel ini).
+Kueri berikut menunjukkan kueri nilai tunggal, termasuk nilai berlapis dalam output kamus JSON. Kueri akhir dalam set ini menunjukkan pemformatan output menggunakan `-o tsv` argumen . Argumen ini mengembalikan hasil sebagai nilai yang dipisahkan tab dan baris baru. Ini berguna untuk menghapus tanda kutip dalam nilai yang dikembalikan - yang berguna untuk menggunakan output ke perintah dan alat lain yang perlu memproses teks dalam beberapa bentuk (seperti yang akan kami tunjukkan nanti di artikel ini).
 
 ```azurecli-interactive
 az account show --query name # Querying a single value
@@ -93,14 +95,14 @@ az account show --query user.name -o tsv # Removes quotation marks from the outp
 
 ### <a name="querying-and-formatting-multiple-values-including-nested-values"></a>Mengkueri dan memformat beberapa nilai, termasuk nilai berlapis
 
-Untuk mendapatkan lebih dari satu properti, letakkan ekspresi dalam tanda kurung siku [ ] (daftar multipilih) sebagai daftar yang dipisahkan koma. Kueri berikut menunjukkan kueri beberapa nilai dalam output kamus JSON, menggunakan beberapa format output.
+Untuk mendapatkan lebih dari satu properti, letakkan ekspresi dalam kurung siku [ ] (daftar multipilih) sebagai daftar yang dipisahkan koma. Kueri berikut menunjukkan kueri beberapa nilai dalam output kamus JSON, menggunakan beberapa format output.
 
 ```azurecli-interactive
 az account show --query [name,id,user.name] # return multiple values
 az account show --query [name,id,user.name] -o table # return multiple values as a table
 ```
 
-Untuk informasi selengkapnya tentang mengembalikan beberapa nilai, lihat [Mendapatkan beberapa nilai](/cli/azure/query-azure-cli#get-multiple-values).
+Untuk informasi selengkapnya tentang mengembalikan beberapa nilai, lihat [Mendapatkan beberapa nilai](./query-azure-cli.md#get-multiple-values).
 
 ### <a name="renaming-properties-in-a-query"></a>Mengganti nama properti dalam kueri
 
@@ -111,7 +113,7 @@ az account show --query "{SubscriptionName: name, SubscriptionId: id, UserName: 
 az account show --query "{SubscriptionName: name, SubscriptionId: id, UserName: user.name}" -o table # Rename the values returned in a table
 ```
 
-Untuk informasi selengkapnya tentang mengganti nama properti dalam kueri, lihat [Mengganti nama properti dalam kueri](/cli/azure/query-azure-cli#rename-properties-in-a-query).
+Untuk informasi selengkapnya tentang mengganti nama properti dalam kueri, lihat [Mengganti nama properti dalam kueri](./query-azure-cli.md#rename-properties-in-a-query).
 
 ### <a name="querying-boolean-values"></a>Mengkueri nilai boolean
 
@@ -138,10 +140,10 @@ subscriptionId="$(az account list --query "[? contains(name, 'Test')].id" -o tsv
 az account set -s $subscriptionId # Sets the current active subscription
 ```
 
-- Untuk informasi selengkapnya tentang mengkueri nilai boolean, lihat [Mengkueri nilai boolean](/cli/azure/query-azure-cli#query-boolean-values).
-- Untuk informasi selengkapnya tentang pemfilteran array, lihat [Memfilter array](/cli/azure/query-azure-cli#filter-arrays).
-- Untuk informasi selengkapnya tentang menggunakan variabel, lihat [Cara menggunakan variabel](/cli/azure/azure-cli-variables).
-- Untuk informasi selengkapnya tentang bekerja dengan langganan, lihat [Mengelola langganan](/cli/azure/manage-azure-subscriptions-azure-cli).
+- Untuk informasi selengkapnya tentang mengkueri nilai boolean, lihat [Mengkueri nilai boolean](./query-azure-cli.md).
+- Untuk informasi selengkapnya tentang pemfilteran array, lihat [Memfilter array](./query-azure-cli.md).
+- Untuk informasi selengkapnya tentang menggunakan variabel, lihat [Cara menggunakan variabel](./azure-cli-variables.md).
+- Untuk informasi selengkapnya tentang bekerja dengan langganan, lihat [Mengelola langganan](./manage-azure-subscriptions-azure-cli.md).
 
 ## <a name="creating-objects-using-variables-and-randomization"></a>Membuat objek menggunakan variabel dan pengacakan
 
@@ -157,7 +159,7 @@ let "randomIdentifier=$RANDOM*$RANDOM"
 
 ### <a name="working-with-spaces-and-quotation-marks"></a>Bekerja dengan spasi dan tanda kutip
 
-Spasi digunakan untuk memisahkan perintah, opsi, dan argumen. Gunakan tanda kutip untuk memberi tahu shell Bash untuk mengabaikan semua karakter khusus, di mana spasi putih adalah karakter khusus. Saat shell Bash melihat tanda kutip pertama, shell tersebut mengabaikan karakter khusus hingga tanda kutip penutup. Namun, terkadang Anda ingin shell Bash mengurai karakter khusus tertentu, seperti tanda dolar, tanda kutip belakang, dan garis miring terbalik. Untuk ini, gunakan tanda kutip ganda.
+Spasi digunakan untuk memisahkan perintah, opsi, dan argumen. Gunakan tanda kutip untuk memberi tahu shell Bash untuk mengabaikan semua karakter khusus, di mana spasi putih adalah karakter khusus. Saat shell Bash melihat tanda kutip pertama, shell tersebut mengabaikan karakter khusus hingga tanda kutip penutup. Namun, terkadang Anda ingin shell Bash mengurai karakter khusus tertentu, seperti tanda dolar, tanda kutip balik, dan garis miring terbalik. Untuk ini, gunakan tanda kutip ganda.
 
 Perintah berikut menggunakan perintah [az group create](/cli/azure/group#az-group-create) untuk mengilustrasikan penggunaan tanda kutip tunggal dan ganda untuk menangani spasi dan mengevaluasi karakter khusus saat bekerja dengan variabel dan membuat objek.
 
@@ -179,7 +181,7 @@ Dalam output kamus JSON, tinjau properti grup sumber daya yang baru saja dibuat.
 
 ### <a name="using-if-then-else-to-determine-if-variable-is-null"></a>Menggunakan If Then Else untuk menentukan apakah variabel null
 
-Untuk mengevaluasi string, gunakan `!=` dan untuk mengevaluasi angka, gunakan `-ne`. Pernyataan If Then Else berikut mengevaluasi apakah variabel $resourceGroup telah ditetapkan. Jika ya, nilai variabel akan dikembalikan. Jika tidak, itu mengatur variabel.
+Untuk mengevaluasi string, gunakan `!=` dan untuk mengevaluasi angka, gunakan `-ne`. Pernyataan If Then Else berikut mengevaluasi apakah variabel $resourceGroup telah ditetapkan. Jika ya, nilai variabel akan dikembalikan. Jika tidak, variabel akan diatur.
 
 ```azurecli
 if [ $resourceGroup != '' ]; then
@@ -201,7 +203,7 @@ else
 fi
 ```
 
-Skrip berikut menghapus grup sumber daya baru yang sudah ada jika sudah ada dengan nama yang ditentukan. Anda dapat menggunakan `--no-wait` argumen untuk mengembalikan kontrol tanpa menunggu perintah selesai. Namun, untuk artikel ini, kami ingin menunggu grup sumber daya dihapus sebelum melanjutkan. Untuk informasi selengkapnya tentang operasi asinkron, lihat [Operasi asinkron](/cli/azure/use-cli-effectively#asynchronous-operations). Kami akan menunjukkan penggunaan `--no-wait` argumen di akhir artikel ini.
+Skrip berikut menghapus grup sumber daya baru yang sudah ada jika sudah ada dengan nama yang ditentukan. Anda dapat menggunakan `--no-wait` argumen untuk mengembalikan kontrol tanpa menunggu perintah selesai. Namun, untuk artikel ini, kami ingin menunggu grup sumber daya dihapus sebelum melanjutkan. Untuk informasi selengkapnya tentang operasi asinkron, lihat [Operasi asinkron](./use-cli-effectively.md#asynchronous-operations). Kami akan menunjukkan penggunaan `--no-wait` argumen di akhir artikel ini.
 
 ```azurecli
 if [ $(az group exists --name $resourceGroup) = true ]; then 
@@ -214,13 +216,13 @@ fi
 
 ### <a name="using-grep-to-determine-if-a-resource-group-exists-and-create-the-resource-group-if-it-does-not"></a>Menggunakan Grep untuk menentukan apakah grup sumber daya ada, dan buat grup sumber daya jika tidak
 
-Perintah berikut menyalurkan output `az group list` perintah ke `grep` perintah . Jika grup sumber daya yang ditentukan tidak ada, perintah akan membuat grup sumber daya menggunakan variabel yang ditentukan sebelumnya.
+Perintah berikut menyalurkan output `az group list` perintah ke `grep` perintah . Jika grup sumber daya yang ditentukan tidak ada, perintah membuat grup sumber daya menggunakan variabel yang ditentukan sebelumnya.
 
 ```azurecli
 az group list --output tsv | grep $resourceGroup -q || az group create --name $resourceGroup --location "$location"
 ```
 
-### <a name="using-case-statement-to-determine-if-a-resource-group-exists-and-create-the-resource-group-if-it-does-not"></a>Menggunakan pernyataan CASE untuk menentukan apakah grup sumber daya ada, dan buat grup sumber daya jika tidak
+### <a name="using-case-statement-to-determine-if-a-resource-group-exists-and-create-the-resource-group-if-it-does-not"></a>Menggunakan pernyataan CASE untuk menentukan apakah grup sumber daya ada, dan membuat grup sumber daya jika tidak
 
 Pernyataan CASE berikut membuat grup sumber daya baru hanya jika satu dengan nama yang ditentukan belum ada. Jika ada satu dengan nama yang ditentukan, pernyataan CASE menggemakan bahwa grup sumber daya ada.
 
@@ -236,7 +238,7 @@ esac
 
 ## <a name="using-for-loops-and-querying-arrays"></a>Menggunakan untuk perulangan dan array kueri
 
-Di bagian artikel ini, kita akan membuat akun penyimpanan dan kemudian menggunakan untuk perulangan untuk membuat sejumlah blob dan kontainer. Kami juga akan menunjukkan kueri array JSON dan bekerja dengan variabel lingkungan.
+Di bagian artikel ini, kami akan membuat akun penyimpanan dan kemudian menggunakan perulangan untuk membuat sejumlah blob dan kontainer. Kami juga akan menunjukkan kueri array JSON dan bekerja dengan variabel lingkungan.
 
 ### <a name="create-storage-account"></a>Membuat akun penyimpanan
 
@@ -263,7 +265,7 @@ echo $accountKey
 
 ### <a name="create-storage-container"></a>Membuat kontainer penyimpanan
 
-Kita akan mulai dengan menggunakan [az storage container create](/cli/azure/storage/container#az-storage-container-create) untuk membuat kontainer penyimpanan tunggal dan kemudian menggunakan [az storage container list untuk mengkueri](/cli/azure/storage/container#az-storage-container-list) nama kontainer yang dibuat.
+Kita akan mulai dengan menggunakan [az storage container create](/cli/azure/storage/container#az-storage-container-create) untuk membuat satu kontainer penyimpanan lalu menggunakan [az storage container list untuk mengkueri](/cli/azure/storage/container#az-storage-container-list) nama kontainer yang dibuat.
 
 ```azurecli
 container="learningbash"
@@ -392,7 +394,7 @@ Untuk segera keluar dari skrip jika perintah mengembalikan status bukan nol, jal
 set -e
 ```
 
-Untuk informasi selengkapnya tentang pengaturan opsi shell dan topik bantuan lainnya, jalankan perintah berikut:
+Untuk informasi selengkapnya tentang mengatur opsi shell dan topik bantuan lainnya, jalankan perintah berikut:
 
 ```azurecli-interactive
 help set
@@ -401,7 +403,7 @@ help help
 
 ## <a name="clean-up-resources"></a>Membersihkan sumber daya
 
-Setelah Anda menyelesaikan artikel ini, hapus grup sumber daya dan semua sumber daya di dalamnya. `--no-wait` Gunakan argumen .
+Setelah anda selesai artikel ini, hapus grup sumber daya dan semua sumber daya di dalamnya. `--no-wait` Gunakan argumen .
 
 ```azurecli
 if [ $(az group exists --name $resourceGroup) = true ]; then 

@@ -1,21 +1,21 @@
 ---
 title: Cara memperbarui Azure CLI | Microsoft Docs
 description: Pelajari cara memperbarui Azure Command-Line Interface (CLI) dengan melakukan pembaruan manual atau mengaktifkan peningkatan otomatis untuk CLI.
-author: dbradish-microsoft
-ms.author: dbradish
-manager: barbkess
+author: jiasli
+ms.author: jiasli
+manager: yonzhan
 ms.date: 9/21/2021
 ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: update azure cli
-ms.openlocfilehash: 9c3d9a7946fefaaf5ebf927a90b6046121ee8cac
-ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+ms.openlocfilehash: 05481019389e9ac3204f1695f386eb731e4fec7e
+ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/06/2022
-ms.locfileid: "141397513"
+ms.lasthandoff: 04/22/2022
+ms.locfileid: "144003193"
 ---
 # <a name="how-to-update-the-azure-cli"></a>Cara memperbarui Azure CLI
 
