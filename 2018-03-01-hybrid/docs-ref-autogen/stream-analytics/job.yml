@@ -1,0 +1,533 @@
+### YamlMime:AzureCLIGroup
+uid: az_stream-analytics_job
+name: az stream-analytics job
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **analisis aliran** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **pekerjaan az stream-analytics** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola pekerjaan streaming dengan analitik streaming.
+description: ''
+directCommands:
+- uid: az_stream-analytics_job_create
+  name: az stream-analytics job create
+  summary: Buat pekerjaan streaming atau ganti pekerjaan streaming yang sudah ada.
+  description: ''
+  syntax: >-
+    az stream-analytics job create --job-name
+                                   --resource-group
+                                   [--arrival-max-delay]
+                                   [--compatibility-level {1.0, 1.2}]
+                                   [--content-storage-policy {JobStorageAccount, SystemAccount}]
+                                   [--data-locale]
+                                   [--functions]
+                                   [--id]
+                                   [--identity]
+                                   [--if-match]
+                                   [--if-none-match]
+                                   [--inputs]
+                                   [--job-storage-account]
+                                   [--job-type {Cloud, Edge}]
+                                   [--location]
+                                   [--no-wait]
+                                   [--order-max-delay]
+                                   [--out-of-order-policy {Adjust, Drop}]
+                                   [--output-error-policy {Drop, Stop}]
+                                   [--output-start-mode {CustomTime, JobStartTime, LastOutputEventTime}]
+                                   [--output-start-time]
+                                   [--outputs]
+                                   [--tags]
+                                   [--transformation]
+  examples:
+  - summary: Membuat pekerjaan streaming lengkap (pekerjaan streaming dengan transformasi, setidaknya 1 input dan setidaknya 1 output)
+    syntax: az stream-analytics job create --job-name "sj7804" --resource-group "sjrg3276" --location "West US" --compatibility-level "1.0" --data-locale "en-US" --arrival-max-delay 5 --order-max-delay 0 --out-of-order-policy "Drop" --functions "[]" --inputs "[{\"name\":\"inputtest\",\"properties\":{\"type\":\"Stream\",\"datasource\":{\"type\":\"Microsoft.Storage/Blob\",\"properties\":{\"container\":\"containerName\",\"pathPattern\":\"\",\"storageAccounts\":[{\"accountKey\":\"yourAccountKey==\",\"accountName\":\"yourAccountName\"}]}},\"serialization\":{\"type\":\"Json\",\"properties\":{\"encoding\":\"UTF8\"}}}}]" --output-error-policy "Drop" --outputs "[{\"name\":\"outputtest\",\"datasource\":{\"type\":\"Microsoft.Sql/Server/Database\",\"properties\":{\"database\":\"databaseName\",\"password\":\"userPassword\",\"server\":\"serverName\",\"table\":\"tableName\",\"user\":\"<user>\"}}}]" --transformation name="transformationtest" streaming-units=1 query="Select Id, Name from inputtest" --tags key1="value1" key3="value3" randomKey="randomValue"
+  - summary: Membuat shell pekerjaan streaming (pekerjaan streaming tanpa input, output, transformasi, atau fungsi)
+    syntax: az stream-analytics job create --job-name "sj59" --resource-group "sjrg6936" --location "West US" --compatibility-level "1.0" --data-locale "en-US" --arrival-max-delay 16 --order-max-delay 5 --out-of-order-policy "Drop" --functions "[]" --inputs "[]" --output-error-policy "Drop" --outputs "[]" --tags key1="value1" key3="value3" randomKey="randomValue"
+  requiredParameters:
+  - isRequired: true
+    name: --job-name --name -n
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --arrival-max-delay
+    summary: Maksimum penundaan yang dapat ditoleransi dalam hitungan detik agar peristiwa yang datang terlambat dapat disertakan.  Rentang yang didukung adalah -1 hingga 1814399 (20.23:59:59 hari) dan -1 digunakan untuk menentukan tunggu tanpa batas waktu. Jika properti tidak ada, peristiwa dianggap memiliki nilai -1.
+    description: ''
+  - name: --compatibility-level
+    parameterValueGroup: 1.0, 1.2
+    summary: Mengontrol perilaku runtime tertentu dari pekerjaan streaming.
+    description: ''
+  - name: --content-storage-policy
+    parameterValueGroup: JobStorageAccount, SystemAccount
+    summary: Nilai yang valid adalah JobStorageAccount dan SystemAccount. Jika diatur ke JobStorageAccount, ini mengharuskan pengguna untuk juga menentukan properti jobStorageAccount. .
+    description: ''
+  - name: --data-locale
+    summary: Lokal data dari pekerjaan analitik stream. Nilai harus menjadi nama .NET Culture yang didukung dari set https://msdn.microsoft.com/en-us/library/system.globalization.culturetypes(v=vs.110).aspx. Tentukan default ke 'en-US' jika tidak ditentukan.
+    description: ''
+  - name: --functions
+    summary: 'Daftar satu atau beberapa fungsi untuk pekerjaan streaming. Properti nama untuk setiap fungsi diperlukan saat menentukan properti ini dalam permintaan PUT. Properti ini tidak dapat diubah melalui operasi PATCH. Anda harus menggunakan API PATCH yang tersedia untuk transformasi individual. Nilai yang diharapkan: json-string/json-file/@json-file.'
+    description: ''
+  - name: --id
+    summary: Id sumber daya kluster.
+    description: ''
+  - name: --identity
+    summary: Jelaskan identitas terkelola yang ditetapkan sistem yang ditetapkan untuk pekerjaan ini yang dapat digunakan untuk mengautentikasi dengan input dan output.
+    description: >-
+      Penggunaan: --identity tenant-id=XX principal-id=XX type=XX
+
+
+      tenant-id: Identitas tenantId principal-id: Jenis ID utama identitas: Jenis identitas.
+  - name: --if-match
+    summary: ETag dari pekerjaan streaming. Hilangkan nilai ini untuk selalu menimpa kumpulan catatan saat ini. Tentukan nilai ETag yang terakhir dilihat untuk mencegah penimpaan perubahan bersamaan secara tidak sengaja.
+    description: ''
+  - name: --if-none-match
+    summary: Atur ke '\*' untuk mengizinkan pekerjaan streaming baru dibuat, tetapi untuk mencegah pembaruan kumpulan catatan yang sudah ada. Nilai lain akan menghasilkan respons 412 Pra-kondisi Gagal.
+    description: ''
+  - name: --inputs
+    summary: 'Daftar satu atau beberapa input ke pekerjaan streaming. Properti nama untuk setiap input diperlukan saat menentukan properti ini dalam permintaan PUT. Properti ini tidak dapat diubah melalui operasi PATCH. Anda harus menggunakan API PATCH yang tersedia untuk input individual. Nilai yang diharapkan: json-string/json-file/@json-file.'
+    description: ''
+  - name: --job-storage-account
+    summary: Properti yang terkait dengan akun Azure Storage dengan MSI.
+    description: >-
+      Penggunaan: --job-storage-account authentication-mode=XX account-name=XX account-key=XX
+
+
+      mode autentikasi: Mode Autentikasi.
+
+      nama akun: Nama akun Azure Storage. Diperlukan pada permintaan PUT (CreateOrReplace).
+
+      account-key: Kunci akun untuk akun Azure Storage. Diperlukan pada permintaan PUT (CreateOrReplace).
+  - name: --job-type
+    parameterValueGroup: Cloud, Edge
+    summary: Menjelaskan jenis pekerjaan. Mode yang valid adalah `Cloud` dan 'Edge'.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --order-max-delay
+    summary: Penundaan maksimum yang dapat ditoleransi dalam hitungan detik agar peristiwa yang keluar dari urutan dapat disesuaikan kembali ke dalam urutan.
+    description: ''
+  - name: --out-of-order-policy
+    parameterValueGroup: Adjust, Drop
+    summary: Menandakan kebijakan untuk diterapkan ke peristiwa yang sampai di luar urutan dalam aliran peristiwa input.
+    description: ''
+  - name: --output-error-policy
+    parameterValueGroup: Drop, Stop
+    summary: Menandakan kebijakan untuk diterapkan ke peristiwa yang mencapai output dan tidak dapat ditulis ke penyimpanan eksternal karena cacat (nilai kolom hilang, nilai kolom dengan jenis atau ukuran yang salah).
+    description: ''
+  - name: --output-start-mode
+    parameterValueGroup: CustomTime, JobStartTime, LastOutputEventTime
+    summary: Properti ini hanya boleh digunakan ketika diinginkan bahwa pekerjaan segera dimulai setelah pembuatan. Nilainya mungkin JobStartTime, CustomTime, atau LastOutputEventTime untuk menunjukkan apakah titik awal aliran peristiwa output harus dimulai setiap kali pekerjaan dimulai, mulai dari stempel waktu pengguna kustom yang ditentukan melalui properti outputStartTime, atau mulai dari waktu output peristiwa terakhir.
+    description: ''
+  - name: --output-start-time
+    summary: Nilai adalah stempel waktu berformat ISO-8601 yang menunjukkan titik awal aliran peristiwa output, atau null untuk menunjukkan bahwa aliran peristiwa output akan dimulai setiap kali pekerjaan streaming dimulai. Properti ini harus memiliki nilai jika outputStartMode diatur ke CustomTime.
+    description: ''
+  - name: --outputs
+    summary: 'Daftar satu atau beberapa output untuk pekerjaan streaming. Properti nama untuk setiap output diperlukan saat menentukan properti ini dalam permintaan PUT. Properti ini tidak dapat diubah melalui operasi PATCH. Anda harus menggunakan API PATCH yang tersedia untuk output individual. Nilai yang diharapkan: json-string/json-file/@json-file.'
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --transformation
+    summary: Tunjukkan kueri dan jumlah unit streaming yang akan digunakan untuk pekerjaan streaming. Properti nama transformasi diperlukan saat menentukan properti ini dalam permintaan PUT. Properti ini tidak dapat diubah melalui operasi PATCH. Anda harus menggunakan API PATCH yang tersedia untuk transformasi individual.
+    description: >-
+      Penggunaan: --transformation streaming-units=XX valid-streaming-units=XX query=XX name=XX
+
+
+      unit streaming: Menentukan jumlah unit streaming yang digunakan pekerjaan streaming.
+
+      valid-streaming-units: Menentukan unit streaming yang valid yang dapat diskalakan oleh pekerjaan streaming.
+
+      kueri: Menentukan kueri yang akan dijalankan dalam pekerjaan streaming. Anda dapat mempelajari selengkapnya tentang Bahasa Kueri Azure Stream Analytics (SAQL) di sini: https://msdn.microsoft.com/library/azure/dn834998 . Diperlukan pada permintaan PUT (CreateOrReplace).
+
+      nama: Nama sumber daya.
+- uid: az_stream-analytics_job_delete
+  name: az stream-analytics job delete
+  summary: Menghapus pekerjaan streaming.
+  description: ''
+  syntax: >-
+    az stream-analytics job delete --job-name
+                                   --resource-group
+                                   [--no-wait]
+                                   [--yes]
+  examples:
+  - summary: Menghapus pekerjaan streaming
+    syntax: az stream-analytics job delete --job-name "sj59" --resource-group "sjrg6936"
+  requiredParameters:
+  - isRequired: true
+    name: --job-name --name -n
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_stream-analytics_job_list
+  name: az stream-analytics job list
+  summary: Cantumkan semua pekerjaan streaming dalam grup sumber daya yang ditentukan. Dan Mencantumkan semua pekerjaan streaming dalam langganan tertentu.
+  description: ''
+  syntax: >-
+    az stream-analytics job list [--expand]
+                                 [--resource-group]
+  examples:
+  - summary: Mencantumkan semua pekerjaan streaming dalam grup sumber daya dan jangan gunakan parameter kueri OData $expand
+    syntax: az stream-analytics job list --resource-group "sjrg6936"
+  - summary: Mencantumkan semua pekerjaan streaming dalam grup sumber daya dan menggunakan parameter kueri $expand OData untuk memperluas input, output, transformasi, dan fungsi
+    syntax: az stream-analytics job list --expand "inputs,outputs,transformation,functions" --resource-group "sjrg3276"
+  - summary: Mencantumkan semua pekerjaan streaming dalam langganan dan tidak menggunakan parameter kueri OData $expand
+    syntax: az stream-analytics job list
+  - summary: Mencantumkan semua pekerjaan streaming dalam langganan dan menggunakan parameter kueri OData $expand untuk memperluas input, output, transformasi, dan fungsi
+    syntax: az stream-analytics job list --expand "inputs,outputs,transformation,functions"
+  optionalParameters:
+  - name: --expand
+    summary: Parameter kueri $expand OData. Ini adalah daftar properti pekerjaan streaming tambahan yang dipisahkan koma untuk disertakan dalam respons, di luar set default yang dikembalikan ketika parameter ini tidak ada. Set default adalah semua properti pekerjaan streaming selain 'input', 'transformasi', 'output', dan 'fungsi'.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_stream-analytics_job_scale
+  name: az stream-analytics job scale
+  summary: Menskalakan pekerjaan streaming saat pekerjaan sedang berjalan.
+  description: ''
+  syntax: >-
+    az stream-analytics job scale --job-name
+                                  --resource-group
+                                  [--no-wait]
+                                  [--streaming-units]
+  examples:
+  - summary: Menskalakan pekerjaan streaming
+    syntax: az stream-analytics job scale --job-name "sj59" --resource-group "sjrg6936" --streaming-units 36
+  requiredParameters:
+  - isRequired: true
+    name: --job-name --name -n
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --streaming-units
+    summary: Menentukan jumlah unit streaming yang akan diskalakan oleh pekerjaan streaming.
+    description: ''
+- uid: az_stream-analytics_job_show
+  name: az stream-analytics job show
+  summary: Dapatkan detail tentang pekerjaan streaming yang ditentukan.
+  description: ''
+  syntax: >-
+    az stream-analytics job show --job-name
+                                 --resource-group
+                                 [--expand]
+  examples:
+  - summary: Dapatkan pekerjaan streaming dan jangan gunakan parameter kueri $expand OData
+    syntax: az stream-analytics job show --job-name "sj59" --resource-group "sjrg6936"
+  - summary: Dapatkan pekerjaan streaming dan gunakan parameter kueri $expand OData untuk memperluas input, output, transformasi, dan fungsi
+    syntax: az stream-analytics job show --expand "inputs,outputs,transformation,functions" --job-name "sj7804" --resource-group "sjrg3276"
+  requiredParameters:
+  - isRequired: true
+    name: --job-name --name -n
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --expand
+    summary: Parameter kueri $expand OData. Ini adalah daftar properti pekerjaan streaming tambahan yang dipisahkan koma untuk disertakan dalam respons, di luar set default yang dikembalikan ketika parameter ini tidak ada. Set default adalah semua properti pekerjaan streaming selain 'input', 'transformasi', 'output', dan 'functions'.
+    description: ''
+- uid: az_stream-analytics_job_start
+  name: az stream-analytics job start
+  summary: Mulai pekerjaan streaming. Setelah pekerjaan dimulai, pekerjaan akan mulai memproses peristiwa input dan menghasilkan output.
+  description: ''
+  syntax: >-
+    az stream-analytics job start --job-name
+                                  --resource-group
+                                  [--no-wait]
+                                  [--output-start-mode {CustomTime, JobStartTime, LastOutputEventTime}]
+                                  [--output-start-time]
+  examples:
+  - summary: Memulai pekerjaan streaming dengan mode mulai output CustomTime
+    syntax: az stream-analytics job start --job-name "sj59" --resource-group "sjrg6936" --output-start-mode "CustomTime" --output-start-time "2012-12-12T12:12:12Z"
+  - summary: Memulai pekerjaan streaming dengan mode mulai output JobStartTime
+    syntax: az stream-analytics job start --job-name "sj59" --resource-group "sjrg6936" --output-start-mode "JobStartTime"
+  - summary: Memulai pekerjaan streaming dengan mode mulai output LastOutputEventTime
+    syntax: az stream-analytics job start --job-name "sj59" --resource-group "sjrg6936" --output-start-mode "LastOutputEventTime"
+  requiredParameters:
+  - isRequired: true
+    name: --job-name --name -n
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --output-start-mode
+    parameterValueGroup: CustomTime, JobStartTime, LastOutputEventTime
+    summary: Nilainya mungkin JobStartTime, CustomTime, atau LastOutputEventTime untuk menunjukkan apakah titik awal aliran peristiwa output harus dimulai setiap kali pekerjaan dimulai, mulai dari stempel waktu pengguna kustom yang ditentukan melalui properti outputStartTime, atau mulai dari waktu output peristiwa terakhir.
+    description: ''
+  - name: --output-start-time
+    summary: Nilai adalah stempel waktu berformat ISO-8601 yang menunjukkan titik awal aliran peristiwa output, atau null untuk menunjukkan bahwa aliran peristiwa output akan dimulai setiap kali pekerjaan streaming dimulai. Properti ini harus memiliki nilai jika outputStartMode diatur ke CustomTime.
+    description: ''
+- uid: az_stream-analytics_job_stop
+  name: az stream-analytics job stop
+  summary: Hentikan pekerjaan streaming yang sedang berjalan. Ini akan menyebabkan pekerjaan streaming yang sedang berjalan berhenti memproses peristiwa input dan menghasilkan output.
+  description: ''
+  syntax: >-
+    az stream-analytics job stop --job-name
+                                 --resource-group
+                                 [--no-wait]
+  examples:
+  - summary: Menghentikan pekerjaan streaming
+    syntax: az stream-analytics job stop --job-name "sj59" --resource-group "sjrg6936"
+  requiredParameters:
+  - isRequired: true
+    name: --job-name --name -n
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_stream-analytics_job_update
+  name: az stream-analytics job update
+  summary: Perbarui pekerjaan streaming yang ada. Ini dapat digunakan untuk memperbarui sebagian (yaitu. memperbarui satu atau dua properti) pekerjaan streaming tanpa memengaruhi definisi pekerjaan lainnya.
+  description: ''
+  syntax: >-
+    az stream-analytics job update --job-name
+                                   --resource-group
+                                   [--arrival-max-delay]
+                                   [--compatibility-level {1.0, 1.2}]
+                                   [--content-storage-policy {JobStorageAccount, SystemAccount}]
+                                   [--data-locale]
+                                   [--functions]
+                                   [--id]
+                                   [--identity]
+                                   [--if-match]
+                                   [--inputs]
+                                   [--job-storage-account]
+                                   [--job-type {Cloud, Edge}]
+                                   [--location]
+                                   [--order-max-delay]
+                                   [--out-of-order-policy {Adjust, Drop}]
+                                   [--output-error-policy {Drop, Stop}]
+                                   [--output-start-mode {CustomTime, JobStartTime, LastOutputEventTime}]
+                                   [--output-start-time]
+                                   [--outputs]
+                                   [--tags]
+                                   [--transformation]
+  examples:
+  - summary: Memperbarui pekerjaan streaming
+    syntax: az stream-analytics job update --job-name "sj59" --resource-group "sjrg6936" --arrival-max-delay 13 --order-max-delay 21
+  requiredParameters:
+  - isRequired: true
+    name: --job-name --name -n
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --arrival-max-delay
+    summary: Maksimum penundaan yang dapat ditoleransi dalam hitungan detik agar peristiwa yang datang terlambat dapat disertakan.  Rentang yang didukung adalah -1 hingga 1814399 (20.23:59:59 hari) dan -1 digunakan untuk menentukan tunggu tanpa batas waktu. Jika properti tidak ada, peristiwa dianggap memiliki nilai -1.
+    description: ''
+  - name: --compatibility-level
+    parameterValueGroup: 1.0, 1.2
+    summary: Mengontrol perilaku runtime tertentu dari pekerjaan streaming.
+    description: ''
+  - name: --content-storage-policy
+    parameterValueGroup: JobStorageAccount, SystemAccount
+    summary: Nilai yang valid adalah JobStorageAccount dan SystemAccount. Jika diatur ke JobStorageAccount, ini mengharuskan pengguna untuk juga menentukan properti jobStorageAccount. .
+    description: ''
+  - name: --data-locale
+    summary: Lokal data dari pekerjaan analitik stream. Nilai harus menjadi nama Budaya .NET yang didukung dari set https://msdn.microsoft.com/en-us/library/system.globalization.culturetypes(v=vs.110).aspx. Tentukan default ke 'en-US' jika tidak ditentukan.
+    description: ''
+  - name: --functions
+    summary: 'Daftar satu atau beberapa fungsi untuk pekerjaan streaming. Properti nama untuk setiap fungsi diperlukan saat menentukan properti ini dalam permintaan PUT. Properti ini tidak dapat diubah melalui operasi PATCH. Anda harus menggunakan PATCH API yang tersedia untuk transformasi individual. Nilai yang diharapkan: json-string/json-file/@json-file.'
+    description: ''
+  - name: --id
+    summary: Id sumber daya kluster.
+    description: ''
+  - name: --identity
+    summary: Jelaskan identitas terkelola yang ditetapkan sistem yang ditetapkan untuk pekerjaan ini yang dapat digunakan untuk mengautentikasi dengan input dan output.
+    description: >-
+      Penggunaan: --identity tenant-id=XX principal-id=XX type=XX
+
+
+      tenant-id: Id utama tenantId identitas: Jenis ID utama identitas: Jenis identitas.
+  - name: --if-match
+    summary: ETag dari pekerjaan streaming. Hilangkan nilai ini untuk selalu menimpa kumpulan catatan saat ini. Tentukan nilai ETag yang terakhir dilihat untuk mencegah penimpaan perubahan bersamaan secara tidak sengaja.
+    description: ''
+  - name: --inputs
+    summary: 'Daftar satu atau beberapa input ke pekerjaan streaming. Properti nama untuk setiap input diperlukan saat menentukan properti ini dalam permintaan PUT. Properti ini tidak dapat diubah melalui operasi PATCH. Anda harus menggunakan PATCH API yang tersedia untuk input individual. Nilai yang diharapkan: json-string/json-file/@json-file.'
+    description: ''
+  - name: --job-storage-account
+    summary: Properti yang terkait dengan akun Azure Storage dengan MSI.
+    description: >-
+      Penggunaan: --job-storage-account authentication-mode=XX account-name=XX account-key=XX
+
+
+      mode autentikasi: Mode Autentikasi.
+
+      nama akun: Nama akun Azure Storage. Diperlukan pada permintaan PUT (CreateOrReplace).
+
+      account-key: Kunci akun untuk akun Azure Storage. Diperlukan pada permintaan PUT (CreateOrReplace).
+  - name: --job-type
+    parameterValueGroup: Cloud, Edge
+    summary: Menjelaskan jenis pekerjaan. Mode yang valid adalah `Cloud` dan 'Edge'.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --order-max-delay
+    summary: Penundaan maksimum yang dapat ditoleransi dalam hitungan detik agar peristiwa yang keluar dari urutan dapat disesuaikan kembali ke dalam urutan.
+    description: ''
+  - name: --out-of-order-policy
+    parameterValueGroup: Adjust, Drop
+    summary: Menandakan kebijakan untuk diterapkan ke peristiwa yang sampai di luar urutan dalam aliran peristiwa input.
+    description: ''
+  - name: --output-error-policy
+    parameterValueGroup: Drop, Stop
+    summary: Menandakan kebijakan untuk diterapkan ke peristiwa yang mencapai output dan tidak dapat ditulis ke penyimpanan eksternal karena cacat (nilai kolom hilang, nilai kolom dengan jenis atau ukuran yang salah).
+    description: ''
+  - name: --output-start-mode
+    parameterValueGroup: CustomTime, JobStartTime, LastOutputEventTime
+    summary: Properti ini hanya boleh digunakan ketika diinginkan agar pekerjaan segera dimulai setelah pembuatan. Nilainya mungkin JobStartTime, CustomTime, atau LastOutputEventTime untuk menunjukkan apakah titik awal aliran peristiwa output harus dimulai setiap kali pekerjaan dimulai, mulai dari stempel waktu pengguna kustom yang ditentukan melalui properti outputStartTime, atau mulai dari waktu output peristiwa terakhir.
+    description: ''
+  - name: --output-start-time
+    summary: Nilai adalah stempel waktu berformat ISO-8601 yang menunjukkan titik awal aliran peristiwa output, atau null untuk menunjukkan bahwa aliran peristiwa output akan dimulai setiap kali pekerjaan streaming dimulai. Properti ini harus memiliki nilai jika outputStartMode diatur ke CustomTime.
+    description: ''
+  - name: --outputs
+    summary: 'Daftar satu atau beberapa output untuk pekerjaan streaming. Properti nama untuk setiap output diperlukan saat menentukan properti ini dalam permintaan PUT. Properti ini tidak dapat diubah melalui operasi PATCH. Anda harus menggunakan API PATCH yang tersedia untuk output individual. Nilai yang diharapkan: json-string/json-file/@json-file.'
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --transformation
+    summary: Tunjukkan kueri dan jumlah unit streaming yang akan digunakan untuk pekerjaan streaming. Properti nama transformasi diperlukan saat menentukan properti ini dalam permintaan PUT. Properti ini tidak dapat diubah melalui operasi PATCH. Anda harus menggunakan PATCH API yang tersedia untuk transformasi individual.
+    description: >-
+      Penggunaan: --transformation streaming-units=XX valid-streaming-units=XX query=XX name=XX
+
+
+      unit streaming: Menentukan jumlah unit streaming yang digunakan pekerjaan streaming.
+
+      valid-streaming-units: Menentukan unit streaming yang valid yang dapat diskalakan oleh pekerjaan streaming.
+
+      kueri: Menentukan kueri yang akan dijalankan dalam pekerjaan streaming. Anda dapat mempelajari selengkapnya tentang Bahasa Kueri Analisis Aliran (SAQL) di sini: https://msdn.microsoft.com/library/azure/dn834998 . Diperlukan pada permintaan PUT (CreateOrReplace).
+
+      nama: Nama sumber daya.
+- uid: az_stream-analytics_job_wait
+  name: az stream-analytics job wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi pekerjaan analisis aliran terpenuhi.
+  description: ''
+  syntax: >-
+    az stream-analytics job wait --job-name
+                                 --resource-group
+                                 [--created]
+                                 [--custom]
+                                 [--deleted]
+                                 [--exists]
+                                 [--expand]
+                                 [--interval]
+                                 [--timeout]
+                                 [--updated]
+  examples:
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga pekerjaan analisis aliran berhasil dibuat.
+    syntax: az stream-analytics job wait --expand "inputs,outputs,transformation,functions" --job-name "sj7804" --resource-group "sjrg3276" --created
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga pekerjaan analisis aliran berhasil dihapus.
+    syntax: az stream-analytics job wait --expand "inputs,outputs,transformation,functions" --job-name "sj7804" --resource-group "sjrg3276" --deleted
+  requiredParameters:
+  - isRequired: true
+    name: --job-name --name -n
+    summary: Nama pekerjaan streaming.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --expand
+    summary: Parameter kueri $expand OData. Ini adalah daftar properti pekerjaan streaming tambahan yang dipisahkan koma untuk disertakan dalam respons, di luar set default yang dikembalikan ketika parameter ini tidak ada. Set default adalah semua properti pekerjaan streaming selain 'input', 'transformasi', 'output', dan 'functions'.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_stream-analytics_job_create
+- az_stream-analytics_job_delete
+- az_stream-analytics_job_list
+- az_stream-analytics_job_scale
+- az_stream-analytics_job_show
+- az_stream-analytics_job_start
+- az_stream-analytics_job_stop
+- az_stream-analytics_job_update
+- az_stream-analytics_job_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola pekerjaan streaming dengan analisis aliran.
+  ms.openlocfilehash: 6070a71345aa7b1cca83add657b563b7de08507d
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141074209"

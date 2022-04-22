@@ -1,0 +1,310 @@
+### YamlMime:AzureCLIGroup
+uid: az_dms
+name: az dms
+summary: Mengelola instans Azure Data Migration Service (DMS).
+description: ''
+directCommands:
+- uid: az_dms_check-name
+  name: az dms check-name
+  summary: Periksa apakah nama instans DMS tertentu tersedia di wilayah tertentu serta validitas nama.
+  description: ''
+  syntax: >-
+    az dms check-name --location
+                      --name
+  examples:
+  - summary: Periksa apakah nama instans DMS tertentu tersedia di wilayah tertentu serta validitas nama. (dibuat otomatis)
+    syntax: az dms check-name --location westus2 --name MyService
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama layanan yang akan diperiksa.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dms/_help.py
+- uid: az_dms_check-status
+  name: az dms check-status
+  summary: Lakukan pemeriksaan kesehatan dan kembalikan status layanan dan ukuran komputer virtual.
+  description: ''
+  syntax: >-
+    az dms check-status --name
+                        --resource-group
+  examples:
+  - summary: Lakukan pemeriksaan kesehatan dan kembalikan status layanan dan ukuran komputer virtual. (dibuat otomatis)
+    syntax: az dms check-status --name MyService --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Layanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dms/_help.py
+- uid: az_dms_create
+  name: az dms create
+  summary: Buat instans Data Migration Service.
+  description: ''
+  syntax: >-
+    az dms create --location
+                  --name
+                  --resource-group
+                  --sku-name
+                  --subnet
+                  [--no-wait]
+                  [--tags]
+  examples:
+  - summary: Buat instans DMS.
+    syntax: az dms create -l westus -n mydms -g myresourcegroup --sku-name Basic_2vCores --subnet /subscriptions/{vnetSubscriptionId}/resourceGroups/{vnetResourceGroup}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName} --tags tagName1=tagValue1 tagWithNoValue
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama Layanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --sku-name
+    summary: Nama SKU CPU tempat komputer virtual layanan akan berjalan. Periksa nama dan ketersediaan SKU di area Anda dengan "az dms list-skus".
+    description: ''
+  - isRequired: true
+    name: --subnet
+    summary: ID Sumber Daya Subnet VNet yang akan Anda gunakan untuk menyambungkan DB sumber dan target. Gunakan "az network vnet subnet show -h" untuk bantuan mendapatkan ID subnet Anda.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --tags
+    summary: Daftar tag yang dibatasi spasi dalam format "tag1[=value1]".
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dms/_help.py
+- uid: az_dms_delete
+  name: az dms delete
+  summary: Menghapus instans Data Migration Service.
+  description: ''
+  syntax: >-
+    az dms delete --name
+                  --resource-group
+                  [--delete-running-tasks]
+                  [--no-wait]
+                  [--yes]
+  examples:
+  - summary: Menghapus instans Data Migration Service. (dibuat otomatis)
+    syntax: az dms delete --name MyService --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Layanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --delete-running-tasks
+    summary: Batalkan tugas yang sedang berjalan sebelum menghapus layanan.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dms/_help.py
+- uid: az_dms_list
+  name: az dms list
+  summary: Cantumkan instans DMS dalam langganan Anda yang saat ini dikonfigurasi (untuk mengatur penggunaan ini "az account set"). Jika disediakan, hanya tampilkan instans dalam grup sumber daya tertentu.
+  description: ''
+  syntax: az dms list [--resource-group]
+  examples:
+  - summary: Cantumkan semua instans dalam langganan Anda.
+    syntax: az dms list
+  - summary: Mencantumkan semua instans dalam grup sumber daya tertentu.
+    syntax: az dms list -g myresourcegroup
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dms/_help.py
+- uid: az_dms_list-skus
+  name: az dms list-skus
+  summary: Cantumkan SKU yang didukung oleh Data Migration Service.
+  description: ''
+  syntax: az dms list-skus
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dms/_help.py
+- uid: az_dms_show
+  name: az dms show
+  summary: Tampilkan detail untuk instans Data Migration Service.
+  description: ''
+  syntax: >-
+    az dms show --name
+                --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Layanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dms/_help.py
+- uid: az_dms_start
+  name: az dms start
+  summary: Mulai instans Data Migration Service. Kemudian dapat digunakan untuk menjalankan migrasi data.
+  description: ''
+  syntax: >-
+    az dms start --name
+                 --resource-group
+                 [--no-wait]
+  examples:
+  - summary: Mulai instans Data Migration Service. Kemudian dapat digunakan untuk menjalankan migrasi data. (dibuat otomatis)
+    syntax: az dms start --name MyService --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Layanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dms/_help.py
+- uid: az_dms_stop
+  name: az dms stop
+  summary: Hentikan instans Data Migration Service. Saat dihentikan, itu tidak dapat digunakan untuk menjalankan migrasi data dan pemilik tidak akan ditagih.
+  description: ''
+  syntax: >-
+    az dms stop --name
+                --resource-group
+                [--no-wait]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Layanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dms/_help.py
+- uid: az_dms_wait
+  name: az dms wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi instans DMS terpenuhi.
+  description: ''
+  syntax: >-
+    az dms wait --name
+                --resource-group
+                [--created]
+                [--custom]
+                [--deleted]
+                [--exists]
+                [--interval]
+                [--timeout]
+                [--updated]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Layanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dms/_help.py
+commands:
+- az_dms_check-name
+- az_dms_check-status
+- az_dms_create
+- az_dms_delete
+- az_dms_list
+- az_dms_list-skus
+- az_dms_project
+- az_dms_project_check-name
+- az_dms_project_create
+- az_dms_project_delete
+- az_dms_project_list
+- az_dms_project_show
+- az_dms_project_task
+- az_dms_project_task_cancel
+- az_dms_project_task_check-name
+- az_dms_project_task_create
+- az_dms_project_task_cutover
+- az_dms_project_task_delete
+- az_dms_project_task_list
+- az_dms_project_task_restart
+- az_dms_project_task_show
+- az_dms_project_task_stop
+- az_dms_show
+- az_dms_start
+- az_dms_stop
+- az_dms_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 10/14/2021
+  description: Mengelola instans Azure Data Migration Service (DMS).
+  ms.openlocfilehash: c40be6a802f2c52fe758b261b59ae138105ac6fa
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141040606"

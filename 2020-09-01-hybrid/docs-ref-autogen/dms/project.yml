@@ -1,0 +1,92 @@
+### YamlMime:AzureCLIGroup
+uid: az_dms_project
+name: az dms project
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **pratinjau dms** untuk Azure CLI (versi 2.27.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **proyek az dms** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola proyek untuk instans Data Migration Service.
+description: ''
+directCommands:
+- uid: az_dms_project_create
+  name: az dms project create
+  summary: Buat proyek migrasi yang dapat berisi beberapa tugas.
+  description: >-
+    Konfigurasi proyek berikut didukung: -) sumber -> target
+        1) SQL -> SQLDB
+        2) PostgreSQL -> AzureDbForPostgreSQL
+        3) MongoDB -> MongoDB (untuk bermigrasi ke Cosmos DB melalui MongoDB API mereka).
+  syntax: >-
+    az dms project create --location
+                          --name
+                          --resource-group
+                          --service-name
+                          --source-platform
+                          --target-platform
+                          [--tags]
+  examples:
+  - summary: Buat SQL ke proyek SQLDB untuk instans DMS.
+    syntax: az dms project create -l westus -n sqlproject -g myresourcegroup --service-name mydms --source-platform SQL --target-platform SQLDB --tags tagName1=tagValue1 tagWithNoValue
+  - summary: Buat PostgreSql ke proyek AzureDbForPostgreSql untuk instans DMS.
+    syntax: az dms project create -l westus -n pgproject -g myresourcegroup --service-name mydms --source-platform PostgreSQL --target-platform AzureDbForPostgreSQL --tags tagName1=tagValue1 tagWithNoValue
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama Project. DMS Project adalah pengelompokan logis yang mencakup koneksi database sumber, koneksi database target, dan daftar database yang akan dimigrasikan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama Layanan. Layanan DMS adalah instans Azure yang melakukan migrasi database.
+    description: ''
+  - isRequired: true
+    name: --source-platform
+    summary: 'Jenis server untuk database sumber. Jenis yang didukung adalah: SQL, PostgreSQL, MongoDB.'
+    description: ''
+  - isRequired: true
+    name: --target-platform
+    summary: 'Jenis layanan untuk database target. Jenis yang didukung adalah: SQLDB, AzureDbForPostgreSQL, MongoDB.'
+    description: ''
+  optionalParameters:
+  - name: --tags
+    summary: Daftar tag yang dibatasi spasi dalam format tag1[=value1]".
+    description: ''
+commands:
+- az_dms_project_create
+- az_dms_project_task
+- az_dms_project_task_cancel
+- az_dms_project_task_create
+- az_dms_project_task_restart
+- az_dms_project_task_stop
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola proyek untuk instans Data Migration Service.
+  ms.openlocfilehash: 6bbfbd53a692af38c673118b7e0c39fa710848d0
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141070087"

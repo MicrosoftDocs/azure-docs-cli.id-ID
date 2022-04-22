@@ -1,0 +1,245 @@
+### YamlMime:AzureCLIGroup
+uid: az_costmanagement_export
+name: az costmanagement export
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **costmanagement** untuk Azure CLI (versi 2.3.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **ekspor costmanagement az** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Ekspor costmanagement.
+description: ''
+directCommands:
+- uid: az_costmanagement_export_create
+  name: az costmanagement export create
+  summary: Operasi untuk membuat ekspor.
+  description: ''
+  syntax: >-
+    az costmanagement export create --name
+                                    --scope
+                                    --storage-account-id
+                                    --storage-container
+                                    --timeframe {BillingMonthToDate, Custom, MonthToDate, TheLastBillingMonth, TheLastMonth, WeekToDate}
+                                    [--dataset-configuration]
+                                    [--recurrence {Annually, Daily, Monthly, Weekly}]
+                                    [--recurrence-period]
+                                    [--schedule-status {Active, Inactive}]
+                                    [--storage-directory]
+                                    [--time-period]
+                                    [--type {ActualCost, AmortizedCost, Usage}]
+  examples:
+  - summary: Membuat ekspor untuk cakupan ManagementGroup
+    syntax: az costmanagement export create --name "TestExport" --type "Usage" --dataset-configuration columns="Date" columns="MeterId" columns="InstanceId" columns="ResourceLocation" columns="PreTaxCost" --timeframe "MonthToDate" --storage-container="exports" --storage-account-id="/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182" --storage-directory="ad-hoc" --recurrence "Weekly" --recurrence-period from="2018-06-01T00:00:00Z" to="2018-10-31T00:00:00Z" --schedule-status "Active" --scope "providers/Microsoft.Management/managementGroups/TestMG"
+  - summary: Membuat ekspor untuk cakupan ResourceGroup
+    syntax: az costmanagement export create --name "TestExport" --type "Usage" --dataset-configuration columns="Date" columns="MeterId" columns="InstanceId" columns="ResourceLocation" columns="PreTaxCost" --timeframe "MonthToDate" --storage-container="exports" --storage-account-id="/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182" --storage-directory="ad-hoc" --recurrence "Weekly" --recurrence-period from="2018-06-01T00:00:00Z" to="2018-10-31T00:00:00Z" --schedule-status "Active" --scope "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG"
+  - summary: Membuat ekspor untuk cakupan Langganan
+    syntax: az costmanagement export create --name "TestExport" --type "Usage" --dataset-configuration columns="Date" columns="MeterId" columns="InstanceId" columns="ResourceLocation" columns="PreTaxCost" --timeframe "MonthToDate" --storage-container="exports" --storage-account-id="/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182" --storage-directory="ad-hoc" --recurrence "Weekly" --recurrence-period from="2018-06-01T00:00:00Z" to="2018-10-31T00:00:00Z" --schedule-status "Active" --scope "subscriptions/00000000-0000-0000-0000-000000000000"
+  requiredParameters:
+  - isRequired: true
+    name: --name
+    summary: Nama Ekspor.
+    description: ''
+  - isRequired: true
+    name: --scope
+    summary: Cakupan yang terkait dengan operasi kueri dan ekspor. Ini termasuk '/subscriptions/{subscriptionId}/' untuk cakupan langganan, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' untuk cakupan resourceGroup, '/providers/Microsoft.Management/managementGroups/{managementGroupId} untuk cakupan Grup Manajemen.
+    description: ''
+  - isRequired: true
+    name: --storage-account-id
+    summary: ID akun penyimpanan untuk menyimpan ekspor.
+    description: ''
+  - isRequired: true
+    name: --storage-container
+    summary: Kontainer penyimpanan untuk mengirimkan ekspor.
+    description: ''
+  - isRequired: true
+    name: --timeframe
+    parameterValueGroup: BillingMonthToDate, Custom, MonthToDate, TheLastBillingMonth, TheLastMonth, WeekToDate
+    summary: Jangka waktu untuk menarik data untuk kueri. Jika kustom, maka periode waktu tertentu harus disediakan.
+    description: ''
+  optionalParameters:
+  - name: --dataset-configuration
+    summary: 'Memiliki informasi konfigurasi untuk data dalam ekspor. Konfigurasi akan diabaikan jika agregasi dan pengelompokan disediakan. Nilai yang diharapkan: columns=xx.'
+    description: ''
+  - name: --recurrence
+    parameterValueGroup: Annually, Daily, Monthly, Weekly
+    summary: Pengulangan jadwal.
+    description: ''
+  - name: --recurrence-period
+    summary: 'Memiliki tanggal mulai dan berakhirnya pengulangan. Tanggal mulai harus di masa mendatang. Jika ada, tanggal akhir harus lebih besar dari tanggal mulai. Nilai yang diharapkan: KEY1=VALUE1 KEY2=VALUE2 ... , KEY yang tersedia adalah: dari, ke. Format waktunya seperti 2020-05-01T00:00:00.'
+    description: ''
+  - name: --schedule-status
+    defaultValue: Inactive
+    parameterValueGroup: Active, Inactive
+    summary: Status jadwal ekspor. Jika tidak aktif, eksekusi terjadwal ekspor dijeda.
+    description: ''
+  - name: --storage-directory
+    summary: Direktori akar dalam kontainer penyimpanan untuk menyimpan ekspor.
+    description: ''
+  - name: --time-period
+    summary: 'Memiliki periode waktu untuk menarik data untuk kueri. Nilai yang diharapkan: from=TIMESTAMP1 to=TIMESTAMP2. Format tanda waktu seperti 2020-05-01T00:00:00.TIMESTAMP1 harus di masa mendatang dan TIMESTAMP2 harus lebih besar dari TIMESTAMP1.'
+    description: ''
+  - name: --type
+    defaultValue: Usage
+    parameterValueGroup: ActualCost, AmortizedCost, Usage
+    summary: Jenis kueri.
+    description: ''
+- uid: az_costmanagement_export_delete
+  name: az costmanagement export delete
+  summary: Operasi untuk menghapus ekspor.
+  description: ''
+  syntax: >-
+    az costmanagement export delete --name
+                                    --scope
+                                    [--yes]
+  examples:
+  - summary: menghapus ekspor untuk cakupan ManagementGroup
+    syntax: az costmanagement export delete --name "TestExport" --scope "providers/Microsoft.Management/managementGroups/TestMG"
+  - summary: menghapus ekspor untuk cakupan ResourceGroup
+    syntax: az costmanagement export delete --name "TestExport" --scope "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG"
+  - summary: menghapus ekspor untuk cakupan Langganan
+    syntax: az costmanagement export delete --name "TestExport" --scope "subscriptions/00000000-0000-0000-0000-000000000000"
+  requiredParameters:
+  - isRequired: true
+    name: --name
+    summary: Nama Ekspor.
+    description: ''
+  - isRequired: true
+    name: --scope
+    summary: Cakupan yang terkait dengan operasi kueri dan ekspor. Ini termasuk '/subscriptions/{subscriptionId}/' untuk cakupan langganan, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' untuk cakupan resourceGroup, '/providers/Microsoft.Management/managementGroups/{managementGroupId} untuk cakupan Grup Manajemen.
+    description: ''
+  optionalParameters:
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_costmanagement_export_list
+  name: az costmanagement export list
+  summary: Operasi untuk mencantumkan semua ekspor pada cakupan yang diberikan.
+  description: ''
+  syntax: az costmanagement export list --scope
+  examples:
+  - summary: mencantumkan ekspor dalam cakupan ManagementGroup
+    syntax: az costmanagement export list --scope "providers/Microsoft.Management/managementGroups/TestMG"
+  - summary: mencantumkan ekspor dalam cakupan ResourceGroup
+    syntax: az costmanagement export list --scope "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG"
+  - summary: mencantumkan ekspor dalam cakupan Langganan
+    syntax: az costmanagement export list --scope "subscriptions/00000000-0000-0000-0000-000000000000"
+  requiredParameters:
+  - isRequired: true
+    name: --scope
+    summary: Cakupan yang terkait dengan operasi kueri dan ekspor. Ini termasuk '/subscriptions/{subscriptionId}/' untuk cakupan langganan, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' untuk cakupan resourceGroup, '/providers/Microsoft.Management/managementGroups/{managementGroupId} untuk cakupan Grup Manajemen.
+    description: ''
+- uid: az_costmanagement_export_show
+  name: az costmanagement export show
+  summary: Operasi untuk mendapatkan riwayat eksekusi ekspor untuk cakupan yang ditentukan berdasarkan nama ekspor.
+  description: ''
+  syntax: >-
+    az costmanagement export show --name
+                                  --scope
+  examples:
+  - summary: Memperlihatkan ekspor dalam cakupan ManagementGroup
+    syntax: az costmanagement export show --name "TestExport" --scope "providers/Microsoft.Management/managementGroups/TestMG"
+  - summary: Menampilkan ekspor dalam cakupan ResourceGroup
+    syntax: az costmanagement export show --name "TestExport" --scope "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG"
+  - summary: Memperlihatkan ekspor dalam cakupan Langganan
+    syntax: az costmanagement export show --name "TestExport" --scope "subscriptions/00000000-0000-0000-0000-000000000000"
+  requiredParameters:
+  - isRequired: true
+    name: --name
+    summary: Nama Ekspor.
+    description: ''
+  - isRequired: true
+    name: --scope
+    summary: Cakupan yang terkait dengan operasi kueri dan ekspor. Ini termasuk '/subscriptions/{subscriptionId}/' untuk cakupan langganan, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' untuk cakupan resourceGroup, '/providers/Microsoft.Management/managementGroups/{managementGroupId} untuk cakupan Grup Manajemen.
+    description: ''
+- uid: az_costmanagement_export_update
+  name: az costmanagement export update
+  summary: Operasi untuk memperbarui ekspor.
+  description: ''
+  syntax: >-
+    az costmanagement export update --name
+                                    --scope
+                                    [--dataset-configuration]
+                                    [--recurrence {Annually, Daily, Monthly, Weekly}]
+                                    [--recurrence-period]
+                                    [--schedule-status {Active, Inactive}]
+                                    [--storage-account-id]
+                                    [--storage-container]
+                                    [--storage-directory]
+                                    [--time-period]
+                                    [--timeframe {BillingMonthToDate, Custom, MonthToDate, TheLastBillingMonth, TheLastMonth, WeekToDate}]
+  examples:
+  - summary: Memperbarui ekspor dalam cakupan ManagementGroup
+    syntax: az costmanagement export update --name "TestExport" --dataset-configuration columns="Date" columns="MeterId" columns="InstanceId" columns="ResourceLocation" columns="PreTaxCost" --timeframe "MonthToDate" --storage-container="exports" --storage-account-id="/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182" --storage-directory="ad-hoc" --recurrence "Weekly" --recurrence-period from="2018-06-01T00:00:00Z" to="2018-10-31T00:00:00Z" --schedule-status "Active" --scope "providers/Microsoft.Management/managementGroups/TestMG"
+  - summary: Memperbarui ekspor dalam cakupan ResourceGroup
+    syntax: az costmanagement export update --name "TestExport" --dataset-configuration columns="Date" columns="MeterId" columns="InstanceId" columns="ResourceLocation" columns="PreTaxCost" --timeframe "MonthToDate" --storage-container="exports" --storage-account-id="/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182" --storage-directory="ad-hoc" --recurrence "Weekly" --recurrence-period from="2018-06-01T00:00:00Z" to="2018-10-31T00:00:00Z" --schedule-status "Active" --scope "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG"
+  - summary: Memperbarui ekspor dalam cakupan Langganan
+    syntax: az costmanagement export update --name "TestExport" --dataset-configuration columns="Date" columns="MeterId" columns="InstanceId" columns="ResourceLocation" columns="PreTaxCost" --timeframe "MonthToDate" --storage-container="exports" --storage-account-id="/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182" --storage-directory="ad-hoc" --recurrence "Weekly" --recurrence-period from="2018-06-01T00:00:00Z" to="2018-10-31T00:00:00Z" --schedule-status "Active" --scope "subscriptions/00000000-0000-0000-0000-000000000000"
+  requiredParameters:
+  - isRequired: true
+    name: --name
+    summary: Nama Ekspor.
+    description: ''
+  - isRequired: true
+    name: --scope
+    summary: Cakupan yang terkait dengan operasi kueri dan ekspor. Ini termasuk '/subscriptions/{subscriptionId}/' untuk cakupan langganan, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' untuk cakupan resourceGroup, '/providers/Microsoft.Management/managementGroups/{managementGroupId} untuk cakupan Grup Manajemen.
+    description: ''
+  optionalParameters:
+  - name: --dataset-configuration
+    summary: 'Memiliki informasi konfigurasi untuk data dalam ekspor. Konfigurasi akan diabaikan jika agregasi dan pengelompokan disediakan. Nilai yang diharapkan: columns=xx.'
+    description: ''
+  - name: --recurrence
+    parameterValueGroup: Annually, Daily, Monthly, Weekly
+    summary: Pengulangan jadwal.
+    description: ''
+  - name: --recurrence-period
+    summary: 'Memiliki tanggal mulai dan berakhirnya pengulangan. Tanggal mulai harus di masa mendatang. Jika ada, tanggal akhir harus lebih besar dari tanggal mulai. Nilai yang diharapkan: KEY1=VALUE1 KEY2=VALUE2 ... , KEY yang tersedia adalah: dari, ke. Format waktunya seperti 2020-05-01T00:00:00.'
+    description: ''
+  - name: --schedule-status
+    parameterValueGroup: Active, Inactive
+    summary: Status jadwal ekspor. Jika tidak aktif, eksekusi terjadwal ekspor dijeda.
+    description: ''
+  - name: --storage-account-id
+    summary: ID akun penyimpanan untuk menyimpan ekspor.
+    description: ''
+  - name: --storage-container
+    summary: Kontainer penyimpanan untuk mengirimkan ekspor.
+    description: ''
+  - name: --storage-directory
+    summary: Direktori akar dalam kontainer penyimpanan untuk menyimpan ekspor.
+    description: ''
+  - name: --time-period
+    summary: 'Memiliki periode waktu untuk menarik data untuk kueri. Nilai yang diharapkan: from=TIMESTAMP1 to=TIMESTAMP2. Format tanda waktu seperti 2020-05-01T00:00:00.TIMESTAMP1 harus di masa mendatang dan TIMESTAMP2 harus lebih besar dari TIMESTAMP1.'
+    description: ''
+  - name: --timeframe
+    parameterValueGroup: BillingMonthToDate, Custom, MonthToDate, TheLastBillingMonth, TheLastMonth, WeekToDate
+    summary: Jangka waktu untuk menarik data untuk kueri. Jika kustom, maka periode waktu tertentu harus disediakan.
+    description: ''
+commands:
+- az_costmanagement_export_create
+- az_costmanagement_export_delete
+- az_costmanagement_export_list
+- az_costmanagement_export_show
+- az_costmanagement_export_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Ekspor costmanagement.
+  ms.openlocfilehash: adce014323092fdce443a90d27c131445d73ae02
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141010609"

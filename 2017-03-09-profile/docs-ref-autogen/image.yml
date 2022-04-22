@@ -1,0 +1,128 @@
+### YamlMime:AzureCLIGroup
+uid: az_image
+name: az image
+summary: Mengelola citra mesin virtual kustom.
+description: ''
+directCommands:
+- uid: az_image_copy
+  name: az image copy
+  summary: Salin gambar terkelola (atau vm) ke wilayah lain. Ini mengharuskan disk sumber tersedia.
+  description: ''
+  syntax: >-
+    az image copy --source-object-name
+                  --source-resource-group
+                  --target-location
+                  --target-resource-group
+                  [--cleanup]
+                  [--export-as-snapshot]
+                  [--parallel-degree]
+                  [--source-type {image, vm}]
+                  [--tags]
+                  [--target-name]
+                  [--target-subscription]
+                  [--temporary-resource-group-name]
+                  [--timeout]
+  examples:
+  - summary: Salin gambar ke beberapa wilayah dan bersihkan di akhir.
+    syntax: >-
+      az image copy --source-resource-group mySources-rg --source-object-name myImage \
+          --target-location uksouth northeurope --target-resource-group "images-repo-rg" --cleanup
+  - summary: Gunakan vm yang sudah digeneralisasi untuk membuat gambar di wilayah lain.
+    syntax: >-
+      az image copy --source-resource-group mySources-rg --source-object-name myVm \
+          --source-type vm --target-location uksouth northeurope --target-resource-group "images-repo-rg"
+  requiredParameters:
+  - isRequired: true
+    name: --source-object-name
+    summary: Nama gambar atau sumber daya vm.
+    description: ''
+  - isRequired: true
+    name: --source-resource-group
+    summary: Nama grup sumber daya sumber daya.
+    description: ''
+  - isRequired: true
+    name: --target-location
+    summary: Daftar lokasi yang dipisahkan spasi untuk membuat gambar di (misalnya westeurope dll.).
+    description: ''
+  - isRequired: true
+    name: --target-resource-group
+    summary: Nama grup sumber daya untuk membuat gambar.
+    description: ''
+  optionalParameters:
+  - name: --cleanup
+    summary: Sertakan sakelar ini untuk menghapus sumber daya sementara setelah selesai.
+    description: ''
+  - name: --export-as-snapshot
+    summary: Sertakan sakelar ini untuk mengekspor salinan sebagai rekam jepret alih-alih gambar.
+    description: ''
+  - name: --parallel-degree
+    defaultValue: "-1"
+    summary: Jumlah operasi penyalinan paralel.
+    description: ''
+  - name: --source-type
+    defaultValue: image
+    parameterValueGroup: image, vm
+    summary: Gambar atau vm.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --target-name
+    summary: Nama gambar akhir yang akan dibuat.
+    description: ''
+  - name: --target-subscription
+    summary: Nama atau ID langganan tempat gambar akhir harus dibuat.
+    description: ''
+  - name: --temporary-resource-group-name --temporary_resource_group_name
+    defaultValue: image-copy-rg
+    summary: Nama Grup Sumber Daya tempat akun penyimpanan sementara akan dibuat. --temporary_resource_group_name tidak digunakan lagi dalam 0.2.7.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu dalam detik agar operasi penyalinan selesai. Tingkatkan kali ini jika Anda akan menyalin gambar besar (disk) seperti 512GB atau lebih.
+    description: ''
+commands:
+- az_image_builder
+- az_image_builder_cancel
+- az_image_builder_create
+- az_image_builder_customizer
+- az_image_builder_customizer_add
+- az_image_builder_customizer_clear
+- az_image_builder_customizer_remove
+- az_image_builder_delete
+- az_image_builder_list
+- az_image_builder_output
+- az_image_builder_output_add
+- az_image_builder_output_clear
+- az_image_builder_output_remove
+- az_image_builder_run
+- az_image_builder_show
+- az_image_builder_show-runs
+- az_image_builder_update
+- az_image_builder_wait
+- az_image_copy
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola citra mesin virtual kustom.
+  ms.openlocfilehash: 153db606f14b69b3f365c796925b5c268d2e08aa
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141102804"

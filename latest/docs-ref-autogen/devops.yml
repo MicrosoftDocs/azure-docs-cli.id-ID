@@ -1,0 +1,239 @@
+### YamlMime:AzureCLIGroup
+uid: az_devops
+name: az devops
+summary: Mengelola operasi tingkat organisasi Azure DevOps.
+description: 'Grup Terkait alur az: Mengelola Azure Pipelines az boards: Kelola Azure Boards az repos: Mengelola artefak az Azure Repos: Mengelola Artefak Azure.'
+directCommands:
+- uid: az_devops_configure
+  name: az devops configure
+  summary: Konfigurasikan CLI Azure DevOps atau lihat konfigurasi Anda.
+  description: ''
+  syntax: >-
+    az devops configure [--defaults]
+                        [--list]
+                        [--use-git-aliases {false, true}]
+  optionalParameters:
+  - name: --defaults -d
+    summary: Spasi memisahkan pasangan 'name=value' untuk default argumen umum, misalnya '--defaults project=my-project-name organization=https://dev.azure.com/organizationName arg=value'. Gunakan '' untuk menghapus default, misalnya --defaults project=''.
+    description: ''
+  - name: --list -l
+    summary: Mencantumkan isi file konfigurasi.
+    description: ''
+  - name: --use-git-aliases
+    parameterValueGroup: false, true
+    summary: Atur ke 'true' untuk mengonfigurasi file konfigurasi git global alias Git (untuk mengaktifkan perintah seperti "git pr list"). Atur ke 'false' untuk menghapus alias apa pun yang ditetapkan oleh alat.
+    description: ''
+- uid: az_devops_feedback
+  name: az devops feedback
+  summary: Menampilkan informasi tentang cara memberikan umpan balik kepada tim CLI Azure DevOps.
+  description: ''
+  syntax: az devops feedback
+- uid: az_devops_invoke
+  name: az devops invoke
+  summary: Perintah ini akan memanggil permintaan untuk area dan sumber daya DevOps apa pun. Gunakan hanya output json karena respons perintah ini tidak diperbaiki. Dokumen bermanfaat - https://docs.microsoft.com/en-us/rest/api/azure/devops/.
+  description: ''
+  syntax: >-
+    az devops invoke [--accept-media-type]
+                     [--api-version]
+                     [--area]
+                     [--detect {false, true}]
+                     [--encoding {ascii, utf-16be, utf-16le, utf-8}]
+                     [--http-method {DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT}]
+                     [--in-file]
+                     [--media-type]
+                     [--org]
+                     [--out-file]
+                     [--query-parameters]
+                     [--resource]
+                     [--route-parameters]
+  examples:
+  - summary: Temukan area yang terkait dengan 'Wiki'
+    syntax: az devops invoke --query "[?contains(area,'wiki')]"
+  - summary: Mendapatkan semua wiki dalam proyek
+    syntax: >-
+      az devops invoke --area wiki --resource wikis --route-parameters project={Project Name} -o json
+
+      az devops invoke --area wiki --resource wikis --route-parameters project=WikiIssue -o json
+  - summary: Menambahkan halaman ke wiki
+    syntax: >-
+      az devops invoke --area wiki --resource pages --route-parameters project={Project Name}
+
+      wikiIdentifier={Wiki Id} --in-file {Full File Path containing text to add to wiki}
+
+      --query-parameters path={Page Path In Wiki} --http-method PUT --api-version 5.1-preview -o json
+
+      az devops invoke --area wiki --resource pages --route-parameters project=WikiIssue
+
+      wikiIdentifier=e479f402-2be8-4953-bb0b-3a0209cbc2d2 --in-file D:/temp/createWikiRequestBody.txt
+
+      --encoding 'utf-8' --query-parameters path=sample738 --http-method PUT --api-version 5.1-preview -o json
+  optionalParameters:
+  - name: --accept-media-type
+    defaultValue: application/json
+    summary: Menentukan tipe isi respons.
+    description: ''
+  - name: --api-version
+    defaultValue: "5.0"
+    summary: Versi API yang akan ditargetkan.
+    description: ''
+  - name: --area
+    summary: Area untuk menemukan sumber daya.
+    description: ''
+  - name: --detect
+    parameterValueGroup: false, true
+    summary: Mendeteksi organisasi secara otomatis.
+    description: ''
+  - name: --encoding
+    defaultValue: utf-8
+    parameterValueGroup: ascii, utf-16be, utf-16le, utf-8
+    summary: Pengodean file input. Digunakan bersama dengan --in-file.
+    description: ''
+  - name: --http-method
+    defaultValue: GET
+    parameterValueGroup: DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT
+    summary: Menentukan metode yang digunakan untuk permintaan.
+    description: ''
+  - name: --in-file
+    summary: Jalur dan nama file ke file yang berisi konten permintaan.
+    description: ''
+  - name: --media-type
+    defaultValue: application/json
+    summary: Menentukan tipe isi permintaan.
+    description: ''
+  - name: --org --organization
+    summary: 'Azure DevOps URL organisasi. Anda dapat mengonfigurasi organisasi default menggunakan az devops configure -d organization=ORG_URL. Diperlukan jika tidak dikonfigurasi sebagai default atau diambil melalui konfigurasi git. Contoh: https://dev.azure.com/MyOrganizationName/.'
+    description: ''
+  - name: --out-file
+    summary: Jalur dan nama file ke file tempat fungsi ini menyimpan isi respons.
+    description: ''
+  - name: --query-parameters
+    summary: Menentukan daftar parameter kueri.
+    description: ''
+  - name: --resource
+    summary: Nama sumber daya yang akan dioperasikan.
+    description: ''
+  - name: --route-parameters
+    summary: Menentukan daftar parameter rute.
+    description: ''
+- uid: az_devops_login
+  name: az devops login
+  summary: Atur kredensial (PAT) yang akan digunakan untuk organisasi tertentu.
+  description: Lihat https://aka.ms/azure-devops-cli-auth informasi selengkapnya tentang memberikan PAT sebagai input.
+  syntax: az devops login [--org]
+  optionalParameters:
+  - name: --org --organization
+    summary: 'Azure DevOps URL organisasi. Contoh: https://dev.azure.com/MyOrganizationName.'
+    description: ''
+- uid: az_devops_logout
+  name: az devops logout
+  summary: Hapus kredensial untuk semua atau organisasi tertentu.
+  description: ''
+  syntax: az devops logout [--org]
+  optionalParameters:
+  - name: --org --organization
+    summary: 'Azure DevOps URL organisasi. Contoh: https://dev.azure.com/MyOrganizationName/. Jika tidak ada organisasi yang ditentukan, semua organisasi akan keluar.'
+    description: ''
+commands:
+- az_devops_admin
+- az_devops_admin_banner
+- az_devops_admin_banner_add
+- az_devops_admin_banner_list
+- az_devops_admin_banner_remove
+- az_devops_admin_banner_show
+- az_devops_admin_banner_update
+- az_devops_configure
+- az_devops_extension
+- az_devops_extension_disable
+- az_devops_extension_enable
+- az_devops_extension_install
+- az_devops_extension_list
+- az_devops_extension_search
+- az_devops_extension_show
+- az_devops_extension_uninstall
+- az_devops_feedback
+- az_devops_invoke
+- az_devops_login
+- az_devops_logout
+- az_devops_project
+- az_devops_project_create
+- az_devops_project_delete
+- az_devops_project_list
+- az_devops_project_show
+- az_devops_security
+- az_devops_security_group
+- az_devops_security_group_create
+- az_devops_security_group_delete
+- az_devops_security_group_list
+- az_devops_security_group_membership
+- az_devops_security_group_membership_add
+- az_devops_security_group_membership_list
+- az_devops_security_group_membership_remove
+- az_devops_security_group_show
+- az_devops_security_group_update
+- az_devops_security_permission
+- az_devops_security_permission_list
+- az_devops_security_permission_namespace
+- az_devops_security_permission_namespace_list
+- az_devops_security_permission_namespace_show
+- az_devops_security_permission_reset
+- az_devops_security_permission_reset-all
+- az_devops_security_permission_show
+- az_devops_security_permission_update
+- az_devops_service-endpoint
+- az_devops_service-endpoint_azurerm
+- az_devops_service-endpoint_azurerm_create
+- az_devops_service-endpoint_create
+- az_devops_service-endpoint_delete
+- az_devops_service-endpoint_github
+- az_devops_service-endpoint_github_create
+- az_devops_service-endpoint_list
+- az_devops_service-endpoint_show
+- az_devops_service-endpoint_update
+- az_devops_team
+- az_devops_team_create
+- az_devops_team_delete
+- az_devops_team_list
+- az_devops_team_list-member
+- az_devops_team_show
+- az_devops_team_update
+- az_devops_user
+- az_devops_user_add
+- az_devops_user_list
+- az_devops_user_remove
+- az_devops_user_show
+- az_devops_user_update
+- az_devops_wiki
+- az_devops_wiki_create
+- az_devops_wiki_delete
+- az_devops_wiki_list
+- az_devops_wiki_page
+- az_devops_wiki_page_create
+- az_devops_wiki_page_delete
+- az_devops_wiki_page_show
+- az_devops_wiki_page_update
+- az_devops_wiki_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: 'Grup Terkait alur az: Mengelola Azure Pipelines az boards: Kelola Azure Boards az repos: Mengelola artefak az Azure Repos: Mengelola Artefak Azure.'
+  ms.openlocfilehash: 9fab7f3b50d7c071f9ceb61af2420cfdc5933387
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141040714"

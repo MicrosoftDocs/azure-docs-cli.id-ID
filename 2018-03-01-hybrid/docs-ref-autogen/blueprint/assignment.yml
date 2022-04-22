@@ -1,0 +1,357 @@
+### YamlMime:AzureCLIGroup
+uid: az_blueprint_assignment
+name: az blueprint assignment
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **cetak biru** untuk Azure CLI (versi 2.3.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **penetapan cetak biru az** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Perintah untuk mengelola penetapan cetak biru.
+description: ''
+directCommands:
+- uid: az_blueprint_assignment_create
+  name: az blueprint assignment create
+  summary: Buat penetapan cetak biru.
+  description: ''
+  syntax: >-
+    az blueprint assignment create --name
+                                   [--blueprint-version]
+                                   [--description]
+                                   [--display-name]
+                                   [--identity-type {None, SystemAssigned, UserAssigned}]
+                                   [--location]
+                                   [--locks-excluded-principals]
+                                   [--locks-mode {AllResourcesDoNotDelete, AllResourcesReadOnly, None}]
+                                   [--management-group]
+                                   [--parameters]
+                                   [--resource-group-value]
+                                   [--subscription]
+                                   [--user-assigned-identity]
+  examples:
+  - summary: Penugasan dengan identitas terkelola yang ditetapkan sistem
+    syntax: >-
+      az blueprint assignment create --subscription MySubscription --name \
+
+      MyBlueprintAssignment --location eastus --identity-type SystemAssigned \
+
+      --description "Enforce pre-defined MyBlueprint to this subscription." \
+
+      --blueprint-version "/providers/Microsoft.Management/managementGroups/ContosoOnlineGroup/provid \
+
+      ers/Microsoft.Blueprint/blueprints/MyBlueprint/versions/v2" \
+
+      --resource-group-value artifact_name=rg-art-1 name=rg1 location=westus \
+
+      --resource-group-value artifact_name=rg-art-2 name=rg2 location=eastus \
+
+      --parameters "path/to/parameter/file" \
+  - summary: Penugasan dengan identitas terkelola yang ditetapkan pengguna
+    syntax: >-
+      az blueprint assignment create --subscription MySubscription --name \
+
+      MyBlueprintAssignment --location eastus --identity-type UserAssigned \
+
+      --user-assigned-identity "/subscriptions/00000000-0000-0000-0000-000000000000 \
+
+      /resourcegroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity"\
+
+      --description "Enforce pre-defined MyBlueprint to this subscription." \
+
+      --blueprint-version "/providers/Microsoft.Management/managementGroups/ContosoOnlineGroup \
+
+      /providers/Microsoft.Blueprint/blueprints/MyBlueprint/versions/v2" \
+
+      --resource-group-value artifact_name=rg-art-1 name=rg1 location=eastus \
+
+      --parameters "path/to/parameter/file" \
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama penetapan cetak biru.
+    description: ''
+  optionalParameters:
+  - name: --blueprint-version
+    summary: ID sumber daya dari versi definisi cetak biru yang diterbitkan.
+    description: ''
+  - name: --description
+    summary: Multibaris menjelaskan sumber daya ini.
+    description: ''
+  - name: --display-name
+    summary: String satu baris menjelaskan sumber daya ini.
+    description: ''
+  - name: --identity-type
+    defaultValue: SystemAssigned
+    parameterValueGroup: None, SystemAssigned, UserAssigned
+    summary: Jenis identitas terkelola.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --locks-excluded-principals
+    summary: Daftar prinsipal AAD yang dikecualikan dari kunci cetak biru. Hingga 5 prinsipal diizinkan.
+    description: ''
+  - name: --locks-mode
+    parameterValueGroup: AllResourcesDoNotDelete, AllResourcesReadOnly, None
+    summary: Mode kunci.
+    description: ''
+  - name: --management-group -m
+    summary: Gunakan grup manajemen untuk cakupan target penetapan cetak biru. Ini disediakan untuk digunakan di masa mendatang. Gunakan --subscription sebagai gantinya.
+    description: ''
+  - name: --parameters -p
+    summary: Nilai parameter penetapan cetak biru. Ini bisa berupa string JSON atau jalur file JSON.
+    description: ''
+  - name: --resource-group-value
+    summary: Pasangan Key=Value untuk grup sumber daya. Kuncinya termasuk 'artifact_name'(wajib), 'nama', 'lokasi'.
+    description: ''
+  - name: --subscription -s
+    summary: Gunakan langganan untuk cakupan target penetapan cetak biru. Susbcription default akan digunakan jika opsi tidak ditentukan.
+    description: ''
+  - name: --user-assigned-identity
+    summary: Identitas terkelola yang ditetapkan pengguna yang terkait dengan sumber daya.
+    description: ''
+- uid: az_blueprint_assignment_delete
+  name: az blueprint assignment delete
+  summary: Menghapus penetapan cetak biru.
+  description: ''
+  syntax: >-
+    az blueprint assignment delete --name
+                                   [--management-group]
+                                   [--subscription]
+                                   [--yes]
+  examples:
+  - summary: Menghapus penugasan
+    syntax: >-
+      az blueprint assignment delete --subscription MySubscription \
+
+      --name MyBlueprintAssignment
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama penetapan cetak biru.
+    description: ''
+  optionalParameters:
+  - name: --management-group -m
+    summary: Gunakan grup manajemen untuk cakupan target penetapan cetak biru. Ini disediakan untuk digunakan di masa mendatang. Gunakan --subscription sebagai gantinya.
+    description: ''
+  - name: --subscription -s
+    summary: Gunakan langganan untuk cakupan target penetapan cetak biru. Susbcription default akan digunakan jika opsi tidak ditentukan.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_blueprint_assignment_list
+  name: az blueprint assignment list
+  summary: Mencantumkan penetapan cetak biru dalam langganan.
+  description: ''
+  syntax: >-
+    az blueprint assignment list [--management-group]
+                                 [--subscription]
+  examples:
+  - summary: Mencantumkan penugasan
+    syntax: az blueprint assignment list --subscription MySubscription
+  optionalParameters:
+  - name: --management-group -m
+    summary: Gunakan grup manajemen untuk cakupan target penetapan cetak biru. Ini disediakan untuk digunakan di masa mendatang. Gunakan --subscription sebagai gantinya.
+    description: ''
+  - name: --subscription -s
+    summary: Gunakan langganan untuk cakupan target penetapan cetak biru. Susbcription default akan digunakan jika opsi tidak ditentukan.
+    description: ''
+- uid: az_blueprint_assignment_show
+  name: az blueprint assignment show
+  summary: Dapatkan penetapan cetak biru.
+  description: ''
+  syntax: >-
+    az blueprint assignment show --name
+                                 [--management-group]
+                                 [--subscription]
+  examples:
+  - summary: Perlihatkan penugasan
+    syntax: >-
+      az blueprint assignment show --subscription MySubscription \
+
+      --name MyBlueprintAssignment
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama penetapan cetak biru.
+    description: ''
+  optionalParameters:
+  - name: --management-group -m
+    summary: Gunakan grup manajemen untuk cakupan target penetapan cetak biru. Ini disediakan untuk digunakan di masa mendatang. Gunakan --subscription sebagai gantinya.
+    description: ''
+  - name: --subscription -s
+    summary: Gunakan langganan untuk cakupan target penetapan cetak biru. Susbcription default akan digunakan jika opsi tidak ditentukan.
+    description: ''
+- uid: az_blueprint_assignment_update
+  name: az blueprint assignment update
+  summary: Memperbarui penetapan cetak biru.
+  description: ''
+  syntax: >-
+    az blueprint assignment update --name
+                                   [--blueprint-version]
+                                   [--description]
+                                   [--display-name]
+                                   [--identity-type {None, SystemAssigned, UserAssigned}]
+                                   [--location]
+                                   [--locks-excluded-principals]
+                                   [--locks-mode {AllResourcesDoNotDelete, AllResourcesReadOnly, None}]
+                                   [--management-group]
+                                   [--parameters]
+                                   [--resource-group-value]
+                                   [--subscription]
+                                   [--user-assigned-identity]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama penetapan cetak biru.
+    description: ''
+  optionalParameters:
+  - name: --blueprint-version
+    summary: ID sumber daya dari versi definisi cetak biru yang diterbitkan.
+    description: ''
+  - name: --description
+    summary: Multibaris menjelaskan sumber daya ini.
+    description: ''
+  - name: --display-name
+    summary: String satu baris menjelaskan sumber daya ini.
+    description: ''
+  - name: --identity-type
+    parameterValueGroup: None, SystemAssigned, UserAssigned
+    summary: Jenis identitas terkelola.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --locks-excluded-principals
+    summary: Daftar prinsipal AAD yang dikecualikan dari kunci cetak biru. Hingga 5 prinsipal diizinkan.
+    description: ''
+  - name: --locks-mode
+    parameterValueGroup: AllResourcesDoNotDelete, AllResourcesReadOnly, None
+    summary: Mode kunci.
+    description: ''
+  - name: --management-group -m
+    summary: Gunakan grup manajemen untuk cakupan target penetapan cetak biru. Ini disediakan untuk digunakan di masa mendatang. Gunakan --subscription sebagai gantinya.
+    description: ''
+  - name: --parameters -p
+    summary: Nilai parameter penetapan cetak biru. Ini bisa berupa string JSON atau jalur file JSON.
+    description: ''
+  - name: --resource-group-value
+    summary: Pasangan Key=Value untuk grup sumber daya. Kuncinya termasuk 'artifact_name'(wajib), 'nama', 'lokasi'.
+    description: ''
+  - name: --subscription -s
+    summary: Gunakan langganan untuk cakupan target penetapan cetak biru. Susbcription default akan digunakan jika opsi tidak ditentukan.
+    description: ''
+  - name: --user-assigned-identity
+    summary: Identitas terkelola yang ditetapkan pengguna yang terkait dengan sumber daya.
+    description: ''
+- uid: az_blueprint_assignment_wait
+  name: az blueprint assignment wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi Penetapan Cetak Biru terpenuhi.
+  description: ''
+  syntax: >-
+    az blueprint assignment wait --name
+                                 [--created]
+                                 [--custom]
+                                 [--deleted]
+                                 [--exists]
+                                 [--interval]
+                                 [--management-group]
+                                 [--subscription]
+                                 [--timeout]
+                                 [--updated]
+  examples:
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga Penetapan Cetak Biru berhasil disediakan.
+    syntax: az blueprint assignment wait --subscription MySubscription \ --name MyBlueprintAssignment --created
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama penetapan cetak biru.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --management-group -m
+    summary: Gunakan grup manajemen untuk cakupan target penetapan cetak biru. Ini disediakan untuk digunakan di masa mendatang. Gunakan --subscription sebagai gantinya.
+    description: ''
+  - name: --subscription -s
+    summary: Gunakan langganan untuk cakupan target penetapan cetak biru. Susbcription default akan digunakan jika opsi tidak ditentukan.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+- uid: az_blueprint_assignment_who
+  name: az blueprint assignment who
+  summary: Dapatkan ObjectId Nama Prinsipal Blueprint Servie.
+  description: ''
+  syntax: >-
+    az blueprint assignment who --name
+                                [--management-group]
+                                [--subscription]
+  examples:
+  - summary: Mendapatkan objectId SPN
+    syntax: >-
+      az blueprint assignment who --subscription MySubscription \
+
+      --name MyBlueprintAssignment
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama penetapan cetak biru.
+    description: ''
+  optionalParameters:
+  - name: --management-group -m
+    summary: Gunakan grup manajemen untuk cakupan target penetapan cetak biru. Ini disediakan untuk digunakan di masa mendatang. Gunakan --subscription sebagai gantinya.
+    description: ''
+  - name: --subscription -s
+    summary: Gunakan langganan untuk cakupan target penetapan cetak biru. Susbcription default akan digunakan jika opsi tidak ditentukan.
+    description: ''
+commands:
+- az_blueprint_assignment_create
+- az_blueprint_assignment_delete
+- az_blueprint_assignment_list
+- az_blueprint_assignment_show
+- az_blueprint_assignment_update
+- az_blueprint_assignment_wait
+- az_blueprint_assignment_who
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Perintah untuk mengelola penetapan cetak biru.
+  ms.openlocfilehash: 8dd49256b0f921033379aa3c7ea6b3169f935718
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141123853"
