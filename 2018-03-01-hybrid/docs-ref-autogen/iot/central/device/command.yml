@@ -1,0 +1,141 @@
+### YamlMime:AzureCLIGroup
+uid: az_iot_central_device_command
+name: az iot central device command
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **azure-iot** untuk Azure CLI (versi 2.24.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **perintah az iot central device** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Jalankan perintah perangkat.
+description: ''
+directCommands:
+- uid: az_iot_central_device_command_history
+  name: az iot central device command history
+  summary: Dapatkan detail untuk permintaan perintah terbaru dan respons yang dikirim ke perangkat.
+  description: >-
+    Mencantumkan permintaan dan respons perintah terbaru yang dikirim ke perangkat dari IoT Central.
+
+    Pembaruan apa pun yang dilakukan perangkat ke properti perangkat sebagai akibat dari eksekusi perintah tidak disertakan dalam respons.
+  syntax: >-
+    az iot central device command history --app-id
+                                          --cn
+                                          --device-id
+                                          [--api-version {1.0, 1.1-preview, preview}]
+                                          [--central-api-uri]
+                                          [--interface-id]
+                                          [--token]
+  examples:
+  - summary: Tampilkan respons perintah
+    syntax: az iot central device command history --app-id {appid} --device-id {deviceid} --interface-id {interfaceid} --command-name {commandname}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --cn --command-name
+    summary: Nama perintah seperti yang ditentukan dalam templat perangkat. Nama perintah bisa berbeda dari Nama Tampilan perintah.
+    description: ''
+  - isRequired: true
+    name: --device-id -d
+    summary: ID perangkat perangkat target. Anda dapat menemukan ID perangkat dengan, mengklik tombol Koneksi di halaman Detail Perangkat.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: "1.0"
+    parameterValueGroup: 1.0, 1.1-preview, preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --interface-id -i
+    summary: Nama antarmuka/komponen seperti yang ditentukan dalam templat perangkat. Anda dapat menemukannya dengan menavigasi ke Templat Perangkat dan melihat identitas antarmuka/komponen di bawah kemampuan perangkat yang sesuai.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+- uid: az_iot_central_device_command_run
+  name: az iot central device command run
+  summary: Jalankan perintah pada perangkat dan lihat respons terkait. TIDAK memantau pembaruan properti yang mungkin dilakukan perintah.
+  description: >-
+    Catatan: payload harus disarangkan di bawah "permintaan".
+
+    yaitu jika perangkat Anda mengharapkan payload dalam bentuk {"key": "value"} payload harus {"request": {"key": "value"}}.
+
+    --content juga dapat diacu pada filepath seperti ini (.../path/to/payload.json).
+  syntax: >-
+    az iot central device command run --app-id
+                                      --cn
+                                      --content
+                                      --device-id
+                                      [--api-version {1.0, 1.1-preview, preview}]
+                                      [--central-api-uri]
+                                      [--interface-id]
+                                      [--token]
+  examples:
+  - summary: Jalankan respons perintah
+    syntax: az iot central device command run --app-id {appid} --device-id {deviceid} --interface-id {interfaceid} --command-name {commandname} --content {payload}
+  - summary: Respons perintah Jalankan Singkat
+    syntax: az iot central device command run -n {appid} -d {deviceid} -i {interfaceid} --cn {commandname} -k {payload}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --cn --command-name
+    summary: Nama perintah seperti yang ditentukan dalam templat perangkat. Nama perintah bisa berbeda dari Nama Tampilan perintah.
+    description: ''
+  - isRequired: true
+    name: --content -k
+    summary: "Konfigurasi untuk permintaan. Sediakan jalur ke file JSON atau JSON yang di-string mentah. [Contoh Jalur File: ./path/to/file.json] [Contoh JSON yang Di string: {'a': 'b'}]."
+    description: ''
+  - isRequired: true
+    name: --device-id -d
+    summary: ID perangkat perangkat target. Anda dapat menemukan ID perangkat dengan, mengklik tombol Koneksi di halaman Detail Perangkat.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: "1.0"
+    parameterValueGroup: 1.0, 1.1-preview, preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --interface-id -i
+    summary: Nama antarmuka/komponen seperti yang ditentukan dalam templat perangkat. Anda dapat menemukannya dengan menavigasi ke Templat Perangkat dan melihat identitas antarmuka/komponen di bawah kemampuan perangkat yang sesuai.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+commands:
+- az_iot_central_device_command_history
+- az_iot_central_device_command_run
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Jalankan perintah perangkat.
+  ms.openlocfilehash: cf5e4ab42c167256e1e4d91be2349487d2a78cb5
+  ms.sourcegitcommit: b179e8c36fc1222f584a3780aaf61c99bf78a40d
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/01/2022
+  ms.locfileid: "141307191"

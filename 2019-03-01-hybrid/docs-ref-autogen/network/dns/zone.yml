@@ -1,0 +1,264 @@
+### YamlMime:AzureCLIGroup
+uid: az_network_dns_zone
+name: zona dns jaringan az
+summary: Mengelola zona DNS.
+description: ''
+directCommands:
+- uid: az_network_dns_zone_create
+  name: buat zona dns jaringan az
+  summary: Membuat zona DNS.
+  description: ''
+  syntax: >-
+    az network dns zone create --name
+                               --resource-group
+                               [--if-none-match]
+                               [--parent-name]
+                               [--registration-vnets]
+                               [--resolution-vnets]
+                               [--tags]
+                               [--zone-type {Private, Public}]
+  examples:
+  - summary: Buat zona DNS menggunakan nama domain yang sepenuhnya memenuhi syarat.
+    syntax: az network dns zone create -g MyResourceGroup -n www.mysite.com
+  - summary: Membuat zona DNS dengan delegasi di induk dalam langganan dan grup sumber daya yang sama
+    syntax: az network dns zone create -g MyResourceGroup -n books.mysite.com -p mysite.com
+  - summary: Membuat zona DNS dengan delegasi di induk dalam langganan yang berbeda
+    syntax: az network dns zone create -g MyResourceGroup -n books.mysite.com -p "/subscriptions/**67e2/resourceGroups/OtherRg/providers/Microsoft.Network/dnszones/mysite.com"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama zona.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --if-none-match
+    summary: Hanya buat zona DNS jika tidak ada yang cocok dengan nama yang diberikan.
+    description: ''
+  - name: --parent-name -p
+    summary: Tentukan apakah zona induk ada untuk zona ini dan delegasi untuk zona anak di induk akan ditambahkan.
+    description: ''
+  - name: --registration-vnets
+    summary: 'Nama atau ID jaringan virtual yang dipisahkan spasi yang mendaftarkan nama host di zona DNS ini. Jumlah zona DNS privat dengan pendaftaran otomatis jaringan virtual diaktifkan adalah 1. Jika Anda perlu meningkatkan batas ini, silakan hubungi Dukungan Azure: https://docs.microsoft.com/en-us/azure/azure-subscription-service-limits.'
+    description: ''
+  - name: --resolution-vnets
+    summary: Nama atau ID jaringan virtual yang dipisahkan spasi yang menyelesaikan rekaman di zona DNS ini.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --zone-type
+    defaultValue: Public
+    parameterValueGroup: Private, Public
+    summary: Jenis zona DNS yang akan dibuat.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_dns_zone_delete
+  name: az network dns zone delete
+  summary: Menghapus zona DNS dan semua rekaman terkait.
+  description: ''
+  syntax: >-
+    az network dns zone delete --name
+                               --resource-group
+                               [--if-match]
+                               [--yes]
+  examples:
+  - summary: Menghapus zona DNS menggunakan nama domain yang sepenuhnya memenuhi syarat.
+    syntax: az network dns zone delete -g MyResourceGroup -n www.mysite.com
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama zona.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --if-match
+    summary: Etag zona DNS. Hilangkan nilai ini untuk selalu menghapus zona saat ini. Tentukan nilai etag yang terakhir dilihat untuk mencegah penghapusan perubahan bersamaan secara tidak sengaja.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_dns_zone_export
+  name: ekspor zona dns jaringan az
+  summary: Ekspor zona DNS sebagai file zona DNS.
+  description: ''
+  syntax: >-
+    az network dns zone export --name
+                               --resource-group
+                               [--file-name]
+  examples:
+  - summary: Ekspor zona DNS sebagai file zona DNS.
+    syntax: az network dns zone export -g MyResourceGroup -n www.mysite.com -f mysite_com_zone.txt
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama zona.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --file-name -f
+    summary: Jalur ke file zona DNS untuk disimpan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_dns_zone_import
+  name: impor zona dns jaringan az
+  summary: Buat zona DNS menggunakan file zona DNS.
+  description: ''
+  syntax: >-
+    az network dns zone import --file-name
+                               --name
+                               --resource-group
+  examples:
+  - summary: Impor file zona lokal ke sumber daya zona DNS.
+    syntax: az network dns zone import -g MyResourceGroup -n MyZone -f /path/to/zone/file
+  requiredParameters:
+  - isRequired: true
+    name: --file-name -f
+    summary: Jalur ke file zona DNS untuk diimpor.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama zona.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_dns_zone_list
+  name: az network dns zone list
+  summary: Mencantumkan zona DNS.
+  description: ''
+  syntax: az network dns zone list [--resource-group]
+  examples:
+  - summary: Mencantumkan zona DNS dalam grup sumber daya.
+    syntax: az network dns zone list -g MyResourceGroup
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_dns_zone_show
+  name: az network dns zone show
+  summary: Mendapatkan parameter zona DNS. Tidak memperlihatkan catatan DNS dalam zona.
+  description: ''
+  syntax: >-
+    az network dns zone show --name
+                             --resource-group
+  examples:
+  - summary: Mencantumkan zona DNS dalam grup sumber daya.
+    syntax: az network dns zone show -g MyResourceGroup -n www.mysite.com
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama zona.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_dns_zone_update
+  name: az network dns zone update
+  summary: Memperbarui properti zona DNS. Tidak mengubah catatan DNS dalam zona.
+  description: ''
+  syntax: >-
+    az network dns zone update --name
+                               --resource-group
+                               [--add]
+                               [--force-string]
+                               [--if-match]
+                               [--registration-vnets]
+                               [--remove]
+                               [--resolution-vnets]
+                               [--set]
+                               [--tags]
+                               [--zone-type {Private, Public}]
+  examples:
+  - summary: Perbarui properti zona DNS untuk mengubah nilai yang ditentukan pengguna dari tag yang ditetapkan sebelumnya.
+    syntax: az network dns zone update -g MyResourceGroup -n www.mysite.com --tags CostCenter=Marketing
+  - summary: Memperbarui properti zona DNS (dibuat otomatis)
+    syntax: az network dns zone update --name www.mysite.com --remove tags.no_80 --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama zona.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --if-match
+    summary: Perbarui hanya jika sumber daya dengan ETAG yang sama ada.
+    description: ''
+  - name: --registration-vnets
+    summary: 'Nama atau ID jaringan virtual yang dipisahkan spasi yang mendaftarkan nama host di zona DNS ini. Jumlah zona DNS privat dengan pendaftaran otomatis jaringan virtual diaktifkan adalah 1. Jika Anda perlu meningkatkan batas ini, silakan hubungi Dukungan Azure: https://docs.microsoft.com/en-us/azure/azure-subscription-service-limits.'
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resolution-vnets
+    summary: Nama atau ID jaringan virtual yang dipisahkan spasi yang menyelesaikan rekaman di zona DNS ini.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --zone-type
+    parameterValueGroup: Private, Public
+    summary: Jenis zona DNS yang akan dibuat.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+commands:
+- az_network_dns_zone_create
+- az_network_dns_zone_delete
+- az_network_dns_zone_export
+- az_network_dns_zone_import
+- az_network_dns_zone_list
+- az_network_dns_zone_show
+- az_network_dns_zone_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/09/2022
+  description: Mengelola zona DNS.
+  ms.openlocfilehash: 805b0b3947dc96f847ebeaf1f0ada9efd8a43bdc
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141458370"

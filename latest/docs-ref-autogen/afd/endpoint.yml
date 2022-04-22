@@ -1,0 +1,225 @@
+### YamlMime:AzureCLIGroup
+uid: az_afd_endpoint
+name: az afd endpoint
+summary: Kelola titik akhir AFD dalam profil yang ditentukan.
+description: Titik akhir adalah pengelompokan domain logis dan konfigurasi terkaitnya.
+directCommands:
+- uid: az_afd_endpoint_create
+  name: az afd endpoint create
+  summary: Membuat titik akhir dalam profil yang ditentukan.
+  description: Azure Front Door akan menghasilkan domain DNS deterministik berdasarkan nama titik akhir input pelanggan dalam bentuk <endpoint name>-<hash>.z01.azurefd.net, domain DNS deterministik dapat digunakan kembali dalam penyewa, langganan, atau grup sumber daya tergantung pada opsi --name-reuse-scope. Pelanggan akan mendapatkan domain DNS yang sama dalam cakupan penggunaan kembali jika titik akhir dihapus dan dibuat ulang.
+  syntax: >-
+    az afd endpoint create --endpoint-name
+                           --profile-name
+                           --resource-group
+                           [--enabled-state {Disabled, Enabled}]
+                           [--name-reuse-scope {NoReuse, ResourceGroupReuse, SubscriptionReuse, TenantReuse}]
+                           [--tags]
+  examples:
+  - summary: Membuat titik akhir yang diaktifkan
+    syntax: az afd endpoint create -g group --endpoint-name endpoint1 --profile-name profile --enabled-state Enabled
+  requiredParameters:
+  - isRequired: true
+    name: --endpoint-name
+    summary: Nama titik akhir di bawah profil yang unik secara global.
+    description: ''
+  - isRequired: true
+    name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --enabled-state
+    defaultValue: Enabled
+    parameterValueGroup: Disabled, Enabled
+    summary: Apakah akan mengaktifkan titik akhir ini.
+    description: ''
+  - name: --name-reuse-scope
+    defaultValue: TenantReuse
+    parameterValueGroup: NoReuse, ResourceGroupReuse, SubscriptionReuse, TenantReuse
+    summary: Menunjukkan cakupan penggunaan kembali nama titik akhir. Nilai defaultnya adalah TenantReuse.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+- uid: az_afd_endpoint_delete
+  name: az afd endpoint delete
+  summary: Menghapus titik akhir dalam profil yang ditentukan.
+  description: ''
+  syntax: >-
+    az afd endpoint delete [--endpoint-name]
+                           [--ids]
+                           [--profile-name]
+                           [--resource-group]
+                           [--yes]
+  examples:
+  - summary: Hapus titik akhir bernama titik akhir1.
+    syntax: az afd endpoint delete -g group --profile-name profile --endpoint-name endpoint1
+  optionalParameters:
+  - name: --endpoint-name
+    summary: Nama titik akhir di bawah profil yang unik secara global.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_afd_endpoint_list
+  name: az afd endpoint list
+  summary: Cantumkan semua titik akhir dalam profil yang ditentukan.
+  description: ''
+  syntax: >-
+    az afd endpoint list --profile-name
+                         --resource-group
+  examples:
+  - summary: Cantumkan semua titik akhir dalam profil yang ditentukan.
+    syntax: az afd endpoint list -g group --profile-name profile
+  requiredParameters:
+  - isRequired: true
+    name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_afd_endpoint_purge
+  name: az afd endpoint purge
+  summary: Menghapus konten cache dari Azure Front Door.
+  description: ''
+  syntax: >-
+    az afd endpoint purge --content-paths
+                          [--domains]
+                          [--endpoint-name]
+                          [--ids]
+                          [--no-wait]
+                          [--profile-name]
+                          [--resource-group]
+  examples:
+  - summary: Hapus semua kotensi yang di-cache di bawah direktori "/script" untuk domain www.contoso.com
+    syntax: az afd endpoint purge -g group --profile-name profile --domains www.contoso.com --content-paths '/scripts/*'
+  requiredParameters:
+  - isRequired: true
+    name: --content-paths
+    summary: Jalur ke konten yang akan dibersihkan. Dapat menjelaskan jalur file atau direktori kartubebas.
+    description: ''
+  optionalParameters:
+  - name: --domains
+    summary: Daftar domain.
+    description: ''
+  - name: --endpoint-name
+    summary: Nama titik akhir di bawah profil yang unik secara global.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_afd_endpoint_show
+  name: az afd endpoint show
+  summary: Tampilkan detail titik akhir dalam profil yang ditentukan.
+  description: ''
+  syntax: >-
+    az afd endpoint show [--endpoint-name]
+                         [--ids]
+                         [--profile-name]
+                         [--resource-group]
+  examples:
+  - summary: memperlihatkan detail titik akhir bernama titik akhir1.
+    syntax: az afd endpoint show -g group --profile-name profile  --endpoint-name endpoint1
+  optionalParameters:
+  - name: --endpoint-name
+    summary: Nama titik akhir di bawah profil yang unik secara global.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_afd_endpoint_update
+  name: az afd endpoint update
+  summary: Perbarui titik akhir dalam profil yang ditentukan.
+  description: ''
+  syntax: >-
+    az afd endpoint update [--enabled-state {Disabled, Enabled}]
+                           [--endpoint-name]
+                           [--ids]
+                           [--profile-name]
+                           [--resource-group]
+                           [--tags]
+  examples:
+  - summary: Perbarui status titik akhir untuk dinonaktifkan.
+    syntax: az afd endpoint update -g group --endpoint-name endpoint1 --profile-name profile --enabled-state Disabled
+  optionalParameters:
+  - name: --enabled-state
+    parameterValueGroup: Disabled, Enabled
+    summary: Apakah akan mengaktifkan titik akhir ini.
+    description: ''
+  - name: --endpoint-name
+    summary: Nama titik akhir di bawah profil yang unik secara global.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+commands:
+- az_afd_endpoint_create
+- az_afd_endpoint_delete
+- az_afd_endpoint_list
+- az_afd_endpoint_purge
+- az_afd_endpoint_show
+- az_afd_endpoint_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Titik akhir adalah pengelompokan domain logis dan konfigurasi terkaitnya.
+  ms.openlocfilehash: f8071be8f49b07005bd4e341a49a099edac183e0
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141464796"

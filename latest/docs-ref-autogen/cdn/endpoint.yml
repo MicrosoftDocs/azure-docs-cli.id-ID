@@ -1,0 +1,469 @@
+### YamlMime:AzureCLIGroup
+uid: az_cdn_endpoint
+name: az cdn endpoint
+summary: Mengelola titik akhir CDN.
+description: ''
+directCommands:
+- uid: az_cdn_endpoint_create
+  name: az cdn endpoint create
+  summary: Buat titik akhir bernama untuk menyambungkan ke CDN.
+  description: ''
+  syntax: >-
+    az cdn endpoint create --name
+                           --origin
+                           --profile-name
+                           --resource-group
+                           [--content-types-to-compress]
+                           [--enable-compression {false, true}]
+                           [--location]
+                           [--no-http {false, true}]
+                           [--no-https {false, true}]
+                           [--no-wait]
+                           [--origin-host-header]
+                           [--origin-path]
+                           [--query-string-caching {BypassCaching, IgnoreQueryString, NotSet, UseQueryString}]
+                           [--tags]
+  examples:
+  - summary: Buat titik akhir ke konten layanan untuk nama host melalui HTTP atau HTTPS.
+    syntax: az cdn endpoint create -g group -n endpoint --profile-name profile --origin www.example.com
+  - summary: Buat titik akhir dengan asal domain kustom dengan port HTTP dan HTTPS.
+    syntax: az cdn endpoint create -g group -n endpoint --profile-name profile --origin www.example.com 88 4444
+  - summary: Buat titik akhir dengan asal domain kustom dengan tautan privat diaktifkan.
+    syntax: az cdn endpoint create -g group -n endpoint --profile-name profile --origin www.example.com 80 443 /subscriptions/subid/resourcegroups/rg1/providers/Microsoft.Network/privateLinkServices/pls1 eastus "Please approve this request"
+  - summary: Buat titik akhir khusus https dengan asal domain kustom dan kompresi dukungan untuk jenis MIME kompresi default Azure CDN.
+    syntax: az cdn endpoint create -g group -n endpoint --profile-name profile --origin www.example.com --no-http --enable-compression
+  - summary: Buat titik akhir dengan asal domain kustom dan kompresi dukungan untuk jenis MIME tertentu.
+    syntax: az cdn endpoint create -g group -n endpoint --profile-name profile --origin www.example.com --enable-compression --content-types-to-compress text/plain text/html
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama titik akhir CDN.
+    description: ''
+  - isRequired: true
+    name: --origin
+    summary: 'Asal titik akhir yang ditentukan oleh 6 tuple yang dibatasi spasi berikut: `www.example.com http_port https_port private_link_resource_id private_link_location private_link_approval_message`. Port HTTP dan HTTPS serta ID sumber daya tautan privat dan lokasi bersifat opsional. Port HTTP dan HTTPS masing-masing default ke 80 dan 443. Bidang tautan privat hanya valid untuk Standard_Microsoft sku, dan private_link_location diperlukan jika private_link_resource_id diatur.'
+    description: ''
+  - isRequired: true
+    name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --content-type-to-compress
+    summary: Daftar tipe isi tempat pemadatan berlaku. Nilai harus berupa jenis MIME yang valid.
+    description: ''
+  - name: --enable-compression
+    parameterValueGroup: false, true
+    summary: Jika pemadatan diaktifkan, konten akan disajikan sebagai dikompresi jika pengguna meminta versi terkompresi. Konten tidak akan dikompresi pada CDN saat konten yang diminta lebih kecil dari 1 byte atau lebih besar dari 1 MB.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --no-http
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah lalu lintas HTTP tidak diizinkan di titik akhir. Defaultnya adalah mengizinkan lalu lintas HTTP.
+    description: ''
+  - name: --no-https
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah lalu lintas HTTPS tidak diizinkan di titik akhir. Defaultnya adalah mengizinkan lalu lintas HTTPS.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --origin-host-header
+    summary: Header Host yang akan dikirim untuk permintaan ke asal ini. Jika Anda membiarkan ini kosong, nama host permintaan menentukan nilai ini. Azure CDN asal, seperti Web Apps, Storage Blob, dan Cloud Services memerlukan nilai header host ini agar sesuai dengan nama host asal secara default.
+    description: ''
+  - name: --origin-path
+    summary: Jalur direktori pada asal yang dapat digunakan Azure CDN untuk mengambil konten.
+    description: ''
+  - name: --query-string-caching
+    parameterValueGroup: BypassCaching, IgnoreQueryString, NotSet, UseQueryString
+    summary: Menentukan bagaimana CDN permintaan cache yang menyertakan string kueri. Anda dapat mengabaikan string kueri apa pun saat penembolokan, melewati penembolokan untuk mencegah permintaan yang berisi string kueri di-cache, atau menyimpan cache setiap permintaan dengan URL unik.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cdn/_help.py
+- uid: az_cdn_endpoint_delete
+  name: az cdn endpoint delete
+  summary: Menghapus titik akhir CDN.
+  description: ''
+  syntax: >-
+    az cdn endpoint delete [--ids]
+                           [--name]
+                           [--no-wait]
+                           [--profile-name]
+                           [--resource-group]
+  examples:
+  - summary: Menghapus titik akhir CDN.
+    syntax: az cdn endpoint delete -g group -n endpoint --profile-name profile-name
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama titik akhir CDN.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cdn/_help.py
+- uid: az_cdn_endpoint_list
+  name: az cdn endpoint list
+  summary: Mencantumkan titik akhir yang tersedia untuk CDN.
+  description: ''
+  syntax: >-
+    az cdn endpoint list --profile-name
+                         --resource-group
+  examples:
+  - summary: Mencantumkan semua titik akhir dalam profil CDN tertentu.
+    syntax: az cdn endpoint list -g group --profile-name profile-name
+  requiredParameters:
+  - isRequired: true
+    name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cdn/_help.py
+- uid: az_cdn_endpoint_load
+  name: az cdn endpoint load
+  summary: Pra-muat konten untuk titik akhir CDN.
+  description: ''
+  syntax: >-
+    az cdn endpoint load --content-paths
+                         [--ids]
+                         [--name]
+                         [--no-wait]
+                         [--profile-name]
+                         [--resource-group]
+  examples:
+  - summary: Pra-muat konten Javascript dan CSS untuk titik akhir.
+    syntax: az cdn endpoint load -g group -n endpoint --profile-name profile-name --content-paths '/scripts/app.js' '/styles/main.css'
+  requiredParameters:
+  - isRequired: true
+    name: --content-paths
+    summary: Jalur ke konten yang akan dimuat. Jalur harus berupa URL file relatif dari asal.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama titik akhir CDN.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cdn/_help.py
+- uid: az_cdn_endpoint_purge
+  name: az cdn endpoint purge
+  summary: Hapus menyeluruh konten yang telah dimuat sebelumnya untuk titik akhir CDN.
+  description: ''
+  syntax: >-
+    az cdn endpoint purge --content-paths
+                          [--ids]
+                          [--name]
+                          [--no-wait]
+                          [--profile-name]
+                          [--resource-group]
+  examples:
+  - summary: Hapus menyeluruh konten Javascript dan CSS yang telah dimuat sebelumnya.
+    syntax: az cdn endpoint purge -g group -n endpoint --profile-name profile-name --content-paths '/scripts/app.js' '/styles/*'
+  requiredParameters:
+  - isRequired: true
+    name: --content-paths
+    summary: Jalur ke konten yang akan dibersihkan. Dapat menjelaskan jalur file atau direktori kartubebas.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama titik akhir CDN.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cdn/_help.py
+- uid: az_cdn_endpoint_show
+  name: az cdn endpoint show
+  summary: Mendapatkan titik akhir CDN yang sudah ada dengan nama titik akhir yang ditentukan di bawah langganan, grup sumber daya, dan profil yang ditentukan.
+  description: ''
+  syntax: >-
+    az cdn endpoint show [--ids]
+                         [--name]
+                         [--profile-name]
+                         [--resource-group]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama titik akhir CDN.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cdn/_help.py
+- uid: az_cdn_endpoint_start
+  name: az cdn endpoint start
+  summary: Mulai titik akhir CDN.
+  description: ''
+  syntax: >-
+    az cdn endpoint start [--ids]
+                          [--name]
+                          [--no-wait]
+                          [--profile-name]
+                          [--resource-group]
+  examples:
+  - summary: Mulai titik akhir CDN.
+    syntax: az cdn endpoint start -g group -n endpoint --profile-name profile-name
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama titik akhir CDN.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cdn/_help.py
+- uid: az_cdn_endpoint_stop
+  name: az cdn endpoint stop
+  summary: Hentikan titik akhir CDN.
+  description: ''
+  syntax: >-
+    az cdn endpoint stop [--ids]
+                         [--name]
+                         [--no-wait]
+                         [--profile-name]
+                         [--resource-group]
+  examples:
+  - summary: Hentikan titik akhir CDN.
+    syntax: az cdn endpoint stop -g group -n endpoint --profile-name profile-name
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama titik akhir CDN.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cdn/_help.py
+- uid: az_cdn_endpoint_update
+  name: az cdn endpoint update
+  summary: Perbarui titik akhir CDN untuk mengelola cara konten dikirimkan.
+  description: ''
+  syntax: >-
+    az cdn endpoint update [--add]
+                           [--content-types-to-compress]
+                           [--default-origin-group]
+                           [--enable-compression {false, true}]
+                           [--force-string]
+                           [--ids]
+                           [--name]
+                           [--no-http {false, true}]
+                           [--no-https {false, true}]
+                           [--no-wait]
+                           [--origin-host-header]
+                           [--origin-path]
+                           [--profile-name]
+                           [--query-string-caching {BypassCaching, IgnoreQueryString, NotSet, UseQueryString}]
+                           [--remove]
+                           [--resource-group]
+                           [--set]
+                           [--tags]
+  examples:
+  - summary: Nonaktifkan lalu lintas HTTP untuk titik akhir.
+    syntax: az cdn endpoint update -g group -n endpoint --profile-name profile --no-http
+  - summary: Aktifkan pemadatan konten untuk titik akhir.
+    syntax: az cdn endpoint update -g group -n endpoint --profile-name profile --enable-compression
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --content-type-to-compress
+    summary: Daftar tipe isi tempat pemadatan berlaku. Nilai harus berupa jenis MIME yang valid.
+    description: ''
+  - name: --default-origin-group
+    summary: Grup asal yang digunakan untuk asal yang tidak secara eksplisit disertakan dalam grup asal. Dapat ditentukan sebagai ID sumber daya atau nama grup asal titik akhir ini.
+    description: ''
+  - name: --enable-compression
+    parameterValueGroup: false, true
+    summary: Jika pemadatan diaktifkan, konten akan disajikan sebagai dikompresi jika permintaan pengguna untuk versi terkompresi. Konten tidak akan dikompresi pada CDN saat konten yang diminta lebih kecil dari 1 byte atau lebih besar dari 1 MB.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama titik akhir CDN.
+    description: ''
+  - name: --no-http
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah lalu lintas HTTP tidak diizinkan pada titik akhir. Defaultnya adalah mengizinkan lalu lintas HTTP.
+    description: ''
+  - name: --no-https
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah lalu lintas HTTPS tidak diizinkan di titik akhir. Defaultnya adalah mengizinkan lalu lintas HTTPS.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --origin-host-header
+    summary: Header Host untuk mengirim permintaan ke asal ini. Jika Anda membiarkan ini kosong, nama host permintaan menentukan nilai ini. Azure CDN asal, seperti Web Apps, Blob Storage, dan Cloud Services memerlukan nilai header host ini agar sesuai dengan nama host asal secara default.
+    description: ''
+  - name: --origin-path
+    summary: Jalur direktori pada asal yang dapat digunakan Azure CDN untuk mengambil konten.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --query-string-caching
+    parameterValueGroup: BypassCaching, IgnoreQueryString, NotSet, UseQueryString
+    summary: Menentukan bagaimana CDN membuat cache permintaan yang menyertakan string kueri. Anda dapat mengabaikan string kueri apa pun saat penembolokan, melewati penembolokan untuk mencegah permintaan yang berisi string kueri di-cache, atau menyimpan cache setiap permintaan dengan URL unik.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cdn/_help.py
+- uid: az_cdn_endpoint_validate-custom-domain
+  name: az cdn endpoint validate-custom-domain
+  summary: Memvalidasi pemetaan domain kustom untuk memastikannya dipetakan ke titik akhir CDN yang benar di DNS.
+  description: ''
+  syntax: >-
+    az cdn endpoint validate-custom-domain --host-name
+                                           [--ids]
+                                           [--name]
+                                           [--profile-name]
+                                           [--resource-group]
+  examples:
+  - summary: Validasi www.contoso.com domain untuk melihat apakah domain dipetakan ke titik akhir CDN yang benar di DNS.
+    syntax: az cdn endpoint validate-custom-domain -g group -n endpoint --profile-name profile-name --host-name www.contoso.com
+  requiredParameters:
+  - isRequired: true
+    name: --host-name
+    summary: Nama host domain kustom. Harus berupa nama domain.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama titik akhir CDN.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cdn/_help.py
+commands:
+- az_cdn_endpoint_create
+- az_cdn_endpoint_delete
+- az_cdn_endpoint_list
+- az_cdn_endpoint_load
+- az_cdn_endpoint_purge
+- az_cdn_endpoint_rule
+- az_cdn_endpoint_rule_action
+- az_cdn_endpoint_rule_action_add
+- az_cdn_endpoint_rule_action_remove
+- az_cdn_endpoint_rule_action_show
+- az_cdn_endpoint_rule_add
+- az_cdn_endpoint_rule_condition
+- az_cdn_endpoint_rule_condition_add
+- az_cdn_endpoint_rule_condition_remove
+- az_cdn_endpoint_rule_condition_show
+- az_cdn_endpoint_rule_remove
+- az_cdn_endpoint_rule_show
+- az_cdn_endpoint_show
+- az_cdn_endpoint_start
+- az_cdn_endpoint_stop
+- az_cdn_endpoint_update
+- az_cdn_endpoint_validate-custom-domain
+- az_cdn_endpoint_waf
+- az_cdn_endpoint_waf_policy
+- az_cdn_endpoint_waf_policy_remove
+- az_cdn_endpoint_waf_policy_set
+- az_cdn_endpoint_waf_policy_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/28/2022
+  description: Mengelola titik akhir CDN.
+  ms.openlocfilehash: 837426cca668b1c470795f98a0d44af4326dd8c3
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141436031"

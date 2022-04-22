@@ -1,0 +1,211 @@
+### YamlMime:AzureCLIGroup
+uid: az_network_bastion
+name: az network bastion
+summary: Mengelola host Azure bastion.
+description: ''
+directCommands:
+- uid: az_network_bastion_create
+  name: az network bastion create
+  summary: Membuat komputer host Azure bastion.
+  description: ''
+  syntax: >-
+    az network bastion create --name
+                              --public-ip-address
+                              --resource-group
+                              --vnet-name
+                              [--location]
+                              [--tags]
+  examples:
+  - summary: Membuat komputer host Azure bastion. (dibuat otomatis)
+    syntax: az network bastion create --location westus2 --name MyBastionHost --public-ip-address MyPublicIpAddress --resource-group MyResourceGroup --vnet-name MyVnet
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama host bastion.
+    description: ''
+  - isRequired: true
+    name: --public-ip-address
+    summary: Nama atau ID IP publik Azure. SKU IP publik harus Standar.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vnet-name
+    summary: Nama jaringan virtual. Ini harus memiliki subnet yang disebut AzureBastionSubnet.
+    description: ''
+  optionalParameters:
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_bastion_list
+  name: az network bastion list
+  summary: Mencantumkan semua komputer host Azure bastion.
+  description: ''
+  syntax: az network bastion list [--resource-group]
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_bastion_rdp
+  name: az network bastion rdp
+  summary: RDP untuk menargetkan Komputer Virtual menggunakan Tunneling dari Azure Bastion.
+  description: ''
+  syntax: >-
+    az network bastion rdp --target-resource-id
+                           [--ids]
+                           [--name]
+                           [--resource-group]
+                           [--resource-port]
+  examples:
+  - summary: RDP ke komputer virtual menggunakan Azure Bastion.
+    syntax: az network bastion rdp --name MyBastionHost --resource-group MyResourceGroup --target-resource-id vmResourceId
+  requiredParameters:
+  - isRequired: true
+    name: --target-resource-id
+    summary: ResourceId dari Komputer Virtual target.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama host bastion.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-port
+    summary: Port sumber daya VM target tempat bastion akan terhubung.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_bastion_ssh
+  name: az network bastion ssh
+  summary: SSH ke komputer virtual menggunakan Tunneling dari Azure Bastion.
+  description: ''
+  syntax: >-
+    az network bastion ssh --auth-type
+                           --target-resource-id
+                           [--ids]
+                           [--name]
+                           [--resource-group]
+                           [--resource-port]
+                           [--ssh-key]
+                           [--username]
+  examples:
+  - summary: SSH ke komputer virtual menggunakan Azure Bastion menggunakan kata sandi.
+    syntax: az network bastion ssh --name MyBastionHost --resource-group MyResourceGroup --target-resource-id vmResourceId --auth-type password --username xyz
+  - summary: SSH ke komputer virtual menggunakan Azure Bastion menggunakan file kunci ssh.
+    syntax: az network bastion ssh --name MyBastionHost --resource-group MyResourceGroup --target-resource-id vmResourceId --auth-type ssh-key --username xyz --ssh-key C:/filepath/sshkey.pem
+  - summary: SSH ke komputer virtual menggunakan Azure Bastion menggunakan AAD.
+    syntax: az network bastion ssh --name MyBastionHost --resource-group MyResourceGroup --target-resource-id vmResourceId --auth-type AAD
+  requiredParameters:
+  - isRequired: true
+    name: --auth-type
+    summary: Jenis autentikasi yang digunakan untuk koneksi SSH.
+    description: ''
+  - isRequired: true
+    name: --target-resource-id
+    summary: ResourceId dari Komputer Virtual target.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama host bastion.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-port
+    summary: Port sumber daya VM target tempat bastion akan terhubung.
+    description: ''
+  - name: --ssh-key
+    summary: Lokasi file kunci SSH untuk koneksi SSH.
+    description: ''
+  - name: --nama pengguna
+    summary: Nama pengguna untuk koneksi SSH.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_bastion_tunnel
+  name: terowongan bastion jaringan az
+  summary: Buka terowongan melalui Azure bastion ke komputer virtual target.
+  description: ''
+  syntax: >-
+    az network bastion tunnel --port
+                              --resource-port
+                              --target-resource-id
+                              [--ids]
+                              [--name]
+                              [--resource-group]
+                              [--timeout]
+  examples:
+  - summary: Buka terowongan melalui Azure bastion ke komputer virtual target.
+    syntax: az network bastion tunnel --name MyBastionHost --resource-group MyResourceGroup --target-resource-id vmResourceId --resource-port 111 --port 222
+  requiredParameters:
+  - isRequired: true
+    name: --port
+    summary: Port lokal yang digunakan untuk penerowongan.
+    description: ''
+  - isRequired: true
+    name: --resource-port
+    summary: Port sumber daya VM target tempat bastion akan terhubung.
+    description: ''
+  - isRequired: true
+    name: --target-resource-id
+    summary: ResourceId dari Komputer Virtual target.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama host bastion.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --timeout
+    summary: Waktu habis untuk koneksi ke terowongan host bastion.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+commands:
+- az_network_bastion_create
+- az_network_bastion_list
+- az_network_bastion_rdp
+- az_network_bastion_ssh
+- az_network_bastion_tunnel
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/09/2022
+  description: Mengelola host Azure bastion.
+  ms.openlocfilehash: 458a3370058f22a530855a198eb25e6baf5fa928
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141451926"

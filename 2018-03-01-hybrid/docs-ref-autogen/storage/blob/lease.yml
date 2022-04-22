@@ -1,0 +1,348 @@
+### YamlMime:AzureCLIGroup
+uid: az_storage_blob_lease
+name: az storage blob lease
+summary: Mengelola penyewaan blob penyimpanan.
+description: ''
+directCommands:
+- uid: az_storage_blob_lease_acquire
+  name: az storage blob lease acquire
+  summary: Minta sewa baru.
+  description: ''
+  syntax: >-
+    az storage blob lease acquire --blob-name
+                                  --container-name
+                                  [--account-key]
+                                  [--account-name]
+                                  [--connection-string]
+                                  [--if-match]
+                                  [--if-modified-since]
+                                  [--if-none-match]
+                                  [--if-unmodified-since]
+                                  [--lease-duration]
+                                  [--proposed-lease-id]
+                                  [--sas-token]
+                                  [--timeout]
+  examples:
+  - summary: Minta sewa baru.
+    syntax: az storage blob lease acquire -b myblob -c mycontainer --account-name mystorageaccount --account-key 0000-0000
+  requiredParameters:
+  - isRequired: true
+    name: --blob-name -b
+    summary: Nama blob.
+    description: ''
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya cocok dengan nilai yang ditentukan.
+    description: ''
+  - name: --if-modified-since
+    summary: Dimulai hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya tidak cocok dengan nilai yang ditentukan. Tentukan karakter kartubebas (\*) untuk melakukan operasi hanya jika sumber daya tidak ada, dan gagalkan operasi jika memang ada.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Dimulai hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --lease-duration
+    defaultValue: "-1"
+    summary: Menentukan durasi sewa, dalam detik, atau negatif satu (-1) untuk sewa yang tidak pernah kedaluwarsa. Sewa yang tidak terbatas bisa antara 15 dan 60 detik. Durasi sewa tidak dapat diubah menggunakan pembaruan atau perubahan. Defaultnya adalah -1 (sewa tak terbatas).
+    description: ''
+  - name: --proposed-lease-id
+    summary: ID sewa yang diusulkan, dalam format string GUID. Blob service mengembalikan 400 (Permintaan tidak valid) jika ID sewa yang diusulkan tidak dalam format yang benar.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_blob_lease_break
+  name: az storage blob lease break
+  summary: Memutuskan sewa, jika blob memiliki sewa aktif.
+  description: Setelah sewa rusak, sewa tidak dapat diperpanjang. Setiap permintaan yang diotorisasi dapat memutus sewa; permintaan tidak diperlukan untuk menentukan ID sewa yang cocok. Ketika sewa rusak, periode istirahat sewa diizinkan untuk berlalu, selama waktu itu tidak ada operasi sewa kecuali istirahat dan pelepasan dapat dilakukan pada blob. Ketika sewa berhasil rusak, respons menunjukkan interval dalam hitungan detik sampai sewa baru dapat diperoleh.   Sewa yang telah rusak juga dapat dirilis, dalam hal ini klien lain dapat segera memperoleh sewa pada blob.
+  syntax: >-
+    az storage blob lease break --blob-name
+                                --container-name
+                                [--account-key]
+                                [--account-name]
+                                [--connection-string]
+                                [--if-match]
+                                [--if-modified-since]
+                                [--if-none-match]
+                                [--if-unmodified-since]
+                                [--lease-break-period]
+                                [--sas-token]
+                                [--timeout]
+  requiredParameters:
+  - isRequired: true
+    name: --blob-name -b
+    summary: Nama blob.
+    description: ''
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya cocok dengan nilai yang ditentukan.
+    description: ''
+  - name: --if-modified-since
+    summary: Dimulai hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya tidak cocok dengan nilai yang ditentukan. Tentukan karakter kartubebas (\*) untuk melakukan operasi hanya jika sumber daya tidak ada, dan gagalkan operasi jika memang ada.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Dimulai hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --lease-break-period
+    summary: Untuk operasi jeda, ini adalah durasi detik yang diusulkan bahwa sewa harus dilanjutkan sebelum rusak, antara 0 dan 60 detik. Periode istirahat ini hanya digunakan jika lebih pendek dari waktu yang tersisa pada sewa. Jika lebih lama, waktu yang tersisa pada sewa digunakan. Sewa baru tidak akan tersedia sebelum periode istirahat berakhir, tetapi sewa dapat ditahan lebih lama dari periode istirahat. Jika header ini tidak muncul dengan operasi pemutusan, sewa durasi tetap berhenti setelah periode sewa yang tersisa berlalu, dan sewa tak terbatas segera berhenti.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_blob_lease_change
+  name: az storage blob lease change
+  summary: Mengubah ID sewa sewa aktif.
+  description: Perubahan harus mencakup ID sewa saat ini dan ID sewa baru.
+  syntax: >-
+    az storage blob lease change --blob-name
+                                 --container-name
+                                 --lease-id
+                                 --proposed-lease-id
+                                 [--account-key]
+                                 [--account-name]
+                                 [--connection-string]
+                                 [--if-match]
+                                 [--if-modified-since]
+                                 [--if-none-match]
+                                 [--if-unmodified-since]
+                                 [--sas-token]
+                                 [--timeout]
+  requiredParameters:
+  - isRequired: true
+    name: --blob-name -b
+    summary: Nama blob.
+    description: ''
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --lease-id
+    summary: Diperlukan jika blob memiliki sewa aktif.
+    description: ''
+  - isRequired: true
+    name: --proposed-lease-id
+    summary: ID sewa yang diusulkan, dalam format string GUID. Blob service mengembalikan 400 (Permintaan tidak valid) jika ID sewa yang diusulkan tidak dalam format yang benar.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya cocok dengan nilai yang ditentukan.
+    description: ''
+  - name: --if-modified-since
+    summary: Dimulai hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya tidak cocok dengan nilai yang ditentukan. Tentukan karakter kartubebas (\*) untuk melakukan operasi hanya jika sumber daya tidak ada, dan gagalkan operasi jika memang ada.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Dimulai hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_blob_lease_release
+  name: rilis sewa blob penyimpanan az
+  summary: Melepaskan sewa.
+  description: Sewa dapat dirilis jika ID sewa yang ditentukan pada permintaan cocok dengan yang terkait dengan blob. Melepaskan sewa memungkinkan klien lain untuk segera memperoleh sewa untuk blob segera setelah rilis selesai.
+  syntax: >-
+    az storage blob lease release --blob-name
+                                  --container-name
+                                  --lease-id
+                                  [--account-key]
+                                  [--account-name]
+                                  [--connection-string]
+                                  [--if-match]
+                                  [--if-modified-since]
+                                  [--if-none-match]
+                                  [--if-unmodified-since]
+                                  [--sas-token]
+                                  [--timeout]
+  requiredParameters:
+  - isRequired: true
+    name: --blob-name -b
+    summary: Nama blob.
+    description: ''
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --lease-id
+    summary: ID Sewa untuk sewa aktif.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya cocok dengan nilai yang ditentukan.
+    description: ''
+  - name: --if-modified-since
+    summary: Dimulai hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya tidak cocok dengan nilai yang ditentukan. Tentukan karakter kartubebas (\*) untuk melakukan operasi hanya jika sumber daya tidak ada, dan gagalkan operasi jika memang ada.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Dimulai hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_blob_lease_renew
+  name: perpanjangan sewa blob penyimpanan az
+  summary: Perpanjang sewa.
+  description: ''
+  syntax: >-
+    az storage blob lease renew --blob-name
+                                --container-name
+                                --lease-id
+                                [--account-key]
+                                [--account-name]
+                                [--connection-string]
+                                [--if-match]
+                                [--if-modified-since]
+                                [--if-none-match]
+                                [--if-unmodified-since]
+                                [--sas-token]
+                                [--timeout]
+  examples:
+  - summary: Perpanjang sewa.
+    syntax: az storage blob lease renew -b myblob -c mycontainer --lease-id "32fe23cd-4779-4919-adb3-357e76c9b1bb" --account-name mystorageaccount --account-key 0000-0000
+  requiredParameters:
+  - isRequired: true
+    name: --blob-name -b
+    summary: Nama blob.
+    description: ''
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --lease-id
+    summary: ID Sewa untuk sewa aktif.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya cocok dengan nilai yang ditentukan.
+    description: ''
+  - name: --if-modified-since
+    summary: Dimulai hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header ini untuk melakukan operasi hanya jika ETag sumber daya tidak cocok dengan nilai yang ditentukan. Tentukan karakter kartubebas (\*) untuk melakukan operasi hanya jika sumber daya tidak ada, dan gagalkan operasi jika memang ada.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Dimulai hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+commands:
+- az_storage_blob_lease_acquire
+- az_storage_blob_lease_break
+- az_storage_blob_lease_change
+- az_storage_blob_lease_release
+- az_storage_blob_lease_renew
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/29/2022
+  description: Mengelola penyewaan blob penyimpanan.
+  ms.openlocfilehash: 0560637f80c97f224134ff05cef5a33062139efe
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141425411"

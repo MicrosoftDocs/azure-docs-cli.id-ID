@@ -1,0 +1,397 @@
+### YamlMime:AzureCLIGroup
+uid: az_disk
+name: az disk
+summary: Mengelola Disk Terkelola Azure.
+description: >-
+  Azure Virtual Machines menggunakan disk sebagai tempat untuk menyimpan sistem operasi, aplikasi, dan data. Semua komputer virtual Azure memiliki setidaknya dua disk: Disk sistem operasi, dan disk sementara. Disk sistem operasi dibuat dari gambar, dan disk sistem operasi dan gambar sebenarnya adalah hard disk virtual (VHD) yang disimpan di akun penyimpanan Azure. Komputer virtual juga dapat memiliki satu atau beberapa disk data, yang juga disimpan sebagai VHD.
+
+  Azure Unmanaged Data Disks memiliki ukuran maksimum 4095 GB. Untuk menggunakan didk yang lebih besar dari 4095 GB, gunakan [Disk Terkelola Azure](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).
+directCommands:
+- uid: az_disk_create
+  name: az disk create
+  summary: Membuat disk terkelola.
+  description: ''
+  syntax: >-
+    az disk create --name
+                   --resource-group
+                   [--disk-iops-read-only]
+                   [--disk-mbps-read-only]
+                   [--enable-bursting {false, true}]
+                   [--gallery-image-reference]
+                   [--gallery-image-reference-lun]
+                   [--image-reference]
+                   [--image-reference-lun]
+                   [--location]
+                   [--logical-sector-size]
+                   [--max-shares]
+                   [--no-wait]
+                   [--os-type {Linux, Windows}]
+                   [--size-gb]
+                   [--sku {Premium_LRS, Standard_LRS}]
+                   [--source]
+                   [--source-storage-account-id]
+                   [--tags]
+                   [--tier]
+                   [--zone {1, 2, 3}]
+  examples:
+  - summary: Buat disk terkelola dengan mengimpor dari uri blob.
+    syntax: az disk create -g MyResourceGroup -n MyDisk --source https://vhd1234.blob.core.windows.net/vhds/osdisk1234.vhd
+  - summary: Buat disk terkelola kosong.
+    syntax: az disk create -g MyResourceGroup -n MyDisk --size-gb 10
+  - summary: Buat disk terkelola kosong dengan bursting diaktifkan.
+    syntax: az disk create -g MyResourceGroup -n MyDisk --size-gb 1024 --location centraluseuap --enable-bursting
+  - summary: Buat disk terkelola dengan menyalin disk atau rekam jepret yang ada.
+    syntax: az disk create -g MyResourceGroup -n MyDisk2 --source MyDisk
+  - summary: Membuat disk di zona ketersediaan di wilayah "US Timur 2"
+    syntax: az disk create -g MyResourceGroup -n MyDisk --size-gb 10 --location eastus2 --zone 1
+  - summary: Buat disk dari gambar.
+    syntax: az disk create -g MyResourceGroup -n MyDisk --image-reference Canonical:UbuntuServer:18.04-LTS:18.04.202002180
+  - summary: Membuat disk dari Disk OS dari versi gambar galeri
+    syntax: az disk create -g MyResourceGroup -n MyDisk --gallery-image-reference /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.Compute/galleries/myGallery/images/myImage/versions/1.0.0
+  - summary: Membuat disk dari Disk OS versi terbaru dalam gambar galeri
+    syntax: az disk create -g MyResourceGroup -n MyDisk --gallery-image-reference /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.Compute/galleries/myGallery/images/myImage
+  - summary: Membuat disk dari Disk Data dari gambar galeri
+    syntax: az disk create -g MyResourceGroup -n MyDisk --gallery-image-reference /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.Compute/galleries/myGallery/images/myImage/versions/1.0.0 --gallery-image-reference-lun 0
+  - summary: Buat disk dengan jumlah total IOPS dan batasan throughput total (MBps).
+    syntax: az disk create -g MyResourceGroup -n MyDisk --size-gb 10 --sku UltraSSD_LRS --disk-iops-read-only 200 --disk-mbps-read-only 30
+  - summary: Buat disk dan tentukan jumlah maksimum VM yang dapat dilampirkan ke disk secara bersamaan.
+    syntax: az disk create -g MyResourceGroup -n MyDisk --size-gb 256 --max-shares 2 -l centraluseuap
+  - summary: Buat disk dan kaitkan dengan sumber daya akses disk.
+    syntax: az disk create -g MyResourceGroup -n MyDisk --size-gb 10 --network-access-policy AllowPrivate --disk-access MyDiskAccessID
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama disk terkelola.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --disk-iops-read-only
+    summary: Jumlah total IOPS yang akan diizinkan di semua VM yang memasang disk bersama sebagai ReadOnly. Satu operasi dapat ditransfer antara 4k dan 256k byte.
+    description: ''
+  - name: --disk-mbps-read-only
+    summary: Throughput total (MBps) yang akan diizinkan di semua VM yang memasang disk bersama sebagai ReadOnly. MBps berarti jutaan byte per detik - MB di sini menggunakan notasi ISO, dengan kekuatan 10.
+    description: ''
+  - name: --enable-bursting
+    parameterValueGroup: false, true
+    summary: Aktifkan bursting sesuai permintaan di luar target performa disk yang disediakan. Bursting sesuai permintaan dinonaktifkan secara default, dan tidak berlaku untuk disk Ultra.
+    description: ''
+  - name: --gallery-image-reference
+    summary: ID versi gambar Compute Gallery untuk membuat disk.
+    description: ''
+  - name: --gallery-image-reference-lun
+    summary: Jika disk dibuat dari disk data gambar, ini adalah indeks yang menunjukkan disk data mana dalam gambar yang akan digunakan. Untuk disk OS, bidang ini null.
+    description: ''
+  - name: --image-reference
+    summary: ID atau URN (publisher:offer:sku:version) gambar untuk membuat disk.
+    description: ''
+  - name: --image-reference-lun
+    summary: Jika disk dibuat dari disk data gambar, ini adalah indeks yang menunjukkan disk data mana dalam gambar yang akan digunakan. Untuk disk OS, bidang ini null.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`. Jika lokasi tidak ditentukan dan tidak ada lokasi default yang ditentukan, lokasi akan secara otomatis diatur sama dengan grup sumber daya.'
+    description: ''
+  - name: --logical-sector-size
+    summary: Ukuran sektor logis dalam byte untuk disk Ultra. Nilai yang didukung adalah 512 iklan 4096. 4096 adalah default.
+    description: ''
+  - name: --max-shares
+    summary: Jumlah maksimum VM yang dapat dilampirkan ke disk secara bersamaan. Nilai yang lebih besar dari satu menunjukkan disk yang dapat dipasang pada beberapa VM secara bersamaan.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --os-type
+    parameterValueGroup: Linux, Windows
+    summary: Jenis Sistem Operasi Disk.
+    description: ''
+  - name: --size-gb -z
+    summary: 'Ukuran dalam GB. Ukuran maksimum: 4095 GB (disk pratinjau tertentu bisa lebih besar).'
+    description: ''
+  - name: --sku
+    defaultValue: Premium_LRS
+    parameterValueGroup: Premium_LRS, Standard_LRS
+    summary: SKU penyimpanan yang mendasar.
+    description: ''
+  - name: --source
+    summary: Sumber untuk membuat disk/rekam jepret dari, termasuk uri blob yang tidak dikelola, id atau nama disk terkelola, atau id atau nama rekam jepret.
+    description: ''
+  - name: --source-storage-account-id
+    summary: Digunakan saat blob sumber berada dalam langganan yang berbeda.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --tier
+    summary: 'Tingkat performa disk (misalnya, P4, S10) seperti yang dijelaskan di sini: https://azure.microsoft.com/pricing/details/managed-disks/. Tidak berlaku untuk disk Ultra.'
+    description: ''
+  - name: --zone
+    parameterValueGroup: 1, 2, 3
+    summary: Zona ketersediaan untuk menyediakan sumber daya.
+    description: ''
+- uid: az_disk_delete
+  name: az disk delete
+  summary: Menghapus disk terkelola.
+  description: ''
+  syntax: >-
+    az disk delete [--ids]
+                   [--name]
+                   [--no-wait]
+                   [--resource-group]
+                   [--yes]
+  examples:
+  - summary: Menghapus disk terkelola. (dibuat otomatis)
+    syntax: az disk delete --name MyManagedDisk --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama disk terkelola.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_disk_grant-access
+  name: az disk grant-access
+  summary: Berikan akses sumber daya ke disk terkelola.
+  description: ''
+  syntax: >-
+    az disk grant-access --duration-in-seconds
+                         [--ids]
+                         [--name]
+                         [--resource-group]
+  examples:
+  - summary: Berikan akses baca sumber daya ke disk terkelola. (dibuat otomatis)
+    syntax: az disk grant-access --access-level Read --duration-in-seconds 3600 --name MyManagedDisk --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --duration-in-seconds
+    summary: Durasi waktu dalam detik hingga akses SAS kedaluwarsa.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama disk terkelola.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_disk_list
+  name: az disk list
+  summary: Mencantumkan disk terkelola.
+  description: ''
+  syntax: az disk list [--resource-group]
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_disk_revoke-access
+  name: az disk revoke-access
+  summary: Mencabut akses baca sumber daya ke disk terkelola.
+  description: ''
+  syntax: >-
+    az disk revoke-access [--ids]
+                          [--name]
+                          [--resource-group]
+  examples:
+  - summary: Mencabut akses baca sumber daya ke disk terkelola. (dibuat otomatis)
+    syntax: az disk revoke-access --ids $id
+  - summary: Mencabut akses baca sumber daya ke disk terkelola. (dibuat otomatis)
+    syntax: az disk revoke-access --name MyManagedDisk --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama disk terkelola.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_disk_show
+  name: az disk show
+  summary: Mendapatkan informasi tentang disk.
+  description: ''
+  syntax: >-
+    az disk show [--ids]
+                 [--name]
+                 [--resource-group]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama disk terkelola.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_disk_update
+  name: az disk update
+  summary: Memperbarui disk terkelola.
+  description: ''
+  syntax: >-
+    az disk update [--add]
+                   [--disk-iops-read-only]
+                   [--disk-mbps-read-only]
+                   [--enable-bursting {false, true}]
+                   [--force-string]
+                   [--ids]
+                   [--max-shares]
+                   [--name]
+                   [--no-wait]
+                   [--remove]
+                   [--resource-group]
+                   [--set]
+                   [--size-gb]
+                   [--sku {Premium_LRS, Standard_LRS}]
+  examples:
+  - summary: Perbarui disk terkelola dan kaitkan dengan sumber daya akses disk.
+    syntax: az disk update --name MyManagedDisk --resource-group MyResourceGroup --network-access-policy AllowPrivate --disk-access MyDiskAccessID
+  - summary: Memperbarui disk terkelola. (dibuat otomatis)
+    syntax: az disk update --name MyManagedDisk --resource-group MyResourceGroup --size-gb 20
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --disk-iops-read-only
+    summary: Jumlah total IOPS yang akan diizinkan di semua VM yang memasang disk bersama sebagai ReadOnly. Satu operasi dapat ditransfer antara 4k dan 256k byte.
+    description: ''
+  - name: --disk-mbps-read-only
+    summary: Throughput total (MBps) yang akan diizinkan di semua VM yang memasang disk bersama sebagai ReadOnly. MBps berarti jutaan byte per detik - MB di sini menggunakan notasi ISO, dengan kekuatan 10.
+    description: ''
+  - name: --enable-bursting
+    parameterValueGroup: false, true
+    summary: Aktifkan bursting sesuai permintaan di luar target performa disk yang disediakan. Bursting sesuai permintaan dinonaktifkan secara default, dan tidak berlaku untuk disk Ultra.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --max-shares
+    summary: Jumlah maksimum VM yang dapat dilampirkan ke disk secara bersamaan. Nilai yang lebih besar dari satu menunjukkan disk yang dapat dipasang pada beberapa VM secara bersamaan.
+    description: ''
+  - name: --name -n
+    summary: Nama disk terkelola.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --size-gb -z
+    summary: 'Ukuran dalam GB. Ukuran maksimum: 4095 GB (disk pratinjau tertentu bisa lebih besar).'
+    description: ''
+  - name: --sku
+    parameterValueGroup: Premium_LRS, Standard_LRS
+    summary: SKU penyimpanan yang mendasar.
+    description: ''
+- uid: az_disk_wait
+  name: az disk wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi disk terkelola terpenuhi.
+  description: ''
+  syntax: >-
+    az disk wait [--created]
+                 [--custom]
+                 [--deleted]
+                 [--exists]
+                 [--ids]
+                 [--interval]
+                 [--name]
+                 [--resource-group]
+                 [--timeout]
+                 [--updated]
+  examples:
+  - summary: Tempatkan CLI dalam status menunggu hingga kondisi disk terkelola terpenuhi. (dibuat otomatis)
+    syntax: az disk wait --created --name MyManagedDisk --resource-group MyResourceGroup
+  - summary: Tempatkan CLI dalam status menunggu hingga kondisi disk terkelola terpenuhi. (dibuat otomatis)
+    syntax: az disk wait --deleted --name MyManagedDisk --resource-group MyResourceGroup --subscription mysubscription
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --name -n
+    summary: Nama disk terkelola.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --diperbarui
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_disk_create
+- az_disk_delete
+- az_disk_grant-access
+- az_disk_list
+- az_disk_revoke-access
+- az_disk_show
+- az_disk_update
+- az_disk_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: >-
+    Azure Virtual Machines menggunakan disk sebagai tempat untuk menyimpan sistem operasi, aplikasi, dan data. Semua komputer virtual Azure memiliki setidaknya dua disk: Disk sistem operasi, dan disk sementara. Disk sistem operasi dibuat dari gambar, dan disk sistem operasi dan gambar sebenarnya adalah hard disk virtual (VHD) yang disimpan di akun penyimpanan Azure. Komputer virtual juga dapat memiliki satu atau beberapa disk data, yang juga disimpan sebagai VHD.
+
+    Azure Unmanaged Data Disks memiliki ukuran maksimum 4095 GB. Untuk menggunakan didk yang lebih besar dari 4095 GB, gunakan [Disk Terkelola Azure](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).
+  ms.openlocfilehash: 1b6e18ad087ddcd3d5f5543e8cd6bc796a9a21e4
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141460998"

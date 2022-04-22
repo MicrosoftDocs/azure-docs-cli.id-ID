@@ -1,0 +1,391 @@
+### YamlMime:AzureCLIGroup
+uid: az_acs
+name: az acs
+summary: Mengelola Azure Container Services.
+description: >-
+  ACS akan dihentikan sebagai layanan mandiri pada 31 Januari 2020.
+
+
+  Jika Anda menggunakan orkestrator Kubernetes, silakan migrasi ke AKS pada 31 Januari 2020.
+directCommands:
+- uid: az_acs_browse
+  name: az acs browse
+  summary: Menampilkan dasbor untuk orkestrator kontainer layanan di browser web.
+  description: ''
+  syntax: >-
+    az acs browse --name
+                  --resource-group
+                  [--disable-browser]
+                  [--ssh-key-file]
+  examples:
+  - summary: Menampilkan dasbor untuk orkestrator kontainer layanan di browser web. (dibuat otomatis)
+    syntax: az acs browse --name MyContainerService --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama layanan kontainer. Anda dapat mengonfigurasi default menggunakan `az configure --defaults acs=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --disable-browser
+    summary: Jangan buka browser setelah membuka proksi ke antarmuka pengguna web kluster.
+    description: ''
+  - name: --ssh-key-file
+    summary: Jika mengatur jalur ke kunci SSH untuk digunakan, hanya berlaku untuk DCOS.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acs/_help.py
+- uid: az_acs_create
+  name: az acs create
+  summary: Buat layanan kontainer baru.
+  description: ''
+  syntax: >-
+    az acs create --name
+                  --resource-group
+                  [--admin-password]
+                  [--admin-username]
+                  [--agent-count]
+                  [--agent-osdisk-size]
+                  [--agent-ports]
+                  [--agent-profiles]
+                  [--agent-storage-profile {ManagedDisks, StorageAccount}]
+                  [--agent-vm-size]
+                  [--agent-vnet-subnet-id]
+                  [--api-version]
+                  [--client-secret]
+                  [--dns-prefix]
+                  [--generate-ssh-keys]
+                  [--location]
+                  [--master-count]
+                  [--master-first-consecutive-static-ip]
+                  [--master-osdisk-size]
+                  [--master-profile]
+                  [--master-storage-profile {ManagedDisks, StorageAccount}]
+                  [--master-vm-size]
+                  [--master-vnet-subnet-id]
+                  [--no-wait]
+                  [--orchestrator-type {Custom, DCOS, DockerCE, Kubernetes, Swarm}]
+                  [--orchestrator-version]
+                  [--service-principal]
+                  [--ssh-key-value]
+                  [--tags]
+                  [--validate]
+                  [--windows]
+  examples:
+  - summary: Buat kluster DCOS dengan kunci SSH yang ada.
+    syntax: >-
+      az acs create --orchestrator-type DCOS -g MyResourceGroup -n MyContainerService \
+        --ssh-key-value /path/to/publickey
+  - summary: Buat kluster DCOS dengan dua kumpulan agen.
+    syntax: >-
+      az acs create -g MyResourceGroup -n MyContainerService --agent-profiles '[ \
+        { \
+          "name": "agentpool1" \
+        }, \
+        { \
+          "name": "agentpool2" \
+        }]'
+  - summary: Buat kluster DCOS di mana kumpulan agen kedua memiliki vmSize yang ditentukan.
+    syntax: >-
+      az acs create -g MyResourceGroup -n MyContainerService --agent-profiles '[ \
+        { \
+          "name": "agentpool1" \
+        }, \
+        { \
+          "name": "agentpool2", \
+          "vmSize": "Standard_D2" \
+        }]'
+  - summary: Buat kluster DCOS dengan profil agen yang ditentukan dari file.
+    syntax: az acs create -g MyResourceGroup -n MyContainerService --agent-profiles MyAgentProfiles.json
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama layanan kontainer. Anda dapat mengonfigurasi default menggunakan `az configure --defaults acs=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --admin-password
+    summary: Kata sandi adminstrasi untuk simpul Windows. Hanya tersedia jika --windows=true.
+    description: ''
+  - name: --admin-username -u
+    defaultValue: azureuser
+    summary: Nama pengguna untuk Virtual Machines Linux.
+    description: ''
+  - name: --agent-count
+    defaultValue: "3"
+    summary: Atur jumlah default agen untuk kumpulan agen.
+    description: Perhatikan bahwa kluster DC/OS akan memiliki 1 atau 2 agen publik tambahan.
+  - name: --agent-osdisk-size
+    summary: 'Fitur dalam pratinjau, hanya di kanadacentral, kanada, centralindia, koreasouth, koreacentral, southindia, uksouth, ukwest, westcentralus, westindia, westus2. Atur ukuran disk default untuk vm kumpulan agen. Unit dalam GB. Default: ukuran disk vmsize yang sesuai.'
+    description: ''
+  - name: --agent-ports
+    summary: 'Fitur dalam pratinjau, hanya di kanadacentral, kanada, centralindia, koreasouth, koreacentral, southindia, uksouth, ukwest, westcentralus, westindia, westus2. Atur port default yang terekspos pada kumpulan agen. Hanya dapat digunakan untuk non-Kubernetes. Default: 8080.4000.80.'
+    description: ''
+  - name: --agent-profiles -a
+    summary: Fitur dalam pratinjau, hanya di kanadacentral, kanada, centralindia, koreasouth, koreacentral, southindia, uksouth, ukwest, westcentralus, westindia, westus2. Representasi file atau kamus profil agen. Perhatikan bahwa ini akan mengambil alih pengaturan agen apa pun setelah diatur.
+    description: ''
+  - name: --agent-storage-profile
+    parameterValueGroup: ManagedDisks, StorageAccount
+    summary: 'Fitur dalam pratinjau, hanya di kanadacentral, kanada, centralindia, koreasouth, koreacentral, southindia, uksouth, ukwest, westcentralus, westindia, westus2. Atur profil penyimpanan default untuk kumpulan agen. Default: bervariasi berdasarkan Orchestrator.'
+    description: ''
+  - name: --agent-vm-size
+    defaultValue: Standard_D2_v2
+    summary: Atur ukuran default untuk vm kumpulan agen.
+    description: ''
+  - name: --agent-vnet-subnet-id
+    summary: 'Fitur dalam pratinjau, hanya di kanadacentral, kanada, centralindia, koreasouth, koreacentral, southindia, uksouth, ukwest, westcentralus, westindia, westus2. Atur id subnet vnet kustom default untuk kumpulan agen. Agen catatan perlu menggunakan vnet yang sama jika kumpulan master. Default: "".'
+    description: ''
+  - name: --api-version
+    summary: 'Fitur dalam pratinjau, hanya di kanadacentral, kanada, centralindia, koreasouth, koreacentral, southindia, uksouth, ukwest, westcentralus, westindia, westus2. Gunakan ACS versi API untuk melakukan operasi az acs. Opsi yang tersedia: 2017-01-31, 2017-07-01. Default: versi terbaru untuk lokasi.'
+    description: ''
+  - name: --client-secret
+    summary: Rahasia yang terkait dengan perwakilan layanan. Argumen ini diperlukan jika `--service-principal` ditentukan.
+    description: ''
+  - name: --dns-prefix -d
+    summary: Mengatur awalan Nama domain untuk kluster. Perangkaian nama domain dan zona DNS regional membentuk nama domain yang sepenuhnya memenuhi syarat yang terkait dengan alamat IP publik.
+    description: ''
+  - name: --generate-ssh-keys
+    summary: Hasilkan file kunci publik dan privat SSH jika hilang.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --master-count
+    defaultValue: "1"
+    summary: Jumlah master untuk kluster.
+    description: ''
+  - name: --master-first-consecutive-static-ip
+    defaultValue: 10.240.255.5
+    summary: Fitur dalam pratinjau, hanya di kanadacentral, kanada, centralindia, koreasouth, koreacentral, southindia, uksouth, ukwest, westcentralus, westindia, westus2. Ip berturut-turut pertama yang digunakan untuk menentukan blok ip statis.
+    description: ''
+  - name: --master-osdisk-size
+    summary: 'Fitur dalam pratinjau, hanya di kanadacentral, kanada, centralindia, koreasouth, koreacentral, southindia, uksouth, ukwest, westcentralus, westindia, westus2. Ukuran disk untuk kumpulan master vm. Unit dalam GB. Default: ukuran disk vmsize yang sesuai.'
+    description: ''
+  - name: --master-profile -m
+    summary: Fitur dalam pratinjau, hanya di kanadacentral, kanada, centralindia, koreasouth, koreacentral, southindia, uksouth, ukwest, westcentralus, westindia, westus2. Representasi file atau kamus profil master. Perhatikan bahwa ini akan mengambil alih pengaturan master apa pun setelah diatur.
+    description: ''
+  - name: --master-storage-profile
+    parameterValueGroup: ManagedDisks, StorageAccount
+    summary: 'Fitur dalam pratinjau, hanya di kanadacentral, kanada, centralindia, koreasouth, koreacentral, southindia, uksouth, ukwest, westcentralus, westindia, westus2. Default: bervariasi berdasarkan Orchestrator.'
+    description: ''
+  - name: --master-vm-size
+    defaultValue: Standard_D2_v2
+    summary: Fitur dalam pratinjau, hanya di kanadacentral, kanada, centralindia, koreasouth, koreacentral, southindia, uksouth, ukwest, westcentralus, westindia, westus2.
+    description: ''
+  - name: --master-vnet-subnet-id
+    summary: 'Fitur dalam pratinjau, hanya di kanadacentral, kanada, centralindia, koreasouth, koreacentral, southindia, uksouth, ukwest, westcentralus, westindia, westus2. Id subnet vnet kustom. Agen catatan perlu menggunakan vnet yang sama jika kumpulan master. Default: "".'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --orchestrator-type -t
+    defaultValue: DCOS
+    parameterValueGroup: Custom, DCOS, DockerCE, Kubernetes, Swarm
+    summary: Jenis orkestrator yang digunakan untuk mengelola aplikasi pada kluster.
+    description: ''
+  - name: --orchestrator-version
+    summary: Fitur dalam pratinjau, hanya di kanadacentral, kanada, centralindia, koreasouth, koreacentral, southindia, uksouth, ukwest, westcentralus, westindia, westus2. Gunakan Versi Orkestrator untuk menentukan versi semantik untuk orkestrator pilihan Anda.
+    description: ''
+  - name: --service-principal
+    summary: Perwakilan layanan yang digunakan untuk autentikasi ke API Azure.
+    description: Jika tidak ditentukan, perwakilan layanan baru dengan peran kontributor dibuat dan di-cache di $HOME/.azure/acsServicePrincipal.json untuk digunakan oleh perintah berikutnya `az acs` .
+  - name: --ssh-key-value
+    defaultValue: ~\.ssh\id_rsa.pub
+    summary: Konfigurasikan semua komputer linux dengan string kunci publik RSA SSH.  Kunci Anda harus menyertakan tiga bagian, misalnya 'ssh-rsa AAAAB... Snip... UcyupgH azureuser@linuxvm.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --validate
+    summary: Buat dan validasi templat ARM tanpa membuat sumber daya apa pun.
+    description: ''
+  - name: --windows
+    summary: Jika true, atur osType default kumpulan agen menjadi Windows.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acs/_help.py
+- uid: az_acs_delete
+  name: az acs delete
+  summary: Menghapus layanan kontainer.
+  description: ''
+  syntax: >-
+    az acs delete --name
+                  --resource-group
+                  [--yes]
+  examples:
+  - summary: Menghapus layanan kontainer. (dibuat otomatis)
+    syntax: az acs delete --name MyContainerService --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama layanan kontainer. Anda dapat mengonfigurasi default menggunakan `az configure --defaults acs=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acs/_help.py
+- uid: az_acs_list
+  name: az acs list
+  summary: Mencantumkan layanan kontainer.
+  description: ''
+  syntax: az acs list [--resource-group]
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acs/_help.py
+- uid: az_acs_list-locations
+  name: az acs list-locations
+  summary: Mencantumkan lokasi tempat Azure Container Service berada dalam pratinjau dan dalam produksi.
+  description: ''
+  syntax: az acs list-locations
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acs/_help.py
+- uid: az_acs_scale
+  name: skala az acs
+  summary: Ubah jumlah agen privat dari layanan kontainer.
+  description: ''
+  syntax: >-
+    az acs scale --name
+                 --new-agent-count
+                 --resource-group
+  examples:
+  - summary: Ubah jumlah agen privat dari layanan kontainer. (dibuat otomatis)
+    syntax: az acs scale --name MyContainerService --new-agent-count 10 --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama layanan kontainer. Anda dapat mengonfigurasi default menggunakan `az configure --defaults acs=<name>`.
+    description: ''
+  - isRequired: true
+    name: --new-agent-count
+    summary: Jumlah agen untuk layanan kontainer.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acs/_help.py
+- uid: az_acs_show
+  name: az acs show
+  summary: Tampilkan detail untuk layanan kontainer.
+  description: ''
+  syntax: >-
+    az acs show --name
+                --resource-group
+  examples:
+  - summary: Tampilkan detail untuk layanan kontainer. (dibuat otomatis)
+    syntax: az acs show --name MyContainerService --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama layanan kontainer. Anda dapat mengonfigurasi default menggunakan `az configure --defaults acs=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acs/_help.py
+- uid: az_acs_wait
+  name: az acs tunggu
+  summary: Tunggu hingga layanan kontainer mencapai status yang diinginkan.
+  description: Jika operasi pada layanan kontainer terganggu atau dimulai dengan `--no-wait`, gunakan perintah ini untuk menunggunya selesai.
+  syntax: >-
+    az acs wait --name
+                --resource-group
+                [--created]
+                [--custom]
+                [--deleted]
+                [--exists]
+                [--interval]
+                [--timeout]
+                [--updated]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama layanan kontainer. Anda dapat mengonfigurasi default menggunakan `az configure --defaults acs=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --diperbarui
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acs/_help.py
+commands:
+- az_acs_browse
+- az_acs_create
+- az_acs_dcos
+- az_acs_dcos_browse
+- az_acs_dcos_install-cli
+- az_acs_delete
+- az_acs_kubernetes
+- az_acs_kubernetes_browse
+- az_acs_kubernetes_get-credentials
+- az_acs_kubernetes_install-cli
+- az_acs_list
+- az_acs_list-locations
+- az_acs_scale
+- az_acs_show
+- az_acs_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/31/2022
+  description: >-
+    ACS akan dihentikan sebagai layanan mandiri pada 31 Januari 2020.
+
+
+    Jika Anda menggunakan orkestrator Kubernetes, silakan migrasi ke AKS pada 31 Januari 2020.
+  ms.openlocfilehash: ccb6c66879a1ff14b2e1c7e19ec36a21ebe2ee3f
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141414952"
