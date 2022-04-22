@@ -1,0 +1,290 @@
+### YamlMime:AzureCLIGroup
+uid: az_scvmm_vm_disk
+name: az scvmm vm disk
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **scvmm** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **disk az scvmm vm** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola Disk Arc untuk Komputer Virtual SCVMM.
+description: ''
+directCommands:
+- uid: az_scvmm_vm_disk_add
+  name: az scvmm vm disk add
+  summary: Tambahkan disk virtual ke komputer virtual.
+  description: ''
+  syntax: >-
+    az scvmm vm disk add --bus
+                         --disk-size
+                         --name
+                         --resource-group
+                         --vm-name
+                         [--bus-type {IDE, SCSI}]
+                         [--lun]
+                         [--no-wait]
+                         [--qos-id]
+                         [--qos-name]
+                         [--vhd-type {Dynamic, Static}]
+  examples:
+  - summary: Buat disk virtual dengan ukuran 100 GB ke komputer virtual dan lampirkan ke pengontrol SCSI Bus 1 Lun 10.
+    syntax: az scvmm vm disk add --subscription contoso-sub --resource-group contoso-rg --vm-name contoso-vm --name disk_2 --bus 1 --lun 10 --bus-type SCSI --disk-size 100
+  requiredParameters:
+  - isRequired: true
+    name: --bus
+    summary: Nomor Bus untuk disk.
+    description: ''
+  - isRequired: true
+    name: --disk-size
+    summary: Ukuran disk dalam GB.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama Disk.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vm-name
+    summary: Nama komputer virtual.
+    description: ''
+  optionalParameters:
+  - name: --bus-type
+    defaultValue: SCSI
+    parameterValueGroup: IDE, SCSI
+    summary: Jenis Bus Disk.
+    description: ''
+  - name: --lun
+    summary: Nomor Lun untuk disk.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --qos-id
+    summary: UUID kebijakan QoS Storage yang akan diterapkan pada disk.
+    description: ''
+  - name: --qos-name
+    summary: Nama Kebijakan QoS Storage yang akan diterapkan pada disk.
+    description: ''
+  - name: --vhd-type
+    defaultValue: Dynamic
+    parameterValueGroup: Dynamic, Static
+    summary: Jenis VHD Disk.
+    description: ''
+- uid: az_scvmm_vm_disk_delete
+  name: az scvmm vm disk delete
+  summary: Menghapus disk komputer virtual.
+  description: ''
+  syntax: >-
+    az scvmm vm disk delete --disks
+                            --resource-group
+                            --vm-name
+                            [--no-wait]
+                            [--yes]
+  examples:
+  - summary: Menghapus disk komputer virtual
+    syntax: az scvmm vm disk delete --subscription contoso-sub --resource-group contoso-rg --vm-name contoso-vm --disks disk_1 disk_2
+  requiredParameters:
+  - isRequired: true
+    name: --disks
+    summary: Nama Disk.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vm-name
+    summary: Nama komputer virtual.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_scvmm_vm_disk_list
+  name: az scvmm vm disk list
+  summary: Ambil daftar disk yang ada di VM.
+  description: ''
+  syntax: >-
+    az scvmm vm disk list --resource-group
+                          --vm-name
+  examples:
+  - summary: Mengambil daftar disk yang ada di VM
+    syntax: az scvmm vm disk list --subscription contoso-sub --resource-group contoso-rg --vm-name contoso-vm
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vm-name
+    summary: Nama komputer virtual.
+    description: ''
+- uid: az_scvmm_vm_disk_show
+  name: az scvmm vm disk show
+  summary: Dapatkan detail disk yang ada di VM.
+  description: ''
+  syntax: >-
+    az scvmm vm disk show --name
+                          --resource-group
+                          --vm-name
+  examples:
+  - summary: Mendapatkan detail disk vm
+    syntax: az scvmm vm disk show --subscription contoso-sub --resource-group contoso-rg --vm-name contoso-vm --name disk_1
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Disk.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vm-name
+    summary: Nama komputer virtual.
+    description: ''
+- uid: az_scvmm_vm_disk_update
+  name: az scvmm vm disk update
+  summary: Memperbarui disk VM.
+  description: ''
+  syntax: >-
+    az scvmm vm disk update --resource-group
+                            --vm-name
+                            [--bus]
+                            [--bus-type {IDE, SCSI}]
+                            [--disk-id]
+                            [--disk-size]
+                            [--lun]
+                            [--name]
+                            [--no-wait]
+                            [--qos-id]
+                            [--qos-name]
+                            [--vhd-type {Dynamic, Static}]
+  examples:
+  - summary: Memperbarui disk VM
+    syntax: az scvmm vm disk update --subscription contoso-sub --resource-group contoso-rg --vm-name contoso-vm --name disk_1 --bus-type IDE --bus 0 --disk-size 40 --vhd-type Dynamic
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vm-name
+    summary: Nama komputer virtual.
+    description: ''
+  optionalParameters:
+  - name: --bus
+    summary: Nomor Bus untuk disk.
+    description: ''
+  - name: --bus-type
+    parameterValueGroup: IDE, SCSI
+    summary: Jenis Bus Disk.
+    description: ''
+  - name: --disk-id
+    summary: UUID of the Disk.
+    description: ''
+  - name: --disk-size
+    summary: Ukuran disk dalam GB.
+    description: ''
+  - name: --lun
+    summary: Nomor Lun untuk disk.
+    description: ''
+  - name: --name -n
+    summary: Nama Disk.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --qos-id
+    summary: UUID kebijakan QoS Storage yang akan diterapkan pada disk.
+    description: ''
+  - name: --qos-name
+    summary: Nama Kebijakan QoS Storage yang akan diterapkan pada disk.
+    description: ''
+  - name: --vhd-type
+    parameterValueGroup: Dynamic, Static
+    summary: Jenis VHD Disk.
+    description: ''
+- uid: az_scvmm_vm_disk_wait
+  name: az scvmm vm disk wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi disk vm terpenuhi.
+  description: ''
+  syntax: >-
+    az scvmm vm disk wait --resource-group
+                          --virtual-machine-name
+                          [--created]
+                          [--custom]
+                          [--deleted]
+                          [--exists]
+                          [--interval]
+                          [--timeout]
+                          [--updated]
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --virtual-machine-name
+    summary: Nama VirtualMachine.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_scvmm_vm_disk_add
+- az_scvmm_vm_disk_delete
+- az_scvmm_vm_disk_list
+- az_scvmm_vm_disk_show
+- az_scvmm_vm_disk_update
+- az_scvmm_vm_disk_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola Disk Arc untuk Komputer Virtual SCVMM.
+  ms.openlocfilehash: eff3edfd13450d310f91008af9400df67c62846f
+  ms.sourcegitcommit: d016676aca62d5461b07446d98cf38e30bba07cd
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/19/2022
+  ms.locfileid: "143907584"

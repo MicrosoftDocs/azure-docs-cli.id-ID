@@ -1,0 +1,94 @@
+### YamlMime:AzureCLIGroup
+uid: az_acr_config_retention
+name: az acr config retention
+summary: Mengelola kebijakan penyimpanan untuk Azure Container Registries.
+description: ''
+directCommands:
+- uid: az_acr_config_retention_show
+  name: az acr config retention show
+  summary: Tampilkan kebijakan penyimpanan yang dikonfigurasi untuk Azure Container Registry.
+  description: ''
+  syntax: >-
+    az acr config retention show --registry
+                                 [--resource-group]
+  examples:
+  - summary: Menampilkan kebijakan penyimpanan yang dikonfigurasi untuk Azure Container Registry
+    syntax: az acr config retention show -r MyRegistry
+  requiredParameters:
+  - isRequired: true
+    name: --registry -r
+    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+- uid: az_acr_config_retention_update
+  name: az acr config retention update
+  summary: Memperbarui kebijakan penyimpanan untuk Azure Container Registry.
+  description: ''
+  syntax: >-
+    az acr config retention update --registry
+                                   --type {UntaggedManifests}
+                                   [--days]
+                                   [--resource-group]
+                                   [--status {disabled, enabled}]
+  examples:
+  - summary: Aktifkan kebijakan penyimpanan untuk Azure Container Registry untuk menghapus manifes yang tidak diberi tag setelah 30 hari.
+    syntax: az acr config retention update -r MyRegistry --status Enabled --days 30 --type UntaggedManifests
+  - summary: Aktifkan kebijakan penyimpanan untuk Azure Container Registry untuk menghapus manifes segera setelah tidak diberi tag.
+    syntax: az acr config retention update -r MyRegistry --status Enabled --days 0 --type UntaggedManifests
+  requiredParameters:
+  - isRequired: true
+    name: --registry -r
+    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    description: ''
+  - isRequired: true
+    name: --type
+    parameterValueGroup: UntaggedManifests
+    summary: Jenis kebijakan penyimpanan.
+    description: ''
+  optionalParameters:
+  - name: --days
+    defaultValue: "7"
+    summary: 'Jumlah hari untuk mempertahankan manifes yang tidak diberi tag setelah itu akan dibersihkan (Rentang: 0 hingga 365). Nilai "0" akan segera menghapus manifes yang tidak diberi tag.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --status
+    parameterValueGroup: disabled, enabled
+    summary: Menunjukkan apakah kebijakan penyimpanan diaktifkan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+commands:
+- az_acr_config_retention_show
+- az_acr_config_retention_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/28/2022
+  description: Mengelola kebijakan penyimpanan untuk Azure Container Registries.
+  ms.openlocfilehash: ecc34501c46d9dd965909a8cf8d838abb6876056
+  ms.sourcegitcommit: d3bae3909ca6297f8ec1fabda40767058c6a6a39
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/15/2022
+  ms.locfileid: "142611413"

@@ -1,21 +1,21 @@
 ---
 title: Menginstal Azure CLI di macOS | Microsoft Docs
 description: Pelajari cara menginstal dan menjalankan Azure CLI di macOS menggunakan pengelola paket homebrew. Azure CLI telah diuji di macOS versi 10.9 dan yang lebih baru.
-author: dbradish-microsoft
-ms.author: dbradish
-manager: barbkess
+author: jiasli
+ms.author: jiasli
+manager: yonzhan
 ms.date: 08/19/2021
 ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: Menginstal azure cli, azure cli macos, macos cli, menginstal azure cli macos
-ms.openlocfilehash: 548fe7d9c8632249aa478eab3335d9b000d9c094
-ms.sourcegitcommit: 9d7e461f68914e3d66f29d030bdf50ae58a4ef8b
+ms.openlocfilehash: 15ecf56d9c16b04adf31c43d8ab81e5c749d8ad6
+ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 01/19/2022
-ms.locfileid: "136921378"
+ms.lasthandoff: 04/22/2022
+ms.locfileid: "144003499"
 ---
 # <a name="install-azure-cli-on-macos"></a>Instal Azure CLI di macOS
 

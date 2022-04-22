@@ -1,0 +1,294 @@
+### YamlMime:AzureCLIGroup
+uid: az_datamigration_sql-managed-instance
+name: az datamigration sql-managed-instance
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **datamigrasi** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az datamigration sql-managed-instance** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola migrasi database ke SQL Managed Instance.
+description: ''
+directCommands:
+- uid: az_datamigration_sql-managed-instance_cancel
+  name: az datamigration sql-managed-instance cancel
+  summary: Hentikan migrasi database yang sedang berlangsung ke SQL Managed Instance.
+  description: ''
+  syntax: >-
+    az datamigration sql-managed-instance cancel --managed-instance-name
+                                                 --migration-operation-id
+                                                 --resource-group
+                                                 --target-db-name
+                                                 [--no-wait]
+  examples:
+  - summary: Hentikan migrasi yang sedang berlangsung untuk database.
+    syntax: az datamigration sql-managed-instance cancel --managed-instance-name "managedInstance1" --migration-operation-id "4124fe90-d1b6-4b50-b4d9-46d02381f59a" --resource-group "testrg" --target-db-name "db1"
+  requiredParameters:
+  - isRequired: true
+    name: --managed-instance-name
+    summary: Nama SQL Managed Instance target.
+    description: ''
+  - isRequired: true
+    name: --migration-operation-id
+    summary: Operasi migrasi pelacakan ID.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --target-db-name
+    summary: Nama database target.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_datamigration_sql-managed-instance_create
+  name: az datamigration sql-managed-instance create
+  summary: Buat migrasi database baru ke SQL Managed Instance tertentu.
+  description: ''
+  syntax: >-
+    az datamigration sql-managed-instance create --managed-instance-name
+                                                 --resource-group
+                                                 --target-db-name
+                                                 [--migration-service]
+                                                 [--no-wait]
+                                                 [--offline-configuration]
+                                                 [--scope]
+                                                 [--source-database-name]
+                                                 [--source-location]
+                                                 [--source-sql-connection]
+                                                 [--target-db-collation]
+                                                 [--target-location]
+  examples:
+  - summary: Buat atau Perbarui sumber daya Migrasi Database dengan fileshare sebagai sumber untuk file cadangan.
+    syntax: az datamigration sql-managed-instance create --managed-instance-name "managedInstance1" --source-location '{\"fileShare\":{\"path\":\"\\\\SharedBackup\\user\",\"password\":\"placeholder\",\"username\":\"Server\\name\"}}' --target-location account-key="abcd" storage-account-resource-id="account.database.windows.net" --migration-service "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/sqlMigrationServices/testagent" --offline-configuration last-backup-name="last_backup_file_name" offline=true --scope "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/instance" --source-database-name "aaa" --source-sql-connection authentication="WindowsAuthentication" data-source="aaa" encrypt-connection=true password="placeholder" trust-server-certificate=true user-name="bbb" --resource-group "testrg" --target-db-name "db1"
+  - summary: Membuat atau Memperbarui sumber daya Migrasi Database dengan penyimpanan Azure Blob sebagai sumber untuk file cadangan.
+    syntax: az datamigration sql-managed-instance create --managed-instance-name "managedInstance1" --source-location '{\"AzureBlob\":{\"storageAccountResourceId\":\"/subscriptions/1111-2222-3333-4444/resourceGroups/RG/prooviders/Microsoft.Storage/storageAccounts/MyStorage\",\"accountKey\":\"======AccountKey====\",\"blobContainerName\":\"ContainerName-X\"}}' --migration-service "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/sqlMigrationServices/testagent" --offline-configuration last-backup-name="last_backup_file_name" offline=true --scope "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/instance" --source-database-name "aaa" --source-sql-connection authentication="WindowsAuthentication" data-source="aaa" encrypt-connection=true password="placeholder" trust-server-certificate=true user-name="bbb" --resource-group "testrg" --target-db-name "db1"
+  requiredParameters:
+  - isRequired: true
+    name: --managed-instance-name
+    summary: Nama SQL Managed Instance target.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --target-db-name
+    summary: Nama database target.
+    description: ''
+  optionalParameters:
+  - name: --migration-service
+    summary: Id Sumber Daya Layanan Migrasi.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --offline-configuration
+    summary: Konfigurasi offline.
+    description: >-
+      Penggunaan: --offline-configuration offline=XX last-backup-name=XX
+
+
+      offline: Nama cadangan-terakhir migrasi offline: Nama cadangan terakhir untuk migrasi offline. Ini opsional untuk migrasi dari berbagi file. Jika tidak disediakan, maka layanan akan menentukan nama file cadangan terakhir berdasarkan file cadangan terbaru yang ada dalam berbagi file.
+  - name: --scope
+    summary: Id sumber daya sumber daya target (SQL VM, SQL Managed Instance, atau SQL DB).
+    description: ''
+  - name: --source-database-name
+    summary: Nama database sumber.
+    description: ''
+  - name: --source-location
+    summary: 'Lokasi sumber cadangan. Nilai yang diharapkan: json-string/json-file/@json-file.'
+    description: ''
+  - name: --source-sql-connection
+    summary: Detail koneksi SQL Server sumber.
+    description: >-
+      Penggunaan: --source-sql-connection data-source=XX authentication=XX user-name=XX password=XX encrypt-connection=XX trust-server-certificate=XX
+
+
+      sumber data: Sumber data.
+
+      autentikasi: Jenis autentikasi.
+
+      nama pengguna: Nama pengguna untuk menyambungkan ke SQL sumber.
+
+      kata sandi: Kata sandi untuk menyambungkan ke SQL sumber.
+
+      encrypt-connection: Apakah akan mengenkripsi koneksi atau tidak.
+
+      trust-server-certificate: Apakah akan mempercayai sertifikat server atau tidak.
+  - name: --target-db-collation
+    summary: Kolase database yang akan digunakan untuk database target.
+    description: ''
+  - name: --target-location
+    summary: Lokasi target untuk menyalin cadangan.
+    description: >-
+      Penggunaan: --target-location storage-account-resource-id=XX account-key=XX
+
+
+      storage-account-resource-id: Id Sumber Daya dari cadangan penyalinan akun penyimpanan.
+
+      kunci akun: Storage Kunci Akun.
+- uid: az_datamigration_sql-managed-instance_cutover
+  name: az datamigration sql-managed-instance cutover
+  summary: Mulai cutover untuk migrasi database online yang sedang berlangsung ke SQL Managed Instance.
+  description: ''
+  syntax: >-
+    az datamigration sql-managed-instance cutover --managed-instance-name
+                                                  --migration-operation-id
+                                                  --resource-group
+                                                  --target-db-name
+                                                  [--no-wait]
+  examples:
+  - summary: Operasi migrasi online langsung untuk database.
+    syntax: az datamigration sql-managed-instance cutover --managed-instance-name "managedInstance1" --migration-operation-id "4124fe90-d1b6-4b50-b4d9-46d02381f59a" --resource-group "testrg" --target-db-name "db1"
+  requiredParameters:
+  - isRequired: true
+    name: --managed-instance-name
+    summary: Nama SQL Managed Instance target.
+    description: ''
+  - isRequired: true
+    name: --migration-operation-id
+    summary: Operasi migrasi pelacakan ID.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --target-db-name
+    summary: Nama database target.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_datamigration_sql-managed-instance_show
+  name: az datamigration sql-managed-instance show
+  summary: Ambil migrasi database yang ditentukan untuk SQL Managed Instance tertentu.
+  description: ''
+  syntax: >-
+    az datamigration sql-managed-instance show --managed-instance-name
+                                               --resource-group
+                                               --target-db-name
+                                               [--expand]
+                                               [--migration-operation-id]
+  examples:
+  - summary: Dapatkan Migrasi database Sql MI dengan parameter perluas.
+    syntax: az datamigration sql-managed-instance show --expand "MigrationStatusDetails" --managed-instance-name "managedInstance1" --resource-group "testrg" --target-db-name "db1"
+  - summary: Dapatkan Migrasi database Sql MI tanpa parameter perluas.
+    syntax: az datamigration sql-managed-instance show --managed-instance-name "managedInstance1" --resource-group "testrg" --target-db-name "db1"
+  requiredParameters:
+  - isRequired: true
+    name: --managed-instance-name
+    summary: Nama SQL Managed Instance target.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --target-db-name
+    summary: Nama database target.
+    description: ''
+  optionalParameters:
+  - name: --expand
+    summary: Detail migrasi lengkap disertakan dalam respons.
+    description: ''
+  - name: --migration-operation-id
+    summary: ID operasi migrasi opsional. Jika ini disediakan, maka detail operasi migrasi untuk ID tersebut diambil. Jika tidak disediakan (default), maka detail yang terkait dengan operasi terbaru atau saat ini diambil.
+    description: ''
+- uid: az_datamigration_sql-managed-instance_wait
+  name: az datamigration sql-managed-instance wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi datamigration sql-managed-instance terpenuhi.
+  description: ''
+  syntax: >-
+    az datamigration sql-managed-instance wait --managed-instance-name
+                                               --resource-group
+                                               --target-db-name
+                                               [--created]
+                                               [--custom]
+                                               [--deleted]
+                                               [--exists]
+                                               [--expand]
+                                               [--interval]
+                                               [--migration-operation-id]
+                                               [--timeout]
+                                               [--updated]
+  examples:
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga datamigration sql-managed-instance berhasil dibuat.
+    syntax: az datamigration sql-managed-instance wait --managed-instance-name "managedInstance1" --resource-group "testrg" --target-db-name "db1" --created
+  requiredParameters:
+  - isRequired: true
+    name: --managed-instance-name
+    summary: Nama SQL Managed Instance target.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --target-db-name
+    summary: Nama database target.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --expand
+    summary: Detail migrasi lengkap disertakan dalam respons.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --migration-operation-id
+    summary: ID operasi migrasi opsional. Jika ini disediakan, maka detail operasi migrasi untuk ID tersebut diambil. Jika tidak disediakan (default), maka detail yang terkait dengan operasi terbaru atau saat ini diambil.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_datamigration_sql-managed-instance_cancel
+- az_datamigration_sql-managed-instance_create
+- az_datamigration_sql-managed-instance_cutover
+- az_datamigration_sql-managed-instance_show
+- az_datamigration_sql-managed-instance_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola migrasi database ke SQL Managed Instance.
+  ms.openlocfilehash: 7f53b03ee53e92140b87f2d0bbcdd416178502c2
+  ms.sourcegitcommit: d016676aca62d5461b07446d98cf38e30bba07cd
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/19/2022
+  ms.locfileid: "143883379"

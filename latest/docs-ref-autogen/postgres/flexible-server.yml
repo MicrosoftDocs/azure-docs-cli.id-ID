@@ -1,0 +1,673 @@
+### YamlMime:AzureCLIGroup
+uid: az_postgres_flexible-server
+name: az postgres flexible-server
+summary: Mengelola Azure Database for PostgreSQL Server Fleksibel.
+description: ''
+directCommands:
+- uid: az_postgres_flexible-server_connect
+  name: az postgres flexible-server connect
+  summary: Koneksi ke server fleksibel.
+  description: ''
+  syntax: >-
+    az postgres flexible-server connect --admin-user
+                                        --name
+                                        [--admin-password]
+                                        [--database-name]
+                                        [--interactive]
+                                        [--querytext]
+  requiredParameters:
+  - isRequired: true
+    name: --admin-user -u
+    summary: Nama pengguna masuk administrator.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama server. Nama hanya boleh berisi huruf kecil, angka, dan karakter tanda hubung (-). Minimal 3 karakter dan maksimum 63 karakter.
+    description: ''
+  optionalParameters:
+  - name: --admin-password -p
+    summary: Kata sandi masuk administrator.
+    description: ''
+  - name: --database-name -d
+    summary: Nama database.
+    description: ''
+  - name: --interactive
+    summary: Teruskan parameter ini untuk menyambungkan ke database dalam mode interaktif.
+    description: ''
+  - name: --querytext -q
+    summary: Kueri untuk dijalankan terhadap server fleksibel.
+    description: ''
+- uid: az_postgres_flexible-server_create
+  name: az postgres flexible-server create
+  summary: Buat server fleksibel PostgreSQL.
+  description: >-
+    Buat server fleksibel PostgreSQL dengan konfigurasi kustom atau default. Untuk informasi selengkapnya tentang konfigurasi jaringan, lihat
+
+    - Mengonfigurasi akses publik https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-manage-firewall-cli
+
+    - Mengonfigurasi akses https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-manage-virtual-network-cliprivat .
+  syntax: >-
+    az postgres flexible-server create [--address-prefixes]
+                                       [--admin-password]
+                                       [--admin-user]
+                                       [--backup-retention]
+                                       [--database-name]
+                                       [--high-availability {Disabled, Enabled}]
+                                       [--location]
+                                       [--name]
+                                       [--private-dns-zone]
+                                       [--public-access]
+                                       [--resource-group]
+                                       [--sku-name]
+                                       [--standby-zone]
+                                       [--storage-size]
+                                       [--subnet]
+                                       [--subnet-prefixes]
+                                       [--tags]
+                                       [--tier]
+                                       [--version]
+                                       [--vnet]
+                                       [--yes]
+                                       [--zone]
+  examples:
+  - summary: Membuat server fleksibel PostgreSQL dengan parameter kustom
+    syntax: >-
+      az postgres flexible-server create --location northeurope --resource-group testGroup \
+        --name testserver --admin-user username --admin-password password \
+        --sku-name Standard_B1ms --tier Burstable --public-access 153.24.26.117 --storage-size 128 \
+        --tags "key=value" --version 13 --high-availability Enabled --zone 1 \
+        --standby-zone 3
+  - summary: Buat server fleksibel PostgreSQL dengan parameter default dan akses publik yang diaktifkan secara default.       Grup sumber daya, nama server, nama pengguna, kata sandi, dan database default akan dibuat oleh CLI
+    syntax: az postgres flexible-server create
+  - summary: Buat server fleksibel PostgreSQL dengan akses publik dan tambahkan rentang alamat IP untuk memiliki akses ke server ini. Parameter --public-access dapat berupa 'All', 'None', <startIpAddress>, atau <startIpAddress>-<endIpAddress>
+    syntax: az postgres flexible-server create --resource-group testGroup --name testserver --public-access 125.23.54.31-125.23.54.35
+  - summary: Buat server fleksibel PostgreSQL dengan akses privat. Jika jaringan virtual dan subnet yang disediakan tidak ada, jaringan virtual dan subnet dengan awalan alamat yang ditentukan akan dibuat.
+    syntax: az postgres flexible-server create --resource-group testGroup --name testserver --vnet myVnet --subnet mySubnet --address-prefixes 10.0.0.0/16 --subnet-prefixes 10.0.0.0/24
+  - summary: Buat server fleksibel PostgreSQL menggunakan ID sumber daya subnet baru dan ID sumber daya zona DNS privat baru. Subnet dan zona DNS dapat dibuat di langganan atau grup sumber daya yang berbeda.
+    syntax: >-
+      az postgres flexible-server create \
+        --resource-group testGroup --name testserver \
+        --subnet /subscriptions/{SubID}/resourceGroups/{ResourceGroup}/providers/Microsoft.Network/virtualNetworks/{VNetName}/subnets/{SubnetName} \
+        --private-dns-zone /subscriptions/{SubID}/resourceGroups/{resourceGroup}/providers/Microsoft.Network/privateDnsZones/testPostgreSQLFlexibleDnsZone.private.postgres.database.azure.com \
+        --address-prefixes 172.0.0.0/16 --subnet-prefixes 172.0.0.0/24
+  - summary: Buat server fleksibel PostgreSQL menggunakan sumber daya jaringan yang ada dalam grup sumber daya yang sama. Subnet yang disediakan tidak boleh memiliki sumber daya lain yang disebarkan di dalamnya dan subnet ini akan didelegasikan ke Microsoft.DBforPostgreSQL/flexibleServers, jika belum terdelegasikan. Zona DNS privat akan ditautkan ke jaringan virtual jika belum ditautkan.
+    syntax: >-
+      # create vnet
+
+      az network vnet create --resource-group testGroup --name testVnet --location testLocation --address-prefixes 172.0.0.0/16
+
+
+      # create subnet
+
+      az network vnet subnet create --resource-group testGroup --vnet-name testVnet --address-prefixes 172.0.0.0/24 --name testSubnet
+
+
+      # create private dns zone
+
+      az network private-dns zone create -g testGroup -n testDNS.private.postgres.database.azure.com
+
+
+      az postgres flexible-server create --resource-group testGroup \
+        --name testserver --location testLocation \
+        --subnet /subscriptions/{SubId}/resourceGroups/{testGroup}/providers/Microsoft.Network/virtualNetworks/tesetVnet/subnets/testSubnet \
+        --private-dns-zone /subscriptions/{SubId}/resourceGroups/{testGroup}/providers/Microsoft.Network/privateDnsZones/testDNS.postgres.database.azure.com\
+
+
+      az postgres flexible-server create --resource-group testGroup --name testserver \
+        --vnet testVnet --subnet testSubnet --location testLocation \
+        --private-dns-zone /subscriptions/{SubId}/resourceGroups/{testGroup}/providers/Microsoft.Network/privateDnsZones/testDNS.postgres.database.azure.com
+  - summary: Buat server fleksibel PostgreSQL menggunakan sumber daya jaringan yang ada di grup sumber daya/langganan yang berbeda.
+    syntax: >-
+      az postgres flexible-server create --resource-group testGroup \
+         --name testserver --location testLocation \
+        --subnet /subscriptions/{SubId2}/resourceGroups/{testGroup2}/providers/Microsoft.Network/virtualNetworks/tesetVnet/subnets/testSubnet \
+        --private-dns-zone /subscriptions/{SubId2}/resourceGroups/{testGroup2}/providers/Microsoft.Network/privateDnsZones/testDNS.postgres.database.azure.com
+  optionalParameters:
+  - name: --address-prefixes
+    summary: Awalan alamat IP yang akan digunakan saat membuat jaringan virtual baru dalam format CIDR. Nilai defaultnya adalah 10.0.0.0/16.
+    description: ''
+  - name: --admin-password -p
+    summary: 'Kata sandi administrator. Minimal 8 karakter dan maksimum 128 karakter. Sandi Anda harus berisi karakter dari tiga kategori berikut: huruf besar bahasa Inggris, huruf kecil bahasa Inggris, angka, dan karakter non-alfanumerik.'
+    description: ''
+  - name: --admin-user -u
+    defaultValue: hatefulcod6
+    summary: Nama pengguna administrator untuk server. Setelah diatur, itu tidak dapat diubah.
+    description: ''
+  - name: --backup-retention
+    defaultValue: "7"
+    summary: Jumlah hari cadangan dipertahankan. Rentang 7 hingga 35 hari. Defaultnya adalah 7 hari.
+    description: ''
+  - name: --database-name -d
+    summary: Nama database yang akan dibuat saat menyediakan server database.
+    description: ''
+  - name: --high-availability
+    defaultValue: Disabled
+    parameterValueGroup: Disabled, Enabled
+    summary: Mengaktifkan atau menonaktifkan fitur ketersediaan tinggi. Nilai defaultnya adalah Dinonaktifkan. Ketersediaan tinggi hanya dapat diatur selama waktu pembuatan server yang fleksibel.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --name -n
+    summary: Nama server. Nama hanya boleh berisi huruf kecil, angka, dan karakter tanda hubung (-). Minimal 3 karakter dan maksimum 63 karakter.
+    description: ''
+  - name: --private-dns-zone
+    summary: Parameter ini hanya berlaku untuk server dengan akses privat. Nama atau id zona dns privat baru atau yang sudah ada. Anda bisa menggunakan zona dns privat dari grup sumber daya yang sama, grup sumber daya yang berbeda, atau langganan yang berbeda. Jika Anda ingin menggunakan zona dari grup sumber daya atau langganan yang berbeda, harap berikan Id sumber daya. CLI membuat zona dns privat baru dalam grup sumber daya yang sama dengan jaringan virtual jika tidak disediakan oleh pengguna.
+    description: ''
+  - name: --public-access
+    summary: Menentukan akses publik. Masukkan satu atau rentang alamat IP yang akan disertakan dalam daftar IP yang diizinkan. Rentang alamat IP harus dipisahkan garis putus-putus dan tidak berisi spasi apa pun. Menentukan 0.0.0.0 memungkinkan akses publik dari sumber daya apa pun yang disebarkan dalam Azure untuk mengakses server Anda. Mengaturnya ke "Tidak Ada" mengatur server dalam mode akses publik tetapi tidak membuat aturan firewall.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --sku-name
+    defaultValue: Standard_D2s_v3
+    summary: 'Nama SKU komputasi. Mengikuti konvensi Standard_{nama VM}. Contoh: Standard_D4s_v3.'
+    description: ''
+  - name: --standby-zone
+    summary: Informasi zona ketersediaan server siaga ketika ketersediaan tinggi diaktifkan.
+    description: ''
+  - name: --storage-size
+    defaultValue: "128"
+    summary: Kapasitas penyimpanan server. Minimum adalah 32 GiB dan maks adalah 16 TiB.
+    description: ''
+  - name: --subnet
+    summary: Nama atau ID sumber daya dari subnet baru atau yang sudah ada. Jika Anda ingin menggunakan subnet dari grup sumber daya atau langganan yang berbeda, berikan ID sumber daya, bukan nama. Harap dicatat bahwa subnet akan didelegasikan ke flexibleServers. Setelah delegasi, subnet ini tidak dapat digunakan untuk jenis sumber daya Azure lainnya.
+    description: ''
+  - name: --subnet-prefixes
+    summary: Awalan alamat IP subnet yang akan digunakan saat membuat subnet baru dalam format CIDR. Nilai defaultnya adalah 10.0.0.0/24.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --tier
+    defaultValue: GeneralPurpose
+    summary: 'Tingkat komputasi server. Nilai yang diterima: Burstable, GeneralPurpose, Memory Optimized.'
+    description: ''
+  - name: --version
+    defaultValue: "13"
+    summary: Versi utama server.
+    description: ''
+  - name: --vnet
+    summary: Nama atau ID jaringan virtual baru atau yang sudah ada. Jika Anda ingin menggunakan vnet dari grup sumber daya atau langganan yang berbeda, berikan ID sumber daya. Nama harus antara 2 hingga 64 karakter. Nama harus diawali dengan huruf atau angka, diakhiri dengan huruf, angka atau garis bawah, dan hanya boleh berisi huruf, angka, garis bawah, titik, atau tanda hubung.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  - name: --zone -z
+    summary: Zona ketersediaan untuk menyediakan sumber daya.
+    description: ''
+- uid: az_postgres_flexible-server_delete
+  name: az postgres flexible-server delete
+  summary: Menghapus server fleksibel.
+  description: ''
+  syntax: >-
+    az postgres flexible-server delete [--ids]
+                                       [--name]
+                                       [--resource-group]
+                                       [--yes]
+  examples:
+  - summary: Menghapus server fleksibel.
+    syntax: az postgres flexible-server delete --resource-group testGroup --name testserver
+  - summary: Hapus server fleksibel tanpa permintaan atau konfirmasi.
+    syntax: az postgres flexible-server delete --resource-group testGroup --name testserver --yes
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama server. Nama hanya boleh berisi huruf kecil, angka, dan karakter tanda hubung (-). Minimal 3 karakter dan maksimum 63 karakter.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_postgres_flexible-server_execute
+  name: az postgres flexible-server execute
+  summary: Koneksi ke server fleksibel.
+  description: ''
+  syntax: >-
+    az postgres flexible-server execute --admin-password
+                                        --admin-user
+                                        --name
+                                        [--database-name]
+                                        [--file-path]
+                                        [--querytext]
+  requiredParameters:
+  - isRequired: true
+    name: --admin-password -p
+    summary: Kata sandi masuk administrator.
+    description: ''
+  - isRequired: true
+    name: --admin-user -u
+    summary: Nama pengguna masuk administrator.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama server. Nama hanya boleh berisi huruf kecil, angka, dan karakter tanda hubung (-). Minimal 3 karakter dan maksimum 63 karakter.
+    description: ''
+  optionalParameters:
+  - name: --database-name -d
+    summary: Nama database.
+    description: ''
+  - name: --file-path -f
+    summary: Jalur file sql yang akan dijalankan.
+    description: ''
+  - name: --querytext -q
+    summary: Kueri untuk dijalankan terhadap server fleksibel.
+    description: ''
+- uid: az_postgres_flexible-server_list
+  name: az postgres flexible-server list
+  summary: Mencantumkan server fleksibel yang tersedia.
+  description: ''
+  syntax: az postgres flexible-server list [--resource-group]
+  examples:
+  - summary: Mencantumkan semua server fleksibel PostgreSQL dalam langganan.
+    syntax: az postgres flexible-server list
+  - summary: Mencantumkan semua server fleksibel PostgreSQL dalam grup sumber daya.
+    syntax: az postgres flexible-server list --resource-group testGroup
+  - summary: Mencantumkan semua server fleksibel PostgreSQL dalam grup sumber daya dalam format tabel.
+    syntax: az postgres flexible-server list --resource-group testGroup --output table
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_postgres_flexible-server_list-skus
+  name: az postgres flexible-server list-skus
+  summary: Mencantumkan sku yang tersedia di wilayah tertentu.
+  description: ''
+  syntax: az postgres flexible-server list-skus --location
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+- uid: az_postgres_flexible-server_restart
+  name: az postgres flexible-server restart
+  summary: Mulai ulang server fleksibel.
+  description: ''
+  syntax: >-
+    az postgres flexible-server restart [--failover]
+                                        [--ids]
+                                        [--name]
+                                        [--resource-group]
+  examples:
+  - summary: Mulai ulang server fleksibel.
+    syntax: az postgres flexible-server restart --resource-group testGroup --name testserver
+  - summary: Menghidupkan ulang server dengan failover yang direncanakan
+    syntax: az postgres flexible-server restart --resource-group testGroup --name testserver --failover Planned
+  - summary: Menghidupkan ulang server dengan failover paksa
+    syntax: az postgres flexible-server restart --resource-group testGroup --name testserver --failover Forced
+  optionalParameters:
+  - name: --failover
+    summary: 'Failover paksa atau terencana untuk operasi hidupkan ulang server. Nilai yang diizinkan: Dipaksakan, Direncanakan.'
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama server. Nama hanya boleh berisi huruf kecil, angka, dan karakter tanda hubung (-). Minimal 3 karakter dan maksimum 63 karakter.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_postgres_flexible-server_restore
+  name: az postgres flexible-server restore
+  summary: Pulihkan server fleksibel dari cadangan.
+  description: ''
+  syntax: >-
+    az postgres flexible-server restore --source-server
+                                        [--address-prefixes]
+                                        [--ids]
+                                        [--name]
+                                        [--no-wait]
+                                        [--private-dns-zone]
+                                        [--resource-group]
+                                        [--restore-time]
+                                        [--subnet]
+                                        [--subnet-prefixes]
+                                        [--vnet]
+                                        [--yes]
+                                        [--zone]
+  examples:
+  - summary: Pulihkan 'testserver' ke titik waktu tertentu sebagai server baru 'testserverNew'.
+    syntax: az postgres flexible-server restore --resource-group testGroup --name testserverNew --source-server testserver --restore-time "2017-06-15T13:10:00Z"
+  - summary: Pulihkan 'testserver2' ke 'testserverNew', di mana 'testserverNew' berada dalam grup sumber daya yang berbeda dari 'testserver2'.
+    syntax: >-
+      az postgres flexible-server restore --resource-group testGroup --name testserverNew \
+        --source-server "/subscriptions/${SubID}/resourceGroups/${ResourceGroup}/providers/Microsoft.DBforPostgreSQL/servers/testserver2" \
+        --restore-time "2017-06-15T13:10:00Z"
+  - summary: Pulihkan 'testserver' ke point-in-time saat ini sebagai server baru 'testserverNew'.
+    syntax: az postgres flexible-server restore --resource-group testGroup --name testserverNew --source-server testserver
+  requiredParameters:
+  - isRequired: true
+    name: --source-server
+    summary: Nama atau ID sumber daya dari server sumber yang akan dipulihkan.
+    description: ''
+  optionalParameters:
+  - name: --address-prefixes
+    summary: Awalan alamat IP yang akan digunakan saat membuat jaringan virtual baru dalam format CIDR. Nilai defaultnya adalah 10.0.0.0/16.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama server. Nama hanya boleh berisi huruf kecil, angka, dan karakter tanda hubung (-). Minimal 3 karakter dan maksimum 63 karakter.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --private-dns-zone
+    summary: Parameter ini hanya berlaku untuk server dengan akses privat. Nama atau id zona dns privat baru atau yang sudah ada. Anda bisa menggunakan zona dns privat dari grup sumber daya yang sama, grup sumber daya yang berbeda, atau langganan yang berbeda. Jika Anda ingin menggunakan zona dari grup sumber daya atau langganan yang berbeda, harap berikan Id sumber daya. CLI membuat zona dns privat baru dalam grup sumber daya yang sama dengan jaringan virtual jika tidak disediakan oleh pengguna.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --restore-time
+    defaultValue: 2022-04-19T13:35:38+00:00
+    summary: Titik waktu dalam UTC untuk memulihkan dari (format ISO8601), misalnya, 2017-04-26T02:10:00+00:00Nilai default diatur ke waktu saat ini.
+    description: ''
+  - name: --subnet
+    summary: Nama atau ID sumber daya dari subnet baru atau yang sudah ada. Jika Anda ingin menggunakan subnet dari grup sumber daya atau langganan yang berbeda, berikan ID sumber daya, bukan nama. Harap dicatat bahwa subnet akan didelegasikan ke flexibleServers. Setelah delegasi, subnet ini tidak dapat digunakan untuk jenis sumber daya Azure lainnya.
+    description: ''
+  - name: --subnet-prefixes
+    summary: Awalan alamat IP subnet yang akan digunakan saat membuat subnet baru dalam format CIDR. Nilai defaultnya adalah 10.0.0.0/24.
+    description: ''
+  - name: --vnet
+    summary: Nama atau ID jaringan virtual baru atau yang sudah ada. Jika Anda ingin menggunakan vnet dari grup sumber daya atau langganan yang berbeda, berikan ID sumber daya. Nama harus antara 2 hingga 64 karakter. Nama harus diawali dengan huruf atau angka, diakhiri dengan huruf, angka atau garis bawah, dan hanya boleh berisi huruf, angka, garis bawah, titik, atau tanda hubung.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  - name: --zone -z
+    summary: Zona ketersediaan untuk menyediakan sumber daya.
+    description: ''
+- uid: az_postgres_flexible-server_show
+  name: az postgres flexible-server show
+  summary: Dapatkan detail server fleksibel.
+  description: ''
+  syntax: >-
+    az postgres flexible-server show [--ids]
+                                     [--name]
+                                     [--resource-group]
+  examples:
+  - summary: Mendapatkan detail server fleksibel
+    syntax: az postgres flexible-server show --resource-group testGroup --name testserver
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama server. Nama hanya boleh berisi huruf kecil, angka, dan karakter tanda hubung (-). Minimal 3 karakter dan maksimum 63 karakter.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_postgres_flexible-server_show-connection-string
+  name: az postgres flexible-server show-connection-string
+  summary: Perlihatkan string koneksi untuk database server fleksibel PostgreSQL.
+  description: ''
+  syntax: >-
+    az postgres flexible-server show-connection-string [--admin-password]
+                                                       [--admin-user]
+                                                       [--database-name]
+                                                       [--ids]
+                                                       [--server-name]
+  examples:
+  - summary: Perlihatkan string koneksi untuk cmd dan bahasa pemrograman.
+    syntax: az postgres flexible-server show-connection-string -s testserver -u username -p password -d databasename
+  optionalParameters:
+  - name: --admin-password -p
+    defaultValue: '{password}'
+    summary: 'Kata sandi administrator. Minimal 8 karakter dan maksimum 128 karakter. Sandi Anda harus berisi karakter dari tiga kategori berikut: huruf besar bahasa Inggris, huruf kecil bahasa Inggris, angka, dan karakter non-alfanumerik.'
+    description: ''
+  - name: --admin-user -u
+    defaultValue: '{login}'
+    summary: Nama pengguna administrator untuk server. Setelah diatur, itu tidak dapat diubah.
+    description: ''
+  - name: --database-name -d
+    defaultValue: '{database}'
+    summary: Nama database yang akan dibuat saat menyediakan server database.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --server-name -s
+    defaultValue: '{server}'
+    summary: Nama server. Nama hanya boleh berisi huruf kecil, angka, dan karakter tanda hubung (-). Minimal 3 karakter dan maksimum 63 karakter.
+    description: ''
+- uid: az_postgres_flexible-server_start
+  name: az postgres flexible-server start
+  summary: Memulai server fleksibel.
+  description: ''
+  syntax: >-
+    az postgres flexible-server start [--ids]
+                                      [--name]
+                                      [--resource-group]
+  examples:
+  - summary: Memulai server fleksibel.
+    syntax: az postgres flexible-server start --resource-group testGroup --name testserver
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama server. Nama hanya boleh berisi huruf kecil, angka, dan karakter tanda hubung (-). Minimal 3 karakter dan maksimum 63 karakter.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_postgres_flexible-server_stop
+  name: az postgres flexible-server stop
+  summary: Hentikan server fleksibel.
+  description: ''
+  syntax: >-
+    az postgres flexible-server stop [--ids]
+                                     [--name]
+                                     [--resource-group]
+  examples:
+  - summary: Hentikan server fleksibel.
+    syntax: az postgres flexible-server stop --resource-group testGroup --name testserver
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama server. Nama hanya boleh berisi huruf kecil, angka, dan karakter tanda hubung (-). Minimal 3 karakter dan maksimum 63 karakter.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_postgres_flexible-server_update
+  name: az postgres flexible-server update
+  summary: Memperbarui server fleksibel.
+  description: ''
+  syntax: >-
+    az postgres flexible-server update [--add]
+                                       [--admin-password]
+                                       [--backup-retention]
+                                       [--force-string]
+                                       [--high-availability {Disabled, Enabled}]
+                                       [--ids]
+                                       [--maintenance-window]
+                                       [--name]
+                                       [--remove]
+                                       [--resource-group]
+                                       [--set]
+                                       [--sku-name]
+                                       [--standby-zone]
+                                       [--storage-size]
+                                       [--tags]
+                                       [--tier]
+  examples:
+  - summary: Perbarui sku server yang fleksibel, menggunakan konteks lokal untuk server dan grup sumber daya.
+    syntax: az postgres flexible-server update --sku-name Standard_D4s_v3
+  - summary: Memperbarui tag server.
+    syntax: az postgres flexible-server update --resource-group testGroup --name testserver --tags "k1=v1" "k2=v2"
+  - summary: Atur ulang kata sandi
+    syntax: az postgres flexible-server update --resource-group testGroup --name testserver -p password123
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --admin-password -p
+    summary: 'Kata sandi administrator. Minimal 8 karakter dan maksimum 128 karakter. Sandi Anda harus berisi karakter dari tiga kategori berikut: huruf besar bahasa Inggris, huruf kecil bahasa Inggris, angka, dan karakter non-alfanumerik.'
+    description: ''
+  - name: --backup-retention
+    summary: Jumlah hari cadangan dipertahankan. Rentang 7 hingga 35 hari. Defaultnya adalah 7 hari.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --high-availability
+    parameterValueGroup: Disabled, Enabled
+    summary: Mengaktifkan atau menonaktifkan fitur ketersediaan tinggi. Nilai defaultnya adalah Dinonaktifkan. Ketersediaan tinggi hanya dapat diatur selama waktu pembuatan server yang fleksibel.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --maintenance-window
+    summary: 'Periode waktu (UTC) yang ditunjuk untuk pemeliharaan. Contoh: "Min:23:30" untuk menjadwalkan pada hari Minggu, 23:30 UTC. Untuk mengatur kembali ke pass default di "Disabled".'
+    description: ''
+  - name: --name -n
+    summary: Nama server. Nama hanya boleh berisi huruf kecil, angka, dan karakter tanda hubung (-). Minimal 3 karakter dan maksimum 63 karakter.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --sku-name
+    summary: 'Nama SKU komputasi. Mengikuti konvensi Standard_{nama VM}. Contoh: Standard_D4s_v3.'
+    description: ''
+  - name: --standby-zone
+    summary: Informasi zona ketersediaan server siaga ketika ketersediaan tinggi diaktifkan.
+    description: ''
+  - name: --storage-size
+    summary: Kapasitas penyimpanan server. Minimum adalah 32 GiB dan maks adalah 16 TiB.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --tier
+    summary: 'Tingkat komputasi server. Nilai yang diterima: Burstable, GeneralPurpose, Memory Optimized.'
+    description: ''
+- uid: az_postgres_flexible-server_wait
+  name: az postgres flexible-server wait
+  summary: Tunggu hingga server fleksibel memenuhi kondisi tertentu.
+  description: ''
+  syntax: >-
+    az postgres flexible-server wait [--created]
+                                     [--custom]
+                                     [--deleted]
+                                     [--exists]
+                                     [--ids]
+                                     [--interval]
+                                     [--name]
+                                     [--resource-group]
+                                     [--timeout]
+                                     [--updated]
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --name -n
+    summary: Nama server. Nama hanya boleh berisi huruf kecil, angka, dan karakter tanda hubung (-). Minimal 3 karakter dan maksimum 63 karakter.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_postgres_flexible-server_connect
+- az_postgres_flexible-server_create
+- az_postgres_flexible-server_db
+- az_postgres_flexible-server_db_create
+- az_postgres_flexible-server_db_delete
+- az_postgres_flexible-server_db_list
+- az_postgres_flexible-server_db_show
+- az_postgres_flexible-server_delete
+- az_postgres_flexible-server_deploy
+- az_postgres_flexible-server_deploy_run
+- az_postgres_flexible-server_deploy_setup
+- az_postgres_flexible-server_execute
+- az_postgres_flexible-server_firewall-rule
+- az_postgres_flexible-server_firewall-rule_create
+- az_postgres_flexible-server_firewall-rule_delete
+- az_postgres_flexible-server_firewall-rule_list
+- az_postgres_flexible-server_firewall-rule_show
+- az_postgres_flexible-server_firewall-rule_update
+- az_postgres_flexible-server_list
+- az_postgres_flexible-server_list-skus
+- az_postgres_flexible-server_migration
+- az_postgres_flexible-server_migration_check-name-availability
+- az_postgres_flexible-server_migration_create
+- az_postgres_flexible-server_migration_delete
+- az_postgres_flexible-server_migration_list
+- az_postgres_flexible-server_migration_show
+- az_postgres_flexible-server_migration_update
+- az_postgres_flexible-server_parameter
+- az_postgres_flexible-server_parameter_list
+- az_postgres_flexible-server_parameter_set
+- az_postgres_flexible-server_parameter_show
+- az_postgres_flexible-server_restart
+- az_postgres_flexible-server_restore
+- az_postgres_flexible-server_show
+- az_postgres_flexible-server_show-connection-string
+- az_postgres_flexible-server_start
+- az_postgres_flexible-server_stop
+- az_postgres_flexible-server_update
+- az_postgres_flexible-server_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola Azure Database for PostgreSQL Server Fleksibel.
+  ms.openlocfilehash: 5225a16009de110263237b8ff92fc0d3d58234b6
+  ms.sourcegitcommit: d016676aca62d5461b07446d98cf38e30bba07cd
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/19/2022
+  ms.locfileid: "143883073"

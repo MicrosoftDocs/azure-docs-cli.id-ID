@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: perwakilan layanan azure, membuat perwakilan layanan azure, membuat perwakilan layanan azure cli
-ms.openlocfilehash: 15312b54f019994214d104ae5434fab8816ada24
-ms.sourcegitcommit: 49c01a527543e5de52f51ee19f930c78842c349e
+ms.openlocfilehash: 4c1a3b9e79ece52c274a36c5403dd1e619b1bc2c
+ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 03/08/2022
-ms.locfileid: "139304807"
+ms.lasthandoff: 04/22/2022
+ms.locfileid: "144003229"
 ---
 # <a name="create-an-azure-service-principal-with-the-azure-cli"></a>Membuat perwakilan layanan Azure dengan Azure CLI
 
@@ -38,12 +38,12 @@ Saat membuat perwakilan layanan, pilih jenis autentikasi masuk yang digunakannya
 > [!WARNING]
 > Saat Anda membuat perwakilan layanan Azure menggunakan perintah `az ad sp create-for-rbac`, output akan menyertakan info masuk yang harus dilindungi. Pastikan Anda tidak menyertakan info masuk ini dalam kode atau memasukkan info masuk ke dalam kontrol sumber Anda. Sebagai alternatif, pertimbangkan untuk menggunakan [identitas terkelola](/azure/active-directory/managed-identities-azure-resources/overview) jika tersedia untuk mencegah penggunaan info masuk.
 >
-> Untuk mengurangi risiko perwakilan layanan yang disusupi, tetapkan peran yang lebih spesifik dan persempit cakupan ke grup sumber daya atau sumber daya. Untuk informasi selengkapnya, lihat [Langkah-langkah untuk menambahkan penetapan peran](/azure/role-based-access-control/role-assignments-steps).
+> Untuk mengurangi risiko perwakilan layanan yang disusupi, tetapkan peran yang lebih spesifik dan persempit cakupan ke sumber daya atau grup sumber daya. Untuk informasi selengkapnya, lihat [Langkah-langkah untuk menambahkan penetapan peran](/azure/role-based-access-control/role-assignments-steps).
 
 
 ### <a name="password-based-authentication"></a>Autentikasi berbasis kata sandi
 
-Dengan autentikasi berbasis kata sandi, kata sandi acak dibuat untuk Anda.  Jika Anda tidak menentukan `--name` nilai parameter, nama yang berisi stempel waktu akan dibuat untuk Anda.  Anda harus menentukan karena `--scopes` nilai ini tidak memiliki default.  Jika mau, Anda dapat mengatur penetapan peran nanti dengan menggunakan [az role assignment create](/cli/azure/role/assignment#az-role-assignment-create).
+Dengan autentikasi berbasis kata sandi, kata sandi acak dibuat untuk Anda.  Jika Anda tidak menentukan `--name` nilai parameter, nama yang berisi stempel waktu akan dibuat untuk Anda.  Anda harus menentukan sebagai `--scopes` nilai ini tidak memiliki default.  Jika mau, Anda dapat mengatur penetapan peran nanti dengan menggunakan [az role assignment create](/cli/azure/role/assignment#az-role-assignment-create).
 
 ```azurecli-interactive
 # Create a service principal with required parameter
@@ -70,11 +70,11 @@ echo "Creating SP for RBAC with name $servicePrincipalName, with role $roleName 
 az ad sp create-for-rbac --name $servicePrincipalName --role $roleName --scopes /subscriptions/$subscriptionID/resourceGroups/$resourceGroup
 ```
 
-Output perwakilan layanan dengan autentikasi kata sandi menyertakan kunci `password`. __Pastikan Anda menyalin nilai ini__ - itu tidak dapat diambil. Jika Anda kehilangan kata sandi, [atur ulang kredensial perwakilan layanan](#6-reset-credentials).
+Output perwakilan layanan dengan autentikasi kata sandi menyertakan kunci `password`. __Pastikan Anda menyalin nilai ini - nilai__ tersebut tidak dapat diambil. Jika lupa kata sandi, [atur ulang info masuk perwakilan layanan](#6-reset-credentials).
 
 ### <a name="certificate-based-authentication"></a>Autentikasi berbasis sertifikat
 
-Untuk autentikasi berbasis sertifikat, gunakan `--cert` parameter. Parameter ini mengharuskan Anda memegang sertifikat yang ada. Pastikan alat apa pun yang menggunakan perwakilan layanan ini memiliki akses ke kunci privat sertifikat. Sertifikat harus dalam format ASCII seperti PEM, CER, atau DER. Teruskan sertifikat sebagai string, atau gunakan format `@path` untuk memuat sertifikat dari file.
+Untuk autentikasi berbasis sertifikat, gunakan `--cert` parameter . Parameter ini mengharuskan Anda memegang sertifikat yang sudah ada. Pastikan alat apa pun yang menggunakan perwakilan layanan ini memiliki akses ke kunci privat sertifikat. Sertifikat harus dalam format ASCII seperti PEM, CER, atau DER. Teruskan sertifikat sebagai string, atau gunakan format `@path` untuk memuat sertifikat dari file.
 
 > [!NOTE]
 > Saat menggunakan file PEM, **CERTIFICATE** harus ditambahkan ke **PRIVATE KEY** di dalam file.
@@ -105,7 +105,7 @@ az ad sp create-for-rbac --name myServicePrincipalName \
                          --keyvault vaultName
 ```
 
-Untuk membuat sertifikat _yang ditandatangani sendiri_ untuk autentikasi, gunakan `--create-cert` parameter:
+Untuk membuat sertifikat yang _ditandatangani sendiri_ untuk autentikasi, gunakan `--create-cert` parameter :
 
 ```azurecli-interactive
 az ad sp create-for-rbac --name myServicePrincipalName \
@@ -170,13 +170,13 @@ openssl pkcs12 -in cert.pfx -passin pass: -out cert.pem -nodes
 
 ## <a name="2-get-an-existing-service-principal"></a>2. Dapatkan perwakilan layanan yang ada
 
-Daftar perwakilan layanan di penyewa dapat diambil dengan [az ad sp list](/cli/azure/ad/sp#az-ad-sp-list). Secara default, perintah ini menampilkan 100 perwakilan layanan pertama untuk penyewa Anda. Untuk mendapatkan semua perwakilan layanan penyewa, gunakan parameternya `--all` . Mendapatkan daftar ini bisa memakan waktu lama, jadi disarankan agar Anda memfilter daftar dengan salah satu parameter berikut:
+Daftar perwakilan layanan di penyewa dapat diambil dengan [az ad sp list](/cli/azure/ad/sp#az-ad-sp-list). Secara default, perintah ini menampilkan 100 perwakilan layanan pertama untuk penyewa Anda. Untuk mendapatkan semua perwakilan layanan penyewa, gunakan `--all` parameter . Mendapatkan daftar ini bisa memakan waktu lama, jadi disarankan agar Anda memfilter daftar dengan salah satu parameter berikut:
 
 * `--display-name` meminta perwakilan layanan yang memiliki _awalan_ yang sesuai dengan nama yang disediakan. Nama tampilan perwakilan layanan adalah nilai yang ditetapkan dengan parameter `--name` selama pembuatan. Jika Anda tidak mengatur `--name` selama pembuatan perwakilan layanan, awalan namanya adalah `azure-cli-`.
 * `--spn` memfilter dengan pencocokan persis nama perwakilan layanan. Nama perwakilan layanan selalu dimulai dengan `https://`.
   jika nilai yang digunakan untuk `--name` bukan URI, nilai ini adalah `https://` diikuti oleh nama tampilan.
 * `--show-mine` hanya meminta perwakilan layanan yang dibuat oleh pengguna yang masuk.
-* `--filter` mengambil filter OData, dan melakukan pemfilteran _sisi server_. Metode ini direkomendasikan untuk memfilter sisi klien dengan parameter CLI `--query` . Untuk mempelajari filter OData, lihat [Sintaks ekspresi OData untuk filter](/rest/api/searchservice/odata-expression-syntax-for-azure-search).
+* `--filter` mengambil filter OData, dan melakukan pemfilteran _sisi server_. Metode ini direkomendasikan daripada memfilter sisi klien dengan parameter CLI `--query` . Untuk mempelajari filter OData, lihat [Sintaks ekspresi OData untuk filter](/rest/api/searchservice/odata-expression-syntax-for-azure-search).
 
 Informasi yang ditampilkan untuk objek perwakilan layanan bersifat verbose. Untuk mendapatkan informasi yang diperlukan untuk masuk saja, gunakan string kueri `[].{id:appId, tenant:appOwnerTenantId}`. Misalnya, untuk mendapatkan informasi masuk untuk semua perwakilan layanan yang dibuat oleh pengguna yang saat ini masuk:
 
@@ -283,7 +283,7 @@ Untuk masuk dengan perwakilan layanan, Anda memerlukan `appID`, `tenantID`, dan 
 
 ## <a name="6-reset-credentials"></a>6. Atur ulang info masuk
 
-Jika Anda kehilangan kredensial untuk perwakilan layanan, gunakan [pengaturan ulang kredensial az ad sp](/cli/azure/ad/sp/credential#az-ad-sp-credential-reset). Perintah reset mengambil parameter yang sama dengan `az ad sp create-for-rbac`.
+Jika Anda kehilangan kredensial untuk perwakilan layanan, gunakan [az ad sp credential reset](/cli/azure/ad/sp/credential#az-ad-sp-credential-reset). Perintah reset mengambil parameter yang sama dengan `az ad sp create-for-rbac`.
 
 ```azurecli-interactive
 az ad sp credential reset --name myServicePrincipal_appID_or_name
@@ -291,14 +291,14 @@ az ad sp credential reset --name myServicePrincipal_appID_or_name
 
 ## <a name="7-troubleshooting"></a>7. Pemecahan masalah
 
-### <a name="insufficient-privileges"></a>Hak istimewa yang tidak mencukupi
+### <a name="insufficient-privileges"></a>Hak istimewa tidak memadai
 Jika akun Anda tidak memiliki izin untuk membuat perwakilan layanan, `az ad sp create-for-rbac` akan menampilkan pesan kesalahan yang berisi "Hak istimewa tidak memadai untuk menyelesaikan operasi." Hubungi admin Azure Active Directory Anda untuk membuat perwakilan layanan.
 
 ### <a name="invalid-tenant"></a>Penyewa tidak valid
-Jika Anda telah menentukan ID langganan yang tidak valid, Anda akan melihat pesan kesalahan "Permintaan tidak memiliki langganan atau penyedia sumber daya tingkat penyewa yang valid."  Jika menggunakan variabel, gunakan perintah Bash `echo` untuk melihat nilai diteruskan ke perintah referensi.  Gunakan [kumpulan akun az](/cli/azure/account#az-account-set) untuk mengubah langganan Anda atau pelajari [Cara mengelola langganan Azure dengan Azure CLI](/cli/azure/manage-azure-subscriptions-azure-cli).
+Jika Anda telah menentukan ID langganan yang tidak valid, Anda akan melihat pesan kesalahan "Permintaan tidak memiliki langganan atau penyedia sumber daya tingkat penyewa yang valid."  Jika menggunakan variabel, gunakan perintah Bash `echo` untuk melihat nilai yang diteruskan ke perintah referensi.  Gunakan [az account set](/cli/azure/account#az-account-set) untuk mengubah langganan Anda atau pelajari [Cara mengelola langganan Azure dengan Azure CLI](./manage-azure-subscriptions-azure-cli.md).
 
 ### <a name="resource-group-not-found"></a>Grup sumber daya tidak ditemukan
-Jika Anda telah menentukan nama grup sumber daya yang tidak valid, Anda melihat pesan kesalahan "Nama grup sumber daya tidak dapat ditemukan."  Jika menggunakan variabel, gunakan perintah Bash `echo` untuk melihat nilai yang diteruskan ke perintah langganan dan referensi.  Gunakan [daftar grup az](/cli/azure/group#az-group-list) untuk melihat grup sumber daya untuk langganan saat ini, atau pelajari [Cara mengelola grup sumber daya Azure dengan Azure CLI](/cli/azure/manage-azure-groups-azure-cli).
+Jika Anda telah menentukan nama grup sumber daya yang tidak valid, Anda akan melihat pesan kesalahan "Grup sumber daya 'nama' tidak dapat ditemukan."  Jika menggunakan variabel, gunakan perintah Bash `echo` untuk melihat nilai yang diteruskan ke perintah langganan dan referensi.  Gunakan [az group list](/cli/azure/group#az-group-list) untuk melihat grup sumber daya untuk langganan saat ini, atau pelajari [Cara mengelola grup sumber daya Azure dengan Azure CLI](./manage-azure-groups-azure-cli.md).
 
 ### <a name="authorization-to-perform-action"></a>Otorisasi untuk melakukan tindakan
 Jika akun Anda tidak memiliki izin untuk menetapkan peran, Anda akan melihat pesan kesalahan bahwa akun Anda "tidak memiliki otorisasi untuk melakukan tindakan 'Microsoft.Authorization/roleAssignments/write'." Hubungi admin Azure Active Directory Anda untuk mengelola peran.

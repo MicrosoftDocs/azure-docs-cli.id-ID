@@ -1,0 +1,400 @@
+### YamlMime:AzureCLIGroup
+uid: az_containerapp
+name: az containerapp
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **containerapp** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az containerapp** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola Azure Container Apps.
+description: ''
+directCommands:
+- uid: az_containerapp_create
+  name: az containerapp create
+  summary: Membuat aplikasi kontainer.
+  description: ''
+  syntax: >-
+    az containerapp create --name
+                           --resource-group
+                           [--args]
+                           [--command]
+                           [--container-name]
+                           [--cpu]
+                           [--dapr-app-id]
+                           [--dapr-app-port]
+                           [--dapr-app-protocol {grpc, http}]
+                           [--enable-dapr {false, true}]
+                           [--env-vars]
+                           [--environment]
+                           [--image]
+                           [--ingress {external, internal}]
+                           [--max-replicas]
+                           [--memory]
+                           [--min-replicas]
+                           [--no-wait]
+                           [--registry-password]
+                           [--registry-server]
+                           [--registry-username]
+                           [--revision-suffix]
+                           [--revisions-mode {multiple, single}]
+                           [--secrets]
+                           [--system-assigned]
+                           [--tags]
+                           [--target-port]
+                           [--transport {auto, http, http2}]
+                           [--user-assigned]
+                           [--yaml]
+  examples:
+  - summary: Buat aplikasi kontainer dan ambil nama domain yang sepenuhnya memenuhi syarat.
+    syntax: >-
+      az containerapp create -n MyContainerapp -g MyResourceGroup \
+          --image myregistry.azurecr.io/my-app:v1.0 --environment MyContainerappEnv \
+          --ingress external --target-port 80 \
+          --registry-server myregistry.azurecr.io --registry-username myregistry --registry-password $REGISTRY_PASSWORD \
+          --query properties.configuration.ingress.fqdn
+  - summary: Buat aplikasi kontainer dengan persyaratan sumber daya dan batas jumlah replika.
+    syntax: >-
+      az containerapp create -n MyContainerapp -g MyResourceGroup \
+          --image nginx --environment MyContainerappEnv \
+          --cpu 0.5 --memory 1.0Gi \
+          --min-replicas 4 --max-replicas 8
+  - summary: Buat aplikasi kontainer dengan rahasia dan variabel lingkungan.
+    syntax: >-
+      az containerapp create -n MyContainerapp -g MyResourceGroup \
+          --image my-app:v1.0 --environment MyContainerappEnv \
+          --secrets mysecret=secretvalue1 anothersecret="secret value 2" \
+          --env-vars GREETING="Hello, world" SECRETENV=secretref:anothersecret
+  - summary: Buat aplikasi kontainer menggunakan konfigurasi YAML. Contoh konfigurasi YAML - https://aka.ms/azure-container-apps-yaml
+    syntax: >-
+      az containerapp create -n MyContainerapp -g MyResourceGroup \
+          --environment MyContainerappEnv \
+          --yaml "path/to/yaml/file.yml"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Containerapp.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --args
+    summary: Daftar argumen perintah startup kontainer. Nilai yang dipisahkan spasi misalnya "-c" "mycommand". String kosong untuk menghapus nilai yang ada.
+    description: ''
+  - name: --command
+    summary: Daftar perintah yang didukung pada kontainer yang akan dijalankan selama startup. Nilai yang dipisahkan spasi misalnya "/bin/queue" "mycommand". String kosong untuk menghapus nilai yang ada.
+    description: ''
+  - name: --container-name
+    summary: Nama kontainer.
+    description: ''
+  - name: --cpu
+    summary: CPU yang diperlukan dalam inti dari 0,25 - 2,0, misalnya 0,5.
+    description: ''
+  - name: --dapr-app-id
+    summary: Pengidentifikasi aplikasi Dapr.
+    description: ''
+  - name: --dapr-app-port
+    summary: Dapr port menggunakan untuk berbicara dengan aplikasi.
+    description: ''
+  - name: --dapr-app-protocol
+    parameterValueGroup: grpc, http
+    summary: Protokol yang digunakan Dapr untuk berbicara dengan aplikasi.
+    description: ''
+  - name: --enable-dapr
+    parameterValueGroup: false, true
+    summary: Boolean menunjukkan apakah mobil samping Dapr diaktifkan.
+    description: ''
+  - name: --env-vars
+    summary: Daftar variabel lingkungan untuk kontainer. Nilai yang dipisahkan spasi dalam format 'key=value'. String kosong untuk menghapus nilai yang ada. Nilai awalan dengan 'secretref:' untuk mereferensikan rahasia.
+    description: ''
+  - name: --environment
+    summary: Nama atau ID sumber daya lingkungan aplikasi kontainer.
+    description: ''
+  - name: --image -i
+    summary: Gambar kontainer, misalnya publisher/image-name:tag.
+    description: ''
+  - name: --ingress
+    parameterValueGroup: external, internal
+    summary: Jenis ingress.
+    description: ''
+  - name: --max-replicas
+    summary: Jumlah maksimum replika.
+    description: ''
+  - name: --memory
+    summary: Memori yang diperlukan dari 0,5 - 4.0 berakhir dengan "Gi", misalnya 1.0Gi.
+    description: ''
+  - name: --min-replicas
+    summary: Jumlah minimum replika.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --registry-password
+    summary: Kata sandi untuk masuk ke registri kontainer. Jika disimpan sebagai rahasia, nilai harus dimulai dengan 'secretref:' diikuti dengan nama rahasia.
+    description: ''
+  - name: --registry-server
+    summary: Nama host server registri kontainer, misalnya myregistry.azurecr.io.
+    description: ''
+  - name: --registry-username
+    summary: Nama pengguna untuk masuk ke registri kontainer.
+    description: ''
+  - name: --revision-suffix
+    summary: Akhiran ramah pengguna yang ditambahkan ke nama revisi.
+    description: ''
+  - name: --revisions-mode
+    defaultValue: single
+    parameterValueGroup: multiple, single
+    summary: Mode revisi aktif untuk aplikasi kontainer.
+    description: ''
+  - name: --secrets -s
+    summary: Daftar rahasia untuk aplikasi kontainer. Nilai yang dipisahkan spasi dalam format 'key=value'.
+    description: ''
+  - name: --system-assigned
+    summary: Boolean menunjukkan apakah akan menetapkan identitas yang ditetapkan sistem.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --target-port
+    summary: Port aplikasi yang digunakan untuk lalu lintas masuk.
+    description: ''
+  - name: --transport
+    defaultValue: auto
+    parameterValueGroup: auto, http, http2
+    summary: Protokol transportasi yang digunakan untuk lalu lintas masuk.
+    description: ''
+  - name: --user-assigned
+    summary: Identitas pengguna yang dipisahkan spasi yang akan ditetapkan.
+    description: ''
+  - name: --yaml
+    summary: Jalur ke file .yaml dengan konfigurasi aplikasi kontainer. Semua parameter lainnya akan diabaikan. Misalnya, lihat  https://docs.microsoft.com/azure/container-apps/azure-resource-manager-api-spec#examples.
+    description: ''
+- uid: az_containerapp_delete
+  name: az containerapp delete
+  summary: Menghapus aplikasi kontainer.
+  description: ''
+  syntax: >-
+    az containerapp delete --name
+                           --resource-group
+                           [--no-wait]
+                           [--yes]
+  examples:
+  - summary: Menghapus aplikasi kontainer.
+    syntax: az containerapp delete -g MyResourceGroup -n MyContainerapp
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Containerapp.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_containerapp_list
+  name: az containerapp list
+  summary: Mencantumkan aplikasi kontainer.
+  description: ''
+  syntax: az containerapp list [--resource-group]
+  examples:
+  - summary: Mencantumkan aplikasi kontainer di langganan saat ini.
+    syntax: az containerapp list
+  - summary: Mencantumkan aplikasi kontainer menurut grup sumber daya.
+    syntax: az containerapp list -g MyResourceGroup
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_containerapp_show
+  name: az containerapp show
+  summary: Menampilkan detail aplikasi kontainer.
+  description: ''
+  syntax: >-
+    az containerapp show --name
+                         --resource-group
+  examples:
+  - summary: Menampilkan detail aplikasi kontainer.
+    syntax: az containerapp show -n MyContainerapp -g MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Containerapp.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_containerapp_update
+  name: az containerapp update
+  summary: Memperbarui aplikasi kontainer. Dalam mode beberapa revisi, buat revisi baru berdasarkan revisi terbaru.
+  description: ''
+  syntax: >-
+    az containerapp update --name
+                           --resource-group
+                           [--args]
+                           [--command]
+                           [--container-name]
+                           [--cpu]
+                           [--image]
+                           [--max-replicas]
+                           [--memory]
+                           [--min-replicas]
+                           [--no-wait]
+                           [--remove-all-env-vars]
+                           [--remove-env-vars]
+                           [--replace-env-vars]
+                           [--revision-suffix]
+                           [--set-env-vars]
+                           [--tags]
+                           [--yaml]
+  examples:
+  - summary: Memperbarui gambar kontainer aplikasi kontainer.
+    syntax: >-
+      az containerapp update -n MyContainerapp -g MyResourceGroup \
+          --image myregistry.azurecr.io/my-app:v2.0
+  - summary: Perbarui persyaratan sumber daya dan batas skala aplikasi kontainer.
+    syntax: >-
+      az containerapp update -n MyContainerapp -g MyResourceGroup \
+          --cpu 0.5 --memory 1.0Gi \
+          --min-replicas 4 --max-replicas 8
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Containerapp.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --args
+    summary: Daftar argumen perintah startup kontainer. Nilai yang dipisahkan spasi misalnya "-c" "mycommand". String kosong untuk menghapus nilai yang ada.
+    description: ''
+  - name: --command
+    summary: Daftar perintah yang didukung pada kontainer yang akan dijalankan selama startup. Nilai yang dipisahkan spasi misalnya "/bin/queue" "mycommand". String kosong untuk menghapus nilai yang ada.
+    description: ''
+  - name: --container-name
+    summary: Nama kontainer.
+    description: ''
+  - name: --cpu
+    summary: CPU yang diperlukan dalam inti dari 0,25 - 2,0, misalnya 0,5.
+    description: ''
+  - name: --image -i
+    summary: Gambar kontainer, misalnya publisher/image-name:tag.
+    description: ''
+  - name: --max-replicas
+    summary: Jumlah maksimum replika.
+    description: ''
+  - name: --memory
+    summary: Memori yang diperlukan dari 0,5 - 4.0 berakhir dengan "Gi", misalnya 1.0Gi.
+    description: ''
+  - name: --min-replicas
+    summary: Jumlah minimum replika.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --remove-all-env-vars
+    summary: Opsi untuk menghapus semua variabel lingkungan dari kontainer.
+    description: ''
+  - name: --remove-env-vars
+    summary: Daftar variabel lingkungan yang akan dihapus dari kontainer. Nilai nama var env yang dipisahkan spasi.
+    description: ''
+  - name: --replace-env-vars
+    summary: Daftar variabel lingkungan untuk diganti dari kontainer. Nilai yang dipisahkan spasi dalam format 'key=value'. Jika disimpan sebagai rahasia, nilai harus dimulai dengan 'secretref:' diikuti dengan nama rahasia.
+    description: ''
+  - name: --revision-suffix
+    summary: Akhiran ramah pengguna yang ditambahkan ke nama revisi.
+    description: ''
+  - name: --set-env-vars
+    summary: Daftar variabel lingkungan untuk ditambahkan ke kontainer. Nilai yang dipisahkan spasi dalam format 'key=value'. Jika disimpan sebagai rahasia, nilai harus dimulai dengan 'secretref:' diikuti dengan nama rahasia.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --yaml
+    summary: Jalur ke file .yaml dengan konfigurasi aplikasi kontainer. Semua parameter lainnya akan diabaikan. Misalnya, lihat  https://docs.microsoft.com/azure/container-apps/azure-resource-manager-api-spec#examples.
+    description: ''
+commands:
+- az_containerapp_create
+- az_containerapp_dapr
+- az_containerapp_dapr_disable
+- az_containerapp_dapr_enable
+- az_containerapp_delete
+- az_containerapp_env
+- az_containerapp_env_create
+- az_containerapp_env_dapr-component
+- az_containerapp_env_dapr-component_list
+- az_containerapp_env_dapr-component_remove
+- az_containerapp_env_dapr-component_set
+- az_containerapp_env_dapr-component_show
+- az_containerapp_env_delete
+- az_containerapp_env_list
+- az_containerapp_env_show
+- az_containerapp_github-action
+- az_containerapp_github-action_add
+- az_containerapp_github-action_delete
+- az_containerapp_github-action_show
+- az_containerapp_identity
+- az_containerapp_identity_assign
+- az_containerapp_identity_remove
+- az_containerapp_identity_show
+- az_containerapp_ingress
+- az_containerapp_ingress_disable
+- az_containerapp_ingress_enable
+- az_containerapp_ingress_show
+- az_containerapp_ingress_traffic
+- az_containerapp_ingress_traffic_set
+- az_containerapp_ingress_traffic_show
+- az_containerapp_list
+- az_containerapp_registry
+- az_containerapp_registry_list
+- az_containerapp_registry_remove
+- az_containerapp_registry_set
+- az_containerapp_registry_show
+- az_containerapp_revision
+- az_containerapp_revision_activate
+- az_containerapp_revision_copy
+- az_containerapp_revision_deactivate
+- az_containerapp_revision_list
+- az_containerapp_revision_restart
+- az_containerapp_revision_set-mode
+- az_containerapp_revision_show
+- az_containerapp_secret
+- az_containerapp_secret_list
+- az_containerapp_secret_remove
+- az_containerapp_secret_set
+- az_containerapp_secret_show
+- az_containerapp_show
+- az_containerapp_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola Azure Container Apps.
+  ms.openlocfilehash: e9cb3d8309392faaf8f84518838e5802e4918046
+  ms.sourcegitcommit: 7bac85b01b53f224997c83feeb6601ff4e108b32
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/13/2022
+  ms.locfileid: "141668377"

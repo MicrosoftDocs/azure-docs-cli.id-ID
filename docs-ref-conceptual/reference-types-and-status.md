@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, jenis referensi, status referensi
-ms.openlocfilehash: b6d8ff4afce36071ef98bf9a421b8830f5ea28bb
-ms.sourcegitcommit: d3bae3909ca6297f8ec1fabda40767058c6a6a39
+ms.openlocfilehash: 4ac362b3579e7aac70295cd0f3222afbfcfbf0f6
+ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/15/2022
-ms.locfileid: "142611521"
+ms.lasthandoff: 04/22/2022
+ms.locfileid: "144003769"
 ---
 # <a name="overview-azure-cli-terminology-and-support-levels"></a>Gambaran umum: Terminologi Azure CLI dan tingkat dukungan
 
@@ -27,17 +27,17 @@ Sintaks Azure CLI adalah kombinasi grup, referensi, perintah, dan parameter. **P
 
 | Layanan Azure | Grup Referensi | Subgrup referensi | Perintah | Perintah referensi lengkap | Contoh Parameter
 |-|-|-|-|-|-|
-| Azure CLI | [az config](/cli/azure/config) | | | az config | --local, --output -o
-| Azure Network | [az network](/cli/azure/network) | application-gateway | buat | [az network application-gateway create](/cli/azure/network/application-gateway#az-network-application-gateway-create) | --name, --resource-group, --capacity
-| Azure DevOps Server | [az pipelines](/cli/azure/pipelines) | agen | list | [az pipelines agent list](/cli/azure/pipelines/agent) | --pool-id, --agent-name, --demands
+| Azure CLI | [az config](../latest/docs-ref-autogen/config.yml) | | | az config | --local, --output -o
+| Azure Network | [az network](../latest/docs-ref-autogen/network.yml) | application-gateway | buat | [az network application-gateway create](/cli/azure/network/application-gateway#az-network-application-gateway-create) | --name, --resource-group, --capacity
+| Azure DevOps Server | [az pipelines](../latest/docs-ref-autogen/pipelines.yml) | agen | list | [az pipelines agent list](../latest/docs-ref-autogen/pipelines/agent.yml) | --pool-id, --agent-name, --demands
 
 **Subgrup referensi** dapat memiliki beberapa tingkat seperti`az network application-gateway private-link ip-config add`
 
 | Grup Referensi | Subgrup | || Perintah|
 |-|-|-|-|-|
-|jaringan|application-gateway|private-link|ip-config|tambahkan
+|jaringan|application-gateway|private-link|ip-config|$add
 
-Lihat [Daftar referensi A -Z](/cli/azure/reference-index) untuk daftar lengkap perintah referensi.
+Lihat [Daftar referensi A -Z](../latest/docs-ref-autogen/reference-index.yml) untuk daftar lengkap perintah referensi.
 
 ## <a name="what-is-reference-type"></a>Apa itu jenis referensi?
 
@@ -103,9 +103,9 @@ Meskipun sebagian besar perintah dan parameter untuk satu referensi memiliki sta
 |                            | --newFutureParameter2                                                | Extensi |     |                | ya          |
 | az network firewall create | Semua                                                                  | Extensi |     |                | ya          |
 
-Tabel di atas hanyalah contoh dan **tidak** mewakili status referensi saat ini misalnya.
+Tabel di atas hanya contoh dan **tidak** mewakili status referensi saat ini misalnya.
 
 ## <a name="see-also"></a>Lihat juga
 
-- [Azure CLI A - Daftar referensi Z](/cli/azure/reference-index)
+- [Azure CLI A - Daftar referensi Z](../latest/docs-ref-autogen/reference-index.yml)
 - [Ekstensi yang tersedia untuk Azure CLI](azure-cli-extensions-list.md)

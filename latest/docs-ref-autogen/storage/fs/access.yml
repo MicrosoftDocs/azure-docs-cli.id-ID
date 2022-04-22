@@ -1,0 +1,349 @@
+### YamlMime:AzureCLIGroup
+uid: az_storage_fs_access
+name: az storage fs access
+summary: Mengelola akses dan izin sistem file untuk akun Azure Data Lake Storage Gen2.
+description: ''
+directCommands:
+- uid: az_storage_fs_access_remove-recursive
+  name: az storage fs access remove-recursive
+  summary: Hapus Access Control pada jalur dan sub-jalur di akun Azure Data Lake Storage Gen2.
+  description: ''
+  syntax: >-
+    az storage fs access remove-recursive --acl
+                                          --file-system
+                                          --path
+                                          [--account-key]
+                                          [--account-name]
+                                          [--auth-mode {key, login}]
+                                          [--batch-size]
+                                          [--connection-string]
+                                          [--continuation]
+                                          [--continue-on-failure {false, true}]
+                                          [--max-batches]
+                                          [--sas-token]
+                                          [--timeout]
+  examples:
+  - summary: Hapus Access Control pada jalur dan sub-jalur di akun Azure Data Lake Storage Gen2.
+    syntax: az storage fs access remove-recursive --acl "default:user:21cd756e-e290-4a26-9547-93e8cc1a8923" -p dir -f myfilesystem --account-name myadlsaccount --account-key 0000-0000
+  requiredParameters:
+  - isRequired: true
+    name: --acl
+    summary: Menghapus hak kontrol akses POSIX pada file dan direktori. Nilai adalah daftar entri kontrol akses yang dipisahkan koma. Setiap entri kontrol akses (ACE) terdiri dari cakupan, jenis, dan pengidentifikasi pengguna atau grup dalam format "[scope:][type]:[id]".
+    description: ''
+  - isRequired: true
+    name: --file-system -f
+    summary: Nama sistem file (yaitu nama kontainer).
+    description: ''
+  - isRequired: true
+    name: --path -p
+    summary: Jalur ke file atau direktori dalam sistem file yang ditentukan.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --batch-size
+    summary: Opsional. Jika ukuran himpunan data melebihi ukuran batch, maka operasi akan dibagi menjadi beberapa permintaan sehingga kemajuan dapat dilacak. Ukuran batch harus antara 1 dan 2000. Default saat tidak ditentukan adalah 2000.
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --continuation
+    summary: Token kelanjutan opsional yang dapat digunakan untuk melanjutkan operasi yang dihentikan sebelumnya.
+    description: ''
+  - name: --continue-on-failure
+    parameterValueGroup: false, true
+    summary: Jika diatur ke False, operasi akan berakhir dengan cepat saat mengalami kesalahan pengguna (4XX). Jika True, operasi akan mengabaikan kesalahan pengguna dan melanjutkan operasi pada sub-entitas lain dari direktori. Token kelanjutan hanya akan dikembalikan ketika --continue-on-failure adalah True jika terjadi kesalahan pengguna. Jika tidak diatur, nilai defaultnya adalah False untuk ini.
+    description: ''
+  - name: --max-baches
+    summary: Opsional. Tentukan jumlah maksimum batch yang dapat dijalankan oleh operasi Access Control perubahan tunggal. Jika maksimum tercapai sebelum semua sub-jalur diproses, maka token kelanjutan dapat digunakan untuk melanjutkan operasi. Nilai kosong menunjukkan bahwa jumlah maksimum batch dalam unbound dan operasi berlanjut hingga akhir.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_fs_access_set
+  name: az storage fs access set
+  summary: Atur properti kontrol akses jalur (direktori atau file) di akun Azure Data Lake Storage Gen2.
+  description: ''
+  syntax: >-
+    az storage fs access set --file-system
+                             --path
+                             [--account-key]
+                             [--account-name]
+                             [--acl]
+                             [--auth-mode {key, login}]
+                             [--connection-string]
+                             [--group]
+                             [--owner]
+                             [--permissions]
+                             [--sas-token]
+  examples:
+  - summary: Atur daftar kontrol akses jalur.
+    syntax: az storage fs access set --acl "user::rwx,group::r--,other::---" -p dir -f myfilesystem --account-name mystorageaccount --account-key 0000-0000
+  - summary: Atur izin jalur.
+    syntax: az storage fs access set --permissions "rwxrwx---" -p dir -f myfilesystem --account-name mystorageaccount --account-key 0000-0000
+  - summary: Atur pemilik jalur.
+    syntax: az storage fs access set --owner example@microsoft.com -p dir -f myfilesystem --account-name mystorageaccount --account-key 0000-0000
+  - summary: Atur grup pemilik jalur.
+    syntax: az storage fs access set --group 68390a19-a897-236b-b453-488abf67b4dc -p dir -f myfilesystem --account-name mystorageaccount --account-key 0000-0000
+  requiredParameters:
+  - isRequired: true
+    name: --file-system -f
+    summary: Nama sistem file (yaitu nama kontainer).
+    description: ''
+  - isRequired: true
+    name: --path -p
+    summary: Jalur ke file atau direktori dalam sistem file yang ditentukan.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --acl
+    summary: Tidak valid bersama dengan acl. Hak kontrol akses POSIX pada file dan direktori dalam format "[scope:][type]:[id]:[permissions]". misalnya "user::rwx,group::r--,other::---,mask::rwx".
+    description: 'Nilai adalah daftar entri kontrol akses yang dipisahkan koma. Setiap entri kontrol akses (ACE) terdiri dari cakupan, jenis, pengidentifikasi pengguna atau grup, dan izin dalam format "[scope:][type]:[id]:[permissions]". Cakupan harus "default" untuk menunjukkan ACE milik ACL default untuk direktori; jika tidak, cakupan bersifat implisit dan ACE milik ACL akses. Ada empat jenis ACE: "pengguna" memberikan hak kepada pemilik atau pengguna bernama, "grup" memberikan hak kepada grup pemilik atau grup bernama, "mask" membatasi hak yang diberikan kepada pengguna bernama dan anggota grup, dan "lainnya" memberikan hak untuk semua pengguna yang tidak ditemukan dalam entri lain. Pengidentifikasi pengguna atau grup dihilangkan untuk entri jenis "masker" dan "lainnya". Pengidentifikasi pengguna atau grup juga dihilangkan untuk pemilik dan grup pemilik. Misalnya, ACL berikut memberikan hak baca, tulis, dan eksekusi kepada pemilik john.doe@contosofile , hak baca untuk grup pemilik, dan tidak ada untuk orang lain: "user::rwx,user:john.doe@contoso:rwx,group::r--,other::---,mask::rwx". Untuk informasi lebih lanjut, silakan merujuk ke https://docs.microsoft.com/azure/storage/blobs/data-lake-storage-access-control.'
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --group
+    summary: Grup pemilik file atau direktori. Grup Azure Active Directory ID objek atau nama prinsipal pengguna untuk ditetapkan sebagai grup pemilik. Untuk informasi lebih lanjut, silakan merujuk ke https://docs.microsoft.com/azure/storage/blobs/data-lake-storage-access-control#changing-the-owning-group.
+    description: ''
+  - name: --owner
+    summary: Pengguna pemilik file atau direktori. Pengguna Azure Active Directory ID objek atau nama prinsipal pengguna untuk ditetapkan sebagai pemilik. Untuk informasi lebih lanjut, silakan merujuk ke https://docs.microsoft.com/azure/storage/blobs/data-lake-storage-access-control#the-owning-user.
+    description: ''
+  - name: --permissions
+    summary: Tidak valid bersama dengan acl. Izin akses POSIX untuk pemilik file, grup pemilik file, dan lainnya. Setiap kelas dapat diberikan izin read(r), write(w), atau execute(x). Notasi simbolis (rwxrw-rw-) dan oktal 4 digit (misalnya 0766) didukung.'.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_fs_access_set-recursive
+  name: az storage fs access set-recursive
+  summary: Atur Access Control pada jalur dan sub-jalur di akun Azure Data Lake Storage Gen2.
+  description: ''
+  syntax: >-
+    az storage fs access set-recursive --acl
+                                       --file-system
+                                       --path
+                                       [--account-key]
+                                       [--account-name]
+                                       [--auth-mode {key, login}]
+                                       [--batch-size]
+                                       [--connection-string]
+                                       [--continuation]
+                                       [--continue-on-failure {false, true}]
+                                       [--max-batches]
+                                       [--sas-token]
+                                       [--timeout]
+  examples:
+  - summary: Atur Access Control pada jalur dan sub-jalur di akun Azure Data Lake Storage Gen2.
+    syntax: az storage fs access set-recursive --acl "default:user:21cd756e-e290-4a26-9547-93e8cc1a8923:rwx" -p dir -f myfilesystem --account-name myadlsaccount --account-key 0000-0000
+  requiredParameters:
+  - isRequired: true
+    name: --acl
+    summary: Nilai adalah daftar entri kontrol akses yang dipisahkan koma. Setiap entri kontrol akses (ACE) terdiri dari cakupan, jenis, pengidentifikasi pengguna atau grup, dan izin dalam format "[scope:][type]:[id]:[permissions]".  Untuk informasi lebih lanjut, silakan merujuk ke https://docs.microsoft.com/azure/storage/blobs/data-lake-storage-access-control.
+    description: ''
+  - isRequired: true
+    name: --file-system -f
+    summary: Nama sistem file (yaitu nama kontainer).
+    description: ''
+  - isRequired: true
+    name: --path -p
+    summary: Jalur ke file atau direktori dalam sistem file yang ditentukan.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --batch-size
+    summary: Opsional. Jika ukuran himpunan data melebihi ukuran batch, maka operasi akan dibagi menjadi beberapa permintaan sehingga kemajuan dapat dilacak. Ukuran batch harus antara 1 dan 2000. Default saat tidak ditentukan adalah 2000.
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --kelanjutan
+    summary: Token kelanjutan opsional yang dapat digunakan untuk melanjutkan operasi yang dihentikan sebelumnya.
+    description: ''
+  - name: --continue-on-failure
+    parameterValueGroup: false, true
+    summary: Jika diatur ke False, operasi akan berakhir dengan cepat saat mengalami kesalahan pengguna (4XX). Jika True, operasi akan mengabaikan kesalahan pengguna dan melanjutkan operasi pada sub-entitas lain dari direktori. Token kelanjutan hanya akan dikembalikan ketika --continue-on-failure adalah True jika terjadi kesalahan pengguna. Jika tidak diatur, nilai defaultnya adalah False untuk ini.
+    description: ''
+  - name: --max-batchs
+    summary: Opsional. Tentukan jumlah maksimum batch yang dapat dijalankan oleh operasi Access Control perubahan tunggal. Jika maksimum tercapai sebelum semua sub-jalur diproses, maka token kelanjutan dapat digunakan untuk melanjutkan operasi. Nilai kosong menunjukkan bahwa jumlah maksimum batch dalam unbound dan operasi berlanjut hingga akhir.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_fs_access_show
+  name: az storage fs access show
+  summary: Tampilkan properti kontrol akses jalur (direktori atau file) di akun Azure Data Lake Storage Gen2.
+  description: ''
+  syntax: >-
+    az storage fs access show --file-system
+                              --path
+                              [--account-key]
+                              [--account-name]
+                              [--auth-mode {key, login}]
+                              [--connection-string]
+                              [--sas-token]
+  examples:
+  - summary: Perlihatkan properti kontrol akses jalur.
+    syntax: az storage fs access show -p dir -f myfilesystem --account-name myadlsaccount --account-key 0000-0000
+  requiredParameters:
+  - isRequired: true
+    name: --file-system -f
+    summary: Nama sistem file (yaitu nama kontainer).
+    description: ''
+  - isRequired: true
+    name: --path -p
+    summary: Jalur ke file atau direktori dalam sistem file yang ditentukan.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_fs_access_update-recursive
+  name: az storage fs access update-recursive
+  summary: Ubah Access Control pada jalur dan sub-jalur di akun Azure Data Lake Storage Gen2.
+  description: ''
+  syntax: >-
+    az storage fs access update-recursive --acl
+                                          --file-system
+                                          --path
+                                          [--account-key]
+                                          [--account-name]
+                                          [--auth-mode {key, login}]
+                                          [--batch-size]
+                                          [--connection-string]
+                                          [--continuation]
+                                          [--continue-on-failure {false, true}]
+                                          [--max-batches]
+                                          [--sas-token]
+                                          [--timeout]
+  examples:
+  - summary: Ubah Access Control pada jalur dan sub-jalur di akun Azure Data Lake Storage Gen2.
+    syntax: az storage fs access update-recursive --acl "user::r-x" -p dir -f myfilesystem --account-name myadlsaccount --account-key 0000-0000
+  requiredParameters:
+  - isRequired: true
+    name: --acl
+    summary: Nilai adalah daftar entri kontrol akses yang dipisahkan koma. Setiap entri kontrol akses (ACE) terdiri dari cakupan, jenis, pengidentifikasi pengguna atau grup, dan izin dalam format "[scope:][type]:[id]:[permissions]".  Untuk informasi lebih lanjut, silakan merujuk ke https://docs.microsoft.com/azure/storage/blobs/data-lake-storage-access-control.
+    description: ''
+  - isRequired: true
+    name: --file-system -f
+    summary: Nama sistem file (yaitu nama kontainer).
+    description: ''
+  - isRequired: true
+    name: --path -p
+    summary: Jalur ke file atau direktori dalam sistem file yang ditentukan.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --batch-size
+    summary: Opsional. Jika ukuran himpunan data melebihi ukuran batch, maka operasi akan dibagi menjadi beberapa permintaan sehingga kemajuan dapat dilacak. Ukuran batch harus antara 1 dan 2000. Default saat tidak ditentukan adalah 2000.
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --kelanjutan
+    summary: Token kelanjutan opsional yang dapat digunakan untuk melanjutkan operasi yang dihentikan sebelumnya.
+    description: ''
+  - name: --continue-on-failure
+    parameterValueGroup: false, true
+    summary: Jika diatur ke False, operasi akan berakhir dengan cepat saat mengalami kesalahan pengguna (4XX). Jika True, operasi akan mengabaikan kesalahan pengguna dan melanjutkan operasi pada sub-entitas lain dari direktori. Token kelanjutan hanya akan dikembalikan ketika --continue-on-failure adalah True jika terjadi kesalahan pengguna. Jika tidak diatur, nilai defaultnya adalah False untuk ini.
+    description: ''
+  - name: --max-batchs
+    summary: Opsional. Tentukan jumlah maksimum batch yang dapat dijalankan oleh operasi Access Control perubahan tunggal. Jika maksimum tercapai sebelum semua sub-jalur diproses, maka token kelanjutan dapat digunakan untuk melanjutkan operasi. Nilai kosong menunjukkan bahwa jumlah maksimum batch dalam unbound dan operasi berlanjut hingga akhir.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+commands:
+- az_storage_fs_access_remove-recursive
+- az_storage_fs_access_set
+- az_storage_fs_access_set-recursive
+- az_storage_fs_access_show
+- az_storage_fs_access_update-recursive
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/29/2022
+  description: Mengelola akses dan izin sistem file untuk akun Azure Data Lake Storage Gen2.
+  ms.openlocfilehash: c757ae2127aa1d8e1bca48c2e01d63cf10810a7c
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141429227"
