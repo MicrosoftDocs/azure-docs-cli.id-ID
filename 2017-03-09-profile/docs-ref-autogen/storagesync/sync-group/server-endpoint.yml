@@ -1,0 +1,350 @@
+### YamlMime:AzureCLIGroup
+uid: az_storagesync_sync-group_server-endpoint
+name: az storagesync sync-group server-endpoint
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **storagesync** untuk Azure CLI (versi 2.3.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az storagesync sync-group server-endpoint** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola titik akhir server.
+description: ''
+directCommands:
+- uid: az_storagesync_sync-group_server-endpoint_create
+  name: az storagesync sync-group server-endpoint create
+  summary: Buat titik akhir server baru.
+  description: ''
+  syntax: >-
+    az storagesync sync-group server-endpoint create --name
+                                                     --registered-server-id
+                                                     --server-local-path
+                                                     --storage-sync-service
+                                                     --sync-group-name
+                                                     [--cloud-tiering {off, on}]
+                                                     [--no-wait]
+                                                     [--offline-data-transfer {off, on}]
+                                                     [--offline-data-transfer-share-name]
+                                                     [--resource-group]
+                                                     [--tier-files-older-than-days]
+                                                     [--volume-free-space-percent]
+  examples:
+  - summary: Buat titik akhir server baru "SampleServerEndpoint" di grup sinkronisasi "SampleSyncGroup".
+    syntax: >-
+      az storagesync sync-group server-endpoint create --resource-group "SampleResourceGroup" \
+
+      --storage-sync-service "SampleStorageSyncService" --sync-group-name \
+
+      "SampleSyncGroup" --name "SampleServerEndpoint" --server-id 91beed22-7e9e-4bda-9313-fec96cf286e0 \
+
+      --server-local-path "d:\abc" --cloud-tiering "off" --volume-free-space-percent 80 --tier-files-older-than-days 20 \
+
+      --offline-data-transfer "on" --offline-data-transfer-share-name "myfileshare"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama titik akhir server.
+    description: ''
+  - isRequired: true
+    name: --registered-server-id --server-id
+    summary: Id sumber daya atau GUID server terdaftar.
+    description: ''
+  - isRequired: true
+    name: --server-local-path
+    summary: Jalur lokal server terdaftar.
+    description: ''
+  - isRequired: true
+    name: --storage-sync-service
+    summary: Nama atau ID layanan sinkronisasi penyimpanan.
+    description: ''
+  - isRequired: true
+    name: --sync-group-name
+    summary: Nama grup sinkronisasi.
+    description: ''
+  optionalParameters:
+  - name: --cloud-tiering
+    parameterValueGroup: off, on
+    summary: Sakelar untuk mengaktifkan atau menonaktifkan tingkatan cloud. Dengan awan berjenjang, berkas yang jarang digunakan atau diakses dapat ditingkatkan ke Azure Files.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --offline-data-transfer
+    parameterValueGroup: off, on
+    summary: Sakelar untuk mengaktifkan atau menonaktifkan transfer data offline. Dengan transfer data offline, Anda dapat menggunakan cara alternatif, seperti Azure Data Box, untuk mengangkut file dalam jumlah besar ke Azure tanpa jaringan.
+    description: ''
+  - name: --offline-data-transfer-share-name
+    summary: Nama berbagi file Azure yang digunakan untuk mentransfer data secara offline.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --tier-files-older-than-days
+    summary: Hari-hari file yang lebih lama dari akan dijenjangkan.
+    description: ''
+  - name: --volume-free-space-percent
+    summary: Jumlah ruang kosong untuk dicadangkan pada volume tempat titik akhir server berada. Misalnya, jika ruang bebas volume diatur ke 50% pada volume yang memiliki titik akhir peladen tunggal, kira-kira setengah dari jumlah data ditingkatkan ke Azure Files. Terlepas dari apakah awan berjenjang diaktifkan, Azure berbagi berkas Anda selalu memiliki salinan lengkap data dalam grup sinkronisasi.
+    description: ''
+- uid: az_storagesync_sync-group_server-endpoint_delete
+  name: az storagesync sync-group server-endpoint delete
+  summary: Menghapus titik akhir server tertentu.
+  description: ''
+  syntax: >-
+    az storagesync sync-group server-endpoint delete --name
+                                                     --storage-sync-service
+                                                     --sync-group-name
+                                                     [--no-wait]
+                                                     [--resource-group]
+                                                     [--yes]
+  examples:
+  - summary: Hapus titik akhir server "SampleServerEndpoint".
+    syntax: >-
+      az storagesync sync-group server-endpoint delete --resource-group "SampleResourceGroup" \
+
+      --storage-sync-service "SampleStorageSyncService" --sync-group-name \
+
+      "SampleSyncGroup" --name "SampleServerEndpoint"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama titik akhir server.
+    description: ''
+  - isRequired: true
+    name: --storage-sync-service
+    summary: Nama atau ID layanan sinkronisasi penyimpanan.
+    description: ''
+  - isRequired: true
+    name: --sync-group-name
+    summary: Nama grup sinkronisasi.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_storagesync_sync-group_server-endpoint_list
+  name: az storagesync sync-group server-endpoint list
+  summary: Mencantumkan semua titik akhir server dalam grup sinkronisasi.
+  description: ''
+  syntax: >-
+    az storagesync sync-group server-endpoint list --storage-sync-service
+                                                   --sync-group-name
+                                                   [--resource-group]
+  examples:
+  - summary: Cantumkan semua titik akhir server dalam grup sinkronisasi "SampleSyncGroup".
+    syntax: >-
+      az storagesync sync-group server-endpoint list --resource-group "SampleResourceGroup" \
+
+      --storage-sync-service "SampleStorageSyncService" --sync-group-name \
+
+      "SampleSyncGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --storage-sync-service
+    summary: Nama atau ID layanan sinkronisasi penyimpanan.
+    description: ''
+  - isRequired: true
+    name: --sync-group-name
+    summary: Nama grup sinkronisasi.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_storagesync_sync-group_server-endpoint_show
+  name: az storagesync sync-group server-endpoint show
+  summary: Perlihatkan properti untuk titik akhir server tertentu.
+  description: ''
+  syntax: >-
+    az storagesync sync-group server-endpoint show --name
+                                                   --storage-sync-service
+                                                   --sync-group-name
+                                                   [--resource-group]
+  examples:
+  - summary: Tampilkan properti untuk titik akhir server "SampleServerEndpoint".
+    syntax: >-
+      az storagesync sync-group server-endpoint show --resource-group "SampleResourceGroup" \
+
+      --storage-sync-service "SampleStorageSyncService" --sync-group-name \
+
+      "SampleSyncGroup" --name "SampleServerEndpoint"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama titik akhir server.
+    description: ''
+  - isRequired: true
+    name: --storage-sync-service
+    summary: Nama atau ID layanan sinkronisasi penyimpanan.
+    description: ''
+  - isRequired: true
+    name: --sync-group-name
+    summary: Nama grup sinkronisasi.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_storagesync_sync-group_server-endpoint_update
+  name: az storagesync sync-group server-endpoint update
+  summary: Perbarui properti untuk titik akhir server tertentu.
+  description: ''
+  syntax: >-
+    az storagesync sync-group server-endpoint update --name
+                                                     --storage-sync-service
+                                                     --sync-group-name
+                                                     [--cloud-tiering {off, on}]
+                                                     [--no-wait]
+                                                     [--offline-data-transfer {off, on}]
+                                                     [--offline-data-transfer-share-name]
+                                                     [--resource-group]
+                                                     [--tier-files-older-than-days]
+                                                     [--volume-free-space-percent]
+  examples:
+  - summary: Perbarui properti untuk titik akhir server "SampleServerEndpoint".
+    syntax: >-
+      az storagesync sync-group server-endpoint update --resource-group "SampleResourceGroup" \
+
+      --storage-sync-service "SampleStorageSyncService" --sync-group-name \
+
+      "SampleSyncGroup" --name "SampleServerEndpoint" --cloud-tiering "off" \
+
+      --volume-free-space-percent "100" --tier-files-older-than-days "0" \
+
+      --offline-data-transfer "off"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama titik akhir server.
+    description: ''
+  - isRequired: true
+    name: --storage-sync-service
+    summary: Nama atau ID layanan sinkronisasi penyimpanan.
+    description: ''
+  - isRequired: true
+    name: --sync-group-name
+    summary: Nama grup sinkronisasi.
+    description: ''
+  optionalParameters:
+  - name: --cloud-tiering
+    parameterValueGroup: off, on
+    summary: Sakelar untuk mengaktifkan atau menonaktifkan tingkatan cloud. Dengan awan berjenjang, berkas yang jarang digunakan atau diakses dapat ditingkatkan ke Azure Files.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --offline-data-transfer
+    parameterValueGroup: off, on
+    summary: Sakelar untuk mengaktifkan atau menonaktifkan transfer data offline. Dengan transfer data offline, Anda dapat menggunakan cara alternatif, seperti Azure Data Box, untuk mengangkut file dalam jumlah besar ke Azure tanpa jaringan.
+    description: ''
+  - name: --offline-data-transfer-share-name
+    summary: Nama berbagi file Azure yang digunakan untuk mentransfer data secara offline.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --tier-files-older-than-days
+    summary: Hari-hari file yang lebih lama dari akan dijenjangkan.
+    description: ''
+  - name: --volume-free-space-percent
+    summary: Jumlah ruang kosong untuk dicadangkan pada volume tempat titik akhir server berada. Misalnya, jika ruang bebas volume diatur ke 50% pada volume yang memiliki titik akhir peladen tunggal, kira-kira setengah dari jumlah data ditingkatkan ke Azure Files. Terlepas dari apakah awan berjenjang diaktifkan, Azure berbagi berkas Anda selalu memiliki salinan lengkap data dalam grup sinkronisasi.
+    description: ''
+- uid: az_storagesync_sync-group_server-endpoint_wait
+  name: az storagesync sync-group server-endpoint wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi titik akhir server terpenuhi.
+  description: ''
+  syntax: >-
+    az storagesync sync-group server-endpoint wait --name
+                                                   --resource-group
+                                                   --storage-sync-service-name
+                                                   --sync-group-name
+                                                   [--created]
+                                                   [--custom]
+                                                   [--deleted]
+                                                   [--exists]
+                                                   [--interval]
+                                                   [--timeout]
+                                                   [--updated]
+  examples:
+  - summary: Tempatkan CLI dalam status menunggu hingga kondisi titik akhir server dibuat.
+    syntax: >-
+      az storagesync sync-group server-endpoint wait --resource-group "SampleResourceGroup" \
+
+      --storage-sync-service "SampleStorageSyncService" --sync-group-name \
+
+      "SampleSyncGroup" --name "SampleServerEndpoint" --created
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama titik akhir server.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --storage-sync-service-name
+    summary: Nama sumber daya Storage Sync Service.
+    description: ''
+  - isRequired: true
+    name: --sync-group-name
+    summary: Nama sumber daya Grup Sinkronisasi.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_storagesync_sync-group_server-endpoint_create
+- az_storagesync_sync-group_server-endpoint_delete
+- az_storagesync_sync-group_server-endpoint_list
+- az_storagesync_sync-group_server-endpoint_show
+- az_storagesync_sync-group_server-endpoint_update
+- az_storagesync_sync-group_server-endpoint_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola titik akhir server.
+  ms.openlocfilehash: 32f6b9f05f99f35db7d86df6b665d5a16be49b95
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141112189"

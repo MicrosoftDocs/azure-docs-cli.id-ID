@@ -1,0 +1,302 @@
+### YamlMime:AzureCLIGroup
+uid: az_maintenance_configuration
+name: az maintenance configuration
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **pemeliharaan** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **konfigurasi pemeliharaan az** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola konfigurasi pemeliharaan dengan pemeliharaan.
+description: ''
+directCommands:
+- uid: az_maintenance_configuration_create
+  name: az maintenance configuration create
+  summary: Membuat rekaman konfigurasi.
+  description: ''
+  syntax: >-
+    az maintenance configuration create --resource-group
+                                        --resource-name
+                                        [--duration]
+                                        [--expiration-date-time]
+                                        [--extension-properties]
+                                        [--install-patches-linux-parameters]
+                                        [--install-patches-post-tasks]
+                                        [--install-patches-pre-tasks]
+                                        [--install-patches-windows-parameters]
+                                        [--location]
+                                        [--maintenance-scope {All, Extension, Host, InGuestPatch, InResource, OSImage, Resource, SQLDB, SQLManagedInstance}]
+                                        [--maintenance-window-recur-every]
+                                        [--maintenance-window-start-date-time]
+                                        [--maintenance-window-time-zone]
+                                        [--namespace]
+                                        [--reboot-setting {Always, IfRequired, Never}]
+                                        [--tags]
+                                        [--visibility {Custom, Public}]
+  examples:
+  - summary: MaintenanceConfigurations_CreateOrUpdateForResource
+    syntax: az maintenance configuration create --location "westus2" --maintenance-scope "OSImage" --maintenance-window-duration "05:00" --maintenance-window-expiration-date-time "9999-12-31 00:00" --maintenance-window-recur-every "Day" --maintenance-window-start-date-time "2020-04-30 08:00" --maintenance-window-time-zone "Pacific Standard Time" --namespace "Microsoft.Maintenance" --visibility "Custom" --resource-group "examplerg" --resource-name "configuration1"
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-name
+    summary: Pengidentifikasi Sumber Daya.
+    description: ''
+  optionalParameters:
+  - name: --duration --maintenance-window-duration
+    summary: 'Durasi jendela pemeliharaan dalam format HH:mm. Jika tidak disediakan, nilai default akan digunakan berdasarkan cakupan pemeliharaan yang disediakan. Contoh: 05:00.'
+    description: ''
+  - name: --expiration-date-time --maintenance-window-expiration-date-time
+    summary: Tanggal kedaluwarsa efektif jendela pemeliharaan dalam format YYYY-MM-DD hh:mm. Jendela akan dibuat di zona waktu yang disediakan dan disesuaikan dengan penghematan siang hari sesuai dengan zona waktu tersebut. Tanggal kedaluwarsa harus diatur ke tanggal mendatang. Jika tidak disediakan, itu akan diatur ke tanggalwaktu maksimum 9999-12-31 23:59:59.
+    description: ''
+  - name: --extension-properties
+    summary: 'Mendapatkan atau mengatur extensionProperties dari maintenanceConfiguration Expect value: KEY1=VALUE1 KEY2=VALUE2 ...'
+    description: ''
+  - name: --install-patches-linux-parameters --linux-parameters
+    summary: Parameter input khusus untuk menambal komputer Linux. Untuk mesin Windows, jangan lewati properti ini.
+    description: >-
+      Penggunaan: --install-patches-linux-parameters package-name-masks-to-exclude=XX package-name-masks-to-include=XX classifications-to-include=XX
+
+
+      package-name-masks-to-exclude: Nama paket yang akan dikecualikan untuk patching.
+
+      package-name-masks-to-include: Nama paket yang akan disertakan untuk patching.
+
+      classifications-to-include: Kategori klasifikasi patch yang akan di-patch.
+  - name: --install-patches-post-tasks --post-tasks
+    summary: "Daftar tugas postingan. misalnya [{'source' :'runbook', 'taskScope': 'Resource', 'parameters': { 'arg1': 'value1'}}] Nilai yang diharapkan: json-string/json-file/@json-file."
+    description: ''
+  - name: --install-patches-pre-tasks --pre-tasks
+    summary: "Daftar pra-tugas. misalnya [{'source' :'runbook', 'taskScope': 'Global', 'parameters': { 'arg1': 'value1'}}] Nilai yang diharapkan: json-string/json-file/@json-file."
+    description: ''
+  - name: --install-patches-windows-parameters --windows-parameters
+    summary: Parameter input khusus untuk menambal komputer Windows. Untuk komputer Linux, jangan lewati properti ini.
+    description: >-
+      Penggunaan: --install-patches-windows-parameters kb-numbers-to-exclude=XX kb-numbers-to-include=XX classifications-to-include=XX exclude-kbs-requiring-reboot=XX
+
+
+      kb-numbers-to-exclude: Windows KBID yang akan dikecualikan untuk patching.
+
+      kb-numbers-to-include: Windows KBID yang akan disertakan untuk patching.
+
+      classifications-to-include: Kategori klasifikasi patch yang akan di-patch exclude-kbs-requiring-reboot: Mengecualikan patch yang perlu di-boot ulang.
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --maintenance-scope
+    parameterValueGroup: All, Extension, Host, InGuestPatch, InResource, OSImage, Resource, SQLDB, SQLManagedInstance
+    summary: Mendapatkan atau mengatur maintenanceScope konfigurasi.
+    description: ''
+  - name: --maintenance-window-recur-every --recur-every
+    summary: "Laju di mana jendela Pemeliharaan diperkirakan akan berulang. Tarif dapat dinyatakan sebagai jadwal harian, mingguan, atau bulanan. Jadwal harian diformat sebagai recurEvery: [Frekuensi sebagai bilangan bulat]['Hari']. Jika tidak ada frekuensi yang disediakan, frekuensi defaultnya adalah 1. Contoh jadwal harian adalah recurEvery: Day, recurEvery: 3Days.  Jadwal mingguan diformat sebagai recurEvery: [Frekuensi sebagai bilangan bulat]['Minggu'] [Daftar opsional yang dipisahkan koma hari kerja Senin-Minggu]. Contoh jadwal mingguan adalah recurEvery: 3Weeks, recurEvery: Week Saturday,Sunday. Jadwal bulanan diformat sebagai [Frekuensi sebagai bilangan bulat]['Bulan'] [Daftar hari bulan yang dipisahkan koma] atau [Frekuensi sebagai bilangan bulat]['Bulan'] [Minggu Dalam Bulan (Pertama, Kedua, Ketiga, Keempat, Terakhir)] [Minggu Kerja Senin-Minggu] [Offset Opsional(No. hari)]. Nilai offset harus antara -6 hingga 6 inklusif. Contoh jadwal bulanan adalah recurEvery: Month, recurEvery: 2Months, recurEvery: Month day23,day24, recurEvery: Month Last Sunday, recurEvery: Month Fourth Monday, recurEvery: Month Last Sunday Offset-3, recurEvery: Month Third Sunday Offset6."
+    description: ''
+  - name: --maintenance-window-start-date-time --start-date-time
+    summary: Tanggal mulai efektif jendela pemeliharaan dalam format YYYY-MM-DD hh:mm. Tanggal mulai dapat diatur ke tanggal saat ini atau tanggal mendatang. Jendela akan dibuat di zona waktu yang disediakan dan disesuaikan dengan penghematan siang hari sesuai dengan zona waktu tersebut.
+    description: ''
+  - name: --maintenance-window-time-zone --time-zone
+    summary: 'Nama zona waktu. Daftar zona waktu dapat diperoleh dengan mengeksekusi [System.TimeZoneInfo]::GetSystemTimeZones() di PowerShell. Contoh: Waktu Standar Pasifik, UTC, W. Waktu Standar Eropa, Waktu Standar Korea, Cen. Waktu Standar Australia.'
+    description: ''
+  - name: --namespace
+    summary: Mendapatkan atau mengatur namespace sumber daya.
+    description: ''
+  - name: --reboot-setting
+    parameterValueGroup: Always, IfRequired, Never
+    summary: Kemungkinan preferensi reboot seperti yang didefinisikan oleh pengguna berdasarkan yang akan diputuskan untuk me-reboot komputer atau tidak setelah operasi patch selesai.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --visibility
+    parameterValueGroup: Custom, Public
+    summary: Mendapatkan atau mengatur visibilitas konfigurasi.
+    description: ''
+- uid: az_maintenance_configuration_delete
+  name: az maintenance configuration delete
+  summary: Menghapus rekaman Konfigurasi.
+  description: ''
+  syntax: >-
+    az maintenance configuration delete --resource-group
+                                        --resource-name
+                                        [--yes]
+  examples:
+  - summary: MaintenanceConfigurations_DeleteForResource
+    syntax: az maintenance configuration delete --resource-group "examplerg" --resource-name "example1"
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-name
+    summary: Pengidentifikasi Sumber Daya.
+    description: ''
+  optionalParameters:
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_maintenance_configuration_list
+  name: az maintenance configuration list
+  summary: Mendapatkan rekaman Konfigurasi dalam langganan.
+  description: ''
+  syntax: az maintenance configuration list
+  examples:
+  - summary: MaintenanceConfigurations_List
+    syntax: az maintenance configuration list
+- uid: az_maintenance_configuration_show
+  name: az maintenance configuration show
+  summary: Mendapatkan rekaman Konfigurasi.
+  description: ''
+  syntax: >-
+    az maintenance configuration show --resource-group
+                                      --resource-name
+  examples:
+  - summary: MaintenanceConfigurations_GetForResource
+    syntax: az maintenance configuration show --resource-group "examplerg" --resource-name "configuration1"
+  - summary: MaintenanceConfigurations_GetForResource_GuestOSPatchLinux
+    syntax: az maintenance configuration show --resource-group "examplerg" --resource-name "configuration1"
+  - summary: MaintenanceConfigurations_GetForResource_GuestOSPatchWindows
+    syntax: az maintenance configuration show --resource-group "examplerg" --resource-name "configuration1"
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-name
+    summary: Pengidentifikasi Sumber Daya.
+    description: ''
+- uid: az_maintenance_configuration_update
+  name: az maintenance configuration update
+  summary: Catatan konfigurasi patch.
+  description: ''
+  syntax: >-
+    az maintenance configuration update --resource-group
+                                        --resource-name
+                                        [--duration]
+                                        [--expiration-date-time]
+                                        [--extension-properties]
+                                        [--install-patches-linux-parameters]
+                                        [--install-patches-post-tasks]
+                                        [--install-patches-pre-tasks]
+                                        [--install-patches-windows-parameters]
+                                        [--location]
+                                        [--maintenance-scope {All, Extension, Host, InGuestPatch, InResource, OSImage, Resource, SQLDB, SQLManagedInstance}]
+                                        [--maintenance-window-recur-every]
+                                        [--maintenance-window-start-date-time]
+                                        [--maintenance-window-time-zone]
+                                        [--namespace]
+                                        [--reboot-setting {Always, IfRequired, Never}]
+                                        [--tags]
+                                        [--visibility {Custom, Public}]
+  examples:
+  - summary: MaintenanceConfigurations_UpdateForResource
+    syntax: az maintenance configuration update --location "westus2" --maintenance-scope "OSImage" --maintenance-window-duration "05:00" --maintenance-window-expiration-date-time "9999-12-31 00:00" --maintenance-window-recur-every "Month Third Sunday" --maintenance-window-start-date-time "2020-04-30 08:00" --maintenance-window-time-zone "Pacific Standard Time" --namespace "Microsoft.Maintenance" --visibility "Custom" --resource-group "examplerg" --resource-name "configuration1"
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-name
+    summary: Pengidentifikasi Sumber Daya.
+    description: ''
+  optionalParameters:
+  - name: --duration --maintenance-window-duration
+    summary: 'Durasi jendela pemeliharaan dalam format HH:mm. Jika tidak disediakan, nilai default akan digunakan berdasarkan cakupan pemeliharaan yang disediakan. Contoh: 05:00.'
+    description: ''
+  - name: --expiration-date-time --maintenance-window-expiration-date-time
+    summary: Tanggal kedaluwarsa efektif jendela pemeliharaan dalam format YYYY-MM-DD hh:mm. Jendela akan dibuat di zona waktu yang disediakan dan disesuaikan dengan penghematan siang hari sesuai dengan zona waktu tersebut. Tanggal kedaluwarsa harus diatur ke tanggal mendatang. Jika tidak disediakan, itu akan diatur ke tanggalwaktu maksimum 9999-12-31 23:59:59.
+    description: ''
+  - name: --extension-properties
+    summary: 'Mendapatkan atau mengatur extensionProperties dari maintenanceConfiguration Expect value: KEY1=VALUE1 KEY2=VALUE2 ...'
+    description: ''
+  - name: --install-patches-linux-parameters --linux-parameters
+    summary: Parameter input khusus untuk menambal komputer Linux. Untuk mesin Windows, jangan lewati properti ini.
+    description: >-
+      Penggunaan: --install-patches-linux-parameters package-name-masks-to-exclude=XX package-name-masks-to-include=XX classifications-to-include=XX
+
+
+      package-name-masks-to-exclude: Nama paket yang akan dikecualikan untuk patching.
+
+      package-name-masks-to-include: Nama paket yang akan disertakan untuk patching.
+
+      classifications-to-include: Kategori klasifikasi patch yang akan di-patch.
+  - name: --install-patches-post-tasks --post-tasks
+    summary: "Daftar tugas postingan. misalnya [{'source' :'runbook', 'taskScope': 'Resource', 'parameters': { 'arg1': 'value1'}}] Nilai yang diharapkan: json-string/json-file/@json-file."
+    description: ''
+  - name: --install-patches-pre-tasks --pre-tasks
+    summary: "Daftar pra-tugas. misalnya [{'source' :'runbook', 'taskScope': 'Global', 'parameters': { 'arg1': 'value1'}}] Nilai yang diharapkan: json-string/json-file/@json-file."
+    description: ''
+  - name: --install-patches-windows-parameters --windows-parameters
+    summary: Parameter input khusus untuk menambal komputer Windows. Untuk komputer Linux, jangan lewati properti ini.
+    description: >-
+      Penggunaan: --install-patches-windows-parameters kb-numbers-to-exclude=XX kb-numbers-to-include=XX classifications-to-include=XX exclude-kbs-requiring-reboot=XX
+
+
+      kb-numbers-to-exclude: Windows KBID yang akan dikecualikan untuk patching.
+
+      kb-numbers-to-include: Windows KBID yang akan disertakan untuk patching.
+
+      classifications-to-include: Kategori klasifikasi patch yang akan di-patch exclude-kbs-requiring-reboot: Mengecualikan patch yang perlu di-boot ulang.
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --maintenance-scope
+    parameterValueGroup: All, Extension, Host, InGuestPatch, InResource, OSImage, Resource, SQLDB, SQLManagedInstance
+    summary: Mendapatkan atau mengatur maintenanceScope konfigurasi.
+    description: ''
+  - name: --maintenance-window-recur-every --recur-every
+    summary: "Laju di mana jendela Pemeliharaan diperkirakan akan berulang. Tarif dapat dinyatakan sebagai jadwal harian, mingguan, atau bulanan. Jadwal harian diformat sebagai recurEvery: [Frekuensi sebagai bilangan bulat]['Hari']. Jika tidak ada frekuensi yang disediakan, frekuensi defaultnya adalah 1. Contoh jadwal harian adalah recurEvery: Day, recurEvery: 3Days.  Jadwal mingguan diformat sebagai recurEvery: [Frekuensi sebagai bilangan bulat]['Minggu'] [Daftar opsional yang dipisahkan koma hari kerja Senin-Minggu]. Contoh jadwal mingguan adalah recurEvery: 3Weeks, recurEvery: Week Saturday,Sunday. Jadwal bulanan diformat sebagai [Frekuensi sebagai bilangan bulat]['Bulan'] [Daftar hari bulan yang dipisahkan koma] atau [Frekuensi sebagai bilangan bulat]['Bulan'] [Minggu Dalam Bulan (Pertama, Kedua, Ketiga, Keempat, Terakhir)] [Minggu Kerja Senin-Minggu] [Offset Opsional(Tidak. hari)]. Nilai offset harus antara -6 hingga 6 inklusif. Contoh jadwal bulanan adalah recurEvery: Month, recurEvery: 2Months, recurEvery: Month day23,day24, recurEvery: Month Last Sunday, recurEvery: Month Fourth Monday, recurEvery: Month Last Sunday Offset-3, recurEvery: Month Third Sunday Offset6."
+    description: ''
+  - name: --maintenance-window-start-date-time --start-date-time
+    summary: Tanggal mulai efektif jendela pemeliharaan dalam format YYYY-MM-DD hh:mm. Tanggal mulai dapat diatur ke tanggal saat ini atau tanggal mendatang. Jendela akan dibuat di zona waktu yang disediakan dan disesuaikan dengan penghematan siang hari sesuai dengan zona waktu tersebut.
+    description: ''
+  - name: --maintenance-window-time-zone --time-zone
+    summary: 'Nama zona waktu. Daftar zona waktu dapat diperoleh dengan mengeksekusi [System.TimeZoneInfo]::GetSystemTimeZones() di PowerShell. Contoh: Waktu Standar Pasifik, UTC, W. Waktu Standar Eropa, Waktu Standar Korea, Cen. Waktu Standar Australia.'
+    description: ''
+  - name: --namespace
+    summary: Mendapatkan atau mengatur namespace sumber daya.
+    description: ''
+  - name: --reboot-setting
+    parameterValueGroup: Always, IfRequired, Never
+    summary: Kemungkinan preferensi reboot seperti yang didefinisikan oleh pengguna berdasarkan yang akan diputuskan untuk me-reboot komputer atau tidak setelah operasi patch selesai.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --visibility
+    parameterValueGroup: Custom, Public
+    summary: Mendapatkan atau mengatur visibilitas konfigurasi.
+    description: ''
+commands:
+- az_maintenance_configuration_create
+- az_maintenance_configuration_delete
+- az_maintenance_configuration_list
+- az_maintenance_configuration_show
+- az_maintenance_configuration_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola konfigurasi pemeliharaan dengan pemeliharaan.
+  ms.openlocfilehash: 3dbd74f4f853741ff57d5bb7d96c091a6b2d2bf0
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141083533"
