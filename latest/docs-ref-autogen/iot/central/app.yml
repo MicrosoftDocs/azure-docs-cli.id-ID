@@ -1,0 +1,210 @@
+### YamlMime:AzureCLIGroup
+uid: az_iot_central_app
+name: az iot central app
+summary: Mengelola aplikasi IoT Central.
+description: Membuat, menghapus, melihat, dan memperbarui aplikasi IoT Central Anda.
+directCommands:
+- uid: az_iot_central_app_create
+  name: az iot central app create
+  summary: Membuat aplikasi IoT Central.
+  description: >-
+    Aplikasi IoT Central adalah aplikasi berbasis cloud yang dapat Anda gunakan untuk mengelola perangkat IoT Anda.
+
+    Untuk informasi selengkapnya tentang menyebarkan aplikasi IoT Central melalui CLI atau daftar argumen yang tersedia, kunjungi https://aka.ms/iotcentral-manage-cli.
+  syntax: >-
+    az iot central app create --name
+                              --resource-group
+                              --subdomain
+                              [--display-name]
+                              [--location]
+                              [--mi-system-assigned]
+                              [--no-wait]
+                              [--sku {ST0, ST1, ST2}]
+                              [--template]
+  examples:
+  - summary: Buat aplikasi IoT Central di wilayah grup sumber daya menggunakan SKU harga default.
+    syntax: az iot central app create -n my-first-iot-app -g MyResourceGroup -s my-iot-app
+  - summary: Buat aplikasi IoT Central di wilayah 'US Timur' dengan paket harga 'ST1' dan templat industri.
+    syntax: az iot central app create -n my-first-iot-app -g MyResourceGroup -s my-iot-app -l eastus -p ST1 -t iotc-distribution
+  - summary: Buat aplikasi IoT Central menggunakan identitas terkelola yang ditetapkan sistem.
+    syntax: az iot central app create -n my-first-iot-app -g MyResourceGroup -s my-iot-app --mi-system-assigned
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Beri aplikasi IoT Central Anda nama yang unik sehingga Anda dapat menemukannya nanti. Ini akan digunakan sebagai nama sumber daya di portal Azure dan CLI.Hindari karakter `-` khusus sebagai gantinya, gunakan huruf kecil (a-z), angka (0-9), dan tanda hubung (-).
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --subdomain -s
+    summary: Masukkan URL unik. Aplikasi Anda akan dapat diakses melalui https://<subdomain>.azureiotcentral.com/. Hindari karakter `-` khusus sebagai gantinya, gunakan huruf kecil (a-z), angka (0-9), dan garis putus-putus (-).
+    description: ''
+  optionalParameters:
+  - name: --display-name -d
+    summary: Nama tampilan kustom untuk aplikasi IoT Central. Ini akan digunakan di manajer aplikasi IoT Central untuk membantu Anda mengidentifikasi aplikasi Anda. Nilai default adalah nama sumber daya.
+    description: ''
+  - name: --location -l
+    summary: Tempat info dan sumber daya aplikasi Anda disimpan. Kami akan default ke lokasi grup sumber daya target. Lihat dokumentasi untuk daftar lengkap lokasi yang didukung.
+    description: ''
+  - name: --mi-system-assigned
+    summary: Berikan bendera ini untuk menggunakan identitas yang ditetapkan sistem.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --sku -p
+    defaultValue: ST2
+    parameterValueGroup: ST0, ST1, ST2
+    summary: Paket harga untuk aplikasi IoT Central.
+    description: ''
+  - name: --template -t
+    summary: Nama templat aplikasi IoT Central. Defaultnya adalah "Aplikasi kustom". Lihat dokumentasi untuk daftar templat yang tersedia.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_central_app_delete
+  name: az iot central app delete
+  summary: Menghapus aplikasi IoT Central.
+  description: >-
+    Hapus aplikasi IoT Central Anda secara permanen.
+
+    -Warning- Operasi ini tidak dapat diubah. Setelah menghapus aplikasi, Anda tidak dapat memulihkannya.
+  syntax: >-
+    az iot central app delete --name
+                              --resource-group
+                              [--no-wait]
+                              [--yes]
+  examples:
+  - summary: Hapus aplikasi IoT Central yang disebut 'my-first-iot-app'.
+    syntax: az iot central app delete -n my-first-iot-app -g MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi IoT Central.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_central_app_list
+  name: az iot central app list
+  summary: Mencantumkan aplikasi IoT Central.
+  description: Semua aplikasi IoT Central yang merupakan bagian dari langganan Anda.
+  syntax: az iot central app list [--resource-group]
+  examples:
+  - summary: Mencantumkan semua aplikasi IoT Central di langganan saya.
+    syntax: az iot central app list
+  - summary: Cantumkan semua aplikasi IoT Central di grup sumber daya 'MyResourceGroup' dalam langganan saya.
+    syntax: az iot central app list -g MyResourceGroup
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_central_app_show
+  name: az iot central app show
+  summary: Dapatkan detail aplikasi IoT Central.
+  description: Informasi tentang aplikasi Anda, seperti nama aplikasi, subdomain, paket harga, dan lokasi.
+  syntax: >-
+    az iot central app show --name
+                            [--resource-group]
+  examples:
+  - summary: Tampilkan detail untuk aplikasi bernama 'my-first-iot-app'.
+    syntax: az iot central app show -n my-first-iot-app
+  - summary: Tampilkan detail untuk aplikasi bernama 'my-first-iot-app' di grup sumber daya 'MyResourceGroup'.
+    syntax: az iot central app show -n my-first-iot-app -g MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi IoT Central.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_central_app_update
+  name: az iot central app update
+  summary: Memperbarui metadata untuk aplikasi IoT Central.
+  description: Perbarui metadata, seperti nama aplikasi, subdomain, paket harga, dan lokasi.
+  syntax: >-
+    az iot central app update --name
+                              --resource-group
+                              [--add]
+                              [--force-string]
+                              [--remove]
+                              [--set]
+  examples:
+  - summary: Perbarui SKU untuk 'my-first-iot-app'
+    syntax: az iot central app update -n my-first-iot-app -g MyResourceGroup --set sku.name=ST1
+  - summary: Ubah subdomain untuk 'my-first-iot-app'
+    syntax: az iot central app update -n my-first-iot-app -g MyResourceGroup --set subdomain.name=my-iot-app-new
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi IoT Central.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+commands:
+- az_iot_central_app_create
+- az_iot_central_app_delete
+- az_iot_central_app_identity
+- az_iot_central_app_identity_assign
+- az_iot_central_app_identity_remove
+- az_iot_central_app_identity_show
+- az_iot_central_app_list
+- az_iot_central_app_show
+- az_iot_central_app_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 02/24/2022
+  description: Membuat, menghapus, melihat, dan memperbarui aplikasi IoT Central Anda.
+  ms.openlocfilehash: e8a6306d1d3d4021eea2fa279dcdecacd7d52b7e
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141031372"

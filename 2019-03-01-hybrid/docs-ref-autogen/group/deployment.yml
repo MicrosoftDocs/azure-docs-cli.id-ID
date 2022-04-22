@@ -1,0 +1,315 @@
+### YamlMime:AzureCLIGroup
+uid: az_group_deployment
+name: az group deployment
+summary: Mengelola penyebaran Azure Resource Manager.
+description: ''
+directCommands:
+- uid: az_group_deployment_cancel
+  name: az group deployment cancel
+  summary: Membatalkan penyebaran templat yang sedang berjalan.
+  description: Anda dapat membatalkan penyebaran hanya jika provisioningState Diterima atau Berjalan. Setelah penyebaran dibatalkan, provisioningState diatur ke Dibatalkan. Membatalkan penyebaran templat menghentikan penyebaran templat yang sedang berjalan dan membiarkan grup sumber daya disebarkan sebagian.
+  syntax: >-
+    az group deployment cancel --name
+                               --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama penyebaran.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_group_deployment_create
+  name: az group deployment create
+  summary: Mulai penyebaran.
+  description: ''
+  syntax: >-
+    az group deployment create --resource-group
+                               [--aux-subs]
+                               [--aux-tenants]
+                               [--handle-extended-json-format]
+                               [--mode {Complete, Incremental}]
+                               [--name]
+                               [--no-prompt {false, true}]
+                               [--no-wait]
+                               [--parameters]
+                               [--rollback-on-error]
+                               [--template-file]
+                               [--template-uri]
+  examples:
+  - summary: Buat penyebaran dari file templat jarak jauh, menggunakan parameter dari file JSON lokal.
+    syntax: az group deployment create -g MyResourceGroup --template-uri https://myresource/azuredeploy.json --parameters @myparameters.json
+  - summary: Buat penyebaran dari file templat lokal, menggunakan parameter dari string JSON.
+    syntax: >-
+      az group deployment create -g MyResourceGroup --template-file azuredeploy.json \
+          --parameters "{ \"location\": { \"value\": \"westus\" } }"
+  - summary: Buat penyebaran dari templat lokal, menggunakan file parameter lokal, file parameter jarak jauh, dan secara selektif menimpa pasangan kunci/nilai.
+    syntax: >-
+      az group deployment create -g MyResourceGroup --template-file azuredeploy.json \
+          --parameters @params.json --parameters https://mysite/params.json --parameters MyValue=This MyArray=@array.json
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --aux-subs
+    summary: Langganan tambahan yang akan digunakan selama penyebaran di seluruh penyewa.
+    description: ''
+  - name: --aux-tenants
+    summary: Penyewa tambahan yang akan digunakan selama penyebaran di seluruh penyewa.
+    description: ''
+  - name: --handle-extended-json-format -j
+    summary: Dukungan untuk menangani konten templat yang diperluas termasuk multibaris dan komentar dalam penyebaran.
+    description: ''
+  - name: --mode
+    defaultValue: Incremental
+    parameterValueGroup: Complete, Incremental
+    summary: Inkremental (hanya tambahkan sumber daya ke grup sumber daya) atau Selesaikan (hapus sumber daya tambahan dari grup sumber daya).
+    description: ''
+  - name: --name -n
+    summary: Nama penyebaran. Default ke nama dasar file templat.
+    description: ''
+  - name: --no-prompt
+    parameterValueGroup: false, true
+    summary: Opsi untuk menonaktifkan permintaan parameter yang hilang untuk templat ARM. Ketika nilainya benar, perintah yang mengharuskan pengguna untuk memberikan parameter yang hilang akan diabaikan. Nilai defaultnya adalah false.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --parameters -p
+    summary: Berikan nilai parameter penyebaran.
+    description: Parameter dapat disediakan dari file menggunakan `@{path}` sintaks, string JSON, atau sebagai pasangan <KEY=VALUE>. Parameter dievaluasi secara berurutan, jadi ketika nilai ditetapkan dua kali, nilai terakhir akan digunakan. Disarankan agar Anda menyediakan file parameter terlebih dahulu, lalu mengambil alih secara selektif menggunakan sintaks KEY=VALUE.
+  - name: --rollback-on-error
+    summary: Nama penyebaran yang akan digulirkan kembali ke kesalahan, atau gunakan sebagai bendera untuk kembali ke penyebaran terakhir yang berhasil.
+    description: ''
+  - name: --template-file -f
+    summary: Jalur ke file templat atau file Bicep dalam sistem file.
+    description: ''
+  - name: --template-uri -u
+    summary: Uri ke file templat jarak jauh.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_group_deployment_delete
+  name: az group deployment delete
+  summary: Menghapus penyebaran dari riwayat penyebaran.
+  description: Penyebaran templat yang saat ini sedang berjalan tidak dapat dihapus. Menghapus penyebaran templat akan menghapus operasi penyebaran terkait. Menghapus penyebaran templat tidak memengaruhi status grup sumber daya. Ini adalah operasi asinkron yang mengembalikan status 202 hingga penyebaran templat berhasil dihapus. Header respons Lokasi berisi URI yang digunakan untuk mendapatkan status proses. Saat proses berjalan, panggilan ke URI di header Lokasi mengembalikan status 202. Setelah proses selesai, URI di header Lokasi mengembalikan status 204 saat berhasil. Jika permintaan asinkron gagal, URI di header Lokasi mengembalikan kode status tingkat kesalahan.
+  syntax: >-
+    az group deployment delete --name
+                               --resource-group
+                               [--no-wait]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama penyebaran.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_group_deployment_export
+  name: az group deployment export
+  summary: Ekspor templat yang digunakan untuk penyebaran.
+  description: ''
+  syntax: >-
+    az group deployment export --name
+                               --resource-group
+  examples:
+  - summary: Ekspor templat yang digunakan untuk penyebaran. (dibuat otomatis)
+    syntax: az group deployment export --name MyDeployment --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama penyebaran.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_group_deployment_list
+  name: az group deployment list
+  summary: Dapatkan semua penyebaran untuk grup sumber daya.
+  description: ''
+  syntax: >-
+    az group deployment list --resource-group
+                             [--filter]
+                             [--top]
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --filter
+    summary: Filter yang akan diterapkan pada operasi. Misalnya, Anda dapat menggunakan $filter=provisioningState eq '{state}'.
+    description: ''
+  - name: --top
+    summary: Jumlah hasil yang akan didapatkan. Jika null diteruskan, mengembalikan semua penyebaran.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_group_deployment_show
+  name: az group deployment show
+  summary: Mendapatkan penyebaran.
+  description: ''
+  syntax: >-
+    az group deployment show --name
+                             --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama penyebaran.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_group_deployment_validate
+  name: az group deployment validate
+  summary: Validasi apakah templat secara sintaksis benar.
+  description: ''
+  syntax: >-
+    az group deployment validate --resource-group
+                                 [--handle-extended-json-format]
+                                 [--mode {Complete, Incremental}]
+                                 [--no-prompt {false, true}]
+                                 [--parameters]
+                                 [--rollback-on-error]
+                                 [--template-file]
+                                 [--template-uri]
+  examples:
+  - summary: Validasi apakah templat secara sintaksis benar. (dibuat otomatis)
+    syntax: >-
+      az group deployment validate --parameters "{ \"location\": { \"value\": \"westus\" } }" \
+          --resource-group MyResourceGroup --template-file storage.json
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --handle-extended-json-format -j
+    summary: Dukungan untuk menangani konten templat yang diperluas termasuk multibaris dan komentar dalam penyebaran.
+    description: ''
+  - name: --mode
+    defaultValue: Incremental
+    parameterValueGroup: Complete, Incremental
+    summary: Inkremental (hanya tambahkan sumber daya ke grup sumber daya) atau Selesaikan (hapus sumber daya tambahan dari grup sumber daya).
+    description: ''
+  - name: --no-prompt
+    parameterValueGroup: false, true
+    summary: Opsi untuk menonaktifkan permintaan parameter yang hilang untuk templat ARM. Ketika nilainya benar, perintah yang mengharuskan pengguna untuk memberikan parameter yang hilang akan diabaikan. Nilai defaultnya adalah false.
+    description: ''
+  - name: --parameters -p
+    summary: Berikan nilai parameter penyebaran.
+    description: Parameter dapat disediakan dari file menggunakan `@{path}` sintaks, string JSON, atau sebagai pasangan <KEY=VALUE>. Parameter dievaluasi secara berurutan, jadi ketika nilai ditetapkan dua kali, nilai terakhir akan digunakan. Disarankan agar Anda menyediakan file parameter terlebih dahulu, lalu mengambil alih secara selektif menggunakan sintaks KEY=VALUE.
+  - name: --rollback-on-error
+    summary: Nama penyebaran yang akan digulirkan kembali ke kesalahan, atau gunakan sebagai bendera untuk kembali ke penyebaran terakhir yang berhasil.
+    description: ''
+  - name: --template-file -f
+    summary: Jalur ke file templat atau file Bicep dalam sistem file.
+    description: ''
+  - name: --template-uri -u
+    summary: Uri ke file templat jarak jauh.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_group_deployment_wait
+  name: az group deployment wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi penyebaran terpenuhi.
+  description: ''
+  syntax: >-
+    az group deployment wait --name
+                             --resource-group
+                             [--created]
+                             [--custom]
+                             [--deleted]
+                             [--exists]
+                             [--interval]
+                             [--timeout]
+                             [--updated]
+  examples:
+  - summary: Tempatkan CLI dalam status menunggu hingga kondisi penyebaran terpenuhi. (dibuat otomatis)
+    syntax: az group deployment wait --name MyDeployment --resource-group MyResourceGroup --updated
+  - summary: Tempatkan CLI dalam status menunggu hingga kondisi penyebaran terpenuhi. (dibuat otomatis)
+    syntax: az group deployment wait --created --name MyDeployment --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama penyebaran.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+commands:
+- az_group_deployment_cancel
+- az_group_deployment_create
+- az_group_deployment_delete
+- az_group_deployment_export
+- az_group_deployment_list
+- az_group_deployment_operation
+- az_group_deployment_operation_list
+- az_group_deployment_operation_show
+- az_group_deployment_show
+- az_group_deployment_validate
+- az_group_deployment_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 02/22/2022
+  description: Mengelola penyebaran Azure Resource Manager.
+  ms.openlocfilehash: 332b0f3422bae8c96549700e2d2e1a8a97249050
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141086305"

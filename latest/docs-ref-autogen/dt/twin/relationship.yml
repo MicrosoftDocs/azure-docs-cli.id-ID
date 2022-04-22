@@ -1,0 +1,273 @@
+### YamlMime:AzureCLIGroup
+uid: az_dt_twin_relationship
+name: az dt twin relationship
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **azure-iot** untuk Azure CLI (versi 2.24.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **hubungan kembar az dt** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola dan mengonfigurasi hubungan kembar digital instans Digital Twins.
+description: ''
+directCommands:
+- uid: az_dt_twin_relationship_create
+  name: az dt twin relationship create
+  summary: Buat hubungan antara kembar digital sumber dan target.
+  description: --properties dapat berupa JSON sebaris atau jalur file.
+  syntax: >-
+    az dt twin relationship create --dt-name
+                                   --kind
+                                   --relationship-id
+                                   --source
+                                   --target
+                                   [--if-none-match]
+                                   [--properties]
+                                   [--resource-group]
+  examples:
+  - summary: Buat hubungan antara dua kembar digital.
+    syntax: az dt twin relationship create -n {instance_or_hostname} --relationship-id {relationship_id} --relationship contains --twin-id {source_twin_id} --target {target_twin_id}
+  - summary: Membuat hubungan antara dua kembar digital dengan tag if-none-match
+    syntax: az dt twin relationship create -n {instance_or_hostname} --relationship-id {relationship_id} --relationship contains --twin-id {source_twin_id} --target {target_twin_id} --if-none-match
+  - summary: Buat hubungan dengan properti yang diinisialisasi antara dua kembar digital.
+    syntax: "az dt twin relationship create -n {instance_or_hostname} --relationship-id {relationship_id} --relationship contains --twin-id {source_twin_id} --target {target_twin_id} --properties '{\"ownershipUser\": \"me\", \"ownershipDepartment\": \"Computer Science\"}'"
+  requiredParameters:
+  - isRequired: true
+    name: --dt-name --dtn -n
+    summary: Nama instans digital Twins atau nama host. Jika nama instans disediakan, langganan pengguna pertama kali dikueri agar instans target mengambil nama host. Jika nama host disediakan, kueri langganan dilewati dan nilai yang disediakan digunakan untuk interaksi berikutnya.
+    description: ''
+  - isRequired: true
+    name: --kind --relationship
+    summary: "Nama atau jenis hubungan. Misalnya: 'contains'."
+    description: ''
+  - isRequired: true
+    name: --relationship-id -r
+    summary: Id Hubungan.
+    description: ''
+  - isRequired: true
+    name: --source --twin-id -t
+    summary: Id kembar sumber untuk hubungan.
+    description: ''
+  - isRequired: true
+    name: --target --target-twin-id
+    summary: Id kembar target untuk hubungan.
+    description: ''
+  optionalParameters:
+  - name: --if-none-match
+    summary: Menunjukkan operasi buat harus gagal jika ada kembar dengan id yang sama.
+    description: ''
+  - name: --properties -p
+    summary: Nilai properti awal untuk membuat instans hubungan kembar digital. Sediakan jalur file atau JSON sebaris.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya instans Digital Twins. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_dt_twin_relationship_delete
+  name: az dt twin relationship delete
+  summary: Menghapus hubungan kembar digital pada instans Digital Twins.
+  description: ''
+  syntax: >-
+    az dt twin relationship delete --dt-name
+                                   --relationship-id
+                                   --source
+                                   [--etag]
+                                   [--resource-group]
+  examples:
+  - summary: Menghapus hubungan kembar digital.
+    syntax: az dt twin relationship delete -n {instance_or_hostname} --twin-id {twin_id} --relationship-id {relationship_id}
+  - summary: Menghapus hubungan kembar digital menggunakan etag.
+    syntax: az dt twin relationship delete -n {instance_or_hostname} --twin-id {twin_id} --relationship-id {relationship_id} --etag {etag}
+  requiredParameters:
+  - isRequired: true
+    name: --dt-name --dtn -n
+    summary: Nama instans digital Twins atau nama host. Jika nama instans disediakan, langganan pengguna pertama kali dikueri agar instans target mengambil nama host. Jika nama host disediakan, kueri langganan dilewati dan nilai yang disediakan digunakan untuk interaksi berikutnya.
+    description: ''
+  - isRequired: true
+    name: --relationship-id -r
+    summary: Id Hubungan.
+    description: ''
+  - isRequired: true
+    name: --source --twin-id -t
+    summary: Id kembar sumber untuk hubungan.
+    description: ''
+  optionalParameters:
+  - name: --etag -e
+    summary: Nilai tag entitas. Perintah akan berhasil jika etag cocok dengan etag saat ini untuk sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya instans Digital Twins. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_dt_twin_relationship_delete-all
+  name: az dt twin relationship delete-all
+  summary: Menghapus semua hubungan kembar digital dalam instans Digital Twins, termasuk hubungan masuk.
+  description: ''
+  syntax: >-
+    az dt twin relationship delete-all --dt-name
+                                       [--resource-group]
+                                       [--source]
+                                       [--yes]
+  examples:
+  - summary: Hapus semua hubungan kembar digital yang terkait dengan kembar.
+    syntax: az dt twin relationship delete-all -n {instance_or_hostname} --twin-id {twin_id}
+  - summary: Hapus semua hubungan kembar digital dalam instace Digital Twins.
+    syntax: az dt twin relationship delete-all -n {instance_or_hostname}
+  requiredParameters:
+  - isRequired: true
+    name: --dt-name --dtn -n
+    summary: Nama instans digital Twins atau nama host. Jika nama instans disediakan, langganan pengguna pertama kali dikueri agar instans target mengambil nama host. Jika nama host disediakan, kueri langganan dilewati dan nilai yang disediakan digunakan untuk interaksi berikutnya.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Grup sumber daya instans Digital Twins. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --source --twin-id -t
+    summary: Id kembar sumber untuk hubungan.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_dt_twin_relationship_list
+  name: az dt twin relationship list
+  summary: Mencantumkan hubungan kembar digital.
+  description: ''
+  syntax: >-
+    az dt twin relationship list --dt-name
+                                 --source
+                                 [--incoming {false, true}]
+                                 [--kind]
+                                 [--resource-group]
+  examples:
+  - summary: Mencantumkan hubungan keluar dari kembar digital.
+    syntax: az dt twin relationship list -n {instance_or_hostname} --twin-id {twin_id}
+  - summary: Mencantumkan hubungan keluar dari kembar digital dan filter pada hubungan 'contains'
+    syntax: az dt twin relationship list -n {instance_or_hostname} --twin-id {twin_id} --relationship contains
+  - summary: Mencantumkan hubungan masuk dari kembar digital.
+    syntax: az dt twin relationship list -n {instance_or_hostname} --twin-id {twin_id} --incoming
+  - summary: Cantumkan hubungan masuk kembar digital dan filter pada hubungan 'contains'.
+    syntax: az dt twin relationship list -n {instance_or_hostname} --twin-id {twin_id} --relationship contains --incoming
+  requiredParameters:
+  - isRequired: true
+    name: --dt-name --dtn -n
+    summary: Nama instans digital Twins atau nama host. Jika nama instans disediakan, langganan pengguna pertama kali dikueri agar instans target mengambil nama host. Jika nama host disediakan, kueri langganan dilewati dan nilai yang disediakan digunakan untuk interaksi berikutnya.
+    description: ''
+  - isRequired: true
+    name: --source --twin-id -t
+    summary: Id kembar sumber untuk hubungan.
+    description: ''
+  optionalParameters:
+  - name: --incoming
+    parameterValueGroup: false, true
+    summary: Mengambil semua hubungan masuk untuk kembar digital.
+    description: ''
+  - name: --kind --relationship
+    summary: Memfilter hasil menurut jenis hubungan.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya instans Digital Twins. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_dt_twin_relationship_show
+  name: az dt twin relationship show
+  summary: Tampilkan detail hubungan kembar digital.
+  description: ''
+  syntax: >-
+    az dt twin relationship show --dt-name
+                                 --relationship-id
+                                 --source
+                                 [--resource-group]
+  examples:
+  - summary: Tampilkan detail hubungan kembar digital.
+    syntax: az dt twin relationship show -n {instance_or_hostname} --twin-id {twin_id} --relationship-id {relationship_id}
+  requiredParameters:
+  - isRequired: true
+    name: --dt-name --dtn -n
+    summary: Nama instans digital Twins atau nama host. Jika nama instans disediakan, langganan pengguna pertama kali dikueri agar instans target mengambil nama host. Jika nama host disediakan, kueri langganan dilewati dan nilai yang disediakan digunakan untuk interaksi berikutnya.
+    description: ''
+  - isRequired: true
+    name: --relationship-id -r
+    summary: Id Hubungan.
+    description: ''
+  - isRequired: true
+    name: --source --twin-id -t
+    summary: Id kembar sumber untuk hubungan.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Grup sumber daya instans Digital Twins. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_dt_twin_relationship_update
+  name: az dt twin relationship update
+  summary: Memperbarui properti hubungan antara dua kembar digital melalui spesifikasi patch JSON.
+  description: Operasi terbatas pada penambahan, penggantian, dan penghapusan.
+  syntax: >-
+    az dt twin relationship update --dt-name
+                                   --json-patch
+                                   --relationship-id
+                                   --source
+                                   [--etag]
+                                   [--resource-group]
+  examples:
+  - summary: Perbarui hubungan kembar digital melalui spesifikasi patch JSON.
+    syntax: "az dt twin relationship update -n {instance_or_hostname} --twin-id {twin_id} --relationship-id {relationship_id} --relationship contains --json-patch '{\"op\":\"replace\", \"path\":\"/Temperature\", \"value\": 20.5}'"
+  - summary: Perbarui hubungan kembar digital melalui spesifikasi patch JSON dan menggunakan etag.
+    syntax: "az dt twin relationship update -n {instance_or_hostname} --twin-id {twin_id} --relationship-id {relationship_id} --relationship contains --json-patch '{\"op\":\"replace\", \"path\":\"/Temperature\", \"value\": 20.5}' --etag {etag}"
+  - summary: Perbarui hubungan kembar digital melalui spesifikasi patch JSON.
+    syntax: >-
+      az dt twin relationship update -n {instance_or_hostname} --twin-id {twin_id} --relationship-id {relationship_id} --relationship contains --json-patch '[
+        {"op":"replace", "path":"/Temperature", "value": 20.5},
+        {"op":"add", "path":"/Areas", "value": ["ControlSystem"]}
+      ]'
+  - summary: Perbarui hubungan kembar digital melalui spesifikasi patch JSON yang ditentukan dalam file.
+    syntax: az dt twin relationship update -n {instance_or_hostname} --twin-id {twin_id} --relationship-id {relationship_id} --relationship contains --json-patch ./my/patch/document.json
+  requiredParameters:
+  - isRequired: true
+    name: --dt-name --dtn -n
+    summary: Nama instans digital Twins atau nama host. Jika nama instans disediakan, langganan pengguna pertama kali dikueri agar instans target mengambil nama host. Jika nama host disediakan, kueri langganan dilewati dan nilai yang disediakan digunakan untuk interaksi berikutnya.
+    description: ''
+  - isRequired: true
+    name: --json-patch --patch
+    summary: Spesifikasi pembaruan yang dijelaskan oleh JSON-patch. Pembaruan pada nilai properti dan elemen $model mungkin terjadi dalam permintaan yang sama. Operasi terbatas pada penambahan, penggantian, dan penghapusan. Sediakan jalur file atau JSON sebaris.
+    description: ''
+  - isRequired: true
+    name: --relationship-id -r
+    summary: Id Hubungan.
+    description: ''
+  - isRequired: true
+    name: --source --twin-id -t
+    summary: Id kembar sumber untuk hubungan.
+    description: ''
+  optionalParameters:
+  - name: --etag -e
+    summary: Nilai tag entitas. Perintah akan berhasil jika etag cocok dengan etag saat ini untuk sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya instans Digital Twins. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+commands:
+- az_dt_twin_relationship_create
+- az_dt_twin_relationship_delete
+- az_dt_twin_relationship_delete-all
+- az_dt_twin_relationship_list
+- az_dt_twin_relationship_show
+- az_dt_twin_relationship_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola dan mengonfigurasi hubungan kembar digital instans Digital Twins.
+  ms.openlocfilehash: c3dd2188cc4c8367499fdba3cc98d8f077babf3e
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141031768"

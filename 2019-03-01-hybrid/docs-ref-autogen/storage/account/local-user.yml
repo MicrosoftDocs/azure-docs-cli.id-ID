@@ -1,0 +1,262 @@
+### YamlMime:AzureCLIGroup
+uid: az_storage_account_local-user
+name: az storage account local-user
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **pratinjau penyimpanan** untuk Azure CLI (versi 2.25.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **pengguna lokal akun penyimpanan az** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola pengguna lokal akun penyimpanan.
+description: ''
+directCommands:
+- uid: az_storage_account_local-user_create
+  name: az storage account local-user create
+  summary: Buat pengguna lokal untuk akun penyimpanan tertentu.
+  description: ''
+  syntax: >-
+    az storage account local-user create --account-name
+                                         --name
+                                         --resource-group
+                                         [--has-shared-key {false, true}]
+                                         [--has-ssh-key {false, true}]
+                                         [--has-ssh-password {false, true}]
+                                         [--home-directory]
+                                         [--permission-scope]
+                                         [--ssh-authorized-key]
+  examples:
+  - summary: Membuat pengguna lokal dengan dua cakupan izin dan ssh-authorized-key
+    syntax: az storage account local-user create --account-name {account-name} -g {resource-group} -n {username} --home-directory home --permission-scope permissions=r service=blob resource-name=container1 --permission-scope permissions=rw service=file resource-name=share2 --ssh-authorized-key key="ssh-rsa a2V5" --has-ssh-key true --has-ssh-password --has-shared-key false
+  requiredParameters:
+  - isRequired: true
+    name: --account-name
+    summary: Nama akun penyimpanan.
+    description: ''
+  - isRequired: true
+    name: --name --username -n
+    summary: Nama pengguna lokal. Nama pengguna hanya boleh berisi huruf kecil dan angka. Ini harus unik hanya dalam akun penyimpanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --has-shared-key
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah kunci bersama ada. Atur ke false untuk menghapus kunci bersama yang ada.
+    description: ''
+  - name: --has-ssh-key
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah kunci ssh ada. Atur ke false untuk menghapus kunci SSH yang ada.
+    description: ''
+  - name: --has-ssh-password
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah kata sandi ssh ada. Atur ke false untuk menghapus kata sandi SSH yang ada.
+    description: ''
+  - name: --home-directory
+    summary: Direktori rumah.
+    description: ''
+  - name: --permission-scope
+    summary: 'Daftar argumen cakupan izin yang mencakup izin, layanan, dan resource_name. Izin dapat berupa kombinasi dari nilai yang mungkin di bawah ini: Baca(r), Tulis (w), Hapus (d), Daftar (l), dan Buat (c). Layanan ini memiliki nilai yang mungkin: blob, file. Nama sumber daya adalah nama kontainer atau nama berbagi file. Contoh: --permission-scope permissions=r service=blob resource-name=container1Bisa menentukan beberapa cakupan izin: --permission-scope permissions=rw service=blob resource-name=container1--permission-scope permissions=rwd service=file resource-name=share2.'
+    description: ''
+  - name: --ssh-authorized-key
+    summary: 'Kunci resmi SSH untuk SFTP. Menyertakan deskripsi dan kunci opsional. Kuncinya adalah kunci umum SSH yang dikodekan base64 , dengan format: <keyType> <keyData> misalnya ssh-rsa AAAABBBB. Contoh: --ssh_authorized_key description=description key="ssh-ras AAAABBBB"or --ssh_authorized_key key="ssh-ras AAAABBBB".'
+    description: ''
+- uid: az_storage_account_local-user_delete
+  name: az storage account local-user delete
+  summary: Menghapus pengguna lokal.
+  description: ''
+  syntax: >-
+    az storage account local-user delete --account-name
+                                         --name
+                                         --resource-group
+  examples:
+  - summary: Menghapus pengguna lokal
+    syntax: az storage account local-user delete --account-name {account-name} -g {resource-group} -n {username}
+  requiredParameters:
+  - isRequired: true
+    name: --account-name
+    summary: Nama akun penyimpanan.
+    description: ''
+  - isRequired: true
+    name: --name --username -n
+    summary: Nama pengguna lokal. Nama pengguna hanya boleh berisi huruf kecil dan angka. Ini harus unik hanya dalam akun penyimpanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_storage_account_local-user_list
+  name: az storage account local-user list
+  summary: Mencantumkan pengguna lokal untuk akun penyimpanan.
+  description: ''
+  syntax: >-
+    az storage account local-user list --account-name
+                                       --resource-group
+  examples:
+  - summary: Mencantumkan pengguna lokal untuk akun penyimpanan
+    syntax: az storage account local-user list --account-name {account-name} -g {resource-group}
+  requiredParameters:
+  - isRequired: true
+    name: --account-name
+    summary: Nama akun penyimpanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_storage_account_local-user_list-keys
+  name: az storage account local-user list-keys
+  summary: Mencantumkan sharedkeys dan sshAuthorizedKeys untuk pengguna lokal.
+  description: ''
+  syntax: >-
+    az storage account local-user list-keys --account-name
+                                            --name
+                                            --resource-group
+  examples:
+  - summary: Mencantumkan sharedkeys dan sshAuthorizedKeys untuk pengguna lokal
+    syntax: az storage account local-user list-keys --account-name {account-name} -g {resource-group} -n {username}
+  requiredParameters:
+  - isRequired: true
+    name: --account-name
+    summary: Nama akun penyimpanan.
+    description: ''
+  - isRequired: true
+    name: --name --username -n
+    summary: Nama pengguna lokal. Nama pengguna hanya boleh berisi huruf kecil dan angka. Ini harus unik hanya dalam akun penyimpanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_storage_account_local-user_regenerate-password
+  name: az storage account local-user regenerate-password
+  summary: Regenerasi sshPassword untuk pengguna lokal.
+  description: ''
+  syntax: >-
+    az storage account local-user regenerate-password --account-name
+                                                      --name
+                                                      --resource-group
+  examples:
+  - summary: Meregenerasi sshPassword untuk pengguna lokal
+    syntax: az storage account local-user regenerate-password --account-name {account-name} -g {resource-group} -n {username}
+  requiredParameters:
+  - isRequired: true
+    name: --account-name
+    summary: Nama akun penyimpanan.
+    description: ''
+  - isRequired: true
+    name: --name --username -n
+    summary: Nama pengguna lokal. Nama pengguna hanya boleh berisi huruf kecil dan angka. Ini harus unik hanya dalam akun penyimpanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_storage_account_local-user_show
+  name: az storage account local-user show
+  summary: Tampilkan info untuk pengguna lokal.
+  description: ''
+  syntax: >-
+    az storage account local-user show --account-name
+                                       --name
+                                       --resource-group
+  examples:
+  - summary: Tampilkan info untuk pengguna lokal
+    syntax: az storage account local-user show --account-name {account-name} -g {resource-group} -n {username}
+  requiredParameters:
+  - isRequired: true
+    name: --account-name
+    summary: Nama akun penyimpanan.
+    description: ''
+  - isRequired: true
+    name: --name --username -n
+    summary: Nama pengguna lokal. Nama pengguna hanya boleh berisi huruf kecil dan angka. Ini harus unik hanya dalam akun penyimpanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_storage_account_local-user_update
+  name: az storage account local-user update
+  summary: Memperbarui properti untuk pengguna lokal.
+  description: ''
+  syntax: >-
+    az storage account local-user update --account-name
+                                         --name
+                                         --resource-group
+                                         [--has-shared-key {false, true}]
+                                         [--has-ssh-key {false, true}]
+                                         [--has-ssh-password {false, true}]
+                                         [--home-directory]
+                                         [--permission-scope]
+                                         [--ssh-authorized-key]
+  examples:
+  - summary: Memperbarui pengguna lokal dengan satu cakupan izin dan tanpa kunci ssh
+    syntax: az storage account local-user update --account-name {account-name} -g {resource-group} -n {username} --permission-scope permissions=rw service=file resource-name=share2 --has-ssh-key false
+  requiredParameters:
+  - isRequired: true
+    name: --account-name
+    summary: Nama akun penyimpanan.
+    description: ''
+  - isRequired: true
+    name: --name --username -n
+    summary: Nama pengguna lokal. Nama pengguna hanya boleh berisi huruf kecil dan angka. Ini harus unik hanya dalam akun penyimpanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --has-shared-key
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah kunci bersama ada. Atur ke false untuk menghapus kunci bersama yang ada.
+    description: ''
+  - name: --has-ssh-key
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah kunci ssh ada. Atur ke false untuk menghapus kunci SSH yang ada.
+    description: ''
+  - name: --has-ssh-password
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah kata sandi ssh ada. Atur ke false untuk menghapus kata sandi SSH yang ada.
+    description: ''
+  - name: --home-directory
+    summary: Direktori rumah.
+    description: ''
+  - name: --permission-scope
+    summary: 'Daftar argumen cakupan izin yang mencakup izin, layanan, dan resource_name. Izin dapat berupa kombinasi dari nilai yang mungkin di bawah ini: Baca(r), Tulis (w), Hapus (d), Daftar (l), dan Buat (c). Layanan ini memiliki nilai yang mungkin: blob, file. Nama sumber daya adalah nama kontainer atau nama berbagi file. Contoh: --permission-scope permissions=r service=blob resource-name=container1Bisa menentukan beberapa cakupan izin: --permission-scope permissions=rw service=blob resource-name=container1--permission-scope permissions=rwd service=file resource-name=share2.'
+    description: ''
+  - name: --ssh-authorized-key
+    summary: 'Kunci resmi SSH untuk SFTP. Menyertakan deskripsi dan kunci opsional. Kuncinya adalah kunci umum SSH yang dikodekan base64 , dengan format: <keyType> <keyData> misalnya ssh-rsa AAAABBBB. Contoh: --ssh_authorized_key description=description key="ssh-ras AAAABBBB"or --ssh_authorized_key key="ssh-ras AAAABBBB".'
+    description: ''
+commands:
+- az_storage_account_local-user_create
+- az_storage_account_local-user_delete
+- az_storage_account_local-user_list
+- az_storage_account_local-user_list-keys
+- az_storage_account_local-user_regenerate-password
+- az_storage_account_local-user_show
+- az_storage_account_local-user_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola pengguna lokal akun penyimpanan.
+  ms.openlocfilehash: ddbe2ce110c283816bba9f8051490e024cd489da
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141097069"

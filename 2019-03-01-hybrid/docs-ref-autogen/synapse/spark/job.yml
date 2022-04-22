@@ -1,0 +1,207 @@
+### YamlMime:AzureCLIGroup
+uid: az_synapse_spark_job
+name: az synapse spark job
+summary: Mengelola pekerjaan batch Synapse Spark.
+description: ''
+directCommands:
+- uid: az_synapse_spark_job_cancel
+  name: az synapse spark job cancel
+  summary: Batalkan pekerjaan Spark.
+  description: ''
+  syntax: >-
+    az synapse spark job cancel --livy-id
+                                --spark-pool-name
+                                --workspace-name
+                                [--yes]
+  examples:
+  - summary: Batalkan pekerjaan Spark.
+    syntax: az synapse spark job cancel --livy-id 1 --workspace-name testsynapseworkspace --spark-pool-name testsparkpool
+  requiredParameters:
+  - isRequired: true
+    name: --livy-id
+    summary: Id pekerjaan Spark.
+    description: ''
+  - isRequired: true
+    name: --spark-pool-name
+    summary: Nama kumpulan Spark.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  optionalParameters:
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_spark_job_list
+  name: az synapse spark job list
+  summary: Mencantumkan semua pekerjaan Spark.
+  description: ''
+  syntax: >-
+    az synapse spark job list --spark-pool-name
+                              --workspace-name
+                              [--from-index]
+                              [--size]
+  examples:
+  - summary: Mencantumkan semua pekerjaan Spark.
+    syntax: az synapse spark job list --workspace-name testsynapseworkspace --spark-pool-name testsparkpool
+  requiredParameters:
+  - isRequired: true
+    name: --spark-pool-name
+    summary: Nama kumpulan Spark.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  optionalParameters:
+  - name: --from-index
+    summary: Parameter opsional yang menentukan indeks mana daftar harus dimulai.
+    description: ''
+  - name: --size
+    summary: Ukuran daftar yang dikembalikan. Secara default adalah 20 dan itu adalah maksimum.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_spark_job_show
+  name: az synapse spark job show
+  summary: Dapatkan pekerjaan Spark.
+  description: ''
+  syntax: >-
+    az synapse spark job show --livy-id
+                              --spark-pool-name
+                              --workspace-name
+  examples:
+  - summary: Dapatkan pekerjaan Spark.
+    syntax: az synapse spark job show --livy-id 1 --workspace-name testsynapseworkspace --spark-pool-name testsparkpool
+  requiredParameters:
+  - isRequired: true
+    name: --livy-id
+    summary: Id pekerjaan Spark.
+    description: ''
+  - isRequired: true
+    name: --spark-pool-name
+    summary: Nama kumpulan Spark.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_spark_job_submit
+  name: az synapse spark job submit
+  summary: Kirim pekerjaan Spark.
+  description: ''
+  syntax: >-
+    az synapse spark job submit --executor-size {Large, Medium, Small}
+                                --executors
+                                --main-definition-file
+                                --name
+                                --spark-pool-name
+                                --workspace-name
+                                [--archives]
+                                [--arguments]
+                                [--configuration]
+                                [--language {CSharp, PySpark, Python, Scala, Spark, SparkDotNet}]
+                                [--main-class-name]
+                                [--reference-files]
+                                [--tags]
+  examples:
+  - summary: Mengirimkan pekerjaan Java Spark.
+    syntax: >-
+      az synapse spark job submit --name WordCount_Java --workspace-name testsynapseworkspace \
+
+      --spark-pool-name testsparkpool \
+
+      --main-definition-file abfss://testfilesystem@testadlsgen2.dfs.core.windows.net/samples/java/wordcount/wordcount.jar \
+
+      --main-class-name WordCount \
+
+      --arguments abfss://testfilesystem@testadlsgen2.dfs.core.windows.net/samples/java/wordcount/shakespeare.txt \
+
+      abfss://testfilesystem@testadlsgen2.dfs.core.windows.net/samples/java/wordcount/result/ \
+
+      --executors 2 --executor-size Small
+  requiredParameters:
+  - isRequired: true
+    name: --executor-size
+    parameterValueGroup: Large, Medium, Small
+    summary: Ukuran pelaksana.
+    description: ''
+  - isRequired: true
+    name: --executors
+    summary: Jumlah pelaksana.
+    description: ''
+  - isRequired: true
+    name: --main-definition-file
+    summary: File utama yang digunakan untuk tugas tersebut.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama pekerjaan Spark.
+    description: ''
+  - isRequired: true
+    name: --spark-pool-name
+    summary: Nama kumpulan Spark.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  optionalParameters:
+  - name: --archives
+    summary: Array arsip.
+    description: ''
+  - name: --arguments
+    summary: 'Argumen opsional untuk pekerjaan (Catatan: silakan gunakan URI penyimpanan untuk argumen file).'
+    description: ''
+  - name: --configuration
+    summary: Konfigurasi pekerjaan Spark.
+    description: ''
+  - name: --language
+    defaultValue: Scala
+    parameterValueGroup: CSharp, PySpark, Python, Scala, Spark, SparkDotNet
+    summary: Bahasa pekerjaan Spark.
+    description: ''
+  - name: --main-class-name
+    summary: Pengidentifikasi yang sepenuhnya memenuhi syarat atau kelas utama yang ada dalam file definisi utama.
+    description: ''
+  - name: --reference-files
+    summary: File tambahan yang digunakan untuk referensi dalam file definisi utama.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+commands:
+- az_synapse_spark_job_cancel
+- az_synapse_spark_job_list
+- az_synapse_spark_job_show
+- az_synapse_spark_job_submit
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 10/27/2021
+  description: Mengelola pekerjaan batch Synapse Spark.
+  ms.openlocfilehash: 47ac35274b518dc56f52e5aef08ea55df246306e
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141043774"

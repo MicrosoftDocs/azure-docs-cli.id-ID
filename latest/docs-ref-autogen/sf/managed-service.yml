@@ -1,0 +1,339 @@
+### YamlMime:AzureCLIGroup
+uid: az_sf_managed-service
+name: az sf managed-service
+summary: Mengelola layanan yang berjalan pada kluster terkelola Azure Service Fabric. Hanya mendukung layanan yang disebarkan ARM.
+description: ''
+directCommands:
+- uid: az_sf_managed-service_create
+  name: az sf managed-service create
+  summary: Buat layanan terkelola baru di kluster terkelola Azure Service Fabric.
+  description: ''
+  syntax: >-
+    az sf managed-service create --application
+                                 --cluster-name
+                                 --name
+                                 --resource-group
+                                 --service-type
+                                 --state {Stateful, Stateless}
+                                 [--activation-mode]
+                                 [--default-move-cost {High, Low, Medium, Zero}]
+                                 [--has-persisted-state {false, true}]
+                                 [--high-key]
+                                 [--instance-count]
+                                 [--keep-duration]
+                                 [--low-key]
+                                 [--min-inst-pct]
+                                 [--min-instance-count]
+                                 [--min-replica]
+                                 [--partition-count]
+                                 [--partition-names]
+                                 [--partition-scheme {Named, Singleton, UniformInt64Range}]
+                                 [--placement-constraints]
+                                 [--plcmt-time-limit]
+                                 [--quorum-loss-wait]
+                                 [--replica-restart-wait]
+                                 [--tags]
+                                 [--target-replica]
+  examples:
+  - summary: Buat layanan terkelola stateless baru "testService1" dengan jumlah instans -1 (pada semua simpul).
+    syntax: >-
+      az sf managed-service create -g testRG -c testCluster --application-name testApp --state stateless --service-name testService \
+        --service-type testStateless --instance-count -1 --partition-scheme singleton
+  - summary: Buat layanan stateful baru "testService2" dengan target 5 simpul.
+    syntax: >-
+      az sf managed-service create -g testRG -c testCluster --application-name testApp --state stateful --service-name testService2 --has-persisted-state \
+        --service-type testStatefulType --min-replica-set-size 3 --target-replica-set-size 5 --partition-scheme uniformint64range --partition-count 1 --low-key 0 --high-key 25
+  requiredParameters:
+  - isRequired: true
+    name: --application --application-name
+    summary: Tentukan nama layanan.
+    description: ''
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Tentukan nama kluster, jika tidak diberikan akan sama dengan nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --name --service-name
+    summary: Tentukan nama layanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-type --type
+    summary: Tentukan nama jenis layanan aplikasi, itu harus ada dalam manifes aplikasi.
+    description: ''
+  - isRequired: true
+    name: --state
+    parameterValueGroup: Stateful, Stateless
+    summary: Tentukan apakah layanan tanpa status atau stateful.
+    description: ''
+  optionalParameters:
+  - name: --activation-mode --package-activation-mode --service-package-activation-mode
+    summary: Tentukan mode aktivasi paket layanan.
+    description: ''
+  - name: --default-move-cost
+    parameterValueGroup: High, Low, Medium, Zero
+    summary: Tentukan biaya default untuk pemindahan. Biaya yang lebih tinggi membuatnya lebih kecil kemungkinan kluster Resource Manager akan memindahkan replika saat mencoba menyeimbangkan kluster.
+    description: ''
+  - name: --has-persisted-state
+    parameterValueGroup: false, true
+    summary: Menentukan apakah ini adalah layanan persisten yang menyimpan status pada disk lokal. Jika itu maka nilai properti ini benar, jika bukan salah.
+    description: ''
+  - name: --high-key
+    summary: Tentukan batas atas rentang kunci partisi yang harus dibagi antara partisi 'Hitung' Ini hanya digunakan dengan skema partisi UniformInt64.
+    description: ''
+  - name: --instance-count
+    summary: Tentukan jumlah instans untuk layanan stateless. Jika -1 digunakan, itu berarti akan berjalan pada semua simpul.
+    description: ''
+  - name: --keep-duration --stand-by-keep-duration --stand-by-replica-keep-duration
+    summary: Tentukan definisi tentang berapa lama replika StandBy harus dipertahankan sebelum dihapus, diwakili dalam format ISO 8601 "hh:mm:ss".
+    description: ''
+  - name: --low-key
+    summary: Tentukan batas bawah rentang kunci partisi yang harus dibagi antara partisi 'Hitung' Ini hanya digunakan dengan skema partisi UniformInt64.
+    description: ''
+  - name: --min-inst-pct --min-instance-percentage
+    summary: Tentukan persentase minimum InstanceCount yang harus memenuhi pemeriksaan keamanan EnsureAvailability selama operasi seperti meningkatkan atau menonaktifkan simpul. Jumlah aktual yang digunakan adalah maks( MinInstanceCount, ceil( MinInstancePercentage/100.0 \* InstanceCount) ). Perhatikan, jika InstanceCount diatur ke -1, selama komputasi MinInstancePercentage, -1 pertama kali dikonversi menjadi jumlah simpul tempat instans diizinkan untuk ditempatkan sesuai dengan batasan penempatan pada layanan. Nilai yang diizinkan adalah dari 0 hingga 100.
+    description: ''
+  - name: --min-instance-count
+    summary: Tentukan jumlah minimum instans yang harus hingga memenuhi pemeriksaan keamanan EnsureAvailability selama operasi seperti meningkatkan atau menonaktifkan simpul. Jumlah aktual yang digunakan adalah maks( MinInstanceCount, ceil( MinInstancePercentage/100.0 \* InstanceCount) ). Perhatikan, jika InstanceCount diatur ke -1, selama komputasi MinInstanceCount -1 pertama kali dikonversi menjadi jumlah simpul tempat instans diizinkan untuk ditempatkan sesuai dengan batasan penempatan pada layanan.
+    description: ''
+  - name: --min-replica --min-replica-set-size
+    summary: Tentukan ukuran set replika min untuk layanan stateful.
+    description: ''
+  - name: --partition-count
+    summary: Tentukan jumlah partisi. Ini hanya digunakan dengan skema partisi UniformInt64.
+    description: ''
+  - name: --partition-names
+    summary: Tentukan array untuk nama partisi. Ini hanya digunakan dengan skema partisi Bernama.
+    description: ''
+  - name: --partition-scheme
+    defaultValue: singleton
+    parameterValueGroup: Named, Singleton, UniformInt64Range
+    summary: Tentukan skema partisi apa yang akan digunakan. Partisi database tunggal biasanya digunakan ketika layanan tidak memerlukan perutean tambahan. UniformInt64 berarti bahwa setiap partisi memiliki rentang kunci int64. Dinamai biasanya untuk layanan dengan data yang dapat di-bucket, dalam set terikat. Beberapa contoh umum bidang data yang digunakan sebagai kunci partisi bernama adalah wilayah, kode pos, grup pelanggan, atau batas bisnis lainnya.
+    description: ''
+  - name: --placement-constraints
+    summary: 'Tentukan batasan penempatan sebagai string. Kendala penempatan adalah ekspresi boolean pada properti node dan memungkinkan pembatasan layanan ke node tertentu berdasarkan persyaratan layanan. Misalnya, untuk menempatkan layanan pada simpul di mana NodeType berwarna biru, tentukan yang berikut: "NodeColor == blue)".'
+    description: ''
+  - name: --plcmt-time-limit --service-placement-time-limit
+    summary: Tentukan durasi replika mana yang dapat tetap InBuild sebelum melaporkan bahwa build macet, diwakili dalam format ISO 8601 "hh:mm:ss".
+    description: ''
+  - name: --quorum-loss-wait --quorum-loss-wait-duration
+    summary: Tentukan durasi maksimum di mana partisi diizinkan untuk berada dalam keadaan kehilangan kuorum, yang diwakili dalam format ISO 8601 "hh:mm:ss".
+    description: ''
+  - name: --replica-restart-wait --replica-restart-wait-duration
+    summary: Tentukan durasi antara ketika replika turun dan ketika replika baru dibuat, diwakili dalam format ISO 8601 "hh:mm:ss".
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --target-replica --target-replica-set-size
+    summary: Tentukan ukuran set replika target untuk layanan stateful.
+    description: ''
+- uid: az_sf_managed-service_delete
+  name: az sf managed-service delete
+  summary: Menghapus layanan terkelola.
+  description: ''
+  syntax: >-
+    az sf managed-service delete --application
+                                 --cluster-name
+                                 --name
+                                 --resource-group
+  examples:
+  - summary: Menghapus layanan terkelola.
+    syntax: az sf managed-service delete -g testRG -c testCluster --application-name testApp --service-name testService
+  requiredParameters:
+  - isRequired: true
+    name: --application --application-name
+    summary: Tentukan nama layanan.
+    description: ''
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Tentukan nama kluster, jika tidak diberikan akan sama dengan nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --name --service-name
+    summary: Tentukan nama layanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_sf_managed-service_list
+  name: az sf managed-service list
+  summary: Mencantumkan layanan terkelola dari aplikasi terkelola tertentu.
+  description: ''
+  syntax: >-
+    az sf managed-service list --application
+                               --cluster-name
+                               --resource-group
+  examples:
+  - summary: Mencantumkan layanan terkelola.
+    syntax: az sf managed-service list -g testRG -c testCluster --application-name testApp
+  requiredParameters:
+  - isRequired: true
+    name: --application --application-name
+    summary: Tentukan nama layanan.
+    description: ''
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Tentukan nama kluster, jika tidak diberikan akan sama dengan nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_sf_managed-service_show
+  name: az sf managed-service show
+  summary: Dapatkan layanan.
+  description: ''
+  syntax: >-
+    az sf managed-service show --application
+                               --cluster-name
+                               --name
+                               --resource-group
+  examples:
+  - summary: Memperlihatkan properti layanan terkelola pada kluster terkelola Azure Service Fabric.
+    syntax: az sf managed-service show -g testRG -c testCluster --application-name testApp --service-name testService
+  requiredParameters:
+  - isRequired: true
+    name: --application --application-name
+    summary: Tentukan nama layanan.
+    description: ''
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Tentukan nama kluster, jika tidak diberikan akan sama dengan nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --name --service-name
+    summary: Tentukan nama layanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_sf_managed-service_update
+  name: az sf managed-service update
+  summary: Memperbarui layanan terkelola.
+  description: ''
+  syntax: >-
+    az sf managed-service update --application
+                                 --cluster-name
+                                 --name
+                                 --resource-group
+                                 [--default-move-cost {High, Low, Medium, Zero}]
+                                 [--instance-count]
+                                 [--keep-duration]
+                                 [--min-inst-pct]
+                                 [--min-instance-count]
+                                 [--min-replica]
+                                 [--placement-constraints]
+                                 [--plcmt-time-limit]
+                                 [--quorum-loss-wait]
+                                 [--replica-restart-wait]
+                                 [--tags]
+                                 [--target-replica]
+  examples:
+  - summary: Memperbarui layanan stateless terkelola.
+    syntax: >-
+      az sf managed-service update -g testRG -c testCluster --application-name testApp --service-name testService --min-instance-count 2 \
+        --min-instance-percentage 20
+  - summary: Memperbarui layanan stateful terkelola.
+    syntax: >-
+      az sf managed-service update -g testRG -c testCluster --application-name testApp --service-name testService2 --service-placement-time-limit '00:11:00' \
+        --stand-by-replica-keep-duration '00:11:00' --replica-restart-wait-duration '00:11:00' --quorum-loss-wait-duration '00:11:00'
+  requiredParameters:
+  - isRequired: true
+    name: --application --application-name
+    summary: Tentukan nama layanan.
+    description: ''
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Tentukan nama kluster, jika tidak diberikan akan sama dengan nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --name --service-name
+    summary: Tentukan nama layanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --default-move-cost
+    parameterValueGroup: High, Low, Medium, Zero
+    summary: Tentukan biaya default untuk pemindahan. Biaya yang lebih tinggi membuatnya lebih kecil kemungkinan kluster Resource Manager akan memindahkan replika saat mencoba menyeimbangkan kluster.
+    description: ''
+  - name: --instance-count
+    summary: Tentukan jumlah instans untuk layanan stateless. Jika -1 digunakan, itu berarti akan berjalan pada semua simpul.
+    description: ''
+  - name: --keep-duration --stand-by-keep-duration --stand-by-replica-keep-duration
+    summary: Tentukan definisi tentang berapa lama replika StandBy harus dipertahankan sebelum dihapus, diwakili dalam format ISO 8601 "hh:mm:ss".
+    description: ''
+  - name: --min-inst-pct --min-instance-percentage
+    summary: Tentukan persentase minimum InstanceCount yang harus memenuhi pemeriksaan keamanan EnsureAvailability selama operasi seperti meningkatkan atau menonaktifkan simpul. Jumlah aktual yang digunakan adalah maks( MinInstanceCount, ceil( MinInstancePercentage/100.0 \* InstanceCount) ). Perhatikan, jika InstanceCount diatur ke -1, selama komputasi MinInstancePercentage, -1 pertama kali dikonversi menjadi jumlah simpul tempat instans diizinkan untuk ditempatkan sesuai dengan batasan penempatan pada layanan. Nilai yang diizinkan adalah dari 0 hingga 100.
+    description: ''
+  - name: --min-instance-count
+    summary: Tentukan jumlah minimum instans yang harus hingga memenuhi pemeriksaan keamanan EnsureAvailability selama operasi seperti meningkatkan atau menonaktifkan simpul. Jumlah aktual yang digunakan adalah maks( MinInstanceCount, ceil( MinInstancePercentage/100.0 \* InstanceCount) ). Perhatikan, jika InstanceCount diatur ke -1, selama komputasi MinInstanceCount -1 pertama kali dikonversi menjadi jumlah simpul tempat instans diizinkan untuk ditempatkan sesuai dengan batasan penempatan pada layanan.
+    description: ''
+  - name: --min-replica --min-replica-set-size
+    summary: Tentukan ukuran set replika min untuk layanan stateful.
+    description: ''
+  - name: --placement-constraints
+    summary: 'Tentukan batasan penempatan sebagai string. Kendala penempatan adalah ekspresi boolean pada properti node dan memungkinkan pembatasan layanan ke node tertentu berdasarkan persyaratan layanan. Misalnya, untuk menempatkan layanan pada simpul di mana NodeType berwarna biru, tentukan yang berikut: "NodeColor == blue)".'
+    description: ''
+  - name: --plcmt-time-limit --service-placement-time-limit
+    summary: Tentukan durasi replika mana yang dapat tetap InBuild sebelum melaporkan bahwa build macet, diwakili dalam format ISO 8601 "hh:mm:ss".
+    description: ''
+  - name: --quorum-loss-wait --quorum-loss-wait-duration
+    summary: Tentukan durasi maksimum di mana partisi diizinkan untuk berada dalam keadaan kehilangan kuorum, yang diwakili dalam format ISO 8601 "hh:mm:ss".
+    description: ''
+  - name: --replica-restart-wait --replica-restart-wait-duration
+    summary: Tentukan durasi antara ketika replika turun dan ketika replika baru dibuat, diwakili dalam format ISO 8601 "hh:mm:ss".
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --target-replica --target-replica-set-size
+    summary: Tentukan ukuran set replika target untuk layanan stateful.
+    description: ''
+commands:
+- az_sf_managed-service_correlation-scheme
+- az_sf_managed-service_correlation-scheme_create
+- az_sf_managed-service_correlation-scheme_delete
+- az_sf_managed-service_correlation-scheme_update
+- az_sf_managed-service_create
+- az_sf_managed-service_delete
+- az_sf_managed-service_list
+- az_sf_managed-service_load-metrics
+- az_sf_managed-service_load-metrics_create
+- az_sf_managed-service_load-metrics_delete
+- az_sf_managed-service_load-metrics_update
+- az_sf_managed-service_show
+- az_sf_managed-service_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola layanan yang berjalan pada kluster terkelola Azure Service Fabric. Hanya mendukung layanan yang disebarkan ARM.
+  ms.openlocfilehash: 53e3f60cc7280c4ba540aa7023bafb26d600a429
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141020698"
