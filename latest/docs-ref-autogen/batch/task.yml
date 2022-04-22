@@ -1,0 +1,408 @@
+### YamlMime:AzureCLIGroup
+uid: az_batch_task
+name: tugas batch az
+summary: Mengelola tugas Batch.
+description: ''
+directCommands:
+- uid: az_batch_task_create
+  name: buat tugas az batch
+  summary: Membuat tugas Batch.
+  description: ''
+  syntax: >-
+    az batch task create --job-id
+                         [--account-endpoint]
+                         [--account-key]
+                         [--account-name]
+                         [--affinity-id]
+                         [--application-package-references]
+                         [--command-line]
+                         [--environment-settings]
+                         [--json-file]
+                         [--max-task-retry-count]
+                         [--max-wall-clock-time]
+                         [--resource-files]
+                         [--retention-time]
+                         [--task-id]
+  requiredParameters:
+  - isRequired: true
+    name: --job-id
+    summary: ID pekerjaan yang berisi tugas.
+    description: ''
+  optionalParameters:
+  - name: --account-endpoint
+    summary: 'Titik akhir layanan batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ENDPOINT.'
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun Batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCESS_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun Batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCOUNT.'
+    description: ''
+  - name: --affinity-id
+    summary: Wajib diisi. Anda dapat meneruskan affinityId dari Sebuah Simpul untuk menunjukkan bahwa Tugas ini perlu dijalankan pada Simpul Komputasi tersebut. Perhatikan bahwa ini hanyalah afinitas lunak. Jika Target Simpul Komputasi sibuk atau tidak tersedia pada saat Tugas dijadwalkan, maka Tugas akan dijadwalkan di tempat lain.
+    description: ''
+  - name: --application-package-references
+    summary: Daftar ID yang dipisahkan spasi yang menentukan paket aplikasi yang akan diinstal. ID aplikasi yang dipisahkan spasi dengan versi opsional dalam format 'id[#version]'.
+    description: ''
+  - name: --baris perintah
+    summary: Baris perintah tugas. Baris perintah tidak berjalan di bawah shell, dan oleh karena itu tidak dapat memanfaatkan fitur shell seperti ekspansi variabel lingkungan. Jika Anda ingin memanfaatkan fitur tersebut, Anda harus memanggil shell di baris perintah, misalnya menggunakan "cmd /c MyCommand" di Windows atau "/bin/sh -c MyCommand" di Linux.
+    description: ''
+  - name: --environment-settings
+    summary: Daftar pengaturan variabel lingkungan untuk tugas tersebut. Nilai yang dipisahkan spasi dalam format 'key=value'.
+    description: ''
+  - name: --json-file
+    summary: File yang berisi tugas yang akan dibuat di JSON(diformat agar sesuai dengan isi permintaan REST API). Saat mengirimkan beberapa tugas, menerima array tugas atau TaskAddCollectionParamater. Jika parameter ini ditentukan, semua parameter lainnya diabaikan.
+    description: ''
+  - name: --max-task-retry-count
+    summary: Berapa kali maksimum Tugas dapat dicoba kembali. Layanan Batch mencoba kembali Tugas jika kode keluarnya bukan nol. Perhatikan bahwa nilai ini secara khusus mengontrol jumlah percobaan ulang untuk Tugas yang dapat dieksekusi karena kode keluar bukan nol. Layanan Batch akan mencoba Tugas sekali, dan kemudian dapat mencoba kembali hingga batas ini. Misalnya, jika jumlah percobaan kembali maksimum adalah 3, Batch mencoba Tugas hingga 4 kali (satu percobaan awal dan 3 percobaan ulang). Jika jumlah percobaan kembali maksimum adalah 0, layanan Batch tidak mencoba kembali Tugas setelah upaya pertama. Jika jumlah percobaan kembali maksimum adalah -1, layanan Batch mencoba kembali Tugas tanpa batas.
+    description: ''
+  - name: --max-wall-clock-time
+    summary: Jika ini tidak ditentukan, tidak ada batas waktu berapa lama Tugas dapat berjalan.
+    description: ''
+  - name: --resource-files
+    summary: Daftar file yang akan diunduh layanan Batch ke simpul komputasi sebelum menjalankan baris perintah. Referensi sumber daya yang dipisahkan ruang dalam format filename=httpurl, dengan httpurl menjadi url HTTP apa pun dengan akses publik atau url SAS dengan akses baca.
+    description: ''
+  - name: --retention-time
+    summary: Defaultnya adalah 7 hari, yaitu direktori Tugas akan dipertahankan selama 7 hari kecuali Simpul Komputasi dihapus atau Pekerjaan dihapus.
+    description: ''
+  - name: --task-id
+    summary: ID tugas.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batch/_help.py
+- uid: az_batch_task_delete
+  name: az batch task delete
+  summary: Menghapus Tugas dari Pekerjaan yang ditentukan.
+  description: Saat Tugas dihapus, semua file di direktorinya pada Simpul Komputasi tempat tugas dijalankan juga dihapus (terlepas dari waktu retensi). Untuk Tugas multi-instans, operasi hapus Tugas berlaku secara sinkron ke tugas utama; subtugas dan filenya kemudian dihapus secara asinkron di latar belakang.
+  syntax: >-
+    az batch task delete --job-id
+                         --task-id
+                         [--account-endpoint]
+                         [--account-key]
+                         [--account-name]
+                         [--if-match]
+                         [--if-modified-since]
+                         [--if-none-match]
+                         [--if-unmodified-since]
+                         [--yes]
+  requiredParameters:
+  - isRequired: true
+    name: --job-id
+    summary: ID Pekerjaan tempat menghapus Tugas.
+    description: ''
+  - isRequired: true
+    name: --task-id
+    summary: ID Tugas yang akan dihapus.
+    description: ''
+  optionalParameters:
+  - name: --account-endpoint
+    summary: 'Titik akhir layanan batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ENDPOINT.'
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCESS_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCOUNT.'
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag yang terkait dengan versi sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika ETag sumber daya saat ini pada layanan sama persis dengan nilai yang ditentukan oleh klien.
+    description: ''
+  - name: --if-modified-since
+    summary: Tanda waktu yang menunjukkan waktu modifikasi terakhir sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika sumber daya pada layanan telah dimodifikasi sejak waktu yang ditentukan.
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag yang terkait dengan versi sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika ETag sumber daya saat ini pada layanan tidak cocok dengan nilai yang ditentukan oleh klien.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Tanda waktu yang menunjukkan waktu modifikasi terakhir sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika sumber daya pada layanan belum dimodifikasi sejak waktu yang ditentukan.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batch/_help.py
+- uid: az_batch_task_list
+  name: az batch task list
+  summary: Mencantumkan semua Tugas yang terkait dengan Pekerjaan yang ditentukan.
+  description: Untuk Tugas multi-instans, informasi seperti affinityId, executionInfo, dan nodeInfo merujuk ke Tugas utama. Gunakan API subtugas daftar untuk mengambil informasi tentang subtugas.
+  syntax: >-
+    az batch task list --job-id
+                       [--account-endpoint]
+                       [--account-key]
+                       [--account-name]
+                       [--expand]
+                       [--filter]
+                       [--select]
+  requiredParameters:
+  - isRequired: true
+    name: --job-id
+    summary: ID Pekerjaan.
+    description: ''
+  optionalParameters:
+  - name: --account-endpoint
+    summary: 'Titik akhir layanan batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ENDPOINT.'
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCESS_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCOUNT.'
+    description: ''
+  - name: --expand
+    summary: Klausa $expand OData.
+    description: ''
+  - name: --filter
+    summary: Klausa $filter OData. Untuk informasi selengkapnya tentang membuat filter ini, lihat https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-tasks.
+    description: ''
+  - name: --select
+    summary: Klausa $select OData.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batch/_help.py
+- uid: az_batch_task_reactivate
+  name: az batch task reactivate
+  summary: Mengaktifkan kembali Tugas, memungkinkannya berjalan lagi meskipun jumlah coba lagi telah habis.
+  description: Aktivasi ulang membuat Tugas memenuhi syarat untuk dicoba lagi hingga jumlah coba lagi maksimumnya. Status Tugas diubah menjadi aktif. Karena Tugas tidak lagi dalam status selesai, kode keluar atau informasi kegagalan sebelumnya tidak lagi tersedia setelah pengaktifan kembali. Setiap kali Tugas diaktifkan kembali, jumlah percobaan ulangnya diatur ulang ke 0. Aktivasi ulang akan gagal untuk Tugas yang tidak selesai atau yang sebelumnya berhasil diselesaikan (dengan kode keluar 0). Selain itu, ini akan gagal jika Pekerjaan telah selesai (atau mengakhiri atau menghapus).
+  syntax: >-
+    az batch task reactivate --job-id
+                             --task-id
+                             [--account-endpoint]
+                             [--account-key]
+                             [--account-name]
+                             [--if-match]
+                             [--if-modified-since]
+                             [--if-none-match]
+                             [--if-unmodified-since]
+  requiredParameters:
+  - isRequired: true
+    name: --job-id
+    summary: ID Pekerjaan yang berisi Tugas.
+    description: ''
+  - isRequired: true
+    name: --task-id
+    summary: ID Tugas yang akan diaktifkan kembali.
+    description: ''
+  optionalParameters:
+  - name: --account-endpoint
+    summary: 'Titik akhir layanan batch. Atau, diatur berdasarkan variabel lingkungan: AZURE_BATCH_ENDPOINT.'
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCESS_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCOUNT.'
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag yang terkait dengan versi sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika ETag sumber daya saat ini pada layanan sama persis dengan nilai yang ditentukan oleh klien.
+    description: ''
+  - name: --if-modified-since
+    summary: Tanda waktu yang menunjukkan waktu modifikasi terakhir sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika sumber daya pada layanan telah dimodifikasi sejak waktu yang ditentukan.
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag yang terkait dengan versi sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika ETag sumber daya saat ini pada layanan tidak cocok dengan nilai yang ditentukan oleh klien.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Tanda waktu yang menunjukkan waktu modifikasi terakhir sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika sumber daya pada layanan belum dimodifikasi sejak waktu yang ditentukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batch/_help.py
+- uid: az_batch_task_reset
+  name: az batch task reset
+  summary: Mengatur ulang properti tugas Batch.
+  description: ''
+  syntax: >-
+    az batch task reset --job-id
+                        --task-id
+                        [--account-endpoint]
+                        [--account-key]
+                        [--account-name]
+                        [--if-match]
+                        [--if-modified-since]
+                        [--if-none-match]
+                        [--if-unmodified-since]
+                        [--json-file]
+                        [--max-task-retry-count]
+                        [--max-wall-clock-time]
+                        [--retention-time]
+  requiredParameters:
+  - isRequired: true
+    name: --job-id
+    summary: ID Pekerjaan yang berisi Tugas.
+    description: ''
+  - isRequired: true
+    name: --task-id
+    summary: ID Tugas yang akan diperbarui.
+    description: ''
+  optionalParameters:
+  - name: --account-endpoint
+    summary: 'Titik akhir layanan batch. Atau, diatur berdasarkan variabel lingkungan: AZURE_BATCH_ENDPOINT.'
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCESS_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCOUNT.'
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag yang terkait dengan versi sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika ETag sumber daya saat ini pada layanan sama persis dengan nilai yang ditentukan oleh klien.
+    description: ''
+  - name: --if-modified-since
+    summary: Tanda waktu yang menunjukkan waktu modifikasi terakhir sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika sumber daya pada layanan telah dimodifikasi sejak waktu yang ditentukan.
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag yang terkait dengan versi sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika ETag sumber daya saat ini pada layanan tidak cocok dengan nilai yang ditentukan oleh klien.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Tanda waktu yang menunjukkan waktu modifikasi terakhir sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika sumber daya pada layanan belum dimodifikasi sejak waktu yang ditentukan.
+    description: ''
+  - name: --json-file
+    summary: File yang berisi spesifikasi batasan dalam JSON (diformat agar sesuai dengan isi REST API masing-masing). Jika parameter ini ditentukan, semua Argumen '{group_title(arg[0])} diabaikan.
+    description: ''
+  - name: --max-task-retry-count
+    summary: Berapa kali maksimum Tugas dapat dicoba kembali. Layanan Batch mencoba kembali Tugas jika kode keluarnya bukan nol. Perhatikan bahwa nilai ini secara khusus mengontrol jumlah percobaan ulang untuk Tugas yang dapat dieksekusi karena kode keluar bukan nol. Layanan Batch akan mencoba Tugas sekali, dan kemudian dapat mencoba kembali hingga batas ini. Misalnya, jika jumlah coba lagi maksimum adalah 3, Batch mencoba Tugas hingga 4 kali (satu percobaan awal dan 3 percobaan ulang). Jika jumlah percobaan kembali maksimum adalah 0, layanan Batch tidak mencoba kembali Tugas setelah upaya pertama. Jika jumlah percobaan kembali maksimum adalah -1, layanan Batch mencoba kembali Tugas tanpa batas.
+    description: ''
+  - name: --max-wall-clock-time
+    summary: Jika ini tidak ditentukan, tidak ada batas waktu berapa lama Tugas dapat berjalan. Format yang diharapkan adalah durasi ISO-8601.
+    description: ''
+  - name: --retention-time
+    summary: Defaultnya adalah 7 hari, yaitu direktori Tugas akan dipertahankan selama 7 hari kecuali Simpul Komputasi dihapus atau Pekerjaan dihapus. Format yang diharapkan adalah durasi ISO-8601.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batch/_help.py
+- uid: az_batch_task_show
+  name: tampilkan tugas az batch
+  summary: Mendapatkan informasi tentang Tugas yang ditentukan.
+  description: Untuk Tugas multi-instans, informasi seperti affinityId, executionInfo, dan nodeInfo mengacu pada Tugas utama. Gunakan DAFTAR API subtugas untuk mengambil informasi tentang subtugas.
+  syntax: >-
+    az batch task show --job-id
+                       --task-id
+                       [--account-endpoint]
+                       [--account-key]
+                       [--account-name]
+                       [--expand]
+                       [--if-match]
+                       [--if-modified-since]
+                       [--if-none-match]
+                       [--if-unmodified-since]
+                       [--select]
+  requiredParameters:
+  - isRequired: true
+    name: --job-id
+    summary: ID Pekerjaan yang berisi Tugas.
+    description: ''
+  - isRequired: true
+    name: --task-id
+    summary: ID Tugas untuk mendapatkan informasi tentang.
+    description: ''
+  optionalParameters:
+  - name: --account-endpoint
+    summary: 'Titik akhir layanan batch. Atau, diatur berdasarkan variabel lingkungan: AZURE_BATCH_ENDPOINT.'
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCESS_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCOUNT.'
+    description: ''
+  - name: --expand
+    summary: Klausa $expand OData.
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag yang terkait dengan versi sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika ETag sumber daya saat ini pada layanan sama persis dengan nilai yang ditentukan oleh klien.
+    description: ''
+  - name: --if-modified-since
+    summary: Tanda waktu yang menunjukkan waktu modifikasi terakhir sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika sumber daya pada layanan telah dimodifikasi sejak waktu yang ditentukan.
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag yang terkait dengan versi sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika ETag sumber daya saat ini pada layanan tidak cocok dengan nilai yang ditentukan oleh klien.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Tanda waktu yang menunjukkan waktu modifikasi terakhir sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika sumber daya pada layanan belum dimodifikasi sejak waktu yang ditentukan.
+    description: ''
+  - name: --select
+    summary: Klausa $select OData.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batch/_help.py
+- uid: az_batch_task_stop
+  name: az batch task stop
+  summary: Mengakhiri Tugas yang ditentukan.
+  description: Ketika Tugas telah dihentikan, Tugas berpindah ke status selesai. Untuk Tugas multi-instans, operasi Hentikan Tugas berlaku secara sinkron ke tugas utama; subtugas kemudian dihentikan secara asinkron di latar belakang.
+  syntax: >-
+    az batch task stop --job-id
+                       --task-id
+                       [--account-endpoint]
+                       [--account-key]
+                       [--account-name]
+                       [--if-match]
+                       [--if-modified-since]
+                       [--if-none-match]
+                       [--if-unmodified-since]
+  requiredParameters:
+  - isRequired: true
+    name: --job-id
+    summary: ID Pekerjaan yang berisi Tugas.
+    description: ''
+  - isRequired: true
+    name: --task-id
+    summary: ID Tugas yang akan dihentikan.
+    description: ''
+  optionalParameters:
+  - name: --account-endpoint
+    summary: 'Titik akhir layanan batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ENDPOINT.'
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCESS_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCOUNT.'
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag yang terkait dengan versi sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika ETag sumber daya saat ini pada layanan sama persis dengan nilai yang ditentukan oleh klien.
+    description: ''
+  - name: --if-modified-since
+    summary: Tanda waktu yang menunjukkan waktu modifikasi terakhir sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika sumber daya pada layanan telah dimodifikasi sejak waktu yang ditentukan.
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag yang terkait dengan versi sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika ETag sumber daya saat ini pada layanan tidak cocok dengan nilai yang ditentukan oleh klien.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Tanda waktu yang menunjukkan waktu modifikasi terakhir sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika sumber daya pada layanan belum dimodifikasi sejak waktu yang ditentukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batch/_help.py
+commands:
+- az_batch_task_create
+- az_batch_task_delete
+- az_batch_task_file
+- az_batch_task_file_delete
+- az_batch_task_file_download
+- az_batch_task_file_list
+- az_batch_task_file_show
+- az_batch_task_list
+- az_batch_task_reactivate
+- az_batch_task_reset
+- az_batch_task_show
+- az_batch_task_stop
+- az_batch_task_subtask
+- az_batch_task_subtask_list
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/30/2022
+  description: Mengelola tugas Batch.
+  ms.openlocfilehash: 14988e13975be94d3a7783acffcc9bf4d4ede992
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141456894"

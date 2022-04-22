@@ -1,0 +1,420 @@
+### YamlMime:AzureCLIGroup
+uid: az_network_lb
+name: az network lb
+summary: Mengelola dan mengonfigurasi penyeimbang beban.
+description: Untuk mempelajari selengkapnya tentang Azure Load Balancer kunjungi https://docs.microsoft.com/azure/load-balancer/load-balancer-get-started-internet-arm-cli.
+directCommands:
+- uid: az_network_lb_create
+  name: az network lb create
+  summary: Membuat load balancer.
+  description: ''
+  syntax: >-
+    az network lb create --name
+                         --resource-group
+                         [--backend-pool-name]
+                         [--edge-zone]
+                         [--frontend-ip-name]
+                         [--frontend-ip-zone {1, 2, 3}]
+                         [--location]
+                         [--no-wait]
+                         [--private-ip-address]
+                         [--private-ip-address-version {IPv4, IPv6}]
+                         [--public-ip-address]
+                         [--public-ip-address-allocation {Dynamic, Static}]
+                         [--public-ip-dns-name]
+                         [--public-ip-zone {1, 2, 3}]
+                         [--sku {Basic, Gateway, Standard}]
+                         [--subnet]
+                         [--subnet-address-prefix]
+                         [--tags]
+                         [--validate]
+                         [--vnet-address-prefix]
+                         [--vnet-name]
+  examples:
+  - summary: Buat load balancer dasar.
+    syntax: az network lb create -g MyResourceGroup -n MyLb --sku Basic
+  - summary: Buat load balancer dasar pada jaringan virtual dan subnet tertentu. Jika jaringan virtual dengan nama yang sama ditemukan dalam grup sumber daya yang sama, load balancer akan menggunakan jaringan virtual ini.  Jika tidak ditemukan, yang baru akan dibuat.
+    syntax: az network lb create -g MyResourceGroup -n MyLb --sku Basic --vnet-name MyVnet --subnet MySubnet
+  - summary: Buat load balancer dasar pada subnet jaringan virtual yang sudah ada sebelumnya. Subnet dapat berada dalam grup sumber daya arbiter atau langganan dengan memberikan ID subnet.
+    syntax: az network lb create -g MyResourceGroup -n MyLb --sku Basic --subnet {subnetID}
+  - summary: Buat penyeimbang muatan internal dengan rasa zona dasar, melalui penyediaan ip publik zonal.
+    syntax: az network lb create -g MyResourceGroup -n MyLb --sku Basic --public-ip-zone 2
+  - summary: Buat penyeimbang muatan publik dengan rasa zona standar, melalui penyediaan konfigurasi ip frontend zonal dan Vnet.
+    syntax: az network lb create -g MyResourceGroup -n MyLb --sku Standard --frontend-ip-zone 1 --vnet-name MyVnet --subnet MySubnet
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama load balancer.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --backend-pool-name
+    summary: Nama kumpulan alamat backend.
+    description: ''
+  - name: --edge-zone
+    summary: Nama zona tepi.
+    description: ''
+  - name: --frontend-ip-name
+    defaultValue: LoadBalancerFrontEnd
+    summary: Nama konfigurasi IP frontend.
+    description: ''
+  - name: --frontend-ip-zone
+    parameterValueGroup: 1, 2, 3
+    summary: Digunakan untuk membuat Load balancer yang menghadap internal.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --private-ip-address
+    summary: Alamat IP privat statis untuk digunakan.
+    description: ''
+  - name: --private-ip-address-version
+    defaultValue: IPv4
+    parameterValueGroup: IPv4, IPv6
+    summary: Versi alamat IP privat yang akan digunakan.
+    description: ''
+  - name: --public-ip-address
+    summary: Nama atau ID alamat IP publik, atau "" untuk tidak ada. Menggunakan sumber daya yang ada jika tersedia atau akan membuat sumber daya baru dengan default jika dihilangkan.
+    description: ''
+  - name: --public-ip-address-allocation
+    parameterValueGroup: Dynamic, Static
+    summary: Metode alokasi IP.
+    description: ''
+  - name: --public-ip-dns-name
+    summary: Nama DNS unik global untuk IP publik baru.
+    description: ''
+  - name: --public-ip-zone
+    parameterValueGroup: 1, 2, 3
+    summary: Digunakan untuk membuat ip publik baru untuk load balancer, alias load balancer yang menghadap publik.
+    description: ''
+  - name: --sku
+    defaultValue: Basic
+    parameterValueGroup: Basic, Gateway, Standard
+    summary: Load balancer SKU.
+    description: ''
+  - name: --subnet
+    summary: Nama atau ID subnet. Menggunakan sumber daya yang ada atau membuat baru jika ditentukan, atau tidak ada jika dihilangkan. Jika nama ditentukan, tentukan juga --vnet-name. Jika Anda ingin menggunakan subnet yang sudah ada di grup sumber daya atau langganan lain, berikan ID alih-alih nama subnet.
+    description: ''
+  - name: --subnet-address-prefix
+    defaultValue: 10.0.0.0/24
+    summary: Awalan alamat CIDR yang akan digunakan saat membuat subnet baru.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --validate
+    summary: Buat dan validasi templat ARM tanpa membuat sumber daya apa pun.
+    description: ''
+  - name: --vnet-address-prefix
+    defaultValue: 10.0.0.0/16
+    summary: Awalan alamat CIDR yang akan digunakan saat membuat VNet baru.
+    description: ''
+  - name: --vnet-name
+    summary: Nama jaringan virtual (VNet).
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_lb_delete
+  name: az network lb delete
+  summary: Menghapus load balancer.
+  description: ''
+  syntax: >-
+    az network lb delete [--ids]
+                         [--name]
+                         [--resource-group]
+  examples:
+  - summary: Menghapus load balancer.
+    syntax: az network lb delete -g MyResourceGroup -n MyLb
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama load balancer.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_lb_list
+  name: az network lb list
+  summary: Mencantumkan load balancer.
+  description: ''
+  syntax: az network lb list [--resource-group]
+  examples:
+  - summary: Mencantumkan load balancer.
+    syntax: az network lb list -g MyResourceGroup
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_lb_list-mapping
+  name: az network lb list-mapping
+  summary: Mencantumkan pemetaan port aturan NAT masuk.
+  description: ''
+  syntax: >-
+    az network lb list-mapping --backend-pool-name
+                               --request
+                               [--ids]
+                               [--name]
+                               [--resource-group]
+  examples:
+  - summary: Mencantumkan pemetaan port aturan NAT masuk berdasarkan IP.
+    syntax: az network lb list-mapping -n MyLb -g MyResourceGroup --backend-pool-name MyAddressPool --request ip=XX
+  - summary: Mencantumkan pemetaan port aturan NAT masuk berdasarkan NIC.
+    syntax: az network lb list-mapping -n MyLb -g MyResourceGroup --backend-pool-name MyAddressPool --request nic=XX
+  requiredParameters:
+  - isRequired: true
+    name: --backend-pool-name
+    summary: Nama kumpulan alamat backend.
+    description: ''
+  - isRequired: true
+    name: --request
+    summary: Kueri permintaan pemetaan port aturan NAT masuk.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama load balancer.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_lb_list-nic
+  name: az network lb list-nic
+  summary: Mencantumkan antarmuka jaringan load balancer terkait.
+  description: ''
+  syntax: >-
+    az network lb list-nic [--ids]
+                           [--name]
+                           [--resource-group]
+  examples:
+  - summary: Mencantumkan antarmuka jaringan load balancer terkait.
+    syntax: az network lb list-nic -g MyResourceGroup --name MyLb
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama load balancer.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_lb_show
+  name: az network lb show
+  summary: Dapatkan detail load balancer.
+  description: ''
+  syntax: >-
+    az network lb show [--expand]
+                       [--ids]
+                       [--name]
+                       [--resource-group]
+  examples:
+  - summary: Dapatkan detail load balancer.
+    syntax: az network lb show -g MyResourceGroup -n MyLb
+  optionalParameters:
+  - name: --expand
+    summary: Memperluas sumber daya yang dirujuk.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama load balancer.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_lb_update
+  name: az network lb update
+  summary: Memperbarui load balancer.
+  description: Perintah ini hanya dapat digunakan untuk memperbarui tag untuk load balancer. Nama dan grup sumber daya tidak dapat diubah dan tidak dapat diperbarui.
+  syntax: >-
+    az network lb update [--add]
+                         [--force-string]
+                         [--ids]
+                         [--name]
+                         [--remove]
+                         [--resource-group]
+                         [--set]
+  examples:
+  - summary: Perbarui tag load balancer.
+    syntax: az network lb update -g MyResourceGroup -n MyLb --set tags.CostCenter=MyBusinessGroup
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama load balancer.
+    description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_lb_wait
+  name: az network lb wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi load balancer terpenuhi.
+  description: ''
+  syntax: >-
+    az network lb wait [--created]
+                       [--custom]
+                       [--deleted]
+                       [--exists]
+                       [--expand]
+                       [--ids]
+                       [--interval]
+                       [--name]
+                       [--resource-group]
+                       [--timeout]
+                       [--updated]
+  examples:
+  - summary: Tunggu hingga load balancer kembali seperti yang dibuat.
+    syntax: az network lb wait -g MyResourceGroup -n MyLB --created
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --expand
+    summary: Memperluas sumber daya yang dirujuk.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --name -n
+    summary: Nama load balancer.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --diperbarui
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+commands:
+- az_network_lb_address-pool
+- az_network_lb_address-pool_address
+- az_network_lb_address-pool_address_add
+- az_network_lb_address-pool_address_list
+- az_network_lb_address-pool_address_remove
+- az_network_lb_address-pool_create
+- az_network_lb_address-pool_delete
+- az_network_lb_address-pool_list
+- az_network_lb_address-pool_show
+- az_network_lb_address-pool_tunnel-interface
+- az_network_lb_address-pool_tunnel-interface_add
+- az_network_lb_address-pool_tunnel-interface_list
+- az_network_lb_address-pool_tunnel-interface_remove
+- az_network_lb_address-pool_tunnel-interface_update
+- az_network_lb_address-pool_update
+- az_network_lb_create
+- az_network_lb_delete
+- az_network_lb_frontend-ip
+- az_network_lb_frontend-ip_create
+- az_network_lb_frontend-ip_delete
+- az_network_lb_frontend-ip_list
+- az_network_lb_frontend-ip_show
+- az_network_lb_frontend-ip_update
+- az_network_lb_inbound-nat-pool
+- az_network_lb_inbound-nat-pool_create
+- az_network_lb_inbound-nat-pool_delete
+- az_network_lb_inbound-nat-pool_list
+- az_network_lb_inbound-nat-pool_show
+- az_network_lb_inbound-nat-pool_update
+- az_network_lb_inbound-nat-rule
+- az_network_lb_inbound-nat-rule_create
+- az_network_lb_inbound-nat-rule_delete
+- az_network_lb_inbound-nat-rule_list
+- az_network_lb_inbound-nat-rule_show
+- az_network_lb_inbound-nat-rule_update
+- az_network_lb_list
+- az_network_lb_list-mapping
+- az_network_lb_list-nic
+- az_network_lb_outbound-rule
+- az_network_lb_outbound-rule_create
+- az_network_lb_outbound-rule_delete
+- az_network_lb_outbound-rule_list
+- az_network_lb_outbound-rule_show
+- az_network_lb_outbound-rule_update
+- az_network_lb_probe
+- az_network_lb_probe_create
+- az_network_lb_probe_delete
+- az_network_lb_probe_list
+- az_network_lb_probe_show
+- az_network_lb_probe_update
+- az_network_lb_rule
+- az_network_lb_rule_create
+- az_network_lb_rule_delete
+- az_network_lb_rule_list
+- az_network_lb_rule_show
+- az_network_lb_rule_update
+- az_network_lb_show
+- az_network_lb_update
+- az_network_lb_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/09/2022
+  description: Untuk mempelajari selengkapnya tentang Azure Load Balancer kunjungi https://docs.microsoft.com/azure/load-balancer/load-balancer-get-started-internet-arm-cli.
+  ms.openlocfilehash: e21488de08aebae386f70d1b85bf2d0f1c12205e
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141448883"

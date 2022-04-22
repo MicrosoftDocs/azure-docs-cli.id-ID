@@ -1,0 +1,285 @@
+### YamlMime:AzureCLIGroup
+uid: az_iot_hub_certificate
+name: az iot hub certificate
+summary: Kelola sertifikat IoT Hub.
+description: ''
+directCommands:
+- uid: az_iot_hub_certificate_create
+  name: az iot hub certificate create
+  summary: Membuat/mengunggah sertifikat Azure IoT Hub.
+  description: Untuk penjelasan terperinci tentang sertifikat CA di Azure IoT Hub, lihat https://docs.microsoft.com/azure/iot-hub/iot-hub-x509ca-overview.
+  syntax: >-
+    az iot hub certificate create --hub-name
+                                  --name
+                                  --path
+                                  [--resource-group]
+                                  [--verified {false, true}]
+  examples:
+  - summary: Mengunggah file PEM sertifikat CA terverifikasi ke hub IoT.
+    syntax: az iot hub certificate create --hub-name MyIotHub --name MyCertificate --path /certificates/Certificate.pem --verified
+  - summary: Mengunggah file CER sertifikat CA ke hub IoT.
+    syntax: az iot hub certificate create --hub-name MyIotHub --name MyCertificate --path /certificates/Certificate.cer
+  - summary: Membuat/mengunggah sertifikat Azure IoT Hub (dibuat otomatis)
+    syntax: az iot hub certificate create --hub-name MyIotHub --name MyCertificate --path /certificates/Certificate.cer --resource-group MyResourceGroup --subscription MySubscription
+  requiredParameters:
+  - isRequired: true
+    name: --hub-name
+    summary: nama IoT Hub.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama yang mudah diingat untuk sertifikat.
+    description: ''
+  - isRequired: true
+    name: --path -p
+    summary: Jalur ke file yang berisi sertifikat.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --verified -v
+    parameterValueGroup: false, true
+    summary: Boolean yang menunjukkan apakah sertifikat diverifikasi atau tidak.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_hub_certificate_delete
+  name: az iot hub certificate delete
+  summary: Menghapus sertifikat Azure IoT Hub.
+  description: Untuk penjelasan terperinci tentang sertifikat CA di Azure IoT Hub, lihat https://docs.microsoft.com/azure/iot-hub/iot-hub-x509ca-overview.
+  syntax: >-
+    az iot hub certificate delete --etag
+                                  --name
+                                  [--hub-name]
+                                  [--ids]
+                                  [--resource-group]
+  examples:
+  - summary: Menghapus MyCertificate
+    syntax: az iot hub certificate delete --hub-name MyIotHub --name MyCertificate --etag AAAAAAAAAAA=
+  requiredParameters:
+  - isRequired: true
+    name: --etag -e
+    summary: Tag Entitas (etag) objek.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama yang mudah diingat untuk sertifikat.
+    description: ''
+  optionalParameters:
+  - name: --hub-name
+    summary: nama IoT Hub.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_hub_certificate_generate-verification-code
+  name: az iot hub certificate generate-verification-code
+  summary: Menghasilkan kode verifikasi untuk sertifikat Azure IoT Hub.
+  description: Kode verifikasi ini digunakan untuk melengkapi bukti langkah kepemilikan untuk sertifikat. Gunakan kode verifikasi ini sebagai CN sertifikat baru yang ditandatangani dengan kunci privat sertifikat akar. Untuk penjelasan terperinci tentang sertifikat CA di Azure IoT Hub, lihat https://docs.microsoft.com/azure/iot-hub/iot-hub-x509ca-overview.
+  syntax: >-
+    az iot hub certificate generate-verification-code --etag
+                                                      --name
+                                                      [--hub-name]
+                                                      [--ids]
+                                                      [--resource-group]
+  examples:
+  - summary: Menghasilkan kode verifikasi untuk MyCertificate
+    syntax: az iot hub certificate generate-verification-code --hub-name MyIotHub --name MyCertificate --etag AAAAAAAAAAA=
+  - summary: Menghasilkan kode verifikasi untuk sertifikat Azure IoT Hub (dibuat secara otomatis)
+    syntax: az iot hub certificate generate-verification-code --etag AAAAAAAAAAA= --hub-name MyIotHub --name MyCertificate --resource-group MyResourceGroup --subscription MySubscription
+  requiredParameters:
+  - isRequired: true
+    name: --etag -e
+    summary: Tag Entitas (etag) objek.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama yang mudah diingat untuk sertifikat.
+    description: ''
+  optionalParameters:
+  - name: --hub-name
+    summary: nama IoT Hub.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_hub_certificate_list
+  name: az iot hub certificate list
+  summary: Mencantumkan semua sertifikat yang terkandung dalam Azure IoT Hub.
+  description: Untuk penjelasan terperinci tentang sertifikat CA di Azure IoT Hub, lihat https://docs.microsoft.com/azure/iot-hub/iot-hub-x509ca-overview.
+  syntax: >-
+    az iot hub certificate list [--hub-name]
+                                [--ids]
+                                [--resource-group]
+  examples:
+  - summary: Mencantumkan semua sertifikat di MyIotHub
+    syntax: az iot hub certificate list --hub-name MyIotHub
+  optionalParameters:
+  - name: --hub-name
+    summary: nama IoT Hub.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_hub_certificate_show
+  name: az iot hub certificate show
+  summary: Memperlihatkan informasi tentang sertifikat Azure IoT Hub tertentu.
+  description: Untuk penjelasan terperinci tentang sertifikat CA di Azure IoT Hub, lihat https://docs.microsoft.com/azure/iot-hub/iot-hub-x509ca-overview.
+  syntax: >-
+    az iot hub certificate show --name
+                                [--hub-name]
+                                [--ids]
+                                [--resource-group]
+  examples:
+  - summary: Tampilkan detail tentang MyCertificate
+    syntax: az iot hub certificate show --hub-name MyIotHub --name MyCertificate
+  - summary: Memperlihatkan informasi tentang sertifikat Azure IoT Hub tertentu (dibuat secara otomatis)
+    syntax: az iot hub certificate show --hub-name MyIotHub --name MyCertificate --resource-group MyResourceGroup --subscription MySubscription
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama yang mudah diingat untuk sertifikat.
+    description: ''
+  optionalParameters:
+  - name: --hub-name
+    summary: nama IoT Hub.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_hub_certificate_update
+  name: az iot hub certificate update
+  summary: Memperbarui sertifikat Azure IoT Hub.
+  description: Mengunggah sertifikat baru untuk mengganti sertifikat yang ada dengan nama yang sama. Untuk penjelasan terperinci tentang sertifikat CA di Azure IoT Hub, lihat https://docs.microsoft.com/azure/iot-hub/iot-hub-x509ca-overview.
+  syntax: >-
+    az iot hub certificate update --etag
+                                  --name
+                                  --path
+                                  [--hub-name]
+                                  [--ids]
+                                  [--resource-group]
+                                  [--verified {false, true}]
+  examples:
+  - summary: Memperbarui sertifikat CA di hub IoT dengan mengunggah file PEM baru.
+    syntax: az iot hub certificate update --hub-name MyIotHub --name MyCertificate --path /certificates/NewCertificate.pem --etag AAAAAAAAAAA=
+  - summary: Memperbarui sertifikat CA di hub IoT dengan mengunggah file CER baru.
+    syntax: az iot hub certificate update --hub-name MyIotHub --name MyCertificate --path /certificates/NewCertificate.cer --etag AAAAAAAAAAA=
+  requiredParameters:
+  - isRequired: true
+    name: --etag -e
+    summary: Tag Entitas (etag) objek.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama yang mudah diingat untuk sertifikat.
+    description: ''
+  - isRequired: true
+    name: --path -p
+    summary: Jalur ke file yang berisi sertifikat.
+    description: ''
+  optionalParameters:
+  - name: --hub-name
+    summary: nama IoT Hub.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --verified -v
+    parameterValueGroup: false, true
+    summary: Boolean yang menunjukkan apakah sertifikat diverifikasi atau tidak.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_hub_certificate_verify
+  name: az iot hub certificate verify
+  summary: Memverifikasi sertifikat Azure IoT Hub.
+  description: Memverifikasi sertifikat dengan mengunggah sertifikat verifikasi yang berisi kode verifikasi yang diperoleh dengan memanggil generate-verification-code. Ini adalah langkah terakhir dalam proses bukti kepemilikan. Untuk penjelasan terperinci tentang sertifikat CA di Azure IoT Hub, lihat https://docs.microsoft.com/azure/iot-hub/iot-hub-x509ca-overview.
+  syntax: >-
+    az iot hub certificate verify --etag
+                                  --name
+                                  --path
+                                  [--hub-name]
+                                  [--ids]
+                                  [--resource-group]
+  examples:
+  - summary: Memverifikasi kepemilikan kunci privat MyCertificate.
+    syntax: az iot hub certificate verify --hub-name MyIotHub --name MyCertificate --path /certificates/Verification.pem --etag AAAAAAAAAAA=
+  - summary: Memverifikasi sertifikat Azure IoT Hub (dibuat secara otomatis)
+    syntax: az iot hub certificate verify --etag AAAAAAAAAAA= --hub-name MyIotHub --name MyCertificate --path /certificates/Verification.pem --resource-group MyResourceGroup --subscription MySubscription
+  requiredParameters:
+  - isRequired: true
+    name: --etag -e
+    summary: Tag Entitas (etag) objek.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama yang mudah diingat untuk sertifikat.
+    description: ''
+  - isRequired: true
+    name: --path -p
+    summary: Jalur ke file yang berisi sertifikat.
+    description: ''
+  optionalParameters:
+  - name: --hub-name
+    summary: nama IoT Hub.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+commands:
+- az_iot_hub_certificate_create
+- az_iot_hub_certificate_delete
+- az_iot_hub_certificate_generate-verification-code
+- az_iot_hub_certificate_list
+- az_iot_hub_certificate_show
+- az_iot_hub_certificate_update
+- az_iot_hub_certificate_verify
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 02/24/2022
+  description: Kelola sertifikat IoT Hub.
+  ms.openlocfilehash: 136c768003e9748ef8993f981d6ae0277392d276
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141128659"

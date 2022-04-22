@@ -1,0 +1,347 @@
+### YamlMime:AzureCLIGroup
+uid: az_netappfiles_account_ad
+name: az netappfiles account ad
+summary: Mengelola direktori aktif Akun Azure NetApp Files (ANF).
+description: ''
+directCommands:
+- uid: az_netappfiles_account_ad_add
+  name: az netappfiles account ad add
+  summary: Tambahkan direktori aktif ke akun.
+  description: ''
+  syntax: >-
+    az netappfiles account ad add --dns
+                                  --domain
+                                  --password
+                                  --smb-server-name
+                                  --username
+                                  [--account-name]
+                                  [--ad-name]
+                                  [--add]
+                                  [--administrators]
+                                  [--aes-encryption {false, true}]
+                                  [--allow-local-ldap-users {false, true}]
+                                  [--backup-operators]
+                                  [--encrypt-dc-conn {false, true}]
+                                  [--force-string]
+                                  [--group-dn]
+                                  [--group-filter]
+                                  [--ids]
+                                  [--kdc-ip]
+                                  [--ldap-over-tls]
+                                  [--ldap-signing {false, true}]
+                                  [--organizational-unit]
+                                  [--remove]
+                                  [--resource-group]
+                                  [--security-operators]
+                                  [--server-root-ca-cert]
+                                  [--set]
+                                  [--user-dn]
+  examples:
+  - summary: Menambahkan direktori aktif ke akun
+    syntax: az netappfiles account ad add -g mygroup --name myname --username aduser --password aduser --smb-server-name SMBSERVER --dns 1.2.3.4 --domain westcentralus
+  requiredParameters:
+  - isRequired: true
+    name: --dns
+    summary: Daftar alamat IP server DNS yang dipisahkan koma untuk domain Direktori Aktif.
+    description: ''
+  - isRequired: true
+    name: --domain
+    summary: Nama domain Direktori Aktif.
+    description: ''
+  - isRequired: true
+    name: --password
+    summary: Kata sandi teks biasa administrator domain Direktori Aktif.
+    description: ''
+  - isRequired: true
+    name: --smb-server-name
+    summary: Nama NetBIOS dari server SMB. Nama ini akan didaftarkan sebagai akun komputer di AD dan digunakan untuk memasang volume. Harus 10 karakter atau kurang.
+    description: ''
+  - isRequired: true
+    name: --nama pengguna
+    summary: Nama pengguna administrator domain Direktori Aktif.
+    description: ''
+  optionalParameters:
+  - name: --account-name --name -a -n
+    summary: Nama akun ANF.
+    description: ''
+  - name: --ad-name
+    summary: Nama komputer direktori aktif. Parameter opsional ini hanya digunakan saat membuat volume kerberos.
+    description: ''
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --administrators
+    summary: Pengguna yang akan ditambahkan ke grup direktori aktif Administrator Bawaan. String nama pengguna unik yang dipisahkan spasi tanpa penentu domain.
+    description: ''
+  - name: --aes-encryption
+    parameterValueGroup: false, true
+    summary: Jika diaktifkan, enkripsi AES akan diaktifkan untuk komunikasi SMB.
+    description: ''
+  - name: --allow-local-ldap-users
+    parameterValueGroup: false, true
+    summary: Jika diaktifkan, pengguna lokal klien NFS juga dapat (selain pengguna LDAP) mengakses volume NFS.
+    description: ''
+  - name: --backup-operators
+    summary: Pengguna yang akan ditambahkan ke grup direktori aktif Operator Cadangan Bawaan. String nama pengguna unik yang dipisahkan spasi tanpa penentu domain.
+    description: ''
+  - name: --encrypt-dc-conn
+    parameterValueGroup: false, true
+    summary: Jika diaktifkan, Lalu lintas antara server SMB ke Pengendali Domain (DC) akan dienkripsi.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --group-dn
+    summary: Ini menentukan grup DN, yang mengambil alih DN dasar untuk pencarian grup.
+    description: ''
+  - name: --group-filter
+    summary: Ini menentukan filter pencarian LDAP kustom yang akan digunakan saat mencari keanggotaan grup dari server LDAP.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --kdc-ip
+    summary: Alamat IP server Kdc untuk komputer direktori aktif. Parameter opsional ini hanya digunakan saat membuat volume kerberos.
+    description: ''
+  - name: --ldap-over-tls
+    summary: Menentukan apakah lalu lintas LDAP perlu diamankan melalui TLS atau tidak.
+    description: ''
+  - name: --ldap-signing
+    parameterValueGroup: false, true
+    summary: Menentukan apakah lalu lintas LDAP perlu ditandatangani atau tidak.
+    description: ''
+  - name: --organizational-unit
+    summary: Unit Organisasi (OU) dalam Windows Active Directory.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --security-operators
+    summary: Pengguna Domain di direktori Aktif yang akan diberikan hak istimewa SeSecurityPrivilege (Diperlukan untuk berbagi SMB yang terus tersedia untuk SQL). Daftar nama pengguna unik yang dipisahkan spasi tanpa penentu domain.
+    description: ''
+  - name: --server-root-ca-cert
+    summary: Ketika LDAP melalui SSL/TLS diaktifkan, klien LDAP diharuskan memiliki sertifikat CA akar Layanan Sertifikat Direktori Aktif yang dikodekan base64, parameter opsional ini hanya digunakan untuk protokol ganda dengan volume pemetaan pengguna LDAP.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --user-dn
+    summary: Ini menentukan DN pengguna, yang mengambil alih DN dasar untuk pencarian pengguna.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/netappfiles/_help.py
+- uid: az_netappfiles_account_ad_list
+  name: az netappfiles account ad list
+  summary: Mencantumkan direktori aktif akun.
+  description: ''
+  syntax: >-
+    az netappfiles account ad list --account-name
+                                   --resource-group
+  examples:
+  - summary: Menambahkan direktori aktif ke akun
+    syntax: az netappfiles account ad list -g mygroup --name myname
+  requiredParameters:
+  - isRequired: true
+    name: --account-name --name -a -n
+    summary: Nama akun ANF.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/netappfiles/_help.py
+- uid: az_netappfiles_account_ad_remove
+  name: az netappfiles account ad remove
+  summary: Hapus direktori aktif dari akun.
+  description: ''
+  syntax: >-
+    az netappfiles account ad remove --active-directory
+                                     [--account-name]
+                                     [--ids]
+                                     [--resource-group]
+  examples:
+  - summary: Menghapus direktori aktif dari akun
+    syntax: az netappfiles account ad remove -g mygroup --name myname --active-directory 13641da9-c0e9-4b97-84fc-4f8014a93848
+  requiredParameters:
+  - isRequired: true
+    name: --active-directory
+    summary: Id direktori aktif.
+    description: ''
+  optionalParameters:
+  - name: --account-name --name -a -n
+    summary: Nama akun ANF.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/netappfiles/_help.py
+- uid: az_netappfiles_account_ad_update
+  name: az netappfiles account ad update
+  summary: Memperbarui direktori aktif ke akun.
+  description: ''
+  syntax: >-
+    az netappfiles account ad update --active-directory-id
+                                     --dns
+                                     --domain
+                                     --password
+                                     --smb-server-name
+                                     --username
+                                     [--account-name]
+                                     [--ad-name]
+                                     [--add]
+                                     [--administrators]
+                                     [--aes-encryption {false, true}]
+                                     [--allow-local-ldap-users {false, true}]
+                                     [--backup-operators]
+                                     [--encrypt-dc-conn {false, true}]
+                                     [--force-string]
+                                     [--group-dn]
+                                     [--group-filter]
+                                     [--ids]
+                                     [--kdc-ip]
+                                     [--ldap-over-tls]
+                                     [--ldap-signing {false, true}]
+                                     [--organizational-unit]
+                                     [--remove]
+                                     [--resource-group]
+                                     [--security-operators]
+                                     [--server-root-ca-cert]
+                                     [--set]
+                                     [--user-dn]
+  examples:
+  - summary: Memperbarui direktori aktif di akun
+    syntax: az netappfiles account ad update -g mygroup --name myname --active-directory-id 123 --username aduser --password aduser --smb-server-name SMBSERVER --dns 1.2.3.4 --domain westcentralus
+  requiredParameters:
+  - isRequired: true
+    name: --active-directory-id
+    summary: Id Direktori Aktif.
+    description: ''
+  - isRequired: true
+    name: --dns
+    summary: Daftar alamat IP server DNS yang dipisahkan koma untuk domain Direktori Aktif.
+    description: ''
+  - isRequired: true
+    name: --domain
+    summary: Nama domain Direktori Aktif.
+    description: ''
+  - isRequired: true
+    name: --password
+    summary: Kata sandi teks biasa administrator domain Direktori Aktif.
+    description: ''
+  - isRequired: true
+    name: --smb-server-name
+    summary: Nama NetBIOS dari server SMB. Nama ini akan didaftarkan sebagai akun komputer di AD dan digunakan untuk memasang volume. Harus 10 karakter atau kurang.
+    description: ''
+  - isRequired: true
+    name: --nama pengguna
+    summary: Nama pengguna administrator domain Direktori Aktif.
+    description: ''
+  optionalParameters:
+  - name: --account-name --name -a -n
+    summary: Nama akun ANF.
+    description: ''
+  - name: --ad-name
+    summary: Nama komputer direktori aktif. Parameter opsional ini hanya digunakan saat membuat volume kerberos.
+    description: ''
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --administrators
+    summary: Pengguna yang akan ditambahkan ke grup direktori aktif Administrator Bawaan. Daftar nama pengguna unik yang dipisahkan spasi tanpa penentu domain.
+    description: ''
+  - name: --aes-encryption
+    parameterValueGroup: false, true
+    summary: Jika diaktifkan, enkripsi AES akan diaktifkan untuk komunikasi SMB.
+    description: ''
+  - name: --allow-local-ldap-users
+    parameterValueGroup: false, true
+    summary: Jika diaktifkan, pengguna lokal klien NFS juga dapat (selain pengguna LDAP) mengakses volume NFS.
+    description: ''
+  - name: --backup-operators
+    summary: Pengguna yang akan ditambahkan ke grup direktori aktif Operator Cadangan Bawaan. Daftar nama pengguna unik yang dipisahkan spasi tanpa penentu domain.
+    description: ''
+  - name: --encrypt-dc-conn
+    parameterValueGroup: false, true
+    summary: Jika diaktifkan, Lalu lintas antara server SMB ke Pengendali Domain (DC) akan dienkripsi.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --group-dn
+    summary: Ini menentukan DN grup, yang menggantikan DN dasar untuk pencarian grup.
+    description: ''
+  - name: --group-filter
+    summary: Ini menentukan filter pencarian LDAP kustom yang akan digunakan saat mencari keanggotaan grup dari server LDAP.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --kdc-ip
+    summary: Alamat IP server Kdc untuk komputer direktori aktif. Parameter opsional ini hanya digunakan saat membuat volume kerberos.
+    description: ''
+  - name: --ldap-over-tls
+    summary: Menentukan apakah lalu lintas LDAP perlu diamankan melalui TLS atau tidak.
+    description: ''
+  - name: --ldap-signing
+    parameterValueGroup: false, true
+    summary: Menentukan apakah lalu lintas LDAP perlu ditandatangani atau tidak.
+    description: ''
+  - name: --organizational-unit
+    summary: Unit Organisasi (OU) dalam Direktori Aktif Windows.
+    description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --security-operators
+    summary: Pengguna Domain di direktori Aktif yang akan diberikan hak istimewa SeSecurityPrivilege (Diperlukan untuk berbagi SMB yang terus tersedia untuk SQL). Daftar nama pengguna unik yang dipisahkan spasi tanpa penentu domain.
+    description: ''
+  - name: --server-root-ca-cert
+    summary: Ketika LDAP melalui SSL/TLS diaktifkan, klien LDAP diharuskan memiliki sertifikat CA akar Layanan Sertifikat Direktori Aktif yang dikodekan base64, parameter opsional ini hanya digunakan untuk protokol ganda dengan volume pemetaan pengguna LDAP.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --user-dn
+    summary: Ini menentukan DN pengguna, yang mengambil alih DN dasar untuk pencarian pengguna.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/netappfiles/_help.py
+commands:
+- az_netappfiles_account_ad_add
+- az_netappfiles_account_ad_list
+- az_netappfiles_account_ad_remove
+- az_netappfiles_account_ad_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/29/2022
+  description: Mengelola direktori aktif Akun Azure NetApp Files (ANF).
+  ms.openlocfilehash: 4cc2880f5d399b969208f1cfd485efd173bb00dc
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141432971"

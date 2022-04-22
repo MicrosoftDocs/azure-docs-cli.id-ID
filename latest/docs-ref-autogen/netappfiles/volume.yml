@@ -1,0 +1,566 @@
+### YamlMime:AzureCLIGroup
+uid: az_netappfiles_volume
+name: volume az netappfiles
+summary: Mengelola Sumber Daya Volume Azure NetApp Files (ANF).
+description: ''
+directCommands:
+- uid: az_netappfiles_volume_create
+  name: az netappfiles volume create
+  summary: Buat volume Azure NetApp Files (ANF) baru. Kebijakan ekspor diterapkan dengan perintah subgrup tetapi perhatikan bahwa volume selalu dibuat dengan kebijakan ekspor default.
+  description: ''
+  syntax: >-
+    az netappfiles volume create --account-name
+                                 --file-path
+                                 --name
+                                 --pool-name
+                                 --resource-group
+                                 --usage-threshold
+                                 --vnet
+                                 [--allowed-clients]
+                                 [--avs-data-store]
+                                 [--backup-enabled {false, true}]
+                                 [--backup-id]
+                                 [--backup-policy-id]
+                                 [--chown-mode]
+                                 [--cifs {false, true}]
+                                 [--cool-access {false, true}]
+                                 [--coolness-period]
+                                 [--default-group-quota]
+                                 [--default-user-quota]
+                                 [--enable-subvolumes]
+                                 [--encryption-key-source]
+                                 [--endpoint-type]
+                                 [--has-root-access]
+                                 [--is-def-quota-enabled {false, true}]
+                                 [--kerberos-enabled {false, true}]
+                                 [--kerberos5-r]
+                                 [--kerberos5-rw]
+                                 [--kerberos5i-r]
+                                 [--kerberos5i-rw]
+                                 [--kerberos5p-r]
+                                 [--kerberos5p-rw]
+                                 [--ldap-enabled {false, true}]
+                                 [--location]
+                                 [--network-features]
+                                 [--policy-enforced {false, true}]
+                                 [--protocol-types]
+                                 [--remote-volume-resource-id]
+                                 [--replication-schedule]
+                                 [--rule-index]
+                                 [--security-style]
+                                 [--service-level {Premium, Standard, Ultra}]
+                                 [--smb-continuously-avl {false, true}]
+                                 [--smb-encryption {false, true}]
+                                 [--snapshot-dir-visible]
+                                 [--snapshot-id]
+                                 [--snapshot-policy-id]
+                                 [--subnet]
+                                 [--tags]
+                                 [--throughput-mibps]
+                                 [--unix-permissions]
+                                 [--unix-read-only {false, true}]
+                                 [--unix-read-write {false, true}]
+                                 [--vault-id]
+                                 [--volume-type]
+  examples:
+  - summary: Membuat volume ANF
+    syntax: az netappfiles volume create -g mygroup --account-name myaccname --pool-name mypoolname --name myvolname -l westus2 --service-level premium --usage-threshold 100 --file-path "unique-file-path" --vnet myvnet --subnet mysubnet --protocol-types NFSv3 NFSv4.1
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun ANF.
+    description: ''
+  - isRequired: true
+    name: --file-path
+    summary: Nilai string alfanumerik panjang 1-80 karakter yang mengidentifikasi berbagi file unik atau titik pemasangan di subnet delegasi target.
+    description: ''
+  - isRequired: true
+    name: --name --volume-name -n -v
+    summary: Nama volume ANF.
+    description: ''
+  - isRequired: true
+    name: --pool-name -p
+    summary: Nama kumpulan ANF.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --usage-threshold
+    summary: Kuota penyimpanan maksimum yang diizinkan untuk sistem file sebagai jumlah bilangan bulat GiB. Min 100 GiB, maks 100TiB".
+    description: ''
+  - isRequired: true
+    name: --vnet
+    summary: ID ARM atau nama vnet untuk volume.
+    description: ''
+  optionalParameters:
+  - name: --allowed-clients
+    summary: Spesifikasi masuk klien sebagai string yang dipisahkan koma dengan CIDR IPv4, alamat host IPv4, dan nama host.
+    description: ''
+  - name: --avs-data-store
+    summary: Menentukan apakah volume diaktifkan untuk tujuan penyimpanan data Azure VMware Solution (AVS). Nilai yang mungkin Diaktifkan dan Dinonaktifkan. Nilai defaultnya adalah Dinonaktifkan.
+    description: ''
+  - name: --backup-enabled
+    parameterValueGroup: false, true
+    summary: Pencadangan Diaktifkan.
+    description: ''
+  - name: --backup-id
+    summary: ID Cadangan. UUID v4 atau pengidentifikasi sumber daya yang digunakan untuk mengidentifikasi Cadangan.
+    description: ''
+  - name: --backup-policy-id
+    summary: ID Sumber Daya Kebijakan Pencadangan.
+    description: ''
+  - name: --chown-mode
+    summary: Parameter ini menentukan siapa yang berwenang untuk mengubah kepemilikan file. dibatasi - Hanya pengguna root yang dapat mengubah kepemilikan file. unrestricted - Pengguna non-root dapat mengubah kepemilikan file yang mereka miliki.
+    description: ''
+  - name: --cifs
+    parameterValueGroup: false, true
+    summary: Memungkinkan protokol NFSv3. Aktifkan hanya untuk volume jenis NFSv3.
+    description: ''
+  - name: --cool-access
+    parameterValueGroup: false, true
+    summary: Menentukan apakah Cool Access(tiering) diaktifkan untuk volume.
+    description: ''
+  - name: --periode-kesejukan
+    summary: Menentukan jumlah hari setelah data yang tidak diakses oleh klien akan dijenjangkan.
+    description: ''
+  - name: --default-group-quota
+    summary: Kuota grup default untuk volume dalam KiB. Jika isDefaultQuotaEnabled diatur, nilai minimum 4 KiB berlaku.
+    description: ''
+  - name: --default-user-quota
+    summary: Kuota pengguna default untuk volume dalam KiB. Jika isDefaultQuotaEnabled diatur, nilai minimum 4 KiB berlaku.
+    description: ''
+  - name: --enable-subvolumes
+    summary: Bendera yang menunjukkan apakah operasi subvolume diaktifkan pada volume. Nilai yang mungkin Diaktifkan dan Dinonaktifkan. Nilai defaultnya adalah Dinonaktifkan.
+    description: ''
+  - name: --encryption-key-source
+    summary: Sumber Kunci Enkripsi.
+    description: ''
+  - name: --endpoint-type
+    summary: Apakah volume adalah sumber ("src") atau tujuan ("dst").
+    description: ''
+  - name: --has-root-access
+    summary: Memiliki akses root ke volume.
+    description: ''
+  - name: --is-def-quota-enabled
+    parameterValueGroup: false, true
+    summary: Menentukan apakah kuota default diaktifkan untuk volume.
+    description: ''
+  - name: --kerberos-enabled
+    parameterValueGroup: false, true
+    summary: Jelaskan apakah volume adalah KerberosEnabled.
+    description: ''
+  - name: --kerberos5-r
+    summary: Akses baca-saja Kerberos5.
+    description: ''
+  - name: --kerberos5-rw
+    summary: Akses baca dan tulis Kerberos5.
+    description: ''
+  - name: --kerberos5i-r
+    summary: Akses Baca saja Kerberos5i.
+    description: ''
+  - name: --kerberos5i-rw
+    summary: Kerberos5i Akses baca dan tulis.
+    description: ''
+  - name: --kerberos5p-r
+    summary: Akses Baca-saja Kerberos5p.
+    description: ''
+  - name: --kerberos5p-rw
+    summary: Akses baca dan tulis Kerberos5p.
+    description: ''
+  - name: --ldap-enabled
+    parameterValueGroup: false, true
+    summary: Menentukan apakah LDAP diaktifkan atau tidak untuk volume NFS tertentu.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --network-features
+    summary: Jaringan dasar, atau fitur Standar tersedia untuk volume. Nilai yang mungkin adalah Dasar dan Standar. Nilai defaultnya adalah Dasar.
+    description: ''
+  - name: --policy-enforced
+    parameterValueGroup: false, true
+    summary: Kebijakan Diberlakukan.
+    description: ''
+  - name: --protocol-type
+    summary: Daftar protokol yang dipisahkan ruang yang dapat digunakan volume, protokol yang tersedia adalah "NFSv4.1", "NFSv3", "CIFS".
+    description: ''
+  - name: --remote-volume-resource-id
+    summary: Id volume volume jarak jauh replikasi (tujuan untuk titik akhir volume "src" dan sumber untuk titik akhir "dst").
+    description: ''
+  - name: --replication-schedule
+    summary: Jadwal replikasi, misalnya "_10minutely, per jam, harian, mingguan, bulanan".
+    description: ''
+  - name: --rule-index
+    summary: Indeks pesanan.
+    description: ''
+  - name: --security-style
+    summary: Gaya keamanan volume.
+    description: ''
+  - name: --tingkat layanan
+    parameterValueGroup: Premium, Standard, Ultra
+    summary: Tingkat layanan.
+    description: ''
+  - name: --smb-continuously-avl
+    parameterValueGroup: false, true
+    summary: Memungkinkan properti berbagi yang terus tersedia untuk volume smb. Hanya berlaku untuk volume SMB. Nilai defaultnya adalah False.
+    description: ''
+  - name: --smb-encryption
+    parameterValueGroup: false, true
+    summary: Mengaktifkan enkripsi untuk data smb3 dalam penerbangan. Hanya berlaku untuk volume SMB/DualProtocol. Untuk digunakan dengan swagger versi 2020-08-01 atau yang lebih baru. Nilai defaultnya adalah False.
+    description: ''
+  - name: --snapshot-dir-visible
+    summary: Jika diaktifkan (true) volume akan berisi direktori .snapshot baca-saja yang menyediakan akses ke setiap rekam jepret volume (default ke true).
+    description: ''
+  - name: --snapshot-id
+    summary: Buat volume yang dibuat dari rekam jepret ini. UUID v4 atau pengidentifikasi sumber daya yang digunakan untuk mengidentifikasi Rekam Jepret. contoh snapshot-id "9760acf5-4638-11e7-9bdb-020073ca3333".
+    description: ''
+  - name: --snapshot-policy-id
+    summary: ResourceId Kebijakan Rekam Jepret.
+    description: ''
+  - name: --subnet
+    defaultValue: default
+    summary: ID ARM atau nama subnet yang didelegasikan untuk vnet. Jika dihilangkan 'default' akan digunakan.
+    description: ''
+  - name: --tags
+    summary: Tag yang dipisahkan spasi dalam `key[=value]` format.
+    description: ''
+  - name: --throughput-mibps
+    summary: Throughput maksimum dalam Mibps yang dapat dicapai oleh volume ini.
+    description: ''
+  - name: --unix-permissions
+    summary: UNIX izin untuk volume NFS yang diterima dalam format oktal 4 digit. Digit pertama memilih atribut SET USER ID(4), set group ID (2) dan sticky (1). Digit kedua memilih izin untuk pemilik file- baca (4), tulis (2) dan jalankan (1). Ketiga memilih izin untuk pengguna lain dalam grup yang sama. yang keempat untuk pengguna lain yang tidak ada dalam grup. 0755 - memberikan izin baca/tulis/eksekusi kepada pemilik dan baca/jalankan ke grup dan pengguna lain.
+    description: ''
+  - name: --unix-read-only
+    parameterValueGroup: false, true
+    summary: Akses baca saja.
+    description: ''
+  - name: --unix-read-write
+    parameterValueGroup: false, true
+    summary: Akses baca dan tulis.
+    description: ''
+  - name: --vault-id
+    summary: ID Sumber Daya Vault.
+    description: ''
+  - name: --volume-type
+    summary: Apakah volume harus berupa volume perlindungan data ("DataProtection"), kosongkan jika ini bukan volume perlindungan data.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/netappfiles/_help.py
+- uid: az_netappfiles_volume_delete
+  name: az netappfiles volume delete
+  summary: Hapus volume ANF yang ditentukan.
+  description: ''
+  syntax: >-
+    az netappfiles volume delete [--account-name]
+                                 [--force-delete {false, true}]
+                                 [--ids]
+                                 [--name]
+                                 [--pool-name]
+                                 [--resource-group]
+  examples:
+  - summary: Menghapus volume ANF
+    syntax: az netappfiles volume delete -g mygroup --account-name myaccname --pool-name mypoolname --name myvolname
+  optionalParameters:
+  - name: --account-name -a
+    summary: Nama akun ANF.
+    description: ''
+  - name: --force-delete
+    parameterValueGroup: false, true
+    summary: Opsi untuk menghapus paksa volume. Akan membersihkan sumber daya yang terhubung ke volume tertentu.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name --volume-name -n -v
+    summary: Nama volume ANF.
+    description: ''
+  - name: --pool-name -p
+    summary: Nama kumpulan ANF.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/netappfiles/_help.py
+- uid: az_netappfiles_volume_list
+  name: az netappfiles volume list
+  summary: Cantumkan Kumpulan ANF untuk akun yang ditentukan.
+  description: ''
+  syntax: >-
+    az netappfiles volume list --account-name
+                               --pool-name
+                               --resource-group
+  examples:
+  - summary: Mencantumkan volume ANF kumpulan
+    syntax: az netappfiles volume list -g mygroup --account-name myaccname --pool-name mypoolname
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun ANF.
+    description: ''
+  - isRequired: true
+    name: --pool-name -p
+    summary: Nama kumpulan ANF.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/netappfiles/_help.py
+- uid: az_netappfiles_volume_pool-change
+  name: az netappfiles volume pool-change
+  summary: Ubah kumpulan untuk volume Azure NetApp Files (ANF).
+  description: ''
+  syntax: >-
+    az netappfiles volume pool-change --new-pool-resource-id
+                                      [--account-name]
+                                      [--ids]
+                                      [--name]
+                                      [--pool-name]
+                                      [--resource-group]
+  examples:
+  - summary: Ini mengubah kumpulan untuk volume myvolname dari mypoolname ke kumpulan dengan Id mynewresourceid
+    syntax: az netappfiles volume pool-change -g mygroup --account-name myaccname --pool-name mypoolname --name myvolname --new-pool-resource-id mynewresourceid
+  requiredParameters:
+  - isRequired: true
+    name: --new-pool-resource-id -d
+    summary: Id sumber daya dari kumpulan ANF baru.
+    description: ''
+  optionalParameters:
+  - name: --account-name -a
+    summary: Nama akun ANF.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name --volume-name -n -v
+    summary: Nama volume ANF.
+    description: ''
+  - name: --pool-name -p
+    summary: Nama kumpulan ANF.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/netappfiles/_help.py
+- uid: az_netappfiles_volume_revert
+  name: az netappfiles volume revert
+  summary: Mengembalikan volume ke salah satu rekam jepretnya.
+  description: Mengembalikan volume ke rekam jepret yang ditentukan dalam isi.
+  syntax: >-
+    az netappfiles volume revert --account-name
+                                 --name
+                                 --pool-name
+                                 --resource-group
+                                 --snapshot-id
+  examples:
+  - summary: Mengembalikan volume ke salah satu rekam jepretnya.
+    syntax: az netappfiles volume revert -g mygroup --account-name myaccname --pool-name mypoolname --name myvolname --snapshot-id 9760acf5-4638-11e7-9bdb-020073ca3333
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun ANF.
+    description: ''
+  - isRequired: true
+    name: --name --volume-name -n -v
+    summary: Nama volume ANF.
+    description: ''
+  - isRequired: true
+    name: --pool-name -p
+    summary: Nama kumpulan ANF.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --snapshot-id -s
+    summary: SnapshotId rekam jepret. UUID v4 digunakan untuk mengidentifikasi Snapshot, contoh "9760acf5-4638-11e7-9bdb-020073ca3333".
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/netappfiles/_help.py
+- uid: az_netappfiles_volume_show
+  name: az netappfiles volume show
+  summary: Dapatkan volume ANF yang ditentukan.
+  description: ''
+  syntax: >-
+    az netappfiles volume show [--account-name]
+                               [--ids]
+                               [--name]
+                               [--pool-name]
+                               [--resource-group]
+  examples:
+  - summary: Mengembalikan properti volume ANF yang diberikan
+    syntax: az netappfiles volume show -g mygroup --account-name myaccname --pool-name mypoolname --name myvolname
+  optionalParameters:
+  - name: --account-name -a
+    summary: Nama akun ANF.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name --volume-name -n -v
+    summary: Nama kumpulan ANF.
+    description: ''
+  - name: --pool-name -p
+    summary: Nama kumpulan ANF.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/netappfiles/_help.py
+- uid: az_netappfiles_volume_update
+  name: az netappfiles volume update
+  summary: Perbarui volume ANF yang ditentukan dengan nilai yang disediakan. Nilai yang tidak ditentukan akan tetap tidak berubah. Kebijakan ekspor diubah/dibuat dengan perintah subgrup.
+  description: ''
+  syntax: >-
+    az netappfiles volume update [--account-name]
+                                 [--add]
+                                 [--backup-enabled {false, true}]
+                                 [--backup-policy-id]
+                                 [--default-group-quota]
+                                 [--default-user-quota]
+                                 [--force-string]
+                                 [--ids]
+                                 [--is-def-quota-enabled {false, true}]
+                                 [--name]
+                                 [--policy-enforced {false, true}]
+                                 [--pool-name]
+                                 [--remove]
+                                 [--resource-group]
+                                 [--service-level {Premium, Standard, Ultra}]
+                                 [--set]
+                                 [--snapshot-policy-id]
+                                 [--tags]
+                                 [--throughput-mibps]
+                                 [--unix-permissions]
+                                 [--usage-threshold]
+                                 [--vault-id]
+  examples:
+  - summary: Memperbarui volume ANF
+    syntax: az netappfiles volume update -g mygroup --account-name myaccname --pool-name mypoolname --name myvolname --service-level ultra --usage-threshold 100 --tags mytag=specialvol
+  optionalParameters:
+  - name: --account-name -a
+    summary: Nama akun ANF.
+    description: ''
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --backup-enabled
+    parameterValueGroup: false, true
+    summary: Pencadangan Diaktifkan.
+    description: ''
+  - name: --backup-policy-id
+    summary: ID Sumber Daya Kebijakan Pencadangan.
+    description: ''
+  - name: --default-group-quota
+    summary: Kuota grup default untuk volume dalam KiB. Jika isDefaultQuotaEnabled diatur, nilai minimum 4 KiB berlaku.
+    description: ''
+  - name: --default-user-quota
+    summary: Kuota pengguna default untuk volume dalam KiB. Jika isDefaultQuotaEnabled diatur, nilai minimum 4 KiB berlaku.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --is-def-quota-enabled
+    parameterValueGroup: false, true
+    summary: Menentukan apakah kuota default diaktifkan untuk volume.
+    description: ''
+  - name: --name --volume-name -n -v
+    summary: Nama volume ANF.
+    description: ''
+  - name: --policy-enforced
+    parameterValueGroup: false, true
+    summary: Kebijakan Pencadangan Diberlakukan.
+    description: ''
+  - name: --pool-name -p
+    summary: Nama kumpulan ANF.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --tingkat layanan
+    parameterValueGroup: Premium, Standard, Ultra
+    summary: Tingkat layanan.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --snapshot-policy-id
+    summary: ResourceId Kebijakan Rekam Jepret.
+    description: ''
+  - name: --tags
+    summary: Tag yang dipisahkan spasi dalam `key[=value]` format.
+    description: ''
+  - name: --throughput-mibps
+    summary: Throughput maksimum dalam Mibps yang dapat dicapai oleh volume ini dan ini akan diterima sebagai input hanya untuk volume qosType manual.
+    description: ''
+  - name: --unix-permissions
+    summary: UNIX izin untuk volume NFS yang diterima dalam format oktal 4 digit. Digit pertama memilih atribut SET USER ID(4), set group ID (2) dan sticky (1). Digit kedua memilih izin untuk pemilik file- baca (4), tulis (2) dan jalankan (1). Ketiga memilih izin untuk pengguna lain dalam grup yang sama. yang keempat untuk pengguna lain yang tidak ada dalam grup. 0755 - memberikan izin baca/tulis/jalankan kepada pemilik dan baca/jalankan ke grup dan pengguna lain.
+    description: ''
+  - name: --usage-threshold
+    summary: Kuota penyimpanan maksimum yang diizinkan untuk sistem file sebagai jumlah bilangan bulat GiB. Min 100 GiB, maks 100TiB.
+    description: ''
+  - name: --vault-id
+    summary: ID Sumber Daya Vault.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/netappfiles/_help.py
+commands:
+- az_netappfiles_volume_backup
+- az_netappfiles_volume_backup_create
+- az_netappfiles_volume_backup_delete
+- az_netappfiles_volume_backup_list
+- az_netappfiles_volume_backup_restore-status
+- az_netappfiles_volume_backup_show
+- az_netappfiles_volume_backup_status
+- az_netappfiles_volume_backup_update
+- az_netappfiles_volume_create
+- az_netappfiles_volume_delete
+- az_netappfiles_volume_export-policy
+- az_netappfiles_volume_export-policy_add
+- az_netappfiles_volume_export-policy_list
+- az_netappfiles_volume_export-policy_remove
+- az_netappfiles_volume_list
+- az_netappfiles_volume_pool-change
+- az_netappfiles_volume_replication
+- az_netappfiles_volume_replication_approve
+- az_netappfiles_volume_replication_re-initialize
+- az_netappfiles_volume_replication_remove
+- az_netappfiles_volume_replication_resume
+- az_netappfiles_volume_replication_status
+- az_netappfiles_volume_replication_suspend
+- az_netappfiles_volume_revert
+- az_netappfiles_volume_show
+- az_netappfiles_volume_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/29/2022
+  description: Mengelola Sumber Daya Volume Azure NetApp Files (ANF).
+  ms.openlocfilehash: a3bc287fc7713a92124bc90e9b6fbc27aa18a3ec
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141441683"

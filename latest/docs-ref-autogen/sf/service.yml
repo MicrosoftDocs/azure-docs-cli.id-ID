@@ -1,0 +1,188 @@
+### YamlMime:AzureCLIGroup
+uid: az_sf_service
+name: az sf service
+summary: Mengelola layanan yang berjalan pada kluster Azure Service Fabric. Hanya mendukung layanan yang disebarkan ARM.
+description: ''
+directCommands:
+- uid: az_sf_service_create
+  name: az sf service create
+  summary: Buat layanan baru di kluster Azure Service Fabric.
+  description: ''
+  syntax: >-
+    az sf service create --application
+                         --cluster-name
+                         --name
+                         --resource-group
+                         --service-type
+                         --state {stateful, stateless}
+                         [--default-move-cost {High, Low, Medium, Zero}]
+                         [--instance-count]
+                         [--min-replica]
+                         [--partition-scheme {named, singleton, uniformInt64}]
+                         [--target-replica]
+  examples:
+  - summary: Buat layanan stateless baru "testApp~testService1" dengan jumlah instans -1 (pada semua simpul).
+    syntax: >-
+      az sf service create -g testRG -c testCluster --application-name testApp --state stateless --service-name testApp~testService \
+        --service-type testStateless --instance-count -1 --partition-scheme singleton
+  - summary: Buat layanan stateful baru "testApp~testService2" dengan target 5 simpul.
+    syntax: >-
+      az sf service create -g testRG -c testCluster --application-name testApp --state stateful --service-name testApp~testService2 \
+        --service-type testStatefulType --min-replica-set-size 3 --target-replica-set-size 5
+  requiredParameters:
+  - isRequired: true
+    name: --application --application-name
+    summary: 'Tentukan nama layanan. Nama aplikasi harus merupakan awalan dari nama layanan, misalnya: appName~serviceName.'
+    description: ''
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Tentukan nama kluster, jika tidak diberikan akan sama dengan nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --name --service-name
+    summary: 'Tentukan nama layanan. Nama aplikasi harus merupakan awalan dari nama layanan, misalnya: appName~serviceName.'
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-type
+    summary: Tentukan nama jenis layanan aplikasi, itu harus ada dalam manifes aplikasi.
+    description: ''
+  - isRequired: true
+    name: --state
+    parameterValueGroup: stateful, stateless
+    summary: Tentukan apakah layanan tanpa status atau stateful.
+    description: ''
+  optionalParameters:
+  - name: --default-move-cost
+    parameterValueGroup: High, Low, Medium, Zero
+    summary: Tentukan biaya default untuk pemindahan. Biaya yang lebih tinggi membuatnya lebih kecil kemungkinan kluster Resource Manager akan memindahkan replika saat mencoba menyeimbangkan kluster.
+    description: ''
+  - name: --instance-count
+    summary: Tentukan jumlah instans untuk layanan stateless. Jika -1 digunakan, itu berarti akan berjalan pada semua simpul.
+    description: ''
+  - name: --min-replica --min-replica-set-size
+    summary: Tentukan ukuran set replika min untuk layanan stateful.
+    description: ''
+  - name: --partition-scheme
+    defaultValue: singleton
+    parameterValueGroup: named, singleton, uniformInt64
+    summary: Tentukan skema partisi apa yang akan digunakan. Partisi database tunggal biasanya digunakan ketika layanan tidak memerlukan perutean tambahan. UniformInt64 berarti bahwa setiap partisi memiliki rentang kunci int64. Dinamai biasanya untuk layanan dengan data yang dapat di-bucket, dalam set terikat. Beberapa contoh umum bidang data yang digunakan sebagai kunci partisi bernama adalah wilayah, kode pos, grup pelanggan, atau batas bisnis lainnya.
+    description: ''
+  - name: --target-replica --target-replica-set-size
+    summary: Tentukan ukuran set replika target untuk layanan stateful.
+    description: ''
+- uid: az_sf_service_delete
+  name: az sf service delete
+  summary: Menghapus layanan.
+  description: ''
+  syntax: >-
+    az sf service delete --application-name
+                         --cluster-name
+                         --name
+                         --resource-group
+  examples:
+  - summary: Menghapus layanan.
+    syntax: az sf service delete -g testRG -c testCluster --application-name testApp --service-name testApp~testService
+  requiredParameters:
+  - isRequired: true
+    name: --application-name
+    summary: Nama sumber daya aplikasi.
+    description: ''
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Tentukan nama kluster, jika tidak diberikan akan sama dengan nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --name --service-name
+    summary: 'Tentukan nama layanan. Nama aplikasi harus merupakan awalan dari nama layanan, misalnya: appName~serviceName.'
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_sf_service_list
+  name: az sf service list
+  summary: Mencantumkan layanan aplikasi tertentu.
+  description: ''
+  syntax: >-
+    az sf service list --application-name
+                       --cluster-name
+                       --resource-group
+  examples:
+  - summary: Mencantumkan layanan.
+    syntax: az sf service list -g testRG -c testCluster --application-name testApp
+  requiredParameters:
+  - isRequired: true
+    name: --application-name
+    summary: Nama sumber daya aplikasi.
+    description: ''
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Tentukan nama kluster, jika tidak diberikan akan sama dengan nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_sf_service_show
+  name: az sf service show
+  summary: Dapatkan layanan.
+  description: ''
+  syntax: >-
+    az sf service show --application-name
+                       --cluster-name
+                       --name
+                       --resource-group
+  examples:
+  - summary: Memperlihatkan properti layanan pada kluster Azure Service Fabric.
+    syntax: az sf service show -g testRG -c testCluster --application-name testApp --service-name testApp~testService
+  requiredParameters:
+  - isRequired: true
+    name: --application-name
+    summary: Nama sumber daya aplikasi.
+    description: ''
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Tentukan nama kluster, jika tidak diberikan akan sama dengan nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --name --service-name
+    summary: 'Tentukan nama layanan. Nama aplikasi harus merupakan awalan dari nama layanan, misalnya: appName~serviceName.'
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+commands:
+- az_sf_service_create
+- az_sf_service_delete
+- az_sf_service_list
+- az_sf_service_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola layanan yang berjalan pada kluster Azure Service Fabric. Hanya mendukung layanan yang disebarkan ARM.
+  ms.openlocfilehash: 2ba04011436ec1780cc810708d4373c6a9d7a2dd
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141127201"

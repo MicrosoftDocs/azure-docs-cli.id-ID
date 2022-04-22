@@ -1,0 +1,541 @@
+### YamlMime:AzureCLIGroup
+uid: az_functionapp
+name: az functionapp
+summary: Mengelola aplikasi fungsi. Untuk menginstal alat Azure Functions Core, lihat https://github.com/Azure/azure-functions-core-tools.
+description: ''
+directCommands:
+- uid: az_functionapp_create
+  name: az functionapp create
+  summary: Buat aplikasi fungsi.
+  description: Nama aplikasi fungsi harus dapat menghasilkan FQDN unik sebagai AppName.azurewebsites.net.
+  syntax: >-
+    az functionapp create --name
+                          --resource-group
+                          --storage-account
+                          [--app-insights]
+                          [--app-insights-key]
+                          [--assign-identity]
+                          [--consumption-plan-location]
+                          [--deployment-container-image-name]
+                          [--deployment-local-git]
+                          [--deployment-source-branch]
+                          [--deployment-source-url]
+                          [--disable-app-insights {false, true}]
+                          [--docker-registry-server-password]
+                          [--docker-registry-server-user]
+                          [--functions-version {2, 3, 4}]
+                          [--os-type {Linux, Windows}]
+                          [--plan]
+                          [--role]
+                          [--runtime]
+                          [--runtime-version]
+                          [--scope]
+                          [--subnet]
+                          [--tags]
+                          [--vnet]
+  examples:
+  - summary: Membuat aplikasi fungsi dasar.
+    syntax: az functionapp create -g MyResourceGroup  -p MyPlan -n MyUniqueAppName -s MyStorageAccount
+  - summary: Buat aplikasi fungsi. (dibuat otomatis)
+    syntax: az functionapp create --consumption-plan-location westus --name MyUniqueAppName --os-type Windows --resource-group MyResourceGroup --runtime dotnet --storage-account MyStorageAccount
+  - summary: Buat aplikasi fungsi menggunakan gambar ACR privat.
+    syntax: az functionapp create -g MyResourceGroup -p MyPlan -n MyUniqueAppName --runtime node --storage-account MyStorageAccount --deployment-container-image-name myacr.azurecr.io/myimage:tag --docker-registry-server-password passw0rd --docker-registry-server-user MyUser
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi fungsi baru.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --storage-account -s
+    summary: Berikan nilai string akun Storage di Grup Sumber Daya yang disediakan. Atau ID Sumber Daya dari Akun Storage di Grup Sumber Daya yang berbeda.
+    description: ''
+  optionalParameters:
+  - name: --app-insights
+    summary: Nama proyek App Insights yang ada untuk ditambahkan ke aplikasi fungsi. Harus berada dalam grup sumber daya yang sama.
+    description: ''
+  - name: --app-insights-key
+    summary: Kunci instrumentasi Insights Aplikasi yang akan ditambahkan.
+    description: ''
+  - name: --assign-identity
+    summary: Terima identitas yang ditetapkan sistem atau pengguna yang dipisahkan oleh spasi. Gunakan '[system]' untuk merujuk identitas yang ditetapkan sistem, atau id sumber daya untuk merujuk identitas yang ditetapkan pengguna. Lihat bantuan untuk contoh selengkapnya.
+    description: ''
+  - name: --consumption-plan-location -c
+    summary: Lokasi geografis tempat aplikasi fungsi akan dihosting. Gunakan `az functionapp list-consumption-locations` untuk melihat lokasi yang tersedia.
+    description: ''
+  - name: --deployment-container-image-name -i
+    summary: Nama gambar kontainer dari Docker Hub, misalnya publisher/image-name:tag.
+    description: ''
+  - name: --deployment-local-git -l
+    summary: Aktifkan git lokal.
+    description: ''
+  - name: --deployment-source-branch -b
+    defaultValue: master
+    summary: Cabang yang akan disebarkan.
+    description: ''
+  - name: --deployment-source-url -u
+    summary: URL repositori Git untuk ditautkan dengan integrasi manual.
+    description: ''
+  - name: --disable-app-insights
+    parameterValueGroup: false, true
+    summary: Nonaktifkan pembuatan sumber daya application insights selama pembuatan functionapp. Tidak ada log yang akan tersedia.
+    description: ''
+  - name: --docker-registry-server-password -w
+    summary: Kata sandi server registri kontainer. Diperlukan untuk registri privat.
+    description: ''
+  - name: --docker-registry-server-user -d
+    summary: Nama pengguna server registri kontainer.
+    description: ''
+  - name: --functions-version
+    parameterValueGroup: 2, 3, 4
+    summary: 'Versi aplikasi fungsi. CATATAN: Ini akan diperlukan memulai siklus rilis berikutnya.'
+    description: ''
+  - name: --os-type
+    parameterValueGroup: Linux, Windows
+    summary: Atur jenis OS untuk aplikasi yang akan dibuat.
+    description: ''
+  - name: --plan -p
+    summary: Nama atau id sumber daya dari paket layanan aplikasi functionapp. Gunakan 'appservice plan create' untuk mendapatkannya. Jika menggunakan paket App Service dari grup sumber daya yang berbeda, id sumber daya lengkap harus digunakan dan bukan nama paket.
+    description: ''
+  - name: --role
+    defaultValue: Contributor
+    summary: Nama peran atau id yang akan dimiliki identitas yang ditetapkan sistem.
+    description: ''
+  - name: --runtime
+    summary: Tumpukan runtime fungsi. Gunakan "az functionapp list-runtimes" untuk memeriksa runtime dan versi yang didukung.
+    description: ''
+  - name: --runtime-version
+    summary: Versi tumpukan runtime fungsi. Tumpukan runtime fungsi. Gunakan "az functionapp list-runtimes" untuk memeriksa runtime dan versi yang didukung.
+    description: ''
+  - name: --cakupan
+    summary: Cakupan yang dapat diakses oleh identitas yang ditetapkan sistem.
+    description: ''
+  - name: --subnet
+    summary: Nama atau ID sumber daya dari subnet yang sudah ada sebelumnya agar aplikasi web bergabung. Argumen --vnet juga diperlukan jika menentukan subnet berdasarkan nama.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --vnet
+    summary: Nama atau ID sumber daya jaringan virtual regional. Jika ada beberapa vnet dengan nama yang sama di berbagai grup sumber daya, gunakan id sumber daya vnet untuk menentukan vnet mana yang akan digunakan. Jika nama vnet digunakan, secara default, vnet dalam grup sumber daya yang sama dengan aplikasi web akan digunakan. Harus digunakan dengan argumen --subnet.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appservice/_help.py
+- uid: az_functionapp_delete
+  name: az functionapp delete
+  summary: Menghapus aplikasi fungsi.
+  description: ''
+  syntax: >-
+    az functionapp delete [--ids]
+                          [--name]
+                          [--resource-group]
+                          [--slot]
+  examples:
+  - summary: Menghapus aplikasi fungsi. (dibuat otomatis)
+    syntax: az functionapp delete --name MyFunctionApp --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi fungsi.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appservice/_help.py
+- uid: az_functionapp_deploy
+  name: az functionapp deploy
+  summary: Menyebarkan artefak yang disediakan ke Azure functionapp.
+  description: ''
+  syntax: >-
+    az functionapp deploy [--async {false, true}]
+                          [--clean {false, true}]
+                          [--ids]
+                          [--ignore-stack {false, true}]
+                          [--name]
+                          [--resource-group]
+                          [--restart {false, true}]
+                          [--slot]
+                          [--src-path]
+                          [--src-url]
+                          [--target-path]
+                          [--timeout]
+                          [--type {ear, jar, lib, startup, static, war, zip}]
+  examples:
+  - summary: Menyebarkan file perang secara asinkron.
+    syntax: az functionapp deploy --resource-group ResouceGroup --name AppName --src-path SourcePath --type war --async true
+  - summary: Menyebarkan file teks statis ke wwwroot/staticfiles/test.txt
+    syntax: az functionapp deploy --resource-group ResouceGroup --name AppName --src-path SourcePath --type static --target-path staticfiles/test.txt
+  optionalParameters:
+  - name: --asinkron
+    parameterValueGroup: false, true
+    summary: Penyebaran asinkron.
+    description: ''
+  - name: --clean
+    parameterValueGroup: false, true
+    summary: Jika true, bersihkan direktori target sebelum menyebarkan file. Nilai default ditentukan berdasarkan jenis artefak.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --ignore-stack
+    parameterValueGroup: false, true
+    summary: Jika true, default khusus tumpukan akan diabaikan.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi fungsi untuk disebarkan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --restart
+    parameterValueGroup: false, true
+    summary: Jika true, aplikasi web akan dimulai ulang setelah penyebaran, nilai defaultnya adalah true. Atur ini ke false jika Anda menyebarkan beberapa artefak dan tidak ingin memulai ulang situs pada penyebaran sebelumnya.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+  - name: --src-path
+    summary: 'Jalur artefak yang akan disebarkan. Misalnya: "myapp.zip" atau "/myworkspace/apps/myapp.war".'
+    description: ''
+  - name: --src-url
+    summary: 'URL artefak. Aplikasi web akan menarik artefak dari URL ini. Misalnya: "http://mysite.com/files/myapp.war?key=123".'
+    description: ''
+  - name: --target-path
+    summary: 'Jalur absolut tempat artefak harus disebarkan. Default ke "home/site/wwwroot/". Misalnya: "/home/site/deployments/tools/", "/home/site/scripts/startup-script.sh".'
+    description: ''
+  - name: --timeout
+    summary: Waktu habis untuk operasi penyebaran dalam milidetik.
+    description: ''
+  - name: --type
+    parameterValueGroup: ear, jar, lib, startup, static, war, zip
+    summary: Digunakan untuk mengambil alih jenis artefak yang sedang disebarkan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appservice/_help.py
+- uid: az_functionapp_list
+  name: az functionapp list
+  summary: Mencantumkan aplikasi fungsi.
+  description: ''
+  syntax: az functionapp list [--resource-group]
+  examples:
+  - summary: Mencantumkan semua aplikasi fungsi di MyResourceGroup.
+    syntax: az functionapp list --resource-group MyResourceGroup
+  - summary: Mencantumkan nama dan status host default untuk semua aplikasi fungsi.
+    syntax: 'az functionapp list --query "[].{hostName: defaultHostName, state: state}"'
+  - summary: Mencantumkan semua aplikasi fungsi yang sedang berjalan.
+    syntax: az functionapp list --query "[?state=='Running']"
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appservice/_help.py
+- uid: az_functionapp_list-consumption-locations
+  name: az functionapp list-consumption-locations
+  summary: Mencantumkan lokasi yang tersedia untuk menjalankan aplikasi fungsi.
+  description: ''
+  syntax: az functionapp list-consumption-locations
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appservice/_help.py
+- uid: az_functionapp_list-runtimes
+  name: az functionapp list-runtimes
+  summary: Mencantumkan tumpukan bawaan yang tersedia yang dapat digunakan untuk aplikasi fungsi.
+  description: ''
+  syntax: az functionapp list-runtimes [--os {linux, windows}]
+  optionalParameters:
+  - name: --os --os-type
+    parameterValueGroup: linux, windows
+    summary: Batasi output hanya untuk runtime windows atau linux.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appservice/_help.py
+- uid: az_functionapp_restart
+  name: az functionapp restart
+  summary: Mulai ulang aplikasi fungsi.
+  description: ''
+  syntax: >-
+    az functionapp restart [--ids]
+                           [--name]
+                           [--resource-group]
+                           [--slot]
+  examples:
+  - summary: Mulai ulang aplikasi fungsi. (dibuat otomatis)
+    syntax: az functionapp restart --name MyFunctionApp --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi fungsi.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appservice/_help.py
+- uid: az_functionapp_show
+  name: az functionapp show
+  summary: Dapatkan detail aplikasi fungsi.
+  description: ''
+  syntax: >-
+    az functionapp show [--ids]
+                        [--name]
+                        [--resource-group]
+                        [--slot]
+  examples:
+  - summary: Dapatkan detail aplikasi fungsi. (dibuat otomatis)
+    syntax: az functionapp show --name MyFunctionApp --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi fungsi.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appservice/_help.py
+- uid: az_functionapp_start
+  name: az functionapp start
+  summary: Memulai aplikasi fungsi.
+  description: ''
+  syntax: >-
+    az functionapp start [--ids]
+                         [--name]
+                         [--resource-group]
+                         [--slot]
+  examples:
+  - summary: Memulai aplikasi fungsi. (dibuat otomatis)
+    syntax: az functionapp start --name MyFunctionApp --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi fungsi.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appservice/_help.py
+- uid: az_functionapp_stop
+  name: az functionapp stop
+  summary: Menghentikan aplikasi fungsi.
+  description: ''
+  syntax: >-
+    az functionapp stop [--ids]
+                        [--name]
+                        [--resource-group]
+                        [--slot]
+  examples:
+  - summary: Menghentikan aplikasi fungsi. (dibuat otomatis)
+    syntax: az functionapp stop --name MyFunctionApp --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi fungsi.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appservice/_help.py
+- uid: az_functionapp_update
+  name: az functionapp update
+  summary: Memperbarui aplikasi fungsi.
+  description: ''
+  syntax: >-
+    az functionapp update [--add]
+                          [--force]
+                          [--force-string]
+                          [--ids]
+                          [--name]
+                          [--plan]
+                          [--remove]
+                          [--resource-group]
+                          [--set]
+                          [--slot]
+  examples:
+  - summary: Memperbarui aplikasi fungsi. (dibuat otomatis)
+    syntax: az functionapp update --name MyFunctionApp --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --force
+    summary: Diperlukan jika mencoba memigrasikan functionapp dari Premium ke Konsumsi --plan.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi fungsi.
+    description: ''
+  - name: --plan
+    summary: Nama atau id sumber daya dari paket untuk memperbarui functionapp.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appservice/_help.py
+commands:
+- az_functionapp_app
+- az_functionapp_app_up
+- az_functionapp_config
+- az_functionapp_config_access-restriction
+- az_functionapp_config_access-restriction_add
+- az_functionapp_config_access-restriction_remove
+- az_functionapp_config_access-restriction_set
+- az_functionapp_config_access-restriction_show
+- az_functionapp_config_appsettings
+- az_functionapp_config_appsettings_delete
+- az_functionapp_config_appsettings_list
+- az_functionapp_config_appsettings_set
+- az_functionapp_config_container
+- az_functionapp_config_container_delete
+- az_functionapp_config_container_set
+- az_functionapp_config_container_show
+- az_functionapp_config_hostname
+- az_functionapp_config_hostname_add
+- az_functionapp_config_hostname_delete
+- az_functionapp_config_hostname_get-external-ip
+- az_functionapp_config_hostname_list
+- az_functionapp_config_set
+- az_functionapp_config_show
+- az_functionapp_config_ssl
+- az_functionapp_config_ssl_bind
+- az_functionapp_config_ssl_create
+- az_functionapp_config_ssl_delete
+- az_functionapp_config_ssl_import
+- az_functionapp_config_ssl_list
+- az_functionapp_config_ssl_show
+- az_functionapp_config_ssl_unbind
+- az_functionapp_config_ssl_upload
+- az_functionapp_cors
+- az_functionapp_cors_add
+- az_functionapp_cors_remove
+- az_functionapp_cors_show
+- az_functionapp_create
+- az_functionapp_delete
+- az_functionapp_deploy
+- az_functionapp_deployment
+- az_functionapp_deployment_container
+- az_functionapp_deployment_container_config
+- az_functionapp_deployment_container_show-cd-url
+- az_functionapp_deployment_list-publishing-credentials
+- az_functionapp_deployment_list-publishing-profiles
+- az_functionapp_deployment_slot
+- az_functionapp_deployment_slot_auto-swap
+- az_functionapp_deployment_slot_create
+- az_functionapp_deployment_slot_delete
+- az_functionapp_deployment_slot_list
+- az_functionapp_deployment_slot_swap
+- az_functionapp_deployment_source
+- az_functionapp_deployment_source_config
+- az_functionapp_deployment_source_config-local-git
+- az_functionapp_deployment_source_config-zip
+- az_functionapp_deployment_source_delete
+- az_functionapp_deployment_source_show
+- az_functionapp_deployment_source_sync
+- az_functionapp_deployment_source_update-token
+- az_functionapp_deployment_user
+- az_functionapp_deployment_user_set
+- az_functionapp_deployment_user_show
+- az_functionapp_devops-pipeline
+- az_functionapp_devops-pipeline_create
+- az_functionapp_function
+- az_functionapp_function_delete
+- az_functionapp_function_keys
+- az_functionapp_function_keys_delete
+- az_functionapp_function_keys_list
+- az_functionapp_function_keys_set
+- az_functionapp_function_show
+- az_functionapp_hybrid-connection
+- az_functionapp_hybrid-connection_add
+- az_functionapp_hybrid-connection_list
+- az_functionapp_hybrid-connection_remove
+- az_functionapp_identity
+- az_functionapp_identity_assign
+- az_functionapp_identity_remove
+- az_functionapp_identity_show
+- az_functionapp_keys
+- az_functionapp_keys_delete
+- az_functionapp_keys_list
+- az_functionapp_keys_set
+- az_functionapp_list
+- az_functionapp_list-consumption-locations
+- az_functionapp_list-runtimes
+- az_functionapp_log
+- az_functionapp_log_deployment
+- az_functionapp_log_deployment_list
+- az_functionapp_log_deployment_show
+- az_functionapp_plan
+- az_functionapp_plan_create
+- az_functionapp_plan_delete
+- az_functionapp_plan_list
+- az_functionapp_plan_show
+- az_functionapp_plan_update
+- az_functionapp_restart
+- az_functionapp_show
+- az_functionapp_start
+- az_functionapp_stop
+- az_functionapp_update
+- az_functionapp_vnet-integration
+- az_functionapp_vnet-integration_add
+- az_functionapp_vnet-integration_list
+- az_functionapp_vnet-integration_remove
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/31/2022
+  description: Mengelola aplikasi fungsi. Untuk menginstal alat Azure Functions Core, lihat https://github.com/Azure/azure-functions-core-tools.
+  ms.openlocfilehash: 80173f2c859f03714bf28b9e8b94ad580118b81b
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141449279"

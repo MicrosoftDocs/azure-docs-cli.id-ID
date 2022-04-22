@@ -1,0 +1,287 @@
+### YamlMime:AzureCLIGroup
+uid: az_sig
+name: az sig
+summary: Mengelola galeri gambar bersama.
+description: ''
+directCommands:
+- uid: az_sig_create
+  name: az sig create
+  summary: Membuat galeri gambar bersama.
+  description: ''
+  syntax: >-
+    az sig create --gallery-name
+                  --resource-group
+                  [--description]
+                  [--location]
+                  [--permissions {Groups, Private}]
+                  [--soft-delete {false, true}]
+                  [--tags]
+  examples:
+  - summary: Membuat galeri gambar bersama
+    syntax: az sig create --resource-group MyResourceGroup --gallery-name MyGallery
+  requiredParameters:
+  - isRequired: true
+    name: --gallery-name -r
+    summary: Nama galeri.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --description
+    summary: Penjabaran dari galeri.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --permissions
+    parameterValueGroup: Groups, Private
+    summary: Properti ini memungkinkan Anda menentukan izin berbagi galeri.
+    description: ''
+  - name: --soft-delete
+    parameterValueGroup: false, true
+    summary: Aktifkan penghapusan sementara untuk sumber daya di galeri ini, memungkinkannya dipulihkan dalam waktu retensi.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+- uid: az_sig_delete
+  name: az sig delete
+  summary: Menghapus Shared Image Gallery.
+  description: ''
+  syntax: >-
+    az sig delete --gallery-name
+                  --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --gallery-name -r
+    summary: Nama galeri.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_sig_list
+  name: az sig list
+  summary: Daftar galeri gambar berbagi.
+  description: ''
+  syntax: az sig list [--resource-group]
+  examples:
+  - summary: Mencantumkan galeri bersama menurut id langganan.
+    syntax: az sig list-shared --location myLocation
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_sig_list-shared
+  name: az sig list-shared
+  summary: Cantumkan semua galeri yang dibagikan langsung ke langganan atau penyewa Anda (pratinjau).
+  description: Cantumkan semua galeri yang dibagikan langsung ke langganan atau penyewa Anda (fitur pratinjau privat, silakan hubungi tim galeri gambar bersama melalui email sigpmdev@microsoft.com untuk mendaftar pratinjau jika Anda tertarik menggunakan fitur ini).
+  syntax: >-
+    az sig list-shared --location
+                       [--shared-to {tenant}]
+  examples:
+  - summary: Daftar galeri yang dibagikan langsung ke langganan Anda di lokasi tertentu
+    syntax: az sig list-shared --location myLocation
+  - summary: Daftar galeri yang dibagikan langsung ke penyewa Anda di lokasi tertentu
+    syntax: az sig list-shared --location myLocation --shared-to tenant
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  optionalParameters:
+  - name: --shared-to
+    parameterValueGroup: tenant
+    summary: Parameter kueri untuk memutuskan galeri bersama apa yang akan diambil saat melakukan operasi daftar. Jika tidak ditentukan, cantumkan menurut id langganan.
+    description: ''
+- uid: az_sig_show
+  name: az sig show
+  summary: Mengambil informasi tentang Shared Image Gallery.
+  description: ''
+  syntax: >-
+    az sig show [--gallery-name]
+                [--ids]
+                [--resource-group]
+                [--select]
+  optionalParameters:
+  - name: --gallery-name -r
+    summary: Nama galeri.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --select
+    summary: Ekspresi pilih untuk diterapkan pada operasi.
+    description: ''
+- uid: az_sig_show-community
+  name: az sig show-community
+  summary: Dapatkan galeri yang telah menjadi komunitas (pratinjau).
+  description: Dapatkan galeri yang telah komunitas (fitur pratinjau pribadi, silakan hubungi tim galeri gambar komunitas melalui email sigpmdev@microsoft.com untuk mendaftar pratinjau jika Anda tertarik menggunakan fitur ini).
+  syntax: >-
+    az sig show-community --location
+                          --public-gallery-name
+  examples:
+  - summary: Dapatkan galeri yang telah menjadi komunitas di lokasi tertentu.
+    syntax: az sig show-community --public-gallery-name publicGalleryName --location myLocation
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --public-gallery-name
+    summary: Nama publik galeri komunitas.
+    description: ''
+- uid: az_sig_show-shared
+  name: az sig show-shared
+  summary: Dapatkan galeri yang telah dibagikan langsung ke langganan atau penyewa Anda (pratinjau).
+  description: Dapatkan galeri yang telah dibagikan langsung ke langganan atau penyewa Anda (fitur pratinjau pribadi, silakan hubungi tim galeri gambar bersama melalui email sigpmdev@microsoft.com untuk mendaftar pratinjau jika Anda tertarik menggunakan fitur ini).
+  syntax: >-
+    az sig show-shared [--gallery-unique-name]
+                       [--ids]
+                       [--location]
+  examples:
+  - summary: Dapatkan galeri yang telah dibagikan langsung ke langganan atau penyewa Anda di lokasi tertentu.
+    syntax: az sig show-shared --gallery-unique-name galleryUniqueName --location myLocation
+  optionalParameters:
+  - name: --gallery-unique-name
+    summary: Nama unik Shared Gallery.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+- uid: az_sig_update
+  name: az sig update
+  summary: Memperbarui galeri gambar berbagi.
+  description: ''
+  syntax: >-
+    az sig update --gallery-name
+                  --resource-group
+                  [--add]
+                  [--force-string]
+                  [--permissions {Groups, Private}]
+                  [--remove]
+                  [--select]
+                  [--set]
+                  [--soft-delete {false, true}]
+  examples:
+  - summary: Mengaktifkan galeri untuk dibagikan ke langganan atau penyewa
+    syntax: >-
+      az sig update --resource-group myresourcegroup --gallery-name mygallery \
+
+      --permissions groups
+  requiredParameters:
+  - isRequired: true
+    name: --gallery-name -r
+    summary: Nama galeri.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --permissions
+    parameterValueGroup: Groups, Private
+    summary: Properti ini memungkinkan Anda menentukan izin berbagi galeri.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --select
+    summary: Ekspresi pilih untuk diterapkan pada operasi.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --soft-delete
+    parameterValueGroup: false, true
+    summary: Aktifkan penghapusan sementara untuk sumber daya di galeri ini, memungkinkannya dipulihkan dalam waktu retensi.
+    description: ''
+commands:
+- az_sig_create
+- az_sig_delete
+- az_sig_gallery-application
+- az_sig_gallery-application_create
+- az_sig_gallery-application_delete
+- az_sig_gallery-application_list
+- az_sig_gallery-application_show
+- az_sig_gallery-application_update
+- az_sig_gallery-application_version
+- az_sig_gallery-application_version_create
+- az_sig_gallery-application_version_delete
+- az_sig_gallery-application_version_list
+- az_sig_gallery-application_version_show
+- az_sig_gallery-application_version_update
+- az_sig_gallery-application_wait
+- az_sig_image-definition
+- az_sig_image-definition_create
+- az_sig_image-definition_delete
+- az_sig_image-definition_list
+- az_sig_image-definition_list-community
+- az_sig_image-definition_list-shared
+- az_sig_image-definition_show
+- az_sig_image-definition_show-community
+- az_sig_image-definition_show-shared
+- az_sig_image-definition_update
+- az_sig_image-version
+- az_sig_image-version_create
+- az_sig_image-version_delete
+- az_sig_image-version_list
+- az_sig_image-version_list-community
+- az_sig_image-version_list-shared
+- az_sig_image-version_show
+- az_sig_image-version_show-community
+- az_sig_image-version_show-shared
+- az_sig_image-version_update
+- az_sig_image-version_wait
+- az_sig_list
+- az_sig_list-shared
+- az_sig_share
+- az_sig_share_add
+- az_sig_share_enable-community
+- az_sig_share_remove
+- az_sig_share_reset
+- az_sig_share_wait
+- az_sig_show
+- az_sig_show-community
+- az_sig_show-shared
+- az_sig_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola galeri gambar bersama.
+  ms.openlocfilehash: 5b4dee5dba907aa5fb1ee047412423c466fb5257
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141127165"
