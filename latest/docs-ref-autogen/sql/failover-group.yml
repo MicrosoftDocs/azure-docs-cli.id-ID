@@ -1,0 +1,249 @@
+### YamlMime:AzureCLIGroup
+uid: az_sql_failover-group
+name: az sql failover-group
+summary: Mengelola Grup Failover SQL.
+description: ''
+directCommands:
+- uid: az_sql_failover-group_create
+  name: az sql failover-group create
+  summary: Menghapus grup failover.
+  description: ''
+  syntax: >-
+    az sql failover-group create --name
+                                 --partner-server
+                                 --resource-group
+                                 --server
+                                 [--add-db]
+                                 [--failover-policy {Automatic, Manual}]
+                                 [--grace-period]
+                                 [--partner-resource-group]
+  examples:
+  - summary: Menghapus grup failover. (dibuat otomatis)
+    syntax: az sql failover-group create --name MyFailoverGroup --partner-server newDb --resource-group MyResourceGroup --server myserver --subscription MySubscription
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Grup Failover.
+    description: ''
+  - isRequired: true
+    name: --partner-server
+    summary: Nama server mitra Grup Failover.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --add-db
+    summary: Daftar database yang akan ditambahkan ke Grup Failover.
+    description: ''
+  - name: --failover-policy
+    defaultValue: Automatic
+    parameterValueGroup: Automatic, Manual
+    summary: Kebijakan failover Grup Failover.
+    description: ''
+  - name: --masa tenggang
+    defaultValue: "1"
+    summary: Interval dalam jam sebelum failover otomatis dimulai jika pemadaman terjadi di server utama. Ini menunjukkan bahwa Azure SQL Database tidak akan memulai failover otomatis sebelum masa tenggang berakhir. Harap dicatat bahwa operasi failover dengan opsi --allow-data-loss dapat menyebabkan hilangnya data karena sifat sinkronisasi asinkron.
+    description: ''
+  - name: --partner-resource-group
+    summary: Nama grup sumber daya server mitra.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_failover-group_delete
+  name: az sql failover-group delete
+  summary: Menghapus grup failover.
+  description: ''
+  syntax: >-
+    az sql failover-group delete --name
+                                 [--ids]
+                                 [--resource-group]
+                                 [--server]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Grup Failover.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_failover-group_list
+  name: az sql failover-group list
+  summary: Membuat daftar grup failover pada sebuah server.
+  description: ''
+  syntax: >-
+    az sql failover-group list [--ids]
+                               [--resource-group]
+                               [--server]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_failover-group_set-primary
+  name: az sql failover-group set-primary
+  summary: Atur yang utama dari grup failover dengan menggagalkan semua database dari server utama saat ini.
+  description: ''
+  syntax: >-
+    az sql failover-group set-primary --name
+                                      [--allow-data-loss]
+                                      [--ids]
+                                      [--resource-group]
+                                      [--server]
+  examples:
+  - summary: Atur yang utama dari grup failover dengan menggagalkan semua database dari server utama saat ini. (dibuat otomatis)
+    syntax: az sql failover-group set-primary --name MyFailoverGroup --resource-group MyResourceGroup --server myserver
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Grup Failover.
+    description: ''
+  optionalParameters:
+  - name: --allow-data-loss
+    summary: Selesaikan failover bahkan jika melakukannya dapat mengakibatkan kehilangan data. Ini akan memungkinkan failover untuk melanjutkan meskipun database utama tidak tersedia.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_failover-group_show
+  name: az sql failover-group show
+  summary: Mendapatkan grup failover.
+  description: ''
+  syntax: >-
+    az sql failover-group show --name
+                               [--ids]
+                               [--resource-group]
+                               [--server]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Grup Failover.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_failover-group_update
+  name: az sql failover-group update
+  summary: Memperbarui grup failover.
+  description: ''
+  syntax: >-
+    az sql failover-group update --name
+                                 [--add]
+                                 [--add-db]
+                                 [--failover-policy {Automatic, Manual}]
+                                 [--force-string]
+                                 [--grace-period]
+                                 [--ids]
+                                 [--remove]
+                                 [--remove-db]
+                                 [--resource-group]
+                                 [--server]
+                                 [--set]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Grup Failover.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --add-db
+    summary: Daftar database yang akan ditambahkan ke Grup Failover.
+    description: ''
+  - name: --failover-policy
+    parameterValueGroup: Automatic, Manual
+    summary: Kebijakan failover Grup Failover.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --masa tenggang
+    summary: Interval dalam jam sebelum failover otomatis dimulai jika pemadaman terjadi di server utama. Ini menunjukkan bahwa Azure SQL Database tidak akan memulai failover otomatis sebelum masa tenggang berakhir. Harap dicatat bahwa operasi failover dengan opsi --allow-data-loss dapat menyebabkan hilangnya data karena sifat sinkronisasi asinkron.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --remove-db
+    summary: Daftar database yang akan dihapus dari Grup Failover.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+commands:
+- az_sql_failover-group_create
+- az_sql_failover-group_delete
+- az_sql_failover-group_list
+- az_sql_failover-group_set-primary
+- az_sql_failover-group_show
+- az_sql_failover-group_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/29/2022
+  description: Mengelola Grup Failover SQL.
+  ms.openlocfilehash: 4fd737dcb9c93a3966a560dd3733bcb2010b7da3
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141416572"

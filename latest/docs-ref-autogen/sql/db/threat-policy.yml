@@ -1,0 +1,152 @@
+### YamlMime:AzureCLIGroup
+uid: az_sql_db_threat-policy
+name: az sql db threat-policy
+summary: Mengelola kebijakan deteksi ancaman database.
+description: ''
+directCommands:
+- uid: az_sql_db_threat-policy_show
+  name: az sql db threat-policy show
+  summary: Mendapatkan kebijakan deteksi ancaman.
+  description: ''
+  syntax: >-
+    az sql db threat-policy show [--ids]
+                                 [--name]
+                                 [--resource-group]
+                                 [--server]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Azure SQL Database.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_db_threat-policy_update
+  name: az sql db threat-policy update
+  summary: Memperbarui kebijakan deteksi ancaman database.
+  description: Jika kebijakan diaktifkan, storage_account atau storage_endpoint dan storage_account_access_key harus ditentukan.
+  syntax: >-
+    az sql db threat-policy update [--add]
+                                   [--disabled-alerts]
+                                   [--email-account-admins]
+                                   [--email-addresses]
+                                   [--force-string]
+                                   [--ids]
+                                   [--name]
+                                   [--remove]
+                                   [--resource-group]
+                                   [--retention-days]
+                                   [--server]
+                                   [--set]
+                                   [--state {Disabled, Enabled, New}]
+                                   [--storage-account]
+                                   [--storage-endpoint]
+                                   [--storage-key]
+  examples:
+  - summary: Aktifkan dengan nama akun penyimpanan.
+    syntax: >-
+      az sql db threat-policy update -g mygroup -s myserver -n mydb \
+          --state Enabled --storage-account mystorage
+  - summary: Aktifkan dengan titik akhir penyimpanan dan kunci.
+    syntax: >-
+      az sql db threat-policy update -g mygroup -s myserver -n mydb \
+          --state Enabled --storage-endpoint https://mystorage.blob.core.windows.net \
+          --storage-key MYKEY==
+  - summary: Nonaktifkan subset jenis pemberitahuan.
+    syntax: >-
+      az sql db threat-policy update -g mygroup -s myserver -n mydb \
+          --disabled-alerts Sql_Injection_Vulnerability Access_Anomaly
+  - summary: Mengonfigurasi penerima email untuk kebijakan.
+    syntax: >-
+      az sql db threat-policy update -g mygroup -s myserver -n mydb \
+          --email-addresses me@examlee.comyou@example.com \
+          --email-account-admins Enabled
+  - summary: Menonaktifkan kebijakan ancaman.
+    syntax: az sql db threat-policy update -g mygroup -s myserver -n mydb --state Disabled
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --disabled-alerts
+    summary: Daftar pemberitahuan yang dinonaktifkan.
+    description: ''
+  - name: --email-account-admins
+    summary: Apakah pemberitahuan dikirim ke administrator akun.
+    description: ''
+  - name: --email-addresses
+    summary: Daftar alamat email tempat pemberitahuan dikirim.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Azure SQL Database.
+    description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --retention-days
+    summary: Jumlah hari untuk menyimpan log deteksi ancaman.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --state
+    parameterValueGroup: Disabled, Enabled, New
+    summary: Status kebijakan deteksi ancaman.
+    description: ''
+  - name: --storage-account
+    summary: Nama akun penyimpanan.
+    description: ''
+  - name: --storage-endpoint
+    summary: Titik akhir akun penyimpanan.
+    description: ''
+  - name: --storage-key
+    summary: Kunci akses untuk akun penyimpanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+commands:
+- az_sql_db_threat-policy_show
+- az_sql_db_threat-policy_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/29/2022
+  description: Mengelola kebijakan deteksi ancaman database.
+  ms.openlocfilehash: 3fbe19d4ee02eb496648118ae58c25b456399f49
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141416716"

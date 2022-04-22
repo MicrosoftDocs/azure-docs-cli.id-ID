@@ -1,0 +1,274 @@
+### YamlMime:AzureCLIGroup
+uid: az_sf_managed-node-type
+name: az sf managed-node-type
+summary: Mengelola jenis node dari kluster terkelola Azure Service Fabric.
+description: ''
+directCommands:
+- uid: az_sf_managed-node-type_create
+  name: az sf managed-node-type create
+  summary: Menghapus kluster terkelola.
+  description: ''
+  syntax: >-
+    az sf managed-node-type create --cluster-name
+                                   --instance-count
+                                   --name
+                                   --resource-group
+                                   [--app-end-port]
+                                   [--app-start-port]
+                                   [--capacity]
+                                   [--data-disk-size]
+                                   [--data-disk-type {Premium_LRS, StandardSSD_LRS, Standard_LRS}]
+                                   [--ephemeral-end-port]
+                                   [--ephemeral-start-port]
+                                   [--is-stateless {false, true}]
+                                   [--multi-place-groups {false, true}]
+                                   [--placement-property]
+                                   [--primary {false, true}]
+                                   [--vm-image-offer]
+                                   [--vm-image-publisher]
+                                   [--vm-image-sku]
+                                   [--vm-image-version]
+                                   [--vm-size]
+  examples:
+  - summary: Buat jenis node utama dengan 5 simpul.
+    syntax: az sf managed-node-type create -g testRG -c testCluster -n pnt --instance-count 5 --primary
+  - summary: Buat jenis node non primer dengan properities, kapasitas, dan port penempatan.
+    syntax: az sf managed-node-type create -g testRG -c testCluster -n snt --instance-count 5 --placement-property NodeColor=Green SomeProperty=5 --capacity ClientConnections=65536 --app-start-port 20575 --app-end-port 20605 --ephemeral-start-port 20606 --ephemeral-end-port 20861
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Tentukan nama kluster, jika tidak diberikan akan sama dengan nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --instance-count
+    summary: Essage = "Jumlah node dalam jenis node.
+    description: ''
+  - isRequired: true
+    name: --name --node-type-name -n
+    summary: Nama jenis node.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --app-end-port --application-end-port
+    summary: Port Akhir Aplikasi dari berbagai port.
+    description: ''
+  - name: --app-start-port --application-start-port
+    summary: Port awal aplikasi dari berbagai port.
+    description: ''
+  - name: --capacity
+    summary: 'Tag kapasitas diterapkan ke simpul dalam jenis node sebagai pasangan kunci/nilai, manajer sumber daya kluster menggunakan tag ini untuk memahami berapa banyak sumber daya yang dimiliki simpul. Memperbarui ini akan menggantikan nilai saat ini.misalnya: --capacity ClientConnections=65536 param2=value2.'
+    description: ''
+  - name: --data-disk-size --disk-size
+    defaultValue: "100"
+    summary: Ukuran disk untuk setiap vm dalam jenis node dalam GB.
+    description: ''
+  - name: --data-disk-type --disk-type
+    parameterValueGroup: Premium_LRS, StandardSSD_LRS, Standard_LRS
+    summary: 'Jenis disk data terkelola. IOPS dan throughput diberikan oleh ukuran disk, untuk melihat informasi selengkapnya, buka https://docs.microsoft.com/azure/virtual-machines/disks-types. StandardSSD_LRSStandard_LRS default: Penyimpanan redundan lokal HDD standar. Terbaik untuk pencadangan, akses non-kritis, dan jarang. StandardSSD_LRS: Penyimpanan redundan lokal SSD standar. Terbaik untuk server web, aplikasi perusahaan yang digunakan dengan ringan dan pengembangan/pengujian. Premium_LRS: Premium penyimpanan redundan lokal SSD. Pilihan terbaik untuk beban kerja yang sensitif terhadap produksi dan kinerja.'
+    description: ''
+  - name: --ephemeral-end-port
+    summary: Port akhir ephemeral dari berbagai port.
+    description: ''
+  - name: --ephemeral-start-port
+    summary: Port awal ephemeral dari berbagai port.
+    description: ''
+  - name: --is-stateless
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah jenis node hanya dapat menghosting beban kerja Stateless.
+    description: ''
+  - name: --multi-place-groups --multiple-placement-groups
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah set skala yang terkait dengan jenis node dapat terdiri dari beberapa grup penempatan.
+    description: ''
+  - name: --placement-property
+    summary: 'Tag penempatan diterapkan ke simpul dalam jenis node sebagai pasangan kunci/nilai, yang dapat digunakan untuk menunjukkan di mana layanan tertentu (beban kerja) harus berjalan. Memperbarui ini akan menggantikan nilai saat ini.misalnya: --placement-property NodeColor=Green SomeProperty=5.'
+    description: ''
+  - name: --primary
+    parameterValueGroup: false, true
+    summary: Tentukan apakah jenis node adalah primer. Pada jenis node ini akan menjalankan layanan sistem. Hanya satu jenis node yang harus ditandai sebagai primer. Jenis node primer tidak dapat dihapus atau diubah untuk kluster yang ada.
+    description: ''
+  - name: --vm-image-offer
+    defaultValue: WindowsServer
+    summary: Jenis penawaran gambar Azure Virtual Machines Marketplace.
+    description: ''
+  - name: --vm-image-publisher
+    defaultValue: MicrosoftWindowsServer
+    summary: Penerbit gambar Azure Virtual Machines Marketplace.
+    description: ''
+  - name: --vm-image-sku
+    defaultValue: 2019-Datacenter
+    summary: SKU gambar Azure Virtual Machines Marketplace.
+    description: ''
+  - name: --vm-image-version
+    defaultValue: latest
+    summary: Versi gambar Azure Virtual Machines Marketplace.
+    description: ''
+  - name: --vm-size
+    defaultValue: Standard_D2
+    summary: Ukuran komputer virtual di kumpulan. Semua komputer virtual dalam satu kumpulan berukuran sama.
+    description: ''
+- uid: az_sf_managed-node-type_delete
+  name: az sf managed-node-type delete
+  summary: Menghapus jenis node dari kluster.
+  description: ''
+  syntax: >-
+    az sf managed-node-type delete --cluster-name
+                                   --name
+                                   --resource-group
+  examples:
+  - summary: Hapus kluster.
+    syntax: az sf managed-node-type delete -g testRG -c testCluster -n snt
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Tentukan nama kluster, jika tidak diberikan akan sama dengan nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --name --node-type-name -n
+    summary: Nama jenis node.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_sf_managed-node-type_list
+  name: az sf managed-node-type list
+  summary: Mencantumkan jenis node dari kluster terkelola.
+  description: ''
+  syntax: >-
+    az sf managed-node-type list --cluster-name
+                                 --resource-group
+  examples:
+  - summary: Mencantumkan jenis node menurut kluster.
+    syntax: az sf managed-node-type list -g testRG -c testCluster
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Tentukan nama kluster, jika tidak diberikan akan sama dengan nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_sf_managed-node-type_show
+  name: az sf managed-node-type show
+  summary: Tampilkan properti jenis node.
+  description: ''
+  syntax: >-
+    az sf managed-node-type show --cluster-name
+                                 --name
+                                 --resource-group
+  examples:
+  - summary: Dapatkan jenis node.
+    syntax: az sf managed-node-type show -g testRG -c testCluster -n pnt
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Tentukan nama kluster, jika tidak diberikan akan sama dengan nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --name --node-type-name -n
+    summary: Nama jenis node.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_sf_managed-node-type_update
+  name: az sf managed-node-type update
+  summary: Memperbarui kluster terkelola.
+  description: ''
+  syntax: >-
+    az sf managed-node-type update --cluster-name
+                                   --name
+                                   --resource-group
+                                   [--app-end-port]
+                                   [--app-start-port]
+                                   [--capacity]
+                                   [--ephemeral-end-port]
+                                   [--ephemeral-start-port]
+                                   [--instance-count]
+                                   [--placement-property]
+  examples:
+  - summary: Perbarui jumlah instans jenis node.
+    syntax: az sf managed-node-type update -g testRG -c testCluster -n snt --instance-count 7
+  - summary: Memperbarui properti penempatan dari jenis node. Ini akan menimpa properti penempatan yang lebih lama jika ada.
+    syntax: az sf managed-node-type update -g testRG -c testCluster -n snt --placement-property NodeColor=Red SomeProperty=6
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Tentukan nama kluster, jika tidak diberikan akan sama dengan nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --name --node-type-name -n
+    summary: Nama jenis node.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --app-end-port --application-end-port
+    summary: Port Akhir Aplikasi dari berbagai port.
+    description: ''
+  - name: --app-start-port --application-start-port
+    summary: Port awal aplikasi dari berbagai port.
+    description: ''
+  - name: --capacity
+    summary: 'Tag kapasitas diterapkan ke simpul dalam jenis node sebagai pasangan kunci/nilai, manajer sumber daya kluster menggunakan tag ini untuk memahami berapa banyak sumber daya yang dimiliki simpul. Memperbarui ini akan menggantikan nilai saat ini.misalnya: --capacity ClientConnections=65536 param2=value2.'
+    description: ''
+  - name: --ephemeral-end-port
+    summary: Port akhir ephemeral dari berbagai port.
+    description: ''
+  - name: --ephemeral-start-port
+    summary: Port awal ephemeral dari berbagai port.
+    description: ''
+  - name: --instance-count
+    summary: Essage = "Jumlah node dalam jenis node.
+    description: ''
+  - name: --placement-property
+    summary: 'Tag penempatan diterapkan ke simpul dalam jenis node sebagai pasangan kunci/nilai, yang dapat digunakan untuk menunjukkan di mana layanan tertentu (beban kerja) harus berjalan. Memperbarui ini akan menggantikan nilai saat ini.misalnya: --placement-property NodeColor=Green SomeProperty=5.'
+    description: ''
+commands:
+- az_sf_managed-node-type_create
+- az_sf_managed-node-type_delete
+- az_sf_managed-node-type_list
+- az_sf_managed-node-type_node
+- az_sf_managed-node-type_node_delete
+- az_sf_managed-node-type_node_reimage
+- az_sf_managed-node-type_node_restart
+- az_sf_managed-node-type_show
+- az_sf_managed-node-type_update
+- az_sf_managed-node-type_vm-extension
+- az_sf_managed-node-type_vm-extension_add
+- az_sf_managed-node-type_vm-extension_delete
+- az_sf_managed-node-type_vm-secret
+- az_sf_managed-node-type_vm-secret_add
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola jenis node dari kluster terkelola Azure Service Fabric.
+  ms.openlocfilehash: 23f77ad6c46273a0157421313747a235992d46f1
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141114871"

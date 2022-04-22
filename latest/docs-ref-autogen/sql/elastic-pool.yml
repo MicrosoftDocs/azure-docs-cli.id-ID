@@ -1,0 +1,342 @@
+### YamlMime:AzureCLIGroup
+uid: az_sql_elastic-pool
+name: az sql elastic-pool
+summary: Mengelola kumpulan elastis.
+description: ''
+directCommands:
+- uid: az_sql_elastic-pool_create
+  name: az sql elastic-pool create
+  summary: Buat kumpulan elastis.
+  description: ''
+  syntax: >-
+    az sql elastic-pool create --name
+                               --resource-group
+                               --server
+                               [--capacity]
+                               [--db-dtu-max]
+                               [--db-dtu-min]
+                               [--edition]
+                               [--family]
+                               [--license-type {BasePrice, LicenseIncluded}]
+                               [--maint-config-id]
+                               [--max-size]
+                               [--no-wait]
+                               [--tags]
+                               [--zone-redundant {false, true}]
+  examples:
+  - summary: Membuat kumpulan elastis dengan redundansi zona diaktifkan
+    syntax: az sql elastic-pool create -g mygroup -s myserver -n mypool -z
+  - summary: Membuat kumpulan elastis dengan redundansi zona yang dinonaktifkan secara eksplisit
+    syntax: az sql elastic-pool create -g mygroup -s myserver -n mypool -z false
+  - summary: Buat kumpulan elastis Standar 100 DTU.
+    syntax: az sql elastic-pool create -g mygroup -s myserver -n mydb -e Standard -c 100
+  - summary: Buat kumpulan elastis dengan edisi GeneralPurpose, perangkat keras Gen4, dan 1 vcore.
+    syntax: az sql elastic-pool create -g mygroup -s myserver -n mydb -e GeneralPurpose -f Gen4 -c 1
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kumpulan elastis.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --capacity --dtu -c
+    summary: Komponen kapasitas sku dalam jumlah bilangan bulat DTU atau vcore.
+    description: ''
+  - name: --db-dtu-max --db-max-capacity --db-max-dtu
+    summary: Kapasitas maksimum (dalam DTU atau vcore) yang dapat digunakan oleh satu database.
+    description: ''
+  - name: --db-dtu-min --db-min-capacity --db-min-dtu
+    summary: Kapasitas minumum (dalam DTU atau vcore) setiap database dijamin.
+    description: ''
+  - name: --edition --tier -e
+    summary: 'Komponen edisi sku. Nilai yang diizinkan meliputi: Dasar, Standar, Premium, GeneralPurpose, BusinessCritical.'
+    description: ''
+  - name: --family -f
+    summary: 'Komponen pembuatan komputasi sku (hanya untuk sku vcore). Nilai yang diizinkan meliputi: Gen4, Gen5.'
+    description: ''
+  - name: --license-type
+    parameterValueGroup: BasePrice, LicenseIncluded
+    summary: Jenis lisensi yang akan diterapkan untuk kumpulan elastis ini.
+    description: ''
+  - name: --maint-config-id -m
+    summary: Id atau nama konfigurasi pemeliharaan yang ditentukan untuk sumber daya ini.
+    description: ''
+  - name: --max-size --storage
+    summary: Ukuran penyimpanan maksimum. Jika tidak ada unit yang ditentukan, default ke byte (B).
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --zone-redundant -z
+    parameterValueGroup: false, true
+    summary: Menentukan apakah akan mengaktifkan redundansi zona.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_elastic-pool_delete
+  name: az sql elastic-pool delete
+  summary: Menghapus kumpulan elastis.
+  description: ''
+  syntax: >-
+    az sql elastic-pool delete [--ids]
+                               [--name]
+                               [--no-wait]
+                               [--resource-group]
+                               [--server]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama kumpulan elastis.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_elastic-pool_list
+  name: az sql elastic-pool list
+  summary: Mendapatkan semua kumpulan elastis di server.
+  description: ''
+  syntax: >-
+    az sql elastic-pool list [--ids]
+                             [--resource-group]
+                             [--server]
+                             [--skip]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  - name: --skip
+    summary: Jumlah elemen dalam koleksi yang akan dilewati.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_elastic-pool_list-dbs
+  name: az sql elastic-pool list-dbs
+  summary: Mendapatkan daftar database dalam kumpulan elastis.
+  description: ''
+  syntax: >-
+    az sql elastic-pool list-dbs [--ids]
+                                 [--name]
+                                 [--resource-group]
+                                 [--server]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama kumpulan elastis.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_elastic-pool_list-editions
+  name: az sql elastic-pool list-editions
+  summary: Mencantumkan edisi kumpulan elastis yang tersedia untuk langganan aktif.
+  description: Termasuk pengaturan DTU kumpulan yang tersedia, batas penyimpanan, dan pengaturan per database. Untuk mengurangi verbositas, batas penyimpanan tambahan dan pengaturan per database disembunyikan secara default.
+  syntax: >-
+    az sql elastic-pool list-editions --location
+                                      [--available]
+                                      [--dtu]
+                                      [--edition]
+                                      [--show-details {db-max-dtu, db-max-size, db-min-dtu, max-size}]
+                                      [--vcores]
+  examples:
+  - summary: Tampilkan semua edisi kumpulan elastis dan batas DTU kumpulan di wilayah US Barat.
+    syntax: az sql elastic-pool list-editions -l westus -o table
+  - summary: Tampilkan semua batas DTU kumpulan untuk edisi Standar di wilayah US Barat.
+    syntax: az sql elastic-pool list-editions -l westus --edition Standard -o table
+  - summary: Tampilkan ukuran maksimum yang tersedia untuk kumpulan elastis dengan setidaknya 100 DTU di wilayah US Barat.
+    syntax: az sql elastic-pool list-editions -l westus --dtu 100 --show-details max-size -o table
+  - summary: Perlihatkan pengaturan per database yang tersedia untuk kumpulan elastis Standar 100 DTU di wilayah US Barat.
+    syntax: az sql elastic-pool list-editions -l westus --edition Standard --dtu 100 -o table --show-details db-min-dtu db-max-dtu db-max-size
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  optionalParameters:
+  - name: --available -a
+    summary: Jika ditentukan, perlihatkan hanya hasil yang tersedia di wilayah yang ditentukan.
+    description: ''
+  - name: --dtu
+    summary: Jumlah DTU yang akan dicari. Jika tidak ditentukan, semua ukuran DTU ditampilkan.
+    description: ''
+  - name: --edition --tier -e
+    summary: Edisi untuk dicari. Jika tidak ditentukan, semua edisi akan ditampilkan.
+    description: ''
+  - name: --show-details -d
+    parameterValueGroup: db-max-dtu, db-max-size, db-min-dtu, max-size
+    summary: Daftar detail tambahan untuk disertakan dalam output.
+    description: ''
+  - name: --vcore
+    summary: Jumlah vcore yang akan dicari. Jika tidak ditentukan, semua ukuran vcore ditampilkan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_elastic-pool_show
+  name: az sql elastic-pool show
+  summary: Mendapat kumpulan elastis.
+  description: ''
+  syntax: >-
+    az sql elastic-pool show [--ids]
+                             [--name]
+                             [--resource-group]
+                             [--server]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama kumpulan elastis.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_elastic-pool_update
+  name: az sql elastic-pool update
+  summary: Memperbarui kumpulan elastis.
+  description: ''
+  syntax: >-
+    az sql elastic-pool update [--add]
+                               [--capacity]
+                               [--db-dtu-max]
+                               [--db-dtu-min]
+                               [--edition]
+                               [--family]
+                               [--force-string]
+                               [--ids]
+                               [--maint-config-id]
+                               [--max-size]
+                               [--name]
+                               [--no-wait]
+                               [--remove]
+                               [--resource-group]
+                               [--server]
+                               [--set]
+                               [--zone-redundant {false, true}]
+  examples:
+  - summary: Memperbarui kumpulan elastis dengan redundansi zona diaktifkan
+    syntax: az sql elastic-pool update -g mygroup -s myserver -n mypool -z
+  - summary: Memperbarui kumpulan elastis dengan redundansi zona yang dinonaktifkan secara eksplisit
+    syntax: az sql elastic-pool update -g mygroup -s myserver -n mypool -z false
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --capacity --dtu -c
+    summary: Komponen kapasitas sku dalam jumlah bilangan bulat DTU atau vcore.
+    description: ''
+  - name: --db-dtu-max --db-max-capacity --db-max-dtu
+    summary: Kapasitas maksimum (dalam DTU atau vcore) yang dapat digunakan oleh satu database.
+    description: ''
+  - name: --db-dtu-min --db-min-capacity --db-min-dtu
+    summary: Kapasitas minumum (dalam DTU atau vcore) setiap database dijamin.
+    description: ''
+  - name: --edition --tier -e
+    summary: 'Komponen edisi sku. Nilai yang diizinkan meliputi: Dasar, Standar, Premium, GeneralPurpose, BusinessCritical.'
+    description: ''
+  - name: --family -f
+    summary: 'Komponen pembuatan komputasi sku (hanya untuk sku vcore). Nilai yang diizinkan meliputi: Gen4, Gen5.'
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --maint-config-id -m
+    summary: Id atau nama konfigurasi pemeliharaan yang ditentukan untuk sumber daya ini.
+    description: ''
+  - name: --max-size --storage
+    summary: Ukuran penyimpanan maksimum. Jika tidak ada unit yang ditentukan, default ke byte (B).
+    description: ''
+  - name: --name -n
+    summary: Nama kumpulan elastis.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --zone-redundant -z
+    parameterValueGroup: false, true
+    summary: Menentukan apakah akan mengaktifkan redundansi zona.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+commands:
+- az_sql_elastic-pool_create
+- az_sql_elastic-pool_delete
+- az_sql_elastic-pool_list
+- az_sql_elastic-pool_list-dbs
+- az_sql_elastic-pool_list-editions
+- az_sql_elastic-pool_op
+- az_sql_elastic-pool_op_cancel
+- az_sql_elastic-pool_op_list
+- az_sql_elastic-pool_show
+- az_sql_elastic-pool_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/29/2022
+  description: Mengelola kumpulan elastis.
+  ms.openlocfilehash: 92b66d1d571fc79ee7ec92b5eeed8bcd62370b35
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141416644"

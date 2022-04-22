@@ -1,0 +1,96 @@
+### YamlMime:AzureCLIGroup
+uid: az_storage_account_keys
+name: az storage account keys
+summary: Mengelola kunci akun penyimpanan.
+description: ''
+directCommands:
+- uid: az_storage_account_keys_list
+  name: daftar kunci akun penyimpanan az
+  summary: Cantumkan kunci akses atau kunci Kerberos (jika direktori aktif diaktifkan) untuk akun penyimpanan.
+  description: ''
+  syntax: >-
+    az storage account keys list --account-name
+                                 [--expand-key-type]
+                                 [--resource-group]
+  examples:
+  - summary: Mencantumkan kunci akses untuk akun penyimpanan.
+    syntax: az storage account keys list -g MyResourceGroup -n MyStorageAccount
+  - summary: Cantumkan kunci akses dan kunci Kerberos (jika direktori aktif diaktifkan) untuk akun penyimpanan.
+    syntax: az storage account keys list -g MyResourceGroup -n MyStorageAccount --expand-key-type kerb
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -n
+    summary: Nama akun penyimpanan.
+    description: ''
+  optionalParameters:
+  - name: --expand-key-type
+    defaultValue: kerb
+    summary: Tentukan jenis kunci yang diperluas yang akan dicantumkan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_account_keys_renew
+  name: pembaruan kunci akun penyimpanan az
+  summary: Regenerasi salah satu kunci akses atau kunci Kerberos (jika direktori aktif diaktifkan) untuk akun penyimpanan.
+  description: Kunci Kerberos dihasilkan per akun penyimpanan untuk autentikasi berbasis identitas Azure Files baik dengan Azure Active Directory Domain Service (Azure AD DS) atau Active Directory Domain Service (AD DS). Ini digunakan sebagai kata sandi identitas yang terdaftar di layanan domain yang mewakili akun penyimpanan. Kunci Kerberos tidak menyediakan izin akses untuk melakukan operasi baca atau tulis sarana data atau kontrol apa pun terhadap akun penyimpanan.
+  syntax: >-
+    az storage account keys renew --account-name
+                                  --key {primary, secondary}
+                                  [--key-type {kerb}]
+                                  [--resource-group]
+  examples:
+  - summary: Regenerasi salah satu kunci akses untuk akun penyimpanan.
+    syntax: az storage account keys renew -g MyResourceGroup -n MyStorageAccount --key primary
+  - summary: Regenerasi salah satu kunci Kerberos untuk akun penyimpanan.
+    syntax: az storage account keys renew -g MyResourceGroup -n MyStorageAccount --key secondary --key-type kerb
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -n
+    summary: Nama akun penyimpanan.
+    description: ''
+  - isRequired: true
+    name: --kunci
+    parameterValueGroup: primary, secondary
+    summary: Opsi utama untuk meregenerasi.
+    description: ''
+  optionalParameters:
+  - name: --key-type
+    parameterValueGroup: kerb
+    summary: Jenis kunci yang akan diregenerasi. Jika --key-type tidak ditentukan, salah satu kunci akses akan diregenerasi secara default.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+commands:
+- az_storage_account_keys_list
+- az_storage_account_keys_renew
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/29/2022
+  description: Mengelola kunci akun penyimpanan.
+  ms.openlocfilehash: 3fa470a2df7696a48a8ee98dd5026d0aada6bccc
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141416392"

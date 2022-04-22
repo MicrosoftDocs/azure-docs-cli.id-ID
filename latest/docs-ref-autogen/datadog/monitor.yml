@@ -1,0 +1,419 @@
+### YamlMime:AzureCLIGroup
+uid: az_datadog_monitor
+name: az datadog monitor
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **datadog** untuk Azure CLI (versi 2.17.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **az datadog monitor** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola pemantauan dengan datadog.
+description: ''
+directCommands:
+- uid: az_datadog_monitor_create
+  name: az datadog monitor create
+  summary: Membuat sumber daya monitor.
+  description: ''
+  syntax: >-
+    az datadog monitor create --monitor-name
+                              --resource-group
+                              [--datadog-organization-properties]
+                              [--location]
+                              [--no-wait]
+                              [--sku-name]
+                              [--tags]
+                              [--type {SystemAssigned, UserAssigned}]
+                              [--user-info]
+  examples:
+  - summary: Monitors_Create
+    syntax: az datadog monitor create --name "myMonitor" --resource-group "myResourceGroup" --location "West US 2" --tags Environment="Dev" --user-info name="Alice" email-address="alice@microsoft.com" phone-number="123-456-7890" --type "SystemAssigned" --sku-name "payg_v2_Monthly"
+  - summary: Memantau pembuatan dengan menautkan ke organisasi Datadogo.
+    syntax: az datadog monitor create --name "myMonitor" --resource-group "myResourceGroup" --location "West US 2" --datadog-organization-properties api-key=XX application-key=XX --tags Environment="Dev" --user-info name="Alice" email-address="alice@microsoft.com" phone-number="123-456-7890" --type "SystemAssigned" --sku-name "Linked"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name --name -n
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --datadog-organization-properties
+    summary: Properti organisasi Datadog.
+    description: >-
+      Penggunaan: --datadog-organization-properties linking-auth-code=XX linking-client-id=XX redirect-uri=XX api-key=XX application-key=XX enterprise-app-id=XX
+
+
+      linking-auth-code: Kode autentikasi yang digunakan untuk menautkan ke organisasi datadog yang ada.
+
+      linking-client-id: Client_id dari yang sudah ada dengan imbalan token autentikasi untuk menautkan organisasi.
+
+      redirect-uri: Uri pengalihan untuk penautan.
+
+      api-key: Kunci api yang terkait dengan organisasi Datadog.
+
+      application-key: Kunci aplikasi yang terkait dengan organisasi Datadog.
+
+      enterprise-app-id: Id Aplikasi Perusahaan yang digunakan untuk Akses menyeluruh.
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --sku-name
+    summary: Nama SKU.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --type
+    parameterValueGroup: SystemAssigned, UserAssigned
+    summary: Jenis identitas.
+    description: ''
+  - name: --user-info
+    summary: Info pengguna.
+    description: >-
+      Penggunaan: --user-info name=XX email-address=XX phone-number=XX
+
+
+      nama: Nama alamat email pengguna: Email pengguna yang digunakan oleh Datadog untuk menghubungi mereka jika diperlukan nomor telepon: Telepon nomor pengguna yang digunakan oleh Datadog untuk menghubungi mereka jika diperlukan.
+- uid: az_datadog_monitor_delete
+  name: az datadog monitor delete
+  summary: Menghapus sumber daya monitor.
+  description: ''
+  syntax: >-
+    az datadog monitor delete --monitor-name
+                              --resource-group
+                              [--no-wait]
+                              [--yes]
+  examples:
+  - summary: Monitors_Delete
+    syntax: az datadog monitor delete --name "myMonitor" --resource-group "myResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name --name -n
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_datadog_monitor_get-default-key
+  name: az datadog monitor get-default-key
+  summary: Dapatkan kunci api default.
+  description: ''
+  syntax: >-
+    az datadog monitor get-default-key --monitor-name
+                                       --resource-group
+  examples:
+  - summary: Monitors_GetDefaultKey
+    syntax: az datadog monitor get-default-key --name "myMonitor" --resource-group "myResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name --name -n
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_datadog_monitor_list
+  name: az datadog monitor list
+  summary: Cantumkan semua monitor di bawah grup sumber daya yang ditentukan. Dan Cantumkan semua monitor di bawah langganan yang ditentukan.
+  description: ''
+  syntax: az datadog monitor list [--resource-group]
+  examples:
+  - summary: Monitors_ListByResourceGroup
+    syntax: az datadog monitor list --resource-group "myResourceGroup"
+  - summary: Monitors_List
+    syntax: az datadog monitor list
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_datadog_monitor_list-api-key
+  name: az datadog monitor list-api-key
+  summary: Mencantumkan kunci api untuk sumber daya monitor tertentu.
+  description: ''
+  syntax: >-
+    az datadog monitor list-api-key --monitor-name
+                                    --resource-group
+  examples:
+  - summary: Monitors_ListApiKeys
+    syntax: az datadog monitor list-api-key --name "myMonitor" --resource-group "myResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name --name -n
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_datadog_monitor_list-host
+  name: az datadog monitor list-host
+  summary: Mencantumkan host untuk sumber daya monitor tertentu.
+  description: ''
+  syntax: >-
+    az datadog monitor list-host --monitor-name
+                                 --resource-group
+  examples:
+  - summary: Monitors_ListHosts
+    syntax: az datadog monitor list-host --name "myMonitor" --resource-group "myResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name --name -n
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_datadog_monitor_list-linked-resource
+  name: az datadog monitor list-linked-resource
+  summary: Cantumkan semua sumber daya Azure yang terkait dengan organisasi Datadog yang sama dengan sumber daya target.
+  description: ''
+  syntax: >-
+    az datadog monitor list-linked-resource --monitor-name
+                                            --resource-group
+  examples:
+  - summary: Monitors_ListLinkedResources
+    syntax: az datadog monitor list-linked-resource --name "myMonitor" --resource-group "myResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name --name -n
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_datadog_monitor_list-monitored-resource
+  name: az datadog monitor list-monitored-resource
+  summary: Cantumkan sumber daya yang saat ini sedang dipantau oleh sumber daya monitor Datadog.
+  description: ''
+  syntax: >-
+    az datadog monitor list-monitored-resource --monitor-name
+                                               --resource-group
+  examples:
+  - summary: Monitors_ListMonitoredResources
+    syntax: az datadog monitor list-monitored-resource --name "myMonitor" --resource-group "myResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name --name -n
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_datadog_monitor_refresh-set-password-link
+  name: az datadog monitor refresh-set-password-link
+  summary: Refresh tautan atur kata sandi dan kembalikan yang terbaru.
+  description: ''
+  syntax: >-
+    az datadog monitor refresh-set-password-link --monitor-name
+                                                 --resource-group
+  examples:
+  - summary: Monitors_RefreshSetPasswordLink
+    syntax: az datadog monitor refresh-set-password-link --name "myMonitor" --resource-group "myResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name --name -n
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_datadog_monitor_set-default-key
+  name: az datadog monitor set-default-key
+  summary: Atur kunci api default.
+  description: ''
+  syntax: >-
+    az datadog monitor set-default-key --monitor-name
+                                       --resource-group
+                                       [--created]
+                                       [--created-by]
+                                       [--key]
+                                       [--name]
+  examples:
+  - summary: Monitors_SetDefaultKey
+    syntax: az datadog monitor set-default-key --monitor-name "myMonitor" --key "1111111111111111aaaaaaaaaaaaaaaa" --resource-group "myResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Waktu pembuatan kunci API.
+    description: ''
+  - name: --created-by
+    summary: Pengguna yang membuat kunci API.
+    description: ''
+  - name: --key
+    summary: Nilai kunci API.
+    description: ''
+  - name: --name
+    summary: Nama kunci API.
+    description: ''
+- uid: az_datadog_monitor_show
+  name: az datadog monitor show
+  summary: Mendapatkan properti sumber daya monitor tertentu.
+  description: ''
+  syntax: >-
+    az datadog monitor show --monitor-name
+                            --resource-group
+  examples:
+  - summary: Monitors_Get
+    syntax: az datadog monitor show --name "myMonitor" --resource-group "myResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name --name -n
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_datadog_monitor_update
+  name: az datadog monitor update
+  summary: Memperbarui sumber daya monitor.
+  description: ''
+  syntax: >-
+    az datadog monitor update --monitor-name
+                              --resource-group
+                              [--monitoring-status]
+                              [--no-wait]
+                              [--sku-name]
+                              [--tags]
+  examples:
+  - summary: Monitors_Update
+    syntax: az datadog monitor update --name "myMonitor" --tags Environment="Dev" --monitoring-status "Disabled" --resource-group "myResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name --name -n
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --monitoring-status
+    summary: 'Bendera yang menentukan apakah pemantauan sumber daya diaktifkan atau dinonaktifkan. Nilai yang diizinkan: "Diaktifkan", "Dinonaktifkan".'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --sku-name
+    summary: Nama SKU.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+- uid: az_datadog_monitor_wait
+  name: az datadog monitor wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi monitor datadog terpenuhi.
+  description: ''
+  syntax: >-
+    az datadog monitor wait --monitor-name
+                            --resource-group
+                            [--created]
+                            [--custom]
+                            [--deleted]
+                            [--exists]
+                            [--interval]
+                            [--timeout]
+                            [--updated]
+  examples:
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga monitor datadog berhasil dibuat.
+    syntax: az datadog monitor wait --name "myMonitor" --resource-group "myResourceGroup" --created
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga monitor datadog berhasil diperbarui.
+    syntax: az datadog monitor wait --name "myMonitor" --resource-group "myResourceGroup" --updated
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga monitor datadog berhasil dihapus.
+    syntax: az datadog monitor wait --name "myMonitor" --resource-group "myResourceGroup" --deleted
+  requiredParameters:
+  - isRequired: true
+    name: --monitor-name --name -n
+    summary: Pantau nama sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_datadog_monitor_create
+- az_datadog_monitor_delete
+- az_datadog_monitor_get-default-key
+- az_datadog_monitor_list
+- az_datadog_monitor_list-api-key
+- az_datadog_monitor_list-host
+- az_datadog_monitor_list-linked-resource
+- az_datadog_monitor_list-monitored-resource
+- az_datadog_monitor_refresh-set-password-link
+- az_datadog_monitor_set-default-key
+- az_datadog_monitor_show
+- az_datadog_monitor_update
+- az_datadog_monitor_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola monitor dengan datadog.
+  ms.openlocfilehash: 715589022785b1d8e3197ea1254fc91a773f8081
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141092515"
