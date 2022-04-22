@@ -1,0 +1,264 @@
+### YamlMime:AzureCLIGroup
+uid: az_iot_central_export
+name: az iot central export
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **azure-iot** untuk Azure CLI (versi 2.24.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az iot central export** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola dan mengonfigurasi ekspor data IoT Central.
+description: ''
+directCommands:
+- uid: az_iot_central_export_create
+  name: az iot central export create
+  summary: Membuat ekspor untuk aplikasi IoT Central.
+  description: ''
+  syntax: >-
+    az iot central export create --app-id
+                                 --destinations
+                                 --display-name
+                                 --export-id
+                                 --source {deviceConnectivity, deviceLifecycle, deviceTemplateLifecycle, properties, telemetry}
+                                 [--api-version {1.1-preview}]
+                                 [--central-api-uri]
+                                 [--en]
+                                 [--enabled {false, true}]
+                                 [--filter]
+                                 [--token]
+  examples:
+  - summary: Membuat ekspor dengan filter, pengayaan, tujuan
+    syntax: >-
+      az iot central export create --app-id {appid} --export-id {exportid} --enabled {enabled} --display-name {displayname} --source {source} --filter "SELECT * FROM devices WHERE $displayName != "abc" AND $id = "a"" --enrichments '{
+        "simulated": {
+          "path": "$simulated"
+        }
+      }' --destinations '[
+        {
+          "id": "{destinationid}",
+          "transform": "{ ApplicationId: .applicationId, Component: .component, DeviceName: .device.name }"
+        }
+      ]'
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --destinations --dests
+    summary: Daftar tujuan dengan transformasi.
+    description: ''
+  - isRequired: true
+    name: --display-name --name
+    summary: Nama tampilan ekspor data.
+    description: ''
+  - isRequired: true
+    name: --export-id --id
+    summary: Pengidentifikasi unik untuk ekspor.
+    description: ''
+  - isRequired: true
+    name: --source -s
+    parameterValueGroup: deviceConnectivity, deviceLifecycle, deviceTemplateLifecycle, properties, telemetry
+    summary: Sumber ekspor data.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: 1.1-preview
+    parameterValueGroup: 1.1-preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --en --enrichments
+    summary: Pengayaan ekspor data.
+    description: ''
+  - name: --enabled -e
+    defaultValue: "1"
+    parameterValueGroup: false, true
+    summary: Status yang diaktifkan untuk ekspor data, Benar atau Salah.
+    description: ''
+  - name: --filter -f
+    summary: 'Filter berbasis Bahasa Kueri IoT Central, detail selengkapnya dari: aka.ms/iotcquery.'
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+- uid: az_iot_central_export_delete
+  name: az iot central export delete
+  summary: Menghapus ekspor untuk aplikasi IoT Central.
+  description: ''
+  syntax: >-
+    az iot central export delete --app-id
+                                 --export-id
+                                 [--api-version {1.1-preview}]
+                                 [--central-api-uri]
+                                 [--token]
+  examples:
+  - summary: Menghapus ekspor
+    syntax: az iot central export delete --app-id {appid} --export-id {exportid}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --export-id --id
+    summary: Pengidentifikasi unik untuk ekspor.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: 1.1-preview
+    parameterValueGroup: 1.1-preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+- uid: az_iot_central_export_list
+  name: az iot central export list
+  summary: Dapatkan daftar lengkap ekspor untuk aplikasi IoT Central.
+  description: ''
+  syntax: >-
+    az iot central export list --app-id
+                               [--api-version {1.1-preview}]
+                               [--central-api-uri]
+                               [--token]
+  examples:
+  - summary: Mencantumkan semua ekspor dalam aplikasi
+    syntax: az iot central export list --app-id {appid}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: 1.1-preview
+    parameterValueGroup: 1.1-preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+- uid: az_iot_central_export_show
+  name: az iot central export show
+  summary: Dapatkan detail ekspor.
+  description: ''
+  syntax: >-
+    az iot central export show --app-id
+                               --export-id
+                               [--api-version {1.1-preview}]
+                               [--central-api-uri]
+                               [--token]
+  examples:
+  - summary: Mendapatkan detail ekspor
+    syntax: az iot central export show --app-id {appid} --export-id {exportid}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --export-id --id
+    summary: Pengidentifikasi unik untuk ekspor.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: 1.1-preview
+    parameterValueGroup: 1.1-preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+- uid: az_iot_central_export_update
+  name: az iot central export update
+  summary: Memperbarui ekspor untuk aplikasi IoT Central.
+  description: Sumber tidak dapat diubah setelah ekspor dibuat.
+  syntax: >-
+    az iot central export update --app-id
+                                 --content
+                                 --export-id
+                                 [--api-version {1.1-preview}]
+                                 [--central-api-uri]
+                                 [--token]
+  examples:
+  - summary: Memperbarui ekspor dari file
+    syntax: az iot central export update --app-id {appid} --export-id {exportid} --content './filepath/payload.json'
+  - summary: Memperbarui nama tampilan ekspor dan mengaktifkan ekspor dari payload json
+    syntax: "az iot central export update --app-id {appid} --export-id {exportid} --content \"{'displayName': 'Updated Export Name', 'enabled': true}\""
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --content -k
+    summary: Definisi ekspor parsial. Sediakan jalur ke file JSON atau JSON yang di-string mentah. [Contoh Jalur File:./path/to/file.json] [Contoh JSON yang di string:{<Export Data JSON>}]. Isi permintaan harus berisi sebagian konten Ekspor.
+    description: ''
+  - isRequired: true
+    name: --export-id --id
+    summary: Pengidentifikasi unik untuk ekspor.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: 1.1-preview
+    parameterValueGroup: 1.1-preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+commands:
+- az_iot_central_export_create
+- az_iot_central_export_delete
+- az_iot_central_export_destination
+- az_iot_central_export_destination_create
+- az_iot_central_export_destination_delete
+- az_iot_central_export_destination_list
+- az_iot_central_export_destination_show
+- az_iot_central_export_destination_update
+- az_iot_central_export_list
+- az_iot_central_export_show
+- az_iot_central_export_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola dan mengonfigurasi ekspor data IoT Central.
+  ms.openlocfilehash: 110752c720e9dde6cdfcc1e7785a7ab6c52c7e4b
+  ms.sourcegitcommit: b179e8c36fc1222f584a3780aaf61c99bf78a40d
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/01/2022
+  ms.locfileid: "141305932"

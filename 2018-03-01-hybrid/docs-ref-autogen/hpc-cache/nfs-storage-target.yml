@@ -1,0 +1,111 @@
+### YamlMime:AzureCLIGroup
+uid: az_hpc-cache_nfs-storage-target
+name: az hpc-cache nfs-storage-target
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **hpc-cache** untuk Azure CLI (versi 2.3.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **az hpc-cache nfs-storage-target** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Perintah untuk membuat target penyimpanan nfs hpc cache.
+description: ''
+directCommands:
+- uid: az_hpc-cache_nfs-storage-target_add
+  name: az hpc-cache nfs-storage-target add
+  summary: Membuat atau memperbarui Target Storage nfs. Operasi ini diizinkan kapan saja, tetapi jika Cache tidak berfungsi atau tidak sehat, pembuatan/modifikasi aktual Storage Target dapat tertunda sampai Cache sehat lagi.
+  description: ''
+  syntax: >-
+    az hpc-cache nfs-storage-target add --cache-name
+                                        --junction
+                                        --name
+                                        --nfs3-target
+                                        --nfs3-usage-model
+                                        --resource-group
+  examples:
+  - summary: StorageTargets_CreateOrUpdate
+    syntax: az hpc-cache nfs-storage-target add --resource-group "scgroup" --cache-name "sc1" --name "st1" --nfs3-target 10.7.0.24 --nfs3-usage-model WRITE_AROUND --junction namespace-path="/nt2" nfs-export="/export/a" target-path="/1" --junction namespace-path="/nt3" nfs-export="/export/b"
+  requiredParameters:
+  - isRequired: true
+    name: --cache-name
+    summary: Nama Cache.
+    description: ''
+  - isRequired: true
+    name: --junction
+    summary: 'Daftar persimpangan namespace cache yang akan ditargetkan untuk asosiasi namespace. Sub parameter berisi: (1) --namespace-path: Jalur namespace pada Cache untuk Target Storage (2) --nfs-export: Ekspor NFS di mana targetPath ada (3) --target-path(Opsional): Jalur di Storage Target tempat titik namespacePath.'
+    description: ''
+  - isRequired: true
+    name: --name
+    summary: Nama Target Storage.
+    description: ''
+  - isRequired: true
+    name: --nfs3-target
+    summary: Alamat IP atau nama host host NFSv3 (misalnya, 10.0.44.44).
+    description: ''
+  - isRequired: true
+    name: --nfs3-usage-model
+    summary: Identifikasi model penggunaan utama yang akan digunakan untuk Target Storage ini. Anda dapat menggunakan perintah `az hpc-cache usage-model list` untuk melihat nama model penggunaan. Untuk detail selengkapnya tentang model penggunaan, silakan lihat https://docs.microsoft.com/azure/hpc-cache/hpc-cache-add-storage?tabs=azure-cli#choose-a-usage-model.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_hpc-cache_nfs-storage-target_update
+  name: az hpc-cache nfs-storage-target update
+  summary: Membuat atau memperbarui Target Storage nfs. Operasi ini diizinkan kapan saja, tetapi jika Cache tidak berfungsi atau tidak sehat, pembuatan/modifikasi aktual Storage Target dapat tertunda sampai Cache sehat lagi.
+  description: ''
+  syntax: >-
+    az hpc-cache nfs-storage-target update --cache-name
+                                           --name
+                                           --resource-group
+                                           [--junction]
+                                           [--nfs3-target]
+                                           [--nfs3-usage-model]
+  requiredParameters:
+  - isRequired: true
+    name: --cache-name
+    summary: Nama Cache.
+    description: ''
+  - isRequired: true
+    name: --name
+    summary: Nama Target Storage.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --junction
+    summary: 'Daftar persimpangan namespace cache yang akan ditargetkan untuk asosiasi namespace. Sub parameter berisi: (1) --namespace-path: Jalur namespace pada Cache untuk Target Storage (2) --nfs-export: Ekspor NFS di mana targetPath ada (3) --target-path(Opsional): Jalur di Storage Target tempat titik namespacePath.'
+    description: ''
+  - name: --nfs3-target
+    summary: Alamat IP atau nama host host NFSv3 (misalnya, 10.0.44.44).
+    description: ''
+  - name: --nfs3-usage-model
+    summary: Identifikasi model penggunaan utama yang akan digunakan untuk Target Storage ini. Anda dapat menggunakan perintah `az hpc-cache usage-model list` untuk melihat nama model penggunaan. Untuk detail selengkapnya tentang model penggunaan, silakan lihat https://docs.microsoft.com/azure/hpc-cache/hpc-cache-add-storage?tabs=azure-cli#choose-a-usage-model.
+    description: ''
+commands:
+- az_hpc-cache_nfs-storage-target_add
+- az_hpc-cache_nfs-storage-target_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Perintah untuk membuat target penyimpanan nfs hpc cache.
+  ms.openlocfilehash: 47647f8bf5e7d727a6382141e3fe27bad12f3a72
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141065425"

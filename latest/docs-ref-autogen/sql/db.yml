@@ -1,0 +1,938 @@
+### YamlMime:AzureCLIGroup
+uid: az_sql_db
+name: az sql db
+summary: Mengelola database.
+description: ''
+directCommands:
+- uid: az_sql_db_copy
+  name: az sql db copy
+  summary: Membuat salinan database.
+  description: Daftar lengkap opsi tingkat performa dapat dilihat dengan mengeksekusi `az sql db list-editions -a -o table -l LOCATION`. Database tujuan salin harus memiliki edisi yang sama dengan database sumber, tetapi Anda bisa mengubah edisi setelah salinan selesai.
+  syntax: >-
+    az sql db copy --dest-name
+                   [--auto-pause-delay]
+                   [--backup-storage-redundancy]
+                   [--capacity]
+                   [--compute-model {Provisioned, Serverless}]
+                   [--dest-resource-group]
+                   [--dest-server]
+                   [--elastic-pool]
+                   [--family]
+                   [--ha-replicas]
+                   [--ids]
+                   [--license-type {BasePrice, LicenseIncluded}]
+                   [--min-capacity]
+                   [--name]
+                   [--no-wait]
+                   [--read-scale {Disabled, Enabled}]
+                   [--resource-group]
+                   [--server]
+                   [--service-objective]
+                   [--tags]
+                   [--zone-redundant {false, true}]
+  examples:
+  - summary: Buat database dengan tingkat performa S0 sebagai salinan database Standar yang sudah ada.
+    syntax: az sql db copy -g mygroup -s myserver -n originalDb --dest-name newDb --service-objective S0
+  - summary: Buat database dengan edisi GeneralPurpose, perangkat keras Gen4, dan 1 vcore sebagai salinan database GeneralPurpose yang ada.
+    syntax: az sql db copy -g mygroup -s myserver -n originalDb --dest-name newDb -f Gen4 -c 1
+  - summary: Membuat database dengan redundansi penyimpanan cadangan lokal sebagai salinan database yang sudah ada
+    syntax: az sql db copy -g mygroup -s myserver -n originalDb --dest-name newDb --backup-storage-redundancy Local
+  requiredParameters:
+  - isRequired: true
+    name: --dest-name
+    summary: Nama database yang akan dibuat sebagai tujuan penyalinan.
+    description: ''
+  optionalParameters:
+  - name: --auto-jeuse-delay
+    summary: Waktu dalam menit setelah database dijeda secara otomatis. Nilai -1 berarti bahwa jeda otomatis dinonaktifkan.
+    description: ''
+  - name: --backup-storage-redundancy --bsr
+    summary: 'Redundansi penyimpanan cadangan yang digunakan untuk menyimpan cadangan. Nilai yang diizinkan meliputi: Lokal, Zona, Geo.'
+    description: ''
+  - name: --capacity -c
+    summary: Komponen kapasitas sku dalam jumlah bilangan bulat DTU atau vcore.
+    description: ''
+  - name: --compute-model
+    parameterValueGroup: Provisioned, Serverless
+    summary: Model komputasi database.
+    description: ''
+  - name: --dest-resource-group
+    summary: Nama grup sumber daya untuk membuat salinan. Jika tidak ditentukan, default ke grup sumber daya asal.
+    description: ''
+  - name: --dest-server
+    summary: Nama server untuk membuat salinan. Jika tidak ditentukan, default ke server asal.
+    description: ''
+  - name: --elastic-pool
+    summary: Nama atau id sumber daya kumpulan elastis untuk membuat database.
+    description: ''
+  - name: --family -f
+    summary: 'Komponen pembuatan komputasi sku (hanya untuk sku vcore). Nilai yang diizinkan meliputi: Gen4, Gen5.'
+    description: ''
+  - name: --ha-replicas --read-replicas
+    summary: Jumlah replika ketersediaan tinggi yang akan disediakan untuk database. Hanya dapat diatur untuk edisi Hyperscale.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --license-type
+    parameterValueGroup: BasePrice, LicenseIncluded
+    summary: Jenis lisensi yang akan diterapkan untuk database ini. LicenseIncluded jika Anda memerlukan lisensi, atau BasePrice jika Anda memiliki lisensi dan memenuhi syarat untuk Azure Hybrid Benefit.
+    description: ''
+  - name: --min-capacity
+    summary: Kapasitas minimal yang akan selalu dialokasikan database, jika tidak dijeda.
+    description: ''
+  - name: --name -n
+    summary: Nama Azure SQL Database.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --read-scale
+    parameterValueGroup: Disabled, Enabled
+    summary: Jika diaktifkan, koneksi yang memiliki niat aplikasi diatur ke readonly dalam string koneksinya dapat dirutekan ke replika sekunder baca-saja. Properti ini hanya dapat diatur untuk database Premium dan Business Critical.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  - name: --service-objective
+    summary: 'Tujuan layanan untuk database baru. Misalnya: Dasar, S0, P1, GP_Gen4_1, GP_Gen5_S_8, BC_Gen5_2, HS_Gen5_32.'
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --zone-redundant -z
+    parameterValueGroup: false, true
+    summary: Menentukan apakah akan mengaktifkan redundansi zona.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_db_create
+  name: buat az sql db
+  summary: Membuat database.
+  description: Daftar lengkap opsi tingkat performa dapat dilihat dengan mengeksekusi `az sql db list-editions -a -o table -l LOCATION`.
+  syntax: >-
+    az sql db create --name
+                     --resource-group
+                     --server
+                     [--auto-pause-delay]
+                     [--backup-storage-redundancy]
+                     [--capacity]
+                     [--catalog-collation {DATABASE_DEFAULT, SQL_Latin1_General_CP1_CI_AS}]
+                     [--collation]
+                     [--compute-model {Provisioned, Serverless}]
+                     [--edition]
+                     [--elastic-pool]
+                     [--family]
+                     [--ha-replicas]
+                     [--ledger-on {Disabled, Enabled}]
+                     [--license-type {BasePrice, LicenseIncluded}]
+                     [--maint-config-id]
+                     [--max-size]
+                     [--min-capacity]
+                     [--no-wait]
+                     [--read-scale {Disabled, Enabled}]
+                     [--sample-name {AdventureWorksLT}]
+                     [--service-objective]
+                     [--tags]
+                     [--yes]
+                     [--zone-redundant {false, true}]
+  examples:
+  - summary: Membuat database S0 Standar.
+    syntax: az sql db create -g mygroup -s myserver -n mydb --service-objective S0
+  - summary: Membuat database dengan edisi GeneralPurpose, perangkat keras Gen4, dan 1 vcore
+    syntax: az sql db create -g mygroup -s myserver -n mydb -e GeneralPurpose -f Gen4 -c 1
+  - summary: Membuat database dengan redundansi zona diaktifkan
+    syntax: az sql db create -g mygroup -s myserver -n mydb -z
+  - summary: Membuat database dengan redundansi zona yang dinonaktifkan secara eksplisit
+    syntax: az sql db create -g mygroup -s myserver -n mydb -z false
+  - summary: Membuat database generalPurpose Gen5 2 vcore tanpa server dengan penundaan jeda otomatis 120 menit
+    syntax: az sql db create -g mygroup -s myserver -n mydb -e GeneralPurpose -f Gen5 -c 2 --compute-model Serverless --auto-pause-delay 120
+  - summary: Membuat database Hyperscale Gen5 2 vcore dengan 2 replika baca
+    syntax: az sql db create -g mygroup -s myserver -n mydb -e Hyperscale -f Gen5 -c 2 --read-replicas 2
+  - summary: Membuat database GeneralPurpose dengan penyimpanan cadangan redundan secara lokal
+    syntax: az sql db create -g mygroup -s myserver -n mydb -e GeneralPurpose --backup-storage-redundancy Local
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Azure SQL Database.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --auto-jeuse-delay
+    summary: Waktu dalam menit setelah database dijeda secara otomatis. Nilai -1 berarti bahwa jeda otomatis dinonaktifkan.
+    description: ''
+  - name: --backup-storage-redundancy --bsr
+    summary: 'Redundansi penyimpanan cadangan yang digunakan untuk menyimpan cadangan. Nilai yang diizinkan meliputi: Lokal, Zona, Geo.'
+    description: ''
+  - name: --capacity -c
+    summary: Komponen kapasitas sku dalam jumlah bilangan bulat DTU atau vcore.
+    description: ''
+  - name: --catalog-collation
+    parameterValueGroup: DATABASE_DEFAULT, SQL_Latin1_General_CP1_CI_AS
+    summary: Kolate katalog metadata.
+    description: ''
+  - name: --collation
+    summary: Kolae database.
+    description: ''
+  - name: --compute-model
+    parameterValueGroup: Provisioned, Serverless
+    summary: Model komputasi database.
+    description: ''
+  - name: --edition --tier -e
+    summary: 'Komponen edisi sku. Nilai yang diizinkan meliputi: Dasar, Standar, Premium, GeneralPurpose, BusinessCritical, Hyperscale.'
+    description: ''
+  - name: --elastic-pool
+    summary: Nama atau id sumber daya kumpulan elastis untuk membuat database.
+    description: ''
+  - name: --family -f
+    summary: 'Komponen pembuatan komputasi sku (hanya untuk sku vcore). Nilai yang diizinkan meliputi: Gen4, Gen5.'
+    description: ''
+  - name: --ha-replicas --read-replicas
+    summary: Jumlah replika ketersediaan tinggi yang akan disediakan untuk database. Hanya dapat diatur untuk edisi Hyperscale.
+    description: ''
+  - name: --ledger-on
+    parameterValueGroup: Disabled, Enabled
+    summary: 'Buat database ledger, di mana integritas semua data dilindungi oleh fitur ledger. Semua tabel dalam database ledger harus berupa tabel ledger. Catatan: nilai properti ini tidak dapat diubah setelah database dibuat.'
+    description: ''
+  - name: --license-type
+    parameterValueGroup: BasePrice, LicenseIncluded
+    summary: Jenis lisensi yang akan diterapkan untuk database ini. LicenseIncluded jika Anda memerlukan lisensi, atau BasePrice jika Anda memiliki lisensi dan memenuhi syarat untuk Azure Hybrid Benefit.
+    description: ''
+  - name: --maint-config-id -m
+    summary: Id atau nama konfigurasi pemeliharaan yang ditentukan untuk sumber daya ini.
+    description: ''
+  - name: --max-size
+    summary: Ukuran penyimpanan maksimum. Jika tidak ada unit yang ditentukan, default ke byte (B).
+    description: ''
+  - name: --min-capacity
+    summary: Kapasitas minimal yang akan selalu dialokasikan database, jika tidak dijeda.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --read-scale
+    parameterValueGroup: Disabled, Enabled
+    summary: Jika diaktifkan, koneksi yang memiliki niat aplikasi diatur ke readonly dalam string koneksinya dapat dirutekan ke replika sekunder baca-saja. Properti ini hanya dapat diatur untuk database Premium dan Business Critical.
+    description: ''
+  - name: --sample-name
+    parameterValueGroup: AdventureWorksLT
+    summary: Nama skema sampel yang akan diterapkan saat membuat database ini.
+    description: ''
+  - name: --service-objective
+    summary: 'Tujuan layanan untuk database baru. Misalnya: Dasar, S0, P1, GP_Gen4_1, GP_Gen5_S_8, BC_Gen5_2, HS_Gen5_32.'
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  - name: --zone-redundant -z
+    parameterValueGroup: false, true
+    summary: Menentukan apakah akan mengaktifkan redundansi zona.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_db_delete
+  name: az sql db menghapus
+  summary: Menghapus database.
+  description: ''
+  syntax: >-
+    az sql db delete [--ids]
+                     [--name]
+                     [--no-wait]
+                     [--resource-group]
+                     [--server]
+                     [--yes]
+  examples:
+  - summary: Menghapus database. (dibuat otomatis)
+    syntax: az sql db delete --name MyAzureSQLDatabase --resource-group MyResourceGroup --server myserver
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Azure SQL Database.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_db_export
+  name: ekspor az sql db
+  summary: Ekspor database ke bacpac.
+  description: ''
+  syntax: >-
+    az sql db export --admin-password
+                     --admin-user
+                     --storage-key
+                     --storage-key-type {SharedAccessKey, StorageAccessKey}
+                     --storage-uri
+                     [--auth-type {ADPassword, SQL}]
+                     [--ids]
+                     [--name]
+                     [--resource-group]
+                     [--server]
+  examples:
+  - summary: Dapatkan kunci SAS untuk digunakan dalam operasi ekspor.
+    syntax: >-
+      az storage blob generate-sas --account-name myAccountName -c myContainer -n myBacpac.bacpac \
+          --permissions w --expiry 2018-01-01T00:00:00Z
+  - summary: Ekspor bacpac menggunakan kunci SAS.
+    syntax: >-
+      az sql db export -s myserver -n mydatabase -g mygroup -p password -u login \
+          --storage-key "?sr=b&sp=rw&se=2018-01-01T00%3A00%3A00Z&sig=mysignature&sv=2015-07-08" \
+          --storage-key-type SharedAccessKey \
+          --storage-uri https://myAccountName.blob.core.windows.net/myContainer/myBacpac.bacpac
+  - summary: Ekspor bacpac menggunakan kunci akun penyimpanan.
+    syntax: >-
+      az sql db export -s myserver -n mydatabase -g mygroup -p password -u login \
+          --storage-key MYKEY== --storage-key-type StorageAccessKey \
+          --storage-uri https://myAccountName.blob.core.windows.net/myContainer/myBacpac.bacpac
+  requiredParameters:
+  - isRequired: true
+    name: --admin-password -p
+    summary: Wajib diisi. Kata sandi masuk administrator.
+    description: ''
+  - isRequired: true
+    name: --admin-user -u
+    summary: Wajib diisi. Nama login administrator.
+    description: ''
+  - isRequired: true
+    name: --storage-key
+    summary: Wajib diisi. Storage kunci.
+    description: ''
+  - isRequired: true
+    name: --storage-key-type
+    parameterValueGroup: SharedAccessKey, StorageAccessKey
+    summary: Wajib diisi. Storage jenis kunci.
+    description: ''
+  - isRequired: true
+    name: --storage-uri
+    summary: Wajib diisi. Storage Uri.
+    description: ''
+  optionalParameters:
+  - name: --auth-type -a
+    parameterValueGroup: ADPassword, SQL
+    summary: Jenis autentikasi.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Azure SQL Database.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_db_import
+  name: az sql db import
+  summary: Mengimpor bacpac ke database yang sudah ada.
+  description: ''
+  syntax: >-
+    az sql db import --admin-password
+                     --admin-user
+                     --storage-key
+                     --storage-key-type {SharedAccessKey, StorageAccessKey}
+                     --storage-uri
+                     [--auth-type {ADPassword, SQL}]
+                     [--ids]
+                     [--name]
+                     [--resource-group]
+                     [--server]
+  examples:
+  - summary: Dapatkan kunci SAS untuk digunakan dalam operasi impor.
+    syntax: >-
+      az storage blob generate-sas --account-name myAccountName -c myContainer -n myBacpac.bacpac \
+          --permissions r --expiry 2018-01-01T00:00:00Z
+  - summary: Impor bacpac ke database yang sudah ada menggunakan kunci SAS.
+    syntax: >-
+      az sql db import -s myserver -n mydatabase -g mygroup -p password -u login \
+          --storage-key "?sr=b&sp=rw&se=2018-01-01T00%3A00%3A00Z&sig=mysignature&sv=2015-07-08" \
+          --storage-key-type SharedAccessKey \
+          --storage-uri https://myAccountName.blob.core.windows.net/myContainer/myBacpac.bacpac
+  - summary: Impor bacpac ke database yang sudah ada menggunakan kunci akun penyimpanan.
+    syntax: >-
+      az sql db import -s myserver -n mydatabase -g mygroup -p password -u login --storage-key MYKEY== \
+          --storage-key-type StorageAccessKey \
+          --storage-uri https://myAccountName.blob.core.windows.net/myContainer/myBacpac.bacpac
+  requiredParameters:
+  - isRequired: true
+    name: --admin-password -p
+    summary: Wajib diisi. Kata sandi masuk administrator.
+    description: ''
+  - isRequired: true
+    name: --admin-user -u
+    summary: Wajib diisi. Nama login administrator.
+    description: ''
+  - isRequired: true
+    name: --storage-key
+    summary: Wajib diisi. Storage kunci.
+    description: ''
+  - isRequired: true
+    name: --storage-key-type
+    parameterValueGroup: SharedAccessKey, StorageAccessKey
+    summary: Wajib diisi. Storage jenis kunci.
+    description: ''
+  - isRequired: true
+    name: --storage-uri
+    summary: Wajib diisi. Storage Uri.
+    description: ''
+  optionalParameters:
+  - name: --auth-type -a
+    parameterValueGroup: ADPassword, SQL
+    summary: Jenis autentikasi.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Azure SQL Database.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_db_list
+  name: az sql db daftar
+  summary: Mencantumkan database di server atau kumpulan elastis.
+  description: ''
+  syntax: >-
+    az sql db list [--elastic-pool]
+                   [--ids]
+                   [--resource-group]
+                   [--server]
+  examples:
+  - summary: Mencantumkan database di server atau kumpulan elastis. (dibuat otomatis)
+    syntax: az sql db list --resource-group MyResourceGroup --server myserver
+  optionalParameters:
+  - name: --elastic-pool
+    summary: Jika ditentukan, hanya mencantumkan database dalam kumpulan elastis ini.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_db_list-deleted
+  name: az sql db list-deleted
+  summary: Mendapatkan daftar database yang dihilangkan yang dapat dicabut.
+  description: ''
+  syntax: >-
+    az sql db list-deleted [--ids]
+                           [--resource-group]
+                           [--server]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_db_list-editions
+  name: az sql db daftar-edisi
+  summary: Perlihatkan edisi database yang tersedia untuk langganan yang saat ini aktif.
+  description: Termasuk tujuan layanan dan batas penyimpanan yang tersedia. Untuk mengurangi verbositas, pengaturan untuk dengan sengaja mengurangi batas penyimpanan disembunyikan secara default.
+  syntax: >-
+    az sql db list-editions --location
+                            [--available]
+                            [--dtu]
+                            [--edition]
+                            [--service-objective]
+                            [--show-details {max-size}]
+                            [--vcores]
+  examples:
+  - summary: Perlihatkan semua edisi database di lokasi.
+    syntax: az sql db list-editions -l westus -o table
+  - summary: Perlihatkan semua tujuan layanan database yang tersedia untuk edisi Standar.
+    syntax: az sql db list-editions -l westus --edition Standard -o table
+  - summary: Perlihatkan ukuran database maks yang tersedia untuk tujuan layanan P1
+    syntax: az sql db list-editions -l westus --service-objective P1 --show-details max-size
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  optionalParameters:
+  - name: --available -a
+    summary: Jika ditentukan, hanya tampilkan hasil yang tersedia di wilayah yang ditentukan.
+    description: ''
+  - name: --dtu
+    summary: Jumlah DTU yang akan dicari. Jika tidak ditentukan, semua ukuran DTU ditampilkan.
+    description: ''
+  - name: --edition --tier -e
+    summary: Edisi untuk dicari. Jika tidak ditentukan, semua edisi akan ditampilkan.
+    description: ''
+  - name: --service-objective
+    summary: Tujuan layanan untuk dicari. Jika tidak ditentukan, semua tujuan layanan ditampilkan.
+    description: ''
+  - name: --show-details -d
+    parameterValueGroup: max-size
+    summary: Daftar detail tambahan untuk disertakan dalam output.
+    description: ''
+  - name: --vcore
+    summary: Jumlah vcore yang akan dicari. Jika tidak ditentukan, semua ukuran vcore ditampilkan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_db_list-usages
+  name: az sql db daftar-pemakaian
+  summary: Mendapatkan penggunaan database.
+  description: ''
+  syntax: >-
+    az sql db list-usages [--ids]
+                          [--name]
+                          [--resource-group]
+                          [--server]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Azure SQL Database.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_db_rename
+  name: az sql db ganti nama
+  summary: Mengganti nama database.
+  description: ''
+  syntax: >-
+    az sql db rename --new-name
+                     [--ids]
+                     [--name]
+                     [--resource-group]
+                     [--server]
+  examples:
+  - summary: Mengganti nama database. (dibuat otomatis)
+    syntax: az sql db rename --name MyAzureSQLDatabase --new-name MyNew --resource-group MyResourceGroup --server myserver
+  requiredParameters:
+  - isRequired: true
+    name: --new-name
+    summary: Nama baru tempat database akan diganti namanya.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Azure SQL Database.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_db_restore
+  name: pulihkan db sql az
+  summary: Buat database baru dengan memulihkan dari cadangan.
+  description: ''
+  syntax: >-
+    az sql db restore --dest-name
+                      [--auto-pause-delay]
+                      [--backup-storage-redundancy]
+                      [--capacity]
+                      [--compute-model {Provisioned, Serverless}]
+                      [--deleted-time]
+                      [--edition]
+                      [--elastic-pool]
+                      [--family]
+                      [--ha-replicas]
+                      [--ids]
+                      [--license-type {BasePrice, LicenseIncluded}]
+                      [--min-capacity]
+                      [--name]
+                      [--no-wait]
+                      [--read-scale {Disabled, Enabled}]
+                      [--resource-group]
+                      [--server]
+                      [--service-objective]
+                      [--tags]
+                      [--time]
+                      [--zone-redundant {false, true}]
+  examples:
+  - summary: Buat database baru dengan memulihkan dari cadangan. (dibuat otomatis)
+    syntax: az sql db restore --dest-name MyDest --edition GeneralPurpose --name MyAzureSQLDatabase --resource-group MyResourceGroup --server myserver --subscription MySubscription --time "2018-05-20T05:34:22"
+  - summary: Buat database baru dengan penyimpanan cadangan geo-redundan dengan memulihkan dari cadangan. (dibuat otomatis)
+    syntax: az sql db restore --dest-name MyDest --edition GeneralPurpose --name MyAzureSQLDatabase --resource-group MyResourceGroup --server myserver --subscription MySubscription --time "2018-05-20T05:34:22" --backup-storage-redundancy Geo
+  requiredParameters:
+  - isRequired: true
+    name: --dest-name
+    summary: Nama database yang akan dibuat sebagai tujuan pemulihan.
+    description: ''
+  optionalParameters:
+  - name: --auto-jeuse-delay
+    summary: Waktu dalam menit setelah database dijeda secara otomatis. Nilai -1 berarti bahwa jeda otomatis dinonaktifkan.
+    description: ''
+  - name: --backup-storage-redundancy --bsr
+    summary: 'Redundansi penyimpanan cadangan yang digunakan untuk menyimpan cadangan. Nilai yang diizinkan meliputi: Lokal, Zona, Geo.'
+    description: ''
+  - name: --capacity -c
+    summary: Komponen kapasitas sku dalam jumlah bilangan bulat DTU atau vcore.
+    description: ''
+  - name: --compute-model
+    parameterValueGroup: Provisioned, Serverless
+    summary: Model komputasi database.
+    description: ''
+  - name: --deleted-time
+    summary: 'Jika ditentukan, pulihkan dari database yang dihapus alih-alih dari database yang sudah ada. Harus cocok dengan waktu penghapusan database yang dihapus di server yang sama. Baik --time atau --deleted-time (atau keduanya) harus ditentukan. Waktu harus dalam format berikut: "YYYY-MM-DDTHH:MM:SS".'
+    description: ''
+  - name: --edition --tier -e
+    summary: 'Komponen edisi sku. Nilai yang diizinkan meliputi: Dasar, Standar, Premium, GeneralPurpose, BusinessCritical, Hyperscale.'
+    description: ''
+  - name: --elastic-pool
+    summary: Nama atau id sumber daya kumpulan elastis untuk membuat database.
+    description: ''
+  - name: --family -f
+    summary: 'Komponen pembuatan komputasi sku (hanya untuk sku vcore). Nilai yang diizinkan meliputi: Gen4, Gen5.'
+    description: ''
+  - name: --ha-replicas --read-replicas
+    summary: Jumlah replika ketersediaan tinggi yang akan disediakan untuk database. Hanya dapat diatur untuk edisi Hyperscale.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --license-type
+    parameterValueGroup: BasePrice, LicenseIncluded
+    summary: Jenis lisensi yang akan diterapkan untuk database ini. LicenseIncluded jika Anda memerlukan lisensi, atau BasePrice jika Anda memiliki lisensi dan memenuhi syarat untuk Azure Hybrid Benefit.
+    description: ''
+  - name: --min-capacity
+    summary: Kapasitas minimal yang akan selalu dialokasikan database, jika tidak dijeda.
+    description: ''
+  - name: --name -n
+    summary: Nama Azure SQL Database.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --read-scale
+    parameterValueGroup: Disabled, Enabled
+    summary: Jika diaktifkan, koneksi yang memiliki niat aplikasi diatur ke readonly dalam string koneksinya dapat dirutekan ke replika sekunder baca-saja. Properti ini hanya dapat diatur untuk database Premium dan Business Critical.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  - name: --service-objective
+    summary: 'Tujuan layanan untuk database baru. Misalnya: Dasar, S0, P1, GP_Gen4_1, GP_Gen5_S_8, BC_Gen5_2, HS_Gen5_32.'
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --time -t
+    summary: 'Titik waktu database sumber yang akan dipulihkan untuk membuat database baru. Harus lebih besar dari atau sama dengan nilai earliestRestoreDate database sumber. Baik --time atau --deleted-time (atau keduanya) harus ditentukan. Waktu harus dalam format berikut: "YYYY-MM-DDTHH:MM:SS".'
+    description: ''
+  - name: --zone-redundant -z
+    parameterValueGroup: false, true
+    summary: Menentukan apakah akan mengaktifkan redundansi zona.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_db_show
+  name: az sql db menunjukkan
+  summary: Dapatkan detail untuk database.
+  description: ''
+  syntax: >-
+    az sql db show [--ids]
+                   [--name]
+                   [--resource-group]
+                   [--server]
+  examples:
+  - summary: Dapatkan detail untuk database. (dibuat otomatis)
+    syntax: az sql db show --name MyAzureSQLDatabase --resource-group MyResourceGroup --server myserver
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Azure SQL Database.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_db_show-connection-string
+  name: az sql db show-connection-string
+  summary: Menghasilkan untaian koneksi ke database.
+  description: ''
+  syntax: >-
+    az sql db show-connection-string --client {ado.net, jdbc, odbc, php, php_pdo, sqlcmd}
+                                     [--auth-type {ADIntegrated, ADPassword, SqlPassword}]
+                                     [--ids]
+                                     [--name]
+                                     [--server]
+  examples:
+  - summary: Membuat string koneksi untuk ado.net
+    syntax: az sql db show-connection-string -s myserver -n mydb -c ado.net
+  requiredParameters:
+  - isRequired: true
+    name: --client -c
+    parameterValueGroup: ado.net, jdbc, odbc, php, php_pdo, sqlcmd
+    summary: Jenis penyedia koneksi klien.
+    description: ''
+  optionalParameters:
+  - name: --auth-type -a
+    defaultValue: SqlPassword
+    parameterValueGroup: ADIntegrated, ADPassword, SqlPassword
+    summary: Jenis autentikasi.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    defaultValue: <databasename>
+    summary: Nama Azure SQL Database.
+    description: ''
+  - name: --server -s
+    defaultValue: <servername>
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_db_update
+  name: az sql db memperbarui
+  summary: Memperbarui database.
+  description: ''
+  syntax: >-
+    az sql db update [--add]
+                     [--auto-pause-delay]
+                     [--backup-storage-redundancy]
+                     [--capacity]
+                     [--compute-model {Provisioned, Serverless}]
+                     [--edition]
+                     [--elastic-pool]
+                     [--family]
+                     [--force-string]
+                     [--ha-replicas]
+                     [--ids]
+                     [--maint-config-id]
+                     [--max-size]
+                     [--min-capacity]
+                     [--name]
+                     [--no-wait]
+                     [--read-scale {Disabled, Enabled}]
+                     [--remove]
+                     [--resource-group]
+                     [--server]
+                     [--service-objective]
+                     [--set]
+                     [--zone-redundant {false, true}]
+  examples:
+  - summary: Perbarui database ke edisi Standar, tingkat performa S0 (10 DTU) dengan menentukan kapasitas DTU. Perhatikan bahwa GeneralPurpose memungkinkan rentang ukuran maksimum yang lebih luas daripada edisi Standar.
+    syntax: az sql db update -g mygroup -s myserver -n mydb --edition Standard --capacity 10 --max-size 250GB
+  - summary: Perbarui database ke edisi Standar, tingkat performa S1 (20 DTU) dengan menentukan nama tingkat performa. Perhatikan bahwa GeneralPurpose memungkinkan rentang ukuran maksimum yang lebih luas daripada edisi Standar.
+    syntax: az sql db update -g mygroup -s myserver -n mydb --edition Standard --service-objective S1 --max-size 250GB
+  - summary: Memperbarui database ke edisi GeneralPurpose, 4 vcore dengan perangkat keras Gen5
+    syntax: az sql db update -g mygroup -s myserver -n mydb --edition GeneralPurpose --capacity 4 --family Gen5
+  - summary: Memperbarui database dengan ukuran maks yang ditingkatkan
+    syntax: az sql db update -g mygroup -s myserver -n mydb --max-size 500GB
+  - summary: Memperbarui database dengan redundansi zona diaktifkan
+    syntax: az sql db update -g mygroup -s myserver -n mydb -z
+  - summary: Memperbarui database dengan redundansi zona yang dinonaktifkan secara eksplisit
+    syntax: az sql db update -g mygroup -s myserver -n mydb -z false
+  - summary: Memperbarui database ke model komputasi tanpa server
+    syntax: az sql db update -g mygroup -s myserver -n mydb --edition GeneralPurpose --capacity 2 --family Gen5 --compute-model Serverless
+  - summary: Memperbarui database dengan penyimpanan cadangan yang berlebihan secara lokal
+    syntax: az sql db update -g mygroup -s myserver -n mydb --backup-storage-redundancy Local
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --auto-jeda-tunda
+    summary: Waktu dalam menit setelah database dijeda secara otomatis. Nilai -1 berarti jeda otomatis dinonaktifkan.
+    description: ''
+  - name: --backup-storage-redundancy --bsr
+    summary: 'Redundansi penyimpanan cadangan yang digunakan untuk menyimpan cadangan. Nilai yang diizinkan meliputi: Lokal, Zona, Geo.'
+    description: ''
+  - name: --capacity -c
+    summary: Komponen kapasitas sku dalam jumlah bilangan bulat DTU atau vcore.
+    description: ''
+  - name: --compute-model
+    parameterValueGroup: Provisioned, Serverless
+    summary: Model komputasi database.
+    description: ''
+  - name: --edition --tier -e
+    summary: 'Komponen edisi sku. Nilai yang diizinkan meliputi: Dasar, Standar, Premium, GeneralPurpose, BusinessCritical, Hyperscale.'
+    description: ''
+  - name: --elastic-pool
+    summary: Nama atau id sumber daya kumpulan elastis untuk memindahkan database.
+    description: ''
+  - name: --family -f
+    summary: 'Komponen pembuatan komputasi sku (hanya untuk sku vcore). Nilai yang diizinkan meliputi: Gen4, Gen5.'
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --ha-replicas --read-replicas
+    summary: Jumlah replika ketersediaan tinggi yang akan disediakan untuk database. Hanya dapat diatur untuk edisi Hyperscale.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --maint-config-id -m
+    summary: Id atau nama konfigurasi pemeliharaan yang ditentukan untuk sumber daya ini.
+    description: ''
+  - name: --max-size
+    summary: Ukuran maksimum baru database yang dinyatakan dalam byte.
+    description: ''
+  - name: --min-capacity
+    summary: Kapasitas minimal yang akan selalu dialokasikan database, jika tidak dijeda.
+    description: ''
+  - name: --name -n
+    summary: Nama Azure SQL Database.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --read-scale
+    parameterValueGroup: Disabled, Enabled
+    summary: Jika diaktifkan, koneksi yang memiliki niat aplikasi yang diatur ke baca-saja dalam string koneksinya dapat dirutekan ke replika sekunder baca-saja. Properti ini hanya dapat diatur untuk database Premium dan Business Critical.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  - name: --service-objective
+    summary: Nama tujuan layanan baru. Jika ini adalah tujuan layanan db mandiri dan db saat ini berada dalam kumpulan elastis, maka db dihapus dari kumpulan.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --zone-redundant -z
+    parameterValueGroup: false, true
+    summary: Menentukan apakah akan mengaktifkan redundansi zona.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+commands:
+- az_sql_db_audit-policy
+- az_sql_db_audit-policy_show
+- az_sql_db_audit-policy_update
+- az_sql_db_audit-policy_wait
+- az_sql_db_classification
+- az_sql_db_classification_delete
+- az_sql_db_classification_list
+- az_sql_db_classification_recommendation
+- az_sql_db_classification_recommendation_disable
+- az_sql_db_classification_recommendation_enable
+- az_sql_db_classification_recommendation_list
+- az_sql_db_classification_show
+- az_sql_db_classification_update
+- az_sql_db_copy
+- az_sql_db_create
+- az_sql_db_delete
+- az_sql_db_export
+- az_sql_db_import
+- az_sql_db_ledger-digest-uploads
+- az_sql_db_ledger-digest-uploads_disable
+- az_sql_db_ledger-digest-uploads_enable
+- az_sql_db_ledger-digest-uploads_show
+- az_sql_db_list
+- az_sql_db_list-deleted
+- az_sql_db_list-editions
+- az_sql_db_list-usages
+- az_sql_db_ltr-backup
+- az_sql_db_ltr-backup_delete
+- az_sql_db_ltr-backup_list
+- az_sql_db_ltr-backup_restore
+- az_sql_db_ltr-backup_show
+- az_sql_db_ltr-backup_wait
+- az_sql_db_ltr-policy
+- az_sql_db_ltr-policy_set
+- az_sql_db_ltr-policy_show
+- az_sql_db_op
+- az_sql_db_op_cancel
+- az_sql_db_op_list
+- az_sql_db_rename
+- az_sql_db_replica
+- az_sql_db_replica_create
+- az_sql_db_replica_delete-link
+- az_sql_db_replica_list-links
+- az_sql_db_replica_set-primary
+- az_sql_db_restore
+- az_sql_db_show
+- az_sql_db_show-connection-string
+- az_sql_db_str-policy
+- az_sql_db_str-policy_set
+- az_sql_db_str-policy_show
+- az_sql_db_str-policy_wait
+- az_sql_db_tde
+- az_sql_db_tde_set
+- az_sql_db_tde_show
+- az_sql_db_threat-policy
+- az_sql_db_threat-policy_show
+- az_sql_db_threat-policy_update
+- az_sql_db_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/29/2022
+  description: Mengelola database.
+  ms.openlocfilehash: df460a5b2d67ad34dcbb12f42262f200969c852a
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141417112"

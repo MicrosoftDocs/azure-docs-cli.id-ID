@@ -1,0 +1,238 @@
+### YamlMime:AzureCLIGroup
+uid: az_sql_db_replica
+name: az sql db replica
+summary: Mengelola replikasi antar database.
+description: ''
+directCommands:
+- uid: az_sql_db_replica_create
+  name: az sql db replica create
+  summary: Buat database sebagai replika sekunder yang dapat dibaca dari database yang sudah ada.
+  description: Daftar lengkap opsi tingkat performa dapat dilihat dengan mengeksekusi `az sql db list-editions -a -o table -l LOCATION`. Database sekunder harus memiliki edisi yang sama dengan database utama.
+  syntax: >-
+    az sql db replica create --name
+                             --partner-server
+                             --resource-group
+                             --server
+                             [--auto-pause-delay]
+                             [--backup-storage-redundancy]
+                             [--capacity]
+                             [--compute-model {Provisioned, Serverless}]
+                             [--elastic-pool]
+                             [--family]
+                             [--ha-replicas]
+                             [--license-type {BasePrice, LicenseIncluded}]
+                             [--min-capacity]
+                             [--no-wait]
+                             [--partner-database]
+                             [--partner-resource-group]
+                             [--read-scale {Disabled, Enabled}]
+                             [--secondary-type]
+                             [--service-objective]
+                             [--tags]
+                             [--zone-redundant {false, true}]
+  examples:
+  - summary: Buat database dengan tingkat performa S0 sebagai replika sekunder dari database Standar yang ada.
+    syntax: az sql db replica create -g mygroup -s myserver -n originalDb --partner-server newDb --service-objective S0
+  - summary: Membuat database dengan edisi GeneralPurpose, perangkat keras Gen4, dan 1 vcore sebagai replika sekunder dari database GeneralPurpose yang ada
+    syntax: az sql db replica create -g mygroup -s myserver -n originalDb --partner-server newDb -f Gen4 -c 1
+  - summary: Buat database dengan penyimpanan cadangan zona redundan sebagai replika sekunder dari database yang ada.
+    syntax: az sql db replica create -g mygroup -s myserver -n originalDb --partner-server newDb --backup-storage-redundancy Zone
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Azure SQL Database.
+    description: ''
+  - isRequired: true
+    name: --partner-server
+    summary: Nama server untuk membuat replika baru.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --auto-jeda-tunda
+    summary: Waktu dalam menit setelah database dijeda secara otomatis. Nilai -1 berarti jeda otomatis dinonaktifkan.
+    description: ''
+  - name: --backup-storage-redundancy --bsr
+    summary: 'Redundansi penyimpanan cadangan yang digunakan untuk menyimpan cadangan. Nilai yang diizinkan meliputi: Lokal, Zona, Geo.'
+    description: ''
+  - name: --capacity -c
+    summary: Komponen kapasitas sku dalam jumlah bilangan bulat DTU atau vcore.
+    description: ''
+  - name: --compute-model
+    parameterValueGroup: Provisioned, Serverless
+    summary: Model komputasi database.
+    description: ''
+  - name: --elastic-pool
+    summary: Nama atau id sumber daya kumpulan elastis untuk membuat database.
+    description: ''
+  - name: --family -f
+    summary: 'Komponen pembuatan komputasi sku (hanya untuk sku vcore). Nilai yang diizinkan meliputi: Gen4, Gen5.'
+    description: ''
+  - name: --ha-replicas --read-replicas
+    summary: Jumlah replika ketersediaan tinggi yang akan disediakan untuk database. Hanya dapat diatur untuk edisi Hyperscale.
+    description: ''
+  - name: --license-type
+    parameterValueGroup: BasePrice, LicenseIncluded
+    summary: Jenis lisensi yang akan diterapkan untuk database ini. LicenseIncluded jika Anda memerlukan lisensi, atau BasePrice jika Anda memiliki lisensi dan memenuhi syarat untuk Azure Hybrid Benefit.
+    description: ''
+  - name: --min-capacity
+    summary: Kapasitas minimal yang akan selalu dialokasikan database, jika tidak dijeda.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --partner-database
+    summary: Nama replika baru. Jika tidak ditentukan, default ke nama database sumber.
+    description: ''
+  - name: --partner-resource-group
+    summary: Nama grup sumber daya untuk membuat replika baru. Jika tidak ditentukan, default ke grup sumber daya asal.
+    description: ''
+  - name: --read-scale
+    parameterValueGroup: Disabled, Enabled
+    summary: Jika diaktifkan, koneksi yang memiliki niat aplikasi yang diatur ke baca-saja dalam string koneksinya dapat dirutekan ke replika sekunder baca-saja. Properti ini hanya dapat diatur untuk database Premium dan Business Critical.
+    description: ''
+  - name: --secondary-type
+    summary: 'Jenis sekunder yang akan dibuat. Nilai yang diizinkan meliputi: Geo, Named.'
+    description: ''
+  - name: --service-objective
+    summary: 'Tujuan layanan untuk database baru. Misalnya: Dasar, S0, P1, GP_Gen4_1, GP_Gen5_S_8, BC_Gen5_2, HS_Gen5_32.'
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --zone-redundant -z
+    parameterValueGroup: false, true
+    summary: Menentukan apakah akan mengaktifkan redundansi zona.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_db_replica_delete-link
+  name: az sql db replica delete-link
+  summary: Hentikan replikasi data secara permanen antara dua replika database.
+  description: ''
+  syntax: >-
+    az sql db replica delete-link --partner-server
+                                  [--ids]
+                                  [--name]
+                                  [--partner-resource-group]
+                                  [--resource-group]
+                                  [--server]
+                                  [--yes]
+  requiredParameters:
+  - isRequired: true
+    name: --partner-server
+    summary: Nama server tempat replika lain berada.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Azure SQL Database.
+    description: ''
+  - name: --partner-resource-group
+    summary: Nama grup sumber daya tempat replika lain berada. Jika tidak ditentukan, default ke grup sumber daya database pertama.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_db_replica_list-links
+  name: az sql db replica list-links
+  summary: Mencantumkan replika database dan status replikasinya.
+  description: ''
+  syntax: >-
+    az sql db replica list-links [--ids]
+                                 [--name]
+                                 [--resource-group]
+                                 [--server]
+  examples:
+  - summary: Mencantumkan replika database dan status replikasinya. (dibuat otomatis)
+    syntax: az sql db replica list-links --name MyAzureSQLDatabase --resource-group MyResourceGroup --server myserver
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Azure SQL Database.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_db_replica_set-primary
+  name: az sql db replica set-primary
+  summary: Atur database replika utama dengan melakukan failover dari database replika utama saat ini.
+  description: ''
+  syntax: >-
+    az sql db replica set-primary [--allow-data-loss]
+                                  [--ids]
+                                  [--name]
+                                  [--resource-group]
+                                  [--server]
+  examples:
+  - summary: Atur database replika utama dengan melakukan failover dari database replika utama saat ini. (dibuat otomatis)
+    syntax: az sql db replica set-primary --allow-data-loss --name MyDatabase --resource-group MyResourceGroup --server myserver --subscription MySubscription
+  optionalParameters:
+  - name: --allow-data-loss
+    summary: Jika ditentukan, operasi failover akan memungkinkan kehilangan data.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama database yang akan di-failover.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya yang berisi replika sekunder yang akan menjadi primer baru.
+    description: ''
+  - name: --server -s
+    summary: Nama server yang berisi replika sekunder yang akan menjadi primer baru. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+commands:
+- az_sql_db_replica_create
+- az_sql_db_replica_delete-link
+- az_sql_db_replica_list-links
+- az_sql_db_replica_set-primary
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/29/2022
+  description: Mengelola replikasi antar database.
+  ms.openlocfilehash: 686f8de0a5cd51f4c396724323add5e541e543fc
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141416824"

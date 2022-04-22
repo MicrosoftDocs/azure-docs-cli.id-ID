@@ -1,0 +1,277 @@
+### YamlMime:AzureCLIGroup
+uid: az_ts
+name: az ts
+summary: Mengelola spesifikasi templat di cakupan langganan atau grup sumber daya.
+description: ''
+directCommands:
+- uid: az_ts_create
+  name: az ts create
+  summary: Buat spesifikasi templat dan atau versi spesifikasi templat.
+  description: ''
+  syntax: >-
+    az ts create --name
+                 --resource-group
+                 [--description]
+                 [--display-name]
+                 [--location]
+                 [--tags]
+                 [--template-file]
+                 [--ui-form-definition]
+                 [--version]
+                 [--version-description]
+                 [--yes]
+  examples:
+  - summary: Membuat spesifikasi templat.
+    syntax: az ts create -g testRG --name TemplateSpecName -l WestUS --display-name "MyDisplayName" --description "Simple template spec" --tags key1=value1
+  - summary: Membuat versi spesifikasi templat.
+    syntax: az ts create -g testRG --name TemplateSpecName -v 2.0 -l WestUS --template-file templateSpec.json --version-description "Less simple template spec" --tags key1=value1 key3=value3
+  - summary: Buat spesifikasi templat dan versi spesifikasi templat.
+    syntax: az ts create -g testRG --name TemplateSpecName -v 1.0 -l WestUS --template-file templateSpec.json --display-name "MyDisplayName" --description "Simple template spec" --version-description "Version of simple template spec" --tags key1=value1 key2=value2
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama spesifikasi templat.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --description
+    summary: Deskripsi spesifikasi templat induk.
+    description: ''
+  - name: --display-name -d
+    summary: Nama tampilan spesifikasi templat.
+    description: ''
+  - name: --location -l
+    summary: Lokasi untuk menyimpan versi spesifikasi templat dan spesifikasi templat. Tidak dapat diubah setelah pembuatan.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --template-file -f
+    summary: Jalur ke file templat atau file Bicep dalam sistem file.
+    description: ''
+  - name: --ui-form-definition
+    summary: Jalur file uiFormDefinition dalam sistem file untuk versi spesifikasi templat.
+    description: ''
+  - name: --version -v
+    summary: Versi spesifikasi templat.
+    description: ''
+  - name: --version-description
+    summary: Deskripsi versi spesifikasi templat.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_ts_delete
+  name: az ts delete
+  summary: Hapus spesifikasi templat atau versi spesifikasi templat tertentu berdasarkan nama atau ID sumber daya..
+  description: ''
+  syntax: >-
+    az ts delete [--name]
+                 [--resource-group]
+                 [--template-spec]
+                 [--version]
+                 [--yes]
+  examples:
+  - summary: Hapus spesifikasi templat yang ditentukan dan semua versi.
+    syntax: az ts delete -g MyResourceGroup --name TemplateSpecName
+  - summary: Hapus versi yang ditentukan dari spesifikasi templat.
+    syntax: az ts delete -g MyResourceGroup --name TemplateSpecName --version VersionName
+  - summary: Hapus spesifikasi atau versi templat berdasarkan ID sumber daya.
+    syntax: az ts delete --template-spec resourceID
+  optionalParameters:
+  - name: --name -n
+    summary: Nama spesifikasi templat.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --template-spec -s
+    summary: Id sumber daya spesifikasi templat.
+    description: ''
+  - name: --version -v
+    summary: Versi spesifikasi templat.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_ts_export
+  name: az ts export
+  summary: Ekspor versi spesifikasi templat dan artefak yang ditentukan (jika ada) ke folder output yang ditentukan.
+  description: ''
+  syntax: >-
+    az ts export --output-folder
+                 [--name]
+                 [--resource-group]
+                 [--template-spec]
+                 [--version]
+  examples:
+  - summary: Ekspor versi spesifikasi templat yang ditentukan berdasarkan ID sumber daya.
+    syntax: az ts export -s resourceID --output-folder C:/path/
+  - summary: Ekspor versi spesifikasi templat yang ditentukan.
+    syntax: az ts export -g testrg --name TemplateSpecName --version VersionName --output-folder C:/path/
+  requiredParameters:
+  - isRequired: true
+    name: --output-folder
+    summary: Folder yang ada untuk mengekspor output.
+    description: ''
+  optionalParameters:
+  - name: --name -n
+    summary: Nama spesifikasi templat.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --template-spec -s
+    summary: Id sumber daya spesifikasi templat.
+    description: ''
+  - name: --version -v
+    summary: Versi spesifikasi templat.
+    description: ''
+- uid: az_ts_list
+  name: az ts list
+  summary: Mencantumkan spesifikasi templat atau versi spesifikasi templat.
+  description: ''
+  syntax: >-
+    az ts list [--name]
+               [--resource-group]
+  examples:
+  - summary: Cantumkan semua spesifikasi templat dalam langganan default saat ini.
+    syntax: az ts list
+  - summary: Cantumkan semua spesifikasi templat dalam langganan tertentu.
+    syntax: az ts list --subscription Subscription
+  - summary: Mencantumkan semua spesifikasi templat dalam grup sumber daya.
+    syntax: az ts list -g MyResourceGroup
+  - summary: Mencantumkan semua versi spesifikasi templat induk.
+    syntax: az ts list -g MyResourceGroup -n TemplateSpecName
+  optionalParameters:
+  - name: --name -n
+    summary: Nama spesifikasi templat.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_ts_show
+  name: az ts show
+  summary: Dapatkan spesifikasi templat atau versi spesifikasi templat yang ditentukan.
+  description: ''
+  syntax: >-
+    az ts show [--name]
+               [--resource-group]
+               [--template-spec]
+               [--version]
+  examples:
+  - summary: Perlihatkan spesifikasi templat yang ditentukan.
+    syntax: az ts show -g testrg --name TemplateSpecName
+  - summary: Tampilkan versi spesifikasi templat yang ditentukan.
+    syntax: az ts show -g testrg --name TemplateSpecName --version VersionName
+  - summary: Tampilkan spesifikasi templat atau versi spesifikasi templat yang ditentukan berdasarkan ID sumber daya.
+    syntax: az ts show --template-spec resourceID
+  optionalParameters:
+  - name: --name -n
+    summary: Nama spesifikasi templat.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --template-spec -s
+    summary: Id sumber daya spesifikasi templat.
+    description: ''
+  - name: --version -v
+    summary: Versi spesifikasi templat.
+    description: ''
+- uid: az_ts_update
+  name: az ts update
+  summary: Memperbarui versi spesifikasi templat.
+  description: ''
+  syntax: >-
+    az ts update [--description]
+                 [--display-name]
+                 [--name]
+                 [--resource-group]
+                 [--tags]
+                 [--template-file]
+                 [--template-spec]
+                 [--ui-form-definition]
+                 [--version]
+                 [--version-description]
+                 [--yes]
+  examples:
+  - summary: Perbarui konten templat spesifikasi templat atau versi spesifikasi templat berdasarkan ID sumber daya.
+    syntax: az ts update --template-spec resourceID -f updatedFile.json
+  - summary: Perbarui nama tampilan dan tag spesifikasi templat berdasarkan ID sumber daya.
+    syntax: az ts update --template-spec resourceID --display-name "NewParentDisplayName" --tags key1=value1
+  - summary: Perbarui deskripsi versi spesifikasi templat tanpa perintah.
+    syntax: az ts update -g ExistingRG --name ExistingName -v 3.0 --version-description "New description" --yes
+  - summary: Memperbarui semua properti versi spesifikasi templat.
+    syntax: az ts update -g ExistingRG --name ExistingName -v 3.0 -f updatedTemplate.json --display-name "New parent display name" --description "New parent description" --version-description "New child description" --ui-form-definition formDefinition.json
+  - summary: Hapus tag dari versi spesifikasi templat tanpa perintah.
+    syntax: az ts update -g ExistingRG --name ExistingName -v 3.0 -f updatedTemplate.json --tags --yes
+  optionalParameters:
+  - name: --description
+    summary: Deskripsi spesifikasi templat induk.
+    description: ''
+  - name: --display-name -d
+    summary: Nama tampilan spesifikasi templat.
+    description: ''
+  - name: --name -n
+    summary: Nama spesifikasi templat.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --template-file -f
+    summary: Jalur ke file templat atau file Bicep dalam sistem file.
+    description: ''
+  - name: --template-spec -s
+    summary: Id sumber daya spesifikasi templat.
+    description: ''
+  - name: --ui-form-definition
+    summary: Jalur file uiFormDefinition dalam sistem file untuk versi spesifikasi templat.
+    description: ''
+  - name: --version -v
+    summary: Versi spesifikasi templat.
+    description: ''
+  - name: --version-description
+    summary: Deskripsi versi spesifikasi templat.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+commands:
+- az_ts_create
+- az_ts_delete
+- az_ts_export
+- az_ts_list
+- az_ts_show
+- az_ts_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola spesifikasi templat di cakupan langganan atau grup sumber daya.
+  ms.openlocfilehash: 03347e634e0a1870845a5cb6d572c980251ad910
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141125977"

@@ -1,0 +1,315 @@
+### YamlMime:AzureCLIGroup
+uid: az_sentinel_incident
+name: az sentinel incident
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **sentinel** untuk Azure CLI (versi 2.11.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **insiden az sentinel** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Insiden Sentinel.
+description: ''
+directCommands:
+- uid: az_sentinel_incident_create
+  name: az sentinel incident create
+  summary: Buat insiden.
+  description: ''
+  syntax: >-
+    az sentinel incident create --incident-id
+                                --resource-group
+                                --workspace-name
+                                [--classification {BenignPositive, FalsePositive, TruePositive, Undetermined}]
+                                [--classification-comment]
+                                [--classification-reason {InaccurateData, IncorrectAlertLogic, SuspiciousActivity, SuspiciousButExpected}]
+                                [--description]
+                                [--etag]
+                                [--first-activity-time-utc]
+                                [--labels]
+                                [--last-activity-time-utc]
+                                [--owner]
+                                [--severity {High, Informational, Low, Medium}]
+                                [--status {Active, Closed, New}]
+                                [--title]
+  examples:
+  - summary: Membuat atau memperbarui insiden.
+    syntax: az sentinel incident create --etag "{etag}" --description "This is a demo incident" --classification "FalsePositive" --classification-comment "Not a malicious activity" --classification-reason "IncorrectAlertLogic" --first-activity-time-utc "2019-01-01T13:00:30Z" --last-activity-time-utc "2019-01-01T13:05:30Z" --owner object-id="{oid}" --severity "High" --status "Closed" --title "My incident" --incident-id "{id}" --resource-group "myRg" --workspace-name "myWorkspace"
+  requiredParameters:
+  - isRequired: true
+    name: --incident-id
+    summary: ID Insiden.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  optionalParameters:
+  - name: --classification
+    parameterValueGroup: BenignPositive, FalsePositive, TruePositive, Undetermined
+    summary: Alasan insiden ditutup.
+    description: ''
+  - name: --classification-comment
+    summary: Menjelaskan alasan insiden ditutup.
+    description: ''
+  - name: --classification-reason
+    parameterValueGroup: InaccurateData, IncorrectAlertLogic, SuspiciousActivity, SuspiciousButExpected
+    summary: Alasan klasifikasi insiden ditutup dengan.
+    description: ''
+  - name: --description
+    summary: Deskripsi insiden.
+    description: ''
+  - name: --etag
+    summary: Etag sumber daya azure.
+    description: ''
+  - name: --first-activity-time-utc
+    summary: Waktu aktivitas pertama dalam insiden.
+    description: ''
+  - name: --labels
+    summary: Daftar label yang relevan dengan insiden ini.
+    description: >-
+      Penggunaan: --labels label-name=XX
+
+
+      label-name: Diperlukan. Nama label
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --labels.
+  - name: --last-activity-time-utc
+    summary: Waktu aktivitas terakhir dalam insiden.
+    description: ''
+  - name: --owner
+    summary: Menjelaskan pengguna tempat insiden ditetapkan.
+    description: >-
+      Penggunaan: --owner email=XX assigned-to=XX object-id=XX user-principal-name=XX
+
+
+      email: Email pengguna tempat insiden ditetapkan.
+
+      assigned-to: Nama pengguna tempat insiden ditetapkan.
+
+      object-id: Id objek pengguna tempat insiden ditetapkan.
+
+      user-principal-name: Nama prinsipal pengguna pengguna tempat insiden ditetapkan.
+  - name: --severity
+    parameterValueGroup: High, Informational, Low, Medium
+    summary: Tingkat keparahan insiden.
+    description: ''
+  - name: --status
+    parameterValueGroup: Active, Closed, New
+    summary: Status insiden.
+    description: ''
+  - name: --title
+    summary: Judul insiden.
+    description: ''
+- uid: az_sentinel_incident_delete
+  name: az sentinel incident delete
+  summary: Hapus insiden.
+  description: ''
+  syntax: >-
+    az sentinel incident delete --incident-id
+                                --resource-group
+                                --workspace-name
+                                [--yes]
+  examples:
+  - summary: Menghapus insiden.
+    syntax: az sentinel incident delete --incident-id "{id}" --resource-group "myRg" --workspace-name "myWorkspace"
+  requiredParameters:
+  - isRequired: true
+    name: --incident-id
+    summary: ID Insiden.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  optionalParameters:
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_sentinel_incident_list
+  name: az sentinel incident list
+  summary: Mendapatkan semua insiden.
+  description: ''
+  syntax: >-
+    az sentinel incident list --resource-group
+                              --workspace-name
+                              [--filter]
+                              [--orderby]
+                              [--skip-token]
+                              [--top]
+  examples:
+  - summary: Dapatkan semua insiden.
+    syntax: az sentinel incident list --orderby "properties/createdTimeUtc desc" --top 1 --resource-group "myRg" --workspace-name "myWorkspace"
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  optionalParameters:
+  - name: --filter
+    summary: Memfilter hasilnya, berdasarkan kondisi Boolean. Opsional.
+    description: ''
+  - name: --orderby
+    summary: Mengurutkan hasilnya. Opsional.
+    description: ''
+  - name: --skip-token
+    summary: Skiptoken hanya digunakan jika operasi sebelumnya mengembalikan hasil parsial. Jika respons sebelumnya berisi elemen nextLink, nilai elemen nextLink akan menyertakan parameter skiptoken yang menentukan titik awal yang akan digunakan untuk panggilan berikutnya. Opsional.
+    description: ''
+  - name: --top
+    summary: Hanya mengembalikan hasil n pertama. Opsional.
+    description: ''
+- uid: az_sentinel_incident_show
+  name: az sentinel incident show
+  summary: Mendapatkan insiden.
+  description: ''
+  syntax: >-
+    az sentinel incident show --incident-id
+                              --resource-group
+                              --workspace-name
+  examples:
+  - summary: Dapatkan insiden.
+    syntax: az sentinel incident show --incident-id "{id}" --resource-group "myRg" --workspace-name "myWorkspace"
+  requiredParameters:
+  - isRequired: true
+    name: --incident-id
+    summary: ID Insiden.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+- uid: az_sentinel_incident_update
+  name: az sentinel incident update
+  summary: Perbarui insiden.
+  description: ''
+  syntax: >-
+    az sentinel incident update --incident-id
+                                --resource-group
+                                --workspace-name
+                                [--classification {BenignPositive, FalsePositive, TruePositive, Undetermined}]
+                                [--classification-comment]
+                                [--classification-reason {InaccurateData, IncorrectAlertLogic, SuspiciousActivity, SuspiciousButExpected}]
+                                [--description]
+                                [--etag]
+                                [--first-activity-time-utc]
+                                [--labels]
+                                [--last-activity-time-utc]
+                                [--owner]
+                                [--severity {High, Informational, Low, Medium}]
+                                [--status {Active, Closed, New}]
+                                [--title]
+  requiredParameters:
+  - isRequired: true
+    name: --incident-id
+    summary: ID Insiden.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  optionalParameters:
+  - name: --classification
+    parameterValueGroup: BenignPositive, FalsePositive, TruePositive, Undetermined
+    summary: Alasan insiden ditutup.
+    description: ''
+  - name: --classification-comment
+    summary: Menjelaskan alasan insiden ditutup.
+    description: ''
+  - name: --classification-reason
+    parameterValueGroup: InaccurateData, IncorrectAlertLogic, SuspiciousActivity, SuspiciousButExpected
+    summary: Alasan klasifikasi insiden ditutup dengan.
+    description: ''
+  - name: --description
+    summary: Deskripsi insiden.
+    description: ''
+  - name: --etag
+    summary: Etag sumber daya azure.
+    description: ''
+  - name: --first-activity-time-utc
+    summary: Waktu aktivitas pertama dalam insiden.
+    description: ''
+  - name: --labels
+    summary: Daftar label yang relevan dengan insiden ini.
+    description: >-
+      Penggunaan: --labels label-name=XX
+
+
+      label-name: Diperlukan. Nama label
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --labels.
+  - name: --last-activity-time-utc
+    summary: Waktu aktivitas terakhir dalam insiden.
+    description: ''
+  - name: --owner
+    summary: Menjelaskan pengguna tempat insiden ditetapkan.
+    description: >-
+      Penggunaan: --owner email=XX assigned-to=XX object-id=XX user-principal-name=XX
+
+
+      email: Email pengguna tempat insiden ditetapkan.
+
+      assigned-to: Nama pengguna tempat insiden ditetapkan.
+
+      object-id: Id objek pengguna tempat insiden ditetapkan.
+
+      user-principal-name: Nama prinsipal pengguna pengguna tempat insiden ditetapkan.
+  - name: --severity
+    parameterValueGroup: High, Informational, Low, Medium
+    summary: Tingkat keparahan insiden.
+    description: ''
+  - name: --status
+    parameterValueGroup: Active, Closed, New
+    summary: Status insiden.
+    description: ''
+  - name: --title
+    summary: Judul insiden.
+    description: ''
+commands:
+- az_sentinel_incident_create
+- az_sentinel_incident_delete
+- az_sentinel_incident_list
+- az_sentinel_incident_show
+- az_sentinel_incident_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Insiden Sentinel.
+  ms.openlocfilehash: 3f4b1b732a1ce19dfb0cebd677a6f726d8bcb839
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141124465"
