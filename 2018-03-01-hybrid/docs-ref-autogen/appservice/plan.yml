@@ -1,0 +1,190 @@
+### YamlMime:AzureCLIGroup
+uid: az_appservice_plan
+name: az appservice plan
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **appservice-kube** untuk Azure CLI (versi 2.34.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **az appservice plan** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola paket layanan aplikasi.
+description: ''
+directCommands:
+- uid: az_appservice_plan_create
+  name: az appservice plan create
+  summary: Buat paket layanan aplikasi.
+  description: ''
+  syntax: >-
+    az appservice plan create --name
+                              --resource-group
+                              [--app-service-environment]
+                              [--custom-location]
+                              [--hyper-v]
+                              [--is-linux]
+                              [--location]
+                              [--no-wait]
+                              [--number-of-workers]
+                              [--per-site-scaling]
+                              [--sku]
+                              [--tags]
+  examples:
+  - summary: Buat paket layanan aplikasi dasar.
+    syntax: az appservice plan create -g MyResourceGroup -n MyPlan
+  - summary: Buat paket layanan aplikasi standar dengan empat pekerja Linux.
+    syntax: >-
+      az appservice plan create -g MyResourceGroup -n MyPlan \
+          --is-linux --number-of-workers 4 --sku S1
+  - summary: Buat paket layanan aplikasi untuk lingkungan layanan aplikasi.
+    syntax: >-
+      az appservice plan create -g MyResourceGroup -n MyPlan \
+          --app-service-environment MyAppServiceEnvironment --sku I1
+  - summary: Buat paket layanan aplikasi untuk lingkungan kubernetes.
+    syntax: >-
+      az appservice plan create -g MyResourceGroup -n MyPlan \
+          --custom-location /subscriptions/sub_id/resourcegroups/group_name/providers/microsoft.extendedlocation/customlocations/custom_location_name \
+          --per-site-scaling --is-linux --sku K1
+  - summary: Membuat paket layanan aplikasi lingkungan kubernetes di grup sumber daya yang sama dengan lokasi kustom
+    syntax: >-
+      az appservice plan create -g MyResourceGroup -n MyPlan \
+          --custom-location custom_location_name \
+          --per-site-scaling --is-linux --sku K1
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama paket layanan aplikasi baru.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --app-service-environment -e
+    summary: Nama atau ID lingkungan layanan aplikasi.
+    description: ''
+  - name: --custom-location -c
+    summary: Nama atau ID lokasi kustom. Gunakan ID untuk lokasi kustom di grup sumber daya yang berbeda dari paket.
+    description: ''
+  - name: --hyper-v
+    summary: Host aplikasi web di kontainer Windows.
+    description: ''
+  - name: --is-linux
+    summary: Host aplikasi web di pekerja Linux.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --number-of-workers
+    defaultValue: "1"
+    summary: Jumlah pekerja yang akan dialokasikan.
+    description: ''
+  - name: --per-site-scaling
+    summary: Aktifkan penskalaan per aplikasi di tingkat paket App Service untuk memungkinkan penskalaan aplikasi secara independen dari paket App Service yang menghostingnya.
+    description: ''
+  - name: --sku
+    summary: Tingkat harga, misalnya, F1(Free), D1(Shared), B1(Basic Small), B2(Basic Medium), B3(Basic Large), S1(Standard Small), P1V2(Premium V2 Small), PC2 (Premium Container Small), PC3 (Premium Container Medium), PC4 (Premium Container Large), I1 (Isolated Small), I2 (Isolated Medium), I3 (Isolated Large), I1v2 (Isolated V2 Small), I2v2 (Isolated V2 Medium), I3v2(Isolated V2  Besar) K1 (Kubernetes).
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+- uid: az_appservice_plan_list
+  name: az appservice plan list
+  summary: Mencantumkan paket layanan aplikasi.
+  description: ''
+  syntax: az appservice plan list [--resource-group]
+  examples:
+  - summary: Daftar semua paket App Service tingkat gratis.
+    syntax: az appservice plan list --query "[?sku.tier=='Free']"
+  - summary: Mencantumkan semua paket App Service untuk lingkungan App Service.
+    syntax: az appservice plan list --query "[?hostingEnvironmentProfile.name=='<ase-name>']"
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_appservice_plan_show
+  name: az appservice plan show
+  summary: Dapatkan paket layanan aplikasi untuk grup sumber daya atau sekumpulan grup sumber daya.
+  description: ''
+  syntax: >-
+    az appservice plan show --name
+                            --resource-group
+  examples:
+  - summary: Dapatkan paket layanan aplikasi untuk grup sumber daya atau sekumpulan grup sumber daya. (dibuat otomatis)
+    syntax: az appservice plan show --name MyAppServicePlan --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama paket layanan aplikasi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_appservice_plan_update
+  name: az appservice plan update
+  summary: Memperbarui paket layanan aplikasi. Lihat https://docs.microsoft.com/azure/app-service/app-service-plan-manage#move-an-app-to-another-app-service-plan untuk mempelajari lebih lanjut.
+  description: ''
+  syntax: >-
+    az appservice plan update --name
+                              --resource-group
+                              [--no-wait]
+                              [--number-of-workers]
+                              [--sku {ANY, B1, B2, B3, D1, ELASTICANY, F1, FREE, I1, I2, I3, P1V2, P2V2, P3V2, PC2, PC3, PC4, S1, S2, S3, SHARED}]
+  examples:
+  - summary: Memperbarui paket layanan aplikasi. (dibuat otomatis)
+    syntax: az appservice plan update --name MyAppServicePlan --resource-group MyResourceGroup --sku F1
+  - summary: Memperbarui paket layanan aplikasi kubernetes.
+    syntax: >-
+      az appservice plan update --name MyAppServicePlan --resource-group MyResourceGroup \
+          --sku ANY --number-of-workers 3
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama paket layanan aplikasi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --number-of-workers
+    defaultValue: "1"
+    summary: Jumlah pekerja yang akan dialokasikan.
+    description: ''
+  - name: --sku
+    parameterValueGroup: ANY, B1, B2, B3, D1, ELASTICANY, F1, FREE, I1, I2, I3, P1V2, P2V2, P3V2, PC2, PC3, PC4, S1, S2, S3, SHARED
+    summary: Tingkat harga, misalnya, F1(Free), D1(Shared), B1(Basic Small), B2(Basic Medium), B3(Basic Large), S1(Standard Small), P1V2(Premium V2 Small), PC2 (Premium Container Small), PC3 (Premium Container Medium), PC4 (Premium Container Large), I1 (Isolated Small), I2 (Isolated Medium), I3 (Isolated Large), K1 (Kubernetes).
+    description: ''
+commands:
+- az_appservice_plan_create
+- az_appservice_plan_list
+- az_appservice_plan_show
+- az_appservice_plan_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola paket layanan aplikasi.
+  ms.openlocfilehash: e4526310b07db75b7217f5665dcc49c5866ff2cd
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141101551"

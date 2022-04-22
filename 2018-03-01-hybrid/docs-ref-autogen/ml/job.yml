@@ -1,0 +1,330 @@
+### YamlMime:AzureCLIGroup
+uid: az_ml_job
+name: az ml job
+extensionInformation: >-
+  > [!Note]
+
+  > This reference is part of the **ml** extension for the Azure CLI  (version 2.15.0 or higher).  The extension will automatically install the first time you run an **az ml job** command.  [Learn more](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) about extensions.
+summary: Mengelola pekerjaan Azure ML.
+description: >-
+  Pekerjaan Azure ML menjalankan tugas terhadap target komputasi tertentu. Anda dapat mengonfigurasi pekerjaan untuk menskalakan pelatihan model di Azure. Azure ML mendukung berbagai jenis pekerjaan dengan kemampuan yang berbeda. Misalnya, pekerjaan paling mendasar, pekerjaan perintah, menjalankan perintah dalam kontainer Docker dan dapat dimanfaatkan untuk simpul tunggal dan pelatihan terdistribusi. Pekerjaan pembersihan menjalankan pembersihan hiperparameter di atas ruang pencarian tertentu untuk menyetel hiperparameter model.
+
+
+  Pekerjaan juga memungkinkan pelacakan sistematis untuk eksperimen dan alur kerja ML Anda. Setelah pekerjaan dibuat, Azure ML mempertahankan catatan eksekusi untuk pekerjaan yang menyertakan metadata, metrik, log, dan artefak apa pun yang dihasilkan selama pekerjaan, kode yang dijalankan, dan lingkungan Azure ML yang digunakan. Semua rekaman eksekusi pekerjaan Anda dapat dilihat di Azure ML studio.
+directCommands:
+- uid: az_ml_job_archive
+  name: arsip pekerjaan az ml
+  summary: Mengarsipkan pekerjaan.
+  description: Pengarsipan pekerjaan akan menyembunyikannya secara default dari kueri daftar (`az ml job list`). Anda masih dapat terus mereferensikan dan menggunakan pekerjaan yang diarsipkan di alur kerja Anda. Hanya pekerjaan yang selesai yang dapat diarsipkan.
+  syntax: >-
+    az ml job archive --name
+                      --resource-group
+                      --workspace-name
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama pekerjaan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+- uid: az_ml_job_cancel
+  name: az ml job cancel
+  summary: Membatalkan pekerjaan.
+  description: ''
+  syntax: >-
+    az ml job cancel --name
+                     --resource-group
+                     --workspace-name
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama pekerjaan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+- uid: az_ml_job_create
+  name: az ml job create
+  summary: Buat pekerjaan.
+  description: Untuk membuat pekerjaan, Anda biasanya perlu mengonfigurasi kode apa pun untuk dijalankan, lingkungan yang merangkum dependensi, target komputasi untuk menjalankan pekerjaan, dan pengaturan khusus pekerjaan tambahan. Ketika pekerjaan dibuat, pekerjaan dikirimkan untuk dieksekusi terhadap sumber daya komputasi yang ditentukan.
+  syntax: >-
+    az ml job create --file
+                     --resource-group
+                     --workspace-name
+                     [--name]
+                     [--save-as]
+                     [--set]
+                     [--stream]
+                     [--web]
+  examples:
+  - summary: Membuat pekerjaan dari file spesifikasi YAML
+    syntax: az ml job create --file job.yml --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Membuat pekerjaan dari file spesifikasi YAML dan membuka detail eksekusi pekerjaan di portal studio Azure ML
+    syntax: az ml job create --file job.yml --web --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --file -f
+    summary: Jalur lokal ke file YAML yang berisi spesifikasi pekerjaan Azure ML.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --name -n
+    summary: Nama pekerjaan.
+    description: ''
+  - name: --save-as -a
+    summary: File yang status pekerjaan yang dibuat dalam format YAML akan ditulis.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur. Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --stream -s
+    summary: Menunjukkan apakah akan melakukan streaming log pekerjaan ke konsol.
+    description: ''
+  - name: --web -e
+    summary: Tampilkan detail eksekusi pekerjaan di Azure ML studio di browser web.
+    description: ''
+- uid: az_ml_job_download
+  name: unduh pekerjaan az ml
+  summary: Unduh semua file terkait pekerjaan.
+  description: File akan diunduh dalam folder bernama sesuai dengan nama pekerjaan.
+  syntax: >-
+    az ml job download --name
+                       --resource-group
+                       --workspace-name
+                       [--all]
+                       [--download-path]
+                       [--output-name]
+  examples:
+  - summary: Mengunduh log dan output pekerjaan ke direktori kerja saat ini
+    syntax: az ml job download --name my-job --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama pekerjaan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --all
+    summary: Unduh semua output pekerjaan.
+    description: ''
+  - name: --download-path -p
+    summary: Jalur untuk mengunduh file pekerjaan. Jika dihilangkan, file pekerjaan akan diunduh ke direktori saat ini.
+    description: ''
+  - name: --output-name
+    summary: Nama output yang ditentukan pengguna untuk diunduh. Ini harus sesuai dengan kunci dalam kamus output pekerjaan. Jika dihilangkan, file output artefak default pekerjaan akan diunduh.
+    description: ''
+- uid: az_ml_job_list
+  name: az ml job list
+  summary: Mencantumkan pekerjaan di ruang kerja.
+  description: ''
+  syntax: >-
+    az ml job list --resource-group
+                   --workspace-name
+                   [--all-results {false, true}]
+                   [--include-archived]
+                   [--max-results]
+                   [--parent-job-name]
+  examples:
+  - summary: Cantumkan semua status pekerjaan di ruang kerja menggunakan argumen --query untuk menjalankan kueri JMESPath pada hasil perintah.
+    syntax: az ml job list --query "[].{Name:name,Jobstatus:status}"  --output table --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --all-results
+    parameterValueGroup: false, true
+    summary: Mengembalikan semua hasil.
+    description: ''
+  - name: --include-archived
+    summary: Mencantumkan pekerjaan yang diarsipkan dan pekerjaan aktif.
+    description: ''
+  - name: --max-results -r
+    defaultValue: "50"
+    summary: Jumlah maksimum hasil yang akan dikembalikan. Defaultnya adalah 50.
+    description: ''
+  - name: --parent-job-name -p
+    summary: Nama pekerjaan induk. Akan mencantumkan semua pekerjaan yang parent_job_name nya cocok dengan nama yang diberikan.
+    description: ''
+- uid: az_ml_job_restore
+  name: az ml job restore
+  summary: Memulihkan pekerjaan yang diarsipkan.
+  description: Ketika pekerjaan yang diarsipkan dipulihkan, pekerjaan tersebut tidak akan lagi disembunyikan dari kueri daftar (`az ml job list`).
+  syntax: >-
+    az ml job restore --name
+                      --resource-group
+                      --workspace-name
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama pekerjaan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+- uid: az_ml_job_show
+  name: az ml job show
+  summary: Tampilkan detail untuk pekerjaan.
+  description: ''
+  syntax: >-
+    az ml job show --name
+                   --resource-group
+                   --workspace-name
+                   [--web]
+  examples:
+  - summary: Perlihatkan status pekerjaan menggunakan argumen --query untuk menjalankan kueri JMESPath pada hasil perintah.
+    syntax: az ml job show --name my-job-id --query "{Name:name,Jobstatus:status}"  --output table --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama pekerjaan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --web -e
+    summary: Tampilkan detail eksekusi pekerjaan di Azure ML studio di browser web.
+    description: ''
+- uid: az_ml_job_stream
+  name: az ml job stream
+  summary: Streaming log pekerjaan ke konsol.
+  description: ''
+  syntax: >-
+    az ml job stream --name
+                     --resource-group
+                     --workspace-name
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama pekerjaan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+- uid: az_ml_job_update
+  name: az ml job update
+  summary: Memperbarui pekerjaan.
+  description: Hanya properti 'tag' dan 'properti' yang dapat diperbarui.
+  syntax: >-
+    az ml job update --name
+                     --resource-group
+                     --workspace-name
+                     [--add]
+                     [--force-string]
+                     [--remove]
+                     [--set]
+                     [--web]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama pekerjaan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --web -e
+    summary: Tampilkan detail eksekusi pekerjaan di Azure ML studio di browser web.
+    description: ''
+commands:
+- az_ml_job_archive
+- az_ml_job_cancel
+- az_ml_job_create
+- az_ml_job_download
+- az_ml_job_list
+- az_ml_job_restore
+- az_ml_job_show
+- az_ml_job_stream
+- az_ml_job_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: >-
+    Pekerjaan Azure ML menjalankan tugas terhadap target komputasi tertentu. Anda dapat mengonfigurasi pekerjaan untuk menskalakan pelatihan model di Azure. Azure ML mendukung berbagai jenis pekerjaan dengan kemampuan yang berbeda. Misalnya, pekerjaan paling dasar, pekerjaan perintah, menjalankan perintah dalam kontainer Docker dan dapat dimanfaatkan untuk simpul tunggal dan pelatihan terdistribusi. Pekerjaan pembersihan menjalankan pembersihan hyperparameter di atas ruang pencarian tertentu untuk menyetel hiperparameter model.
+
+
+    Pekerjaan juga memungkinkan pelacakan sistematis untuk eksperimen dan alur kerja ML Anda. Setelah pekerjaan dibuat, Azure ML mempertahankan catatan eksekusi untuk pekerjaan yang menyertakan metadata, metrik, log, dan artefak apa pun yang dihasilkan selama pekerjaan, kode yang dijalankan, dan lingkungan Azure ML yang digunakan. Semua rekaman eksekusi pekerjaan Anda dapat dilihat di studio Azure ML.
+  ms.openlocfilehash: d8bbb27432d9823fc27ba5cf08dd381e3bf86df9
+  ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141397964"

@@ -1,0 +1,421 @@
+### YamlMime:AzureCLIGroup
+uid: az_iot_dps_enrollment-group
+name: az iot dps enrollment-group
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **azure-iot** untuk Azure CLI (versi 2.24.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az iot dps enrollment-group** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola grup pendaftaran dalam Azure IoT Hub Device Provisioning Service.
+description: ''
+directCommands:
+- uid: az_iot_dps_enrollment-group_compute-device-key
+  name: az iot dps enrollment-group compute-device-key
+  summary: Buat kunci SAS perangkat turunan untuk grup pendaftaran di Azure IoT Hub Device Provisioning Service.
+  description: ''
+  syntax: >-
+    az iot dps enrollment-group compute-device-key --registration-id
+                                                   [--auth-type {key, login}]
+                                                   [--dps-name]
+                                                   [--eid]
+                                                   [--key]
+                                                   [--login]
+                                                   [--resource-group]
+  examples:
+  - summary: Komputasi kunci perangkat dengan kunci konten yang diberikan.
+    syntax: az iot dps enrollment-group compute-device-key --key {enrollement_group_symmetric_key} --registration-id {registration_id}
+  - summary: Komputasi kunci perangkat dengan grup pendaftaran yang diberikan.
+    syntax: az iot dps enrollment-group compute-device-key -g {resource_group_name} --dps-name {dps_name} --enrollment-id {enrollment_id} --registration-id {registration_id}
+  requiredParameters:
+  - isRequired: true
+    name: --registration-id --rid
+    summary: ID pendaftaran perangkat.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iotdps-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --dps-name -n
+    summary: Nama Azure IoT Hub Device Provisioning Service. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --eid --enrollment-id --gid --group-id
+    summary: ID grup pendaftaran.
+    description: ''
+  - name: --key --symmetric-key
+    summary: Kunci akses bersama simetris untuk grup pendaftaran. Ini melewati registri Device Provisioning Service dan menghasilkan token SAS langsung dari kunci konten yang disediakan tanpa validasi lebih lanjut. Semua parameter perintah lainnya selain DARI ID pendaftaran akan diabaikan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --dps-name tidak disediakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_iot_dps_enrollment-group_create
+  name: az iot dps enrollment-group create
+  summary: Buat grup pendaftaran di Azure IoT Hub Device Provisioning Service.
+  description: ''
+  syntax: >-
+    az iot dps enrollment-group create --eid
+                                       [--allocation-policy {custom, geoLatency, hashed, static}]
+                                       [--api-version]
+                                       [--auth-type {key, login}]
+                                       [--ca-name]
+                                       [--certificate-path]
+                                       [--dps-name]
+                                       [--edge-enabled {false, true}]
+                                       [--hn]
+                                       [--ih]
+                                       [--initial-twin-properties]
+                                       [--initial-twin-tags]
+                                       [--login]
+                                       [--pk]
+                                       [--provisioning-status {disabled, enabled}]
+                                       [--reprovision-policy {never, reprovisionandmigratedata, reprovisionandresetdata}]
+                                       [--resource-group]
+                                       [--scn]
+                                       [--scp]
+                                       [--secondary-key]
+                                       [--webhook-url]
+  examples:
+  - summary: Buat grup pendaftaran '{enrollment_id}' di layanan provisi Azure IoT '{dps_name}' di grup sumber daya '{resource_group_name} menggunakan sertifikat perantara sebagai sertifikat utama'.
+    syntax: az iot dps enrollment-group create -g {resource_group_name} --dps-name {dps_name} --enrollment-id {enrollment_id} --certificate-path /certificates/Certificate.pem
+  - summary: Buat grup pendaftaran '{enrollment_id}' di layanan provisi Azure IoT '{dps_name}' di grup sumber daya '{resource_group_name} menggunakan sertifikat CA {certificate_name} sebagai sertifikat sekunder'.
+    syntax: az iot dps enrollment-group create -g {resource_group_name} --dps-name {dps_name} --enrollment-id {enrollment_id} --secondary-ca-name {certificate_name}
+  - summary: Buat grup pendaftaran '{enrollment_id}' di layanan provisi Azure IoT 'MyDps' di grup sumber daya '{resource_group_name}' dengan status provisi 'diaktifkan', properti kembar awal '{"location":{"region":"US"}}' dan tag kembar awal '{"version_dps":"1"}' menggunakan sertifikat perantara sebagai sertifikat utama'.
+    syntax: az iot dps enrollment-group create -g {resource_group_name} --dps-name {dps_name} --enrollment-id {enrollment_id} --certificate-path /certificates/Certificate.pem --provisioning-status enabled --initial-twin-properties "{'location':{'region':'US'}}" --initial-twin-tags "{'version_dps':'1'}"
+  - summary: Buat grup pendaftaran '{enrollment_id}' di layanan provisi Azure IoT '{dps_name}' di grup sumber daya '{resource_group_name} dengan tipe pengesahan 'symmetrickey'.
+    syntax: az iot dps enrollment-group create -g {resource_group_name} --dps-name {dps_name} --enrollment-id {enrollment_id} --primary-key {primary_key} --secondary-key {secondary_key}
+  - summary: Buat grup pendaftaran '{enrollment_id}' dengan kebijakan alokasi kustom,
+    syntax: az iot dps enrollment-group create -g {resource_group_name} --dps-name {dps_name} --enrollment-id {enrollment_id} --allocation-policy custom --webhook-url {webhook_url} --api-version {api_version}
+  requiredParameters:
+  - isRequired: true
+    name: --eid --enrollment-id --gid --group-id
+    summary: ID grup pendaftaran.
+    description: ''
+  optionalParameters:
+  - name: --allocation-policy --ap
+    parameterValueGroup: custom, geoLatency, hashed, static
+    summary: Jenis kebijakan alokasi untuk menentukan bagaimana perangkat ditetapkan ke IoT Hub. Jika tidak disediakan, kebijakan alokasi akan menjadi default kebijakan alokasi saat ini yang ditetapkan untuk instans Device Provisioning Service.
+    description: ''
+  - name: --api-version --av
+    summary: 'Versi API dari jenis layanan provisi yang dikirim dalam permintaan alokasi kustom. Versi minimum yang didukung: pratinjau 2018-09-01.'
+    description: ''
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iotdps-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --ca-name --cn --root-ca-name
+    summary: Nama sertifikat OS akar utama. Jika pengesahan dengan sertifikat OS akar diinginkan, maka nama ca akar harus disediakan.
+    description: ''
+  - name: --certificate-path --cp
+    summary: Jalur ke file yang berisi sertifikat utama. Jika pengesahan dengan sertifikat perantara diinginkan, jalur sertifikat harus disediakan.
+    description: ''
+  - name: --dps-name -n
+    summary: Nama Azure IoT Hub Device Provisioning Service. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --edge-enabled --ee
+    parameterValueGroup: false, true
+    summary: Bendera yang menunjukkan pengaktifan tepi.
+    description: ''
+  - name: --hn --iot-hub-host-name
+    summary: Nama host IoT Hub target. Kebijakan alokasi default ke statis jika parameter ini disediakan.
+    description: ''
+  - name: --ih --iot-hubs
+    summary: Nama host IoT Hub target yang terkait dengan kebijakan alokasi. Gunakan daftar yang dipisahkan spasi untuk beberapa IoT Hub.
+    description: ''
+  - name: --initial-twin-properties --props
+    summary: Properti kembar perangkat awal.
+    description: ''
+  - name: --initial-twin-tags --tags
+    summary: Tag kembar perangkat awal.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --dps-name tidak disediakan.
+    description: ''
+  - name: --pk --primary-key
+    summary: Kunci akses bersama simetris utama yang disimpan dalam format base64.
+    description: ''
+  - name: --provisioning-status --ps
+    parameterValueGroup: disabled, enabled
+    summary: Mengaktifkan atau menonaktifkan entri pendaftaran.
+    description: ''
+  - name: --reprovision-policy --rp
+    parameterValueGroup: never, reprovisionandmigratedata, reprovisionandresetdata
+    summary: Kebijakan untuk menentukan bagaimana data perangkat harus ditangani pada provisi ulang ke IoT Hub yang berbeda.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --scn --secondary-ca-name --secondary-root-ca-name
+    summary: Nama sertifikat OS akar sekunder. Jika pengesahan dengan sertifikat OS akar diinginkan, maka nama ca akar harus disediakan.
+    description: ''
+  - name: --scp --secondary-certificate-path
+    summary: Jalur ke file yang berisi sertifikat sekunder. Jika pengesahan dengan sertifikat perantara diinginkan, jalur sertifikat harus disediakan.
+    description: ''
+  - name: --secondary-key --sk
+    summary: Kunci akses bersama simetris sekunder yang disimpan dalam format base64.
+    description: ''
+  - name: --webhook-url --wh
+    summary: URL webhook Azure Function yang digunakan untuk permintaan alokasi kustom.
+    description: ''
+- uid: az_iot_dps_enrollment-group_delete
+  name: az iot dps enrollment-group delete
+  summary: Menghapus grup pendaftaran di Azure IoT Hub Device Provisioning Service.
+  description: ''
+  syntax: >-
+    az iot dps enrollment-group delete --eid
+                                       [--auth-type {key, login}]
+                                       [--dps-name]
+                                       [--etag]
+                                       [--login]
+                                       [--resource-group]
+  requiredParameters:
+  - isRequired: true
+    name: --eid --enrollment-id --gid --group-id
+    summary: ID grup pendaftaran.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iotdps-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --dps-name -n
+    summary: Nama Azure IoT Hub Device Provisioning Service. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --etag -e
+    summary: Tag Etag atau entitas yang sesuai dengan status terakhir sumber daya. Jika tidak ada etag yang disediakan, nilai '\*' digunakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --dps-name tidak disediakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_iot_dps_enrollment-group_list
+  name: az iot dps enrollment-group list
+  summary: Mencantumkan grup pendaftaran dalam Azure IoT Hub Device Provisioning Service.
+  description: ''
+  syntax: >-
+    az iot dps enrollment-group list [--auth-type {key, login}]
+                                     [--dps-name]
+                                     [--login]
+                                     [--resource-group]
+                                     [--top]
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iotdps-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --dps-name -n
+    summary: Nama Azure IoT Hub Device Provisioning Service. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --dps-name tidak disediakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --top
+    summary: Jumlah maksimum elemen yang akan dikembalikan. Gunakan -1 untuk tidak terbatas.
+    description: ''
+- uid: az_iot_dps_enrollment-group_show
+  name: az iot dps enrollment-group show
+  summary: Dapatkan detail grup pendaftaran di Azure IoT Hub Device Provisioning Service.
+  description: ''
+  syntax: >-
+    az iot dps enrollment-group show --eid
+                                     [--auth-type {key, login}]
+                                     [--dps-name]
+                                     [--keys {false, true}]
+                                     [--login]
+                                     [--resource-group]
+  examples:
+  - summary: Penggunaan dasar
+    syntax: az iot dps enrollment-group show --dps-name {dps_name} -g {resource_group} --enrollment-id {enrollment_id}
+  - summary: Sertakan informasi pengesahan lengkap dalam hasil untuk grup pendaftaran kunci konten
+    syntax: az iot dps enrollment-group show --dps-name {dps_name} -g {resource_group} --enrollment-id {symmetric_key_enrollment_id} --show-keys
+  requiredParameters:
+  - isRequired: true
+    name: --eid --enrollment-id --gid --group-id
+    summary: ID grup pendaftaran.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iotdps-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --dps-name -n
+    summary: Nama Azure IoT Hub Device Provisioning Service. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --keys --show-keys
+    parameterValueGroup: false, true
+    summary: Sertakan kunci pengesahan dan informasi dalam hasil grup pendaftaran.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string dan nama koneksi entitas disediakan, string koneksi akan diprioritaskan. Diperlukan jika --dps-name tidak disediakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_iot_dps_enrollment-group_update
+  name: az iot dps enrollment-group update
+  summary: Memperbarui grup pendaftaran di Azure IoT Hub Device Provisioning Service.
+  description: ''
+  syntax: >-
+    az iot dps enrollment-group update --eid
+                                       [--allocation-policy {custom, geoLatency, hashed, static}]
+                                       [--api-version]
+                                       [--auth-type {key, login}]
+                                       [--ca-name]
+                                       [--certificate-path]
+                                       [--dps-name]
+                                       [--edge-enabled {false, true}]
+                                       [--etag]
+                                       [--hn]
+                                       [--ih]
+                                       [--initial-twin-properties]
+                                       [--initial-twin-tags]
+                                       [--login]
+                                       [--pk]
+                                       [--provisioning-status {disabled, enabled}]
+                                       [--rc {false, true}]
+                                       [--remove-secondary-certificate {false, true}]
+                                       [--reprovision-policy {never, reprovisionandmigratedata, reprovisionandresetdata}]
+                                       [--resource-group]
+                                       [--scn]
+                                       [--scp]
+                                       [--secondary-key]
+                                       [--webhook-url]
+  examples:
+  - summary: Perbarui grup pendaftaran '{enrollment_id}' di layanan provisi Azure IoT '{dps_name}' di grup sumber daya '{resource_group_name}' dengan properti kembar awal dan tag kembar awal.
+    syntax: az iot dps enrollment-group update -g {resource_group_name} --dps-name {dps_name} --enrollment-id {enrollment_id} --initial-twin-properties "{'location':{'region':'USA'}}" --initial-twin-tags "{'version_dps':'2'}" --etag AAAAAAAAAAA=
+  - summary: Perbarui grup pendaftaran '{enrollment_id}' di layanan provisi Azure IoT '{dps_name}' di grup sumber daya '{resource_group_name}' dengan sertifikat perantara utama baru dan hapus sertifikat perantara sekunder yang ada.
+    syntax: az iot dps enrollment-group update -g {resource_group_name} --dps-name {dps_name} --enrollment-id {enrollment_id} --certificate-path /certificates/NewCertificate.pem --remove-secondary-certificate --etag AAAAAAAAAAA=
+  - summary: Perbarui grup pendaftaran '{enrollment_id}' di layanan provisi Azure IoT '{dps_name}' di grup sumber daya '{resource_group_name}' dengan sertifikat CA sekunder baru '{certificate_name}' dan hapus sertifikat CA utama yang ada.
+    syntax: az iot dps enrollment-group update -g {resource_group_name} --dps-name {dps_name} --enrollment-id {enrollment_id} --secondary-ca-name {certificate_name} --remove-certificate --etag AAAAAAAAAAA=
+  - summary: Perbarui grup pendaftaran '{enrollment_id}' di layanan provisi Azure IoT '{dps_name}' di grup sumber daya '{resource_group_name}' dengan kunci primer baru.
+    syntax: az iot dps enrollment-group update -g {resource_group_name} --dps-name {dps_name} --enrollment-id {enrollment_id} --primary-key {new_primary_key} --etag AAAAAAAAAAA=
+  requiredParameters:
+  - isRequired: true
+    name: --eid --enrollment-id --gid --group-id
+    summary: ID grup pendaftaran.
+    description: ''
+  optionalParameters:
+  - name: --allocation-policy --ap
+    parameterValueGroup: custom, geoLatency, hashed, static
+    summary: Jenis kebijakan alokasi untuk menentukan bagaimana perangkat ditetapkan ke IoT Hub. Jika tidak disediakan, kebijakan alokasi akan menjadi default kebijakan alokasi saat ini yang ditetapkan untuk instans Device Provisioning Service.
+    description: ''
+  - name: --api-version --av
+    summary: 'Versi API dari jenis layanan provisi yang dikirim dalam permintaan alokasi kustom. Versi minimum yang didukung: pratinjau 2018-09-01.'
+    description: ''
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iotdps-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --ca-name --cn --root-ca-name
+    summary: Nama sertifikat OS akar utama. Jika pengesahan dengan sertifikat OS akar diinginkan, maka nama ca akar harus disediakan.
+    description: ''
+  - name: --certificate-path --cp
+    summary: Jalur ke file yang berisi sertifikat utama. Jika pengesahan dengan sertifikat perantara diinginkan, jalur sertifikat harus disediakan.
+    description: ''
+  - name: --dps-name -n
+    summary: Nama Azure IoT Hub Device Provisioning Service. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --edge-enabled --ee
+    parameterValueGroup: false, true
+    summary: Bendera yang menunjukkan pengaktifan tepi.
+    description: ''
+  - name: --etag -e
+    summary: Tag Etag atau entitas yang sesuai dengan status terakhir sumber daya. Jika tidak ada etag yang disediakan, nilai '\*' digunakan.
+    description: ''
+  - name: --hn --iot-hub-host-name
+    summary: Nama host IoT Hub target. Kebijakan alokasi default ke statis jika parameter ini disediakan.
+    description: ''
+  - name: --ih --iot-hubs
+    summary: Nama host IoT Hub target yang terkait dengan kebijakan alokasi. Gunakan daftar yang dipisahkan ruang untuk beberapa IoT Hub.
+    description: ''
+  - name: --initial-twin-properties --props
+    summary: Properti kembar perangkat awal.
+    description: ''
+  - name: --initial-twin-tags --tags
+    summary: Tag kembar perangkat awal.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string dan nama koneksi entitas disediakan, string koneksi akan diprioritaskan. Diperlukan jika --dps-name tidak disediakan.
+    description: ''
+  - name: --pk --primary-key
+    summary: Kunci akses bersama simetris utama yang disimpan dalam format base64.
+    description: ''
+  - name: --provisioning-status --ps
+    parameterValueGroup: disabled, enabled
+    summary: Mengaktifkan atau menonaktifkan entri pendaftaran.
+    description: ''
+  - name: --rc --remove-certificate
+    parameterValueGroup: false, true
+    summary: Bendera untuk menghapus sertifikat utama saat ini.
+    description: ''
+  - name: --remove-secondary-certificate --rsc
+    parameterValueGroup: false, true
+    summary: Benderai untuk menghapus sertifikat sekunder saat ini.
+    description: ''
+  - name: --reprovision-policy --rp
+    parameterValueGroup: never, reprovisionandmigratedata, reprovisionandresetdata
+    summary: Kebijakan untuk menentukan bagaimana data perangkat harus ditangani pada provisi ulang ke IoT Hub yang berbeda.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --scn --secondary-ca-name --secondary-root-ca-name
+    summary: Nama sertifikat OS akar sekunder. Jika pengesahan dengan sertifikat OS akar diinginkan, maka nama ca akar harus disediakan.
+    description: ''
+  - name: --scp --secondary-certificate-path
+    summary: Jalur ke file yang berisi sertifikat sekunder. Jika pengesahan dengan sertifikat perantara diinginkan, jalur sertifikat harus disediakan.
+    description: ''
+  - name: --secondary-key --sk
+    summary: Kunci akses bersama simetris sekunder yang disimpan dalam format base64.
+    description: ''
+  - name: --webhook-url --wh
+    summary: URL webhook Azure Function yang digunakan untuk permintaan alokasi kustom.
+    description: ''
+commands:
+- az_iot_dps_enrollment-group_compute-device-key
+- az_iot_dps_enrollment-group_create
+- az_iot_dps_enrollment-group_delete
+- az_iot_dps_enrollment-group_list
+- az_iot_dps_enrollment-group_registration
+- az_iot_dps_enrollment-group_registration_delete
+- az_iot_dps_enrollment-group_registration_list
+- az_iot_dps_enrollment-group_registration_show
+- az_iot_dps_enrollment-group_show
+- az_iot_dps_enrollment-group_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola grup pendaftaran di Azure IoT Hub Device Provisioning Service.
+  ms.openlocfilehash: a24df53216bbaaea1a3d13c6bfe8df4de4344b3d
+  ms.sourcegitcommit: b179e8c36fc1222f584a3780aaf61c99bf78a40d
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/01/2022
+  ms.locfileid: "141306976"

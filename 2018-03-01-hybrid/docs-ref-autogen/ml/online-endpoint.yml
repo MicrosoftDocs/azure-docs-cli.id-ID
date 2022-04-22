@@ -1,0 +1,353 @@
+### YamlMime:AzureCLIGroup
+uid: az_ml_online-endpoint
+name: az ml online-endpoint
+extensionInformation: >-
+  > [!Note]
+
+  > This reference is part of the **ml** extension for the Azure CLI  (version 2.15.0 or higher).  The extension will automatically install the first time you run an **az ml online-endpoint** command.  [Learn more](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) about extensions.
+summary: Mengelola titik akhir online Azure ML.
+description: >-
+  Titik akhir Azure ML menyediakan antarmuka sederhana untuk membuat dan mengelola penyebaran model. Setiap titik akhir dapat memiliki satu atau beberapa penyebaran, memungkinkan lalu lintas dari satu titik akhir penilaian untuk dilayani ke beberapa penyebaran jika diperlukan. Ini berguna untuk skenario seperti peluncuran terkontrol.
+
+
+  Azure ML mendukung dua jenis titik akhir: online dan batch. Titik akhir online mendukung inferensi real-time, sementara titik akhir batch digunakan untuk penilaian batch offline.
+directCommands:
+- uid: az_ml_online-endpoint_create
+  name: az ml online-endpoint create
+  summary: Membuat titik akhir.
+  description: Untuk membuat titik akhir, berikan file YAML dengan konfigurasi titik akhir batch. Jika titik akhir sudah ada, titik akhir akan ditulis secara berlebihan dengan pengaturan baru.
+  syntax: >-
+    az ml online-endpoint create --resource-group
+                                 --workspace-name
+                                 [--auth-mode]
+                                 [--file]
+                                 [--local {false, true}]
+                                 [--name]
+                                 [--no-wait]
+                                 [--set]
+  examples:
+  - summary: Membuat titik akhir dari file spesifikasi YAML
+    syntax: az ml online-endpoint create --file endpoint.yml --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --auth-mode
+    summary: 'Metode autentikasi untuk titik akhir. Nilai yang diizinkan: kunci, aml_token. Default: kunci.'
+    description: ''
+  - name: --file -f
+    summary: Jalur lokal ke file YAML yang berisi spesifikasi titik akhir online Azure ml.
+    description: ''
+  - name: --local
+    parameterValueGroup: false, true
+    summary: "Buat titik akhir secara lokal. Catatan: lalu lintas dan autentikasi tidak didukung secara lokal. Anda dapat menggunakan 'az ml online-deployment create --local' secara langsung. Ini akan membuat titik akhir jika tidak ada."
+    description: ''
+  - name: --name -n
+    summary: Nama titik akhir online.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai. Defaultnya adalah False.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur. Contoh: --set property1.property2=<value>.'
+    description: ''
+- uid: az_ml_online-endpoint_delete
+  name: az ml online-endpoint delete
+  summary: Menghapus titik akhir.
+  description: ''
+  syntax: >-
+    az ml online-endpoint delete --name
+                                 --resource-group
+                                 --workspace-name
+                                 [--local {false, true}]
+                                 [--no-wait]
+                                 [--yes]
+  examples:
+  - summary: Menghapus titik akhir online, termasuk semua penyebarannya
+    syntax: az ml online-endpoint delete --name my-online-endpoint --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama titik akhir online.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --local
+    parameterValueGroup: false, true
+    summary: Menghapus titik akhir lokal.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai. Defaultnya adalah False.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_ml_online-endpoint_get-credentials
+  name: az ml online-endpoint get-credentials
+  summary: Cantumkan token/kunci untuk titik akhir online.
+  description: ''
+  syntax: >-
+    az ml online-endpoint get-credentials --name
+                                          --resource-group
+                                          --workspace-name
+  examples:
+  - summary: Mencantumkan kunci untuk titik akhir online
+    syntax: az ml online-endpoint get-credentials --name my-online-endpoint --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama titik akhir online.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+- uid: az_ml_online-endpoint_invoke
+  name: az ml online-endpoint invoke
+  summary: Memanggil titik akhir.
+  description: Anda dapat memanggil titik akhir online dengan beberapa data permintaan. Ini akan menjadi inferensi real time, dan hasil penilaian akan segera dikembalikan.
+  syntax: >-
+    az ml online-endpoint invoke --name
+                                 --resource-group
+                                 --workspace-name
+                                 [--deployment-name]
+                                 [--local {false, true}]
+                                 [--request-file]
+  examples:
+  - summary: Memanggil titik akhir online dengan beberapa data permintaan
+    syntax: az ml online-endpoint invoke --name my-online-endpoint --request-file sample_request.json --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Memanggil titik akhir online, menargetkan penyebaran tertentu
+    syntax: az ml online-endpoint invoke --name my-online-endpoint --deployment my-deployment --request-file sample_request.json --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama titik akhir online.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --deployment-name -d
+    summary: Nama penyebaran ke target.
+    description: ''
+  - name: --local
+    parameterValueGroup: false, true
+    summary: Panggil titik akhir lokal. Ini hanya akan berfungsi jika penyebaran lokal telah dibuat untuk titik akhir ini.
+    description: ''
+  - name: --request-file -r
+    summary: Jalur lokal ke file JSON yang berisi data permintaan.
+    description: ''
+- uid: az_ml_online-endpoint_list
+  name: az ml online-endpoint list
+  summary: Mencantumkan titik akhir di ruang kerja.
+  description: ''
+  syntax: >-
+    az ml online-endpoint list --resource-group
+                               --workspace-name
+                               [--local {false, true}]
+  examples:
+  - summary: Mencantumkan semua titik akhir online di ruang kerja
+    syntax: az ml online-endpoint list --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Mencantumkan semua titik akhir batch di ruang kerja
+    syntax: az ml online-endpoint list  --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Cantumkan semua titik akhir online di ruang kerja menggunakan argumen --query untuk menjalankan kueri JMESPath pada hasil perintah.
+    syntax: az ml online-endpoint list --query "[].{Name:name}"  --output table --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --local
+    parameterValueGroup: false, true
+    summary: Mencantumkan semua titik akhir lokal.
+    description: ''
+- uid: az_ml_online-endpoint_regenerate-keys
+  name: az ml online-endpoint regenerate-keys
+  summary: Regenerasi kunci untuk titik akhir online.
+  description: ''
+  syntax: >-
+    az ml online-endpoint regenerate-keys --name
+                                          --resource-group
+                                          --workspace-name
+                                          [--key-type]
+                                          [--no-wait]
+  examples:
+  - summary: Meregenerasi kunci untuk titik akhir online
+    syntax: az ml online-endpoint regenerate-keys --name my-online-endpoint --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama titik akhir online.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --key-type
+    defaultValue: primary
+    summary: 'Jenis kunci yang akan diregenerasi. Nilai yang diizinkan: primer, sekunder.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai. Defaultnya adalah False.
+    description: ''
+- uid: az_ml_online-endpoint_show
+  name: az ml online-endpoint show
+  summary: Perlihatkan detail untuk titik akhir.
+  description: ''
+  syntax: >-
+    az ml online-endpoint show --name
+                               --resource-group
+                               --workspace-name
+                               [--local {false, true}]
+  examples:
+  - summary: Menampilkan detail untuk titik akhir batch
+    syntax: az ml online-endpoint show --name my-online-endpoint  --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Perlihatkan status penyediaan titik akhir menggunakan argumen --query untuk menjalankan kueri JMESPath pada hasil perintah.
+    syntax: az ml online-endpoint show -n my-endpoint --query "{Name:name,State:provisioning_state}"  --output table --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama titik akhir online.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --local
+    parameterValueGroup: false, true
+    summary: Tampilkan titik akhir lokal.
+    description: ''
+- uid: az_ml_online-endpoint_update
+  name: az ml online-endpoint update
+  summary: Memperbarui titik akhir.
+  description: Properti 'description', 'tags', dan 'traffic' dari titik akhir dapat diperbarui. Selain itu, penyebaran baru dapat ditambahkan ke titik akhir, dan penyebaran yang ada dapat diperbarui.
+  syntax: >-
+    az ml online-endpoint update --resource-group
+                                 --workspace-name
+                                 [--add]
+                                 [--file]
+                                 [--force-string]
+                                 [--local {false, true}]
+                                 [--name]
+                                 [--no-wait]
+                                 [--remove]
+                                 [--set]
+                                 [--traffic]
+  examples:
+  - summary: Memperbarui titik akhir dari file spesifikasi YAML
+    syntax: az ml online-endpoint update --file updated_endpoint.yml --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Memperbarui pengaturan lalu lintas untuk titik akhir
+    syntax: az ml online-endpoint update --name my-online-endpoint  --traffic "my-new-deployment=100" --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --file -f
+    summary: Jalur lokal ke file YAML yang berisi spesifikasi titik akhir online Azure ml.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --local
+    parameterValueGroup: false, true
+    summary: Perbarui titik akhir lokal.
+    description: ''
+  - name: --name -n
+    summary: Nama titik akhir online.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai. Defaultnya adalah False.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --traffic -r
+    summary: Pasangan kunci-nilai yang dipisahkan spasi, dalam tanda kutip, untuk pengaturan lalu lintas untuk titik akhir.
+    description: ''
+commands:
+- az_ml_online-endpoint_create
+- az_ml_online-endpoint_delete
+- az_ml_online-endpoint_get-credentials
+- az_ml_online-endpoint_invoke
+- az_ml_online-endpoint_list
+- az_ml_online-endpoint_regenerate-keys
+- az_ml_online-endpoint_show
+- az_ml_online-endpoint_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: >-
+    Titik akhir Azure ML menyediakan antarmuka sederhana untuk membuat dan mengelola penyebaran model. Setiap titik akhir dapat memiliki satu atau beberapa penyebaran, memungkinkan lalu lintas dari satu titik akhir penilaian untuk dilayani ke beberapa penyebaran jika diperlukan. Ini berguna untuk skenario seperti peluncuran terkontrol.
+
+
+    Azure ML mendukung dua jenis titik akhir: online dan batch. Titik akhir online mendukung inferensi real-time, sementara titik akhir batch digunakan untuk penilaian batch offline.
+  ms.openlocfilehash: b5357adbd018264bccac47f210b5dd8675221ed6
+  ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141397918"

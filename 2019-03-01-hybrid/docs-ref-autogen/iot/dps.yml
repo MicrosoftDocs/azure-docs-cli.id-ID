@@ -1,0 +1,282 @@
+### YamlMime:AzureCLIGroup
+uid: az_iot_dps
+name: az iot dps
+summary: Mengelola Azure IoT Hub Device Provisioning Service.
+description: ''
+directCommands:
+- uid: az_iot_dps_compute-device-key
+  name: az iot dps compute-device-key
+  summary: Buat kunci SAS perangkat turunan.
+  description: Buat kunci perangkat turunan untuk grup pendaftaran DPS.
+  syntax: >-
+    az iot dps compute-device-key --registration-id
+                                  [--auth-type {key, login}]
+                                  [--dps-name]
+                                  [--eid]
+                                  [--key]
+                                  [--login]
+                                  [--resource-group]
+  examples:
+  - summary: Komputasi kunci perangkat dengan kunci konten yang diberikan.
+    syntax: az iot dps compute-device-key --key {enrollement_group_symmetric_key} --registration-id {registration_id}
+  - summary: Komputasi kunci perangkat dengan grup pendaftaran yang diberikan.
+    syntax: az iot dps compute-device-key -g {resource_group_name} --dps-name {dps_name} --enrollment-id {enrollment_id} --registration-id {registration_id}
+  requiredParameters:
+  - isRequired: true
+    name: --registration-id
+    summary: ID pendaftaran perangkat.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iotdps-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --dps-name -n
+    summary: Nama Azure IoT Hub Device Provisioning Service. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --eid --enrollment-id --gid --group-id
+    summary: ID grup pendaftaran.
+    description: ''
+  - name: --key --symmetric-key
+    summary: Kunci akses bersama simetris untuk grup pendaftaran. Ini melewati registri Device Provisioning Service dan menghasilkan token SAS langsung dari kunci konten yang disediakan tanpa validasi lebih lanjut. Semua parameter perintah lainnya selain DARI ID pendaftaran akan diabaikan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string dan nama koneksi entitas disediakan, string koneksi akan diprioritaskan. Diperlukan jika --dps-name tidak disediakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_iot_dps_create
+  name: az iot dps create
+  summary: Buat instans IoT Hub Device Provisioning Service Azure.
+  description: Untuk pengenalan Azure IoT Hub Device Provisioning Service, lihat https://docs.microsoft.com/azure/iot-dps/about-iot-dps.
+  syntax: >-
+    az iot dps create --name
+                      --resource-group
+                      [--edr {false, true}]
+                      [--location]
+                      [--sku {S1}]
+                      [--tags]
+                      [--unit]
+  examples:
+  - summary: Buat Azure IoT Hub Device Provisioning Service dengan tingkat harga standar S1, di wilayah grup sumber daya.
+    syntax: az iot dps create --name MyDps --resource-group MyResourceGroup
+  - summary: Buat Azure IoT Hub Device Provisioning Service dengan tingkat harga standar S1, di wilayah 'eastus'.
+    syntax: az iot dps create --name MyDps --resource-group MyResourceGroup --location eastus
+  - summary: Buat Azure IoT Hub Device Provisioning Service dengan residensi data diberlakukan. Ini akan menonaktifkan pemulihan bencana lintas wilayah.
+    syntax: az iot dps create --name MyDps --resource-group MyResourceGroup --edr
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: IoT Hub Nama Device Provisioning Service.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --edr --enforce-data-residency
+    parameterValueGroup: false, true
+    summary: Terlaksananya residensi data untuk IoT Hub Device Provisioning Service ini dengan menonaktifkan pemulihan bencana lintas pasangan geografis. Properti ini tidak dapat diubah setelah diatur pada sumber daya. Hanya tersedia di wilayah tertentu. Pelajari lebih lanjut di https://aka.ms/dpsdr.
+    description: ''
+  - name: --location -l
+    summary: Lokasi IoT Hub Device Provisioning Service Anda. Default adalah lokasi grup sumber daya target.
+    description: ''
+  - name: --sku
+    defaultValue: S1
+    parameterValueGroup: S1
+    summary: Tingkat harga untuk IoT Hub Device Provisioning Service.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --unit
+    defaultValue: "1"
+    summary: Unit di IoT Hub Device Provisioning Service Anda.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_dps_delete
+  name: az iot dps delete
+  summary: Hapus instans IoT Hub Device Provisioning Service Azure.
+  description: ''
+  syntax: >-
+    az iot dps delete [--ids]
+                      [--name]
+                      [--resource-group]
+  examples:
+  - summary: Menghapus Azure IoT Hub Device Provisioning Service 'MyDps'
+    syntax: az iot dps delete --name MyDps --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: IoT Hub Nama Device Provisioning Service.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_dps_list
+  name: az iot dps list
+  summary: Cantumkan instans IoT Hub Device Provisioning Service Azure.
+  description: ''
+  syntax: az iot dps list [--resource-group]
+  examples:
+  - summary: Mencantumkan semua Azure IoT Hub Device Provisioning Services dalam langganan.
+    syntax: az iot dps list
+  - summary: Mencantumkan semua Azure IoT Hub Device Provisioning Services di grup sumber daya 'MyResourceGroup'
+    syntax: az iot dps list --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_dps_show
+  name: az iot dps show
+  summary: Dapatkan detail instans IoT Hub Device Provisioning Service Azure.
+  description: ''
+  syntax: >-
+    az iot dps show [--ids]
+                    [--name]
+                    [--resource-group]
+  examples:
+  - summary: Menampilkan detail Azure IoT Hub Device Provisioning Service 'MyDps'
+    syntax: az iot dps show --name MyDps --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: IoT Hub Nama Device Provisioning Service.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_dps_update
+  name: az iot dps update
+  summary: Perbarui instans IoT Hub Device Provisioning Service Azure.
+  description: ''
+  syntax: >-
+    az iot dps update [--add]
+                      [--force-string]
+                      [--ids]
+                      [--name]
+                      [--remove]
+                      [--resource-group]
+                      [--set]
+                      [--tags]
+  examples:
+  - summary: Memperbarui Kebijakan Alokasi ke 'GeoLatency' dari Azure IoT Hub Device Provisioning Service 'MyDps'
+    syntax: az iot dps update --name MyDps --resource-group MyResourceGroup --set properties.allocationPolicy="GeoLatency"
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: IoT Hub Nama Device Provisioning Service.
+    description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+commands:
+- az_iot_dps_access-policy
+- az_iot_dps_access-policy_create
+- az_iot_dps_access-policy_delete
+- az_iot_dps_access-policy_list
+- az_iot_dps_access-policy_show
+- az_iot_dps_access-policy_update
+- az_iot_dps_certificate
+- az_iot_dps_certificate_create
+- az_iot_dps_certificate_delete
+- az_iot_dps_certificate_generate-verification-code
+- az_iot_dps_certificate_list
+- az_iot_dps_certificate_show
+- az_iot_dps_certificate_update
+- az_iot_dps_certificate_verify
+- az_iot_dps_compute-device-key
+- az_iot_dps_connection-string
+- az_iot_dps_connection-string_show
+- az_iot_dps_create
+- az_iot_dps_delete
+- az_iot_dps_enrollment
+- az_iot_dps_enrollment_create
+- az_iot_dps_enrollment_delete
+- az_iot_dps_enrollment_list
+- az_iot_dps_enrollment_show
+- az_iot_dps_enrollment_update
+- az_iot_dps_enrollment-group
+- az_iot_dps_enrollment-group_compute-device-key
+- az_iot_dps_enrollment-group_create
+- az_iot_dps_enrollment-group_delete
+- az_iot_dps_enrollment-group_list
+- az_iot_dps_enrollment-group_registration
+- az_iot_dps_enrollment-group_registration_delete
+- az_iot_dps_enrollment-group_registration_list
+- az_iot_dps_enrollment-group_registration_show
+- az_iot_dps_enrollment-group_show
+- az_iot_dps_enrollment-group_update
+- az_iot_dps_linked-hub
+- az_iot_dps_linked-hub_create
+- az_iot_dps_linked-hub_delete
+- az_iot_dps_linked-hub_list
+- az_iot_dps_linked-hub_show
+- az_iot_dps_linked-hub_update
+- az_iot_dps_list
+- az_iot_dps_policy
+- az_iot_dps_policy_create
+- az_iot_dps_policy_delete
+- az_iot_dps_policy_list
+- az_iot_dps_policy_show
+- az_iot_dps_policy_update
+- az_iot_dps_registration
+- az_iot_dps_registration_delete
+- az_iot_dps_registration_list
+- az_iot_dps_registration_show
+- az_iot_dps_show
+- az_iot_dps_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 02/24/2022
+  description: Mengelola Azure IoT Hub Device Provisioning Service.
+  ms.openlocfilehash: 513ece1bdaa82144952bc6c3a4c35336aaa7a496
+  ms.sourcegitcommit: b179e8c36fc1222f584a3780aaf61c99bf78a40d
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/01/2022
+  ms.locfileid: "141306526"

@@ -1,0 +1,217 @@
+### YamlMime:AzureCLIGroup
+uid: az_devops_security_group
+name: az devops security group
+summary: Mengelola grup keamanan.
+description: ''
+directCommands:
+- uid: az_devops_security_group_create
+  name: az devops security group create
+  summary: Buat grup Azure DevOps baru.
+  description: ''
+  syntax: >-
+    az devops security group create [--description]
+                                    [--detect {false, true}]
+                                    [--email-id]
+                                    [--groups]
+                                    [--name]
+                                    [--org]
+                                    [--origin-id]
+                                    [--project]
+                                    [--scope {organization, project}]
+  examples:
+  - summary: Membuat Grup Azure DevOps dengan nama dan deskripsi
+    syntax: >-
+      az devops security group create --name 'Some group name'
+
+      --description 'Something to describe this group'
+  - summary: Menambahkan grup AAD yang sudah ada ke grup Azure DevOps
+    syntax: >-
+      Get object ID of an existing AAD group
+
+      az ad group show -g '{Group Name}'
+
+      az devops security group create --origin-id '{Object ID}' --groups 'vssgp.someDescriptorForGroup'
+  - summary: Menambahkan grup AAD yang sudah ada ke grup Azure DevOps dengan ID Email grup AAD
+    syntax: >-
+      az devops security group create --email-id '{Email ID of AAD group}'
+
+      --groups 'vssgp.someDescriptorForGroup'
+  - summary: Buat grup Azure DevOps baru dan tambahkan ke grup Azure DevOps yang sudah ada.
+    syntax: >-
+      az devops security group create --name 'Some group name'
+
+      --groups 'vssgp.someDescriptorForGroupOne,vssgp.someDescriptorForGroupTwo'
+  optionalParameters:
+  - name: --description
+    summary: Deskripsi grup Azure DevOps.
+    description: ''
+  - name: --detect
+    parameterValueGroup: false, true
+    summary: Mendeteksi organisasi secara otomatis.
+    description: ''
+  - name: --email-id
+    summary: Buat grup baru menggunakan alamat email sebagai referensi ke grup yang sudah ada dari AD eksternal atau penyedia yang didukung AAD. Diperlukan jika nama atau origin-id hilang.
+    description: ''
+  - name: --groups
+    summary: Daftar grup referensi deskriptor yang dipisahkan koma yang Anda inginkan untuk bergabung dengan grup yang baru dibuat.
+    description: ''
+  - name: --name
+    summary: Nama grup Azure DevOps.
+    description: ''
+  - name: --org --organization
+    summary: 'Azure DevOps URL organisasi. Anda dapat mengonfigurasi organisasi default menggunakan az devops configure -d organization=ORG_URL. Diperlukan jika tidak dikonfigurasi sebagai default atau diambil melalui konfigurasi git. Contoh: https://dev.azure.com/MyOrganizationName/.'
+    description: ''
+  - name: --origin-id
+    summary: Buat grup baru menggunakan OriginID sebagai referensi ke grup yang sudah ada dari AD eksternal atau penyedia yang didukung AAD. Diperlukan jika nama atau email-id hilang.
+    description: ''
+  - name: --project -p
+    summary: Nama atau ID proyek tempat grup Azure DevOps harus dibuat.
+    description: ''
+  - name: --scope
+    defaultValue: project
+    parameterValueGroup: organization, project
+    summary: Membuat grup di tingkat proyek atau organisasi.
+    description: ''
+- uid: az_devops_security_group_delete
+  name: az devops security group delete
+  summary: Menghapus grup Azure DevOps.
+  description: ''
+  syntax: >-
+    az devops security group delete --id
+                                    [--detect {false, true}]
+                                    [--org]
+                                    [--yes]
+  requiredParameters:
+  - isRequired: true
+    name: --id
+    summary: Deskriptor grup.
+    description: ''
+  optionalParameters:
+  - name: --detect
+    parameterValueGroup: false, true
+    summary: Mendeteksi organisasi secara otomatis.
+    description: ''
+  - name: --org --organization
+    summary: 'Azure DevOps URL organisasi. Anda dapat mengonfigurasi organisasi default menggunakan az devops configure -d organization=ORG_URL. Diperlukan jika tidak dikonfigurasi sebagai default atau diambil melalui konfigurasi git. Contoh: https://dev.azure.com/MyOrganizationName/.'
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_devops_security_group_list
+  name: az devops security group list
+  summary: Mencantumkan semua grup dalam proyek atau organisasi.
+  description: ''
+  syntax: >-
+    az devops security group list [--continuation-token]
+                                  [--detect {false, true}]
+                                  [--org]
+                                  [--project]
+                                  [--scope {organization, project}]
+                                  [--subject-types]
+  optionalParameters:
+  - name: --continuation-token
+    summary: Jika ada lebih banyak hasil yang tidak dapat dikembalikan dalam satu halaman, kumpulan hasil akan berisi token kelanjutan untuk pengambilan kumpulan hasil berikutnya.
+    description: ''
+  - name: --detect
+    parameterValueGroup: false, true
+    summary: Mendeteksi organisasi secara otomatis.
+    description: ''
+  - name: --org --organization
+    summary: 'Azure DevOps URL organisasi. Anda dapat mengonfigurasi organisasi default menggunakan az devops configure -d organization=ORG_URL. Diperlukan jika tidak dikonfigurasi sebagai default atau diambil melalui konfigurasi git. Contoh: https://dev.azure.com/MyOrganizationName/.'
+    description: ''
+  - name: --project -p
+    summary: Mencantumkan grup untuk proyek tertentu.
+    description: ''
+  - name: --scope
+    defaultValue: project
+    parameterValueGroup: organization, project
+    summary: Mencantumkan grup di tingkat proyek atau organisasi.
+    description: ''
+  - name: --subject-types
+    summary: Daftar subjenis subjek pengguna yang dipisahkan koma untuk mengurangi hasil yang diambil. Anda dapat memberikan bagian awal deskriptor [sebelum titik] sebagai filter misalnya vssgp,aadgp.
+    description: ''
+- uid: az_devops_security_group_show
+  name: az devops security group show
+  summary: Perlihatkan detail grup.
+  description: ''
+  syntax: >-
+    az devops security group show --id
+                                  [--detect {false, true}]
+                                  [--org]
+  requiredParameters:
+  - isRequired: true
+    name: --id
+    summary: Deskriptor grup.
+    description: ''
+  optionalParameters:
+  - name: --detect
+    parameterValueGroup: false, true
+    summary: Mendeteksi organisasi secara otomatis.
+    description: ''
+  - name: --org --organization
+    summary: 'Azure DevOps URL organisasi. Anda dapat mengonfigurasi organisasi default menggunakan az devops configure -d organization=ORG_URL. Diperlukan jika tidak dikonfigurasi sebagai default atau diambil melalui konfigurasi git. Contoh: https://dev.azure.com/MyOrganizationName/.'
+    description: ''
+- uid: az_devops_security_group_update
+  name: az devops security group update
+  summary: Perbarui nama DAN/ATAU deskripsi untuk grup Azure DevOps.
+  description: ''
+  syntax: >-
+    az devops security group update --id
+                                    [--description]
+                                    [--detect {false, true}]
+                                    [--name]
+                                    [--org]
+  requiredParameters:
+  - isRequired: true
+    name: --id
+    summary: Deskriptor grup.
+    description: ''
+  optionalParameters:
+  - name: --description
+    summary: Deskripsi baru untuk grup Azure DevOps.
+    description: ''
+  - name: --detect
+    parameterValueGroup: false, true
+    summary: Mendeteksi organisasi secara otomatis.
+    description: ''
+  - name: --name
+    summary: Nama baru untuk grup Azure DevOps.
+    description: ''
+  - name: --org --organization
+    summary: 'Azure DevOps URL organisasi. Anda dapat mengonfigurasi organisasi default menggunakan az devops configure -d organization=ORG_URL. Diperlukan jika tidak dikonfigurasi sebagai default atau diambil melalui konfigurasi git. Contoh: https://dev.azure.com/MyOrganizationName/.'
+    description: ''
+commands:
+- az_devops_security_group_create
+- az_devops_security_group_delete
+- az_devops_security_group_list
+- az_devops_security_group_membership
+- az_devops_security_group_membership_add
+- az_devops_security_group_membership_list
+- az_devops_security_group_membership_remove
+- az_devops_security_group_show
+- az_devops_security_group_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola grup keamanan.
+  ms.openlocfilehash: 6934f83ecfdedf3de5c7a7f9aab260a010f89d21
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141119641"

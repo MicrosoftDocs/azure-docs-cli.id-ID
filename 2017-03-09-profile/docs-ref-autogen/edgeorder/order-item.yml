@@ -1,0 +1,422 @@
+### YamlMime:AzureCLIGroup
+uid: az_edgeorder_order-item
+name: az edgeorder order-item
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **edgeorder** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az edgeorder order-item** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Kelola item pesanan dengan item pesanan sub grup edgeorder.
+description: ''
+directCommands:
+- uid: az_edgeorder_order-item_cancel
+  name: az edgeorder order-item cancel
+  summary: Batalkan item pesanan.
+  description: ''
+  syntax: >-
+    az edgeorder order-item cancel --name
+                                   --reason
+                                   --resource-group
+  examples:
+  - summary: CancelOrderItem
+    syntax: az edgeorder order-item cancel --reason "Order cancelled" --name "TestOrderItemName1" --resource-group "TestRG"
+  requiredParameters:
+  - isRequired: true
+    name: --name --order-item-name -n
+    summary: Nama item pesanan.
+    description: ''
+  - isRequired: true
+    name: --reason
+    summary: Alasan pembatalan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_edgeorder_order-item_create
+  name: az edgeorder order-item create
+  summary: Membuat item pesanan. Item pesanan yang ada tidak dapat diperbarui dengan api ini dan sebaliknya harus diperbarui dengan API Perbarui item pesanan.
+  description: ''
+  syntax: >-
+    az edgeorder order-item create --name
+                                   --order-item-resource
+                                   --resource-group
+                                   [--no-wait]
+  examples:
+  - summary: CreateOrderItem
+    syntax: az edgeorder order-item create --name "TestOrderItemName01" --order-item-resource "{\"location\":\"eastus\",\"tags\":{\"carrot\":\"vegetable\",\"mango\":\"fruit\"},\"orderItemDetails\":{\"orderItemType\":\"Purchase\",\"preferences\":{\"transportPreferences\":{\"preferredShipmentType\":\"MicrosoftManaged\"}},\"productDetails\":{\"hierarchyInformation\":{\"configurationName\":\"edgep_base\",\"productFamilyName\":\"azurestackedge\",\"productLineName\":\"azurestackedge\",\"productName\":\"azurestackedgegpu\"}}},\"addressDetails\":{\"forwardAddress\":{\"contactDetails\":{\"contactName\":\"Petr Cech\",\"emailList\":[\"ssemmail@microsoft.com\",\"vishwamdir@microsoft.com\"],\"phone\":\"3213131190\",\"phoneExtension\":\"\"},\"shippingAddress\":{\"addressType\":\"None\",\"city\":\"San Francisco\",\"companyName\":\"Microsoft\",\"country\":\"US\",\"postalCode\":\"94107\",\"stateOrProvince\":\"CA\",\"streetAddress1\":\"16 TOWNSEND ST\",\"streetAddress2\":\"UNIT 1\"}}},\"orderId\":\"/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/locations/eastus/orders/TestOrderItemName01\"}" --resource-group "TestRG"
+  requiredParameters:
+  - isRequired: true
+    name: --name --order-item-name -n
+    summary: Nama item pesanan.
+    description: ''
+  - isRequired: true
+    name: --order-item-resource
+    summary: 'Detail item pesanan dari isi permintaan. Nilai yang diharapkan: json-string/json-file/@json-file.'
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_edgeorder_order-item_delete
+  name: az edgeorder order-item delete
+  summary: Menghapus item pesanan.
+  description: ''
+  syntax: >-
+    az edgeorder order-item delete --name
+                                   --resource-group
+                                   [--no-wait]
+                                   [--yes]
+  examples:
+  - summary: DeleteOrderItemByName
+    syntax: az edgeorder order-item delete --name "TestOrderItemName01" --resource-group "TestRG"
+  requiredParameters:
+  - isRequired: true
+    name: --name --order-item-name -n
+    summary: Nama item pesanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_edgeorder_order-item_list
+  name: az edgeorder order-item list
+  summary: Mencantumkan item pesanan di tingkat grup sumber daya. Dan Daftar item pesanan di tingkat langganan.
+  description: ''
+  syntax: >-
+    az edgeorder order-item list [--expand]
+                                 [--filter]
+                                 [--resource-group]
+                                 [--skip-token]
+  examples:
+  - summary: ListOrderItemsAtResourceGroupLevel
+    syntax: az edgeorder order-item list --resource-group "TestRG"
+  - summary: ListOrderItemsAtSubscriptionLevel
+    syntax: az edgeorder order-item list
+  optionalParameters:
+  - name: --expand
+    summary: $expand didukung pada detail perangkat, detail pengiriman maju, dan parameter detail pengiriman terbalik. Masing-masing dapat disediakan sebagai daftar yang dipisahkan koma. Detail Perangkat untuk item pesanan memberikan detail tentang perangkat produk, detail Pengiriman Maju dan Terbalik masing-masing memberikan detail pengiriman maju dan terbalik.
+    description: ''
+  - name: --filter
+    summary: $filter didukung untuk memfilter berdasarkan id pesanan. Filter hanya mendukung operasi yang sama.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --skip-token
+    summary: $skipToken didukung pada Dapatkan daftar item pesanan, yang menyediakan halaman berikutnya dalam daftar item pesanan.
+    description: ''
+- uid: az_edgeorder_order-item_return
+  name: az edgeorder order-item return
+  summary: Mengembalikan item pesanan.
+  description: ''
+  syntax: >-
+    az edgeorder order-item return --name
+                                   --resource-group
+                                   --return-reason
+                                   [--contact-details]
+                                   [--no-wait]
+                                   [--service-tag]
+                                   [--shipping-address]
+                                   [--shipping-box-required {false, true}]
+  examples:
+  - summary: ReturnOrderItem
+    syntax: az edgeorder order-item return --name "TestOrderName1" --resource-group "TestRG" --return-reason "Order returned"
+  requiredParameters:
+  - isRequired: true
+    name: --name --order-item-name -n
+    summary: Nama item pesanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --return-reason
+    summary: Alasan Pengembalian.
+    description: ''
+  optionalParameters:
+  - name: --contact-details
+    summary: Detail kontak untuk alamat tersebut.
+    description: >-
+      Penggunaan: --contact-details contact-name=XX phone=XX phone-extension=XX mobile=XX email-list=XX
+
+
+      nama kontak: Diperlukan. Nama kontak orang tersebut.
+
+      telepon: Diperlukan. Telepon nomor kontak.
+
+      ekstensi telepon: Telepon nomor ekstensi kontak.
+
+      mobile: Nomor ponsel kontak.
+
+      email-list: Diperlukan. Daftar Email-id yang akan diberi tahu tentang kemajuan pekerjaan.
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --service-tag
+    summary: Tag layanan (terletak di sudut kanan bawah perangkat).
+    description: ''
+  - name: --shipping-address
+    summary: Detail pengiriman untuk alamat.
+    description: >-
+      Penggunaan: --shipping-address street-address1=XX street-address2=XX street-address3=XX city=XX state-or-province=XX country=XX postal-code=XX zip-extended-code=XX company-name=XX address-type=XX
+
+
+      alamat jalan1: Diperlukan. Alamat Jalan baris 1.
+
+      alamat jalan2: Alamat Jalan baris 2.
+
+      alamat jalan3: Alamat Jalan baris 3.
+
+      kota: Nama Kota.
+
+      negara bagian atau provinsi: Nama Negara Bagian atau Provinsi.
+
+      negara: Diperlukan. Nama Negara.
+
+      kode pos: Kode pos.
+
+      zip-extended-code: Extended Zip Code.
+
+      nama perusahaan: Nama perusahaan.
+
+      jenis alamat: Jenis alamat.
+  - name: --shipping-box-required
+    parameterValueGroup: false, true
+    summary: Kotak Pengiriman diperlukan.
+    description: ''
+- uid: az_edgeorder_order-item_show
+  name: az edgeorder order-item show
+  summary: Dapatkan item pesanan.
+  description: ''
+  syntax: >-
+    az edgeorder order-item show --name
+                                 --resource-group
+                                 [--expand]
+  examples:
+  - summary: GetOrderItemByName
+    syntax: az edgeorder order-item show --name "TestOrderItemName01" --resource-group "TestRG"
+  requiredParameters:
+  - isRequired: true
+    name: --name --order-item-name -n
+    summary: Nama item pesanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --expand
+    summary: $expand didukung pada detail perangkat, detail pengiriman maju, dan parameter detail pengiriman terbalik. Masing-masing dapat disediakan sebagai daftar yang dipisahkan koma. Detail Perangkat untuk item pesanan memberikan detail tentang perangkat produk, detail Pengiriman Maju dan Terbalik masing-masing memberikan detail pengiriman maju dan terbalik.
+    description: ''
+- uid: az_edgeorder_order-item_update
+  name: az edgeorder order-item update
+  summary: Perbarui properti item pesanan yang sudah ada.
+  description: ''
+  syntax: >-
+    az edgeorder order-item update --name
+                                   --resource-group
+                                   [--contact-details]
+                                   [--encryption-preferences]
+                                   [--if-match]
+                                   [--mgmt-preferences]
+                                   [--no-wait]
+                                   [--notif-email-list]
+                                   [--notif-preferences]
+                                   [--shipping-address]
+                                   [--tags]
+                                   [--transport-preferences]
+  examples:
+  - summary: UpdateOrderItem
+    syntax: az edgeorder order-item update --name "TestOrderItemName01" --contact-details contact-name="Updated contact name" email-list="testemail@microsoft.com" phone="2222200000" --transport-preferences preferred-shipment-type="CustomerManaged" --tags ant="insect" pigeon="bird" tiger="animal" --resource-group "TestRG"
+  requiredParameters:
+  - isRequired: true
+    name: --name --order-item-name -n
+    summary: Nama item pesanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --contact-details
+    summary: Detail kontak untuk alamat tersebut.
+    description: >-
+      Penggunaan: --contact-details contact-name=XX phone=XX phone-extension=XX mobile=XX email-list=XX
+
+
+      nama kontak: Diperlukan. Nama kontak orang tersebut.
+
+      telepon: Diperlukan. Telepon nomor kontak.
+
+      ekstensi telepon: Telepon nomor ekstensi kontak.
+
+      mobile: Nomor ponsel kontak.
+
+      email-list: Diperlukan. Daftar Email-id yang akan diberi tahu tentang kemajuan pekerjaan.
+  - name: --encryption-preferences
+    summary: Preferensi yang terkait dengan Enkripsi.
+    description: >-
+      Penggunaan: --encryption-preferences double-encryption-status=XX
+
+
+      status enkripsi ganda: Status enkripsi ganda seperti yang dimasukkan oleh pelanggan. Wajib untuk memberikan parameter ini jika kebijakan 'Tolak' atau 'Dinonaktifkan' dikonfigurasi.
+  - name: --if-match
+    summary: Menentukan kondisi If-Match. Patch akan dilakukan hanya jika ETag urutan pada server cocok dengan nilai ini.
+    description: ''
+  - name: --mgmt-preferences
+    summary: Preferensi yang terkait dengan sumber daya Manajemen.
+    description: >-
+      Penggunaan: --mgmt-preferences preferred-management-resource-id=XX
+
+
+      preferred-management-resource-id: ID ARM sumber daya Manajemen pilihan pelanggan.
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --notif-email-list
+    summary: Daftar email pemberitahuan tambahan.
+    description: ''
+  - name: --notif-preferences
+    summary: Preferensi pemberitahuan.
+    description: >-
+      Penggunaan: --notif-preferences stage-name=XX send-notification=XX
+
+
+      nama tahap: Diperlukan. Nama panggung.
+
+      send-notification: Diperlukan. Pemberitahuan diperlukan atau tidak.
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --notification-preferences.
+  - name: --shipping-address
+    summary: Detail pengiriman untuk alamat.
+    description: >-
+      Penggunaan: --shipping-address street-address1=XX street-address2=XX street-address3=XX city=XX state-or-province=XX country=XX postal-code=XX zip-extended-code=XX company-name=XX address-type=XX
+
+
+      alamat jalan1: Diperlukan. Alamat Jalan baris 1.
+
+      alamat jalan2: Alamat Jalan baris 2.
+
+      alamat jalan3: Alamat Jalan baris 3.
+
+      kota: Nama Kota.
+
+      negara bagian atau provinsi: Nama Negara Bagian atau Provinsi.
+
+      negara: Diperlukan. Nama Negara.
+
+      kode pos: Kode pos.
+
+      zip-extended-code: Extended Zip Code.
+
+      nama perusahaan: Nama perusahaan.
+
+      jenis alamat: Jenis alamat.
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --transport-preferences
+    summary: Preferensi yang terkait dengan logistik pengiriman pesanan.
+    description: >-
+      Penggunaan: --transport-preferences preferred-shipment-type=XX
+
+
+      preferred-shipment-type: Diperlukan. Menunjukkan jenis Logistik Pengiriman yang disukai pelanggan.
+- uid: az_edgeorder_order-item_wait
+  name: az edgeorder order-item wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi item pesanan terpenuhi.
+  description: ''
+  syntax: >-
+    az edgeorder order-item wait --order-item-name
+                                 --resource-group
+                                 [--created]
+                                 [--custom]
+                                 [--deleted]
+                                 [--exists]
+                                 [--expand]
+                                 [--interval]
+                                 [--timeout]
+                                 [--updated]
+  requiredParameters:
+  - isRequired: true
+    name: --order-item-name
+    summary: Nama item pesanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --expand
+    summary: $expand didukung pada detail perangkat, detail pengiriman maju, dan parameter detail pengiriman terbalik.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_edgeorder_order-item_cancel
+- az_edgeorder_order-item_create
+- az_edgeorder_order-item_delete
+- az_edgeorder_order-item_list
+- az_edgeorder_order-item_return
+- az_edgeorder_order-item_show
+- az_edgeorder_order-item_update
+- az_edgeorder_order-item_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Kelola item pesanan dengan item pesanan sub grup edgeorder.
+  ms.openlocfilehash: 079a4ed67d3350d6f8838c396ae9b997681616ac
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141077359"

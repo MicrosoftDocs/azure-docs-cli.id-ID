@@ -1,0 +1,401 @@
+### YamlMime:AzureCLIGroup
+uid: az_blueprint
+name: az blueprint
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **cetak biru** untuk Azure CLI (versi 2.3.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **cetak biru az** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Perintah untuk mengelola cetak biru.
+description: ''
+directCommands:
+- uid: az_blueprint_create
+  name: az blueprint create
+  summary: Membuat definisi cetak biru.
+  description: ''
+  syntax: >-
+    az blueprint create --name
+                        [--description]
+                        [--display-name]
+                        [--management-group]
+                        [--parameters]
+                        [--resource-groups]
+                        [--subscription]
+                        [--target-scope {managementGroup, subscription}]
+                        [--versions]
+  examples:
+  - summary: Membuat cetak biru langganan
+    syntax: >-
+      az blueprint create --subscription MySubscription --name \
+
+      MyBlueprint --description \
+
+      "blueprint contains all artifacts" --target-scope \
+
+      subscription
+  - summary: Membuat cetak biru grup manajemen
+    syntax: >-
+      az blueprint create --management-group MyManagementGroup --name \
+
+      MyBlueprint --description \
+
+      "blueprint contains all artifact" --target-scope \
+
+      subscription
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama definisi cetak biru.
+    description: ''
+  optionalParameters:
+  - name: --description
+    summary: Multibaris menjelaskan sumber daya ini.
+    description: ''
+  - name: --display-name
+    summary: String satu baris menjelaskan sumber daya ini.
+    description: ''
+  - name: --management-group -m
+    summary: Gunakan grup manajemen untuk cakupan cetak biru.
+    description: ''
+  - name: --parameters -p
+    summary: Parameter yang diperlukan oleh definisi cetak biru ini. Ini bisa berupa string JSON atau jalur file JSON.
+    description: ''
+  - name: --resource-groups
+    summary: 'Tempat penampung grup sumber daya yang ditentukan oleh definisi cetak biru ini. Nilai yang diharapkan: json-string/@json-file.'
+    description: ''
+  - name: --subscription -s
+    summary: Gunakan langganan untuk cakupan cetak biru. Jika --management-group tidak ditentukan, --nilai langganan atau langganan default akan digunakan sebagai cakupan.
+    description: ''
+  - name: --target-scope
+    defaultValue: subscription
+    parameterValueGroup: managementGroup, subscription
+    summary: Cakupan tempat definisi cetak biru ini dapat ditetapkan.
+    description: ''
+  - name: --versions
+    summary: 'Versi yang diterbitkan dari definisi cetak biru ini. Nilai yang diharapkan: json-string/@json-file.'
+    description: ''
+- uid: az_blueprint_delete
+  name: az blueprint delete
+  summary: Menghapus definisi cetak biru.
+  description: ''
+  syntax: >-
+    az blueprint delete --name
+                        [--management-group]
+                        [--subscription]
+                        [--yes]
+  examples:
+  - summary: Menghapus cetak biru grup manajemen
+    syntax: >-
+      az blueprint delete --management-group MyManagementGroup --name \
+
+      MyBlueprint
+  - summary: Menghapus cetak biru langganan
+    syntax: >-
+      az blueprint delete --subscription MySubscription --name \
+
+      MyBlueprint
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama definisi cetak biru.
+    description: ''
+  optionalParameters:
+  - name: --management-group -m
+    summary: Gunakan grup manajemen untuk cakupan cetak biru.
+    description: ''
+  - name: --subscription -s
+    summary: Gunakan langganan untuk cakupan cetak biru. Jika --management-group tidak ditentukan, --nilai langganan atau langganan default akan digunakan sebagai cakupan.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_blueprint_export
+  name: az blueprint export
+  summary: Ekspor definisi cetak biru dan artefak ke file json.
+  description: ''
+  syntax: >-
+    az blueprint export --name
+                        --output-path
+                        [--management-group]
+                        [--subscription]
+                        [--yes]
+  examples:
+  - summary: Mengekspor definisi cetak biru dan artefak
+    syntax: >-
+      az blueprint export --name MyBlueprint \
+
+      --output-path "path/to/blueprint/directory"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama definisi cetak biru yang akan diekspor.
+    description: ''
+  - isRequired: true
+    name: --output-path
+    summary: Jalur direktori untuk definisi json dari cetak biru dan artefak. File definisi cetak biru akan diberi nama blueprint.json. Artefak file json akan berada dalam subdirektori bernama artefak.
+    description: ''
+  optionalParameters:
+  - name: --management-group -m
+    summary: Gunakan grup manajemen untuk cakupan cetak biru.
+    description: ''
+  - name: --subscription -s
+    summary: Gunakan langganan untuk cakupan cetak biru. Jika --management-group tidak ditentukan, --nilai langganan atau langganan default akan digunakan sebagai cakupan.
+    description: ''
+  - name: --yes -y
+    summary: Lewati konfirmasi pengguna. Ketika diatur, jika direktori tidak ada, direktori akan dibuat. Jika direktori ada dan memiliki konten, direktori tersebut akan ditimpa. Jika tidak diatur, pengguna akan dimintai izin untuk melanjutkan.
+    description: ''
+- uid: az_blueprint_import
+  name: az blueprint import
+  summary: Impor definisi cetak biru dan artefak dari directoy file json.
+  description: ''
+  syntax: >-
+    az blueprint import --input-path
+                        --name
+                        [--management-group]
+                        [--subscription]
+                        [--yes]
+  examples:
+  - summary: Mengimpor definisi cetak biru dan artefak
+    syntax: >-
+      az blueprint import --name MyBlueprint \
+
+      --input-path "path/to/blueprint/directory"
+  requiredParameters:
+  - isRequired: true
+    name: --input-path
+    summary: Jalur direktori untuk definisi json dari cetak biru dan artefak. File definisi cetak biru harus diberi nama blueprint.json. Artefak file json harus berada dalam subdirektori bernama artefak.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama definisi cetak biru.
+    description: ''
+  optionalParameters:
+  - name: --management-group -m
+    summary: Gunakan grup manajemen untuk cakupan cetak biru.
+    description: ''
+  - name: --subscription -s
+    summary: Gunakan langganan untuk cakupan cetak biru. Jika --management-group tidak ditentukan, --nilai langganan atau langganan default akan digunakan sebagai cakupan.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_blueprint_list
+  name: az blueprint list
+  summary: Mencantumkan definisi cetak biru.
+  description: ''
+  syntax: >-
+    az blueprint list [--management-group]
+                      [--subscription]
+  examples:
+  - summary: Mencantumkan cetak biru dalam grup manajemen
+    syntax: az blueprint list --management-group MyManagementGroup
+  - summary: Mencantumkan cetak biru dalam langganan
+    syntax: az blueprint list --subscription MySubscription
+  optionalParameters:
+  - name: --management-group -m
+    summary: Gunakan grup manajemen untuk cakupan cetak biru.
+    description: ''
+  - name: --subscription -s
+    summary: Gunakan langganan untuk cakupan cetak biru. Jika --management-group tidak ditentukan, --nilai langganan atau langganan default akan digunakan sebagai cakupan.
+    description: ''
+- uid: az_blueprint_publish
+  name: az blueprint publish
+  summary: Terbitkan versi baru definisi cetak biru dengan artefak terbaru. Definisi cetak biru yang diterbitkan tidak dapat diubah.
+  description: ''
+  syntax: >-
+    az blueprint publish --blueprint-name
+                         --version
+                         [--change-notes]
+                         [--management-group]
+                         [--subscription]
+  examples:
+  - summary: Menerbitkan cetak biru grup manajemen
+    syntax: >-
+      az blueprint publish --management-group MyManagementGroup --blueprint-name \
+
+      MyBlueprint --version v2
+  - summary: Menerbitkan cetak biru langganan
+    syntax: >-
+      az blueprint publish --subscription MySubscription \
+
+      --blueprint-name MyBlueprint \
+
+      --version v2
+  requiredParameters:
+  - isRequired: true
+    name: --blueprint-name
+    summary: Nama definisi cetak biru.
+    description: ''
+  - isRequired: true
+    name: --version
+    summary: Versi definisi cetak biru yang diterbitkan.
+    description: ''
+  optionalParameters:
+  - name: --change-notes
+    summary: Catatan perubahan khusus versi.
+    description: ''
+  - name: --management-group -m
+    summary: Gunakan grup manajemen untuk cakupan cetak biru.
+    description: ''
+  - name: --subscription -s
+    summary: Gunakan langganan untuk cakupan cetak biru. Jika --management-group tidak ditentukan, --nilai langganan atau langganan default akan digunakan sebagai cakupan.
+    description: ''
+- uid: az_blueprint_show
+  name: az blueprint show
+  summary: Mendapatkan definisi cetak biru.
+  description: ''
+  syntax: >-
+    az blueprint show --name
+                      [--management-group]
+                      [--subscription]
+  examples:
+  - summary: Menampilkan cetak biru grup manajemen
+    syntax: >-
+      az blueprint show --management-group MyManagementGroup --name \
+
+      MyBlueprint
+  - summary: Menampilkan cetak biru langganan
+    syntax: >-
+      az blueprint show --subscription MySubscription --name \
+
+      MyBlueprint
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama definisi cetak biru.
+    description: ''
+  optionalParameters:
+  - name: --management-group -m
+    summary: Gunakan grup manajemen untuk cakupan cetak biru.
+    description: ''
+  - name: --subscription -s
+    summary: Gunakan langganan untuk cakupan cetak biru. Jika --management-group tidak ditentukan, --nilai langganan atau langganan default akan digunakan sebagai cakupan.
+    description: ''
+- uid: az_blueprint_update
+  name: az blueprint update
+  summary: Memperbarui definisi cetak biru.
+  description: ''
+  syntax: >-
+    az blueprint update --name
+                        [--add]
+                        [--description]
+                        [--display-name]
+                        [--force-string]
+                        [--management-group]
+                        [--parameters]
+                        [--remove]
+                        [--resource-groups]
+                        [--set]
+                        [--subscription]
+                        [--target-scope {managementGroup, subscription}]
+                        [--versions]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama definisi cetak biru.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --description
+    summary: Multibaris menjelaskan sumber daya ini.
+    description: ''
+  - name: --display-name
+    summary: String satu baris menjelaskan sumber daya ini.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --management-group -m
+    summary: Gunakan grup manajemen untuk cakupan cetak biru.
+    description: ''
+  - name: --parameters -p
+    summary: Parameter yang diperlukan oleh definisi cetak biru ini. Ini bisa berupa string JSON atau jalur file JSON.
+    description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-groups
+    summary: 'Tempat penampung grup sumber daya yang ditentukan oleh definisi cetak biru ini. Nilai yang diharapkan: json-string/@json-file.'
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --subscription -s
+    summary: Gunakan langganan untuk cakupan cetak biru. Jika --management-group tidak ditentukan, --nilai langganan atau langganan default akan digunakan sebagai cakupan.
+    description: ''
+  - name: --target-scope
+    parameterValueGroup: managementGroup, subscription
+    summary: Cakupan tempat definisi cetak biru ini dapat ditetapkan.
+    description: ''
+  - name: --versions
+    summary: 'Versi yang diterbitkan dari definisi cetak biru ini. Nilai yang diharapkan: json-string/@json-file.'
+    description: ''
+commands:
+- az_blueprint_artifact
+- az_blueprint_artifact_delete
+- az_blueprint_artifact_list
+- az_blueprint_artifact_policy
+- az_blueprint_artifact_policy_create
+- az_blueprint_artifact_policy_update
+- az_blueprint_artifact_role
+- az_blueprint_artifact_role_create
+- az_blueprint_artifact_role_update
+- az_blueprint_artifact_show
+- az_blueprint_artifact_template
+- az_blueprint_artifact_template_create
+- az_blueprint_artifact_template_update
+- az_blueprint_assignment
+- az_blueprint_assignment_create
+- az_blueprint_assignment_delete
+- az_blueprint_assignment_list
+- az_blueprint_assignment_show
+- az_blueprint_assignment_update
+- az_blueprint_assignment_wait
+- az_blueprint_assignment_who
+- az_blueprint_create
+- az_blueprint_delete
+- az_blueprint_export
+- az_blueprint_import
+- az_blueprint_list
+- az_blueprint_publish
+- az_blueprint_resource-group
+- az_blueprint_resource-group_add
+- az_blueprint_resource-group_list
+- az_blueprint_resource-group_remove
+- az_blueprint_resource-group_show
+- az_blueprint_resource-group_update
+- az_blueprint_show
+- az_blueprint_update
+- az_blueprint_version
+- az_blueprint_version_artifact
+- az_blueprint_version_artifact_list
+- az_blueprint_version_artifact_show
+- az_blueprint_version_delete
+- az_blueprint_version_list
+- az_blueprint_version_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Perintah untuk mengelola cetak biru.
+  ms.openlocfilehash: e5655b9955d2b780922be068ec17534f3e63e4b5
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141120091"

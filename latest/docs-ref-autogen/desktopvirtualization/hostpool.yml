@@ -1,0 +1,336 @@
+### YamlMime:AzureCLIGroup
+uid: az_desktopvirtualization_hostpool
+name: az desktopvirtualization hostpool
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **desktopvirtualization** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **az desktopvirtualization hostpool** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Kumpulan host desktopvirtualization.
+description: ''
+directCommands:
+- uid: az_desktopvirtualization_hostpool_create
+  name: az desktopvirtualization hostpool create
+  summary: Buat kumpulan host.
+  description: ''
+  syntax: >-
+    az desktopvirtualization hostpool create --host-pool-type {BYODesktop, Personal, Pooled}
+                                             --load-balancer-type {BreadthFirst, DepthFirst, Persistent}
+                                             --name
+                                             --preferred-app-group-type {Desktop, None, RailApplications}
+                                             --resource-group
+                                             [--custom-rdp-property]
+                                             [--description]
+                                             [--friendly-name]
+                                             [--location]
+                                             [--max-session-limit]
+                                             [--personal-desktop-assignment-type {Automatic, Direct}]
+                                             [--registration-info]
+                                             [--ring]
+                                             [--sso-client-id]
+                                             [--sso-client-secret-key-vault-path]
+                                             [--sso-secret-type {Certificate, CertificateInKeyVault, SharedKey, SharedKeyInKeyVault}]
+                                             [--ssoadfs-authority]
+                                             [--start-vm-on-connect {false, true}]
+                                             [--tags]
+                                             [--validation-environment {false, true}]
+                                             [--vm-template]
+  examples:
+  - summary: HostPool_Create
+    syntax: az desktopvirtualization hostpool create --location "centralus" --description "des1" --friendly-name "friendly" --host-pool-type "Pooled" --load-balancer-type "BreadthFirst" --max-session-limit 999999 --personal-desktop-assignment-type "Automatic" --preferred-app-group-type "Desktop" --registration-info expiration-time="2020-10-01T14:01:54.9571247Z" registration-token-operation="Update" --sso-client-id "client" --sso-client-secret-key-vault-path "https://keyvault/secret" --sso-secret-type "SharedKey" --ssoadfs-authority "https://adfs" --start-vm-on-connect false --vm-template "{json:json}" --tags tag1="value1" tag2="value2" --name "MyHostPool" --resource-group "MyResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --host-pool-type
+    parameterValueGroup: BYODesktop, Personal, Pooled
+    summary: Jenis HostPool untuk desktop.
+    description: >-
+      Pribadi: Pengguna akan diberi SessionHost baik oleh administrator (PersonalDesktopAssignmentType = Direct) atau setelah menyambungkan ke kumpulan (PersonalDesktopAssignmentType = Otomatis). Mereka akan selalu diarahkan ke SessionHost yang ditetapkan.
+
+      Terkumpul: Pengguna mendapatkan SessionHost baru (acak) setiap kali terhubung ke HostPool.
+
+      BYODesktop: Pengguna menetapkan komputer mereka sendiri, logika penyeimbangan beban tetap sama dengan Pribadi. --personal-desktop-ssignment-type harus Direct.
+  - isRequired: true
+    name: --load-balancer-type
+    parameterValueGroup: BreadthFirst, DepthFirst, Persistent
+    summary: Jenis load balancer.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kumpulan host dalam grup sumber daya yang ditentukan.
+    description: ''
+  - isRequired: true
+    name: --preferred-app-group-type -t
+    parameterValueGroup: Desktop, None, RailApplications
+    summary: Jenis jenis grup aplikasi pilihan, default ke Grup Aplikasi Desktop.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --custom-rdp-property
+    summary: Properti rdp kustom hostPool.
+    description: ''
+  - name: --description
+    summary: Deskripsi HostPool.
+    description: ''
+  - name: --friendly-name
+    summary: Nama hostPool yang mudah diingat.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --max-session-limit
+    summary: Batas sesi maksimum HostPool.
+    description: ''
+  - name: --personal-desktop-assignment-type
+    parameterValueGroup: Automatic, Direct
+    summary: Jenis PersonalDesktopAssignment untuk HostPool.
+    description: ''
+  - name: --registration-info
+    summary: Info pendaftaran HostPool.
+    description: >-
+      Penggunaan: --registration-info expiration-time=XX token=XX registration-token-operation=XX
+
+
+      waktu kedaluwarsa: Waktu kedaluwarsa token pendaftaran.
+
+      token: String yang dikodekan base64 token pendaftaran.
+
+      registration-token-operation: Jenis pengaturan ulang token.
+  - name: --ring
+    summary: Nomor cincin HostPool.
+    description: ''
+  - name: --sso-client-id
+    summary: ClientId untuk Pihak Yang Mengandalkan terdaftar yang digunakan untuk menerbitkan sertifikat SSO WVD.
+    description: ''
+  - name: --sso-client-secret-key-vault-path -p
+    summary: Jalur ke Azure KeyVault menyimpan rahasia yang digunakan untuk komunikasi ke ADFS.
+    description: ''
+  - name: --sso-secret-type
+    parameterValueGroup: Certificate, CertificateInKeyVault, SharedKey, SharedKeyInKeyVault
+    summary: Jenis akses menyeluruh pada Jenis Rahasia.
+    description: ''
+  - name: --ssoadfs-authority
+    summary: URL ke server ADFS pelanggan untuk menandatangani sertifikat WVD SSO.
+    description: ''
+  - name: --start-vm-on-connect
+    parameterValueGroup: false, true
+    summary: Bendera untuk mengaktifkan/menonaktifkan fitur StartVMOnConnect.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --validation-environment
+    parameterValueGroup: false, true
+    summary: Adalah lingkungan validasi.
+    description: ''
+  - name: --vm-template
+    summary: Templat VM untuk konfigurasi sessionhosts dalam hostpool.
+    description: ''
+- uid: az_desktopvirtualization_hostpool_delete
+  name: az desktopvirtualization hostpool delete
+  summary: Menghapus kumpulan host.
+  description: ''
+  syntax: >-
+    az desktopvirtualization hostpool delete --name
+                                             --resource-group
+                                             [--force {false, true}]
+  examples:
+  - summary: HostPool_Delete
+    syntax: az desktopvirtualization hostpool delete --force true --name "MyHostPool" --resource-group "MyResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kumpulan host dalam grup sumber daya yang ditentukan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --force
+    parameterValueGroup: false, true
+    summary: Paksa bendera untuk menghapus sessionHost.
+    description: ''
+- uid: az_desktopvirtualization_hostpool_list
+  name: az desktopvirtualization hostpool list
+  summary: Mencantumkan hostPools dalam langganan.
+  description: ''
+  syntax: az desktopvirtualization hostpool list [--resource-group]
+  examples:
+  - summary: HostPool_ListByResourceGroup
+    syntax: az desktopvirtualization hostpool list --resource-group "MyResourceGroup"
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_desktopvirtualization_hostpool_retrieve-registration-token
+  name: az desktopvirtualization hostpool retrieve-registration-token
+  summary: Token pendaftaran kumpulan host.
+  description: ''
+  syntax: >-
+    az desktopvirtualization hostpool retrieve-registration-token --name
+                                                                  --resource-group
+  examples:
+  - summary: HostPools_RetrieveRegistrationToken_Post
+    syntax: az desktopvirtualization hostpool retrieve-registration-token --name "MyHostPool" --resource-group "MyResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kumpulan host dalam grup sumber daya yang ditentukan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_desktopvirtualization_hostpool_show
+  name: az desktopvirtualization hostpool show
+  summary: Mendapatkan kumpulan host.
+  description: ''
+  syntax: >-
+    az desktopvirtualization hostpool show --name
+                                           --resource-group
+  examples:
+  - summary: HostPool_Get
+    syntax: az desktopvirtualization hostpool show --name "MyHostPool" --resource-group "MyResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kumpulan host dalam grup sumber daya yang ditentukan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_desktopvirtualization_hostpool_update
+  name: az desktopvirtualization hostpool update
+  summary: Memperbarui kumpulan host.
+  description: ''
+  syntax: >-
+    az desktopvirtualization hostpool update --name
+                                             --resource-group
+                                             [--custom-rdp-property]
+                                             [--description]
+                                             [--friendly-name]
+                                             [--load-balancer-type {BreadthFirst, DepthFirst, Persistent}]
+                                             [--max-session-limit]
+                                             [--personal-desktop-assignment-type {Automatic, Direct}]
+                                             [--preferred-app-group-type {Desktop, None, RailApplications}]
+                                             [--registration-info]
+                                             [--ring]
+                                             [--sso-client-id]
+                                             [--sso-client-secret-key-vault-path]
+                                             [--sso-secret-type {Certificate, CertificateInKeyVault, SharedKey, SharedKeyInKeyVault}]
+                                             [--ssoadfs-authority]
+                                             [--start-vm-on-connect {false, true}]
+                                             [--tags]
+                                             [--validation-environment {false, true}]
+                                             [--vm-template]
+  examples:
+  - summary: HostPool_Update
+    syntax: az desktopvirtualization hostpool update --description "des1" --friendly-name "friendly" --load-balancer-type "BreadthFirst" --max-session-limit 999999 --personal-desktop-assignment-type "Automatic" --registration-info expiration-time="2020-10-01T15:01:54.9571247Z" registration-token-operation="Update" --sso-client-id "client" --sso-client-secret-key-vault-path "https://keyvault/secret" --sso-secret-type "SharedKey" --ssoadfs-authority "https://adfs" --start-vm-on-connect false --vm-template "{json:json}" --tags tag1="value1" tag2="value2" --name "MyHostPool" --resource-group "MyResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kumpulan host dalam grup sumber daya yang ditentukan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --custom-rdp-property
+    summary: Properti rdp kustom hostPool.
+    description: ''
+  - name: --description
+    summary: Deskripsi HostPool.
+    description: ''
+  - name: --friendly-name
+    summary: Nama hostPool yang mudah diingat.
+    description: ''
+  - name: --load-balancer-type
+    parameterValueGroup: BreadthFirst, DepthFirst, Persistent
+    summary: Jenis load balancer.
+    description: ''
+  - name: --max-session-limit
+    summary: Batas sesi maksimum HostPool.
+    description: ''
+  - name: --personal-desktop-assignment-type
+    parameterValueGroup: Automatic, Direct
+    summary: Jenis PersonalDesktopAssignment untuk HostPool.
+    description: ''
+  - name: --preferred-app-group-type -t
+    parameterValueGroup: Desktop, None, RailApplications
+    summary: Jenis jenis grup aplikasi pilihan, default ke Grup Aplikasi Desktop.
+    description: ''
+  - name: --registration-info
+    summary: Info pendaftaran HostPool.
+    description: >-
+      Penggunaan: --registration-info expiration-time=XX registration-token-operation=XX
+
+
+      waktu kedaluwarsa: Waktu kedaluwarsa token pendaftaran.
+
+      registration-token-operation: Jenis pengaturan ulang token.
+  - name: --ring
+    summary: Nomor cincin HostPool.
+    description: ''
+  - name: --sso-client-id
+    summary: ClientId untuk Pihak Yang Mengandalkan terdaftar yang digunakan untuk menerbitkan sertifikat SSO WVD.
+    description: ''
+  - name: --sso-client-secret-key-vault-path -p
+    summary: Jalur ke Azure KeyVault menyimpan rahasia yang digunakan untuk komunikasi ke ADFS.
+    description: ''
+  - name: --sso-secret-type
+    parameterValueGroup: Certificate, CertificateInKeyVault, SharedKey, SharedKeyInKeyVault
+    summary: Jenis akses menyeluruh pada Jenis Rahasia.
+    description: ''
+  - name: --ssoadfs-authority
+    summary: URL ke server ADFS pelanggan untuk menandatangani sertifikat WVD SSO.
+    description: ''
+  - name: --start-vm-on-connect
+    parameterValueGroup: false, true
+    summary: Bendera untuk mengaktifkan/menonaktifkan fitur StartVMOnConnect.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --validation-environment
+    parameterValueGroup: false, true
+    summary: Adalah lingkungan validasi.
+    description: ''
+  - name: --vm-template
+    summary: Templat VM untuk konfigurasi sessionhosts dalam hostpool.
+    description: ''
+commands:
+- az_desktopvirtualization_hostpool_create
+- az_desktopvirtualization_hostpool_delete
+- az_desktopvirtualization_hostpool_list
+- az_desktopvirtualization_hostpool_retrieve-registration-token
+- az_desktopvirtualization_hostpool_show
+- az_desktopvirtualization_hostpool_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Kumpulan host desktopvirtualization.
+  ms.openlocfilehash: cfbe71aa5b251c025979b28d2d195b1912f3a8a8
+  ms.sourcegitcommit: b179e8c36fc1222f584a3780aaf61c99bf78a40d
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/01/2022
+  ms.locfileid: "141307480"
