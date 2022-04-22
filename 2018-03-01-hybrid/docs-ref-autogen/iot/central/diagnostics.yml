@@ -1,0 +1,314 @@
+### YamlMime:AzureCLIGroup
+uid: az_iot_central_diagnostics
+name: az iot central diagnostics
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **azure-iot** untuk Azure CLI (versi 2.24.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **az iot central diagnostics** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Lakukan diagnostik tingkat aplikasi dan perangkat.
+description: ''
+directCommands:
+- uid: az_iot_central_diagnostics_monitor-events
+  name: az iot central diagnostics monitor-events
+  summary: Lihat pesan telemetri perangkat yang dikirim ke aplikasi IoT Central.
+  description: Memperlihatkan data telemetri yang dikirim ke aplikasi IoT Central. Secara default, ini menunjukkan semua data yang dikirim oleh semua perangkat. Gunakan parameter --device-id untuk memfilter ke perangkat tertentu.
+  syntax: >-
+    az iot central diagnostics monitor-events --app-id
+                                              [--central-api-uri]
+                                              [--cg]
+                                              [--device-id]
+                                              [--enqueued-time]
+                                              [--module-id]
+                                              [--properties {all, anno, app, sys}]
+                                              [--repair {false, true}]
+                                              [--timeout]
+                                              [--token]
+                                              [--yes {false, true}]
+  examples:
+  - summary: Penggunaan dasar
+    syntax: az iot central diagnostics monitor-events --app-id {app_id}
+  - summary: Penggunaan dasar saat memfilter pada perangkat target
+    syntax: az iot central diagnostics monitor-events --app-id {app_id} -d {device_id}
+  - summary: Penggunaan dasar saat memfilter perangkat yang ditargetkan dengan kartubebas di ID
+    syntax: az iot central diagnostics monitor-events --app-id {app_id} -d Device*d
+  - summary: Penggunaan dasar saat memfilter pada modul.
+    syntax: az iot central diagnostics monitor-events --app-id {app_id} -m {module_id}
+  - summary: Penggunaan dasar saat memfilter modul yang ditargetkan dengan kartubebas di ID
+    syntax: az iot central diagnostics monitor-events --app-id {app_id} -m Module*
+  - summary: Filter perangkat dan tentukan grup konsumen Pusat Aktivitas yang akan diikat.
+    syntax: az iot central diagnostics monitor-events --app-id {app_id} -d {device_id} --cg {consumer_group_name}
+  - summary: Menerima anotasi pesan (header pesan)
+    syntax: az iot central diagnostics monitor-events --app-id {app_id} -d {device_id} --properties anno
+  - summary: Menerima anotasi pesan + properti sistem. Tidak pernah kehabisan waktu.
+    syntax: az iot central diagnostics monitor-events --app-id {app_id} -d {device_id} --properties anno sys --timeout 0
+  - summary: Menerima semua atribut pesan dari semua pesan perangkat
+    syntax: az iot central diagnostics monitor-events --app-id {app_id} --props all
+  - summary: Menerima semua pesan dan mengurai payload pesan sebagai JSON
+    syntax: az iot central diagnostics monitor-events --app-id {app_id} --output json
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  optionalParameters:
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --cg --consumer-group -c
+    defaultValue: $Default
+    summary: Tentukan grup konsumen yang akan digunakan saat menyambungkan ke titik akhir hub peristiwa.
+    description: ''
+  - name: --device-id -d
+    summary: ID perangkat perangkat target. Anda dapat menemukan ID perangkat dengan, mengklik tombol Koneksi di halaman Detail Perangkat.
+    description: ''
+  - name: --enqueued-time --et -e
+    summary: Menunjukkan waktu yang harus digunakan sebagai titik awal untuk membaca pesan dari partisi. Unit adalah milidetik sejak zaman unix. Jika tidak ada waktu yang ditunjukkan "sekarang" digunakan.
+    description: ''
+  - name: --module-id -m
+    summary: ID Modul IoT Edge jika jenis perangkat IoT Edge.
+    description: ''
+  - name: --properties --props -p
+    parameterValueGroup: all, anno, app, sys
+    summary: Menunjukkan properti pesan utama ke output. sys = properti sistem, aplikasi = properti aplikasi, ano = anotasi.
+    description: ''
+  - name: --repair -r
+    parameterValueGroup: false, true
+    summary: 'Instal ulang dependensi uamqp yang kompatibel dengan versi ekstensi. Default: false.'
+    description: ''
+  - name: --timeout --to -t
+    defaultValue: "300"
+    summary: Detik maksimum untuk mempertahankan koneksi tanpa menerima pesan. Gunakan 0 untuk tak terbatas.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+  - name: --yes -y
+    parameterValueGroup: false, true
+    summary: 'Lewati perintah pengguna. Menunjukkan penerimaan penginstalan dependensi (jika diperlukan). Digunakan terutama untuk skenario otomatisasi. Default: false.'
+    description: ''
+- uid: az_iot_central_diagnostics_monitor-properties
+  name: az iot central diagnostics monitor-properties
+  summary: Lihat properti yang diinginkan dan dilaporkan yang dikirim ke/dari aplikasi IoT Central.
+  description: Polling perangkat-kembar dari pusat dan membandingkannya dengan perangkat-kembar terakhir Mengurai properti dari perangkat-kembar, dan mendeteksi apakah perubahan dibuat Cetak subset properti yang diubah dalam interval polling.
+  syntax: >-
+    az iot central diagnostics monitor-properties --app-id
+                                                  --device-id
+                                                  [--central-api-uri]
+                                                  [--token]
+  examples:
+  - summary: Penggunaan dasar
+    syntax: az iot central diagnostics monitor-properties --app-id {app_id} -d {device_id}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --device-id -d
+    summary: ID perangkat perangkat target. Anda dapat menemukan ID perangkat dengan, mengklik tombol Koneksi di halaman Detail Perangkat.
+    description: ''
+  optionalParameters:
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+- uid: az_iot_central_diagnostics_registration-summary
+  name: az iot central diagnostics registration-summary
+  summary: Lihat ringkasan pendaftaran semua perangkat dalam aplikasi.
+  description: 'Catatan: Perintah ini dapat memakan banyak waktu untuk dikembalikan jika aplikasi Anda berisi banyak perangkat.'
+  syntax: >-
+    az iot central diagnostics registration-summary --app-id
+                                                    [--api-version {1.0, 1.1-preview, preview}]
+                                                    [--central-api-uri]
+                                                    [--token]
+  examples:
+  - summary: Ringkasan pendaftaran
+    syntax: az iot central diagnostics registration-summary --app-id {appid}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: "1.0"
+    parameterValueGroup: 1.0, 1.1-preview, preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+- uid: az_iot_central_diagnostics_validate-messages
+  name: az iot central diagnostics validate-messages
+  summary: Validasi pesan yang dikirim ke IoT Hub untuk aplikasi IoT Central.
+  description: Melakukan validasi pada pesan telemetri dan melaporkan kembali data yang tidak dimodelkan dalam templat perangkat atau data di mana jenis data tidak cocok dengan apa yang ditentukan dalam templat perangkat.
+  syntax: >-
+    az iot central diagnostics validate-messages --app-id
+                                                 [--central-api-uri]
+                                                 [--cg]
+                                                 [--device-id]
+                                                 [--dr]
+                                                 [--enqueued-time]
+                                                 [--max-messages]
+                                                 [--minimum-severity {error, info, warning}]
+                                                 [--module-id]
+                                                 [--properties {all, anno, app, sys}]
+                                                 [--repair {false, true}]
+                                                 [--style {csv, json, scroll}]
+                                                 [--timeout]
+                                                 [--token]
+                                                 [--yes {false, true}]
+  examples:
+  - summary: Penggunaan dasar
+    syntax: az iot central diagnostics validate-messages --app-id {app_id}
+  - summary: Kesalahan output saat terdeteksi
+    syntax: az iot central diagnostics validate-messages --app-id {app_id} --style scroll
+  - summary: Penggunaan dasar saat memfilter pada perangkat target
+    syntax: az iot central diagnostics validate-messages --app-id {app_id} -d {device_id}
+  - summary: Penggunaan dasar saat memfilter perangkat yang ditargetkan dengan kartubebas di ID
+    syntax: az iot central diagnostics validate-messages --app-id {app_id} -d Device*
+  - summary: Penggunaan dasar saat memfilter pada modul.
+    syntax: az iot central diagnostics validate-messages --app-id {app_id} -m {module_id}
+  - summary: Penggunaan dasar saat memfilter modul yang ditargetkan dengan kartubebas di ID
+    syntax: az iot central diagnostics validate-messages --app-id {app_id} -m Module*
+  - summary: Filter perangkat dan tentukan grup konsumen Pusat Aktivitas yang akan diikat.
+    syntax: az iot central diagnostics validate-messages --app-id {app_id} -d {device_id} --cg {consumer_group_name}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  optionalParameters:
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --cg --consumer-group -c
+    defaultValue: $Default
+    summary: Tentukan grup konsumen yang akan digunakan saat menyambungkan ke titik akhir hub peristiwa.
+    description: ''
+  - name: --device-id -d
+    summary: ID perangkat perangkat target. Anda dapat menemukan ID perangkat dengan, mengklik tombol Koneksi di halaman Detail Perangkat.
+    description: ''
+  - name: --dr --duration
+    defaultValue: "300"
+    summary: Durasi maksimum untuk menerima pesan dari perangkat target sebelum mengakhiri koneksi. Gunakan 0 untuk tak terbatas.
+    description: ''
+  - name: --enqueued-time --et -e
+    summary: Menunjukkan waktu yang harus digunakan sebagai titik awal untuk membaca pesan dari partisi. Unit adalah milidetik sejak zaman unix. Jika tidak ada waktu yang ditunjukkan "sekarang" digunakan.
+    description: ''
+  - name: --max-messages --mm
+    defaultValue: "10"
+    summary: Jumlah maksimum pesan yang akan diterima dari perangkat target sebelum mengakhiri koneksi. Gunakan 0 untuk tak terbatas.
+    description: ''
+  - name: --minimum-severity
+    defaultValue: warning
+    parameterValueGroup: error, info, warning
+    summary: Tingkat keparahan minimum masalah yang diperlukan untuk pelaporan.
+    description: ''
+  - name: --module-id -m
+    summary: ID Modul IoT Edge jika jenis perangkat IoT Edge.
+    description: ''
+  - name: --properties --props -p
+    parameterValueGroup: all, anno, app, sys
+    summary: Menunjukkan properti pesan utama ke output. sys = properti sistem, aplikasi = properti aplikasi, ano = anotasi.
+    description: ''
+  - name: --repair -r
+    parameterValueGroup: false, true
+    summary: 'Instal ulang dependensi uamqp yang kompatibel dengan versi ekstensi. Default: false.'
+    description: ''
+  - name: --style
+    defaultValue: scroll
+    parameterValueGroup: csv, json, scroll
+    summary: Menunjukkan stylescroll output = memberikan kesalahan saat tiba, json = meringkas hasil sebagai json, csv = meringkas hasil sebagai csv.
+    description: ''
+  - name: --timeout --to -t
+    defaultValue: "300"
+    summary: Detik maksimum untuk mempertahankan koneksi tanpa menerima pesan. Gunakan 0 untuk tak terbatas.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+  - name: --yes -y
+    parameterValueGroup: false, true
+    summary: 'Lewati perintah pengguna. Menunjukkan penerimaan penginstalan dependensi (jika diperlukan). Digunakan terutama untuk skenario otomatisasi. Default: false.'
+    description: ''
+- uid: az_iot_central_diagnostics_validate-properties
+  name: az iot central diagnostics validate-properties
+  summary: Validasi properti yang dilaporkan yang dikirim ke aplikasi IoT Central.
+  description: >-
+    Melakukan validasi pada pembaruan properti yang dilaporkan:
+
+    1) Peringatan - Properti yang dikirim oleh perangkat yang tidak dimodelkan di pusat.
+
+    2) Peringatan - Properti dengan nama yang sama yang dideklarasikan dalam beberapa antarmuka harus memiliki nama antarmuka yang disertakan sebagai bagian dari pembaruan properti.
+  syntax: >-
+    az iot central diagnostics validate-properties --app-id
+                                                   --device-id
+                                                   [--central-api-uri]
+                                                   [--minimum-severity {error, info, warning}]
+                                                   [--token]
+  examples:
+  - summary: Penggunaan dasar
+    syntax: az iot central diagnostics validate-properties --app-id {app_id} -d {device_id}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi dari aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --device-id -d
+    summary: ID perangkat dari perangkat target. Anda dapat menemukan ID perangkat dengan, mengklik tombol Koneksi di halaman Detail Perangkat.
+    description: ''
+  optionalParameters:
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --minimum-severity
+    defaultValue: warning
+    parameterValueGroup: error, info, warning
+    summary: Tingkat keparahan minimum masalah yang diperlukan untuk pelaporan.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+commands:
+- az_iot_central_diagnostics_monitor-events
+- az_iot_central_diagnostics_monitor-properties
+- az_iot_central_diagnostics_registration-summary
+- az_iot_central_diagnostics_validate-messages
+- az_iot_central_diagnostics_validate-properties
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Melakukan diagnostik tingkat aplikasi dan perangkat.
+  ms.openlocfilehash: 0ef5f7378c8207444c1415d1bb3e54b8962fc2e9
+  ms.sourcegitcommit: b179e8c36fc1222f584a3780aaf61c99bf78a40d
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/01/2022
+  ms.locfileid: "141309820"

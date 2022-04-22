@@ -1,0 +1,169 @@
+### YamlMime:AzureCLIGroup
+uid: az_network_lb_address-pool
+name: az network lb address-pool
+summary: Mengelola kumpulan alamat load balancer.
+description: ''
+directCommands:
+- uid: az_network_lb_address-pool_create
+  name: buat kumpulan-alamat lb jaringan az
+  summary: Buat kumpulan alamat.
+  description: ''
+  syntax: >-
+    az network lb address-pool create --lb-name
+                                      --name
+                                      --resource-group
+                                      [--backend-address]
+                                      [--backend-addresses-config-file]
+                                      [--vnet]
+  examples:
+  - summary: Buat kumpulan alamat.
+    syntax: az network lb address-pool create -g MyResourceGroup --lb-name MyLb -n MyAddressPool
+  - summary: Buat kumpulan alamat dengan beberapa alamat backend menggunakan argumen kunci-nilai.
+    syntax: az network lb address-pool create -g MyResourceGroup --lb-name MyLb -n MyAddressPool --vnet {VnetResourceId} --backend-address name=addr1 ip-address=10.0.0.1 --backend-address name=addr2 ip-address=10.0.0.3
+  - summary: Membuat kumpulan alamat dengan beberapa alamat backend menggunakan file konfigurasi
+    syntax: az network lb address-pool create -g MyResourceGroup --lb-name MyLb -n MyAddressPool --backend-addresses-config-file @config_file.json
+  requiredParameters:
+  - isRequired: true
+    name: --lb-name
+    summary: Nama load balancer.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kumpulan alamat backend. Jika hanya ada satu, hilangkan untuk digunakan sebagai default.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --backend-address
+    summary: Informasi alamat backend untuk kumpulan alamat backend. Jika digunakan, --vnet diperlukan atau subnet diperlukan.
+    description: >-
+      Penggunaan1: --backend-address name=addr1 ip-address=10.0.0.1 --vnet MyVnet Usage2: --backend-address name=addr1 ip-address=10.0.0.1 subnet=/subscriptions/000/resourceGroups/MyRg/providers/Microsoft.Network/virtualNetworks/vnet/subnets/subnet1 Usage3: --backend-address name=addr1 ip-address=10.0.0.1 subnet=subnet1 --vnet MyVnet
+
+
+      nama: Diperlukan. Nama alamat backend.
+
+      alamat ip: Diperlukan. Alamat IP dalam Virtual Network.
+
+      subnet: Nama atau Id subnet.
+
+
+      Beberapa alamat backend dapat ditentukan dengan menggunakan lebih dari satu `--backend-address` argumen.
+  - name: --backend-addresses-config-file
+    summary: File konfigurasi yang digunakan untuk mengatur alamat backend. Argumen ini untuk pengguna berpengalaman. Anda mungkin mengalami kesalahan penguraian jika file json tidak valid.
+    description: >-
+      Penggunaan: --backend-addresses-config-file @"{config_file.json}"
+
+
+      Contoh file konfigurasi adalah [ { "name": "address1", "virtualNetwork": "clitestvnet", "ipAddress": "10.0.0.4" }, { "name": "address2", "virtualNetwork": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/virtualNetworks/clitestvnet", "ipAddress": "10.0.0.5" }, { "name": "address3", "subnet": "subnet3", "ipAddress": "10.0.0.6" }, { "name": "address4", "subnet":  "/subscriptions/000/resourceGroups/MyRg/providers/Microsoft.Network/virtualNetworks/vnet/subnets/subnet4", "ipAddress": "10.0.0.7" } ].
+  - name: --vnet
+    summary: Nama atau Id jaringan virtual yang diterapkan ke semua alamat backend.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_lb_address-pool_delete
+  name: az network lb address-pool delete
+  summary: Menghapus kumpulan alamat.
+  description: ''
+  syntax: >-
+    az network lb address-pool delete --lb-name
+                                      --name
+                                      --resource-group
+  examples:
+  - summary: Menghapus kumpulan alamat.
+    syntax: az network lb address-pool delete -g MyResourceGroup --lb-name MyLb -n MyAddressPool
+  requiredParameters:
+  - isRequired: true
+    name: --lb-name
+    summary: Nama load balancer.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kumpulan alamat backend.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_lb_address-pool_list
+  name: az network lb address-pool list
+  summary: Mencantumkan kumpulan alamat.
+  description: ''
+  syntax: >-
+    az network lb address-pool list --lb-name
+                                    --resource-group
+  examples:
+  - summary: Mencantumkan kumpulan alamat.
+    syntax: az network lb address-pool list -g MyResourceGroup --lb-name MyLb -o table
+  requiredParameters:
+  - isRequired: true
+    name: --lb-name
+    summary: Nama load balancer.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_lb_address-pool_show
+  name: az network lb address-pool show
+  summary: Dapatkan detail kumpulan alamat.
+  description: ''
+  syntax: >-
+    az network lb address-pool show --lb-name
+                                    --name
+                                    --resource-group
+  examples:
+  - summary: Dapatkan detail kumpulan alamat.
+    syntax: az network lb address-pool show -g MyResourceGroup --lb-name MyLb -n MyAddressPool
+  requiredParameters:
+  - isRequired: true
+    name: --lb-name
+    summary: Nama load balancer.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kumpulan alamat backend.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+commands:
+- az_network_lb_address-pool_address
+- az_network_lb_address-pool_address_add
+- az_network_lb_address-pool_address_list
+- az_network_lb_address-pool_address_remove
+- az_network_lb_address-pool_create
+- az_network_lb_address-pool_delete
+- az_network_lb_address-pool_list
+- az_network_lb_address-pool_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/09/2022
+  description: Mengelola kumpulan alamat load balancer.
+  ms.openlocfilehash: 03076687cf4f5cf873213a354409132a47ea2d27
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141431315"

@@ -1,0 +1,209 @@
+### YamlMime:AzureCLIGroup
+uid: az_ad_sp
+name: az ad sp
+summary: Mengelola Azure Active Directory perwakilan layanan untuk autentikasi otomatisasi.
+description: ''
+directCommands:
+- uid: az_ad_sp_create
+  name: az ad sp create
+  summary: Buat Perwakilan Layanan.
+  description: ''
+  syntax: az ad sp create --id
+  examples:
+  - summary: Buat Perwakilan Layanan. (dibuat otomatis)
+    syntax: az ad sp create --id 00000000-0000-0000-0000-000000000000
+  requiredParameters:
+  - isRequired: true
+    name: --id
+    summary: Uri pengidentifikasi, id aplikasi, atau id objek aplikasi terkait.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+- uid: az_ad_sp_create-for-rbac
+  name: az ad sp create-for-rbac
+  summary: Buat perwakilan layanan dan konfigurasi aksesnya ke sumber daya Azure.
+  description: >-
+    Output mencakup kredensial yang harus Anda lindungi. Pastikan Anda tidak menyertakan info masuk ini dalam kode atau memasukkan info masuk ke dalam kontrol sumber Anda. Sebagai alternatif, pertimbangkan untuk menggunakan [identitas terkelola](https://aka.ms/azadsp-managed-identities) jika tersedia untuk mencegah penggunaan info masuk.
+
+
+    Secara default, perintah ini tidak menetapkan peran apa pun ke perwakilan layanan. Anda dapat menggunakan --role dan --scopes untuk menetapkan peran tertentu dan mempersempit cakupan ke grup sumber daya atau sumber daya. Anda juga dapat menggunakan `az role assignment create` untuk membuat penetapan peran untuk perwakilan layanan ini nanti. Lihat [langkah-langkah untuk menambahkan penetapan peran](https://aka.ms/azadsp-more) untuk informasi selengkapnya.
+  syntax: >-
+    az ad sp create-for-rbac [--cert]
+                             [--create-cert]
+                             [--keyvault]
+                             [--name]
+                             [--role]
+                             [--scopes]
+                             [--sdk-auth {false, true}]
+                             [--skip-assignment {false, true}]
+                             [--years]
+  examples:
+  - summary: Buat tanpa penetapan peran.
+    syntax: az ad sp create-for-rbac
+  - summary: Buat menggunakan nama tampilan kustom.
+    syntax: az ad sp create-for-rbac -n "MyApp"
+  - summary: Buat dengan penetapan peran Kontributor pada cakupan tertentu. Untuk mengambil ID langganan saat ini, jalankan `az account show --query id --output tsv`.
+    syntax: az ad sp create-for-rbac -n "MyApp" --role Contributor --scopes /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup1} /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup2}
+  - summary: Buat menggunakan sertifikat yang ditandatangani sendiri.
+    syntax: az ad sp create-for-rbac --create-cert
+  - summary: Buat menggunakan sertifikat yang ditandatangani sendiri, dan simpan dalam KeyVault.
+    syntax: az ad sp create-for-rbac --keyvault MyVault --cert CertName --create-cert
+  - summary: Buat menggunakan sertifikat yang ada di KeyVault.
+    syntax: az ad sp create-for-rbac --keyvault MyVault --cert CertName
+  optionalParameters:
+  - name: --cert
+    summary: Sertifikat yang digunakan untuk kredensial.
+    description: Saat digunakan dengan `--keyvault,` menunjukkan nama sertifikasi yang akan digunakan atau dibuat. Jika tidak, berikan string sertifikat publik berformat PEM atau DER. Gunakan `@{path}` untuk memuat dari file. Jangan sertakan info kunci privat.
+  - name: --create-cert
+    summary: Buat sertifikat yang ditandatangani sendiri untuk digunakan untuk kredensial. Hanya pengguna OS saat ini yang memiliki izin baca/tulis ke sertifikat ini.
+    description: Gunakan dengan `--keyvault` untuk membuat sertifikat di Key Vault. Jika tidak, sertifikat akan dibuat secara lokal.
+  - name: --keyvault
+    summary: Nama atau ID KeyVault yang digunakan untuk membuat atau mengambil sertifikat.
+    description: ''
+  - name: --name -n
+    summary: Nama tampilan perwakilan layanan. Jika tidak ada, default ke azure-cli-%Y-%m-%d-%H-%M-%S di mana akhiran adalah waktu pembuatan.
+    description: ''
+  - name: --role
+    summary: Peran perwakilan layanan.
+    description: ''
+  - name: --cakupan
+    summary: Daftar cakupan yang dipisahkan ruang yang berlaku untuk penetapan peran perwakilan layanan. misalnya, /subscriptions/0b1f6471-1bf0-4dda-aec3-1111222223333/resourceGroups/myGroup, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM.
+    description: ''
+  - name: --sdk-auth
+    parameterValueGroup: false, true
+    summary: Hasil output kompatibel dengan file autentikasi Azure SDK.
+    description: ''
+  - name: --skip-assignment
+    parameterValueGroup: false, true
+    summary: No-op.
+    description: ''
+  - name: --tahun
+    summary: 'Jumlah tahun di mana kredensial akan valid. Default: 1 tahun.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+- uid: az_ad_sp_delete
+  name: az ad sp delete
+  summary: Menghapus perwakilan layanan dan penetapan perannya.
+  description: ''
+  syntax: az ad sp delete --id
+  examples:
+  - summary: Menghapus perwakilan layanan dan penetapan perannya. (dibuat otomatis)
+    syntax: az ad sp delete --id 00000000-0000-0000-0000-000000000000
+  requiredParameters:
+  - isRequired: true
+    name: --id
+    summary: Nama perwakilan layanan, atau id objek.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+- uid: az_ad_sp_list
+  name: az ad sp list
+  summary: Mencantumkan perwakilan layanan.
+  description: Untuk latensi rendah, secara default, hanya 100 pertama yang akan dikembalikan kecuali Anda memberikan argumen filter atau menggunakan "--all".
+  syntax: >-
+    az ad sp list [--all]
+                  [--display-name]
+                  [--filter]
+                  [--show-mine]
+                  [--spn]
+  optionalParameters:
+  - name: --all
+    summary: Cantumkan semua entitas, harapkan penundaan panjang jika berada di bawah organisasi besar.
+    description: ''
+  - name: --display-name
+    summary: Nama tampilan objek atau awalannya.
+    description: ''
+  - name: --filter
+    summary: Filter OData, misalnya --filter "displayname eq 'test' dan servicePrincipalType eq 'Application'".
+    description: ''
+  - name: --show-mine
+    summary: Mencantumkan entitas yang dimiliki oleh pengguna saat ini.
+    description: ''
+  - name: --spn
+    summary: Nama perwakilan layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+- uid: az_ad_sp_show
+  name: az ad sp show
+  summary: Dapatkan detail perwakilan layanan.
+  description: ''
+  syntax: az ad sp show --id
+  examples:
+  - summary: Dapatkan detail perwakilan layanan. (dibuat otomatis)
+    syntax: az ad sp show --id 00000000-0000-0000-0000-000000000000
+  requiredParameters:
+  - isRequired: true
+    name: --id
+    summary: Nama perwakilan layanan, atau id objek.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+- uid: az_ad_sp_update
+  name: az ad sp update
+  summary: Memperbarui perwakilan layanan.
+  description: ''
+  syntax: >-
+    az ad sp update --id
+                    [--add]
+                    [--force-string]
+                    [--remove]
+                    [--set]
+  examples:
+  - summary: memperbarui perwakilan layanan (dibuat secara otomatis)
+    syntax: az ad sp update --id 00000000-0000-0000-0000-000000000000 --set groupMembershipClaims=All
+  requiredParameters:
+  - isRequired: true
+    name: --id
+    summary: Nama perwakilan layanan, atau id objek.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+commands:
+- az_ad_sp_create
+- az_ad_sp_create-for-rbac
+- az_ad_sp_credential
+- az_ad_sp_credential_delete
+- az_ad_sp_credential_list
+- az_ad_sp_credential_reset
+- az_ad_sp_delete
+- az_ad_sp_list
+- az_ad_sp_owner
+- az_ad_sp_owner_list
+- az_ad_sp_show
+- az_ad_sp_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/09/2022
+  description: Mengelola Azure Active Directory perwakilan layanan untuk autentikasi otomatisasi.
+  ms.openlocfilehash: 13a51c8732da7f6f69c1ed2cb75af2d1e17d3e0a
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141414160"

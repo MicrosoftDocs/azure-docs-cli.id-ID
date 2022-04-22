@@ -1,0 +1,236 @@
+### YamlMime:AzureCLIGroup
+uid: az_ams_transform
+name: az ams transform
+summary: Mengelola transformasi untuk akun Azure Media Services.
+description: ''
+directCommands:
+- uid: az_ams_transform_create
+  name: az ams transform create
+  summary: Membuat transformasi.
+  description: ''
+  syntax: >-
+    az ams transform create --account-name
+                            --name
+                            --preset
+                            --resource-group
+                            [--audio-analysis-mode]
+                            [--audio-language]
+                            [--blur-type]
+                            [--description]
+                            [--face-detector-mode]
+                            [--insights-to-extract {AllInsights, AudioInsightsOnly, VideoInsightsOnly}]
+                            [--on-error {ContinueJob, StopProcessingJob}]
+                            [--relative-priority {High, Low, Normal}]
+                            [--resolution]
+                            [--video-analysis-mode]
+  examples:
+  - summary: Buat transformasi dengan preset bawaan AdaptiveStreaming dan Prioritas relatif tinggi.
+    syntax: az ams transform create -a myAmsAccount -n transformName -g myResourceGroup --preset AdaptiveStreaming --relative-priority High
+  - summary: Buat transformasi dengan preset Standard Encoder kustom dari file JSON dan Prioritas relatif rendah.
+    syntax: az ams transform create -a myAmsAccount -n transformName -g myResourceGroup --preset "C:\MyPresets\CustomPreset.json" --relative-priority Low
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun Azure Media Services.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama transformasi.
+    description: ''
+  - isRequired: true
+    name: --preset
+    summary: 'Preset yang menjelaskan operasi yang akan digunakan untuk memodifikasi, mentranskode, atau mengekstrak wawasan dari file sumber untuk menghasilkan output transformasi. Nilai yang diizinkan: H264SingleBitrateSD, H264SingleBitrate720p, H264SingleBitrate1080p, AdaptiveStreaming, AACGoodQualityAudio, ContentAwareEncodingExperimental, ContentAwareEncoding, CopyAllBitrateNonInterleaved, H264MultipleBitrate1080p, H264MultipleBitrate720p, H264MultipleBitrateSD, H265ContentAwareEncoding, H265AdaptiveStreaming, H265SingleBitrate720p, H265SingleBitrate1080p, H265SingleBitrate4K, AudioAnalyzer, VideoAnalyzer, FaceDetector. Selain nilai yang diizinkan, Anda juga dapat meneruskan jalur ke file JSON preset Standard Encoder kustom. Lihat https://docs.microsoft.com/rest/api/media/transforms/createorupdate#standardencoderpreset untuk detail lebih lanjut tentang pengaturan yang akan digunakan untuk membangun preset kustom.'
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --audio-analysis-mode
+    summary: 'Menentukan serangkaian operasi analisis audio yang akan dilakukan. Jika tidak ditentukan, AudioAnalysisMode Standar akan dipilih. Nilai yang diizinkan: Standar, Dasar.'
+    description: ''
+  - name: --audio-language
+    summary: 'Bahasa untuk payload audio dalam input menggunakan format BCP-47 dari "language tag-region" (misalnya: en-US). Jika tidak ditentukan, deteksi bahasa otomatis akan digunakan. Fitur ini saat ini mendukung bahasa Inggris, Cina, Prancis, Jerman, Italia, Jepang, Spanyol, Rusia, dan Portugis. Deteksi otomatis berfungsi paling baik dengan rekaman audio dengan ucapan yang jelas terlihat. Jika deteksi otomatis gagal menemukan bahasa, transkripsi akan kembali ke bahasa Inggris. Nilai yang diizinkan: en-US, en-GB, es-ES, es-MX, fr-FR, it-IT, ja-JP, pt-BR, zh-CN, de-DE, ar-EG, ru-RU, hi-IN.'
+    description: ''
+  - name: --blur-type
+    summary: 'Nilai yang diizinkan: Box, Low, Med, High, Black.'
+    description: ''
+  - name: --description
+    summary: Deskripsi transformasi.
+    description: ''
+  - name: --face-detector-mode
+    summary: 'Mode ini menyediakan kemampuan untuk memilih antara pengaturan berikut: 1) Analisis - Hanya untuk deteksi. Mode ini menghasilkan file JSON metadata yang menandai tampilan wajah di seluruh video. Jika memungkinkan, penampilan orang yang sama diberi ID yang sama. 2) Gabungan - Selain itu redaksi (kabur) wajah yang terdeteksi. 3) Redaksi - Ini memungkinkan proses 2-pass, memungkinkan redaksi selektif dari subset wajah yang terdeteksi. Dibutuhkan file metadata dari pass analisis sebelumnya, bersama dengan video sumber, dan subset ID yang dipilih pengguna yang memerlukan redaksi. Nilai yang diizinkan: Analisis, Redaksi, Gabungan.'
+    description: ''
+  - name: --insights-to-extract
+    parameterValueGroup: AllInsights, AudioInsightsOnly, VideoInsightsOnly
+    summary: Jenis wawasan yang akan diekstrak. Jika tidak diatur, maka jenis akan dipilih berdasarkan jenis konten. Jika kontennya audio hanya maka hanya wawasan audio yang akan diekstrak dan jika hanya video insight video yang akan diekstraksi.
+    description: ''
+  - name: --on-error
+    parameterValueGroup: ContinueJob, StopProcessingJob
+    summary: Transformasi dapat menentukan lebih dari satu output. Properti ini menentukan apa yang harus dilakukan layanan ketika satu output gagal - baik terus menghasilkan output lain, atau, menghentikan output lainnya. Status Pekerjaan keseluruhan tidak akan mencerminkan kegagalan output yang ditentukan dengan 'ContinueJob'. Defaultnya adalah 'StopProcessingJob'.
+    description: ''
+  - name: --relative-priority
+    parameterValueGroup: High, Low, Normal
+    summary: Mengatur prioritas relatif output transformasi dalam transformasi. Ini menetapkan prioritas yang digunakan layanan untuk memproses TransformOutputs. Prioritas defaultnya adalah Normal.
+    description: ''
+  - name: --resolusi
+    summary: 'Menentukan resolusi maksimum di mana video Anda dianalisis. Perilaku default adalah "SourceResolution", yang akan menyimpan video input pada resolusi aslinya saat dianalisis. Menggunakan StandardDefinition akan mengubah ukuran video input ke definisi standar sambil mempertahankan rasio aspek yang sesuai. Ini hanya akan mengubah ukuran jika video memiliki resolusi yang lebih tinggi. Misalnya, input 1920x1080 akan diskalakan ke 640x360 sebelum diproses. Beralih ke "StandardDefinition" akan mengurangi waktu yang diperlukan untuk memproses video resolusi tinggi. Ini juga dapat mengurangi biaya penggunaan komponen ini (lihat https://azure.microsoft.com/pricing/details/media-services/#analytics untuk detailnya). Namun, wajah yang akhirnya terlalu kecil dalam video yang diubah ukurannya mungkin tidak terdeteksi. Nilai yang diizinkan: StandardDefinition, SourceResolution.'
+    description: ''
+  - name: --video-analysis-mode
+    summary: 'Menentukan serangkaian operasi analisis audio yang akan dilakukan. Jika tidak ditentukan, AudioAnalysisMode Standar akan dipilih. Nilai yang diizinkan: Standar, Dasar.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/ams/_help.py
+- uid: az_ams_transform_delete
+  name: az ams transform delete
+  summary: Menghapus transformasi.
+  description: ''
+  syntax: >-
+    az ams transform delete [--account-name]
+                            [--ids]
+                            [--name]
+                            [--resource-group]
+  optionalParameters:
+  - name: --account-name -a
+    summary: Nama akun Azure Media Services.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama transformasi.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/ams/_help.py
+- uid: az_ams_transform_list
+  name: az ams transform list
+  summary: Mencantumkan semua transformasi akun Azure Media Services.
+  description: ''
+  syntax: >-
+    az ams transform list --account-name
+                          --resource-group
+                          [--filter]
+                          [--orderby]
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun Azure Media Services.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --filter
+    summary: Membatasi kumpulan item yang dikembalikan.
+    description: ''
+  - name: --orderby
+    summary: Menentukan kunci di mana kumpulan hasil harus diurutkan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/ams/_help.py
+- uid: az_ams_transform_show
+  name: az ams transform show
+  summary: Menampilkan detail transformasi.
+  description: ''
+  syntax: >-
+    az ams transform show [--account-name]
+                          [--ids]
+                          [--name]
+                          [--resource-group]
+  optionalParameters:
+  - name: --account-name -a
+    summary: Nama akun Azure Media Services.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama transformasi.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/ams/_help.py
+- uid: az_ams_transform_update
+  name: pembaruan transformasi az ams
+  summary: Perbarui detail transformasi.
+  description: ''
+  syntax: >-
+    az ams transform update [--account-name]
+                            [--add]
+                            [--description]
+                            [--force-string]
+                            [--ids]
+                            [--name]
+                            [--remove]
+                            [--resource-group]
+                            [--set]
+  examples:
+  - summary: Perbarui output transformasi pertama transformasi dengan mengatur prioritas relatifnya ke Tinggi.
+    syntax: az ams transform update -a myAmsAccount -n transformName -g myResourceGroup --set outputs[0].relativePriority=High
+  optionalParameters:
+  - name: --account-name -a
+    summary: Nama akun Azure Media Services.
+    description: ''
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --description
+    summary: Deskripsi transformasi.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama transformasi.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/ams/_help.py
+commands:
+- az_ams_transform_create
+- az_ams_transform_delete
+- az_ams_transform_list
+- az_ams_transform_output
+- az_ams_transform_output_add
+- az_ams_transform_output_remove
+- az_ams_transform_show
+- az_ams_transform_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/30/2022
+  description: Mengelola transformasi untuk akun Azure Media Services.
+  ms.openlocfilehash: ff030d3311376419353270ce34a33bf9f3478f86
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141414016"

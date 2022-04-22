@@ -1,0 +1,453 @@
+### YamlMime:AzureCLIGroup
+uid: az_iot_central_device
+name: az iot central device
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **azure-iot** untuk Azure CLI (versi 2.24.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **az iot central device** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola dan mengonfigurasi perangkat IoT Central.
+description: ''
+directCommands:
+- uid: az_iot_central_device_compute-device-key
+  name: az iot central device compute-device-key
+  summary: Buat kunci SAS perangkat turunan.
+  description: Buat kunci perangkat turunan dari kunci SAS tingkat grup.
+  syntax: >-
+    az iot central device compute-device-key --device-id
+                                             --pk
+  examples:
+  - summary: Penggunaan dasar
+    syntax: az iot central device compute-device-key --pk {primaryKey} --device-id {deviceid}
+  requiredParameters:
+  - isRequired: true
+    name: --device-id -d
+    summary: ID perangkat dari perangkat target. Anda dapat menemukan ID perangkat dengan, mengklik tombol Koneksi di halaman Detail Perangkat.
+    description: ''
+  - isRequired: true
+    name: --pk --primary-key
+    summary: Kunci akses bersama simetris utama yang disimpan dalam format base64.
+    description: ''
+- uid: az_iot_central_device_create
+  name: az iot central device create
+  summary: Buat perangkat di IoT Central.
+  description: ''
+  syntax: >-
+    az iot central device create --app-id
+                                 --device-id
+                                 [--api-version {1.0, 1.1-preview, preview}]
+                                 [--central-api-uri]
+                                 [--device-name]
+                                 [--organizations]
+                                 [--simulated {false, true}]
+                                 [--template]
+                                 [--token]
+  examples:
+  - summary: Membuat perangkat
+    syntax: az iot central device create --app-id {appid} --device-id {deviceid}
+  - summary: Membuat perangkat yang disimulasikan
+    syntax: az iot central device create --app-id {appid} --device-id {deviceid} --template {devicetemplateid} --simulated
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi dari aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --device-id -d
+    summary: "Pengidentifikasi unik untuk perangkat. String peka huruf besar/kecil (panjang hingga 128 karakter) dari karakter alfanumerik ASCII 7-bit ditambah karakter khusus tertentu: - . + % _ # \\* ? ! ( ) , : = @ $ '."
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: "1.0"
+    parameterValueGroup: 1.0, 1.1-preview, preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --device-name
+    summary: 'Nama perangkat yang dapat dibaca manusia. Contoh: Kulkas.'
+    description: ''
+  - name: --organizations --orgs
+    summary: 'Tetapkan perangkat ke organisasi yang ditentukan. Daftar id organisasi yang dipisahkan koma. Versi minimum yang didukung: 1.1-pratinjau.'
+    description: ''
+  - name: --simulated
+    parameterValueGroup: false, true
+    summary: Tambahkan bendera ini jika Anda ingin IoT Central mengaturnya sebagai perangkat yang disimulasikan. --template diperlukan jika ini benar.
+    description: ''
+  - name: --template
+    summary: 'Id templat pusat. Contoh: dtmi:ojpkindbz:modelDefinition:iild3tm_uo.'
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+- uid: az_iot_central_device_delete
+  name: az iot central device delete
+  summary: Menghapus perangkat dari IoT Central.
+  description: ''
+  syntax: >-
+    az iot central device delete --app-id
+                                 --device-id
+                                 [--api-version {1.0, 1.1-preview, preview}]
+                                 [--central-api-uri]
+                                 [--token]
+  examples:
+  - summary: Menghapus perangkat
+    syntax: az iot central device delete --app-id {appid} --device-id {deviceid}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi dari aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --device-id -d
+    summary: ID perangkat dari perangkat target. Anda dapat menemukan ID perangkat dengan, mengklik tombol Koneksi di halaman Detail Perangkat.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: "1.0"
+    parameterValueGroup: 1.0, 1.1-preview, preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+- uid: az_iot_central_device_list
+  name: az iot central device list
+  summary: Dapatkan daftar perangkat untuk aplikasi IoT Central.
+  description: ''
+  syntax: >-
+    az iot central device list --app-id
+                               [--api-version {1.0, 1.1-preview, preview}]
+                               [--central-api-uri]
+                               [--edge-only]
+                               [--token]
+  examples:
+  - summary: Mencantumkan semua perangkat dalam aplikasi, diurutkan menurut Id perangkat (default)
+    syntax: az iot central device list --app-id {appid}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi dari aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: "1.0"
+    parameterValueGroup: 1.0, 1.1-preview, preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --edge-only -e
+    summary: Hanya daftar perangkat IoT Edge.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+- uid: az_iot_central_device_manual-failback
+  name: az iot central device manual-failback
+  summary: Mengembalikan perintah failover yang dijalankan sebelumnya dengan memindahkan perangkat kembali ke IoT Hub aslinya.
+  description: Untuk informasi selengkapnya tentang ketersediaan tinggi, kunjungi https://github.com/iot-for-all/iot-central-high-availability-clients#readme.
+  syntax: >-
+    az iot central device manual-failback --app-id
+                                          --device-id
+                                          [--api-version {1.0, 1.1-preview, preview}]
+                                          [--central-api-uri]
+                                          [--token]
+  examples:
+  - summary: Mengembalikan perintah failover yang dijalankan sebelumnya dengan memindahkan perangkat kembali ke IoT Hub aslinya
+    syntax: az iot central device manual-failback --app-id {appid} --device-id {deviceid}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi dari aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --device-id -d
+    summary: ID perangkat dari perangkat target. Anda dapat menemukan ID perangkat dengan, mengklik tombol Koneksi di halaman Detail Perangkat.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: "1.0"
+    parameterValueGroup: 1.0, 1.1-preview, preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+- uid: az_iot_central_device_manual-failover
+  name: az iot central device manual-failover
+  summary: Jalankan failover manual perangkat di beberapa IoT Hub untuk memvalidasi kemampuan firmware perangkat untuk terhubung kembali menggunakan DPS ke IoT Hub yang berbeda.
+  description: Untuk informasi selengkapnya tentang ketersediaan tinggi dan nilai default untuk ttl-menit kunjungi https://github.com/iot-for-all/iot-central-high-availability-clients#readme.
+  syntax: >-
+    az iot central device manual-failover --app-id
+                                          --device-id
+                                          [--api-version {1.0, 1.1-preview, preview}]
+                                          [--central-api-uri]
+                                          [--token]
+                                          [--ttl]
+  examples:
+  - summary: Jalankan failover manual perangkat di beberapa IoT Hub untuk memvalidasi kemampuan firmware perangkat untuk terhubung kembali menggunakan DPS ke IoT Hub yang berbeda.
+    syntax: az iot central device manual-failover --app-id {appid} --device-id {deviceid} --ttl-minutes {ttl_minutes}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi dari aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --device-id -d
+    summary: ID perangkat dari perangkat target. Anda dapat menemukan ID perangkat dengan, mengklik tombol Koneksi di halaman Detail Perangkat.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: "1.0"
+    parameterValueGroup: 1.0, 1.1-preview, preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+  - name: --ttl --ttl-minutes
+    summary: Bilangan bulat positif. TTL dalam hitungan menit untuk memindahkan perangkat kembali ke hub asli. Memiliki nilai default di backend. Lihat dokumentasi tentang waktu default backend terbaru untuk nilai langsung sehingga mengunjungi https://github.com/iot-for-all/iot-central-high-availability-clients#readme.
+    description: ''
+- uid: az_iot_central_device_registration-info
+  name: az iot central device registration-info
+  summary: Dapatkan info pendaftaran tentang perangkat dari IoT Central.
+  description: 'Catatan: Perintah ini dapat memakan banyak waktu untuk dikembalikan jika tidak ada id perangkat yang ditentukan dan aplikasi Anda berisi banyak perangkat.'
+  syntax: >-
+    az iot central device registration-info --app-id
+                                            --device-id
+                                            [--api-version {1.0, 1.1-preview, preview}]
+                                            [--central-api-uri]
+                                            [--token]
+  examples:
+  - summary: Mendapatkan info pendaftaran pada perangkat tertentu
+    syntax: az iot central device registration-info --app-id {appid} --device-id {deviceid}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi dari aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --device-id -d
+    summary: ID perangkat dari perangkat target. Anda dapat menemukan ID perangkat dengan, mengklik tombol Koneksi di halaman Detail Perangkat.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: "1.0"
+    parameterValueGroup: 1.0, 1.1-preview, preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+- uid: az_iot_central_device_show
+  name: az iot central device show
+  summary: Dapatkan perangkat dari IoT Central.
+  description: ''
+  syntax: >-
+    az iot central device show --app-id
+                               --device-id
+                               [--api-version {1.0, 1.1-preview, preview}]
+                               [--central-api-uri]
+                               [--token]
+  examples:
+  - summary: Mendapatkan perangkat
+    syntax: az iot central device show --app-id {appid} --device-id {deviceid}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi dari aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --device-id -d
+    summary: ID perangkat dari perangkat target. Anda dapat menemukan ID perangkat dengan, mengklik tombol Koneksi di halaman Detail Perangkat.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: "1.0"
+    parameterValueGroup: 1.0, 1.1-preview, preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+- uid: az_iot_central_device_show-credentials
+  name: az iot central device show-credentials
+  summary: Mendapatkan kredensial perangkat dari IoT Central.
+  description: ''
+  syntax: >-
+    az iot central device show-credentials --app-id
+                                           --device-id
+                                           [--api-version {1.0, 1.1-preview, preview}]
+                                           [--central-api-uri]
+                                           [--token]
+  examples:
+  - summary: Mendapatkan kredensial perangkat untuk perangkat
+    syntax: az iot central device show-credentials --app-id {appid} --device-id {deviceid}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --device-id -d
+    summary: ID perangkat perangkat target. Anda dapat menemukan ID perangkat dengan, mengklik tombol Koneksi di halaman Detail Perangkat.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: "1.0"
+    parameterValueGroup: 1.0, 1.1-preview, preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+- uid: az_iot_central_device_update
+  name: az iot central device update
+  summary: Memperbarui perangkat di IoT Central.
+  description: >-
+    Memungkinkan untuk mengubah properti perangkat berikut: bendera "displayName", "template" dan "simulasi" dan "diaktifkan".
+
+    Id Perangkat tidak dapat diubah.
+
+    Jika versi api yang ditentukan adalah "1.1-preview", organisasi untuk perangkat juga dapat diperbarui.
+  syntax: >-
+    az iot central device update --app-id
+                                 --device-id
+                                 [--api-version {1.0, 1.1-preview, preview}]
+                                 [--central-api-uri]
+                                 [--device-name]
+                                 [--enable {false, true}]
+                                 [--organizations]
+                                 [--simulated {false, true}]
+                                 [--template]
+                                 [--token]
+  examples:
+  - summary: Memperbarui nama tampilan perangkat
+    syntax: az iot central device update --app-id {appid} --device-id {deviceid} --device-name {deviceName}
+  - summary: Mengubah perangkat yang disimulasikan menjadi perangkat nyata
+    syntax: az iot central device update --app-id {appid} --device-id {deviceid} --simulated false
+  - summary: Memperbarui organisasi untuk perangkat
+    syntax: az iot central device update --app-id {appid} --device-id {deviceid} --organizations {organizations}
+  - summary: Menonaktifkan perangkat
+    syntax: az iot central device update --app-id {appid} --device-id {deviceid} --enable false
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --device-id -d
+    summary: ID perangkat perangkat target. Anda dapat menemukan ID perangkat dengan, mengklik tombol Koneksi di halaman Detail Perangkat.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: "1.0"
+    parameterValueGroup: 1.0, 1.1-preview, preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --device-name
+    summary: 'Nama perangkat yang dapat dibaca manusia. Contoh: Kulkas.'
+    description: ''
+  - name: --enable
+    parameterValueGroup: false, true
+    summary: Tambahkan bendera ini jika Anda ingin IoT Central mengaktifkan atau menonaktifkan perangkat.
+    description: ''
+  - name: --organizations --orgs
+    summary: 'Tetapkan perangkat ke organisasi yang ditentukan. Daftar id organisasi yang dipisahkan koma. Versi minimum yang didukung: pratinjau 1.1.'
+    description: ''
+  - name: --simulated
+    parameterValueGroup: false, true
+    summary: Tambahkan bendera ini jika Anda ingin IoT Central mengaturnya sebagai perangkat yang disimulasikan. --template diperlukan jika ini benar.
+    description: ''
+  - name: --template
+    summary: 'Id templat pusat. Contoh: dtmi:ojpkindbz:modelDefinition:iild3tm_uo.'
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+commands:
+- az_iot_central_device_c2d-message
+- az_iot_central_device_c2d-message_purge
+- az_iot_central_device_command
+- az_iot_central_device_command_history
+- az_iot_central_device_command_run
+- az_iot_central_device_compute-device-key
+- az_iot_central_device_create
+- az_iot_central_device_delete
+- az_iot_central_device_edge
+- az_iot_central_device_edge_children
+- az_iot_central_device_edge_children_add
+- az_iot_central_device_edge_children_list
+- az_iot_central_device_edge_children_remove
+- az_iot_central_device_edge_manifest
+- az_iot_central_device_edge_manifest_show
+- az_iot_central_device_edge_module
+- az_iot_central_device_edge_module_list
+- az_iot_central_device_edge_module_restart
+- az_iot_central_device_edge_module_show
+- az_iot_central_device_list
+- az_iot_central_device_manual-failback
+- az_iot_central_device_manual-failover
+- az_iot_central_device_registration-info
+- az_iot_central_device_show
+- az_iot_central_device_show-credentials
+- az_iot_central_device_twin
+- az_iot_central_device_twin_show
+- az_iot_central_device_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola dan mengonfigurasi perangkat IoT Central.
+  ms.openlocfilehash: aaa54c3f4cd5e0f51c15bb71dd616788bfda1f2b
+  ms.sourcegitcommit: b179e8c36fc1222f584a3780aaf61c99bf78a40d
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/01/2022
+  ms.locfileid: "141307861"

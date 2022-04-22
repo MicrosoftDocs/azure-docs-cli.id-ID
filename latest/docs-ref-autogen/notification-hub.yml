@@ -1,0 +1,323 @@
+### YamlMime:AzureCLIGroup
+uid: az_notification-hub
+name: az notification-hub
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **notification-hub** untuk Azure CLI (versi 2.3.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **az notification-hub** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Kelola Notification Hubs.
+description: ''
+directCommands:
+- uid: az_notification-hub_check-availability
+  name: az notification-hub check-availability
+  summary: Periksa ketersediaan notificationHub yang diberikan di namespace layanan.
+  description: ''
+  syntax: >-
+    az notification-hub check-availability --name
+                                           --namespace-name
+                                           --resource-group
+  examples:
+  - summary: Periksa ketersediaan nama notificationHub yang diberikan
+    syntax: >-
+      az notification-hub check-availability --resource-group MyResourceGroup \
+
+      --namespace-name "locp-newns" --name my-hub
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama hub pemberitahuan untuk diperiksa.
+    description: ''
+  - isRequired: true
+    name: --namespace-name
+    summary: Nama namespace layanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_notification-hub_create
+  name: az notification-hub create
+  summary: Buat NotificationHub di namespace.
+  description: ''
+  syntax: >-
+    az notification-hub create --location
+                               --name
+                               --namespace-name
+                               --resource-group
+                               [--registration-ttl]
+                               [--tags]
+  examples:
+  - summary: Buat Hub Pemberitahuan
+    syntax: >-
+      az notification-hub create --resource-group MyResourceGroup --namespace-name my-namespace \
+
+      --name my-hub --location "South Central US"
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama hub pemberitahuan.
+    description: ''
+  - isRequired: true
+    name: --namespace-name
+    summary: Nama namespace layanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --registration-ttl
+    summary: RegistrationTtl dari NotificationHub yang dibuat.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+- uid: az_notification-hub_delete
+  name: az notification-hub delete
+  summary: Menghapus hub pemberitahuan yang terkait dengan namespace.
+  description: ''
+  syntax: >-
+    az notification-hub delete --name
+                               --namespace-name
+                               --resource-group
+                               [--yes]
+  examples:
+  - summary: Menghapus hub pemberitahuan
+    syntax: >-
+      az notification-hub delete --resource-group MyResourceGroup --namespace-name my-namespace \
+
+      --name my-hub
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama hub pemberitahuan.
+    description: ''
+  - isRequired: true
+    name: --namespace-name
+    summary: Nama namespace layanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_notification-hub_list
+  name: az notification-hub list
+  summary: Mencantumkan hub pemberitahuan yang terkait dengan namespace.
+  description: ''
+  syntax: >-
+    az notification-hub list --namespace-name
+                             --resource-group
+  examples:
+  - summary: Mencantumkan hub pemberitahuan
+    syntax: az notification-hub list --resource-group MyResourceGroup --namespace-name my-namespace
+  requiredParameters:
+  - isRequired: true
+    name: --namespace-name
+    summary: Nama namespace layanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_notification-hub_show
+  name: az notification-hub show
+  summary: Tampilkan informasi hub pemberitahuan.
+  description: ''
+  syntax: >-
+    az notification-hub show --name
+                             --namespace-name
+                             --resource-group
+  examples:
+  - summary: Tampilkan info Notification Hub
+    syntax: >-
+      az notification-hub show --resource-group MyResourceGroup --namespace-name my-namespace \
+
+      --name my-hub
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama hub pemberitahuan.
+    description: ''
+  - isRequired: true
+    name: --namespace-name
+    summary: Nama namespace layanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_notification-hub_test-send
+  name: az notification-hub test-send
+  summary: Uji kirim pemberitahuan push.
+  description: ''
+  syntax: >-
+    az notification-hub test-send --namespace-name
+                                  --notification-format {apple, baidu, gcm, template, windows, windowsphone}
+                                  --notification-hub-name
+                                  --resource-group
+                                  [--message]
+                                  [--payload]
+                                  [--tag]
+                                  [--title]
+  examples:
+  - summary: uji kirim pemberitahuan dengan isi pesan
+    syntax: >-
+      az notification-hub test-send --resource-group MyResourceGroup --namespace-name \
+
+      my-namespace --notification-hub-name my-hub --notification-format gcm \
+
+      --message "test notification"
+  - summary: uji kirim pemberitahuan dari file
+    syntax: >-
+      az notification-hub test-send --resource-group MyResourceGroup --namespace-name \
+
+      my-namespace --notification-hub-name my-hub --notification-format gcm \
+
+      --payload @path/to/file
+  - summary: uji kirim pemberitahuan dengan string json
+    syntax: >-
+      az notification-hub test-send --resource-group MyResourceGroup --namespace-name \
+
+      my-namespace --notification-hub-name my-hub --notification-format gcm \
+
+      --payload "{\"data\":{\"message\":\"test notification\"}}"
+  requiredParameters:
+  - isRequired: true
+    name: --namespace-name
+    summary: Nama namespace layanan.
+    description: ''
+  - isRequired: true
+    name: --notification-format
+    parameterValueGroup: apple, baidu, gcm, template, windows, windowsphone
+    summary: Format pesan pemberitahuan.
+    description: ''
+  - isRequired: true
+    name: --notification-hub-name
+    summary: Nama hub pemberitahuan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --message
+    summary: Isi pesan yang akan dikirim. Jika tidak Tidak Ada, payload akan diabaikan.
+    description: ''
+  - name: --payload
+    summary: Payload untuk pesan dalam format JSON.
+    description: ''
+  - name: --tag
+    summary: Anda dapat mengirim pemberitahuan pengujian ke sekumpulan pendaftaran tertentu menggunakan opsi ini. Biarkan bidang ini kosong jika Anda ingin mengirim pemberitahuan push ke 10 pendaftaran acak pada platform yang dipilih.
+    description: ''
+  - name: --title
+    summary: Judul pemberitahuan.
+    description: ''
+- uid: az_notification-hub_update
+  name: az notification-hub update
+  summary: Memperbarui Notification Hub di namespace.
+  description: ''
+  syntax: >-
+    az notification-hub update --name
+                               --namespace-name
+                               --resource-group
+                               [--tags]
+  examples:
+  - summary: Memperbarui Notification Hub
+    syntax: >-
+      az notification-hub update --resource-group MyResourceGroup --namespace-name \
+
+      my-namespace --name "sdk-notificationHubs-8708"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama hub pemberitahuan.
+    description: ''
+  - isRequired: true
+    name: --namespace-name
+    summary: Nama namespace layanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+commands:
+- az_notification-hub_authorization-rule
+- az_notification-hub_authorization-rule_create
+- az_notification-hub_authorization-rule_delete
+- az_notification-hub_authorization-rule_list
+- az_notification-hub_authorization-rule_list-keys
+- az_notification-hub_authorization-rule_regenerate-keys
+- az_notification-hub_authorization-rule_show
+- az_notification-hub_check-availability
+- az_notification-hub_create
+- az_notification-hub_credential
+- az_notification-hub_credential_adm
+- az_notification-hub_credential_adm_update
+- az_notification-hub_credential_apns
+- az_notification-hub_credential_apns_update
+- az_notification-hub_credential_baidu
+- az_notification-hub_credential_baidu_update
+- az_notification-hub_credential_gcm
+- az_notification-hub_credential_gcm_update
+- az_notification-hub_credential_list
+- az_notification-hub_credential_mpns
+- az_notification-hub_credential_mpns_update
+- az_notification-hub_credential_wns
+- az_notification-hub_credential_wns_update
+- az_notification-hub_delete
+- az_notification-hub_list
+- az_notification-hub_namespace
+- az_notification-hub_namespace_authorization-rule
+- az_notification-hub_namespace_authorization-rule_create
+- az_notification-hub_namespace_authorization-rule_delete
+- az_notification-hub_namespace_authorization-rule_list
+- az_notification-hub_namespace_authorization-rule_list-keys
+- az_notification-hub_namespace_authorization-rule_regenerate-keys
+- az_notification-hub_namespace_authorization-rule_show
+- az_notification-hub_namespace_check-availability
+- az_notification-hub_namespace_create
+- az_notification-hub_namespace_delete
+- az_notification-hub_namespace_list
+- az_notification-hub_namespace_show
+- az_notification-hub_namespace_update
+- az_notification-hub_namespace_wait
+- az_notification-hub_show
+- az_notification-hub_test-send
+- az_notification-hub_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Kelola Notification Hubs.
+  ms.openlocfilehash: 1b05027e6510e860826826fa4c14bba3e664de51
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141116275"

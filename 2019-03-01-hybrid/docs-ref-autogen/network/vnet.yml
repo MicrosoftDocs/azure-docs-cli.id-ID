@@ -1,0 +1,332 @@
+### YamlMime:AzureCLIGroup
+uid: az_network_vnet
+name: az network vnet
+summary: Mengelola Azure Virtual Networks.
+description: Untuk mempelajari lebih lanjut tentang Virtual Networks kunjungi https://docs.microsoft.com/azure/virtual-network/virtual-network-manage-network.
+directCommands:
+- uid: az_network_vnet_check-ip-address
+  name: az network vnet check-ip-address
+  summary: Periksa apakah alamat IP privat tersedia untuk digunakan dalam jaringan virtual.
+  description: ''
+  syntax: >-
+    az network vnet check-ip-address --ip-address
+                                     [--ids]
+                                     [--name]
+                                     [--resource-group]
+  examples:
+  - summary: Periksa apakah 10.0.0.4 tersedia dalam MyVnet.
+    syntax: az network vnet check-ip-address -g MyResourceGroup -n MyVnet --ip-address 10.0.0.4
+  requiredParameters:
+  - isRequired: true
+    name: --ip-address
+    summary: Alamat IP privat yang akan diverifikasi.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama jaringan virtual (VNet).
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_vnet_create
+  name: az network vnet create
+  summary: Membuat jaringan virtual.
+  description: Anda juga dapat membuat subnet secara bersamaan dengan menentukan nama subnet dan (opsional) awalan alamat. Untuk mempelajari tentang cara membuat jaringan virtual, kunjungi https://docs.microsoft.com/azure/virtual-network/manage-virtual-network#create-a-virtual-network.
+  syntax: >-
+    az network vnet create --name
+                           --resource-group
+                           [--address-prefixes]
+                           [--bgp-community]
+                           [--ddos-protection {false, true}]
+                           [--defer]
+                           [--dns-servers]
+                           [--location]
+                           [--network-security-group]
+                           [--subnet-name]
+                           [--subnet-prefix]
+                           [--tags]
+                           [--vm-protection {false, true}]
+  examples:
+  - summary: Membuat jaringan virtual.
+    syntax: az network vnet create -g MyResourceGroup -n MyVnet
+  - summary: Buat jaringan virtual dengan awalan alamat tertentu dan satu subnet.
+    syntax: >-
+      az network vnet create -g MyResourceGroup -n MyVnet --address-prefix 10.0.0.0/16 \
+          --subnet-name MySubnet --subnet-prefix 10.0.0.0/24
+  - summary: Membuat jaringan virtual. (dibuat otomatis)
+    syntax: az network vnet create --address-prefixes 10.0.0.0/16 --name MyVirtualNetwork --resource-group MyResourceGroup --subnet-name MyAseSubnet --subnet-prefixes 10.0.0.0/24
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama jaringan virtual (VNet).
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --address-prefixes
+    defaultValue: 10.0.0.0/16
+    summary: Daftar awalan alamat IP yang dipisahkan spasi untuk VNet.
+    description: ''
+  - name: --bgp-community
+    summary: Komunitas BGP yang terkait dengan jaringan virtual.
+    description: ''
+  - name: --ddos-protection
+    parameterValueGroup: false, true
+    summary: Mengontrol apakah perlindungan DDoS diaktifkan.
+    description: ''
+  - name: --defer
+    summary: Simpan sementara objek di cache lokal alih-alih mengirim ke Azure. Gunakan `az cache` perintah untuk melihat/menghapus.
+    description: ''
+  - name: --dns-servers
+    summary: Daftar alamat IP server DNS yang dipisahkan spasi.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --network-security-group --nsg
+    summary: Nama atau ID grup keamanan jaringan (NSG).
+    description: ''
+  - name: --subnet-name
+    summary: Nama subnet baru untuk dibuat dalam VNet.
+    description: ''
+  - name: --subnet-prefix
+    summary: Awalan alamat IP untuk subnet baru. Jika dihilangkan, secara otomatis mencadangkan blok /24 (atau sebesar yang tersedia) dalam ruang alamat VNet.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --vm-protection
+    parameterValueGroup: false, true
+    summary: Aktifkan perlindungan VM untuk semua subnet di VNet.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_vnet_delete
+  name: az network vnet delete
+  summary: Menghapus jaringan virtual.
+  description: ''
+  syntax: >-
+    az network vnet delete [--ids]
+                           [--name]
+                           [--resource-group]
+  examples:
+  - summary: Menghapus jaringan virtual.
+    syntax: az network vnet delete -g MyResourceGroup -n myVNet
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama jaringan virtual (VNet).
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_vnet_list
+  name: az network vnet list
+  summary: Mencantumkan jaringan virtual.
+  description: ''
+  syntax: az network vnet list [--resource-group]
+  examples:
+  - summary: Mencantumkan semua jaringan virtual dalam langganan.
+    syntax: az network vnet list
+  - summary: Mencantumkan semua jaringan virtual dalam grup sumber daya.
+    syntax: az network vnet list -g MyResourceGroup
+  - summary: Mencantumkan jaringan virtual dalam langganan yang menentukan awalan alamat tertentu.
+    syntax: az network vnet list --query "[?contains(addressSpace.addressPrefixes, '10.0.0.0/16')]"
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_vnet_list-available-ips
+  name: az network vnet list-available-ips
+  summary: Cantumkan beberapa ip yang tersedia di vnet.
+  description: ''
+  syntax: >-
+    az network vnet list-available-ips [--ids]
+                                       [--name]
+                                       [--resource-group]
+  examples:
+  - summary: Cantumkan beberapa ip yang tersedia di vnet.
+    syntax: az network vnet list-available-ips -g MyResourceGroup -n MyVNet
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama jaringan virtual (VNet).
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_vnet_list-endpoint-services
+  name: az network vnet list-endpoint-services
+  summary: Cantumkan layanan mana yang mendukung penerowongan layanan VNET di wilayah tertentu.
+  description: Untuk mempelajari selengkapnya tentang titik akhir layanan, kunjungi https://docs.microsoft.com/azure/virtual-network/virtual-network-service-endpoints-configure#azure-cli.
+  syntax: az network vnet list-endpoint-services --location
+  examples:
+  - summary: Cantumkan layanan titik akhir yang tersedia untuk digunakan di wilayah US Barat.
+    syntax: az network vnet list-endpoint-services -l westus -o table
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_vnet_show
+  name: az network vnet show
+  summary: Dapatkan detail jaringan virtual.
+  description: ''
+  syntax: >-
+    az network vnet show [--expand]
+                         [--ids]
+                         [--name]
+                         [--resource-group]
+  examples:
+  - summary: Dapatkan detail untuk MyVNet.
+    syntax: az network vnet show -g MyResourceGroup -n MyVNet
+  optionalParameters:
+  - name: --expand
+    summary: Memperluas sumber daya yang dirujuk.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama jaringan virtual (VNet).
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_vnet_update
+  name: az network vnet update
+  summary: Memperbarui jaringan virtual.
+  description: ''
+  syntax: >-
+    az network vnet update [--add]
+                           [--address-prefixes]
+                           [--bgp-community]
+                           [--ddos-protection {false, true}]
+                           [--defer]
+                           [--dns-servers]
+                           [--force-string]
+                           [--ids]
+                           [--name]
+                           [--remove]
+                           [--resource-group]
+                           [--set]
+                           [--vm-protection {false, true}]
+  examples:
+  - summary: Perbarui jaringan virtual dengan alamat IP server DNS.
+    syntax: az network vnet update -g MyResourceGroup -n MyVNet --dns-servers 10.2.0.8
+  - summary: Perbarui jaringan virtual untuk menghapus server DNS.
+    syntax: az network vnet update -g MyResourceGroup -n MyVNet --dns-servers ''
+  - summary: Memperbarui jaringan virtual. (dibuat otomatis)
+    syntax: az network vnet update --address-prefixes 40.1.0.0/24 --name MyVNet --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --address-prefixes
+    summary: Daftar awalan alamat IP yang dipisahkan spasi untuk VNet.
+    description: ''
+  - name: --bgp-community
+    summary: Komunitas BGP yang terkait dengan jaringan virtual.
+    description: ''
+  - name: --ddos-protection
+    parameterValueGroup: false, true
+    summary: Mengontrol apakah perlindungan DDoS diaktifkan.
+    description: ''
+  - name: --defer
+    summary: Simpan sementara objek di cache lokal alih-alih mengirim ke Azure. Gunakan `az cache` perintah untuk melihat/menghapus.
+    description: ''
+  - name: --dns-servers
+    summary: Daftar alamat IP server DNS yang dipisahkan spasi.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama jaringan virtual (VNet).
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --vm-protection
+    parameterValueGroup: false, true
+    summary: Aktifkan perlindungan VM untuk semua subnet di VNet.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+commands:
+- az_network_vnet_check-ip-address
+- az_network_vnet_create
+- az_network_vnet_delete
+- az_network_vnet_list
+- az_network_vnet_list-available-ips
+- az_network_vnet_list-endpoint-services
+- az_network_vnet_peering
+- az_network_vnet_peering_create
+- az_network_vnet_peering_delete
+- az_network_vnet_peering_list
+- az_network_vnet_peering_show
+- az_network_vnet_peering_sync
+- az_network_vnet_peering_update
+- az_network_vnet_show
+- az_network_vnet_subnet
+- az_network_vnet_subnet_create
+- az_network_vnet_subnet_delete
+- az_network_vnet_subnet_list
+- az_network_vnet_subnet_show
+- az_network_vnet_subnet_update
+- az_network_vnet_tap
+- az_network_vnet_tap_create
+- az_network_vnet_tap_delete
+- az_network_vnet_tap_list
+- az_network_vnet_tap_show
+- az_network_vnet_tap_update
+- az_network_vnet_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/09/2022
+  description: Untuk mempelajari lebih lanjut tentang Virtual Networks kunjungi https://docs.microsoft.com/azure/virtual-network/virtual-network-manage-network.
+  ms.openlocfilehash: cec6742bdec69d0f9f1ed39832f0a301bb873fe9
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141422099"
