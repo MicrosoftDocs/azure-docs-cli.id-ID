@@ -1,0 +1,141 @@
+### YamlMime:AzureCLIGroup
+uid: az_batch_pool_autoscale
+name: skala otomatis kumpulan batch az
+summary: Mengelola penskalaan otomatis kumpulan Batch.
+description: ''
+directCommands:
+- uid: az_batch_pool_autoscale_disable
+  name: az batch pool autoscale disable
+  summary: Menonaktifkan penskalaan otomatis untuk Kumpulan.
+  description: ''
+  syntax: >-
+    az batch pool autoscale disable --pool-id
+                                    [--account-endpoint]
+                                    [--account-key]
+                                    [--account-name]
+  requiredParameters:
+  - isRequired: true
+    name: --pool-id
+    summary: ID Kumpulan untuk menonaktifkan penskalaan otomatis.
+    description: ''
+  optionalParameters:
+  - name: --account-endpoint
+    summary: 'Titik akhir layanan batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ENDPOINT.'
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCESS_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCOUNT.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batch/_help.py
+- uid: az_batch_pool_autoscale_enable
+  name: az batch pool autoscale enable
+  summary: Mengaktifkan penskalaan otomatis untuk Kumpulan.
+  description: Anda tidak dapat mengaktifkan penskalakan otomatis pada Kumpulan jika operasi pengurangan ukuran sedang berlangsung di Kumpulan. Jika penskalaan otomatis Kumpulan saat ini dinonaktifkan, Anda harus menentukan rumus skala otomatis yang valid sebagai bagian dari permintaan. Jika penskalaan otomatis Kumpulan sudah diaktifkan, Anda dapat menentukan rumus skala otomatis baru dan/atau interval evaluasi baru. Anda tidak dapat memanggil API ini untuk Kumpulan yang sama lebih dari sekali setiap 30 detik.
+  syntax: >-
+    az batch pool autoscale enable --pool-id
+                                   [--account-endpoint]
+                                   [--account-key]
+                                   [--account-name]
+                                   [--auto-scale-evaluation-interval]
+                                   [--auto-scale-formula]
+                                   [--if-match]
+                                   [--if-modified-since]
+                                   [--if-none-match]
+                                   [--if-unmodified-since]
+  requiredParameters:
+  - isRequired: true
+    name: --pool-id
+    summary: ID Kumpulan untuk mengaktifkan penskalaan otomatis.
+    description: ''
+  optionalParameters:
+  - name: --account-endpoint
+    summary: 'Titik akhir layanan batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ENDPOINT.'
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCESS_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCOUNT.'
+    description: ''
+  - name: --auto-scale-evaluation-interval
+    summary: Nilai defaultnya adalah 15 menit. Nilai minimum dan maksimum masing-masing adalah 5 menit dan 168 jam. Jika Anda menentukan nilai kurang dari 5 menit atau lebih besar dari 168 jam, layanan Batch menolak permintaan dengan kesalahan nilai properti yang tidak valid; jika Anda memanggil REST API secara langsung, kode status HTTP adalah 400 (Permintaan Buruk). Jika Anda menentukan interval baru, maka jadwal evaluasi skala otomatis yang ada akan dihentikan dan jadwal evaluasi skala otomatis baru akan dimulai, dengan waktu mulainya saat permintaan ini dikeluarkan.
+    description: ''
+  - name: --auto-scale-formula
+    summary: Rumus diperiksa validitasnya sebelum diterapkan ke Kumpulan. Jika rumus tidak valid, layanan Batch menolak permintaan dengan informasi kesalahan terperinci. Untuk informasi selengkapnya tentang menentukan rumus ini, lihat Menskalakan Simpul Komputasi secara otomatis dalam Kumpulan Azure Batch (https://azure.microsoft.com/en-us/documentation/articles/batch-automatic-scaling).
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag yang terkait dengan versi sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika ETag sumber daya saat ini pada layanan sama persis dengan nilai yang ditentukan oleh klien.
+    description: ''
+  - name: --if-modified-since
+    summary: Tanda waktu yang menunjukkan waktu modifikasi terakhir sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika sumber daya pada layanan telah dimodifikasi sejak waktu yang ditentukan.
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag yang terkait dengan versi sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika ETag sumber daya saat ini pada layanan tidak cocok dengan nilai yang ditentukan oleh klien.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Tanda waktu yang menunjukkan waktu modifikasi terakhir sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika sumber daya pada layanan belum dimodifikasi sejak waktu yang ditentukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batch/_help.py
+- uid: az_batch_pool_autoscale_evaluate
+  name: az batch pool autoscale evaluate
+  summary: Mendapatkan hasil mengevaluasi rumus penskalaan otomatis pada Kumpulan.
+  description: API ini terutama untuk memvalidasi rumus skala otomatis, karena hanya mengembalikan hasil tanpa menerapkan rumus ke Kumpulan. Kumpulan harus mengaktifkan penskalaan otomatis untuk mengevaluasi rumus.
+  syntax: >-
+    az batch pool autoscale evaluate --auto-scale-formula
+                                     --pool-id
+                                     [--account-endpoint]
+                                     [--account-key]
+                                     [--account-name]
+  requiredParameters:
+  - isRequired: true
+    name: --auto-scale-formula
+    summary: Rumus divalidasi dan hasilnya dihitung, tetapi tidak diterapkan ke Kumpulan. Untuk menerapkan rumus ke Kumpulan, 'Aktifkan penskalaan otomatis pada Kumpulan'. Untuk informasi selengkapnya tentang menentukan rumus ini, lihat Menskalakan Simpul Komputasi secara otomatis dalam Kumpulan Azure Batch (https://azure.microsoft.com/en-us/documentation/articles/batch-automatic-scaling).
+    description: ''
+  - isRequired: true
+    name: --pool-id
+    summary: ID Kumpulan untuk mengevaluasi rumus penskalaan otomatis.
+    description: ''
+  optionalParameters:
+  - name: --account-endpoint
+    summary: 'Titik akhir layanan batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ENDPOINT.'
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCESS_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCOUNT.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batch/_help.py
+commands:
+- az_batch_pool_autoscale_disable
+- az_batch_pool_autoscale_enable
+- az_batch_pool_autoscale_evaluate
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/30/2022
+  description: Mengelola penskalaan otomatis kumpulan Batch.
+  ms.openlocfilehash: 1baf25591a71d342d126e662a514c5c8137f3228
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141444959"

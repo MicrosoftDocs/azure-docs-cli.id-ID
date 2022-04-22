@@ -1,0 +1,241 @@
+### YamlMime:AzureCLIGroup
+uid: az_storage_azcopy_blob
+name: az storage azcopy blob
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **pratinjau penyimpanan** untuk Azure CLI (versi 2.25.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az storage azcopy blob** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola penyimpanan objek untuk data (blob) yang tidak terstruktur menggunakan AzCopy.
+description: ''
+directCommands:
+- uid: az_storage_azcopy_blob_delete
+  name: az storage azcopy blob delete
+  summary: Hapus blob dari kontainer blob penyimpanan menggunakan AzCopy.
+  description: ''
+  syntax: >-
+    az storage azcopy blob delete --container
+                                  [--account-key]
+                                  [--account-name]
+                                  [--auth-mode {key, login}]
+                                  [--connection-string]
+                                  [--recursive]
+                                  [--sas-token]
+                                  [--target]
+  examples:
+  - summary: Menghapus satu blob dari kontainer.
+    syntax: az storage azcopy blob delete -c MyContainer --account-name MyStorageAccount -t TargetBlob
+  - summary: Hapus semua blob dari kontainer.
+    syntax: az storage azcopy blob delete -c MyContainer --account-name MyStorageAccount --recursive
+  - summary: Hapus semua blob dalam direktori virtual.
+    syntax: az storage azcopy blob delete -c MyContainer --account-name MyStorageAccount -t "path/to/virtual_directory" --recursive
+  requiredParameters:
+  - isRequired: true
+    name: --container -c
+    summary: Kontainer target penghapusan.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --recursive -r
+    summary: Menghapus blob secara rekursif.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --target -t
+    summary: Jalur target penghapusan.
+    description: ''
+- uid: az_storage_azcopy_blob_download
+  name: az storage azcopy blob download
+  summary: Unduh blob dari kontainer blob penyimpanan menggunakan AzCopy.
+  description: ''
+  syntax: >-
+    az storage azcopy blob download --container
+                                    --destination
+                                    [--account-key]
+                                    [--account-name]
+                                    [--auth-mode {key, login}]
+                                    [--connection-string]
+                                    [--recursive]
+                                    [--sas-token]
+                                    [--source]
+  examples:
+  - summary: Unduh satu blob dari kontainer.
+    syntax: az storage azcopy blob download -c MyContainer --account-name MyStorageAccount -s "path/to/blob" -d "path/to/file"
+  - summary: Unduh direktori virtual dari kontainer.
+    syntax: az storage azcopy blob download -c MyContainer --account-name MyStorageAccount -s "path/to/virtual_directory" -d "download/path" --recursive
+  - summary: Unduh konten kontainer ke sistem file lokal.
+    syntax: az storage azcopy blob download -c MyContainer --account-name MyStorageAccount -s * -d "download/path" --recursive
+  requiredParameters:
+  - isRequired: true
+    name: --container -c
+    summary: Kontainer sumber unduhan.
+    description: ''
+  - isRequired: true
+    name: --destination -d
+    summary: Jalur file tujuan untuk diunduh.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --recursive -r
+    summary: Mengunduh blob secara rekursif.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --source -s
+    summary: Jalur sumber unduhan.
+    description: ''
+- uid: az_storage_azcopy_blob_sync
+  name: az storage azcopy blob sync
+  summary: Sinkronkan blob secara rekursif ke kontainer blob penyimpanan menggunakan AzCopy.
+  description: Untuk mempelajari selengkapnya tentang sinkronisasi azcopy, lihat https://docs.microsoft.com/azure/storage/common/storage-ref-azcopy-sync.
+  syntax: >-
+    az storage azcopy blob sync --container
+                                --source
+                                [--account-key]
+                                [--account-name]
+                                [--auth-mode {key, login}]
+                                [--connection-string]
+                                [--destination]
+                                [--sas-token]
+  examples:
+  - summary: Sinkronkan satu blob ke kontainer.
+    syntax: az storage azcopy blob sync -c MyContainer --account-name MyStorageAccount -s "path/to/file" -d NewBlob
+  - summary: Menyinkronkan direktori ke kontainer.
+    syntax: az storage azcopy blob sync -c MyContainer --account-name MyStorageAccount -s "path/to/directory"
+  requiredParameters:
+  - isRequired: true
+    name: --container -c
+    summary: Kontainer tujuan sinkronisasi.
+    description: ''
+  - isRequired: true
+    name: --source -s
+    summary: Jalur file sumber untuk disinkronkan.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --destination -d
+    summary: Jalur tujuan sinkronisasi.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+- uid: az_storage_azcopy_blob_upload
+  name: az storage azcopy blob upload
+  summary: Upload blob ke kontainer blob penyimpanan menggunakan AzCopy.
+  description: ''
+  syntax: >-
+    az storage azcopy blob upload --container
+                                  --source
+                                  [--account-key]
+                                  [--account-name]
+                                  [--auth-mode {key, login}]
+                                  [--connection-string]
+                                  [--destination]
+                                  [--recursive]
+                                  [--sas-token]
+  examples:
+  - summary: Upload satu blob ke kontainer.
+    syntax: az storage azcopy blob upload -c MyContainer --account-name MyStorageAccount -s "path/to/file" -d NewBlob
+  - summary: Upload direktori ke kontainer.
+    syntax: az storage azcopy blob upload -c MyContainer --account-name MyStorageAccount -s "path/to/directory" --recursive
+  - summary: Upload konten direktori ke kontainer.
+    syntax: az storage azcopy blob upload -c MyContainer --account-name MyStorageAccount -s "path/to/directory/*" --recursive
+  requiredParameters:
+  - isRequired: true
+    name: --container -c
+    summary: Kontainer tujuan unggahan.
+    description: ''
+  - isRequired: true
+    name: --source -s
+    summary: Jalur file sumber untuk diunggah.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --destination -d
+    summary: Jalur tujuan unggahan.
+    description: ''
+  - name: --recursive -r
+    summary: Mengunggah blob secara rekursif.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+commands:
+- az_storage_azcopy_blob_delete
+- az_storage_azcopy_blob_download
+- az_storage_azcopy_blob_sync
+- az_storage_azcopy_blob_upload
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola penyimpanan objek untuk data (blob) yang tidak terstruktur menggunakan AzCopy.
+  ms.openlocfilehash: e168fd2e20783d2c24d3a439650eb6cdab11ba4b
+  ms.sourcegitcommit: 7bac85b01b53f224997c83feeb6601ff4e108b32
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/13/2022
+  ms.locfileid: "141666811"

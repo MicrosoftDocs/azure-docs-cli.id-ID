@@ -1,0 +1,167 @@
+### YamlMime:AzureCLIGroup
+uid: az_vm_diagnostics
+name: az vm diagnostics
+summary: Konfigurasikan ekstensi diagnostik Azure Virtual Machine.
+description: ''
+directCommands:
+- uid: az_vm_diagnostics_get-default-config
+  name: az vm diagnostics get-default-config
+  summary: Dapatkan pengaturan konfigurasi default untuk VM.
+  description: ''
+  syntax: az vm diagnostics get-default-config [--is-windows-os]
+  examples:
+  - summary: Dapatkan diagnostik default untuk VM Linux dan ganti nama akun penyimpanan dan ID sumber daya VM.
+    syntax: >-
+      az vm diagnostics get-default-config \
+          | sed "s#__DIAGNOSTIC_STORAGE_ACCOUNT__#MyStorageAccount#g" \
+          | sed "s#__VM_OR_VMSS_RESOURCE_ID__#MyVmResourceId#g"
+  - summary: Dapatkan diagnostik default untuk VM Windows.
+    syntax: az vm diagnostics get-default-config --is-windows-os
+  optionalParameters:
+  - name: --is-windows-os
+    summary: Untuk VM Windows.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_diagnostics_set
+  name: az vm diagnostics set
+  summary: Konfigurasikan ekstensi diagnostik Azure VM.
+  description: ''
+  syntax: >-
+    az vm diagnostics set --settings
+                          [--ids]
+                          [--no-auto-upgrade {false, true}]
+                          [--no-auto-upgrade-minor-version {false, true}]
+                          [--protected-settings]
+                          [--resource-group]
+                          [--version]
+                          [--vm-name]
+  examples:
+  - summary: Siapkan diagnostik default pada VM Linux untuk grafik metrik VM Portal Azure dan koleksi syslog.
+    syntax: >-
+      # Set the following 3 parameters first.
+
+      my_resource_group={Resource group name containing your Linux VM and the storage account}
+
+      my_linux_vm={Your Azure Linux VM name}
+
+      my_diagnostic_storage_account={Your Azure storage account for storing VM diagnostic data}
+
+
+      my_vm_resource_id=$(az vm show -g $my_resource_group -n $my_linux_vm --query "id" -o tsv)
+
+
+      default_config=$(az vm diagnostics get-default-config \
+          | sed "s#__DIAGNOSTIC_STORAGE_ACCOUNT__#$my_diagnostic_storage_account#g" \
+          | sed "s#__VM_OR_VMSS_RESOURCE_ID__#$my_vm_resource_id#g")
+
+      storage_sastoken=$(az storage account generate-sas \
+          --account-name $my_diagnostic_storage_account --expiry 2037-12-31T23:59:00Z \
+          --permissions wlacu --resource-types co --services bt -o tsv)
+
+      protected_settings="{'storageAccountName': '$my_diagnostic_storage_account', \
+          'storageAccountSasToken': '$storage_sastoken'}"
+
+      az vm diagnostics set --settings "$default_config" \
+          --protected-settings "$protected_settings" \
+          --resource-group $my_resource_group --vm-name $my_linux_vm
+  - summary: Siapkan diagnostik default pada VM Windows.
+    syntax: >-
+      # Set the following 3 parameters first.
+
+      my_resource_group={Resource group name containing your Windows VM and the storage account}
+
+      my_windows_vm={Your Azure Windows VM name}
+
+      my_diagnostic_storage_account={Your Azure storage account for storing VM diagnostic data}
+
+
+      my_vm_resource_id=$(az vm show -g $my_resource_group -n $my_windows_vm --query "id" -o tsv)
+
+
+      default_config=$(az vm diagnostics get-default-config  --is-windows-os \
+          | sed "s#__DIAGNOSTIC_STORAGE_ACCOUNT__#$my_diagnostic_storage_account#g" \
+          | sed "s#__VM_OR_VMSS_RESOURCE_ID__#$my_vm_resource_id#g")
+
+      # Please use the same options, the WAD diagnostic extension has strict
+
+      # expectations of the sas token's format. Set the expiry as desired.
+
+      storage_sastoken=$(az storage account generate-sas \
+          --account-name $my_diagnostic_storage_account --expiry 2037-12-31T23:59:00Z \
+          --permissions acuw --resource-types co --services bt --https-only --output tsv)
+
+      protected_settings="{'storageAccountName': '$my_diagnostic_storage_account', \
+          'storageAccountSasToken': '$storage_sastoken'}"
+
+      az vm diagnostics set --settings "$default_config" \
+          --protected-settings "$protected_settings" \
+          --resource-group $my_resource_group --vm-name $my_windows_vm
+
+      # # Alternatively, if the WAD extension has issues parsing the sas token,
+
+      # # one can use a storage account key instead.
+
+      storage_account_key=$(az storage account keys list --account-name {my_storage_account} \
+        --query [0].value -o tsv)
+      protected_settings="{'storageAccountName': '$my_diagnostic_storage_account', \
+        'storageAccountKey': '$storage_account_key'}"
+  requiredParameters:
+  - isRequired: true
+    name: --settings
+    summary: String Json atau jalur file, yang menentukan data yang akan dikumpulkan.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --no-auto-upgrade
+    parameterValueGroup: false, true
+    summary: Jika diatur, layanan ekstensi tidak akan secara otomatis memilih atau meningkatkan ke versi minor terbaru, bahkan jika ekstensi disebarkan ulang.
+    description: ''
+  - name: --no-auto-upgrade-minor-version
+    parameterValueGroup: false, true
+    summary: Jika diatur, layanan ekstensi tidak akan secara otomatis memilih atau meningkatkan ke versi minor terbaru, bahkan jika ekstensi disebarkan ulang.
+    description: ''
+  - name: --protected-settings
+    summary: String Json atau jalur file yang berisi konfigurasi privat seperti kunci akun penyimpanan, dll.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --version
+    summary: Versi ekstensi diagnostik. Akan menggunakan yang terbaru jika tidak dispesifikasikan.
+    description: ''
+  - name: --vm-name
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+commands:
+- az_vm_diagnostics_get-default-config
+- az_vm_diagnostics_set
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 04/01/2022
+  description: Konfigurasikan ekstensi diagnostik Azure Virtual Machine.
+  ms.openlocfilehash: 5dc37e5bdff3d8b75aa85812eb86d4d7522b68b0
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141424691"

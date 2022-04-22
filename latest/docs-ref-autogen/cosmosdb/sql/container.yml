@@ -1,0 +1,275 @@
+### YamlMime:AzureCLIGroup
+uid: az_cosmosdb_sql_container
+name: az cosmosdb sql container
+summary: Mengelola kontainer SQL Azure Cosmos DB.
+description: ''
+directCommands:
+- uid: az_cosmosdb_sql_container_create
+  name: membuat database az cosmosdb sql
+  summary: Buat kontainer SQL di bawah database SQL Azure Cosmos DB.
+  description: ''
+  syntax: >-
+    az cosmosdb sql container create --account-name
+                                     --database-name
+                                     --name
+                                     --partition-key-path
+                                     --resource-group
+                                     [--analytical-storage-ttl]
+                                     [--conflict-resolution-policy]
+                                     [--idx]
+                                     [--max-throughput]
+                                     [--partition-key-version]
+                                     [--throughput]
+                                     [--ttl]
+                                     [--unique-key-policy]
+  examples:
+  - summary: Buat kontainer SQL Azure Cosmos DB.
+    syntax: az cosmosdb sql container create -g MyResourceGroup -a MyAccount -d MyDatabase -n MyContainer --partition-key-path "/my/path" --idx @policy-file.json --ttl 1000 --throughput "700"
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun Cosmosdb.
+    description: ''
+  - isRequired: true
+    name: --database-name -d
+    summary: Nama database.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --partition-key-path -p
+    summary: Jalur Kunci Partisi, misalnya, '/address/zipcode'.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --analytical-storage-ttl -t
+    summary: TTL analitis, saat penyimpanan analitis diaktifkan.
+    description: ''
+  - name: --conflict-resolution-policy -c
+    summary: 'Kebijakan Resolusi Konflik, Anda dapat memasukkannya sebagai string atau sebagai file, misalnya, --conflict-resolution-policy @policy-file.json atau --conflict-resolution-policy "{"mode": "lastWriterWins", "conflictResolutionPath": "/path"}".'
+    description: ''
+  - name: --idx
+    defaultValue: >-
+      {
+        "indexingMode": "consistent",
+        "automatic": true,
+        "includedPaths": [
+          {
+            "path": "/*"
+          }
+        ],
+        "excludedPaths": [
+          {
+            "path": "/\"_etag\"/?"
+          }
+        ]
+      }
+    summary: 'Kebijakan Pengindeksan, Anda dapat memasukkannya sebagai string atau sebagai file, misalnya, --idx @policy-file.json atau --idx "{"indexingMode": "consistent", "automatic": true, "includedPaths": [{"path": "/\*"}], "excludedPaths": [{ "path": "/headquarters/employees/?"}, { "path": "/\"_etag\"/?"}]}".'
+    description: ''
+  - name: --max-throughput
+    summary: Sumber daya throughput maksimum dapat diskalakan ke (RU/dtk). Disediakan saat sumber daya diaktifkan skala otomatis. Nilai minimumnya bisa 4000 (RU/dtk).
+    description: ''
+  - name: --partition-key-version
+    summary: Versi kunci partisi.
+    description: ''
+  - name: --throughput
+    summary: Throughput kontainer SQL (RU/dtk). Nilai defaultnya adalah 400. Hilangkan parameter ini jika database telah berbagi throughput kecuali kontainer harus memiliki throughput khusus.
+    description: ''
+  - name: --ttl
+    summary: TTL default. Jika nilai hilang atau diatur ke "-1", item tidak akan kedaluwarsa. Jika nilai diatur ke "n", item akan kedaluwarsa "n" detik setelah waktu terakhir diubah.
+    description: ''
+  - name: --unique-key-policy -u
+    summary: 'Kebijakan Kunci Unik, Anda dapat memasukkannya sebagai string atau sebagai file, misalnya, --unique-key-policy @policy-file.json atau --unique-key-policy "{"uniqueKeys": [{"paths": ["/path/to/key1"]}, {"paths": ["/path/to/key2"]}]}".'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cosmosdb/_help.py
+- uid: az_cosmosdb_sql_container_delete
+  name: az cosmosdb sql container delete
+  summary: Hapus kontainer SQL di bawah database SQL Azure Cosmos DB.
+  description: ''
+  syntax: >-
+    az cosmosdb sql container delete --account-name
+                                     --database-name
+                                     --name
+                                     --resource-group
+                                     [--yes]
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun Cosmosdb.
+    description: ''
+  - isRequired: true
+    name: --database-name -d
+    summary: Nama database.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cosmosdb/_help.py
+- uid: az_cosmosdb_sql_container_exists
+  name: az cosmosdb sql container ada
+  summary: Memeriksa apakah kontainer SQL Azure Cosmos DB ada.
+  description: ''
+  syntax: >-
+    az cosmosdb sql container exists --account-name
+                                     --database-name
+                                     --name
+                                     --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun Cosmosdb.
+    description: ''
+  - isRequired: true
+    name: --database-name -d
+    summary: Nama database.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cosmosdb/_help.py
+- uid: az_cosmosdb_sql_container_list
+  name: az cosmosdb sql container list
+  summary: Cantumkan kontainer SQL di bawah database SQL Azure Cosmos DB.
+  description: ''
+  syntax: >-
+    az cosmosdb sql container list --account-name
+                                   --database-name
+                                   --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun Cosmosdb.
+    description: ''
+  - isRequired: true
+    name: --database-name -d
+    summary: Nama database.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cosmosdb/_help.py
+- uid: az_cosmosdb_sql_container_show
+  name: az cosmosdb sql container show
+  summary: Memperlihatkan detail kontainer SQL di bawah database SQL Azure Cosmos DB.
+  description: ''
+  syntax: >-
+    az cosmosdb sql container show --account-name
+                                   --database-name
+                                   --name
+                                   --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun Cosmosdb.
+    description: ''
+  - isRequired: true
+    name: --database-name -d
+    summary: Nama database.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cosmosdb/_help.py
+- uid: az_cosmosdb_sql_container_update
+  name: az cosmosdb sql container update
+  summary: Perbarui kontainer SQL di bawah database SQL Azure Cosmos DB.
+  description: ''
+  syntax: >-
+    az cosmosdb sql container update --account-name
+                                     --database-name
+                                     --name
+                                     --resource-group
+                                     [--analytical-storage-ttl]
+                                     [--idx]
+                                     [--ttl]
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun Cosmosdb.
+    description: ''
+  - isRequired: true
+    name: --database-name -d
+    summary: Nama database.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --analytical-storage-ttl -t
+    summary: TTL analitis, saat penyimpanan analitis diaktifkan.
+    description: ''
+  - name: --idx
+    summary: 'Kebijakan Pengindeksan, Anda dapat memasukkannya sebagai string atau sebagai file, misalnya, --idx @policy-file.json atau --idx "{"indexingMode": "consistent", "automatic": true, "includedPaths": [{"path": "/\*"}], "excludedPaths": [{ "path": "/headquarters/employees/?"}, { "path": "/\"_etag\"/?"}]}".'
+    description: ''
+  - name: --ttl
+    summary: TTL default. Jika nilai hilang atau diatur ke "-1", item tidak akan kedaluwarsa. Jika nilai diatur ke "n", item akan kedaluwarsa "n" detik setelah waktu terakhir diubah.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cosmosdb/_help.py
+commands:
+- az_cosmosdb_sql_container_create
+- az_cosmosdb_sql_container_delete
+- az_cosmosdb_sql_container_exists
+- az_cosmosdb_sql_container_list
+- az_cosmosdb_sql_container_show
+- az_cosmosdb_sql_container_throughput
+- az_cosmosdb_sql_container_throughput_migrate
+- az_cosmosdb_sql_container_throughput_show
+- az_cosmosdb_sql_container_throughput_update
+- az_cosmosdb_sql_container_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/09/2022
+  description: Mengelola kontainer SQL Azure Cosmos DB.
+  ms.openlocfilehash: 64cbbfac78f2a6f23303ee22d5a45e05d23d52d0
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141446147"

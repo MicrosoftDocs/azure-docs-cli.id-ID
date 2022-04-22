@@ -1,0 +1,817 @@
+### YamlMime:AzureCLIGroup
+uid: az_spring-cloud_app
+name: az spring-cloud app
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **spring-cloud** untuk Azure CLI (versi 2.30.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **az spring-cloud app** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Perintah untuk mengelola aplikasi di Azure Spring Cloud.
+description: ''
+directCommands:
+- uid: az_spring-cloud_app_append-loaded-public-certificate
+  name: az spring-cloud app append-loaded-public-certificate
+  summary: Tambahkan sertifikat publik baru yang dimuat ke aplikasi di Azure Spring Cloud.
+  description: ''
+  syntax: >-
+    az spring-cloud app append-loaded-public-certificate --certificate-name
+                                                         --load-trust-store {false, true}
+                                                         --name
+                                                         --resource-group
+                                                         --service
+  examples:
+  - summary: Tambahkan sertifikat publik baru yang dimuat ke aplikasi.
+    syntax: az spring-cloud app append-loaded-public-certificate --name MyApp --service MyCluster --resource-group MyResourceGroup --certificate-name MyCertName --load-trust-store true
+  requiredParameters:
+  - isRequired: true
+    name: --certificate-name
+    summary: Nama sertifikat yang akan ditambahkan.
+    description: ''
+  - isRequired: true
+    name: --load-trust-store
+    parameterValueGroup: false, true
+    summary: Jika true, sertifikat akan dimuat ke dalam penyimpanan kepercayaan untuk aplikasi Java.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service -s
+    summary: Nama Azure Spring Cloud, Anda dapat mengonfigurasi layanan default menggunakan az configure --defaults spring-cloud=<name>.
+    description: ''
+- uid: az_spring-cloud_app_append-persistent-storage
+  name: az spring-cloud app append-persistent-storage
+  summary: Tambahkan penyimpanan persisten baru ke aplikasi di Azure Spring Cloud.
+  description: ''
+  syntax: >-
+    az spring-cloud app append-persistent-storage --mount-path
+                                                  --name
+                                                  --persistent-storage-type
+                                                  --resource-group
+                                                  --service
+                                                  --share-name
+                                                  --storage-name
+                                                  [--mount-options]
+                                                  [--read-only {false, true}]
+  examples:
+  - summary: Tambahkan penyimpanan persisten baru ke aplikasi.
+    syntax: az spring-cloud app append-persistent-storage --persistent-storage-type AzureFileVolume --share-name MyShareName --mount-path /MyMountPath --storage-name MyStorageName -n MyApp -g MyResourceGroup -s MyService
+  requiredParameters:
+  - isRequired: true
+    name: --mount-path
+    summary: Jalur untuk volume penyimpanan persisten yang akan dipasang.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --persistent-storage-type -t
+    summary: Jenis volume penyimpanan persisten.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service -s
+    summary: Nama Azure Spring Cloud, Anda dapat mengonfigurasi layanan default menggunakan az configure --defaults spring-cloud=<name>.
+    description: ''
+  - isRequired: true
+    name: --share-name
+    summary: Nama berbagi file yang telah dibuat sebelumnya. ShareName harus disediakan hanya jika jenis volume penyimpanan persisten adalah AzureFileVolume.
+    description: ''
+  - isRequired: true
+    name: --storage-name
+    summary: Nama sumber daya penyimpanan yang Anda buat di Azure Spring Cloud.
+    description: ''
+  optionalParameters:
+  - name: --mount-options
+    summary: '[opsional] Opsi pemasangan untuk volume penyimpanan persisten.'
+    description: ''
+  - name: --read-only
+    parameterValueGroup: false, true
+    summary: '[opsional] Jika true, volume penyimpanan persisten hanya akan dibaca.'
+    description: ''
+- uid: az_spring-cloud_app_create
+  name: az spring-cloud app create
+  summary: Buat aplikasi baru dengan penyebaran default di Azure Spring Cloud.
+  description: ''
+  syntax: >-
+    az spring-cloud app create --name
+                               --resource-group
+                               --service
+                               [--assign-endpoint {false, true}]
+                               [--assign-identity {false, true}]
+                               [--cpu]
+                               [--disable-probe {false, true}]
+                               [--enable-persistent-storage {false, true}]
+                               [--env]
+                               [--instance-count]
+                               [--jvm-options]
+                               [--loaded-public-certificate-file]
+                               [--memory]
+                               [--persistent-storage]
+                               [--runtime-version {Java_11, Java_17, Java_8, NetCore_31}]
+                               [--system-assigned {false, true}]
+                               [--user-assigned]
+  examples:
+  - summary: Buat aplikasi dengan konfigurasi default.
+    syntax: az spring-cloud app create -n MyApp -s MyCluster -g MyResourceGroup
+  - summary: Buat aplikasi yang dapat diakses publik dengan 3 instans dan 2 inti cpu dan memori 3 GB per instans.
+    syntax: az spring-cloud app create -n MyApp -s MyCluster -g MyResourceGroup --assign-endpoint true --cpu 2 --memory 3 --instance-count 3
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service -s
+    summary: Nama Azure Spring Cloud, Anda dapat mengonfigurasi layanan default menggunakan az configure --defaults spring-cloud=<name>.
+    description: ''
+  optionalParameters:
+  - name: --assign-endpoint
+    parameterValueGroup: false, true
+    summary: Jika true, tetapkan URL titik akhir untuk akses langsung.
+    description: ''
+  - name: --assign-identity
+    parameterValueGroup: false, true
+    summary: Aktifkan identitas terkelola yang ditetapkan sistem.
+    description: ''
+  - name: --cpu
+    defaultValue: "1"
+    summary: Kuantitas sumber daya CPU. Harus 500m atau jumlah inti CPU.
+    description: ''
+  - name: --disable-probe
+    parameterValueGroup: false, true
+    summary: Jika true, nonaktifkan pemeriksaan keaktifan dan kesiapan.
+    description: ''
+  - name: --enable-persistent-storage
+    parameterValueGroup: false, true
+    summary: Jika true, pasang disk 50G (tingkat Harga Standar) atau 1G (tingkat Harga Dasar) dengan jalur default.
+    description: ''
+  - name: --env
+    summary: Variabel lingkungan yang dipisahkan spasi dalam format 'key[=value]'.
+    description: ''
+  - name: --instance-count
+    defaultValue: "1"
+    summary: Jumlah instans.
+    description: ''
+  - name: --jvm-options
+    summary: "String yang berisi opsi jvm, gunakan '=' alih-alih ' ' untuk argumen ini untuk menghindari kesalahan penguraian bash, misalnya: --jvm-options='-Xms1024m -Xmx2048m'."
+    description: ''
+  - name: --loaded-public-certificate-file -f
+    summary: Jalur file json menunjukkan sertifikat yang akan dimuat ke aplikasi.
+    description: ''
+  - name: --memory
+    defaultValue: 1Gi
+    summary: 'Kuantitas sumber daya memori. Harus 512Mi atau #Gi, misalnya, 1Gi, 3Gi.'
+    description: ''
+  - name: --persistent-storage
+    summary: Jalur file json untuk penyimpanan persisten yang akan dipasang ke aplikasi.
+    description: ''
+  - name: --runtime-version
+    parameterValueGroup: Java_11, Java_17, Java_8, NetCore_31
+    summary: Versi runtime bahasa yang digunakan.
+    description: ''
+  - name: --system-assigned
+    parameterValueGroup: false, true
+    summary: Aktifkan identitas terkelola yang ditetapkan sistem.
+    description: ''
+  - name: --user-assigned
+    summary: ID sumber daya identitas terkelola yang ditetapkan pengguna yang dipisahkan ruang untuk di-assgin ke aplikasi.
+    description: ''
+- uid: az_spring-cloud_app_delete
+  name: az spring-cloud app delete
+  summary: Menghapus aplikasi di Azure Spring Cloud.
+  description: ''
+  syntax: >-
+    az spring-cloud app delete --name
+                               --resource-group
+                               --service
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service -s
+    summary: Nama Azure Spring Cloud, Anda dapat mengonfigurasi layanan default menggunakan az configure --defaults spring-cloud=<name>.
+    description: ''
+- uid: az_spring-cloud_app_deploy
+  name: az spring-cloud app deploy
+  summary: Sebarkan kode sumber atau biner bawaan ke aplikasi dan perbarui konfigurasi terkait.
+  description: ''
+  syntax: >-
+    az spring-cloud app deploy --name
+                               --resource-group
+                               --service
+                               [--artifact-path]
+                               [--build-env]
+                               [--builder]
+                               [--config-file-patterns]
+                               [--container-args]
+                               [--container-command]
+                               [--container-image]
+                               [--container-registry]
+                               [--deployment]
+                               [--disable-probe {false, true}]
+                               [--disable-validation {false, true}]
+                               [--env]
+                               [--jvm-options]
+                               [--main-entry]
+                               [--no-wait]
+                               [--registry-password]
+                               [--registry-username]
+                               [--runtime-version {Java_11, Java_17, Java_8, NetCore_31}]
+                               [--source-path]
+                               [--target-module]
+                               [--version]
+  examples:
+  - summary: Menyebarkan kode sumber ke aplikasi. Ini akan mengemas direktori saat ini, membangun biner dengan Pivotal Build Service lalu menyebarkan ke aplikasi.
+    syntax: az spring-cloud app deploy -n MyApp -s MyCluster -g MyResourceGroup
+  - summary: Sebarkan jar bawaan ke aplikasi dengan opsi jvm dan variabel lingkungan.
+    syntax: az spring-cloud app deploy -n MyApp -s MyCluster -g MyResourceGroup --jar-path app.jar --jvm-options="-XX:+UseG1GC -XX:+UseStringDeduplication" --env foo=bar
+  - summary: Menyebarkan kode sumber ke penyebaran aplikasi tertentu.
+    syntax: az spring-cloud app deploy -n MyApp -s MyCluster -g MyResourceGroup -d green-deployment
+  - summary: Sebarkan gambar kontainer di Docker Hub ke aplikasi.
+    syntax: az spring-cloud app deploy -n MyApp -s MyCluster -g MyResourceGroup --container-image contoso/your-app:v1
+  - summary: Menyebarkan gambar kontainer pada registri privat ke aplikasi.
+    syntax: az spring-cloud app deploy -n MyApp -s MyCluster -g MyResourceGroup --container-image contoso/your-app:v1 --container-registry myacr.azurecr.io --registry-username <username> --registry-password <password>
+  - summary: Sebarkan dengan pola file konfigurasi Layanan Konfigurasi Aplikasi ke aplikasi.
+    syntax: az spring-cloud app deploy -n MyApp -s MyCluster -g MyResourceGroup --config-file-patterns MyPatterns --jar-path app.jar
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service -s
+    summary: Nama Azure Spring Cloud, Anda dapat mengonfigurasi layanan default menggunakan az configure --defaults spring-cloud=<name>.
+    description: ''
+  optionalParameters:
+  - name: --artifact-path
+    summary: Sebarkan artefak bawaan yang ditentukan (jar atau netcore zip).
+    description: ''
+  - name: --build-env
+    summary: Pasangan kunci-nilai env yang digunakan dalam fase build.
+    description: ''
+  - name: --builder
+    defaultValue: default
+    summary: (Hanya Tingkat Perusahaan) Build service builder yang digunakan untuk membangun executable.
+    description: ''
+  - name: --config-file-patterns
+    summary: (Hanya Tingkat Perusahaan) Pola file konfigurasi dipisahkan dengan ',' untuk memutuskan pola Layanan Konfigurasi Aplikasi mana yang akan digunakan. Gunakan '""' untuk menghapus konfigurasi yang ada.
+    description: ''
+  - name: --container-args
+    summary: Argumen gambar kontainer.
+    description: ''
+  - name: --container-command
+    summary: Perintah gambar kontainer.
+    description: ''
+  - name: --container-image
+    summary: Tag gambar kontainer.
+    description: ''
+  - name: --container-registry
+    defaultValue: docker.io
+    summary: Registri gambar kontainer.
+    description: ''
+  - name: --deployment -d
+    summary: Nama penyebaran aplikasi yang ada. Default ke penyebaran produksi jika tidak ditentukan.
+    description: ''
+  - name: --disable-probe
+    parameterValueGroup: false, true
+    summary: Jika true, nonaktifkan pemeriksaan keaktifan dan kesiapan.
+    description: ''
+  - name: --disable-validation
+    parameterValueGroup: false, true
+    summary: Jika true, nonaktifkan validasi jar.
+    description: ''
+  - name: --env
+    summary: Variabel lingkungan yang dipisahkan spasi dalam format 'key[=value]'.
+    description: ''
+  - name: --jvm-options
+    summary: "String yang berisi opsi jvm, gunakan '=' alih-alih ' ' untuk argumen ini untuk menghindari kesalahan penguraian bash, misalnya: --jvm-options='-Xms1024m -Xmx2048m'."
+    description: ''
+  - name: --main-entry -m
+    summary: String yang berisi jalur ke .NET yang dapat dieksekusi relatif terhadap akar zip.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --registry-password
+    summary: Kata sandi registri kontainer.
+    description: ''
+  - name: --registry-username
+    summary: Nama pengguna registri kontainer.
+    description: ''
+  - name: --runtime-version
+    parameterValueGroup: Java_11, Java_17, Java_8, NetCore_31
+    summary: Versi runtime bahasa yang digunakan.
+    description: ''
+  - name: --source-path
+    summary: Sebarkan folder sumber yang ditentukan. Folder akan dikemas ke dalam tar, diunggah, dan dibangun menggunakan kpack. Default ke folder saat ini jika tidak ada nilai yang disediakan.
+    description: ''
+  - name: --target-module
+    summary: Modul anak yang akan disebarkan, diperlukan untuk beberapa paket jar yang dibangun dari kode sumber.
+    description: ''
+  - name: --version
+    summary: Versi penyebaran, tetap tidak berubah jika tidak diatur.
+    description: ''
+- uid: az_spring-cloud_app_list
+  name: az spring-cloud app list
+  summary: Mencantumkan semua aplikasi di Azure Spring Cloud.
+  description: ''
+  syntax: >-
+    az spring-cloud app list --resource-group
+                             --service
+  examples:
+  - summary: Status kueri penyimpanan persisten semua aplikasi
+    syntax: az spring-cloud app list -s MyCluster -g MyResourceGroup -o json --query '[].{Name:name, PersistentStorage:properties.persistentDisk}'
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service -s
+    summary: Nama Azure Spring Cloud, Anda dapat mengonfigurasi layanan default menggunakan az configure --defaults spring-cloud=<name>.
+    description: ''
+- uid: az_spring-cloud_app_logs
+  name: az spring-cloud app logs
+  summary: Tampilkan log instans aplikasi, log akan dialirkan saat mengatur '-f/--follow'.
+  description: ''
+  syntax: >-
+    az spring-cloud app logs --name
+                             --resource-group
+                             --service
+                             [--deployment]
+                             [--follow]
+                             [--format-json]
+                             [--instance]
+                             [--limit]
+                             [--lines]
+                             [--since]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service -s
+    summary: Nama Azure Spring Cloud, Anda dapat mengonfigurasi layanan default menggunakan az configure --defaults spring-cloud=<name>.
+    description: ''
+  optionalParameters:
+  - name: --deployment -d
+    summary: Nama penyebaran aplikasi yang ada. Default ke penyebaran produksi jika tidak ditentukan.
+    description: ''
+  - name: --follow  -f
+    summary: Tentukan apakah log harus dialirkan.
+    description: ''
+  - name: --format-json
+    summary: Format log JSON jika log terstruktur diaktifkan.
+    description: ''
+  - name: --instance -i
+    summary: Nama instans penyebaran yang ada.
+    description: ''
+  - name: --limit
+    defaultValue: "2048"
+    summary: Kilobyte maksimum log yang akan dikembalikan. Nomor plafon adalah 2048.
+    description: ''
+  - name: --lines
+    defaultValue: "50"
+    summary: Jumlah baris yang akan ditampilkan. Maksimum adalah 10000.
+    description: ''
+  - name: --since
+    summary: Hanya mengembalikan log yang lebih baru dari durasi relatif seperti 5s, 2m, atau 1h. Maksimum adalah 1 jam.
+    description: ''
+- uid: az_spring-cloud_app_restart
+  name: az spring-cloud app restart
+  summary: Mulai ulang instans aplikasi, default ke penyebaran produksi.
+  description: ''
+  syntax: >-
+    az spring-cloud app restart --name
+                                --resource-group
+                                --service
+                                [--deployment]
+                                [--no-wait]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service -s
+    summary: Nama Azure Spring Cloud, Anda dapat mengonfigurasi layanan default menggunakan az configure --defaults spring-cloud=<name>.
+    description: ''
+  optionalParameters:
+  - name: --deployment -d
+    summary: Nama penyebaran aplikasi yang ada. Default ke penyebaran produksi jika tidak ditentukan.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_spring-cloud_app_scale
+  name: az spring-cloud app scale
+  summary: Menskalakan aplikasi atau penyebarannya secara manual.
+  description: ''
+  syntax: >-
+    az spring-cloud app scale --name
+                              --resource-group
+                              --service
+                              [--cpu]
+                              [--deployment]
+                              [--instance-count]
+                              [--memory]
+                              [--no-wait]
+  examples:
+  - summary: Tingkatkan skala aplikasi menjadi 4 inti cpu dan memori 8 Gb per instans.
+    syntax: az spring-cloud app scale -n MyApp -s MyCluster -g MyResourceGroup --cpu 3 --memory 8
+  - summary: Meluaskan skala penyebaran aplikasi ke 5 instans.
+    syntax: az spring-cloud app scale -n MyApp -s MyCluster -g MyResourceGroup -d green-deployment --instance-count 5
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service -s
+    summary: Nama Azure Spring Cloud, Anda dapat mengonfigurasi layanan default menggunakan az configure --defaults spring-cloud=<name>.
+    description: ''
+  optionalParameters:
+  - name: --cpu
+    summary: Kuantitas sumber daya CPU. Harus 500m atau jumlah inti CPU.
+    description: ''
+  - name: --deployment -d
+    summary: Nama penyebaran aplikasi yang ada. Default ke penyebaran produksi jika tidak ditentukan.
+    description: ''
+  - name: --instance-count
+    summary: Jumlah instans.
+    description: ''
+  - name: --memory
+    summary: 'Kuantitas sumber daya memori. Harus 512Mi atau #Gi, misalnya, 1Gi, 3Gi.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_spring-cloud_app_set-deployment
+  name: az spring-cloud app set-deployment
+  summary: Atur penyebaran produksi aplikasi.
+  description: ''
+  syntax: >-
+    az spring-cloud app set-deployment --deployment
+                                       --name
+                                       --resource-group
+                                       --service
+                                       [--no-wait]
+  examples:
+  - summary: Menukar penyebaran penahapan aplikasi ke produksi.
+    syntax: az spring-cloud app set-deployment -d green-deployment -n MyApp -s MyCluster -g MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --deployment -d
+    summary: Nama penyebaran aplikasi yang ada.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service -s
+    summary: Nama Azure Spring Cloud, Anda dapat mengonfigurasi layanan default menggunakan az configure --defaults spring-cloud=<name>.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_spring-cloud_app_show
+  name: az spring-cloud app show
+  summary: Menampilkan detail aplikasi di Azure Spring Cloud.
+  description: ''
+  syntax: >-
+    az spring-cloud app show --name
+                             --resource-group
+                             --service
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service -s
+    summary: Nama Azure Spring Cloud, Anda dapat mengonfigurasi layanan default menggunakan az configure --defaults spring-cloud=<name>.
+    description: ''
+- uid: az_spring-cloud_app_show-deploy-log
+  name: az spring-cloud app show-deploy-log
+  summary: Tampilkan log build dari penyebaran terakhir, hanya berlaku untuk penyebaran kode sumber, default ke penyebaran produksi.
+  description: ''
+  syntax: >-
+    az spring-cloud app show-deploy-log --name
+                                        --resource-group
+                                        --service
+                                        [--deployment]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service -s
+    summary: Nama Azure Spring Cloud, Anda dapat mengonfigurasi layanan default menggunakan az configure --defaults spring-cloud=<name>.
+    description: ''
+  optionalParameters:
+  - name: --deployment -d
+    summary: Nama penyebaran aplikasi yang ada. Default ke penyebaran produksi jika tidak ditentukan.
+    description: ''
+- uid: az_spring-cloud_app_start
+  name: az spring-cloud app start
+  summary: Mulai instans aplikasi, default ke penyebaran produksi.
+  description: ''
+  syntax: >-
+    az spring-cloud app start --name
+                              --resource-group
+                              --service
+                              [--deployment]
+                              [--no-wait]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service -s
+    summary: Nama Azure Spring Cloud, Anda dapat mengonfigurasi layanan default menggunakan az configure --defaults spring-cloud=<name>.
+    description: ''
+  optionalParameters:
+  - name: --deployment -d
+    summary: Nama penyebaran aplikasi yang ada. Default ke penyebaran produksi jika tidak ditentukan.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_spring-cloud_app_stop
+  name: az spring-cloud app stop
+  summary: Hentikan instans aplikasi, default ke penyebaran produksi.
+  description: ''
+  syntax: >-
+    az spring-cloud app stop --name
+                             --resource-group
+                             --service
+                             [--deployment]
+                             [--no-wait]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service -s
+    summary: Nama Azure Spring Cloud, Anda dapat mengonfigurasi layanan default menggunakan az configure --defaults spring-cloud=<name>.
+    description: ''
+  optionalParameters:
+  - name: --deployment -d
+    summary: Nama penyebaran aplikasi yang ada. Default ke penyebaran produksi jika tidak ditentukan.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_spring-cloud_app_unset-deployment
+  name: az spring-cloud app unset-deployment
+  summary: Membatalkan penyebaran produksi aplikasi.
+  description: ''
+  syntax: >-
+    az spring-cloud app unset-deployment --name
+                                         --resource-group
+                                         --service
+                                         [--no-wait]
+  examples:
+  - summary: Tukar penyebaran produksi aplikasi ke penahapan jika aplikasi memiliki penyebaran produksi.
+    syntax: az spring-cloud app unset-deployment -n MyApp -s MyCluster -g MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service -s
+    summary: Nama Azure Spring Cloud, Anda dapat mengonfigurasi layanan default menggunakan az configure --defaults spring-cloud=<name>.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_spring-cloud_app_update
+  name: az spring-cloud app update
+  summary: Memperbarui konfigurasi aplikasi.
+  description: ''
+  syntax: >-
+    az spring-cloud app update --name
+                               --resource-group
+                               --service
+                               [--assign-endpoint {false, true}]
+                               [--config-file-patterns]
+                               [--deployment]
+                               [--disable-probe {false, true}]
+                               [--enable-ingress-to-app-tls {false, true}]
+                               [--enable-persistent-storage {false, true}]
+                               [--env]
+                               [--https-only {false, true}]
+                               [--jvm-options]
+                               [--loaded-public-certificate-file]
+                               [--main-entry]
+                               [--no-wait]
+                               [--persistent-storage]
+                               [--runtime-version {Java_11, Java_17, Java_8, NetCore_31}]
+  examples:
+  - summary: Tambahkan variabel lingkungan untuk aplikasi.
+    syntax: az spring-cloud app update -n MyApp -s MyCluster -g MyResourceGroup --env foo=bar
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service -s
+    summary: Nama Azure Spring Cloud, Anda dapat mengonfigurasi layanan default menggunakan az configure --defaults spring-cloud=<name>.
+    description: ''
+  optionalParameters:
+  - name: --assign-endpoint
+    parameterValueGroup: false, true
+    summary: Jika true, tetapkan URL titik akhir untuk akses langsung.
+    description: ''
+  - name: --config-file-patterns
+    summary: (Hanya Tingkat Perusahaan) Pola file konfigurasi dipisahkan dengan ',' untuk memutuskan pola Layanan Konfigurasi Aplikasi mana yang akan digunakan. Gunakan '""' untuk menghapus konfigurasi yang ada.
+    description: ''
+  - name: --deployment -d
+    summary: Nama penyebaran aplikasi yang ada. Default ke penyebaran produksi jika tidak ditentukan.
+    description: ''
+  - name: --disable-probe
+    parameterValueGroup: false, true
+    summary: Jika true, nonaktifkan pemeriksaan keaktifan dan kesiapan.
+    description: ''
+  - name: --enable-ingress-to-app-tls
+    parameterValueGroup: false, true
+    summary: Jika true, aktifkan ingress ke tls aplikasi.
+    description: ''
+  - name: --enable-persistent-storage
+    parameterValueGroup: false, true
+    summary: Jika true, pasang disk 50G (tingkat Harga Standar) atau 1G (tingkat Harga Dasar) dengan jalur default.
+    description: ''
+  - name: --env
+    summary: Variabel lingkungan yang dipisahkan spasi dalam format 'key[=value]'.
+    description: ''
+  - name: --https-only
+    parameterValueGroup: false, true
+    summary: Jika true, akses aplikasi melalui https.
+    description: ''
+  - name: --jvm-options
+    summary: "String yang berisi opsi jvm, gunakan '=' alih-alih ' ' untuk argumen ini untuk menghindari kesalahan penguraian bash, misalnya: --jvm-options='-Xms1024m -Xmx2048m'."
+    description: ''
+  - name: --loaded-public-certificate-file -f
+    summary: Jalur file json menunjukkan sertifikat yang akan dimuat ke aplikasi.
+    description: ''
+  - name: --main-entry -m
+    summary: Jalur ke .NET yang dapat dieksekusi relatif terhadap akar zip.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --persistent-storage
+    summary: Jalur file json untuk penyimpanan persisten yang akan dipasang ke aplikasi.
+    description: ''
+  - name: --runtime-version
+    parameterValueGroup: Java_11, Java_17, Java_8, NetCore_31
+    summary: Versi runtime bahasa yang digunakan.
+    description: ''
+commands:
+- az_spring-cloud_app_append-loaded-public-certificate
+- az_spring-cloud_app_append-persistent-storage
+- az_spring-cloud_app_binding
+- az_spring-cloud_app_binding_cosmos
+- az_spring-cloud_app_binding_cosmos_add
+- az_spring-cloud_app_binding_cosmos_update
+- az_spring-cloud_app_binding_list
+- az_spring-cloud_app_binding_mysql
+- az_spring-cloud_app_binding_mysql_add
+- az_spring-cloud_app_binding_mysql_update
+- az_spring-cloud_app_binding_redis
+- az_spring-cloud_app_binding_redis_add
+- az_spring-cloud_app_binding_redis_update
+- az_spring-cloud_app_binding_remove
+- az_spring-cloud_app_binding_show
+- az_spring-cloud_app_create
+- az_spring-cloud_app_custom-domain
+- az_spring-cloud_app_custom-domain_bind
+- az_spring-cloud_app_custom-domain_list
+- az_spring-cloud_app_custom-domain_show
+- az_spring-cloud_app_custom-domain_unbind
+- az_spring-cloud_app_custom-domain_update
+- az_spring-cloud_app_delete
+- az_spring-cloud_app_deploy
+- az_spring-cloud_app_deployment
+- az_spring-cloud_app_deployment_create
+- az_spring-cloud_app_deployment_delete
+- az_spring-cloud_app_deployment_generate-heap-dump
+- az_spring-cloud_app_deployment_generate-thread-dump
+- az_spring-cloud_app_deployment_list
+- az_spring-cloud_app_deployment_show
+- az_spring-cloud_app_deployment_start-jfr
+- az_spring-cloud_app_identity
+- az_spring-cloud_app_identity_assign
+- az_spring-cloud_app_identity_force-set
+- az_spring-cloud_app_identity_remove
+- az_spring-cloud_app_identity_show
+- az_spring-cloud_app_list
+- az_spring-cloud_app_log
+- az_spring-cloud_app_log_tail
+- az_spring-cloud_app_logs
+- az_spring-cloud_app_restart
+- az_spring-cloud_app_scale
+- az_spring-cloud_app_set-deployment
+- az_spring-cloud_app_show
+- az_spring-cloud_app_show-deploy-log
+- az_spring-cloud_app_start
+- az_spring-cloud_app_stop
+- az_spring-cloud_app_unset-deployment
+- az_spring-cloud_app_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Perintah untuk mengelola aplikasi di Azure Spring Cloud.
+  ms.openlocfilehash: 10d7c4e02445a39acf17b29287e986c321564cf3
+  ms.sourcegitcommit: bd63e04a53877fcd43d09e2de1229d90a99e645e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/08/2022
+  ms.locfileid: "141538827"
