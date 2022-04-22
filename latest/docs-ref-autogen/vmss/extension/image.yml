@@ -1,0 +1,154 @@
+### YamlMime:AzureCLIGroup
+uid: az_vmss_extension_image
+name: az vmss extension image
+summary: Temukan ekstensi VM yang tersedia untuk langganan dan wilayah.
+description: ''
+directCommands:
+- uid: az_vmss_extension_image_list
+  name: az vmss extension image list
+  summary: Cantumkan informasi tentang ekstensi yang tersedia.
+  description: ''
+  syntax: >-
+    az vmss extension image list [--latest]
+                                 [--location]
+                                 [--name]
+                                 [--publisher]
+                                 [--version]
+  examples:
+  - summary: Cantumkan penerbit unik untuk ekstensi.
+    syntax: az vmss extension image list --query "[].publisher" -o tsv | sort -u
+  - summary: Temukan ekstensi dengan "Docker" dalam nama.
+    syntax: az vmss extension image list --query "[].name" -o tsv | sort -u | grep Docker
+  - summary: Cantumkan nama ekstensi tempat nama penerbit dimulai dengan "Microsoft.Azure.App".
+    syntax: >-
+      az vmss extension image list --query \
+          "[?starts_with(publisher, 'Microsoft.Azure.App')].publisher" \
+          -o tsv | sort -u | xargs -I{} az vmss extension image list-names --publisher {} -l westus
+  optionalParameters:
+  - name: --latest
+    summary: Tampilkan versi terbaru saja.
+    description: ''
+  - name: --location -l
+    summary: Lokasi gambar.
+    description: ''
+  - name: --name -n
+    summary: Nama gambar.
+    description: ''
+  - name: --publisher -p
+    summary: Nama penerbit gambar.
+    description: ''
+  - name: --version
+    summary: Versi ekstensi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_extension_image_list-names
+  name: az vmss extension image list-names
+  summary: Mendapatkan daftar jenis gambar ekstensi komputer virtual.
+  description: ''
+  syntax: >-
+    az vmss extension image list-names --location
+                                       --publisher
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --publisher -p
+    summary: Nama penerbit gambar.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_extension_image_list-versions
+  name: az vmss extension image list-versions
+  summary: Mendapatkan daftar versi gambar ekstensi komputer virtual.
+  description: ''
+  syntax: >-
+    az vmss extension image list-versions --location
+                                          --name
+                                          --publisher
+                                          [--filter]
+                                          [--orderby]
+                                          [--top]
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama ekstensi.
+    description: ''
+  - isRequired: true
+    name: --publisher -p
+    summary: Nama penerbit gambar.
+    description: ''
+  optionalParameters:
+  - name: --filter
+    summary: Filter yang akan diterapkan pada operasi.
+    description: ''
+  - name: --orderby
+    summary: Opsi kueri $orderby odata.
+    description: ''
+  - name: --top
+    summary: Opsi kueri $top odata.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_extension_image_show
+  name: az vmss extension image show
+  summary: Mendapatkan gambar ekstensi komputer virtual.
+  description: ''
+  syntax: >-
+    az vmss extension image show --location
+                                 --name
+                                 --publisher
+                                 --version
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama ekstensi.
+    description: ''
+  - isRequired: true
+    name: --publisher -p
+    summary: Nama penerbit gambar.
+    description: ''
+  - isRequired: true
+    name: --version
+    summary: Versi ekstensi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+commands:
+- az_vmss_extension_image_list
+- az_vmss_extension_image_list-names
+- az_vmss_extension_image_list-versions
+- az_vmss_extension_image_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 04/01/2022
+  description: Temukan ekstensi VM yang tersedia untuk langganan dan wilayah.
+  ms.openlocfilehash: 18ae1ea5112a003e70881c46a3fb5d9994a75c2c
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141441179"

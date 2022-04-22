@@ -1,0 +1,164 @@
+### YamlMime:AzureCLIGroup
+uid: az_vm_encryption
+name: az vm encryption
+summary: Mengelola enkripsi disk VM.
+description: 'Untuk mengetahui informasi selengkapnya, lihat: https://docs.microsoft.com/azure/security/fundamentals/azure-disk-encryption-vms-vmss.'
+directCommands:
+- uid: az_vm_encryption_disable
+  name: az vm encryption disable
+  summary: Nonaktifkan enkripsi disk pada disk OS dan/atau disk data. Dekripsi disk yang dipasang.
+  description: >-
+    Untuk VM Linux, menonaktifkan enkripsi hanya diizinkan pada volume data.
+
+    Untuk VM Windows, menonaktifkan enkripsi diizinkan pada OS dan volume data.
+  syntax: >-
+    az vm encryption disable [--force]
+                             [--ids]
+                             [--name]
+                             [--resource-group]
+                             [--volume-type {ALL, DATA, OS}]
+  examples:
+  - summary: Nonaktifkan enkripsi disk pada disk OS dan/atau disk data. (dibuat otomatis)
+    syntax: az vm encryption disable --name MyVirtualMachine --resource-group MyResourceGroup --volume-type DATA
+  optionalParameters:
+  - name: --force
+    summary: Lanjutkan dengan mengabaikan kesalahan validasi sisi klien.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --volume-type
+    parameterValueGroup: ALL, DATA, OS
+    summary: Jenis volume untuk eksekusi operasi enkripsi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_encryption_enable
+  name: az vm encryption enable
+  summary: Aktifkan enkripsi disk pada disk OS dan/atau disk data. Mengenkripsi disk yang dipasang.
+  description: >-
+    Perhatikan bahwa argumen Azure Active Directory / perwakilan layanan tidak perlu untuk enkripsi vm. Versi lama Azure Disk Encryption diperlukan AAD argumen.
+
+    Untuk informasi selengkapnya, lihat: ttps://docs.microsoft.com/azure/security/fundamentals/azure-disk-encryption-vms-vmss.
+  syntax: >-
+    az vm encryption enable --disk-encryption-keyvault
+                            [--aad-client-cert-thumbprint]
+                            [--aad-client-id]
+                            [--aad-client-secret]
+                            [--encrypt-format-all]
+                            [--force]
+                            [--ids]
+                            [--key-encryption-algorithm]
+                            [--key-encryption-key]
+                            [--key-encryption-keyvault]
+                            [--name]
+                            [--resource-group]
+                            [--volume-type {ALL, DATA, OS}]
+  examples:
+  - summary: mengenkripsi VM menggunakan brankas kunci dalam grup sumber daya yang sama
+    syntax: az vm encryption enable -g MyResourceGroup -n MyVm --disk-encryption-keyvault MyVault
+  - summary: Aktifkan enkripsi disk pada disk OS dan/atau disk data. Mengenkripsi disk yang dipasang. (dibuat otomatis)
+    syntax: az vm encryption enable --disk-encryption-keyvault MyVault --name MyVm --resource-group MyResourceGroup --volume-type DATA
+  requiredParameters:
+  - isRequired: true
+    name: --disk-encryption-keyvault
+    summary: Nama atau ID brankas kunci tempat kunci enkripsi yang dihasilkan akan ditempatkan.
+    description: ''
+  optionalParameters:
+  - name: --aad-client-cert-thumbprint
+    summary: Thumbprint sertifikat aplikasi AAD dengan izin untuk menulis rahasia ke brankas kunci.
+    description: ''
+  - name: --aad-client-id
+    summary: ID klien aplikasi AAD dengan izin untuk menulis rahasia ke brankas kunci.
+    description: ''
+  - name: --aad-client-secret
+    summary: Rahasia klien aplikasi AAD dengan izin untuk menulis rahasia ke brankas kunci.
+    description: ''
+  - name: --encrypt-format-all
+    summary: Mengenkripsi disk data format alih-alih mengenkripsinya. Pemformatan enkripsi jauh lebih cepat daripada enkripsi di tempat tetapi menghapus partisi yang diformat enkripsi. (Hanya didukung untuk komputer virtual Linux.).
+    description: ''
+  - name: --force
+    summary: Lanjutkan dengan mengabaikan kesalahan validasi sisi klien.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --key-encryption-algorithm
+    defaultValue: RSA-OAEP
+    summary: ''
+    description: ''
+  - name: --key-encryption-key
+    summary: Nama kunci brankas kunci atau URL yang digunakan untuk mengenkripsi kunci enkripsi disk.
+    description: ''
+  - name: --key-encryption-keyvault
+    summary: Nama atau ID brankas kunci yang berisi kunci enkripsi kunci yang digunakan untuk mengenkripsi kunci enkripsi disk. Jika hilang, CLI akan menggunakan `--disk-encryption-keyvault`.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --volume-type
+    parameterValueGroup: ALL, DATA, OS
+    summary: Jenis volume untuk eksekusi operasi enkripsi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_encryption_show
+  name: az vm encryption show
+  summary: Tampilkan status enkripsi.
+  description: ''
+  syntax: >-
+    az vm encryption show [--ids]
+                          [--name]
+                          [--resource-group]
+  examples:
+  - summary: Tampilkan status enkripsi. (dibuat otomatis)
+    syntax: az vm encryption show --name MyVirtualMachine --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+commands:
+- az_vm_encryption_disable
+- az_vm_encryption_enable
+- az_vm_encryption_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 04/01/2022
+  description: 'Untuk mengetahui informasi selengkapnya, lihat: https://docs.microsoft.com/azure/security/fundamentals/azure-disk-encryption-vms-vmss.'
+  ms.openlocfilehash: e4dffb6094d2ca9324a216ab021509f8f6a32491
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141434735"

@@ -1,0 +1,116 @@
+### YamlMime:AzureCLIGroup
+uid: az_network_cross-region-lb_address-pool
+name: az network cross-region-lb address-pool
+summary: Mengelola kumpulan alamat penyeimbang muatan lintas wilayah.
+description: ''
+directCommands:
+- uid: az_network_cross-region-lb_address-pool_create
+  name: az network cross-region-lb address-pool create
+  summary: Buat kumpulan alamat.
+  description: ''
+  syntax: >-
+    az network cross-region-lb address-pool create --lb-name
+                                                   --name
+                                                   --resource-group
+                                                   [--backend-address]
+                                                   [--backend-addresses-config-file]
+  examples:
+  - summary: Buat kumpulan alamat.
+    syntax: az network cross-region-lb address-pool create -g MyResourceGroup --lb-name MyLb -n MyAddressPool
+  - summary: Buat kumpulan alamat dengan beberapa alamat backend menggunakan argumen kunci-nilai.
+    syntax: az network cross-region-lb address-pool create -g MyResourceGroup --lb-name MyLb -n MyAddressPool --backend-address name=addr1 frontend-ip-address=/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/loadBalancers/regional-lb/frontendIPConfigurations/fe-rlb1 --backend-address name=addr2 frontend-ip-address=/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/loadBalancers/regional-lb/frontendIPConfigurations/fe-rlb2
+  - summary: Membuat kumpulan alamat dengan beberapa alamat backend menggunakan file konfigurasi
+    syntax: az network cross-region-lb address-pool create -g MyResourceGroup --lb-name MyLb -n MyAddressPool --backend-addresses-config-file @config_file.json
+  requiredParameters:
+  - isRequired: true
+    name: --lb-name
+    summary: Nama load balancer.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kumpulan alamat backend. Jika hanya ada satu, hilangkan untuk digunakan sebagai default.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --backend-address
+    summary: Informasi alamat backend untuk kumpulan alamat backend.
+    description: >-
+      Penggunaan: --backend-address name=addr1 frontend-ip-address=regional_lb_resource_id
+
+
+      nama: Diperlukan. Nama alamat backend.
+
+      frontend-ip-address: Diperlukan. Id sumber daya dari load balancer regional.
+
+
+      Beberapa alamat backend dapat ditentukan dengan menggunakan lebih dari satu `--backend-address` argumen.
+  - name: --backend-addresses-config-file --config-file
+    summary: File konfigurasi yang digunakan untuk mengatur alamat backend. Argumen ini untuk pengguna berpengalaman. Anda mungkin mengalami kesalahan penguraian jika file json tidak valid.
+    description: >-
+      Penggunaan: --backend-addresses-config-file @"{config_file.json}"
+
+
+      Contoh file konfigurasi adalah [ { "name": "address1", "frontendIpAddress": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/loadBalancers/regional-lb/frontendIPConfigurations/fe-rlb1" }, { "name": "address2", "frontendIpAddress": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft. Network/loadBalancers/regional-lb/frontendIPConfigurations/fe-rlb2" } ].
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_cross-region-lb_address-pool_delete
+  name: az network cross-region-lb address-pool delete
+  summary: Menghapus kumpulan alamat.
+  description: ''
+  syntax: >-
+    az network cross-region-lb address-pool delete --lb-name
+                                                   --name
+                                                   --resource-group
+  examples:
+  - summary: Menghapus kumpulan alamat.
+    syntax: az network cross-region-lb address-pool delete -g MyResourceGroup --lb-name MyLb -n MyAddressPool
+  requiredParameters:
+  - isRequired: true
+    name: --lb-name
+    summary: Nama load balancer.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kumpulan alamat backend. Jika hanya ada satu, hilangkan untuk digunakan sebagai default.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+commands:
+- az_network_cross-region-lb_address-pool_address
+- az_network_cross-region-lb_address-pool_address_add
+- az_network_cross-region-lb_address-pool_address_list
+- az_network_cross-region-lb_address-pool_address_remove
+- az_network_cross-region-lb_address-pool_create
+- az_network_cross-region-lb_address-pool_delete
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/09/2022
+  description: Mengelola kumpulan alamat penyeimbang muatan lintas wilayah.
+  ms.openlocfilehash: be7cf31affa7eaa2b0121d12144498748cd59622
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141440999"

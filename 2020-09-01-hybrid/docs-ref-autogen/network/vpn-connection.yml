@@ -1,0 +1,302 @@
+### YamlMime:AzureCLIGroup
+uid: az_network_vpn-connection
+name: az network vpn-connection
+summary: Mengelola koneksi VPN.
+description: Untuk informasi selengkapnya tentang koneksi situs-ke-situs, kunjungi https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-howto-site-to-site-resource-manager-cli. Untuk informasi selengkapnya tentang koneksi Vnet-ke-Vnet, kunjungi https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-howto-vnet-vnet-cli.
+directCommands:
+- uid: az_network_vpn-connection_create
+  name: az network vpn-connection create
+  summary: Buat koneksi VPN.
+  description: VPN Gateway dan Gateway Jaringan Lokal harus disediakan sebelum membuat koneksi di antara mereka.
+  syntax: >-
+    az network vpn-connection create --name
+                                     --resource-group
+                                     --vnet-gateway1
+                                     [--authorization-key]
+                                     [--enable-bgp]
+                                     [--express-route-circuit2]
+                                     [--express-route-gateway-bypass {false, true}]
+                                     [--local-gateway2]
+                                     [--location]
+                                     [--routing-weight]
+                                     [--shared-key]
+                                     [--tags]
+                                     [--use-policy-based-traffic-selectors {false, true}]
+                                     [--validate]
+                                     [--vnet-gateway2]
+  examples:
+  - summary: Buat koneksi situs-ke-situs antara jaringan virtual Azure dan gateway jaringan lokal.
+    syntax: az network vpn-connection create -g MyResourceGroup -n MyConnection --vnet-gateway1 MyVnetGateway --local-gateway2 MyLocalGateway --shared-key Abc123
+  - summary: Buat koneksi VPN dengan --ingress-nat-rule.
+    syntax: az network vpn-connection create -g MyResourceGroup -n MyConnection --vnet-gateway1 MyVnetGateway --local-gateway2 MyLocalGateway --shared-key Abc123 --ingress-nat-rule /subscriptions/000/resourceGroups/TestBGPRG1/providers/Microsoft.Network/virtualNetworkGateways/gwx/natRules/nat
+  - summary: Buat koneksi VPN. (dibuat otomatis)
+    syntax: az network vpn-connection create --location westus2 --name MyConnection --resource-group MyResourceGroup --shared-key Abc123 --vnet-gateway1 MyVnetGateway --vnet-gateway2 /subscriptions/{subscriptionID}/resourceGroups/TestBGPRG1/providers/Microsoft.Network/virtualNetworkGateways/VNet1GW
+  - summary: Buat koneksi VPN. (dibuat otomatis)
+    syntax: az network vpn-connection create --local-gateway2 MyLocalGateway --location westus2 --name MyConnection --resource-group MyResourceGroup --shared-key Abc123 --vnet-gateway1 MyVnetGateway
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama koneksi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vnet-gateway1
+    summary: Nama atau ID gateway jaringan virtual sumber.
+    description: ''
+  optionalParameters:
+  - name: --authorization-key
+    summary: Kunci otorisasi untuk koneksi VPN.
+    description: ''
+  - name: --enable-bgp
+    summary: Aktifkan BGP untuk koneksi VPN ini.
+    description: ''
+  - name: --express-route-circuit2
+    summary: Nama atau ID tujuan ExpressRoute untuk disambungkan menggunakan koneksi 'ExpressRoute'.
+    description: ''
+  - name: --express-route-gateway-bypass
+    parameterValueGroup: false, true
+    summary: Melewati gateway ExpressRoute untuk penerusan data.
+    description: ''
+  - name: --local-gateway2
+    summary: Nama atau ID gateway jaringan lokal tujuan untuk disambungkan menggunakan koneksi 'IPSec'.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --routing-weight
+    defaultValue: "10"
+    summary: Bobot perutean koneksi.
+    description: ''
+  - name: --shared-key
+    summary: Kunci IPSec bersama.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --use-policy-based-traffic-selectors
+    parameterValueGroup: false, true
+    summary: Aktifkan pemilih lalu lintas berbasis kebijakan.
+    description: ''
+  - name: --validate
+    summary: Tampilkan dan validasi templat ARM tetapi jangan buat sumber daya apa pun.
+    description: ''
+  - name: --vnet-gateway2
+    summary: Nama atau ID gateway jaringan virtual tujuan untuk disambungkan menggunakan koneksi 'Vnet2Vnet'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_vpn-connection_delete
+  name: az network vpn-connection delete
+  summary: Menghapus koneksi VPN.
+  description: ''
+  syntax: >-
+    az network vpn-connection delete [--ids]
+                                     [--name]
+                                     [--resource-group]
+  examples:
+  - summary: Menghapus koneksi VPN.
+    syntax: az network vpn-connection delete -g MyResourceGroup -n MyConnection
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama koneksi.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_vpn-connection_list
+  name: az network vpn-connection list
+  summary: Mencantumkan semua koneksi VPN.
+  description: ''
+  syntax: >-
+    az network vpn-connection list --resource-group
+                                   [--vnet-gateway]
+  examples:
+  - summary: Mencantumkan semua koneksi VPN dalam grup sumber daya.
+    syntax: az network vpn-connection list -g MyResourceGroup
+  - summary: Mencantumkan semua koneksi VPN dalam gateway jaringan virtual.
+    syntax: az network vpn-connection list -g MyResourceGroup --vnet-gateway MyVnetGateway
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --vnet-gateway
+    summary: Nama gateway VNet.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_vpn-connection_show
+  name: az network vpn-connection show
+  summary: Dapatkan detail koneksi VPN.
+  description: ''
+  syntax: >-
+    az network vpn-connection show [--ids]
+                                   [--name]
+                                   [--resource-group]
+  examples:
+  - summary: Lihat detail koneksi VPN.
+    syntax: az network vpn-connection show -g MyResourceGroup -n MyConnection
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama koneksi.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_vpn-connection_show-device-config-script
+  name: az network vpn-connection show-device-config-script
+  summary: Dapatkan representasi format XML untuk skrip konfigurasi perangkat koneksi VPN.
+  description: ''
+  syntax: >-
+    az network vpn-connection show-device-config-script --device-family
+                                                        --firmware-version
+                                                        --vendor
+                                                        [--ids]
+                                                        [--name]
+                                                        [--resource-group]
+  examples:
+  - summary: Dapatkan representasi format XML untuk skrip konfigurasi perangkat koneksi VPN.
+    syntax: az network vpn-connection show-device-config-script -g MyResourceGroup -n MyConnection --vendor "Cisco" --device-family "Cisco-ISR(IOS)" --firmware-version "Cisco-ISR-15.x--IKEv2+BGP"
+  requiredParameters:
+  - isRequired: true
+    name: --device-family
+    summary: Keluarga perangkat untuk perangkat vpn.
+    description: ''
+  - isRequired: true
+    name: --firmware-version
+    summary: Versi firmware untuk perangkat vpn.
+    description: ''
+  - isRequired: true
+    name: --vendor
+    summary: Vendor untuk perangkat VPN.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama koneksi.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_vpn-connection_update
+  name: az network vpn-connection update
+  summary: Memperbarui koneksi VPN.
+  description: ''
+  syntax: >-
+    az network vpn-connection update [--add]
+                                     [--enable-bgp {false, true}]
+                                     [--express-route-gateway-bypass {false, true}]
+                                     [--force-string]
+                                     [--ids]
+                                     [--name]
+                                     [--remove]
+                                     [--resource-group]
+                                     [--routing-weight]
+                                     [--set]
+                                     [--shared-key]
+                                     [--tags]
+                                     [--use-policy-based-traffic-selectors {false, true}]
+  examples:
+  - summary: Tambahkan BGP ke koneksi yang sudah ada.
+    syntax: az network vpn-connection update -g MyResourceGroup -n MyConnection --enable-bgp True
+  - summary: Memperbarui koneksi VPN. (dibuat otomatis)
+    syntax: az network vpn-connection update --name MyConnection --resource-group MyResourceGroup --use-policy-based-traffic-selectors true
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --enable-bgp
+    parameterValueGroup: false, true
+    summary: Aktifkan BGP (Border Gateway Protocol).
+    description: ''
+  - name: --express-route-gateway-bypass
+    parameterValueGroup: false, true
+    summary: Melewati gateway ExpressRoute untuk penerusan data.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama koneksi.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --routing-weight
+    summary: Bobot perutean koneksi.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --shared-key
+    summary: Kunci IPSec bersama.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --use-policy-based-traffic-selectors
+    parameterValueGroup: false, true
+    summary: Aktifkan pemilih lalu lintas berbasis kebijakan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+commands:
+- az_network_vpn-connection_create
+- az_network_vpn-connection_delete
+- az_network_vpn-connection_ipsec-policy
+- az_network_vpn-connection_ipsec-policy_add
+- az_network_vpn-connection_ipsec-policy_clear
+- az_network_vpn-connection_ipsec-policy_list
+- az_network_vpn-connection_list
+- az_network_vpn-connection_shared-key
+- az_network_vpn-connection_shared-key_reset
+- az_network_vpn-connection_shared-key_show
+- az_network_vpn-connection_shared-key_update
+- az_network_vpn-connection_show
+- az_network_vpn-connection_show-device-config-script
+- az_network_vpn-connection_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/09/2022
+  description: Untuk informasi selengkapnya tentang koneksi situs-ke-situs, kunjungi https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-howto-site-to-site-resource-manager-cli. Untuk informasi selengkapnya tentang koneksi Vnet-ke-Vnet, kunjungi https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-howto-vnet-vnet-cli.
+  ms.openlocfilehash: 1df438ede9e626dfabc08cacba55b82d98e53d26
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141418156"
