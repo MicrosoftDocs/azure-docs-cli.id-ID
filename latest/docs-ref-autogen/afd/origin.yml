@@ -1,0 +1,294 @@
+### YamlMime:AzureCLIGroup
+uid: az_afd_origin
+name: az afd origin
+summary: Kelola asal dalam grup asal yang ditentukan.
+description: Asal adalah server aplikasi tempat Front Door akan merutekan permintaan klien Anda. Gunakan server aplikasi yang dapat diakses publik, termasuk App Service, Traffic Manager, Private Link, dan banyak lainnya.
+directCommands:
+- uid: az_afd_origin_create
+  name: az afd origin create
+  summary: Buat asal AFD.
+  description: ''
+  syntax: >-
+    az afd origin create --enabled-state {Disabled, Enabled}
+                         --host-name
+                         --origin-group-name
+                         --origin-name
+                         --profile-name
+                         --resource-group
+                         [--enable-private-link {false, true}]
+                         [--enforce-certificate-name-check {false, true}]
+                         [--http-port]
+                         [--https-port]
+                         [--origin-host-header]
+                         [--priority]
+                         [--private-link-location]
+                         [--private-link-request-message]
+                         [--private-link-resource]
+                         [--private-link-sub-resource-type]
+                         [--weight]
+  examples:
+  - summary: Membuat asal reguler
+    syntax: az afd origin create -g group --host-name example.contoso.com --profile-name profile --origin-group-name originGroup --origin-name origin1 --origin-host-header example.contoso.com --priority 1 --weight 500 --enabled-state Enabled --http-port 80 --https-port 443
+  - summary: Membuat asal tautan privat
+    syntax: az afd origin create -g group --host-name example.contoso.com --profile-name profile --origin-group-name originGroup --origin-name origin1 --origin-host-header example.contoso.com --priority 1 --weight 500 --enabled-state Enabled --http-port 80 --https-port 443 --private-link-resource /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group/providers/Microsoft.Storage/storageAccounts/plstest --private-link-location EastUS --private-link-request-message 'Please approve this request' --private-link-sub-resource table
+  requiredParameters:
+  - isRequired: true
+    name: --enabled-state
+    parameterValueGroup: Disabled, Enabled
+    summary: Apakah akan mengaktifkan asal ini.
+    description: ''
+  - isRequired: true
+    name: --host-name
+    summary: Alamat asal. Nama domain, alamat IPv4, dan alamat IPv6 didukung. Ini harus unik di semua asal dalam grup asal.
+    description: ''
+  - isRequired: true
+    name: --origin-group-name
+    summary: Nama grup asal yang unik dalam titik akhir.
+    description: ''
+  - isRequired: true
+    name: --origin-name
+    summary: Nama asal.
+    description: ''
+  - isRequired: true
+    name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --enable-private-link
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah tautan privat diamankan pada asal tersebut.
+    description: ''
+  - name: --enforce-certificate-name-check
+    defaultValue: "1"
+    parameterValueGroup: false, true
+    summary: "\"Apakah akan mengaktifkan pemeriksaan nama sertifikat di tingkat asal."
+    description: ''
+  - name: --http-port
+    defaultValue: "80"
+    summary: Port yang digunakan untuk permintaan http ke asal.
+    description: ''
+  - name: --https-port
+    defaultValue: "443"
+    summary: Port yang digunakan untuk permintaan https ke asal.
+    description: ''
+  - name: --origin-host-header
+    summary: Header Host yang akan dikirim untuk permintaan ke asal ini. Jika Anda membiarkan ini kosong, nama host permintaan menentukan nilai ini. Azure CDN asal, seperti Web Apps, Storage Blob, dan Cloud Services memerlukan nilai header host ini agar sesuai dengan nama host asal secara default.
+    description: ''
+  - name: --priority
+    defaultValue: "1"
+    summary: Prioritas asal dalam grup asal yang diberikan untuk penyeimbangan beban. Prioritas yang lebih tinggi tidak akan digunakan untuk penyeimbangan beban jika asal prioritas yang lebih rendah sehat. Harus antara 1 dan 5.
+    description: ''
+  - name: --private-link-location
+    summary: Lokasi asal yang akan terhubung menggunakan tautan privat.
+    description: ''
+  - name: --private-link-request-message
+    summary: Pesan yang ditampilkan kepada pemberi izin permintaan tautan privat.
+    description: ''
+  - name: --private-link-resource
+    summary: ID sumber daya asal yang akan disambungkan menggunakan tautan privat.
+    description: ''
+  - name: --private-link-sub-resource-type
+    summary: Jenis sub-sumber daya asal yang akan disambungkan menggunakan tautan privat. Anda dapat menggunakan "az network private-link-resource list" untuk mendapatkan jenis sub-sumber daya yang didukung.
+    description: ''
+  - name: --weight
+    defaultValue: "1000"
+    summary: Berat asal dalam grup asal yang diberikan untuk penyeimbangan beban. Harus antara 1 dan 1000.
+    description: ''
+- uid: az_afd_origin_delete
+  name: az afd origin delete
+  summary: Menghapus asal yang ada dalam grup asal.
+  description: ''
+  syntax: >-
+    az afd origin delete [--ids]
+                         [--origin-group-name]
+                         [--origin-name]
+                         [--profile-name]
+                         [--resource-group]
+                         [--yes]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --origin-group-name
+    summary: Nama grup asal yang unik dalam titik akhir.
+    description: ''
+  - name: --origin-name
+    summary: Nama asal.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_afd_origin_list
+  name: az afd origin list
+  summary: Mencantumkan semua asal yang ada dalam grup asal.
+  description: ''
+  syntax: >-
+    az afd origin list --origin-group-name
+                       --profile-name
+                       --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --origin-group-name
+    summary: Nama grup asal yang unik dalam titik akhir.
+    description: ''
+  - isRequired: true
+    name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_afd_origin_show
+  name: az afd origin show
+  summary: Mendapatkan asal yang ada dalam grup asal.
+  description: ''
+  syntax: >-
+    az afd origin show [--ids]
+                       [--origin-group-name]
+                       [--origin-name]
+                       [--profile-name]
+                       [--resource-group]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --origin-group-name
+    summary: Nama grup asal yang unik dalam titik akhir.
+    description: ''
+  - name: --origin-name
+    summary: Nama asal.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_afd_origin_update
+  name: az afd origin update
+  summary: Perbarui pengaturan asal AFD yang ditentukan.
+  description: ''
+  syntax: >-
+    az afd origin update [--enable-private-link {false, true}]
+                         [--enabled-state {Disabled, Enabled}]
+                         [--enforce-certificate-name-check {false, true}]
+                         [--host-name]
+                         [--http-port]
+                         [--https-port]
+                         [--ids]
+                         [--origin-group-name]
+                         [--origin-host-header]
+                         [--origin-name]
+                         [--priority]
+                         [--private-link-location]
+                         [--private-link-request-message]
+                         [--private-link-resource]
+                         [--private-link-sub-resource-type]
+                         [--profile-name]
+                         [--resource-group]
+                         [--weight]
+  examples:
+  - summary: Perbarui header host dan prioritas asal yang ditentukan.
+    syntax: az afd origin update -g group --host-name example.contoso.com --profile-name profile --origin-group-name originGroup --origin-name origin1 --origin-host-header example.contoso.com --priority 3
+  - summary: Nonaktifkan tautan privat asal.
+    syntax: az afd origin update -g group --host-name example.contoso.com --profile-name profile --origin-group-name originGroup --origin-name origin1 --enable-private-link False
+  optionalParameters:
+  - name: --enable-private-link
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah tautan privat diamankan pada asal tersebut.
+    description: ''
+  - name: --enabled-state
+    parameterValueGroup: Disabled, Enabled
+    summary: Apakah akan mengaktifkan asal ini.
+    description: ''
+  - name: --enforce-certificate-name-check
+    parameterValueGroup: false, true
+    summary: "\"Apakah akan mengaktifkan pemeriksaan nama sertifikat di tingkat asal."
+    description: ''
+  - name: --host-name
+    summary: Alamat asal. Nama domain, alamat IPv4, dan alamat IPv6 didukung. Ini harus unik di semua asal dalam grup asal.
+    description: ''
+  - name: --http-port
+    summary: Port yang digunakan untuk permintaan http ke asal.
+    description: ''
+  - name: --https-port
+    summary: Port yang digunakan untuk permintaan https ke asal.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --origin-group-name
+    summary: Nama grup asal yang unik dalam titik akhir.
+    description: ''
+  - name: --origin-host-header
+    summary: Header Host yang akan dikirim untuk permintaan ke asal ini. Jika Anda membiarkan ini kosong, nama host permintaan menentukan nilai ini. Azure CDN asal, seperti Web Apps, Storage Blob, dan Cloud Services memerlukan nilai header host ini agar sesuai dengan nama host asal secara default.
+    description: ''
+  - name: --origin-name
+    summary: Nama asal.
+    description: ''
+  - name: --priority
+    summary: Prioritas asal dalam grup asal yang diberikan untuk penyeimbangan beban. Prioritas yang lebih tinggi tidak akan digunakan untuk penyeimbangan beban jika asal prioritas yang lebih rendah sehat. Harus antara 1 dan 5.
+    description: ''
+  - name: --private-link-location
+    summary: Lokasi asal yang akan terhubung menggunakan tautan privat.
+    description: ''
+  - name: --private-link-request-message
+    summary: Pesan yang ditampilkan kepada pemberi izin permintaan tautan privat.
+    description: ''
+  - name: --private-link-resource
+    summary: ID sumber daya asal yang akan disambungkan menggunakan tautan privat.
+    description: ''
+  - name: --private-link-sub-resource-type
+    summary: Jenis sub-sumber daya asal yang akan disambungkan menggunakan tautan privat. Anda dapat menggunakan "az network private-link-resource list" untuk mendapatkan jenis sub-sumber daya yang didukung.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --weight
+    summary: Berat asal dalam grup asal yang diberikan untuk penyeimbangan beban. Harus antara 1 dan 1000.
+    description: ''
+commands:
+- az_afd_origin_create
+- az_afd_origin_delete
+- az_afd_origin_list
+- az_afd_origin_show
+- az_afd_origin_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Asal adalah server aplikasi tempat Front Door akan merutekan permintaan klien Anda. Gunakan server aplikasi yang dapat diakses publik, termasuk App Service, Traffic Manager, Private Link, dan banyak lainnya.
+  ms.openlocfilehash: 83c78f77988291947a49116483a8356736da9a82
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141436139"

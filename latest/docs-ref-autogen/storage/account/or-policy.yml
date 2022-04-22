@@ -1,0 +1,230 @@
+### YamlMime:AzureCLIGroup
+uid: az_storage_account_or-policy
+name: az storage account or-policy
+summary: Mengelola Kebijakan Replikasi Objek akun penyimpanan.
+description: ''
+directCommands:
+- uid: az_storage_account_or-policy_create
+  name: az storage account or-policy create
+  summary: Buat Kebijakan Layanan Replikasi Objek untuk akun penyimpanan.
+  description: ''
+  syntax: >-
+    az storage account or-policy create --account-name
+                                        [--dcont]
+                                        [--destination-account]
+                                        [--min-creation-time]
+                                        [--policy]
+                                        [--policy-id]
+                                        [--prefix]
+                                        [--resource-group]
+                                        [--rule-id]
+                                        [--scont]
+                                        [--source-account]
+  examples:
+  - summary: Buat Kebijakan Layanan Replikasi Objek untuk akun penyimpanan.
+    syntax: az storage account or-policy create -g ResourceGroupName -n storageAccountName -d destAccountName -s srcAccountName --destination-container dcont --source-container scont
+  - summary: Buat file json Kebijakan Layanan Replikasi Objek untuk akun penyimpanan.
+    syntax: az storage account or-policy create -g ResourceGroupName -n storageAccountName --policy @policy.json
+  - summary: Buat Kebijakan Layanan Replikasi Objek ke akun penyimpanan sumber melalui kebijakan yang terkait dengan akun penyimpanan tujuan.
+    syntax: az storage account or-policy show -g ResourceGroupName -n destAccountName --policy-id "3496e652-4cea-4581-b2f7-c86b3971ba92" | az storage account or-policy create -g ResourceGroupName -n srcAccountName -p "@-"
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -n
+    summary: Nama akun penyimpanan.
+    description: ''
+  optionalParameters:
+  - name: --dcont --destination-container
+    summary: Nama kontainer penyimpanan tujuan. Diperlukan ketika tidak ada --kebijakan yang disediakan.
+    description: ''
+  - name: --destination-account -d
+    summary: Nama akun penyimpanan tujuan atau Id sumber daya. Terapkan nilai --account-name sebagai akun tujuan ketika tidak ada akun tujuan yang disediakan dalam --policy dan --destination-account.
+    description: ''
+  - name: --min-creation-time -t
+    summary: "Blob yang dibuat setelah waktu akan direplikasi ke tujuan. Ini harus dalam format tanggalwaktu 'yyyy-MM-ddTHH:mm:ssZ'. Contoh: 2020-02-19T16:05:00Z."
+    description: ''
+  - name: --policy -p
+    summary: Definisi kebijakan replikasi objek antara dua akun penyimpanan, dalam format JSON. Beberapa aturan dapat ditentukan dalam satu kebijakan.
+    description: ''
+  - name: --policy-id
+    defaultValue: default
+    summary: ID kebijakan replikasi objek atau "default" jika ID kebijakan tidak diketahui. Id Kebijakan akan dibuat secara otomatis saat mengatur pada akun tujuan. Diperlukan saat mengatur pada akun sumber.
+    description: ''
+  - name: --prefix --prefix-match
+    summary: Opsional. Filter hasil untuk mereplikasi hanya blob yang namanya dimulai dengan awalan yang ditentukan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --rule-id
+    summary: Id Aturan dibuat secara otomatis untuk setiap aturan baru pada akun tujuan. Ini diperlukan untuk menempatkan kebijakan pada akun sumber.
+    description: ''
+  - name: --scont --source-container
+    summary: Nama kontainer penyimpanan sumber. Diperlukan ketika tidak ada --kebijakan yang disediakan.
+    description: ''
+  - name: --source-account -s
+    summary: Nama akun penyimpanan sumber atau Id sumber daya. Diperlukan ketika tidak ada --policy yang disediakan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_account_or-policy_delete
+  name: az storage account or-policy delete
+  summary: Hapus Kebijakan Layanan Replikasi Objek tertentu yang terkait dengan akun penyimpanan yang ditentukan.
+  description: ''
+  syntax: >-
+    az storage account or-policy delete --account-name
+                                        --policy-id
+                                        [--resource-group]
+  examples:
+  - summary: Hapus Kebijakan Layanan Replikasi Objek yang terkait dengan akun penyimpanan yang ditentukan.
+    syntax: az storage account or-policy delete -g ResourceGroupName -n StorageAccountName --policy-id "04344ea7-aa3c-4846-bfb9-e908e32d3bf8"
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -n
+    summary: Nama akun penyimpanan.
+    description: ''
+  - isRequired: true
+    name: --policy-id
+    summary: ID kebijakan replikasi objek atau "default" jika ID kebijakan tidak diketahui. Id Kebijakan akan dibuat secara otomatis saat mengatur pada akun tujuan. Diperlukan saat mengatur pada akun sumber.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_account_or-policy_list
+  name: az storage account or-policy list
+  summary: Daftar Kebijakan Layanan Replikasi Objek yang terkait dengan akun penyimpanan yang ditentukan.
+  description: ''
+  syntax: >-
+    az storage account or-policy list --account-name
+                                      [--resource-group]
+  examples:
+  - summary: Daftar Kebijakan Layanan Replikasi Objek yang terkait dengan akun penyimpanan yang ditentukan.
+    syntax: az storage account or-policy list -g ResourceGroupName -n StorageAccountName
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -n
+    summary: Nama akun penyimpanan.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_account_or-policy_show
+  name: az storage account or-policy show
+  summary: Perlihatkan properti Kebijakan Layanan Replikasi Objek yang ditentukan untuk akun penyimpanan.
+  description: ''
+  syntax: >-
+    az storage account or-policy show --account-name
+                                      --policy-id
+                                      [--resource-group]
+  examples:
+  - summary: Perlihatkan properti Kebijakan Layanan Replikasi Objek yang ditentukan untuk akun penyimpanan.
+    syntax: az storage account or-policy show -g ResourceGroupName -n StorageAccountName --policy-id "04344ea7-aa3c-4846-bfb9-e908e32d3bf8"
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -n
+    summary: Nama akun penyimpanan.
+    description: ''
+  - isRequired: true
+    name: --policy-id
+    summary: ID kebijakan replikasi objek atau "default" jika ID kebijakan tidak diketahui. Id Kebijakan akan dibuat secara otomatis saat mengatur pada akun tujuan. Diperlukan saat mengatur pada akun sumber.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_account_or-policy_update
+  name: az storage account or-policy update
+  summary: Memperbarui properti Kebijakan Layanan Replikasi Objek untuk akun penyimpanan.
+  description: ''
+  syntax: >-
+    az storage account or-policy update --account-name
+                                        [--add]
+                                        [--destination-account]
+                                        [--force-string]
+                                        [--policy]
+                                        [--policy-id]
+                                        [--remove]
+                                        [--resource-group]
+                                        [--set]
+                                        [--source-account]
+  examples:
+  - summary: Perbarui akun penyimpanan sumber dalam Kebijakan Layanan Replikasi Objek.
+    syntax: az storage account or-policy update -g ResourceGroupName -n StorageAccountName --source-account newSourceAccount --policy-id "04344ea7-aa3c-4846-bfb9-e908e32d3bf8"
+  - summary: Perbarui Kebijakan Layanan Replikasi Objek melalui file json.
+    syntax: az storage account or-policy update -g ResourceGroupName -n StorageAccountName -p @policy.json
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -n
+    summary: Nama akun penyimpanan.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --destination-account -d
+    summary: Nama akun penyimpanan tujuan atau Id sumber daya. Terapkan nilai --account-name sebagai akun tujuan ketika tidak ada akun tujuan yang disediakan dalam --policy dan --destination-account.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --policy -p
+    summary: Definisi kebijakan replikasi objek antara dua akun penyimpanan, dalam format JSON. Beberapa aturan dapat ditentukan dalam satu kebijakan.
+    description: ''
+  - name: --policy-id
+    summary: ID kebijakan replikasi objek atau "default" jika ID kebijakan tidak diketahui. Id Kebijakan akan dibuat secara otomatis saat mengatur pada akun tujuan. Diperlukan saat mengatur pada akun sumber.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --source-account -s
+    summary: Nama akun penyimpanan sumber atau Id sumber daya. Diperlukan ketika tidak ada --policy yang disediakan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+commands:
+- az_storage_account_or-policy_create
+- az_storage_account_or-policy_delete
+- az_storage_account_or-policy_list
+- az_storage_account_or-policy_rule
+- az_storage_account_or-policy_rule_add
+- az_storage_account_or-policy_rule_list
+- az_storage_account_or-policy_rule_remove
+- az_storage_account_or-policy_rule_show
+- az_storage_account_or-policy_rule_update
+- az_storage_account_or-policy_show
+- az_storage_account_or-policy_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/29/2022
+  description: Mengelola Kebijakan Replikasi Objek akun penyimpanan.
+  ms.openlocfilehash: ec81366e5c2577dc6176a92bc24fed937fbb77ae
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141429587"

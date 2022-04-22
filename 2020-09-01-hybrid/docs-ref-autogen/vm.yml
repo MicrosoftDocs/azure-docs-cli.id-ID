@@ -1,0 +1,1447 @@
+### YamlMime:AzureCLIGroup
+uid: az_vm
+name: az vm
+summary: Mengelola komputer virtual Linux atau Windows.
+description: ''
+directCommands:
+- uid: az_vm_assess-patches
+  name: az vm assess-patchs
+  summary: Menilai patch pada VM.
+  description: ''
+  syntax: >-
+    az vm assess-patches [--ids]
+                         [--name]
+                         [--resource-group]
+  examples:
+  - summary: Menilai patch pada VM.
+    syntax: az vm assess-patches -g MyResourceGroup -n MyVm
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_auto-shutdown
+  name: az vm auto-shutdown
+  summary: Mengelola matikan otomatis untuk VM.
+  description: ''
+  syntax: >-
+    az vm auto-shutdown [--email]
+                        [--ids]
+                        [--location]
+                        [--name]
+                        [--off]
+                        [--resource-group]
+                        [--time]
+                        [--webhook]
+  examples:
+  - summary: Membuat jadwal matikan otomatis untuk VM.
+    syntax: az vm auto-shutdown -g MyResourceGroup -n MyVm --time 1730 --email "foo@bar.com" --webhook "https://example.com/"
+  - summary: Menghapus jadwal matikan otomatis untuk VM.
+    syntax: az vm auto-shutdown -g MyResourceGroup -n MyVm --off
+  optionalParameters:
+  - name: --email
+    summary: Penerima email untuk mengirim pemberitahuan ke (dapat menjadi daftar alamat email yang dipisahkan titik koma).
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --off
+    summary: Nonaktifkan matikan otomatis untuk VM. Konfigurasi akan dihapus.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --time
+    summary: 'Waktu UTC hari jadwal akan terjadi setiap hari. Format: hhmm. Contoh: 1730.'
+    description: ''
+  - name: --webhook
+    summary: URL webhook tempat pemberitahuan akan dikirim.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_capture
+  name: az vm capture
+  summary: Mengambil informasi untuk VM yang dihentikan.
+  description: Untuk tutorial end-to-end, lihat https://docs.microsoft.com/azure/virtual-machines/linux/capture-image.
+  syntax: >-
+    az vm capture --vhd-name-prefix
+                  [--ids]
+                  [--name]
+                  [--overwrite]
+                  [--resource-group]
+                  [--storage-container]
+  examples:
+  - summary: Batalkan alokasi, generalisasi, dan tangkap komputer virtual yang dihentikan.
+    syntax: >-
+      az vm deallocate -g MyResourceGroup -n MyVm
+
+      az vm generalize -g MyResourceGroup -n MyVm
+
+      az vm capture -g MyResourceGroup -n MyVm --vhd-name-prefix MyPrefix
+  - summary: Batalkan alokasi, generalisasi, dan tangkap beberapa komputer virtual yang dihentikan.
+    syntax: >-
+      vms_ids=$(az vm list -g MyResourceGroup --query "[].id" -o tsv)
+
+      az vm deallocate --ids {vms_ids}
+
+      az vm generalize --ids {vms_ids}
+
+      az vm capture --ids {vms_ids} --vhd-name-prefix MyPrefix
+  requiredParameters:
+  - isRequired: true
+    name: --vhd-name-prefix
+    summary: Awalan nama VHD menentukan untuk disk VM.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --overwrite
+    defaultValue: "1"
+    summary: Timpa file disk yang ada.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --storage-container
+    defaultValue: vhds
+    summary: Nama kontainer akun penyimpanan untuk menyimpan disk.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_convert
+  name: az vm convert
+  summary: Mengonversi VM dengan disk tidak terkelola untuk menggunakan disk terkelola.
+  description: ''
+  syntax: >-
+    az vm convert [--ids]
+                  [--name]
+                  [--resource-group]
+  examples:
+  - summary: Mengonversi VM dengan disk tidak terkelola untuk menggunakan disk terkelola.
+    syntax: az vm convert -g MyResourceGroup -n MyVm
+  - summary: Konversikan semua VM dengan disk tidak terkelola dalam grup sumber daya untuk menggunakan disk terkelola.
+    syntax: az vm convert --ids $(az vm list -g MyResourceGroup --query "[].id" -o tsv)
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_create
+  name: membuat vm az
+  summary: Membuat Azure Virtual Machine.
+  description: Untuk tutorial end-to-end, lihat https://docs.microsoft.com/azure/virtual-machines/linux/quick-create-cli.
+  syntax: >-
+    az vm create --name
+                 --resource-group
+                 [--accelerated-networking {false, true}]
+                 [--accept-term]
+                 [--admin-password]
+                 [--admin-username]
+                 [--asgs]
+                 [--assign-identity]
+                 [--attach-data-disks]
+                 [--attach-os-disk]
+                 [--authentication-type {all, password, ssh}]
+                 [--availability-set]
+                 [--boot-diagnostics-storage]
+                 [--computer-name]
+                 [--count]
+                 [--custom-data]
+                 [--data-disk-caching]
+                 [--data-disk-encryption-sets]
+                 [--data-disk-sizes-gb]
+                 [--enable-agent {false, true}]
+                 [--enable-auto-update {false, true}]
+                 [--encryption-at-host {false, true}]
+                 [--ephemeral-os-disk {false, true}]
+                 [--ephemeral-os-disk-placement {CacheDisk, ResourceDisk}]
+                 [--eviction-policy {Deallocate, Delete}]
+                 [--generate-ssh-keys]
+                 [--host]
+                 [--host-group]
+                 [--image]
+                 [--license-type {None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server}]
+                 [--location]
+                 [--max-price]
+                 [--nics]
+                 [--no-wait]
+                 [--nsg]
+                 [--nsg-rule {NONE, RDP, SSH}]
+                 [--os-disk-caching {None, ReadOnly, ReadWrite}]
+                 [--os-disk-encryption-set]
+                 [--os-disk-name]
+                 [--os-disk-size-gb]
+                 [--os-type {linux, windows}]
+                 [--plan-name]
+                 [--plan-product]
+                 [--plan-promotion-code]
+                 [--plan-publisher]
+                 [--platform-fault-domain]
+                 [--ppg]
+                 [--priority {Low, Regular, Spot}]
+                 [--private-ip-address]
+                 [--public-ip-address]
+                 [--public-ip-address-allocation {dynamic, static}]
+                 [--public-ip-address-dns-name]
+                 [--public-ip-sku {Basic, Standard}]
+                 [--role]
+                 [--scope]
+                 [--secrets]
+                 [--size]
+                 [--specialized {false, true}]
+                 [--ssh-dest-key-path]
+                 [--ssh-key-name]
+                 [--ssh-key-values]
+                 [--storage-account]
+                 [--storage-container-name]
+                 [--storage-sku]
+                 [--subnet]
+                 [--subnet-address-prefix]
+                 [--tags]
+                 [--ultra-ssd-enabled {false, true}]
+                 [--use-unmanaged-disk]
+                 [--validate]
+                 [--vmss]
+                 [--vnet-address-prefix]
+                 [--vnet-name]
+                 [--workspace]
+                 [--zone {1, 2, 3}]
+  examples:
+  - summary: Buat VM Ubuntu default dengan autentikasi SSH otomatis.
+    syntax: az vm create -n MyVm -g MyResourceGroup --image UbuntuLTS
+  - summary: Buat VM RedHat default dengan autentikasi SSH otomatis menggunakan URN gambar.
+    syntax: az vm create -n MyVm -g MyResourceGroup --image RedHat:RHEL:7-RAW:7.4.2018010506
+  - summary: Buat Windows Server VM default dengan alamat IP privat.
+    syntax: az vm create -n MyVm -g MyResourceGroup --public-ip-address "" --image Win2012R2Datacenter
+  - summary: Buat VM dari gambar terkelola kustom.
+    syntax: az vm create -g MyResourceGroup -n MyVm --image MyImage
+  - summary: Buat VM dari versi gambar galeri umum.
+    syntax: az vm create -g MyResourceGroup -n MyVm --image /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.Compute/galleries/myGallery/images/myImage/versions/1.0.0
+  - summary: Buat VM dari versi gambar galeri khusus.
+    syntax: az vm create -g MyResourceGroup -n MyVm --image /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.Compute/galleries/myGallery/images/myImage/versions/1.0.0 --specialized
+  - summary: Membuat VM dari versi terbaru gambar galeri
+    syntax: az vm create -g MyResourceGroup -n MyVm --image /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.Compute/galleries/myGallery/images/myImage
+  - summary: Buat VM dengan melampirkan ke disk sistem operasi terkelola.
+    syntax: az vm create -g MyResourceGroup -n MyVm --attach-os-disk MyOsDisk --os-type linux
+  - summary: 'Buat VM Linux Ubuntu menggunakan skrip cloud-init untuk konfigurasi. Lihat: https://docs.microsoft.com/azure/virtual-machines/linux/using-cloud-init.'
+    syntax: az vm create -g MyResourceGroup -n MyVm --image debian --custom-data MyCloudInitScript.yml
+  - summary: Buat VM Debian dengan autentikasi kunci SSH dan entri DNS publik, yang terletak di jaringan virtual dan set ketersediaan yang ada.
+    syntax: >-
+      az vm create -n MyVm -g MyResourceGroup --image debian --vnet-name MyVnet --subnet subnet1 \
+          --availability-set MyAvailabilitySet --public-ip-address-dns-name MyUniqueDnsName \
+          --ssh-key-values @key-file
+  - summary: Buat VM Linux Ubuntu sederhana dengan alamat IP publik, entri DNS, dua disk data (10GB dan 20GB), lalu hasilkan pasangan kunci ssh.
+    syntax: >-
+      az vm create -n MyVm -g MyResourceGroup --public-ip-address-dns-name MyUniqueDnsName \
+          --image ubuntults --data-disk-sizes-gb 10 20 --size Standard_DS2_v2 \
+          --generate-ssh-keys
+  - summary: Buat VM Debian menggunakan rahasia Key Vault.
+    syntax: >-
+      az keyvault certificate create --vault-name vaultname -n cert1 \
+        -p "$(az keyvault certificate get-default-policy)"
+
+      secrets=$(az keyvault secret list-versions --vault-name vaultname \
+        -n cert1 --query "[?attributes.enabled].id" -o tsv)
+
+      vm_secrets=$(az vm secret format -s "$secrets")
+
+
+      az vm create -g group-name -n vm-name --admin-username deploy  \
+        --image debian --secrets "$vm_secrets"
+  - summary: Buat VM CentOS dengan identitas yang ditetapkan sistem. VM akan memiliki peran 'Kontributor' dengan akses ke akun penyimpanan.
+    syntax: az vm create -n MyVm -g rg1 --image centos --assign-identity [system] --scope /subscriptions/99999999-1bf0-4dda-aec3-cb9272f09590/MyResourceGroup/myRG/providers/Microsoft.Storage/storageAccounts/storage1 --role Contributor
+  - summary: Buat VM debian dengan identitas yang ditetapkan pengguna.
+    syntax: az vm create -n MyVm -g rg1 --image debian --assign-identity /subscriptions/99999999-1bf0-4dda-aec3-cb9272f09590/resourcegroups/myRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myID
+  - summary: Buat VM debian dengan sistem dan identitas yang ditetapkan pengguna.
+    syntax: az vm create -n MyVm -g rg1 --image debian --assign-identity [system] /subscriptions/99999999-1bf0-4dda-aec3-cb9272f09590/resourcegroups/myRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myID
+  - summary: Membuat beberapa VM. Dalam contoh ini, 3 VM dibuat. Mereka adalah MyVm0, MyVm1, MyVm2.
+    syntax: az vm create -n MyVm -g MyResourceGroup --image centos --count 3
+  - summary: Buat VM dari gambar galeri bersama (fitur pratinjau pribadi, silakan hubungi tim galeri gambar bersama melalui email sigpmdev@microsoft.com untuk mendaftar pratinjau jika Anda tertarik menggunakan fitur ini).
+    syntax: az vm create -n MyVm -g MyResourceGroup --image /SharedGalleries/{gallery_unique_name}/Images/{image}/Versions/{version}
+  - summary: Buat VM dari gambar galeri komunitas (fitur pratinjau pribadi, silakan hubungi tim galeri gambar komunitas melalui email sigpmdev@microsoft.com untuk mendaftar pratinjau jika Anda tertarik menggunakan fitur ini).
+    syntax: az vm create -n MyVm -g MyResourceGroup --image /CommunityGalleries/{gallery_unique_name}/Images/{image}/Versions/{version}
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama komputer virtual.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --accelerated-networking
+    parameterValueGroup: false, true
+    summary: Aktifkan jaringan terakselerasi. Kecuali ditentukan, CLI akan mengaktifkannya berdasarkan gambar dan ukuran komputer.
+    description: ''
+  - name: --accept-term
+    summary: Terima perjanjian lisensi dan pernyataan privasi.
+    description: ''
+  - name: --admin-password
+    summary: Kata sandi untuk VM jika jenis autentikasi adalah 'Kata Sandi'.
+    description: ''
+  - name: --admin-username
+    summary: Nama pengguna untuk VM. Nilai default adalah nama pengguna OS saat ini. Jika nilai default dicadangkan sistem, maka nilai default akan diatur ke azureuser. Silakan merujuk ke https://docs.microsoft.com/rest/api/compute/virtualmachines/createorupdate#osprofile untuk mendapatkan daftar lengkap nilai yang dipesan.
+    description: ''
+  - name: --asgs
+    summary: Daftar yang dipisahkan ruang dari grup keamanan aplikasi yang ada untuk dikaitkan dengan VM.
+    description: ''
+  - name: --assign-identity
+    summary: Terima identitas yang ditetapkan sistem atau pengguna yang dipisahkan oleh spasi. Gunakan '[system]' untuk merujuk identitas yang ditetapkan sistem, atau id sumber daya untuk merujuk identitas yang ditetapkan pengguna. Lihat bantuan untuk contoh selengkapnya.
+    description: ''
+  - name: --attach-data-disks
+    summary: Lampirkan disk data yang ada ke VM. Dapat menggunakan nama atau ID disk terkelola atau URI ke VHD disk yang tidak dikelola.
+    description: ''
+  - name: --attach-os-disk
+    summary: Lampirkan disk OS yang ada ke VM. Dapat menggunakan nama atau ID disk terkelola atau URI ke VHD disk yang tidak dikelola.
+    description: ''
+  - name: --authentication-type
+    parameterValueGroup: all, password, ssh
+    summary: Jenis autentikasi yang akan digunakan dengan VM. Default ke kata sandi untuk Windows dan kunci publik SSH untuk Linux. "all" memungkinkan autentikasi ssh dan kata sandi.
+    description: ''
+  - name: --availability-set
+    summary: Nama atau ID dari set ketersediaan yang ada untuk menambahkan VM. Tidak ada secara default.
+    description: ''
+  - name: --boot-diagnostics-storage
+    summary: Nama akun penyimpanan yang sudah ada sebelumnya atau uri blob-nya untuk menangkap diagnostik boot. Sku-nya harus menjadi salah satu Standard_GRS, Standard_LRS dan Standard_RAGRS.
+    description: ''
+  - name: --computer-name
+    summary: Nama OS host komputer virtual. Default ke nama VM.
+    description: ''
+  - name: --count
+    summary: Jumlah komputer virtual yang akan dibuat. Rentang nilai adalah [2, 250], inklusif. Jangan tentukan parameter ini jika Anda ingin membuat VM tunggal normal. VM dibuat secara paralel. Output dari perintah ini adalah array VM, bukan satu VM tunggal. Setiap VM memiliki IP publik sendiri, NIC. VNET dan NSG dibagikan. Disarankan agar tidak ada IP publik, NIC, VNET, dan NSG yang ada dalam grup sumber daya. Ketika --count ditentukan, --attach-data-disks, --attach-os-disk, --boot-diagnostics-storage, --computer-name, --host, --host-group, --nics, --os-disk-name, --private-ip-address, --public-ip-address, --public-ip-address-dns-name, --storage-account, --storage-container-name, --subnet, --use-unmanaged-disk, --vnet-name tidak diizinkan.
+    description: ''
+  - name: --custom-data
+    summary: File atau teks skrip init kustom (cloud-init, cloud-config, dll..).
+    description: ''
+  - name: --data-disk-caching
+    summary: Storage jenis penembolokan untuk disk data, termasuk 'None', 'ReadOnly', 'ReadWrite', dll. Gunakan nilai tunggal untuk diterapkan pada semua disk, atau gunakan `<lun>=<vaule1> <lun>=<value2>` untuk mengonfigurasi disk individual.
+    description: ''
+  - name: --data-disk-encryption-sets
+    summary: Nama atau ID (dibatasi spasi) set enkripsi disk untuk disk data.
+    description: ''
+  - name: --data-disk-sizes-gb
+    summary: Ukuran disk data terkelola kosong yang dipisahkan spasi dalam GB untuk dibuat.
+    description: ''
+  - name: --enable-agent
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah agen komputer virtual harus disediakan pada komputer virtual. Ketika properti ini tidak ditentukan, perilaku default adalah mengaturnya ke true. Ini akan memastikan bahwa Agen VM diinstal pada VM sehingga ekstensi dapat ditambahkan ke VM nanti.
+    description: ''
+  - name: --enable-auto-update
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah Pembaruan Otomatis diaktifkan untuk komputer virtual Windows.
+    description: ''
+  - name: --encryption-at-host
+    parameterValueGroup: false, true
+    summary: Aktifkan Enkripsi Host untuk VM atau VMSS. Ini akan mengaktifkan enkripsi untuk semua disk termasuk disk Resource/Temp di host itu sendiri.
+    description: ''
+  - name: --ephemeral-os-disk
+    parameterValueGroup: false, true
+    summary: Memungkinkan Anda membuat disk OS langsung pada node host, memberikan performa disk lokal dan waktu pencitraan ulang VM/VMSS yang lebih cepat.
+    description: ''
+  - name: --ephemeral-os-disk-placement --ephemeral-placement
+    parameterValueGroup: CacheDisk, ResourceDisk
+    summary: Hanya berlaku saat digunakan dengan `--ephemeral-os-disk`. Memungkinkan Anda memilih lokasi provisi disk OS Ephemeral.
+    description: ''
+  - name: --eviction-policy
+    parameterValueGroup: Deallocate, Delete
+    summary: Kebijakan pengeluaran untuk komputer virtual prioritas Spot. Kebijakan pengeluaran default adalah Batalkan alokasi untuk komputer virtual prioritas Spot.
+    description: ''
+  - name: --generate-ssh-keys
+    summary: Hasilkan file kunci publik dan privat SSH jika hilang. Kunci akan disimpan di direktori ~/.ssh.
+    description: ''
+  - name: --host
+    summary: ID host khusus tempat VM akan berada. --host dan --host-group tidak dapat digunakan bersama-sama.
+    description: ''
+  - name: --host-group
+    summary: Nama atau ID grup host khusus tempat VM akan berada. --host dan --host-group tidak dapat digunakan bersama-sama.
+    description: ''
+  - name: --image
+    summary: 'Nama gambar sistem operasi sebagai alias URN, URN, nama gambar kustom atau ID, ID versi gambar kustom, atau URI blob VHD. Selain itu, ini juga mendukung gambar galeri bersama. Parameter ini diperlukan kecuali menggunakan `--attach-os-disk.` format URN Yang Valid: "Publisher:Offer:Sku:Version". Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/virtual-machines/linux/cli-ps-findimage.'
+    description: ''
+    valueFrom: az vm image list, az vm image show, az sig image-version show-shared
+  - name: --license-type
+    parameterValueGroup: None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server
+    summary: Menentukan bahwa gambar atau disk Windows dilisensikan secara lokal. Untuk mengaktifkan Azure Hybrid Benefit untuk Windows Server, gunakan 'Windows_Server'. Untuk mengaktifkan Hak Hosting Multi-penyewa untuk Windows 10, gunakan 'Windows_Client'. Untuk informasi selengkapnya, lihat dokumen online Azure Windows VM.
+    description: ''
+  - name: --location -l
+    summary: Lokasi untuk membuat VM dan sumber daya terkait. Jika lokasi default tidak dikonfigurasi, akan default ke lokasi grup sumber daya.
+    description: ''
+  - name: --max-price
+    summary: Harga maksimum (dalam Dolar AS) yang bersedia Anda bayar untuk Spot VM/VMSS. -1 menunjukkan bahwa Spot VM/VMSS tidak boleh dikeluarkan karena alasan harga.
+    description: ''
+  - name: --nics
+    summary: Nama atau ID NIC yang ada untuk dilampirkan ke VM. NIC pertama akan ditetapkan sebagai primer. Jika dihilangkan, NIC baru akan dibuat. Jika NIC yang ada ditentukan, jangan tentukan subnet, VNet, IP publik, atau NSG.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --nsg
+    summary: Nama yang akan digunakan saat membuat Grup Keamanan Jaringan baru (default) atau mereferensikan yang sudah ada. Dapat juga mereferensikan NSG yang ada dengan ID atau menentukan "" untuk tidak ada ('"' di Azure CLI menggunakan operator PowerShell atau --%).
+    description: ''
+  - name: --nsg-rule
+    parameterValueGroup: NONE, RDP, SSH
+    summary: Aturan NSG yang akan dibuat saat membuat NSG baru. Default untuk membuka port untuk mengizinkan RDP pada Windows dan mengizinkan SSH di Linux. NONE tidak mewakili aturan NSG.
+    description: ''
+  - name: --os-disk-caching
+    parameterValueGroup: None, ReadOnly, ReadWrite
+    summary: 'Storage jenis penembolokan untuk disk OS VM. Default: ReadWrite.'
+    description: ''
+  - name: --os-disk-encryption-set
+    summary: Nama atau ID enkripsi disk yang ditetapkan untuk disk OS.
+    description: ''
+  - name: --os-disk-name
+    summary: Nama disk OS VM baru.
+    description: ''
+  - name: --os-disk-size-gb
+    summary: Ukuran disk OS dalam GB untuk dibuat.
+    description: ''
+  - name: --os-type
+    parameterValueGroup: linux, windows
+    summary: Jenis OS yang diinstal pada VHD kustom. Jangan gunakan saat menentukan alias URN atau URN.
+    description: ''
+  - name: --plan-name
+    summary: Nama rencana.
+    description: ''
+  - name: --plan-product
+    summary: Rencanakan produk.
+    description: ''
+  - name: --plan-promotion-code
+    summary: Rencanakan kode promosi.
+    description: ''
+  - name: --plan-publisher
+    summary: Merencanakan penerbit.
+    description: ''
+  - name: --platform-fault-domain
+    summary: Tentukan domain kesalahan logis set skala tempat komputer virtual akan dibuat. Secara default, komputer virtual akan secara otomatis ditetapkan ke domain kesalahan yang paling menjaga keseimbangan di seluruh domain kesalahan yang tersedia. Ini hanya berlaku jika properti virtualMachineScaleSet dari komputer virtual ini diatur. Set skala komputer virtual yang dirujuk, harus memiliki jumlah domain kesalahan platform. Properti ini tidak dapat diperbarui setelah komputer virtual dibuat. Penetapan domain kesalahan dapat dilihat dalam tampilan instans komputer virtual.
+    description: ''
+  - name: --ppg
+    summary: Nama atau ID grup penempatan kedekatan yang harus dikaitkan dengan VM.
+    description: ''
+  - name: --prioritas
+    parameterValueGroup: Low, Regular, Spot
+    summary: Prioritas. Gunakan 'Spot' untuk menjalankan beban kerja berumur pendek dengan cara yang hemat biaya. Enum 'Rendah' akan ditolak di masa depan. Silakan gunakan 'Spot' untuk menyebarkan Azure spot VM dan/atau VMSS. Default ke Reguler.
+    description: ''
+  - name: --private-ip-address
+    summary: Alamat IP privat statis (misalnya 10.0.0.5).
+    description: ''
+  - name: --public-ip-address
+    summary: Nama alamat IP publik saat membuat satu (default) atau mereferensikan yang sudah ada. Dapat juga mereferensikan IP publik yang ada berdasarkan ID atau menentukan "" untuk Tidak Ada ('"' di Azure CLI menggunakan operator PowerShell atau --%).
+    description: ''
+  - name: --public-ip-address-allocation
+    parameterValueGroup: dynamic, static
+    summary: ''
+    description: ''
+  - name: --public-ip-address-dns-name
+    summary: Nama DNS unik global untuk IP publik yang baru dibuat.
+    description: ''
+  - name: --public-ip-sku
+    parameterValueGroup: Basic, Standard
+    summary: SKU IP Publik. Ini diatur ke Dasar secara default. IP publik didukung untuk dibuat di zona tepi hanya ketika 'Standar'.
+    description: ''
+  - name: --role
+    summary: Nama peran atau id yang akan dimiliki identitas yang ditetapkan sistem.
+    description: ''
+  - name: --cakupan
+    summary: Cakupan yang dapat diakses oleh identitas yang ditetapkan sistem.
+    description: ''
+  - name: --secrets
+    summary: 'Satu atau banyak rahasia Key Vault sebagai string atau file JSON melalui `@{path}` yang berisi `[{ "sourceVault": { "id": "value" }, "vaultCertificates": [{ "certificateUrl": "value", "certificateStore": "cert store name (only on windows)"}] }]`.'
+    description: ''
+  - name: --size
+    defaultValue: Standard_DS1_v2
+    summary: Ukuran VM yang akan dibuat. Lihat https://azure.microsoft.com/pricing/details/virtual-machines/ untuk info ukuran.
+    description: ''
+    valueFrom: az vm list-sizes
+  - name: --specialized
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah gambar sumber dikhususkan.
+    description: ''
+  - name: --ssh-dest-key-path
+    summary: Jalur file tujuan pada VM untuk kunci SSH. Jika file sudah ada, kunci yang ditentukan ditambahkan ke file. Jalur tujuan untuk kunci umum SSH saat ini terbatas pada nilai defaultnya "/home/username/.ssh/authorized_keys" karena masalah yang diketahui di agen provisi Linux.
+    description: ''
+  - name: --ssh-key-name
+    summary: Gunakan sebagai kunci publik di komputer virtual. Ini harus menjadi sumber daya kunci SSH yang ada di Azure.
+    description: ''
+  - name: --ssh-key-values
+    summary: Daftar kunci umum SSH yang dipisahkan spasi atau jalur file kunci publik.
+    description: ''
+  - name: --storage-account
+    summary: Hanya berlaku saat digunakan dengan `--use-unmanaged-disk`. Nama yang akan digunakan saat membuat akun penyimpanan baru atau mereferensikan akun penyimpanan yang sudah ada. Jika dihilangkan, akun penyimpanan yang sesuai dalam grup sumber daya dan lokasi yang sama akan digunakan, atau yang baru akan dibuat.
+    description: ''
+  - name: --storage-container-name
+    summary: 'Hanya berlaku saat digunakan dengan `--use-unmanaged-disk`. Nama kontainer penyimpanan untuk disk OS VM. Default: vhds.'
+    description: ''
+  - name: --storage-sku
+    summary: 'SKU akun penyimpanan untuk mempertahankan VM. Gunakan sku tunggal yang akan diterapkan di semua disk, atau tentukan disk individual. Penggunaan: [--storage-sku SKU | --storage-sku ID=SKU ID=SKU ID=SKU...], di mana setiap ID adalah "os" atau lun yang diindeks 0. Nilai yang diizinkan: Standard_LRS, Premium_LRS, StandardSSD_LRS, UltraSSD_LRS.'
+    description: ''
+  - name: --subnet
+    summary: Nama subnet saat membuat VNet baru atau mereferensikan yang sudah ada. Dapat juga mereferensikan subnet yang ada berdasarkan ID. Jika nama vnet dan subnet dihilangkan, VNet dan subnet yang sesuai akan dipilih secara otomatis, atau yang baru akan dibuat.
+    description: ''
+  - name: --subnet-address-prefix
+    defaultValue: 10.0.0.0/24
+    summary: Awalan alamat IP subnet yang akan digunakan saat membuat VNet baru dalam format CIDR.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --ultra-ssd-enabled
+    parameterValueGroup: false, true
+    summary: Mengaktifkan atau menonaktifkan kemampuan untuk memiliki 1 disk data terkelola atau lebih dengan akun penyimpanan UltraSSD_LRS.
+    description: ''
+  - name: --use-unmanaged-disk
+    summary: Jangan gunakan disk terkelola untuk mempertahankan VM.
+    description: ''
+  - name: --validate
+    summary: Buat dan validasi templat ARM tanpa membuat sumber daya apa pun.
+    description: ''
+  - name: --vmss
+    summary: Nama atau ID set skala komputer virtual yang ada yang harus ditetapkan oleh komputer virtual. Tidak ada secara default.
+    description: ''
+  - name: --vnet-address-prefix
+    defaultValue: 10.0.0.0/16
+    summary: Awalan alamat IP yang akan digunakan saat membuat VNet baru dalam format CIDR.
+    description: ''
+  - name: --vnet-name
+    summary: Nama jaringan virtual saat membuat jaringan baru atau mereferensikan yang sudah ada.
+    description: ''
+  - name: --workspace
+    summary: Nama atau ID Ruang Kerja Analitik Log. Jika Anda menentukan ruang kerja melalui namanya, ruang kerja harus berada dalam grup sumber daya yang sama dengan vm, jika tidak, ruang kerja baru akan dibuat.
+    description: ''
+  - name: --zone -z
+    parameterValueGroup: 1, 2, 3
+    summary: Zona ketersediaan untuk menyediakan sumber daya.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_deallocate
+  name: az vm deallocate
+  summary: Batalkan alokasi VM.
+  description: Untuk tutorial end-to-end, lihat https://docs.microsoft.com/azure/virtual-machines/linux/capture-image.
+  syntax: >-
+    az vm deallocate [--ids]
+                     [--name]
+                     [--no-wait]
+                     [--resource-group]
+  examples:
+  - summary: Batalkan alokasi, generalisasi, dan tangkap komputer virtual yang dihentikan.
+    syntax: >-
+      az vm deallocate -g MyResourceGroup -n MyVm
+
+      az vm generalize -g MyResourceGroup -n MyVm
+
+      az vm capture -g MyResourceGroup -n MyVm --vhd-name-prefix MyPrefix
+  - summary: Batalkan alokasi, generalisasi, dan tangkap beberapa komputer virtual yang dihentikan.
+    syntax: >-
+      vms_ids=$(az vm list -g MyResourceGroup --query "[].id" -o tsv)
+
+      az vm deallocate --ids {vms_ids}
+
+      az vm generalize --ids {vms_ids}
+
+      az vm capture --ids {vms_ids} --vhd-name-prefix MyPrefix
+  - summary: Batalkan alokasi VM. (dibuat otomatis)
+    syntax: az vm deallocate --name MyVm --no-wait --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_delete
+  name: az vm delete
+  summary: Menghapus komputer virtual.
+  description: ''
+  syntax: >-
+    az vm delete [--force-deletion]
+                 [--ids]
+                 [--name]
+                 [--no-wait]
+                 [--resource-group]
+                 [--yes]
+  examples:
+  - summary: Hapus VM tanpa permintaan konfirmasi.
+    syntax: az vm delete -g MyResourceGroup -n MyVm --yes
+  - summary: Menghapus semua VM dalam grup sumber daya.
+    syntax: az vm delete --ids $(az vm list -g MyResourceGroup --query "[].id" -o tsv)
+  optionalParameters:
+  - name: --force-deletion
+    summary: Parameter opsional untuk memaksa penghapusan komputer virtual.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_generalize
+  name: az vm generalize
+  summary: Tandai VM sebagai umum, memungkinkannya dicitrakan untuk beberapa penyebaran.
+  description: Untuk tutorial end-to-end, lihat https://docs.microsoft.com/azure/virtual-machines/linux/capture-image.
+  syntax: >-
+    az vm generalize [--ids]
+                     [--name]
+                     [--no-wait]
+                     [--resource-group]
+  examples:
+  - summary: Batalkan alokasi, generalisasi, dan tangkap komputer virtual yang dihentikan.
+    syntax: >-
+      az vm deallocate -g MyResourceGroup -n MyVm
+
+      az vm generalize -g MyResourceGroup -n MyVm
+
+      az vm capture -g MyResourceGroup -n MyVm --vhd-name-prefix MyPrefix
+  - summary: Batalkan alokasi, generalisasi, dan tangkap beberapa komputer virtual yang dihentikan.
+    syntax: >-
+      vms_ids=$(az vm list -g MyResourceGroup --query "[].id" -o tsv)
+
+      az vm deallocate --ids ${vms_ids}
+
+      az vm generalize --ids ${vms_ids}
+
+      az vm capture --ids ${vms_ids} --vhd-name-prefix MyPrefix
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_get-instance-view
+  name: az vm get-instance-view
+  summary: Mendapatkan informasi instans tentang VM.
+  description: ''
+  syntax: >-
+    az vm get-instance-view [--ids]
+                            [--name]
+                            [--resource-group]
+  examples:
+  - summary: Gunakan grup sumber daya dan nama untuk mendapatkan informasi tampilan instans VM.
+    syntax: az vm get-instance-view -g MyResourceGroup -n MyVm
+  - summary: Mendapatkan tampilan instans untuk semua VM dalam grup sumber daya.
+    syntax: az vm get-instance-view --ids $(az vm list -g MyResourceGroup --query "[].id" -o tsv)
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_list
+  name: az vm list
+  summary: Mencantumkan detail Virtual Machines.
+  description: '`--resource-group` dapat meneruskan string kosong sebagai parameter, yang akan menghasilkan semua informasi VM di bawah langganan. Untuk informasi selengkapnya tentang mengkueri informasi tentang Virtual Machines, lihat https://docs.microsoft.com/cli/azure/query-az-cli2.'
+  syntax: >-
+    az vm list [--resource-group]
+               [--show-details]
+  examples:
+  - summary: Mencantumkan semua VM.
+    syntax: az vm list
+  - summary: Mencantumkan semua VM menurut grup sumber daya.
+    syntax: az vm list -g MyResourceGroup
+  - summary: Cantumkan semua VM menurut grup sumber daya dengan detail.
+    syntax: az vm list -g MyResourceGroup -d
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --show-details -d
+    summary: Tampilkan alamat IP publik, FQDN, dan status daya. perintah akan berjalan lambat.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_list-ip-addresses
+  name: az vm list-ip-addresses
+  summary: Mencantumkan alamat IP yang terkait dengan VM.
+  description: ''
+  syntax: >-
+    az vm list-ip-addresses [--ids]
+                            [--name]
+                            [--resource-group]
+  examples:
+  - summary: Dapatkan alamat IP untuk VM.
+    syntax: az vm list-ip-addresses -g MyResourceGroup -n MyVm
+  - summary: Dapatkan alamat IP untuk semua VM dalam grup sumber daya.
+    syntax: az vm list-ip-addresses --ids $(az vm list -g MyResourceGroup --query "[].id" -o tsv)
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_list-sizes
+  name: az vm list-sizes
+  summary: Mencantumkan ukuran yang tersedia untuk VM.
+  description: ''
+  syntax: az vm list-sizes --location
+  examples:
+  - summary: Cantumkan ukuran VM yang tersedia di wilayah US Barat.
+    syntax: az vm list-sizes -l westus
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_list-skus
+  name: az vm list-skus
+  summary: Dapatkan detail untuk SKU sumber daya terkait komputasi.
+  description: Perintah ini menggabungkan pembatasan tingkat langganan, menawarkan informasi yang paling akurat.
+  syntax: >-
+    az vm list-skus [--all {false, true}]
+                    [--location]
+                    [--resource-type]
+                    [--size]
+                    [--zone {false, true}]
+  examples:
+  - summary: Mencantumkan semua SKU di wilayah US Barat.
+    syntax: az vm list-skus -l westus
+  - summary: Cantumkan semua ukuran vm yang tersedia di wilayah US Timur2 yang mendukung zona ketersediaan.
+    syntax: az vm list-skus -l eastus2 --zone
+  - summary: Cantumkan semua ukuran vm yang tersedia di wilayah US Timur2 yang mendukung zona ketersediaan dengan nama seperti "standard_ds1...".
+    syntax: az vm list-skus -l eastus2 --zone --size standard_ds1
+  - summary: Mencantumkan set ketersediaan informasi sku terkait di wilayah US Barat.
+    syntax: az vm list-skus -l westus --resource-type availabilitySets
+  optionalParameters:
+  - name: --all
+    parameterValueGroup: false, true
+    summary: Perlihatkan semua informasi termasuk ukuran vm yang tidak tersedia di bawah langganan saat ini.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --resource-type -r
+    summary: Jenis sumber daya misalnya "availabilitySets", "snapshots", "disk", dll.
+    description: ''
+  - name: --size -s
+    summary: Nama ukuran, nama parsial diterima.
+    description: ''
+  - name: --zone -z
+    parameterValueGroup: false, true
+    summary: Tampilkan sku yang mendukung zona ketersediaan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_list-usage
+  name: az vm list-usage
+  summary: Mencantumkan sumber daya penggunaan yang tersedia untuk VM.
+  description: ''
+  syntax: az vm list-usage --location
+  examples:
+  - summary: Dapatkan penggunaan sumber daya komputasi untuk wilayah US Barat.
+    syntax: az vm list-usage -l westus
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_list-vm-resize-options
+  name: az vm list-vm-resize-options
+  summary: Mencantumkan opsi mengubah ukuran yang tersedia untuk VM.
+  description: ''
+  syntax: >-
+    az vm list-vm-resize-options [--ids]
+                                 [--name]
+                                 [--resource-group]
+  examples:
+  - summary: Cantumkan semua ukuran VM yang tersedia untuk mengubah ukuran.
+    syntax: az vm list-vm-resize-options -g MyResourceGroup -n MyVm
+  - summary: Mencantumkan ukuran yang tersedia untuk semua VM dalam grup sumber daya.
+    syntax: az vm list-vm-resize-options --ids $(az vm list -g MyResourceGroup --query "[].id" -o tsv)
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_open-port
+  name: az vm open-port
+  summary: Membuka mesin virtual ke lalu lintas masuk pada port tertentu.
+  description: Menambahkan aturan keamanan ke kelompok keamanan jaringan (NSG) yang dilampirkan ke antarmuka jaringan (NIC) atau subnet VM. NSG yang ada akan digunakan atau yang baru akan dibuat. Nama aturan adalah 'open-port-{port}' dan akan menimpa aturan yang ada dengan nama ini. Untuk VM multi-NIC, atau untuk kontrol yang lebih halus, gunakan perintah jaringan yang sesuai secara langsung (buat aturan nsg, dll).
+  syntax: >-
+    az vm open-port --port
+                    [--apply-to-subnet]
+                    [--ids]
+                    [--name]
+                    [--nsg-name]
+                    [--priority]
+                    [--resource-group]
+  examples:
+  - summary: Buka semua port pada VM untuk lalu lintas masuk.
+    syntax: az vm open-port -g MyResourceGroup -n MyVm --port '*'
+  - summary: Buka berbagai port pada VM untuk lalu lintas masuk dengan prioritas tertinggi.
+    syntax: az vm open-port -g MyResourceGroup -n MyVm --port 80-100 --priority 100
+  - summary: Buka port 555, 557, 558, dan 559 ke lalu lintas masuk dengan prioritas tertinggi.
+    syntax: az vm open-port -g MyResourceGroup -n MyVm --port 555,557-559 --priority 100
+  - summary: Buka semua port untuk semua VM dalam grup sumber daya.
+    syntax: az vm open-port --ids $(az vm list -g MyResourceGroup --query "[].id" -o tsv) --port '*'
+  requiredParameters:
+  - isRequired: true
+    name: --port
+    summary: "Rentang port atau port (misalnya: 80-100) untuk membuka lalu lintas masuk. Gunakan '\\*' untuk mengizinkan lalu lintas ke semua port. Gunakan nilai yang dipisahkan koma untuk menentukan lebih dari satu port atau rentang port."
+    description: ''
+  optionalParameters:
+  - name: --apply-to-subnet
+    summary: Izinkan lalu lintas masuk pada subnet alih-alih NIC.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama komputer virtual untuk membuka lalu lintas masuk.
+    description: ''
+  - name: --nsg-name
+    summary: Nama grup keamanan jaringan yang akan dibuat jika tidak ada. Diabaikan jika NSG sudah ada.
+    description: ''
+  - name: --prioritas
+    defaultValue: "900"
+    summary: Prioritas aturan, antara 100 (prioritas tertinggi) dan 4096 (prioritas terendah). Harus unik untuk setiap aturan dalam koleksi.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_perform-maintenance
+  name: az vm perform-maintenance
+  summary: Operasi untuk melakukan pemeliharaan pada komputer virtual.
+  description: ''
+  syntax: >-
+    az vm perform-maintenance [--ids]
+                              [--name]
+                              [--resource-group]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_reapply
+  name: az vm terapkan ulang
+  summary: Terapkan ulang VM.
+  description: ''
+  syntax: >-
+    az vm reapply [--ids]
+                  [--name]
+                  [--no-wait]
+                  [--resource-group]
+  examples:
+  - summary: Terapkan ulang VM.
+    syntax: az vm reapply -g MyResourceGroup -n MyVm
+  - summary: Terapkan ulang semua VM dalam grup sumber daya.
+    syntax: az vm reapply --ids $(az vm list -g MyResourceGroup --query "[].id" -o tsv)
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_redeploy
+  name: az vm redeploy
+  summary: Menyebarkan ulang VM yang ada.
+  description: ''
+  syntax: >-
+    az vm redeploy [--ids]
+                   [--name]
+                   [--no-wait]
+                   [--resource-group]
+  examples:
+  - summary: Menyebarkan ulang VM.
+    syntax: az vm redeploy -g MyResourceGroup -n MyVm
+  - summary: Menyebarkan ulang semua VM dalam grup sumber daya.
+    syntax: az vm redeploy --ids $(az vm list -g MyResourceGroup --query "[].id" -o tsv)
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_resize
+  name: mengubah ukuran az vm
+  summary: Perbarui ukuran VM.
+  description: ''
+  syntax: >-
+    az vm resize --size
+                 [--ids]
+                 [--name]
+                 [--no-wait]
+                 [--resource-group]
+  examples:
+  - summary: Mengubah ukuran VM.
+    syntax: az vm resize -g MyResourceGroup -n MyVm --size Standard_DS3_v2
+  - summary: Mengubah ukuran semua VM dalam grup sumber daya.
+    syntax: az vm resize --size Standard_DS3_v2 --ids $(az vm list -g MyResourceGroup --query "[].id" -o tsv)
+  requiredParameters:
+  - isRequired: true
+    name: --size
+    summary: Ukuran VM.
+    description: ''
+    valueFrom: az vm list-vm-resize-options
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_restart
+  name: az vm restart
+  summary: Mulai ulang VM.
+  description: ''
+  syntax: >-
+    az vm restart [--force]
+                  [--ids]
+                  [--name]
+                  [--no-wait]
+                  [--resource-group]
+  examples:
+  - summary: Mulai ulang VM.
+    syntax: az vm restart -g MyResourceGroup -n MyVm
+  - summary: Mulai ulang semua VM dalam grup sumber daya.
+    syntax: az vm restart --ids $(az vm list -g MyResourceGroup --query "[].id" -o tsv)
+  optionalParameters:
+  - name: --force
+    summary: Paksa VM untuk memulai ulang dengan menyebarkannya kembali. Gunakan jika VM tidak responsif.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_show
+  name: az vm show
+  summary: Dapatkan detail VM.
+  description: ''
+  syntax: >-
+    az vm show [--ids]
+               [--name]
+               [--resource-group]
+               [--show-details]
+  examples:
+  - summary: Tampilkan informasi tentang VM.
+    syntax: az vm show -g MyResourceGroup -n MyVm -d
+  - summary: Dapatkan detail untuk semua VM dalam grup sumber daya.
+    syntax: az vm show -d --ids $(az vm list -g MyResourceGroup --query "[].id" -o tsv)
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --show-details -d
+    summary: Tampilkan alamat IP publik, FQDN, dan status daya. perintah akan berjalan lambat.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_simulate-eviction
+  name: az vm simulate-eviction
+  summary: Simulasikan pengeluaran Spot VM.
+  description: ''
+  syntax: >-
+    az vm simulate-eviction [--ids]
+                            [--name]
+                            [--resource-group]
+  examples:
+  - summary: Simulasikan pengeluaran Spot VM.
+    syntax: az vm simulate-eviction --resource-group MyResourceGroup --name MyVm
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_start
+  name: az vm start
+  summary: Mulai VM yang dihentikan.
+  description: ''
+  syntax: >-
+    az vm start [--ids]
+                [--name]
+                [--no-wait]
+                [--resource-group]
+  examples:
+  - summary: Mulai VM yang dihentikan.
+    syntax: az vm start -g MyResourceGroup -n MyVm
+  - summary: Mulai semua VM dalam grup sumber daya.
+    syntax: az vm start --ids $(az vm list -g MyResourceGroup --query "[].id" -o tsv)
+  - summary: Mulai VM yang dihentikan. (dibuat otomatis)
+    syntax: az vm start --name MyVm --no-wait --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_stop
+  name: az vm stop
+  summary: Matikan (hentikan) VM yang sedang berjalan.
+  description: VM akan terus ditagih. Untuk menghindari hal ini, Anda dapat membatalkan alokasi VM melalui "az vm deallocate".
+  syntax: >-
+    az vm stop [--ids]
+               [--name]
+               [--no-wait]
+               [--resource-group]
+               [--skip-shutdown]
+  examples:
+  - summary: Matikan (hentikan) VM yang sedang berjalan.
+    syntax: az vm stop --resource-group MyResourceGroup --name MyVm
+  - summary: Matikan VM yang sedang berjalan tanpa mematikan.
+    syntax: az vm stop --resource-group MyResourceGroup --name MyVm --skip-shutdown
+  - summary: Matikan VM dalam grup sumber daya.
+    syntax: az vm stop --ids $(az vm list -g MyResourceGroup --query "[].id" -o tsv)
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --skip-shutdown
+    summary: Lewati matikan dan matikan segera.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_update
+  name: az vm update
+  summary: Memperbarui properti VM.
+  description: Perbarui objek dan properti VM menggunakan jalur yang sesuai dengan 'az vm show'.
+  syntax: >-
+    az vm update [--add]
+                 [--disk-caching]
+                 [--ephemeral-os-disk-placement {CacheDisk, ResourceDisk}]
+                 [--force-string]
+                 [--host]
+                 [--host-group]
+                 [--ids]
+                 [--license-type {None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server}]
+                 [--max-price]
+                 [--name]
+                 [--no-wait]
+                 [--os-disk]
+                 [--ppg]
+                 [--priority {Low, Regular, Spot}]
+                 [--remove]
+                 [--resource-group]
+                 [--set]
+                 [--size]
+                 [--ultra-ssd-enabled {false, true}]
+                 [--workspace]
+                 [--write-accelerator]
+  examples:
+  - summary: Menambahkan atau memperbarui tag.
+    syntax: az vm update -n name -g group --set tags.tagName=tagValue
+  - summary: Menghapus tag.
+    syntax: az vm update -n name -g group --remove tags.tagName
+  - summary: Atur NIC utama VM.
+    syntax: az vm update -n name -g group --set networkProfile.networkInterfaces[1].primary=false networkProfile.networkInterfaces[0].primary=true
+  - summary: Tambahkan NIC non-primer baru ke VM.
+    syntax: az vm update -n name -g group --add networkProfile.networkInterfaces primary=false id={NIC_ID}
+  - summary: Hapus NIC keempat dari VM.
+    syntax: az vm update -n name -g group --remove networkProfile.networkInterfaces 3
+  - summary: Menambahkan VM yang ada ke host khusus
+    syntax: >-
+      az vm deallocate -n name -g group
+
+      az vm update -n name -g group --host my-host
+
+      az vm start -n name -g group
+  - summary: Menambahkan VM yang ada ke grup host khusus
+    syntax: >-
+      az vm deallocate -n name -g group
+
+      az vm update -n name -g group --host-group my-host-group
+
+      az vm start -n name -g group
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --disk-caching
+    summary: Gunakan nilai tunggal untuk diterapkan di seluruh, atau tentukan disk individual, misalnya 'os=ReadWrite 0=None 1=ReadOnly' harus mengaktifkan pembaruan disk os dan 2 disk data.
+    description: ''
+  - name: --ephemeral-os-disk-placement --ephemeral-placement
+    parameterValueGroup: CacheDisk, ResourceDisk
+    summary: Hanya berlaku saat digunakan dengan `--size`. Memungkinkan Anda memilih lokasi provisi disk OS Ephemeral.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --host
+    summary: ID host khusus tempat VM akan berada. --host dan --host-group tidak dapat digunakan bersama-sama. Anda harus membatalkan alokasi VM sebelum memperbarui, dan memulai VM setelah pembaruan. Silakan lihat bantuan untuk contoh lebih lanjut.
+    description: ''
+  - name: --host-group
+    summary: Nama atau ID grup host khusus tempat VM akan berada. --host dan --host-group tidak dapat digunakan bersama-sama. Anda harus membatalkan alokasi VM sebelum memperbarui, dan memulai VM setelah pembaruan. Silakan lihat bantuan untuk contoh lebih lanjut.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --license-type
+    parameterValueGroup: None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server
+    summary: Menentukan bahwa gambar atau disk Windows dilisensikan secara lokal. Untuk mengaktifkan Azure Hybrid Benefit untuk Windows Server, gunakan 'Windows_Server'. Untuk mengaktifkan Hak Hosting Multi-penyewa untuk Windows 10, gunakan 'Windows_Client'. Untuk informasi selengkapnya, lihat dokumen online Azure Windows VM.
+    description: ''
+  - name: --max-price
+    summary: Harga maksimum (dalam Dolar AS) yang bersedia Anda bayar untuk Spot VM/VMSS. -1 menunjukkan bahwa Spot VM/VMSS tidak boleh dikeluarkan karena alasan harga.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --os-disk
+    summary: ID disk OS terkelola atau nama untuk ditukar.
+    description: ''
+  - name: --ppg
+    summary: Nama atau ID grup penempatan kedekatan yang harus dikaitkan dengan VM.
+    description: ''
+  - name: --priority
+    parameterValueGroup: Low, Regular, Spot
+    summary: Prioritas. Gunakan 'Spot' untuk menjalankan beban kerja berumur pendek dengan cara yang hemat biaya. Enum 'rendah' akan ditolak di masa mendatang. Silakan gunakan 'Spot' untuk menyebarkan Azure spot VM dan/atau VMSS. Default ke Reguler.
+    description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --size
+    summary: Ukuran baru komputer virtual. Lihat https://azure.microsoft.com/pricing/details/virtual-machines/ untuk info ukuran.
+    description: ''
+  - name: --ultra-ssd-enabled
+    parameterValueGroup: false, true
+    summary: Mengaktifkan atau menonaktifkan kemampuan untuk memiliki 1 atau lebih disk data terkelola dengan akun penyimpanan UltraSSD_LRS.
+    description: ''
+  - name: --workspace
+    summary: Nama atau ID Ruang Kerja Analitik Log. Jika Anda menentukan ruang kerja melalui namanya, ruang kerja harus berada dalam grup sumber daya yang sama dengan vm, jika tidak, ruang kerja baru akan dibuat.
+    description: ''
+  - name: --write-accelerator
+    summary: Aktifkan/nonaktifkan akselerator tulis disk. Gunakan nilai tunggal 'true/false' untuk diterapkan di seluruh, atau tentukan disk individual, misalnya'os=true 1=true 2=true' untuk disk os dan disk data dengan lun 1 & 2.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_wait
+  name: az vm wait
+  summary: Tempatkan CLI dalam status menunggu sampai kondisi VM terpenuhi.
+  description: ''
+  syntax: >-
+    az vm wait [--created]
+               [--custom]
+               [--deleted]
+               [--exists]
+               [--ids]
+               [--interval]
+               [--name]
+               [--resource-group]
+               [--timeout]
+               [--updated]
+  examples:
+  - summary: Tunggu hingga VM dibuat.
+    syntax: az vm wait -g MyResourceGroup -n MyVm --created
+  - summary: Tunggu hingga semua VM dalam grup sumber daya dihapus.
+    syntax: az vm wait --deleted --ids $(az vm list -g MyResourceGroup --query "[].id" -o tsv)
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --diperbarui
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+commands:
+- az_vm_aem
+- az_vm_aem_delete
+- az_vm_aem_set
+- az_vm_aem_verify
+- az_vm_assess-patches
+- az_vm_auto-shutdown
+- az_vm_availability-set
+- az_vm_availability-set_convert
+- az_vm_availability-set_create
+- az_vm_availability-set_delete
+- az_vm_availability-set_list
+- az_vm_availability-set_list-sizes
+- az_vm_availability-set_show
+- az_vm_availability-set_update
+- az_vm_boot-diagnostics
+- az_vm_boot-diagnostics_disable
+- az_vm_boot-diagnostics_enable
+- az_vm_boot-diagnostics_get-boot-log
+- az_vm_boot-diagnostics_get-boot-log-uris
+- az_vm_capture
+- az_vm_convert
+- az_vm_create
+- az_vm_deallocate
+- az_vm_delete
+- az_vm_diagnostics
+- az_vm_diagnostics_get-default-config
+- az_vm_diagnostics_set
+- az_vm_disk
+- az_vm_disk_attach
+- az_vm_disk_detach
+- az_vm_encryption
+- az_vm_encryption_disable
+- az_vm_encryption_enable
+- az_vm_encryption_show
+- az_vm_extension
+- az_vm_extension_delete
+- az_vm_extension_image
+- az_vm_extension_image_list
+- az_vm_extension_image_list-names
+- az_vm_extension_image_list-versions
+- az_vm_extension_image_show
+- az_vm_extension_list
+- az_vm_extension_set
+- az_vm_extension_show
+- az_vm_extension_wait
+- az_vm_generalize
+- az_vm_get-instance-view
+- az_vm_host
+- az_vm_host_create
+- az_vm_host_delete
+- az_vm_host_get-instance-view
+- az_vm_host_group
+- az_vm_host_group_create
+- az_vm_host_group_delete
+- az_vm_host_group_get-instance-view
+- az_vm_host_group_list
+- az_vm_host_group_show
+- az_vm_host_group_update
+- az_vm_host_list
+- az_vm_host_show
+- az_vm_host_update
+- az_vm_identity
+- az_vm_identity_assign
+- az_vm_identity_remove
+- az_vm_identity_show
+- az_vm_image
+- az_vm_image_accept-terms
+- az_vm_image_list
+- az_vm_image_list-offers
+- az_vm_image_list-publishers
+- az_vm_image_list-skus
+- az_vm_image_show
+- az_vm_image_terms
+- az_vm_image_terms_accept
+- az_vm_image_terms_cancel
+- az_vm_image_terms_show
+- az_vm_list
+- az_vm_list-ip-addresses
+- az_vm_list-sizes
+- az_vm_list-skus
+- az_vm_list-usage
+- az_vm_list-vm-resize-options
+- az_vm_monitor
+- az_vm_monitor_log
+- az_vm_monitor_log_show
+- az_vm_nic
+- az_vm_nic_add
+- az_vm_nic_list
+- az_vm_nic_remove
+- az_vm_nic_set
+- az_vm_nic_show
+- az_vm_open-port
+- az_vm_perform-maintenance
+- az_vm_reapply
+- az_vm_redeploy
+- az_vm_repair
+- az_vm_repair_create
+- az_vm_repair_list-scripts
+- az_vm_repair_restore
+- az_vm_repair_run
+- az_vm_resize
+- az_vm_restart
+- az_vm_run-command
+- az_vm_run-command_create
+- az_vm_run-command_delete
+- az_vm_run-command_invoke
+- az_vm_run-command_list
+- az_vm_run-command_show
+- az_vm_run-command_update
+- az_vm_run-command_wait
+- az_vm_secret
+- az_vm_secret_add
+- az_vm_secret_format
+- az_vm_secret_list
+- az_vm_secret_remove
+- az_vm_show
+- az_vm_simulate-eviction
+- az_vm_start
+- az_vm_stop
+- az_vm_unmanaged-disk
+- az_vm_unmanaged-disk_attach
+- az_vm_unmanaged-disk_detach
+- az_vm_unmanaged-disk_list
+- az_vm_update
+- az_vm_user
+- az_vm_user_delete
+- az_vm_user_reset-ssh
+- az_vm_user_update
+- az_vm_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 04/01/2022
+  description: Mengelola komputer virtual Linux atau Windows.
+  ms.openlocfilehash: 66c0749a313125341c8488d230fa0080e1ef6167
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141450072"

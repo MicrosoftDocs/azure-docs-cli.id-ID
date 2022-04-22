@@ -1,0 +1,217 @@
+### YamlMime:AzureCLIGroup
+uid: az_network_watcher_packet-capture
+name: az network watcher packet-capture
+summary: Mengelola sesi pengambilan paket pada VM.
+description: Perintah ini mengharuskan Azure Network Watcher diaktifkan untuk wilayah VM dan AzureNetworkWatcherExtension diaktifkan pada VM. Untuk informasi selengkapnya, kunjungi https://docs.microsoft.com/azure/network-watcher/network-watcher-packet-capture-manage-cli.
+directCommands:
+- uid: az_network_watcher_packet-capture_create
+  name: az network watcher packet-capture create
+  summary: Membuat dan memulai sesi pengambilan paket.
+  description: ''
+  syntax: >-
+    az network watcher packet-capture create --name
+                                             --resource-group
+                                             --vm
+                                             [--capture-limit]
+                                             [--capture-size]
+                                             [--file-path]
+                                             [--filters]
+                                             [--storage-account]
+                                             [--storage-path]
+                                             [--time-limit]
+  examples:
+  - summary: Buat sesi pengambilan paket pada VM.
+    syntax: az network watcher packet-capture create -g MyResourceGroup -n MyPacketCaptureName --vm MyVm --storage-account MyStorageAccount
+  - summary: Buat sesi pengambilan paket pada VM dengan filter opsional untuk protokol, alamat IP lokal, dan rentang alamat IP jarak jauh dan port.
+    syntax: >-
+      az network watcher packet-capture create -g MyResourceGroup -n MyPacketCaptureName --vm MyVm \
+          --storage-account MyStorageAccount --filters '[ \
+              { \
+                  "protocol":"TCP", \
+                  "remoteIPAddress":"1.1.1.1-255.255.255", \
+                  "localIPAddress":"10.0.0.3", \
+                  "remotePort":"20" \
+              }, \
+              { \
+                  "protocol":"TCP", \
+                  "remoteIPAddress":"1.1.1.1-255.255.255", \
+                  "localIPAddress":"10.0.0.3", \
+                  "remotePort":"80" \
+              }, \
+              { \
+                  "protocol":"TCP", \
+                  "remoteIPAddress":"1.1.1.1-255.255.255", \
+                  "localIPAddress":"10.0.0.3", \
+                  "remotePort":"443" \
+              }, \
+              { \
+                  "protocol":"UDP" \
+              }]'
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama sesi pengambilan paket.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya tempat VM target berada.
+    description: ''
+  - isRequired: true
+    name: --vm
+    summary: Nama atau ID VM yang akan ditargetkan.
+    description: ''
+  optionalParameters:
+  - name: --capture-limit
+    summary: Ukuran maksimum dalam byte dari output tangkapan.
+    description: ''
+  - name: --capture-size
+    summary: Jumlah byte yang diambil per paket. Byte berlebih terpotok.
+    description: ''
+  - name: --file-path
+    summary: Jalur lokal pada VM yang ditargetkan untuk menyimpan pengambilan paket. Untuk VM Linux, jalur harus dimulai dengan /var/captures.
+    description: ''
+  - name: --filters
+    summary: Daftar filter paket yang dikodekan JSON. Gunakan `@{path}` untuk memuat dari file.
+    description: ''
+  - name: --storage-account
+    summary: Nama atau ID akun penyimpanan untuk menyimpan pengambilan paket.
+    description: ''
+  - name: --storage-path
+    summary: URI yang sepenuhnya memenuhi syarat dari kontainer penyimpanan yang ada untuk menyimpan file pengambilan.
+    description: Jika tidak ditentukan, kontainer 'network-watcher-logs' akan dibuat jika tidak ada dan file pengambilan akan disimpan di sana.
+  - name: --batas waktu
+    summary: Durasi maksimum sesi pengambilan dalam hitungan detik.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_watcher_packet-capture_delete
+  name: az network watcher packet-capture delete
+  summary: Menghapus sesi pengambilan paket.
+  description: ''
+  syntax: >-
+    az network watcher packet-capture delete --location
+                                             --name
+  examples:
+  - summary: Menghapus sesi pengambilan paket. Ini hanya menghapus sesi dan bukan file pengambilan.
+    syntax: az network watcher packet-capture delete -n packetCaptureName -l westcentralus
+  - summary: Menghapus sesi pengambilan paket. (dibuat otomatis)
+    syntax: az network watcher packet-capture delete --location westcentralus --name packetCaptureName --subscription MySubscription
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama sesi pengambilan paket.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_watcher_packet-capture_list
+  name: az network watcher packet-capture list
+  summary: Mencantumkan semua sesi pengambilan paket dalam grup sumber daya.
+  description: ''
+  syntax: az network watcher packet-capture list --location
+  examples:
+  - summary: Mencantumkan semua sesi pengambilan paket dalam suatu wilayah.
+    syntax: az network watcher packet-capture list -l westus
+  - summary: Mencantumkan semua sesi pengambilan paket dalam grup sumber daya (dibuat secara otomatis)
+    syntax: az network watcher packet-capture list --location westus --subscription MySubscription
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_watcher_packet-capture_show
+  name: az network watcher packet-capture show
+  summary: Menampilkan detail sesi pengambilan paket.
+  description: ''
+  syntax: >-
+    az network watcher packet-capture show --location
+                                           --name
+  examples:
+  - summary: Tampilkan sesi pengambilan paket.
+    syntax: az network watcher packet-capture show -l westus -n MyPacketCapture
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama sesi pengambilan paket.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_watcher_packet-capture_show-status
+  name: az network watcher packet-capture show-status
+  summary: Menampilkan status sesi pengambilan paket.
+  description: ''
+  syntax: >-
+    az network watcher packet-capture show-status --location
+                                                  --name
+  examples:
+  - summary: Menampilkan status sesi pengambilan paket.
+    syntax: az network watcher packet-capture show-status -l westus -n MyPacketCapture
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama yang diberikan ke sesi pengambilan paket.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_watcher_packet-capture_stop
+  name: az network watcher packet-capture stop
+  summary: Hentikan sesi pengambilan paket yang sedang berjalan.
+  description: ''
+  syntax: >-
+    az network watcher packet-capture stop --location
+                                           --name
+  examples:
+  - summary: Hentikan sesi pengambilan paket yang sedang berjalan.
+    syntax: az network watcher packet-capture stop -l westus -n MyPacketCapture
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama sesi pengambilan paket.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+commands:
+- az_network_watcher_packet-capture_create
+- az_network_watcher_packet-capture_delete
+- az_network_watcher_packet-capture_list
+- az_network_watcher_packet-capture_show
+- az_network_watcher_packet-capture_show-status
+- az_network_watcher_packet-capture_stop
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/09/2022
+  description: Perintah ini mengharuskan Azure Network Watcher diaktifkan untuk wilayah VM dan AzureNetworkWatcherExtension diaktifkan pada VM. Untuk informasi selengkapnya, kunjungi https://docs.microsoft.com/azure/network-watcher/network-watcher-packet-capture-manage-cli.
+  ms.openlocfilehash: 50fee56f2b83588374ffe804803081264b7292e4
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141426563"
