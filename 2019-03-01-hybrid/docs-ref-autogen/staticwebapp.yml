@@ -1,0 +1,312 @@
+### YamlMime:AzureCLIGroup
+uid: az_staticwebapp
+name: az staticwebapp
+summary: Mengelola aplikasi statis.
+description: ''
+directCommands:
+- uid: az_staticwebapp_create
+  name: az staticwebapp create
+  summary: Buat aplikasi statis dengan konten dari URL repositori GitHub dan di cabang yang disediakan. Jika repositori berada di bawah organisasi Github, pastikan bahwa Aplikasi Azure CLI Github memiliki akses ke organisasi. Akses dapat diminta di browser saat menggunakan argumen "--login-with-github". Akses harus diberikan oleh admin organisasi.
+  description: ''
+  syntax: >-
+    az staticwebapp create --branch
+                           --location
+                           --name
+                           --resource-group
+                           --source
+                           [--api-location]
+                           [--app-location]
+                           [--login-with-github]
+                           [--no-wait]
+                           [--output-location]
+                           [--sku {Free, Standard}]
+                           [--tags]
+                           [--token]
+  examples:
+  - summary: Membuat aplikasi statis dalam langganan.
+    syntax: az staticwebapp create -n MyStaticAppName -g MyExistingRg -s https://github.com/JohnDoe/my-first-static-web-app -l WestUs2 -b master -t MyAccessToken
+  - summary: Membuat aplikasi statis dalam langganan, mengambil token secara interaktif
+    syntax: az staticwebapp create -n MyStaticAppName -g MyExistingRg -s https://github.com/JohnDoe/my-first-static-web-app -l WestUs2 -b master --login-with-github
+  requiredParameters:
+  - isRequired: true
+    name: --branch -b
+    summary: Cabang target di repositori.
+    description: ''
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama situs statis.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --source -s
+    summary: URL untuk repositori situs statis.
+    description: ''
+  optionalParameters:
+  - name: --api-location
+    summary: Lokasi kode Azure Functions Anda. Misalnya, '/api' mewakili folder yang disebut 'api'.
+    description: ''
+  - name: --app-location
+    defaultValue: /
+    summary: Lokasi kode aplikasi Anda. Misalnya, '/' mewakili akar aplikasi Anda, sementara '/app' mewakili direktori yang disebut 'app'.
+    description: ''
+  - name: --login-with-github
+    summary: Masuk secara interaktif dengan Github untuk mengambil Token Akses Pribadi.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --output-location
+    summary: Jalur output build Anda relatif terhadap lokasi aplikasi Anda. Misalnya, menetapkan nilai 'build' saat lokasi aplikasi Anda diatur ke '/app' akan menyebabkan konten di '/app/build' dilayani.
+    description: ''
+  - name: --sku
+    defaultValue: Free
+    parameterValueGroup: Free, Standard
+    summary: Tingkat harga untuk Static Web App.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --token -t
+    summary: "Token repositori github pengguna. Ini digunakan untuk menyiapkan file alur kerja Github Actions dan rahasia API. Jika Anda perlu membuat Token Akses Pribadi Github, jalankan dengan bendera '--login-with-github' atau ikuti langkah-langkah yang ditemukan di tautan berikut: https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line."
+    description: ''
+- uid: az_staticwebapp_delete
+  name: az staticwebapp delete
+  summary: Menghapus aplikasi statis.
+  description: ''
+  syntax: >-
+    az staticwebapp delete --name
+                           [--no-wait]
+                           [--resource-group]
+                           [--yes]
+  examples:
+  - summary: Menghapus aplikasi statis.
+    syntax: az staticwebapp delete -n MyStaticAppName -g MyRg
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama situs statis.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_staticwebapp_disconnect
+  name: az staticwebapp terputus
+  summary: Putuskan sambungan kontrol sumber untuk mengaktifkan menyambungkan ke repositori yang berbeda.
+  description: ''
+  syntax: >-
+    az staticwebapp disconnect --name
+                               [--no-wait]
+                               [--resource-group]
+  examples:
+  - summary: Putuskan sambungan aplikasi statis.
+    syntax: az staticwebapp disconnect -n MyStaticAppName
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama situs statis.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_staticwebapp_list
+  name: az staticwebapp list
+  summary: Cantumkan semua sumber daya aplikasi statis dalam langganan, atau dalam grup sumber daya jika disediakan.
+  description: ''
+  syntax: az staticwebapp list [--resource-group]
+  examples:
+  - summary: Mencantumkan aplikasi statis dalam langganan.
+    syntax: az staticwebapp list
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_staticwebapp_reconnect
+  name: az staticwebapp terhubung kembali
+  summary: Koneksi ke repositori dan cabang setelah perintah putuskan sambungan.
+  description: ''
+  syntax: >-
+    az staticwebapp reconnect --branch
+                              --name
+                              --source
+                              [--login-with-github]
+                              [--no-wait]
+                              [--resource-group]
+                              [--token]
+  examples:
+  - summary: Koneksi repositori dan cabang ke aplikasi statis.
+    syntax: az staticwebapp reconnect -n MyStaticAppName --source MyGitHubRepo -b master --token MyAccessToken
+  - summary: Koneksi repositori dan cabang ke aplikasi statis, mengambil token secara interaktif
+    syntax: az staticwebapp reconnect -n MyStaticAppName --source MyGitHubRepo -b master --login-with-github
+  requiredParameters:
+  - isRequired: true
+    name: --branch -b
+    summary: Cabang target di repositori.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama situs statis.
+    description: ''
+  - isRequired: true
+    name: --source -s
+    summary: URL untuk repositori situs statis.
+    description: ''
+  optionalParameters:
+  - name: --login-with-github
+    summary: Masuk secara interaktif dengan Github untuk mengambil Token Akses Pribadi.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --token -t
+    summary: "Token repositori github pengguna. Ini digunakan untuk menyiapkan file alur kerja Github Actions dan rahasia API. Jika Anda perlu membuat Token Akses Pribadi Github, jalankan dengan bendera '--login-with-github' atau ikuti langkah-langkah yang ditemukan di tautan berikut: https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line."
+    description: ''
+- uid: az_staticwebapp_show
+  name: az staticwebapp show
+  summary: Menampilkan detail aplikasi statis.
+  description: ''
+  syntax: >-
+    az staticwebapp show --name
+                         [--resource-group]
+  examples:
+  - summary: Menampilkan aplikasi statis dalam langganan.
+    syntax: az staticwebapp show -n MyStaticAppName
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama situs statis.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_staticwebapp_update
+  name: az staticwebapp update
+  summary: Memperbarui aplikasi statis. Mengembalikan aplikasi yang diperbarui.
+  description: ''
+  syntax: >-
+    az staticwebapp update --name
+                           [--branch]
+                           [--no-wait]
+                           [--resource-group]
+                           [--sku {Free, Standard}]
+                           [--source]
+                           [--tags]
+                           [--token]
+  examples:
+  - summary: Perbarui aplikasi statis ke sku standar.
+    syntax: az staticwebapp update -n MyStaticAppName --sku Standard
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama situs statis.
+    description: ''
+  optionalParameters:
+  - name: --branch -b
+    summary: Cabang target di repositori.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --sku
+    parameterValueGroup: Free, Standard
+    summary: Tingkat harga untuk Static Web App.
+    description: ''
+  - name: --source -s
+    summary: URL untuk repositori situs statis.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --token -t
+    summary: "Token repositori github pengguna. Ini digunakan untuk menyiapkan file alur kerja Github Actions dan rahasia API. Jika Anda perlu membuat Token Akses Pribadi Github, jalankan dengan bendera '--login-with-github' atau ikuti langkah-langkah yang ditemukan di tautan berikut: https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line."
+    description: ''
+commands:
+- az_staticwebapp_appsettings
+- az_staticwebapp_appsettings_delete
+- az_staticwebapp_appsettings_list
+- az_staticwebapp_appsettings_set
+- az_staticwebapp_create
+- az_staticwebapp_delete
+- az_staticwebapp_disconnect
+- az_staticwebapp_enterprise-edge
+- az_staticwebapp_enterprise-edge_disable
+- az_staticwebapp_enterprise-edge_enable
+- az_staticwebapp_enterprise-edge_show
+- az_staticwebapp_environment
+- az_staticwebapp_environment_delete
+- az_staticwebapp_environment_functions
+- az_staticwebapp_environment_list
+- az_staticwebapp_environment_show
+- az_staticwebapp_functions
+- az_staticwebapp_functions_link
+- az_staticwebapp_functions_show
+- az_staticwebapp_functions_unlink
+- az_staticwebapp_hostname
+- az_staticwebapp_hostname_delete
+- az_staticwebapp_hostname_list
+- az_staticwebapp_hostname_set
+- az_staticwebapp_hostname_show
+- az_staticwebapp_identity
+- az_staticwebapp_identity_assign
+- az_staticwebapp_identity_remove
+- az_staticwebapp_identity_show
+- az_staticwebapp_list
+- az_staticwebapp_reconnect
+- az_staticwebapp_secrets
+- az_staticwebapp_secrets_list
+- az_staticwebapp_secrets_reset-api-key
+- az_staticwebapp_show
+- az_staticwebapp_update
+- az_staticwebapp_users
+- az_staticwebapp_users_invite
+- az_staticwebapp_users_list
+- az_staticwebapp_users_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola aplikasi statis.
+  ms.openlocfilehash: 128987c1597d309e93b2cd968c73d68049a70910
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141455130"

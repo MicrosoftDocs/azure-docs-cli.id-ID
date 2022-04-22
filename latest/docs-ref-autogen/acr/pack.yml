@@ -1,0 +1,109 @@
+### YamlMime:AzureCLIGroup
+uid: az_acr_pack
+name: az acr pack
+summary: Mengelola Azure Container Registry Tasks yang menggunakan Cloud Native Buildpacks.
+description: ''
+directCommands:
+- uid: az_acr_pack_build
+  name: az acr pack build
+  summary: Mengantrekan tugas build cepat yang membangun aplikasi dan mendorongnya ke Azure Container Registry.
+  description: ''
+  syntax: >-
+    az acr pack build --builder
+                      --image
+                      --registry
+                      [--agent-pool]
+                      [--auth-mode {Default, None}]
+                      [--no-format]
+                      [--no-logs]
+                      [--no-wait]
+                      [--pack-image-tag]
+                      [--platform]
+                      [--pull]
+                      [--resource-group]
+                      [--timeout]
+                      [<SOURCE_LOCATION>]
+  examples:
+  - summary: Mengantrekan build untuk direktori saat ini dengan penyusun CloudFoundry.
+    syntax: az acr pack build -r MyRegistry -t {{.Run.Registry}}/node-app:{{.Run.ID}} --builder cloudfoundry/cnb:bionic .
+  - summary: Antrekan build untuk repositori GitHub yang diberikan dengan pembangun Heroku.
+    syntax: az acr pack build -r MyRegistry -t {{.Run.Registry}}/node-app:{{.Run.ID}} --pull --builder heroku/buildpacks:18 https://github.com/Azure-Samples/nodejs-docs-hello-world.git
+  requiredParameters:
+  - isRequired: true
+    name: --builder -b
+    summary: Nama dan tag gambar penyusun Buildpack.
+    description: ''
+  - isRequired: true
+    name: --image -t
+    summary: "Nama dan tag gambar menggunakan format: '-t repo/image:tag'."
+    description: ''
+  - isRequired: true
+    name: --registry -r
+    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    description: ''
+  optionalParameters:
+  - name: --agent-pool
+    summary: Nama kumpulan agen.
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: Default, None
+    summary: Mode autentikasi registri sumber.
+    description: ''
+  - name: --no-format
+    summary: Menunjukkan apakah log harus ditampilkan dalam format mentah.
+    description: ''
+  - name: --no-logs
+    summary: Jangan tampilkan log setelah berhasil mengantre build.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu eksekusi selesai dan kembali segera setelah mengantre eksekusi.
+    description: ''
+  - name: --pack-image-tag
+    defaultValue: stable
+    summary: Tag gambar runner 'pack' ('mcr.microsoft.com/oryx/pack').
+    description: ''
+  - name: --platform
+    summary: Platform tempat build/task dijalankan, Misalnya, 'windows' dan 'linux'. Saat digunakan dalam perintah build, perintah tersebut juga dapat ditentukan dalam format 'os/arch/variant' untuk gambar yang dihasilkan. Misalnya, linux/arm/v7. Bagian 'arch' dan 'varian' bersifat opsional.
+    description: ''
+  - name: --pull
+    summary: Tarik penyusun terbaru dan jalankan gambar sebelum digunakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --timeout
+    summary: Waktu habis dalam hitung detik.
+    description: ''
+  - name: <SOURCE_LOCATION>
+    summary: Jalur direktori kode sumber lokal (misalnya, './src'), atau URL ke repositori git (misalnya, 'https://github.com/Azure-Samples/acr-build-helloworld-node.git') atau tarball jarak jauh (misalnya, 'http://server/context.tar.gz'), atau repositori artefak OCI di registri kontainer Azure (misalnya, 'oci://myregistry.azurecr.io/myartifact:mytag').
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+commands:
+- az_acr_pack_build
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/28/2022
+  description: Mengelola Azure Container Registry Tasks yang menggunakan Cloud Native Buildpacks.
+  ms.openlocfilehash: 109bd9999dbb397ee20ccb4a11727c88f797f72d
+  ms.sourcegitcommit: d3bae3909ca6297f8ec1fabda40767058c6a6a39
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/15/2022
+  ms.locfileid: "142611863"

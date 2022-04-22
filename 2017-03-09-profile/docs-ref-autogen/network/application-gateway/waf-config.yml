@@ -1,0 +1,105 @@
+### YamlMime:AzureCLIGroup
+uid: az_network_application-gateway_waf-config
+name: az network application-gateway waf-config
+summary: Mengonfigurasi pengaturan firewall aplikasi web.
+description: Perintah ini hanya berlaku untuk gateway aplikasi dengan jenis SKU WAF. Untuk mempelajari lebih lanjut, kunjungi https://docs.microsoft.com/azure/application-gateway/application-gateway-web-application-firewall-cli.
+directCommands:
+- uid: az_network_application-gateway_waf-config_set
+  name: az network application-gateway waf-config set
+  summary: Perbarui konfigurasi firewall aplikasi web.
+  description: Perintah ini hanya berlaku untuk gateway aplikasi dengan jenis SKU WAF. Untuk mempelajari lebih lanjut, kunjungi https://docs.microsoft.com/azure/application-gateway/application-gateway-web-application-firewall-cli.
+  syntax: >-
+    az network application-gateway waf-config set --enabled {false, true}
+                                                  [--gateway-name]
+                                                  [--ids]
+                                                  [--no-wait]
+                                                  [--resource-group]
+  examples:
+  - summary: Mengonfigurasi WAF pada gateway aplikasi dalam mode deteksi dengan nilai default
+    syntax: >-
+      az network application-gateway waf-config set -g MyResourceGroup --gateway-name MyAppGateway \
+          --enabled true --firewall-mode Detection --rule-set-version 3.0
+  - summary: Nonaktifkan aturan untuk validasi penguraian isi permintaan dan injeksi SQL.
+    syntax: >-
+      az network application-gateway waf-config set -g MyResourceGroup --gateway-name MyAppGateway \
+          --enabled true --rule-set-type OWASP --rule-set-version 3.0 \
+          --disabled-rule-groups REQUEST-942-APPLICATION-ATTACK-SQLI \
+          --disabled-rules 920130 920140
+  - summary: Mengonfigurasi WAF pada gateway aplikasi dengan pengecualian.
+    syntax: >-
+      az network application-gateway waf-config set -g MyResourceGroup --gateway-name MyAppGateway \
+          --enabled true --firewall-mode Detection --rule-set-version 3.0 \
+          --exclusion "RequestHeaderNames StartsWith x-header" \
+          --exclusion "RequestArgNames Equals IgnoreThis"
+  requiredParameters:
+  - isRequired: true
+    name: --diaktifkan
+    parameterValueGroup: false, true
+    summary: Tentukan apakah firewall aplikasi diaktifkan.
+    description: ''
+  optionalParameters:
+  - name: --gateway-name
+    summary: Nama gateway aplikasi.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_application-gateway_waf-config_show
+  name: az network application-gateway waf-config show
+  summary: Mendapatkan konfigurasi firewall aplikasi web.
+  description: ''
+  syntax: >-
+    az network application-gateway waf-config show [--gateway-name]
+                                                   [--ids]
+                                                   [--resource-group]
+  examples:
+  - summary: Mendapatkan konfigurasi firewall aplikasi web.
+    syntax: az network application-gateway waf-config show -g MyResourceGroup --gateway-name MyAppGateway
+  optionalParameters:
+  - name: --gateway-name
+    summary: Nama gateway aplikasi.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+commands:
+- az_network_application-gateway_waf-config_set
+- az_network_application-gateway_waf-config_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/09/2022
+  description: Perintah ini hanya berlaku untuk gateway aplikasi dengan jenis SKU WAF. Untuk mempelajari lebih lanjut, kunjungi https://docs.microsoft.com/azure/application-gateway/application-gateway-web-application-firewall-cli.
+  ms.openlocfilehash: e39addd16b47cbb75f32250224433e2c66234b06
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141477288"
