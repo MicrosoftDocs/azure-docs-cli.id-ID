@@ -1,0 +1,287 @@
+### YamlMime:AzureCLIGroup
+uid: az_afd_rule
+name: aturan az afd
+summary: Mengelola aturan pengiriman dalam seperangkat aturan yang ditentukan.
+description: ''
+directCommands:
+- uid: az_afd_rule_create
+  name: az afd rule create
+  summary: Membuat aturan pengiriman baru dalam seperangkat aturan yang ditentukan.
+  description: ''
+  syntax: >-
+    az afd rule create --action-name {ModifyRequestHeader, ModifyResponseHeader, RouteConfigurationOverride, UrlRedirect, UrlRewrite}
+                       --order
+                       --profile-name
+                       --resource-group
+                       --rule-name
+                       --rule-set-name
+                       [--cache-behavior {HonorOrigin, OverrideAlways, OverrideIfOriginMissing}]
+                       [--cache-duration]
+                       [--custom-fragment]
+                       [--custom-hostname]
+                       [--custom-path]
+                       [--custom-querystring]
+                       [--destination]
+                       [--enable-caching {false, true}]
+                       [--enable-compression {false, true}]
+                       [--forwarding-protocol {HttpOnly, HttpsOnly, MatchRequest}]
+                       [--header-action {Append, Delete, Overwrite}]
+                       [--header-name]
+                       [--header-value]
+                       [--match-processing-behavior {Continue, Stop}]
+                       [--match-values]
+                       [--match-variable {ClientPort, Cookies, HostName, HttpVersion, IsDevice, PostArgs, QueryString, RemoteAddress, RequestBody, RequestHeader, RequestMethod, RequestScheme, RequestUri, ServerPort, SocketAddr, SslProtocol, UrlFileExtension, UrlFileName, UrlPath}]
+                       [--negate-condition {false, true}]
+                       [--operator]
+                       [--preserve-unmatched-path {false, true}]
+                       [--query-parameters]
+                       [--query-string-caching-behavior {IgnoreQueryString, IgnoreSpecifiedQueryStrings, IncludeSpecifiedQueryStrings, UseQueryString}]
+                       [--redirect-protocol {Http, Https, MatchRequest}]
+                       [--redirect-type {Found, Moved, PermanentRedirect, TemporaryRedirect}]
+                       [--selector]
+                       [--source-pattern]
+                       [--transforms {Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode, UrlEncode}]
+  examples:
+  - summary: Buat aturan untuk menambahkan header respons untuk permintaan dari Thailand.
+    syntax: az afd rule create -g group --rule-set-name ruleset1 --profile-name profile --order 2 --match-variable RemoteAddress --operator GeoMatch --match-values TH --rule-name disablecahing --action-name ModifyResponseHeader --header-action Append --header-name X-CDN --header-value AFDX
+  - summary: Membuat aturan untuk pengalihan http ke https
+    syntax: az afd rule create -g group --rule-set-name ruleset1 --profile-name profile --order 1 --rule-name "redirect" --match-variable RequestScheme --operator Equal --match-values HTTP --action-name "UrlRedirect" --redirect-protocol Https --redirect-type Moved
+  requiredParameters:
+  - isRequired: true
+    name: --action-name
+    parameterValueGroup: ModifyRequestHeader, ModifyResponseHeader, RouteConfigurationOverride, UrlRedirect, UrlRewrite
+    summary: 'Nama tindakan untuk aturan pengiriman: https://docs.microsoft.com/en-us/azure/frontdoor/front-door-rules-engine-actions.'
+    description: ''
+  - isRequired: true
+    name: --order
+    summary: Urutan penerapan aturan untuk titik akhir. Nilai yang mungkin {0,1,2,3,.........}. Aturan dengan urutan yang lebih rendah akan diterapkan sebelum aturan dengan urutan yang lebih tinggi. Aturan dengan urutan 0 adalah aturan khusus. Ini tidak memerlukan kondisi dan tindakan apa pun yang tercantum di dalamnya akan selalu diterapkan.
+    description: ''
+  - isRequired: true
+    name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --rule-name
+    summary: Nama aturan.
+    description: ''
+  - isRequired: true
+    name: --rule-set-name
+    summary: Nama seperangkat aturan.
+    description: ''
+  optionalParameters:
+  - name: --cache-behavior
+    parameterValueGroup: HonorOrigin, OverrideAlways, OverrideIfOriginMissing
+    summary: Perilaku penembolokan untuk permintaan.
+    description: ''
+  - name: --cache-duration
+    summary: Durasi konten perlu di-cache.                Format yang diizinkan adalah [d.]hh:mm:ss.
+    description: ''
+  - name: --custom-fragment
+    summary: Fragmen untuk ditambahkan ke URL pengalihan.
+    description: ''
+  - name: --custom-hostname
+    summary: Host untuk dialihkan.                Biarkan kosong untuk menggunakan host masuk sebagai host tujuan.
+    description: ''
+  - name: --custom-path
+    summary: Jalur lengkap untuk mengalihkan. Jalur tidak boleh kosong dan harus dimulai dengan /.                Biarkan kosong untuk menggunakan jalur masuk sebagai jalur tujuan.
+    description: ''
+  - name: --custom-querystring
+    summary: Kumpulan string kueri yang akan ditempatkan di URL pengalihan.                biarkan kosong untuk mempertahankan string kueri masuk.
+    description: ''
+  - name: --destination
+    summary: Jalur tujuan yang akan digunakan dalam penulisan ulang.
+    description: ''
+  - name: --enable-caching
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah akan mengaktifkan penembolokan pada rute.
+    description: ''
+  - name: --enable-compression
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah pemadatan konten diaktifkan di AzureFrontDoor. Nilai default-nya adalah false. Jika pemadatan diaktifkan, konten akan disajikan sebagai dikompresi jika permintaan pengguna untuk versi terkompresi. Konten tidak akan dikompresi di AzureFrontDoor saat konten yang diminta lebih kecil dari 1 byte atau lebih besar dari 1 MB.
+    description: ''
+  - name: --forwarding-protocol
+    parameterValueGroup: HttpOnly, HttpsOnly, MatchRequest
+    summary: Protokol yang akan digunakan aturan ini saat meneruskan lalu lintas ke backend.
+    description: ''
+  - name: --header-action
+    parameterValueGroup: Append, Delete, Overwrite
+    summary: Tindakan header untuk permintaan.
+    description: ''
+  - name: --header-name
+    summary: Nama header yang akan diubah.
+    description: ''
+  - name: --header-value
+    summary: Nilai header.
+    description: ''
+  - name: --match-processing-behavior
+    parameterValueGroup: Continue, Stop
+    summary: Menunjukkan apakah mesin aturan harus terus menjalankan aturan yang tersisa atau berhenti jika cocok. Default ke Lanjutkan.
+    description: ''
+  - name: --match-values
+    summary: Cocokkan nilai kondisi kecocokan.
+    description: ''
+  - name: --match-variable
+    parameterValueGroup: ClientPort, Cookies, HostName, HttpVersion, IsDevice, PostArgs, QueryString, RemoteAddress, RequestBody, RequestHeader, RequestMethod, RequestScheme, RequestUri, ServerPort, SocketAddr, SslProtocol, UrlFileExtension, UrlFileName, UrlPath
+    summary: 'Nama kondisi kecocokan: https://docs.microsoft.com/en-us/azure/frontdoor/rules-match-conditions.'
+    description: ''
+  - name: --negate-condition
+    parameterValueGroup: false, true
+    summary: Jika true, meniadakan kondisi.
+    description: ''
+  - name: --operator
+    summary: Operator kondisi kecocokan.
+    description: ''
+  - name: --preserve-unmatched-path
+    parameterValueGroup: false, true
+    summary: Jika True, jalur yang tersisa setelah pola sumber akan ditambahkan ke jalur tujuan baru.
+    description: ''
+  - name: --query-parameters
+    summary: Parameter kueri untuk disertakan atau dikecualikan.
+    description: ''
+  - name: --query-string-caching-behavior
+    parameterValueGroup: IgnoreQueryString, IgnoreSpecifiedQueryStrings, IncludeSpecifiedQueryStrings, UseQueryString
+    summary: Menentukan bagaimana CDN membuat cache permintaan yang menyertakan string kueri. Anda dapat mengabaikan string kueri apa pun saat penembolokan, melewati penembolokan untuk mencegah permintaan yang berisi string kueri di-cache, atau menyimpan cache setiap permintaan dengan URL unik.
+    description: ''
+  - name: --redirect-protocol
+    parameterValueGroup: Http, Https, MatchRequest
+    summary: Protokol yang digunakan untuk pengalihan.
+    description: ''
+  - name: --redirect-type
+    parameterValueGroup: Found, Moved, PermanentRedirect, TemporaryRedirect
+    summary: Jenis pengalihan yang akan digunakan aturan saat mengalihkan lalu lintas.
+    description: ''
+  - name: --selector
+    summary: Pemilih kondisi kecocokan.
+    description: ''
+  - name: --source-pattern
+    summary: Pola URI permintaan yang mengidentifikasi jenis permintaan yang mungkin ditulis ulang.
+    description: ''
+  - name: --transforms
+    parameterValueGroup: Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode, UrlEncode
+    summary: Transformasi untuk diterapkan sebelum pencocokan.
+    description: ''
+- uid: az_afd_rule_delete
+  name: az afd rule delete
+  summary: Menghapus aturan pengiriman dari seperangkat aturan.
+  description: ''
+  syntax: >-
+    az afd rule delete [--ids]
+                       [--profile-name]
+                       [--resource-group]
+                       [--rule-name]
+                       [--rule-set-name]
+                       [--yes]
+  examples:
+  - summary: Hapus aturan dengan nama aturan1.
+    syntax: az afd rule delete -g group --rule-set-name ruleSetName --profile-name profile --rule-name rule1
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --rule-name
+    summary: Nama aturan.
+    description: ''
+  - name: --rule-set-name
+    summary: Nama seperangkat aturan.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_afd_rule_list
+  name: az afd rule list
+  summary: Mencantumkan semua aturan pengiriman yang ada dalam seperangkat aturan.
+  description: ''
+  syntax: >-
+    az afd rule list --profile-name
+                     --resource-group
+                     --rule-set-name
+  requiredParameters:
+  - isRequired: true
+    name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --rule-set-name
+    summary: Nama seperangkat aturan.
+    description: ''
+- uid: az_afd_rule_show
+  name: az afd rule show
+  summary: Tampilkan detail aturan pengiriman.
+  description: ''
+  syntax: >-
+    az afd rule show [--ids]
+                     [--profile-name]
+                     [--resource-group]
+                     [--rule-name]
+                     [--rule-set-name]
+  examples:
+  - summary: memperlihatkan detail aturan pengiriman dengan nama aturan1.
+    syntax: az afd rule show -g group --rule-set-name ruleSetName --profile-name profile --rule-name rule1
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --rule-name
+    summary: Nama aturan.
+    description: ''
+  - name: --rule-set-name
+    summary: Nama seperangkat aturan.
+    description: ''
+commands:
+- az_afd_rule_action
+- az_afd_rule_action_add
+- az_afd_rule_action_list
+- az_afd_rule_action_remove
+- az_afd_rule_condition
+- az_afd_rule_condition_add
+- az_afd_rule_condition_list
+- az_afd_rule_condition_remove
+- az_afd_rule_create
+- az_afd_rule_delete
+- az_afd_rule_list
+- az_afd_rule_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Kelola aturan pengiriman dalam seperangkat aturan yang ditentukan.
+  ms.openlocfilehash: e8760cb01304e935e7303544007cc5e598e3d676
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141446705"

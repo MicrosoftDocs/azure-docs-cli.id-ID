@@ -1,0 +1,208 @@
+### YamlMime:AzureCLIGroup
+uid: az_vm_image
+name: az vm image
+summary: Informasi tentang gambar komputer virtual yang tersedia.
+description: ''
+directCommands:
+- uid: az_vm_image_accept-terms
+  name: az vm image accept-terms
+  summary: Terima istilah Marketplace Azure sehingga gambar dapat digunakan untuk membuat VM.
+  description: ''
+  syntax: >-
+    az vm image accept-terms [--offer]
+                             [--plan]
+                             [--publisher]
+                             [--urn]
+  examples:
+  - summary: Terima istilah Marketplace Azure sehingga gambar dapat digunakan untuk membuat VM. (dibuat otomatis)
+    syntax: az vm image accept-terms --urn publisher:offer:sku:version
+  optionalParameters:
+  - name: --offer -f
+    summary: Penawaran gambar.
+    description: ''
+  - name: --plan
+    summary: Paket penagihan gambar.
+    description: ''
+  - name: --publisher -p
+    summary: Penerbit gambar.
+    description: ''
+  - name: --urn
+    summary: URN, dalam format 'publisher:offer:sku:version' atau 'publisher:offer:sku:edge_zone:version'. Jika ditentukan, nilai argumen lain dapat dihilangkan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_image_list
+  name: az vm image list
+  summary: Cantumkan gambar VM/VMSS yang tersedia di Marketplace Azure.
+  description: ''
+  syntax: >-
+    az vm image list [--all]
+                     [--location]
+                     [--offer]
+                     [--publisher]
+                     [--sku]
+  examples:
+  - summary: Cantumkan semua gambar yang tersedia.
+    syntax: az vm image list --all
+  - summary: Mencantumkan semua gambar CentOS yang di-cache secara offline.
+    syntax: az vm image list -f CentOS
+  - summary: Cantumkan semua gambar CentOS.
+    syntax: az vm image list -f CentOS --all
+  optionalParameters:
+  - name: --all
+    summary: Ambil daftar gambar dari layanan Azure langsung daripada menggunakan daftar gambar offline.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --offer -f
+    summary: Nama penawaran gambar, nama parsial diterima.
+    description: ''
+  - name: --publisher -p
+    summary: Nama penerbit gambar, nama parsial diterima.
+    description: ''
+  - name: --sku -s
+    summary: Nama sku gambar, nama parsial diterima.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_image_list-offers
+  name: az vm image list-offers
+  summary: Cantumkan penawaran gambar VM yang tersedia di Marketplace Azure.
+  description: ''
+  syntax: >-
+    az vm image list-offers --location
+                            --publisher
+  examples:
+  - summary: Mencantumkan semua penawaran dari Microsoft di wilayah US Barat.
+    syntax: az vm image list-offers -l westus -p MicrosoftWindowsServer
+  - summary: Cantumkan semua penawaran dari OpenLocic di wilayah US Barat.
+    syntax: az vm image list-offers -l westus -p OpenLogic
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --publisher -p
+    summary: Penerbit gambar.
+    description: ''
+    valueFrom: az vm image list-publishers
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_image_list-publishers
+  name: az vm image list-publishers
+  summary: Cantumkan penerbit gambar VM yang tersedia di Marketplace Azure.
+  description: ''
+  syntax: az vm image list-publishers --location
+  examples:
+  - summary: Mencantumkan semua penerbit di wilayah US Barat.
+    syntax: az vm image list-publishers -l westus
+  - summary: Cantumkan semua penerbit dengan nama yang dimulai dengan "Buka" di westus.
+    syntax: az vm image list-publishers -l westus --query "[?starts_with(name, 'Open')]"
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_image_list-skus
+  name: az vm image list-skus
+  summary: Cantumkan SKU gambar VM yang tersedia di Marketplace Azure.
+  description: ''
+  syntax: >-
+    az vm image list-skus --location
+                          --offer
+                          --publisher
+  examples:
+  - summary: Cantumkan semua sku yang tersedia untuk CentOS yang diterbitkan oleh OpenLogic di wilayah US Barat.
+    syntax: az vm image list-skus -l westus -f CentOS -p OpenLogic
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --offer -f
+    summary: Penawaran gambar.
+    description: ''
+  - isRequired: true
+    name: --publisher -p
+    summary: Penerbit gambar.
+    description: ''
+    valueFrom: az vm image list-publishers
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_image_show
+  name: az vm image show
+  summary: Dapatkan detail untuk gambar VM yang tersedia di Marketplace Azure.
+  description: ''
+  syntax: >-
+    az vm image show [--location]
+                     [--offer]
+                     [--publisher]
+                     [--sku]
+                     [--urn]
+                     [--version]
+  examples:
+  - summary: Tampilkan informasi untuk gambar CentOS terbaru yang tersedia dari OpenLogic.
+    syntax: >-
+      latest=$(az vm image list -p OpenLogic -s 7.3 --all --query \
+          "[?offer=='CentOS'].version" -o tsv | sort -u | tail -n 1)
+      az vm image show -l westus -f CentOS -p OpenLogic --sku 7.3 --version ${latest}
+  - summary: Dapatkan detail untuk gambar VM yang tersedia di Marketplace Azure. (dibuat otomatis)
+    syntax: az vm image show --location westus --urn publisher:offer:sku:version
+  optionalParameters:
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --offer -f
+    summary: Penawaran gambar.
+    description: ''
+  - name: --publisher -p
+    summary: Penerbit gambar.
+    description: ''
+  - name: --sku -s
+    summary: Gambar sku.
+    description: ''
+  - name: --urn
+    summary: URN, dalam format 'publisher:offer:sku:version' atau 'publisher:offer:sku:edge_zone:version'. Jika ditentukan, nilai argumen lain dapat dihilangkan.
+    description: ''
+  - name: --version
+    summary: Versi sku gambar.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+commands:
+- az_vm_image_accept-terms
+- az_vm_image_list
+- az_vm_image_list-offers
+- az_vm_image_list-publishers
+- az_vm_image_list-skus
+- az_vm_image_show
+- az_vm_image_terms
+- az_vm_image_terms_accept
+- az_vm_image_terms_cancel
+- az_vm_image_terms_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 04/01/2022
+  description: Informasi tentang gambar komputer virtual yang tersedia.
+  ms.openlocfilehash: 72f61c8691b37e8d45ec83053db94fb5c33f17f0
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141473994"

@@ -1,0 +1,292 @@
+### YamlMime:AzureCLIGroup
+uid: az_storage_message
+name: az storage message
+summary: Mengelola pesan penyimpanan antrean.
+description: 'Tentukan salah satu parameter autentikasi berikut untuk perintah Anda: --auth-mode, --account-key, --connection-string, --sas-token. Anda juga dapat menggunakan variabel lingkungan yang sesuai untuk menyimpan kredensial autentikasi Anda, misalnya AZURE_STORAGE_KEY, AZURE_STORAGE_CONNECTION_STRING, dan AZURE_STORAGE_SAS_TOKEN.'
+directCommands:
+- uid: az_storage_message_clear
+  name: az storage message clear
+  summary: Menghapus semua pesan dari antrean yang ditentukan.
+  description: ''
+  syntax: >-
+    az storage message clear --queue-name
+                             [--account-key]
+                             [--account-name]
+                             [--connection-string]
+                             [--sas-token]
+                             [--timeout]
+  requiredParameters:
+  - isRequired: true
+    name: --queue-name -q
+    summary: Nama antrean.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_message_delete
+  name: az storage message delete
+  summary: Menghapus pesan yang ditentukan.
+  description: 'Biasanya setelah klien mengambil pesan dengan operasi get_messages, klien diharapkan untuk memproses dan menghapus pesan. Untuk menghapus pesan, Anda harus memiliki dua item data: id dan pop_receipt. Id dikembalikan dari operasi get_messages sebelumnya. Pop_receipt dikembalikan dari operasi get_messages() atau update_message() terbaru. Agar operasi delete_message berhasil, pop_receipt yang ditentukan pada permintaan harus cocok dengan pop_receipt yang dikembalikan dari operasi get_messages() atau update_message().'
+  syntax: >-
+    az storage message delete --id
+                              --pop-receipt
+                              --queue-name
+                              [--account-key]
+                              [--account-name]
+                              [--connection-string]
+                              [--sas-token]
+                              [--timeout]
+  requiredParameters:
+  - isRequired: true
+    name: --id
+    summary: Id pesan yang mengidentifikasi pesan yang akan dihapus.
+    description: ''
+  - isRequired: true
+    name: --pop-receipt
+    summary: Nilai tanda terima pop yang valid dikembalikan dari panggilan sebelumnya ke get_messages() atau update_message().
+    description: ''
+  - isRequired: true
+    name: --queue-name -q
+    summary: Nama antrean.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_message_get
+  name: az storage message get
+  summary: Mengambil satu atau beberapa pesan dari depan antrean.
+  description: Saat pesan diambil dari antrean, respons menyertakan konten pesan dan nilai pop_receipt, yang diperlukan untuk menghapus pesan.  Pesan tidak dihapus secara otomatis dari antrean, tetapi setelah diambil, pesan tidak terlihat oleh klien lain untuk interval waktu yang ditentukan oleh parameter visibility_timeout.  Jika bidang kunci-enkripsi-kunci atau resolver diatur pada objek layanan lokal, pesan akan didekripsi sebelum dikembalikan.
+  syntax: >-
+    az storage message get --queue-name
+                           [--account-key]
+                           [--account-name]
+                           [--connection-string]
+                           [--num-messages]
+                           [--sas-token]
+                           [--timeout]
+                           [--visibility-timeout]
+  requiredParameters:
+  - isRequired: true
+    name: --queue-name -q
+    summary: Nama antrean.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --num-messages
+    summary: Nilai bilangan bulat bukan nol yang menentukan jumlah pesan yang akan diambil dari antrean, hingga maksimum 32. Jika lebih sedikit terlihat, pesan yang terlihat akan dikembalikan. Secara default, satu pesan diambil dari antrean dengan operasi ini.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  - name: --visibility-timeout
+    summary: Menentukan nilai batas waktu visibilitas baru, dalam hitungan detik, relatif terhadap waktu server. Nilai baru harus lebih besar dari atau sama dengan 1 detik, dan tidak boleh lebih besar dari 7 hari. Batas waktu visibilitas pesan dapat diatur ke nilai lebih lambat dari waktu kedaluwarsa.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_message_peek
+  name: intip pesan penyimpanan az
+  summary: Mengambil satu atau beberapa pesan dari depan antrean, tetapi tidak mengubah visibilitas pesan.
+  description: Hanya pesan yang terlihat yang dapat diambil. Saat pesan diambil untuk pertama kalinya dengan panggilan ke get_messages, properti dequeue_count diatur ke 1. Jika tidak dihapus dan kemudian diambil lagi, properti dequeue_count akan dinaikkan. Klien dapat menggunakan nilai ini untuk menentukan berapa kali pesan telah diambil. Perhatikan bahwa panggilan ke peek_messages tidak menaikkan nilai DequeueCount, tetapi mengembalikan nilai ini untuk dibaca klien.  Jika bidang key-encryption-key atau resolver diatur pada objek layanan lokal, pesan akan didekripsi sebelum dikembalikan.
+  syntax: >-
+    az storage message peek --queue-name
+                            [--account-key]
+                            [--account-name]
+                            [--connection-string]
+                            [--num-messages]
+                            [--sas-token]
+                            [--timeout]
+  requiredParameters:
+  - isRequired: true
+    name: --queue-name -q
+    summary: Nama antrean.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --num-messages
+    summary: Nilai bilangan bulat bukan nol yang menentukan jumlah pesan yang akan diintip dari antrean, hingga maksimum 32. Secara default, satu pesan diintip dari antrean dengan operasi ini.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_message_put
+  name: az storage message put
+  summary: Menambahkan pesan baru ke bagian belakang antrean pesan.
+  description: Batas waktu visibilitas menentukan waktu pesan tidak akan terlihat. Setelah batas waktu berakhir, pesan akan terlihat.  Jika batas waktu visibilitas tidak ditentukan, nilai default 0 akan digunakan.  Waktu hidup pesan menentukan berapa lama pesan akan tetap berada dalam antrean. Pesan akan dihapus dari antrean ketika periode time-to-live berakhir.  Jika bidang kunci-enkripsi-kunci diatur pada objek layanan lokal, metode ini akan mengenkripsi konten sebelum mengunggah.
+  syntax: >-
+    az storage message put --content
+                           --queue-name
+                           [--account-key]
+                           [--account-name]
+                           [--connection-string]
+                           [--sas-token]
+                           [--time-to-live]
+                           [--timeout]
+                           [--visibility-timeout]
+  requiredParameters:
+  - isRequired: true
+    name: --content
+    summary: Konten pesan, berukuran hingga 64KB.
+    description: ''
+  - isRequired: true
+    name: --queue-name -q
+    summary: Nama antrean.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --time-to-live
+    summary: Menentukan interval time-to-live untuk pesan, dalam hitungan detik. Waktu hidup maksimum yang diizinkan adalah 7 hari. Jika parameter ini dihilangkan, waktu hidup default adalah 7 hari.
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  - name: --visibility-timeout
+    summary: Jika tidak ditentukan, nilai defaultnya adalah 0. Menentukan nilai batas waktu visibilitas baru, dalam detik, relatif terhadap waktu server. Nilai harus lebih besar dari atau sama dengan 0, dan tidak boleh lebih besar dari 7 hari. Batas waktu visibilitas pesan tidak dapat diatur ke nilai lebih lambat dari waktu kedaluwarsa. visibility_timeout harus diatur ke nilai yang lebih kecil dari nilai time-to-live.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_message_update
+  name: az storage message update
+  summary: Memperbarui batas waktu visibilitas pesan.
+  description: Anda juga dapat menggunakan operasi ini untuk memperbarui konten pesan.  Operasi ini dapat digunakan untuk terus memperluas invisibilitas pesan antrean. Fungsionalitas ini dapat berguna jika Anda ingin peran pekerja "menyewakan" pesan antrean. Misalnya, jika peran pekerja memanggil get_messages dan mengenali bahwa perlu lebih banyak waktu untuk memproses pesan, peran tersebut dapat terus memperluas tembus pandang pesan hingga diproses. Jika peran pekerja gagal selama pemrosesan, akhirnya pesan akan terlihat lagi dan peran pekerja lain dapat memprosesnya.  Jika bidang kunci-enkripsi-kunci diatur pada objek layanan lokal, metode ini akan mengenkripsi konten sebelum mengunggah.
+  syntax: >-
+    az storage message update --id
+                              --pop-receipt
+                              --queue-name
+                              --visibility-timeout
+                              [--account-key]
+                              [--account-name]
+                              [--connection-string]
+                              [--content]
+                              [--sas-token]
+                              [--timeout]
+  requiredParameters:
+  - isRequired: true
+    name: --id
+    summary: Id pesan yang mengidentifikasi pesan yang akan diperbarui.
+    description: ''
+  - isRequired: true
+    name: --pop-receipt
+    summary: Nilai tanda terima pop yang valid yang dikembalikan dari panggilan sebelumnya ke operasi get_messages() atau update_message().
+    description: ''
+  - isRequired: true
+    name: --queue-name -q
+    summary: Nama antrean.
+    description: ''
+  - isRequired: true
+    name: --visibility-timeout
+    summary: Menentukan nilai batas waktu visibilitas baru, dalam detik, relatif terhadap waktu server. Nilai baru harus lebih besar dari atau sama dengan 0, dan tidak boleh lebih besar dari 7 hari. Batas waktu visibilitas pesan tidak dapat diatur ke nilai lebih lambat dari waktu kedaluwarsa. Pesan dapat diperbarui hingga dihapus atau telah kedaluwarsa.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --content
+    summary: Konten pesan, berukuran hingga 64KB.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+commands:
+- az_storage_message_clear
+- az_storage_message_delete
+- az_storage_message_get
+- az_storage_message_peek
+- az_storage_message_put
+- az_storage_message_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/29/2022
+  description: 'Tentukan salah satu parameter autentikasi berikut untuk perintah Anda: --auth-mode, --account-key, --connection-string, --sas-token. Anda juga dapat menggunakan variabel lingkungan yang sesuai untuk menyimpan kredensial autentikasi Anda, misalnya AZURE_STORAGE_KEY, AZURE_STORAGE_CONNECTION_STRING, dan AZURE_STORAGE_SAS_TOKEN.'
+  ms.openlocfilehash: 2622c911765f84599ca2b79e407c88ec467df1ae
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141445607"

@@ -1,0 +1,678 @@
+### YamlMime:AzureCLIGroup
+uid: az_storage_account
+name: az storage account
+summary: Mengelola akun penyimpanan.
+description: ''
+directCommands:
+- uid: az_storage_account_check-name
+  name: az storage account check-name
+  summary: Periksa apakah nama akun penyimpanan valid dan belum digunakan.
+  description: ''
+  syntax: az storage account check-name --name
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama akun penyimpanan dalam grup sumber daya yang ditentukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_account_create
+  name: az storage account create
+  summary: Membuat akun penyimpanan.
+  description: SKU akun penyimpanan default ke 'Standard_RAGRS'.
+  syntax: >-
+    az storage account create --name
+                              --resource-group
+                              [--access-tier {Cool, Hot}]
+                              [--account-type]
+                              [--action]
+                              [--allow-blob-public-access]
+                              [--allow-cross-tenant-replication]
+                              [--allow-protected-append-writes]
+                              [--allow-shared-key-access]
+                              [--custom-domain]
+                              [--default-share-permission]
+                              [--edge-zone]
+                              [--enable-alw]
+                              [--enable-nfs-v3]
+                              [--encryption-key-name]
+                              [--encryption-key-source]
+                              [--encryption-key-vault]
+                              [--encryption-key-version]
+                              [--https-only {false, true}]
+                              [--identity-type]
+                              [--immutability-period-since-creation-in-days]
+                              [--immutability-policy-state]
+                              [--key-expiration-period-in-days]
+                              [--key-vault-user-identity-id]
+                              [--kind {BlobStorage, Storage}]
+                              [--location]
+                              [--min-tls-version]
+                              [--public-network-access]
+                              [--require-infrastructure-encryption]
+                              [--sam-account-name]
+                              [--sas-expiration-period]
+                              [--sku {Premium_LRS, Standard_GRS, Standard_LRS, Standard_RAGRS, Standard_ZRS}]
+                              [--subnet]
+                              [--tags]
+                              [--user-identity-id]
+                              [--vnet-name]
+  examples:
+  - summary: Buat akun penyimpanan 'mystorageaccount' di grup sumber daya 'MyResourceGroup' di wilayah US Barat dengan penyimpanan redundan lokal.
+    syntax: az storage account create -n mystorageaccount -g MyResourceGroup -l westus --account-type Standard_LRS
+  - summary: Buat akun penyimpanan 'mystorageaccount' di grup sumber daya 'MyResourceGroup' di wilayah eastus2euap dengan kunci enkripsi cakupan akun diaktifkan untuk Layanan Tabel.
+    syntax: az storage account create -n mystorageaccount -g MyResourceGroup --kind StorageV2 -l eastus2euap -t Account
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama akun penyimpanan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --access-tier
+    parameterValueGroup: Cool, Hot
+    summary: Tingkat akses yang digunakan untuk penagihan akun StandardBlob. Tidak dapat diatur untuk jenis akun StandardLRS, StandardGRS, StandardRAGRS, atau PremiumLRS. Diperlukan untuk akun StandardBlob selama pembuatan.
+    description: ''
+  - name: --account-type
+    summary: Jenis akun penyimpanan.
+    description: ''
+  - name: --action
+    defaultValue: Allow
+    summary: ''
+    description: ''
+  - name: --allow-blob-public-access
+    summary: ''
+    description: ''
+  - name: --allow-cross-tenant-replication
+    summary: ''
+    description: ''
+  - name: --allow-protected-append-writes
+    summary: ''
+    description: ''
+  - name: --allow-shared-key-access
+    summary: ''
+    description: ''
+  - name: --custom-domain
+    summary: Domain pengguna ditetapkan ke akun penyimpanan. Nama adalah sumber CNAME.
+    description: ''
+  - name: --default-share-permission
+    summary: ''
+    description: ''
+  - name: --edge-zone
+    summary: ''
+    description: ''
+  - name: --enable-alw
+    summary: ''
+    description: ''
+  - name: --enable-nfs-v3
+    summary: ''
+    description: ''
+  - name: --encryption-key-name
+    summary: ''
+    description: ''
+  - name: --encryption-key-source
+    summary: ''
+    description: ''
+  - name: --encryption-key-vault
+    summary: ''
+    description: ''
+  - name: --encryption-key-version
+    summary: ''
+    description: ''
+  - name: --https-only
+    parameterValueGroup: false, true
+    summary: Izinkan lalu lintas https hanya ke layanan penyimpanan jika diatur ke true. Nilai defaultnya adalah false.
+    description: ''
+  - name: --identity-type
+    summary: ''
+    description: ''
+  - name: --immutability-period-since-creation-in-days
+    summary: ''
+    description: ''
+  - name: --immutability-policy-state
+    summary: ''
+    description: ''
+  - name: --key-expiration-period-in-days
+    summary: ''
+    description: ''
+  - name: --key-vault-user-identity-id
+    summary: ''
+    description: ''
+  - name: --kind
+    defaultValue: Storage
+    parameterValueGroup: BlobStorage, Storage
+    summary: Menunjukkan jenis akun penyimpanan.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --min-tls-version
+    summary: ''
+    description: ''
+  - name: --public-network-access
+    summary: ''
+    description: ''
+  - name: --require-infrastructure-encryption
+    summary: ''
+    description: ''
+  - name: --sam-account-name
+    summary: ''
+    description: ''
+  - name: --sas-expiration-period
+    summary: ''
+    description: ''
+  - name: --sku
+    defaultValue: Standard_RAGRS
+    parameterValueGroup: Premium_LRS, Standard_GRS, Standard_LRS, Standard_RAGRS, Standard_ZRS
+    summary: SKU akun penyimpanan.
+    description: ''
+  - name: --subnet
+    summary: ''
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --user-identity-id
+    summary: ''
+    description: ''
+  - name: --vnet-name
+    summary: ''
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_account_delete
+  name: az storage account delete
+  summary: Menghapus akun penyimpanan.
+  description: ''
+  syntax: >-
+    az storage account delete [--ids]
+                              [--name]
+                              [--resource-group]
+                              [--yes]
+  examples:
+  - summary: Menghapus akun penyimpanan menggunakan ID sumber daya.
+    syntax: az storage account delete --ids /subscriptions/{SubID}/resourceGroups/{ResourceGroup}/providers/Microsoft.Storage/storageAccounts/{StorageAccount}
+  - summary: Hapus akun penyimpanan menggunakan nama akun dan grup sumber daya.
+    syntax: az storage account delete -n MyStorageAccount -g MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama akun penyimpanan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_account_generate-sas
+  name: az storage account generate-sas
+  summary: Buat tanda tangan akses bersama untuk akun penyimpanan.
+  description: ''
+  syntax: >-
+    az storage account generate-sas --expiry
+                                    --permissions
+                                    --resource-types
+                                    --services
+                                    [--account-key]
+                                    [--account-name]
+                                    [--connection-string]
+                                    [--https-only]
+                                    [--ids]
+                                    [--ip]
+                                    [--start]
+  examples:
+  - summary: Buat token sas untuk akun yang valid untuk layanan antrean dan tabel di Linux.
+    syntax: >-
+      end=`date -u -d "30 minutes" '+%Y-%m-%dT%H:%MZ'`
+
+      az storage account generate-sas --permissions cdlruwap --account-name MyStorageAccount --services qt --resource-types sco --expiry $end -o tsv
+  - summary: Buat token sas untuk akun yang valid untuk layanan antrean dan tabel di MacOS.
+    syntax: >-
+      end=`date -v+30M '+%Y-%m-%dT%H:%MZ'`
+
+      az storage account generate-sas --permissions cdlruwap --account-name MyStorageAccount --services qt --resource-types sco --expiry $end -o tsv
+  - summary: Membuat tanda tangan akses bersama untuk akun (dibuat secara otomatis)
+    syntax: az storage account generate-sas --account-key 00000000 --account-name MyStorageAccount --expiry 2020-01-01 --https-only --permissions acuw --resource-types co --services bfqt
+  requiredParameters:
+  - isRequired: true
+    name: --expiry
+    summary: Menentukan tanggalwaktu UTC (Y-m-d'T'H:M'Z') di mana SAS menjadi tidak valid.
+    description: ''
+  - isRequired: true
+    name: --permissions
+    summary: 'Izin yang diberikan SAS. Nilai yang diizinkan: (a)dd (a)dd (c)reate (c)reate (d)elete (d)elete (l)ist (l)ist (p)rocess (p)rocess (r)ead (r)ead (u)pdate (u)pdate (w)rite (w)rite. Dapat digabungkan.'
+    description: ''
+  - isRequired: true
+    name: --resource-types
+    summary: 'Jenis sumber daya yang berlaku untuk SAS. Nilai yang diizinkan: (s)ervice (c)ontainer (o)bject. Dapat digabungkan.'
+    description: ''
+  - isRequired: true
+    name: --services
+    summary: 'Layanan penyimpanan yang berlaku untuk SAS. Nilai yang diizinkan: (b)lob (f)ile (q)ueue (t)able. Dapat digabungkan.'
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Variabel Lingkungan: AZURE_STORAGE_ACCOUNT.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --https-only
+    summary: Hanya izinkan permintaan yang dibuat dengan protokol HTTPS. Jika dihilangkan, permintaan dari protokol HTTP dan HTTPS diizinkan.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --ip
+    summary: Menentukan alamat IP atau rentang alamat IP tempat menerima permintaan. Hanya mendukung alamat gaya IPv4.
+    description: ''
+  - name: --start
+    summary: Menentukan tanggalwaktu UTC (Y-m-d'T'H:M'Z') di mana SAS menjadi valid. Default ke waktu permintaan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_account_list
+  name: az storage account list
+  summary: Mencantumkan akun penyimpanan.
+  description: ''
+  syntax: az storage account list [--resource-group]
+  examples:
+  - summary: Mencantumkan semua akun penyimpanan dalam langganan.
+    syntax: az storage account list
+  - summary: Mencantumkan semua akun penyimpanan dalam grup sumber daya.
+    syntax: az storage account list -g MyResourceGroup
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_account_show
+  name: az storage account show
+  summary: Tampilkan properti akun penyimpanan.
+  description: ''
+  syntax: >-
+    az storage account show [--ids]
+                            [--name]
+                            [--resource-group]
+  examples:
+  - summary: Tampilkan properti untuk akun penyimpanan menurut ID sumber daya.
+    syntax: az storage account show --ids /subscriptions/{SubID}/resourceGroups/{ResourceGroup}/providers/Microsoft.Storage/storageAccounts/{StorageAccount}
+  - summary: Tampilkan properti untuk akun penyimpanan menggunakan nama akun dan grup sumber daya.
+    syntax: az storage account show -g MyResourceGroup -n MyStorageAccount
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama akun penyimpanan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_account_show-connection-string
+  name: az storage account show-connection-string
+  summary: Mendapatkan untaian koneksi untuk akun penyimpanan tertentu.
+  description: ''
+  syntax: >-
+    az storage account show-connection-string [--blob-endpoint]
+                                              [--file-endpoint]
+                                              [--ids]
+                                              [--key {primary, secondary}]
+                                              [--name]
+                                              [--protocol {http, https}]
+                                              [--queue-endpoint]
+                                              [--resource-group]
+                                              [--sas-token]
+                                              [--table-endpoint]
+  examples:
+  - summary: Dapatkan string koneksi untuk akun penyimpanan.
+    syntax: az storage account show-connection-string -g MyResourceGroup -n MyStorageAccount
+  - summary: Mendapatkan untaian koneksi untuk akun penyimpanan tertentu. (dibuat otomatis)
+    syntax: az storage account show-connection-string --name MyStorageAccount --resource-group MyResourceGroup --subscription MySubscription
+  optionalParameters:
+  - name: --blob-endpoint
+    summary: Titik akhir kustom untuk blob.
+    description: ''
+  - name: --file-endpoint
+    summary: Titik akhir kustom untuk file.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --key
+    defaultValue: primary
+    parameterValueGroup: primary, secondary
+    summary: Kunci yang akan digunakan.
+    description: ''
+  - name: --name -n
+    summary: Nama akun penyimpanan.
+    description: ''
+  - name: --protocol
+    defaultValue: https
+    parameterValueGroup: http, https
+    summary: Protokol titik akhir default.
+    description: ''
+  - name: --queue-endpoint
+    summary: Titik akhir kustom untuk antrean.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --sas-token
+    summary: Token SAS yang akan digunakan dalam string koneksi.
+    description: ''
+  - name: --table-endpoint
+    summary: Titik akhir kustom untuk tabel.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_account_show-usage
+  name: az storage account show-usage
+  summary: Tampilkan jumlah dan batas akun penyimpanan saat ini di bawah langganan.
+  description: ''
+  syntax: az storage account show-usage
+  examples:
+  - summary: Tampilkan jumlah dan batas akun penyimpanan saat ini di bawah langganan. (dibuat otomatis)
+    syntax: az storage account show-usage --location westus2
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_account_update
+  name: az storage account update
+  summary: Memperbarui properti akun penyimpanan.
+  description: ''
+  syntax: >-
+    az storage account update --name
+                              [--access-tier {Cool, Hot, Premium}]
+                              [--account-type {Computer, User}]
+                              [--add]
+                              [--allow-append {false, true}]
+                              [--allow-blob-public-access {false, true}]
+                              [--allow-cross-tenant-replication {false, true}]
+                              [--allow-shared-key-access {false, true}]
+                              [--allowed-copy-scope {AAD, PrivateLink}]
+                              [--assign-identity]
+                              [--azure-storage-sid]
+                              [--bypass {AzureServices, Logging, Metrics, None}]
+                              [--custom-domain]
+                              [--default-action {Allow, Deny}]
+                              [--default-share-permission {None, StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor, StorageFileDataSmbShareReader}]
+                              [--domain-guid]
+                              [--domain-name]
+                              [--domain-sid]
+                              [--enable-files-aadds {false, true}]
+                              [--enable-files-adds {false, true}]
+                              [--enable-large-file-share]
+                              [--enable-local-user {false, true}]
+                              [--enable-sftp {false, true}]
+                              [--encryption-key-name]
+                              [--encryption-key-source {Microsoft.Keyvault, Microsoft.Storage}]
+                              [--encryption-key-vault]
+                              [--encryption-key-version]
+                              [--encryption-services {blob, file, queue, table}]
+                              [--force-string]
+                              [--forest-name]
+                              [--https-only {false, true}]
+                              [--identity-type {None, SystemAssigned, SystemAssigned,UserAssigned, UserAssigned}]
+                              [--immutability-period]
+                              [--immutability-state {Disabled, Locked, Unlocked}]
+                              [--key-exp-days]
+                              [--key-vault-federated-identity-client-id]
+                              [--key-vault-user-identity-id]
+                              [--min-tls-version {TLS1_0, TLS1_1, TLS1_2}]
+                              [--net-bios-domain-name]
+                              [--public-network-access {Disabled, Enabled}]
+                              [--publish-internet-endpoints {false, true}]
+                              [--publish-microsoft-endpoints {false, true}]
+                              [--remove]
+                              [--resource-group]
+                              [--routing-choice {InternetRouting, MicrosoftRouting}]
+                              [--sam-account-name]
+                              [--sas-exp]
+                              [--set]
+                              [--sku {Premium_LRS, Premium_ZRS, Standard_GRS, Standard_GZRS, Standard_LRS, Standard_RAGRS, Standard_RAGZRS, Standard_ZRS}]
+                              [--tags]
+                              [--use-subdomain {false, true}]
+                              [--user-identity-id]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama akun penyimpanan.
+    description: ''
+  optionalParameters:
+  - name: --access-tier
+    parameterValueGroup: Cool, Hot, Premium
+    summary: Tingkat akses yang digunakan untuk penagihan akun StandardBlob. Tidak dapat diatur untuk jenis akun StandardLRS, StandardGRS, StandardRAGRS, atau PremiumLRS. Ini diperlukan untuk akun StandardBlob selama pembuatan.
+    description: ''
+  - name: --account-type
+    parameterValueGroup: Computer, User
+    summary: Tentukan jenis akun Direktori Aktif untuk Azure Storage.
+    description: ''
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --allow-append --allow-protected-append-writes -w
+    parameterValueGroup: false, true
+    summary: Properti ini hanya dapat diubah untuk kebijakan penyimpanan berbasis waktu yang dinonaktifkan dan tidak terkunci. Saat diaktifkan, blok baru dapat ditulis ke blob penambahan sambil mempertahankan perlindungan dan kepatuhan imutabilitas. Hanya blok baru yang dapat ditambahkan dan blok yang ada tidak dapat dimodifikasi atau dihapus.
+    description: ''
+  - name: --allow-blob-public-access
+    parameterValueGroup: false, true
+    summary: Mengizinkan atau melarang akses publik ke semua blob atau kontainer di akun penyimpanan. Nilai default untuk properti ini adalah null, yang setara dengan true. Jika true, kontainer di akun dapat dikonfigurasi untuk akses publik. Perhatikan bahwa mengatur properti ini ke true tidak mengaktifkan akses anonim ke data apa pun di akun. Langkah tambahan untuk mengonfigurasi pengaturan akses publik untuk kontainer diperlukan untuk mengaktifkan akses anonim.
+    description: ''
+  - name: --allow-cross-tenant-replication -r
+    parameterValueGroup: false, true
+    summary: Mengizinkan atau melarang replikasi objek penyewa lintas AAD. Interpretasi default berlaku untuk properti ini.
+    description: ''
+  - name: --allow-shared-key-access -k
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah akun penyimpanan mengizinkan permintaan untuk diotorisasi dengan kunci akses akun melalui Kunci Bersama. Jika false, maka semua permintaan, termasuk tanda tangan akses bersama, harus diotorisasi dengan Azure Active Directory (Azure AD). Nilai default adalah null, yang setara dengan true.
+    description: ''
+  - name: --allowed-copy-scope -s
+    parameterValueGroup: AAD, PrivateLink
+    summary: Batasi penyalinan ke dan dari Akun Storage dalam penyewa AAD atau dengan Private Link ke VNet yang sama.
+    description: ''
+  - name: --assign-identity
+    summary: Buat dan tetapkan Identitas Akun Storage baru untuk akun penyimpanan ini untuk digunakan dengan layanan manajemen utama seperti Azure KeyVault.
+    description: ''
+  - name: --azure-storage-sid
+    summary: Tentukan pengidentifikasi keamanan (SID) untuk Azure Storage. Diperlukan ketika --enable-files-adds diatur ke True.
+    description: ''
+  - name: --bypass
+    parameterValueGroup: AzureServices, Logging, Metrics, None
+    summary: Melewati lalu lintas untuk penggunaan yang dipisahkan ruang.
+    description: ''
+  - name: --custom-domain
+    summary: Domain pengguna ditetapkan ke akun penyimpanan. Nama adalah sumber CNAME. Gunakan "" untuk menghapus nilai yang ada.
+    description: ''
+  - name: --default-action
+    parameterValueGroup: Allow, Deny
+    summary: Tindakan default yang akan diterapkan saat tidak ada aturan yang cocok.
+    description: ''
+  - name: --default-share-permission -d
+    parameterValueGroup: None, StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor, StorageFileDataSmbShareReader
+    summary: Izin berbagi default untuk pengguna yang menggunakan autentikasi Kerberos jika peran RBAC tidak ditetapkan.
+    description: ''
+  - name: --domain-guid
+    summary: Tentukan GUID domain. Diperlukan ketika --enable-files-adds diatur ke True.
+    description: ''
+  - name: --domain-name
+    summary: Tentukan domain utama tempat server DNS AD berotoritatif. Diperlukan ketika --enable-files-adds diatur ke True.
+    description: ''
+  - name: --domain-sid
+    summary: Tentukan pengidentifikasi keamanan (SID). Diperlukan ketika --enable-files-adds diatur ke True.
+    description: ''
+  - name: --enable-files-aadds
+    parameterValueGroup: false, true
+    summary: Aktifkan autentikasi Azure Active Directory Domain Services untuk Azure Files.
+    description: ''
+  - name: --enable-files-adds
+    parameterValueGroup: false, true
+    summary: Aktifkan Azure Files Autentikasi Layanan Domain Direktori Aktif untuk akun penyimpanan. Ketika --enable-files-adds diatur ke true, argumen properti Azure Active Directory harus disediakan.
+    description: ''
+  - name: --enable-large-file-share
+    summary: Aktifkan kemampuan untuk mendukung berbagi file besar dengan kapasitas lebih dari 5 TiB untuk akun penyimpanan. Setelah properti diaktifkan, fitur tidak dapat dinonaktifkan. Saat ini hanya didukung untuk jenis replikasi LRS dan ZRS, oleh karena itu konversi akun ke akun geo-redundan tidak akan dimungkinkan. Untuk informasi lebih lanjut, silakan merujuk ke https://go.microsoft.com/fwlink/?linkid=2086047.
+    description: ''
+  - name: --enable-local-user
+    parameterValueGroup: false, true
+    summary: Aktifkan fitur pengguna lokal.
+    description: ''
+  - name: --enable-sftp
+    parameterValueGroup: false, true
+    summary: Aktifkan Protokol Transfer File Aman.
+    description: ''
+  - name: --encryption-key-name
+    summary: Nama kunci KeyVault.
+    description: ''
+  - name: --encryption-key-source
+    parameterValueGroup: Microsoft.Keyvault, Microsoft.Storage
+    summary: Sumber kunci enkripsi default.
+    description: ''
+  - name: --encryption-key-vault
+    summary: The Uri of the KeyVault.
+    description: ''
+  - name: --encryption-key-version
+    summary: Versi kunci KeyVault yang akan digunakan, yang akan memilih keluar dari rotasi kunci implisit. Silakan gunakan "" untuk memilih rotasi otomatis kunci lagi.
+    description: ''
+  - name: --encryption-services
+    parameterValueGroup: blob, file, queue, table
+    summary: Menentukan layanan mana yang akan dienkripsi.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --forest-name
+    summary: Tentukan forest Direktori Aktif yang akan didapatkan. Diperlukan ketika --enable-files-adds diatur ke True.
+    description: ''
+  - name: --https-only
+    parameterValueGroup: false, true
+    summary: Mengizinkan lalu lintas https hanya ke layanan penyimpanan.
+    description: ''
+  - name: --identity-type
+    parameterValueGroup: None, SystemAssigned, SystemAssigned,UserAssigned, UserAssigned
+    summary: Jenis identitas.
+    description: ''
+  - name: --immutability-period --immutability-period-in-days
+    summary: Periode imutabilitas untuk blob dalam kontainer sejak pembuatan kebijakan, dalam beberapa hari.
+    description: ''
+  - name: --immutability-state
+    parameterValueGroup: Disabled, Locked, Unlocked
+    summary: Menentukan mode kebijakan. Status dinonaktifkan menonaktifkan kebijakan, Status tidak terkunci memungkinkan peningkatan dan penurunan waktu retensi imutabilitas dan juga memungkinkan pengalihan properti allow-protected-append-write, Status terkunci hanya memungkinkan peningkatan waktu retensi imutabilitas. Kebijakan hanya dapat dibuat dalam status Dinonaktifkan atau Tidak Terkunci dan dapat dialihkan di antara kedua status. Hanya kebijakan dalam status Tidak Terkunci yang dapat beralih ke status Terkunci yang tidak dapat dikembalikan.
+    description: ''
+  - name: --key-exp-days --key-expiration-period-in-days
+    summary: Periode kedaluwarsa dalam hari Kebijakan Kunci yang ditetapkan ke akun penyimpanan.
+    description: ''
+  - name: --key-vault-federated-identity-client-id -f
+    summary: ClientId dari aplikasi multi-penyewa yang akan digunakan bersama dengan identitas yang ditetapkan pengguna untuk enkripsi sisi server kunci terkelola pelanggan lintas penyewa pada akun penyimpanan.
+    description: ''
+  - name: --key-vault-user-identity-id -u
+    summary: Pengidentifikasi sumber daya identitas UserAssigned yang akan dikaitkan dengan enkripsi sisi server pada akun penyimpanan.
+    description: ''
+  - name: --min-tls-version
+    parameterValueGroup: TLS1_0, TLS1_1, TLS1_2
+    summary: Versi TLS minimum yang akan diizinkan berdasarkan permintaan ke penyimpanan. Interpretasi default adalah TLS 1.0 untuk properti ini.
+    description: ''
+  - name: --net-bios-domain-name
+    summary: Tentukan nama domain NetBIOS. Diperlukan ketika --enable-files-adds diatur ke True.
+    description: ''
+  - name: --public-network-access
+    parameterValueGroup: Disabled, Enabled
+    summary: Mengaktifkan atau menonaktifkan akses jaringan publik ke akun penyimpanan.
+    description: ''
+  - name: --publish-internet-endpoints
+    parameterValueGroup: false, true
+    summary: Bendera boolean yang menunjukkan apakah titik akhir penyimpanan perutean internet akan diterbitkan.
+    description: ''
+  - name: --publish-microsoft-endpoints
+    parameterValueGroup: false, true
+    summary: Bendera boolean yang menunjukkan apakah titik akhir penyimpanan perutean microsoft akan diterbitkan.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --routing-choice
+    parameterValueGroup: InternetRouting, MicrosoftRouting
+    summary: Pilihan Perutean menentukan jenis perutean jaringan yang dipilih oleh pengguna.
+    description: ''
+  - name: --sam-account-name
+    summary: Tentukan SAMAccountName Direktori Aktif untuk Azure Storage.
+    description: ''
+  - name: --sas-exp --sas-expiration-period
+    summary: Periode kedaluwarsa Kebijakan SAS yang ditetapkan ke akun penyimpanan, DD.HH:MM:SS.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --sku
+    parameterValueGroup: Premium_LRS, Premium_ZRS, Standard_GRS, Standard_GZRS, Standard_LRS, Standard_RAGRS, Standard_RAGZRS, Standard_ZRS
+    summary: Perhatikan bahwa nama SKU tidak dapat diperbarui ke Standard_ZRS, Premium_LRS, atau Premium_ZRS, juga tidak dapat membuat akun nama SKU tersebut diperbarui ke nilai lain.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --use-subdomain
+    parameterValueGroup: false, true
+    summary: Tentukan apakah akan menggunakan validasi CNAME tidak langsung.
+    description: ''
+  - name: --user-identity-id
+    summary: Kuncinya adalah pengidentifikasi sumber daya ARM dari identitas. Hanya 1 Identitas yang Ditetapkan Pengguna yang diizinkan di sini.
+    description: ''
+commands:
+- az_storage_account_check-name
+- az_storage_account_create
+- az_storage_account_delete
+- az_storage_account_generate-sas
+- az_storage_account_keys
+- az_storage_account_keys_list
+- az_storage_account_keys_renew
+- az_storage_account_list
+- az_storage_account_local-user
+- az_storage_account_local-user_create
+- az_storage_account_local-user_delete
+- az_storage_account_local-user_list
+- az_storage_account_local-user_list-keys
+- az_storage_account_local-user_regenerate-password
+- az_storage_account_local-user_show
+- az_storage_account_local-user_update
+- az_storage_account_network-rule
+- az_storage_account_network-rule_add
+- az_storage_account_network-rule_list
+- az_storage_account_network-rule_remove
+- az_storage_account_show
+- az_storage_account_show-connection-string
+- az_storage_account_show-usage
+- az_storage_account_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/29/2022
+  description: Mengelola akun penyimpanan.
+  ms.openlocfilehash: a1eefed2afb19fc62de01b6bf27d0bd796e838a3
+  ms.sourcegitcommit: 7bac85b01b53f224997c83feeb6601ff4e108b32
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/13/2022
+  ms.locfileid: "141666739"

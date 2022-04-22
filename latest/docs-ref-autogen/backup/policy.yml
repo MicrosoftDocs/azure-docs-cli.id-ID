@@ -1,0 +1,262 @@
+### YamlMime:AzureCLIGroup
+uid: az_backup_policy
+name: kebijakan pencadangan az
+summary: Kebijakan pencadangan menentukan kapan Anda ingin mengambil cadangan dan berapa lama Anda akan menyimpan setiap salinan cadangan.
+description: ''
+directCommands:
+- uid: az_backup_policy_create
+  name: az backup policy create
+  summary: Buat kebijakan baru untuk BackupManagementType dan workloadType yang diberikan.
+  description: ''
+  syntax: >-
+    az backup policy create --backup-management-type {AzureIaasVM, AzureStorage, AzureWorkload}
+                            --name
+                            --policy
+                            --resource-group
+                            --vault-name
+                            [--workload-type {AzureFileShare, MSSQL, SAPHANA, SAPHanaDatabase, SQLDataBase, VM}]
+  examples:
+  - summary: Buat kebijakan baru untuk BackupManagementType dan workloadType yang diberikan.
+    syntax: az backup policy create --policy {policy} --resource-group MyResourceGroup --vault-name MyVault --name MyPolicy --backup-management-type AzureStorage
+  requiredParameters:
+  - isRequired: true
+    name: --backup-management-type
+    parameterValueGroup: AzureIaasVM, AzureStorage, AzureWorkload
+    summary: 'Tentukan jenis manajemen cadangan. Tentukan bagaimana Azure Backup mengelola cadangan entitas dalam sumber daya ARM. Misalnya: AzureWorkloads mengacu pada beban kerja yang diinstal dalam Azure VM, AzureStorage mengacu pada entitas dalam akun Storage. Diperlukan hanya jika nama yang mudah diingat digunakan sebagai Nama kontainer.'
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama Kebijakan.
+    description: ''
+  - isRequired: true
+    name: --policy
+    summary: Definisi kebijakan yang dikodekan JSON. Gunakan perintah tampilkan dengan output JSON untuk mendapatkan objek kebijakan. Ubah nilai menggunakan editor file dan teruskan objek .
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vault-name -v
+    summary: Nama vault layanan Pemulihan.
+    description: ''
+  optionalParameters:
+  - name: --workload-type
+    parameterValueGroup: AzureFileShare, MSSQL, SAPHANA, SAPHanaDatabase, SQLDataBase, VM
+    summary: Tentukan jenis aplikasi dalam Sumber Daya yang harus ditemukan dan dilindungi oleh Azure Backup.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/backup/_help.py
+- uid: az_backup_policy_delete
+  name: az backup policy delete
+  summary: Hapus kebijakan pencadangan yang tidak memiliki item cadangan terkait.
+  description: ''
+  syntax: >-
+    az backup policy delete [--ids]
+                            [--name]
+                            [--resource-group]
+                            [--vault-name]
+  examples:
+  - summary: Sebelum Anda dapat menghapus kebijakan perlindungan Cadangan, kebijakan tidak boleh memiliki item Cadangan terkait. Untuk mengaitkan kebijakan lain dengan item Cadangan, gunakan perintah set-policy item cadangan.
+    syntax: az backup policy delete --name MyBackupPolicy --resource-group MyResourceGroup --vault-name MyVault
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama kebijakan pencadangan. Anda dapat menggunakan perintah daftar kebijakan cadangan untuk mendapatkan nama kebijakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --vault-name -v
+    summary: Nama vault layanan Pemulihan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/backup/_help.py
+- uid: az_backup_policy_get-default-for-vm
+  name: az backup policy get-default-for-vm
+  summary: Dapatkan kebijakan default dengan nilai default untuk mencadangkan VM.
+  description: ''
+  syntax: >-
+    az backup policy get-default-for-vm --resource-group
+                                        --vault-name
+  examples:
+  - summary: Dapatkan kebijakan default dengan nilai default untuk mencadangkan VM. (dibuat otomatis)
+    syntax: az backup policy get-default-for-vm --resource-group MyResourceGroup --vault-name MyVault
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vault-name -v
+    summary: Nama vault layanan Pemulihan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/backup/_help.py
+- uid: az_backup_policy_list
+  name: az backup policy list
+  summary: Mencantumkan semua kebijakan untuk vault layanan Pemulihan.
+  description: ''
+  syntax: >-
+    az backup policy list --resource-group
+                          --vault-name
+                          [--backup-management-type {AzureIaasVM, AzureStorage, AzureWorkload}]
+                          [--policy-sub-type {Enhanced, Standard}]
+                          [--workload-type {AzureFileShare, MSSQL, SAPHANA, SAPHanaDatabase, SQLDataBase, VM}]
+  examples:
+  - summary: Mencantumkan semua kebijakan untuk vault layanan Pemulihan. (dibuat otomatis)
+    syntax: az backup policy list --resource-group MyResourceGroup --vault-name MyVault
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vault-name -v
+    summary: Nama vault layanan Pemulihan.
+    description: ''
+  optionalParameters:
+  - name: --backup-management-type
+    parameterValueGroup: AzureIaasVM, AzureStorage, AzureWorkload
+    summary: 'Tentukan jenis manajemen cadangan. Tentukan bagaimana Azure Backup mengelola cadangan entitas dalam sumber daya ARM. Misalnya: AzureWorkloads mengacu pada beban kerja yang diinstal dalam Azure VM, AzureStorage mengacu pada entitas dalam akun Storage. Diperlukan hanya jika nama yang mudah diingat digunakan sebagai Nama kontainer.'
+    description: ''
+  - name: --policy-sub-type
+    parameterValueGroup: Enhanced, Standard
+    summary: Sub jenis kebijakan yang akan diambil. Untuk mencantumkan kebijakan pencadangan standar, tentukan 'Standar' sebagai nilai parameter ini. Untuk mencantumkan kebijakan pencadangan yang disempurnakan untuk Azure VM, tentukan 'Ditingkatkan' sebagai nilai parameter ini.
+    description: ''
+  - name: --workload-type
+    parameterValueGroup: AzureFileShare, MSSQL, SAPHANA, SAPHanaDatabase, SQLDataBase, VM
+    summary: Tentukan jenis aplikasi dalam Sumber Daya yang harus ditemukan dan dilindungi oleh Azure Backup.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/backup/_help.py
+- uid: az_backup_policy_list-associated-items
+  name: az backup policy list-associated-items
+  summary: Mencantumkan semua item yang dilindungi oleh kebijakan pencadangan.
+  description: ''
+  syntax: >-
+    az backup policy list-associated-items [--backup-management-type {AzureIaasVM, AzureStorage, AzureWorkload}]
+                                           [--ids]
+                                           [--name]
+                                           [--resource-group]
+                                           [--vault-name]
+  examples:
+  - summary: Mencantumkan semua item yang dilindungi oleh kebijakan pencadangan
+    syntax: az backup policy list-associated-items --name MyBackupPolicy --resource-group MyResourceGroup --vault-name MyVault --backup-management-type AzureIaasVM
+  optionalParameters:
+  - name: --backup-management-type
+    parameterValueGroup: AzureIaasVM, AzureStorage, AzureWorkload
+    summary: 'Tentukan jenis manajemen cadangan. Tentukan bagaimana Azure Backup mengelola cadangan entitas dalam sumber daya ARM. Misalnya: AzureWorkloads mengacu pada beban kerja yang diinstal dalam Azure VM, AzureStorage mengacu pada entitas dalam akun Storage. Diperlukan hanya jika nama yang mudah diingat digunakan sebagai Nama kontainer.'
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama kebijakan pencadangan. Anda dapat menggunakan perintah daftar kebijakan cadangan untuk mendapatkan nama kebijakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --vault-name -v
+    summary: Nama vault layanan Pemulihan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/backup/_help.py
+- uid: az_backup_policy_set
+  name: az backup policy set
+  summary: Perbarui kebijakan yang ada dengan detail yang disediakan.
+  description: ''
+  syntax: >-
+    az backup policy set [--backup-management-type {AzureIaasVM, AzureStorage, AzureWorkload}]
+                         [--fix-for-inconsistent-items {false, true}]
+                         [--ids]
+                         [--name]
+                         [--policy]
+                         [--resource-group]
+                         [--vault-name]
+  examples:
+  - summary: Perbarui kebijakan yang ada dengan detail yang disediakan. (dibuat otomatis)
+    syntax: az backup policy set --policy {policy} --resource-group MyResourceGroup --vault-name MyVault
+  optionalParameters:
+  - name: --backup-management-type
+    parameterValueGroup: AzureIaasVM, AzureStorage, AzureWorkload
+    summary: 'Tentukan jenis manajemen cadangan. Tentukan bagaimana Azure Backup mengelola cadangan entitas dalam sumber daya ARM. Misalnya: AzureWorkloads mengacu pada beban kerja yang diinstal dalam Azure VM, AzureStorage mengacu pada entitas dalam akun Storage. Diperlukan hanya jika nama yang mudah diingat digunakan sebagai Nama kontainer.'
+    description: ''
+  - name: --fix-for-inconsistent-items
+    parameterValueGroup: false, true
+    summary: Tentukan apakah akan mencoba kembali Pembaruan Kebijakan untuk item yang gagal atau tidak.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Kebijakan.
+    description: ''
+  - name: --policy
+    summary: Definisi kebijakan yang dikodekan JSON. Gunakan perintah tampilkan dengan output JSON untuk mendapatkan objek kebijakan. Ubah nilai menggunakan editor file dan teruskan objek .
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --vault-name -v
+    summary: Nama vault layanan Pemulihan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/backup/_help.py
+- uid: az_backup_policy_show
+  name: az backup policy show
+  summary: Tampilkan detail kebijakan tertentu.
+  description: ''
+  syntax: >-
+    az backup policy show [--ids]
+                          [--name]
+                          [--resource-group]
+                          [--vault-name]
+  examples:
+  - summary: Menampilkan detail kebijakan tertentu
+    syntax: az backup policy show --name MyBackupPolicy --resource-group MyResourceGroup --vault-name MyVault
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama kebijakan pencadangan. Anda dapat menggunakan perintah daftar kebijakan cadangan untuk mendapatkan nama kebijakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --vault-name -v
+    summary: Nama vault layanan Pemulihan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/backup/_help.py
+commands:
+- az_backup_policy_create
+- az_backup_policy_delete
+- az_backup_policy_get-default-for-vm
+- az_backup_policy_list
+- az_backup_policy_list-associated-items
+- az_backup_policy_set
+- az_backup_policy_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 10/26/2021
+  description: Kebijakan pencadangan menentukan kapan Anda ingin mengambil cadangan dan berapa lama Anda akan mempertahankan setiap salinan cadangan.
+  ms.openlocfilehash: 5c17b037c7c2644704373884b1f7f0aecf6b7190
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141473598"

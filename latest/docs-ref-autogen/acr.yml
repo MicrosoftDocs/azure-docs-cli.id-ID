@@ -1,0 +1,787 @@
+### YamlMime:AzureCLIGroup
+uid: az_acr
+name: az acr
+summary: Mengelola registri privat dengan Azure Container Registries.
+description: ''
+directCommands:
+- uid: az_acr_build
+  name: az acr build
+  summary: Mengantrekan build cepat, menyediakan log streaming untuk Azure Container Registry.
+  description: ''
+  syntax: >-
+    az acr build --registry
+                 [--agent-pool]
+                 [--auth-mode {Default, None}]
+                 [--build-arg]
+                 [--file]
+                 [--image]
+                 [--log-template]
+                 [--no-format]
+                 [--no-logs]
+                 [--no-push]
+                 [--no-wait]
+                 [--platform]
+                 [--resource-group]
+                 [--secret-build-arg]
+                 [--target]
+                 [--timeout]
+                 [<SOURCE_LOCATION>]
+  examples:
+  - summary: Antrekan konteks lokal sebagai build Linux, tandai, dan dorong ke registri.
+    syntax: az acr build -t sample/hello-world:{{.Run.ID}} -r MyRegistry .
+  - summary: Antrekan konteks lokal sebagai build Linux, tandai, dan dorong ke registri tanpa log streaming.
+    syntax: az acr build -t sample/hello-world:{{.Run.ID}} -r MyRegistry --no-logs .
+  - summary: Antrekan konteks lokal sebagai build Linux tanpa mendorongnya ke registri.
+    syntax: az acr build -t sample/hello-world:{{.Run.ID}} -r MyRegistry --no-push .
+  - summary: Antrekan konteks lokal sebagai build Linux tanpa mendorongnya ke registri.
+    syntax: az acr build -r MyRegistry .
+  - summary: Antrekan konteks GitHub jarak jauh sebagai build Windows, tandai, dan dorong ke registri.
+    syntax: az acr build -r MyRegistry https://github.com/Azure/acr-builder.git -f Windows.Dockerfile --platform windows
+  - summary: Antrekan build konteks Artefak OCI jarak jauh.
+    syntax: az acr build -r MyRegistry oci://myregistry.azurecr.io/myartifact:mytag
+  - summary: Antrekan konteks lokal sebagai build Linux pada arsitektur arm/v7, tandai, dan dorong ke registri.
+    syntax: az acr build -t sample/hello-world:{{.Run.ID}} -r MyRegistry . --platform linux/arm/v7
+  requiredParameters:
+  - isRequired: true
+    name: --registry -r
+    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    description: ''
+  optionalParameters:
+  - name: --agent-pool
+    summary: Nama kumpulan agen.
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: Default, None
+    summary: Mode autentikasi registri sumber.
+    description: ''
+  - name: --build-arg
+    summary: Argumen build dalam format '--build-arg name[=value]'. Kelipatan didukung dengan meneruskan --build-arg beberapa kali.
+    description: ''
+  - name: --file -f
+    summary: Jalur relatif file docker ke folder akar kode sumber. Default ke 'Dockerfile'.
+    description: ''
+  - name: --image -t
+    summary: "Nama dan tag gambar menggunakan format: '-t repo/image:tag'. Beberapa tag didukung dengan meneruskan -t beberapa kali."
+    description: ''
+  - name: --log-template
+    summary: "Templat repositori dan tag untuk menjalankan artefak log menggunakan format: 'log/repo:tag' (misalnya, 'acr/logs:{{.Run.ID}}'). Hanya berlaku untuk registri yang diaktifkan CMK."
+    description: ''
+  - name: --no-format
+    summary: Menunjukkan apakah log harus ditampilkan dalam format mentah.
+    description: ''
+  - name: --no-logs
+    summary: Jangan tampilkan log setelah berhasil mengantre build.
+    description: ''
+  - name: --no-push
+    summary: Menunjukkan apakah gambar yang dibuat harus didorong ke registri.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu build selesai dan kembali segera setelah mengantre build.
+    description: ''
+  - name: --platform
+    summary: Platform tempat build/tugas dijalankan, Misalnya, 'windows' dan 'linux'. Ketika digunakan dalam perintah build, perintah tersebut juga dapat ditentukan dalam format 'os/arch/variant' untuk gambar yang dihasilkan. Misalnya, linux/arm/v7. Bagian 'arch' dan 'varian' bersifat opsional.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --secret-build-arg
+    summary: Argumen build rahasia dalam format '--secret-build-arg name[=value]'. Kelipatan didukung dengan meneruskan '--secret-build-arg name[=value]' beberapa kali.
+    description: ''
+  - name: --target
+    summary: Nama tahap build target.
+    description: ''
+  - name: --timeout
+    summary: Waktu habis dalam hitung detik.
+    description: ''
+  - name: <SOURCE_LOCATION>
+    summary: Jalur direktori kode sumber lokal (misalnya, './src'), atau URL ke repositori git (misalnya, 'https://github.com/Azure-Samples/acr-build-helloworld-node.git') atau tarball jarak jauh (misalnya, 'http://server/context.tar.gz'), atau repositori artefak OCI di registri kontainer Azure (misalnya, 'oci://myregistry.azurecr.io/myartifact:mytag').
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+- uid: az_acr_check-health
+  name: az acr check-health
+  summary: Dapatkan informasi kesehatan lingkungan dan, secara opsional, informasi kesehatan mengenai registri target.
+  description: ''
+  syntax: >-
+    az acr check-health [--ignore-errors]
+                        [--name]
+                        [--vnet]
+                        [--yes]
+  examples:
+  - summary: Mendapatkan status kesehatan dengan registri target 'MyRegistry', melewati konfirmasi untuk menarik gambar.
+    syntax: az acr check-health -n MyRegistry -y
+  - summary: Mendapatkan status kesehatan lingkungan, tanpa berhenti pada kesalahan pertama.
+    syntax: az acr check-health --ignore-errors
+  optionalParameters:
+  - name: --ignore-errors
+    summary: Berikan semua pemeriksaan kesehatan, meskipun kesalahan ditemukan.
+    description: ''
+  - name: --name -n
+    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    description: ''
+  - name: --vnet
+    summary: ID jaringan virtual sehingga untuk menjalankan perintah ini di dalam VNET untuk memverifikasi perutean DNS ke titik akhir privat.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+- uid: az_acr_check-name
+  name: az acr check-name
+  summary: Memeriksa apakah nama Azure Container Registry valid dan tersedia untuk digunakan.
+  description: ''
+  syntax: az acr check-name --name
+  examples:
+  - summary: Periksa apakah nama registri sudah ada.
+    syntax: az acr check-name -n doesthisnameexist
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+- uid: az_acr_create
+  name: az acr create
+  summary: Buat Azure Container Registry.
+  description: ''
+  syntax: >-
+    az acr create --name
+                  --resource-group
+                  --sku {Basic, Classic, Premium, Standard}
+                  [--admin-enabled {false, true}]
+                  [--allow-exports {false, true}]
+                  [--allow-trusted-services {false, true}]
+                  [--default-action {Allow, Deny}]
+                  [--identity]
+                  [--key-encryption-key]
+                  [--location]
+                  [--public-network-enabled {false, true}]
+                  [--tags]
+                  [--workspace]
+                  [--zone-redundancy {Disabled, Enabled}]
+  examples:
+  - summary: Buat registri kontainer terkelola dengan SKU Standar.
+    syntax: az acr create -n MyRegistry -g MyResourceGroup --sku Standard
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --sku
+    parameterValueGroup: Basic, Classic, Premium, Standard
+    summary: SKU registri kontainer.
+    description: ''
+  optionalParameters:
+  - name: --admin-enabled
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah pengguna admin diaktifkan.
+    description: ''
+  - name: --allow-exports
+    parameterValueGroup: false, true
+    summary: Konfigurasikan exportPolicy untuk mengizinkan/melarang artefak diekspor dari registri ini. Artefak dapat diekspor melalui operasi impor atau transfer. Untuk informasi lebih lanjut, silakan kunjungi https://aka.ms/acr/export-policy.
+    description: ''
+  - name: --allow-trusted-services
+    parameterValueGroup: false, true
+    summary: Izinkan Layanan Azure tepercaya mengakses registri terbatas jaringan. Untuk informasi lebih lanjut, silakan kunjungi https://aka.ms/acr/trusted-services. Defaultnya adalah mengizinkan.
+    description: ''
+  - name: --default-action
+    parameterValueGroup: Allow, Deny
+    summary: Tindakan default yang akan diterapkan saat tidak ada aturan yang cocok. Hanya berlaku untuk SKU Premium.
+    description: ''
+  - name: --identity
+    summary: Gunakan id atau nama sumber daya identitas terkelola yang ditetapkan jika berada dalam grup sumber daya yang sama.
+    description: ''
+  - name: --key-encryption-key
+    summary: Uri kunci brankas kunci. Untuk mengaktifkan rotasi otomatis, berikan uri kunci tanpa versi. Untuk rotasi manual, berikan uri kunci versi.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --public-network-enabled
+    parameterValueGroup: false, true
+    summary: Izinkan akses jaringan publik untuk registri kontainer. Defaultnya adalah mengizinkan.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --workspace
+    summary: Nama atau ID ruang kerja Analitik Log untuk mengirim log diagnostik registri. Semua peristiwa akan diaktifkan. Anda dapat menggunakan "az monitor log-analytics workspace create" untuk membuatnya. Penagihan tambahan mungkin berlaku.
+    description: ''
+  - name: --zone-redundancy
+    parameterValueGroup: Disabled, Enabled
+    summary: Menunjukkan apakah redundansi zona harus diaktifkan atau tidak untuk registri atau replikasi ini. Untuk informasi selengkapnya, seperti lokasi yang didukung, silakan kunjungi https://aka.ms/acr/az. Redundansi zona tidak dapat diperbarui. Default ke 'Dinonaktifkan'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+- uid: az_acr_delete
+  name: az acr delete
+  summary: Menghapus Azure Container Registry.
+  description: ''
+  syntax: >-
+    az acr delete --name
+                  [--resource-group]
+                  [--yes]
+  examples:
+  - summary: Menghapus Azure Container Registry.
+    syntax: az acr delete -n MyRegistry
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+- uid: az_acr_import
+  name: az acr import
+  summary: Mengimpor citra ke Azure Container Registry dari Container Registry lain. Proses impor menghilangkan kebutuhan untuk penarikan docker, tag docker, pendorongan docker. Untuk gambar yang lebih besar, pertimbangkan untuk menggunakan `--no-wait`.
+  description: ''
+  syntax: >-
+    az acr import --name
+                  --source
+                  [--force]
+                  [--image]
+                  [--no-wait]
+                  [--password]
+                  [--registry]
+                  [--repository]
+                  [--resource-group]
+                  [--username]
+  examples:
+  - summary: Impor gambar dari 'sourceregistry' ke 'MyRegistry'. Gambar mewarisi repositori sumber dan nama tagnya.
+    syntax: az acr import -n MyRegistry --source sourceregistry.azurecr.io/sourcerepository:sourcetag
+  - summary: Impor gambar dari repositori publik di Docker Hub. Gambar menggunakan nama repositori dan tag yang ditentukan.
+    syntax: az acr import -n MyRegistry --source docker.io/library/hello-world:latest -t targetrepository:targettag
+  - summary: Impor gambar dari repositori privat menggunakan nama pengguna dan kata sandinya. Ini juga berlaku untuk registri di luar Azure.
+    syntax: az acr import -n MyRegistry --source myprivateregistry.azurecr.io/hello-world:latest -u username -p password
+  - summary: Impor gambar dari registri kontainer Azure di langganan lain.
+    syntax: >-
+      az acr import -n MyRegistry --source sourcerepository:sourcetag -t targetrepository:targettag \
+          -r /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sourceResourceGroup/providers/Microsoft.ContainerRegistry/registries/sourceRegistry
+  - summary: Impor gambar tanpa menunggu keberhasilan penyelesaian. Kegagalan selama impor tidak akan tercermin. Jalankan `az acr repository show-tags` untuk mengonfirmasi bahwa impor berhasil.
+    syntax: az acr import -n MyRegistry --source sourceregistry.azurecr.io/sourcerepository:sourcetag --no-wait
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    description: ''
+  - isRequired: true
+    name: --source
+    summary: Nama gambar sumber atau sumber yang sepenuhnya memenuhi syarat yang berisi server masuk registri. Jika `--registry` digunakan, `--source` akan selalu ditafsirkan sebagai gambar sumber, bahkan jika berisi server login.
+    description: ''
+  optionalParameters:
+  - name: --force
+    summary: Timpa tag gambar yang ada untuk diimpor.
+    description: ''
+  - name: --image -t
+    summary: "Nama dan tag gambar menggunakan format: '-t repo/image:tag'. Beberapa tag didukung dengan meneruskan -t beberapa kali."
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu impor selesai dan kembali segera setelah mengantre impor.
+    description: ''
+  - name: --password -p
+    summary: Kata sandi registri kontainer sumber.
+    description: ''
+  - name: --registry -r
+    summary: Registri kontainer Azure sumber. Ini bisa berupa nama, server login, atau ID sumber daya dari registri sumber.
+    description: ''
+  - name: --repository
+    summary: Nama repositori untuk salinan gambar khusus manifes. Beberapa salinan didukung dengan meneruskan --repositori beberapa kali.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --username -u
+    summary: Nama pengguna registri kontainer sumber.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+- uid: az_acr_list
+  name: az acr list
+  summary: Mencantumkan semua registri kontainer di langganan saat ini.
+  description: ''
+  syntax: az acr list [--resource-group]
+  examples:
+  - summary: Cantumkan registri kontainer dan perlihatkan hasilnya dalam tabel, di beberapa grup sumber daya.
+    syntax: az acr list -o table
+  - summary: Mencantumkan registri kontainer dalam grup sumber daya dan memperlihatkan hasilnya dalam tabel.
+    syntax: az acr list -g MyResourceGroup -o table
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+- uid: az_acr_login
+  name: az acr login
+  summary: Masuk ke Azure Container Registry melalui Docker CLI.
+  description: Docker harus diinstal pada komputer Anda. Setelah selesai, gunakan 'docker logout <registry url>' untuk keluar. (Jika Anda hanya memerlukan token akses dan tidak ingin menginstal Docker, tentukan '--expose-token').
+  syntax: >-
+    az acr login --name
+                 [--expose-token]
+                 [--password]
+                 [--resource-group]
+                 [--suffix]
+                 [--username]
+  examples:
+  - summary: Masuk ke Azure Container Registry
+    syntax: az acr login -n MyRegistry
+  - summary: Mendapatkan token akses Azure Container Registry
+    syntax: az acr login -n MyRegistry --expose-token
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    description: ''
+  optionalParameters:
+  - name: --expose-token -t
+    summary: Mengekspos token akses alih-alih masuk secara otomatis melalui Docker CLI.
+    description: ''
+  - name: --password -p
+    summary: Kata sandi yang digunakan untuk masuk ke registri kontainer.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --suffix
+    summary: Akhiran penyewa di server masuk registri. Anda dapat menentukan '--akhiran penyewa' jika server masuk registri Anda dalam format 'registry-tenant.azurecr.io'. Berlaku jika Anda mengakses registri dari langganan lain atau Anda memiliki izin untuk mengakses gambar tetapi bukan izin untuk mengelola sumber daya registri.
+    description: ''
+  - name: --username -u
+    summary: Nama pengguna yang digunakan untuk masuk ke registri kontainer.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+- uid: az_acr_run
+  name: az acr run
+  summary: Mengantrekan eksekusi cepat yang menyediakan log yang dialirkan untuk Azure Container Registry.
+  description: ''
+  syntax: >-
+    az acr run --registry
+               [--agent-pool]
+               [--auth-mode {Default, None}]
+               [--cmd]
+               [--file]
+               [--log-template]
+               [--no-format]
+               [--no-logs]
+               [--no-wait]
+               [--platform]
+               [--resource-group]
+               [--set]
+               [--set-secret]
+               [--timeout]
+               [--values]
+               [<SOURCE_LOCATION>]
+  examples:
+  - summary: Antrekan eksekusi untuk menjalankan perintah kontainer.
+    syntax: az acr run -r MyRegistry --cmd '$Registry/myimage' /dev/null
+  - summary: Antrekan eksekusi dengan definisi tugas dari input standar. Baik 'Ctrl + Z'(Windows) atau 'Ctrl + D'(Linux) mengakhiri aliran input.
+    syntax: az acr run -r MyRegistry -f - /dev/null
+  - summary: Antrekan eksekusi untuk menjalankan tugas yang diteruskan melalui pipa.
+    syntax: cat task.yaml | az acr run -r MyRegistry -f - /dev/null
+  - summary: Antrekan konteks lokal, didorong ke ACR dengan log streaming.
+    syntax: az acr run -r MyRegistry -f bash-echo.yaml ./workspace
+  - summary: Mengantrekan konteks git jarak jauh dengan log streaming.
+    syntax: az acr run -r MyRegistry https://github.com/Azure-Samples/acr-tasks.git -f hello-world.yaml
+  - summary: Antrekan konteks git jarak jauh dengan log streaming dan jalankan tugas di platform Linux.
+    syntax: az acr run -r MyRegistry https://github.com/Azure-Samples/acr-tasks.git -f build-hello-world.yaml --platform linux
+  - summary: Mengantre konteks Artefak OCI jarak jauh dan menjalankan tugas.
+    syntax: az acr run -r MyRegistry oci://myregistry.azurecr.io/myartifact:mytag -f hello-world.yaml
+  requiredParameters:
+  - isRequired: true
+    name: --registry -r
+    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    description: ''
+  optionalParameters:
+  - name: --agent-pool
+    summary: Nama kumpulan agen.
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: Default, None
+    summary: Mode autentikasi registri sumber.
+    description: ''
+  - name: --cmd
+    summary: Perintah untuk dijalankan. Ini juga mendukung parameter eksekusi docker tambahan (https://docs.docker.com/engine/reference/commandline/run/) atau bahkan perintah docker lainnya (https://docs.docker.com/engine/reference/commandline/docker/).
+    description: ''
+  - name: --file -f
+    summary: Jalur file templat/definisi tugas relatif terhadap konteks sumber. Dapat berupa '-' untuk menyalurkan file dari input standar.
+    description: ''
+  - name: --log-template
+    summary: "Templat repositori dan tag untuk menjalankan artefak log menggunakan format: 'log/repo:tag' (misalnya, 'acr/logs:{{.Run.ID}}'). Hanya berlaku untuk registri yang diaktifkan CMK."
+    description: ''
+  - name: --no-format
+    summary: Menunjukkan apakah log harus ditampilkan dalam format mentah.
+    description: ''
+  - name: --no-logs
+    summary: Jangan tampilkan log setelah berhasil mengantre build.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu eksekusi selesai dan kembali segera setelah mengantre eksekusi.
+    description: ''
+  - name: --platform
+    summary: Platform tempat build/tugas dijalankan, Misalnya, 'windows' dan 'linux'. Ketika digunakan dalam perintah build, perintah tersebut juga dapat ditentukan dalam format 'os/arch/variant' untuk gambar yang dihasilkan. Misalnya, linux/arm/v7. Bagian 'arch' dan 'varian' bersifat opsional.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: Nilai dalam format 'name[=value]'. Kelipatan didukung dengan melewati --set beberapa kali.
+    description: ''
+  - name: --set-secret
+    summary: Nilai rahasia dalam format '--set nama[=value]'. Kelipatan didukung dengan melewati --set beberapa kali.
+    description: ''
+  - name: --timeout
+    summary: Waktu habis dalam hitung detik.
+    description: ''
+  - name: --values
+    summary: Jalur file nilai tugas relatif terhadap konteks sumber.
+    description: ''
+  - name: <SOURCE_LOCATION>
+    summary: Jalur direktori kode sumber lokal (misalnya, './src'), atau URL ke repositori git (misalnya, 'https://github.com/Azure-Samples/acr-build-helloworld-node.git'), atau tarball jarak jauh (misalnya, 'http://server/context.tar.gz'), atau repositori artefak OCI di registri kontainer Azure (misalnya, 'oci://myregistry.azurecr.io/myartifact:mytag'). Jika '/dev/null' ditentukan, nilai akan diatur ke Tidak Ada dan diabaikan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+- uid: az_acr_show
+  name: az acr show
+  summary: Mendapatkan detail Azure Container Registry.
+  description: ''
+  syntax: >-
+    az acr show --name
+                [--resource-group]
+  examples:
+  - summary: Dapatkan server login untuk Azure Container Registry.
+    syntax: az acr show -n MyRegistry --query loginServer
+  - summary: Mendapatkan detail Azure Container Registry
+    syntax: az acr show --name MyRegistry --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+- uid: az_acr_show-endpoints
+  name: az acr show-endpoints
+  summary: Tampilkan titik akhir registri.
+  description: ''
+  syntax: >-
+    az acr show-endpoints --name
+                          [--resource-group]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+- uid: az_acr_show-usage
+  name: az acr show-usage
+  summary: Mendapatkan penggunaan penyimpanan Azure Container Registry.
+  description: ''
+  syntax: >-
+    az acr show-usage --name
+                      [--resource-group]
+  examples:
+  - summary: Mendapatkan penggunaan penyimpanan Azure Container Registry.
+    syntax: az acr show-usage -n MyRegistry
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+- uid: az_acr_update
+  name: az acr update
+  summary: Memperbarui Azure Container Registry.
+  description: ''
+  syntax: >-
+    az acr update --name
+                  [--add]
+                  [--admin-enabled {false, true}]
+                  [--allow-exports {false, true}]
+                  [--allow-trusted-services {false, true}]
+                  [--anonymous-pull-enabled {false, true}]
+                  [--data-endpoint-enabled {false, true}]
+                  [--default-action {Allow, Deny}]
+                  [--force-string]
+                  [--public-network-enabled {false, true}]
+                  [--remove]
+                  [--resource-group]
+                  [--set]
+                  [--sku {Basic, Classic, Premium, Standard}]
+                  [--tags]
+  examples:
+  - summary: Memperbarui tag untuk Azure Container Registry.
+    syntax: az acr update -n MyRegistry --tags key1=value1 key2=value2
+  - summary: Aktifkan akun pengguna administrator untuk Azure Container Registry.
+    syntax: az acr update -n MyRegistry --admin-enabled true
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --admin-enabled
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah pengguna admin diaktifkan.
+    description: ''
+  - name: --allow-exports
+    parameterValueGroup: false, true
+    summary: Konfigurasikan exportPolicy untuk mengizinkan/melarang artefak diekspor dari registri ini. Artefak dapat diekspor melalui operasi impor atau transfer. Untuk informasi lebih lanjut, silakan kunjungi https://aka.ms/acr/export-policy.
+    description: ''
+  - name: --allow-trusted-services
+    parameterValueGroup: false, true
+    summary: Izinkan Layanan Azure tepercaya mengakses registri terbatas jaringan. Untuk informasi lebih lanjut, silakan kunjungi https://aka.ms/acr/trusted-services.
+    description: ''
+  - name: --anonymous-pull-enabled
+    parameterValueGroup: false, true
+    summary: Aktifkan penarikan seluruh registri dari klien yang tidak terauthentikasi.
+    description: ''
+  - name: --data-endpoint-enabled
+    parameterValueGroup: false, true
+    summary: Aktifkan titik akhir data khusus untuk konfigurasi firewall klien.
+    description: ''
+  - name: --default-action
+    parameterValueGroup: Allow, Deny
+    summary: Tindakan default yang akan diterapkan ketika tidak ada aturan yang cocok. Hanya berlaku untuk SKU Premium.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --public-network-enabled
+    parameterValueGroup: false, true
+    summary: Izinkan akses jaringan publik untuk registri kontainer.
+    description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --sku
+    parameterValueGroup: Basic, Classic, Premium, Standard
+    summary: SKU registri kontainer.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+commands:
+- az_acr_agentpool
+- az_acr_agentpool_create
+- az_acr_agentpool_delete
+- az_acr_agentpool_list
+- az_acr_agentpool_show
+- az_acr_agentpool_update
+- az_acr_build
+- az_acr_check-health
+- az_acr_check-name
+- az_acr_config
+- az_acr_config_content-trust
+- az_acr_config_content-trust_show
+- az_acr_config_content-trust_update
+- az_acr_config_retention
+- az_acr_config_retention_show
+- az_acr_config_retention_update
+- az_acr_connected-registry
+- az_acr_connected-registry_create
+- az_acr_connected-registry_deactivate
+- az_acr_connected-registry_delete
+- az_acr_connected-registry_get-settings
+- az_acr_connected-registry_install
+- az_acr_connected-registry_install_info
+- az_acr_connected-registry_install_renew-credentials
+- az_acr_connected-registry_list
+- az_acr_connected-registry_list-client-tokens
+- az_acr_connected-registry_permissions
+- az_acr_connected-registry_permissions_show
+- az_acr_connected-registry_permissions_update
+- az_acr_connected-registry_repo
+- az_acr_connected-registry_show
+- az_acr_connected-registry_update
+- az_acr_create
+- az_acr_credential
+- az_acr_credential_renew
+- az_acr_credential_show
+- az_acr_delete
+- az_acr_encryption
+- az_acr_encryption_rotate-key
+- az_acr_encryption_show
+- az_acr_export-pipeline
+- az_acr_export-pipeline_create
+- az_acr_export-pipeline_delete
+- az_acr_export-pipeline_list
+- az_acr_export-pipeline_show
+- az_acr_helm
+- az_acr_helm_delete
+- az_acr_helm_install-cli
+- az_acr_helm_list
+- az_acr_helm_push
+- az_acr_helm_repo
+- az_acr_helm_repo_add
+- az_acr_helm_show
+- az_acr_identity
+- az_acr_identity_assign
+- az_acr_identity_remove
+- az_acr_identity_show
+- az_acr_import
+- az_acr_import-pipeline
+- az_acr_import-pipeline_create
+- az_acr_import-pipeline_delete
+- az_acr_import-pipeline_list
+- az_acr_import-pipeline_show
+- az_acr_list
+- az_acr_login
+- az_acr_manifest
+- az_acr_manifest_delete
+- az_acr_manifest_list
+- az_acr_manifest_list-metadata
+- az_acr_manifest_list-referrers
+- az_acr_manifest_metadata
+- az_acr_manifest_metadata_list
+- az_acr_manifest_metadata_show
+- az_acr_manifest_metadata_update
+- az_acr_manifest_show
+- az_acr_manifest_show-metadata
+- az_acr_manifest_update-metadata
+- az_acr_network-rule
+- az_acr_network-rule_add
+- az_acr_network-rule_list
+- az_acr_network-rule_remove
+- az_acr_pack
+- az_acr_pack_build
+- az_acr_pipeline-run
+- az_acr_pipeline-run_clean
+- az_acr_pipeline-run_create
+- az_acr_pipeline-run_delete
+- az_acr_pipeline-run_list
+- az_acr_pipeline-run_show
+- az_acr_private-endpoint-connection
+- az_acr_private-endpoint-connection_approve
+- az_acr_private-endpoint-connection_delete
+- az_acr_private-endpoint-connection_list
+- az_acr_private-endpoint-connection_reject
+- az_acr_private-endpoint-connection_show
+- az_acr_private-link-resource
+- az_acr_private-link-resource_list
+- az_acr_replication
+- az_acr_replication_create
+- az_acr_replication_delete
+- az_acr_replication_list
+- az_acr_replication_show
+- az_acr_replication_update
+- az_acr_repository
+- az_acr_repository_delete
+- az_acr_repository_list
+- az_acr_repository_show
+- az_acr_repository_show-manifests
+- az_acr_repository_show-tags
+- az_acr_repository_untag
+- az_acr_repository_update
+- az_acr_run
+- az_acr_scope-map
+- az_acr_scope-map_create
+- az_acr_scope-map_delete
+- az_acr_scope-map_list
+- az_acr_scope-map_show
+- az_acr_scope-map_update
+- az_acr_show
+- az_acr_show-endpoints
+- az_acr_show-usage
+- az_acr_task
+- az_acr_task_cancel-run
+- az_acr_task_create
+- az_acr_task_credential
+- az_acr_task_credential_add
+- az_acr_task_credential_list
+- az_acr_task_credential_remove
+- az_acr_task_credential_update
+- az_acr_task_delete
+- az_acr_task_identity
+- az_acr_task_identity_assign
+- az_acr_task_identity_remove
+- az_acr_task_identity_show
+- az_acr_task_list
+- az_acr_task_list-runs
+- az_acr_task_logs
+- az_acr_task_run
+- az_acr_task_show
+- az_acr_task_show-run
+- az_acr_task_timer
+- az_acr_task_timer_add
+- az_acr_task_timer_list
+- az_acr_task_timer_remove
+- az_acr_task_timer_update
+- az_acr_task_update
+- az_acr_task_update-run
+- az_acr_taskrun
+- az_acr_taskrun_delete
+- az_acr_taskrun_list
+- az_acr_taskrun_logs
+- az_acr_taskrun_show
+- az_acr_token
+- az_acr_token_create
+- az_acr_token_credential
+- az_acr_token_credential_delete
+- az_acr_token_credential_generate
+- az_acr_token_delete
+- az_acr_token_list
+- az_acr_token_show
+- az_acr_token_update
+- az_acr_update
+- az_acr_webhook
+- az_acr_webhook_create
+- az_acr_webhook_delete
+- az_acr_webhook_get-config
+- az_acr_webhook_list
+- az_acr_webhook_list-events
+- az_acr_webhook_ping
+- az_acr_webhook_show
+- az_acr_webhook_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/28/2022
+  description: Mengelola registri privat dengan Azure Container Registries.
+  ms.openlocfilehash: 8914e4d0b1fa323f61301fff09c5b9ca0d40894f
+  ms.sourcegitcommit: d016676aca62d5461b07446d98cf38e30bba07cd
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/19/2022
+  ms.locfileid: "143884277"
