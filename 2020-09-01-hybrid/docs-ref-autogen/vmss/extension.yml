@@ -1,0 +1,226 @@
+### YamlMime:AzureCLIGroup
+uid: az_vmss_extension
+name: az vmss extension
+summary: Mengelola ekstensi pada set skala VM.
+description: ''
+directCommands:
+- uid: az_vmss_extension_delete
+  name: az vmss extension delete
+  summary: Menghapus ekstensi dari VMSS.
+  description: ''
+  syntax: >-
+    az vmss extension delete --name
+                             --resource-group
+                             --vmss-name
+                             [--no-wait]
+  examples:
+  - summary: Menghapus ekstensi dari VMSS. (dibuat otomatis)
+    syntax: az vmss extension delete --name MyExtension --resource-group MyResourceGroup --vmss-name MyVmss
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama ekstensi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vmss-name
+    summary: Nama set skala. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vmss=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_extension_list
+  name: az vmss extension list
+  summary: Mencantumkan ekstensi yang terkait dengan VMSS.
+  description: ''
+  syntax: >-
+    az vmss extension list --resource-group
+                           --vmss-name
+  examples:
+  - summary: Mencantumkan ekstensi yang terkait dengan VMSS. (dibuat otomatis)
+    syntax: az vmss extension list --resource-group MyResourceGroup --vmss-name MyVmss
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vmss-name
+    summary: Nama set skala. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vmss=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_extension_set
+  name: set ekstensi az vmss
+  summary: Tambahkan ekstensi ke VMSS atau perbarui ekstensi yang ada.
+  description: Dapatkan detail ekstensi dari `az vmss extension image list`.
+  syntax: >-
+    az vmss extension set --name
+                          --publisher
+                          --resource-group
+                          --vmss-name
+                          [--enable-auto-upgrade {false, true}]
+                          [--extension-instance-name]
+                          [--force-update]
+                          [--no-auto-upgrade {false, true}]
+                          [--no-auto-upgrade-minor-version {false, true}]
+                          [--no-wait]
+                          [--protected-settings]
+                          [--provision-after-extensions]
+                          [--settings]
+                          [--version]
+  examples:
+  - summary: Atur ekstensi yang bergantung pada dua ekstensi yang ditetapkan sebelumnya. Artinya, Ketika instans VMSS dibuat atau dicitrakan ulang, ekstensi customScript akan disediakan hanya setelah semua ekstensi yang bergantung padanya telah disediakan. Ekstensi tidak perlu bergantung pada ekstensi lain untuk konfigurasi prasyarat.
+    syntax: >-
+      az vmss extension set --vmss-name my-vmss --name customScript --resource-group my-group \
+          --version 2.0 --publisher Microsoft.Azure.Extensions \
+          --provision-after-extensions NetworkWatcherAgentLinux VMAccessForLinux  \
+          --settings '{"commandToExecute": "echo testing"}'
+  - summary: Tambahkan ekstensi dan aktifkan peningkatan otomatis oleh platform jika ada versi ekstensi yang lebih baru yang tersedia.
+    syntax: az vmss extension set -n extName --publisher publisher --vmss-name my-vmss -g my-group \ --enable-auto-upgrade true
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama ekstensi.
+    description: ''
+    valueFrom: az vm extension image list
+  - isRequired: true
+    name: --publisher
+    summary: Nama penerbit ekstensi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vmss-name
+    summary: Nama set skala. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vmss=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --enable-auto-upgrade
+    parameterValueGroup: false, true
+    summary: Tunjukkan ekstensi harus ditingkatkan secara otomatis oleh platform jika ada versi ekstensi yang lebih baru yang tersedia.
+    description: ''
+  - name: --extension-instance-name
+    summary: 'Nama instans ekstensi, yang dapat disesuaikan. Default: nama ekstensi.'
+    description: ''
+  - name: --force-update
+    summary: Paksa untuk memperbarui meskipun konfigurasi ekstensi tidak berubah.
+    description: ''
+  - name: --no-auto-upgrade
+    parameterValueGroup: false, true
+    summary: Jika diatur, layanan ekstensi tidak akan secara otomatis memilih atau meningkatkan ke versi minor terbaru, bahkan jika ekstensi disebarkan ulang.
+    description: ''
+  - name: --no-auto-upgrade-minor-version
+    parameterValueGroup: false, true
+    summary: Jika diatur, layanan ekstensi tidak akan secara otomatis memilih atau meningkatkan ke versi minor terbaru, bahkan jika ekstensi disebarkan ulang.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --protected-settings
+    summary: Pengaturan yang dilindungi dalam format JSON untuk informasi sensitif seperti kredensial. Jalur file JSON juga diterima.
+    description: ''
+  - name: --provision-after-extensions
+    summary: Daftar nama ekstensi yang dipisahkan spasi setelah ekstensi ini harus disediakan. Ekstensi ini harus sudah diatur pada vm.
+    description: ''
+  - name: --settings
+    summary: Pengaturan ekstensi dalam format JSON. Jalur file JSON juga diterima.
+    description: ''
+  - name: --version
+    summary: Versi ekstensi. Untuk menyematkan versi ekstensi ke nilai ini, tentukan --no-auto-upgrade-minor-version.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_extension_show
+  name: az vmss extension show
+  summary: Tampilkan detail pada ekstensi VMSS.
+  description: ''
+  syntax: >-
+    az vmss extension show --name
+                           --resource-group
+                           --vmss-name
+  examples:
+  - summary: Tampilkan detail pada ekstensi VMSS. (dibuat otomatis)
+    syntax: az vmss extension show --name MyExtension --resource-group MyResourceGroup --vmss-name MyVmss
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama ekstensi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vmss-name
+    summary: Nama set skala. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vmss=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vmss_extension_upgrade
+  name: peningkatan ekstensi az vmss
+  summary: Tingkatkan semua ekstensi untuk semua instans VMSS ke versi terbaru.
+  description: ''
+  syntax: >-
+    az vmss extension upgrade [--ids]
+                              [--name]
+                              [--no-wait]
+                              [--resource-group]
+  examples:
+  - summary: Tingkatkan semua ekstensi ke versi terbaru.
+    syntax: az vmss extension upgrade -g MyResourceGroup -n MyVmss
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama set skala. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vmss=<name>`.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+commands:
+- az_vmss_extension_delete
+- az_vmss_extension_image
+- az_vmss_extension_image_list
+- az_vmss_extension_image_list-names
+- az_vmss_extension_image_list-versions
+- az_vmss_extension_image_show
+- az_vmss_extension_list
+- az_vmss_extension_set
+- az_vmss_extension_show
+- az_vmss_extension_upgrade
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 04/01/2022
+  description: Mengelola ekstensi pada set skala VM.
+  ms.openlocfilehash: 6dd0f602cbcb4d4256f659287da1b4d9603365b4
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141450000"

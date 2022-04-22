@@ -1,21 +1,21 @@
 ---
 title: Masuk dengan Azure CLI — Aktivitas Masuk dan Autentikasi | Microsoft Docs
 description: Pelajari berbagai jenis autentikasi untuk aktivitas masuk Azure CLI — masuk dengan Azure CLI secara otomatis, lokal, atau interaktif menggunakan perintah az login.
-author: dbradish-microsoft
-ms.author: dbradish
-manager: barbkess
+author: jiasli
+ms.author: jiasli
+manager: yonzhan
 ms.date: 09/10/2021
 ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: az login, jenis autentikasi, metode autentikasi, azure, cli login, az login powershell, cli login
-ms.openlocfilehash: 1272165a031169b2b3fcdee79d16ae4dd1b091f5
-ms.sourcegitcommit: ad79327952adf0f8be8f1b9678e72434d9f03f0c
+ms.openlocfilehash: f2b5bedd66fdb29bd6ddb78dc3392208b7e7a969
+ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 02/12/2022
-ms.locfileid: "138520331"
+ms.lasthandoff: 04/22/2022
+ms.locfileid: "144002996"
 ---
 # <a name="sign-in-with-azure-cli"></a>Masuk dengan Azure CLI 
 

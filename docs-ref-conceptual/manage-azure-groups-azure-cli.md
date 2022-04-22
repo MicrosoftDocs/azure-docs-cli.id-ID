@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: Grup sumber daya Azure, grup sumber daya di Azure
-ms.openlocfilehash: fda917493b9cba9e2cde461e28367c5e326e9c59
-ms.sourcegitcommit: ecad34e4d4654660377050fccba7861e942e03de
+ms.openlocfilehash: fd599d236f33a133c5506eb89a32bb2062913b00
+ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 09/13/2021
-ms.locfileid: "132439037"
+ms.lasthandoff: 04/22/2022
+ms.locfileid: "144003912"
 ---
 # <a name="how-to-manage-azure-resource-groups-with-the-azure-cli"></a>Cara mengelola grup sumber daya Azure dengan Azure CLI
 
@@ -44,7 +44,7 @@ az group list --output table
 ```
 
 > [!TIP]
-> `--output` Parameternya adalah parameter global, tersedia untuk semua perintah. Nilai **tabel** menyajikan output dalam format yang bersahabat. Untuk informasi selengkapnya, lihat [Format output untuk perintah Azure CLI](/cli/azure/format-output-azure-cli).
+> `--output` Parameternya adalah parameter global, tersedia untuk semua perintah. Nilai **tabel** menyajikan output dalam format yang bersahabat. Untuk informasi selengkapnya, lihat [Format output untuk perintah Azure CLI](./format-output-azure-cli.md).
 
 Saat Anda membuat sumber daya, Anda membuatnya dalam grup sumber daya. Contoh berikut menunjukkan akun penyimpanan yang dibuat dengan menggunakan perintah [az storage account create](/cli/azure/storage/account#az_storage_account_create) :
 
@@ -104,7 +104,7 @@ az config param-persist off
 
 Azure CLI menyimpan nilai tetap Anda. Anda dapat melihatnya di file konteks lokal. Jika Anda mengaktifkan lagi parameter persistensi, nilai tersebut sudah ditetapkan.
 
-Untuk informasi selengkapnya tentang menggunakan perintah [az config param-persist](/cli/azure/config/param-persist), lihat [Menggunakan parameter tetap untuk menyederhanakan perintah Azure CLI berurutan](/cli/azure/param-persist-tutorial).
+Untuk informasi selengkapnya tentang menggunakan perintah [az config param-persist](../latest/docs-ref-autogen/config/param-persist.yml), lihat [Menggunakan parameter tetap untuk menyederhanakan perintah Azure CLI berurutan](./param-persist-tutorial.md).
 
 ## <a name="set-a-default-resource-group"></a>Mengatur grup sumber daya default
 
@@ -122,7 +122,7 @@ Untuk mengatur grup sumber daya default untuk penginstalan Azure CLI Anda, jalan
 az config set defaults.group=MyResourceGroup
 ```
 
-Perintah menetapkan nilai untuk kunci tertentu, dalam hal ini `defaults.group`. Untuk opsi konfigurasi yang tersedia, lihat [Konfigurasi Azure CLI](/cli/azure/azure-cli-configuration).
+Perintah menetapkan nilai untuk kunci tertentu, dalam hal ini `defaults.group`. Untuk opsi konfigurasi yang tersedia, lihat [Konfigurasi Azure CLI](./azure-cli-configuration.md).
 
 > [!NOTE]
 > Perintah [az config set](/cli/azure/config#az_config_set) tidak memvalidasi keberadaan grup sumber daya yang Anda masukkan. Perintah hanya menyimpan pasangan nilai kunci.
@@ -167,8 +167,8 @@ az config param-persist delete --all
 
 ## <a name="see-also"></a>Lihat juga
 
-[Konfigurasi CLI Azure](/cli/azure/azure-cli-configuration)
+[Konfigurasi CLI Azure](./azure-cli-configuration.md)
 
-[Tutorial: Gunakan parameter tetap untuk menyederhanakan perintah Azure CLI berurutan](/cli/azure/param-persist-tutorial)
+[Tutorial: Gunakan parameter tetap untuk menyederhanakan perintah Azure CLI berurutan](./param-persist-tutorial.md)
 
 [Menggunakan beberapa langganan Azure](manage-azure-subscriptions-azure-cli.md)

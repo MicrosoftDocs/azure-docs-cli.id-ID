@@ -1,0 +1,438 @@
+### YamlMime:AzureCLIGroup
+uid: az
+name: az
+summary: ''
+description: ''
+directCommands:
+- uid: az_configure
+  name: az configure
+  summary: Mengelola konfigurasi Azure CLI. Perintah ini interaktif.
+  description: Untuk skenario otomatisasi atau untuk mengatur semua opsi yang tersedia, gunakan yang baru `az config`.
+  syntax: >-
+    az configure [--defaults]
+                 [--list-defaults {false, true}]
+                 [--scope {global, local}]
+  examples:
+  - summary: Atur nama grup sumber daya, webapp, dan VM default.
+    syntax: az configure --defaults group=myRG web=myweb vm=myvm
+  - summary: Hapus nama webapp dan VM default.
+    syntax: az configure --defaults vm='' web=''
+  optionalParameters:
+  - name: --defaults -d
+    summary: Pasangan 'name=value' yang dipisahkan spasi untuk default argumen umum.
+    description: ''
+  - name: --list-defaults -l
+    parameterValueGroup: false, true
+    summary: Mencantumkan semua default yang berlaku.
+    description: ''
+  - name: --scope
+    defaultValue: global
+    parameterValueGroup: global, local
+    summary: Cakupan default. Menggunakan "lokal" untuk pengaturan hanya efektif di bawah folder saat ini.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/configure/_help.py
+- uid: az_feedback
+  name: az feedback
+  summary: Kirim umpan balik ke Tim Azure CLI.
+  description: Perintah ini interaktif. Jika memungkinkan, ia meluncurkan browser web default untuk membuka halaman pembuatan masalah GitHub dengan isi yang dibuat secara otomatis dan telah diisi sebelumnya. Anda akan memiliki kesempatan untuk mengedit isi masalah sebelum mengirimkannya.
+  syntax: az feedback
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/feedback/_help.py
+- uid: az_find
+  name: az find
+  summary: Saya adalah robot AI, saran saya didasarkan pada dokumentasi Azure kami serta pola penggunaan pengguna Azure CLI dan Azure ARM. Menggunakan saya meningkatkan produk dan dokumentasi Azure.
+  description: ''
+  syntax: az find [<CLI_TERM>]
+  examples:
+  - summary: Beri saya grup Azure CLI apa pun dan saya akan menampilkan perintah paling populer dalam grup.
+    syntax: az find "az storage"
+  - summary: Beri saya perintah Azure CLI apa pun dan saya akan menunjukkan parameter dan sub-perintah yang paling populer.
+    syntax: az find "az monitor activity-log list"
+  - summary: Anda juga dapat memasukkan istilah pencarian, dan saya akan mencoba membantu menemukan perintah terbaik.
+    syntax: az find "arm template"
+  optionalParameters:
+  - name: <CLI_TERM>
+    summary: Perintah atau grup Azure CLI yang Anda perlukan contohnya.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/find/_help.py
+- uid: az_init
+  name: az init
+  summary: Ini adalah alat penyiapan yang mudah untuk konfigurasi.
+  description: ''
+  syntax: az init
+- uid: az_interactive
+  name: az interactive
+  summary: Mulai mode interaktif. Menginstal ekstensi Interaktif jika belum diinstal.
+  description: 'Untuk informasi selengkapnya tentang mode interaktif, lihat: https://azure.microsoft.com/blog/welcome-to-azure-cli-shell/.'
+  syntax: >-
+    az interactive [--style {bg, br, contrast, default, grey, halloween, neon, none, pastel, primary, purple, quiet}]
+                   [--update]
+  optionalParameters:
+  - name: --style -s
+    parameterValueGroup: bg, br, contrast, default, grey, halloween, neon, none, pastel, primary, purple, quiet
+    summary: Warna shell.
+    description: ''
+  - name: --update
+    summary: Perbarui ekstensi Interaktif ke yang terbaru tersedia.
+    description: ''
+- uid: az_login
+  name: az login
+  summary: Masuk ke Azure.
+  description: >-
+    Secara default, perintah ini masuk dengan akun pengguna. CLI akan mencoba meluncurkan browser web untuk masuk secara interaktif. Jika browser web tidak tersedia, CLI akan kembali ke login kode perangkat.
+
+    Untuk masuk dengan perwakilan layanan, tentukan --service-principal.
+  syntax: >-
+    az login [--allow-no-subscriptions]
+             [--federated-token]
+             [--identity]
+             [--password]
+             [--scope]
+             [--service-principal]
+             [--tenant]
+             [--use-cert-sn-issuer]
+             [--use-device-code]
+             [--username]
+  examples:
+  - summary: Log masuk secara interaktif.
+    syntax: az login
+  - summary: Masuk dengan nama pengguna dan kata sandi. Ini tidak berfungsi dengan akun atau akun Microsoft yang mengaktifkan autentikasi dua faktor. Gunakan -p=secret jika karakter pertama kata sandi adalah '-'.
+    syntax: az login -u johndoe@contoso.com -p VerySecret
+  - summary: Masuk dengan perwakilan layanan menggunakan rahasia klien. Gunakan -p=secret jika karakter pertama kata sandi adalah '-'.
+    syntax: az login --service-principal -u http://azure-cli-2016-08-05-14-31-15 -p VerySecret --tenant contoso.onmicrosoft.com
+  - summary: Masuk dengan perwakilan layanan menggunakan sertifikat klien.
+    syntax: az login --service-principal -u http://azure-cli-2016-08-05-14-31-15 -p ~/mycertfile.pem --tenant contoso.onmicrosoft.com
+  - summary: Masuk menggunakan identitas terkelola yang ditetapkan sistem komputer virtual.
+    syntax: az login --identity
+  - summary: Masuk menggunakan identitas terkelola yang ditetapkan pengguna VM. Id klien atau objek identitas layanan juga berfungsi.
+    syntax: az login --identity -u /subscriptions/<subscriptionId>/resourcegroups/myRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myID
+  optionalParameters:
+  - name: --allow-no-subscriptions
+    summary: Mendukung penyewa akses tanpa langganan. Tidak jarang tetapi berguna untuk menjalankan perintah tingkat penyewa, seperti 'az ad'.
+    description: ''
+  - name: --federated-token
+    summary: Token federasi yang dapat digunakan untuk pertukaran token OIDC.
+    description: ''
+  - name: --identity -i
+    summary: Masuk menggunakan identitas Komputer Virtual.
+    description: ''
+  - name: --password -p
+    summary: Kredensial seperti kata sandi pengguna, atau untuk perwakilan layanan, berikan rahasia klien atau file pem dengan kunci dan sertifikat publik. Akan meminta jika tidak diberikan.
+    description: ''
+  - name: --scope
+    summary: Digunakan dalam permintaan /authorize. Ini hanya dapat mencakup satu sumber daya statis.
+    description: ''
+  - name: --service-principal
+    summary: Info masuk yang mewakili perwakilan layanan.
+    description: ''
+  - name: --tenant -t
+    summary: Penyewa AAD, harus menyediakan saat menggunakan perwakilan layanan.
+    description: ''
+  - name: --use-cert-sn-issuer
+    summary: Digunakan dengan perwakilan layanan yang dikonfigurasi dengan Nama Subjek dan Autentikasi Penerbit untuk mendukung roll sertifikat otomatis.
+    description: ''
+  - name: --use-device-code
+    summary: Gunakan alur autentikasi lama CLI berdasarkan kode perangkat. CLI juga akan menggunakan ini jika tidak dapat meluncurkan browser atas nama Anda, misalnya di SSH jarak jauh atau Cloud Shell.
+    description: ''
+  - name: --username -u
+    summary: Nama pengguna, perwakilan layanan, atau ID identitas layanan terkelola.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/profile/_help.py
+- uid: az_logout
+  name: az logout
+  summary: Keluar untuk menghapus akses ke langganan Azure.
+  description: ''
+  syntax: az logout [--username]
+  optionalParameters:
+  - name: --username
+    summary: Pengguna akun, jika hilang, keluar dari akun aktif saat ini.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/profile/_help.py
+- uid: az_next
+  name: az next
+  summary: Merekomendasikan kemungkinan kumpulan perintah berikutnya untuk diambil.
+  description: >-
+    Ada beberapa konfigurasi kustom:
+
+
+    [1] az config set next.execute_in_prompt=True/False Aktifkan/nonaktifkan langkah menjalankan perintah yang direkomendasikan dalam mode interaktif. Aktifkan secara default.
+
+
+    [2] az config set next.filter_type=True/False Aktifkan/nonaktifkan langkah jenis rekomendasi pemfilteran. Nonaktifkan secara default.
+
+
+    [3] az config set next.output=json/jsonc/none/table/tsv/yaml/yamlc/status Atur format output default. Status adalah default.
+
+
+    [4] az config set next.num_limit={amount_limit} Atur batas item yang direkomendasikan. 5 adalah defaultnya.
+
+
+    [5] az config set next.show_arguments=True/False Show/hide argumen item yang direkomendasikan. False adalah defaultnya.
+
+
+    [6] az config set next.print_help=True/False Enable/disable apakah akan mencetak bantuan secara aktif sebelum menjalankan setiap perintah. False adalah defaultnya.
+  syntax: az next
+- uid: az_rest
+  name: az rest
+  summary: Panggil permintaan kustom.
+  description: >-
+    Perintah ini secara otomatis mengautentikasi menggunakan kredensial yang masuk: Jika header Otorisasi tidak diatur, perintah ini melampirkan header `Authorization: Bearer <token>`, di mana `<token>` diambil dari AAD. Sumber daya target token berasal dari --url jika --url dimulai dengan titik akhir dari `az cloud show --query endpoints`. Anda juga dapat menggunakan --resource untuk sumber daya kustom.
+
+    Jika header Content-Type tidak diatur dan --body adalah string JSON yang valid, header Content-Type akan default ke application/json.
+  syntax: >-
+    az rest --uri
+            [--body]
+            [--headers]
+            [--method {delete, get, head, options, patch, post, put}]
+            [--output-file]
+            [--resource]
+            [--skip-authorization-header]
+            [--uri-parameters]
+  examples:
+  - summary: Mendapatkan log Audit melalui Microsoft Graph
+    syntax: az rest --method get --url https://graph.microsoft.com/beta/auditLogs/directoryAudits
+  - summary: Memperbarui nama tampilan Pengguna Azure Active Directory Graph
+    syntax: 'az rest --method patch --url "https://graph.microsoft.com/v1.0/users/johndoe@azuresdkteam.onmicrosoft.com" --body "{\"displayName\": \"jondoe2\"}"'
+  - summary: Mendapatkan komputer virtual
+    syntax: az rest --method get --uri /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}?api-version=2019-03-01
+  - summary: Membuat alamat IP publik dari file body.json
+    syntax: az rest --method put --url https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses/{publicIpAddressName}?api-version=2019-09-01 --body @body.json
+  - summary: Mencantumkan tiga sumber daya teratas (Bash)
+    syntax: az rest --method get --url https://management.azure.com/subscriptions/{subscriptionId}/resources?api-version=2019-07-01 --url-parameters \$top=3
+  requiredParameters:
+  - isRequired: true
+    name: --uri --url -u
+    summary: URL Permintaan. Jika tidak dimulai dengan host, CLI menganggapnya sebagai ID sumber daya Azure dan mengawalinya dengan titik akhir ARM dari cloud saat ini yang ditunjukkan oleh `az cloud show --query endpoints.resourceManager`. Token umum {subscriptionId} akan diganti dengan ID langganan saat ini yang ditentukan oleh `az account set`.
+    description: ''
+  optionalParameters:
+  - name: --body -b
+    summary: Isi permintaan. Gunakan @{file} untuk memuat dari file. Untuk mengutip masalah di terminal yang berbeda, lihat https://github.com/Azure/azure-cli/blob/dev/doc/use_cli_effectively.md#quoting-issues.
+    description: ''
+  - name: --headers
+    summary: Header yang dipisahkan spasi dalam format KEY=VALUE atau string JSON. Gunakan @{file} untuk memuat dari file.
+    description: ''
+  - name: --method -m
+    defaultValue: get
+    parameterValueGroup: delete, get, head, options, patch, post, put
+    summary: Metode permintaan HTTP.
+    description: ''
+  - name: --output-file
+    summary: Simpan payload respons ke file.
+    description: ''
+  - name: --resource
+    summary: Url sumber daya tempat CLI harus memperoleh token dari AAD untuk mengakses layanan. Token akan ditempatkan di header Otorisasi. Secara default, CLI dapat mencari tahu ini berdasarkan argumen --url, kecuali Anda menggunakan argumen yang tidak ada dalam daftar "az cloud show --query endpoints".
+    description: ''
+  - name: --skip-authorization-header
+    summary: Jangan tambahkan header Otorisasi secara otomatis.
+    description: ''
+  - name: --uri-parameters --url-parameters
+    summary: Parameter kueri di URL. Kueri yang dipisahkan spasi dalam format KEY=VALUE atau string JSON. Gunakan @{file} untuk memuat dari file.
+    description: ''
+- uid: az_self-test
+  name: az self-test
+  summary: Menjalankan uji mandiri CLI.
+  description: ''
+  syntax: az self-test
+- uid: az_upgrade
+  name: az upgrade
+  summary: Meningkatkan Azure CLI dan ekstensi.
+  description: ''
+  syntax: >-
+    az upgrade [--all {false, true}]
+               [--yes]
+  optionalParameters:
+  - name: --all
+    defaultValue: "true"
+    parameterValueGroup: false, true
+    summary: Aktifkan pembaruan ekstensi juga.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta untuk memeriksa catatan rilis.
+    description: ''
+- uid: az_version
+  name: az version
+  summary: Tampilkan versi modul dan ekstensi Azure CLI dalam format JSON secara default atau format yang dikonfigurasi oleh --output.
+  description: ''
+  syntax: az version
+commands:
+- az_account
+- az_acr
+- az_ad
+- az_ai-examples
+- az_aks
+- az_alias
+- az_appconfig
+- az_appservice
+- az_arcappliance
+- az_arcdata
+- az_artifacts
+- az_attestation
+- az_automation
+- az_azurestackhci
+- az_baremetalinstance
+- az_batch
+- az_bicep
+- az_blockchain
+- az_blueprint
+- az_boards
+- az_cache
+- az_cli-translator
+- az_cloud
+- az_cloud-service
+- az_communication
+- az_confidentialledger
+- az_config
+- az_configure
+- az_confluent
+- az_connectedk8s
+- az_connectedmachine
+- az_connectedvmware
+- az_container
+- az_containerapp
+- az_cosmosdb
+- az_costmanagement
+- az_csvmware
+- az_customlocation
+- az_custom-providers
+- az_databox
+- az_databricks
+- az_datadog
+- az_datafactory
+- az_datamigration
+- az_dataprotection
+- az_datashare
+- az_dedicated-hsm
+- az_demo
+- az_deployment
+- az_deployment-scripts
+- az_desktopvirtualization
+- az_devops
+- az_disk
+- az_disk-pool
+- az_dms
+- az_dnc
+- az_dt
+- az_edgeorder
+- az_elastic
+- az_eventgrid
+- az_extension
+- az_feedback
+- az_find
+- az_footprint
+- az_functionapp
+- az_fzf
+- az_grafana
+- az_graph
+- az_group
+- az_guestconfig
+- az_hack
+- az_hanainstance
+- az_hdinsight
+- az_healthbot
+- az_healthcareapis
+- az_hpc-cache
+- az_identity
+- az_image
+- az_import-export
+- az_init
+- az_interactive
+- az_internet-analyzer
+- az_iot
+- az_k8sconfiguration
+- az_k8s-configuration
+- az_k8s-extension
+- az_keyvault
+- az_kusto
+- az_local-context
+- az_lock
+- az_logic
+- az_login
+- az_logout
+- az_logz
+- az_maintenance
+- az_managedapp
+- az_managed-cassandra
+- az_managementpartner
+- az_mesh
+- az_ml
+- az_ml(v1)
+- az_monitor
+- az_mysql
+- az_netappfiles
+- az_network
+- az_next
+- az_notification-hub
+- az_offazure
+- az_peering
+- az_pipelines
+- az_policy
+- az_portal
+- az_postgres
+- az_powerbi
+- az_provider
+- az_providerhub
+- az_purview
+- az_quantum
+- az_quota
+- az_redisenterprise
+- az_remote-rendering-account
+- az_repos
+- az_resource
+- az_resource-mover
+- az_rest
+- az_role
+- az_sapmonitor
+- az_scvmm
+- az_security
+- az_self-test
+- az_sentinel
+- az_serial-console
+- az_sig
+- az_snapshot
+- az_spatial-anchors-account
+- az_spring-cloud
+- az_sql
+- az_ssh
+- az_sshkey
+- az_stack-hci
+- az_staticwebapp
+- az_storage
+- az_storagesync
+- az_stream-analytics
+- az_support
+- az_synapse
+- az_tag
+- az_term
+- az_tsi
+- az_upgrade
+- az_version
+- az_vm
+- az_vmss
+- az_vmware
+- az_webapp
+- az_webpubsub
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 10/15/2021
+  ms.openlocfilehash: eead28f5ef12962cd57eb6f76d3839d474064775
+  ms.sourcegitcommit: d016676aca62d5461b07446d98cf38e30bba07cd
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/19/2022
+  ms.locfileid: "143882227"
