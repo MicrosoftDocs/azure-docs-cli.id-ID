@@ -1,0 +1,238 @@
+### YamlMime:AzureCLIGroup
+uid: az_maps_account
+name: az maps account
+summary: Mengelola akun Azure Maps.
+description: ''
+directCommands:
+- uid: az_maps_account_create
+  name: az maps account create
+  summary: Buat Akun Peta. Akun Peta menyimpan kunci yang memungkinkan akses ke REST API Peta.
+  description: ''
+  syntax: >-
+    az maps account create --account-name
+                           --resource-group
+                           --sku {G2, S0, S1}
+                           [--accept-tos]
+                           [--disable-local-auth {false, true}]
+                           [--kind {Gen1, Gen2}]
+                           [--linked-resources]
+                           [--tags]
+                           [--type {None, SystemAssigned, SystemAssigned, UserAssigned, UserAssigned}]
+                           [--user-identities]
+  examples:
+  - summary: Buat Akun dengan Identitas Terkelola
+    syntax: az maps account create --type "SystemAssigned, UserAssigned" --user-identities "{\"/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identityName\":{}}" --kind "Gen2" --disable-local-auth false --linked-resources id="/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Storage/accounts/mystorageacc" unique-name="myBatchStorageAccount" --linked-resources id="/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Storage/accounts/mystorageacc" unique-name="myBlobDataSource" --tags test="true" --account-name "myMapsAccount" --resource-group "myResourceGroup" --sku "S0"
+  - summary: Buat Akun Gen1
+    syntax: az maps account create --kind "Gen1" --disable-local-auth false --tags test="true" --account-name "myMapsAccount" --resource-group "myResourceGroup" --sku "S0"
+  - summary: Buat Akun Gen2
+    syntax: az maps account create --kind "Gen2" --disable-local-auth true --tags test="true" --account-name "myMapsAccount" --resource-group "myResourceGroup" --sku "S0"
+  requiredParameters:
+  - isRequired: true
+    name: --account-name --name -n
+    summary: Nama akun peta.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --sku -s
+    parameterValueGroup: G2, S0, S1
+    summary: Nama SKU, dalam format standar (seperti S0).
+    description: ''
+  optionalParameters:
+  - name: --accept-tos
+    summary: Anda harus menyetujui Lisensi dan Pernyataan Privasi untuk membuat akun.
+    description: ''
+  - name: --disable-local-auth
+    parameterValueGroup: false, true
+    summary: Memungkinkan pengalih fungsionalitas pada Azure Policy menonaktifkan dukungan autentikasi lokal Azure Maps. Ini akan menonaktifkan autentikasi Kunci Bersama dari penggunaan apa pun.
+    description: ''
+  - name: --kind
+    parameterValueGroup: Gen1, Gen2
+    summary: Mendapatkan atau Mengatur properti Jenis.
+    description: ''
+  - name: --linked-resources
+    summary: Mengatur sumber daya yang akan digunakan untuk operasi berbasis Identitas Terkelola untuk sumber daya akun Peta.
+    description: >-
+      Penggunaan: --linked-resources unique-name=XX id=XX
+
+
+      nama unik: Diperlukan. Nama yang disediakan yang secara unik mengidentifikasi sumber daya yang ditautkan.
+
+      id: Diperlukan. ID sumber daya ARM dalam formulir: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft. Storage/accounts/{storageName}'.
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --linked-resources.
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --type
+    parameterValueGroup: None, SystemAssigned, SystemAssigned, UserAssigned, UserAssigned
+    summary: Jenis identitas.
+    description: ''
+  - name: --user-identities
+    summary: "Daftar identitas pengguna yang terkait dengan sumber daya. Referensi kunci kamus identitas pengguna akan menjadi id sumber daya ARM dalam formulir: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'. Nilai yang diharapkan: json-string/@json-file."
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/maps/_help.py
+- uid: az_maps_account_delete
+  name: az maps account delete
+  summary: Menghapus Akun Azure Maps.
+  description: ''
+  syntax: >-
+    az maps account delete [--account-name]
+                           [--ids]
+                           [--resource-group]
+  examples:
+  - summary: DeleteAccount
+    syntax: az maps account delete --name "myMapsAccount" --resource-group "myResourceGroup"
+  optionalParameters:
+  - name: --account-name --name -n
+    summary: Nama akun peta.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/maps/_help.py
+- uid: az_maps_account_list
+  name: az maps account list
+  summary: Tampilkan semua akun peta dalam langganan atau dalam grup sumber daya.
+  description: ''
+  syntax: az maps account list [--resource-group]
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/maps/_help.py
+- uid: az_maps_account_show
+  name: az maps account show
+  summary: Menampilkan detail akun peta.
+  description: ''
+  syntax: >-
+    az maps account show [--account-name]
+                         [--ids]
+                         [--resource-group]
+  examples:
+  - summary: Menampilkan detail akun peta. (dibuat otomatis)
+    syntax: az maps account show --name MyMapsAccount --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --account-name --name -n
+    summary: Nama akun peta.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/maps/_help.py
+- uid: az_maps_account_update
+  name: az maps account update
+  summary: Memperbarui Akun Peta. Hanya subset parameter yang dapat diperbarui setelah pembuatan, seperti Sku, Tag, Properti.
+  description: ''
+  syntax: >-
+    az maps account update --sku {G2, S0, S1}
+                           [--account-name]
+                           [--disable-local-auth {false, true}]
+                           [--ids]
+                           [--kind {Gen1, Gen2}]
+                           [--linked-resources]
+                           [--resource-group]
+                           [--tags]
+                           [--type {None, SystemAssigned, SystemAssigned, UserAssigned, UserAssigned}]
+                           [--user-identities]
+  examples:
+  - summary: Memperbarui Identitas Terkelola Akun
+    syntax: az maps account update --type "SystemAssigned, UserAssigned" --user-identities "{\"/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identityName\":{}}" --kind "Gen2" --linked-resources id="/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/accounts/{storageName}" unique-name="myBatchStorageAccount" --account-name "myMapsAccount" --resource-group "myResourceGroup" --sku "S1"
+  - summary: Memperbarui Tag Akun
+    syntax: az maps account update --tags specialTag="true" --account-name "myMapsAccount" --resource-group "myResourceGroup" --sku "S0"
+  - summary: Perbarui ke Akun Gen1
+    syntax: az maps account update --kind "Gen1" --account-name "myMapsAccount" --resource-group "myResourceGroup" --sku "S0"
+  - summary: Pembaruan ke Akun Gen2
+    syntax: az maps account update --kind "Gen2" --account-name "myMapsAccount" --resource-group "myResourceGroup" --sku "S0"
+  requiredParameters:
+  - isRequired: true
+    name: --sku -s
+    parameterValueGroup: G2, S0, S1
+    summary: Nama SKU, dalam format standar (seperti S0).
+    description: ''
+  optionalParameters:
+  - name: --account-name --name -n
+    summary: Nama akun peta.
+    description: ''
+  - name: --disable-local-auth
+    parameterValueGroup: false, true
+    summary: Memungkinkan pengalih fungsionalitas pada Azure Policy menonaktifkan dukungan autentikasi lokal Azure Maps. Ini akan menonaktifkan autentikasi Kunci Bersama dari penggunaan apa pun.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --kind
+    parameterValueGroup: Gen1, Gen2
+    summary: Mendapatkan atau Mengatur properti Jenis.
+    description: ''
+  - name: --linked-resources
+    summary: Mengatur sumber daya yang akan digunakan untuk operasi berbasis Identitas Terkelola untuk sumber daya akun Peta.
+    description: >-
+      Penggunaan: --linked-resources unique-name=XX id=XX
+
+
+      nama unik: Diperlukan. Nama yang disediakan yang secara unik mengidentifikasi sumber daya yang ditautkan.
+
+      id: Diperlukan. ID sumber daya ARM dalam formulir: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft. Storage/accounts/{storageName}'.
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --linked-resources.
+  - name: --resource-group -g
+    summary: Nama grup sumber daya.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --type
+    parameterValueGroup: None, SystemAssigned, SystemAssigned, UserAssigned, UserAssigned
+    summary: Jenis identitas.
+    description: ''
+  - name: --user-identities
+    summary: "Daftar identitas pengguna yang terkait dengan sumber daya. Referensi kunci kamus identitas pengguna akan menjadi id sumber daya ARM dalam formulir: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'. Nilai yang diharapkan: json-string/@json-file."
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/maps/_help.py
+commands:
+- az_maps_account_create
+- az_maps_account_delete
+- az_maps_account_keys
+- az_maps_account_keys_list
+- az_maps_account_keys_renew
+- az_maps_account_list
+- az_maps_account_show
+- az_maps_account_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 07/13/2021
+  description: Mengelola akun Azure Maps.
+  ms.openlocfilehash: 7212b06535ac256b91c52356d865d2c281d1f7e9
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141079195"

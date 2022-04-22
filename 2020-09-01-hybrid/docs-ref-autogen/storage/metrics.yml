@@ -1,0 +1,135 @@
+### YamlMime:AzureCLIGroup
+uid: az_storage_metrics
+name: az storage metrics
+summary: Mengelola metrik layanan penyimpanan.
+description: ''
+directCommands:
+- uid: az_storage_metrics_show
+  name: az storage metrics show
+  summary: Tampilkan pengaturan metrik untuk akun penyimpanan.
+  description: ''
+  syntax: >-
+    az storage metrics show [--account-key]
+                            [--account-name]
+                            [--connection-string]
+                            [--interval {both, hour, minute}]
+                            [--sas-token]
+                            [--services]
+                            [--timeout]
+  examples:
+  - summary: Tampilkan pengaturan metrik untuk akun penyimpanan. (dibuat otomatis)
+    syntax: az storage metrics show --account-key 00000000 --account-name MyAccount
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --interval
+    defaultValue: both
+    parameterValueGroup: both, hour, minute
+    summary: Filter kumpulan metrik untuk diambil menurut interval waktu.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --services
+    defaultValue: bfqt
+    summary: 'Layanan penyimpanan untuk mengambil info metrik: (b)lob (q)ueue (t)dapat. Dapat digabungkan.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_metrics_update
+  name: pembaruan metrik penyimpanan az
+  summary: Memperbarui pengaturan metrik untuk akun penyimpanan.
+  description: ''
+  syntax: >-
+    az storage metrics update --retention
+                              --services
+                              [--account-key]
+                              [--account-name]
+                              [--api {false, true}]
+                              [--connection-string]
+                              [--hour {false, true}]
+                              [--minute {false, true}]
+                              [--sas-token]
+                              [--timeout]
+  examples:
+  - summary: Memperbarui pengaturan metrik untuk akun penyimpanan. (dibuat otomatis)
+    syntax: az storage metrics update --account-name MyAccount --api true --hour true --minute true --retention 10 --services bfqt
+  - summary: Memperbarui pengaturan metrik untuk akun penyimpanan berdasarkan string koneksi. (dibuat otomatis)
+    syntax: az storage metrics update --api true --connection-string $connectionString --hour true --minute true --retention 10 --services bfqt
+  requiredParameters:
+  - isRequired: true
+    name: --retention
+    summary: Jumlah hari untuk mempertahankan metrik. 0 untuk menonaktifkan. Berlaku untuk metrik jam dan menit jika keduanya ditentukan.
+    description: ''
+  - isRequired: true
+    name: --services
+    summary: 'Layanan penyimpanan untuk mengambil info metrik: (b)lob (q)ueue (t)dapat. Dapat digabungkan.'
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --api
+    parameterValueGroup: false, true
+    summary: Tentukan apakah akan menyertakan API dalam metrik. Berlaku untuk metrik jam dan menit jika keduanya ditentukan. Harus ditentukan jika metrik jam atau menit diaktifkan dan sedang diperbarui.
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --jam
+    parameterValueGroup: false, true
+    summary: Perbarui metrik per jam.
+    description: ''
+  - name: --minute
+    parameterValueGroup: false, true
+    summary: Perbarui metrik per menit.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+commands:
+- az_storage_metrics_show
+- az_storage_metrics_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/29/2022
+  description: Mengelola metrik layanan penyimpanan.
+  ms.openlocfilehash: 245857633712285e7c0bfd16ecf20556e9b89fbf
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141427787"

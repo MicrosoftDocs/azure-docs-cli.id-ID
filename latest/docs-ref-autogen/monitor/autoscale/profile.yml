@@ -1,0 +1,212 @@
+### YamlMime:AzureCLIGroup
+uid: az_monitor_autoscale_profile
+name: az monitor autoscale profile
+summary: Mengelola profil autoscaling.
+description: 'Untuk informasi selengkapnya tentang penskalaan otomatis, kunjungi: https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-understanding-autoscale-settings.'
+directCommands:
+- uid: az_monitor_autoscale_profile_create
+  name: az monitor autoscale profile create
+  summary: Buat profil skala otomatis tetap atau berulang.
+  description: 'Untuk informasi selengkapnya tentang penskalaan otomatis, kunjungi: https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-understanding-autoscale-settings.'
+  syntax: >-
+    az monitor autoscale profile create --autoscale-name
+                                        --count
+                                        --name
+                                        --resource-group
+                                        --timezone
+                                        [--copy-rules]
+                                        [--end]
+                                        [--max-count]
+                                        [--min-count]
+                                        [--recurrence]
+                                        [--start]
+  examples:
+  - summary: Buat profil tanggal tetap, mewarisi aturan penskalakan default tetapi mengubah kapasitas.
+    syntax: >-
+      az monitor autoscale create -g {myrg} --resource {resource-id} --min-count 2 --count 3 \
+        --max-count 5
+
+      az monitor autoscale rule create -g {myrg} --autoscale-name {name} --scale out 1 \
+        --condition "Percentage CPU > 75 avg 5m"
+
+      az monitor autoscale rule create -g {myrg} --autoscale-name {name} --scale in 1 \
+        --condition "Percentage CPU < 25 avg 5m"
+
+      az monitor autoscale profile create -g {myrg} --autoscale-name {name} -n Christmas \
+        --copy-rules default --min-count 3 --count 6 --max-count 10 --start 2018-12-24 \
+        --end 2018-12-26 --timezone "Pacific Standard Time"
+  - summary: Buat profil akhir pekan berulang, mewarisi aturan penskalaan default tetapi mengubah kapasitas.
+    syntax: >-
+      az monitor autoscale create -g {myrg} --resource {resource-id} --min-count 2 --count 3 \
+        --max-count 5
+
+      az monitor autoscale rule create -g {myrg} --autoscale-name {name} --scale out 1 \
+        --condition "Percentage CPU > 75 avg 5m"
+
+      az monitor autoscale rule create -g {myrg} --autoscale-name {name} --scale in 1 \
+        --condition "Percentage CPU < 25 avg 5m"
+
+      az monitor autoscale profile create -g {myrg} --autoscale-name {name} -n weeekend \
+        --copy-rules default --min-count 1 --count 2 --max-count 2 \
+        --recurrence week sat sun --timezone "Pacific Standard Time"
+  - summary: Buat profil skala otomatis tetap atau berulang. (dibuat otomatis)
+    syntax: az monitor autoscale profile create --autoscale-name MyAutoscale --copy-rules default --count 2 --end 2018-12-26 --max-count 10 --min-count 1 --name Christmas --recurrence week sat sun --resource-group MyResourceGroup --start 2018-12-24 --timezone "Pacific Standard Time"
+  - summary: Buat profil skala otomatis tetap atau berulang. (dibuat otomatis)
+    syntax: az monitor autoscale profile create --autoscale-name MyAutoscale --count 2 --max-count 10 --min-count 1 --name Christmas --recurrence week sat sun --resource-group MyResourceGroup --start 2018-12-24 --subscription MySubscription --timezone "Pacific Standard Time"
+  requiredParameters:
+  - isRequired: true
+    name: --autoscale-name
+    summary: Nama pengaturan skala otomatis.
+    description: ''
+  - isRequired: true
+    name: --count
+    summary: Angka instans yang akan digunakan. Jika digunakan dengan --min/max-count, jumlah default instans yang akan digunakan.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama profil skala otomatis.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --zona waktu
+    summary: Nama zona waktu.
+    description: ''
+    valueFrom: az monitor autoscale profile list-timezones
+  optionalParameters:
+  - name: --copy-rules
+    summary: Nama jadwal yang ada untuk menyalin aturan penskalaan untuk jadwal baru.
+    description: ''
+  - name: --end
+    summary: Saat profil skala otomatis berakhir. Format tergantung pada jenis profil.
+    description: 'Diperbaiki: --end yyyy-mm-dd [hh:mm:ss] Mingguan: [--end hh:mm].'
+  - name: --max-count
+    summary: Jumlah maksimum instans.
+    description: ''
+  - name: --min-count
+    summary: Jumlah minimum instans.
+    description: ''
+  - name: --pengulangan -r
+    summary: Saat profil berulang. Jika dihilangkan, profil tetap (tidak berulang) dibuat.
+    description: 'Penggunaan: --pengulangan {week} [ARG ARG ...] Mingguan: --minggu pengulangan Sat Sun.'
+  - name: --start
+    summary: Saat profil skala otomatis dimulai. Format tergantung pada jenis profil.
+    description: 'Diperbaiki: --start yyyy-mm-dd [hh:mm:ss] Mingguan: [--start hh:mm].'
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/monitor/_help.py
+- uid: az_monitor_autoscale_profile_delete
+  name: az monitor autoscale profile delete
+  summary: Menghapus profil skala otomatis.
+  description: ''
+  syntax: >-
+    az monitor autoscale profile delete --autoscale-name
+                                        --name
+                                        --resource-group
+  examples:
+  - summary: Menghapus profil skala otomatis. (dibuat otomatis)
+    syntax: az monitor autoscale profile delete --autoscale-name MyAutoscale --name MyAutoscaleProfile --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --autoscale-name
+    summary: Nama pengaturan skala otomatis.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama profil skala otomatis.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/monitor/_help.py
+- uid: az_monitor_autoscale_profile_list
+  name: az monitor autoscale profile list
+  summary: Mencantumkan profil skala otomatis.
+  description: ''
+  syntax: >-
+    az monitor autoscale profile list --autoscale-name
+                                      --resource-group
+  examples:
+  - summary: Mencantumkan profil skala otomatis. (dibuat otomatis)
+    syntax: az monitor autoscale profile list --autoscale-name MyAutoscale --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --autoscale-name
+    summary: Nama pengaturan skala otomatis.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/monitor/_help.py
+- uid: az_monitor_autoscale_profile_list-timezones
+  name: az monitor autoscale profile list-timezones
+  summary: Cari informasi zona waktu.
+  description: ''
+  syntax: >-
+    az monitor autoscale profile list-timezones [--offset]
+                                                [--search-query]
+  optionalParameters:
+  - name: --offset
+    summary: Memfilter hasil berdasarkan offset jam UTC.
+    description: ''
+  - name: --search-query -q
+    summary: Teks kueri untuk ditemukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/monitor/_help.py
+- uid: az_monitor_autoscale_profile_show
+  name: az monitor autoscale profile show
+  summary: Menampilkan detail profil skala otomatis.
+  description: ''
+  syntax: >-
+    az monitor autoscale profile show --autoscale-name
+                                      --name
+                                      --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --autoscale-name
+    summary: Nama pengaturan skala otomatis.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama profil skala otomatis.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/monitor/_help.py
+commands:
+- az_monitor_autoscale_profile_create
+- az_monitor_autoscale_profile_delete
+- az_monitor_autoscale_profile_list
+- az_monitor_autoscale_profile_list-timezones
+- az_monitor_autoscale_profile_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 04/01/2022
+  description: 'Untuk informasi selengkapnya tentang penskalaan otomatis, kunjungi: https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-understanding-autoscale-settings.'
+  ms.openlocfilehash: 69430c7c8d4341f7bfbfa3e9a3151718342372ce
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141427319"

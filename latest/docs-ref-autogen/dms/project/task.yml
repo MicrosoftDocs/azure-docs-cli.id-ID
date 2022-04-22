@@ -1,0 +1,435 @@
+### YamlMime:AzureCLIGroup
+uid: az_dms_project_task
+name: az dms project task
+summary: Mengelola tugas untuk proyek instans Data Migration Service.
+description: ''
+directCommands:
+- uid: az_dms_project_task_cancel
+  name: az dms project task cancel
+  summary: Batalkan tugas jika saat ini sedang diantrekan atau dijalankan.
+  description: ''
+  syntax: >-
+    az dms project task cancel --name
+                               --project-name
+                               --resource-group
+                               --service-name
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Tugas.
+    description: ''
+  - isRequired: true
+    name: --project-name
+    summary: Nama Project.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama Layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dms/_help.py
+- uid: az_dms_project_task_check-name
+  name: az dms project task check-name
+  summary: Periksa apakah nama tugas tertentu tersedia dalam instans DMS tertentu serta validitas nama.
+  description: ''
+  syntax: >-
+    az dms project task check-name --name
+                                   --project-name
+                                   --resource-group
+                                   --service-name
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama tugas yang akan diperiksa.
+    description: ''
+  - isRequired: true
+    name: --project-name
+    summary: Nama Project.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama Layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dms/_help.py
+- uid: az_dms_project_task_create
+  name: az dms project task create
+  summary: Membuat dan memulai tugas migrasi.
+  description: >-
+    Konfigurasi tugas berikut didukung: -) sumber -> target :: jenis tugas
+      1) SQL -> SQLDB :: OfflineMigration
+      2) PostgreSQL -> AzureDbForPostgreSql :: OnlineMigration
+      3) MySQL -> AzureDbForMySQL :: OfflineMigration.
+  syntax: >-
+    az dms project task create --database-options-json
+                               --name
+                               --project-name
+                               --resource-group
+                               --service-name
+                               --source-connection-json
+                               --target-connection-json
+                               [--enable-data-integrity-validation]
+                               [--enable-query-analysis-validation]
+                               [--enable-schema-validation]
+                               [--task-type]
+  examples:
+  - summary: Membuat dan memulai tugas migrasi SQL offline. Untuk migrasi SQL, ini tidak akan melakukan pemeriksaan validasi.
+    syntax: "az dms project task create --task-type OfflineMigration --database-options-json \"C:\\CLI Files\\databaseOptions.json\" -n mytask --project-name myproject -g myresourcegroup --service-name mydms --source-connection-json \"{'dataSource': 'myserver', 'authentication': 'SqlAuthentication', 'encryptConnection': 'true', 'trustServerCertificate': 'true'}\" --target-connection-json \"C:\\CLI Files\\targetConnection.json\""
+  - summary: Buat dan mulai tugas SQL yang melakukan semua pemeriksaan validasi.
+    syntax: az dms project task create --task-type OfflineMigration --database-options-json "C:\CLI Files\databaseOptions.json" -n mytask --project-name myproject -g myresourcegroup --service-name mydms --source-connection-json "C:\CLI Files\sourceConnection.json" --target-connection-json "C:\CLI Files\targetConnection.json" --enable-data-integrity-validation --enable-query-analysis-validation --enable-schema-validation
+  requiredParameters:
+  - isRequired: true
+    name: --database-options-json
+    summary: Informasi database dan tabel. Ini dapat berupa string berformat JSON atau lokasi ke file yang berisi objek JSON. Lihat contoh di bawah ini untuk format .
+    description: >-
+      Untuk SQL kami mendukung migrasi per tabel. Untuk menggunakan ini, tentukan nama tabel di 'table_map' seperti di bawah ini. Anda juga dapat mengatur sumber sebagai baca saja.
+
+      [ { "name": "source database", "target_database_name": "target database", "make_source_db_read_only": false|true, "table_map": { "schema. SourceTableName1": "skema. TargetTableName1", "skema. SourceTableName2": "skema. TargetTableName2", ... n } }, ... n ]
+
+
+      Untuk PostgreSQL, format opsi database objek JSON.
+
+      [ { "name": "source database", "target_database_name": "target database", // Digunakan untuk memanipulasi mesin migrasi yang mendasar.
+
+      Hanya sediakan jika diinstruksikan untuk melakukannya atau jika Anda benar-benar tahu apa yang Anda lakukan.
+
+      "migrationSetting": { "setting1": "value1", ... n }, // Digunakan untuk memanipulasi mesin migrasi yang mendasar.
+
+      Hanya sediakan jika diinstruksikan untuk melakukannya atau jika Anda benar-benar tahu apa yang Anda lakukan.
+
+      "sourceSetting": { "setting1": "value1", ... n }, // Digunakan untuk memanipulasi mesin migrasi yang mendasar.
+
+      Hanya sediakan jika diinstruksikan untuk melakukannya atau jika Anda benar-benar tahu apa yang Anda lakukan.
+
+      "targetSetting": { "setting1": "value1", ... n }, // Parameter opsional untuk mencantumkan tabel yang ingin Anda sertakan dalam migrasi.
+
+      "selectedTables": [ "schemaName1.tableName1", ... n ] }, ... n ]
+
+
+      Untuk MySQL, format opsi database objek JSON. { // Detail skema yang dipetakan yang perlu dimigrasikan. Beberapa skema dapat dimigrasikan pada satu waktu.
+
+      "selected_databases":[ // database/schema 1 details { "name": "sourceSchema1", "target_database_name": "targetSchema1", // Pemetaan tabel dari skema sumber ke target [Opsional] // Jangan tambahkan jika semua tabel database ini perlu dimigrasikan "table_map": {"sourceSchema1.table1": "targetSchema1.table1", "sourceSchema1.table2": "targetSchema1.table2", "sourceSchema1.table3": "targetSchema1.table3", .. n} }, ... n ],
+
+          // Used for manipulating the underlying migration engine. [Optional]
+          // Only provide if instructed to do so or if you really know what you are doing.
+          "migration_level_settings": {
+              // Optional setting that configures the maximum number of parallel reads on tables located on the source database.
+              "DesiredRangesCount": "4",
+              // Optional setting that configures that size of the largest batch that will be committed to the target server.
+              "MaxBatchSizeKb": "4096",
+              // Optional setting that configures the minimum number of rows in each batch written to the target.
+              "MinBatchRows": null,
+              // Optional setting that configures the number of databases that will be prepared for migration in parallel.
+              "PrepareDatabaseForBulkImportTaskCount": null,
+              // Optional setting that configures the number of tables that will be prepared for migration in parallel.
+              "PrepareTableForBulkImportTaskCount": null,
+              // Optional setting that configures the number of threads available to read ranges on the source.
+              "QueryTableDataRangeTaskCount": "8",
+              // Optional setting that configures the number of threads available to write batches to the target.
+              "WriteDataRangeBatchTaskCount": "12",
+              // Optional setting that configures how much memory will be used to cache batches in memory before reads on the source are throttled.
+              "MaxBatchCacheSizeMb": null,
+              // Optional setting that configures the amount of available memory at which point reads on the source will be throttled.
+              "ThrottleQueryTableDataRangeTaskAtAvailableMemoryMb": null,
+              // Optional setting that configures the number of batches cached in memory that will trigger read throttling on the source.
+              "ThrottleQueryTableDataRangeTaskAtBatchCount": 36,
+              // Optional setting that configures the delay between updates of result objects in Azure Table Storage.
+              "DelayProgressUpdatesInStorageInterval": "00:00:30",
+              },
+          // [Optional]
+          "make_source_server_read_only": "true|false"
+      }.
+  - isRequired: true
+    name: --name -n
+    summary: Nama Tugas.
+    description: ''
+  - isRequired: true
+    name: --project-name
+    summary: Nama Project.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama Layanan.
+    description: ''
+  - isRequired: true
+    name: --source-connection-json
+    summary: Informasi koneksi ke server sumber. Ini dapat berupa string berformat JSON atau lokasi ke file yang berisi objek JSON. Lihat contoh di bawah ini untuk format .
+    description: >-
+      Format objek JSON koneksi untuk koneksi SQL.
+
+      { "userName": "user name", // if this is missing or null, you will be prompted "password": null, // if this is missing or null (highly recommended) you will be prompted "dataSource": "server name[,port]", "authentication": "SqlAuthentication| WindowsAuthentication", "encryptConnection": true, // sangat disarankan untuk meninggalkan sebagai benar "trustServerCertificate": false // sangat disarankan untuk meninggalkan sebagai false }
+
+
+      Format objek JSON koneksi untuk koneksi PostgreSQL.
+
+      { "userName": "user name", // if this is missing or null, Anda akan diminta "kata sandi": null, // jika ini hilang atau null (sangat disarankan) Anda akan diminta "serverName": "server name", "databaseName": "database name", // if this is missing, it will default to the 'postgres' database "port": 5432, // if this is missing, it will default to 5432 "encryptConnection":  true, // sangat disarankan untuk meninggalkan sebagai benar "trustServerCertificate": false // sangat disarankan untuk meninggalkan sebagai false }
+
+
+      Format objek JSON koneksi untuk koneksi MySQL.
+
+      { "userName": "user name", // if this is missing or null, you will be prompted "password": null, // if this is missing or null (highly recommended) you will be prompted "serverName": "server name", "port": 3306 // if this is missing, it will default to 3306 }.
+  - isRequired: true
+    name: --target-connection-json
+    summary: Informasi koneksi ke server target. Ini dapat berupa string berformat JSON atau lokasi ke file yang berisi objek JSON. Lihat 'source-connection-json' untuk contoh format koneksi.
+    description: ''
+  optionalParameters:
+  - name: --enable-data-integrity-validation
+    summary: Hanya untuk SQL. Apakah akan melakukan validasi integritas data berbasis checksum antara sumber dan target untuk database dan tabel yang dipilih.
+    description: ''
+  - name: --enable-query-analysis-validation
+    summary: Hanya untuk SQL. Apakah akan melakukan analisis kueri yang cepat dan cerdas dengan mengambil kueri dari database sumber dan menjalankannya di target. Hasilnya akan memiliki statistik eksekusi untuk eksekusi dalam database sumber dan target untuk kueri yang diekstrak.
+    description: ''
+  - name: --enable-schema-validation
+    summary: Hanya untuk SQL. Apakah akan membandingkan informasi skema antara sumber dan target.
+    description: ''
+  - name: --task-type
+    summary: 'Jenis pergerakan data yang akan didukung tugas. Jenis yang didukung adalah: OnlineMigration, OfflineMigration. Jika tidak disediakan, akan default ke OfflineMigration untuk SQL, MySQL, dan OnlineMigration for PostgreSQL.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dms/_help.py
+- uid: az_dms_project_task_cutover
+  name: az dms project task cutover
+  summary: Untuk tugas migrasi online, selesaikan migrasi dengan melakukan cutover.
+  description: "Untuk melihat hasil permintaan, silakan gunakan perintah 'task show': az dms project task show ... --expand command."
+  syntax: >-
+    az dms project task cutover --name
+                                --object-name
+                                --project-name
+                                --resource-group
+                                --service-name
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Tugas.
+    description: ''
+  - isRequired: true
+    name: --object-name
+    summary: Nama database pada sumber yang ingin Anda potong.
+    description: ''
+  - isRequired: true
+    name: --project-name
+    summary: Nama Project.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama Layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dms/_help.py
+- uid: az_dms_project_task_delete
+  name: az dms project task delete
+  summary: Menghapus tugas migrasi.
+  description: ''
+  syntax: >-
+    az dms project task delete --name
+                               --project-name
+                               --resource-group
+                               --service-name
+                               [--delete-running-tasks]
+                               [--yes]
+  examples:
+  - summary: Menghapus tugas migrasi. (dibuat otomatis)
+    syntax: az dms project task delete --name MyTask --project-name MyProject --resource-group MyResourceGroup --service-name MyService
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Tugas.
+    description: ''
+  - isRequired: true
+    name: --project-name
+    summary: Nama Project.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama Layanan.
+    description: ''
+  optionalParameters:
+  - name: --delete-running-tasks
+    summary: Jika tugas sedang berjalan, batalkan tugas sebelum menghapus proyek.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dms/_help.py
+- uid: az_dms_project_task_list
+  name: az dms project task list
+  summary: Mencantumkan tugas dalam proyek. Beberapa tugas mungkin memiliki status Tidak Diketahui, yang menunjukkan bahwa terjadi kesalahan saat mengkueri status tugas tersebut.
+  description: ''
+  syntax: >-
+    az dms project task list --project-name
+                             --resource-group
+                             --service-name
+                             [--task-type]
+  examples:
+  - summary: Mencantumkan semua tugas dalam proyek.
+    syntax: az dms project task list --project-name myproject -g myresourcegroup --service-name mydms
+  - summary: Cantumkan hanya SQL untuk SQL tugas migrasi dalam proyek.
+    syntax: az dms project task list --project-name myproject -g myresourcegroup --service-name mydms --task-type Migrate.SqlServer.SqlDb
+  requiredParameters:
+  - isRequired: true
+    name: --project-name
+    summary: Nama Project.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama Layanan.
+    description: ''
+  optionalParameters:
+  - name: --task-type
+    summary: Memfilter daftar menurut tipe tugas. Untuk daftar jenis yang mungkin, lihat "az dms check-status".
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dms/_help.py
+- uid: az_dms_project_task_restart
+  name: az dms project task restart
+  summary: Mulai ulang seluruh migrasi atau hanya objek tertentu. Saat ini hanya didukung oleh migrasi MongoDB.
+  description: "Untuk melihat hasil permintaan, silakan gunakan perintah 'task show': az dms project task show ... --expand command."
+  syntax: >-
+    az dms project task restart --name
+                                --project-name
+                                --resource-group
+                                --service-name
+                                [--object-name]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Tugas. Tugas Project DMS adalah aktivitas yang melakukan pekerjaan terkait migrasi. Mungkin ada beberapa Tugas yang terkait dengan Project.
+    description: ''
+  - isRequired: true
+    name: --project-name
+    summary: Nama Project. DMS Project adalah pengelompokan logis yang mencakup koneksi database sumber, koneksi database target, dan daftar database yang akan dimigrasikan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama Layanan. Layanan DMS adalah instans Azure yang melakukan migrasi database.
+    description: ''
+  optionalParameters:
+  - name: --object-name
+    summary: Nama database atau koleksi yang memenuhi syarat yang ingin Anda mulai ulang. Biarkan kosong untuk memulai ulang seluruh migrasi.
+    description: ''
+- uid: az_dms_project_task_show
+  name: az dms project task show
+  summary: Memperlihatkan detail tugas migrasi. Gunakan "--expand" untuk mendapatkan detail selengkapnya.
+  description: ''
+  syntax: >-
+    az dms project task show --name
+                             --project-name
+                             --resource-group
+                             --service-name
+                             [--expand]
+  examples:
+  - summary: Memperlihatkan detail tugas migrasi. Gunakan "--expand" untuk mendapatkan detail selengkapnya. (dibuat otomatis)
+    syntax: az dms project task show --name MyTask --project-name MyProject --resource-group MyResourceGroup --service-name MyService
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Tugas.
+    description: ''
+  - isRequired: true
+    name: --project-name
+    summary: Nama Project.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama Layanan.
+    description: ''
+  optionalParameters:
+  - name: --expand
+    summary: Perluas respons untuk memberikan detail selengkapnya. Gunakan dengan "perintah" untuk melihat detail tugas selengkapnya. Gunakan dengan "output" untuk melihat hasil migrasi tugas.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/dms/_help.py
+- uid: az_dms_project_task_stop
+  name: az dms project task stop
+  summary: Menghentikan tugas, atau menghentikan migrasi pada objek yang ditentukan (hanya migrasi MongoDB).
+  description: "Untuk melihat hasil permintaan, silakan gunakan perintah 'task show': az dms project task show ... --expand command."
+  syntax: >-
+    az dms project task stop --name
+                             --project-name
+                             --resource-group
+                             --service-name
+                             [--object-name]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Tugas. Tugas Project DMS adalah aktivitas yang melakukan pekerjaan terkait migrasi. Mungkin ada beberapa Tugas yang terkait dengan Project.
+    description: ''
+  - isRequired: true
+    name: --project-name
+    summary: Nama Project. DMS Project adalah pengelompokan logis yang mencakup koneksi database sumber, koneksi database target, dan daftar database yang akan dimigrasikan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name
+    summary: Nama Layanan. Layanan DMS adalah instans Azure yang melakukan migrasi database.
+    description: ''
+  optionalParameters:
+  - name: --object-name
+    summary: Hanya didukung oleh migrasi MongoDB. Nama database atau koleksi yang memenuhi syarat yang ingin Anda hentikan. Biarkan kosong untuk menghentikan seluruh migrasi.
+    description: ''
+commands:
+- az_dms_project_task_cancel
+- az_dms_project_task_check-name
+- az_dms_project_task_create
+- az_dms_project_task_cutover
+- az_dms_project_task_delete
+- az_dms_project_task_list
+- az_dms_project_task_restart
+- az_dms_project_task_show
+- az_dms_project_task_stop
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 10/14/2021
+  description: Mengelola tugas untuk proyek instans Data Migration Service.
+  ms.openlocfilehash: 0c1c01768c54b7cead30dd4192b6e9d9af7ffa12
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141079807"

@@ -1,0 +1,202 @@
+### YamlMime:AzureCLIGroup
+uid: az_monitor_autoscale_rule
+name: aturan skala otomatis monitor az
+summary: Mengelola aturan penskalakan skala otomatis.
+description: 'Untuk informasi selengkapnya tentang penskalaan otomatis, kunjungi: https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-understanding-autoscale-settings.'
+directCommands:
+- uid: az_monitor_autoscale_rule_copy
+  name: az monitor autoscale rule copy
+  summary: Salin aturan skala otomatis dari satu profil ke profil lainnya.
+  description: ''
+  syntax: >-
+    az monitor autoscale rule copy --autoscale-name
+                                   --dest-schedule
+                                   --index
+                                   --resource-group
+                                   [--source-schedule]
+  requiredParameters:
+  - isRequired: true
+    name: --autoscale-name
+    summary: Nama pengaturan skala otomatis.
+    description: ''
+  - isRequired: true
+    name: --dest-schedule
+    summary: Nama profil yang akan disalin aturannya.
+    description: ''
+  - isRequired: true
+    name: --index
+    summary: Daftar indeks aturan yang dipisahkan spasi untuk disalin, atau '\*' untuk menyalin semua aturan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --source-schedule
+    defaultValue: default
+    summary: Nama profil untuk menyalin aturan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/monitor/_help.py
+- uid: az_monitor_autoscale_rule_create
+  name: az monitor autoscale rule create
+  summary: Tambahkan aturan skala otomatis baru.
+  description: 'Untuk informasi selengkapnya tentang penskalaan otomatis, kunjungi: https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-understanding-autoscale-settings.'
+  syntax: >-
+    az monitor autoscale rule create --autoscale-name
+                                     --condition
+                                     --scale
+                                     [--cooldown]
+                                     [--profile-name]
+                                     [--resource]
+                                     [--resource-group]
+                                     [--resource-namespace]
+                                     [--resource-parent]
+                                     [--resource-type]
+                                     [--timegrain]
+  examples:
+  - summary: Skalakan ke 5 instans ketika Persentase CPU di seluruh instans lebih besar dari 75 rata-rata selama 10 menit.
+    syntax: >-
+      az monitor autoscale rule create -g {myrg} --autoscale-name {myvmss} \
+        --scale to 5 --condition "Percentage CPU > 75 avg 10m"
+  - summary: Tingkatkan 2 instans saat Persentase CPU di seluruh instans lebih besar dari 75 rata-rata selama 5 menit.
+    syntax: >-
+      az monitor autoscale rule create -g {myrg} --autoscale-name {myvmss} \
+        --scale out 2 --condition "Percentage CPU > 75 avg 5m"
+  - summary: Turunkan skala 50% ketika Persentase CPU di seluruh instans kurang dari 25 rata-rata selama 15 menit.
+    syntax: >-
+      az monitor autoscale rule create -g {myrg} --autoscale-name {myvmss} \
+        --scale in 50% --condition "Percentage CPU < 25 avg 15m"
+  - summary: Buat pengaturan skala otomatis melalui metrik vm tamu yang diaktifkan dari ekstensi diagnostik. Anda dapat menggunakan bidang counterSpecifier yang diambil dari 'az vmss diagnostics get-default-config' di `--condition`.
+    syntax: az monitor autoscale rule create -g {myrg} --autoscale-name test --scale out 1 --condition "/builtin/memory/percentavailablememory > 80 total 5m"
+  requiredParameters:
+  - isRequired: true
+    name: --autoscale-name
+    summary: Nama pengaturan skala otomatis.
+    description: ''
+  - isRequired: true
+    name: --condition
+    summary: Kondisi yang memicu tindakan penskalakan.
+    description: >-
+      Penggunaan: --condition ["NAMESPACE"] METRIC {==,!=,>,>=,<,<=} THRESHOLD {avg,min,max,total,count} PERIOD [where DIMENSION {==,!=} VALUE [or VALUE ...] [dan DIMENSI {===,!=} VALUE [atau VALUE ...] ...]]
+
+
+      Dimensi dapat dikueri dengan menambahkan kata kunci 'di mana' dan beberapa dimensi dapat dikueri dengan menggabungkannya dengan kata kunci 'dan'. Nilai untuk METRIK dan nilai AMBANG YANG sesuai dapat diperoleh dari `az monitor metric` perintah . Format PERIOD adalah "##h##m##s".
+  - isRequired: true
+    name: --scale
+    summary: Arah dan jumlah untuk diskalakan.
+    description: 'Penggunaan: --scale {to,in,out} VAL[%] Fixed Count: --scale to 5 In by Count: --scale in 2 Out by PerCent: --scale out 10%.'
+  optionalParameters:
+  - name: --cooldown
+    defaultValue: "5"
+    summary: Jumlah menit yang harus berlalu sebelum peristiwa penskalaan lain dapat terjadi.
+    description: ''
+  - name: --profile-name
+    defaultValue: default
+    summary: Nama profil skala otomatis.
+    description: ''
+  - name: --resource
+    summary: Nama atau ID sumber daya target.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-namespace
+    summary: Namespace penyedia sumber daya target.
+    description: ''
+  - name: --resource-parent
+    summary: Jalur induk sumber daya target, jika berlaku.
+    description: ''
+  - name: --resource-type
+    summary: "Jenis sumber daya target. Dapat juga menerima format namespace/type (Mis: 'Microsoft.Compute/virtualMachines')."
+    description: ''
+  - name: --timegrain
+    defaultValue: avg 1m
+    summary: Cara metrik dijajaki di seluruh instans.
+    description: Bentuk timegrain adalah {avg,min,max,sum} VALUE. Nilai dapat diperoleh dari `az monitor metric` perintah . Format VALUE adalah "##h##m##s".
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/monitor/_help.py
+- uid: az_monitor_autoscale_rule_delete
+  name: az monitor autoscale rule delete
+  summary: Menghapus aturan skala otomatis dari profil.
+  description: ''
+  syntax: >-
+    az monitor autoscale rule delete --autoscale-name
+                                     --index
+                                     --resource-group
+                                     [--profile-name]
+  requiredParameters:
+  - isRequired: true
+    name: --autoscale-name
+    summary: Nama pengaturan skala otomatis.
+    description: ''
+  - isRequired: true
+    name: --index
+    summary: Daftar indeks aturan yang dipisahkan spasi untuk dihapus, atau '\*' untuk menghapus semua aturan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --profile-name
+    defaultValue: default
+    summary: Nama profil skala otomatis.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/monitor/_help.py
+- uid: az_monitor_autoscale_rule_list
+  name: daftar aturan skala otomatis monitor az
+  summary: Mencantumkan aturan skala otomatis untuk profil.
+  description: ''
+  syntax: >-
+    az monitor autoscale rule list --autoscale-name
+                                   --resource-group
+                                   [--profile-name]
+  examples:
+  - summary: Mencantumkan aturan skala otomatis untuk profil. (dibuat otomatis)
+    syntax: az monitor autoscale rule list --autoscale-name MyAutoscale --profile-name MyProfile --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --autoscale-name
+    summary: Nama pengaturan skala otomatis.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --profile-name
+    defaultValue: default
+    summary: Nama profil skala otomatis.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/monitor/_help.py
+commands:
+- az_monitor_autoscale_rule_copy
+- az_monitor_autoscale_rule_create
+- az_monitor_autoscale_rule_delete
+- az_monitor_autoscale_rule_list
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 04/01/2022
+  description: 'Untuk informasi selengkapnya tentang penskalaan otomatis, kunjungi: https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-understanding-autoscale-settings.'
+  ms.openlocfilehash: 2c5a19a078c681db44f04f41cdfcda28720368b9
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141427274"

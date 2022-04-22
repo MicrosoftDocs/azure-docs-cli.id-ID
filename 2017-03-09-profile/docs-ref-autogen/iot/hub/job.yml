@@ -1,0 +1,257 @@
+### YamlMime:AzureCLIGroup
+uid: az_iot_hub_job
+name: az iot hub job
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **azure-iot** untuk Azure CLI (versi 2.24.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **pekerjaan az iot hub** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola pekerjaan IoT Hub (v2).
+description: ''
+directCommands:
+- uid: az_iot_hub_job_cancel
+  name: az iot hub job cancel
+  summary: Membatalkan pekerjaan IoT Hub.
+  description: ''
+  syntax: >-
+    az iot hub job cancel --job-id
+                          [--auth-type {key, login}]
+                          [--hub-name]
+                          [--login]
+                          [--resource-group]
+  examples:
+  - summary: Membatalkan pekerjaan IoT Hub.
+    syntax: az iot hub job cancel --hub-name {iothub_name} --job-id {job_id}
+  requiredParameters:
+  - isRequired: true
+    name: --job-id
+    summary: IoT Hub ID pekerjaan.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string dan nama koneksi entitas disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_iot_hub_job_create
+  name: az iot hub job create
+  summary: Membuat dan menjadwalkan pekerjaan IoT Hub untuk eksekusi.
+  description: >-
+    Saat menjadwalkan pekerjaan pembaruan kembar, patch kembar adalah argumen yang diperlukan.
+
+    Saat menjadwalkan pekerjaan metode perangkat, nama metode dan payload diperlukan argumen.
+
+    HARAP DIPERHATIKAN: Menggunakan waktu mulai kustom yang ada di masa lalu dapat menyebabkan operasi gagal.
+  syntax: >-
+    az iot hub job create --job-id
+                          --job-type {scheduleDeviceMethod, scheduleUpdateTwin}
+                          [--auth-type {key, login}]
+                          [--duration]
+                          [--hub-name]
+                          [--interval]
+                          [--login]
+                          [--mct]
+                          [--method-name]
+                          [--method-payload]
+                          [--method-response-timeout]
+                          [--patch]
+                          [--query-condition]
+                          [--resource-group]
+                          [--start]
+                          [--ttl]
+                          [--wait {false, true}]
+  examples:
+  - summary: Buat dan jadwalkan pekerjaan untuk memperbarui tag kembar dari semua perangkat.
+    syntax: "az iot hub job create --job-id {job_id} --job-type scheduleUpdateTwin -n {iothub_name} -q \"*\" --twin-patch '{\"tags\": {\"deviceType\": \"Type1, Type2, Type3\"}}'"
+  - summary: Jadwalkan pekerjaan dan blokir untuk hasil "selesai", "gagal" atau "dibatalkan". Tentukan interval polling dalam hitungan detik.
+    syntax: "az iot hub job create --job-id {job_id} --job-type scheduleUpdateTwin -n {iothub_name} -q \"*\" --twin-patch '{\"tags\": {\"deviceType\": \"Type1, Type2, Type3\"}}' --wait --poll-interval 30"
+  - summary: Buat pekerjaan untuk memperbarui properti kembar yang diinginkan pada subset perangkat, yang dijadwalkan untuk berjalan pada waktu mendatang yang berubah-ubah.
+    syntax: "az iot hub job create --job-id {job_name} --job-type scheduleUpdateTwin -n {iothub_name} --twin-patch '{\"properties\":{\"desired\": {\"temperatureF\": 65}}}' --start-time \"2050-01-08T12:19:56.868Z\" --query-condition \"deviceId IN ['MyDevice1', 'MyDevice2', 'MyDevice3']\""
+  - summary: Membuat dan menjadwalkan pekerjaan untuk memanggil metode perangkat untuk sekumpulan perangkat yang memenuhi kondisi kueri.
+    syntax: az iot hub job create --job-id {job_name} --job-type scheduleDeviceMethod -n {iothub_name} --method-name setSyncIntervalSec --method-payload 30 --query-condition "properties.reported.settings.syncIntervalSec != 30"
+  - summary: Membuat dan menjadwalkan pekerjaan untuk memanggil metode perangkat untuk semua perangkat.
+    syntax: az iot hub job create --job-id {job_name} --job-type scheduleDeviceMethod -q "*" -n {iothub_name} --method-name setSyncIntervalSec --method-payload '{"version":"1.0"}'
+  requiredParameters:
+  - isRequired: true
+    name: --job-id
+    summary: IoT Hub ID pekerjaan.
+    description: ''
+  - isRequired: true
+    name: --job-type --jt
+    parameterValueGroup: scheduleDeviceMethod, scheduleUpdateTwin
+    summary: Jenis pekerjaan terjadwal.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --duration --poll-duration
+    defaultValue: "600"
+    summary: Total durasi dalam detik di mana status pekerjaan akan diperiksa jika --tunggu bendera diteruskan.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --interval --poll-interval
+    defaultValue: "10"
+    summary: Interval dalam detik status pekerjaan akan diperiksa jika --bendera tunggu diteruskan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string dan nama koneksi entitas disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --mct --method-connect-timeout
+    defaultValue: "30"
+    summary: Jumlah detik maksimum untuk menunggu koneksi perangkat.
+    description: ''
+  - name: --method-name --mn
+    summary: Metode target untuk pemanggilan.
+    description: ''
+  - name: --method-payload --mp
+    summary: Payload Json yang akan diteruskan ke metode . Harus jalur file atau json mentah.
+    description: ''
+  - name: --method-response-timeout --mrt
+    defaultValue: "30"
+    summary: Jumlah detik maksimum untuk menunggu hasil metode perangkat.
+    description: ''
+  - name: --patch --twin-patch
+    summary: Patch kembar yang diinginkan. Sediakan jalur file atau json mentah.
+    description: ''
+  - name: --query-condition -q
+    summary: 'Kondisi untuk kueri perangkat agar perangkat dapat menjalankan pekerjaan. Diperlukan jika jenis pekerjaan adalah scheduleDeviceMethod atau scheduleUpdateTwin. Catatan: Layanan akan mengawali "PILIH \* DARI perangkat DI MANA" ke input.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --start --start-time
+    summary: Awal pekerjaan yang dijadwalkan dalam format waktu tanggal ISO 8601. Jika tidak ada waktu mulai yang disediakan, pekerjaan diantrekan untuk eksekusi asap. Menggunakan waktu mulai kustom yang ada di masa lalu dapat menyebabkan operasi gagal.
+    description: ''
+  - name: --ttl
+    defaultValue: "3600"
+    summary: Waktu eksekusi maksimum dalam detik, sebelum pekerjaan dihentikan.
+    description: ''
+  - name: --wait -w
+    parameterValueGroup: false, true
+    summary: Blokir hingga pekerjaan yang dibuat dalam status selesai, gagal, atau dibatalkan. Akan secara teratur melakukan polling pada interval yang ditentukan oleh --poll-interval.
+    description: ''
+- uid: az_iot_hub_job_list
+  name: az iot hub job list
+  summary: Mencantumkan pekerjaan historis IoT Hub.
+  description: ''
+  syntax: >-
+    az iot hub job list [--auth-type {key, login}]
+                        [--hub-name]
+                        [--job-status {cancelled, completed, enqueued, failed, queued, running, scheduled, unknown}]
+                        [--job-type {export, import, scheduleDeviceMethod, scheduleUpdateTwin}]
+                        [--login]
+                        [--resource-group]
+                        [--top]
+  examples:
+  - summary: Cantumkan semua pekerjaan yang diarsipkan dalam periode retensi (maksimal 30 hari).
+    syntax: az iot hub job list --hub-name {iothub_name}
+  - summary: Mencantumkan semua pekerjaan yang diarsipkan yang memproyeksikan properti tertentu
+    syntax: az iot hub job list --hub-name {iothub_name} --query "[*].[jobId,type,status,startTime,endTime]"
+  - summary: Mencantumkan hanya memperbarui pekerjaan jenis kembar
+    syntax: az iot hub job list --hub-name {iothub_name} --job-type scheduleDeviceMethod
+  - summary: Mencantumkan pekerjaan metode perangkat yang memiliki status "terjadwal"
+    syntax: az iot hub job list --hub-name {iothub_name} --job-type scheduleDeviceMethod --job-status scheduled
+  - summary: Mencantumkan pekerjaan ekspor perangkat yang memiliki status "selesai"
+    syntax: az iot hub job list --hub-name {iothub_name} --job-type export --job-status completed
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --job-status --js
+    parameterValueGroup: cancelled, completed, enqueued, failed, queued, running, scheduled, unknown
+    summary: Status pekerjaan terjadwal.
+    description: ''
+  - name: --job-type --jt
+    parameterValueGroup: export, import, scheduleDeviceMethod, scheduleUpdateTwin
+    summary: Jenis pekerjaan terjadwal.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string dan nama koneksi entitas disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --top
+    summary: Jumlah maksimum elemen yang akan dikembalikan. Gunakan -1 untuk tidak terbatas.
+    description: ''
+- uid: az_iot_hub_job_show
+  name: az iot hub job show
+  summary: Tampilkan detail pekerjaan IoT Hub yang sudah ada.
+  description: ''
+  syntax: >-
+    az iot hub job show --job-id
+                        [--auth-type {key, login}]
+                        [--hub-name]
+                        [--login]
+                        [--resource-group]
+  examples:
+  - summary: Menampilkan detail pekerjaan yang dibuat.
+    syntax: az iot hub job show --hub-name {iothub_name} --job-id {job_id}
+  requiredParameters:
+  - isRequired: true
+    name: --job-id
+    summary: IoT Hub ID pekerjaan.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --hub-name -n
+    summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string dan nama koneksi entitas disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+commands:
+- az_iot_hub_job_cancel
+- az_iot_hub_job_create
+- az_iot_hub_job_list
+- az_iot_hub_job_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola pekerjaan IoT Hub (v2).
+  ms.openlocfilehash: d59ad1a0fee7fa27d85d7798f6b651eced67aa76
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141091073"

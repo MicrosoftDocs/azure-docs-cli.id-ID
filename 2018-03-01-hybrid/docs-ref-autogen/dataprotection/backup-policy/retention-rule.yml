@@ -1,0 +1,121 @@
+### YamlMime:AzureCLIGroup
+uid: az_dataprotection_backup-policy_retention-rule
+name: az dataprotection backup-policy retention-rule
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **perlindungan data** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az dataprotection backup-policy retention-rule** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Buat siklus hidup dan tambahkan atau hapus aturan retensi dalam kebijakan pencadangan.
+description: ''
+directCommands:
+- uid: az_dataprotection_backup-policy_retention-rule_create-lifecycle
+  name: az dataprotection backup-policy retention-rule create-lifecycle
+  summary: Membuat siklus hidup untuk aturan Azure Retention.
+  description: ''
+  syntax: >-
+    az dataprotection backup-policy retention-rule create-lifecycle --count
+                                                                    --retention-duration-type {Days, Months, Weeks, Years}
+                                                                    --source-datastore {ArchiveStore, OperationalStore, VaultStore}
+                                                                    [--copy-option {CopyOnExpiryOption, CustomCopyOption, ImmediateCopyOption}]
+                                                                    [--target-datastore {ArchiveStore, OperationalStore, VaultStore}]
+  examples:
+  - summary: membuat siklus hidup harian
+    syntax: az dataprotection backup-policy retention-rule create-lifecycle --retention-duration-count 12 --retention-duration-type Days --source-datastore OperationalStore
+  requiredParameters:
+  - isRequired: true
+    name: --count --retention-duration-count
+    summary: Jumlah durasi retensi.
+    description: ''
+  - isRequired: true
+    name: --retention-duration-type --type
+    parameterValueGroup: Days, Months, Weeks, Years
+    summary: Jenis durasi retensi.
+    description: ''
+  - isRequired: true
+    name: --source-datastore
+    parameterValueGroup: ArchiveStore, OperationalStore, VaultStore
+    summary: Tentukan datastore sumber.
+    description: ''
+  optionalParameters:
+  - name: --copy-option
+    parameterValueGroup: CopyOnExpiryOption, CustomCopyOption, ImmediateCopyOption
+    summary: Tentukan opsi salin dari datastore sumber ke datastore target.
+    description: ''
+  - name: --target-datastore
+    parameterValueGroup: ArchiveStore, OperationalStore, VaultStore
+    summary: Tentukan datastore target.
+    description: ''
+- uid: az_dataprotection_backup-policy_retention-rule_remove
+  name: az dataprotection backup-policy retention-rule remove
+  summary: Hapus aturan retensi yang ada dalam kebijakan pencadangan.
+  description: ''
+  syntax: >-
+    az dataprotection backup-policy retention-rule remove --name {Daily, Default, Monthly, Weekly, Yearly}
+                                                          --policy
+  examples:
+  - summary: Menghapus aturan retensi
+    syntax: az dataprotection backup-policy retention-rule remove --name Daily --policy policy.json
+  requiredParameters:
+  - isRequired: true
+    name: --name
+    parameterValueGroup: Daily, Default, Monthly, Weekly, Yearly
+    summary: Tentukan nama aturan retensi yang akan dihapus dalam kebijakan.
+    description: ''
+  - isRequired: true
+    name: --policy
+    summary: String atau file Json kebijakan yang ada.
+    description: ''
+- uid: az_dataprotection_backup-policy_retention-rule_set
+  name: az dataprotection backup-policy retention-rule set
+  summary: Tambahkan aturan retensi baru atau perbarui aturan retensi yang ada.
+  description: ''
+  syntax: >-
+    az dataprotection backup-policy retention-rule set --lifecycles
+                                                       --name {Daily, Default, Monthly, Weekly, Yearly}
+                                                       --policy
+  examples:
+  - summary: Menambahkan aturan retensi harian
+    syntax: az dataprotection backup-policy retention-rule set --lifecycles dailylifecycle.json --name Daily --policy policy.json
+  requiredParameters:
+  - isRequired: true
+    name: --lifecycles
+    summary: Siklus hidup yang akan dikaitkan dengan aturan retensi. Tentukan nama file json yang dipisahkan spasi.
+    description: ''
+  - isRequired: true
+    name: --name
+    parameterValueGroup: Daily, Default, Monthly, Weekly, Yearly
+    summary: Tentukan nama aturan retensi yang akan diedit dalam kebijakan.
+    description: ''
+  - isRequired: true
+    name: --policy
+    summary: String atau file Policy Json.
+    description: ''
+commands:
+- az_dataprotection_backup-policy_retention-rule_create-lifecycle
+- az_dataprotection_backup-policy_retention-rule_remove
+- az_dataprotection_backup-policy_retention-rule_set
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Buat siklus hidup dan tambahkan atau hapus aturan retensi dalam kebijakan pencadangan.
+  ms.openlocfilehash: 101c7938c23574c6b4099252be35d1d5e1e78ac9
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141133699"

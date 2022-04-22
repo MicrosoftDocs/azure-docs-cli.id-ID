@@ -1,0 +1,198 @@
+### YamlMime:AzureCLIGroup
+uid: az_storage_container_immutability-policy
+name: az storage container immutability-policy
+summary: Mengelola kebijakan ketetapan kontainer.
+description: ''
+directCommands:
+- uid: az_storage_container_immutability-policy_create
+  name: az storage container immutability-policy create
+  summary: Membuat atau memperbarui kebijakan kekekalan yang tidak terkunci.
+  description: ''
+  syntax: >-
+    az storage container immutability-policy create --account-name
+                                                    --container-name
+                                                    [--allow-protected-append-writes {false, true}]
+                                                    [--allow-protected-append-writes-all]
+                                                    [--if-match]
+                                                    [--period]
+                                                    [--resource-group]
+  requiredParameters:
+  - isRequired: true
+    name: --account-name
+    summary: ''
+    description: ''
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  optionalParameters:
+  - name: --allow-protected-append-writes -w
+    parameterValueGroup: false, true
+    summary: Properti ini hanya dapat diubah untuk kebijakan retensi berbasis waktu yang tidak terkunci. Saat diaktifkan, blok baru dapat ditulis ke blob penambahan sambil mempertahankan perlindungan dan kepatuhan imutabilitas. Hanya blok baru yang dapat ditambahkan dan blok yang ada tidak dapat dimodifikasi atau dihapus. Properti ini tidak dapat diubah dengan ExtendImmutabilityPolicy API.
+    description: ''
+  - name: --allow-protected-append-writes-all
+    summary: ''
+    description: ''
+  - name: --if-match
+    summary: ''
+    description: ''
+  - name: --period
+    summary: Periode imutabilitas untuk blob dalam kontainer sejak pembuatan kebijakan, dalam beberapa hari.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_container_immutability-policy_delete
+  name: az storage container immutability-policy delete
+  summary: Membatalkan kebijakan kekekalan yang tidak terkunci.
+  description: Respons penghapusan memiliki immutabilityPeriodSinceCreationInDays yang diatur ke 0. ETag dalam If-Match diperlukan untuk operasi ini. Menghapus kebijakan kekekalan terkunci tidak diizinkan, satu-satunya cara adalah dengan menghapus kontainer setelah menghapus semua blob yang kedaluwarsa di dalam kontainer terkunci kebijakan.
+  syntax: >-
+    az storage container immutability-policy delete --account-name
+                                                    --container-name
+                                                    --if-match
+                                                    [--resource-group]
+  requiredParameters:
+  - isRequired: true
+    name: --account-name
+    summary: Nama akun penyimpanan dalam grup sumber daya yang ditentukan. Nama akun penyimpanan harus sepanjang antara 3 dan 24 karakter dan hanya menggunakan angka dan huruf kecil.
+    description: ''
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --if-match
+    summary: Versi status entitas (ETag) dari kebijakan kekekalan untuk diperbarui. Nilai "\*" dapat digunakan untuk menerapkan operasi hanya jika kebijakan imutabilitas sudah ada. Jika dihilangkan, operasi ini akan selalu diterapkan.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_container_immutability-policy_extend
+  name: az storage container immutability-policy extend
+  summary: Perluas immutabilityPeriodSinceCreationInDays dari immutabilityPolicy yang terkunci.
+  description: ''
+  syntax: >-
+    az storage container immutability-policy extend --account-name
+                                                    --container-name
+                                                    --if-match
+                                                    [--allow-protected-append-writes {false, true}]
+                                                    [--allow-protected-append-writes-all]
+                                                    [--period]
+                                                    [--resource-group]
+  requiredParameters:
+  - isRequired: true
+    name: --account-name
+    summary: ''
+    description: ''
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --if-match
+    summary: ''
+    description: ''
+  optionalParameters:
+  - name: --allow-protected-append-writes -w
+    parameterValueGroup: false, true
+    summary: Properti ini hanya dapat diubah untuk kebijakan retensi berbasis waktu yang tidak terkunci. Saat diaktifkan, blok baru dapat ditulis ke blob penambahan sambil mempertahankan perlindungan dan kepatuhan imutabilitas. Hanya blok baru yang dapat ditambahkan dan blok yang ada tidak dapat dimodifikasi atau dihapus. Properti ini tidak dapat diubah dengan ExtendImmutabilityPolicy API.
+    description: ''
+  - name: --allow-protected-append-writes-all
+    summary: ''
+    description: ''
+  - name: --period
+    summary: Periode imutabilitas untuk blob dalam kontainer sejak pembuatan kebijakan, dalam beberapa hari.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_container_immutability-policy_lock
+  name: az storage container immutability-policy lock
+  summary: Mengatur ImmutabilityPolicy ke status Terkunci.
+  description: Satu-satunya tindakan yang diizinkan pada kebijakan Terkunci adalah tindakan ExtendImmutabilityPolicy. ETag dalam If-Match diperlukan untuk operasi ini.
+  syntax: >-
+    az storage container immutability-policy lock --account-name
+                                                  --container-name
+                                                  --if-match
+                                                  [--resource-group]
+  requiredParameters:
+  - isRequired: true
+    name: --account-name
+    summary: Nama akun penyimpanan dalam grup sumber daya yang ditentukan. Nama akun penyimpanan harus sepanjang antara 3 dan 24 karakter dan hanya menggunakan angka dan huruf kecil.
+    description: ''
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  - isRequired: true
+    name: --if-match
+    summary: Versi status entitas (ETag) dari kebijakan kekekalan untuk diperbarui. Nilai "\*" dapat digunakan untuk menerapkan operasi hanya jika kebijakan imutabilitas sudah ada. Jika dihilangkan, operasi ini akan selalu diterapkan.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_container_immutability-policy_show
+  name: az storage container immutability-policy show
+  summary: Mendapatkan kebijakan kekekalan yang ada bersama dengan ETag yang sesuai dalam header dan isi respons.
+  description: ''
+  syntax: >-
+    az storage container immutability-policy show --account-name
+                                                  --container-name
+                                                  [--if-match]
+                                                  [--resource-group]
+  requiredParameters:
+  - isRequired: true
+    name: --account-name
+    summary: Nama akun penyimpanan dalam grup sumber daya yang ditentukan. Nama akun penyimpanan harus sepanjang antara 3 dan 24 karakter dan hanya menggunakan angka dan huruf kecil.
+    description: ''
+  - isRequired: true
+    name: --container-name -c
+    summary: Nama kontainer.
+    description: ''
+  optionalParameters:
+  - name: --if-match
+    summary: Versi status entitas (ETag) dari kebijakan kekekalan untuk diperbarui. Nilai "\*" dapat digunakan untuk menerapkan operasi hanya jika kebijakan imutabilitas sudah ada. Jika dihilangkan, operasi ini akan selalu diterapkan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+commands:
+- az_storage_container_immutability-policy_create
+- az_storage_container_immutability-policy_delete
+- az_storage_container_immutability-policy_extend
+- az_storage_container_immutability-policy_lock
+- az_storage_container_immutability-policy_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/29/2022
+  description: Mengelola kebijakan ketetapan kontainer.
+  ms.openlocfilehash: 1a7d6d6451c7733a9eaf883acf5eb6a65e57a92f
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141427859"
