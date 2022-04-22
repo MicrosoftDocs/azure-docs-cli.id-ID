@@ -1,0 +1,395 @@
+### YamlMime:AzureCLIGroup
+uid: az_redisenterprise_database
+name: az redisenterprise database
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **redisenterprise** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **database az redisenterprise** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola database Perusahaan Redis.
+description: ''
+directCommands:
+- uid: az_redisenterprise_database_create
+  name: az redisenterprise database create
+  summary: Buat database baru untuk cache Redis Enterprise.
+  description: ''
+  syntax: >-
+    az redisenterprise database create --cluster-name
+                                       --resource-group
+                                       [--client-protocol {Encrypted, Plaintext}]
+                                       [--clustering-policy {EnterpriseCluster, OSSCluster}]
+                                       [--eviction-policy {AllKeysLFU, AllKeysLRU, AllKeysRandom, NoEviction, VolatileLFU, VolatileLRU, VolatileRandom, VolatileTTL}]
+                                       [--modules]
+                                       [--no-wait]
+                                       [--persistence]
+                                       [--port]
+  examples:
+  - summary: Buat database baru untuk cache Redis Enterprise.
+    syntax: az redisenterprise database create --cluster-name "cache1" --client-protocol "Encrypted" --clustering-policy "EnterpriseCluster" --eviction-policy "AllKeysLRU" --modules name="RedisBloom" args="ERROR_RATE 0.00 INITIAL_SIZE 400" --modules name="RedisTimeSeries" args="RETENTION_POLICY 20" --modules name="RediSearch" --persistence aof-enabled=true aof-frequency="1s" --port 10000 --resource-group "rg1"
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name --name -n
+    summary: Nama kluster RedisEnterprise.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --client-protocol
+    parameterValueGroup: Encrypted, Plaintext
+    summary: Menentukan apakah klien redis dapat terhubung menggunakan protokol redis yang dienkripsi TLS atau teks biasa. Defaultnya adalah terenkripsi TLS.
+    description: ''
+  - name: --clustering-policy
+    parameterValueGroup: EnterpriseCluster, OSSCluster
+    summary: Kebijakan pengklusteran - defaultnya adalah OSSCluster. Ditentukan pada waktu pembuatan.
+    description: ''
+  - name: --eviction-policy
+    parameterValueGroup: AllKeysLFU, AllKeysLRU, AllKeysRandom, NoEviction, VolatileLFU, VolatileLRU, VolatileRandom, VolatileTTL
+    summary: Kebijakan pengeluaran Redis - defaultnya adalah VolatileLRU.
+    description: ''
+  - name: --modules
+    summary: Set modul redis opsional untuk diaktifkan dalam database ini - modul hanya dapat ditambahkan pada waktu pembuatan.
+    description: >-
+      Penggunaan: --modules name=XX args=XX
+
+
+      nama: Diperlukan. Nama modul, misalnya 'RedisBloom', 'RediSearch', 'RedisTimeSeries' args: Opsi konfigurasi untuk modul, misalnya 'ERROR_RATE 0,00 INITIAL_SIZE 400'.
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --modules.
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --persistence
+    summary: Pengaturan persistensi.
+    description: >-
+      Penggunaan: --persistence aof-enabled=XX aof-frequency=XX rdb-enabled=XX rdb-frequency=XX
+
+
+      aof-enabled: Mengatur apakah AOF diaktifkan.  Nilai yang diizinkan: true, false.
+
+      aof-frequency: Mengatur frekuensi di mana data ditulis ke disk.  Nilai yang diizinkan: 1d, selalu.
+
+      diaktifkan rdb: Mengatur apakah RDB diaktifkan.  Nilai yang diizinkan: true, false.
+
+      Frekuensi rdb: Mengatur frekuensi pembuatan rekam jepret database.  Nilai yang diizinkan: 1h, 6h, 12h.
+
+
+      Setelah mengaktifkan persistensi, Anda tidak akan dapat menonaktifkannya. Dukungan untuk menonaktifkan persistensi setelah mengaktifkan akan ditambahkan di kemudian hari.
+  - name: --port
+    summary: Port TCP dari titik akhir database. Ditentukan pada waktu pembuatan. Default ke port yang tersedia.
+    description: ''
+- uid: az_redisenterprise_database_delete
+  name: az redisenterprise database delete
+  summary: Menghapus database tunggal di cache Redis Enterprise.
+  description: ''
+  syntax: >-
+    az redisenterprise database delete --cluster-name
+                                       --resource-group
+                                       [--no-wait]
+                                       [--yes]
+  examples:
+  - summary: Menghapus database tunggal di cache Redis Enterprise.
+    syntax: az redisenterprise database delete --cluster-name "cache1" --resource-group "rg1"
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name --name -n
+    summary: Nama kluster RedisEnterprise.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_redisenterprise_database_export
+  name: az redisenterprise database export
+  summary: Mengekspor data yang disimpan dalam database Redis Enterprise.
+  description: Ekspor data yang disimpan dalam database Perusahaan Redis ke file database target.
+  syntax: >-
+    az redisenterprise database export --cluster-name
+                                       --resource-group
+                                       --sas-uri
+                                       [--no-wait]
+  examples:
+  - summary: Ekspor data yang disimpan dalam database Perusahaan Redis ke file database target.
+    syntax: az redisenterprise database export --cluster-name "cache1" --sas-uri "https://contosostorage.blob.core.window.net/urlToBlobContainer?sasKeyParameters" --resource-group "rg1"
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name --name -n
+    summary: Nama kluster RedisEnterprise.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --sas-uri
+    summary: SAS URI untuk direktori target yang akan diekspor.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_redisenterprise_database_import
+  name: az redisenterprise database import
+  summary: Mengimpor data ke database Perusahaan Redis.
+  description: Impor data dari file database ke database Redis Enterprise target.
+  syntax: >-
+    az redisenterprise database import --cluster-name
+                                       --resource-group
+                                       --sas-uri
+                                       [--no-wait]
+  examples:
+  - summary: Impor data dari file database ke database Redis Enterprise target.
+    syntax: az redisenterprise database import --cluster-name "cache1" --sas-uri "https://contosostorage.blob.core.window.net/urltoBlobFile?sasKeyParameters" --resource-group "rg1"
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name --name -n
+    summary: Nama kluster RedisEnterprise.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --sas-uri
+    summary: SAS URI untuk blob target untuk diimpor.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_redisenterprise_database_list
+  name: az redisenterprise database list
+  summary: Mencantumkan semua database dalam cache Redis Enterprise.
+  description: Mencantumkan detail tentang semua database dalam cache Redis Enterprise yang ditentukan.
+  syntax: >-
+    az redisenterprise database list --cluster-name
+                                     --resource-group
+  examples:
+  - summary: Cantumkan semua database dalam cache Redis Enterprise yang ditentukan.
+    syntax: az redisenterprise database list --cluster-name "cache1" --resource-group "rg1"
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name --name -n
+    summary: Nama kluster RedisEnterprise.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_redisenterprise_database_list-keys
+  name: az redisenterprise database list-keys
+  summary: Ambil semua kunci akses untuk database Redis Enterprise.
+  description: ''
+  syntax: >-
+    az redisenterprise database list-keys --cluster-name
+                                          --resource-group
+  examples:
+  - summary: Ambil semua kunci akses untuk database Redis Enterprise.
+    syntax: az redisenterprise database list-keys --cluster-name "cache1" --resource-group "rg1"
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name --name -n
+    summary: Nama kluster RedisEnterprise.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_redisenterprise_database_regenerate-key
+  name: az redisenterprise database regenerate-key
+  summary: Meregenerasi kunci akses untuk database Redis Enterprise.
+  description: ''
+  syntax: >-
+    az redisenterprise database regenerate-key --cluster-name
+                                               --key-type {Primary, Secondary}
+                                               --resource-group
+                                               [--no-wait]
+  examples:
+  - summary: Meregenerasi kunci akses untuk database Redis Enterprise.
+    syntax: az redisenterprise database regenerate-key --cluster-name "cache1" --key-type "Primary" --resource-group "rg1"
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name --name -n
+    summary: Nama kluster RedisEnterprise.
+    description: ''
+  - isRequired: true
+    name: --key-type
+    parameterValueGroup: Primary, Secondary
+    summary: Kunci akses mana yang akan diregenerasi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_redisenterprise_database_show
+  name: az redisenterprise database show
+  summary: Dapatkan informasi tentang database di cache Redis Enterprise.
+  description: ''
+  syntax: >-
+    az redisenterprise database show --cluster-name
+                                     --resource-group
+  examples:
+  - summary: Dapatkan informasi tentang database di cache Redis Enterprise.
+    syntax: az redisenterprise database show --cluster-name "cache1" --resource-group "rg1"
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name --name -n
+    summary: Nama kluster RedisEnterprise.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_redisenterprise_database_update
+  name: az redisenterprise database update
+  summary: Perbarui database Perusahaan Redis yang sudah ada.
+  description: ''
+  syntax: >-
+    az redisenterprise database update --cluster-name
+                                       --resource-group
+                                       [--client-protocol {Encrypted, Plaintext}]
+                                       [--eviction-policy {AllKeysLFU, AllKeysLRU, AllKeysRandom, NoEviction, VolatileLFU, VolatileLRU, VolatileRandom, VolatileTTL}]
+                                       [--no-wait]
+                                       [--persistence]
+  examples:
+  - summary: Perbarui database Perusahaan Redis yang sudah ada.
+    syntax: az redisenterprise database update --cluster-name "cache1" --client-protocol "Encrypted" --eviction-policy "AllKeysLRU" --persistence rdb-enabled=true rdb-frequency="12h" --resource-group "rg1"
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name --name -n
+    summary: Nama kluster RedisEnterprise.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --client-protocol
+    parameterValueGroup: Encrypted, Plaintext
+    summary: Menentukan apakah klien redis dapat terhubung menggunakan protokol redis yang dienkripsi TLS atau teks biasa.
+    description: ''
+  - name: --eviction-policy
+    parameterValueGroup: AllKeysLFU, AllKeysLRU, AllKeysRandom, NoEviction, VolatileLFU, VolatileLRU, VolatileRandom, VolatileTTL
+    summary: Kebijakan pengeluaran Redis.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --persistence
+    summary: Pengaturan persistensi.
+    description: >-
+      Penggunaan: --persistence aof-enabled=XX aof-frequency=XX rdb-enabled=XX rdb-frequency=XX
+
+
+      aof-enabled: Mengatur apakah AOF diaktifkan.  Nilai yang diizinkan: true, false.
+
+      aof-frequency: Mengatur frekuensi di mana data ditulis ke disk.  Nilai yang diizinkan: 1d, selalu.
+
+      diaktifkan rdb: Mengatur apakah RDB diaktifkan.  Nilai yang diizinkan: true, false.
+
+      Frekuensi rdb: Mengatur frekuensi pembuatan rekam jepret database.  Nilai yang diizinkan: 1h, 6h, 12h.
+
+
+      Setelah mengaktifkan persistensi, Anda tidak akan dapat menonaktifkannya. Dukungan untuk menonaktifkan persistensi setelah mengaktifkan akan ditambahkan di kemudian hari.
+- uid: az_redisenterprise_database_wait
+  name: az redisenterprise database wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi database Redis Enterprise terpenuhi.
+  description: ''
+  syntax: >-
+    az redisenterprise database wait --cluster-name
+                                     --resource-group
+                                     [--created]
+                                     [--custom]
+                                     [--deleted]
+                                     [--exists]
+                                     [--interval]
+                                     [--timeout]
+                                     [--updated]
+  examples:
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga database Redis Enterprise berhasil dibuat.
+    syntax: az redisenterprise database wait --cluster-name "cache1" --resource-group "rg1" --created
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga database Redis Enterprise berhasil diperbarui.
+    syntax: az redisenterprise database wait --cluster-name "cache1" --resource-group "rg1" --updated
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga database Redis Enterprise berhasil dihapus.
+    syntax: az redisenterprise database wait --cluster-name "cache1" --resource-group "rg1" --deleted
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name --name -n
+    summary: Nama kluster RedisEnterprise.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_redisenterprise_database_create
+- az_redisenterprise_database_delete
+- az_redisenterprise_database_export
+- az_redisenterprise_database_import
+- az_redisenterprise_database_list
+- az_redisenterprise_database_list-keys
+- az_redisenterprise_database_regenerate-key
+- az_redisenterprise_database_show
+- az_redisenterprise_database_update
+- az_redisenterprise_database_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola database Redis Enterprise.
+  ms.openlocfilehash: 8d53aa925388d6796e95364edd1eb559073ddb9d
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141115641"

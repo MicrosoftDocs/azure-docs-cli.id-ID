@@ -1,0 +1,277 @@
+### YamlMime:AzureCLIGroup
+uid: az_cosmosdb_sql_role_definition
+name: definisi peran az cosmosdb sql
+summary: Mengelola definisi peran Azure Cosmos DB SQL.
+description: ''
+directCommands:
+- uid: az_cosmosdb_sql_role_definition_create
+  name: az cosmosdb sql role definition create
+  summary: Buat definisi peran SQL di bawah akun Azure Cosmos DB.
+  description: ''
+  syntax: >-
+    az cosmosdb sql role definition create --account-name
+                                           --body
+                                           --resource-group
+                                           [--no-wait]
+  examples:
+  - summary: Buat definisi peran SQL di bawah akun Azure Cosmos DB menggunakan string JSON.
+    syntax: >-
+      az cosmosdb sql role definition create --account-name MyAccount --resource-group MyResourceGroup --body '{
+        "Id": "be79875a-2cc4-40d5-8958-566017875b39",
+        "RoleName": "My Read Only Role",
+        "Type": "CustomRole",
+        "AssignableScopes": ["/dbs/mydb/colls/mycontainer"],
+        "Permissions": [{
+          "DataActions": [
+            "Microsoft.DocumentDB/databaseAccounts/readMetadata",
+            "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/read",
+            "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/executeQuery",
+            "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/readChangeFeed"
+          ]
+        }]
+      }'
+  - summary: Buat definisi peran SQL di bawah akun Azure Cosmos DB menggunakan file JSON.
+    syntax: az cosmosdb sql role definition create --account-name MyAccount --resource-group MyResourceGroup --body @role-definition.json
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun Cosmosdb.
+    description: ''
+  - isRequired: true
+    name: --body -b
+    summary: 'Isi Definisi Peran dengan Id (Opsional untuk membuat), DataActions atau Izin, Jenis (Defaultnya adalah CustomRole), dan AssignableScopes.  Anda dapat memasukkannya sebagai string atau sebagai file, misalnya, --body atau --body @rdbody-file.json "{ "Id": "be79875a-2cc4-40d5-8958-566017875b39", "RoleName": "My Read Write Role", "Type": "CustomRole", "AssignableScopes": [ "/" ], "DataActions": [ "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/create", "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/read" ]}".'
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cosmosdb/_help.py
+- uid: az_cosmosdb_sql_role_definition_delete
+  name: az cosmosdb sql role definition delete
+  summary: Hapus definisi peran SQL di bawah akun Azure Cosmos DB.
+  description: ''
+  syntax: >-
+    az cosmosdb sql role definition delete --account-name
+                                           --id
+                                           --resource-group
+                                           [--no-wait]
+                                           [--yes]
+  examples:
+  - summary: Hapus definisi peran SQL di bawah akun Azure Cosmos DB.
+    syntax: az cosmosdb sql role definition delete --account-name MyAccount --resource-group MyResourceGroup --id be79875a-2cc4-40d5-8958-566017875b39
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun Cosmosdb.
+    description: ''
+  - isRequired: true
+    name: --id -i
+    summary: ID unik untuk Definisi Peran.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cosmosdb/_help.py
+- uid: az_cosmosdb_sql_role_definition_exists
+  name: definisi peran az cosmosdb sql ada
+  summary: Periksa apakah definisi peran Azure Cosmos DB ada.
+  description: ''
+  syntax: >-
+    az cosmosdb sql role definition exists --account-name
+                                           --id
+                                           --resource-group
+  examples:
+  - summary: Periksa apakah definisi peran Azure Cosmos DB ada.
+    syntax: az cosmosdb sql role definition exists --account-name MyAccount --resource-group MyResourceGroup --id be79875a-2cc4-40d5-8958-566017875b39
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun Cosmosdb.
+    description: ''
+  - isRequired: true
+    name: --id -i
+    summary: ID unik untuk Definisi Peran.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cosmosdb/_help.py
+- uid: az_cosmosdb_sql_role_definition_list
+  name: az cosmosdb sql role definition list
+  summary: Cantumkan semua definisi peran SQL di bawah akun Azure Cosmos DB.
+  description: ''
+  syntax: >-
+    az cosmosdb sql role definition list --account-name
+                                         --resource-group
+  examples:
+  - summary: Cantumkan semua definisi peran SQL di bawah akun Azure Cosmos DB.
+    syntax: az cosmosdb sql role definition list --account-name MyAccount --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun Cosmosdb.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cosmosdb/_help.py
+- uid: az_cosmosdb_sql_role_definition_show
+  name: az cosmosdb sql role definition show
+  summary: Tampilkan properti definisi peran SQL di bawah akun Azure Cosmos DB.
+  description: ''
+  syntax: >-
+    az cosmosdb sql role definition show --account-name
+                                         --id
+                                         --resource-group
+  examples:
+  - summary: Tampilkan properti definisi peran SQL di bawah akun Azure Cosmos DB.
+    syntax: az cosmosdb sql role definition show --account-name MyAccount --resource-group MyResourceGroup --id be79875a-2cc4-40d5-8958-566017875b39
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun Cosmosdb.
+    description: ''
+  - isRequired: true
+    name: --id -i
+    summary: ID unik untuk Definisi Peran.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cosmosdb/_help.py
+- uid: az_cosmosdb_sql_role_definition_update
+  name: az cosmosdb sql role definition update
+  summary: Perbarui definisi peran SQL di bawah akun Azure Cosmos DB.
+  description: ''
+  syntax: >-
+    az cosmosdb sql role definition update --account-name
+                                           --body
+                                           --resource-group
+                                           [--no-wait]
+  examples:
+  - summary: Perbarui definisi peran SQL di bawah akun Azure Cosmos DB.
+    syntax: az cosmosdb sql role definition update --account-name MyAccount --resource-group MyResourceGroup --body @role-definition.json
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun Cosmosdb.
+    description: ''
+  - isRequired: true
+    name: --body -b
+    summary: 'Isi Definisi Peran dengan Id (Opsional untuk membuat), DataActions atau Izin, Jenis (Defaultnya adalah CustomRole), dan AssignableScopes.  Anda dapat memasukkannya sebagai string atau sebagai file, misalnya, --body atau --body @rdbody-file.json "{ "Id": "be79875a-2cc4-40d5-8958-566017875b39", "RoleName": "My Read Write Role", "Type": "CustomRole", "AssignableScopes": [ "/" ], "DataActions": [ "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/create", "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/read" ]}".'
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cosmosdb/_help.py
+- uid: az_cosmosdb_sql_role_definition_wait
+  name: az cosmosdb sql role definition wait
+  summary: Polling tentang definisi peran SQL hingga kondisi tertentu terpenuhi.
+  description: ''
+  syntax: >-
+    az cosmosdb sql role definition wait --account-name
+                                         --id
+                                         --resource-group
+                                         [--created]
+                                         [--custom]
+                                         [--deleted]
+                                         [--exists]
+                                         [--interval]
+                                         [--timeout]
+                                         [--updated]
+  examples:
+  - summary: Polling pada definisi peran SQL hingga dihapus.
+    syntax: az cosmosdb sql role definition wait --account-name MyAccount --resource-group MyResourceGroup --id cb8ed2d7-2371-4e3c-bd31-6cc1560e84f8 --deleted
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: Nama akun Cosmosdb.
+    description: ''
+  - isRequired: true
+    name: --id -i
+    summary: ID unik untuk Definisi Peran.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --diperbarui
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cosmosdb/_help.py
+commands:
+- az_cosmosdb_sql_role_definition_create
+- az_cosmosdb_sql_role_definition_delete
+- az_cosmosdb_sql_role_definition_exists
+- az_cosmosdb_sql_role_definition_list
+- az_cosmosdb_sql_role_definition_show
+- az_cosmosdb_sql_role_definition_update
+- az_cosmosdb_sql_role_definition_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/09/2022
+  description: Mengelola definisi peran SQL Azure Cosmos DB.
+  ms.openlocfilehash: f970e6264ac927056f2a6f189284af43db1594e5
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141429983"

@@ -1,0 +1,215 @@
+### YamlMime:AzureCLIGroup
+uid: az_role_assignment
+name: penetapan peran az
+summary: Mengelola penetapan peran.
+description: ''
+directCommands:
+- uid: az_role_assignment_create
+  name: pembuatan penetapan peran az
+  summary: Membuat penetapan peran baru untuk pengguna, grup, atau perwakilan layanan.
+  description: ''
+  syntax: >-
+    az role assignment create --role
+                              [--assignee]
+                              [--assignee-object-id]
+                              [--assignee-principal-type {ForeignGroup, Group, ServicePrincipal, User}]
+                              [--condition]
+                              [--condition-version]
+                              [--description]
+                              [--resource-group]
+                              [--scope]
+  examples:
+  - summary: Membuat penetapan peran untuk penerima tugas.
+    syntax: az role assignment create --assignee sp_name --role a_role
+  - summary: Buat penetapan peran untuk penerima tugas dengan deskripsi dan kondisi.
+    syntax: az role assignment create --role "Owner" --assignee "Jhon.Doe@Contoso.com" --description "Role assignment foo to check on bar" --condition "@Resource[Microsoft.Storage/storageAccounts/blobServices/containers:Name] stringEquals 'foo'" --condition-version "2.0"
+  - summary: Membuat penetapan peran baru untuk pengguna, grup, atau perwakilan layanan. (dibuat otomatis)
+    syntax: az role assignment create --assignee 00000000-0000-0000-0000-000000000000 --role "Storage Account Key Operator Service Role" --scope $id
+  requiredParameters:
+  - isRequired: true
+    name: --role
+    summary: Nama peran atau id.
+    description: ''
+  optionalParameters:
+  - name: --assignee
+    summary: 'Mewakili pengguna, grup, atau perwakilan layanan. format yang didukung: id objek, nama masuk pengguna, atau nama perwakilan layanan.'
+    description: ''
+  - name: --assignee-object-id
+    summary: Gunakan parameter ini alih-alih '--assignee' untuk melewati pemanggilan API Graph jika hak istimewa tidak mencukupi. Parameter ini hanya berfungsi dengan id objek untuk pengguna, grup, perwakilan layanan, dan identitas terkelola. Untuk identitas terkelola, gunakan id utama. Untuk perwakilan layanan, gunakan id objek dan bukan id aplikasi.
+    description: ''
+  - name: --assignee-principal-type
+    parameterValueGroup: ForeignGroup, Group, ServicePrincipal, User
+    summary: Gunakan dengan --assignee-object-id untuk menghindari kesalahan yang disebabkan oleh latensi penyebaran dalam AAD Graph.
+    description: ''
+  - name: --condition
+    summary: Kondisi saat pengguna dapat diberikan izin.
+    description: ''
+  - name: --condition-version
+    summary: Versi sintaks kondisi. Jika --condition ditentukan tanpa --condition-version, default ke 2.0.
+    description: ''
+  - name: --description
+    summary: Deskripsi penetapan peran.
+    description: ''
+  - name: --resource-group -g
+    summary: Gunakan hanya jika peran atau penetapan ditambahkan di tingkat grup sumber daya.
+    description: ''
+  - name: --cakupan
+    summary: Cakupan di mana penetapan peran atau definisi berlaku untuk, misalnya, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup, atau /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+- uid: az_role_assignment_delete
+  name: az role assignment delete
+  summary: Menghapus penetapan peran.
+  description: ''
+  syntax: >-
+    az role assignment delete [--assignee]
+                              [--ids]
+                              [--include-inherited]
+                              [--resource-group]
+                              [--role]
+                              [--scope]
+                              [--yes]
+  examples:
+  - summary: Menghapus penetapan peran. (dibuat otomatis)
+    syntax: az role assignment delete --assignee 00000000-0000-0000-0000-000000000000 --role "Storage Account Key Operator Service Role"
+  optionalParameters:
+  - name: --assignee
+    summary: 'Mewakili pengguna, grup, atau perwakilan layanan. format yang didukung: id objek, nama masuk pengguna, atau nama perwakilan layanan.'
+    description: ''
+  - name: --ids
+    summary: Id penetapan peran yang dipisahkan spasi.
+    description: ''
+  - name: --include-inherited
+    summary: Sertakan tugas yang diterapkan pada cakupan induk.
+    description: ''
+  - name: --resource-group -g
+    summary: Gunakan hanya jika peran atau penetapan ditambahkan di tingkat grup sumber daya.
+    description: ''
+  - name: --role
+    summary: Nama peran atau id.
+    description: ''
+  - name: --cakupan
+    summary: Cakupan di mana penetapan peran atau definisi berlaku untuk, misalnya, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup, atau /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM.
+    description: ''
+  - name: --yes -y
+    summary: Lanjutkan menghapus semua tugas di bawah langganan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+- uid: az_role_assignment_list
+  name: az role assignment list
+  summary: Mencantumkan penetapan peran.
+  description: Secara default, hanya tugas yang dilingkup ke langganan yang akan ditampilkan. Untuk melihat tugas yang dilingkup oleh sumber daya atau grup, gunakan `--all`.
+  syntax: >-
+    az role assignment list [--all]
+                            [--assignee]
+                            [--include-classic-administrators {false, true}]
+                            [--include-groups]
+                            [--include-inherited]
+                            [--resource-group]
+                            [--role]
+                            [--scope]
+  optionalParameters:
+  - name: --all
+    summary: Perlihatkan semua tugas di bawah langganan saat ini.
+    description: ''
+  - name: --assignee
+    summary: 'Mewakili pengguna, grup, atau perwakilan layanan. format yang didukung: id objek, nama masuk pengguna, atau nama perwakilan layanan.'
+    description: ''
+  - name: --include-classic-administrators
+    parameterValueGroup: false, true
+    summary: Mencantumkan penetapan peran default untuk administrator klasik langganan, alias rekan admin.
+    description: ''
+  - name: --include-groups
+    summary: Sertakan tugas tambahan ke grup yang penggunanya adalah anggota (secara transitif).
+    description: ''
+  - name: --include-inherited
+    summary: Sertakan tugas yang diterapkan pada cakupan induk.
+    description: ''
+  - name: --resource-group -g
+    summary: Gunakan hanya jika peran atau penetapan ditambahkan di tingkat grup sumber daya.
+    description: ''
+  - name: --role
+    summary: Nama peran atau id.
+    description: ''
+  - name: --cakupan
+    summary: Cakupan di mana penetapan peran atau definisi berlaku untuk, misalnya, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup, atau /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+- uid: az_role_assignment_list-changelogs
+  name: az role assignment list-changelogs
+  summary: Daftar changelog untuk penetapan peran.
+  description: ''
+  syntax: >-
+    az role assignment list-changelogs [--end-time]
+                                       [--start-time]
+  optionalParameters:
+  - name: --end-time
+    summary: Waktu akhir kueri dalam format %Y-%m-%dT%H:%M:%SZ, misalnya 2000-12-31T12:59:59Z. Default ke waktu saat ini.
+    description: ''
+  - name: --start-time
+    summary: Waktu mulai kueri dalam format %Y-%m-%dT%H:%M:%SZ, misalnya 2000-12-31T12:59:59Z. Default ke 1 Jam sebelum waktu saat ini.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+- uid: az_role_assignment_update
+  name: az role assignment update
+  summary: Perbarui penetapan peran yang ada untuk pengguna, grup, atau perwakilan layanan.
+  description: ''
+  syntax: az role assignment update --role-assignment
+  examples:
+  - summary: Memperbarui penetapan peran dari file JSON.
+    syntax: az role assignment update --role-assignment assignment.json
+  - summary: Memperbarui penetapan peran dari string JSON. (Bash)
+    syntax: >-
+      az role assignment update --role-assignment '{
+          "canDelegate": null,
+          "condition": "@Resource[Microsoft.Storage/storageAccounts/blobServices/containers:Name] stringEquals '"'"'foo'"'"'",
+          "conditionVersion": "2.0",
+          "description": "Role assignment foo to check on bar",
+          "id": "/subscriptions/00000001-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Authorization/roleAssignments/3eabdd43-375b-4dbd-8dc4-04acd15ce56b",
+          "name": "3eabdd43-375b-4dbd-8dc4-04acd15ce56b",
+          "principalId": "00000002-0000-0000-0000-000000000000",
+          "principalType": "User",
+          "resourceGroup": "rg1",
+          "roleDefinitionId": "/subscriptions/00000001-0000-0000-0000-000000000000/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7",
+          "scope": "/subscriptions/00000001-0000-0000-0000-000000000000/resourceGroups/rg1",
+          "type": "Microsoft.Authorization/roleAssignments"
+      }'
+  requiredParameters:
+  - isRequired: true
+    name: --role-assignment
+    summary: Deskripsi penetapan peran yang ada sebagai JSON, atau jalur ke file yang berisi deskripsi JSON.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+commands:
+- az_role_assignment_create
+- az_role_assignment_delete
+- az_role_assignment_list
+- az_role_assignment_list-changelogs
+- az_role_assignment_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/09/2022
+  description: Mengelola penetapan peran.
+  ms.openlocfilehash: 2ee565bcbb8411c2cd8a240f0bcfb2ee9ed499a7
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141413224"

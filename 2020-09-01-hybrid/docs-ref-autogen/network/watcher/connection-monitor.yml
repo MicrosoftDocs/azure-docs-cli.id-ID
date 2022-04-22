@@ -1,0 +1,231 @@
+### YamlMime:AzureCLIGroup
+uid: az_network_watcher_connection-monitor
+name: az network watcher connection-monitor
+summary: Mengelola pemantauan koneksi antara Azure Virtual Machine dan sumber daya IP apa pun.
+description: >-
+  Pemantau koneksi dapat digunakan untuk memantau konektivitas jaringan antara komputer virtual Azure dan alamat IP.
+
+  Alamat IP dapat ditetapkan ke sumber daya Azure lain atau sumber daya di Internet atau lokal. Untuk mempelajari lebih lanjut, kunjungi https://aka.ms/connectionmonitordoc.
+directCommands:
+- uid: az_network_watcher_connection-monitor_create
+  name: az network watcher connection-monitor create
+  summary: Membuat pemantau koneksi.
+  description: >-
+    Ekstensi ini memungkinkan untuk membuat monitor koneksi versi V1 dan V2.
+
+    Monitor koneksi V1 mendukung titik akhir sumber tunggal dan tujuan yang dilengkapi dengan grup argumen V1 seperti biasa.
+
+    Monitor koneksi V2 mendukung beberapa titik akhir dan beberapa protokol pengujian yang dilengkapi dengan grup argumen V2.
+  syntax: >-
+    az network watcher connection-monitor create --name
+                                                 [--dest-address]
+                                                 [--dest-port]
+                                                 [--dest-resource]
+                                                 [--do-not-start]
+                                                 [--location]
+                                                 [--monitoring-interval]
+                                                 [--resource-group]
+                                                 [--source-port]
+                                                 [--source-resource]
+                                                 [--tags]
+  examples:
+  - summary: Buat pemantau koneksi untuk komputer virtual.
+    syntax: >-
+      az network watcher connection-monitor create -g MyResourceGroup -n MyConnectionMonitorName \
+          --source-resource MyVM
+  - summary: Membuat monitor koneksi V2
+    syntax: az network watcher connection-monitor create --name MyV2ConnectionMonitor --endpoint-source-name "vm01" --endpoint-source-resource-id MyVM01ResourceID --endpoint-dest-name bing --endpoint-dest-address bing.com --test-config-name TCPTestConfig --protocol Tcp --tcp-port 2048
+  - summary: Membuat pemantau koneksi. (dibuat otomatis)
+    syntax: az network watcher connection-monitor create --endpoint-dest-address bing.com --endpoint-dest-name bing --endpoint-source-name "vm01" --endpoint-source-resource-id MyVM01ResourceID --location westus2 --name MyConnectionMonitorName --protocol Tcp --tcp-port 2048 --test-config-name TCPTestConfig
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama pemantau koneksi.
+    description: ''
+  optionalParameters:
+  - name: --dest-address
+    summary: Alamat IP atau URI untuk menerima lalu lintas.
+    description: ''
+  - name: --dest-port
+    summary: Nomor port untuk menerima lalu lintas.
+    description: ''
+  - name: --dest-resource
+    summary: Saat ini hanya Virtual Machines yang didukung.
+    description: ''
+  - name: --do-not-start
+    summary: Buat pemantau koneksi tetapi jangan segera memulainya.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --monitoring-interval
+    defaultValue: "60"
+    summary: Interval pemantauan dalam hitungan detik.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --source-port
+    summary: Nomor port dari mana asal lalu lintas.
+    description: ''
+  - name: --source-resource
+    summary: Saat ini hanya Virtual Machines yang didukung.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_watcher_connection-monitor_delete
+  name: az network watcher connection-monitor delete
+  summary: Menghapus pemantau koneksi untuk wilayah tertentu.
+  description: ''
+  syntax: >-
+    az network watcher connection-monitor delete --location
+                                                 --name
+  examples:
+  - summary: Menghapus pemantau koneksi untuk wilayah tertentu.
+    syntax: az network watcher connection-monitor delete -l westus -n MyConnectionMonitorName
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama pemantau koneksi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_watcher_connection-monitor_list
+  name: az network watcher connection-monitor list
+  summary: Mencantumkan pemantau koneksi untuk wilayah tertentu.
+  description: ''
+  syntax: az network watcher connection-monitor list --location
+  examples:
+  - summary: Mencantumkan pemantau koneksi untuk wilayah tertentu.
+    syntax: az network watcher connection-monitor list -l westus
+  - summary: Mencantumkan pemantau koneksi untuk wilayah tertentu. (dibuat otomatis)
+    syntax: az network watcher connection-monitor list --location westus --subscription MySubscription
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_watcher_connection-monitor_query
+  name: az network watcher connection-monitor query
+  summary: Mengkueri rekam jepret dari status koneksi terbaru dari pemantau koneksi.
+  description: ''
+  syntax: >-
+    az network watcher connection-monitor query --location
+                                                --name
+  examples:
+  - summary: Mencantumkan pemantau koneksi untuk wilayah tertentu.
+    syntax: az network watcher connection-monitor query -l westus -n MyConnectionMonitorName
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama pemantau koneksi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_watcher_connection-monitor_show
+  name: az network watcher connection-monitor show
+  summary: Memperlihatkan pemantau koneksi berdasarkan nama.
+  description: ''
+  syntax: >-
+    az network watcher connection-monitor show --location
+                                               --name
+  examples:
+  - summary: Perlihatkan pemantau koneksi untuk nama yang diberikan.
+    syntax: az network watcher connection-monitor show -l westus -n MyConnectionMonitorName
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama pemantau koneksi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_watcher_connection-monitor_start
+  name: az network watcher connection-monitor start
+  summary: Mulai pemantau koneksi yang ditentukan.
+  description: ''
+  syntax: >-
+    az network watcher connection-monitor start --location
+                                                --name
+  examples:
+  - summary: Mulai pemantau koneksi yang ditentukan.
+    syntax: az network watcher connection-monitor start -l westus -n MyConnectionMonitorName
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama pemantau koneksi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_watcher_connection-monitor_stop
+  name: az network watcher connection-monitor stop
+  summary: Hentikan pemantau koneksi yang ditentukan.
+  description: ''
+  syntax: >-
+    az network watcher connection-monitor stop --location
+                                               --name
+  examples:
+  - summary: Hentikan pemantau koneksi yang ditentukan.
+    syntax: az network watcher connection-monitor stop -l westus -n MyConnectionMonitorName
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama pemantau koneksi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+commands:
+- az_network_watcher_connection-monitor_create
+- az_network_watcher_connection-monitor_delete
+- az_network_watcher_connection-monitor_list
+- az_network_watcher_connection-monitor_query
+- az_network_watcher_connection-monitor_show
+- az_network_watcher_connection-monitor_start
+- az_network_watcher_connection-monitor_stop
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/09/2022
+  description: >-
+    Pemantau koneksi dapat digunakan untuk memantau konektivitas jaringan antara komputer virtual Azure dan alamat IP.
+
+    Alamat IP dapat ditetapkan ke sumber daya Azure lain atau sumber daya di Internet atau lokal. Untuk mempelajari lebih lanjut, kunjungi https://aka.ms/connectionmonitordoc.
+  ms.openlocfilehash: b68fa0fabef1b22b7f402942d82cfa37ca56538d
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141421595"
