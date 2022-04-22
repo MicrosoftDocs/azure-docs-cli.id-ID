@@ -1,0 +1,219 @@
+### YamlMime:AzureCLIGroup
+uid: az_policy_set-definition
+name: az policy set-definition
+summary: Mengelola definisi kumpulan kebijakan sumber daya.
+description: ''
+directCommands:
+- uid: az_policy_set-definition_create
+  name: az policy set-definition create
+  summary: Membuat definisi kumpulan kebijakan.
+  description: ''
+  syntax: >-
+    az policy set-definition create --definitions
+                                    --name
+                                    [--definition-groups]
+                                    [--description]
+                                    [--display-name]
+                                    [--management-group]
+                                    [--metadata]
+                                    [--params]
+  examples:
+  - summary: Membuat definisi kumpulan kebijakan.
+    syntax: >-
+      az policy set-definition create -n readOnlyStorage \
+          --definitions "[ { \"policyDefinitionId\": \"/subscriptions/mySubId/providers/ \
+              Microsoft.Authorization/policyDefinitions/storagePolicy\", \"parameters\": \
+                  { \"storageSku\": { \"value\": \"[parameters(\\"requiredSku\\")]\" } } }]" \
+          --params "{ \"requiredSku\": { \"type\": \"String\" } }"
+  - summary: Buat definisi kumpulan kebijakan dengan parameter.
+    syntax: >-
+      az policy set-definition create -n readOnlyStorage \
+          --definitions '[ { \"policyDefinitionId\": \"/subscriptions/mySubId/providers/ \
+              Microsoft.Authorization/policyDefinitions/storagePolicy\" } ]'
+  - summary: Membuat definisi kumpulan kebijakan dalam langganan.
+    syntax: >-
+      az policy set-definition create -n readOnlyStorage \
+          --subscription '0b1f6471-1bf0-4dda-aec3-111122223333' \
+          --definitions '[ { \"policyDefinitionId\": \"/subscriptions/ \
+              0b1f6471-1bf0-4dda-aec3-111122223333/providers/Microsoft.Authorization/ \
+                  policyDefinitions/storagePolicy\" } ]'
+  - summary: Buat definisi kumpulan kebijakan dengan grup definisi kebijakan.
+    syntax: >-
+      az policy set-definition create -n computeRequirements \
+          --definitions "[ { \"policyDefinitionId \": \"/subscriptions/mySubId/providers/ \
+              Microsoft.Authorization/policyDefinitions/storagePolicy\", \"groupNames\": \
+                  [ \"CostSaving\", \"Organizational\" ] }, { \"policyDefinitionId\": \
+                      \"/subscriptions/mySubId/providers/Microsoft.Authorization/ \
+                          policyDefinitions/tagPolicy\", \"groupNames\": [ \
+                              \"Organizational\" ] } ]" \
+          --definition-groups "[{ \"name\": \"CostSaving\" }, { \"name\": \"Organizational\" } ]"
+  requiredParameters:
+  - isRequired: true
+    name: --definitions
+    summary: Definisi kebijakan dalam format JSON, atau jalur ke file atau URI yang berisi aturan JSON.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama definisi kumpulan kebijakan baru.
+    description: ''
+  optionalParameters:
+  - name: --definition-groups
+    summary: String berformat JSON atau jalur ke file atau uri yang berisi grup definisi kebijakan. Grup digunakan untuk mengatur definisi kebijakan dalam kumpulan kebijakan.
+    description: ''
+  - name: --description
+    summary: Deskripsi definisi kumpulan kebijakan.
+    description: ''
+  - name: --display-name
+    summary: Nama tampilan definisi kumpulan kebijakan.
+    description: ''
+  - name: --management-group
+    summary: Nama grup manajemen tempat definisi kumpulan kebijakan baru dapat ditetapkan.
+    description: ''
+  - name: --metadata
+    summary: Metadata dalam pasangan key=value yang dipisahkan spasi.
+    description: ''
+  - name: --params
+    summary: String berformat JSON atau jalur ke file atau uri dengan definisi parameter.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_policy_set-definition_delete
+  name: az policy set-definition delete
+  summary: Menghapus definisi set kebijakan.
+  description: ''
+  syntax: >-
+    az policy set-definition delete --name
+                                    [--management-group]
+  examples:
+  - summary: Menghapus definisi set kebijakan. (dibuat otomatis)
+    syntax: az policy set-definition delete --management-group myMg --name MyPolicySetDefinition
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama definisi kumpulan kebijakan.
+    description: ''
+  optionalParameters:
+  - name: --management-group
+    summary: Nama grup manajemen definisi kebijakan [set].
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_policy_set-definition_list
+  name: az policy set-definition list
+  summary: Mencantumkan definisi kumpulan kebijakan.
+  description: ''
+  syntax: az policy set-definition list [--management-group]
+  optionalParameters:
+  - name: --management-group
+    summary: Nama grup manajemen definisi kebijakan [set].
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_policy_set-definition_show
+  name: az policy set-definition show
+  summary: Perlihatkan definisi kumpulan kebijakan.
+  description: ''
+  syntax: >-
+    az policy set-definition show --name
+                                  [--management-group]
+  examples:
+  - summary: Perlihatkan definisi kumpulan kebijakan. (dibuat otomatis)
+    syntax: az policy set-definition show --name MyPolicySetDefinition
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama definisi kumpulan kebijakan.
+    description: ''
+  optionalParameters:
+  - name: --management-group
+    summary: Nama grup manajemen definisi kebijakan [set].
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+- uid: az_policy_set-definition_update
+  name: az policy set-definition update
+  summary: Memperbarui definisi kumpulan kebijakan.
+  description: ''
+  syntax: >-
+    az policy set-definition update --name
+                                    [--definition-groups]
+                                    [--definitions]
+                                    [--description]
+                                    [--display-name]
+                                    [--management-group]
+                                    [--metadata]
+                                    [--params]
+  examples:
+  - summary: Memperbarui definisi kumpulan kebijakan.
+    syntax: >-
+      az policy set-definition update \
+          --definitions '[ { \"policyDefinitionId\": \"/subscriptions/mySubId/providers/ \
+              Microsoft.Authorization/policyDefinitions/storagePolicy\" } ]' \
+          --name MyPolicySetDefinition
+  - summary: Perbarui grup dan definisi dalam definisi kumpulan kebijakan.
+    syntax: >-
+      az policy set-definition update -n computeRequirements \
+          --definitions "[ { \"policyDefinitionId\": \"/subscriptions/mySubId/providers/ \
+              Microsoft.Authorization/policyDefinitions/storagePolicy\", \"groupNames\": [ \
+                  \"CostSaving\", \"Organizational\" ] }, { \"policyDefinitionId\": \
+                      \"/subscriptions/mySubId/providers/Microsoft.Authorization/ \
+                          policyDefinitions/tagPolicy\", \
+                              \"groupNames\": [ \"Organizational\" ] } ]" \
+          --definition-groups "[{ \"name\": \"CostSaving\" }, { \"name\": \"Organizational\" } ]"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama definisi kumpulan kebijakan.
+    description: ''
+  optionalParameters:
+  - name: --definition-groups
+    summary: String berformat JSON atau jalur ke file atau uri yang berisi grup definisi kebijakan. Grup digunakan untuk mengatur definisi kebijakan dalam kumpulan kebijakan.
+    description: ''
+  - name: --definitions
+    summary: String berformat JSON atau jalur ke file atau uri yang berisi definisi.
+    description: ''
+  - name: --description
+    summary: Deskripsi definisi kumpulan kebijakan.
+    description: ''
+  - name: --display-name
+    summary: Nama tampilan definisi kumpulan kebijakan.
+    description: ''
+  - name: --management-group
+    summary: Nama grup manajemen definisi kebijakan [set].
+    description: ''
+  - name: --metadata
+    summary: Metadata dalam pasangan key=value yang dipisahkan spasi.
+    description: ''
+  - name: --params
+    summary: String berformat JSON atau jalur ke file atau uri dengan definisi parameter.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/resource/_help.py
+commands:
+- az_policy_set-definition_create
+- az_policy_set-definition_delete
+- az_policy_set-definition_list
+- az_policy_set-definition_show
+- az_policy_set-definition_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 02/22/2022
+  description: Mengelola definisi kumpulan kebijakan sumber daya.
+  ms.openlocfilehash: 203218eb852c6237bf303e9d57f085841dce17c6
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141116167"

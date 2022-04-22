@@ -1,0 +1,433 @@
+### YamlMime:AzureCLIGroup
+uid: az_monitor_alert-processing-rule
+name: az monitor alert-processing-rule
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **alertsmanagement** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **az monitor alert-processing-rule** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola aturan pemrosesan pemberitahuan dengan pengelolaan pemberitahuan.
+description: ''
+directCommands:
+- uid: az_monitor_alert-processing-rule_create
+  name: az monitor alert-processing-rule create
+  summary: Buat aturan pemrosesan peringatan.
+  description: ''
+  syntax: >-
+    az monitor alert-processing-rule create --name
+                                            --resource-group
+                                            --rule-type {AddActionGroups, RemoveAllActionGroups}
+                                            --scopes
+                                            [--action-groups]
+                                            [--description]
+                                            [--enabled {false, true}]
+                                            [--filter-alert-context]
+                                            [--filter-alert-rule-description]
+                                            [--filter-alert-rule-id]
+                                            [--filter-alert-rule-name]
+                                            [--filter-monitor-condition]
+                                            [--filter-monitor-service]
+                                            [--filter-resource-group]
+                                            [--filter-resource-type]
+                                            [--filter-severity]
+                                            [--filter-signal-type]
+                                            [--filter-target-resource]
+                                            [--schedule-end-datetime]
+                                            [--schedule-recurrence]
+                                            [--schedule-recurrence-2]
+                                            [--schedule-recurrence-2-end-time]
+                                            [--schedule-recurrence-2-start-time]
+                                            [--schedule-recurrence-2-type {Daily, Monthly, Weekly}]
+                                            [--schedule-recurrence-end-time]
+                                            [--schedule-recurrence-start-time]
+                                            [--schedule-recurrence-type {Daily, Monthly, Weekly}]
+                                            [--schedule-start-datetime]
+                                            [--schedule-time-zone]
+                                            [--tags]
+  examples:
+  - summary: Membuat atau memperbarui aturan yang menambahkan grup tindakan ke semua pemberitahuan dalam langganan
+    syntax: >-
+      az monitor alert-processing-rule create \
+
+      --name 'AddActionGroupToSubscription' \
+
+      --rule-type AddActionGroups \
+
+      --scopes "/subscriptions/MySubscriptionId" \
+
+      --action-groups "/subscriptions/MySubscriptionId/resourcegroups/MyResourceGroup1/providers/microsoft.insights/actiongroups/ActionGroup1" \
+
+      --enabled true \
+
+      --resource-group alertscorrelationrg \
+
+      --description "Add ActionGroup1 to all alerts in the subscription"
+  - summary: Membuat atau memperbarui aturan yang menambahkan dua grup tindakan ke semua pemberitahuan Sev0 dan Sev1 dalam dua grup sumber daya
+    syntax: >-
+      az monitor alert-processing-rule create \
+
+      --name 'AddActionGroupsBySeverity' \
+
+      --rule-type AddActionGroups \
+
+      --action-groups "/subscriptions/MySubscriptionId/resourcegroups/MyResourceGroup1/providers/microsoft.insights/actiongroups/MyActionGroupId1" "/subscriptions/MySubscriptionId/resourceGroups/MyResourceGroup2/providers/microsoft.insights/actionGroups/MyActionGroup2" \
+
+      --scopes "/subscriptions/MySubscriptionId" \
+
+      --resource-group alertscorrelationrg \
+
+      --filter-severity Equals Sev0 Sev1 \
+
+      --description "Add AGId1 and AGId2 to all Sev0 and Sev1 alerts in these resourceGroups"
+  - summary: Membuat atau memperbarui aturan yang menghapus semua grup tindakan dari pemberitahuan pada VM tertentu selama jendela pemeliharaan satu kali (1800-2000 pada tanggal tertentu, Waktu Standar Pasifik)
+    syntax: >-
+      az monitor alert-processing-rule create \
+
+      --name 'RemoveActionGroupsMaintenanceWindow' \
+
+      --rule-type RemoveAllActionGroups \
+
+      --scopes "/subscriptions/MySubscriptionId/resourceGroups/MyResourceGroup1/providers/Microsoft.Compute/virtualMachines/VMName" \
+
+      --resource-group alertscorrelationrg \
+
+      --schedule-start-datetime '2022-01-02 18:00:00' \
+
+      --schedule-end-datetime '2022-01-02 20:00:00' \
+
+      --schedule-time-zone 'Pacific Standard Time' \
+
+      --description "Removes all ActionGroups from all Alerts on VMName during the maintenance window"
+  - summary: Membuat atau memperbarui aturan yang menghapus semua grup tindakan dari semua pemberitahuan dalam langganan yang berasal dari aturan pemberitahuan tertentu
+    syntax: >-
+      az monitor alert-processing-rule create \
+
+      --name 'RemoveActionGroupsSpecificAlertRule' \
+
+      --rule-type RemoveAllActionGroups \
+
+      --scopes "/subscriptions/MySubscriptionId" \
+
+      --resource-group alertscorrelationrg \
+
+      --filter-alert-rule-id Equals "/subscriptions/MySubscriptionId/resourceGroups/MyResourceGroup1/providers/microsoft.insights/activityLogAlerts/RuleName" \
+
+      --description "Removes all ActionGroups from all Alerts that fire on above AlertRule"
+  - summary: Membuat atau memperbarui aturan yang menghapus semua grup tindakan dari semua pemberitahuan pada VM apa pun dalam dua grup sumber daya selama jendela pemeliharaan berulang (2200-0400 setiap Sab dan Matahari, Waktu Standar India)
+    syntax: >-
+      az monitor alert-processing-rule create \
+
+      --name 'RemoveActionGroupsRecurringMaintenance' \
+
+      --rule-type RemoveAllActionGroups \
+
+      --scopes "/subscriptions/MySubscriptionId/resourceGroups/MyResourceGroup1" "/subscriptions/MySubscriptionId/resourceGroups/MyResourceGroup2" \
+
+      --resource-group alertscorrelationrg \
+
+      --filter-resource-type Equals "microsoft.compute/virtualmachines" \
+
+      --schedule-time-zone "India Standard Time" \
+
+      --schedule-recurrence-type Weekly \
+
+      --schedule-recurrence-start-time "22:00:00" \
+
+      --schedule-recurrence-end-time "04:00:00" \
+
+      --schedule-recurrence Sunday Saturday \
+
+      --description "Remove all ActionGroups from all Virtual machine Alerts during the recurring maintenance"
+  - summary: Membuat atau memperbarui aturan yang menghapus semua grup tindakan di luar jam kerja (Senin-Jumat 09:00-17:00, Waktu Standar Timur)
+    syntax: >-
+      az monitor alert-processing-rule create \
+
+      --name 'RemoveActionGroupsOutsideBusinessHours' \
+
+      --rule-type RemoveAllActionGroups \
+
+      --scopes "/subscriptions/MySubscriptionId" \
+
+      --resource-group alertscorrelationrg \
+
+      --schedule-time-zone "Eastern Standard Time" \
+
+      --schedule-recurrence-type Daily \
+
+      --schedule-recurrence-start-time "17:00:00" \
+
+      --schedule-recurrence-end-time "09:00:00" \
+
+      --schedule-recurrence-2-type Weekly \
+
+      --schedule-recurrence-2 Saturday Sunday \
+
+      --description "Remove all ActionGroups outside business hours"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aturan pemrosesan pemberitahuan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --rule-type
+    parameterValueGroup: AddActionGroups, RemoveAllActionGroups
+    summary: Menunjukkan jenis aturan pemrosesan pemberitahuan.
+    description: ''
+  - isRequired: true
+    name: --scopes
+    summary: Daftar ID sumber daya (dibatasi spasi) untuk cakupan. Aturan akan berlaku untuk pemberitahuan yang diaktifkan pada sumber daya dalam cakupan tersebut.
+    description: ''
+  optionalParameters:
+  - name: --action-groups
+    summary: Daftar id sumber daya (dibatasi spasi) grup tindakan untuk ditambahkan. Penggunaan argumen ini mengharuskan jenis aturan adalah AddActionGroups.
+    description: ''
+  - name: --description
+    summary: Deskripsi aturan pemrosesan pemberitahuan.
+    description: ''
+  - name: --enabled
+    parameterValueGroup: false, true
+    summary: Tunjukkan apakah aturan pemrosesan pemberitahuan yang diberikan diaktifkan atau dinonaktifkan (default diaktifkan).
+    description: ''
+  - name: --filter-alert-context
+    summary: Memfilter pemberitahuan menurut konteks pemberitahuan (payload).
+    description: 'Format filter <<operator> nilai yang dibatasi spasi> di mana Operator: salah satu <Sama dengan, NotEquals, Contains, DoesNotContain nilai>: Daftar nilai yang cocok untuk kondisi tertentu.'
+  - name: --filter-alert-rule-description
+    summary: Memfilter pemberitahuan menurut deskripsi aturan pemberitahuan.
+    description: ''
+  - name: --filter-alert-rule-id
+    summary: Memfilter pemberitahuan menurut ID pemberitahuan.
+    description: ''
+  - name: --filter-alert-rule-name
+    summary: Memfilter pemberitahuan menurut nama aturan pemberitahuan.
+    description: ''
+  - name: --filter-monitor-condition
+    summary: Memfilter pemberitahuan menurut kondisi pemantauan.
+    description: ''
+  - name: --filter-monitor-service
+    summary: Memfilter pemberitahuan menurut layanan monitor.
+    description: ''
+  - name: --filter-resource-group
+    summary: Memfilter pemberitahuan menurut grup sumber daya.
+    description: ''
+  - name: --filter-resource-type
+    summary: Memfilter pemberitahuan menurut jenis sumber daya.
+    description: ''
+  - name: --filter-severity
+    summary: Memfilter pemberitahuan berdasarkan tingkat keparahan <Sev0, Sev1, Sev2, Sev3, Sev4>.
+    description: ''
+  - name: --filter-signal-type
+    summary: Memfilter pemberitahuan menurut jenis sinyal.
+    description: ''
+  - name: --filter-target-resource
+    summary: Memfilter pemberitahuan menurut sumber daya.
+    description: ''
+  - name: --schedule-end-datetime
+    summary: "Tanggal selesai untuk aturan. Format: 'YYYY-MM-DD hh:mm:ss'."
+    description: ''
+  - name: --schedule-recurrence
+    summary: Daftar nilai pola pengulangan.
+    description: >-
+      --schedule-recurrence: Daftar nilai pola pengulangan (dibatasi spasi).
+
+      Untuk jenis pengulangan mingguan, nilai yang diizinkan adalah Minggu hingga Sabtu.
+
+      Untuk jenis pengulangan bulanan, nilai yang diizinkan adalah 1 hingga 31 (hari dalam sebulan).
+  - name: --schedule-recurrence-2
+    summary: Daftar nilai pola pengulangan untuk pola pengulangan kedua.
+    description: >-
+      --schedule-recurrence-2: Daftar nilai pola pengulangan (dibatasi spasi).
+
+      Untuk jenis pengulangan mingguan, nilai yang diizinkan adalah Minggu hingga Sabtu.
+
+      Untuk jenis pengulangan bulanan, nilai yang diizinkan adalah 1 hingga 31 (hari dalam sebulan).
+  - name: --schedule-recurrence-2-end-time
+    summary: 'Waktu akhir untuk setiap pengulangan. Format: hh:mm:ss.'
+    description: ''
+  - name: --schedule-recurrence-2-start-time
+    summary: 'Waktu mulai untuk setiap pengulangan. Format: hh:mm:ss.'
+    description: ''
+  - name: --schedule-recurrence-2-type
+    parameterValueGroup: Daily, Monthly, Weekly
+    summary: Menentukan kapan aturan pemrosesan harus diterapkan. Default ke Selalu.
+    description: ''
+  - name: --schedule-recurrence-end-time
+    summary: "Waktu akhir untuk setiap pengulangan. Format: 'hh:mm:ss'."
+    description: ''
+  - name: --schedule-recurrence-start-time
+    summary: "Waktu mulai untuk setiap pengulangan. Format: 'hh:mm:ss'."
+    description: ''
+  - name: --schedule-recurrence-type
+    parameterValueGroup: Daily, Monthly, Weekly
+    summary: Menentukan kapan aturan pemrosesan harus diterapkan.
+    description: ''
+  - name: --schedule-start-datetime
+    summary: "Tanggal mulai untuk aturan. Format: 'YYYY-MM-DD hh:mm:ss'."
+    description: ''
+  - name: --schedule-time-zone
+    defaultValue: UTC
+    summary: Jadwalkan zona waktu.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+- uid: az_monitor_alert-processing-rule_delete
+  name: az monitor alert-processing-rule delete
+  summary: Menghapus aturan pemrosesan pemberitahuan.
+  description: ''
+  syntax: >-
+    az monitor alert-processing-rule delete --name
+                                            --resource-group
+                                            [--yes]
+  examples:
+  - summary: Menghapus aturan pemrosesan pemberitahuan.
+    syntax: >-
+      az monitor alert-processing-rule delete \
+
+      --resource-group myResourceGroup \
+
+      --name myRuleName
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aturan pemrosesan pemberitahuan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_monitor_alert-processing-rule_list
+  name: az monitor alert-processing-rule list
+  summary: Mencantumkan semua aturan pemrosesan pemberitahuan dalam grup langganan atau sumber daya.
+  description: ''
+  syntax: az monitor alert-processing-rule list [--resource-group]
+  examples:
+  - summary: Mencantumkan semua aturan pemrosesan pemberitahuan dalam langganan saat ini
+    syntax: az monitor alert-processing-rule list
+  - summary: Mencantumkan semua aturan pemrosesan pemberitahuan dalam grup sumber daya
+    syntax: >-
+      az monitor alert-processing-rule list \
+
+      --resource-group myResourceGroup
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_monitor_alert-processing-rule_show
+  name: az monitor alert-processing-rule show
+  summary: Mendapatkan aturan pemrosesan pemberitahuan.
+  description: ''
+  syntax: >-
+    az monitor alert-processing-rule show --name
+                                          --resource-group
+  examples:
+  - summary: Mendapatkan aturan pemrosesan pemberitahuan berdasarkan nama
+    syntax: >-
+      az monitor alert-processing-rule show \
+
+      --name myRuleName \
+
+      --resource-group myRuleNameResourceGroup
+  - summary: Mendapatkan aturan pemrosesan pemberitahuan menurut id
+    syntax: >-
+      az monitor alert-processing-rule show \
+
+      --ids ruleId1 ruleId2
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aturan pemrosesan pemberitahuan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_monitor_alert-processing-rule_update
+  name: az monitor alert-processing-rule update
+  summary: Mengaktifkan, menonaktifkan, atau memperbarui tag untuk aturan pemrosesan pemberitahuan.
+  description: ''
+  syntax: >-
+    az monitor alert-processing-rule update --name
+                                            --resource-group
+                                            [--add]
+                                            [--enabled {false, true}]
+                                            [--force-string]
+                                            [--remove]
+                                            [--set]
+                                            [--tags]
+  examples:
+  - summary: PatchAlertProcessingRule
+    syntax: >-
+      az monitor alert-processing-rule update \
+
+      --name "WeeklySuppression" \
+
+      --enabled false \
+
+      --tags key1="value1" key2="value2" --resource-group "alertscorrelationrg"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aturan pemrosesan pemberitahuan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --enabled
+    parameterValueGroup: false, true
+    summary: Tunjukkan apakah aturan pemrosesan yang diberikan diaktifkan atau dinonaktifkan (nilainya True dan False).
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+commands:
+- az_monitor_alert-processing-rule_create
+- az_monitor_alert-processing-rule_delete
+- az_monitor_alert-processing-rule_list
+- az_monitor_alert-processing-rule_show
+- az_monitor_alert-processing-rule_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola aturan pemrosesan pemberitahuan dengan pengelolaan pemberitahuan.
+  ms.openlocfilehash: 8b457357eea5e50aae70b9c699f6ce5da963df3e
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141131701"

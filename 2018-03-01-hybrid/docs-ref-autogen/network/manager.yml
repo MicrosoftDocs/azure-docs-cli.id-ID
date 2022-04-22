@@ -1,0 +1,463 @@
+### YamlMime:AzureCLIGroup
+uid: az_network_manager
+name: az network manager
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **virtual-network-manager** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **az network manager** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola networkmanager dengan jaringan.
+description: ''
+directCommands:
+- uid: az_network_manager_create
+  name: az network manager create
+  summary: Membuat Pengelola Jaringan.
+  description: ''
+  syntax: >-
+    az network manager create --location
+                              --name
+                              --network-manager-scopes
+                              --resource-group
+                              --scope-accesses
+                              [--description]
+                              [--display-name]
+                              [--id]
+                              [--tags]
+  examples:
+  - summary: Membuat/Memperbarui Azure Virtual Network Manager
+    syntax: az network manager create --name "TestNetworkManager" -l eastus2euap --description "My Test Network Manager" --display-name "TestNetworkManager" --scope-accesses "SecurityAdmin" "Connectivity" --network-manager-scopes management-groups="/providers/Microsoft.Management/testmg" subscriptions="/subscriptions/00000000-0000-0000-0000-000000000000" --resource-group "rg1"
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - isRequired: true
+    name: --name --network-manager-name -n
+    summary: Nama manajer jaringan.
+    description: ''
+  - isRequired: true
+    name: --network-manager-scopes
+    summary: Cakupan Pengelola Jaringan.
+    description: >-
+      Penggunaan: --network-manager-scopes management-groups=XX subscriptions=XX
+
+
+      grup manajemen: Daftar grup manajemen.
+
+      langganan: Daftar langganan.
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --scope-accesses
+    summary: 'Akses Cakupan. Nilai yang tersedia: SecurityAdmin, Connectivity.'
+    description: ''
+  optionalParameters:
+  - name: --description
+    summary: Deskripsi manajer jaringan.
+    description: ''
+  - name: --display-name
+    summary: Nama yang mudah diingat untuk manajer jaringan.
+    description: ''
+  - name: --id
+    summary: ID Sumber Daya.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+- uid: az_network_manager_delete
+  name: az network manager delete
+  summary: Menghapus manajer jaringan.
+  description: ''
+  syntax: >-
+    az network manager delete --name
+                              --resource-group
+                              [--yes]
+  examples:
+  - summary: Menghapus Azure Virtual Network Manager
+    syntax: az network manager delete --name "testNetworkManager" --resource-group "rg1"
+  requiredParameters:
+  - isRequired: true
+    name: --name --network-manager-name -n
+    summary: Nama manajer jaringan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_network_manager_list
+  name: az network manager list
+  summary: Mencantumkan manajer jaringan dalam grup sumber daya.
+  description: ''
+  syntax: >-
+    az network manager list --resource-group
+                            [--skip-token]
+                            [--top]
+  examples:
+  - summary: Mencantumkan Azure Virtual Network Manager
+    syntax: az network manager list --resource-group "rg1"
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --skip-token
+    summary: SkipToken hanya digunakan jika operasi sebelumnya mengembalikan hasil parsial. Jika respons sebelumnya berisi elemen nextLink, nilai elemen nextLink akan menyertakan parameter skipToken yang menentukan titik awal yang akan digunakan untuk panggilan berikutnya.
+    description: ''
+  - name: --top
+    summary: Parameter kueri opsional yang menentukan jumlah maksimum rekaman yang akan dikembalikan oleh server.
+    description: ''
+- uid: az_network_manager_list-active-connectivity-config
+  name: az network manager list-active-connectivity-config
+  summary: Mencantumkan konfigurasi aktif di manajer jaringan.
+  description: ''
+  syntax: >-
+    az network manager list-active-connectivity-config --name
+                                                       --resource-group
+                                                       [--regions]
+                                                       [--skip-token]
+  examples:
+  - summary: Mendapatkan Konfigurasi Aktif Azure Virtual Network Manager
+    syntax: az network manager list-active-connectivity-config --network-manager-name "testNetworkManager" --resource-group "myResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --name --network-manager-name -n
+    summary: Nama manajer jaringan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --regions
+    summary: Nama lokasi.
+    description: ''
+  - name: --skip-token
+    summary: SkipToken hanya digunakan jika operasi sebelumnya mengembalikan hasil parsial. Jika respons sebelumnya berisi elemen nextLink, nilai elemen nextLink akan menyertakan parameter skipToken yang menentukan titik awal yang akan digunakan untuk panggilan berikutnya.
+    description: ''
+- uid: az_network_manager_list-active-security-admin-rule
+  name: az network manager list-active-security-admin-rule
+  summary: Mencantumkan aturan admin keamanan aktif di manajer jaringan.
+  description: ''
+  syntax: >-
+    az network manager list-active-security-admin-rule --name
+                                                       --resource-group
+                                                       [--regions]
+                                                       [--skip-token]
+  examples:
+  - summary: Mendapatkan Aturan Admin Keamanan Aktif Azure Virtual Network Manager
+    syntax: az network manager list-active-security-admin-rule --network-manager-name "testNetworkManager" --resource-group "myResourceGroup" --region "eastus2euap"
+  requiredParameters:
+  - isRequired: true
+    name: --name --network-manager-name -n
+    summary: Nama manajer jaringan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --regions
+    summary: Daftar lokasi.
+    description: ''
+  - name: --skip-token
+    summary: SkipToken hanya digunakan jika operasi sebelumnya mengembalikan hasil parsial. Jika respons sebelumnya berisi elemen nextLink, nilai elemen nextLink akan menyertakan parameter skipToken yang menentukan titik awal yang akan digunakan untuk panggilan berikutnya.
+    description: ''
+- uid: az_network_manager_list-deploy-status
+  name: az network manager list-deploy-status
+  summary: Posting Daftar Status Penyebaran Pengelola Jaringan.
+  description: ''
+  syntax: >-
+    az network manager list-deploy-status --name
+                                          --resource-group
+                                          [--deployment-types]
+                                          [--regions]
+                                          [--skip-token]
+  examples:
+  - summary: Posting Status Penyebaran Azure Virtual Network Manager
+    syntax: az network manager list-deploy-status --network-manager-name "testNetworkManager" --deployment-types "Connectivity" "SecurityAdmin" --regions "eastus" "westus" --resource-group "resoureGroupSample"
+  requiredParameters:
+  - isRequired: true
+    name: --name --network-manager-name -n
+    summary: Nama manajer jaringan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --deployment-types
+    summary: Daftar jenis penyebaran konfigurasi.
+    description: ''
+  - name: --regions
+    summary: Daftar lokasi.
+    description: ''
+  - name: --skip-token
+    summary: SkipToken hanya digunakan jika operasi sebelumnya mengembalikan hasil parsial. Jika respons sebelumnya berisi elemen nextLink, nilai elemen nextLink akan menyertakan parameter skipToken yang menentukan titik awal yang akan digunakan untuk panggilan berikutnya.
+    description: ''
+- uid: az_network_manager_list-effective-connectivity-config
+  name: az network manager list-effective-connectivity-config
+  summary: Mencantumkan konfigurasi efektif di manajer jaringan.
+  description: ''
+  syntax: >-
+    az network manager list-effective-connectivity-config --resource-group
+                                                          --virtual-network-name
+                                                          [--skip-token]
+  examples:
+  - summary: Mendapatkan Konfigurasi Efektif Azure Virtual Network Manager
+    syntax: az network manager list-effective-connectivity-config --virtual-network-name "myVirtualNetwork" --resource-group "myResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --virtual-network-name --vnet-name
+    summary: Nama jaringan virtual.
+    description: ''
+  optionalParameters:
+  - name: --skip-token
+    summary: SkipToken hanya digunakan jika operasi sebelumnya mengembalikan hasil parsial. Jika respons sebelumnya berisi elemen nextLink, nilai elemen nextLink akan menyertakan parameter skipToken yang menentukan titik awal yang akan digunakan untuk panggilan berikutnya.
+    description: ''
+- uid: az_network_manager_list-effective-security-admin-rule
+  name: az network manager list-effective-security-admin-rule
+  summary: Mencantumkan konfigurasi efektif di manajer jaringan.
+  description: ''
+  syntax: >-
+    az network manager list-effective-security-admin-rule --resource-group
+                                                          --virtual-network-name
+                                                          [--skip-token]
+  examples:
+  - summary: Mendapatkan Konfigurasi Efektif Azure Virtual Network Manager
+    syntax: az network manager list-effective-security-admin-rule --virtual-network-name "myVirtualNetwork" --resource-group "myResourceGroup"
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --virtual-network-name --vnet-name
+    summary: Nama jaringan virtual.
+    description: ''
+  optionalParameters:
+  - name: --skip-token
+    summary: SkipToken hanya digunakan jika operasi sebelumnya mengembalikan hasil parsial. Jika respons sebelumnya berisi elemen nextLink, nilai elemen nextLink akan menyertakan parameter skipToken yang menentukan titik awal yang akan digunakan untuk panggilan berikutnya.
+    description: ''
+- uid: az_network_manager_post-commit
+  name: az network manager post-commit
+  summary: Memposting Penerapan Pengelola Jaringan.
+  description: ''
+  syntax: >-
+    az network manager post-commit --commit-type {Connectivity, SecurityAdmin}
+                                   --name
+                                   --resource-group
+                                   --target-locations
+                                   [--configuration-ids]
+  examples:
+  - summary: Memposting Penerapan Azure Virtual Network Manager
+    syntax: az network manager post-commit --network-manager-name "testNetworkManager" --commit-type "SecurityAdmin" --configuration-ids "/subscriptions/subscriptionC/resourceGroups/resoureGroupSample/providers/Microsoft.Network/networkManagers/testNetworkManager/securityConfigurations/SampleSecurityConfig" --target-locations "eastus" --resource-group "resoureGroupSample"
+  requiredParameters:
+  - isRequired: true
+    name: --commit-type
+    parameterValueGroup: Connectivity, SecurityAdmin
+    summary: Jenis Penerapan.
+    description: ''
+  - isRequired: true
+    name: --name --network-manager-name -n
+    summary: Nama manajer jaringan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --target-locations
+    summary: Daftar lokasi target.
+    description: ''
+  optionalParameters:
+  - name: --configuration-ids
+    summary: Daftar id konfigurasi.
+    description: ''
+- uid: az_network_manager_show
+  name: az network manager show
+  summary: Mendapatkan Pengelola Jaringan yang ditentukan.
+  description: ''
+  syntax: >-
+    az network manager show --name
+                            --resource-group
+  examples:
+  - summary: Mendapatkan Azure Virtual Network Manager
+    syntax: az network manager show --name "testNetworkManager" --resource-group "rg1"
+  requiredParameters:
+  - isRequired: true
+    name: --name --network-manager-name -n
+    summary: Nama manajer jaringan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_network_manager_update
+  name: az network manager update
+  summary: Memperbarui Pengelola Jaringan.
+  description: ''
+  syntax: >-
+    az network manager update --name
+                              --resource-group
+                              [--add]
+                              [--description]
+                              [--display-name]
+                              [--force-string]
+                              [--id]
+                              [--location]
+                              [--network-manager-scopes]
+                              [--remove]
+                              [--scope-accesses]
+                              [--set]
+                              [--tags]
+  requiredParameters:
+  - isRequired: true
+    name: --name --network-manager-name -n
+    summary: Nama manajer jaringan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --description
+    summary: Deskripsi manajer jaringan.
+    description: ''
+  - name: --display-name
+    summary: Nama yang mudah diingat untuk manajer jaringan.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --id
+    summary: ID Sumber Daya.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --network-manager-scopes
+    summary: Cakupan Pengelola Jaringan.
+    description: >-
+      Penggunaan: --network-manager-scopes management-groups=XX subscriptions=XX
+
+
+      grup manajemen: Daftar grup manajemen.
+
+      langganan: Daftar langganan.
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --scope-accesses
+    summary: 'Akses Cakupan. Nilai yang tersedia: SecurityAdmin, Konektivitas.'
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+commands:
+- az_network_manager_connect-config
+- az_network_manager_connect-config_create
+- az_network_manager_connect-config_delete
+- az_network_manager_connect-config_list
+- az_network_manager_connect-config_show
+- az_network_manager_connect-config_update
+- az_network_manager_connection
+- az_network_manager_connection_subscription
+- az_network_manager_connection_subscription_create
+- az_network_manager_connection_subscription_delete
+- az_network_manager_connection_subscription_list
+- az_network_manager_connection_subscription_show
+- az_network_manager_connection_subscription_update
+- az_network_manager_create
+- az_network_manager_delete
+- az_network_manager_group
+- az_network_manager_group_create
+- az_network_manager_group_delete
+- az_network_manager_group_list
+- az_network_manager_group_list-effect-vnet
+- az_network_manager_group_show
+- az_network_manager_group_static-member
+- az_network_manager_group_static-member_create
+- az_network_manager_group_static-member_delete
+- az_network_manager_group_static-member_list
+- az_network_manager_group_static-member_show
+- az_network_manager_group_update
+- az_network_manager_list
+- az_network_manager_list-active-connectivity-config
+- az_network_manager_list-active-security-admin-rule
+- az_network_manager_list-deploy-status
+- az_network_manager_list-effective-connectivity-config
+- az_network_manager_list-effective-security-admin-rule
+- az_network_manager_post-commit
+- az_network_manager_scope-connection
+- az_network_manager_scope-connection_create
+- az_network_manager_scope-connection_delete
+- az_network_manager_scope-connection_list
+- az_network_manager_scope-connection_show
+- az_network_manager_scope-connection_update
+- az_network_manager_security-admin-config
+- az_network_manager_security-admin-config_create
+- az_network_manager_security-admin-config_delete
+- az_network_manager_security-admin-config_list
+- az_network_manager_security-admin-config_rule-collection
+- az_network_manager_security-admin-config_rule-collection_create
+- az_network_manager_security-admin-config_rule-collection_delete
+- az_network_manager_security-admin-config_rule-collection_list
+- az_network_manager_security-admin-config_rule-collection_rule
+- az_network_manager_security-admin-config_rule-collection_rule_create
+- az_network_manager_security-admin-config_rule-collection_rule_delete
+- az_network_manager_security-admin-config_rule-collection_rule_list
+- az_network_manager_security-admin-config_rule-collection_rule_show
+- az_network_manager_security-admin-config_rule-collection_rule_update
+- az_network_manager_security-admin-config_rule-collection_show
+- az_network_manager_security-admin-config_rule-collection_update
+- az_network_manager_security-admin-config_show
+- az_network_manager_security-admin-config_update
+- az_network_manager_security-user-config
+- az_network_manager_security-user-config_create
+- az_network_manager_security-user-config_delete
+- az_network_manager_security-user-config_list
+- az_network_manager_security-user-config_show
+- az_network_manager_security-user-config_update
+- az_network_manager_show
+- az_network_manager_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Kelola networkmanager dengan jaringan.
+  ms.openlocfilehash: 3faf179c171e15b3ba5be2b0fecce90c8922ddd4
+  ms.sourcegitcommit: 36a23229659359ef8c1a6dc8011b039306fe6717
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/12/2022
+  ms.locfileid: "141654948"

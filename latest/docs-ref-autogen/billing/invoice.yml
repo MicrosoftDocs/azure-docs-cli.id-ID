@@ -1,0 +1,134 @@
+### YamlMime:AzureCLIGroup
+uid: az_billing_invoice
+name: az billing invoice
+summary: Mendapatkan faktur tagihan untuk langganan.
+description: ''
+directCommands:
+- uid: az_billing_invoice_download
+  name: az billing invoice download
+  summary: Dapatkan URL untuk mengunduh faktur.
+  description: ''
+  syntax: >-
+    az billing invoice download [--account-name]
+                                [--download-token]
+                                [--download-urls]
+                                [--invoice-name]
+  examples:
+  - summary: Dapatkan URL untuk mengunduh faktur. Operasi ini didukung untuk akun penagihan dengan jenis perjanjian Perjanjian Mitra Microsoft atau Perjanjian Pelanggan Microsoft.
+    syntax: az billing invoice download --account-name "{billingAccountName}" --invoice-name "{invoiceName}" --download-token "{downloadToken}"
+  - summary: Dapatkan URL untuk mengunduh beberapa dokumen faktur (faktur pdf, tanda terima pajak, catatan kredit) sebagai file zip. Operasi ini didukung untuk akun penagihan dengan jenis perjanjian Perjanjian Mitra Microsoft atau Perjanjian Pelanggan Microsoft.
+    syntax: az billing invoice download --account-name "{billingAccountName}" --download-urls "{ListOfDownloadURLs}"
+  - summary: Dapatkan URL untuk mengunduh beberapa dokumen faktur (pdf faktur, tanda terima pajak, catatan kredit) sebagai file zip.
+    syntax: az billing invoice download --download-urls "{ListOfDownloadURLs}"
+  - summary: Dapatkan URL untuk mengunduh faktur.
+    syntax: az billing invoice download --invoice-name "{invoiceName}" --download-token "{downloadToken}"
+  optionalParameters:
+  - name: --account-name
+    summary: ID yang secara unik mengidentifikasi akun penagihan.
+    description: ''
+  - name: --download-token
+    summary: Token unduhan dengan sumber dokumen dan ID dokumen.
+    description: ''
+  - name: --download-urls
+    summary: Daftar url unduhan yang dipisahkan spasi untuk individu.
+    description: ''
+  - name: --invoice-name
+    summary: ID yang secara unik mengidentifikasi faktur.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/billing/_help.py
+- uid: az_billing_invoice_list
+  name: az billing invoice list
+  summary: Mencantumkan faktur untuk langganan.
+  description: ''
+  syntax: >-
+    az billing invoice list --period-end-date
+                            --period-start-date
+                            [--account-name]
+                            [--profile-name]
+  examples:
+  - summary: Mencantumkan faktur dengan akun penagihan dan nama profil dengan properti default
+    syntax: az billing invoice list --account-name "{billingAccountName}" --profile-name "{billingProfileName}" --period-end-date "2018-06-30" --period-start-date "2018-01-01"
+  - summary: Mencantumkan faktur berdasarkan akun penagihan dan nama profil dengan properti yang diperluas
+    syntax: az billing invoice list --account-name "{billingAccountName}" --profile-name "{billingProfileName}" --period-end-date "2018-06-30" --period-start-date "2018-01-01"
+  requiredParameters:
+  - isRequired: true
+    name: --period-end-date
+    summary: Tanggal akhir untuk mengambil faktur. Tanggal harus ditentukan dalam format MM-DD-YYYY.
+    description: ''
+  - isRequired: true
+    name: --period-start-date
+    summary: Tanggal mulai untuk mengambil faktur. Tanggal harus ditentukan dalam format MM-DD-YYYY.
+    description: ''
+  optionalParameters:
+  - name: --account-name
+    summary: ID yang secara unik mengidentifikasi akun penagihan.
+    description: ''
+  - name: --profile-name
+    summary: ID yang secara unik mengidentifikasi profil penagihan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/billing/_help.py
+- uid: az_billing_invoice_show
+  name: az billing invoice show
+  summary: Dapatkan faktur. Operasi ini didukung untuk akun penagihan dengan jenis perjanjian Perjanjian Mitra Microsoft atau Perjanjian Pelanggan Microsoft.
+  description: ''
+  syntax: >-
+    az billing invoice show --name
+                            [--account-name]
+                            [--by-subscription]
+  examples:
+  - summary: Menampilkan faktur dengan nama dan ID akun penagihan
+    syntax: az billing invoice show --account-name "{billingAccountName}" --name "{invoiceName}"
+  - summary: Menampilkan faktur menurut ID
+    syntax: az billing invoice show --name "{invoiceName}"
+  - summary: Menampilkan faktur menurut ID langganan dan ID faktur
+    syntax: az billing invoice show --name "{invoiceName}" --by-subscription
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: ID yang secara unik mengidentifikasi faktur.
+    description: ''
+  optionalParameters:
+  - name: --account-name
+    summary: ID yang secara unik mengidentifikasi akun penagihan.
+    description: ''
+  - name: --by-subscription
+    summary: Ketika disediakan, itu harus bekerja dengan --invoice-name untuk mendapatkan faktur dengan ID langganan dan ID faktur.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/billing/_help.py
+commands:
+- az_billing_invoice_download
+- az_billing_invoice_list
+- az_billing_invoice_section
+- az_billing_invoice_section_create
+- az_billing_invoice_section_list
+- az_billing_invoice_section_show
+- az_billing_invoice_section_update
+- az_billing_invoice_section_wait
+- az_billing_invoice_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 10/26/2020
+  description: Mendapatkan faktur tagihan untuk langganan.
+  ms.openlocfilehash: 59b346a7f7282e8cd7c8a539d5a27f4f3aa6d76e
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141118057"

@@ -1,0 +1,189 @@
+### YamlMime:AzureCLIGroup
+uid: az_sql_server_vnet-rule
+name: az sql server vnet-rule
+summary: Mengelola aturan jaringan virtual server.
+description: ''
+directCommands:
+- uid: az_sql_server_vnet-rule_create
+  name: az sql server vnet-rule create
+  summary: Buat aturan jaringan virtual untuk memungkinkan akses ke server Azure SQL.
+  description: ''
+  syntax: >-
+    az sql server vnet-rule create --name
+                                   --resource-group
+                                   --server
+                                   --subnet
+                                   [--ignore-missing-endpoint {false, true}]
+                                   [--vnet-name]
+  examples:
+  - summary: Buat aturan vnet dengan memberikan id subnet.
+    syntax: >-
+      az sql server vnet-rule create --server MyAzureSqlServer --name MyVNetRule \
+        -g MyResourceGroup --subnet /subscriptions/{SubID}/resourceGroups/{ResourceGroup}/providers/Microsoft.Network/virtualNetworks/{VNETName}/subnets/{SubnetName}
+  - summary: Buat aturan vnet dengan memberikan nama vnet dan subnet. Id subnet dibuat dengan mengambil nama grup sumber daya dan id langganan server SQL.
+    syntax: >-
+      az sql server vnet-rule create --server MyAzureSqlServer --name MyVNetRule \
+          -g MyResourceGroup --subnet subnetName --vnet-name vnetName
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aturan jaringan virtual.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  - isRequired: true
+    name: --subnet
+    summary: Nama atau ID subnet yang memungkinkan akses ke Azure Sql Server. Jika nama subnet disediakan, --vnet-name harus disediakan.
+    description: ''
+  optionalParameters:
+  - name: --ignore-missing-endpoint -i
+    parameterValueGroup: false, true
+    summary: Buat aturan firewall sebelum jaringan virtual mengaktifkan titik akhir layanan vnet.
+    description: ''
+  - name: --vnet-name
+    summary: Nama jaringan virtual.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_server_vnet-rule_delete
+  name: az sql server vnet-rule delete
+  summary: Menghapus aturan jaringan virtual dengan nama yang diberikan.
+  description: ''
+  syntax: >-
+    az sql server vnet-rule delete --name
+                                   [--ids]
+                                   [--resource-group]
+                                   [--server]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aturan jaringan virtual.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_server_vnet-rule_list
+  name: az sql server vnet-rule list
+  summary: Mendapatkan daftar aturan jaringan virtual di server.
+  description: ''
+  syntax: >-
+    az sql server vnet-rule list [--ids]
+                                 [--resource-group]
+                                 [--server]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_server_vnet-rule_show
+  name: az sql server vnet-rule show
+  summary: Mendapatkan aturan jaringan virtual.
+  description: ''
+  syntax: >-
+    az sql server vnet-rule show --name
+                                 [--ids]
+                                 [--resource-group]
+                                 [--server]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aturan jaringan virtual.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_server_vnet-rule_update
+  name: az sql server vnet-rule update
+  summary: Memperbarui aturan jaringan virtual.
+  description: ''
+  syntax: >-
+    az sql server vnet-rule update --name
+                                   --subnet
+                                   [--ids]
+                                   [--ignore-missing-endpoint {false, true}]
+                                   [--resource-group]
+                                   [--server]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aturan jaringan virtual.
+    description: ''
+  - isRequired: true
+    name: --subnet
+    summary: Nama atau ID subnet yang memungkinkan akses ke Azure Sql Server. Jika nama subnet disediakan, --vnet-name harus disediakan.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --ignore-missing-endpoint -i
+    parameterValueGroup: false, true
+    summary: Buat aturan firewall sebelum jaringan virtual mengaktifkan titik akhir layanan vnet.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --server -s
+    summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+commands:
+- az_sql_server_vnet-rule_create
+- az_sql_server_vnet-rule_delete
+- az_sql_server_vnet-rule_list
+- az_sql_server_vnet-rule_show
+- az_sql_server_vnet-rule_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/29/2022
+  description: Mengelola aturan jaringan virtual server.
+  ms.openlocfilehash: 3ee47189fe8c60f81ae49d48fba14510338a08d3
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141468270"

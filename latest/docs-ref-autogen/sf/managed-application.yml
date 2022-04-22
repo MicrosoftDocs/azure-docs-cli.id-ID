@@ -1,0 +1,273 @@
+### YamlMime:AzureCLIGroup
+uid: az_sf_managed-application
+name: az sf managed-application
+summary: Mengelola aplikasi yang berjalan di kluster terkelola Azure Service Fabric. Hanya mendukung aplikasi yang disebarkan ARM.
+description: ''
+directCommands:
+- uid: az_sf_managed-application_create
+  name: az sf managed-application create
+  summary: Buat aplikasi terkelola baru di kluster terkelola Azure Service Fabric.
+  description: ''
+  syntax: >-
+    az sf managed-application create --application-name
+                                     --application-type-name
+                                     --application-type-version
+                                     --cluster-name
+                                     --resource-group
+                                     [--application-parameters]
+                                     [--package-url]
+                                     [--tags]
+  examples:
+  - summary: Buat aplikasi terkelola "testApp" dengan parameter. Jenis aplikasi "TestAppType" versi "v1" harus sudah ada di kluster, dan parameter aplikasi harus ditentukan dalam manifes aplikasi.
+    syntax: >-
+      az sf managed-application create -g testRG -c testCluster --application-name testApp --application-type-name TestAppType \
+        --application-type-version v1 --application-parameters key0=value0 --tags key1=value1
+  - summary: Buat aplikasi "testApp" dan versi jenis aplikasi menggunakan url paket yang disediakan.
+    syntax: >-
+      az sf managed-application create -g testRG -c testCluster --application-name testApp --application-type-name TestAppType \
+        --application-type-version v1 --package-url "https://sftestapp.blob.core.windows.net/sftestapp/testApp_1.0.sfpkg" \
+          --application-parameters key0=value0
+  requiredParameters:
+  - isRequired: true
+    name: --application-name --name
+    summary: Tentukan nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --application-type-name --type-name
+    summary: Tentukan nama jenis aplikasi.
+    description: ''
+  - isRequired: true
+    name: --application-type-version --version
+    summary: Tentukan versi jenis aplikasi.
+    description: ''
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Tentukan nama kluster, jika tidak diberikan akan sama dengan nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --application-parameters --parameters
+    summary: 'Tentukan parameter aplikasi sebagai pasangan kunci/nilai. Parameter ini harus ada dalam manifes aplikasi. misalnya: --application-parameters param1=value1 param2=value2.'
+    description: ''
+  - name: --package-url
+    summary: Tentukan url file sfpkg paket aplikasi.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+- uid: az_sf_managed-application_delete
+  name: az sf managed-application delete
+  summary: Menghapus aplikasi terkelola.
+  description: ''
+  syntax: >-
+    az sf managed-application delete --application-name
+                                     --cluster-name
+                                     --resource-group
+  examples:
+  - summary: Menghapus aplikasi terkelola.
+    syntax: az sf managed-application delete -g testRG -c testCluster --application-name testApp
+  requiredParameters:
+  - isRequired: true
+    name: --application-name --name
+    summary: Tentukan nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Tentukan nama kluster, jika tidak diberikan akan sama dengan nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_sf_managed-application_list
+  name: az sf managed-application list
+  summary: Mencantumkan aplikasi terkelola dari kluster terkelola tertentu.
+  description: ''
+  syntax: >-
+    az sf managed-application list --cluster-name
+                                   --resource-group
+  examples:
+  - summary: Mencantumkan aplikasi terkelola untuk kluster terkelola tertentu.
+    syntax: az sf managed-application list -g testRG -c testCluster
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Tentukan nama kluster, jika tidak diberikan akan sama dengan nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_sf_managed-application_show
+  name: az sf managed-application show
+  summary: Menampilkan properti aplikasi terkelola pada kluster terkelola Azure Service Fabric.
+  description: ''
+  syntax: >-
+    az sf managed-application show --application-name
+                                   --cluster-name
+                                   --resource-group
+  examples:
+  - summary: Dapatkan aplikasi terkelola.
+    syntax: az sf managed-application show -g testRG -c testCluster --application-name testApp
+  requiredParameters:
+  - isRequired: true
+    name: --application-name --name
+    summary: Tentukan nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Tentukan nama kluster, jika tidak diberikan akan sama dengan nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_sf_managed-application_update
+  name: az sf managed-application update
+  summary: Memperbarui aplikasi terkelola Azure Service Fabric.
+  description: Ini memungkinkan untuk memperbarui tag, parameter aplikasi, nilai adalah upgradePolicy aplikasi dan/atau meningkatkan versi jenis aplikasi yang akan memicu peningkatan aplikasi.
+  syntax: >-
+    az sf managed-application update --application-name
+                                     --cluster-name
+                                     --resource-group
+                                     [--application-parameters]
+                                     [--application-type-version]
+                                     [--close-duration]
+                                     [--consider-warning-as-error {false, true}]
+                                     [--failure-action {Manual, Rollback}]
+                                     [--force-restart {false, true}]
+                                     [--hc-retry-timeout]
+                                     [--hc-stable-duration]
+                                     [--hc-wait-duration]
+                                     [--max-percent-unhealthy-apps]
+                                     [--max-percent-unhealthy-partitions]
+                                     [--max-percent-unhealthy-replicas]
+                                     [--max-percent-unhealthy-services]
+                                     [--recreate-application {false, true}]
+                                     [--rep-check-timeout]
+                                     [--service-type-health-policy-map]
+                                     [--tags]
+                                     [--ud-timeout]
+                                     [--upgrade-mode {Monitored, UnmonitoredAuto}]
+                                     [--upgrade-timeout]
+  examples:
+  - summary: Perbarui parameter aplikasi dan nilai kebijakan upgreade dan versi jenis aplikasi ke v2.
+    syntax: >-
+      az sf managed-application update -g testRG -c testCluster --application-name testApp --application-type-version v2 \
+        --application-parameters key0=value0 --health-check-stable-duration 0 --health-check-wait-duration 0 --health-check-retry-timeout 0 \
+          --upgrade-domain-timeout 5000 --upgrade-timeout 7000 --failure-action Rollback --upgrade-replica-set-check-timeout 300 --force-restart
+  - summary: Memperbarui peta kebijakan kesehatan jenis layanan aplikasi terkelola.
+    syntax: az sf managed-application update -g testRG -c testCluster --application-name testApp --service-type-health-policy-map  "ServiceTypeName01"="5,10,5" "ServiceTypeName02"="5,5,5"
+  requiredParameters:
+  - isRequired: true
+    name: --application-name --name
+    summary: Tentukan nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --cluster-name -c
+    summary: Tentukan nama kluster, jika tidak diberikan akan sama dengan nama grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Tentukan nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --application-parameters --parameters
+    summary: 'Tentukan parameter aplikasi sebagai pasangan kunci/nilai. Parameter ini harus ada dalam manifes aplikasi. misalnya: --application-parameters param1=value1 param2=value2.'
+    description: ''
+  - name: --application-type-version --version
+    summary: Tentukan versi jenis aplikasi.
+    description: ''
+  - name: --close-duration --instance-close-delay-duration --instance-close-duration
+    summary: Tentukan durasi dalam detik, untuk menunggu sebelum instans stateless ditutup, untuk memungkinkan permintaan aktif terkuras dengan baik. Ini akan efektif ketika instans ditutup selama peningkatan aplikasi/kluster, hanya untuk instans yang memiliki durasi penundaan non-nol yang dikonfigurasi dalam deskripsi layanan.
+    description: ''
+  - name: --consider-warning-as-error --warning-as-error
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah akan memperlakukan peristiwa kesehatan peringatan sebagai peristiwa kesalahan selama evaluasi kesehatan.
+    description: ''
+  - name: --failure-action
+    parameterValueGroup: Manual, Rollback
+    summary: Tentukan tindakan yang akan diambil jika peningkatan yang dipantau gagal. Nilai yang dapat diterima untuk parameter ini adalah Putar Kembali atau Manual.
+    description: ''
+  - name: --force-restart
+    parameterValueGroup: false, true
+    summary: Menunjukkan bahwa host layanan dimulai ulang meskipun peningkatan adalah perubahan khusus konfigurasi.
+    description: ''
+  - name: --hc-retry-timeout --health-check-retry-timeout
+    summary: Tentukan durasi, dalam detik, setelah itu Service Fabric mencoba kembali pemeriksaan kesehatan jika pemeriksaan kesehatan sebelumnya gagal.
+    description: ''
+  - name: --hc-stable-duration --health-check-stable-duration
+    summary: Tentukan durasi, dalam detik, yang Service Fabric tunggu untuk memverifikasi bahwa aplikasi stabil sebelum pindah ke domain peningkatan berikutnya atau menyelesaikan peningkatan. Durasi tunggu ini mencegah perubahan kesehatan yang tidak terdeteksi tepat setelah pemeriksaan kesehatan dilakukan.
+    description: ''
+  - name: --hc-wait-duration --health-check-wait-duration
+    summary: Tentukan durasi, dalam detik, yang Service Fabric tunggu sebelum melakukan pemeriksaan kesehatan awal setelah menyelesaikan peningkatan pada domain peningkatan.
+    description: ''
+  - name: --max-percent-unhealthy-apps --max-percent-unhealthy-deployed-applications --max-unhealthy-apps
+    summary: Tentukan persentase maksimum instans aplikasi yang disebarkan pada node di kluster yang memiliki status kesehatan kesalahan sebelum status kesehatan aplikasi untuk kluster adalah kesalahan. Nilai yang diizinkan adalah formulir 0 hingga 100.
+    description: ''
+  - name: --max-percent-unhealthy-partitions --max-unhealthy-parts
+    summary: Tentukan persentase maksimum partisi yang tidak baik per layanan yang diizinkan oleh kebijakan kesehatan untuk jenis layanan default yang akan digunakan untuk peningkatan yang dipantau. Nilai yang diizinkan adalah dari 0 hingga 100.
+    description: ''
+  - name: --max-percent-unhealthy-replicas --max-unhealthy-reps
+    summary: Tentukan persentase maksimum replika yang tidak bergantian per layanan yang diizinkan oleh kebijakan kesehatan untuk jenis layanan default yang akan digunakan untuk peningkatan yang dipantau. Nilai yang diizinkan adalah dari 0 hingga 100.
+    description: ''
+  - name: --max-percent-unhealthy-services --max-unhealthy-servs
+    summary: Tentukan persentase maksimum layanan yang tidak terbantahkan yang diizinkan oleh kebijakan kesehatan untuk jenis layanan default yang akan digunakan untuk peningkatan yang dipantau. Nilai yang diizinkan adalah dari 0 hingga 100.
+    description: ''
+  - name: --recreate-application
+    parameterValueGroup: false, true
+    summary: Menentukan apakah aplikasi harus dibuat ulang saat pembaruan. Jika value=true, parameter kebijakan peningkatan lainnya tidak diperbolehkan.
+    description: ''
+  - name: --rep-check-timeout --replica-check-timeout --upgrade-replica-set-check-timeout
+    summary: Tentukan waktu maksimum, dalam detik, yang Service Fabric menunggu layanan dikonfigurasi ulang ke status aman, jika belum dalam keadaan aman, sebelum Service Fabric melanjutkan peningkatan.
+    description: ''
+  - name: --service-type-health-policy-map --service-type-policy
+    summary: 'Tentukan peta kebijakan kesehatan yang akan digunakan untuk berbagai jenis layanan sebagai pasangan kunci/nilai dalam format berikut: "ServiceTypeName"="MaxPercentUnhealthyPartitionsPerService,MaxPercentUnhealthyReplicasPerPartition,MaxPercentUnhealthyServices". misalnya: --service-type-health-policy-map "ServiceTypeName01"="5,10,5" "ServiceTypeName02"="5,5,5".'
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --ud-timeout --upgrade-domain-timeout
+    summary: Tentukan waktu maksimum, dalam detik, yang Service Fabric ambil untuk meningkatkan satu domain peningkatan. Setelah periode ini, peningkatan gagal.
+    description: ''
+  - name: --upgrade-mode
+    parameterValueGroup: Monitored, UnmonitoredAuto
+    summary: Tentukan mode yang digunakan untuk memantau kesehatan selama peningkatan bergulir. Nilainya dipantau, dan UnmonitoredAuto.
+    description: ''
+  - name: --upgrade-timeout
+    summary: Tentukan waktu maksimum, dalam detik, yang Service Fabric ambil untuk seluruh peningkatan. Setelah periode ini, peningkatan gagal.
+    description: ''
+commands:
+- az_sf_managed-application_create
+- az_sf_managed-application_delete
+- az_sf_managed-application_list
+- az_sf_managed-application_show
+- az_sf_managed-application_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola aplikasi yang berjalan di kluster terkelola Azure Service Fabric. Hanya mendukung aplikasi yang disebarkan ARM.
+  ms.openlocfilehash: 538a83415d9c8b903cba3f8542454eb7228dabd0
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141127219"

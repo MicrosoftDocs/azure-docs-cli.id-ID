@@ -1,0 +1,387 @@
+### YamlMime:AzureCLIGroup
+uid: az_webapp
+name: az webapp
+summary: Mengelola aplikasi web.
+description: ''
+directCommands:
+- uid: az_webapp_create
+  name: az webapp create
+  summary: Buat aplikasi web.
+  description: Nama aplikasi web harus dapat menghasilkan FQDN unik sebagai AppName.azurewebsites.net.
+  syntax: >-
+    az webapp create --name
+                     --resource-group
+                     [--assign-identity]
+                     [--custom-location]
+                     [--deployment-container-image-name]
+                     [--deployment-local-git]
+                     [--deployment-source-branch]
+                     [--deployment-source-url]
+                     [--docker-registry-server-password]
+                     [--docker-registry-server-user]
+                     [--max-worker-count]
+                     [--min-worker-count]
+                     [--multicontainer-config-file]
+                     [--multicontainer-config-type {COMPOSE, KUBE}]
+                     [--plan]
+                     [--role]
+                     [--runtime]
+                     [--scope]
+                     [--startup-file]
+                     [--tags]
+  examples:
+  - summary: Buat aplikasi web dengan konfigurasi default.
+    syntax: az webapp create -g MyResourceGroup -p MyPlan -n MyUniqueAppName
+  - summary: Buat aplikasi web dengan runtime Java 11 menggunakan pemisah '|'.
+    syntax: az webapp create -g MyResourceGroup -p MyPlan -n MyUniqueAppName --runtime "java|11|Java SE|11"
+  - summary: Buat aplikasi web dengan runtime Java 11 menggunakan pemisah ':'.
+    syntax: az webapp create -g MyResourceGroup -p MyPlan -n MyUniqueAppName --runtime "java:11:Java SE:11"
+  - summary: Buat aplikasi web dengan runtime NodeJS 10.14 dan sebarkan dari repositori git lokal.
+    syntax: az webapp create -g MyResourceGroup -p MyPlan -n MyUniqueAppName --runtime "node|10.14" --deployment-local-git
+  - summary: Buat aplikasi web dengan gambar dari DockerHub.
+    syntax: az webapp create -g MyResourceGroup -p MyPlan -n MyUniqueAppName -i nginx
+  - summary: Buat aplikasi web dengan gambar dari registri DockerHub privat.
+    syntax: az webapp create -g MyResourceGroup -p MyPlan -n MyUniqueAppName -i MyImageName -s username -w password
+  - summary: Buat aplikasi web dengan gambar dari Azure Container Registry privat.
+    syntax: az webapp create -g MyResourceGroup -p MyPlan -n MyUniqueAppName -i myregistry.azurecr.io/docker-image:tag
+  - summary: buat WebApp menggunakan Paket App Service bersama yang berada di grup sumber daya yang berbeda.
+    syntax: AppServicePlanID=$(az appservice plan show -n SharedAppServicePlan -g MyASPRG --query "id" --out tsv) az webapp create -g MyResourceGroup -p "$AppServicePlanID" -n MyUniqueAppName
+  - summary: membuat WebApp di lingkungan kubernetes layanan aplikasi
+    syntax: az webapp create -g MyResourceGroup -p MyPlan -n MyUniqueAppName --custom-location /subscriptions/sub_id/resourcegroups/group_name/providers/microsoft.extendedlocation/customlocations/custom_location_name
+  - summary: membuat WebApp di lingkungan kubernetes appservice dan di grup sumber daya yang sama dengan lokasi kustom
+    syntax: az webapp create -g MyResourceGroup -p MyPlan -n MyUniqueAppName --custom-location custom_location_name
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi web baru.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --assign-identity
+    summary: Terima identitas yang ditetapkan sistem atau pengguna yang dipisahkan oleh spasi. Gunakan '[system]' untuk merujuk identitas yang ditetapkan sistem, atau id sumber daya untuk merujuk identitas yang ditetapkan pengguna. Lihat bantuan untuk contoh selengkapnya.
+    description: ''
+  - name: --custom-location
+    summary: Nama atau ID lokasi kustom. Gunakan ID untuk lokasi kustom di grup sumber daya yang berbeda dari aplikasi.
+    description: ''
+  - name: --deployment-container-image-name -i
+    summary: Hanya Linux. Nama gambar kontainer dari Docker Hub, misalnya publisher/image-name:tag.
+    description: ''
+  - name: --deployment-local-git -l
+    summary: Aktifkan git lokal.
+    description: ''
+  - name: --deployment-source-branch -b
+    defaultValue: master
+    summary: Cabang yang akan disebarkan.
+    description: ''
+  - name: --deployment-source-url -u
+    summary: URL repositori Git untuk ditautkan dengan integrasi manual.
+    description: ''
+  - name: --docker-registry-server-password -w
+    summary: Kata sandi server registri kontainer. Diperlukan untuk registri privat.
+    description: ''
+  - name: --docker-registry-server-user -s
+    summary: Nama pengguna server registri kontainer.
+    description: ''
+  - name: --max-worker-count
+    summary: Jumlah maksimum pekerja yang akan dialokasikan.
+    description: ''
+  - name: --min-worker-count
+    summary: Jumlah minimum pekerja yang akan dialokasikan.
+    description: ''
+  - name: --multicontainer-config-file
+    summary: Hanya Linux. File konfigurasi untuk aplikasi multikontainer. (lokal atau jarak jauh).
+    description: ''
+  - name: --multicontainer-config-type
+    parameterValueGroup: COMPOSE, KUBE
+    summary: Hanya Linux.
+    description: ''
+  - name: --plan -p
+    summary: Nama atau id sumber daya paket layanan aplikasi. Gunakan 'appservice plan create' untuk mendapatkannya.
+    description: ''
+  - name: --role
+    defaultValue: Contributor
+    summary: Nama peran atau id yang akan dimiliki identitas yang ditetapkan sistem.
+    description: ''
+  - name: --runtime -r
+    summary: Runtime web kanonis dalam format Framework| Versi, misalnya "PHP|5.6". Gunakan `az webapp list-runtimes` untuk daftar yang tersedia.
+    description: ''
+  - name: --cakupan
+    summary: Cakupan yang dapat diakses oleh identitas yang ditetapkan sistem.
+    description: ''
+  - name: --startup-file
+    summary: Hanya Linux. File startup web.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+- uid: az_webapp_restart
+  name: az webapp restart
+  summary: Mulai ulang aplikasi web.
+  description: ''
+  syntax: >-
+    az webapp restart --name
+                      --resource-group
+                      [--slot]
+  examples:
+  - summary: Mulai ulang aplikasi web. (dibuat otomatis)
+    syntax: az webapp restart --name MyWebapp --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi web. Anda dapat mengonfigurasi default menggunakan `az configure --defaults web=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+- uid: az_webapp_scale
+  name: skala webapp az
+  summary: Ubah jumlah instans aplikasi web.
+  description: ''
+  syntax: >-
+    az webapp scale --instance-count
+                    --name
+                    --resource-group
+                    [--slot]
+  examples:
+  - summary: Ubah jumlah instans MyApp menjadi 2.
+    syntax: az webapp scale -g MyResourceGroup -n MyApp --instance-count 2
+  requiredParameters:
+  - isRequired: true
+    name: --instance-count
+    defaultValue: "1"
+    summary: Jumlah instans.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi web. Anda dapat mengonfigurasi default menggunakan `az configure --defaults web=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+- uid: az_webapp_show
+  name: az webapp show
+  summary: Dapatkan detail aplikasi web.
+  description: ''
+  syntax: >-
+    az webapp show --name
+                   --resource-group
+                   [--slot]
+  examples:
+  - summary: Dapatkan detail aplikasi web. (dibuat otomatis)
+    syntax: az webapp show --name MyWebapp --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi web. Anda dapat mengonfigurasi default menggunakan `az configure --defaults web=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+- uid: az_webapp_update
+  name: az webapp update
+  summary: Perbarui aplikasi web yang sudah ada.
+  description: ''
+  syntax: >-
+    az webapp update --name
+                     --resource-group
+                     [--add]
+                     [--client-affinity-enabled {false, true}]
+                     [--force-string]
+                     [--https-only {false, true}]
+                     [--minimum-elastic-instance-count]
+                     [--prewarmed-instance-count]
+                     [--remove]
+                     [--set]
+                     [--slot]
+  examples:
+  - summary: Perbarui tag aplikasi web.
+    syntax: az webapp update -g MyResourceGroup -n MyAppName --set tags.tagName=tagValue
+  - summary: Memperbarui aplikasi web. (dibuat otomatis)
+    syntax: az webapp update --https-only true --name MyAppName --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi web. Anda dapat mengonfigurasi default menggunakan `az configure --defaults web=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --client-affinity-enabled
+    parameterValueGroup: false, true
+    summary: Memungkinkan pengiriman cookie afinitas sesi.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --https-only
+    parameterValueGroup: false, true
+    summary: Alihkan semua lalu lintas yang dibuat ke aplikasi menggunakan HTTP ke HTTPS.
+    description: ''
+  - name: --minimum-elastic-instance-count -i
+    summary: Jumlah instans minimum. Aplikasi harus dalam skala elastis App Service Plan.
+    description: ''
+  - name: --prewarmed-instance-count -w
+    summary: Jumlah instans preWarmed. Aplikasi harus dalam skala elastis App Service Plan.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+commands:
+- az_webapp_auth
+- az_webapp_auth_apple
+- az_webapp_auth_apple_show
+- az_webapp_auth_apple_update
+- az_webapp_auth_config-version
+- az_webapp_auth_config-version_revert
+- az_webapp_auth_config-version_show
+- az_webapp_auth_config-version_upgrade
+- az_webapp_auth_facebook
+- az_webapp_auth_facebook_show
+- az_webapp_auth_facebook_update
+- az_webapp_auth_github
+- az_webapp_auth_github_show
+- az_webapp_auth_github_update
+- az_webapp_auth_google
+- az_webapp_auth_google_show
+- az_webapp_auth_google_update
+- az_webapp_auth_microsoft
+- az_webapp_auth_microsoft_show
+- az_webapp_auth_microsoft_update
+- az_webapp_auth_openid-connect
+- az_webapp_auth_openid-connect_add
+- az_webapp_auth_openid-connect_remove
+- az_webapp_auth_openid-connect_show
+- az_webapp_auth_openid-connect_update
+- az_webapp_auth_set
+- az_webapp_auth_show
+- az_webapp_auth_twitter
+- az_webapp_auth_twitter_show
+- az_webapp_auth_twitter_update
+- az_webapp_auth_update
+- az_webapp_auth-classic
+- az_webapp_auth-classic_show
+- az_webapp_auth-classic_update
+- az_webapp_config
+- az_webapp_config_ssl
+- az_webapp_config_ssl_bind
+- az_webapp_config_ssl_unbind
+- az_webapp_connection
+- az_webapp_connection_create
+- az_webapp_connection_create_appconfig
+- az_webapp_connection_create_confluent-cloud
+- az_webapp_connection_create_cosmos-cassandra
+- az_webapp_connection_create_cosmos-gremlin
+- az_webapp_connection_create_cosmos-mongo
+- az_webapp_connection_create_cosmos-sql
+- az_webapp_connection_create_cosmos-table
+- az_webapp_connection_create_eventhub
+- az_webapp_connection_create_keyvault
+- az_webapp_connection_create_mysql
+- az_webapp_connection_create_mysql-flexible
+- az_webapp_connection_create_postgres
+- az_webapp_connection_create_postgres-flexible
+- az_webapp_connection_create_redis
+- az_webapp_connection_create_redis-enterprise
+- az_webapp_connection_create_servicebus
+- az_webapp_connection_create_signalr
+- az_webapp_connection_create_storage-blob
+- az_webapp_connection_create_storage-file
+- az_webapp_connection_create_storage-queue
+- az_webapp_connection_create_storage-table
+- az_webapp_connection_delete
+- az_webapp_connection_list
+- az_webapp_connection_list-configuration
+- az_webapp_connection_list-support-types
+- az_webapp_connection_show
+- az_webapp_connection_update
+- az_webapp_connection_update_appconfig
+- az_webapp_connection_update_confluent-cloud
+- az_webapp_connection_update_cosmos-cassandra
+- az_webapp_connection_update_cosmos-gremlin
+- az_webapp_connection_update_cosmos-mongo
+- az_webapp_connection_update_cosmos-sql
+- az_webapp_connection_update_cosmos-table
+- az_webapp_connection_update_eventhub
+- az_webapp_connection_update_keyvault
+- az_webapp_connection_update_mysql
+- az_webapp_connection_update_mysql-flexible
+- az_webapp_connection_update_postgres
+- az_webapp_connection_update_postgres-flexible
+- az_webapp_connection_update_redis
+- az_webapp_connection_update_redis-enterprise
+- az_webapp_connection_update_servicebus
+- az_webapp_connection_update_signalr
+- az_webapp_connection_update_storage-blob
+- az_webapp_connection_update_storage-file
+- az_webapp_connection_update_storage-queue
+- az_webapp_connection_update_storage-table
+- az_webapp_connection_validate
+- az_webapp_connection_wait
+- az_webapp_create
+- az_webapp_deployment
+- az_webapp_deployment_source
+- az_webapp_deployment_source_config-zip
+- az_webapp_restart
+- az_webapp_scale
+- az_webapp_scan
+- az_webapp_scan_list-result
+- az_webapp_scan_show-result
+- az_webapp_scan_start
+- az_webapp_scan_stop
+- az_webapp_scan_track
+- az_webapp_show
+- az_webapp_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola aplikasi web.
+  ms.openlocfilehash: 6e19a43ef5e27767cf252836fc41263706abab76
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141444239"

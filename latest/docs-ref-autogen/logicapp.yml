@@ -1,0 +1,258 @@
+### YamlMime:AzureCLIGroup
+uid: az_logicapp
+name: az logicapp
+summary: Mengelola aplikasi logika.
+description: ''
+directCommands:
+- uid: az_logicapp_create
+  name: az logicapp create
+  summary: Membuat aplikasi logika.
+  description: Nama aplikasi logika harus dapat menghasilkan FQDN unik sebagai AppName.azurewebsites.net.
+  syntax: >-
+    az logicapp create --name
+                       --resource-group
+                       --storage-account
+                       [--app-insights]
+                       [--app-insights-key]
+                       [--consumption-plan-location]
+                       [--deployment-container-image-name]
+                       [--deployment-local-git]
+                       [--deployment-source-branch]
+                       [--deployment-source-url]
+                       [--disable-app-insights {false, true}]
+                       [--docker-registry-server-password]
+                       [--docker-registry-server-user]
+                       [--os-type {Linux, Windows}]
+                       [--plan]
+                       [--tags]
+  examples:
+  - summary: Membuat aplikasi logika dasar.
+    syntax: az logicapp create -g MyResourceGroup --subscription MySubscription -p MyPlan -n MyUniqueAppName -s MyStorageAccount
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aplikasi logika baru.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --storage-account -s
+    summary: Berikan nilai string akun Storage di Grup Sumber Daya yang disediakan. Atau ID Sumber Daya dari Akun Storage di Grup Sumber Daya yang berbeda.
+    description: ''
+  optionalParameters:
+  - name: --app-insights
+    summary: Nama proyek App Insights yang ada untuk ditambahkan ke aplikasi logika. Harus berada dalam grup sumber daya yang sama.
+    description: ''
+  - name: --app-insights-key
+    summary: Kunci instrumentasi App Insights yang akan ditambahkan.
+    description: ''
+  - name: --consumption-plan-location -c
+    summary: Lokasi geografis tempat aplikasi logika akan dihosting. Gunakan `az logicapp list-consumption-locations` untuk melihat lokasi yang tersedia.
+    description: ''
+  - name: --deployment-container-image-name -i
+    summary: Nama gambar kontainer dari Docker Hub, misalnya publisher/image-name:tag.
+    description: ''
+  - name: --deployment-local-git -l
+    summary: Aktifkan git lokal.
+    description: ''
+  - name: --deployment-source-branch -b
+    defaultValue: master
+    summary: Cabang yang akan disebarkan.
+    description: ''
+  - name: --deployment-source-url -u
+    summary: URL repositori Git untuk ditautkan dengan integrasi manual.
+    description: ''
+  - name: --disable-app-insights
+    parameterValueGroup: false, true
+    summary: Nonaktifkan pembuatan sumber daya wawasan aplikasi selama pembuatan logicapp. Tidak ada log yang akan tersedia.
+    description: ''
+  - name: --docker-registry-server-password -w
+    summary: Kata sandi server registri kontainer. Diperlukan untuk registri privat.
+    description: ''
+  - name: --docker-registry-server-user -d
+    summary: Nama pengguna server registri kontainer.
+    description: ''
+  - name: --os-type
+    parameterValueGroup: Linux, Windows
+    summary: Atur jenis OS untuk aplikasi yang akan dibuat.
+    description: ''
+  - name: --plan -p
+    summary: Nama atau id sumber daya paket layanan aplikasi logicapp. Gunakan 'pembuatan rencana layanan aplikasi' untuk mendapatkannya. Jika menggunakan paket App Service dari grup sumber daya yang berbeda, id sumber daya lengkap harus digunakan dan bukan nama paket.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+- uid: az_logicapp_delete
+  name: az logicapp delete
+  summary: Menghapus aplikasi logika.
+  description: ''
+  syntax: >-
+    az logicapp delete [--ids]
+                       [--name]
+                       [--resource-group]
+                       [--slot]
+                       [--yes]
+  examples:
+  - summary: Menghapus aplikasi logika.
+    syntax: az logicapp delete --name MyLogicapp --resource-group MyResourceGroup --subscription MySubscription
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi logika.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_logicapp_list
+  name: az logicapp list
+  summary: Mencantumkan aplikasi logika.
+  description: ''
+  syntax: az logicapp list [--resource-group]
+  examples:
+  - summary: Mencantumkan nama dan status host default untuk semua aplikasi logika.
+    syntax: 'az logicapp list --query "[].{hostName: defaultHostName, state: state}"'
+  - summary: Mencantumkan semua aplikasi logika yang sedang berjalan.
+    syntax: az logicapp list --query "[?state=='Running']"
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_logicapp_restart
+  name: az logicapp restart
+  summary: Mulai ulang aplikasi logika.
+  description: ''
+  syntax: >-
+    az logicapp restart [--ids]
+                        [--name]
+                        [--resource-group]
+                        [--slot]
+  examples:
+  - summary: Mulai ulang aplikasi logika.
+    syntax: az logicapp restart --name MyLogicApp --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi logika.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+- uid: az_logicapp_show
+  name: az logicapp show
+  summary: Dapatkan detail aplikasi logika.
+  description: ''
+  syntax: >-
+    az logicapp show [--ids]
+                     [--name]
+                     [--resource-group]
+  examples:
+  - summary: Dapatkan detail aplikasi logika.
+    syntax: az logicapp show --name MyLogicapp --resource-group MyResourceGroup --subscription MySubscription
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi logika.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_logicapp_start
+  name: az logicapp start
+  summary: Memulai aplikasi logika.
+  description: ''
+  syntax: >-
+    az logicapp start [--ids]
+                      [--name]
+                      [--resource-group]
+                      [--slot]
+  examples:
+  - summary: Memulai aplikasi logika
+    syntax: az logicapp start --name MyLogicApp --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi logika.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+- uid: az_logicapp_stop
+  name: az logicapp stop
+  summary: Menghentikan aplikasi logika.
+  description: ''
+  syntax: >-
+    az logicapp stop [--ids]
+                     [--name]
+                     [--resource-group]
+                     [--slot]
+  examples:
+  - summary: Menghentikan aplikasi logika.
+    syntax: az logicapp stop --name MyLogicApp --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi logika.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+commands:
+- az_logicapp_create
+- az_logicapp_delete
+- az_logicapp_list
+- az_logicapp_restart
+- az_logicapp_show
+- az_logicapp_start
+- az_logicapp_stop
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola aplikasi logika.
+  ms.openlocfilehash: 085f5fa625e8867ead2553d3c3faa8229a37ea64
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141128353"

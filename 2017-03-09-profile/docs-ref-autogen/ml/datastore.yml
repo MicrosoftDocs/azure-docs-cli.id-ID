@@ -1,0 +1,189 @@
+### YamlMime:AzureCLIGroup
+uid: az_ml_datastore
+name: az ml datastore
+extensionInformation: >-
+  > [!Note]
+
+  > This reference is part of the **ml** extension for the Azure CLI  (version 2.15.0 or higher).  The extension will automatically install the first time you run an **az ml datastore** command.  [Learn more](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) about extensions.
+summary: Mengelola penyimpanan data Azure ML.
+description: >-
+  Azure ML datastore menautkan layanan penyimpanan Azure Anda dengan aman ke ruang kerja sehingga Anda dapat mengakses penyimpanan tanpa harus mengodekan informasi koneksi ke dalam skrip Anda. Rahasia koneksi, seperti kredensial autentikasi layanan penyimpanan, disimpan di Key Vault ruang kerja Anda.
+
+
+  Saat Anda membuat ruang kerja, akun Azure Storage secara otomatis dibuat sebagai sumber daya terkait. Kontainer blob dibuat di akun ini, dan informasi koneksinya disimpan sebagai datastore bernama 'workspaceblobstore'. Ini berfungsi sebagai datastore default ruang kerja, dan kontainer blob digunakan untuk menyimpan artefak ruang kerja dan log dan output pekerjaan pembelajaran mesin Anda.
+directCommands:
+- uid: az_ml_datastore_create
+  name: az ml datastore create
+  summary: Membuat datastore.
+  description: Ini menyambungkan layanan penyimpanan Azure yang mendasar ke ruang kerja. Jenis layanan penyimpanan yang saat ini dapat disambungkan dengan membuat datastore termasuk penyimpanan Azure Blob, Azure File Share, Azure Data Lake Storage Gen1, dan Azure Data Lake Storage Gen2.
+  syntax: >-
+    az ml datastore create --file
+                           --resource-group
+                           --workspace-name
+                           [--name]
+                           [--set]
+  examples:
+  - summary: Membuat datastore dari file spesifikasi YAML
+    syntax: az ml datastore create --file blobstore.yml --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --file -f
+    summary: Jalur lokal ke file YAML yang berisi spesifikasi datastore Azure ML.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --name -n
+    summary: Nama datastore. Ini menimpa bidang 'nama' dalam file YAML yang disediakan untuk --file/-f.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur. Contoh: --set property1.property2=<value>.'
+    description: ''
+- uid: az_ml_datastore_delete
+  name: az ml datastore delete
+  summary: Menghapus datastore.
+  description: Ini menghapus informasi koneksi ke layanan penyimpanan dari ruang kerja tetapi tidak menghapus data yang mendasar dalam penyimpanan.
+  syntax: >-
+    az ml datastore delete --name
+                           --resource-group
+                           --workspace-name
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama datastore.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+- uid: az_ml_datastore_list
+  name: az ml datastore list
+  summary: Mencantumkan penyimpanan data di ruang kerja.
+  description: ''
+  syntax: >-
+    az ml datastore list --resource-group
+                         --workspace-name
+                         [--max-results]
+  examples:
+  - summary: Cantumkan semua penyimpanan data di ruang kerja menggunakan argumen --query untuk menjalankan kueri JMESPath pada hasil perintah.
+    syntax: az ml datastore list --query "[].{Name:name}"  --output table --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --max-results -r
+    summary: Jumlah maksimum hasil yang akan dikembalikan.
+    description: ''
+- uid: az_ml_datastore_show
+  name: az ml datastore show
+  summary: Tampilkan detail untuk datastore.
+  description: ''
+  syntax: >-
+    az ml datastore show --name
+                         --resource-group
+                         --workspace-name
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama datastore.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+- uid: az_ml_datastore_update
+  name: az ml datastore update
+  summary: Memperbarui datastore.
+  description: Properti 'description', 'tags', dan 'credential' dapat diperbarui.
+  syntax: >-
+    az ml datastore update --resource-group
+                           --workspace-name
+                           [--add]
+                           [--file]
+                           [--force-string]
+                           [--name]
+                           [--remove]
+                           [--set]
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --file -f
+    summary: Jalur lokal ke file YAML yang berisi spesifikasi datastore Azure ML.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --name -n
+    summary: Nama datastore. Ini menimpa bidang 'nama' dalam file YAML yang disediakan untuk --file/-f.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+commands:
+- az_ml_datastore_create
+- az_ml_datastore_delete
+- az_ml_datastore_list
+- az_ml_datastore_show
+- az_ml_datastore_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: >-
+    Penyimpanan data Azure ML menautkan layanan penyimpanan Azure Anda dengan aman ke ruang kerja sehingga Anda dapat mengakses penyimpanan tanpa harus melakukan hardcode informasi koneksi ke dalam skrip Anda. Rahasia koneksi, seperti kredensial autentikasi layanan penyimpanan, disimpan di Key Vault ruang kerja Anda.
+
+
+    Saat Anda membuat ruang kerja, akun Azure Storage secara otomatis dibuat sebagai sumber daya terkait. Kontainer blob dibuat di akun ini, dan informasi koneksinya disimpan sebagai datastore bernama 'workspaceblobstore'. Ini berfungsi sebagai datastore default ruang kerja, dan kontainer blob digunakan untuk menyimpan artefak ruang kerja Dan log dan output pekerjaan pembelajaran mesin Anda.
+  ms.openlocfilehash: ecc59e2294a46a7d769e37caac53ec6ee238abff
+  ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141410200"
