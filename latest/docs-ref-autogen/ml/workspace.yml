@@ -1,0 +1,319 @@
+### YamlMime:AzureCLIGroup
+uid: az_ml_workspace
+name: az ml workspace
+extensionInformation: >-
+  > [!Note]
+
+  > This reference is part of the **ml** extension for the Azure CLI  (version 2.15.0 or higher).  The extension will automatically install the first time you run an **az ml workspace** command.  [Learn more](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) about extensions.
+summary: Mengelola ruang kerja Azure ML.
+description: >-
+  Ruang kerja Azure ML adalah sumber daya tingkat atas untuk Azure Machine Learning. Ini menyediakan tempat terpusat untuk melacak aset dan sumber daya yang digunakan dalam alur kerja ML Anda, bersama dengan log dan artefak yang dihasilkan dari pekerjaan pelatihan Anda.
+
+
+  Jika Anda meningkatkan dari CLI v1 ke v2, Anda memerlukan dua perubahan berikut dalam cakupan manajemen ruang kerja:
+
+  - Tingkatkan `az ml workspace private-endpoint` perintah ke perintah yang setara `az network private-endpoint` .
+
+  - Selain itu, tingkatkan `az ml workspace share` perintah ke perintah yang setara `az role assignment create` .
+directCommands:
+- uid: az_ml_workspace_create
+  name: az ml workspace create
+  summary: Membuat ruang kerja.
+  description: 'Saat ruang kerja dibuat, beberapa sumber daya Azure yang akan digunakan oleh Azure ML juga dibuat secara default: Azure Storage, Azure Container Registry, Azure Key Vault, dan Azure Application Insights. Anda dapat menggunakan instans sumber daya Azure yang ada untuk instans tersebut saat membuat ruang kerja dengan menentukan ID sumber daya dalam file YAML konfigurasi ruang kerja.'
+  syntax: >-
+    az ml workspace create --resource-group
+                           [--application-insights]
+                           [--container-registry]
+                           [--description]
+                           [--display-name]
+                           [--file]
+                           [--image-build-compute]
+                           [--location]
+                           [--name]
+                           [--no-wait]
+                           [--public-network-access]
+                           [--set]
+                           [--tags]
+                           [--update-dependent-resources]
+  examples:
+  - summary: Buat ruang kerja dari file spesifikasi YAML.
+    syntax: az ml workspace create --file workspace.yml --resource-group my-resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --application-insights
+    summary: ID ARM dari wawasan aplikasi yang terkait dengan ruang kerja ini.
+    description: ''
+  - name: --container-registry
+    summary: ID ARM dari registri kontainer yang terkait dengan ruang kerja ini.
+    description: ''
+  - name: --description
+    summary: Deskripsi ruang kerja Azure ML.
+    description: ''
+  - name: --display-name
+    summary: Nama tampilan untuk ruang kerja.
+    description: ''
+  - name: --file -f
+    summary: Jalur lokal ke file YAML yang berisi spesifikasi ruang kerja Azure ML.
+    description: ''
+  - name: --image-build-compute -i
+    summary: Nama target komputasi yang akan digunakan untuk membangun citra Docker lingkungan ketika registri kontainer berada di belakang VNet.
+    description: ''
+  - name: --location -l
+    summary: Lokasi yang akan digunakan untuk ruang kerja baru.
+    description: ''
+  - name: --name -n
+    summary: Nama ruang kerja Azure ML.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu pembuatan ruang kerja selesai.
+    description: ''
+  - name: --public-network-access
+    summary: Izinkan konektivitas titik akhir publik saat ruang kerja diaktifkan tautan privat.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur. Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --tags
+    summary: Pasangan kunci-nilai yang dipisahkan spasi untuk tag objek.
+    description: ''
+  - name: --update-dependent-resources -u
+    summary: Menentukan --update_dependent_resources, memberikan persetujuan Anda untuk memperbarui sumber daya dependen ruang kerja. Memperbarui sumber daya Azure Container Registry atau Application Insights yang terpasang di ruang kerja dapat merusak silsilah pekerjaan sebelumnya, titik akhir inferensi yang disebarkan, atau kemampuan Anda untuk menjalankan ulang pekerjaan sebelumnya di ruang kerja ini.
+    description: ''
+- uid: az_ml_workspace_delete
+  name: az ml workspace delete
+  summary: Menghapus ruang kerja.
+  description: Secara default sumber daya dependen yang terkait dengan ruang kerja (Azure Storage, Azure Container Registry, Azure Key Vault, Azure Application Insights) tidak dihapus. Untuk menghapusnya juga, sertakan --all-resources.
+  syntax: >-
+    az ml workspace delete --name
+                           --resource-group
+                           [--all-resources]
+                           [--no-wait]
+                           [--yes]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --all-resources
+    summary: Hapus semua sumber daya dependen yang terkait dengan ruang kerja (akun Azure Storage, Azure Container Registry, azure Application Insights, Azure Key Vault).
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai. Defaultnya adalah False.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_ml_workspace_diagnose
+  name: az ml workspace diagnosa
+  summary: Mendiagnosis masalah penyiapan ruang kerja.
+  description: Jika ruang kerja Anda tidak berfungsi seperti yang diharapkan, Anda dapat menjalankan diagnosis ini untuk memeriksa apakah ruang kerja telah rusak. Untuk ruang kerja titik akhir privat, ini juga akan membantu memeriksa apakah penyiapan jaringan ke ruang kerja ini dan sumber daya dependennya bermasalah atau tidak.
+  syntax: >-
+    az ml workspace diagnose --name
+                             --resource-group
+                             [--no-wait]
+  examples:
+  - summary: mendiagnosis ruang kerja.
+    syntax: az ml workspace diagnose --name my-workspace-name --no-wait -g my-resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai. Defaultnya adalah False.
+    description: ''
+- uid: az_ml_workspace_list
+  name: az ml workspace list
+  summary: Mencantumkan semua ruang kerja dalam langganan.
+  description: Daftar ruang kerja dapat difilter menurut grup sumber daya.
+  syntax: >-
+    az ml workspace list [--max-results]
+                         [--resource-group]
+  examples:
+  - summary: Mencantumkan semua ruang kerja dalam grup sumber daya
+    syntax: az ml workspace list --resource-group my-resource-group
+  - summary: Cantumkan semua ruang kerja menggunakan argumen --query untuk menjalankan kueri JMESPath pada hasil perintah.
+    syntax: az ml workspace list --query "[].{Name:name}"  --output table --resource-group my-resource-group
+  optionalParameters:
+  - name: --max-results -r
+    summary: Jumlah maksimum hasil yang akan dikembalikan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_ml_workspace_list-keys
+  name: az ml workspace list-keys
+  summary: Mencantumkan kunci ruang kerja untuk sumber daya dependen seperti Azure Storage, Azure Container Registry, dan Insights Aplikasi Azure.
+  description: ''
+  syntax: >-
+    az ml workspace list-keys --name
+                              --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_ml_workspace_show
+  name: az ml workspace show
+  summary: Tampilkan detail untuk ruang kerja.
+  description: ''
+  syntax: >-
+    az ml workspace show --name
+                         --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_ml_workspace_sync-keys
+  name: az ml workspace sync-keys
+  summary: Sinkronkan kunci ruang kerja untuk sumber daya dependen seperti Azure Storage, Azure Container Registry, dan Insights Aplikasi Azure.
+  description: Jika kunci untuk sumber daya apa pun di ruang kerja diubah, diperlukan waktu sekitar satu jam agar dapat diperbarui secara otomatis. Perintah ini memicu ruang kerja untuk segera menyinkronkan kunci. Skenario yang mungkin adalah membutuhkan akses langsung ke penyimpanan setelah meregenerasi kunci penyimpanan.
+  syntax: >-
+    az ml workspace sync-keys --name
+                              --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_ml_workspace_update
+  name: az ml workspace update
+  summary: Memperbarui ruang kerja.
+  description: Properti 'description', 'tags', dan 'friendly_name' dapat diperbarui.
+  syntax: >-
+    az ml workspace update --name
+                           --resource-group
+                           [--add]
+                           [--application-insights]
+                           [--container-registry]
+                           [--description]
+                           [--display-name]
+                           [--file]
+                           [--force-string]
+                           [--image-build-compute]
+                           [--no-wait]
+                           [--public-network-access]
+                           [--remove]
+                           [--set]
+                           [--update-dependent-resources]
+  examples:
+  - summary: memperbarui ruang kerja dari file spesifikasi YAML.
+    syntax: az ml workspace update --resource-group my-resource-group --name my-workspace-name --file workspace.yml
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --application-insights
+    summary: ID ARM dari wawasan aplikasi yang terkait dengan ruang kerja ini.
+    description: ''
+  - name: --container-registry
+    summary: ID ARM dari registri kontainer yang terkait dengan ruang kerja ini.
+    description: ''
+  - name: --description
+    summary: Deskripsi ruang kerja Azure ML.
+    description: ''
+  - name: --display-name
+    summary: Nama tampilan untuk ruang kerja.
+    description: ''
+  - name: --file -f
+    summary: Jalur lokal ke file YAML yang berisi spesifikasi ruang kerja Azure ML.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --image-build-compute -i
+    summary: Nama target komputasi yang akan digunakan untuk membangun citra Docker lingkungan ketika registri kontainer berada di belakang VNet.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai. Defaultnya adalah False.
+    description: ''
+  - name: --public-network-access
+    summary: Izinkan konektivitas titik akhir publik saat ruang kerja diaktifkan tautan privat.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --update-dependent-resources -u
+    summary: Menentukan --update_dependent_resources, memberikan persetujuan Anda untuk memperbarui sumber daya dependen ruang kerja. Memperbarui sumber daya Azure Container Registry atau Application Insights yang terpasang di ruang kerja dapat merusak silsilah pekerjaan sebelumnya, titik akhir inferensi yang disebarkan, atau kemampuan Anda untuk menjalankan ulang pekerjaan sebelumnya di ruang kerja ini.
+    description: ''
+commands:
+- az_ml_workspace_create
+- az_ml_workspace_delete
+- az_ml_workspace_diagnose
+- az_ml_workspace_list
+- az_ml_workspace_list-keys
+- az_ml_workspace_show
+- az_ml_workspace_sync-keys
+- az_ml_workspace_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: >-
+    Ruang kerja Azure ML adalah sumber daya tingkat atas untuk Azure Machine Learning. Ini menyediakan tempat terpusat untuk melacak aset dan sumber daya yang digunakan dalam alur kerja ML Anda, bersama dengan log dan artefak yang dihasilkan dari pekerjaan pelatihan Anda.
+
+
+    Jika Anda meningkatkan dari CLI v1 ke v2, Anda memerlukan dua perubahan berikut dalam cakupan manajemen ruang kerja:
+
+    - Tingkatkan `az ml workspace private-endpoint` perintah ke perintah yang setara `az network private-endpoint` .
+
+    - Selain itu, tingkatkan `az ml workspace share` perintah ke perintah yang setara `az role assignment create` .
+  ms.openlocfilehash: e5c733f09b6472cffd55a230239d0e9b00798d65
+  ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141408688"

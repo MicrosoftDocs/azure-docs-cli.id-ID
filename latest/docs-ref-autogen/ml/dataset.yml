@@ -1,0 +1,212 @@
+### YamlMime:AzureCLIGroup
+uid: az_ml_dataset
+name: himpunan data az ml
+extensionInformation: >-
+  > [!Note]
+
+  > This reference is part of the **ml** extension for the Azure CLI  (version 2.15.0 or higher).  The extension will automatically install the first time you run an **az ml dataset** command.  [Learn more](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) about extensions.
+summary: Mengelola aset himpunan data Azure ML.
+description: Azure ML aset himpunan data adalah referensi ke file di layanan penyimpanan atau URL publik Anda bersama dengan metadata yang sesuai. Mereka bukan salinan data Anda. Anda dapat menggunakan aset himpunan data ini untuk mengakses data yang relevan selama pelatihan model dan memasang atau mengunduh data yang dirujuk ke target komputasi Anda.
+directCommands:
+- uid: az_ml_dataset_create
+  name: az ml dataset create
+  summary: Membuat aset himpunan data.
+  description: >-
+    Aset himpunan data dapat ditentukan dari file di komputer lokal Anda atau sebagai referensi ke file di penyimpanan cloud. Aset himpunan data yang dibuat akan dilacak di ruang kerja dengan nama dan versi yang ditentukan.
+
+
+    Untuk membuat aset himpunan data dari file di komputer lokal Anda, tentukan bidang 'local_path' di konfigurasi YAML Anda. Azure ML akan mengunggah file ini ke kontainer blob yang mendukung datastore default ruang kerja (bernama 'workspaceblobstore'). Aset himpunan data yang dibuat kemudian akan menunjuk ke data yang diunggah tersebut.
+
+
+    Untuk membuat aset himpunan data yang mereferensikan file di penyimpanan cloud, tentukan 'datastore' yang sesuai dengan layanan penyimpanan dan 'jalur' ke file dalam penyimpanan di konfigurasi YAML Anda.
+
+
+    Anda juga dapat membuat aset himpunan data langsung dari URL penyimpanan atau URL publik. Untuk melakukannya, tentukan URL ke bidang 'jalur' di konfigurasi YAML Anda.
+  syntax: >-
+    az ml dataset create --resource-group
+                         --workspace-name
+                         [--description]
+                         [--file]
+                         [--local-path]
+                         [--name]
+                         [--paths]
+                         [--set]
+                         [--tags]
+                         [--version]
+  examples:
+  - summary: Membuat aset himpunan data dari file spesifikasi YAML
+    syntax: az ml dataset create --file data.yml --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --description -d
+    summary: Deskripsi himpunan data.
+    description: ''
+  - name: --file -f
+    summary: Jalur lokal ke file YAML yang berisi spesifikasi himpunan data Azure ML.
+    description: ''
+  - name: --local-path -l
+    summary: Jalur file atau folder lokal untuk membuat himpunan data.
+    description: ''
+  - name: --name -n
+    summary: Nama himpunan data.
+    description: ''
+  - name: --paths -p
+    summary: "Jalur data dalam format URI yang didukung untuk membuat himpunan data. Contoh: 'folder:azureml://datastores/mydatastore/paths/path_to_data/', 'file:azureml://datastores/mydatastore/paths/path_to_data/myfile.csv'."
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur. Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --tags
+    summary: Tag yang dipisahkan spasi untuk himpunan data.
+    description: ''
+  - name: --version -v
+    summary: Versi dari himpunan data.
+    description: ''
+- uid: az_ml_dataset_list
+  name: az ml dataset list
+  summary: Mencantumkan aset himpunan data di ruang kerja.
+  description: ''
+  syntax: >-
+    az ml dataset list --resource-group
+                       --workspace-name
+                       [--max-results]
+                       [--name]
+  examples:
+  - summary: Mencantumkan semua aset himpunan data di ruang kerja
+    syntax: az ml dataset list --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Mencantumkan semua versi aset himpunan data untuk nama yang ditentukan di ruang kerja
+    syntax: az ml dataset list --name my-data --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Cantumkan semua aset himpunan data di ruang kerja menggunakan argumen --query untuk menjalankan kueri JMESPath pada hasil perintah.
+    syntax: az ml dataset list --query "[].{Name:name}" --output table --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --max-results -r
+    summary: Jumlah maksimum hasil yang akan dikembalikan.
+    description: ''
+  - name: --name -n
+    summary: Nama aset data. Jika disediakan, semua versi data dengan nama ini akan dikembalikan.
+    description: ''
+- uid: az_ml_dataset_show
+  name: az ml dataset show
+  summary: Memperlihatkan detail untuk aset himpunan data.
+  description: ''
+  syntax: >-
+    az ml dataset show --name
+                       --resource-group
+                       --workspace-name
+                       [--label]
+                       [--version]
+  examples:
+  - summary: Menampilkan detail untuk aset himpunan data dengan nama dan versi yang ditentukan
+    syntax: az ml dataset show --name my-data --version 1 --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aset data.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --label -l
+    summary: Label aset data.
+    description: ''
+  - name: --version -v
+    summary: Versi aset data.
+    description: ''
+- uid: az_ml_dataset_update
+  name: az ml dataset update
+  summary: Memperbarui aset himpunan data.
+  description: Hanya properti 'deskripsi' dan 'tag' yang dapat diperbarui.
+  syntax: >-
+    az ml dataset update --resource-group
+                         --workspace-name
+                         [--add]
+                         [--force-string]
+                         [--label]
+                         [--name]
+                         [--remove]
+                         [--set]
+                         [--version]
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --label -l
+    summary: Label aset data.
+    description: ''
+  - name: --name -n
+    summary: Nama aset data.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --version -v
+    summary: Versi aset data.
+    description: ''
+commands:
+- az_ml_dataset_create
+- az_ml_dataset_list
+- az_ml_dataset_show
+- az_ml_dataset_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Azure ML aset himpunan data adalah referensi ke file di layanan penyimpanan atau URL publik Anda bersama dengan metadata yang sesuai. Mereka bukan salinan data Anda. Anda dapat menggunakan aset himpunan data ini untuk mengakses data yang relevan selama pelatihan model dan memasang atau mengunduh data yang dirujuk ke target komputasi Anda.
+  ms.openlocfilehash: ca8e469c2021f24423dec0b588072c9b7487c6fc
+  ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141408760"

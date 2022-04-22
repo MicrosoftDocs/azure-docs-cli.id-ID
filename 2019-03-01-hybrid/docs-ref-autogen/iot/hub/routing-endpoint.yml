@@ -1,0 +1,232 @@
+### YamlMime:AzureCLIGroup
+uid: az_iot_hub_routing-endpoint
+name: az iot hub routing-endpoint
+summary: Mengelola titik akhir kustom dari hub IoT.
+description: ''
+directCommands:
+- uid: az_iot_hub_routing-endpoint_create
+  name: az iot hub routing-endpoint create
+  summary: Tambahkan titik akhir ke IoT Hub Anda.
+  description: Buat titik akhir kustom baru di IoT Hub Anda.
+  syntax: >-
+    az iot hub routing-endpoint create --endpoint-name
+                                       --endpoint-resource-group
+                                       --endpoint-subscription-id
+                                       --endpoint-type {azurestoragecontainer, eventhub, servicebusqueue, servicebustopic}
+                                       --hub-name
+                                       [--auth-type {identityBased, keyBased}]
+                                       [--batch-frequency]
+                                       [--chunk-size]
+                                       [--connection-string]
+                                       [--container]
+                                       [--encoding {avro, json}]
+                                       [--endpoint-uri]
+                                       [--entity-path]
+                                       [--ff]
+                                       [--identity]
+                                       [--resource-group]
+  examples:
+  - summary: Tambahkan titik akhir baru "E2" jenis EventHub ke IoT Hub "MyIotHub".
+    syntax: az iot hub routing-endpoint create --resource-group MyResourceGroup --hub-name MyIotHub --endpoint-name E2 --endpoint-type eventhub --endpoint-resource-group {ResourceGroup} --endpoint-subscription-id {SubscriptionId} --connection-string {ConnectionString}
+  - summary: Tambahkan titik akhir baru "S1" jenis AzureStorageContainer ke IoT Hub "MyIotHub".
+    syntax: >-
+      az iot hub routing-endpoint create --resource-group MyResourceGroup --hub-name MyIotHub \
+
+      --endpoint-name S1 --endpoint-type azurestoragecontainer --endpoint-resource-group "[Resource Group]" \
+
+      --endpoint-subscription-id {SubscriptionId} --connection-string {ConnectionString} \
+
+      --container-name {ContainerName} --batch-frequency 100 --chunk-size 100 \
+
+      --ff {iothub}-{partition}-{YYYY}-{MM}-{DD}-{HH}-{mm}
+  - summary: Tambahkan titik akhir EventHub berbasis identitas baru bernama "EventHubIdentity" dan autentikasi menggunakan identitas terkelola yang ditetapkan pengguna
+    syntax: az iot hub routing-endpoint create --resource-group MyResourceGroup --hub-name MyIotHub --endpoint-name EventHubIdentity --endpoint-type eventhub --endpoint-resource-group {ResourceGroup} --endpoint-subscription-id {SubscriptionId} --auth-type identityBased --identity {userIdentityResourceId} --endpoint-uri {EventHubEndpointUri} --entity-path {EntityPath}
+  requiredParameters:
+  - isRequired: true
+    name: --endpoint-name --name -n
+    summary: Nama Titik Akhir Perutean.
+    description: ''
+  - isRequired: true
+    name: --endpoint-resource-group --erg -r
+    summary: Grup sumber daya dari sumber daya resoure Titik akhir.
+    description: ''
+  - isRequired: true
+    name: --endpoint-subscription-id -s
+    summary: SubscriptionId sumber daya Titik Akhir.
+    description: ''
+  - isRequired: true
+    name: --endpoint-type --type -t
+    parameterValueGroup: azurestoragecontainer, eventhub, servicebusqueue, servicebustopic
+    summary: Jenis Titik Akhir Perutean.
+    description: ''
+  - isRequired: true
+    name: --hub-name
+    summary: nama IoT Hub.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    parameterValueGroup: identityBased, keyBased
+    summary: Jenis autentikasi untuk titik akhir. Defaultnya adalah keyBased.
+    description: ''
+  - name: --batch-frequency -b
+    defaultValue: "300"
+    summary: Minta frekuensi batch dalam detik. Jumlah waktu maksimum yang dapat berlalu sebelum data ditulis ke blob, antara 60 dan 720 detik.
+    description: ''
+  - name: --chunk-size -w
+    defaultValue: "300"
+    summary: Meminta ukuran gugus dalam megabyte (MB). Ukuran maksimum blob, antara 10 dan 500 MB.
+    description: ''
+  - name: --connection-string -c
+    summary: String koneksi Titik Akhir Perutean.
+    description: ''
+  - name: --container --container-name
+    summary: Nama kontainer penyimpanan.
+    description: ''
+  - name: --encoding
+    parameterValueGroup: avro, json
+    summary: Format pengodean untuk kontainer. Defaultnya adalah AVRO. Perhatikan bahwa bidang ini hanya berlaku untuk titik akhir kontainer blob.
+    description: ''
+  - name: --endpoint-uri
+    summary: Uri sumber daya titik akhir.
+    description: ''
+  - name: --entity-path
+    summary: Jalur entitas sumber daya titik akhir.
+    description: ''
+  - name: --ff --file-name-format
+    defaultValue: '{iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}'
+    summary: Format nama file untuk blob. Format nama file harus berisi bidang {iothub}, {partition}, {YYYY}, {MM}, {DD}, {HH} dan {mm}. Semua parameter wajib tetapi dapat disusun ulang dengan atau tanpa pemisah.
+    description: ''
+  - name: --identity
+    summary: Gunakan identitas terkelola yang ditetapkan sistem atau ditetapkan pengguna untuk autentikasi titik akhir. Gunakan "[system]" untuk merujuk ke identitas yang ditetapkan sistem atau ID sumber daya untuk merujuk ke identitas yang ditetapkan pengguna. Jika Anda menggunakan --auth-type tanpa parameter ini, identitas terkelola yang ditetapkan sistem diasumsikan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_hub_routing-endpoint_delete
+  name: az iot hub routing-endpoint delete
+  summary: Hapus semua atau titik akhir yang disebutkan untuk IoT Hub Anda.
+  description: Hapus titik akhir untuk IoT Hub Anda. Kami menyarankan agar Anda menghapus rute apa pun ke titik akhir, sebelum menghapus titik akhir.
+  syntax: >-
+    az iot hub routing-endpoint delete [--endpoint-name]
+                                       [--endpoint-type {azurestoragecontainer, eventhub, servicebusqueue, servicebustopic}]
+                                       [--hub-name]
+                                       [--ids]
+                                       [--resource-group]
+  examples:
+  - summary: Hapus titik akhir "E2" dari IoT Hub "MyIotHub".
+    syntax: az iot hub routing-endpoint delete --resource-group MyResourceGroup --hub-name MyIotHub --endpoint-name E2
+  - summary: Hapus semua titik akhir jenis "EventHub" dari IoT Hub "MyIotHub".
+    syntax: az iot hub routing-endpoint delete --resource-group MyResourceGroup --hub-name MyIotHub --endpoint-type eventhub
+  - summary: Hapus semua titik akhir dari IoT Hub "MyIotHub".
+    syntax: az iot hub routing-endpoint delete --resource-group MyResourceGroup --hub-name MyIotHub
+  optionalParameters:
+  - name: --endpoint-name --name -n
+    summary: Nama Titik Akhir Perutean.
+    description: ''
+  - name: --endpoint-type --type -t
+    parameterValueGroup: azurestoragecontainer, eventhub, servicebusqueue, servicebustopic
+    summary: Jenis Titik Akhir Perutean.
+    description: ''
+  - name: --hub-name
+    summary: nama IoT Hub.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_hub_routing-endpoint_list
+  name: az iot hub routing-endpoint list
+  summary: Dapatkan informasi tentang semua titik akhir untuk IoT Hub Anda.
+  description: Dapatkan informasi tentang semua titik akhir di IoT Hub Anda. Anda juga dapat menentukan jenis titik akhir mana yang ingin Anda dapatkan informaitonnya.
+  syntax: >-
+    az iot hub routing-endpoint list [--endpoint-type {azurestoragecontainer, eventhub, servicebusqueue, servicebustopic}]
+                                     [--hub-name]
+                                     [--ids]
+                                     [--resource-group]
+  examples:
+  - summary: Dapatkan semua titik akhir dari IoT Hub "MyIotHub".
+    syntax: az iot hub routing-endpoint list -g MyResourceGroup --hub-name MyIotHub
+  - summary: Dapatkan semua titik akhir jenis "EventHub" dari IoT Hub "MyIotHub".
+    syntax: az iot hub routing-endpoint list -g MyResourceGroup --hub-name MyIotHub --endpoint-type eventhub
+  optionalParameters:
+  - name: --endpoint-type --type -t
+    parameterValueGroup: azurestoragecontainer, eventhub, servicebusqueue, servicebustopic
+    summary: Jenis Titik Akhir Perutean.
+    description: ''
+  - name: --hub-name
+    summary: nama IoT Hub.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+- uid: az_iot_hub_routing-endpoint_show
+  name: az iot hub routing-endpoint show
+  summary: Dapatkan informasi tentang titik akhir yang disebutkan untuk IoT Hub Anda.
+  description: Dapatkan informasi tentang titik akhir tertentu di IoT Hub Anda.
+  syntax: >-
+    az iot hub routing-endpoint show --endpoint-name
+                                     [--hub-name]
+                                     [--ids]
+                                     [--resource-group]
+  examples:
+  - summary: Dapatkan informasi titik akhir dari IoT Hub "MyIotHub".
+    syntax: >-
+      az iot hub routing-endpoint show --resource-group MyResourceGroup --hub-name MyIotHub \
+
+      --endpoint-name {endpointName}
+  requiredParameters:
+  - isRequired: true
+    name: --endpoint-name --name -n
+    summary: Nama Titik Akhir Perutean.
+    description: ''
+  optionalParameters:
+  - name: --hub-name
+    summary: nama IoT Hub.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/iot/_help.py
+commands:
+- az_iot_hub_routing-endpoint_create
+- az_iot_hub_routing-endpoint_delete
+- az_iot_hub_routing-endpoint_list
+- az_iot_hub_routing-endpoint_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 02/24/2022
+  description: Mengelola titik akhir kustom dari hub IoT.
+  ms.openlocfilehash: e49579070d78dbc4f88513fd030016484bfa0b1e
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141132205"

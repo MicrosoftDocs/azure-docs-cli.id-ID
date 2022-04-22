@@ -1,0 +1,551 @@
+### YamlMime:AzureCLIGroup
+uid: az_ml_compute
+name: az ml compute
+extensionInformation: >-
+  > [!Note]
+
+  > This reference is part of the **ml** extension for the Azure CLI  (version 2.15.0 or higher).  The extension will automatically install the first time you run an **az ml compute** command.  [Learn more](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) about extensions.
+summary: Mengelola sumber daya komputasi Azure ML.
+description: Target komputasi Azure ML adalah sumber daya komputasi yang ditunjuk tempat Anda dapat menjalankan pekerjaan untuk melatih atau menyebarkan model Anda untuk inferensi.
+directCommands:
+- uid: az_ml_compute_attach
+  name: az ml compute attach
+  summary: Lampirkan sumber daya komputasi yang sudah ada ke ruang kerja.
+  description: Kluster Kubernetes dan VM jarak jauh dapat dilampirkan sebagai target komputasi.
+  syntax: >-
+    az ml compute attach --resource-group
+                         --workspace-name
+                         [--admin-password]
+                         [--admin-username]
+                         [--file]
+                         [--identity-type]
+                         [--name]
+                         [--namespace]
+                         [--no-wait]
+                         [--resource-id]
+                         [--ssh-port]
+                         [--ssh-private-key-file]
+                         [--type]
+                         [--user-assigned-identities]
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --admin-password
+    summary: Kata sandi pengguna administrator yang dapat digunakan untuk SSH ke dalam simpul.
+    description: ''
+  - name: --admin-username
+    summary: Nama akun pengguna administrator yang dapat digunakan untuk SSH ke dalam simpul.
+    description: ''
+  - name: --file -f
+    summary: Jalur lokal ke file YAML yang berisi spesifikasi komputasi Azure ML.
+    description: ''
+  - name: --identity-type
+    summary: 'Jenis identitas terkelola. Nilai yang diizinkan: SystemAssigned, UserAssigned.'
+    description: ''
+  - name: --name -n
+    summary: Nama target komputasi (Diperlukan jika tidak ditentukan dalam file yaml).
+    description: ''
+  - name: --namespace
+    summary: Namespace dari KubernetesCompute.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-id
+    summary: ID sumber daya yang sepenuhnya memenuhi syarat, termasuk nama sumber daya dan jenis sumber daya (Diperlukan jika tidak ditentukan dalam file yaml).
+    description: ''
+  - name: --ssh-port
+    summary: Nomor port yang dapat digunakan untuk SSH ke dalam simpul. Jika tidak ditentukan, default (port 22) akan digunakan.
+    description: ''
+  - name: --ssh-private-key-file
+    summary: File yang berisi kunci privat SSH dari akun pengguna administrator.
+    description: ''
+  - name: --type -t
+    summary: 'Jenis target komputasi. Nilai yang diizinkan: virtualmachine, Kubernetes.'
+    description: ''
+  - name: --user-assigned-identities -i
+    summary: ID sumber daya identitas yang ditetapkan pengguna, diperlukan untuk --identity_type=UserAssigned.
+    description: ''
+- uid: az_ml_compute_create
+  name: az ml compute create
+  summary: Buat target komputasi.
+  description: Anda dapat membuat kluster AmlCompute, yang merupakan infrastruktur komputasi terkelola Azure ML, atau instans komputasi, yang merupakan stasiun kerja berbasis cloud terkelola.
+  syntax: >-
+    az ml compute create --resource-group
+                         --workspace-name
+                         [--admin-password]
+                         [--admin-username]
+                         [--description]
+                         [--file]
+                         [--identity-type]
+                         [--idle-time-before-scale-down]
+                         [--max-instances]
+                         [--min-instances]
+                         [--name]
+                         [--no-wait]
+                         [--set]
+                         [--size]
+                         [--ssh-key-value]
+                         [--ssh-public-access-enabled]
+                         [--subnet]
+                         [--tags]
+                         [--tier]
+                         [--type]
+                         [--user-assigned-identities]
+                         [--user-object-id]
+                         [--user-tenant-id]
+                         [--vnet-name]
+  examples:
+  - summary: Membuat target komputasi dari file spesifikasi YAML
+    syntax: az ml compute create --file compute.yml --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Membuat target AmlCompute menggunakan opsi perintah
+    syntax: az ml compute create --name nc6-cluster --size Standard_NC6 --min-instances 0 --max-instances 5 --type AmlCompute --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --admin-password
+    summary: Kata sandi untuk akun pengguna administrator jika jenis autentikasi adalah 'Kata Sandi'.
+    description: ''
+  - name: --admin-username
+    summary: Nama akun pengguna administrator yang dapat digunakan untuk SSH ke dalam simpul.
+    description: ''
+  - name: --description
+    summary: Deskripsi target komputasi.
+    description: ''
+  - name: --file -f
+    summary: Jalur lokal ke file YAML yang berisi spesifikasi komputasi Azure ML.
+    description: ''
+  - name: --identity-type
+    summary: 'Jenis identitas terkelola. Nilai yang diizinkan: SystemAssigned, UserAssigned.'
+    description: ''
+  - name: --idle-time-before-scale-down -d
+    summary: 'Waktu idle simpul dalam hitungan detik sebelum menskalakan kluster. Default: 120.'
+    description: ''
+  - name: --max-instances
+    summary: 'Jumlah maksimum node untuk digunakan pada kluster. Default: 4.'
+    description: ''
+  - name: --min-instances
+    summary: 'Jumlah simpul minimum untuk digunakan untuk kluster. Default: 0.'
+    description: ''
+  - name: --name -n
+    summary: Nama target komputasi. Diperlukan jika --file/-f tidak disediakan.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai. Defaultnya adalah False.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur. Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --size
+    summary: 'Ukuran VM yang digunakan untuk target komputasi. Detail selengkapnya dapat ditemukan di sini: https://aka.ms/azureml-vm-details.'
+    description: ''
+  - name: --ssh-key-value
+    summary: Kunci umum SSH dari akun pengguna administrator.
+    description: ''
+  - name: --ssh-public-access-enabled -p
+    summary: Menunjukkan apakah port SSH publik diaktifkan.
+    description: ''
+  - name: --subnet
+    summary: Nama subnet. Dapat juga mereferensikan subnet di vnet yang ada berdasarkan ID, bukan nama. Jika ID subnet ditentukan, maka vnet-name akan diabaikan. ID subnet dapat merujuk ke vnet/subnet di RG lain dengan menentukan ID subnet yang sepenuhnya memenuhi syarat. Diperlukan saat nama vnet ditentukan.
+    description: ''
+  - name: --tags
+    summary: Pasangan kunci-nilai yang dipisahkan spasi untuk tag objek.
+    description: ''
+  - name: --tier
+    summary: 'Tingkat prioritas VM. Nilai yang diizinkan: khusus, low_priority.'
+    description: ''
+  - name: --type -t
+    summary: 'Jenis target komputasi. Diperlukan jika --file/-f tidak disediakan. Nilai yang diizinkan: AmlCompute, ComputeInstance.'
+    description: ''
+  - name: --user-assigned-identities -i
+    summary: Gunakan '[system]' untuk mengatur identitas yang ditetapkan sistem, id sumber daya input lain yang dipisahkan oleh koma (yaitu <ResourceID1>,<ResourceID2> ) untuk mengatur identitas yang ditetapkan pengguna.
+    description: ''
+  - name: --user-object-id
+    summary: AAD ID objek dari pengguna yang ditetapkan.
+    description: ''
+  - name: --user-tenant-id
+    summary: AAD ID penyewa dari pengguna yang ditetapkan.
+    description: ''
+  - name: --vnet-name
+    summary: Nama jaringan virtual.
+    description: ''
+- uid: az_ml_compute_delete
+  name: az ml compute delete
+  summary: Menghapus target komputasi.
+  description: ''
+  syntax: >-
+    az ml compute delete --name
+                         --resource-group
+                         --workspace-name
+                         [--no-wait]
+                         [--yes]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama target komputasi (Diperlukan jika tidak ditentukan dalam file yaml).
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai. Defaultnya adalah False.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_ml_compute_detach
+  name: az ml compute detach
+  summary: Lepaskan sumber daya komputasi yang dilampirkan sebelumnya dari ruang kerja.
+  description: ''
+  syntax: >-
+    az ml compute detach --name
+                         --resource-group
+                         --workspace-name
+                         [--no-wait]
+                         [--yes]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama target komputasi (Diperlukan jika tidak ditentukan dalam file yaml).
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_ml_compute_list
+  name: az ml compute list
+  summary: Mencantumkan target komputasi di ruang kerja.
+  description: ''
+  syntax: >-
+    az ml compute list --resource-group
+                       --workspace-name
+                       [--max-results]
+                       [--type]
+  examples:
+  - summary: Cantumkan semua target komputasi di ruang kerja menggunakan argumen --query untuk menjalankan kueri JMESPath pada hasil perintah.
+    syntax: az ml compute list --query "[].{Name:name}"  --output table --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --max-results -r
+    summary: Jumlah maksimum hasil yang akan dikembalikan.
+    description: ''
+  - name: --type
+    summary: 'Jenis target komputasi. Nilai yang diizinkan: AmlCompute, ComputeInstance, Kubernetes.'
+    description: ''
+- uid: az_ml_compute_list-nodes
+  name: az ml compute list-node
+  summary: Mencantumkan detail simpul untuk target komputasi. Satu-satunya jenis komputasi yang didukung untuk perintah ini adalah komputasi AML.
+  description: ''
+  syntax: >-
+    az ml compute list-nodes --name
+                             --resource-group
+                             --workspace-name
+  examples:
+  - summary: Mencantumkan detail simpul untuk target komputasi AML
+    syntax: az ml compute list-nodes --name nc6-cluster --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama target komputasi (Diperlukan jika tidak ditentukan dalam file yaml).
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+- uid: az_ml_compute_list-sizes
+  name: az ml compute list-sizes
+  summary: Cantumkan ukuran VM yang tersedia berdasarkan lokasi.
+  description: ''
+  syntax: >-
+    az ml compute list-sizes --resource-group
+                             --workspace-name
+                             [--location]
+                             [--type]
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --type -t
+    summary: 'Jenis target komputasi. Nilai yang diizinkan: AmlCompute, ComputeInstance.'
+    description: ''
+- uid: az_ml_compute_list-usage
+  name: az ml compute list-usage
+  summary: Cantumkan sumber daya penggunaan yang tersedia untuk VM.
+  description: ''
+  syntax: >-
+    az ml compute list-usage --resource-group
+                             --workspace-name
+                             [--location]
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --location -l
+    summary: Default ke lokasi ruang kerja.
+    description: ''
+- uid: az_ml_compute_restart
+  name: az ml compute restart
+  summary: Mulai ulang target ComputeInstance.
+  description: Opsi --no-wait disarankan.
+  syntax: >-
+    az ml compute restart --name
+                          --resource-group
+                          --workspace-name
+                          [--no-wait]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama target komputasi (Diperlukan jika tidak ditentukan dalam file yaml).
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai. Defaultnya adalah False.
+    description: ''
+- uid: az_ml_compute_show
+  name: az ml compute show
+  summary: Tampilkan detail untuk target komputasi.
+  description: ''
+  syntax: >-
+    az ml compute show --name
+                       --resource-group
+                       --workspace-name
+  examples:
+  - summary: Menampilkan detail untuk target komputasi
+    syntax: az ml compute show --name nc6-cluster --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama target komputasi (Diperlukan jika tidak ditentukan dalam file yaml).
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+- uid: az_ml_compute_start
+  name: az ml compute start
+  summary: Mulai target ComputeInstance.
+  description: Opsi --no-wait disarankan.
+  syntax: >-
+    az ml compute start --name
+                        --resource-group
+                        --workspace-name
+                        [--no-wait]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama target komputasi (Diperlukan jika tidak ditentukan dalam file yaml).
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai. Defaultnya adalah False.
+    description: ''
+- uid: az_ml_compute_stop
+  name: az ml compute stop
+  summary: Hentikan target ComputeInstance.
+  description: Opsi --no-wait disarankan.
+  syntax: >-
+    az ml compute stop --name
+                       --resource-group
+                       --workspace-name
+                       [--no-wait]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama target komputasi (Diperlukan jika tidak ditentukan dalam file yaml).
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai. Defaultnya adalah False.
+    description: ''
+- uid: az_ml_compute_update
+  name: az ml compute update
+  summary: Memperbarui target komputasi.
+  description: Properti 'tag', 'max_instances', 'min_instances', 'idle_time_before_scale_down', 'identity_type', dan 'user_assigned_identities' dapat diperbarui.
+  syntax: >-
+    az ml compute update --name
+                         --resource-group
+                         --workspace-name
+                         [--add]
+                         [--force-string]
+                         [--identity-type]
+                         [--idle-time-before-scale-down]
+                         [--max-instances]
+                         [--min-instances]
+                         [--no-wait]
+                         [--remove]
+                         [--set]
+                         [--user-assigned-identities]
+  examples:
+  - summary: Memperbarui jumlah minimum simpul untuk kluster AmlCompute
+    syntax: az ml compute update --name nc6-cluster --min-instances 1 --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Memperbarui tag yang ada atau menambahkan tag baru untuk kluster AmlCompute
+    syntax: az ml compute update --name nc6-cluster --set tags.key1=value1 tags.key2=value2 --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama target komputasi (Diperlukan jika tidak ditentukan dalam file yaml).
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --identity-type
+    summary: 'Jenis identitas terkelola. Nilai yang diizinkan: SystemAssigned, UserAssigned.'
+    description: ''
+  - name: --idle-time-before-scale-down -d
+    summary: 'Waktu idle simpul dalam hitungan detik sebelum menskalakan kluster. Default: 120.'
+    description: ''
+  - name: --max-instances
+    summary: 'Jumlah maksimum simpul yang akan digunakan. Default: 4.'
+    description: ''
+  - name: --min-instances
+    summary: 'Jumlah minimum simpul yang akan digunakan. Default: 0.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai. Defaultnya adalah False.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --user-assigned-identities -i
+    summary: Gunakan '[system]' untuk mengatur identitas yang ditetapkan sistem, id sumber daya input lain yang dipisahkan oleh koma (yaitu <ResourceID1>,<ResourceID2> ) untuk mengatur identitas yang ditetapkan pengguna.
+    description: ''
+commands:
+- az_ml_compute_attach
+- az_ml_compute_create
+- az_ml_compute_delete
+- az_ml_compute_detach
+- az_ml_compute_list
+- az_ml_compute_list-nodes
+- az_ml_compute_list-sizes
+- az_ml_compute_list-usage
+- az_ml_compute_restart
+- az_ml_compute_show
+- az_ml_compute_start
+- az_ml_compute_stop
+- az_ml_compute_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Target komputasi Azure ML adalah sumber daya komputasi yang ditunjuk tempat Anda dapat menjalankan pekerjaan untuk melatih atau menyebarkan model Anda untuk inferensi.
+  ms.openlocfilehash: 8735210d109cae86a0332b6840343584c6f23997
+  ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141409228"

@@ -1,0 +1,326 @@
+### YamlMime:AzureCLIGroup
+uid: az_apim_product
+name: az apim product
+summary: Mengelola Produk Azure API Management.
+description: ''
+directCommands:
+- uid: az_apim_product_create
+  name: az apim product create
+  summary: Membuat produk.
+  description: ''
+  syntax: >-
+    az apim product create --product-name
+                           --resource-group
+                           --service-name
+                           [--approval-required]
+                           [--description]
+                           [--legal-terms]
+                           [--no-wait]
+                           [--product-id]
+                           [--state {notPublished, published}]
+                           [--subscription-required]
+                           [--subscriptions-limit]
+  examples:
+  - summary: Membuat produk.
+    syntax: az apim product create --resource-group MyResourceGroup  --service-name MyServiceName --product-id MyProductID --product-name MyProductName --description MyDescription --legal-terms MyTerms --subscription-required true --approval-required true --subscriptions-limit 8 --state "published"
+  requiredParameters:
+  - isRequired: true
+    name: --product-name
+    summary: Nama produk.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name -n
+    summary: Nama instans layanan api management.
+    description: ''
+  optionalParameters:
+  - name: --approval-required
+    summary: Apakah persetujuan langganan diperlukan. Jika false, langganan baru akan disetujui secara otomatis memungkinkan pengembang untuk memanggil API produk segera setelah berlangganan. Jika true, administrator harus menyetujui langganan secara manual sebelum pengembang dapat menggunakan API produk apa pun. Dapat hadir hanya jika properti subscriptionRequired ada dan memiliki nilai false.
+    description: ''
+  - name: --description
+    summary: Deskripsi produk. Mungkin menyertakan tag pemformatan HTML.
+    description: ''
+  - name: --legal-terms
+    summary: Persyaratan penggunaan produk. Pengembang yang mencoba berlangganan produk akan disajikan dan diharuskan untuk menerima persyaratan ini sebelum mereka dapat menyelesaikan proses berlangganan.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --product-id
+    summary: Pengidentifikasi produk. Harus unik dalam instans layanan API Management saat ini.
+    description: ''
+  - name: --state
+    parameterValueGroup: notPublished, published
+    summary: Apakah produk diterbitkan atau tidak. Produk yang diterbitkan dapat ditemukan oleh pengguna portal pengembang. Produk yang tidak diterbitkan hanya terlihat oleh administrator. Status default Produk tidak Diterbitkan.
+    description: ''
+  - name: --subscription-required -s
+    summary: Apakah langganan produk diperlukan untuk mengakses API yang disertakan dalam produk ini.
+    description: ''
+  - name: --subscriptions-limit
+    summary: Apakah jumlah langganan yang dapat dimiliki pengguna ke produk ini secara bersamaan. Atur ke null atau hilangkan untuk mengizinkan langganan per pengguna tanpa batas. Dapat hadir hanya jika properti subscriptionRequired ada dan memiliki nilai false.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/apim/_help.py
+- uid: az_apim_product_delete
+  name: az apim product delete
+  summary: Menghapus produk.
+  description: ''
+  syntax: >-
+    az apim product delete --product-id
+                           --resource-group
+                           --service-name
+                           [--delete-subscriptions]
+                           [--if-match]
+                           [--no-wait]
+                           [--yes]
+  examples:
+  - summary: Hapus produk dengan semua langganan untuk produk ini.
+    syntax: az apim product delete --resource-group MyResourceGroup  --service-name MyServiceName --product-id MyProductID --delete-subscriptions true
+  requiredParameters:
+  - isRequired: true
+    name: --product-id
+    summary: Pengidentifikasi produk. Harus unik dalam instans layanan API Management saat ini.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name -n
+    summary: Nama instans layanan api management.
+    description: ''
+  optionalParameters:
+  - name: --delete-subscriptions
+    summary: Hapus langganan yang sudah ada yang terkait dengan produk atau tidak.
+    description: ''
+  - name: --if-match
+    summary: ETag Entitas.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/apim/_help.py
+- uid: az_apim_product_list
+  name: az apim product list
+  summary: Mencantumkan kumpulan produk dalam contoh layanan yang ditentukan.
+  description: ''
+  syntax: >-
+    az apim product list --resource-group
+                         --service-name
+  examples:
+  - summary: Cantumkan semua produk untuk instans APIM ini.
+    syntax: az apim product list --resource-group MyResourceGroup --service-name MyServiceName
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name -n
+    summary: Nama instans layanan api management.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/apim/_help.py
+- uid: az_apim_product_show
+  name: az apim product show
+  summary: Mendapatkan detail produk yang ditentukan oleh pengidentifikasinya.
+  description: ''
+  syntax: >-
+    az apim product show --product-id
+                         --resource-group
+                         --service-name
+  examples:
+  - summary: Mendapatkan detail produk yang ditentukan oleh pengidentifikasinya.
+    syntax: az apim product show --resource-group MyResourceGroup --service-name MyServiceName  --product-id MyProductID
+  requiredParameters:
+  - isRequired: true
+    name: --product-id
+    summary: Pengidentifikasi produk. Harus unik dalam instans layanan API Management saat ini.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name -n
+    summary: Nama instans layanan api management.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/apim/_help.py
+- uid: az_apim_product_update
+  name: az apim product update
+  summary: Perbarui detail produk yang ada.
+  description: ''
+  syntax: >-
+    az apim product update --product-id
+                           --resource-group
+                           --service-name
+                           [--add]
+                           [--approval-required]
+                           [--description]
+                           [--force-string]
+                           [--if-match]
+                           [--legal-terms]
+                           [--no-wait]
+                           [--product-name]
+                           [--remove]
+                           [--set]
+                           [--state {notPublished, published}]
+                           [--subscription-required]
+                           [--subscriptions-limit]
+  examples:
+  - summary: Perbarui detail produk yang ada.
+    syntax: az apim product update --resource-group MyResourceGroup  --service-name MyServiceName --product-id MyProductID --product-name MyNewProductName --description MyNewDescription --legal-terms MyNewTerms --subscription-required false --state "notPublished"
+  requiredParameters:
+  - isRequired: true
+    name: --product-id
+    summary: Pengidentifikasi produk. Harus unik dalam instans layanan API Management saat ini.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name -n
+    summary: Nama instans layanan api management.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --approval-required
+    summary: Apakah persetujuan langganan diperlukan. Jika false, langganan baru akan disetujui secara otomatis memungkinkan pengembang untuk memanggil API produk segera setelah berlangganan. Jika true, administrator harus menyetujui langganan secara manual sebelum pengembang dapat menggunakan API produk apa pun. Dapat hadir hanya jika properti subscriptionRequired ada dan memiliki nilai false.
+    description: ''
+  - name: --description
+    summary: Deskripsi produk. Mungkin menyertakan tag pemformatan HTML.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --if-match
+    summary: ETag Entitas.
+    description: ''
+  - name: --legal-terms
+    summary: Persyaratan penggunaan produk. Pengembang yang mencoba berlangganan produk akan disajikan dan diharuskan untuk menerima persyaratan ini sebelum mereka dapat menyelesaikan proses berlangganan.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --product-name
+    summary: Nama produk.
+    description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --state
+    parameterValueGroup: notPublished, published
+    summary: Apakah produk diterbitkan atau tidak. Produk yang diterbitkan dapat ditemukan oleh pengguna portal pengembang. Produk yang tidak dipublikasikan hanya dapat dilihat oleh administrator. Status default Produk tidak Diterbitkan.
+    description: ''
+  - name: --subscription-required -s
+    summary: Apakah langganan produk diperlukan untuk mengakses API yang disertakan dalam produk ini.
+    description: ''
+  - name: --subscriptions-limit
+    summary: Apakah jumlah langganan yang dapat dimiliki pengguna ke produk ini secara bersamaan. Atur ke null atau hilangkan untuk mengizinkan langganan per pengguna tanpa batas. Dapat hadir hanya jika properti subscriptionRequired ada dan memiliki nilai false.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/apim/_help.py
+- uid: az_apim_product_wait
+  name: az apim product wait
+  summary: Tempatkan CLI dalam status menunggu sampai kondisi produk apim terpenuhi.
+  description: ''
+  syntax: >-
+    az apim product wait --product-id
+                         --resource-group
+                         --service-name
+                         [--created]
+                         [--custom]
+                         [--deleted]
+                         [--exists]
+                         [--interval]
+                         [--timeout]
+                         [--updated]
+  examples:
+  - summary: Tempatkan CLI dalam status menunggu hingga kondisi apim terpenuhi. (dibuat otomatis)
+    syntax: az apim product wait --created --resource-group MyResourceGroup --service-name MyServiceName --product-id MyProductID
+  requiredParameters:
+  - isRequired: true
+    name: --product-id
+    summary: Pengidentifikasi produk. Harus unik dalam instans layanan API Management saat ini.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service-name -n
+    summary: Nama instans layanan api management.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --diperbarui
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/apim/_help.py
+commands:
+- az_apim_product_api
+- az_apim_product_api_add
+- az_apim_product_api_check
+- az_apim_product_api_delete
+- az_apim_product_api_list
+- az_apim_product_create
+- az_apim_product_delete
+- az_apim_product_list
+- az_apim_product_show
+- az_apim_product_update
+- az_apim_product_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/24/2022
+  description: Mengelola Produk Azure API Management.
+  ms.openlocfilehash: 02f6c9a653e4613f111c0ad7776bef58094379d4
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141438299"

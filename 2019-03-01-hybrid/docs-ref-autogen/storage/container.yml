@@ -1,0 +1,562 @@
+### YamlMime:AzureCLIGroup
+uid: az_storage_container
+name: az storage container
+summary: Mengelola kontainer penyimpanan blob.
+description: 'Tentukan salah satu parameter autentikasi berikut untuk perintah Anda: --auth-mode, --account-key, --connection-string, --sas-token. Anda juga dapat menggunakan variabel lingkungan yang sesuai untuk menyimpan kredensial autentikasi Anda, misalnya AZURE_STORAGE_KEY, AZURE_STORAGE_CONNECTION_STRING, dan AZURE_STORAGE_SAS_TOKEN.'
+directCommands:
+- uid: az_storage_container_create
+  name: pembuatan kontainer penyimpanan az
+  summary: Buat kontainer di akun penyimpanan.
+  description: Secara default, data kontainer bersifat privat ("nonaktif") kepada pemilik akun. Gunakan "blob" untuk memungkinkan akses baca publik untuk blob. Gunakan "kontainer" untuk mengizinkan akses baca dan daftar publik ke seluruh kontainer. Anda dapat mengonfigurasi --public-access menggunakan `az storage container set-permission -n CONTAINER_NAME --public-access blob/container/off`.
+  syntax: >-
+    az storage container create --name
+                                [--account-key]
+                                [--account-name]
+                                [--auth-mode {key, login}]
+                                [--connection-string]
+                                [--default-encryption-scope]
+                                [--fail-on-exist]
+                                [--metadata]
+                                [--prevent-encryption-scope-override {false, true}]
+                                [--public-access {blob, container, off}]
+                                [--resource-group]
+                                [--sas-token]
+                                [--timeout]
+  examples:
+  - summary: Buat kontainer penyimpanan di akun penyimpanan.
+    syntax: az storage container create -n mystoragecontainer
+  - summary: Buat kontainer penyimpanan di akun penyimpanan dan kembalikan kesalahan jika kontainer sudah ada.
+    syntax: az storage container create -n mystoragecontainer --fail-on-exist
+  - summary: Buat kontainer penyimpanan di akun penyimpanan dan izinkan akses baca publik untuk blob.
+    syntax: az storage container create -n mystoragecontainer --public-access blob
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kontainer.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --default-encryption-scope -d
+    summary: Default kontainer untuk menggunakan cakupan enkripsi tertentu untuk semua penulisan.
+    description: ''
+  - name: --fail-on-exist
+    summary: Lempar pengecualian jika kontainer sudah ada.
+    description: ''
+  - name: --metadata
+    summary: Metadata dalam pasangan key=value yang dipisahkan spasi. Ini menimpa metadata yang ada.
+    description: ''
+  - name: --prevent-encryption-scope-override -p
+    parameterValueGroup: false, true
+    summary: Blokir penimpaan cakupan enkripsi dari default kontainer.
+    description: ''
+  - name: --public-access
+    parameterValueGroup: blob, container, off
+    summary: Menentukan apakah data dalam kontainer dapat diakses secara publik.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_container_delete
+  name: penghapusan kontainer penyimpanan az
+  summary: Menandai kontainer yang ditentukan untuk penghapusan.
+  description: Kontainer dan blob apa pun yang terkandung di dalamnya kemudian dihapus selama pengumpulan sampah.
+  syntax: >-
+    az storage container delete --name
+                                [--account-key]
+                                [--account-name]
+                                [--auth-mode {key, login}]
+                                [--bypass-immutability-policy]
+                                [--connection-string]
+                                [--fail-not-exist]
+                                [--if-modified-since]
+                                [--if-unmodified-since]
+                                [--lease-id]
+                                [--sas-token]
+                                [--timeout]
+  examples:
+  - summary: Menandai kontainer yang ditentukan untuk penghapusan. (dibuat otomatis)
+    syntax: az storage container delete --account-key 00000000 --account-name MyAccount --name mycontainer
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kontainer.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --bypass-immutability-policy
+    summary: Melewati perilaku layanan mendatang yang akan memblokir kontainer agar tidak dihapus jika memiliki kebijakan kekekalan. Menentukan ini akan mengabaikan argumen selain yang digunakan untuk mengidentifikasi kontainer ("--name", "--account-name").
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --fail-not-exist
+    summary: Lempar pengecualian jika kontainer tidak ada.
+    description: ''
+  - name: --if-modified-since
+    summary: Dimulai hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --if-unmodified-since
+    summary: Dimulai hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --lease-id
+    summary: Jika ditentukan, delete_container hanya berhasil jika sewa kontainer aktif dan cocok dengan ID ini. Diperlukan jika kontainer memiliki sewa aktif.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_container_exists
+  name: az storage container exists
+  summary: Periksa keberadaan kontainer penyimpanan.
+  description: ''
+  syntax: >-
+    az storage container exists --name
+                                [--account-key]
+                                [--account-name]
+                                [--auth-mode {key, login}]
+                                [--connection-string]
+                                [--sas-token]
+                                [--timeout]
+  examples:
+  - summary: Periksa keberadaan kontainer penyimpanan. (dibuat otomatis)
+    syntax: az storage container exists --account-name mystorageccount --account-key 00000000 --name mycontainer
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kontainer.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_container_generate-sas
+  name: az storage container generate-sas
+  summary: Buat token SAS untuk kontainer penyimpanan.
+  description: ''
+  syntax: >-
+    az storage container generate-sas --name
+                                      [--account-key]
+                                      [--account-name]
+                                      [--auth-mode {key, login}]
+                                      [--cache-control]
+                                      [--connection-string]
+                                      [--content-disposition]
+                                      [--content-encoding]
+                                      [--content-language]
+                                      [--content-type]
+                                      [--expiry]
+                                      [--https-only]
+                                      [--ip]
+                                      [--permissions]
+                                      [--policy-name]
+                                      [--sas-token]
+                                      [--start]
+  examples:
+  - summary: Buat token sas untuk kontainer blob dan gunakan untuk mengunggah blob.
+    syntax: >-
+      end=`date -u -d "30 minutes" '+%Y-%m-%dT%H:%MZ'`
+
+      sas=`az storage container generate-sas -n mycontainer --https-only --permissions dlrw --expiry $end -o tsv`
+
+      az storage blob upload -n MyBlob -c mycontainer -f file.txt --sas-token $sas
+  - summary: Membuat tanda tangan akses bersama untuk kontainer (dibuat secara otomatis)
+    syntax: az storage container generate-sas --account-key 00000000 --account-name mystorageaccount --expiry 2020-01-01 --name mycontainer --permissions dlrw
+  - summary: Buat token SAS untuk kontainer penyimpanan. (dibuat otomatis)
+    syntax: az storage container generate-sas --account-name mystorageaccount --as-user --auth-mode login --expiry 2020-01-01 --name container1 --permissions dlrw
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kontainer.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --cache-control
+    summary: Nilai header respons untuk Cache-Control saat sumber daya diakses menggunakan tanda tangan akses bersama ini.
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --content-disposition
+    summary: Nilai header respons untuk Content-Disposition saat sumber daya diakses menggunakan tanda tangan akses bersama ini.
+    description: ''
+  - name: --content-encoding
+    summary: Nilai header respons untuk Pengodean Konten saat sumber daya diakses menggunakan tanda tangan akses bersama ini.
+    description: ''
+  - name: --content-language
+    summary: Nilai header respons untuk Content-Language saat sumber daya diakses menggunakan tanda tangan akses bersama ini.
+    description: ''
+  - name: --content-type
+    summary: Nilai header respons untuk Content-Type saat sumber daya diakses menggunakan tanda tangan akses bersama ini.
+    description: ''
+  - name: --kedaluwarsa
+    summary: Menentukan tanggalwaktu UTC (Y-m-d'T'H:M'Z') di mana SAS menjadi tidak valid. Jangan gunakan jika kebijakan akses tersimpan dirujuk dengan --policy-name yang menentukan nilai ini.
+    description: ''
+  - name: --https-only
+    summary: Hanya izinkan permintaan yang dibuat dengan protokol HTTPS. Jika dihilangkan, permintaan dari protokol HTTP dan HTTPS diizinkan.
+    description: ''
+  - name: --ip
+    summary: Menentukan alamat IP atau rentang alamat IP tempat menerima permintaan. Hanya mendukung alamat gaya IPv4.
+    description: ''
+  - name: --permissions
+    summary: 'Izin yang diberikan SAS. Nilai yang diizinkan: (d)elete (d)elete (l)ist (l)ist (r)ead (r)ead (w)rite (w)rite. Jangan gunakan jika kebijakan akses tersimpan dirujuk dengan --id yang menentukan nilai ini. Dapat digabungkan.'
+    description: ''
+  - name: --policy-name
+    summary: Nama kebijakan akses tersimpan dalam ACL kontainer.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --start
+    summary: Menentukan tanggalwaktu UTC (Y-m-d'T'H:M'Z') di mana SAS menjadi valid. Jangan gunakan jika kebijakan akses tersimpan dirujuk dengan --policy-name yang menentukan nilai ini. Default ke waktu permintaan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_container_list
+  name: daftar kontainer penyimpanan az
+  summary: Mencantumkan kontainer di akun penyimpanan.
+  description: ''
+  syntax: >-
+    az storage container list [--account-key]
+                              [--account-name]
+                              [--auth-mode {key, login}]
+                              [--connection-string]
+                              [--include-metadata]
+                              [--marker]
+                              [--num-results]
+                              [--prefix]
+                              [--sas-token]
+                              [--timeout]
+  examples:
+  - summary: Mencantumkan kontainer di akun penyimpanan.
+    syntax: az storage container list
+  - summary: Mencantumkan kontainer yang dihapus sementara di akun penyimpanan.
+    syntax: az storage container list --include-deleted
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --include-metadata
+    summary: Menentukan bahwa metadata kontainer dikembalikan dalam respons.
+    description: ''
+  - name: --penanda
+    summary: Token kelanjutan buram. Nilai ini dapat diambil dari bidang next_marker dari objek generator sebelumnya jika num_results ditentukan dan generator tersebut telah selesai menghitung hasil. Jika ditentukan, generator ini akan mulai mengembalikan hasil dari titik di mana generator sebelumnya berhenti.
+    description: ''
+  - name: --num-results
+    defaultValue: "5000"
+    summary: Menentukan jumlah maksimum hasil yang akan dikembalikan. Sediakan "\*" untuk mengembalikan semua.
+    description: ''
+  - name: --prefix
+    summary: Memfilter hasil untuk mengembalikan hanya kontainer yang namanya dimulai dengan awalan yang ditentukan.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_container_restore
+  name: pemulihan kontainer penyimpanan az
+  summary: Pulihkan kontainer yang dihapus sementara.
+  description: Operasi hanya akan berhasil jika digunakan dalam jumlah hari yang ditentukan yang ditetapkan dalam kebijakan penyimpanan penghapusan.
+  syntax: >-
+    az storage container restore --deleted-version
+                                 --name
+                                 [--account-key]
+                                 [--account-name]
+                                 [--auth-mode {key, login}]
+                                 [--connection-string]
+                                 [--sas-token]
+                                 [--timeout]
+  examples:
+  - summary: Mencantumkan dan memulihkan kontainer yang dihapus sementara.
+    syntax: >-
+      az storage container list --include-deleted
+
+      az storage container restore -n deletedcontainer --deleted-version deletedversion
+  requiredParameters:
+  - isRequired: true
+    name: --deleted-version
+    summary: Tentukan versi kontainer yang dihapus untuk dipulihkan.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Tentukan nama kontainer yang dihapus untuk dipulihkan.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+- uid: az_storage_container_set-permission
+  name: az storage container set-permission
+  summary: Mengatur izin untuk kontainer yang ditentukan atau kebijakan akses tersimpan yang dapat digunakan dengan Tanda Tangan Akses Bersama.
+  description: Izin menunjukkan apakah blob dalam kontainer dapat diakses secara publik.
+  syntax: >-
+    az storage container set-permission --name
+                                        [--account-key]
+                                        [--account-name]
+                                        [--auth-mode {key, login}]
+                                        [--connection-string]
+                                        [--if-modified-since]
+                                        [--if-unmodified-since]
+                                        [--lease-id]
+                                        [--public-access {blob, container, off}]
+                                        [--sas-token]
+                                        [--timeout]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kontainer.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --if-modified-since
+    summary: Dimulai hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --if-unmodified-since
+    summary: Dimulai hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
+    description: ''
+  - name: --lease-id
+    summary: Jika ditentukan, set_container_acl hanya berhasil jika sewa kontainer aktif dan cocok dengan ID ini.
+    description: ''
+  - name: --public-access
+    parameterValueGroup: blob, container, off
+    summary: Menentukan apakah data dalam kontainer dapat diakses secara publik.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_container_show
+  name: az storage container show
+  summary: Mengembalikan semua metadata dan properti sistem yang ditentukan pengguna untuk kontainer yang ditentukan.
+  description: Data yang dikembalikan tidak menyertakan daftar blob kontainer.
+  syntax: >-
+    az storage container show --name
+                              [--account-key]
+                              [--account-name]
+                              [--auth-mode {key, login}]
+                              [--connection-string]
+                              [--lease-id]
+                              [--sas-token]
+                              [--timeout]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kontainer.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --lease-id
+    summary: Jika ditentukan, get_container_properties hanya berhasil jika sewa kontainer aktif dan cocok dengan ID ini.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_container_show-permission
+  name: az storage container show-permission
+  summary: Mendapatkan izin untuk kontainer yang ditentukan.
+  description: Izin menunjukkan apakah data kontainer dapat diakses secara publik.
+  syntax: >-
+    az storage container show-permission --name
+                                         [--account-key]
+                                         [--account-name]
+                                         [--auth-mode {key, login}]
+                                         [--connection-string]
+                                         [--lease-id]
+                                         [--sas-token]
+                                         [--timeout]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama kontainer.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --auth-mode
+    parameterValueGroup: key, login
+    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --lease-id
+    summary: Jika ditentukan, get_container_acl hanya berhasil jika sewa kontainer aktif dan cocok dengan ID ini.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+commands:
+- az_storage_container_create
+- az_storage_container_delete
+- az_storage_container_exists
+- az_storage_container_generate-sas
+- az_storage_container_lease
+- az_storage_container_lease_acquire
+- az_storage_container_lease_break
+- az_storage_container_lease_change
+- az_storage_container_lease_release
+- az_storage_container_lease_renew
+- az_storage_container_list
+- az_storage_container_metadata
+- az_storage_container_metadata_show
+- az_storage_container_metadata_update
+- az_storage_container_policy
+- az_storage_container_policy_create
+- az_storage_container_policy_delete
+- az_storage_container_policy_list
+- az_storage_container_policy_show
+- az_storage_container_policy_update
+- az_storage_container_restore
+- az_storage_container_set-permission
+- az_storage_container_show
+- az_storage_container_show-permission
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/29/2022
+  description: 'Tentukan salah satu parameter autentikasi berikut untuk perintah Anda: --auth-mode, --account-key, --connection-string, --sas-token. Anda juga dapat menggunakan variabel lingkungan yang sesuai untuk menyimpan kredensial autentikasi Anda, misalnya AZURE_STORAGE_KEY, AZURE_STORAGE_CONNECTION_STRING, dan AZURE_STORAGE_SAS_TOKEN.'
+  ms.openlocfilehash: 2aa1533d69e0c8e3b55eb0fb86558b871adf7ebc
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141439127"

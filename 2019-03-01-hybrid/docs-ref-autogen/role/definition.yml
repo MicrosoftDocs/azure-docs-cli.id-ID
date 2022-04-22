@@ -1,0 +1,169 @@
+### YamlMime:AzureCLIGroup
+uid: az_role_definition
+name: definisi peran az
+summary: Mengelola definisi peran.
+description: ''
+directCommands:
+- uid: az_role_definition_create
+  name: az role definition create
+  summary: Membuat definisi peran kustom.
+  description: ''
+  syntax: az role definition create --role-definition
+  examples:
+  - summary: Buat peran dengan akses baca-saja ke penyimpanan dan sumber daya jaringan, dan kemampuan untuk memulai atau memulai ulang VM. (Bash)
+    syntax: >-
+      az role definition create --role-definition '{
+          "Name": "Contoso On-call",
+          "Description": "Perform VM actions and read storage and network information.",
+          "Actions": [
+              "Microsoft.Compute/*/read",
+                  "Microsoft.Compute/virtualMachines/start/action",
+                  "Microsoft.Compute/virtualMachines/restart/action",
+                  "Microsoft.Network/*/read",
+              "Microsoft.Storage/*/read",
+                  "Microsoft.Authorization/*/read",
+              "Microsoft.Resources/subscriptions/resourceGroups/read",
+              "Microsoft.Resources/subscriptions/resourceGroups/resources/read",
+              "Microsoft.Insights/alertRules/*",
+                  "Microsoft.Support/*"
+          ],
+          "DataActions": [
+              "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/*"
+          ],
+          "NotDataActions": [
+              "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/write"
+          ],
+          "AssignableScopes": ["/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"]
+      }'
+  - summary: Buat peran dari file yang berisi deskripsi JSON.
+    syntax: az role definition create --role-definition @ad-role.json
+  requiredParameters:
+  - isRequired: true
+    name: --role-definition
+    summary: Deskripsi peran sebagai JSON, atau jalur ke file yang berisi deskripsi JSON.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+- uid: az_role_definition_delete
+  name: az role definition delete
+  summary: Menghapus definisi peran.
+  description: ''
+  syntax: >-
+    az role definition delete --name
+                              [--custom-role-only {false, true}]
+                              [--resource-group]
+                              [--scope]
+  examples:
+  - summary: Menghapus definisi peran. (dibuat otomatis)
+    syntax: az role definition delete --name MyRole
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama peran.
+    description: ''
+  optionalParameters:
+  - name: --custom-role-only
+    parameterValueGroup: false, true
+    summary: Peran kustom saja(vs. build-in).
+    description: ''
+  - name: --resource-group -g
+    summary: Gunakan hanya jika peran atau penetapan ditambahkan di tingkat grup sumber daya.
+    description: ''
+  - name: --cakupan
+    summary: Cakupan di mana penetapan peran atau definisi berlaku untuk, misalnya, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup, atau /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+- uid: az_role_definition_list
+  name: az role definition list
+  summary: Mencantumkan definisi peran.
+  description: ''
+  syntax: >-
+    az role definition list [--custom-role-only {false, true}]
+                            [--name]
+                            [--resource-group]
+                            [--scope]
+  optionalParameters:
+  - name: --custom-role-only
+    parameterValueGroup: false, true
+    summary: Peran kustom saja(vs. build-in).
+    description: ''
+  - name: --name -n
+    summary: Nama peran.
+    description: ''
+  - name: --resource-group -g
+    summary: Gunakan hanya jika peran atau penetapan ditambahkan di tingkat grup sumber daya.
+    description: ''
+  - name: --cakupan
+    summary: Cakupan di mana penetapan peran atau definisi berlaku untuk, misalnya, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup, atau /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+- uid: az_role_definition_update
+  name: az role definition update
+  summary: Memperbarui definisi peran.
+  description: ''
+  syntax: az role definition update --role-definition
+  examples:
+  - summary: Perbarui peran menggunakan output "az role definition list". (Bash)
+    syntax: >-
+      az role definition update --role-definition '{
+          "roleName": "Contoso On-call",
+          "Description": "Perform VM actions and read storage and network information.",
+          "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/providers/Microsoft.Authorization/roleDefinitions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+          "roleType": "CustomRole",
+          "type": "Microsoft.Authorization/roleDefinitions",
+          "Actions": [
+              "Microsoft.Compute/*/read",
+                  "Microsoft.Compute/virtualMachines/start/action",
+                  "Microsoft.Compute/virtualMachines/restart/action",
+                  "Microsoft.Network/*/read",
+              "Microsoft.Storage/*/read",
+                  "Microsoft.Authorization/*/read",
+              "Microsoft.Resources/subscriptions/resourceGroups/read",
+              "Microsoft.Resources/subscriptions/resourceGroups/resources/read",
+              "Microsoft.Support/*"
+              ],
+              "DataActions": [
+                  "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/*"
+          ],
+          "NotDataActions": [
+              "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/write"
+          ],
+          "AssignableScopes": ["/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"]
+      }'
+  requiredParameters:
+  - isRequired: true
+    name: --role-definition
+    summary: Deskripsi peran yang ada sebagai JSON, atau jalur ke file yang berisi deskripsi JSON.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+commands:
+- az_role_definition_create
+- az_role_definition_delete
+- az_role_definition_list
+- az_role_definition_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/09/2022
+  description: Mengelola definisi peran.
+  ms.openlocfilehash: 68fc7440179e7059bda8e4554f16905a9a4a8cca
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141439163"

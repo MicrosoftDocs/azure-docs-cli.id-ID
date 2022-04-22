@@ -1,0 +1,242 @@
+### YamlMime:AzureCLIGroup
+uid: az_webapp_config_backup
+name: az webapp config backup
+summary: Mengelola cadangan untuk aplikasi web.
+description: ''
+directCommands:
+- uid: az_webapp_config_backup_create
+  name: az webapp config backup create
+  summary: Membuat cadangan aplikasi web.
+  description: ''
+  syntax: >-
+    az webapp config backup create --container-url
+                                   --resource-group
+                                   --webapp-name
+                                   [--backup-name]
+                                   [--db-connection-string]
+                                   [--db-name]
+                                   [--db-type {LocalMySql, MySql, PostgreSql, SqlAzure}]
+                                   [--slot]
+  examples:
+  - summary: Membuat cadangan aplikasi web. (dibuat otomatis)
+    syntax: az webapp config backup create --container-url {container-url} --resource-group MyResourceGroup --webapp-name MyWebapp
+  requiredParameters:
+  - isRequired: true
+    name: --container-url
+    summary: URL dengan token SAS ke kontainer penyimpanan blob.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --webapp-name
+    summary: Nama aplikasi web.
+    description: ''
+  optionalParameters:
+  - name: --backup-name
+    summary: Nama cadangan. Jika tidak ditentukan, cadangan akan diberi nama dengan nama aplikasi web dan tanda waktu.
+    description: ''
+  - name: --db-connection-string
+    summary: String koneksi untuk database dalam cadangan.
+    description: ''
+  - name: --db-name
+    summary: Nama database dalam cadangan.
+    description: ''
+  - name: --db-type
+    parameterValueGroup: LocalMySql, MySql, PostgreSql, SqlAzure
+    summary: Jenis database dalam cadangan.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+- uid: az_webapp_config_backup_list
+  name: az webapp config backup list
+  summary: Mencantumkan cadangan aplikasi web.
+  description: ''
+  syntax: >-
+    az webapp config backup list --resource-group
+                                 --webapp-name
+                                 [--slot]
+  examples:
+  - summary: Mencantumkan cadangan aplikasi web. (dibuat otomatis)
+    syntax: az webapp config backup list --resource-group MyResourceGroup --webapp-name MyWebapp
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --webapp-name
+    summary: Nama aplikasi web.
+    description: ''
+  optionalParameters:
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+- uid: az_webapp_config_backup_restore
+  name: az webapp config backup restore
+  summary: Memulihkan aplikasi web dari cadangan.
+  description: ''
+  syntax: >-
+    az webapp config backup restore --backup-name
+                                    --container-url
+                                    --resource-group
+                                    --webapp-name
+                                    [--db-connection-string]
+                                    [--db-name]
+                                    [--db-type {LocalMySql, MySql, PostgreSql, SqlAzure}]
+                                    [--ignore-hostname-conflict]
+                                    [--overwrite]
+                                    [--slot]
+                                    [--target-name]
+  requiredParameters:
+  - isRequired: true
+    name: --backup-name
+    summary: Nama cadangan yang akan dipulihkan.
+    description: ''
+  - isRequired: true
+    name: --container-url
+    summary: URL dengan token SAS ke kontainer penyimpanan blob.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --webapp-name
+    summary: Nama aplikasi web.
+    description: ''
+  optionalParameters:
+  - name: --db-connection-string
+    summary: String koneksi untuk database dalam cadangan.
+    description: ''
+  - name: --db-name
+    summary: Nama database dalam cadangan.
+    description: ''
+  - name: --db-type
+    parameterValueGroup: LocalMySql, MySql, PostgreSql, SqlAzure
+    summary: Jenis database dalam cadangan.
+    description: ''
+  - name: --ignore-hostname-conflict
+    summary: Mengabaikan nama host kustom yang disimpan dalam cadangan.
+    description: ''
+  - name: --overwrite
+    summary: Timpa aplikasi web sumber, jika --target-name tidak ditentukan.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+  - name: --target-name
+    summary: Nama yang digunakan untuk aplikasi web yang dipulihkan. Jika tidak ditentukan, akan default ke nama yang digunakan saat cadangan dibuat.
+    description: ''
+- uid: az_webapp_config_backup_show
+  name: az webapp config backup show
+  summary: Tampilkan jadwal pencadangan untuk aplikasi web.
+  description: ''
+  syntax: >-
+    az webapp config backup show --resource-group
+                                 --webapp-name
+                                 [--slot]
+  examples:
+  - summary: Tampilkan jadwal pencadangan untuk aplikasi web. (dibuat otomatis)
+    syntax: az webapp config backup show --resource-group MyResourceGroup --webapp-name MyWebapp
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --webapp-name
+    summary: Nama aplikasi web.
+    description: ''
+  optionalParameters:
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+- uid: az_webapp_config_backup_update
+  name: az webapp config backup update
+  summary: Mengonfigurasi jadwal pencadangan baru untuk aplikasi web.
+  description: ''
+  syntax: >-
+    az webapp config backup update --resource-group
+                                   --webapp-name
+                                   [--backup-name]
+                                   [--container-url]
+                                   [--db-connection-string]
+                                   [--db-name]
+                                   [--db-type {LocalMySql, MySql, PostgreSql, SqlAzure}]
+                                   [--frequency]
+                                   [--retain-one {false, true}]
+                                   [--retention]
+                                   [--slot]
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --webapp-name
+    summary: Nama aplikasi web.
+    description: ''
+  optionalParameters:
+  - name: --backup-name
+    summary: Nama cadangan. Jika tidak ditentukan, cadangan akan diberi nama dengan nama aplikasi web dan tanda waktu.
+    description: ''
+  - name: --container-url
+    summary: URL dengan token SAS ke kontainer penyimpanan blob.
+    description: ''
+  - name: --db-connection-string
+    summary: String koneksi untuk database dalam cadangan.
+    description: ''
+  - name: --db-name
+    summary: Nama database dalam cadangan.
+    description: ''
+  - name: --db-type
+    parameterValueGroup: LocalMySql, MySql, PostgreSql, SqlAzure
+    summary: Jenis database dalam cadangan.
+    description: ''
+  - name: --frequency
+    summary: Seberapa sering untuk mencadangkan. Gunakan angka diikuti oleh d atau h, misalnya 5d = 5 hari, 2 jam = 2 jam.
+    description: ''
+  - name: --retain-one
+    parameterValueGroup: false, true
+    summary: Selalu simpan satu cadangan, terlepas dari berapa usianya.
+    description: ''
+  - name: --retention
+    summary: Berapa hari untuk menyimpan cadangan sebelum menghapusnya secara otomatis. Atur ke 0 untuk retensi yang tidak terbatas.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+commands:
+- az_webapp_config_backup_create
+- az_webapp_config_backup_list
+- az_webapp_config_backup_restore
+- az_webapp_config_backup_show
+- az_webapp_config_backup_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola cadangan untuk aplikasi web.
+  ms.openlocfilehash: 1768cb417391f357c03dbce28cc6389bbde4fa21
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141103046"

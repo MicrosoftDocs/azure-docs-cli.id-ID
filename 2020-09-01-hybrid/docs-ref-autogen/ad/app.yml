@@ -1,0 +1,404 @@
+### YamlMime:AzureCLIGroup
+uid: az_ad_app
+name: az ad app
+summary: Mengelola aplikasi dengan AAD Graph.
+description: ''
+directCommands:
+- uid: az_ad_app_create
+  name: az ad app create
+  summary: Buat aplikasi web, API web, atau aplikasi asli.
+  description: ''
+  syntax: >-
+    az ad app create --display-name
+                     [--app-roles]
+                     [--available-to-other-tenants {false, true}]
+                     [--credential-description]
+                     [--end-date]
+                     [--homepage]
+                     [--identifier-uris]
+                     [--key-type {AsymmetricX509Cert, Password, Symmetric}]
+                     [--key-usage {Sign, Verify}]
+                     [--key-value]
+                     [--native-app {false, true}]
+                     [--oauth2-allow-implicit-flow {false, true}]
+                     [--optional-claims]
+                     [--password]
+                     [--reply-urls]
+                     [--required-resource-accesses]
+                     [--start-date]
+  examples:
+  - summary: Buat aplikasi asli dengan izin yang didelegasikan dari "akses direktori AAD sebagai pengguna yang masuk"
+    syntax: >-
+      az ad app create --display-name my-native --native-app --required-resource-accesses @manifest.json
+
+      ("manifest.json" contains the following content)
+
+      [{
+          "resourceAppId": "00000002-0000-0000-c000-000000000000",
+          "resourceAccess": [
+              {
+                  "id": "a42657d6-7f20-40e3-b6f0-cee03008a62a",
+                  "type": "Scope"
+              }
+         ]
+      }]
+  - summary: Membuat aplikasi dengan peran
+    syntax: >-
+      az ad app create --display-name mytestapp --identifier-uris https://mytestapp.websites.net --app-roles @manifest.json
+
+      ("manifest.json" contains the following content)
+
+      [{
+          "allowedMemberTypes": [
+            "User"
+          ],
+          "description": "Approvers can mark documents as approved",
+          "displayName": "Approver",
+          "isEnabled": "true",
+          "value": "approver"
+      }]
+  - summary: Membuat aplikasi dengan klaim opsional
+    syntax: >-
+      az ad app create --display-name mytestapp --optional-claims @manifest.json
+
+      ("manifest.json" contains the following content)
+
+      {
+          "idToken": [
+              {
+                  "name": "auth_time",
+                  "source": null,
+                  "essential": false
+              }
+          ],
+          "accessToken": [
+              {
+                  "name": "email",
+                  "source": null,
+                  "essential": false
+              }
+          ]
+      }
+  requiredParameters:
+  - isRequired: true
+    name: --display-name
+    summary: Nama tampilan aplikasi.
+    description: ''
+  optionalParameters:
+  - name: --app-roles
+    summary: Nyatakan peran yang ingin Anda kaitkan dengan aplikasi Anda. Harus dalam format json manifes. Lihat contoh di bawah ini untuk detailnya.
+    description: ''
+  - name: --available-to-other-tenants
+    parameterValueGroup: false, true
+    summary: Aplikasi ini dapat digunakan dari penyewa Azure AD mana pun.
+    description: ''
+  - name: --credential-description
+    summary: Deskripsi kata sandi.
+    description: ''
+  - name: --end-date
+    summary: Tanggal atau tanggalwaktu setelah kredensial kedaluwarsa(misalnya '2017-12-31T11:59:59+00:00' atau '2017-12-31'). Nilai default adalah satu tahun setelah waktu saat ini.
+    description: ''
+  - name: --homepage
+    summary: Url tempat pengguna dapat masuk dan menggunakan aplikasi Anda.
+    description: ''
+  - name: --identifier-uris
+    summary: URI unik yang dipisahkan ruang yang Azure AD dapat digunakan untuk aplikasi ini.
+    description: ''
+  - name: --key-type
+    defaultValue: AsymmetricX509Cert
+    parameterValueGroup: AsymmetricX509Cert, Password, Symmetric
+    summary: Jenis kredensial kunci yang terkait dengan aplikasi.
+    description: ''
+  - name: --key-usage
+    defaultValue: Verify
+    parameterValueGroup: Sign, Verify
+    summary: Penggunaan kredensial kunci yang terkait dengan aplikasi.
+    description: ''
+  - name: --key-value
+    summary: Nilai untuk kredensial kunci yang terkait dengan aplikasi.
+    description: ''
+  - name: --native-app
+    parameterValueGroup: false, true
+    summary: Aplikasi yang dapat diinstal pada perangkat atau komputer pengguna.
+    description: ''
+  - name: --oauth2-allow-implicit-flow
+    parameterValueGroup: false, true
+    summary: Apakah akan mengizinkan alur pemberian izin implisit untuk OAuth2.
+    description: ''
+  - name: --optional-claims
+    summary: Nyatakan klaim opsional untuk aplikasi. Harus dalam format json manifes. Lihat contoh di bawah ini untuk detailnya. Silakan referensi https://docs.microsoft.com/azure/active-directory/develop/active-directory-optional-claims#optionalclaim-type untuk properti klaim opsional.
+    description: ''
+  - name: --password
+    summary: Kata sandi aplikasi, alias 'rahasia klien'.
+    description: ''
+  - name: --reply-urls
+    summary: URI yang dipisahkan spasi tempat Azure AD akan mengalihkan sebagai respons terhadap permintaan OAuth 2.0. Nilai tidak perlu menjadi titik akhir fisik, tetapi harus merupakan URI yang valid.
+    description: ''
+  - name: --required-resource-accesses
+    summary: Cakupan dan peran sumber daya yang memerlukan akses ke aplikasi. Harus dalam format json manifes. Lihat contoh di bawah ini untuk detailnya.
+    description: ''
+  - name: --start-date
+    summary: Tanggal atau tanggalwaktu di mana kredensial menjadi valid (misalnya '2017-01-01T01:00:00+00:00' atau '2017-01-01'). Nilai default adalah waktu saat ini.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+- uid: az_ad_app_delete
+  name: az ad app delete
+  summary: Menghapus aplikasi.
+  description: ''
+  syntax: az ad app delete --id
+  examples:
+  - summary: Menghapus aplikasi. (dibuat otomatis)
+    syntax: az ad app delete --id 00000000-0000-0000-0000-000000000000
+  requiredParameters:
+  - isRequired: true
+    name: --id
+    summary: Uri pengidentifikasi, id aplikasi, atau id objek.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+- uid: az_ad_app_list
+  name: az ad app list
+  summary: Mencantumkan aplikasi.
+  description: Untuk latensi rendah, secara default, hanya 100 pertama yang akan dikembalikan kecuali Anda memberikan argumen filter atau menggunakan "--all".
+  syntax: >-
+    az ad app list [--all]
+                   [--app-id]
+                   [--display-name]
+                   [--filter]
+                   [--identifier-uri]
+                   [--show-mine]
+  optionalParameters:
+  - name: --all
+    summary: Cantumkan semua entitas, harapkan penundaan panjang jika berada di bawah organisasi besar.
+    description: ''
+  - name: --app-id
+    summary: Id aplikasi.
+    description: ''
+  - name: --display-name
+    summary: Nama tampilan aplikasi.
+    description: ''
+  - name: --filter
+    summary: Filter OData, misalnya --filter "displayname eq 'test' dan servicePrincipalType eq 'Application'".
+    description: ''
+  - name: --identifier-uri
+    summary: Graph pengidentifikasi aplikasi, harus dalam format uri.
+    description: ''
+  - name: --show-mine
+    summary: Mencantumkan entitas yang dimiliki oleh pengguna saat ini.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+- uid: az_ad_app_show
+  name: az ad app show
+  summary: Dapatkan detail aplikasi.
+  description: ''
+  syntax: az ad app show --id
+  examples:
+  - summary: Dapatkan detail aplikasi. (dibuat otomatis)
+    syntax: az ad app show --id 00000000-0000-0000-0000-000000000000
+  requiredParameters:
+  - isRequired: true
+    name: --id
+    summary: Uri pengidentifikasi, id aplikasi, atau id objek.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+- uid: az_ad_app_update
+  name: pembaruan aplikasi az ad
+  summary: Memperbarui aplikasi.
+  description: ''
+  syntax: >-
+    az ad app update --id
+                     [--add]
+                     [--app-roles]
+                     [--available-to-other-tenants {false, true}]
+                     [--credential-description]
+                     [--display-name]
+                     [--end-date]
+                     [--force-string]
+                     [--homepage]
+                     [--identifier-uris]
+                     [--key-type {AsymmetricX509Cert, Password, Symmetric}]
+                     [--key-usage {Sign, Verify}]
+                     [--key-value]
+                     [--oauth2-allow-implicit-flow {false, true}]
+                     [--optional-claims]
+                     [--password]
+                     [--remove]
+                     [--reply-urls]
+                     [--required-resource-accesses]
+                     [--set]
+                     [--start-date]
+  examples:
+  - summary: memperbarui aplikasi asli dengan izin yang didelegasikan dari "akses direktori AAD sebagai pengguna yang masuk"
+    syntax: >-
+      az ad app update --id e042ec79-34cd-498f-9d9f-123456781234 --required-resource-accesses @manifest.json
+
+      ("manifest.json" contains the following content)
+
+      [{
+          "resourceAppId": "00000002-0000-0000-c000-000000000000",
+          "resourceAccess": [
+              {
+                  "id": "a42657d6-7f20-40e3-b6f0-cee03008a62a",
+                  "type": "Scope"
+              }
+         ]
+      }]
+  - summary: mendeklarasikan peran aplikasi
+    syntax: >-
+      az ad app update --id e042ec79-34cd-498f-9d9f-123456781234 --app-roles @manifest.json
+
+      ("manifest.json" contains the following content)
+
+      [{
+          "allowedMemberTypes": [
+            "User"
+          ],
+          "description": "Approvers can mark documents as approved",
+          "displayName": "Approver",
+          "isEnabled": "true",
+          "value": "approver"
+      }]
+  - summary: memperbarui klaim opsional
+    syntax: >-
+      az ad app update --id e042ec79-34cd-498f-9d9f-123456781234 --optional-claims @manifest.json
+
+      ("manifest.json" contains the following content)
+
+      {
+          "idToken": [
+              {
+                  "name": "auth_time",
+                  "source": null,
+                  "essential": false
+              }
+          ],
+          "accessToken": [
+              {
+                  "name": "email",
+                  "source": null,
+                  "essential": false
+              }
+          ]
+      }
+  - summary: memperbarui klaim keanggotaan grup aplikasi ke "Semua"
+    syntax: az ad app update --id e042ec79-34cd-498f-9d9f-123456781234 --set groupMembershipClaims=All
+  requiredParameters:
+  - isRequired: true
+    name: --id
+    summary: Uri pengidentifikasi, id aplikasi, atau id objek.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --app-roles
+    summary: Nyatakan peran yang ingin Anda kaitkan dengan aplikasi Anda. Harus dalam format json manifes. Lihat contoh di bawah ini untuk detailnya.
+    description: ''
+  - name: --available-to-other-tenants
+    parameterValueGroup: false, true
+    summary: Aplikasi ini dapat digunakan dari penyewa Azure AD mana pun.
+    description: ''
+  - name: --credential-description
+    summary: Deskripsi kata sandi.
+    description: ''
+  - name: --display-name
+    summary: Nama tampilan aplikasi.
+    description: ''
+  - name: --end-date
+    summary: Tanggal atau tanggalwaktu setelah kredensial kedaluwarsa (misalnya '2017-12-31T11:59:59+00:00' atau '2017-12-31'). Nilai default adalah satu tahun setelah waktu saat ini.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --homepage
+    summary: Url tempat pengguna dapat masuk dan menggunakan aplikasi Anda.
+    description: ''
+  - name: --identifier-uris
+    summary: URI unik yang dipisahkan ruang yang Azure AD dapat digunakan untuk aplikasi ini.
+    description: ''
+  - name: --key-type
+    defaultValue: AsymmetricX509Cert
+    parameterValueGroup: AsymmetricX509Cert, Password, Symmetric
+    summary: Jenis kredensial kunci yang terkait dengan aplikasi.
+    description: ''
+  - name: --key-usage
+    defaultValue: Verify
+    parameterValueGroup: Sign, Verify
+    summary: Penggunaan kredensial kunci yang terkait dengan aplikasi.
+    description: ''
+  - name: --key-value
+    summary: Nilai untuk kredensial kunci yang terkait dengan aplikasi.
+    description: ''
+  - name: --oauth2-allow-implicit-flow
+    parameterValueGroup: false, true
+    summary: Apakah mengizinkan alur pemberian implisit untuk OAuth2.
+    description: ''
+  - name: --optional-claims
+    summary: Nyatakan klaim opsional untuk aplikasi. Harus dalam format json manifes. Lihat contoh di bawah ini untuk detailnya. Silakan referensi https://docs.microsoft.com/azure/active-directory/develop/active-directory-optional-claims#optionalclaim-type untuk properti klaim opsional.
+    description: ''
+  - name: --password
+    summary: Kata sandi aplikasi, alias 'rahasia klien'.
+    description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --reply-urls
+    summary: URI yang dipisahkan spasi yang akan dialihkan Azure AD sebagai respons terhadap permintaan OAuth 2.0. Nilai tidak perlu menjadi titik akhir fisik, tetapi harus merupakan URI yang valid.
+    description: ''
+  - name: --required-resource-accesses
+    summary: Cakupan dan peran sumber daya yang memerlukan akses ke aplikasi. Harus dalam format json manifes. Lihat contoh di bawah ini untuk detailnya.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --start-date
+    summary: Tanggal atau tanggalwaktu di mana kredensial menjadi valid (misalnya '2017-01-01T01:00:00+00:00' atau '2017-01-01'). Nilai default adalah waktu saat ini.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
+commands:
+- az_ad_app_create
+- az_ad_app_credential
+- az_ad_app_credential_delete
+- az_ad_app_credential_list
+- az_ad_app_credential_reset
+- az_ad_app_delete
+- az_ad_app_list
+- az_ad_app_owner
+- az_ad_app_owner_add
+- az_ad_app_owner_list
+- az_ad_app_owner_remove
+- az_ad_app_permission
+- az_ad_app_permission_add
+- az_ad_app_permission_admin-consent
+- az_ad_app_permission_delete
+- az_ad_app_permission_grant
+- az_ad_app_permission_list
+- az_ad_app_permission_list-grants
+- az_ad_app_show
+- az_ad_app_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/09/2022
+  description: Mengelola aplikasi dengan AAD Graph.
+  ms.openlocfilehash: df3c2dcbd0ce6531ba54462e193957f66d9c6a3f
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141438839"

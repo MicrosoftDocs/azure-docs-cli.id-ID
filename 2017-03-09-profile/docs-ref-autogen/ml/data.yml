@@ -1,0 +1,209 @@
+### YamlMime:AzureCLIGroup
+uid: az_ml_data
+name: az ml data
+extensionInformation: >-
+  > [!Note]
+
+  > This reference is part of the **ml** extension for the Azure CLI  (version 2.15.0 or higher).  The extension will automatically install the first time you run an **az ml data** command.  [Learn more](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) about extensions.
+summary: Mengelola aset data Azure ML.
+description: Azure ML aset data adalah referensi ke file di layanan penyimpanan atau URL publik Anda bersama dengan metadata yang sesuai. Mereka bukan salinan data Anda. Anda dapat menggunakan aset data ini untuk mengakses data yang relevan selama pelatihan model dan memasang atau mengunduh data yang dirujuk ke target komputasi Anda.
+directCommands:
+- uid: az_ml_data_create
+  name: az ml data create
+  summary: Membuat aset data.
+  description: >-
+    Aset data dapat ditentukan dari file di komputer lokal Anda atau sebagai referensi ke file di penyimpanan cloud. Aset data yang dibuat akan dilacak di ruang kerja dengan nama dan versi yang ditentukan.
+
+
+    Untuk membuat aset data dari file di komputer lokal Anda, tentukan bidang 'jalur' di konfigurasi YAML Anda. Azure ML akan mengunggah file ini ke kontainer blob yang mendukung datastore default ruang kerja (bernama 'workspaceblobstore'). Aset data yang dibuat kemudian akan menunjuk ke data yang diunggah tersebut.
+
+
+    Untuk membuat aset data yang mereferensikan file di penyimpanan cloud, tentukan 'jalur' ke file dalam penyimpanan di konfigurasi YAML Anda.
+
+
+    Anda juga dapat membuat aset data langsung dari URL penyimpanan atau URL publik. Untuk melakukannya, tentukan URL ke bidang 'jalur' di konfigurasi YAML Anda.
+  syntax: >-
+    az ml data create --resource-group
+                      --workspace-name
+                      [--description]
+                      [--file]
+                      [--name]
+                      [--path]
+                      [--set]
+                      [--type {uri_file, uri_folder}]
+                      [--version]
+  examples:
+  - summary: Membuat aset data dari file spesifikasi YAML
+    syntax: az ml data create --file data.yml --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Membuat aset data tanpa menggunakan file spesifikasi YAML
+    syntax: az ml data create --name my-data --version 1 --path ./my-data.csv --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --description -d
+    summary: Deskripsi aset data.
+    description: ''
+  - name: --file -f
+    summary: Jalur lokal ke file YAML yang berisi spesifikasi data Azure ML. --name/-n dan --version/-v harus disediakan jika file YAML tidak memiliki nama dan versi.
+    description: ''
+  - name: --name -n
+    summary: Nama aset data.
+    description: ''
+  - name: --path -p
+    summary: Jalur ke aset data, bisa lokal atau jarak jauh.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur. Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --type -t
+    parameterValueGroup: uri_file, uri_folder
+    summary: Jenis aset data.
+    description: ''
+  - name: --version -v
+    summary: Versi aset data.
+    description: ''
+- uid: az_ml_data_list
+  name: az ml data list
+  summary: Mencantumkan aset data di ruang kerja.
+  description: ''
+  syntax: >-
+    az ml data list --resource-group
+                    --workspace-name
+                    [--include-archived]
+                    [--max-results]
+                    [--name]
+  examples:
+  - summary: Mencantumkan semua aset data di ruang kerja
+    syntax: az ml data list --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Mencantumkan semua versi aset data untuk nama yang ditentukan di ruang kerja
+    syntax: az ml data list --name my-data --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Cantumkan semua aset data di ruang kerja menggunakan argumen --query untuk menjalankan kueri JMESPath pada hasil perintah.
+    syntax: az ml data list --query "[].{Name:name}" --output table --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --include-archived
+    summary: Mencantumkan aset data yang diarsipkan dan aset data aktif.
+    description: ''
+  - name: --max-results -r
+    summary: Jumlah maksimum hasil yang akan dikembalikan.
+    description: ''
+  - name: --name -n
+    summary: Nama aset data. Jika disediakan, semua versi data dengan nama ini akan dikembalikan.
+    description: ''
+- uid: az_ml_data_show
+  name: az ml data show
+  summary: Memperlihatkan detail untuk aset data.
+  description: ''
+  syntax: >-
+    az ml data show --name
+                    --resource-group
+                    --version
+                    --workspace-name
+  examples:
+  - summary: Menampilkan detail untuk aset data dengan nama dan versi yang ditentukan
+    syntax: az ml data show --name my-data --version 1 --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aset data.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --version -v
+    summary: Versi aset data.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+- uid: az_ml_data_update
+  name: az ml data update
+  summary: Memperbarui aset data.
+  description: Hanya properti 'deskripsi' dan 'tag' yang dapat diperbarui.
+  syntax: >-
+    az ml data update --name
+                      --resource-group
+                      --version
+                      --workspace-name
+                      [--add]
+                      [--force-string]
+                      [--remove]
+                      [--set]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aset data.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --version -v
+    summary: Versi aset data.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+commands:
+- az_ml_data_create
+- az_ml_data_list
+- az_ml_data_show
+- az_ml_data_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Aset data Azure ML adalah referensi ke file di layanan penyimpanan atau URL publik Anda bersama dengan metadata yang sesuai. Mereka bukan salinan data Anda. Anda dapat menggunakan aset data ini untuk mengakses data yang relevan selama pelatihan model dan memasang atau mengunduh data yang dirujuk ke target komputasi Anda.
+  ms.openlocfilehash: 8735d4812f68790efb7ef1bd38876d782f33314e
+  ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141408364"

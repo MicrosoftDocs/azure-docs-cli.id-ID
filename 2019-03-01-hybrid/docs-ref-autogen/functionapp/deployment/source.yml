@@ -1,0 +1,258 @@
+### YamlMime:AzureCLIGroup
+uid: az_functionapp_deployment_source
+name: az functionapp deployment source
+summary: Mengelola penyebaran aplikasi fungsi melalui kontrol sumber.
+description: ''
+directCommands:
+- uid: az_functionapp_deployment_source_config
+  name: konfigurasi sumber penyebaran az functionapp
+  summary: Mengelola penyebaran dari git atau repositori Merkurial.
+  description: ''
+  syntax: >-
+    az functionapp deployment source config --repo-url
+                                            [--branch]
+                                            [--git-token]
+                                            [--github-action]
+                                            [--ids]
+                                            [--manual-integration]
+                                            [--name]
+                                            [--repository-type {externalgit, git, github, localgit, mercurial}]
+                                            [--resource-group]
+                                            [--slot]
+  examples:
+  - summary: Mengelola penyebaran dari git atau repositori Merkurial. (dibuat otomatis)
+    syntax: az functionapp deployment source config --branch master --manual-integration --name MyFunctionApp --repo-url https://github.com/Azure-Samples/function-image-upload-resize --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --repo-url -u
+    summary: Url repositori untuk menarik sumber terbaru, misalnya https://github.com/foo/foo-web.
+    description: ''
+  optionalParameters:
+  - name: --branch
+    summary: Nama cabang repositori.
+    description: ''
+  - name: --git-token
+    summary: Token akses Git diperlukan untuk sinkronisasi otomatis.
+    description: ''
+  - name: --github-action
+    summary: Jika menggunakan tindakan github, default ke False.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --manual-integration
+    summary: Nonaktifkan sinkronisasi otomatis antara kontrol sumber dan web.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi fungsi.
+    description: ''
+  - name: --repository-type
+    defaultValue: git
+    parameterValueGroup: externalgit, git, github, localgit, mercurial
+    summary: Jenis repositori.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appservice/_help.py
+- uid: az_functionapp_deployment_source_config-local-git
+  name: az functionapp deployment source config-local-git
+  summary: Dapatkan URL untuk titik akhir repositori git untuk mengkloning dan mendorong ke untuk penyebaran aplikasi fungsi.
+  description: ''
+  syntax: >-
+    az functionapp deployment source config-local-git [--ids]
+                                                      [--name]
+                                                      [--resource-group]
+                                                      [--slot]
+  examples:
+  - summary: Dapatkan titik akhir dan tambahkan sebagai jarak jauh git.
+    syntax: >-
+      az functionapp deployment source config-local-git \
+          -g MyResourceGroup -n MyUniqueApp
+
+      git remote add azure \
+          https://{deploy_user_name}@MyUniqueApp.scm.azurewebsites.net/MyUniqueApp.git
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi fungsi.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appservice/_help.py
+- uid: az_functionapp_deployment_source_config-zip
+  name: az functionapp deployment source config-zip
+  summary: Lakukan penyebaran menggunakan penyebaran kudu zip push untuk aplikasi fungsi.
+  description: Secara default Kudu mengasumsikan bahwa penyebaran zip tidak memerlukan tindakan terkait build seperti npm install atau dotnet publish. Ini dapat ditimpa dengan menyertakan file .deployment dalam file zip Anda dengan konten berikut '[config] SCM_DO_BUILD_DURING_DEPLOYMENT = true', untuk mengaktifkan logika deteksi Kudu dan proses pembuatan skrip build. Lihat https://github.com/projectkudu/kudu/wiki/Configurable-settings#enabledisable-build-actions-preview. Secara bergantian pengaturan dapat diaktifkan menggunakan perintah az functionapp config appsettings set.
+  syntax: >-
+    az functionapp deployment source config-zip --src
+                                                [--build-remote {false, true}]
+                                                [--ids]
+                                                [--name]
+                                                [--resource-group]
+                                                [--slot]
+                                                [--timeout]
+  examples:
+  - summary: Lakukan penyebaran dengan menggunakan konten file zip.
+    syntax: >-
+      az functionapp deployment source config-zip \
+          -g {myRG} -n {myAppName} \
+          --src {zipFilePathLocation}
+  requiredParameters:
+  - isRequired: true
+    name: --src
+    summary: Jalur file zip untuk penyebaran.
+    description: ''
+  optionalParameters:
+  - name: --build-remote
+    parameterValueGroup: false, true
+    summary: Aktifkan build jarak jauh selama penyebaran.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi fungsi.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+  - name: --timeout -t
+    summary: Batas waktu yang dapat dikonfigurasi dalam hitungan detik untuk memeriksa status penyebaran.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appservice/_help.py
+- uid: az_functionapp_deployment_source_delete
+  name: az functionapp deployment source delete
+  summary: Menghapus konfigurasi penyebaran kontrol sumber.
+  description: ''
+  syntax: >-
+    az functionapp deployment source delete [--ids]
+                                            [--name]
+                                            [--resource-group]
+                                            [--slot]
+  examples:
+  - summary: Menghapus konfigurasi penyebaran kontrol sumber. (dibuat otomatis)
+    syntax: az functionapp deployment source delete --name MyFunctionApp --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi fungsi.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appservice/_help.py
+- uid: az_functionapp_deployment_source_show
+  name: az functionapp deployment source show
+  summary: Dapatkan detail konfigurasi penyebaran kontrol sumber.
+  description: ''
+  syntax: >-
+    az functionapp deployment source show [--ids]
+                                          [--name]
+                                          [--resource-group]
+                                          [--slot]
+  examples:
+  - summary: Dapatkan detail konfigurasi penyebaran kontrol sumber. (dibuat otomatis)
+    syntax: az functionapp deployment source show --name MyFunctionApp --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi fungsi.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appservice/_help.py
+- uid: az_functionapp_deployment_source_sync
+  name: sinkronisasi sumber penyebaran az functionapp
+  summary: Sinkronkan dari repositori. Hanya diperlukan dalam mode integrasi manual.
+  description: ''
+  syntax: >-
+    az functionapp deployment source sync [--ids]
+                                          [--name]
+                                          [--resource-group]
+                                          [--slot]
+  examples:
+  - summary: Sinkronkan dari repositori. Hanya diperlukan dalam mode integrasi manual. (dibuat otomatis)
+    syntax: az functionapp deployment source sync --name MyFunctionApp --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi fungsi.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --slot -s
+    summary: Nama slot. Default ke slot produksi jika tidak ditentukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appservice/_help.py
+- uid: az_functionapp_deployment_source_update-token
+  name: az functionapp deployment source update-token
+  summary: Perbarui token kontrol sumber yang di-cache di layanan aplikasi Azure.
+  description: Jika tidak ada token yang disediakan, perintah akan membersihkan token yang ada.
+  syntax: az functionapp deployment source update-token [--git-token]
+  optionalParameters:
+  - name: --git-token
+    summary: Token akses Git diperlukan untuk sinkronisasi otomatis.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appservice/_help.py
+commands:
+- az_functionapp_deployment_source_config
+- az_functionapp_deployment_source_config-local-git
+- az_functionapp_deployment_source_config-zip
+- az_functionapp_deployment_source_delete
+- az_functionapp_deployment_source_show
+- az_functionapp_deployment_source_sync
+- az_functionapp_deployment_source_update-token
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/31/2022
+  description: Mengelola penyebaran aplikasi fungsi melalui kontrol sumber.
+  ms.openlocfilehash: ecd1446400780ce22bdc5692ce8dac36cb8249f6
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141439379"

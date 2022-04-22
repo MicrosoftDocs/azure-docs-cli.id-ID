@@ -1,0 +1,189 @@
+### YamlMime:AzureCLIGroup
+uid: az_ml_component
+name: komponen az ml
+extensionInformation: >-
+  > [!Note]
+
+  > This reference is part of the **ml** extension for the Azure CLI  (version 2.15.0 or higher).  The extension will automatically install the first time you run an **az ml component** command.  [Learn more](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) about extensions.
+summary: Mengelola komponen Azure ML.
+description: Komponen Azure ML menentukan konfigurasi komponen untuk pekerjaan alur. Anda dapat mengonfigurasi port input/output, lingkungan eksekusi, dan perintah komponen. Setelah komponen dibuat, Anda dapat mereferensikan komponen dalam pekerjaan alur untuk menjalankannya dalam kontainer docker.
+directCommands:
+- uid: az_ml_component_create
+  name: az ml component create
+  summary: Membuat komponen.
+  description: ''
+  syntax: >-
+    az ml component create --file
+                           --resource-group
+                           --workspace-name
+                           [--set]
+                           [--version]
+  examples:
+  - summary: Membuat komponen dari file spesifikasi YAML
+    syntax: az ml component create --file my_component.yml --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Membuat komponen dari file spesifikasi YAML dengan versi tertentu
+    syntax: az ml component create --file my_component.yml --version 1 --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --file -f
+    summary: Jalur lokal ke file YAML yang berisi spesifikasi komponen Azure ML.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur. Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --version -v
+    summary: Versi komponen.
+    description: ''
+- uid: az_ml_component_list
+  name: az ml component list
+  summary: Mencantumkan komponen di ruang kerja.
+  description: ''
+  syntax: >-
+    az ml component list --resource-group
+                         --workspace-name
+                         [--max-results]
+                         [--name]
+  examples:
+  - summary: Mencantumkan semua komponen di ruang kerja
+    syntax: az ml component list --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Mencantumkan semua versi komponen untuk nama yang ditentukan di ruang kerja
+    syntax: az ml component list --name my-component --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Cantumkan semua komponen di ruang kerja menggunakan argumen --query untuk menjalankan kueri JMESPath pada hasil perintah.
+    syntax: az ml component list --query "[].{Name:name}"  --output table --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --max-results -r
+    summary: Jumlah maksimum hasil yang akan dikembalikan.
+    description: ''
+  - name: --name -n
+    summary: Nama komponen.
+    description: ''
+- uid: az_ml_component_show
+  name: az ml component show
+  summary: Tampilkan detail untuk komponen.
+  description: ''
+  syntax: >-
+    az ml component show --name
+                         --resource-group
+                         --workspace-name
+                         [--label]
+                         [--version]
+  examples:
+  - summary: Menampilkan detail untuk komponen dengan nama dan versi yang ditentukan
+    syntax: az ml component show --name my-component --version 1 --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama komponen.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --label -l
+    summary: Label komponen.
+    description: ''
+  - name: --version -v
+    summary: Versi komponen.
+    description: ''
+- uid: az_ml_component_update
+  name: az ml component update
+  summary: Memperbarui komponen. Saat ini hanya beberapa bidang (deskripsi, display_name) yang mendukung pembaruan.
+  description: ''
+  syntax: >-
+    az ml component update --name
+                           --resource-group
+                           --workspace-name
+                           [--add]
+                           [--force-string]
+                           [--label]
+                           [--remove]
+                           [--set]
+                           [--version]
+  examples:
+  - summary: Memperbarui deskripsi komponen
+    syntax: az ml component update -n my_component -v 1 --set description="new description" -g my-resource-group -w my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama komponen.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --label -l
+    summary: Label komponen.
+    description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --version -v
+    summary: Versi komponen.
+    description: ''
+commands:
+- az_ml_component_create
+- az_ml_component_list
+- az_ml_component_show
+- az_ml_component_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Komponen Azure ML menentukan konfigurasi komponen untuk pekerjaan alur. Anda dapat mengonfigurasi port input/output, lingkungan eksekusi, dan perintah komponen. Setelah komponen dibuat, Anda dapat mereferensikan komponen dalam pekerjaan alur untuk menjalankannya dalam kontainer docker.
+  ms.openlocfilehash: 57a43a405e78c5e07d6bdf575ad42178760c67b7
+  ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141407158"
