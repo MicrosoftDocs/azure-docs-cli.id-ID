@@ -1,0 +1,187 @@
+### YamlMime:AzureCLIGroup
+uid: az_image_builder_customizer
+name: az image builder customizer
+summary: Mengelola penyesuai templat penyusun citra.
+description: ''
+directCommands:
+- uid: az_image_builder_customizer_add
+  name: az image builder customizer add
+  summary: Tambahkan penyesuai penyusun gambar ke templat penyusun gambar.
+  description: Harus digunakan dengan --defer.
+  syntax: >-
+    az image builder customizer add --customizer-name
+                                    --type {file, powershell, shell, windows-restart, windows-update}
+                                    [--defer]
+                                    [--dest-path]
+                                    [--exit-codes]
+                                    [--file-source]
+                                    [--filters]
+                                    [--ids]
+                                    [--inline-script]
+                                    [--name]
+                                    [--resource-group]
+                                    [--restart-check-command]
+                                    [--restart-command]
+                                    [--restart-timeout]
+                                    [--script-url]
+                                    [--search-criteria]
+                                    [--update-limit]
+  examples:
+  - summary: Menambahkan penyesuai shell sebaris ke templat gambar di cache objek cli
+    syntax: >-
+      az image builder customizer add -n mytemplate -g my-group \
+          --inline-script "sudo mkdir /buildArtifacts" \
+                          "sudo cp /tmp/index.html /buildArtifacts/index.html" \
+          --customizer-name shell-script-inline --type shell --defer
+  - summary: Menambahkan penyesuai file ke templat gambar di cache objek cli
+    syntax: >-
+      az image builder customizer add -n mytemplate -g my-group \
+          --customizer-name my-file --type file \
+          --file-source "https://my-remote-file.html" --dest-path "/tmp/index.html" --defer
+  - summary: Menambahkan penyesuai hidupkan ulang windows ke templat gambar di cache objek cli
+    syntax: >-
+      az image builder customizer add -n mytemplate -g my-group \
+
+      --customizer-name shell-script-url \
+
+      --restart-check-command "echo Azure-Image-Builder-Restarted-the-VM  > \
+                              c:\buildArtifacts\restart.txt" \
+          --type windows-restart --restart-timeout 10m --defer
+  - summary: Tambahkan penyesuai pembaruan windows ke templat gambar di cache objek cli.
+    syntax: az image builder customizer add -n mytemplate -g my-group --customizer-name win_update --type windows-update --search-criteria IsInstalled=0 --filters "exclude:\$_.Title -like \'*Preview*\'" "include:\$true" --update-limit 20 --defer
+  requiredParameters:
+  - isRequired: true
+    name: --customizer-name
+    summary: Nama penyesuai.
+    description: ''
+  - isRequired: true
+    name: --type -t
+    parameterValueGroup: file, powershell, shell, windows-restart, windows-update
+    summary: Jenis penyesuai yang akan ditambahkan ke templat gambar.
+    description: ''
+  optionalParameters:
+  - name: --defer
+    summary: Simpan sementara objek di cache lokal alih-alih mengirim ke Azure. Gunakan `az cache` perintah untuk melihat/menghapus.
+    description: ''
+  - name: --dest-path
+    summary: Jalur tujuan absolut tempat file yang ditentukan dalam --file-source akan diunduh ke dalam gambar.
+    description: ''
+  - name: --exit-codes -e
+    summary: Daftar kode keluar yang dipisahkan spasi, sebagai bilangan bulat.
+    description: ''
+  - name: --file-source
+    summary: URI file yang akan diunduh ke dalam gambar. Ini bisa menjadi tautan github, SAS URI untuk Azure Storage, dll.
+    description: ''
+  - name: --filters
+    summary: Filter yang dibatasi spasi untuk memilih pembaruan yang akan diterapkan. Hilangkan atau tentukan array kosong untuk menggunakan default (tanpa filter).
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --inline-script
+    summary: Daftar baris skrip sebaris yang dipisahkan spasi untuk menyesuaikan gambar.
+    description: ''
+  - name: --name -n
+    summary: Nama templat gambar.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --restart-check-command
+    summary: Perintah untuk memverifikasi bahwa hidupkan ulang berhasil.
+    description: ''
+  - name: --restart-command
+    summary: Perintah untuk menjalankan operasi hidupkan ulang.
+    description: ''
+  - name: --restart-timeout
+    defaultValue: 5m
+    summary: Waktu habis hidupkan ulang yang ditentukan sebagai string yang terdiri dari besaran dan unit, misalnya '5m' (5 menit) atau '2 jam' (2 jam).
+    description: ''
+  - name: --script-url
+    summary: URL skrip untuk menyesuaikan gambar dengan. URL harus dapat diakses publik.
+    description: ''
+  - name: --search-criteria
+    summary: Kriteria untuk mencari pembaruan. Hilangkan atau tentukan string kosong untuk menggunakan default (cari semua). Lihat tautan di atas untuk contoh dan deskripsi terperinci dari bidang ini.
+    description: ''
+  - name: --update-limit
+    summary: Jumlah maksimum pembaruan yang akan diterapkan pada satu waktu. Hilangkan atau tentukan 0 untuk menggunakan default (1000).
+    description: ''
+- uid: az_image_builder_customizer_clear
+  name: az image builder customizer clear
+  summary: Hapus semua penyesuai penyusun gambar dari templat penyusun gambar.
+  description: Harus digunakan dengan --defer.
+  syntax: >-
+    az image builder customizer clear [--defer]
+                                      [--ids]
+                                      [--name]
+                                      [--resource-group]
+  optionalParameters:
+  - name: --defer
+    summary: Simpan sementara objek di cache lokal alih-alih mengirim ke Azure. Gunakan `az cache` perintah untuk melihat/menghapus.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama templat gambar.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_image_builder_customizer_remove
+  name: az image builder customizer remove
+  summary: Menghapus penyesuai penyusun gambar dari templat penyusun gambar.
+  description: Harus digunakan dengan --defer.
+  syntax: >-
+    az image builder customizer remove --customizer-name
+                                       [--defer]
+                                       [--ids]
+                                       [--name]
+                                       [--resource-group]
+  requiredParameters:
+  - isRequired: true
+    name: --customizer-name
+    summary: Nama penyesuai.
+    description: ''
+  optionalParameters:
+  - name: --defer
+    summary: Simpan sementara objek di cache lokal alih-alih mengirim ke Azure. Gunakan `az cache` perintah untuk melihat/menghapus.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama templat gambar.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+commands:
+- az_image_builder_customizer_add
+- az_image_builder_customizer_clear
+- az_image_builder_customizer_remove
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola penyesuai templat penyusun citra.
+  ms.openlocfilehash: 5a6f49101fcff1e7ae1de83a9f2d72c536e67a8a
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141100687"

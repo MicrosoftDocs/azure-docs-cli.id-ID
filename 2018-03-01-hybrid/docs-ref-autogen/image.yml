@@ -1,0 +1,286 @@
+### YamlMime:AzureCLIGroup
+uid: az_image
+name: az image
+summary: Mengelola citra mesin virtual kustom.
+description: ''
+directCommands:
+- uid: az_image_copy
+  name: az image copy
+  summary: Salin gambar terkelola (atau vm) ke wilayah lain. Ini mengharuskan disk sumber tersedia.
+  description: ''
+  syntax: >-
+    az image copy --source-object-name
+                  --source-resource-group
+                  --target-location
+                  --target-resource-group
+                  [--cleanup]
+                  [--export-as-snapshot]
+                  [--parallel-degree]
+                  [--source-type {image, vm}]
+                  [--tags]
+                  [--target-name]
+                  [--target-subscription]
+                  [--temporary-resource-group-name]
+                  [--timeout]
+  examples:
+  - summary: Salin gambar ke beberapa wilayah dan bersihkan di akhir.
+    syntax: >-
+      az image copy --source-resource-group mySources-rg --source-object-name myImage \
+          --target-location uksouth northeurope --target-resource-group "images-repo-rg" --cleanup
+  - summary: Gunakan vm yang sudah digeneralisasi untuk membuat gambar di wilayah lain.
+    syntax: >-
+      az image copy --source-resource-group mySources-rg --source-object-name myVm \
+          --source-type vm --target-location uksouth northeurope --target-resource-group "images-repo-rg"
+  requiredParameters:
+  - isRequired: true
+    name: --source-object-name
+    summary: Nama gambar atau sumber daya vm.
+    description: ''
+  - isRequired: true
+    name: --source-resource-group
+    summary: Nama grup sumber daya sumber daya.
+    description: ''
+  - isRequired: true
+    name: --target-location
+    summary: Daftar lokasi yang dipisahkan spasi untuk membuat gambar di (misalnya westeurope dll.).
+    description: ''
+  - isRequired: true
+    name: --target-resource-group
+    summary: Nama grup sumber daya untuk membuat gambar.
+    description: ''
+  optionalParameters:
+  - name: --cleanup
+    summary: Sertakan sakelar ini untuk menghapus sumber daya sementara setelah selesai.
+    description: ''
+  - name: --export-as-snapshot
+    summary: Sertakan sakelar ini untuk mengekspor salinan sebagai rekam jepret, bukan gambar.
+    description: ''
+  - name: --parallel-degree
+    defaultValue: "-1"
+    summary: Jumlah operasi penyalinan paralel.
+    description: ''
+  - name: --source-type
+    defaultValue: image
+    parameterValueGroup: image, vm
+    summary: Gambar atau vm.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --target-name
+    summary: Nama gambar akhir yang akan dibuat.
+    description: ''
+  - name: --target-subscription
+    summary: Nama atau ID langganan tempat gambar akhir harus dibuat.
+    description: ''
+  - name: --temporary-resource-group-name --temporary_resource_group_name
+    defaultValue: image-copy-rg
+    summary: Nama Grup Sumber Daya tempat akun penyimpanan sementara akan dibuat. --temporary_resource_group_name tidak akan digunakan lagi dalam 0.2.7.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu dalam detik agar operasi penyalinan selesai. Tingkatkan kali ini jika Anda akan menyalin gambar besar (disk) seperti 512GB atau lebih.
+    description: ''
+- uid: az_image_create
+  name: az image create
+  summary: Buat Gambar Komputer Virtual kustom dari disk atau rekam jepret terkelola.
+  description: ''
+  syntax: >-
+    az image create --name
+                    --resource-group
+                    --source
+                    [--data-disk-caching {None, ReadOnly, ReadWrite}]
+                    [--data-disk-sources]
+                    [--location]
+                    [--os-disk-caching {None, ReadOnly, ReadWrite}]
+                    [--os-type {Linux, Windows}]
+                    [--storage-sku {Premium_LRS, Standard_LRS}]
+                    [--tags]
+  examples:
+  - summary: Buat gambar dari disk yang ada.
+    syntax: >-
+      az image create -g MyResourceGroup -n image1 --os-type Linux \
+          --source /subscriptions/db5eb68e-73e2-4fa8-b18a-0123456789999/resourceGroups/rg1/providers/Microsoft.Compute/snapshots/s1
+  - summary: Buat gambar dengan menangkap komputer virtual umum yang ada dalam grup sumber daya yang sama.
+    syntax: az image create -g MyResourceGroup -n image1 --source MyVm1
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama gambar baru.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --source
+    summary: Sumber disk OS dari wilayah yang sama, termasuk ID atau nama komputer virtual, URI blob disk OS, ID atau nama disk OS terkelola, atau ID atau nama rekam jepret OS.
+    description: ''
+  optionalParameters:
+  - name: --data-disk-caching
+    parameterValueGroup: None, ReadOnly, ReadWrite
+    summary: Storage jenis penembolokan untuk disk data gambar.
+    description: ''
+  - name: --data-disk-sources
+    summary: Daftar sumber disk data yang dipisahkan spasi, termasuk URI blob yang tidak dikelola, ID atau nama disk terkelola, atau ID atau nama rekam jepret.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --os-disk-caching
+    parameterValueGroup: None, ReadOnly, ReadWrite
+    summary: Storage jenis penembolokan untuk disk OS gambar.
+    description: ''
+  - name: --os-type
+    parameterValueGroup: Linux, Windows
+    summary: ''
+    description: ''
+  - name: --storage-sku
+    parameterValueGroup: Premium_LRS, Standard_LRS
+    summary: SKU akun penyimpanan untuk membuat gambar VM. Tidak digunakan jika VM sumber ditentukan.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+- uid: az_image_delete
+  name: az image delete
+  summary: Menghapus Gambar.
+  description: ''
+  syntax: >-
+    az image delete [--ids]
+                    [--name]
+                    [--resource-group]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama gambar.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_image_list
+  name: az image list
+  summary: Mencantumkan gambar VM kustom.
+  description: ''
+  syntax: az image list [--resource-group]
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_image_show
+  name: az image show
+  summary: Mendapatkan gambar.
+  description: ''
+  syntax: >-
+    az image show [--expand]
+                  [--ids]
+                  [--name]
+                  [--resource-group]
+  optionalParameters:
+  - name: --expand
+    summary: Ekspresi perluas untuk diterapkan pada operasi.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama gambar.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_image_update
+  name: az image update
+  summary: Perbarui gambar VM kustom.
+  description: ''
+  syntax: >-
+    az image update [--add]
+                    [--force-string]
+                    [--ids]
+                    [--name]
+                    [--remove]
+                    [--resource-group]
+                    [--set]
+                    [--tags]
+  examples:
+  - summary: Menambahkan atau memperbarui tag.
+    syntax: az image update -n ImageName -g ResourceGroup --tags tag1=val1 tag2=val2
+  - summary: Hapus semua tag.
+    syntax: az image update -n ImageName -g resourceGroup --tags
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama gambar.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+commands:
+- az_image_builder
+- az_image_builder_cancel
+- az_image_builder_create
+- az_image_builder_customizer
+- az_image_builder_customizer_add
+- az_image_builder_customizer_clear
+- az_image_builder_customizer_remove
+- az_image_builder_delete
+- az_image_builder_list
+- az_image_builder_output
+- az_image_builder_output_add
+- az_image_builder_output_clear
+- az_image_builder_output_remove
+- az_image_builder_run
+- az_image_builder_show
+- az_image_builder_show-runs
+- az_image_builder_update
+- az_image_builder_wait
+- az_image_copy
+- az_image_create
+- az_image_delete
+- az_image_list
+- az_image_show
+- az_image_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola citra mesin virtual kustom.
+  ms.openlocfilehash: 79f6b2387a4cf287be5b5d40daf454948bfb96c4
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141088465"

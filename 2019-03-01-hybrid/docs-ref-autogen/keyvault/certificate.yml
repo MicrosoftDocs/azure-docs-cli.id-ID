@@ -1,0 +1,443 @@
+### YamlMime:AzureCLIGroup
+uid: az_keyvault_certificate
+name: az keyvault certificate
+summary: Mengelola sertifikat.
+description: ''
+directCommands:
+- uid: az_keyvault_certificate_create
+  name: az keyvault certificate create
+  summary: Buat sertifikat Key Vault.
+  description: Sertifikat dapat digunakan sebagai rahasia untuk komputer virtual yang disediakan.
+  syntax: >-
+    az keyvault certificate create --name
+                                   --policy
+                                   --vault-name
+                                   [--disabled {false, true}]
+                                   [--tags]
+                                   [--validity]
+  examples:
+  - summary: Buat sertifikat yang ditandatangani sendiri dengan kebijakan default dan tambahkan ke komputer virtual.
+    syntax: >-
+      az keyvault certificate create --vault-name vaultname -n cert1 \
+        -p "$(az keyvault certificate get-default-policy)"
+
+      secrets=$(az keyvault secret list-versions --vault-name vaultname \
+        -n cert1 --query "[?attributes.enabled].id" -o tsv)
+
+      vm_secrets=$(az vm secret format -s "$secrets")
+
+
+      az vm create -g group-name -n vm-name --admin-username deploy  \
+        --image debian --secrets "$vm_secrets"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama sertifikat.
+    description: ''
+  - isRequired: true
+    name: --policy -p
+    summary: Definisi kebijakan yang dikodekan JSON. Gunakan @{file} untuk memuat dari file (misalnya @my_policy.json).
+    description: ''
+  - isRequired: true
+    name: --vault-name
+    summary: Nama Vault.
+    description: ''
+  optionalParameters:
+  - name: --disabled
+    parameterValueGroup: false, true
+    summary: Buat sertifikat dalam status dinonaktifkan.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --validity
+    summary: Jumlah bulan sertifikat berlaku untuk. Mengambil alih nilai yang ditentukan dengan --policy/-p.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_certificate_delete
+  name: az keyvault certificate delete
+  summary: Menghapus sertifikat dari brankas kunci tertentu.
+  description: Menghapus semua versi objek sertifikat bersama dengan kebijakan terkait. Hapus sertifikat tidak dapat digunakan untuk menghapus versi individual objek sertifikat. Operasi ini memerlukan izin sertifikat/hapus.
+  syntax: >-
+    az keyvault certificate delete [--id]
+                                   [--name]
+                                   [--vault-name]
+  optionalParameters:
+  - name: --id
+    summary: Id sertifikat. Jika ditentukan semua argumen 'Id' lainnya harus dihilangkan.
+    description: ''
+  - name: --name -n
+    summary: Nama sertifikat. Diperlukan jika --id tidak ditentukan.
+    description: ''
+  - name: --vault-name
+    summary: Nama Key Vault. Diperlukan jika --id tidak ditentukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_certificate_download
+  name: az keyvault certificate download
+  summary: Unduh bagian publik dari sertifikat Key Vault.
+  description: Sertifikat yang diformat sebagai PEM atau DER. PEM adalah default.
+  syntax: >-
+    az keyvault certificate download --file
+                                     [--encoding {DER, PEM}]
+                                     [--id]
+                                     [--name]
+                                     [--vault-name]
+                                     [--version]
+  examples:
+  - summary: Unduh sertifikat sebagai PEM dan periksa sidik jarinya di openssl.
+    syntax: >-
+      az keyvault certificate download --vault-name vault -n cert-name -f cert.pem && \
+
+      openssl x509 -in cert.pem -inform PEM  -noout -sha1 -fingerprint
+  - summary: Unduh sertifikat sebagai DER dan periksa sidik jarinya di openssl.
+    syntax: >-
+      az keyvault certificate download --vault-name vault -n cert-name -f cert.crt -e DER && \
+
+      openssl x509 -in cert.crt -inform DER  -noout -sha1 -fingerprint
+  requiredParameters:
+  - isRequired: true
+    name: --file -f
+    summary: File untuk menerima isi sertifikat biner.
+    description: ''
+  optionalParameters:
+  - name: --encoding -e
+    defaultValue: PEM
+    parameterValueGroup: DER, PEM
+    summary: Pengodean sertifikat. DER akan membuat sertifikat x509 berformat DER biner, dan PEM akan membuat sertifikat base64 PEM x509.
+    description: ''
+  - name: --id
+    summary: Id sertifikat. Jika ditentukan semua argumen 'Id' lainnya harus dihilangkan.
+    description: ''
+  - name: --name -n
+    summary: Nama sertifikat. Diperlukan jika --id tidak ditentukan.
+    description: ''
+  - name: --vault-name
+    summary: Nama Key Vault. Diperlukan jika --id tidak ditentukan.
+    description: ''
+  - name: --version -v
+    summary: Versi sertifikat. Jika dihilangkan, menggunakan versi terbaru.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_certificate_get-default-policy
+  name: az keyvault certificate get-default-policy
+  summary: Dapatkan kebijakan default untuk sertifikat yang ditandatangani sendiri.
+  description: >-
+    Kebijakan default ini dapat digunakan bersama dengan `az keyvault create` untuk membuat sertifikat yang ditandatangani sendiri.
+
+    Kebijakan default juga dapat digunakan sebagai titik awal untuk membuat kebijakan turunan.
+
+
+    Untuk detail selengkapnya, lihat: https://docs.microsoft.com/azure/key-vault/certificates/about-certificates#certificate-policy.
+  syntax: az keyvault certificate get-default-policy [--scaffold]
+  examples:
+  - summary: Membuat sertifikat yang ditandatangani sendiri dengan kebijakan default
+    syntax: >-
+      az keyvault certificate create --vault-name vaultname -n cert1 \
+        -p "$(az keyvault certificate get-default-policy)"
+  optionalParameters:
+  - name: --scaffold
+    summary: Buat struktur kebijakan yang sepenuhnya terbentuk dengan nilai default.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_certificate_import
+  name: az keyvault certificate import
+  summary: Mengimpor sertifikat ke KeyVault.
+  description: Sertifikat juga dapat digunakan sebagai rahasia di komputer virtual yang disediakan.
+  syntax: >-
+    az keyvault certificate import --file
+                                   --name
+                                   --vault-name
+                                   [--disabled {false, true}]
+                                   [--password]
+                                   [--policy]
+                                   [--tags]
+  examples:
+  - summary: Buat perwakilan layanan dengan sertifikat, tambahkan sertifikat ke Key Vault dan provisikan VM dengan sertifikat tersebut.
+    syntax: >-
+      service_principal=$(az ad sp create-for-rbac --create-cert)
+
+
+      cert_file=$(echo $service_principal | jq .fileWithCertAndPrivateKey -r)
+
+
+      az keyvault create -g my-group -n vaultname
+
+
+      az keyvault certificate import --vault-name vaultname -n cert_name -f cert_file
+
+
+      secrets=$(az keyvault secret list-versions --vault-name vaultname \
+        -n cert1 --query "[?attributes.enabled].id" -o tsv)
+
+      vm_secrets=$(az vm secret format -s "$secrets")
+
+
+      az vm create -g group-name -n vm-name --admin-username deploy  \
+        --image debian --secrets "$vm_secrets"
+  requiredParameters:
+  - isRequired: true
+    name: --file -f
+    summary: File PKCS12 atau file PEM yang berisi sertifikat dan kunci privat.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama sertifikat.
+    description: ''
+  - isRequired: true
+    name: --vault-name
+    summary: Nama Vault.
+    description: ''
+  optionalParameters:
+  - name: --disabled
+    parameterValueGroup: false, true
+    summary: Impor sertifikat dalam status dinonaktifkan.
+    description: ''
+  - name: --password
+    summary: Jika kunci privat dalam sertifikat dienkripsi, kata sandi yang digunakan untuk enkripsi.
+    description: ''
+  - name: --policy -p
+    summary: Definisi kebijakan yang dikodekan JSON. Gunakan @{file} untuk memuat dari file (misalnya @my_policy.json).
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_certificate_list
+  name: az keyvault certificate list
+  summary: Mencantumkan sertifikat dalam brankas kunci tertentu.
+  description: Operasi GetCertificates mengembalikan kumpulan sumber daya sertifikat dalam brankas kunci yang ditentukan. Operasi ini memerlukan izin sertifikat/daftar.
+  syntax: >-
+    az keyvault certificate list [--id]
+                                 [--maxresults]
+                                 [--vault-name]
+  optionalParameters:
+  - name: --id
+    summary: URI lengkap Vault atau HSM. Jika ditentukan semua argumen 'Id' lainnya harus dihilangkan.
+    description: ''
+  - name: --maxresults
+    summary: Jumlah hasil maksimum untuk dikembalikan dalam halaman. Jika tidak ditentukan, layanan akan mengembalikan hingga 25 hasil.
+    description: ''
+  - name: --vault-name
+    summary: Nama Key Vault. Diperlukan jika --id tidak ditentukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_certificate_list-deleted
+  name: az keyvault certificate list-deleted
+  summary: Mencantumkan sertifikat yang dihapus dalam vault yang ditentukan yang saat ini tersedia untuk pemulihan.
+  description: Operasi GetDeletedCertificates mengambil sertifikat di vault saat ini yang dalam keadaan dihapus dan siap untuk pemulihan atau pembersihan. Operasi ini mencakup informasi khusus penghapusan. Operasi ini memerlukan izin sertifikat/dapatkan/daftar. Operasi ini hanya dapat diaktifkan pada vault yang diaktifkan penghapusan sementara.
+  syntax: >-
+    az keyvault certificate list-deleted --vault-name
+                                         [--id]
+                                         [--maxresults]
+  requiredParameters:
+  - isRequired: true
+    name: --vault-name
+    summary: Nama Vault.
+    description: ''
+  optionalParameters:
+  - name: --id
+    summary: URI penuh Vault. Jika ditentukan semua argumen 'Id' lainnya harus dihilangkan.
+    description: ''
+  - name: --maxresults
+    summary: Jumlah hasil maksimum untuk dikembalikan dalam halaman. Jika tidak ditentukan, layanan akan mengembalikan hingga 25 hasil.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_certificate_list-versions
+  name: az keyvault certificate list-versions
+  summary: Mencantumkan versi sertifikat.
+  description: Operasi GetCertificateVersions mengembalikan versi sertifikat dalam brankas kunci yang ditentukan. Operasi ini memerlukan izin sertifikat/daftar.
+  syntax: >-
+    az keyvault certificate list-versions [--id]
+                                          [--maxresults]
+                                          [--name]
+                                          [--vault-name]
+  optionalParameters:
+  - name: --id
+    summary: Id sertifikat. Jika ditentukan semua argumen 'Id' lainnya harus dihilangkan.
+    description: ''
+  - name: --maxresults
+    summary: Jumlah hasil maksimum untuk dikembalikan dalam halaman. Jika tidak ditentukan, layanan akan mengembalikan hingga 25 hasil.
+    description: ''
+  - name: --name -n
+    summary: Nama sertifikat. Diperlukan jika --id tidak ditentukan.
+    description: ''
+  - name: --vault-name
+    summary: Nama Key Vault. Diperlukan jika --id tidak ditentukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_certificate_purge
+  name: az keyvault certificate purge
+  summary: Menghapus sertifikat yang dihapus secara permanen.
+  description: Operasi PurgeDeletedCertificate melakukan penghapusan sertifikat yang ditentukan yang tidak dapat diubah, tanpa kemungkinan untuk pemulihan. Operasi tidak tersedia jika tingkat pemulihan tidak menentukan 'Dapat Dibersihkan'. Operasi ini memerlukan izin sertifikat/hapus menyeluruh.
+  syntax: >-
+    az keyvault certificate purge [--id]
+                                  [--name]
+                                  [--vault-name]
+  optionalParameters:
+  - name: --id
+    summary: Id pemulihan sertifikat. Jika ditentukan semua argumen 'Id' lainnya harus dihilangkan.
+    description: ''
+  - name: --name -n
+    summary: Nama sertifikat. Diperlukan jika --id tidak ditentukan.
+    description: ''
+  - name: --vault-name
+    summary: Nama Vault. Diperlukan jika --id tidak ditentukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_certificate_recover
+  name: az keyvault certificate recover
+  summary: Memulihkan sertifikat yang dihapus kembali ke versi saat ini di bawah /certificates.
+  description: Operasi RecoverDeletedCertificate melakukan pembalikan operasi Hapus. Operasi ini berlaku dalam vault yang diaktifkan untuk penghapusan sementara, dan harus dikeluarkan selama interval retensi (tersedia dalam atribut sertifikat yang dihapus). Operasi ini memerlukan izin sertifikat/pemulihan.
+  syntax: >-
+    az keyvault certificate recover [--id]
+                                    [--name]
+                                    [--vault-name]
+  optionalParameters:
+  - name: --id
+    summary: Id pemulihan sertifikat. Jika ditentukan semua argumen 'Id' lainnya harus dihilangkan.
+    description: ''
+  - name: --name -n
+    summary: Nama sertifikat. Diperlukan jika --id tidak ditentukan.
+    description: ''
+  - name: --vault-name
+    summary: Nama Vault. Diperlukan jika --id tidak ditentukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_certificate_set-attributes
+  name: az keyvault certificate set-attributes
+  summary: Memperbarui atribut yang ditentukan dan terkait dengan sertifikat tertentu.
+  description: Operasi UpdateCertificate menerapkan pembaruan yang ditentukan pada sertifikat yang diberikan; satu-satunya elemen yang diperbarui adalah atribut sertifikat. Operasi ini memerlukan izin sertifikat/pembaruan.
+  syntax: >-
+    az keyvault certificate set-attributes [--enabled {false, true}]
+                                           [--id]
+                                           [--name]
+                                           [--policy]
+                                           [--tags]
+                                           [--vault-name]
+                                           [--version]
+  optionalParameters:
+  - name: --enabled
+    parameterValueGroup: false, true
+    summary: Aktifkan sertifikat.
+    description: ''
+  - name: --id
+    summary: Id sertifikat. Jika ditentukan semua argumen 'Id' lainnya harus dihilangkan.
+    description: ''
+  - name: --name -n
+    summary: Nama sertifikat. Diperlukan jika --id tidak ditentukan.
+    description: ''
+  - name: --policy -p
+    summary: Definisi kebijakan yang dikodekan JSON. Gunakan @{file} untuk memuat dari file(misalnya). @my_policy.json
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --vault-name
+    summary: Nama Key Vault. Diperlukan jika --id tidak ditentukan.
+    description: ''
+  - name: --version -v
+    summary: Versi sertifikat. Jika dihilangkan, menggunakan versi terbaru.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_certificate_show
+  name: az keyvault certificate show
+  summary: Mendapatkan informasi tentang sertifikat.
+  description: Mendapatkan informasi tentang sertifikat tertentu. Operasi ini memerlukan izin sertifikat/dapatkan.
+  syntax: >-
+    az keyvault certificate show [--id]
+                                 [--name]
+                                 [--vault-name]
+                                 [--version]
+  optionalParameters:
+  - name: --id
+    summary: Id sertifikat. Jika ditentukan semua argumen 'Id' lainnya harus dihilangkan.
+    description: ''
+  - name: --name -n
+    summary: Nama sertifikat. Diperlukan jika --id tidak ditentukan.
+    description: ''
+  - name: --vault-name
+    summary: Nama Key Vault. Diperlukan jika --id tidak ditentukan.
+    description: ''
+  - name: --version -v
+    summary: Versi sertifikat. Jika dihilangkan, menggunakan versi terbaru.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_certificate_show-deleted
+  name: az keyvault certificate show-deleted
+  summary: Mengambil informasi tentang sertifikat yang dihapus yang ditentukan.
+  description: Operasi GetDeletedCertificate mengambil informasi sertifikat yang dihapus ditambah atributnya, seperti interval retensi, penghapusan permanen terjadwal, dan tingkat pemulihan penghapusan saat ini. Operasi ini memerlukan izin sertifikat/dapatkan.
+  syntax: >-
+    az keyvault certificate show-deleted [--id]
+                                         [--name]
+                                         [--vault-name]
+  optionalParameters:
+  - name: --id
+    summary: Id pemulihan sertifikat. Jika ditentukan semua argumen 'Id' lainnya harus dihilangkan.
+    description: ''
+  - name: --name -n
+    summary: Nama sertifikat. Diperlukan jika --id tidak ditentukan.
+    description: ''
+  - name: --vault-name
+    summary: Nama Vault. Diperlukan jika --id tidak ditentukan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+commands:
+- az_keyvault_certificate_contact
+- az_keyvault_certificate_contact_add
+- az_keyvault_certificate_contact_delete
+- az_keyvault_certificate_contact_list
+- az_keyvault_certificate_create
+- az_keyvault_certificate_delete
+- az_keyvault_certificate_download
+- az_keyvault_certificate_get-default-policy
+- az_keyvault_certificate_import
+- az_keyvault_certificate_issuer
+- az_keyvault_certificate_issuer_admin
+- az_keyvault_certificate_issuer_admin_add
+- az_keyvault_certificate_issuer_admin_delete
+- az_keyvault_certificate_issuer_admin_list
+- az_keyvault_certificate_issuer_create
+- az_keyvault_certificate_issuer_delete
+- az_keyvault_certificate_issuer_list
+- az_keyvault_certificate_issuer_show
+- az_keyvault_certificate_issuer_update
+- az_keyvault_certificate_list
+- az_keyvault_certificate_list-deleted
+- az_keyvault_certificate_list-versions
+- az_keyvault_certificate_pending
+- az_keyvault_certificate_pending_delete
+- az_keyvault_certificate_pending_merge
+- az_keyvault_certificate_pending_show
+- az_keyvault_certificate_purge
+- az_keyvault_certificate_recover
+- az_keyvault_certificate_set-attributes
+- az_keyvault_certificate_show
+- az_keyvault_certificate_show-deleted
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 11/30/2021
+  description: Mengelola sertifikat.
+  ms.openlocfilehash: d372a26b35267c684618e0f991bb5d5c8f9f907a
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141045196"

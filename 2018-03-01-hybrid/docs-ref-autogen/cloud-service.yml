@@ -1,0 +1,430 @@
+### YamlMime:AzureCLIGroup
+uid: az_cloud-service
+name: az cloud-service
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **layanan cloud** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **az cloud-service** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola layanan cloud (dukungan yang diperluas).
+description: ''
+directCommands:
+- uid: az_cloud-service_create
+  name: az cloud-service create
+  summary: Membuat layanan awan (dukungan yang diperluas). Harap dicatat bahwa beberapa properti hanya dapat diatur selama pembuatan layanan awan.
+  description: ''
+  syntax: >-
+    az cloud-service create --cloud-service-name
+                            --resource-group
+                            [--configuration]
+                            [--configuration-url]
+                            [--extensions]
+                            [--id]
+                            [--lb]
+                            [--location]
+                            [--no-wait]
+                            [--package-url]
+                            [--roles]
+                            [--secrets]
+                            [--start-cloud-service {false, true}]
+                            [--tags]
+                            [--upgrade-mode {Auto, Manual, Simultaneous}]
+  examples:
+  - summary: Buat layanan cloud dengan 2 peran, 2 penyeimbang beban (satu memiliki IP publik dan yang lain memiliki IP privat), rahasia, dan ekstensi.
+    syntax: 'az cloud-service create -g ResourceGroup -n CloudService --roles ContosoFrontend:Standard_D1_v2:1:Standard ContosoBackend:Standard_D1_v2:1:Standard --package-url PackageURL --configuration Config --load-balancer-configurations MyLoadBalancer:MyFe:PublicIP:: MyLoadBalancer2:MyFe2::SubnetIDd:PrivateIPID --secrets Vault0:Cert0:Cert1 Vault1:Cert2:Cert3:Cert4 --extensions "@extensions.json"'
+  requiredParameters:
+  - isRequired: true
+    name: --cloud-service-name --name -n
+    summary: Nama layanan awan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --configuration
+    summary: 'Tentukan konfigurasi layanan XML (.cscfg) untuk layanan cloud. Nilai yang diharapkan: xml-string/@xml-file.'
+    description: ''
+  - name: --configuration-url
+    summary: Tentukan URL yang merujuk ke lokasi konfigurasi layanan di Blob service. URL paket layanan dapat menjadi URI Tanda Tangan Akses Bersama (SAS) dari akun penyimpanan apa pun. Ini adalah properti hanya-tulis dan tidak dikembalikan dalam panggilan GET.
+    description: ''
+  - name: --extensions
+    summary: 'Daftar ekstensi untuk layanan awan. Nilai yang diharapkan: json-string/@json-file. Contoh: [{"properties": {"type": "RDP", "autoUpgradeMinorVersion": false, "protectedSettings": "settings","publisher": "Microsoft.Windows. Azure.Extensions", "settings": "settings", "typeHandlerVersion": "1.2.1"}, "name": "RDPExtension"}].'
+    description: ''
+  - name: --id
+    summary: Id Sumber Daya.
+    description: ''
+  - name: --lb --load-balancer-configurations
+    summary: 'Daftar konfigurasi load balancer yang dipisahkan oleh ruang untuk layanan cloud. IP publik adalah bidang wajib. Format: LBName:FrontendIPConfiguration:PublicIPAddress:Subnet:PrivateIP.'
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --package-url
+    summary: Tentukan URL yang merujuk ke lokasi paket layanan di Blob service. URL paket layanan dapat menjadi URI Tanda Tangan Akses Bersama (SAS) dari akun penyimpanan apa pun. Ini adalah properti hanya-tulis dan tidak dikembalikan dalam panggilan GET.
+    description: ''
+  - name: --roles
+    summary: 'Daftar peran yang dipisahkan oleh ruang untuk layanan cloud. Format: RoleName:SkuName:SkuCapacity:SkuTier.'
+    description: ''
+  - name: --secrets
+    summary: 'Tentukan sertifikat yang dipisahkan oleh ruang yang harus diinstal ke instans peran. Format: KeyVaultName:CertificateUrl:CertificateUrl2:...:CertificateUrlN.'
+    description: ''
+  - name: --start-cloud-service
+    parameterValueGroup: false, true
+    summary: Tunjukkan apakah akan memulai layanan cloud segera setelah dibuat. Nilai defaultnya adalah `true`. Jika false, model layanan masih disebarkan, tetapi kode tidak segera dijalankan. Sebagai gantinya, layanan ini adalah PoweredOff sampai Anda memanggil Mulai, pada saat itu layanan akan dimulai. Layanan yang disebarkan masih dikenakan biaya, bahkan jika diberdayakan.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --upgrade-mode
+    parameterValueGroup: Auto, Manual, Simultaneous
+    summary: Perbarui mode untuk layanan awan. Instans peran dialokasikan untuk memperbarui domain saat layanan disebarkan. Pembaruan dapat dimulai secara manual di setiap domain pembaruan atau dimulai secara otomatis di semua domain pembaruan. Nilai yang Mungkin adalah Otomatis, Manual, Simultan. Jika tidak ditentukan, nilai defaultnya adalah Otomatis. Jika diatur ke Manual, PUT UpdateDomain harus dipanggil untuk menerapkan pembaruan. Jika diatur ke Otomatis, pembaruan secara otomatis diterapkan ke setiap domain pembaruan secara berurutan.
+    description: ''
+- uid: az_cloud-service_delete
+  name: az cloud-service delete
+  summary: Menghapus layanan awan.
+  description: ''
+  syntax: >-
+    az cloud-service delete --cloud-service-name
+                            --resource-group
+                            [--no-wait]
+                            [--yes]
+  requiredParameters:
+  - isRequired: true
+    name: --cloud-service-name --name -n
+    summary: Nama layanan awan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_cloud-service_delete-instance
+  name: az cloud-service delete-instance
+  summary: Menghapus instans peran di layanan awan.
+  description: ''
+  syntax: >-
+    az cloud-service delete-instance --cloud-service-name
+                                     --resource-group
+                                     [--no-wait]
+                                     [--role-instances]
+                                     [--yes]
+  requiredParameters:
+  - isRequired: true
+    name: --cloud-service-name --name -n
+    summary: Nama layanan awan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --role-instances
+    summary: Daftar nama instans peran layanan awan. Nilai '\*' akan menandakan semua instans peran layanan cloud.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_cloud-service_list
+  name: az cloud-service list
+  summary: Dapatkan daftar semua layanan cloud di bawah grup sumber daya.
+  description: ''
+  syntax: az cloud-service list --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_cloud-service_list-all
+  name: az cloud-service list-all
+  summary: Dapatkan daftar semua layanan cloud dalam langganan, terlepas dari grup sumber daya terkait.
+  description: ''
+  syntax: az cloud-service list-all
+- uid: az_cloud-service_power-off
+  name: az cloud-service power-off
+  summary: Matikan layanan awan. Perhatikan bahwa sumber daya masih terlampir dan Anda dikenakan biaya untuk sumber daya tersebut.
+  description: ''
+  syntax: >-
+    az cloud-service power-off --cloud-service-name
+                               --resource-group
+                               [--no-wait]
+  requiredParameters:
+  - isRequired: true
+    name: --cloud-service-name --name -n
+    summary: Nama layanan awan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_cloud-service_rebuild
+  name: az cloud-service rebuild
+  summary: Membangun kembali Instans Peran. Instal ulang sistem operasi pada instans peran web atau peran pekerja dan inisialisasi sumber daya penyimpanan yang digunakan oleh mereka. Jika Anda tidak ingin menginisialisasi sumber daya penyimpanan, Anda dapat menggunakan Reimage Role Instances.
+  description: ''
+  syntax: >-
+    az cloud-service rebuild --cloud-service-name
+                             --resource-group
+                             [--no-wait]
+                             [--role-instances]
+  requiredParameters:
+  - isRequired: true
+    name: --cloud-service-name --name -n
+    summary: Nama layanan awan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --role-instances
+    summary: Daftar nama instans peran layanan awan. Nilai '\*' akan menandakan semua instans peran layanan cloud.
+    description: ''
+- uid: az_cloud-service_reimage
+  name: az cloud-service reimage
+  summary: Citrakan ulang operasi asinkron menginstal ulang sistem operasi pada instans peran web atau peran pekerja.
+  description: ''
+  syntax: >-
+    az cloud-service reimage --cloud-service-name
+                             --resource-group
+                             [--no-wait]
+                             [--role-instances]
+  requiredParameters:
+  - isRequired: true
+    name: --cloud-service-name --name -n
+    summary: Nama layanan awan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --role-instances
+    summary: Daftar nama instans peran layanan awan. Nilai '\*' akan menandakan semua instans peran layanan cloud.
+    description: ''
+- uid: az_cloud-service_restart
+  name: az cloud-service restart
+  summary: Mulai ulang satu atau beberapa instans peran di layanan awan.
+  description: ''
+  syntax: >-
+    az cloud-service restart --cloud-service-name
+                             --resource-group
+                             [--no-wait]
+                             [--role-instances]
+  requiredParameters:
+  - isRequired: true
+    name: --cloud-service-name --name -n
+    summary: Nama layanan awan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --role-instances
+    summary: Daftar nama instans peran layanan awan. Nilai '\*' akan menandakan semua instans peran layanan cloud.
+    description: ''
+- uid: az_cloud-service_show
+  name: az cloud-service show
+  summary: Menampilkan informasi tentang layanan awan.
+  description: ''
+  syntax: >-
+    az cloud-service show --cloud-service-name
+                          --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --cloud-service-name --name -n
+    summary: Nama layanan awan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_cloud-service_show-instance-view
+  name: az cloud-service show-instance-view
+  summary: Mendapatkan status layanan awan.
+  description: ''
+  syntax: >-
+    az cloud-service show-instance-view --cloud-service-name
+                                        --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --cloud-service-name --name -n
+    summary: Nama layanan awan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_cloud-service_start
+  name: az cloud-service start
+  summary: Mulai layanan awan.
+  description: ''
+  syntax: >-
+    az cloud-service start --cloud-service-name
+                           --resource-group
+                           [--no-wait]
+  requiredParameters:
+  - isRequired: true
+    name: --cloud-service-name --name -n
+    summary: Nama layanan awan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_cloud-service_update
+  name: az cloud-service update
+  summary: Memperbarui layanan awan.
+  description: ''
+  syntax: >-
+    az cloud-service update --cloud-service-name
+                            --resource-group
+                            [--no-wait]
+                            [--tags]
+  requiredParameters:
+  - isRequired: true
+    name: --cloud-service-name --name -n
+    summary: Nama layanan awan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+- uid: az_cloud-service_wait
+  name: az cloud-service wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi layanan awan terpenuhi.
+  description: ''
+  syntax: >-
+    az cloud-service wait --cloud-service-name
+                          --resource-group
+                          [--created]
+                          [--custom]
+                          [--deleted]
+                          [--exists]
+                          [--interval]
+                          [--timeout]
+                          [--updated]
+  requiredParameters:
+  - isRequired: true
+    name: --cloud-service-name --name -n
+    summary: Nama layanan awan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_cloud-service_create
+- az_cloud-service_delete
+- az_cloud-service_delete-instance
+- az_cloud-service_list
+- az_cloud-service_list-all
+- az_cloud-service_power-off
+- az_cloud-service_rebuild
+- az_cloud-service_reimage
+- az_cloud-service_restart
+- az_cloud-service_role
+- az_cloud-service_role_list
+- az_cloud-service_role_show
+- az_cloud-service_role-instance
+- az_cloud-service_role-instance_delete
+- az_cloud-service_role-instance_list
+- az_cloud-service_role-instance_rebuild
+- az_cloud-service_role-instance_reimage
+- az_cloud-service_role-instance_restart
+- az_cloud-service_role-instance_show
+- az_cloud-service_role-instance_show-instance-view
+- az_cloud-service_role-instance_show-remote-desktop-file
+- az_cloud-service_show
+- az_cloud-service_show-instance-view
+- az_cloud-service_start
+- az_cloud-service_update
+- az_cloud-service_update-domain
+- az_cloud-service_update-domain_list-update-domain
+- az_cloud-service_update-domain_show-update-domain
+- az_cloud-service_update-domain_walk-update-domain
+- az_cloud-service_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola layanan cloud (dukungan yang diperluas).
+  ms.openlocfilehash: 4deef0dd437a6a59dcc9b8f9441af99e9a85b07a
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141089059"
