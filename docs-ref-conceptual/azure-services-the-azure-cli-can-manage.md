@@ -11,12 +11,12 @@ ms.technology: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: pengelolaan layanan azure, daftar layanan azure, daftar sumber daya azure
-ms.openlocfilehash: d66239cf198b2cd7c409f8577625a7bbae2e8ae1
-ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+ms.openlocfilehash: c1581efe5f39df14465572af7a17a9adbcc73bdf
+ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/06/2022
-ms.locfileid: "141398418"
+ms.lasthandoff: 04/22/2022
+ms.locfileid: "144003787"
 ---
 # <a name="list-of-azure-services-the-azure-cli-can-manage"></a>Daftar layanan Azure yang dapat dikelola Azure CLI
 
@@ -182,11 +182,11 @@ Teknologi Azure DevOps menghadirkan inovasi lebih cepat dengan alat yang sederha
 |[Azure Arc](/cli/azure/service-page/azure%20arc) | [Menghapus pengontrol data Azure Arc](/azure/azure-arc/data/uninstall-azure-arc-data-controller)
 |[Azure Database untuk PostgreSQL](/cli/azure/service-page/azure%20database%20for%20postgresql) | [Menyebarkan aplikasi web Django dengan PostgreSQL di Azure App Service](/azure/app-service/tutorial-python-postgresql-app?tabs=cmd%2Cclone&pivots=postgres-single-server)
 |[Azure DevOps](azure-cli-reference-for-devops.md) | Lihat tautan dalam ringkasan referensi.
-|[Azure IoT Edge](../latest/docs-ref-autogen/iot/edge.yml) | [Menyebarkan modul IoT Edge pertama Anda ke perangkat Linux virtual](/azure/iot-edge/quickstart-linux)
-|[Azure Security Center](/cli/azure/service-page/azure%20security%20center) |
-|[Azure Sentinel](/cli/azure/service-page/azure%20sentinel) |
-|[Azure SQL Database](./azure-cli-reference-for-sql.md) | [Memulihkan database tunggal di Azure SQL Database ke titik waktu sebelumnya](/azure/sql-database/scripts/sql-database-restore-database-cli)
-|[Azure Stack HCI](../latest/docs-ref-autogen/stack-hci.yml) |
+|[Azure IoT Edge](/cli/azure/iot/edge) | [Menyebarkan modul IoT Edge pertama Anda ke perangkat Linux virtual](/azure/iot-edge/quickstart-linux)
+|[Microsoft Defender for Cloud](/cli/azure/service-page/azure%20security%20center) |
+|[Microsoft Sentinel](/cli/azure/service-page/azure%20sentinel) |
+|[Azure SQL Database](/cli/azure/azure-cli-reference-for-sql#sql-database) | [Memulihkan database tunggal di Azure SQL Database ke titik waktu sebelumnya](/azure/sql-database/scripts/sql-database-restore-database-cli)
+|[Azure Stack HCI](/cli/azure/stack-hci) |
 
 ## <a name="identity"></a>Identitas
 
@@ -303,8 +303,8 @@ Teknologi Azure DevOps menghadirkan inovasi lebih cepat dengan alat yang sederha
 |-|-|
 |[Azure Active Directory (AD)](/cli/azure/service-page/azure%20active%20directory) | [Membuat perwakilan layanan Azure](create-an-azure-service-principal-azure-cli.md)
 |[Azure Dedicated HSM](/cli/azure/service-page/azure%20dedicated%20hsm) | [Menyebarkan HSM ke jaringan virtual yang ada menggunakan Azure CLI](/azure/dedicated-hsm/tutorial-deploy-hsm-cli)
-|[Azure Security Center](/cli/azure/service-page/azure%20security%20center) |
-|[Azure Sentinel](/cli/azure/service-page/azure%20sentinel) |
+|[Microsoft Defender for Cloud](/cli/azure/service-page/azure%20security%20center) |
+|[Microsoft Sentinel](/cli/azure/service-page/azure%20sentinel) |
 |[Key Vault](/cli/azure/service-page/azure%20key%20vault) | [Gunakan identitas terkelola untuk menghubungkan Key Vault ke aplikasi web Azure di .NET](/azure/key-vault/general/tutorial-net-create-vault-azure-web-app)
 | | [Mengatur dan mengambil rahasia dari Azure Key Vault menggunakan Azure CLI](/azure/key-vault/secrets/quick-create-cli)
 |[Microsoft Azure Attestation](/cli/azure/service-page/azure%20attestation) | [Menyiapkan Azure Attestation dengan Azure CLI](/azure/attestation/quickstart-azure-cli)
@@ -353,4 +353,5 @@ Teknologi Azure DevOps menghadirkan inovasi lebih cepat dengan alat yang sederha
 ## <a name="see-also"></a>Lihat juga
 
 - [Mulai menggunakan Azure CLI](get-started-with-azure-cli.md)
-- [Daftar referensi perintah untuk Azure CLI](../latest/docs-ref-autogen/reference-index.yml)
+- [Daftar referensi perintah untuk Azure CLI](/cli/azure/reference-index)
+

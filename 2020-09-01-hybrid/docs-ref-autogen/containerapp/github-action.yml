@@ -1,0 +1,161 @@
+### YamlMime:AzureCLIGroup
+uid: az_containerapp_github-action
+name: az containerapp github-action
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **containerapp** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az containerapp github-action** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Perintah untuk mengelola Tindakan GitHub.
+description: ''
+directCommands:
+- uid: az_containerapp_github-action_add
+  name: az containerapp github-action add
+  summary: Tambahkan alur kerja Tindakan Github ke repositori untuk menyebarkan aplikasi kontainer.
+  description: ''
+  syntax: >-
+    az containerapp github-action add --name
+                                      --repo-url
+                                      --resource-group
+                                      [--branch]
+                                      [--context-path]
+                                      [--image]
+                                      [--login-with-github]
+                                      [--registry-password]
+                                      [--registry-url]
+                                      [--registry-username]
+                                      [--service-principal-client-id]
+                                      [--service-principal-client-secret]
+                                      [--service-principal-tenant-id]
+                                      [--token]
+  examples:
+  - summary: Tambahkan Tindakan GitHub, menggunakan Azure Container Registry dan token akses pribadi.
+    syntax: az containerapp github-action add -g MyResourceGroup -n MyContainerapp --repo-url https://github.com/userid/repo --branch main --registry-url myregistryurl.azurecr.io --service-principal-client-id 00000000-0000-0000-0000-00000000 --service-principal-tenant-id 00000000-0000-0000-0000-00000000 --service-principal-client-secret ClientSecret --token MyAccessToken
+  - summary: Tambahkan Tindakan GitHub, menggunakan Azure Container Registry dan masuk ke alur GitHub untuk mengambil token akses pribadi.
+    syntax: az containerapp github-action add -g MyResourceGroup -n MyContainerapp --repo-url https://github.com/userid/repo --branch main --registry-url myregistryurl.azurecr.io --service-principal-client-id 00000000-0000-0000-0000-00000000 --service-principal-tenant-id 00000000-0000-0000-0000-00000000 --service-principal-client-secret ClientSecret --login-with-github
+  - summary: Tambahkan tindakan GitHub, menggunakan Docker Hub dan masuk ke alur GitHub untuk mengambil token akses pribadi.
+    syntax: az containerapp github-action add -g MyResourceGroup -n MyContainerapp --repo-url https://github.com/userid/repo --branch main --registry-username MyUsername --registry-password MyPassword --service-principal-client-id 00000000-0000-0000-0000-00000000 --service-principal-tenant-id 00000000-0000-0000-0000-00000000 --service-principal-client-secret ClientSecret --login-with-github
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Containerapp.
+    description: ''
+  - isRequired: true
+    name: --repo-url
+    summary: 'Repositori GitHub tempat file alur kerja akan ditambahkan. Dalam format: https://github.com/<owner>> nama repositori /<.'
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --branch -b
+    summary: Cabang repositori GitHub. Default ke "main" jika tidak ditentukan.
+    description: ''
+  - name: --context-path
+    summary: Jalur dalam repositori untuk menjalankan build docker. Default ke "./".
+    description: ''
+  - name: --image -i
+    summary: Nama gambar kontainer yang harus digunakan Oleh Github Action. Default ke nama Aplikasi Kontainer.
+    description: ''
+  - name: --login-with-github
+    summary: Masuk secara interaktif dengan Github untuk mengambil Token Akses Pribadi.
+    description: ''
+  - name: --registry-password
+    summary: Kata sandi registri. Jika menggunakan Azure Container Registry, kami akan mencoba menyimpulkan kredensial jika tidak disediakan.
+    description: ''
+  - name: --registry-url
+    summary: Server registri kontainer, misalnya myregistry.azurecr.io.
+    description: ''
+  - name: --registry-username
+    summary: Nama pengguna registri. Jika menggunakan Azure Container Registry, kami akan mencoba menyimpulkan kredensial jika tidak disediakan.
+    description: ''
+  - name: --service-principal-client-id
+    summary: ID klien perwakilan layanan.
+    description: ''
+  - name: --service-principal-client-secret
+    summary: Rahasia klien perwakilan layanan.
+    description: ''
+  - name: --service-principal-tenant-id
+    summary: ID penyewa perwakilan layanan.
+    description: ''
+  - name: --token
+    summary: 'Token Akses Pribadi dengan akses tulis ke repositori yang ditentukan. Untuk informasi selengkapnya: https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line.'
+    description: ''
+- uid: az_containerapp_github-action_delete
+  name: az containerapp github-action delete
+  summary: Menghapus alur kerja Container Apps GitHub Actions yang dikonfigurasi sebelumnya dari repositori.
+  description: ''
+  syntax: >-
+    az containerapp github-action delete --name
+                                         --resource-group
+                                         [--login-with-github]
+                                         [--token]
+  examples:
+  - summary: Hapus Tindakan GitHub menggunakan token akses pribadi.
+    syntax: az containerapp github-action delete -g MyResourceGroup -n MyContainerapp --token MyAccessToken
+  - summary: Hapus Tindakan GitHub menggunakan masuk untuk GitHub alur untuk mengambil token akses pribadi.
+    syntax: az containerapp github-action delete -g MyResourceGroup -n MyContainerapp --login-with-github
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Containerapp.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --login-with-github
+    summary: Masuk secara interaktif dengan Github untuk mengambil Token Akses Pribadi.
+    description: ''
+  - name: --token
+    summary: 'Token Akses Pribadi dengan akses tulis ke repositori yang ditentukan. Untuk informasi selengkapnya: https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line.'
+    description: ''
+- uid: az_containerapp_github-action_show
+  name: az containerapp github-action show
+  summary: Tampilkan konfigurasi tindakan GitHub pada aplikasi kontainer.
+  description: ''
+  syntax: >-
+    az containerapp github-action show --name
+                                       --resource-group
+  examples:
+  - summary: Tampilkan konfigurasi tindakan GitHub pada Containerapp.
+    syntax: az containerapp github-action show -g MyResourceGroup -n MyContainerapp
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Containerapp.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+commands:
+- az_containerapp_github-action_add
+- az_containerapp_github-action_delete
+- az_containerapp_github-action_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Perintah untuk mengelola Tindakan GitHub.
+  ms.openlocfilehash: ebd0de47e4dba4eb1fc51d4afb4b944f4f6cb9c8
+  ms.sourcegitcommit: d016676aca62d5461b07446d98cf38e30bba07cd
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/19/2022
+  ms.locfileid: "143882623"

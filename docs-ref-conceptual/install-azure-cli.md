@@ -1,21 +1,21 @@
 ---
 title: Cara menginstal Azure CLI | Microsoft Docs
 description: Azure CLI dapat diinstal di lingkungan Windows, macOS, dan Linux. Ini juga dapat dijalankan dalam kontainer Docker dan Azure Cloud Shell.
-author: dbradish-microsoft
-ms.author: dbradish
-manager: barbkess
+author: jiasli
+ms.author: jiasli
+manager: yonzhan
 ms.date: 08/01/2021
 ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli, menginstal azure cli, unduhan azure cli, mengunduh azure cli
-ms.openlocfilehash: 27e9a69243e6e67414afbb29861e2b5022eed1cc
-ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+ms.openlocfilehash: 53d247196cbc49846b75811507fed5347871e34c
+ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/06/2022
-ms.locfileid: "141412000"
+ms.lasthandoff: 04/22/2022
+ms.locfileid: "144003049"
 ---
 # <a name="how-to-install-the-azure-cli"></a>Cara menginstal Azure CLI
 

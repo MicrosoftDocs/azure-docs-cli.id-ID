@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
-ms.openlocfilehash: 5599eeb4c0da6d9243a2211963d143deecc37e22
-ms.sourcegitcommit: bd63e04a53877fcd43d09e2de1229d90a99e645e
+ms.openlocfilehash: 80c6701787b2ded269139fd37608ef34003685c0
+ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/08/2022
-ms.locfileid: "141542265"
+ms.lasthandoff: 04/22/2022
+ms.locfileid: "144004091"
 ---
 # <a name="how-to-use-azure-cli-effectively"></a>Cara menggunakan Azure CLI secara efektif
 
@@ -50,9 +50,9 @@ az account list --output table
 
 Berikut tiga format umum:
 
-* Format `json` menampilkan informasi sebagai string JSON. Format ini memberi Anda informasi paling komprehensif. Ini adalah format default. Anda dapat mengubah format default dengan menggunakan perintah [az config](../latest/docs-ref-autogen/config.yml).
-* Format `table` menampilkan output sebagai tabel yang dapat dibaca manusia. Anda dapat menentukan nilai mana yang akan muncul dalam tabel dan menggunakan kueri untuk menyesuaikan output.
-* Format `tsv` menampilkan nilai yang dipisahkan tab dan dipisahkan baris baru tanpa pemformatan tambahan, kunci, atau simbol lainnya.
+- Format `json` menampilkan informasi sebagai string JSON. Format ini memberi Anda informasi paling komprehensif. Ini adalah format default. Anda dapat mengubah format default dengan menggunakan perintah [az config](../latest/docs-ref-autogen/config.yml).
+- Format `table` menampilkan output sebagai tabel yang dapat dibaca manusia. Anda dapat menentukan nilai mana yang akan muncul dalam tabel dan menggunakan kueri untuk menyesuaikan output.
+- Format `tsv` menampilkan nilai yang dipisahkan tab dan dipisahkan baris baru tanpa pemformatan tambahan, kunci, atau simbol lainnya.
 
 Untuk informasi selengkapnya, lihat [Format output untuk perintah Azure CLI](format-output-azure-cli.md).
 
@@ -60,7 +60,7 @@ Untuk informasi selengkapnya, lihat [Format output untuk perintah Azure CLI](for
 
 Perintah Azure CLI dijalankan dalam shell. Artikel ini menggunakan Bash, tetapi masih ada opsi lain. Anda dapat menggunakan sintaks shell standar untuk memudahkan penggunaan Azure CLI.
 
-Anda dapat menyimpan nilai sebagai variabel. Variabel memungkinkan Anda menggunakan nilai lebih dari sekali atau untuk membuat lebih banyak skrip umum. Contoh ini menetapkan ID yang ditemukan oleh perintah [az vm list](/cli/azure/vm#az-vm-list) ke variabel.
+Anda dapat menyimpan nilai sebagai variabel. Variabel memungkinkan Anda menggunakan nilai lebih dari sekali atau untuk membuat lebih banyak skrip umum. Contoh ini menggunakan perintah [az vm list](/cli/azure/vm#az_vm_list) dengan kueri `[?powerState=='VM running'].id` untuk menemukan ID VM yang sedang berjalan. Untuk mempelajari selengkapnya tentang `--query` dan kueri JMESPath lihat [Cara mengkueri output perintah Azure CLI menggunakan kueri JMESPath](./query-azure-cli.md).
 
 ```azurecli
 running_vm_ids=$(az vm list --resource-group MyResourceGroup --show-details \
@@ -88,31 +88,31 @@ az vm list --query "[?powerState=='VM running'].name" --output tsv | grep my_vm
 
 Saat Anda bekerja dengan perintah Azure CLI, ketahui cara shell menggunakan tanda kutip dan karakter escape. Jika Anda mendukung skrip yang digunakan dalam shell yang berbeda, Anda perlu memahami perbedaannya.
 
-* Bash. [Mengutip](https://www.gnu.org/software/bash/manual/html_node/Quoting.html)
-* PowerShell. [Tentang Aturan Mengutip](/powershell/module/microsoft.powershell.core/about/about_quoting_rules)
-* Windows Command Prompt. [Cara: Menggunakan Karakter Escape, Pemisah dan Kutipan di baris perintah Windows](https://ss64.com/nt/syntax-esc.html)
+- Bash. [Mengutip](https://www.gnu.org/software/bash/manual/html_node/Quoting.html)
+- PowerShell. [Tentang Aturan Mengutip](/powershell/module/microsoft.powershell.core/about/about_quoting_rules)
+- Windows Command Prompt. [Cara: Menggunakan Karakter Escape, Pemisah dan Kutipan di baris perintah Windows](https://ss64.com/nt/syntax-esc.html)
 
 > [!NOTE]
 > Karena masalah yang diketahui di PowerShell, beberapa aturan penggunaan karakter escape tambahan diberlakukan. Untuk informasi selengkapnya, lihat [Mengutip masalah dengan PowerShell](https://github.com/Azure/azure-cli/blob/dev/doc/quoting-issues-with-powershell.md).
 
 Jika Anda memasukkan argumen yang berisi spasi, apit dengan tanda kutip. Ingat tips berikut:
 
-* Di Bash atau PowerShell, kutipan tunggal dan ganda ditafsirkan. Dalam Windows Command Prompt, hanya tanda kutip ganda yang ditafsirkan. Kutipan tunggal ditafsirkan sebagai bagian dari nilai.
+- Di Bash atau PowerShell, kutipan tunggal dan ganda ditafsirkan. Dalam Windows Command Prompt, hanya tanda kutip ganda yang ditafsirkan. Kutipan tunggal ditafsirkan sebagai bagian dari nilai.
 
-* Untuk perintah khusus Bash, gunakan tanda kutipan tunggal untuk menyederhanakan JSON sebaris. Misalnya, JSON ini benar di Bash: `'{"key": "value"}'`. Dalam Windows Command Prompt, persamaannya adalah: `"{\"key\": \"value\"}"`
+- Untuk perintah khusus Bash, gunakan tanda kutipan tunggal untuk menyederhanakan JSON sebaris. Misalnya, JSON ini benar di Bash: `'{"key": "value"}'`. Dalam Windows Command Prompt, persamaannya adalah: `"{\"key\": \"value\"}"`
 
-* Beberapa perintah Azure CLI mengambil daftar nilai yang dipisahkan spasi. Jika nama kunci atau nilai berisi spasi, apit seluruh pasangan: `"my key=my value"`.
+- Beberapa perintah Azure CLI mengambil daftar nilai yang dipisahkan spasi. Jika nama kunci atau nilai berisi spasi, apit seluruh pasangan: `"my key=my value"`.
 
-* Bash mengevaluasi kutipan ganda dalam variabel yang diekspor. Jika perilaku ini bukan yang Anda inginkan, hindari variabel: `"\$variable"`.
+- Bash mengevaluasi kutipan ganda dalam variabel yang diekspor. Jika perilaku ini bukan yang Anda inginkan, hindari variabel: `"\$variable"`.
 
-* Ada karakter khusus PowerShell, seperti di `@`. Untuk menjalankan Azure CLI di PowerShell, tambahkan `` ` `` sebelum karakter khusus untuk mengeluarkannya dari program. Sebagai gantinya, Anda dapat melampirkan nilai dalam tanda kutip tunggal atau ganda `"`/`"`.
+- Ada karakter khusus PowerShell, seperti di `@`. Untuk menjalankan Azure CLI di PowerShell, tambahkan `` ` `` sebelum karakter khusus untuk mengeluarkannya dari program. Sebagai gantinya, Anda dapat melampirkan nilai dalam tanda kutip tunggal atau ganda `"`/`"`.
 
   ```azurecli
   `@parameters.json
   '@parameters.json'
   ```
 
-* Jika Anda menggunakan parameter `--query` dengan perintah, beberapa karakter [JMESPath](https://jmespath.org/specification.html) harus dikeluarkan dari program dalam shell.
+- Jika Anda menggunakan parameter `--query` dengan perintah, beberapa karakter [JMESPath](https://jmespath.org/specification.html) harus dikeluarkan dari program dalam shell.
 
   Ketiga perintah ini setara dalam Bash:
 
@@ -176,9 +176,9 @@ Jika Anda menggunakan Azure CLI melalui server proksi, kesalahan berikut dapat t
 | OS                     | Bundel otoritas sertifikat default                                                  |
 |----------------------- |-------------------------------------------------------------------------------------- |
 | Windows                | C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\Lib\site-packages\certifi\cacert.pem |
-| Ubuntu/Debian Linux    | /opt/az/lib/python3.6/site-packages/certifi/cacert.pem                                |
-| CentOS/RHEL/SUSE Linux | /usr/lib64/az/lib/python3.6/site-packages/certifi/cacert.pem                          |
-| macOS                  | /usr/local/Cellar/azure-cli/2.33.1/libexec/lib/python3.10/site-packages/certifi/cacert.pem|
+| Ubuntu/Debian Linux    | /opt/az/lib/python<version>/site-packages/certifi/cacert.pem                                |
+| CentOS/RHEL/SUSE Linux | /usr/lib64/az/lib/python<version>/site-packages/certifi/cacert.pem                          |
+| macOS                  | /usr/local/Cellar/azure-cli/<cliversion>/libexec/lib/python<version>/site-packages/certifi/cacert.pem|
 
 Tambahkan sertifikat server proksi ke file ini atau salin kontennya ke file sertifikat lain, lalu atur `REQUESTS_CA_BUNDLE` ke dalamnya. Anda mungkin juga perlu mengatur variabel lingkungan `HTTP_PROXY` atau `HTTPS_PROXY`.
 
@@ -202,9 +202,9 @@ Untuk menyederhanakan perintah, pertimbangkan untuk menggunakan string JSON. Mis
 
 ```azurecli
 az vm update --resource-group VMResources --name virtual-machine-01 \
---add storageProfile.dataDisks "{\"createOption\": \"Attach\", \"managedDisk\": 
-   {\"id\": 
-   \"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/yg/providers/Microsoft.Compute/disks/yg-disk\"}, 
+--add storageProfile.dataDisks "{\"createOption\": \"Attach\", \"managedDisk\":
+   {\"id\":
+   \"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/yg/providers/Microsoft.Compute/disks/yg-disk\"},
    \"lun\": 1}"
 ```
 
@@ -292,7 +292,7 @@ Alternatifnya adalah menggunakan variabel otomatis `$?`. Variabel ini berisi sta
 Contoh berikut menunjukkan bagaimana variabel otomatis ini dapat bekerja untuk penanganan kesalahan:
 
 ```powershell
-az group create --name MyResourceGroup 
+az group create --name MyResourceGroup
 if ($? -eq $false) {
     Write-Error "Error creating resource group."
 }
@@ -305,7 +305,7 @@ Jika Anda ingin menggunakan `try` kata kunci dan `catch`, Anda dapat menggunakan
 ```powershell
 $ErrorActionPreference = "Stop"
 try {
-    az group create --name MyResourceGroup 
+    az group create --name MyResourceGroup
     if ($? -eq $false) {
         throw 'Group create failed.'
     }
@@ -326,7 +326,8 @@ Untuk informasi selengkapnya tentang penanganan kesalahan PowerShell, lihat [Seg
 
 ## <a name="next-steps"></a>Langkah berikutnya
 
-* [Menentukan nilai dalam perintah Azure CLI](azure-cli-variables.md)
-* [Mengkueri output perintah Azure CLI](query-azure-cli.md)
-* [Format output untuk perintah Azure CLI](format-output-azure-cli.md)
-* [Menggunakan langganan Azure dengan Azure CLI](manage-azure-subscriptions-azure-cli.md)
+- [Menentukan nilai dalam perintah Azure CLI](azure-cli-variables.md)
+- [Mengkueri output perintah Azure CLI](query-azure-cli.md)
+- [Format output untuk perintah Azure CLI](format-output-azure-cli.md)
+- [Menggunakan langganan Azure dengan Azure CLI](manage-azure-subscriptions-azure-cli.md)
+

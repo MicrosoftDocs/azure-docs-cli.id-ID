@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli, cara menggunakan azure cli, antarmuka baris perintah azure, cara membuka azure cli, perintah azure cli
-ms.openlocfilehash: a98d282beebeafd3262fe5d662a083019956721f
-ms.sourcegitcommit: ad79327952adf0f8be8f1b9678e72434d9f03f0c
+ms.openlocfilehash: af30f80beef8b48148fad0ff0177f49ae36b8c60
+ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 02/12/2022
-ms.locfileid: "138526549"
+ms.lasthandoff: 04/22/2022
+ms.locfileid: "144003031"
 ---
 # <a name="get-started-with-azure-cli"></a>Memulai dengan Azure CLI
 
@@ -52,13 +52,13 @@ Tabel ini mencantumkan beberapa perintah umum yang digunakan dalam CLI dan tauta
 
 | Jenis Sumber Daya | Grup perintah Azure CLI |
 |---------------|-------------------------|
-| [Grup sumber daya](/azure/azure-resource-manager/resource-group-overview) | [az group](/cli/azure/group) |
-| [Komputer virtual](/azure/virtual-machines) | [az vm](/cli/azure/vm) |
-| [Akun penyimpanan](/azure/storage/common/storage-introduction) | [az storage account](/cli/azure/storage/account) |
-| [Key Vault](/azure/key-vault/key-vault-whatis) | [az keyvault](/cli/azure/keyvault) |
-| [Aplikasi web](/azure/app-service) | [az webapp](/cli/azure/webapp) |
-| [Database SQL](/azure/sql-database) | [az sql server](/cli/azure/sql/server) |
-| [CosmosDB](/azure/cosmos-db) | [az cosmosdb](/cli/azure/cosmosdb) |
+| [Grup sumber daya](/azure/azure-resource-manager/resource-group-overview) | [az group](../latest/docs-ref-autogen/group.yml) |
+| [Komputer virtual](/azure/virtual-machines) | [az vm](../latest/docs-ref-autogen/vm.yml) |
+| [Akun penyimpanan](/azure/storage/common/storage-introduction) | [az storage account](../latest/docs-ref-autogen/storage/account.yml) |
+| [Key Vault](/azure/key-vault/key-vault-whatis) | [az keyvault](../latest/docs-ref-autogen/keyvault.yml) |
+| [Aplikasi web](/azure/app-service) | [az webapp](../latest/docs-ref-autogen/webapp.yml) |
+| [Database SQL](/azure/sql-database) | [az sql server](../latest/docs-ref-autogen/sql/server.yml) |
+| [CosmosDB](/azure/cosmos-db) | [az cosmosdb](../latest/docs-ref-autogen/cosmosdb.yml) |
 
 ## <a name="finding-commands"></a>Menemukan perintah
 
@@ -128,4 +128,4 @@ az feedback
 ## <a name="see-also"></a>Lihat juga
 
 * [Layanan yang dapat dikelola Azure CLI](azure-services-the-azure-cli-can-manage.md)
-* [Daftar referensi perintah lengkap untuk Azure CLI](/cli/azure/reference-index)
+* [Daftar referensi perintah lengkap untuk Azure CLI](../latest/docs-ref-autogen/reference-index.yml)

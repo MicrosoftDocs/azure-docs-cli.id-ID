@@ -1,0 +1,252 @@
+### YamlMime:AzureCLIGroup
+uid: az_batch_node
+name: az batch node
+summary: Mengelola simpul komputasi Batch.
+description: ''
+directCommands:
+- uid: az_batch_node_delete
+  name: az batch node delete
+  summary: Menghapus Simpul Komputasi dari Kumpulan yang ditentukan.
+  description: Operasi ini hanya dapat berjalan ketika status alokasi Kumpulan stabil. Ketika operasi ini berjalan, status alokasi berubah dari stabil menjadi mengubah ukuran. Setiap permintaan dapat menghapus hingga 100 simpul.
+  syntax: >-
+    az batch node delete --pool-id
+                         [--account-endpoint]
+                         [--account-key]
+                         [--account-name]
+                         [--if-match]
+                         [--if-modified-since]
+                         [--if-none-match]
+                         [--if-unmodified-since]
+                         [--json-file]
+                         [--node-deallocation-option {requeue, retaineddata, taskcompletion, terminate}]
+                         [--node-list]
+                         [--resize-timeout]
+  requiredParameters:
+  - isRequired: true
+    name: --pool-id
+    summary: ID Kumpulan tempat Anda ingin menghapus Simpul Komputasi.
+    description: ''
+  optionalParameters:
+  - name: --account-endpoint
+    summary: 'Titik akhir layanan batch. Atau, diatur berdasarkan variabel lingkungan: AZURE_BATCH_ENDPOINT.'
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCESS_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCOUNT.'
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag yang terkait dengan versi sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika ETag sumber daya saat ini pada layanan sama persis dengan nilai yang ditentukan oleh klien.
+    description: ''
+  - name: --if-modified-since
+    summary: Tanda waktu yang menunjukkan waktu modifikasi terakhir sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika sumber daya pada layanan telah dimodifikasi sejak waktu yang ditentukan.
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag yang terkait dengan versi sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika ETag sumber daya saat ini pada layanan tidak cocok dengan nilai yang ditentukan oleh klien.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Tanda waktu yang menunjukkan waktu modifikasi terakhir sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika sumber daya pada layanan belum dimodifikasi sejak waktu yang ditentukan.
+    description: ''
+  - name: --json-file
+    summary: File yang berisi spesifikasi parameter penghapusan node di JSON (diformat agar sesuai dengan isi REST API masing-masing). Jika parameter ini ditentukan, semua Argumen '{group_title(arg[0])} diabaikan.
+    description: ''
+  - name: --node-deallocation-option
+    parameterValueGroup: requeue, retaineddata, taskcompletion, terminate
+    summary: Menentukan apa yang harus dilakukan dengan Simpul Komputasi dan tugas yang sedang berjalan setelah dipilih untuk dealokasi. Nilai defaultnya adalah mengantri-ulang.
+    description: ''
+  - name: --node-list
+    summary: Wajib diisi. Maksimal 100 simpul dapat dihapus per permintaan. Nilai yang dipisahkan spasi.
+    description: ''
+  - name: --resize-timeout
+    summary: Nilai defaultnya adalah 15 menit. Nilai minimum adalah 5 menit. Jika Anda menentukan nilai kurang dari 5 menit, layanan Batch mengembalikan kesalahan; jika Anda memanggil REST API secara langsung, kode status HTTP adalah 400 (Permintaan Buruk). Format yang diharapkan adalah durasi ISO-8601.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batch/_help.py
+- uid: az_batch_node_list
+  name: az batch node list
+  summary: Mencantumkan Simpul Komputasi di Kumpulan yang ditentukan.
+  description: ''
+  syntax: >-
+    az batch node list --pool-id
+                       [--account-endpoint]
+                       [--account-key]
+                       [--account-name]
+                       [--filter]
+                       [--select]
+  requiredParameters:
+  - isRequired: true
+    name: --pool-id
+    summary: ID Kumpulan tempat Anda ingin mencantumkan Simpul Komputasi.
+    description: ''
+  optionalParameters:
+  - name: --account-endpoint
+    summary: 'Titik akhir layanan batch. Atau, diatur berdasarkan variabel lingkungan: AZURE_BATCH_ENDPOINT.'
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCESS_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCOUNT.'
+    description: ''
+  - name: --filter
+    summary: Klausa $filter OData. Untuk informasi selengkapnya tentang membuat filter ini, lihat https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-nodes-in-a-pool.
+    description: ''
+  - name: --select
+    summary: Klausa $select OData.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batch/_help.py
+- uid: az_batch_node_reboot
+  name: az batch node reboot
+  summary: Memulai ulang Simpul Komputasi yang ditentukan.
+  description: Anda dapat menghidupkan ulang Simpul Komputasi hanya jika berada dalam status diam atau berjalan.
+  syntax: >-
+    az batch node reboot --node-id
+                         --pool-id
+                         [--account-endpoint]
+                         [--account-key]
+                         [--account-name]
+                         [--node-reboot-option {requeue, retaineddata, taskcompletion, terminate}]
+  requiredParameters:
+  - isRequired: true
+    name: --node-id
+    summary: ID Simpul Komputasi yang ingin Anda mulai ulang.
+    description: ''
+  - isRequired: true
+    name: --pool-id
+    summary: ID Kumpulan yang berisi Simpul Komputasi.
+    description: ''
+  optionalParameters:
+  - name: --account-endpoint
+    summary: 'Titik akhir layanan batch. Atau, diatur berdasarkan variabel lingkungan: AZURE_BATCH_ENDPOINT.'
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCESS_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCOUNT.'
+    description: ''
+  - name: --node-reboot-option
+    parameterValueGroup: requeue, retaineddata, taskcompletion, terminate
+    summary: Nilai defaultnya adalah mengantri-ulang.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batch/_help.py
+- uid: az_batch_node_reimage
+  name: az batch node reimage
+  summary: Menginstal ulang sistem operasi pada Simpul Komputasi yang ditentukan.
+  description: Anda dapat menginstal ulang sistem operasi pada Simpul Komputasi hanya jika berada dalam status menganggur atau berjalan. API ini hanya dapat dipanggil pada Kumpulan yang dibuat dengan properti konfigurasi layanan cloud.
+  syntax: >-
+    az batch node reimage --node-id
+                          --pool-id
+                          [--account-endpoint]
+                          [--account-key]
+                          [--account-name]
+                          [--node-reimage-option {requeue, retaineddata, taskcompletion, terminate}]
+  requiredParameters:
+  - isRequired: true
+    name: --node-id
+    summary: ID Simpul Komputasi yang ingin Anda mulai ulang.
+    description: ''
+  - isRequired: true
+    name: --pool-id
+    summary: ID Kumpulan yang berisi Simpul Komputasi.
+    description: ''
+  optionalParameters:
+  - name: --account-endpoint
+    summary: 'Titik akhir layanan batch. Atau, diatur berdasarkan variabel lingkungan: AZURE_BATCH_ENDPOINT.'
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCESS_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCOUNT.'
+    description: ''
+  - name: --node-reimage-option
+    parameterValueGroup: requeue, retaineddata, taskcompletion, terminate
+    summary: Nilai defaultnya adalah mengantri-ulang.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batch/_help.py
+- uid: az_batch_node_show
+  name: az batch node show
+  summary: Mendapatkan informasi tentang Simpul Komputasi yang ditentukan.
+  description: ''
+  syntax: >-
+    az batch node show --node-id
+                       --pool-id
+                       [--account-endpoint]
+                       [--account-key]
+                       [--account-name]
+                       [--select]
+  requiredParameters:
+  - isRequired: true
+    name: --node-id
+    summary: ID Simpul Komputasi yang ingin Anda dapatkan informasinya.
+    description: ''
+  - isRequired: true
+    name: --pool-id
+    summary: ID Kumpulan yang berisi Simpul Komputasi.
+    description: ''
+  optionalParameters:
+  - name: --account-endpoint
+    summary: 'Titik akhir layanan batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ENDPOINT.'
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCESS_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCOUNT.'
+    description: ''
+  - name: --select
+    summary: Klausa $select OData.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batch/_help.py
+commands:
+- az_batch_node_delete
+- az_batch_node_file
+- az_batch_node_file_delete
+- az_batch_node_file_download
+- az_batch_node_file_list
+- az_batch_node_file_show
+- az_batch_node_list
+- az_batch_node_reboot
+- az_batch_node_reimage
+- az_batch_node_remote-desktop
+- az_batch_node_remote-desktop_download
+- az_batch_node_remote-login-settings
+- az_batch_node_remote-login-settings_show
+- az_batch_node_scheduling
+- az_batch_node_scheduling_disable
+- az_batch_node_scheduling_enable
+- az_batch_node_service-logs
+- az_batch_node_service-logs_upload
+- az_batch_node_show
+- az_batch_node_user
+- az_batch_node_user_create
+- az_batch_node_user_delete
+- az_batch_node_user_reset
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/30/2022
+  description: Mengelola simpul komputasi Batch.
+  ms.openlocfilehash: 76196d4495da70bf852506ec77773b12cb5d4513
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141457002"

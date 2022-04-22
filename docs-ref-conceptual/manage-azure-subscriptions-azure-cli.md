@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: Langganan Azure, kelola langganan Azure, grup manajemen Azure, langganan set Azure cli, langganan pilih Azure cli
-ms.openlocfilehash: 73ddb9674535dee93f0d80d68b57e67b70fef66a
-ms.sourcegitcommit: ad79327952adf0f8be8f1b9678e72434d9f03f0c
+ms.openlocfilehash: 2c5a3c1a953a2d3772dbb08bcbcc37e9186fb44f
+ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 02/12/2022
-ms.locfileid: "138520318"
+ms.lasthandoff: 04/22/2022
+ms.locfileid: "144002905"
 ---
 # <a name="how-to-manage-azure-subscriptions-with-the-azure-cli"></a>Cara mengelola langganan Azure dengan Azure CLI
 
@@ -45,14 +45,14 @@ az account show --output table
 az account list --query "[?isDefault]"
 
 # get a list of subscriptions except for the default subscription
-az account list --query "[?isDefault == \`false\`]"
+az account list --query "[?isDefault == false]"
 
 # get the details of a specific subscription
 az account show --subscription MySubscriptionName
 ```
 
 > [!TIP]
-> `--output` Parameternya adalah parameter global, tersedia untuk semua perintah. Nilai **tabel** menyajikan output dalam format yang bersahabat. Untuk informasi selengkapnya, lihat [Format output untuk perintah Azure CLI](/cli/azure/format-output-azure-cli).
+> `--output` Parameternya adalah parameter global, tersedia untuk semua perintah. Nilai **tabel** menyajikan output dalam format yang bersahabat. Untuk informasi selengkapnya, lihat [Format output untuk perintah Azure CLI](./format-output-azure-cli.md).
 
 Langganan berisi grup sumber daya. Grup sumber daya adalah kontainer yang menampung sumber daya terkait untuk sebuah solusi Azure. Jika perintah berfungsi dengan sumber daya di langganan aktif Anda, Anda tidak perlu menentukan `--subscription`.
 
@@ -98,7 +98,7 @@ Jika Anda menjalankan kembali perintah [az account list](/cli/azure/account#az_a
 
 Grup manajemen Azure berisi langganan. Grup manajemen menyediakan cara untuk mengelola akses, kebijakan, dan kepatuhan untuk langganan tersebut. Untuk informasi selengkapnya, lihat [Apa yang dimaksud dengan grup manajemen Azure](/azure/governance/management-groups/overview).
 
-Gunakan perintah [az account management-group](/cli/azure/account/management-group) untuk membuat dan mengelola Azure Management Groups.
+Gunakan perintah [az account management-group](../latest/docs-ref-autogen/account/management-group.yml) untuk membuat dan mengelola Azure Management Groups.
 
 Anda dapat membuat grup manajemen untuk beberapa langganan Anda dengan menggunakan perintah [az account management-group create](/cli/azure/account/management-group#az-account-management-group-create):
 
@@ -137,7 +137,7 @@ Menghapus langganan atau menghapus grup manajemen tidak menghapus atau menonakti
 
 Sebagai administrator, Anda mungkin perlu mengunci langganan untuk mencegah pengguna menghapus atau memodifikasinya. Untuk informasi selengkapnya, lihat [Kunci sumber daya untuk mencegah perubahan yang tidak terduga](/azure/azure-resource-manager/management/lock-resources).
 
-Di Azure CLI, gunakan perintah [az account lock](/cli/azure/account/lock). Misalnya, perintah [az account lock create](/cli/azure/account/lock#az-account-lock-create) dapat mencegah pengguna menghapus langganan:
+Di Azure CLI, gunakan perintah [az account lock](../latest/docs-ref-autogen/account/lock.yml). Misalnya, perintah [az account lock create](/cli/azure/account/lock#az-account-lock-create) dapat mencegah pengguna menghapus langganan:
 
 ```azurecli
 az account lock create --name "Cannot delete subscription" --lock-type CanNotDelete

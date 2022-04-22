@@ -8,12 +8,12 @@ ms.topic: how-to
 ms.date: 08/01/2021
 ms.custom: template-how-to, devx-track-azurecli, seo-azure-cli
 keywords: variabel azure cli, perintah azure cli, nilai variabel, variabel shell
-ms.openlocfilehash: 7e524e834be80117d4e2e69b69a07019b7f12389
-ms.sourcegitcommit: 62469e9c1ad07f215129ece5db89c530f1a77968
+ms.openlocfilehash: 36ca640aaa7d8c3a1ecfaca142494628f383a3a4
+ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 12/15/2021
-ms.locfileid: "135155922"
+ms.lasthandoff: 04/22/2022
+ms.locfileid: "144004109"
 ---
 # <a name="how-to-use-variables-in-azure-cli-commands"></a>Cara menggunakan variabel dalam perintah Azure CLI
 
@@ -30,7 +30,7 @@ Artikel ini membahas berbagai cara untuk menentukan nilai dalam perintah Azure C
 
 ## <a name="use-shell-variables"></a>Menggunakan variabel shell
 
-Azure CLI berjalan di dalam shell. Artikel ini menggunakan Bash. Untuk informasi tentang shell lain, lihat [Menggunakan Azure CLI secara efektif](/cli/azure/use-cli-effectively). Anda dapat menggunakan variabel di Bash untuk meneruskan nilai untuk parameter ke perintah. Penggunaan variabel dengan Azure CLI juga memungkinkan perintah digunakan kembali, baik sedikit demi sedikit maupun dalam skrip.
+Azure CLI berjalan di dalam shell. Artikel ini menggunakan Bash. Untuk informasi tentang shell lain, lihat [Menggunakan Azure CLI secara efektif](./use-cli-effectively.md). Anda dapat menggunakan variabel di Bash untuk meneruskan nilai untuk parameter ke perintah. Penggunaan variabel dengan Azure CLI juga memungkinkan perintah digunakan kembali, baik sedikit demi sedikit maupun dalam skrip.
 
 Contoh ini membuat disk penyimpanan baru dengan jenis yang sama dengan disk penyimpanan di mesin virtual yang ada.
 
@@ -49,9 +49,9 @@ osType=$(az vm get-instance-view --resource-group $MyResourceGroup \
 az disk create --resource-group $MyResourceGroup --name DestinationDisk --size-gb 20 --os-type $osType
 ```
 
-Contoh ini menunjukkan cara menetapkan nilai ke variabel yang digunakan kembali, seperti **MyResourceGroup**. Perintah mendapat nilai untuk ditetapkan ke **osType**.
+Contoh ini menunjukkan cara menetapkan nilai ke variabel yang digunakan kembali, seperti **MyResourceGroup** dan **osType**. Perintah [az vm get-instance-view](/cli/azure/vm#az_vm_get_instance_view) yang dikombinasikan dengan kueri `storageProfile.osDisk.osType` mengembalikan jenis OS disk. Membungkus perintah dengan `$()` menetapkan nilai pengembalian perintah ke `osType`. Untuk mempelajari selengkapnya tentang `--query` dan kueri JMESPath lihat [Cara mengkueri output perintah Azure CLI menggunakan kueri JMESPath](./query-azure-cli.md).
 
-Saat Anda menetapkan nilai ke variabel dari perintah lain, pastikan perintah menggunakan format output yang kompatibel. Perintah [az vm get-instance-view](/cli/azure/vm#az_vm_get_instance_view) menggunakan format output `tsv`. Opsi ini menampilkan nilai tanpa pemformatan tambahan, kunci, atau simbol lainnya. Beberapa format output mencakup struktur atau karakter seperti tanda kutip. Untuk informasi selengkapnya, lihat [Format output untuk perintah Azure CLI](/cli/azure/format-output-azure-cli).
+Saat Anda menetapkan nilai ke variabel dari perintah lain, pastikan perintah menggunakan format output yang kompatibel. Perintah [az vm get-instance-view](/cli/azure/vm#az_vm_get_instance_view) menggunakan format output `tsv`. Opsi ini menampilkan nilai tanpa pemformatan tambahan, kunci, atau simbol lainnya. Beberapa format output mencakup struktur atau karakter seperti tanda kutip. Untuk informasi selengkapnya, lihat [Format output untuk perintah Azure CLI](./format-output-azure-cli.md).
 
 Dalam contoh ini, variabel **MySubscription** harus dalam tanda kutip. Nilai variabel berisi spasi, yang tidak dapat diurai oleh perintah. Jika hanya bekerja dengan ID langganan, Anda tidak perlu menggunakan tanda kutip.
 
@@ -63,7 +63,7 @@ Banyak perintah memerlukan langganan tertentu. Sumber daya Azure ada di grup sum
 az account show --output table
 ```
 
-Anda mungkin hanya memiliki akses ke satu langganan. Untuk informasi selengkapnya, lihat [Menggunakan langganan Azure dengan Azure CLI](/cli/azure/manage-azure-subscriptions-azure-cli). Anda dapat menggunakan perintah [az account set](/cli/azure/account#az_account_set) untuk mengatur langganan Anda saat ini:
+Anda mungkin hanya memiliki akses ke satu langganan. Untuk informasi selengkapnya, lihat [Menggunakan langganan Azure dengan Azure CLI](./manage-azure-subscriptions-azure-cli.md). Anda dapat menggunakan perintah [az account set](/cli/azure/account#az_account_set) untuk mengatur langganan Anda saat ini:
 
 ```azurecli
 az account set --subscription "My Demos"
@@ -116,7 +116,7 @@ Selama persistensi aktif, Anda dapat mengeluarkan parameter `--resource-group` d
 az storage account create --name storage135 --location eastus --sku Standard_LRS
 ```
 
-Untuk informasi selengkapnya, lihat [Parameter tetap Azure CLI](/cli/azure/param-persist-howto).
+Untuk informasi selengkapnya, lihat [Parameter tetap Azure CLI](./param-persist-howto.md).
 
 ## <a name="clean-up-resources"></a>Membersihkan sumber daya
 

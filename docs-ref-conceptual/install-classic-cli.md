@@ -1,21 +1,21 @@
 ---
 title: Menginstal Azure classic CLI | Microsoft Docs
 description: Pelajari cara menginstal Azure classic CLI untuk macOS, Linux, dan Windows untuk menggunakan perintah berbasis shell sumber terbuka untuk mengelola layanan Microsoft Azure.
-author: dbradish-microsoft
-ms.author: dbradish
-manager: barbkess
+author: jiasli
+ms.author: jiasli
+manager: yonzhan
 ms.date: 08/19/2021
 ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure classic cli, azure classic
-ms.openlocfilehash: 98779bdb244262a66270e0210962349ff229dc01
-ms.sourcegitcommit: ecad34e4d4654660377050fccba7861e942e03de
+ms.openlocfilehash: 5b2ee5caff38238efbc55e1072b6512081436ed3
+ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 09/13/2021
-ms.locfileid: "132439047"
+ms.lasthandoff: 04/22/2022
+ms.locfileid: "144003391"
 ---
 # <a name="install-the-azure-classic-cli"></a>Pasang CLI klasik Azure
 

@@ -1,0 +1,166 @@
+### YamlMime:AzureCLIGroup
+uid: az_keyvault_security-domain
+name: az keyvault security-domain
+summary: Mengelola operasi domain keamanan.
+description: ''
+directCommands:
+- uid: az_keyvault_security-domain_download
+  name: az keyvault security-domain download
+  summary: Unduh file domain keamanan dari HSM.
+  description: ''
+  syntax: >-
+    az keyvault security-domain download --sd-quorum
+                                         --sd-wrapping-keys
+                                         --security-domain-file
+                                         [--hsm-name]
+                                         [--id]
+                                         [--no-wait]
+  examples:
+  - summary: Unduhan domain keamanan (N=3, M=2).
+    syntax: az keyvault security-domain download --hsm-name MyHSM --security-domain-file "{SD_FILE_NAME}" --sd-quorum 2 --sd-wrapping-keys "{PEM_PUBLIC_KEY1_FILE_NAME}" "{PEM_PUBLIC_KEY2_FILE_NAME}" "{PEM_PUBLIC_KEY3_FILE_NAME}"
+  requiredParameters:
+  - isRequired: true
+    name: --sd-quorum
+    summary: Jumlah minimum berbagi yang diperlukan untuk mendekripsi domain keamanan untuk pemulihan.
+    description: ''
+  - isRequired: true
+    name: --sd-wrapping-keys
+    summary: Jalur file yang dipisahkan spasi ke file PEM yang berisi kunci umum.
+    description: ''
+  - isRequired: true
+    name: --security-domain-file
+    summary: Jalur ke file tempat blob JSON yang dikembalikan oleh perintah ini disimpan.
+    description: ''
+  optionalParameters:
+  - name: --hsm-name
+    summary: Nama HSM. Dapat dihilangkan jika --id ditentukan.
+    description: ''
+  - name: --id
+    summary: URI penuh HSM.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_security-domain_init-recovery
+  name: az keyvault security-domain init-recovery
+  summary: Ambil kunci pertukaran HSM.
+  description: ''
+  syntax: >-
+    az keyvault security-domain init-recovery --sd-exchange-key
+                                              [--hsm-name]
+                                              [--id]
+  examples:
+  - summary: Ambil kunci pertukaran dan simpan.
+    syntax: az keyvault security-domain init-recovery --hsm-name MyHSM --sd-exchange-key "{PATH_TO_RESTORE}"
+  requiredParameters:
+  - isRequired: true
+    name: --sd-exchange-key
+    summary: Jalur file lokal untuk menyimpan kunci yang diekspor.
+    description: ''
+  optionalParameters:
+  - name: --hsm-name
+    summary: Nama HSM. Dapat dihilangkan jika --id ditentukan.
+    description: ''
+  - name: --id
+    summary: URI penuh HSM.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_security-domain_upload
+  name: az keyvault security-domain upload
+  summary: Mulai memulihkan HSM.
+  description: ''
+  syntax: >-
+    az keyvault security-domain upload --sd-exchange-key
+                                       --sd-file
+                                       --sd-wrapping-keys
+                                       [--hsm-name]
+                                       [--id]
+                                       [--no-wait]
+                                       [--passwords]
+  examples:
+  - summary: Unggahan domain keamanan (M=2).
+    syntax: az keyvault security-domain upload --hsm-name MyHSM --sd-file "{SD_TRANSFER_FILE}" --sd-exchange-key "{PEM_FILE_NAME}" --sd-wrapping-keys "{PEM_PRIVATE_KEY1_FILE_NAME}" "{PEM_PRIVATE_KEY2_FILE_NAME}"
+  requiredParameters:
+  - isRequired: true
+    name: --sd-exchange-key
+    summary: Kunci pertukaran untuk domain keamanan.
+    description: ''
+  - isRequired: true
+    name: --sd-file
+    summary: File ini berisi domain keamanan yang dienkripsi menggunakan file SD Exchange diunduh dalam perintah security-domain init-recovery.
+    description: ''
+  - isRequired: true
+    name: --sd-wrapping-keys
+    summary: Jalur file yang dipisahkan spasi ke file PEM yang berisi kunci privat.
+    description: ''
+  optionalParameters:
+  - name: --hsm-name
+    summary: Nama HSM. Dapat dihilangkan jika --id ditentukan.
+    description: ''
+  - name: --id
+    summary: URI penuh HSM.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --passwords
+    summary: Daftar kata sandi yang dipisahkan spasi untuk --sd-wrapping-keys. CLI akan mencocokkannya secara berurutan. Dapat dihilangkan jika kunci Anda tanpa perlindungan kata sandi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+- uid: az_keyvault_security-domain_wait
+  name: az keyvault security-domain wait
+  summary: Tempatkan CLI dalam status menunggu hingga operasi domain keamanan HSM selesai.
+  description: ''
+  syntax: >-
+    az keyvault security-domain wait [--hsm-name]
+                                     [--id]
+                                     [--target-operation {download, upload}]
+  examples:
+  - summary: Jeda CLI hingga operasi domain keamanan selesai.
+    syntax: az keyvault security-domain wait --hsm-name MyHSM
+  optionalParameters:
+  - name: --hsm-name
+    summary: Nama HSM. Dapat dihilangkan jika --id ditentukan.
+    description: ''
+  - name: --id
+    summary: URI penuh HSM.
+    description: ''
+  - name: --target-operation
+    defaultValue: upload
+    parameterValueGroup: download, upload
+    summary: Operasi target yang perlu menunggu.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/keyvault/_help.py
+commands:
+- az_keyvault_security-domain_download
+- az_keyvault_security-domain_init-recovery
+- az_keyvault_security-domain_upload
+- az_keyvault_security-domain_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 11/30/2021
+  description: Mengelola operasi domain keamanan.
+  ms.openlocfilehash: b4e796a26170852d79d2cf38efcf46dabbb8b969
+  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 03/25/2022
+  ms.locfileid: "141128461"

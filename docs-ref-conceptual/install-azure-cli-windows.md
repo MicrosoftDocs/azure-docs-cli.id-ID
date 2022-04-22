@@ -1,9 +1,9 @@
 ---
 title: Menginstal Azure CLI untuk Windows | Microsoft Docs
 description: Untuk menginstal Azure CLI di Windows, Anda harus menggunakan Powershell, atau alat penginstal MSI, yang memberi Anda akses ke CLI melalui Windows Command Prompt (CMD).
-author: dbradish-microsoft
-ms.author: dbradish
-manager: barbkess
+author: jiasli
+ms.author: jiasli
+manager: yonzhan
 ms.prod: azure
 ms.date: 08/19/2021
 ms.topic: conceptual
@@ -11,12 +11,12 @@ ms.devlang: azurecli
 ms.technology: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: Menginstal azure cli, unduhan azure cli, cli untuk windows, menginstal azure cli di windows, azure cli windows, menginstal azure cli windows
-ms.openlocfilehash: 028fe7dc7bd45aa82f166c0043a3d73151350615
-ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+ms.openlocfilehash: 098caabddfa2c1abbe6551b5f51fc76105f0d0e4
+ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/06/2022
-ms.locfileid: "141397558"
+ms.lasthandoff: 04/22/2022
+ms.locfileid: "144003102"
 ---
 # <a name="install-azure-cli-on-windows"></a>Instal Azure CLI di Windows
 

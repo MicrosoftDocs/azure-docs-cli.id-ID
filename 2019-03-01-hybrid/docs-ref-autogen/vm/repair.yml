@@ -17,6 +17,7 @@ directCommands:
                         --resource-group
                         [--associate-public-ip]
                         [--copy-disk-name]
+                        [--distro]
                         [--enable-nested]
                         [--repair-group-name]
                         [--repair-password]
@@ -28,6 +29,8 @@ directCommands:
     syntax: az vm repair create -g MyResourceGroup -n myVM --verbose
   - summary: Membuat VM perbaikan dan mengatur autentikasi VM
     syntax: az vm repair create -g MyResourceGroup -n myVM --repair-username username --repair-password password!234 --verbose
+  - summary: Membuat VM perbaikan distro tertentu atau URN tertentu juga dapat disediakan
+    syntax: az vm repair create -g MyResourceGroup -n myVM --distro 'rhel7|sles12|ubuntu20|centos6|oracle8|sles15'
   requiredParameters:
   - isRequired: true
     name: --name -n
@@ -43,6 +46,10 @@ directCommands:
     description: ''
   - name: --copy-disk-name
     summary: Nama salinan disk OS.
+    description: ''
+  - name: --distro
+    defaultValue: ubuntu
+    summary: Opsi untuk membuat vm perbaikan dari distro linux tertentu (rhel7|rhel8|suse12|ubuntu20|centos7|oracle7).
     description: ''
   - name: --enable-nested
     summary: Aktifkan hyperv berlapis.
@@ -190,9 +197,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Perintah perbaikan VM akan memungkinkan pengguna Azure untuk memperbaiki VM yang tidak dapat di-boot sendiri dengan menyalin disk OS VM sumber dan melampirkannya ke VM perbaikan yang baru dibuat.
-  ms.openlocfilehash: b7b7fa378f0149c5bb0a79867c7dcd5b76b98887
-  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.openlocfilehash: 584f9e13531a80b7722b0f5f0a71e6f307dfa841
+  ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 03/25/2022
-  ms.locfileid: "141130784"
+  ms.lasthandoff: 04/22/2022
+  ms.locfileid: "144002941"

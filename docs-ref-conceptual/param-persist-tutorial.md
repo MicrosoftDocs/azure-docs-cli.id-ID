@@ -11,12 +11,12 @@ ms.devlang: azurecli
 ms.technology: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: tutorial parameter tetap
-ms.openlocfilehash: c80710818e052e439112d3fe887d4f80dd717359
-ms.sourcegitcommit: 49c01a527543e5de52f51ee19f930c78842c349e
+ms.openlocfilehash: ad3f419931c2d93c06f340cf7371c8c2e3f4c166
+ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 03/08/2022
-ms.locfileid: "139325885"
+ms.lasthandoff: 04/22/2022
+ms.locfileid: "144003337"
 ---
 # <a name="tutorial-use-persisted-parameters-to-simplify-sequential-azure-cli-commands"></a>Tutorial: Gunakan parameter tetap untuk menyederhanakan perintah Azure CLI berurutan
 
@@ -78,7 +78,7 @@ cd azCLI
 
 ## <a name="2-turn-on-persisted-parameters"></a>2. Aktifkan parameter tetap
 
-[Parameter tetap](/cli/azure/config/param-persist) harus diaktifkan sebelum nilai parameter dapat disimpan.  Anda akan menerima peringatan hingga `az config param-persist` dipindahkan dari tahap percobaan.  Lihat [Ringkasan: Jenis dan status referensi Azure CLI](/cli/azure/reference-types-and-status) untuk mempelajari jenis referensi, status, dan tingkat dukungan Azure CLI.
+[Parameter tetap](../latest/docs-ref-autogen/config/param-persist.yml) harus diaktifkan sebelum nilai parameter dapat disimpan.  Anda akan menerima peringatan hingga `az config param-persist` dipindahkan dari tahap percobaan.  Lihat [Ringkasan: Jenis dan status referensi Azure CLI](./reference-types-and-status.md) untuk mempelajari jenis referensi, status, dan tingkat dukungan Azure CLI.
 
 ```azurecli
 az config param-persist on
@@ -128,7 +128,7 @@ Untuk menyimpan nilai untuk parameter tetap, jalankan perintah Azure CLI pilihan
 
 1. Buat parameter tetap tanpa membuat sumber daya baru.
 
-   Jika Anda tidak ingin membuat sumber daya Azure baru, parameter `resource_group_name` dan `location` dapat disimpan dengan menggunakan perintah non-create seperti `show` atau `list`.   Lihat [Parameter tetap Azure CLI](/cli/azure/param-persist-howto#compare-parameter-persistence-and-global-variables) untuk mengetahui daftar lengkap parameter yang didukung, dan tindakan yang diperlukan untuk menyimpan nilai.  Contoh ini juga menghapus semua nilai parameter dengan menggunakan perintah [z config param-persist delete](/cli/azure/config/param-persist#az_param_persist_delete).
+   Jika Anda tidak ingin membuat sumber daya Azure baru, parameter `resource_group_name` dan `location` dapat disimpan dengan menggunakan perintah non-create seperti `show` atau `list`.   Lihat [Parameter tetap Azure CLI](./param-persist-howto.md) untuk mengetahui daftar lengkap parameter yang didukung, dan tindakan yang diperlukan untuk menyimpan nilai.  Contoh ini juga menghapus semua nilai parameter dengan menggunakan perintah [z config param-persist delete](/cli/azure/config/param-persist#az_param_persist_delete).
 
    ```azurecli
    # Clear all persisted parameters for demonstration.
@@ -302,7 +302,7 @@ az storage account create --name SA4inAzCLI --sku Standard_LRS
 
 ## <a name="8-clean-up-resources"></a>8. Membersihkan sumber daya
 
-Jika tidak dibutuhkan lagi, gunakan perintah [az group delete](/cli/azure/group) untuk menghapus grup sumber daya, dan semua sumber daya terkait.
+Jika tidak dibutuhkan lagi, gunakan perintah [az group delete](../latest/docs-ref-autogen/group.yml) untuk menghapus grup sumber daya, dan semua sumber daya terkait.
 
 ```azurecli
 az group delete --name RG1forTutorial
@@ -311,4 +311,4 @@ az group delete --name RG1forTutorial
 ## <a name="see-also"></a>Lihat juga
 
 - [(Cara bekerja dengan parameter tetap Azure CLI](param-persist-howto.md)
-- [Opsi konfigurasi Azure CLI](/cli/azure/azure-cli-configuration)
+- [Opsi konfigurasi Azure CLI](./azure-cli-configuration.md)

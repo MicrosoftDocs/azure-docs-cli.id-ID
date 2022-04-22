@@ -1,0 +1,318 @@
+### YamlMime:AzureCLIGroup
+uid: az_ssh
+name: az ssh
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **ssh** untuk Azure CLI (versi 2.4.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az ssh** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: SSH ke dalam sumber daya (Azure VM, server Arc, dll) menggunakan sertifikat openssh yang dikeluarkan AAD.
+description: ''
+directCommands:
+- uid: az_ssh_arc
+  name: az ssh arc
+  summary: SSH ke Azure Arc Servers.
+  description: Pengguna dapat masuk menggunakan sertifikat yang dikeluarkan AAD atau menggunakan kredensial pengguna lokal. Sebaiknya masuk menggunakan sertifikat yang dikeluarkan AAD karena azure secara otomatis memutar kunci CA SSH. Untuk SSH sebagai pengguna lokal di komputer target, Anda harus memberikan nama pengguna lokal menggunakan argumen --local-user.
+  syntax: >-
+    az ssh arc [--certificate-file]
+               [--delete-private-key]
+               [--local-user]
+               [--name]
+               [--port]
+               [--private-key-file]
+               [--public-key-file]
+               [--resource-group]
+               [--ssh-client-folder]
+               [--ssh-proxy-folder]
+               [<SSH_ARGS>]
+  examples:
+  - summary: Berikan nama grup sumber daya dan nama komputer ke SSH menggunakan sertifikat yang diterbitkan AAD
+    syntax: az ssh arc --resource-group myResourceGroup --name myMachine
+  - summary: Menggunakan file kunci privat kustom
+    syntax: az ssh arc --resource-group myResourceGroup --name myMachine --private-key-file key --public-key-file key.pub
+  - summary: Menggunakan argumen ssh tambahan
+    syntax: az ssh arc --resource-group myResourceGroup --name myMachine -- -A -o ForwardX11=yes
+  - summary: Berikan nama pengguna lokal ke SSH dengan kredensial pengguna lokal menggunakan autentikasi berbasis sertifikat.
+    syntax: az ssh arc --local-user username --resource-group myResourceGroup --name myMachine --certificate-file cert.pub --private-key-file key
+  - summary: Berikan nama pengguna lokal ke SSH dengan kredensial pengguna lokal menggunakan autentikasi berbasis kunci.
+    syntax: az ssh arc --local-user username --resource-group myResourceGroup --name myMachine --private-key-file key
+  - summary: Berikan nama pengguna lokal ke SSH dengan kredensial pengguna lokal menggunakan autentikasi berbasis kata sandi.
+    syntax: az ssh arc --local-user username --resource-group myResourceGroup --name myMachine
+  - summary: Berikan Folder Klien SSH untuk menggunakan executable ssh di folder tersebut, seperti ssh-keygen.exe dan ssh.exe. Jika tidak disediakan, ekstensi mencoba menggunakan klien OpenSSH yang telah diinstal sebelumnya (pastikan klien OpenSSH diinstal dan variabel lingkungan Jalur diatur dengan benar).
+    syntax: az ssh arc --resource-group myResourceGroup --name myMachine --ssh-client-folder "C:\Program Files\OpenSSH"
+  optionalParameters:
+  - name: --certificate-file -c
+    summary: Jalur ke file sertifikat.
+    description: ''
+  - name: --delete-private-key --force-delete-credentials
+    summary: Ini adalah argumen internal. Argumen ini digunakan oleh Portal Microsoft Azure untuk memberikan pengalaman masuk SSH satu klik di Cloud shell.
+    description: ''
+  - name: --local-user
+    summary: Nama pengguna untuk pengguna lokal.
+    description: ''
+  - name: --name --vm-name -n
+    summary: Nama Server Arc.
+    description: ''
+  - name: --port
+    summary: Port untuk menyambungkan ke pada host jarak jauh.
+    description: ''
+  - name: --private-key-file -i
+    summary: Jalur file kunci privat RSA.
+    description: ''
+  - name: --public-key-file -p
+    summary: Jalur file kunci publik RSA.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --ssh-client-folder
+    summary: Jalur folder yang berisi ssh executable (ssh.exe, ssh-keygen.exe, dll). Default ke ssh yang telah diinstal sebelumnya jika tidak disediakan.
+    description: ''
+  - name: --ssh-proxy-folder
+    summary: Jalur ke folder tempat proksi ssh harus disimpan. Default ke folder .clientsshproxy di direktori beranda pengguna jika tidak disediakan.
+    description: ''
+  - name: <SSH_ARGS>
+    summary: Argumen tambahan diteruskan ke OpenSSH.
+    description: ''
+- uid: az_ssh_cert
+  name: az ssh cert
+  summary: Buat sertifikat RSA SSH yang ditandatangani oleh AAD.
+  description: ''
+  syntax: >-
+    az ssh cert [--file]
+                [--public-key-file]
+                [--ssh-client-folder]
+  examples:
+  - summary: Membuat sertifikat ssh berumur pendek yang ditandatangani oleh AAD
+    syntax: az ssh cert --public-key-file ./id_rsa.pub --file ./id_rsa-aadcert.pub
+  optionalParameters:
+  - name: --file -f
+    summary: Jalur file untuk menulis sertifikasi SSH ke, default ke jalur kunci publik dengan -aadcert.pub diterapkan.
+    description: ''
+  - name: --public-key-file -p
+    summary: Jalur file kunci publik RSA. Jika tidak disediakan, pasangan kunci yang dihasilkan disimpan dalam direktori yang sama dengan --file.
+    description: ''
+  - name: --ssh-client-folder
+    summary: Jalur folder yang berisi ssh executable (ssh.exe, ssh-keygen.exe, dll). Default ke ssh yang telah diinstal sebelumnya jika tidak disediakan.
+    description: ''
+- uid: az_ssh_config
+  name: az ssh config
+  summary: Buat konfigurasi SSH untuk sumber daya (Azure VM, Arc Server, dll) yang kemudian dapat digunakan oleh klien yang mendukung konfigurasi dan sertifikat OpenSSH.
+  description: Perangkat lunak lain (git/rsync/etc) yang mendukung pengaturan perintah SSH dapat diatur untuk menggunakan file konfigurasi dengan mengatur perintah ke 'ssh -F /path/to/config' misalnya rsync -e 'ssh -F /path/to/config'.  Pengguna dapat membuat file konfigurasi ssh yang menggunakan sertifikat yang dikeluarkan AAD atau kredensial pengguna lokal.
+  syntax: >-
+    az ssh config --file
+                  [--certificate-file]
+                  [--ip]
+                  [--keys-dest-folder]
+                  [--local-user]
+                  [--name]
+                  [--overwrite]
+                  [--port]
+                  [--prefer-private-ip]
+                  [--private-key-file]
+                  [--public-key-file]
+                  [--resource-group]
+                  [--resource-type]
+                  [--ssh-client-folder]
+                  [--ssh-proxy-folder]
+  examples:
+  - summary: Beri nama grup sumber daya dan komputer untuk membuat konfigurasi menggunakan sertifikat yang dikeluarkan AAD, simpan dalam file lokal, lalu ssh ke sumber daya tersebut
+    syntax: >-
+      az ssh config --resource-group myResourceGroup --name myVm --file ./sshconfig
+
+      ssh -F ./sshconfig myResourceGroup-myVM
+  - summary: Berikan IP publik (atau nama host) azure VM untuk membuat konfigurasi lalu ssh ke VM tersebut
+    syntax: >-
+      az ssh config --ip 1.2.3.4 --file ./sshconfig
+
+      ssh -F ./sshconfig 1.2.3.4
+  - summary: Beri pengguna lokal untuk membuat konfigurasi menggunakan kredensial pengguna lokal, simpan dalam file lokal, lalu ssh ke sumber daya tersebut
+    syntax: >-
+      az ssh config --resource-group myResourceGroup --name myMachine --local-user username --certificate-file cert --private-key-file key --file ./sshconfig
+
+      ssh -F ./sshconfig MyResourceGroup-myMachine-username
+  - summary: Berikan Folder Tujuan Kunci untuk menyimpan kunci dan sertifikat yang dihasilkan. Jika tidak disediakan, kunci SSH disimpan di folder baru "az_ssh_config" di samping file konfigurasi.
+    syntax: az ssh config --ip 1.2.3.4 --file ./sshconfig --keys-destination-folder /home/user/mykeys
+  - summary: Membuat konfigurasi generik untuk digunakan dengan host apa pun
+    syntax: >-
+      #Bash
+
+      az ssh config --ip \* --file ./sshconfig
+
+      #PowerShell
+
+      az ssh config --ip * --file ./sshconfig
+  - summary: Contoh dengan perangkat lunak lain
+    syntax: >-
+      #Bash
+
+      az ssh config --ip \* --file ./sshconfig
+
+      rsync -e 'ssh -F ./sshconfig' -avP directory/ myvm:~/directory
+
+      GIT_SSH_COMMAND="ssh -F ./sshconfig" git clone myvm:~/gitrepo
+  - summary: Berikan Folder Klien SSH untuk menggunakan executable ssh di folder tersebut. Jika tidak disediakan, ekstensi mencoba menggunakan klien OpenSSH yang telah diinstal sebelumnya (dalam hal ini, pastikan klien OpenSSH diinstal dan variabel lingkungan Jalur diatur dengan benar).
+    syntax: az ssh config --file ./sshconfig --resource-group myResourceGroup --name myMachine --ssh-client-folder "C:\Program Files\OpenSSH"
+  - summary: Berikan Jenis Sumber Daya target. Berguna ketika ada Azure VM dan Arc Server dengan nama yang sama dalam grup sumber daya yang sama. Jenis sumber daya dapat berupa "Microsoft.HybridCompute" untuk Arc Servers atau "Microsoft.Compute" untuk Azure Virtual Machines.
+    syntax: az ssh config --resource-type [Microsoft.Compute|Microsoft.HybridCompute] --resource-group myResourceGroup --name myVM --file ./myconfig
+  requiredParameters:
+  - isRequired: true
+    name: --file -f
+    summary: Jalur file untuk menulis konfigurasi SSH.
+    description: ''
+  optionalParameters:
+  - name: --certificate-file -c
+    summary: Jalur ke file sertifikat.
+    description: ''
+  - name: --ip
+    summary: Alamat IP publik (atau nama host) VM.
+    description: ''
+  - name: --keys-dest-folder --keys-destination-folder
+    summary: Folder tempat kunci baru yang dihasilkan akan disimpan.
+    description: ''
+  - name: --local-user
+    summary: Nama pengguna untuk pengguna lokal.
+    description: ''
+  - name: --name --vm-name -n
+    summary: Nama VM.
+    description: ''
+  - name: --overwrite
+    summary: Menimpa file konfigurasi jika bendera ini diatur.
+    description: ''
+  - name: --port
+    summary: Port SSH.
+    description: ''
+  - name: --prefer-private-ip
+    summary: Akan menggunakan IP privat jika tersedia. Secara default hanya IP publik yang digunakan.
+    description: ''
+  - name: --private-key-file -i
+    summary: Jalur file kunci privat RSA.
+    description: ''
+  - name: --public-key-file -p
+    summary: Jalur file kunci publik RSA.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-type
+    summary: Jenis sumber daya harus Microsoft.Compute atau Microsoft.HybridCompute.
+    description: ''
+  - name: --ssh-client-folder
+    summary: Jalur folder yang berisi ssh executable (ssh.exe, ssh-keygen.exe, dll). Default ke ssh yang telah diinstal sebelumnya jika tidak disediakan.
+    description: ''
+  - name: --ssh-proxy-folder
+    summary: Jalur ke folder tempat proksi ssh harus disimpan. Default ke folder .clientsshproxy di direktori beranda pengguna jika tidak disediakan.
+    description: ''
+- uid: az_ssh_vm
+  name: az ssh vm
+  summary: SSH ke Azure VM atau Arc Server.
+  description: Pengguna dapat masuk menggunakan sertifikat yang dikeluarkan AAD atau menggunakan kredensial pengguna lokal. Sebaiknya masuk menggunakan sertifikat yang diterbitkan AAD. Untuk SSH menggunakan kredensial pengguna lokal, Anda harus memberikan nama pengguna lokal menggunakan parameter --local-user.
+  syntax: >-
+    az ssh vm [--certificate-file]
+              [--delete-private-key]
+              [--hostname]
+              [--local-user]
+              [--name]
+              [--port]
+              [--prefer-private-ip]
+              [--private-key-file]
+              [--public-key-file]
+              [--resource-group]
+              [--resource-type]
+              [--ssh-client-folder]
+              [--ssh-proxy-folder]
+              [<SSH_ARGS>]
+  examples:
+  - summary: Berikan nama grup sumber daya dan nama komputer ke SSH menggunakan sertifikat yang diterbitkan AAD
+    syntax: az ssh vm --resource-group myResourceGroup --name myVM
+  - summary: Berikan IP publik (atau nama host) VM ke SSH menggunakan sertifikat yang diterbitkan AAD
+    syntax: >-
+      az ssh vm --ip 1.2.3.4
+
+      az ssh vm --hostname example.com
+  - summary: Menggunakan file kunci privat kustom
+    syntax: az ssh vm --ip 1.2.3.4 --private-key-file key --public-key-file key.pub
+  - summary: Menggunakan argumen ssh tambahan
+    syntax: az ssh vm --ip 1.2.3.4 -- -A -o ForwardX11=yes
+  - summary: Berikan Jenis Sumber Daya target. Berguna ketika ada Azure VM dan Arc Server dengan nama yang sama dalam grup sumber daya yang sama. Jenis sumber daya dapat berupa "Microsoft.HybridCompute" untuk Arc Servers atau "Microsoft.Compute" untuk Azure Virtual Machines.
+    syntax: az ssh vm --resource-type [Microsoft.Compute|Microsoft.HybridCompute] --resource-group myResourceGroup --name myVM
+  - summary: Berikan nama pengguna lokal ke SSH dengan kredensial pengguna lokal menggunakan autentikasi berbasis sertifikat.
+    syntax: az ssh vm --local-user username --ip 1.2.3.4 --certificate-file cert.pub --private-key-file key
+  - summary: Berikan nama pengguna lokal ke SSH dengan kredensial pengguna lokal menggunakan autentikasi berbasis kunci.
+    syntax: az ssh vm --local-user username --resource-group myResourceGroup --name myVM --private-key-file key
+  - summary: Berikan nama pengguna lokal ke SSH dengan kredensial pengguna lokal menggunakan autentikasi berbasis kata sandi.
+    syntax: az ssh vm --local-user username --resource-group myResourceGroup --name myArcServer
+  - summary: Berikan Folder Klien SSH untuk menggunakan executable ssh di folder tersebut, seperti ssh-keygen.exe dan ssh.exe. Jika tidak disediakan, ekstensi mencoba menggunakan klien OpenSSH yang telah diinstal sebelumnya (dalam hal ini, pastikan klien OpenSSH diinstal dan variabel lingkungan Jalur diatur dengan benar).
+    syntax: az ssh vm --resource-group myResourceGroup --name myVM --ssh-client-folder "C:\Program Files\OpenSSH"
+  optionalParameters:
+  - name: --certificate-file -c
+    summary: Jalur ke file sertifikat yang digunakan untuk autentikasi saat menggunakan kredensial pengguna lokal.
+    description: ''
+  - name: --delete-private-key --force-delete-credentials
+    summary: Ini adalah argumen internal. Argumen ini digunakan oleh Portal Microsoft Azure untuk memberikan pengalaman masuk SSH satu klik di Cloud shell.
+    description: ''
+  - name: --hostname --ip
+    summary: Alamat IP publik (atau privat yang dapat dijangkau) (atau nama host) VM.
+    description: ''
+  - name: --local-user
+    summary: Nama pengguna untuk pengguna lokal.
+    description: ''
+  - name: --name --vm-name -n
+    summary: Nama VM.
+    description: ''
+  - name: --port
+    summary: Port SSH.
+    description: ''
+  - name: --prefer-private-ip
+    summary: Akan lebih memilih IP privat.  Memerlukan konektivitas ke IP privat.
+    description: ''
+  - name: --private-key-file -i
+    summary: Jalur file kunci privat RSA.
+    description: ''
+  - name: --public-key-file -p
+    summary: Jalur file kunci publik RSA.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-type
+    summary: Jenis sumber daya harus Microsoft.Compute atau Microsoft.HybridCompute.
+    description: ''
+  - name: --ssh-client-folder
+    summary: Jalur folder yang berisi executable ssh (ssh.exe, ssh-keygen.exe, dll). Default ke ssh yang telah diinstal sebelumnya jika tidak disediakan.
+    description: ''
+  - name: --ssh-proxy-folder
+    summary: Jalur ke folder tempat proksi ssh harus disimpan. Default ke folder .clientsshproxy di direktori beranda pengguna jika tidak disediakan.
+    description: ''
+  - name: <SSH_ARGS>
+    summary: Argumen tambahan diteruskan ke OpenSSH.
+    description: ''
+commands:
+- az_ssh_arc
+- az_ssh_cert
+- az_ssh_config
+- az_ssh_vm
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: SSH ke dalam sumber daya (Azure VM, server Arc, dll) menggunakan sertifikat openssh yang diterbitkan AAD.
+  ms.openlocfilehash: 59a71ce5dc5341fab2308ca77bacf74a829a116d
+  ms.sourcegitcommit: d016676aca62d5461b07446d98cf38e30bba07cd
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/19/2022
+  ms.locfileid: "143882317"

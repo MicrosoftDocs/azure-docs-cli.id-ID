@@ -1,21 +1,21 @@
 ---
 title: Cara menjalankan Azure CLI di Kontainer Docker | Microsoft Docs
 description: Pelajari cara menjalankan kontainer Docker yang meng-host Azure CLI. Docker membantu Anda mulai menggunakan lingkungan terisolasi dengan cepat untuk menjalankan Azure CLI.
-author: dbradish-microsoft
-ms.author: dbradish
-manager: barbkess
+author: jiasli
+ms.author: jiasli
+manager: yonzhan
 ms.date: 04/08/2022
 ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli docker, docker azure cli
-ms.openlocfilehash: bee7c9ecaf1f3efc0cc5f39c0cb6c5f8cd23f95d
-ms.sourcegitcommit: 36a23229659359ef8c1a6dc8011b039306fe6717
+ms.openlocfilehash: 47d33dcc12b7beff4aa5bfb2f8a2feb0891177f1
+ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/12/2022
-ms.locfileid: "141656118"
+ms.lasthandoff: 04/22/2022
+ms.locfileid: "144003247"
 ---
 # <a name="how-to-run-the-azure-cli-in-a-docker-container"></a>Cara menjalankan Azure CLI di kontainer Docker
 

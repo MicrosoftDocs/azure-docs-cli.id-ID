@@ -1,0 +1,222 @@
+### YamlMime:AzureCLIGroup
+uid: az_datamigration
+name: az datamigration
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **datamigrasi** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **az datamigration** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Kelola Migrasi Data.
+description: ''
+directCommands:
+- uid: az_datamigration_get-assessment
+  name: az datamigration get-assessment
+  summary: Mulai penilaian pada instans SQL Server.
+  description: ''
+  syntax: >-
+    az datamigration get-assessment [--config-file-path]
+                                    [--connection-string]
+                                    [--output-folder]
+                                    [--overwrite]
+  examples:
+  - summary: Jalankan Penilaian SQL pada SQL Server tertentu menggunakan string koneksi.
+    syntax: az datamigration get-assessment --connection-string "Data Source=LabServer.database.net;Initial Catalog=master;Integrated Security=False;User Id=User;Password=password" --output-folder "C:\AssessmentOutput" --overwrite
+  - summary: Jalankan Penilaian SQL pada SQL Server tertentu menggunakan file konfigurasi penilaian.
+    syntax: az datamigration get-assessment --config-file-path "C:\Users\user\document\config.json"
+  optionalParameters:
+  - name: --config-file-path
+    summary: Jalur ConfigFile.
+    description: ''
+  - name: --connection-string
+    summary: SQL Server String Koneksi.
+    description: ''
+  - name: --output-folder
+    summary: Folder output untuk menyimpan laporan penilaian.
+    description: ''
+  - name: --overwrite
+    summary: Aktifkan parameter ini untuk menimpa laporan penilaian yang ada.
+    description: ''
+- uid: az_datamigration_get-sku-recommendation
+  name: az datamigration get-sku-recommendation
+  summary: Berikan rekomendasi SKU untuk penawaran Azure SQL.
+  description: ''
+  syntax: >-
+    az datamigration get-sku-recommendation [--config-file-path]
+                                            [--database-allow-list]
+                                            [--database-deny-list]
+                                            [--display-result]
+                                            [--elastic-strategy]
+                                            [--end-time]
+                                            [--output-folder]
+                                            [--overwrite]
+                                            [--scaling-factor]
+                                            [--start-time]
+                                            [--target-percentile]
+                                            [--target-platform]
+                                            [--target-sql-instance]
+  examples:
+  - summary: Dapatkan rekomendasi SKU untuk SQL Server yang diberikan menggunakan baris perintah.
+    syntax: az datamigration get-sku-recommendation --output-folder "C:\PerfCollectionOutput" --database-allow-list AdventureWorks, AdventureWorks2 --display-result --overwrite
+  - summary: Dapatkan rekomendasi SKU untuk SQL Server yang diberikan menggunakan file konfigurasi penilaian.
+    syntax: az datamigration get-sku-recommendation --config-file-path "C:\Users\user\document\config.json"
+  optionalParameters:
+  - name: --config-file-path
+    summary: Jalur ConfigFile.
+    description: ''
+  - name: --database-allow-list
+    summary: 'Daftar nama database yang dipisahkan spasi untuk diizinkan untuk pertimbangan rekomendasi SKU sambil mengecualikan semua yang lain. Hanya atur salah satu dari berikut ini atau tidak: databaseAllowList, databaseDenyList. Default: null.'
+    description: ''
+  - name: --database-deny-list
+    summary: 'Daftar nama database yang dipisahkan spasi tidak dipertimbangkan untuk rekomendasi SKU. Hanya atur salah satu dari berikut ini atau tidak: databaseAllowList, databaseDenyList. Default: null.'
+    description: ''
+  - name: --display-result
+    summary: Apakah akan mencetak hasil rekomendasi SKU ke konsol atau tidak. Aktifkan parameter ini untuk menampilkan hasil.
+    description: ''
+  - name: --elastic-strategy
+    summary: Apakah menggunakan strategi elastis untuk rekomendasi SKU berdasarkan pembuatan profil penggunaan sumber daya atau tidak. Aktifkan parameter ini untuk menggunakan strategi elastis.
+    description: ''
+  - name: --end-time
+    summary: 'Waktu akhir UTC titik data performa yang perlu dipertimbangkan selama agregasi, dalam format YYYY-MM-DD HH:MM. Hanya digunakan untuk strategi garis besar (non-elastis). Default: semua titik data yang dikumpulkan akan dipertimbangkan.'
+    description: ''
+  - name: --output-folder
+    summary: Folder output tempat data performa SQL Server disimpan. Nilai di sini harus sama dengan yang digunakan dalam PerfDataCollection.
+    description: ''
+  - name: --overwrite
+    summary: Apakah akan menimpa laporan rekomendasi SKU yang ada atau tidak. Aktifkan paramater ini untuk menimpa.
+    description: ''
+  - name: --scaling-factor
+    defaultValue: "100"
+    summary: Faktor penskalaan (kenyamanan) yang digunakan selama rekomendasi SKU. Misalnya, jika ditentukan bahwa ada persyaratan CPU 4 vCore dengan faktor penskalaan 150%, maka persyaratan CPU yang sebenarnya adalah 6 vCore.
+    description: ''
+  - name: --start-time
+    summary: 'Waktu mulai UTC titik data performa yang perlu dipertimbangkan selama agregasi, dalam format YYYY-MM-DD HH:MM. Hanya digunakan untuk strategi garis besar (non-elastis). Default: semua titik data yang dikumpulkan akan dipertimbangkan.'
+    description: ''
+  - name: --target-percentile
+    defaultValue: "95"
+    summary: Persentil poin data yang akan digunakan selama agregasi data performa. Hanya digunakan untuk strategi garis besar (non-elastis).
+    description: ''
+  - name: --target-platform
+    defaultValue: Any
+    summary: 'Platform target untuk rekomendasi SKU: AzureSqlDatabase, AzureSqlManagedInstance, AzureSqlVirtualMachine, atau Apa pun. Jika Ada yang dipilih, maka rekomendasi SKU untuk ketiga platform target akan dievaluasi, dan yang paling cocok akan dikembalikan.'
+    description: ''
+  - name: --target-sql-instance
+    summary: 'Nama instans SQL di mana SKU harus direkomendasikan. Default: outputFolder akan dipindai untuk file yang dibuat oleh tindakan PerfDataCollection, dan rekomendasi akan diberikan untuk setiap instans yang ditemukan.'
+    description: ''
+- uid: az_datamigration_performance-data-collection
+  name: az datamigration performance-data-collection
+  summary: Kumpulkan data performa untuk instans SQL Server tertentu.
+  description: ''
+  syntax: >-
+    az datamigration performance-data-collection [--config-file-path]
+                                                 [--connection-string]
+                                                 [--number-of-iteration]
+                                                 [--output-folder]
+                                                 [--perf-query-interval]
+                                                 [--static-query-interval]
+  examples:
+  - summary: Kumpulkan data performa dari SQL Server tertentu menggunakan string koneksi.
+    syntax: az datamigration performance-data-collection --connection-string "Data Source=LabServer.database.net;Initial Catalog=master;Integrated Security=False;User Id=User;Password=password" --output-folder "C:\PerfCollectionOutput" --number-of-iteration 5 --perf-query-interval 10 --static-query-interval 60
+  - summary: Kumpulkan data performa dari SQL Server tertentu menggunakan file konfigurasi penilaian.
+    syntax: az datamigration performance-data-collection --config-file-path "C:\Users\user\document\config.json"
+  optionalParameters:
+  - name: --config-file-path
+    summary: Jalur ConfigFile.
+    description: ''
+  - name: --connection-string
+    summary: SQL Server String Koneksi.
+    description: ''
+  - name: --number-of-iteration
+    defaultValue: "20"
+    summary: 'Jumlah perulangan pengumpulan data performa yang harus dilakukan sebelum bertahan pada file. Misalnya, dengan nilai default, data performa akan dipertahankan setiap 30 detik \* 20 iterasi = 10 menit. Minimum: 2.'
+    description: ''
+  - name: --output-folder
+    summary: Folder output untuk menyimpan data performa.
+    description: ''
+  - name: --perf-query-interval
+    defaultValue: "30"
+    summary: Interval untuk mengkueri data performa, dalam hitungan detik.
+    description: ''
+  - name: --static-query-interval
+    defaultValue: "3600"
+    summary: Interval untuk mengkueri dan mempertahankan data konfigurasi statis, dalam hitungan detik.
+    description: ''
+- uid: az_datamigration_register-integration-runtime
+  name: az datamigration register-integration-runtime
+  summary: Daftarkan Database Migration Service di Integration Runtime.
+  description: ''
+  syntax: >-
+    az datamigration register-integration-runtime --auth-key
+                                                  [--ir-path]
+  examples:
+  - summary: Daftarkan Sql Migration Service di Integration Runtime yang Dihost sendiri.
+    syntax: az datamigration register-integration-runtime --auth-key "IR@00000-0000000-000000-aaaaa-bbbb-cccc"
+  - summary: Instal Integration Runtime dan daftarkan Sql Migration Service di dalamnya.
+    syntax: az datamigration register-integration-runtime --auth-key "IR@00000-0000000-000000-aaaaa-bbbb-cccc" --ir-path "C:\Users\user\Downloads\IntegrationRuntime.msi"
+  requiredParameters:
+  - isRequired: true
+    name: --auth-key
+    summary: AuthKey dari SQL Migration Service.
+    description: ''
+  optionalParameters:
+  - name: --ir-path
+    summary: Jalur MSI Integration Runtime.
+    description: ''
+commands:
+- az_datamigration_get-assessment
+- az_datamigration_get-sku-recommendation
+- az_datamigration_performance-data-collection
+- az_datamigration_register-integration-runtime
+- az_datamigration_sql-db
+- az_datamigration_sql-db_cancel
+- az_datamigration_sql-db_create
+- az_datamigration_sql-db_delete
+- az_datamigration_sql-db_show
+- az_datamigration_sql-db_wait
+- az_datamigration_sql-managed-instance
+- az_datamigration_sql-managed-instance_cancel
+- az_datamigration_sql-managed-instance_create
+- az_datamigration_sql-managed-instance_cutover
+- az_datamigration_sql-managed-instance_show
+- az_datamigration_sql-managed-instance_wait
+- az_datamigration_sql-service
+- az_datamigration_sql-service_create
+- az_datamigration_sql-service_delete
+- az_datamigration_sql-service_delete-node
+- az_datamigration_sql-service_list
+- az_datamigration_sql-service_list-auth-key
+- az_datamigration_sql-service_list-integration-runtime-metric
+- az_datamigration_sql-service_list-migration
+- az_datamigration_sql-service_regenerate-auth-key
+- az_datamigration_sql-service_show
+- az_datamigration_sql-service_update
+- az_datamigration_sql-service_wait
+- az_datamigration_sql-vm
+- az_datamigration_sql-vm_cancel
+- az_datamigration_sql-vm_create
+- az_datamigration_sql-vm_cutover
+- az_datamigration_sql-vm_show
+- az_datamigration_sql-vm_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Kelola Migrasi Data.
+  ms.openlocfilehash: e080f5bb040ae5c4919e3fe20334eb8ae6544c9e
+  ms.sourcegitcommit: d016676aca62d5461b07446d98cf38e30bba07cd
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/19/2022
+  ms.locfileid: "143882191"

@@ -11,12 +11,12 @@ ms.service: azure-cli
 ms.reviewer: robb
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure, azure monitor
-ms.openlocfilehash: 6af75b674cbfdfd032916ebdbfdc31e767920125
-ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+ms.openlocfilehash: afe7d33635f9d1bbc3d885ec97bfb8e92e0dc602
+ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/06/2022
-ms.locfileid: "141398394"
+ms.lasthandoff: 04/22/2022
+ms.locfileid: "144003211"
 ---
 # <a name="azure-cli-reference-commands-for-azure-monitor"></a>Perintah referensi Azure CLI untuk Azure Monitor
 
@@ -34,21 +34,21 @@ Daftar referensi Azure CLI yang dapat digunakan untuk mengelola Azure Monitor, d
 
 | Referensi | Menginstal ekstensi | Deskripsi | Untuk informasi selengkapnya
 |-|-|-|-|
-| [az monitor](/cli/azure/monitor) | | Grup perintah tingkat atas untuk semua perintah Azure CLI untuk Azure Monitor. | [Gambaran umum Azure Monitor](/azure/azure-monitor/overview)
-| [az monitor action-group](/cli/azure/monitor/action-group) | | Mengelola grup tindakan, yang terkait dengan notifikasi setelah peringatan dipicu. | [Peringatan Azure Monitor](/azure/azure-monitor/platform/alerts-overview)
+| [az monitor](../latest/docs-ref-autogen/monitor.yml) | | Grup perintah tingkat atas untuk semua perintah Azure CLI untuk Azure Monitor. | [Gambaran umum Azure Monitor](/azure/azure-monitor/overview)
+| [az monitor action-group](../latest/docs-ref-autogen/monitor/action-group.yml) | | Mengelola grup tindakan, yang terkait dengan notifikasi setelah peringatan dipicu. | [Peringatan Azure Monitor](/azure/azure-monitor/platform/alerts-overview)
 | [az monitor action-rule](/azure/azure-monitor/alerts/alerts-action-rules) | ya | Mengelola aturan tindakan, yang memungkinkan Anda menambahkan atau menekan grup tindakan pada peringatan yang dipicu. | [Peringatan Azure Monitor](/azure/azure-monitor/alerts/alerts-action-rules)
-| [az monitor activity-log](/cli/azure/monitor/activity-log) | | Mengelola log aktivitas, termasuk peringatan log aktivitas. | [Log aktivitas Azure](/azure/azure-monitor/platform/activity-log)
-| [az monitor app-insights](/cli/azure/monitor/app-insights) | ya | Mengelola Application Insights untuk pemantauan aplikasi. | [Gambaran umum Application insights](/azure/azure-monitor/app/app-insights-overview)
-| [az monitor autoscale](/cli/azure/monitor/autoscale) | | Mengelola pengaturan skala otomatis. | [Ringkasan skala otomatis](/azure/azure-monitor/platform/autoscale-overview)
-| [az monitor data-collection](/cli/azure/monitor/data-collection) | ya | Mengelola aturan pengumpulan data. | [Aturan pengumpulan data](/azure/azure-monitor/agents/data-collection-rule-overview)
-| [az monitor diagnostic-settings](/cli/azure/monitor/diagnostic-settings) | | Mengelola pengaturan diagnostik layanan, yang menyiapkan pengumpulan dan perutean berbagai jenis log dan metrik platform. | [Membuat pengaturan diagnostik](/azure/azure-monitor/platform/diagnostic-settings)
-| [az footprint](/cli/azure/footprint) | ya | Mengelola pengaturan Azure Footprint. |
-| [az monitor log-analytics](/cli/azure/monitor/log-analytics) | | Mengelola kluster log dan ruang kerja. | [Merancang penyebaran Log Azure Monitor](/azure/azure-monitor/platform/design-logs-deployment)
-| [az monitor log-analytics solution](/cli/azure/monitor/log-analytics/solution) | ya | Mengelola solusi Log Analytics. |
-| [az monitor log-profiles](/cli/azure/monitor/log-profiles) | | JANGAN gunakan untuk pengembangan baru. Perintah ini sebelumnya digunakan untuk merutekan log aktivitas ke Log Azure Monitor dan Log Analytics.  Sebagai gantinya, gunakan [pengaturan diagnostik](/azure/azure-monitor/platform/diagnostic-settings).  | [Mengirim Log aktivitas ke ruang kerja Log Analytics](/azure/azure-monitor/platform/activity-log#send-to-log-analytics-workspace)
-| [az monitor metrics](/cli/azure/monitor/metrics) | | Mengelola metrik platform dan aturan peringatan metrik mendekati real time. | [Ringkasan metrik di Azure Monitor](/azure/azure-monitor/platform/data-platform-metrics) dan [Memahami cara kerja peringatan metrik](/azure/azure-monitor/platform/alerts-metric-overview)
-| [az monitor private-link-scope](/cli/azure/monitor/private-link-scope) | | Mengelola pemantauan sumber daya cakupan tautan privat. | [Menggunakan Azure Private Link untuk menyambungkan jaringan dengan aman ke Azure Monitor](/azure/azure-monitor/platform/private-link-security)
-| [az monitor scheduled-query](/cli/azure/monitor/scheduled-query) | ya | Mengelola kueri terjadwal.
+| [az monitor activity-log](../latest/docs-ref-autogen/monitor/activity-log.yml) | | Mengelola log aktivitas, termasuk peringatan log aktivitas. | [Log aktivitas Azure](/azure/azure-monitor/platform/activity-log)
+| [az monitor app-insights](../latest/docs-ref-autogen/monitor/app-insights.yml) | ya | Mengelola Application Insights untuk pemantauan aplikasi. | [Gambaran umum Application insights](/azure/azure-monitor/app/app-insights-overview)
+| [az monitor autoscale](../latest/docs-ref-autogen/monitor/autoscale.yml) | | Mengelola pengaturan skala otomatis. | [Ringkasan skala otomatis](/azure/azure-monitor/platform/autoscale-overview)
+| [az monitor data-collection](../latest/docs-ref-autogen/monitor/data-collection.yml) | ya | Mengelola aturan pengumpulan data. | [Aturan pengumpulan data](/azure/azure-monitor/agents/data-collection-rule-overview)
+| [az monitor diagnostic-settings](../latest/docs-ref-autogen/monitor/diagnostic-settings.yml) | | Mengelola pengaturan diagnostik layanan, yang menyiapkan pengumpulan dan perutean berbagai jenis log dan metrik platform. | [Membuat pengaturan diagnostik](/azure/azure-monitor/platform/diagnostic-settings)
+| [az footprint](../latest/docs-ref-autogen/footprint.yml) | ya | Mengelola pengaturan Azure Footprint. |
+| [az monitor log-analytics](../latest/docs-ref-autogen/monitor/log-analytics.yml) | | Mengelola kluster log dan ruang kerja. | [Merancang penyebaran Log Azure Monitor](/azure/azure-monitor/platform/design-logs-deployment)
+| [az monitor log-analytics solution](../latest/docs-ref-autogen/monitor/log-analytics/solution.yml) | ya | Mengelola solusi Log Analytics. |
+| [az monitor log-profiles](../latest/docs-ref-autogen/monitor/log-profiles.yml) | | JANGAN gunakan untuk pengembangan baru. Perintah ini sebelumnya digunakan untuk merutekan log aktivitas ke Log Azure Monitor dan Log Analytics.  Sebagai gantinya, gunakan [pengaturan diagnostik](/azure/azure-monitor/platform/diagnostic-settings).  | [Mengirim Log aktivitas ke ruang kerja Log Analytics](/azure/azure-monitor/platform/activity-log#send-to-log-analytics-workspace)
+| [az monitor metrics](../latest/docs-ref-autogen/monitor/metrics.yml) | | Mengelola metrik platform dan aturan peringatan metrik mendekati real time. | [Ringkasan metrik di Azure Monitor](/azure/azure-monitor/platform/data-platform-metrics) dan [Memahami cara kerja peringatan metrik](/azure/azure-monitor/platform/alerts-metric-overview)
+| [az monitor private-link-scope](../latest/docs-ref-autogen/monitor/private-link-scope.yml) | | Mengelola pemantauan sumber daya cakupan tautan privat. | [Menggunakan Azure Private Link untuk menyambungkan jaringan dengan aman ke Azure Monitor](/azure/azure-monitor/platform/private-link-security)
+| [az monitor scheduled-query](../latest/docs-ref-autogen/monitor/scheduled-query.yml) | ya | Mengelola kueri terjadwal.
 
 ## <a name="popular-azure-monitor-articles-using-the-azure-cli"></a>Artikel Azure Monitor populer menggunakan Azure CLI
 

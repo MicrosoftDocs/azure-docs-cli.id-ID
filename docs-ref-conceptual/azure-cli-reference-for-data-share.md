@@ -11,12 +11,12 @@ ms.date: 09/21/2021
 ms.author: dbradish
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, azure data share cli
-ms.openlocfilehash: ee3c14f9590662bd5590156da2174a20505117e1
-ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+ms.openlocfilehash: 28ed01b12d297732ecf441f80bb1eecf6469a39a
+ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/06/2022
-ms.locfileid: "141405711"
+ms.lasthandoff: 04/22/2022
+ms.locfileid: "144002964"
 ---
 # <a name="azure-cli-reference-commands-for-azure-data-share"></a>Perintah referensi Azure CLI untuk Azure Data Share
 
@@ -34,10 +34,10 @@ Daftar referensi Azure Data Share CLI yang dapat digunakan untuk mengelola Azure
 | [az datashare account](../latest/docs-ref-autogen/datashare/account.yml) | Perintah untuk mengelola akun Azure Data Share.
 | [az datashare consumer](/cli/azure/datashare/consumer) | Perintah bagi konsumen untuk mengelola Azure Data Share.
 | [az datashare dataset](/cli/azure/datashare/dataset) | Perintah bagi penyedia untuk mengelola kumpulan data Azure Data Share.
-| [az datashare invitation](/cli/azure/datashare/invitation) | Perintah bagi konsumen untuk mengelola undangan Azure Data Share.
-| [az datashare provider-share-subscription](/cli/azure/datashare/provider-share-subscription) | Perintah bagi penyedia untuk mengelola langganan Azure Data Share.
-| [az datashare synchronization](/cli/azure/datashare) | Perintah untuk mengelola sinkronisasi Azure Data Share.
-| [az datashare synchronization-setting](/cli/azure/datashare/synchronization-setting) | Perintah bagi penyedia untuk mengelola pengaturan sinkronisasi Azure Data Share.
+| [az datashare invitation](../latest/docs-ref-autogen/datashare/invitation.yml) | Perintah bagi konsumen untuk mengelola undangan Azure Data Share.
+| [az datashare provider-share-subscription](../latest/docs-ref-autogen/datashare/provider-share-subscription.yml) | Perintah bagi penyedia untuk mengelola langganan Azure Data Share.
+| [az datashare synchronization](../latest/docs-ref-autogen/datashare.yml) | Perintah untuk mengelola sinkronisasi Azure Data Share.
+| [az datashare synchronization-setting](../latest/docs-ref-autogen/datashare/synchronization-setting.yml) | Perintah bagi penyedia untuk mengelola pengaturan sinkronisasi Azure Data Share.
 
 ## <a name="reference-examples"></a>Contoh referensi
 

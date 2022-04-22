@@ -1,0 +1,240 @@
+### YamlMime:AzureCLIGroup
+uid: az_sql_midb_ltr-backup
+name: az sql midb ltr-backup
+summary: Mengelola cadangan retensi jangka panjang database SQL Managed Instance.
+description: ''
+directCommands:
+- uid: az_sql_midb_ltr-backup_delete
+  name: az sql midb ltr-backup delete
+  summary: Menghapus cadangan retensi jangka panjang.
+  description: ''
+  syntax: >-
+    az sql midb ltr-backup delete [--backup-id]
+                                  [--database]
+                                  [--location]
+                                  [--managed-instance]
+                                  [--name]
+                                  [--yes]
+  examples:
+  - summary: Menghapus cadangan retensi jangka panjang untuk database terkelola.
+    syntax: az sql midb ltr-backup delete -l southeastasia --mi myinstance -d mymanageddb --name "3214b3fb-fba9-43e7-96a3-09e35ffcb336;132292152080000000"
+  - summary: Menghapus cadangan retensi jangka panjang untuk database terkelola.
+    syntax: az sql midb ltr-backup delete --backup-id '/subscriptions/6caa113c-794c-42f8-ab9d-878d8aa104dc/resourceGroups/mygroup/providers/Microsoft.Sql/locations/southeastasia/longTermRetentionManagedInstances/myinstance/longTermRetentionDatabases/mymanageddb/longTermRetentionManagedInstanceBackups/3214b3fb-fba9-43e7-96a3-09e35ffcb336;132292152080000000'
+  optionalParameters:
+  - name: --backup-id --id
+    summary: Id sumber daya cadangan. Gunakan 'az sql midb ltr-backup show' atau 'az sql midb ltr-backup list' untuk id cadangan. Jika disediakan, argumen lain tidak diperlukan.
+    description: ''
+  - name: --database -d
+    summary: Nama Database Terkelola Azure SQL.
+    description: ''
+  - name: --location -l
+    summary: Lokasi cadangan yang diinginkan.
+    description: ''
+  - name: --managed-instance --mi
+    summary: Nama instans terkelola Azure SQL.
+    description: ''
+  - name: --name -n
+    summary: Nama cadangan LTR. Gunakan 'az sql midb ltr-backup show' atau 'az sql midb ltr-backup list' untuk nama cadangan.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_midb_ltr-backup_list
+  name: az sql midb ltr-backup list
+  summary: Cantumkan cadangan retensi jangka panjang untuk lokasi, instans, atau database.
+  description: ''
+  syntax: >-
+    az sql midb ltr-backup list --location
+                                [--database]
+                                [--database-state]
+                                [--latest]
+                                [--managed-instance]
+                                [--resource-group]
+  examples:
+  - summary: Mencantumkan cadangan retensi jangka panjang untuk database terkelola.
+    syntax: az sql midb ltr-backup list -l southeastasia --mi myinstance -d mymanageddb
+  - summary: Mencantumkan cadangan retensi jangka panjang untuk instans terkelola (hanya mencantumkan cadangan LTR terbaru, yang termasuk dalam database langsung).
+    syntax: az sql midb ltr-backup list -l southeastasia --mi myinstance --database-state Live --only-latest-per-database
+  - summary: Mencantumkan cadangan retensi jangka panjang untuk instans terkelola (dengan argumen grup sumber daya).
+    syntax: az sql midb ltr-backup list -l southeastasia -g mygroup --mi myinstance
+  - summary: Mencantumkan cadangan retensi jangka panjang untuk lokasi (hanya mencantumkan cadangan LTR terbaru, yang termasuk dalam database langsung).
+    syntax: az sql midb ltr-backup list -l southeastasia --database-state Live --only-latest-per-database
+  - summary: Mencantumkan cadangan retensi jangka panjang untuk lokasi (dengan argumen grup sumber daya).
+    syntax: az sql midb ltr-backup list -l southeastasia -g mygroup
+  requiredParameters:
+  - isRequired: true
+    name: --location -l
+    summary: Lokasi cadangan yang diinginkan.
+    description: ''
+  optionalParameters:
+  - name: --database -d
+    summary: Nama Database Terkelola Azure SQL. Jika ditentukan (bersama dengan nama instans), mengambil semua cadangan yang diminta di bawah database ini.
+    description: ''
+  - name: --database-state --state
+    summary: "'Semua', 'Langsung', atau 'Dihapus'. Akan mengambil cadangan hanya dari database dengan status yang ditentukan. Jika tidak ada status yang diprovisikan, default ke 'Semua'."
+    description: ''
+  - name: --latest --only-latest-per-database
+    summary: Jika true, hanya akan mengembalikan cadangan terbaru untuk setiap database.
+    description: ''
+  - name: --managed-instance --mi
+    summary: Nama instans terkelola Azure SQL. Jika ditentukan, mengambil semua cadangan yang diminta di bawah instans terkelola ini.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_midb_ltr-backup_restore
+  name: az sql midb ltr-backup restore
+  summary: Pulihkan cadangan retensi jangka panjang ke database baru.
+  description: ''
+  syntax: >-
+    az sql midb ltr-backup restore --backup-id
+                                   --dest-database
+                                   --dest-mi
+                                   --dest-resource-group
+                                   [--no-wait]
+  examples:
+  - summary: Pulihkan database terkelola menggunakan cadangan LTR.
+    syntax: >-
+      az sql midb ltr-backup restore \
+          --dest-database targetmidb --dest-mi myinstance --dest-resource-group mygroup \
+          --backup-id "/subscriptions/6caa113c-794c-42f8-ab9d-878d8aa104dc/resourceGroups/mygroup/providers/Microsoft.Sql/locations/southeastasia/longTermRetentionManagedInstances/myinstance/longTermRetentionDatabases/sourcemidb/longTermRetentionManagedInstanceBackups/3214b3fb-fba9-43e7-96a3-09e35ffcb336;132292152080000000"
+  requiredParameters:
+  - isRequired: true
+    name: --backup-id --id
+    summary: Id sumber daya dari cadangan retensi jangka panjang yang akan dipulihkan. Gunakan 'az sql midb ltr-backup show' atau 'az sql midb ltr-backup list' untuk id cadangan.
+    description: ''
+  - isRequired: true
+    name: --dest-database
+    summary: Nama database terkelola yang akan dibuat sebagai tujuan pemulihan.
+    description: ''
+  - isRequired: true
+    name: --dest-mi
+    summary: Nama instans terkelola untuk memulihkan database terkelola.
+    description: ''
+  - isRequired: true
+    name: --dest-resource-group
+    summary: Nama grup sumber daya instans terkelola untuk memulihkan database terkelola.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_midb_ltr-backup_show
+  name: az sql midb ltr-backup show
+  summary: Dapatkan cadangan retensi jangka panjang untuk database terkelola.
+  description: ''
+  syntax: >-
+    az sql midb ltr-backup show [--backup-id]
+                                [--database]
+                                [--location]
+                                [--managed-instance]
+                                [--name]
+  examples:
+  - summary: Perlihatkan cadangan retensi jangka panjang untuk database terkelola.
+    syntax: az sql midb ltr-backup show --backup-id '/subscriptions/6caa113c-794c-42f8-ab9d-878d8aa104dc/resourceGroups/mygroup/providers/Microsoft.Sql/locations/southeastasia/longTermRetentionManagedInstances/myinstance/longTermRetentionDatabases/mymanageddb/longTermRetentionManagedInstanceBackups/3214b3fb-fba9-43e7-96a3-09e35ffcb336;132292152080000000'
+  optionalParameters:
+  - name: --backup-id --id
+    summary: Id sumber daya cadangan. Gunakan 'az sql midb ltr-backup show' atau 'az sql midb ltr-backup list' untuk id cadangan. Jika disediakan, argumen lain tidak diperlukan.
+    description: ''
+  - name: --database -d
+    summary: Nama Database Terkelola Azure SQL.
+    description: ''
+  - name: --location -l
+    summary: Lokasi cadangan yang diinginkan.
+    description: ''
+  - name: --managed-instance --mi
+    summary: Nama instans terkelola Azure SQL.
+    description: ''
+  - name: --name -n
+    summary: Nama cadangan LTR. Gunakan 'az sql midb ltr-backup show' atau 'az sql midb ltr-backup list' untuk nama cadangan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+- uid: az_sql_midb_ltr-backup_wait
+  name: az sql midb ltr-backup wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi database terkelola terpenuhi.
+  description: ''
+  syntax: >-
+    az sql midb ltr-backup wait --database
+                                --managed-instance
+                                --resource-group
+                                [--created]
+                                [--custom]
+                                [--deleted]
+                                [--exists]
+                                [--interval]
+                                [--timeout]
+                                [--updated]
+  requiredParameters:
+  - isRequired: true
+    name: --database -d
+    summary: Nama Database Terkelola Azure SQL.
+    description: ''
+  - isRequired: true
+    name: --managed-instance --mi
+    summary: Nama instans terkelola Azure SQL.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --diperbarui
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
+commands:
+- az_sql_midb_ltr-backup_delete
+- az_sql_midb_ltr-backup_list
+- az_sql_midb_ltr-backup_restore
+- az_sql_midb_ltr-backup_show
+- az_sql_midb_ltr-backup_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/29/2022
+  description: Mengelola cadangan retensi jangka panjang database SQL Managed Instance.
+  ms.openlocfilehash: 188a3a43446a205d64d83d3357e596b7f27beaba
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141467946"
