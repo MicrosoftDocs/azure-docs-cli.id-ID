@@ -1,0 +1,273 @@
+### YamlMime:AzureCLIGroup
+uid: az_monitor_autoscale
+name: az monitor autoscale
+summary: Mengelola pengaturan skala otomatis.
+description: 'Untuk informasi selengkapnya tentang penskalaan otomatis, kunjungi: https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-understanding-autoscale-settings.'
+directCommands:
+- uid: az_monitor_autoscale_create
+  name: az monitor autoscale create
+  summary: Buat pengaturan skala otomatis baru.
+  description: 'Untuk informasi selengkapnya tentang penskalaan otomatis, kunjungi: https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-understanding-autoscale-settings.'
+  syntax: >-
+    az monitor autoscale create --count
+                                --resource
+                                [--action]
+                                [--disabled {false, true}]
+                                [--email-administrator {false, true}]
+                                [--email-coadministrators {false, true}]
+                                [--location]
+                                [--max-count]
+                                [--min-count]
+                                [--name]
+                                [--resource-group]
+                                [--resource-namespace]
+                                [--resource-parent]
+                                [--resource-type]
+                                [--tags]
+  examples:
+  - summary: Buat pengaturan skala otomatis untuk menskalakan antara 2 dan 5 instans (3 sebagai default). Kirim email ke administrator saat penskalakan terjadi.
+    syntax: >-
+      az monitor autoscale create -g {myrg} --resource {resource-id} --min-count 2 --max-count 5 \
+        --count 3 --email-administrator
+
+      az monitor autoscale rule create -g {myrg} --autoscale-name {resource-name} --scale out 1 \
+        --condition "Percentage CPU > 75 avg 5m"
+
+      az monitor autoscale rule create -g {myrg} --autoscale-name {resource-name} --scale in 1 \
+        --condition "Percentage CPU < 25 avg 5m"
+  - summary: Buat pengaturan skala otomatis untuk tepat 4 instans.
+    syntax: az monitor autoscale create -g {myrg} --resource {resource-id} --count 4
+  - summary: Buat pengaturan skala otomatis baru. (dibuat otomatis)
+    syntax: az monitor autoscale create --count 3 --max-count 5 --min-count 2 --name MyAutoscaleSettings --resource myScaleSet --resource-group MyResourceGroup --resource-type Microsoft.Compute/virtualMachineScaleSets
+  requiredParameters:
+  - isRequired: true
+    name: --count
+    summary: Angka instans yang akan digunakan. Jika digunakan dengan --min/max-count, jumlah default instans yang akan digunakan.
+    description: ''
+  - isRequired: true
+    name: --resource
+    summary: Nama atau ID sumber daya target.
+    description: ''
+  optionalParameters:
+  - name: --action -a
+    summary: Tambahkan tindakan untuk diaktifkan saat peristiwa penskalakan terjadi.
+    description: 'Penggunaan: --action TYPE KEY [ARG ...] Email: --action email bob@contoso.comann@contoso.com Webhook: --action webhook https://www.contoso.com/alert apiKey=value Webhook: --action webhook https://www.contoso.com/alert?apiKey=value Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu `--action` argumen.'
+  - name: --disabled
+    parameterValueGroup: false, true
+    summary: Buat pengaturan skala otomatis dalam status dinonaktifkan.
+    description: ''
+  - name: --email-administrator
+    parameterValueGroup: false, true
+    summary: Kirim email ke administrator langganan saat penskalakan.
+    description: ''
+  - name: --email-coadministrators
+    parameterValueGroup: false, true
+    summary: Kirim email ke administrator bersama langganan saat penskalakan.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --max-count
+    summary: Jumlah maksimum instans.
+    description: ''
+  - name: --min-count
+    summary: Jumlah minimum instans.
+    description: ''
+  - name: --name -n
+    summary: Nama pengaturan skala otomatis.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --resource-namespace
+    summary: Namespace penyedia sumber daya target.
+    description: ''
+  - name: --resource-parent
+    summary: Jalur induk sumber daya target, jika berlaku.
+    description: ''
+  - name: --resource-type
+    summary: "Jenis sumber daya target. Dapat juga menerima format namespace/type (Mis: 'Microsoft.Compute/virtualMachines')."
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/monitor/_help.py
+- uid: az_monitor_autoscale_delete
+  name: az monitor autoscale delete
+  summary: Menghapus dan pengaturan skala otomatis.
+  description: ''
+  syntax: >-
+    az monitor autoscale delete [--ids]
+                                [--name]
+                                [--resource-group]
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama pengaturan skala otomatis.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/monitor/_help.py
+- uid: az_monitor_autoscale_list
+  name: az monitor autoscale list
+  summary: Mencantumkan pengaturan skala otomatis untuk grup sumber daya.
+  description: ''
+  syntax: az monitor autoscale list --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/monitor/_help.py
+- uid: az_monitor_autoscale_show
+  name: az monitor autoscale show
+  summary: Tampilkan detail pengaturan skala otomatis.
+  description: ''
+  syntax: >-
+    az monitor autoscale show [--ids]
+                              [--name]
+                              [--resource-group]
+  examples:
+  - summary: Tampilkan detail pengaturan skala otomatis. (dibuat otomatis)
+    syntax: az monitor autoscale show --name MyAutoscaleSettings --resource-group MyResourceGroup
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama pengaturan skala otomatis.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/monitor/_help.py
+- uid: az_monitor_autoscale_update
+  name: pembaruan skala otomatis monitor az
+  summary: Memperbarui pengaturan skala otomatis.
+  description: 'Untuk informasi selengkapnya tentang penskalaan otomatis, kunjungi: https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-understanding-autoscale-settings.'
+  syntax: >-
+    az monitor autoscale update [--add]
+                                [--add-action]
+                                [--count]
+                                [--email-administrator {false, true}]
+                                [--email-coadministrators {false, true}]
+                                [--enabled {false, true}]
+                                [--force-string]
+                                [--ids]
+                                [--max-count]
+                                [--min-count]
+                                [--name]
+                                [--remove]
+                                [--remove-action]
+                                [--resource-group]
+                                [--set]
+                                [--tags]
+  examples:
+  - summary: Perbarui pengaturan skala otomatis untuk menggunakan 3 instans tetap secara default.
+    syntax: az monitor autoscale update -g {myrg} -n {autoscale-name} --count 3
+  - summary: Perbarui pengaturan skala otomatis untuk menghapus pemberitahuan email.
+    syntax: >-
+      az monitor autoscale update -g {myrg} -n {autoscale-name} \
+        --remove-action email bob@contoso.com
+  - summary: Memperbarui pengaturan skala otomatis. (dibuat otomatis)
+    syntax: az monitor autoscale update --count 3 --email-administrator true --enabled true --max-count 5 --min-count 2 --name MyAutoscaleSettings --resource-group MyResourceGroup --tags key[=value]
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --add-action -a
+    summary: Tambahkan tindakan untuk diaktifkan saat peristiwa penskalakan terjadi.
+    description: 'Penggunaan: --add-action TYPE KEY [ARG ...] Email: --add-action email bob@contoso.comann@contoso.com Webhook: --add-action webhook https://www.contoso.com/alert apiKey=value Webhook: --add-action webhook https://www.contoso.com/alert?apiKey=value Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu `--add-action` argumen.'
+  - name: --count
+    summary: Angka instans yang akan digunakan. Jika digunakan dengan --min/max-count, jumlah default instans yang akan digunakan.
+    description: ''
+  - name: --email-administrator
+    parameterValueGroup: false, true
+    summary: Kirim email ke administrator langganan saat penskalakan.
+    description: ''
+  - name: --email-coadministrators
+    parameterValueGroup: false, true
+    summary: Kirim email ke administrator bersama langganan saat penskalakan.
+    description: ''
+  - name: --enabled
+    parameterValueGroup: false, true
+    summary: Status mengaktifkan pengaturan skala otomatis.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --max-count
+    summary: Jumlah maksimum instans.
+    description: ''
+  - name: --min-count
+    summary: Jumlah minimum instans.
+    description: ''
+  - name: --name -n
+    summary: Nama pengaturan skala otomatis.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --remove-action -r
+    summary: Hapus satu atau beberapa tindakan.
+    description: 'Penggunaan: --remove-action TYPE KEY [KEY ...] Email: --remove-action email bob@contoso.comann@contoso.com Webhook: --remove-action webhook https://contoso.com/alerthttps://alerts.contoso.com.'
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/monitor/_help.py
+commands:
+- az_monitor_autoscale_create
+- az_monitor_autoscale_delete
+- az_monitor_autoscale_list
+- az_monitor_autoscale_profile
+- az_monitor_autoscale_profile_create
+- az_monitor_autoscale_profile_delete
+- az_monitor_autoscale_profile_list
+- az_monitor_autoscale_profile_list-timezones
+- az_monitor_autoscale_profile_show
+- az_monitor_autoscale_rule
+- az_monitor_autoscale_rule_copy
+- az_monitor_autoscale_rule_create
+- az_monitor_autoscale_rule_delete
+- az_monitor_autoscale_rule_list
+- az_monitor_autoscale_show
+- az_monitor_autoscale_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 04/01/2022
+  description: 'Untuk informasi selengkapnya tentang penskalaan otomatis, kunjungi: https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-understanding-autoscale-settings.'
+  ms.openlocfilehash: f51aff2edab572c9d2b21885aefe547df3a87d2e
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141472014"

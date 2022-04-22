@@ -1,0 +1,254 @@
+### YamlMime:AzureCLIGroup
+uid: az_cdn_endpoint_rule
+name: aturan titik akhir az cdn
+summary: Mengelola aturan pengiriman untuk titik akhir.
+description: ''
+directCommands:
+- uid: az_cdn_endpoint_rule_add
+  name: az cdn endpoint rule add
+  summary: Tambahkan aturan pengiriman ke titik akhir CDN.
+  description: ''
+  syntax: >-
+    az cdn endpoint rule add --action-name {CacheExpiration, CacheKeyQueryString, ModifyRequestHeader, ModifyResponseHeader, OriginGroupOverride, UrlRedirect, UrlRewrite}
+                             --order
+                             [--cache-behavior {BypassCache, Override, SetIfMissing}]
+                             [--cache-duration]
+                             [--custom-fragment]
+                             [--custom-hostname]
+                             [--custom-path]
+                             [--custom-querystring]
+                             [--destination]
+                             [--header-action {Append, Delete, Overwrite}]
+                             [--header-name]
+                             [--header-value]
+                             [--ids]
+                             [--match-values]
+                             [--match-variable {ClientPort, Cookies, HostName, HttpVersion, IsDevice, PostArgs, QueryString, RemoteAddress, RequestBody, RequestHeader, RequestMethod, RequestScheme, RequestUri, ServerPort, SocketAddr, SslProtocol, UrlFileExtension, UrlFileName, UrlPath}]
+                             [--name]
+                             [--negate-condition {false, true}]
+                             [--operator]
+                             [--origin-group]
+                             [--preserve-unmatched-path {false, true}]
+                             [--profile-name]
+                             [--query-parameters]
+                             [--query-string-behavior {Exclude, ExcludeAll, Include, IncludeAll}]
+                             [--redirect-protocol {Http, Https, MatchRequest}]
+                             [--redirect-type {Found, Moved, PermanentRedirect, TemporaryRedirect}]
+                             [--resource-group]
+                             [--rule-name]
+                             [--selector]
+                             [--source-pattern]
+                             [--transform {Lowercase, Uppercase}]
+  examples:
+  - summary: Buat aturan global untuk menonaktifkan penembolokan.
+    syntax: az cdn endpoint rule add -g group -n endpoint --profile-name profile --order 0 --rule-name global --action-name CacheExpiration --cache-behavior BypassCache
+  - summary: Buat aturan untuk pengalihan http ke https.
+    syntax: az cdn endpoint rule add -g group -n endpoint --profile-name profile --order 1 --rule-name "redirect" --match-variable RequestScheme --operator Equal --match-values HTTP --action-name "UrlRedirect" --redirect-protocol Https --redirect-type Moved
+  - summary: Buat aturan untuk mendistribusikan permintaan dengan "/test1" di jalur URL-nya ke grup asal dengan nama "origingroup1".
+    syntax: az cdn endpoint rule add -g group -n endpoint --profile-name profile --order 1 --rule-name "origin-groupo-verride" --match-variable UrlPath --operator Contains --match-values /test1 --action-name "OriginGroupOverride" --origin-group origingroup1
+  requiredParameters:
+  - isRequired: true
+    name: --action-name
+    parameterValueGroup: CacheExpiration, CacheKeyQueryString, ModifyRequestHeader, ModifyResponseHeader, OriginGroupOverride, UrlRedirect, UrlRewrite
+    summary: 'Nama tindakan untuk aturan pengiriman: https://docs.microsoft.com/en-us/azure/cdn/cdn-standard-rules-engine-actions.'
+    description: ''
+  - isRequired: true
+    name: --order
+    summary: Urutan penerapan aturan untuk titik akhir. Nilai yang mungkin {0,1,2,3,.........}. Aturan dengan urutan yang lebih rendah akan diterapkan sebelum aturan dengan urutan yang lebih tinggi. Aturan dengan urutan 0 adalah aturan khusus. Ini tidak memerlukan kondisi dan tindakan apa pun yang tercantum di dalamnya akan selalu diterapkan.
+    description: ''
+  optionalParameters:
+  - name: --cache-behavior
+    parameterValueGroup: BypassCache, Override, SetIfMissing
+    summary: Perilaku penembolokan untuk permintaan.
+    description: ''
+  - name: --cache-duration
+    summary: Durasi konten perlu di-cache.                Format yang diizinkan adalah [d.]hh:mm:ss.
+    description: ''
+  - name: --custom-fragment
+    summary: Fragmen untuk ditambahkan ke URL pengalihan.
+    description: ''
+  - name: --custom-hostname
+    summary: Host untuk dialihkan.                Biarkan kosong untuk menggunakan host masuk sebagai host tujuan.
+    description: ''
+  - name: --custom-path
+    summary: Jalur lengkap untuk mengalihkan. Jalur tidak boleh kosong dan harus dimulai dengan /.                Biarkan kosong untuk menggunakan jalur masuk sebagai jalur tujuan.
+    description: ''
+  - name: --custom-querystring
+    summary: Kumpulan string kueri yang akan ditempatkan di URL pengalihan.                biarkan kosong untuk mempertahankan string kueri masuk.
+    description: ''
+  - name: --destination
+    summary: Jalur tujuan yang akan digunakan dalam penulisan ulang.
+    description: ''
+  - name: --header-action
+    parameterValueGroup: Append, Delete, Overwrite
+    summary: Tindakan header untuk permintaan.
+    description: ''
+  - name: --header-name
+    summary: Nama header yang akan diubah.
+    description: ''
+  - name: --header-value
+    summary: Nilai header.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --match-values
+    summary: Cocokkan nilai kondisi kecocokan.
+    description: ''
+  - name: --match-variable
+    parameterValueGroup: ClientPort, Cookies, HostName, HttpVersion, IsDevice, PostArgs, QueryString, RemoteAddress, RequestBody, RequestHeader, RequestMethod, RequestScheme, RequestUri, ServerPort, SocketAddr, SslProtocol, UrlFileExtension, UrlFileName, UrlPath
+    summary: 'Nama kondisi kecocokan: https://docs.microsoft.com/en-us/azure/cdn/cdn-standard-rules-engine-match-conditions.'
+    description: ''
+  - name: --name -n
+    summary: Nama titik akhir CDN.
+    description: ''
+  - name: --negate-condition
+    parameterValueGroup: false, true
+    summary: Jika true, meniadakan kondisi.
+    description: ''
+  - name: --operator
+    summary: Operator kondisi kecocokan.
+    description: ''
+  - name: --origin-group
+    summary: Nama atau ID OriginGroup yang akan menggantikan OriginGroup default.
+    description: ''
+  - name: --preserve-unmatched-path
+    parameterValueGroup: false, true
+    summary: Jika True, jalur yang tersisa setelah pola sumber akan ditambahkan ke jalur tujuan baru.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --query-parameters
+    summary: Parameter kueri untuk disertakan atau dikecualikan (dipisahkan koma).
+    description: ''
+  - name: --query-string-behavior
+    parameterValueGroup: Exclude, ExcludeAll, Include, IncludeAll
+    summary: Perilaku string kueri untuk permintaan.
+    description: ''
+  - name: --redirect-protocol
+    parameterValueGroup: Http, Https, MatchRequest
+    summary: Protokol yang digunakan untuk pengalihan.
+    description: ''
+  - name: --redirect-type
+    parameterValueGroup: Found, Moved, PermanentRedirect, TemporaryRedirect
+    summary: Jenis pengalihan yang akan digunakan aturan saat mengalihkan lalu lintas.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --rule-name
+    summary: Nama aturan, hanya diperlukan untuk Microsoft SKU.
+    description: ''
+  - name: --selector
+    summary: Pemilih kondisi kecocokan.
+    description: ''
+  - name: --source-pattern
+    summary: Pola URI permintaan yang mengidentifikasi jenis permintaan yang mungkin ditulis ulang.
+    description: ''
+  - name: --transform
+    parameterValueGroup: Lowercase, Uppercase
+    summary: Transformasi untuk diterapkan sebelum pencocokan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cdn/_help.py
+- uid: az_cdn_endpoint_rule_remove
+  name: az cdn endpoint rule remove
+  summary: Menghapus aturan pengiriman dari titik akhir.
+  description: ''
+  syntax: >-
+    az cdn endpoint rule remove [--ids]
+                                [--name]
+                                [--order]
+                                [--profile-name]
+                                [--resource-group]
+                                [--rule-name]
+  examples:
+  - summary: Hapus aturan global.
+    syntax: az cdn endpoint rule remove -g group -n endpoint --profile-name profile --rule-name Global
+  - summary: Hapus aturan dengan urutan 4.
+    syntax: az cdn endpoint rule remove -g group -n endpoint --profile-name profile --order 4
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama titik akhir CDN.
+    description: ''
+  - name: --order
+    summary: Urutan penerapan aturan untuk titik akhir. Nilai yang mungkin {0,1,2,3,.........}. Aturan dengan urutan yang lebih rendah akan diterapkan sebelum aturan dengan urutan yang lebih tinggi. Aturan dengan urutan 0 adalah aturan khusus. Ini tidak memerlukan kondisi dan tindakan apa pun yang tercantum di dalamnya akan selalu diterapkan.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --rule-name
+    summary: Nama aturan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cdn/_help.py
+- uid: az_cdn_endpoint_rule_show
+  name: az cdn endpoint rule show
+  summary: Tampilkan aturan pengiriman yang diakuisisi dengan titik akhir.
+  description: ''
+  syntax: >-
+    az cdn endpoint rule show [--ids]
+                              [--name]
+                              [--profile-name]
+                              [--resource-group]
+  examples:
+  - summary: tampilkan aturan pengiriman yang diakuisisi dengan titik akhir.
+    syntax: az cdn endpoint rule show -g group -n endpoint --profile-name profile
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama titik akhir CDN.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cdn/_help.py
+commands:
+- az_cdn_endpoint_rule_action
+- az_cdn_endpoint_rule_action_add
+- az_cdn_endpoint_rule_action_remove
+- az_cdn_endpoint_rule_action_show
+- az_cdn_endpoint_rule_add
+- az_cdn_endpoint_rule_condition
+- az_cdn_endpoint_rule_condition_add
+- az_cdn_endpoint_rule_condition_remove
+- az_cdn_endpoint_rule_condition_show
+- az_cdn_endpoint_rule_remove
+- az_cdn_endpoint_rule_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/28/2022
+  description: Mengelola aturan pengiriman untuk titik akhir.
+  ms.openlocfilehash: 15b2fbae09e78d7dd632bb394c0ab762b9444bdf
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141446435"
