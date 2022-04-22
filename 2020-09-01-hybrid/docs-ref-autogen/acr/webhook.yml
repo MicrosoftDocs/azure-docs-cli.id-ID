@@ -1,0 +1,320 @@
+### YamlMime:AzureCLIGroup
+uid: az_acr_webhook
+name: az acr webhook
+summary: Mengelola webhook untuk Azure Container Registries.
+description: ''
+directCommands:
+- uid: az_acr_webhook_create
+  name: az acr webhook create
+  summary: Membuat webhook untuk Azure Container Registry.
+  description: ''
+  syntax: >-
+    az acr webhook create --actions {chart_delete, chart_push, delete, push, quarantine}
+                          --name
+                          --registry
+                          --uri
+                          [--headers]
+                          [--location]
+                          [--resource-group]
+                          [--scope]
+                          [--status {disabled, enabled}]
+                          [--tags]
+  examples:
+  - summary: Buat webhook untuk Azure Container Registry yang akan mengirimkan peristiwa docker push dan delete ke URI layanan.
+    syntax: az acr webhook create -n MyWebhook -r MyRegistry --uri http://myservice.com --actions push delete
+  - summary: Buat webhook untuk Azure Container Registry yang akan mengirimkan peristiwa docker push ke URI layanan dengan header autentikasi dasar.
+    syntax: az acr webhook create -n MyWebhook -r MyRegistry --uri http://myservice.com --actions push --headers "Authorization=Basic 000000"
+  - summary: Buat webhook untuk Azure Container Registry yang akan mengirimkan peristiwa dorong dan hapus bagan helm ke URI layanan.
+    syntax: az acr webhook create -n MyWebhook -r MyRegistry --uri http://myservice.com --actions chart_push chart_delete
+  requiredParameters:
+  - isRequired: true
+    name: --actions
+    parameterValueGroup: chart_delete, chart_push, delete, push, quarantine
+    summary: Daftar tindakan yang dipisahkan spasi yang memicu webhook untuk memposting pemberitahuan.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama webhook.
+    description: ''
+  - isRequired: true
+    name: --registry -r
+    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    description: ''
+  - isRequired: true
+    name: --uri
+    summary: URI layanan untuk webhook untuk memposting pemberitahuan.
+    description: ''
+  optionalParameters:
+  - name: --headers
+    summary: Header kustom yang dipisahkan spasi dalam format 'key[=value]' yang akan ditambahkan ke pemberitahuan webhook. Gunakan "" untuk menghapus header yang ada.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --scope
+    summary: Cakupan repositori tempat peristiwa dapat dipicu. Misalnya, 'foo:\*' berarti peristiwa untuk semua tag di bawah repositori 'foo'. 'foo:bar' berarti peristiwa untuk 'foo:bar' saja. 'foo' setara dengan 'foo:latest'. Kosong berarti peristiwa untuk semua repositori.
+    description: ''
+  - name: --status
+    defaultValue: enabled
+    parameterValueGroup: disabled, enabled
+    summary: Menunjukkan apakah webhook diaktifkan.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+- uid: az_acr_webhook_delete
+  name: az acr webhook delete
+  summary: Menghapus webhook dari Azure Container Registry.
+  description: ''
+  syntax: >-
+    az acr webhook delete --name
+                          --registry
+                          [--resource-group]
+  examples:
+  - summary: Menghapus webhook dari Azure Container Registry.
+    syntax: az acr webhook delete -n MyWebhook -r MyRegistry
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama webhook.
+    description: ''
+  - isRequired: true
+    name: --registry -r
+    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+- uid: az_acr_webhook_get-config
+  name: az acr webhook get-config
+  summary: Mendapatkan URI layanan dan header kustom untuk webhook.
+  description: ''
+  syntax: >-
+    az acr webhook get-config --name
+                              --registry
+                              [--resource-group]
+  examples:
+  - summary: Dapatkan informasi konfigurasi untuk webhook.
+    syntax: az acr webhook get-config -n MyWebhook -r MyRegistry
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama webhook.
+    description: ''
+  - isRequired: true
+    name: --registry -r
+    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+- uid: az_acr_webhook_list
+  name: az acr webhook list
+  summary: Mencantumkan semua webhook untuk Azure Container Registry.
+  description: ''
+  syntax: >-
+    az acr webhook list --registry
+                        [--resource-group]
+  examples:
+  - summary: Mencantumkan webhook dan memperlihatkan hasilnya dalam tabel.
+    syntax: az acr webhook list -r MyRegistry -o table
+  requiredParameters:
+  - isRequired: true
+    name: --registry -r
+    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+- uid: az_acr_webhook_list-events
+  name: az acr webhook list-events
+  summary: Mencantumkan kejadian terbaru untuk webhook.
+  description: ''
+  syntax: >-
+    az acr webhook list-events --name
+                               --registry
+                               [--resource-group]
+  examples:
+  - summary: Mencantumkan kejadian terbaru untuk webhook.
+    syntax: az acr webhook list-events -n MyWebhook -r MyRegistry
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama webhook.
+    description: ''
+  - isRequired: true
+    name: --registry -r
+    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+- uid: az_acr_webhook_ping
+  name: az acr webhook ping
+  summary: Memicu kejadian ping untuk webhook.
+  description: ''
+  syntax: >-
+    az acr webhook ping --name
+                        --registry
+                        [--resource-group]
+  examples:
+  - summary: Memicu kejadian ping untuk webhook.
+    syntax: az acr webhook ping -n MyWebhook -r MyRegistry
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama webhook.
+    description: ''
+  - isRequired: true
+    name: --registry -r
+    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+- uid: az_acr_webhook_show
+  name: az acr webhook show
+  summary: Mendapatkan detail webhook.
+  description: ''
+  syntax: >-
+    az acr webhook show --name
+                        --registry
+                        [--resource-group]
+  examples:
+  - summary: Mendapatkan detail webhook.
+    syntax: az acr webhook show -n MyWebhook -r MyRegistry
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama webhook.
+    description: ''
+  - isRequired: true
+    name: --registry -r
+    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    description: ''
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+- uid: az_acr_webhook_update
+  name: az acr webhook update
+  summary: Memperbarui webhook.
+  description: ''
+  syntax: >-
+    az acr webhook update --name
+                          --registry
+                          [--actions {chart_delete, chart_push, delete, push, quarantine}]
+                          [--add]
+                          [--force-string]
+                          [--headers]
+                          [--remove]
+                          [--resource-group]
+                          [--scope]
+                          [--set]
+                          [--status {disabled, enabled}]
+                          [--tags]
+                          [--uri]
+  examples:
+  - summary: Memperbarui header untuk webhook.
+    syntax: az acr webhook update -n MyWebhook -r MyRegistry --headers "Authorization=Basic 000000"
+  - summary: Perbarui URI layanan dan tindakan untuk webhook.
+    syntax: az acr webhook update -n MyWebhook -r MyRegistry --uri http://myservice.com --actions push delete
+  - summary: Nonaktifkan webhook.
+    syntax: az acr webhook update -n MyWebhook -r MyRegistry --status disabled
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama webhook.
+    description: ''
+  - isRequired: true
+    name: --registry -r
+    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    description: ''
+  optionalParameters:
+  - name: --actions
+    parameterValueGroup: chart_delete, chart_push, delete, push, quarantine
+    summary: Daftar tindakan yang dipisahkan spasi yang memicu webhook untuk memposting pemberitahuan.
+    description: ''
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --headers
+    summary: Header kustom yang dipisahkan spasi dalam format 'key[=value]' yang akan ditambahkan ke pemberitahuan webhook. Gunakan "" untuk menghapus header yang ada.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --scope
+    summary: Cakupan repositori tempat peristiwa dapat dipicu. Misalnya, 'foo:\*' berarti peristiwa untuk semua tag di bawah repositori 'foo'. 'foo:bar' berarti peristiwa untuk 'foo:bar' saja. 'foo' setara dengan 'foo:latest'. Kosong berarti peristiwa untuk semua repositori.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --status
+    parameterValueGroup: disabled, enabled
+    summary: Menunjukkan apakah webhook diaktifkan.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --uri
+    summary: URI layanan untuk webhook untuk memposting pemberitahuan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
+commands:
+- az_acr_webhook_create
+- az_acr_webhook_delete
+- az_acr_webhook_get-config
+- az_acr_webhook_list
+- az_acr_webhook_list-events
+- az_acr_webhook_ping
+- az_acr_webhook_show
+- az_acr_webhook_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/28/2022
+  description: Mengelola webhook untuk Azure Container Registries.
+  ms.openlocfilehash: 857eda692a55f15ff9e49198fdd36b336254eb4e
+  ms.sourcegitcommit: d3bae3909ca6297f8ec1fabda40767058c6a6a39
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/15/2022
+  ms.locfileid: "142611791"

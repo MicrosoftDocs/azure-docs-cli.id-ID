@@ -1,0 +1,268 @@
+### YamlMime:AzureCLIGroup
+uid: az_appconfig_feature_filter
+name: filter fitur az appconfig
+summary: Mengelola filter yang terkait dengan bendera fitur yang disimpan dalam App Configuration.
+description: ''
+directCommands:
+- uid: az_appconfig_feature_filter_add
+  name: az appconfig feature filter add
+  summary: Tambahkan filter ke bendera fitur.
+  description: ''
+  syntax: >-
+    az appconfig feature filter add --filter-name
+                                    [--auth-mode {key, login}]
+                                    [--connection-string]
+                                    [--endpoint]
+                                    [--feature]
+                                    [--filter-parameters]
+                                    [--index]
+                                    [--key]
+                                    [--label]
+                                    [--name]
+                                    [--yes]
+  examples:
+  - summary: Tambahkan filter untuk fitur 'warna' dengan label MyLabel dengan nama 'MyFilter' dan 2 parameter.
+    syntax: az appconfig feature filter add -n MyAppConfiguration --feature color --label MyLabel --filter-name MyFilter --filter-parameters Name=\"Value\" Name2=\"Value2\"
+  - summary: Sisipkan filter di indeks 2 (indeks berbasis nol) untuk fitur 'warna' dengan label MyLabel dan nama filter 'MyFilter' tanpa parameter
+    syntax: az appconfig feature filter add -n MyAppConfiguration --feature color --label MyLabel --filter-name MyFilter --index 2
+  - summary: Tambahkan filter dengan nama 'MyFilter' menggunakan string koneksi.
+    syntax: az appconfig feature filter add --connection-string Endpoint=https://contoso.azconfig.io;Id=xxx;Secret=xxx --feature color --filter-name MyFilter
+  - summary: Tambahkan filter dengan nama 'MyFilter' menggunakan titik akhir App Configuration dan kredensial 'az login' Anda.
+    syntax: az appconfig feature filter add --endpoint=https://contoso.azconfig.io --feature color --filter-name MyFilter --auth-mode login
+  - summary: Tambahkan filter untuk fitur 'warna' dengan label MyLabel dengan nama 'MyFilter' dan parameter array.
+    syntax: az appconfig feature filter add -n MyAppConfiguration --feature color --label MyLabel --filter-name MyFilter --filter-parameters ArrayParam=[1,2,3]
+  requiredParameters:
+  - isRequired: true
+    name: --filter-name
+    summary: Nama filter yang akan ditambahkan.
+    description: ''
+  optionalParameters:
+  - name: --auth-mode
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Parameter ini dapat digunakan untuk menunjukkan bagaimana operasi data akan diotorisasi. Jika mode autentikasi adalah "kunci", berikan string koneksi atau nama penyimpanan dan kunci akses akun Anda akan diambil untuk otorisasi. Jika mode auth adalah "login", berikan titik akhir toko atau nama toko dan kredensial "az login" Anda akan digunakan untuk otorisasi. Anda dapat mengonfigurasi mode autentikasi default menggunakan `az configure --defaults appconfig_auth_mode=<auth_mode>`. Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/azure-app-configuration/concept-enable-rbac.
+    description: ''
+  - name: --connection-string
+    summary: Kombinasi kunci akses dan titik akhir App Configuration. Dapat ditemukan menggunakan 'az appconfig credential list'. Pengguna dapat mengaturnya menggunakan `az configure --defaults appconfig_connection_string=<connection_string>` variabel lingkungan atau dengan nama AZURE_APPCONFIG_CONNECTION_STRING.
+    description: ''
+  - name: --endpoint
+    summary: Jika mode autentikasi adalah "login", berikan URL titik akhir App Configuration. Titik akhir dapat diambil menggunakan perintah "az appconfig show". Anda dapat mengonfigurasi titik akhir default menggunakan `az configure --defaults appconfig_endpoint=<endpoint>`.
+    description: ''
+  - name: --feature
+    summary: Nama fitur yang ingin Anda tambahkan filternya. Jika kunci bendera fitur berbeda dari kunci default, berikan argumen sebagai gantinya `--key` .
+    description: ''
+  - name: --filter-parameters
+    summary: Parameter filter yang dipisahkan spasi dalam format 'name[=value]'. Nilai harus berupa string JSON yang lolos.
+    description: ''
+  - name: --index
+    summary: Indeks berbasis nol dalam daftar filter tempat Anda ingin menyisipkan filter baru. Jika tidak ada indeks yang ditentukan atau indeks tidak valid, filter akan ditambahkan ke akhir daftar.
+    description: ''
+  - name: --kunci
+    summary: Kunci bendera fitur. Kunci harus dimulai dengan awalan ".appconfig.featureflag/". Kunci tidak boleh berisi karakter "%". Jika argumen kunci dan fitur disediakan, hanya kunci yang akan digunakan. Kunci default adalah awalan yang dipesan ".appconfig.featureflag/" + nama fitur.
+    description: ''
+  - name: --label
+    summary: Jika tidak ada label yang ditentukan, tambahkan ke bendera fitur dengan label null secara default.
+    description: ''
+  - name: --name -n
+    summary: Nama App Configuration. Anda dapat mengonfigurasi nama default menggunakan `az configure --defaults app_configuration_store=<name>`.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appconfig/_help.py
+- uid: az_appconfig_feature_filter_delete
+  name: az appconfig feature filter delete
+  summary: Menghapus filter dari bendera fitur.
+  description: ''
+  syntax: >-
+    az appconfig feature filter delete [--all]
+                                       [--auth-mode {key, login}]
+                                       [--connection-string]
+                                       [--endpoint]
+                                       [--feature]
+                                       [--filter-name]
+                                       [--index]
+                                       [--key]
+                                       [--label]
+                                       [--name]
+                                       [--yes]
+  examples:
+  - summary: Hapus filter dari fitur menggunakan nama App Configuration tanpa konfirmasi.
+    syntax: az appconfig feature filter delete -n MyAppConfiguration --feature color --filter-name MyFilter --yes
+  - summary: Hapus filter dari fitur saat Anda memiliki beberapa filter dengan nama yang sama.
+    syntax: az appconfig feature filter delete --feature color --filter-name MyFilter --index 2 --connection-string Endpoint=https://contoso.azconfig.io;Id=xxx;Secret=xxx
+  - summary: Hapus semua filter fitur menggunakan nama App Configuration tanpa konfirmasi.
+    syntax: az appconfig feature filter delete -n MyAppConfiguration --feature color --label MyLabel --all --yes
+  optionalParameters:
+  - name: --all
+    summary: Hapus semua filter yang terkait dengan bendera fitur.
+    description: ''
+  - name: --auth-mode
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Parameter ini dapat digunakan untuk menunjukkan bagaimana operasi data akan diotorisasi. Jika mode autentikasi adalah "kunci", berikan string koneksi atau nama penyimpanan dan kunci akses akun Anda akan diambil untuk otorisasi. Jika mode auth adalah "login", berikan titik akhir toko atau nama toko dan kredensial "az login" Anda akan digunakan untuk otorisasi. Anda dapat mengonfigurasi mode autentikasi default menggunakan `az configure --defaults appconfig_auth_mode=<auth_mode>`. Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/azure-app-configuration/concept-enable-rbac.
+    description: ''
+  - name: --connection-string
+    summary: Kombinasi kunci akses dan titik akhir App Configuration. Dapat ditemukan menggunakan 'az appconfig credential list'. Pengguna dapat mengaturnya menggunakan `az configure --defaults appconfig_connection_string=<connection_string>` variabel lingkungan atau dengan nama AZURE_APPCONFIG_CONNECTION_STRING.
+    description: ''
+  - name: --endpoint
+    summary: Jika mode autentikasi adalah "login", berikan URL titik akhir App Configuration. Titik akhir dapat diambil menggunakan perintah "az appconfig show". Anda dapat mengonfigurasi titik akhir default menggunakan `az configure --defaults appconfig_endpoint=<endpoint>`.
+    description: ''
+  - name: --feature
+    summary: Nama fitur tempat Anda ingin menghapus filter. Jika kunci bendera fitur berbeda dari kunci default, berikan argumen sebagai gantinya `--key` .
+    description: ''
+  - name: --filter-name
+    summary: Nama filter yang akan dihapus.
+    description: ''
+  - name: --index
+    summary: Indeks filter berbasis nol yang akan dihapus jika ada beberapa instans dengan nama filter yang sama.
+    description: ''
+  - name: --kunci
+    summary: Kunci bendera fitur. Kunci harus dimulai dengan awalan ".appconfig.featureflag/". Kunci tidak boleh berisi karakter "%". Jika argumen kunci dan fitur disediakan, hanya kunci yang akan digunakan. Kunci default adalah awalan yang dipesan ".appconfig.featureflag/" + nama fitur.
+    description: ''
+  - name: --label
+    summary: Jika tidak ada label yang ditentukan, hapus dari bendera fitur dengan label null secara default.
+    description: ''
+  - name: --name -n
+    summary: Nama App Configuration. Anda dapat mengonfigurasi nama default menggunakan `az configure --defaults app_configuration_store=<name>`.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appconfig/_help.py
+- uid: az_appconfig_feature_filter_list
+  name: az appconfig feature filter list
+  summary: Mencantumkan semua filter untuk bendera fitur.
+  description: ''
+  syntax: >-
+    az appconfig feature filter list [--all]
+                                     [--auth-mode {key, login}]
+                                     [--connection-string]
+                                     [--endpoint]
+                                     [--feature]
+                                     [--key]
+                                     [--label]
+                                     [--name]
+                                     [--top]
+  examples:
+  - summary: Cantumkan semua filter untuk bendera fitur 'warna'.
+    syntax: az appconfig feature filter list -n MyAppConfiguration --feature color --all
+  - summary: Daftar 150 filter untuk bendera fitur 'warna'
+    syntax: az appconfig feature filter list --connection-string Endpoint=https://contoso.azconfig.io;Id=xxx;Secret=xxx  --feature color --top 150
+  - summary: Cantumkan semua filter untuk bendera fitur 'warna' menggunakan kredensial 'az login' Anda.
+    syntax: az appconfig feature filter list --endpoint https://myappconfiguration.azconfig.io --feature color --all --auth-mode login
+  optionalParameters:
+  - name: --all
+    summary: Mencantumkan semua filter yang terkait dengan bendera fitur.
+    description: ''
+  - name: --auth-mode
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Parameter ini dapat digunakan untuk menunjukkan bagaimana operasi data akan diotorisasi. Jika mode autentikasi adalah "kunci", berikan string koneksi atau nama penyimpanan dan kunci akses akun Anda akan diambil untuk otorisasi. Jika mode auth adalah "login", berikan titik akhir toko atau nama toko dan kredensial "az login" Anda akan digunakan untuk otorisasi. Anda dapat mengonfigurasi mode autentikasi default menggunakan `az configure --defaults appconfig_auth_mode=<auth_mode>`. Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/azure-app-configuration/concept-enable-rbac.
+    description: ''
+  - name: --connection-string
+    summary: Kombinasi kunci akses dan titik akhir App Configuration. Dapat ditemukan menggunakan 'az appconfig credential list'. Pengguna dapat mengaturnya menggunakan `az configure --defaults appconfig_connection_string=<connection_string>` variabel lingkungan atau dengan nama AZURE_APPCONFIG_CONNECTION_STRING.
+    description: ''
+  - name: --endpoint
+    summary: Jika mode autentikasi adalah "login", berikan URL titik akhir App Configuration. Titik akhir dapat diambil menggunakan perintah "az appconfig show". Anda dapat mengonfigurasi titik akhir default menggunakan `az configure --defaults appconfig_endpoint=<endpoint>`.
+    description: ''
+  - name: --feature
+    summary: Nama fitur yang filternya ingin Anda tampilkan. Jika kunci bendera fitur berbeda dari kunci default, berikan argumen sebagai gantinya `--key` .
+    description: ''
+  - name: --kunci
+    summary: Kunci bendera fitur. Kunci harus dimulai dengan awalan ".appconfig.featureflag/". Kunci tidak boleh berisi karakter "%". Jika argumen kunci dan fitur disediakan, hanya kunci yang akan digunakan. Kunci default adalah awalan yang dipesan ".appconfig.featureflag/" + nama fitur.
+    description: ''
+  - name: --label
+    summary: Jika tidak ada label yang ditentukan, tampilkan filter dari bendera fitur dengan label null secara default.
+    description: ''
+  - name: --name -n
+    summary: Nama App Configuration. Anda dapat mengonfigurasi nama default menggunakan `az configure --defaults app_configuration_store=<name>`.
+    description: ''
+  - name: --top -t
+    summary: Jumlah maksimum item yang akan dikembalikan. Harus berupa nilai bilangan bulat positif. Default ke 100.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appconfig/_help.py
+- uid: az_appconfig_feature_filter_show
+  name: az appconfig feature filter show
+  summary: Perlihatkan filter bendera fitur.
+  description: ''
+  syntax: >-
+    az appconfig feature filter show --filter-name
+                                     [--auth-mode {key, login}]
+                                     [--connection-string]
+                                     [--endpoint]
+                                     [--feature]
+                                     [--index]
+                                     [--key]
+                                     [--label]
+                                     [--name]
+  examples:
+  - summary: Tampilkan satu filter fitur unik saat Anda memiliki beberapa filter dengan nama yang sama.
+    syntax: az appconfig feature filter show -n MyAppConfiguration --feature color --filter-name MyFilter --index 2
+  - summary: Tampilkan semua instans filter fitur saat Anda memiliki beberapa filter dengan nama yang sama.
+    syntax: az appconfig feature filter show --connection-string Endpoint=https://contoso.azconfig.io;Id=xxx;Secret=xxx --feature color --filter-name MyFilter
+  requiredParameters:
+  - isRequired: true
+    name: --filter-name
+    summary: Nama filter yang akan ditampilkan.
+    description: ''
+  optionalParameters:
+  - name: --auth-mode
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Parameter ini dapat digunakan untuk menunjukkan bagaimana operasi data akan diotorisasi. Jika mode autentikasi adalah "kunci", berikan string koneksi atau nama penyimpanan dan kunci akses akun Anda akan diambil untuk otorisasi. Jika mode auth adalah "login", berikan titik akhir toko atau nama toko dan kredensial "az login" Anda akan digunakan untuk otorisasi. Anda dapat mengonfigurasi mode autentikasi default menggunakan `az configure --defaults appconfig_auth_mode=<auth_mode>`. Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/azure-app-configuration/concept-enable-rbac.
+    description: ''
+  - name: --connection-string
+    summary: Kombinasi kunci akses dan titik akhir App Configuration. Dapat ditemukan menggunakan 'az appconfig credential list'. Pengguna dapat mengaturnya menggunakan `az configure --defaults appconfig_connection_string=<connection_string>` variabel lingkungan atau dengan nama AZURE_APPCONFIG_CONNECTION_STRING.
+    description: ''
+  - name: --endpoint
+    summary: Jika mode autentikasi adalah "login", berikan URL titik akhir App Configuration. Titik akhir dapat diambil menggunakan perintah "az appconfig show". Anda dapat mengonfigurasi titik akhir default menggunakan `az configure --defaults appconfig_endpoint=<endpoint>`.
+    description: ''
+  - name: --feature
+    summary: Nama fitur yang berisi filter. Jika kunci bendera fitur berbeda dari kunci default, berikan argumen sebagai gantinya `--key` .
+    description: ''
+  - name: --index
+    summary: Indeks filter berbasis nol yang akan ditampilkan jika ada beberapa instans dengan nama filter yang sama.
+    description: ''
+  - name: --kunci
+    summary: Kunci bendera fitur. Kunci harus dimulai dengan awalan ".appconfig.featureflag/". Kunci tidak boleh berisi karakter "%". Jika argumen kunci dan fitur disediakan, hanya kunci yang akan digunakan. Kunci default adalah awalan yang dipesan ".appconfig.featureflag/" + nama fitur.
+    description: ''
+  - name: --label
+    summary: Jika tidak ada label yang ditentukan, tampilkan bendera fitur dengan label null secara default.
+    description: ''
+  - name: --name -n
+    summary: Nama App Configuration. Anda dapat mengonfigurasi nama default menggunakan `az configure --defaults app_configuration_store=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appconfig/_help.py
+commands:
+- az_appconfig_feature_filter_add
+- az_appconfig_feature_filter_delete
+- az_appconfig_feature_filter_list
+- az_appconfig_feature_filter_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/16/2022
+  description: Mengelola filter yang terkait dengan bendera fitur yang disimpan dalam App Configuration.
+  ms.openlocfilehash: c3fd270a84cc6f21f3a2873eac41bc647f63fc60
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141461934"

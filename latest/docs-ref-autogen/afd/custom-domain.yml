@@ -1,0 +1,293 @@
+### YamlMime:AzureCLIGroup
+uid: az_afd_custom-domain
+name: az afd custom-domain
+summary: Mengelola domain kustom dalam profil yang ditentukan.
+description: ''
+directCommands:
+- uid: az_afd_custom-domain_create
+  name: az afd custom-domain create
+  summary: Buat domain kustom dalam profil yang ditentukan.
+  description: Operasi akan selesai dengan domain kustom yang dibuat dengan status validasinya diatur ke 'Tertunda. Anda harus membuat catatan TXT DNS "_dnsauth.<your_custom_domain>" dengan token validasi sebagai nilainya untuk membuat status validasi domain menjadi 'Disetujui' untuk lalu lintas server. Gunakan "az afd custom-domain show" untuk mendapatkan token validasi. Token validasi akan kedaluwarsa setelah 7 hari dan status validasi domain Anda akan menjadi "Waktu Habis" jika tidak ada catatan TXT yang benar yang terdeteksi dalam periode tersebut. Anda dapat menggunakan 'az afd custom-domain regenerate-validation-token' untuk meregenerasi token validasi untuk memulai ulang proses validasi.
+  syntax: >-
+    az afd custom-domain create --certificate-type {AzureFirstPartyManagedCertificate, CustomerCertificate, ManagedCertificate}
+                                --custom-domain-name
+                                --host-name
+                                --minimum-tls-version {TLS10, TLS12}
+                                --profile-name
+                                --resource-group
+                                [--azure-dns-zone]
+                                [--no-wait]
+                                [--secret]
+  examples:
+  - summary: Buat domain kustom yang menggunakan serficate terkelola AFD untuk enkripsi SSL/TLS.
+    syntax: az afd custom-domain create -g group --custom-domain-name customDomain --profile-name profile --host-name www.contoso.com --minimum-tls-version TLS12 --certificate-type ManagedCertificate
+  - summary: Buat domain kustom yang menggunakan serficate Anda sendiri untuk enkripsi SSL/TLS, sertifikat disimpan di Azure Key Vault dan direferensikan oleh rahasia AFD.
+    syntax: az afd custom-domain create -g group --custom-domain-name customDomain --profile-name profile --host-name www.contoso.com --minimum-tls-version TLS12 --certificate-type CustomerCertificate --secret secretName
+  requiredParameters:
+  - isRequired: true
+    name: --certificate-type
+    parameterValueGroup: AzureFirstPartyManagedCertificate, CustomerCertificate, ManagedCertificate
+    summary: Menentukan sumber sertifikat SSL.
+    description: ''
+  - isRequired: true
+    name: --custom-domain-name
+    summary: Nama domain kustom.
+    description: ''
+  - isRequired: true
+    name: --host-name
+    summary: Nama host domain. Harus berupa nama domain.
+    description: ''
+  - isRequired: true
+    name: --minimum-tls-version
+    parameterValueGroup: TLS10, TLS12
+    summary: Versi protokol TLS yang akan digunakan untuk Https.
+    description: ''
+  - isRequired: true
+    name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --azure-dns-zone
+    summary: ID zona Azure DNS.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --secret
+    summary: Nama rahasia azure front door.
+    description: ''
+- uid: az_afd_custom-domain_delete
+  name: az afd custom-domain delete
+  summary: Menghapus domain kustom.
+  description: ''
+  syntax: >-
+    az afd custom-domain delete [--custom-domain-name]
+                                [--ids]
+                                [--profile-name]
+                                [--resource-group]
+                                [--yes]
+  examples:
+  - summary: Menghapus domain kustom.
+    syntax: az afd custom-domain delete -g group --profile-name profile  --custom-domain-name customDomainName
+  optionalParameters:
+  - name: --custom-domain-name
+    summary: Nama domain kustom.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_afd_custom-domain_list
+  name: az afd custom-domain list
+  summary: Cantumkan semua domain kustom dalam profil yang ditentukan.
+  description: ''
+  syntax: >-
+    az afd custom-domain list --profile-name
+                              --resource-group
+  examples:
+  - summary: Cantumkan semua domain kustom dalam profil yang ditentukan.
+    syntax: az afd custom-domain list -g group --profile-name profile
+  requiredParameters:
+  - isRequired: true
+    name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_afd_custom-domain_regenerate-validation-token
+  name: az afd custom-domain regenerate-validation-token
+  summary: Regenerasi token validasi domain untuk memulai ulang proses validasi.
+  description: ''
+  syntax: >-
+    az afd custom-domain regenerate-validation-token [--custom-domain-name]
+                                                     [--ids]
+                                                     [--profile-name]
+                                                     [--resource-group]
+  examples:
+  - summary: Regenerasi token validasi domain.
+    syntax: az afd custom-domain regenerate-validation-token -g MyResourceGroup --profile-name MyProfle --custom-domain-name MyCustomDomain
+  optionalParameters:
+  - name: --custom-domain-name
+    summary: Nama domain kustom.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_afd_custom-domain_show
+  name: az afd custom-domain show
+  summary: Perlihatkan detail domain kustom.
+  description: ''
+  syntax: >-
+    az afd custom-domain show [--custom-domain-name]
+                              [--ids]
+                              [--profile-name]
+                              [--resource-group]
+  examples:
+  - summary: menampilkan detail domain kustom dalam profil yang ditentukan.
+    syntax: az afd custom-domain show -g group --profile-name profile  --custom-domain-name customDomainName
+  optionalParameters:
+  - name: --custom-domain-name
+    summary: Nama domain kustom.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_afd_custom-domain_update
+  name: az afd custom-domain update
+  summary: Perbarui domain kustom dalam profil yang ditentukan.
+  description: ''
+  syntax: >-
+    az afd custom-domain update [--azure-dns-zone]
+                                [--certificate-type {AzureFirstPartyManagedCertificate, CustomerCertificate, ManagedCertificate}]
+                                [--custom-domain-name]
+                                [--ids]
+                                [--minimum-tls-version {TLS10, TLS12}]
+                                [--profile-name]
+                                [--resource-group]
+                                [--secret]
+  examples:
+  - summary: Perbarui versi TLS minimum domain kustom yang didukung.
+    syntax: az afd custom-domain update -g group --custom-domain-name customDomain --profile-name profile --minimum-tls-version TLS12
+  - summary: Perbarui jenis sertifikat domain kustom ke sertifikat terkelola AFD.
+    syntax: az afd custom-domain update -g group --custom-domain-name customDomain --profile-name profile --certificate-type ManagedCertificate
+  optionalParameters:
+  - name: --azure-dns-zone
+    summary: ID zona Azure DNS.
+    description: ''
+  - name: --certificate-type
+    parameterValueGroup: AzureFirstPartyManagedCertificate, CustomerCertificate, ManagedCertificate
+    summary: Menentukan sumber sertifikat SSL.
+    description: ''
+  - name: --custom-domain-name
+    summary: Nama domain kustom.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --minimum-tls-version
+    parameterValueGroup: TLS10, TLS12
+    summary: Versi protokol TLS yang akan digunakan untuk Https.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --secret
+    summary: Nama rahasia azure front door.
+    description: ''
+- uid: az_afd_custom-domain_wait
+  name: az afd custom-domain wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi domain kustom terpenuhi.
+  description: ''
+  syntax: >-
+    az afd custom-domain wait [--created]
+                              [--custom]
+                              [--custom-domain-name]
+                              [--deleted]
+                              [--exists]
+                              [--ids]
+                              [--interval]
+                              [--profile-name]
+                              [--resource-group]
+                              [--timeout]
+                              [--updated]
+  examples:
+  - summary: Tunggu hingga domain kustom dibuat.
+    syntax: az afd custom-domain wait -g MyResourceGroup --profile-name MyProfle --custom-domain-name MyCustomDomain --created
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --custom-domain-name
+    summary: Nama domain kustom.
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --diperbarui
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_afd_custom-domain_create
+- az_afd_custom-domain_delete
+- az_afd_custom-domain_list
+- az_afd_custom-domain_regenerate-validation-token
+- az_afd_custom-domain_show
+- az_afd_custom-domain_update
+- az_afd_custom-domain_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Kelola domain kustom dalam profil yang ditentukan.
+  ms.openlocfilehash: 2fefb2a1af47fb20e7e36f5c1905839c5ac436e2
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141446777"

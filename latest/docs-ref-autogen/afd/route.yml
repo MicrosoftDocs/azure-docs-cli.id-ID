@@ -1,0 +1,331 @@
+### YamlMime:AzureCLIGroup
+uid: az_afd_route
+name: rute az afd
+summary: Mengelola rute di bawah titik akhir AFD.
+description: Rute memetakan domain Anda dan mencocokkan pola jalur URL ke grup asal tertentu.
+directCommands:
+- uid: az_afd_route_create
+  name: az afd route create
+  summary: Membuat rute baru dalam titik akhir yang ditentukan.
+  description: ''
+  syntax: >-
+    az afd route create --endpoint-name
+                        --forwarding-protocol {HttpOnly, HttpsOnly, MatchRequest}
+                        --https-redirect {Disabled, Enabled}
+                        --origin-group
+                        --profile-name
+                        --resource-group
+                        --route-name
+                        --supported-protocols {Http, Https}
+                        [--content-types-to-compress]
+                        [--custom-domains]
+                        [--enable-caching {false, true}]
+                        [--enable-compression {false, true}]
+                        [--enabled-state {Disabled, Enabled}]
+                        [--link-to-default-domain {Disabled, Enabled}]
+                        [--origin-path]
+                        [--patterns-to-match]
+                        [--query-parameters]
+                        [--query-string-caching-behavior {IgnoreQueryString, IgnoreSpecifiedQueryStrings, IncludeSpecifiedQueryStrings, UseQueryString}]
+                        [--rule-sets]
+  examples:
+  - summary: Membuat rute untuk mengaitkan domain default titik akhir dengan grup asal untuk semua permintaan HTTPS.
+    syntax: az afd route create -g group --endpoint-name endpoint1 --profile-name profile --route-name route1 --https-redirect False --origin-group og001 --supported-protocols Https --link-to-default-domain Enabled --forwarding-protocol MatchRequest
+  - summary: Membuat rute untuk mengaitkan domain default titik akhir dengan grup asal untuk semua permintaan dan menggunakan seperangkat aturan yang ditentukan untuk menyesuaikan perilaku rute.
+    syntax: az afd route create -g group --endpoint-name endpoint1 --profile-name profile --route-name route1 --rule-sets ruleset1 rulseset2 --origin-group og001 --supported-protocols Http Https --link-to-default-domain Enabled --forwarding-protocol MatchRequest --https-redirect False
+  - summary: Membuat rute untuk mengaitkan domain default titik akhir dan domain kustom dengan grup asal untuk semua permintaan dengan pola jalur yang ditentukan dan mengalihkan semua trafic untuk menggunakan Https.
+    syntax: az afd route create -g group --endpoint-name endpoint1 --profile-name profile --route-name route1 --patterns-to-match /test1/* /tes2/* --origin-group og001 --supported-protocols Http Https --custom-domains cd001 --forwarding-protocol MatchRequest --https-redirect True --link-to-default-domain Enabled
+  requiredParameters:
+  - isRequired: true
+    name: --endpoint-name
+    summary: Nama titik akhir.
+    description: ''
+  - isRequired: true
+    name: --forwarding-protocol
+    parameterValueGroup: HttpOnly, HttpsOnly, MatchRequest
+    summary: Protokol yang akan digunakan aturan ini saat meneruskan lalu lintas ke backend.
+    description: ''
+  - isRequired: true
+    name: --https-redirect
+    parameterValueGroup: Disabled, Enabled
+    summary: Apakah akan mengalihkan lalu lintas HTTP ke lalu lintas HTTPS secara otomatis.
+    description: ''
+  - isRequired: true
+    name: --origin-group
+    summary: Nama atau ID grup asal yang akan dikaitkan.
+    description: ''
+  - isRequired: true
+    name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --route-name
+    summary: Nama rute.
+    description: ''
+  - isRequired: true
+    name: --supported-protocols
+    parameterValueGroup: Http, Https
+    summary: Daftar protokol yang didukung untuk rute ini.
+    description: ''
+  optionalParameters:
+  - name: --content-type-to-compress
+    summary: Daftar tipe isi tempat pemadatan berlaku. Nilai harus berupa jenis MIME yang valid.
+    description: ''
+  - name: --custom-domains
+    summary: Domain kustom yang dirujuk oleh titik akhir ini.
+    description: ''
+  - name: --enable-caching
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah penembolokan diamankan pada rute tersebut.
+    description: ''
+  - name: --enable-compression
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah pemadatan konten diaktifkan di AzureFrontDoor. Nilai default-nya adalah false. Jika pemadatan diaktifkan, konten akan disajikan sebagai dikompresi jika pengguna meminta versi terkompresi. Konten tidak akan dikompresi di AzureFrontDoor saat konten yang diminta lebih kecil dari 1 byte atau lebih besar dari 1 MB.
+    description: ''
+  - name: --enabled-state
+    defaultValue: Enabled
+    parameterValueGroup: Disabled, Enabled
+    summary: Apakah akan mengaktifkan rute ini.
+    description: ''
+  - name: --link-to-default-domain
+    parameterValueGroup: Disabled, Enabled
+    summary: Apakah rute ini akan ditautkan ke domain titik akhir default.
+    description: ''
+  - name: --origin-path
+    summary: Jalur direktori pada asal yang dapat digunakan Azure Front Door untuk mengambil konten.
+    description: ''
+  - name: --patterns-to-match
+    summary: Pola rute aturan.
+    description: ''
+  - name: --query-parameters
+    summary: Parameter kueri untuk disertakan atau dikecualikan.
+    description: ''
+  - name: --query-string-caching-behavior
+    parameterValueGroup: IgnoreQueryString, IgnoreSpecifiedQueryStrings, IncludeSpecifiedQueryStrings, UseQueryString
+    summary: Menentukan bagaimana CDN permintaan cache yang menyertakan string kueri. Anda dapat mengabaikan string kueri apa pun saat penembolokan, melewati penembolokan untuk mencegah permintaan yang berisi string kueri di-cache, atau menyimpan cache setiap permintaan dengan URL unik.
+    description: ''
+  - name: --rule-sets
+    summary: Kumpulan ID atau nama seperangkat aturan yang dirujuk oleh rute.
+    description: ''
+- uid: az_afd_route_delete
+  name: az afd route delete
+  summary: Hapus rute yang ada dalam titik akhir yang ditentukan.
+  description: ''
+  syntax: >-
+    az afd route delete [--endpoint-name]
+                        [--ids]
+                        [--profile-name]
+                        [--resource-group]
+                        [--route-name]
+                        [--yes]
+  examples:
+  - summary: Hapus rute bernama route1.
+    syntax: az afd route delete -g group --profile-name profile --endpoint-name endpoint1 --route-name route1
+  optionalParameters:
+  - name: --endpoint-name
+    summary: Nama titik akhir.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --route-name
+    summary: Nama rute.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_afd_route_list
+  name: az afd route list
+  summary: Cantumkan semua rute dalam titik akhir yang ditentukan.
+  description: ''
+  syntax: >-
+    az afd route list --endpoint-name
+                      --profile-name
+                      --resource-group
+  examples:
+  - summary: Cantumkan semua rute dalam titik akhir yang ditentukan.
+    syntax: az afd route list -g group --profile-name profile --endpoint-name endpoint1
+  requiredParameters:
+  - isRequired: true
+    name: --endpoint-name
+    summary: Nama titik akhir.
+    description: ''
+  - isRequired: true
+    name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_afd_route_show
+  name: az afd route show
+  summary: Tampilkan detail rute.
+  description: ''
+  syntax: >-
+    az afd route show [--endpoint-name]
+                      [--ids]
+                      [--profile-name]
+                      [--resource-group]
+                      [--route-name]
+  examples:
+  - summary: menampilkan detail rute bernama route1.
+    syntax: az afd route show -g group --profile-name profile  --endpoint-name endpoint1 --route-name route1
+  optionalParameters:
+  - name: --endpoint-name
+    summary: Nama titik akhir.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --route-name
+    summary: Nama rute.
+    description: ''
+- uid: az_afd_route_update
+  name: az afd route update
+  summary: Perbarui rute yang ada dalam titik akhir yang ditentukan.
+  description: ''
+  syntax: >-
+    az afd route update [--content-types-to-compress]
+                        [--custom-domains]
+                        [--enable-caching {false, true}]
+                        [--enable-compression {false, true}]
+                        [--enabled-state {Disabled, Enabled}]
+                        [--endpoint-name]
+                        [--forwarding-protocol {HttpOnly, HttpsOnly, MatchRequest}]
+                        [--https-redirect {Disabled, Enabled}]
+                        [--ids]
+                        [--link-to-default-domain {Disabled, Enabled}]
+                        [--origin-group]
+                        [--origin-path]
+                        [--patterns-to-match]
+                        [--profile-name]
+                        [--query-parameters]
+                        [--query-string-caching-behavior {IgnoreQueryString, IgnoreSpecifiedQueryStrings, IncludeSpecifiedQueryStrings, UseQueryString}]
+                        [--resource-group]
+                        [--route-name]
+                        [--rule-sets]
+                        [--supported-protocols {Http, Https}]
+  examples:
+  - summary: Perbarui rute untuk menerima permintaan Http dan Https dan alihkan semua trafic untuk menggunakan Https.
+    syntax: az afd route update -g group --endpoint-name endpoint1 --profile-name profile --route-name route1 --supported-protocols Http Https --https-redirect True
+  - summary: Perbarui pengaturan seperangkat aturan rute untuk menyesuaikan perilaku rute.
+    syntax: az afd route update -g group --endpoint-name endpoint1 --profile-name profile --route-name route1 --rule-sets ruleset1 rulseset2
+  - summary: Perbarui pengaturan pemadatan rute untuk mengaktifkan pemadatan untuk jenis konten yang ditentukan.
+    syntax: az afd route update -g group --endpoint-name endpoint1 --profile-name profile --route-name route1 --query-string-caching-behavior IgnoreQueryString --enable-compression true --content-types-to-compress text/javascript text/plain
+  optionalParameters:
+  - name: --content-type-to-compress
+    summary: Daftar tipe isi tempat pemadatan berlaku. Nilai harus berupa jenis MIME yang valid.
+    description: ''
+  - name: --custom-domains
+    summary: Domain kustom yang dirujuk oleh titik akhir ini.
+    description: ''
+  - name: --enable-caching
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah penembolokan diamankan pada rute tersebut.
+    description: ''
+  - name: --enable-compression
+    parameterValueGroup: false, true
+    summary: Menunjukkan apakah pemadatan konten diaktifkan di AzureFrontDoor. Nilai default-nya adalah false. Jika pemadatan diaktifkan, konten akan disajikan sebagai dikompresi jika pengguna meminta versi terkompresi. Konten tidak akan dikompresi di AzureFrontDoor saat konten yang diminta lebih kecil dari 1 byte atau lebih besar dari 1 MB.
+    description: ''
+  - name: --enabled-state
+    parameterValueGroup: Disabled, Enabled
+    summary: Apakah akan mengaktifkan rute ini.
+    description: ''
+  - name: --endpoint-name
+    summary: Nama titik akhir.
+    description: ''
+  - name: --forwarding-protocol
+    parameterValueGroup: HttpOnly, HttpsOnly, MatchRequest
+    summary: Protokol yang akan digunakan aturan ini saat meneruskan lalu lintas ke backend.
+    description: ''
+  - name: --https-redirect
+    parameterValueGroup: Disabled, Enabled
+    summary: Apakah akan mengalihkan lalu lintas HTTP ke lalu lintas HTTPS secara otomatis.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --link-to-default-domain
+    parameterValueGroup: Disabled, Enabled
+    summary: Apakah rute ini akan ditautkan ke domain titik akhir default.
+    description: ''
+  - name: --origin-group
+    summary: Nama atau ID grup asal yang akan dikaitkan.
+    description: ''
+  - name: --origin-path
+    summary: Jalur direktori pada asal yang dapat digunakan Azure Front Door untuk mengambil konten.
+    description: ''
+  - name: --patterns-to-match
+    summary: Pola rute aturan.
+    description: ''
+  - name: --profile-name
+    summary: Nama profil CDN yang unik dalam grup sumber daya.
+    description: ''
+  - name: --query-parameters
+    summary: Parameter kueri untuk disertakan atau dikecualikan.
+    description: ''
+  - name: --query-string-caching-behavior
+    parameterValueGroup: IgnoreQueryString, IgnoreSpecifiedQueryStrings, IncludeSpecifiedQueryStrings, UseQueryString
+    summary: Menentukan bagaimana CDN permintaan cache yang menyertakan string kueri. Anda dapat mengabaikan string kueri apa pun saat penembolokan, melewati penembolokan untuk mencegah permintaan yang berisi string kueri di-cache, atau menyimpan cache setiap permintaan dengan URL unik.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --route-name
+    summary: Nama rute.
+    description: ''
+  - name: --rule-sets
+    summary: Kumpulan ID atau nama seperangkat aturan yang dirujuk oleh rute.
+    description: ''
+  - name: --supported-protocols
+    parameterValueGroup: Http, Https
+    summary: Daftar protokol yang didukung untuk rute ini.
+    description: ''
+commands:
+- az_afd_route_create
+- az_afd_route_delete
+- az_afd_route_list
+- az_afd_route_show
+- az_afd_route_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Rute memetakan domain Anda dan mencocokkan pola jalur URL ke grup asal tertentu.
+  ms.openlocfilehash: f566d8301533ef8718154b5cea8544c69cfa1459
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141446741"

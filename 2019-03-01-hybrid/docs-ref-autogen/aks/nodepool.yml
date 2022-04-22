@@ -1,0 +1,570 @@
+### YamlMime:AzureCLIGroup
+uid: az_aks_nodepool
+name: az aks nodepool
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **pratinjau aks** untuk Azure CLI (versi 2.32.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az aks nodepool** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Perintah untuk mengelola kumpulan simpul di kluster Kubernetes terkelola.
+description: ''
+directCommands:
+- uid: az_aks_nodepool_add
+  name: az aks nodepool add
+  summary: Tambahkan kumpulan simpul ke kluster Kubernetes terkelola.
+  description: ''
+  syntax: >-
+    az aks nodepool add --cluster-name
+                        --name
+                        --resource-group
+                        [--aks-custom-headers]
+                        [--crg-id]
+                        [--enable-cluster-autoscaler]
+                        [--enable-encryption-at-host]
+                        [--enable-fips-image]
+                        [--enable-node-public-ip]
+                        [--enable-ultra-ssd]
+                        [--eviction-policy {Deallocate, Delete}]
+                        [--gpu-instance-profile {MIG1g, MIG2g, MIG3g, MIG4g, MIG7g}]
+                        [--host-group-id]
+                        [--kubelet-config]
+                        [--kubernetes-version]
+                        [--labels]
+                        [--linux-os-config]
+                        [--max-count]
+                        [--max-pods]
+                        [--max-surge]
+                        [--message-of-the-day]
+                        [--min-count]
+                        [--mode {System, User}]
+                        [--no-wait]
+                        [--node-count]
+                        [--node-osdisk-size]
+                        [--node-osdisk-type]
+                        [--node-public-ip-prefix-id]
+                        [--node-taints]
+                        [--node-vm-size]
+                        [--node-zones {1, 2, 3}]
+                        [--os-sku]
+                        [--os-type]
+                        [--pod-subnet-id]
+                        [--ppg]
+                        [--priority {Regular, Spot}]
+                        [--scale-down-mode {Deallocate, Delete}]
+                        [--snapshot-id]
+                        [--spot-max-price]
+                        [--tags]
+                        [--vnet-subnet-id]
+                        [--workload-runtime {OCIContainer, WasmWasi}]
+  examples:
+  - summary: Buat nodepool di kluster AKS yang ada dengan os ephemeral diaktifkan.
+    syntax: az aks nodepool add -g MyResourceGroup -n nodepool1 --cluster-name MyManagedCluster --node-osdisk-type Ephemeral --node-osdisk-size 48
+  - summary: Buat nodepool dengan EncryptionAtHost diaktifkan.
+    syntax: az aks nodepool add -g MyResourceGroup -n nodepool1 --cluster-name MyManagedCluster --enable-encryption-at-host
+  - summary: Membuat nodepool dengan os-sku tertentu
+    syntax: az aks nodepool add -g MyResourceGroup -n nodepool1 --cluster-name MyManagedCluster  --os-sku Ubuntu
+  - summary: Buat nodepool yang dapat menjalankan beban kerja wasm.
+    syntax: az aks nodepool add -g MyResourceGroup -n nodepool1 --cluster-name MyManagedCluster  --workload-runtime WasmWasi
+  - summary: buat kluster kubernetes dengan id rekam jepret.
+    syntax: az aks nodepool add -g MyResourceGroup -n nodepool1 --cluster-name MyManagedCluster --kubernetes-version 1.20.9 --snapshot-id "/subscriptions/00000/resourceGroups/AnotherResourceGroup/providers/Microsoft.ContainerService/snapshots/mysnapshot1"
+  - summary: buat nodepool dengan ID Grup Reservasi Kapasitas (CRG).
+    syntax: az aks nodepool add -g MyResourceGroup -n MyNodePool --cluster-name MyMC --node-vm-size VMSize --crg-id "/subscriptions/SubID/resourceGroups/ResourceGroupName/providers/Microsoft.ContainerService/CapacityReservationGroups/MyCRGID"
+  - summary: membuat nodepool di kluster AKS yang ada dengan id grup host
+    syntax: az aks nodepool add -g MyResourceGroup -n MyNodePool --cluster-name MyMC --host-group-id /subscriptions/00000/resourceGroups/AnotherResourceGroup/providers/Microsoft.ContainerService/hostGroups/myHostGroup --node-vm-size VMSize
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kumpulan simpul.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --aks-custom-headers
+    summary: Kirim header kustom. Ketika ditentukan, format harus Key1=Value1,Key2=Value2.
+    description: ''
+  - name: --crg-id
+    summary: crg-id yang digunakan untuk mengaitkan nodepool baru dengan sumber daya Grup Reservasi Kapasitas yang ada.
+    description: ''
+  - name: --enable-cluster-autoscaler -e
+    summary: Aktifkan autoscaler kluster.
+    description: ''
+  - name: --enable-encryption-at-host
+    summary: Aktifkan EncryptionAtHost pada kumpulan simpul agen.
+    description: ''
+  - name: --enable-fips-image
+    summary: Gunakan OS berkemampuan FIPS pada simpul agen.
+    description: ''
+  - name: --enable-node-public-ip
+    summary: Aktifkan IP publik simpul VMSS.
+    description: ''
+  - name: --enable-ultra-ssd
+    summary: Aktifkan UltraSSD pada kumpulan simpul agen.
+    description: ''
+  - name: --eviction-policy
+    defaultValue: Delete
+    parameterValueGroup: Deallocate, Delete
+    summary: Kebijakan pengeluaran kumpulan simpul Spot. Ini hanya dapat diatur ketika --prioritas adalah Spot.
+    description: ''
+  - name: --gpu-instance-profile
+    parameterValueGroup: MIG1g, MIG2g, MIG3g, MIG4g, MIG7g
+    summary: Profil instans GPU ke GPU Nvidia multi-gpu partisi.
+    description: ''
+  - name: --host-group-id
+    summary: (PRATINJAU) Id grup host khusus yang sepenuhnya memenuhi syarat yang digunakan untuk memprovisikan kumpulan simpul agen.
+    description: ''
+  - name: --kubelet-config
+    summary: Konfigurasi Kubelet untuk simpul agen.
+    description: ''
+  - name: --kubernetes-version -k
+    summary: Versi Kubernetes yang digunakan untuk membuat kluster, seperti "1.7.12" atau "1.8.7".
+    description: ''
+    valueFrom: '`az aks get-versions`'
+  - name: --labels
+    summary: Label simpul untuk kumpulan simpul. Lihat https://aka.ms/node-labels untuk sintaks label.
+    description: ''
+  - name: --linux-os-config
+    summary: Konfigurasi OS untuk simpul agen Linux.
+    description: ''
+  - name: --max-count
+    summary: Jumlah simpul maksimum yang digunakan untuk autoscaler, ketika "--enable-cluster-autoscaler" ditentukan. Tentukan nilai dalam rentang [1, 100].
+    description: ''
+  - name: --max-pods -m
+    summary: Jumlah maksimum pod yang dapat disebarkan ke simpul.
+    description: Jika tidak ditentukan, default berdasarkan plugin jaringan. 30 untuk "azure", 110 untuk "kubenet", atau 250 untuk "none".
+  - name: --max-surge
+    summary: Simpul tambahan yang digunakan untuk mempercepat peningkatan. Ketika ditentukan, ini menunjukkan angka atau persentase yang digunakan, misalnya. 5 atau 33%.
+    description: ''
+  - name: --message-of-the-day
+    summary: Jalur ke file yang berisi pesan yang diinginkan hari itu. Hanya berlaku untuk simpul linux. Akan ditulis ke /etc/motd.
+    description: ''
+  - name: --min-count
+    summary: Jumlah simpul minimun yang digunakan untuk autoscaler, ketika "--enable-cluster-autoscaler" ditentukan. Tentukan nilai dalam rentang [1, 100].
+    description: ''
+  - name: --mode
+    defaultValue: User
+    parameterValueGroup: System, User
+    summary: Mode untuk kumpulan simpul yang menentukan fungsi utama kumpulan simpul. Jika ditetapkan sebagai "Sistem", AKS lebih memilih pod sistem yang menjadwalkan kumpulan simpul dengan mode `System`. Pelajari lebih lanjut di https://aka.ms/aks/nodepool/mode.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --node-count -c
+    defaultValue: "3"
+    summary: Jumlah simpul di kumpulan agen Kubernetes. Setelah membuat kluster, Anda dapat mengubah ukuran kumpulan simpulnya dengan `az aks scale`.
+    description: ''
+  - name: --node-osdisk-size
+    summary: Ukuran dalam GB disk OS untuk setiap simpul di kumpulan agen. Minimal 30 GB.
+    description: ''
+  - name: --node-osdisk-type
+    summary: Jenis disk OS yang akan digunakan untuk komputer di kumpulan agen tertentu. Default ke 'Terkelola'. Mungkin tidak diubah untuk kumpulan ini setelah pembuatan.
+    description: ''
+  - name: --node-public-ip-prefix-id
+    summary: ID awalan IP publik yang digunakan untuk menetapkan IP publik ke simpul VMSS.
+    description: ''
+  - name: --node-taints
+    summary: Taint simpul untuk kumpulan node.
+    description: ''
+  - name: --node-vm-size -s
+    summary: Ukuran Virtual Machines untuk dibuat sebagai simpul Kubernetes.
+    description: ''
+  - name: --node-zones --zones -z
+    parameterValueGroup: 1, 2, 3
+    summary: (tidak akan digunakan lagi, gunakan --zones) Zona ketersediaan tempat simpul agen akan ditempatkan.
+    description: ''
+  - name: --os-sku
+    summary: Os-sku dari kumpulan simpul agen. Ubuntu atau CBLMariner.
+    description: ''
+  - name: --os-type
+    summary: Jenis OS. Linux atau Windows.
+    description: ''
+  - name: --pod-subnet-id
+    summary: ID subnet di VNet yang ada untuk menetapkan pod dalam kluster (memerlukan azure network-plugin).
+    description: ''
+  - name: --ppg
+    summary: The ID of a PPG.
+    description: ''
+  - name: --priority
+    defaultValue: Regular
+    parameterValueGroup: Regular, Spot
+    summary: Prioritas kumpulan simpul.
+    description: ''
+  - name: --scale-down-mode
+    defaultValue: Delete
+    parameterValueGroup: Deallocate, Delete
+    summary: Menjelaskan bagaimana VM ditambahkan ke atau dihapus dari nodepool.
+    description: ''
+  - name: --snapshot-id
+    summary: Id rekam jepret sumber yang digunakan untuk membuat kumpulan simpul ini.
+    description: ''
+  - name: --spot-max-price
+    defaultValue: nan
+    summary: Ini hanya dapat diatur ketika --prioritas adalah Spot. Tentukan harga maksimum yang ingin Anda bayar dalam Dolar AS. Nilai yang mungkin adalah nilai desimal apa pun yang lebih besar dari nol atau -1 yang menunjukkan harga default hingga sesuai permintaan. Ini hanya dapat mencakup hingga 5 tempat desimal.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --vnet-subnet-id
+    summary: ID subnet di VNet yang ada untuk menyebarkan kluster.
+    description: ''
+  - name: --workload-runtime
+    defaultValue: OCIContainer
+    parameterValueGroup: OCIContainer, WasmWasi
+    summary: Menentukan jenis beban kerja yang dapat dijalankan simpul. Default ke OCIContainer.
+    description: ''
+- uid: az_aks_nodepool_delete
+  name: az aks nodepool delete
+  summary: Hapus kumpulan agen di kluster Kubernetes terkelola.
+  description: ''
+  syntax: >-
+    az aks nodepool delete --cluster-name
+                           --name
+                           --resource-group
+                           [--no-wait]
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kumpulan simpul.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_aks_nodepool_get-upgrades
+  name: az aks nodepool get-upgrades
+  summary: Dapatkan versi peningkatan yang tersedia untuk kumpulan agen dari kluster Kubernetes terkelola.
+  description: ''
+  syntax: >-
+    az aks nodepool get-upgrades --cluster-name
+                                 --nodepool-name
+                                 --resource-group
+  examples:
+  - summary: Dapatkan versi peningkatan yang tersedia untuk kumpulan agen dari kluster Kubernetes terkelola.
+    syntax: az aks nodepool get-upgrades --resource-group MyResourceGroup --cluster-name MyManagedCluster --nodepool-name MyNodePool
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --nodepool-name
+    summary: Nama kumpulan simpul.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_aks_nodepool_list
+  name: az aks nodepool list
+  summary: Daftar kumpulan node di kluster Kubernetes terkelola.
+  description: ''
+  syntax: >-
+    az aks nodepool list --cluster-name
+                         --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_aks_nodepool_scale
+  name: az aks nodepool scale
+  summary: Skalakan kumpulan node dalam kluster Kubernetes terkelola.
+  description: ''
+  syntax: >-
+    az aks nodepool scale --cluster-name
+                          --name
+                          --resource-group
+                          [--no-wait]
+                          [--node-count]
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kumpulan simpul.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --node-count -c
+    defaultValue: "3"
+    summary: Jumlah simpul di kumpulan simpul Kubernetes.
+    description: ''
+- uid: az_aks_nodepool_show
+  name: az aks nodepool show
+  summary: Tampilkan detail untuk kumpulan node di kluster Kubernetes terkelola.
+  description: ''
+  syntax: >-
+    az aks nodepool show --cluster-name
+                         --name
+                         --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kumpulan simpul.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_aks_nodepool_start
+  name: az aks nodepool start
+  summary: Mulai kumpulan agen yang dihentikan di kluster Kubernetes terkelola.
+  description: ''
+  syntax: >-
+    az aks nodepool start --cluster-name
+                          --nodepool-name
+                          --resource-group
+                          [--aks-custom-headers]
+                          [--no-wait]
+  examples:
+  - summary: Memulai kumpulan agen di kluster terkelola
+    syntax: az aks nodepool start --nodepool-name nodepool1 -g MyResourceGroup --cluster-name MyManagedCluster
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --nodepool-name
+    summary: Nama kumpulan agen.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --aks-custom-headers
+    summary: Kirim header kustom. Ketika ditentukan, format harus Key1=Value1,Key2=Value2.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_aks_nodepool_stop
+  name: az aks nodepool stop
+  summary: Berhenti menjalankan kumpulan agen di kluster Kubernetes terkelola.
+  description: ''
+  syntax: >-
+    az aks nodepool stop --cluster-name
+                         --nodepool-name
+                         --resource-group
+                         [--aks-custom-headers]
+                         [--no-wait]
+  examples:
+  - summary: Menghentikan kumpulan agen di kluster terkelola
+    syntax: az aks nodepool stop --nodepool-name nodepool1 -g MyResourceGroup --cluster-name MyManagedCluster
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --nodepool-name
+    summary: Nama kumpulan agen.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --aks-custom-headers
+    summary: Kirim header kustom. Ketika ditentukan, format harus Key1=Value1,Key2=Value2.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_aks_nodepool_update
+  name: az aks nodepool update
+  summary: Perbarui kumpulan simpul untuk mengaktifkan/menonaktifkan cluster-autoscaler atau mengubah jumlah min atau jumlah maks.
+  description: ''
+  syntax: >-
+    az aks nodepool update --cluster-name
+                           --name
+                           --resource-group
+                           [--disable-cluster-autoscaler]
+                           [--enable-cluster-autoscaler]
+                           [--labels]
+                           [--max-count]
+                           [--max-surge]
+                           [--min-count]
+                           [--mode {System, User}]
+                           [--no-wait]
+                           [--node-taints]
+                           [--scale-down-mode {Deallocate, Delete}]
+                           [--tags]
+                           [--update-cluster-autoscaler]
+  examples:
+  - summary: Aktifkan penskala otomatis kluster dalam rentang jumlah simpul [1,5]
+    syntax: az aks nodepool update --enable-cluster-autoscaler --min-count 1 --max-count 5 -g MyResourceGroup -n nodepool1 --cluster-name MyManagedCluster
+  - summary: Menonaktifkan penskala otomatis kluster untuk kluster yang ada
+    syntax: az aks nodepool update --disable-cluster-autoscaler -g MyResourceGroup -n nodepool1 --cluster-name MyManagedCluster
+  - summary: Perbarui jumlah min atau jumlah maks untuk autoscaler kluster.
+    syntax: az aks nodepool update --update-cluster-autoscaler --min-count 1 --max-count 10 -g MyResourceGroup -n nodepool1 --cluster-name MyManagedCluster
+  - summary: Mengubah kumpulan simpul ke mode sistem
+    syntax: az aks nodepool update --mode System -g MyResourceGroup -n nodepool1 --cluster-name MyManagedCluster
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kumpulan simpul.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --disable-cluster-autoscaler -d
+    summary: Nonaktifkan autoscaler kluster.
+    description: ''
+  - name: --enable-cluster-autoscaler -e
+    summary: Aktifkan autoscaler kluster.
+    description: ''
+  - name: --labels
+    summary: Label simpul untuk kumpulan simpul. Lihat https://aka.ms/node-labels untuk sintaks label.
+    description: ''
+  - name: --max-count
+    summary: Jumlah simpul maksimum yang digunakan untuk autoscaler, ketika "--enable-cluster-autoscaler" ditentukan. Tentukan nilai dalam rentang [1, 100].
+    description: ''
+  - name: --max-surge
+    summary: Simpul tambahan yang digunakan untuk mempercepat peningkatan. Ketika ditentukan, ini menunjukkan angka atau persentase yang digunakan, misalnya. 5 atau 33%.
+    description: ''
+  - name: --min-count
+    summary: Jumlah simpul minimun yang digunakan untuk autoscaler, ketika "--enable-cluster-autoscaler" ditentukan. Tentukan nilai dalam rentang [1, 100].
+    description: ''
+  - name: --mode
+    parameterValueGroup: System, User
+    summary: Mode untuk kumpulan simpul yang menentukan fungsi utama kumpulan simpul. Jika ditetapkan sebagai "Sistem", AKS lebih memilih pod sistem yang menjadwalkan kumpulan simpul dengan mode `System`. Pelajari lebih lanjut di https://aka.ms/aks/nodepool/mode.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --node-taints
+    summary: Taint simpul untuk kumpulan node.
+    description: ''
+  - name: --scale-down-mode
+    parameterValueGroup: Deallocate, Delete
+    summary: Menjelaskan bagaimana VM ditambahkan ke atau dihapus dari nodepool.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --update-cluster-autoscaler -u
+    summary: Perbarui jumlah min atau jumlah maks untuk autoscaler kluster.
+    description: ''
+- uid: az_aks_nodepool_upgrade
+  name: az aks nodepool upgrade
+  summary: Tingkatkan kumpulan node di kluster Kubernetes terkelola.
+  description: ''
+  syntax: >-
+    az aks nodepool upgrade --cluster-name
+                            --name
+                            --resource-group
+                            [--aks-custom-headers]
+                            [--kubernetes-version]
+                            [--max-surge]
+                            [--no-wait]
+                            [--node-image-only]
+                            [--snapshot-id]
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name
+    summary: Nama kluster.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama kumpulan simpul.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --aks-custom-headers
+    summary: Kirim header kustom. Ketika ditentukan, format harus Key1=Value1,Key2=Value2.
+    description: ''
+  - name: --kubernetes-version -k
+    summary: Versi Kubernetes untuk meningkatkan kumpulan simpul ke, seperti "1.11.12".
+    description: ''
+  - name: --max-surge
+    summary: Simpul tambahan yang digunakan untuk mempercepat peningkatan. Ketika ditentukan, ini menunjukkan angka atau persentase yang digunakan, misalnya. 5 atau 33%.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --node-image-only
+    summary: Hanya tingkatkan gambar simpul kumpulan agen.
+    description: ''
+  - name: --snapshot-id
+    summary: Id rekam jepret sumber yang digunakan untuk meningkatkan kumpulan simpul ini.
+    description: ''
+commands:
+- az_aks_nodepool_add
+- az_aks_nodepool_delete
+- az_aks_nodepool_get-upgrades
+- az_aks_nodepool_list
+- az_aks_nodepool_scale
+- az_aks_nodepool_show
+- az_aks_nodepool_snapshot
+- az_aks_nodepool_snapshot_create
+- az_aks_nodepool_snapshot_delete
+- az_aks_nodepool_snapshot_list
+- az_aks_nodepool_snapshot_show
+- az_aks_nodepool_start
+- az_aks_nodepool_stop
+- az_aks_nodepool_update
+- az_aks_nodepool_upgrade
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Perintah untuk mengelola kumpulan simpul di kluster Kubernetes terkelola.
+  ms.openlocfilehash: cb865afaf4b87897c7786a9be99891ef80cb7549
+  ms.sourcegitcommit: bd63e04a53877fcd43d09e2de1229d90a99e645e
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/08/2022
+  ms.locfileid: "141541347"

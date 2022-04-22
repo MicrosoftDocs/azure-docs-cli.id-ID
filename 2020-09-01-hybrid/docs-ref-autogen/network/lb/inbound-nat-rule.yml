@@ -1,0 +1,273 @@
+### YamlMime:AzureCLIGroup
+uid: az_network_lb_inbound-nat-rule
+name: az network lb inbound-nat-rule
+summary: Mengelola aturan NAT masuk dari load balancer.
+description: ''
+directCommands:
+- uid: az_network_lb_inbound-nat-rule_create
+  name: az network lb inbound-nat-rule create
+  summary: Buat aturan NAT masuk.
+  description: ''
+  syntax: >-
+    az network lb inbound-nat-rule create --backend-port
+                                          --lb-name
+                                          --name
+                                          --protocol {All, Tcp, Udp}
+                                          --resource-group
+                                          [--backend-pool-name]
+                                          [--enable-tcp-reset {false, true}]
+                                          [--floating-ip {false, true}]
+                                          [--frontend-ip-name]
+                                          [--frontend-port]
+                                          [--frontend-port-range-end]
+                                          [--frontend-port-range-start]
+                                          [--idle-timeout]
+  examples:
+  - summary: Buat aturan NAT masuk dasar untuk port 80.
+    syntax: >-
+      az network lb inbound-nat-rule create -g MyResourceGroup --lb-name MyLb -n MyNatRule \
+          --protocol Tcp --frontend-port 80 --backend-port 80
+  - summary: Buat aturan NAT masuk dasar untuk IP frontend tertentu dan aktifkan IP mengambang untuk Aturan NAT.
+    syntax: >-
+      az network lb inbound-nat-rule create -g MyResourceGroup --lb-name MyLb -n MyNatRule --protocol Tcp \
+          --frontend-port 5432 --backend-port 3389 --frontend-ip-name MyFrontendIp --floating-ip true
+  requiredParameters:
+  - isRequired: true
+    name: --backend-port
+    summary: Nomor port.
+    description: ''
+  - isRequired: true
+    name: --lb-name
+    summary: Nama load balancer.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama aturan NAT masuk.
+    description: ''
+  - isRequired: true
+    name: --protocol
+    parameterValueGroup: All, Tcp, Udp
+    summary: Protokol transportasi jaringan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --backend-pool-name
+    summary: Nama kumpulan alamat backend.
+    description: ''
+  - name: --enable-tcp-reset
+    parameterValueGroup: false, true
+    summary: Terima reset TCP dua arah pada batas waktu diam aliran TCP atau penghentian koneksi yang tidak terduga. Hanya digunakan ketika protokol diatur ke TCP.
+    description: ''
+  - name: --floating-ip
+    parameterValueGroup: false, true
+    summary: Aktifkan IP mengambang.
+    description: ''
+  - name: --frontend-ip-name
+    summary: Nama konfigurasi IP frontend. Jika hanya ada satu, hilangkan untuk digunakan sebagai default.
+    description: ''
+  - name: --frontend-port
+    summary: Nomor port.
+    description: ''
+  - name: --frontend-port-range-end
+    summary: Nomor port.
+    description: ''
+  - name: --frontend-port-range-start
+    summary: Nomor port.
+    description: ''
+  - name: --idle-timeout
+    summary: Batas waktu diam dalam menit.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_lb_inbound-nat-rule_delete
+  name: az network lb inbound-nat-rule delete
+  summary: Menghapus aturan NAT masuk.
+  description: ''
+  syntax: >-
+    az network lb inbound-nat-rule delete --lb-name
+                                          --name
+                                          --resource-group
+  examples:
+  - summary: Menghapus aturan NAT masuk.
+    syntax: az network lb inbound-nat-rule delete -g MyResourceGroup --lb-name MyLb -n MyNatRule
+  requiredParameters:
+  - isRequired: true
+    name: --lb-name
+    summary: Nama load balancer.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama aturan NAT masuk.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_lb_inbound-nat-rule_list
+  name: az network lb inbound-nat-rule list
+  summary: Mencantumkan aturan NAT masuk.
+  description: ''
+  syntax: >-
+    az network lb inbound-nat-rule list --lb-name
+                                        --resource-group
+  examples:
+  - summary: Mencantumkan aturan NAT masuk.
+    syntax: az network lb inbound-nat-rule list -g MyResourceGroup --lb-name MyLb -o table
+  requiredParameters:
+  - isRequired: true
+    name: --lb-name
+    summary: Nama load balancer.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_lb_inbound-nat-rule_show
+  name: az network lb inbound-nat-rule show
+  summary: Dapatkan detail aturan NAT masuk.
+  description: ''
+  syntax: >-
+    az network lb inbound-nat-rule show --lb-name
+                                        --name
+                                        --resource-group
+  examples:
+  - summary: Dapatkan detail aturan NAT masuk.
+    syntax: az network lb inbound-nat-rule show -g MyResourceGroup --lb-name MyLb -n MyNatRule
+  requiredParameters:
+  - isRequired: true
+    name: --lb-name
+    summary: Nama load balancer.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama aturan NAT masuk.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_lb_inbound-nat-rule_update
+  name: az network lb inbound-nat-rule update
+  summary: Memperbarui aturan NAT masuk.
+  description: ''
+  syntax: >-
+    az network lb inbound-nat-rule update [--add]
+                                          [--backend-port]
+                                          [--enable-tcp-reset {false, true}]
+                                          [--floating-ip {false, true}]
+                                          [--force-string]
+                                          [--frontend-ip-name]
+                                          [--frontend-port]
+                                          [--frontend-port-range-end]
+                                          [--frontend-port-range-start]
+                                          [--idle-timeout]
+                                          [--ids]
+                                          [--lb-name]
+                                          [--name]
+                                          [--protocol {All, Tcp, Udp}]
+                                          [--remove]
+                                          [--resource-group]
+                                          [--set]
+  examples:
+  - summary: Perbarui aturan NAT masuk untuk menonaktifkan IP mengambang dan mengubah durasi batas waktu diam.
+    syntax: >-
+      az network lb inbound-nat-rule update -g MyResourceGroup --lb-name MyLb -n MyNatRule \
+          --floating-ip false --idle-timeout 5
+  - summary: Memperbarui aturan NAT masuk. (dibuat otomatis)
+    syntax: az network lb inbound-nat-rule update --backend-port 3389 --frontend-port 5432 --lb-name MyLb --name MyNatRule --protocol Udp --resource-group MyResourceGroup
+  - summary: Memperbarui aturan NAT masuk. (dibuat otomatis)
+    syntax: az network lb inbound-nat-rule update --lb-name MyLb --name MyNatRule --resource-group MyResourceGroup --set tags.CostCenter=MyBusinessGroup
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --backend-port
+    summary: Nomor port.
+    description: ''
+  - name: --enable-tcp-reset
+    parameterValueGroup: false, true
+    summary: Terima reset TCP dua arah pada batas waktu diam aliran TCP atau penghentian koneksi yang tidak terduga. Hanya digunakan ketika protokol diatur ke TCP.
+    description: ''
+  - name: --floating-ip
+    parameterValueGroup: false, true
+    summary: Aktifkan IP mengambang.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --frontend-ip-name
+    summary: Nama konfigurasi IP frontend.
+    description: ''
+  - name: --frontend-port
+    summary: Nomor port.
+    description: ''
+  - name: --frontend-port-range-end
+    summary: Nomor port.
+    description: ''
+  - name: --frontend-port-range-start
+    summary: Nomor port.
+    description: ''
+  - name: --idle-timeout
+    summary: Batas waktu diam dalam menit.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --lb-name
+    summary: Nama load balancer.
+    description: ''
+  - name: --name -n
+    summary: Nama aturan NAT masuk.
+    description: ''
+  - name: --protocol
+    parameterValueGroup: All, Tcp, Udp
+    summary: Protokol transportasi jaringan.
+    description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+commands:
+- az_network_lb_inbound-nat-rule_create
+- az_network_lb_inbound-nat-rule_delete
+- az_network_lb_inbound-nat-rule_list
+- az_network_lb_inbound-nat-rule_show
+- az_network_lb_inbound-nat-rule_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/09/2022
+  description: Mengelola aturan NAT masuk dari load balancer.
+  ms.openlocfilehash: 156359116cd297aea8b1594047c12cbbb9b8ce82
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141464454"

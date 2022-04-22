@@ -1,0 +1,331 @@
+### YamlMime:AzureCLIGroup
+uid: az_storage_entity
+name: az storage entity
+summary: Mengelola entitas penyimpanan tabel.
+description: ''
+directCommands:
+- uid: az_storage_entity_delete
+  name: az storage entity delete
+  summary: Menghapus entitas yang sudah ada dalam tabel.
+  description: ''
+  syntax: >-
+    az storage entity delete --partition-key
+                             --row-key
+                             --table-name
+                             [--account-key]
+                             [--account-name]
+                             [--connection-string]
+                             [--if-match]
+                             [--sas-token]
+                             [--timeout]
+  requiredParameters:
+  - isRequired: true
+    name: --partition-key
+    summary: PartitionKey entitas.
+    description: ''
+  - isRequired: true
+    name: --row-key
+    summary: RowKey entitas.
+    description: ''
+  - isRequired: true
+    name: --table-name -t
+    summary: Nama tabel yang berisi entitas yang akan dihapus.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --if-match
+    defaultValue: ''
+    summary: Klien dapat menentukan ETag untuk entitas pada permintaan untuk dibandingkan dengan ETag yang dikelola oleh layanan untuk tujuan konkurensi optimis. Operasi penghapusan akan dilakukan hanya jika ETag yang dikirim oleh klien cocok dengan nilai yang dikelola oleh server, menunjukkan bahwa entitas belum dimodifikasi sejak diambil oleh klien. Untuk memaksa penghapusan tanpa syarat, atur If-Match ke karakter kartubebas (\*).
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_entity_insert
+  name: sisipan entitas penyimpanan az
+  summary: Sisipkan entitas ke dalam tabel.
+  description: ''
+  syntax: >-
+    az storage entity insert --entity
+                             --table-name
+                             [--account-key]
+                             [--account-name]
+                             [--connection-string]
+                             [--if-exists {fail, merge, replace}]
+                             [--sas-token]
+                             [--timeout]
+  examples:
+  - summary: Sisipkan entitas ke dalam tabel. (dibuat otomatis)
+    syntax: az storage entity insert --connection-string $connectionString --entity PartitionKey=AAA RowKey=BBB Content=ASDF2 --if-exists fail --table-name MyTable
+  requiredParameters:
+  - isRequired: true
+    name: --entity -e
+    summary: Daftar pasangan key=value yang dipisahkan spasi. Harus berisi PartitionKey dan RowKey.
+    description: PartitionKey dan RowKey harus unik dalam tabel, dan mungkin berukuran hingga 64Kb. Jika menggunakan nilai bilangan bulat sebagai kunci, konversikan ke string lebar tetap yang dapat diurutkan secara kanonis. Misalnya, konversikan nilai bilangan bulat 1 ke nilai string "0000001" untuk memastikan pengurutan yang tepat.
+  - isRequired: true
+    name: --table-name -t
+    summary: Nama tabel untuk menyisipkan entitas ke dalamnya.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --if-exists
+    defaultValue: fail
+    parameterValueGroup: fail, merge, replace
+    summary: Perilaku ketika entitas sudah ada untuk PartitionKey dan RowKey yang ditentukan.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_entity_merge
+  name: az storage entity merge
+  summary: Perbarui entitas yang ada dengan menggabungkan properti entitas.
+  description: ''
+  syntax: >-
+    az storage entity merge --entity
+                            --table-name
+                            [--account-key]
+                            [--account-name]
+                            [--connection-string]
+                            [--if-match]
+                            [--sas-token]
+                            [--timeout]
+  requiredParameters:
+  - isRequired: true
+    name: --entity -e
+    summary: Entitas yang akan digabungkan. Bisa berupa dict atau objek entitas. Harus berisi PartitionKey dan RowKey.
+    description: ''
+  - isRequired: true
+    name: --table-name -t
+    summary: Nama tabel yang berisi entitas yang akan digabungkan.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --if-match
+    defaultValue: ''
+    summary: Klien dapat menentukan ETag untuk entitas pada permintaan untuk dibandingkan dengan ETag yang dikelola oleh layanan untuk tujuan konkurensi optimis. Operasi penggabungan akan dilakukan hanya jika ETag yang dikirim oleh klien cocok dengan nilai yang dikelola oleh server, yang menunjukkan bahwa entitas belum dimodifikasi sejak diambil oleh klien. Untuk memaksa penggabungan tanpa syarat, atur If-Match ke karakter kartubebas (\*).
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_entity_query
+  name: kueri entitas penyimpanan az
+  summary: Mencantumkan entitas yang memenuhi kueri.
+  description: ''
+  syntax: >-
+    az storage entity query --table-name
+                            [--accept {full, minimal, none}]
+                            [--account-key]
+                            [--account-name]
+                            [--connection-string]
+                            [--filter]
+                            [--marker]
+                            [--num-results]
+                            [--sas-token]
+                            [--select]
+                            [--timeout]
+  examples:
+  - summary: Mencantumkan entitas yang memenuhi kueri. (dibuat otomatis)
+    syntax: az storage entity query --table-name MyTable
+  requiredParameters:
+  - isRequired: true
+    name: --table-name -t
+    summary: Nama tabel yang akan dikueri.
+    description: ''
+  optionalParameters:
+  - name: --accept
+    defaultValue: minimal
+    parameterValueGroup: full, minimal, none
+    summary: Menentukan berapa banyak metadata yang akan disertakan dalam payload respons.
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --filter
+    summary: Hanya mengembalikan entitas yang memenuhi filter yang ditentukan. Perhatikan bahwa tidak lebih dari 15 perbandingan diskrit diizinkan dalam string $filter. Lihat http://msdn.microsoft.com/en-us/library/windowsazure/dd894031.aspx untuk informasi selengkapnya tentang membuat filter.
+    description: ''
+  - name: --penanda
+    summary: Daftar pasangan key=value yang dipisahkan spasi. Harus berisi nextpartitionkey dan nextrowkey.
+    description: Nilai ini dapat diambil dari bidang next_marker objek generator sebelumnya jika max_results ditentukan dan generator tersebut telah selesai menghitung hasil. Jika ditentukan, generator ini akan mulai mengembalikan hasil dari titik di mana generator sebelumnya berhenti.
+  - name: --num-results
+    summary: Jumlah maksimum entitas yang akan dikembalikan.
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --select
+    summary: Daftar properti yang dipisahkan spasi untuk dikembalikan untuk setiap entitas.
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_entity_replace
+  name: az storage entity replace
+  summary: Memperbarui entitas yang sudah ada dalam tabel.
+  description: ''
+  syntax: >-
+    az storage entity replace --entity
+                              --table-name
+                              [--account-key]
+                              [--account-name]
+                              [--connection-string]
+                              [--if-match]
+                              [--sas-token]
+                              [--timeout]
+  requiredParameters:
+  - isRequired: true
+    name: --entity -e
+    summary: Entitas yang akan diperbarui. Bisa berupa dict atau objek entitas. Harus berisi PartitionKey dan RowKey.
+    description: ''
+  - isRequired: true
+    name: --table-name -t
+    summary: Nama tabel yang berisi entitas yang akan diperbarui.
+    description: ''
+  optionalParameters:
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --if-match
+    defaultValue: ''
+    summary: Klien dapat menentukan ETag untuk entitas pada permintaan untuk dibandingkan dengan ETag yang dikelola oleh layanan untuk tujuan konkurensi optimis. Operasi pembaruan akan dilakukan hanya jika ETag yang dikirim oleh klien cocok dengan nilai yang dikelola oleh server, menunjukkan bahwa entitas belum dimodifikasi sejak diambil oleh klien. Untuk memaksa pembaruan tanpa syarat, atur If-Match ke karakter kartubebas (\*).
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+- uid: az_storage_entity_show
+  name: az storage entity show
+  summary: Dapatkan entitas dari tabel yang ditentukan.
+  description: Melemparkan jika entitas tidak ada.
+  syntax: >-
+    az storage entity show --partition-key
+                           --row-key
+                           --table-name
+                           [--accept]
+                           [--account-key]
+                           [--account-name]
+                           [--connection-string]
+                           [--sas-token]
+                           [--select]
+                           [--timeout]
+  requiredParameters:
+  - isRequired: true
+    name: --partition-key
+    summary: PartitionKey entitas.
+    description: ''
+  - isRequired: true
+    name: --row-key
+    summary: RowKey entitas.
+    description: ''
+  - isRequired: true
+    name: --table-name -t
+    summary: Nama tabel untuk mendapatkan entitas.
+    description: ''
+  optionalParameters:
+  - name: --accept
+    defaultValue: application/json;odata=minimalmetadata
+    summary: Menentukan jenis konten yang diterima dari payload respons. Lihat TablePayloadFormat untuk nilai yang mungkin.
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
+    description: ''
+  - name: --connection-string
+    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --sas-token
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    description: ''
+  - name: --select
+    summary: Daftar properti yang dipisahkan spasi untuk dikembalikan untuk setiap entitas.
+    description: ''
+  - name: --timeout
+    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
+commands:
+- az_storage_entity_delete
+- az_storage_entity_insert
+- az_storage_entity_merge
+- az_storage_entity_query
+- az_storage_entity_replace
+- az_storage_entity_show
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/29/2022
+  description: Mengelola entitas penyimpanan tabel.
+  ms.openlocfilehash: f5bcdfc91141b7418fc3b4c0863dd99f55f23965
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141447659"
