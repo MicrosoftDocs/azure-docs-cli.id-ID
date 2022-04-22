@@ -1,0 +1,487 @@
+### YamlMime:AzureCLIGroup
+uid: az_batch_pool
+name: kumpulan batch az
+summary: Mengelola kumpulan Batch.
+description: ''
+directCommands:
+- uid: az_batch_pool_create
+  name: buat kumpulan batch az
+  summary: Buat kumpulan Batch di akun. Saat membuat kumpulan, pilih argumen dari Konfigurasi Cloud Services atau Konfigurasi Komputer Virtual.
+  description: ''
+  syntax: >-
+    az batch pool create [--account-endpoint]
+                         [--account-key]
+                         [--account-name]
+                         [--application-licenses]
+                         [--application-package-references]
+                         [--auto-scale-formula]
+                         [--certificate-references]
+                         [--disk-encryption-targets]
+                         [--enable-inter-node-communication]
+                         [--id]
+                         [--image]
+                         [--json-file]
+                         [--metadata]
+                         [--node-agent-sku-id]
+                         [--os-family {2, 3, 4, 5, 6}]
+                         [--os-version]
+                         [--policy {regional, zonal}]
+                         [--resize-timeout]
+                         [--start-task-command-line]
+                         [--start-task-resource-files]
+                         [--start-task-wait-for-success]
+                         [--target-dedicated-nodes]
+                         [--target-low-priority-nodes]
+                         [--targets]
+                         [--task-slots-per-node]
+                         [--vm-size]
+  optionalParameters:
+  - name: --account-endpoint
+    summary: 'Titik akhir layanan batch. Atau, diatur berdasarkan variabel lingkungan: AZURE_BATCH_ENDPOINT.'
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCESS_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCOUNT.'
+    description: ''
+  - name: --application-licenses
+    summary: Daftar lisensi aplikasi harus merupakan subset dari lisensi aplikasi layanan Batch yang tersedia. Jika lisensi diminta yang tidak didukung, pembuatan Kumpulan akan gagal. Nilai yang dipisahkan spasi.
+    description: ''
+  - name: --application-package-references
+    summary: Perubahan pada referensi Paket memengaruhi semua Simpul baru yang bergabung dengan Kumpulan, tetapi tidak memengaruhi Simpul Komputasi yang sudah ada di Kumpulan hingga di-boot ulang atau digambut ulang. Ada maksimum 10 referensi Paket pada Kumpulan tertentu. ID aplikasi yang dipisahkan spasi dengan versi opsional dalam format 'id[#version]'.
+    description: ''
+  - name: --auto-scale-formula
+    summary: Rumus untuk jumlah simpul komputasi yang diinginkan dalam kumpulan. Rumus diperiksa validitasnya sebelum kumpulan dibuat. Jika rumus tidak valid, layanan Batch menolak permintaan dengan informasi kesalahan terperinci. Untuk informasi selengkapnya tentang menentukan rumus ini, lihat https://azure.microsoft.com/documentation/articles/batch-automatic-scaling/.
+    description: ''
+  - name: --certificate-references
+    summary: Untuk simpul Windows, layanan Batch menginstal Sertifikat ke penyimpanan dan lokasi Sertifikat yang ditentukan. Untuk Simpul Komputasi Linux, Sertifikat disimpan dalam direktori di dalam direktori kerja Tugas dan variabel lingkungan AZ_BATCH_CERTIFICATES_DIR disediakan ke Tugas untuk mengkueri lokasi ini. Untuk Sertifikat dengan visibilitas 'remoteUser', direktori 'certs' dibuat di direktori beranda pengguna (misalnya, /home/{user-name}/certs) dan Sertifikat ditempatkan di direktori tersebut. Thumbprint sertifikat yang dipisahkan spasi.
+    description: ''
+  - name: --disk-encryption-targets
+    summary: Daftar DiskEncryptionTargets yang dipisahkan spasi. nilai saat ini yang mungkin termasuk OsDisk dan TemporaryDisk.
+    description: ''
+  - name: --enable-inter-node-communication
+    summary: Apakah Kumpulan mengizinkan komunikasi langsung antara Simpul Komputasi. Mengaktifkan komunikasi antar-simpul membatasi ukuran maksimum Kumpulan karena pembatasan penyebaran pada Simpul Komputasi Kumpulan. Ini dapat mengakibatkan Kumpulan tidak mencapai ukuran yang diinginkan. Nilai defaultnya adalah false. True jika bendera ada.
+    description: ''
+  - name: --id
+    summary: Wajib diisi. ID dapat berisi kombinasi karakter alfanumerik termasuk tanda hubung dan garis bawah, dan tidak boleh berisi lebih dari 64 karakter. ID adalah mempertahankan huruf besar/kecil dan tidak peka huruf besar/kecil (artinya, Anda mungkin tidak memiliki dua ID Kumpulan dalam Akun yang hanya berbeda menurut kasus).
+    description: ''
+  - name: --image
+    summary: "Referensi gambar OS. Ini bisa berupa format 'publisher:offer:sku[:version]', atau id gambar ARM yang sepenuhnya memenuhi syarat dari formulir '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}'. Jika format 'publisher:offer:sku[:version]', versi bersifat opsional dan jika dihilangkan terbaru akan digunakan. Nilai yang valid dapat diambil melalui 'az batch pool supported-images list'. Misalnya: 'MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:latest'."
+    description: ''
+  - name: --json-file
+    summary: File yang berisi spesifikasi kumpulan di JSON (diformat agar sesuai dengan isi REST API masing-masing). Jika parameter ini ditentukan, semua Argumen '{group_title(arg[0])} diabaikan.
+    description: ''
+  - name: --metadata
+    summary: Layanan Batch tidak menetapkan arti apa pun untuk metadata; hanya untuk penggunaan kode pengguna. Nilai yang dipisahkan spasi dalam format 'key=value'.
+    description: ''
+  - name: --node-agent-sku-id
+    summary: Wajib diisi. Agen Simpul Komputasi Batch adalah program yang berjalan pada setiap Simpul Komputasi di Kumpulan, dan menyediakan antarmuka perintah dan kontrol antara Simpul Komputasi dan layanan Batch. Ada berbagai implementasi agen Simpul Komputasi, yang dikenal sebagai SKU, untuk sistem operasi yang berbeda. Anda harus menentukan SKU agen Simpul Komputasi yang cocok dengan referensi Gambar yang dipilih. Untuk mendapatkan daftar SKU agen Simpul Komputasi yang didukung bersama dengan daftar referensi Gambar terverifikasi mereka, lihat operasi 'Daftar SKU agen Simpul Komputasi yang didukung'.
+    description: ''
+  - name: --os-family
+    parameterValueGroup: 2, 3, 4, 5, 6
+    summary: 'Wajib diisi. Nilai yang mungkin adalah: 2 - OS Family 2, setara dengan Windows Server 2008 R2 SP1. 3 - OS Family 3, setara dengan Windows Server 2012. 4 - OS Family 4, setara dengan Windows Server 2012 R2. 5 - OS Family 5, setara dengan Windows Server 2016. 6 - OS Family 6, setara dengan Windows Server 2019. Untuk informasi selengkapnya, lihat Rilis OS Tamu Azure (https://azure.microsoft.com/documentation/articles/cloud-services-guestos-update-matrix/#releases).'
+    description: ''
+  - name: --os-version
+    summary: Nilai default adalah \* yang menentukan versi sistem operasi terbaru untuk keluarga OS yang ditentukan.
+    description: ''
+  - name: --policy
+    parameterValueGroup: regional, zonal
+    summary: Jenis Kebijakan penempatan simpul pada Kumpulan Batch. Kebijakan alokasi yang digunakan oleh Layanan Batch untuk menyediakan simpul. Jika tidak ditentukan, Batch akan menggunakan kebijakan regional.
+    description: ''
+  - name: --resize-timeout
+    summary: Batas waktu ini hanya berlaku untuk penskalakan manual; tidak berpengaruh ketika enableAutoScale diatur ke true. Nilai defaultnya adalah 15 menit. Nilai minimum adalah 5 menit. Jika Anda menentukan nilai kurang dari 5 menit, layanan Batch mengembalikan kesalahan; jika Anda memanggil REST API secara langsung, kode status HTTP adalah 400 (Permintaan Buruk). Format yang diharapkan adalah durasi ISO-8601.
+    description: ''
+  - name: --start-task-command-line
+    summary: Wajib diisi. Baris perintah tidak berjalan di bawah shell, dan karena itu tidak dapat memanfaatkan fitur shell seperti ekspansi variabel lingkungan. Jika Anda ingin memanfaatkan fitur tersebut, Anda harus memanggil shell di baris perintah, misalnya menggunakan "cmd /c MyCommand" di Windows atau "/bin/sh -c MyCommand" di Linux. Jika baris perintah mengacu pada jalur file, baris tersebut harus menggunakan jalur relatif (relatif terhadap direktori kerja Tugas), atau menggunakan variabel lingkungan yang disediakan Batch (https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables).
+    description: ''
+  - name: --start-task-resource-files
+    summary: File yang tercantum di bawah elemen ini terletak di direktori kerja Tugas. Referensi sumber daya yang dipisahkan spasi dalam format filename=httpurl.
+    description: ''
+  - name: --start-task-wait-for-success
+    summary: Apakah layanan Batch harus menunggu StartTask berhasil diselesaikan (yaitu, untuk keluar dengan kode keluar 0) sebelum menjadwalkan Tugas apa pun pada Simpul Komputasi. Jika true dan StartTask gagal pada Node, layanan Batch mencoba kembali StartTask hingga jumlah coba lagi maksimumnya (maxTaskRetryCount). Jika Tugas masih belum berhasil diselesaikan setelah semua percobaan ulang, maka layanan Batch menandai Simpul yang tidak dapat digunakan, dan tidak akan menjadwalkan Tugas ke dalamnya. Kondisi ini dapat dideteksi melalui status Simpul Komputasi dan detail info kegagalan. Jika false, layanan Batch tidak akan menunggu StartTask selesai. Dalam hal ini, Tugas lain dapat mulai dijalankan pada Simpul Komputasi saat StartTask masih berjalan; dan bahkan jika StartTask gagal, Tugas baru akan terus dijadwalkan pada Simpul Komputasi. Secara default adalah benar. True jika bendera ada.
+    description: ''
+  - name: --target-dedicated-node
+    summary: Jumlah Simpul Komputasi khusus yang diinginkan di Kumpulan. Properti ini tidak boleh ditentukan jika enableAutoScale diatur ke true. Jika enableAutoScale diatur ke false, maka Anda harus mengatur targetDedicatedNodes, targetLowPriorityNodes, atau keduanya.
+    description: ''
+  - name: --target-low-priority-node
+    summary: Jumlah Simpul Komputasi Spot/Prioritas rendah yang diinginkan di Kumpulan. Properti ini tidak boleh ditentukan jika enableAutoScale diatur ke true. Jika enableAutoScale diatur ke false, maka Anda harus mengatur targetDedicatedNodes, targetLowPriorityNodes, atau keduanya.
+    description: ''
+  - name: --targets
+    summary: Jika dihilangkan, tidak ada disk pada simpul komputasi di kumpulan yang akan dienkripsi. Di kumpulan Linux, hanya "TemporaryDisk" yang didukung; pada kumpulan Windows, "OsDisk" dan "TemporaryDisk" harus ditentukan. Disk target yang dipisahkan ruang yang akan dienkripsi. Nilai dapat berupa OsDisk atau TemporaryDisk.
+    description: ''
+  - name: --task-slots-per-node
+    summary: Jumlah slot tugas yang dapat digunakan untuk menjalankan tugas bersamaan pada satu simpul komputasi dalam kumpulan. Nilai default adalah 1. Nilai maksimum adalah lebih kecil dari 4 kali jumlah inti vmSize kumpulan atau 256.
+    description: ''
+  - name: --vm-size
+    summary: Wajib diisi. Untuk informasi tentang ukuran komputer virtual yang tersedia untuk kumpulan Cloud Services (kumpulan yang dibuat dengan cloudServiceConfiguration), lihat Ukuran untuk Cloud Services (https://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch mendukung semua ukuran VM Cloud Services kecuali ExtraSmall, A1V2, dan A2V2. Untuk informasi tentang ukuran VM yang tersedia untuk Kumpulan menggunakan Gambar dari Virtual Machines Marketplace (kumpulan yang dibuat dengan virtualMachineConfiguration) lihat Ukuran untuk Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) atau Ukuran untuk Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch mendukung semua ukuran Azure VM kecuali STANDARD_A0 dan yang memiliki penyimpanan premium (STANDARD_GS, STANDARD_DS, dan seri STANDARD_DSV2).
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batch/_help.py
+- uid: az_batch_pool_delete
+  name: az batch pool delete
+  summary: Menghapus Kumpulan dari Akun yang ditentukan.
+  description: 'Saat Anda meminta agar Kumpulan dihapus, tindakan berikut terjadi: status Kumpulan diatur untuk menghapus; setiap operasi pengurangan ukuran yang sedang berlangsung pada Kumpulan dihentikan; layanan Batch mulai mengubah ukuran Kumpulan menjadi nol Simpul Komputasi; Tugas apa pun yang berjalan pada Simpul Komputasi yang ada dihentikan dan diantrekan kembali (seolah-olah operasi Pengubahan ukuran Kumpulan telah diminta dengan opsi antrean ulang default); akhirnya, Kumpulan dihapus dari sistem. Karena menjalankan Tugas diantrekan kembali, pengguna dapat menjalankan ulang Tugas ini dengan memperbarui Pekerjaan mereka untuk menargetkan Kumpulan yang berbeda. Tugas kemudian dapat berjalan pada Kumpulan baru. Jika Anda ingin mengambil alih perilaku antrean ulang, maka Anda harus memanggil mengubah ukuran Kumpulan secara eksplisit untuk menyusutkan Kumpulan ke ukuran nol sebelum menghapus Kumpulan. Jika Anda memanggil API Pembaruan, Patch, atau Hapus pada Kumpulan dalam status penghapusan, itu akan gagal dengan kode status HTTP 409 dengan kode kesalahan PoolBeingDeleted.'
+  syntax: >-
+    az batch pool delete --pool-id
+                         [--account-endpoint]
+                         [--account-key]
+                         [--account-name]
+                         [--if-match]
+                         [--if-modified-since]
+                         [--if-none-match]
+                         [--if-unmodified-since]
+                         [--yes]
+  requiredParameters:
+  - isRequired: true
+    name: --pool-id
+    summary: ID Kumpulan yang akan dihapus.
+    description: ''
+  optionalParameters:
+  - name: --account-endpoint
+    summary: 'Titik akhir layanan batch. Atau, diatur berdasarkan variabel lingkungan: AZURE_BATCH_ENDPOINT.'
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCESS_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCOUNT.'
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag yang terkait dengan versi sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika ETag sumber daya saat ini pada layanan sama persis dengan nilai yang ditentukan oleh klien.
+    description: ''
+  - name: --if-modified-since
+    summary: Tanda waktu yang menunjukkan waktu modifikasi terakhir sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika sumber daya pada layanan telah dimodifikasi sejak waktu yang ditentukan.
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag yang terkait dengan versi sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika ETag sumber daya saat ini pada layanan tidak cocok dengan nilai yang ditentukan oleh klien.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Tanda waktu yang menunjukkan waktu modifikasi terakhir sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika sumber daya pada layanan belum dimodifikasi sejak waktu yang ditentukan.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batch/_help.py
+- uid: az_batch_pool_list
+  name: az batch pool list
+  summary: Mencantumkan semua Kumpulan di Akun yang ditentukan.
+  description: ''
+  syntax: >-
+    az batch pool list [--account-endpoint]
+                       [--account-key]
+                       [--account-name]
+                       [--expand]
+                       [--filter]
+                       [--select]
+  optionalParameters:
+  - name: --account-endpoint
+    summary: 'Titik akhir layanan batch. Atau, diatur berdasarkan variabel lingkungan: AZURE_BATCH_ENDPOINT.'
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCESS_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCOUNT.'
+    description: ''
+  - name: --expand
+    summary: Klausa $expand OData.
+    description: ''
+  - name: --filter
+    summary: Klausa $filter OData. Untuk informasi selengkapnya tentang membuat filter ini, lihat https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-pools.
+    description: ''
+  - name: --select
+    summary: Klausa $select OData.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batch/_help.py
+- uid: az_batch_pool_reset
+  name: az batch pool reset
+  summary: Perbarui properti kumpulan Batch. Properti yang tidak ditentukan yang dapat diperbarui diatur ulang ke defaultnya.
+  description: ''
+  syntax: >-
+    az batch pool reset --pool-id
+                        [--account-endpoint]
+                        [--account-key]
+                        [--account-name]
+                        [--application-package-references]
+                        [--certificate-references]
+                        [--json-file]
+                        [--metadata]
+                        [--start-task-command-line]
+                        [--start-task-environment-settings]
+                        [--start-task-max-task-retry-count]
+                        [--start-task-wait-for-success]
+  requiredParameters:
+  - isRequired: true
+    name: --pool-id
+    summary: ID kumpulan yang akan diperbarui.
+    description: ''
+  optionalParameters:
+  - name: --account-endpoint
+    summary: 'Titik akhir layanan batch. Atau, diatur berdasarkan variabel lingkungan: AZURE_BATCH_ENDPOINT.'
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun Batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCESS_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun Batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCOUNT.'
+    description: ''
+  - name: --application-package-references
+    summary: Wajib diisi. Daftar menggantikan referensi Paket Aplikasi yang ada pada Kumpulan. Perubahan pada referensi Paket Aplikasi memengaruhi semua Simpul Komputasi baru yang bergabung dengan Kumpulan, tetapi tidak memengaruhi Simpul Komputasi yang sudah ada di Kumpulan hingga di-boot ulang atau digambut ulang. Ada maksimum 10 referensi Paket Aplikasi pada Kumpulan tertentu. Jika dihilangkan, atau jika Anda menentukan koleksi kosong, referensi Paket Aplikasi yang ada akan dihapus dari Kumpulan. Maksimal 10 referensi dapat ditentukan pada Kumpulan tertentu.
+    description: ''
+  - name: --certificate-references
+    summary: Wajib diisi. Daftar ini menggantikan referensi Sertifikat yang ada yang dikonfigurasi pada Kumpulan. Jika Anda menentukan koleksi kosong, referensi Sertifikat yang ada akan dihapus dari Kumpulan. Untuk simpul Windows, layanan Batch menginstal Sertifikat ke penyimpanan dan lokasi Sertifikat yang ditentukan. Untuk Simpul Komputasi Linux, Sertifikat disimpan dalam direktori di dalam direktori kerja Tugas dan variabel lingkungan AZ_BATCH_CERTIFICATES_DIR disediakan ke Tugas untuk mengkueri lokasi ini. Untuk Sertifikat dengan visibilitas 'remoteUser', direktori 'certs' dibuat di direktori beranda pengguna (misalnya, /home/{user-name}/certs) dan Sertifikat ditempatkan di direktori tersebut.
+    description: ''
+  - name: --json-file
+    summary: File yang berisi spesifikasi parameter properti pembaruan kumpulan di JSON(diformat agar sesuai dengan isi permintaan REST API). Jika parameter ini ditentukan, semua 'Argumen Parameter Properti Pembaruan Kumpulan' diabaikan.
+    description: ''
+  - name: --metadata
+    summary: Wajib diisi. Daftar ini menggantikan metadata yang ada yang dikonfigurasi pada Kumpulan. Jika dihilangkan, atau jika Anda menentukan koleksi kosong, metadata yang ada akan dihapus dari Kumpulan.
+    description: ''
+  - name: --start-task-command-line
+    summary: Baris perintah tugas mulai. Baris perintah tidak berjalan di bawah shell, dan karena itu tidak dapat memanfaatkan fitur shell seperti ekspansi variabel lingkungan. Jika Anda ingin memanfaatkan fitur tersebut, Anda harus memanggil shell di baris perintah, misalnya menggunakan "cmd /c MyCommand" di Windows atau "/bin/sh -c MyCommand" di Linux.
+    description: ''
+  - name: --start-task-environment-settings
+    summary: Daftar pengaturan variabel lingkungan untuk tugas mulai. Nilai yang dipisahkan spasi dalam format 'key=value'.
+    description: ''
+  - name: --start-task-max-task-retry-count
+    summary: Jumlah maksimum tugas dapat dicoba kembali.
+    description: ''
+  - name: --start-task-wait-for-success
+    summary: Apakah layanan Batch harus menunggu tugas mulai berhasil diselesaikan (yaitu, untuk keluar dengan kode keluar 0) sebelum menjadwalkan tugas apa pun pada simpul komputasi. True jika ada bendera, jika tidak default ke False.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batch/_help.py
+- uid: az_batch_pool_resize
+  name: az batch pool resize
+  summary: Mengubah ukuran atau berhenti mengubah ukuran kumpulan Batch.
+  description: ''
+  syntax: >-
+    az batch pool resize --pool-id
+                         [--abort]
+                         [--account-endpoint]
+                         [--account-key]
+                         [--account-name]
+                         [--if-match]
+                         [--if-modified-since]
+                         [--if-none-match]
+                         [--if-unmodified-since]
+                         [--node-deallocation-option {requeue, retaineddata, taskcompletion, terminate}]
+                         [--resize-timeout]
+                         [--target-dedicated-nodes]
+                         [--target-low-priority-nodes]
+  requiredParameters:
+  - isRequired: true
+    name: --pool-id
+    summary: ID kumpulan.
+    description: ''
+  optionalParameters:
+  - name: --batalkan
+    summary: Hentikan operasi mengubah ukuran kumpulan.
+    description: ''
+  - name: --account-endpoint
+    summary: 'Titik akhir layanan batch. Atau, diatur berdasarkan variabel lingkungan: AZURE_BATCH_ENDPOINT.'
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun Batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCESS_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun Batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCOUNT.'
+    description: ''
+  - name: --if-match
+    summary: Operasi akan dilakukan hanya jika ETag sumber daya saat ini sama persis dengan nilai yang ditentukan.
+    description: ''
+  - name: --if-modified-since
+    summary: Operasi akan dilakukan hanya jika sumber daya telah dimodifikasi sejak tanda waktu yang ditentukan.
+    description: ''
+  - name: --if-none-match
+    summary: Operasi tidak akan dilakukan hanya jika ETag sumber daya saat ini sama persis dengan nilai yang ditentukan.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Operasi tidak akan dilakukan hanya jika sumber daya telah dimodifikasi sejak tanda waktu yang ditentukan.
+    description: ''
+  - name: --node-deallocation-option
+    parameterValueGroup: requeue, retaineddata, taskcompletion, terminate
+    summary: Ketika simpul dapat dihapus dari kumpulan, jika ukuran kumpulan menurun.
+    description: ''
+  - name: --resize-timeout
+    summary: Nilai defaultnya adalah 15 menit. Nilai minimum adalah 5 menit. Jika Anda menentukan nilai kurang dari 5 menit, layanan Batch mengembalikan kesalahan; jika Anda memanggil REST API secara langsung, kode status HTTP adalah 400 (Permintaan Buruk).
+    description: ''
+  - name: --target-dedicated-node
+    summary: Jumlah Simpul Komputasi khusus yang diinginkan di Kumpulan.
+    description: ''
+  - name: --target-low-priority-node
+    summary: Jumlah Simpul Komputasi Spot/Prioritas rendah yang diinginkan di Kumpulan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batch/_help.py
+- uid: az_batch_pool_set
+  name: az batch pool set
+  summary: Perbarui properti kumpulan Batch. Memperbarui properti dalam subgrup akan mereset properti yang tidak ditentukan dari grup tersebut.
+  description: ''
+  syntax: >-
+    az batch pool set --pool-id
+                      [--account-endpoint]
+                      [--account-key]
+                      [--account-name]
+                      [--application-package-references]
+                      [--certificate-references]
+                      [--if-match]
+                      [--if-modified-since]
+                      [--if-none-match]
+                      [--if-unmodified-since]
+                      [--json-file]
+                      [--metadata]
+                      [--start-task-command-line]
+                      [--start-task-environment-settings]
+                      [--start-task-max-task-retry-count]
+                      [--start-task-resource-files]
+                      [--start-task-wait-for-success]
+  requiredParameters:
+  - isRequired: true
+    name: --pool-id
+    summary: ID Kumpulan yang akan diperbarui.
+    description: ''
+  optionalParameters:
+  - name: --account-endpoint
+    summary: 'Titik akhir layanan batch. Atau, diatur berdasarkan variabel lingkungan: AZURE_BATCH_ENDPOINT.'
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCESS_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCOUNT.'
+    description: ''
+  - name: --application-package-references
+    summary: Perubahan pada referensi Paket memengaruhi semua Simpul baru yang bergabung dengan Kumpulan, tetapi tidak memengaruhi Simpul Komputasi yang sudah ada di Kumpulan hingga di-boot ulang atau digambut ulang. Jika elemen ini ada, elemen ini menggantikan referensi Paket yang ada. Jika Anda menentukan koleksi kosong, semua referensi Paket akan dihapus dari Kumpulan. Jika dihilangkan, referensi Paket yang ada dibiarkan tidak berubah. ID aplikasi yang dipisahkan spasi dengan versi opsional dalam format 'id[#version]'.
+    description: ''
+  - name: --certificate-references
+    summary: Jika elemen ini ada, elemen ini menggantikan referensi Sertifikat yang ada yang dikonfigurasi pada Kumpulan. Jika dihilangkan, referensi Sertifikat yang ada dibiarkan tidak berubah. Untuk simpul Windows, layanan Batch menginstal Sertifikat ke penyimpanan dan lokasi Sertifikat yang ditentukan. Untuk Simpul Komputasi Linux, Sertifikat disimpan dalam direktori di dalam direktori kerja Tugas dan variabel lingkungan AZ_BATCH_CERTIFICATES_DIR disediakan ke Tugas untuk mengkueri lokasi ini. Untuk Sertifikat dengan visibilitas 'remoteUser', direktori 'certs' dibuat di direktori beranda pengguna (misalnya, /home/{user-name}/certs) dan Sertifikat ditempatkan di direktori tersebut. Thumbprint sertifikat yang dipisahkan spasi.
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag yang terkait dengan versi sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika ETag sumber daya saat ini pada layanan sama persis dengan nilai yang ditentukan oleh klien.
+    description: ''
+  - name: --if-modified-since
+    summary: Tanda waktu yang menunjukkan waktu modifikasi terakhir sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika sumber daya pada layanan telah dimodifikasi sejak waktu yang ditentukan.
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag yang terkait dengan versi sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika ETag sumber daya saat ini pada layanan tidak cocok dengan nilai yang ditentukan oleh klien.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Tanda waktu yang menunjukkan waktu modifikasi terakhir sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika sumber daya pada layanan belum dimodifikasi sejak waktu yang ditentukan.
+    description: ''
+  - name: --json-file
+    summary: File yang berisi spesifikasi parameter patch kumpulan di JSON (diformat agar sesuai dengan isi REST API masing-masing). Jika parameter ini ditentukan, semua Argumen '{group_title(arg[0])} diabaikan.
+    description: ''
+  - name: --metadata
+    summary: Jika elemen ini ada, elemen ini menggantikan metadata yang ada yang dikonfigurasi pada Kumpulan. Jika Anda menentukan koleksi kosong, metadata apa pun akan dihapus dari Kumpulan. Jika dihilangkan, metadata yang ada dibiarkan tidak berubah. Nilai yang dipisahkan spasi dalam format 'key=value'.
+    description: ''
+  - name: --start-task-command-line
+    summary: Wajib diisi. Baris perintah tidak berjalan di bawah shell, dan oleh karena itu tidak dapat memanfaatkan fitur shell seperti ekspansi variabel lingkungan. Jika Anda ingin memanfaatkan fitur tersebut, Anda harus memanggil shell di baris perintah, misalnya menggunakan "cmd /c MyCommand" di Windows atau "/bin/sh -c MyCommand" di Linux. Jika baris perintah mengacu pada jalur file, baris tersebut harus menggunakan jalur relatif (relatif terhadap direktori kerja Tugas), atau menggunakan variabel lingkungan yang disediakan Batch (https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables).
+    description: ''
+  - name: --start-task-environment-settings
+    summary: Nilai yang dipisahkan spasi dalam format 'key=value'.
+    description: ''
+  - name: --start-task-max-task-retry-count
+    summary: Berapa kali maksimum Tugas dapat dicoba kembali. Layanan Batch mencoba kembali Tugas jika kode keluarnya bukan nol. Perhatikan bahwa nilai ini secara khusus mengontrol jumlah percobaan kembali. Layanan Batch akan mencoba Tugas sekali, dan kemudian dapat mencoba kembali hingga batas ini. Misalnya, jika jumlah percobaan kembali maksimum adalah 3, Batch mencoba Tugas hingga 4 kali (satu percobaan awal dan 3 percobaan ulang). Jika jumlah percobaan kembali maksimum adalah 0, layanan Batch tidak mencoba kembali Tugas. Jika jumlah percobaan kembali maksimum adalah -1, layanan Batch mencoba kembali Tugas tanpa batas.
+    description: ''
+  - name: --start-task-resource-files
+    summary: File yang tercantum di bawah elemen ini terletak di direktori kerja Tugas. Referensi sumber daya yang dipisahkan spasi dalam format filename=httpurl.
+    description: ''
+  - name: --start-task-wait-for-success
+    summary: Apakah layanan Batch harus menunggu StartTask berhasil diselesaikan (yaitu, keluar dengan kode keluar 0) sebelum menjadwalkan Tugas apa pun pada Simpul Komputasi. Jika true dan StartTask gagal pada Node, layanan Batch mencoba kembali StartTask hingga jumlah coba lagi maksimumnya (maxTaskRetryCount). Jika Tugas masih belum berhasil diselesaikan setelah semua percobaan ulang, maka layanan Batch menandai Simpul tidak dapat digunakan, dan tidak akan menjadwalkan Tugas ke dalamnya. Kondisi ini dapat dideteksi melalui status Simpul Komputasi dan detail info kegagalan. Jika false, layanan Batch tidak akan menunggu StartTask selesai. Dalam hal ini, Tugas lain dapat mulai dijalankan pada Simpul Komputasi saat StartTask masih berjalan; dan bahkan jika StartTask gagal, Tugas baru akan terus dijadwalkan pada Simpul Komputasi. Secara default adalah benar. Tentukan 'true' atau 'false' untuk memperbarui properti.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batch/_help.py
+- uid: az_batch_pool_show
+  name: menampilkan kumpulan batch az
+  summary: Mendapatkan informasi tentang Kumpulan yang ditentukan.
+  description: ''
+  syntax: >-
+    az batch pool show --pool-id
+                       [--account-endpoint]
+                       [--account-key]
+                       [--account-name]
+                       [--expand]
+                       [--if-match]
+                       [--if-modified-since]
+                       [--if-none-match]
+                       [--if-unmodified-since]
+                       [--select]
+  requiredParameters:
+  - isRequired: true
+    name: --pool-id
+    summary: ID Kumpulan yang akan didapatkan.
+    description: ''
+  optionalParameters:
+  - name: --account-endpoint
+    summary: 'Titik akhir layanan batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ENDPOINT.'
+    description: ''
+  - name: --account-key
+    summary: 'Kunci akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCESS_KEY.'
+    description: ''
+  - name: --account-name
+    summary: 'Nama akun batch. Atau, diatur oleh variabel lingkungan: AZURE_BATCH_ACCOUNT.'
+    description: ''
+  - name: --expand
+    summary: Klausa $expand OData.
+    description: ''
+  - name: --if-match
+    summary: Nilai ETag yang terkait dengan versi sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika ETag sumber daya saat ini pada layanan sama persis dengan nilai yang ditentukan oleh klien.
+    description: ''
+  - name: --if-modified-since
+    summary: Tanda waktu yang menunjukkan waktu modifikasi terakhir sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika sumber daya pada layanan telah dimodifikasi sejak waktu yang ditentukan.
+    description: ''
+  - name: --if-none-match
+    summary: Nilai ETag yang terkait dengan versi sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika ETag sumber daya saat ini pada layanan tidak cocok dengan nilai yang ditentukan oleh klien.
+    description: ''
+  - name: --if-unmodified-since
+    summary: Tanda waktu yang menunjukkan waktu modifikasi terakhir sumber daya yang diketahui oleh klien. Operasi akan dilakukan hanya jika sumber daya pada layanan belum dimodifikasi sejak waktu yang ditentukan.
+    description: ''
+  - name: --select
+    summary: Klausa $select OData.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batch/_help.py
+commands:
+- az_batch_pool_all-statistics
+- az_batch_pool_all-statistics_show
+- az_batch_pool_autoscale
+- az_batch_pool_autoscale_disable
+- az_batch_pool_autoscale_enable
+- az_batch_pool_autoscale_evaluate
+- az_batch_pool_create
+- az_batch_pool_delete
+- az_batch_pool_list
+- az_batch_pool_node-counts
+- az_batch_pool_node-counts_list
+- az_batch_pool_reset
+- az_batch_pool_resize
+- az_batch_pool_set
+- az_batch_pool_show
+- az_batch_pool_supported-images
+- az_batch_pool_supported-images_list
+- az_batch_pool_usage-metrics
+- az_batch_pool_usage-metrics_list
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/30/2022
+  description: Mengelola kumpulan Batch.
+  ms.openlocfilehash: 3d4aedd339a4a4bfbadaa515fb04ad67b9fe575f
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141424439"

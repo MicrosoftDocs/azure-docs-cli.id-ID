@@ -1,0 +1,288 @@
+### YamlMime:AzureCLIGroup
+uid: az_network_nsg_rule
+name: aturan nsg jaringan az
+summary: Mengelola aturan kelompok keamanan jaringan.
+description: ''
+directCommands:
+- uid: az_network_nsg_rule_create
+  name: az network nsg rule create
+  summary: Membuat aturan kelompok keamanan jaringan.
+  description: ''
+  syntax: >-
+    az network nsg rule create --name
+                               --nsg-name
+                               --priority
+                               --resource-group
+                               [--access {Allow, Deny}]
+                               [--description]
+                               [--destination-address-prefix]
+                               [--destination-port-range]
+                               [--direction {Inbound, Outbound}]
+                               [--protocol {*, Tcp, Udp}]
+                               [--source-address-prefix]
+                               [--source-port-range]
+  examples:
+  - summary: Buat aturan NSG "Izinkan" dasar dengan prioritas tertinggi.
+    syntax: az network nsg rule create -g MyResourceGroup --nsg-name MyNsg -n MyNsgRule --priority 100
+  - summary: Buat aturan "Tolak" melalui TCP untuk rentang alamat IP tertentu dengan prioritas terendah.
+    syntax: >-
+      az network nsg rule create -g MyResourceGroup --nsg-name MyNsg -n MyNsgRule --priority 4096 \
+          --source-address-prefixes 208.130.28.0/24 --source-port-ranges 80 \
+          --destination-address-prefixes '*' --destination-port-ranges 80 8080 --access Deny \
+          --protocol Tcp --description "Deny from specific IP address ranges on 80 and 8080."
+  - summary: Buat aturan keamanan menggunakan tag layanan. Untuk detail selengkapnya, kunjungi https://aka.ms/servicetags
+    syntax: >-
+      az network nsg rule create -g MyResourceGroup --nsg-name MyNsg -n MyNsgRuleWithTags \
+          --priority 400 --source-address-prefixes VirtualNetwork --destination-address-prefixes Storage \
+          --destination-port-ranges '*' --direction Outbound --access Allow --protocol Tcp --description "Allow VirtualNetwork to Storage."
+  - summary: Buat aturan keamanan menggunakan kelompok keamanan aplikasi. https://aka.ms/applicationsecuritygroups
+    syntax: >-
+      az network nsg rule create -g MyResourceGroup --nsg-name MyNsg -n MyNsgRuleWithAsg \
+          --priority 500 --source-address-prefixes Internet --destination-port-ranges 80 8080 \
+          --destination-asgs Web --access Allow --protocol Tcp --description "Allow Internet to Web ASG on ports 80,8080."
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aturan grup keamanan jaringan.
+    description: ''
+  - isRequired: true
+    name: --nsg-name
+    summary: Nama grup keamanan jaringan.
+    description: ''
+  - isRequired: true
+    name: --prioritas
+    summary: Prioritas aturan, antara 100 (prioritas tertinggi) dan 4096 (prioritas terendah). Harus unik untuk setiap aturan dalam koleksi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --access
+    defaultValue: Allow
+    parameterValueGroup: Allow, Deny
+    summary: ''
+    description: ''
+  - name: --description
+    summary: Deskripsi aturan.
+    description: ''
+  - name: --destination-address-prefix
+    defaultValue: ''
+    summary: Daftar awalan atau rentang IP CIDR yang dipisahkan spasi. Atau, tentukan SALAH SATU dari 'VirtualNetwork', 'AzureLoadBalancer', 'Internet' atau '\*' untuk mencocokkan semua IP. Selain itu, ini juga mendukung semua Tag Layanan yang tersedia seperti 'ApiManagement', 'SqlManagement', 'AzureMonitor', dll.
+    description: ''
+  - name: --destination-port-range
+    defaultValue: "80"
+    summary: Rentang port atau port antara 0-65535. Gunakan '\*' untuk mencocokkan semua port.
+    description: ''
+  - name: --direction
+    defaultValue: Inbound
+    parameterValueGroup: Inbound, Outbound
+    summary: ''
+    description: ''
+  - name: --protocol
+    defaultValue: ''
+    parameterValueGroup: '*, Tcp, Udp'
+    summary: Protokol jaringan yang berlaku untuk aturan ini.
+    description: ''
+  - name: --source-address-prefix
+    defaultValue: ''
+    summary: Daftar awalan atau rentang IP CIDR yang dipisahkan spasi. Atau, tentukan SALAH SATU dari 'VirtualNetwork', 'AzureLoadBalancer', 'Internet' atau '\*' untuk mencocokkan semua IP. Selain itu, ini juga mendukung semua Tag Layanan yang tersedia seperti 'ApiManagement', 'SqlManagement', 'AzureMonitor', dll.
+    description: ''
+  - name: --source-port-range
+    defaultValue: ''
+    summary: Rentang port atau port antara 0-65535. Gunakan '\*' untuk mencocokkan semua port.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_nsg_rule_delete
+  name: az network nsg rule delete
+  summary: Menghapus aturan grup keamanan jaringan.
+  description: ''
+  syntax: >-
+    az network nsg rule delete [--ids]
+                               [--name]
+                               [--nsg-name]
+                               [--resource-group]
+  examples:
+  - summary: Menghapus aturan grup keamanan jaringan.
+    syntax: az network nsg rule delete -g MyResourceGroup --nsg-name MyNsg -n MyNsgRule
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aturan grup keamanan jaringan.
+    description: ''
+  - name: --nsg-name
+    summary: Nama grup keamanan jaringan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_nsg_rule_list
+  name: az network nsg rule list
+  summary: Mencantumkan semua aturan dalam kelompok keamanan jaringan.
+  description: ''
+  syntax: >-
+    az network nsg rule list --nsg-name
+                             --resource-group
+                             [--include-default]
+  examples:
+  - summary: Mencantumkan semua aturan dalam kelompok keamanan jaringan.
+    syntax: az network nsg rule list -g MyResourceGroup --nsg-name MyNsg
+  requiredParameters:
+  - isRequired: true
+    name: --nsg-name
+    summary: Nama grup keamanan jaringan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --include-default
+    summary: Sertakan aturan keamanan default dalam output.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_nsg_rule_show
+  name: az network nsg rule show
+  summary: Mendapatkan detail aturan kelompok keamanan jaringan.
+  description: ''
+  syntax: >-
+    az network nsg rule show [--ids]
+                             [--name]
+                             [--nsg-name]
+                             [--resource-group]
+  examples:
+  - summary: Mendapatkan detail aturan kelompok keamanan jaringan.
+    syntax: az network nsg rule show -g MyResourceGroup --nsg-name MyNsg -n MyNsgRule
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aturan grup keamanan jaringan.
+    description: ''
+  - name: --nsg-name
+    summary: Nama grup keamanan jaringan.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_nsg_rule_update
+  name: az network nsg rule update
+  summary: Memperbarui aturan grup keamanan jaringan.
+  description: ''
+  syntax: >-
+    az network nsg rule update [--access {Allow, Deny}]
+                               [--add]
+                               [--description]
+                               [--destination-address-prefix]
+                               [--destination-port-range]
+                               [--direction {Inbound, Outbound}]
+                               [--force-string]
+                               [--ids]
+                               [--name]
+                               [--nsg-name]
+                               [--priority]
+                               [--protocol {*, Tcp, Udp}]
+                               [--remove]
+                               [--resource-group]
+                               [--set]
+                               [--source-address-prefix]
+                               [--source-port-range]
+  examples:
+  - summary: Perbarui aturan NSG dengan awalan alamat tujuan wildcard baru.
+    syntax: az network nsg rule update -g MyResourceGroup --nsg-name MyNsg -n MyNsgRule --destination-address-prefix '*'
+  - summary: Memperbarui aturan grup keamanan jaringan. (dibuat otomatis)
+    syntax: az network nsg rule update --name MyNsgRule --nsg-name MyNsg --resource-group MyResourceGroup --source-address-prefixes 208.130.28/24
+  optionalParameters:
+  - name: --access
+    parameterValueGroup: Allow, Deny
+    summary: ''
+    description: ''
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --description
+    summary: Deskripsi aturan.
+    description: ''
+  - name: --destination-address-prefix
+    summary: Daftar awalan atau rentang IP CIDR yang dipisahkan spasi. Atau, tentukan SALAH SATU dari 'VirtualNetwork', 'AzureLoadBalancer', 'Internet' atau '\*' untuk mencocokkan semua IP. Selain itu, ini juga mendukung semua Tag Layanan yang tersedia seperti 'ApiManagement', 'SqlManagement', 'AzureMonitor', dll.
+    description: ''
+  - name: --destination-port-range
+    summary: Rentang port atau port antara 0-65535. Gunakan '\*' untuk mencocokkan semua port.
+    description: ''
+  - name: --direction
+    parameterValueGroup: Inbound, Outbound
+    summary: ''
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama aturan grup keamanan jaringan.
+    description: ''
+  - name: --nsg-name
+    summary: Nama grup keamanan jaringan.
+    description: ''
+  - name: --prioritas
+    summary: Prioritas aturan, antara 100 (prioritas tertinggi) dan 4096 (prioritas terendah). Harus unik untuk setiap aturan dalam koleksi.
+    description: ''
+  - name: --protocol
+    parameterValueGroup: '*, Tcp, Udp'
+    summary: Protokol jaringan yang berlaku untuk aturan ini.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --source-address-prefix
+    summary: Daftar awalan atau rentang IP CIDR yang dipisahkan spasi. Atau, tentukan SALAH SATU dari 'VirtualNetwork', 'AzureLoadBalancer', 'Internet' atau '\*' untuk mencocokkan semua IP. Selain itu, ini juga mendukung semua Tag Layanan yang tersedia seperti 'ApiManagement', 'SqlManagement', 'AzureMonitor', dll.
+    description: ''
+  - name: --source-port-range
+    summary: Rentang port atau port antara 0-65535. Gunakan '\*' untuk mencocokkan semua port.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+commands:
+- az_network_nsg_rule_create
+- az_network_nsg_rule_delete
+- az_network_nsg_rule_list
+- az_network_nsg_rule_show
+- az_network_nsg_rule_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/09/2022
+  description: Mengelola aturan kelompok keamanan jaringan.
+  ms.openlocfilehash: 80cbe59cdd625e230b0b23829bb2b10f41215635
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141440207"

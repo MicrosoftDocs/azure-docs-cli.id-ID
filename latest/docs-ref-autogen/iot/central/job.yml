@@ -1,0 +1,333 @@
+### YamlMime:AzureCLIGroup
+uid: az_iot_central_job
+name: az iot central job
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **azure-iot** untuk Azure CLI (versi 2.24.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **az iot central job** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola dan mengonfigurasi pekerjaan untuk aplikasi IoT Central.
+description: ''
+directCommands:
+- uid: az_iot_central_job_create
+  name: az iot central job create
+  summary: Membuat dan menjalankan pekerjaan melalui definisi kerjanya.
+  description: ''
+  syntax: >-
+    az iot central job create --app-id
+                              --content
+                              --group-id
+                              --job-id
+                              [--api-version {1.1-preview, preview}]
+                              [--batch]
+                              [--batch-type]
+                              [--cancellation-threshold]
+                              [--cancellation-threshold-batch]
+                              [--cancellation-threshold-type {number, percentage}]
+                              [--central-api-uri]
+                              [--desc]
+                              [--job-name]
+                              [--token]
+  examples:
+  - summary: Membuat pekerjaan dengan nama
+    syntax: az iot central job create --app-id {appid} --job-id {jobId} --group-id {groupId} --job-name {jobName} --content {creationJSONPath}
+  - summary: Buat pekerjaan dengan nama dan konfigurasi batch.
+    syntax: az iot central job create --app-id {appid} --job-id {jobId} --group-id {groupId} --job-name {jobName} --content {creationJSONPath} --batch {jobBatchValue} --batch-type {jobBatchType}
+  - summary: Buat pekerjaan dengan konfigurasi ambang nama dan pembatalan tanpa batch.
+    syntax: az iot central job create --app-id {appid} --job-id {jobId} --group-id {groupId} --job-name {jobName} --content {creationJSONPath} --cancellation-threshold {jobCancellationThresholdValue} --cancellation-threshold-type {jobCancellationThresholdType} --description {jobDesc}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi dari aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --content -k
+    summary: Definisi data pekerjaan. Berikan jalur ke file JSON atau JSON string mentah. [Contoh Jalur File:./path/to/file.json] [Contoh JSON yang diurai:[{<Job Data JSON>}]. Isi permintaan harus berisi array JobData.
+    description: ''
+  - isRequired: true
+    name: --group-id -g
+    summary: ID grup perangkat tempat menjalankan pekerjaan.
+    description: ''
+  - isRequired: true
+    name: --job-id -j
+    summary: Pengidentifikasi unik untuk pekerjaan tersebut.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: 1.1-preview
+    parameterValueGroup: 1.1-preview, preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --batch -b
+    summary: Jumlah atau persentase perangkat tempat batching dilakukan.
+    description: ''
+  - name: --batch-type --bt
+    summary: Tentukan apakah batching dilakukan pada sejumlah perangkat atau persentase dari total.
+    description: ''
+  - name: --cancellation-threshold --cth
+    summary: Jumlah atau persentase perangkat tempat ambang pembatalan diterapkan.
+    description: ''
+  - name: --cancellation-threshold-batch --ctb
+    defaultValue: number
+    summary: Apakah ambang pembatalan berlaku per batch atau untuk pekerjaan keseluruhan.
+    description: ''
+  - name: --cancellation-threshold-type --ctt
+    defaultValue: number
+    parameterValueGroup: number, percentage
+    summary: Tentukan apakah ambang pembatalan berlaku untuk sejumlah perangkat atau persentase total.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --desc --description
+    summary: Deskripsi terperinci tentang pekerjaan.
+    description: ''
+  - name: --job-name
+    summary: Nama tampilan pekerjaan.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+- uid: az_iot_central_job_get-devices
+  name: az iot central job get-devices
+  summary: Mendapatkan status perangkat pekerjaan.
+  description: ''
+  syntax: >-
+    az iot central job get-devices --app-id
+                                   --job-id
+                                   [--api-version {1.1-preview, preview}]
+                                   [--central-api-uri]
+                                   [--token]
+  examples:
+  - summary: Mendapatkan daftar status perangkat individual menurut ID pekerjaan
+    syntax: az iot central job get-devices --app-id {appid} --job-id {jobId}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi dari aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --job-id -j
+    summary: Pengidentifikasi unik untuk pekerjaan tersebut.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: 1.1-preview
+    parameterValueGroup: 1.1-preview, preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+- uid: az_iot_central_job_list
+  name: az iot central job list
+  summary: Dapatkan daftar pekerjaan untuk aplikasi IoT Central.
+  description: ''
+  syntax: >-
+    az iot central job list --app-id
+                            [--api-version {1.1-preview, preview}]
+                            [--central-api-uri]
+                            [--token]
+  examples:
+  - summary: Mencantumkan pekerjaan dalam aplikasi
+    syntax: az iot central job list --app-id {appid}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi dari aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: 1.1-preview
+    parameterValueGroup: 1.1-preview, preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+- uid: az_iot_central_job_rerun
+  name: az iot central job rerun
+  summary: Jalankan kembali pekerjaan di semua perangkat yang gagal.
+  description: ''
+  syntax: >-
+    az iot central job rerun --app-id
+                             --job-id
+                             --rerun-id
+                             [--api-version {1.1-preview, preview}]
+                             [--central-api-uri]
+                             [--token]
+  examples:
+  - summary: Menjalankan ulang pekerjaan
+    syntax: az iot central job rerun --app-id {appid} --job-id {jobId} --rerun-id {rerunId}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi dari aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --job-id -j
+    summary: Pengidentifikasi unik untuk pekerjaan tersebut.
+    description: ''
+  - isRequired: true
+    name: --rerun-id
+    summary: Pengidentifikasi unik untuk eksekusi ulang.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: 1.1-preview
+    parameterValueGroup: 1.1-preview, preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+- uid: az_iot_central_job_resume
+  name: az iot central job resume
+  summary: Melanjutkan pekerjaan yang dihentikan.
+  description: ''
+  syntax: >-
+    az iot central job resume --app-id
+                              --job-id
+                              [--api-version {1.1-preview, preview}]
+                              [--central-api-uri]
+                              [--token]
+  examples:
+  - summary: Melanjutkan pekerjaan
+    syntax: az iot central job resume --app-id {appid} --job-id {jobId}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi dari aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --job-id -j
+    summary: Pengidentifikasi unik untuk pekerjaan tersebut.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: 1.1-preview
+    parameterValueGroup: 1.1-preview, preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+- uid: az_iot_central_job_show
+  name: az iot central job show
+  summary: Dapatkan detail pekerjaan berdasarkan ID.
+  description: ''
+  syntax: >-
+    az iot central job show --app-id
+                            --job-id
+                            [--api-version {1.1-preview, preview}]
+                            [--central-api-uri]
+                            [--token]
+  examples:
+  - summary: Mendapatkan detail pekerjaan
+    syntax: az iot central job show --app-id {appid} --job-id {jobId}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi dari aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --job-id -j
+    summary: Pengidentifikasi unik untuk pekerjaan tersebut.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: 1.1-preview
+    parameterValueGroup: 1.1-preview, preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+- uid: az_iot_central_job_stop
+  name: az iot central job stop
+  summary: Hentikan pekerjaan yang sedang berjalan.
+  description: ''
+  syntax: >-
+    az iot central job stop --app-id
+                            --job-id
+                            [--api-version {1.1-preview, preview}]
+                            [--central-api-uri]
+                            [--token]
+  examples:
+  - summary: Menghentikan pekerjaan
+    syntax: az iot central job stop --app-id {appid} --job-id {jobId}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi dari aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --job-id -j
+    summary: Pengidentifikasi unik untuk pekerjaan tersebut.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: 1.1-preview
+    parameterValueGroup: 1.1-preview, preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+commands:
+- az_iot_central_job_create
+- az_iot_central_job_get-devices
+- az_iot_central_job_list
+- az_iot_central_job_rerun
+- az_iot_central_job_resume
+- az_iot_central_job_show
+- az_iot_central_job_stop
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola dan mengonfigurasi pekerjaan untuk aplikasi IoT Central.
+  ms.openlocfilehash: 7a8cd44660ef1b7bd91afc7563184f21ff026503
+  ms.sourcegitcommit: b179e8c36fc1222f584a3780aaf61c99bf78a40d
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/01/2022
+  ms.locfileid: "141310090"

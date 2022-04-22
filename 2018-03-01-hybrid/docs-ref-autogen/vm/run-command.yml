@@ -1,0 +1,448 @@
+### YamlMime:AzureCLIGroup
+uid: az_vm_run-command
+name: az vm run-command
+summary: Mengelola perintah jalankan pada Komputer Virtual.
+description: Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/virtual-machines/windows/run-command atau https://docs.microsoft.com/azure/virtual-machines/linux/run-command.
+directCommands:
+- uid: az_vm_run-command_create
+  name: az vm run-command create
+  summary: Operasi untuk membuat perintah jalankan.
+  description: ''
+  syntax: >-
+    az vm run-command create --name
+                             --resource-group
+                             --vm-name
+                             [--async-execution {false, true}]
+                             [--command-id]
+                             [--error-blob-uri]
+                             [--location]
+                             [--no-wait]
+                             [--output-blob-uri]
+                             [--parameters]
+                             [--protected-parameters]
+                             [--run-as-password]
+                             [--run-as-user]
+                             [--script]
+                             [--script-uri]
+                             [--tags]
+                             [--timeout-in-seconds]
+  examples:
+  - summary: Buat perintah jalankan.
+    syntax: az vm run-command create --resource-group "myResourceGroup" --location "West US" --async-execution false --parameters arg1=param1 arg2=value1 --run-as-password "<runAsPassword>" --run-as-user "user1" --script "Write-Host Hello World!" --timeout-in-seconds 3600 --run-command-name "myRunCommand" --vm-name "myVM"
+  requiredParameters:
+  - isRequired: true
+    name: --name --run-command-name
+    summary: Nama perintah eksekusi komputer virtual.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vm-name
+    summary: Nama komputer virtual.
+    description: ''
+  optionalParameters:
+  - name: --async-execution
+    parameterValueGroup: false, true
+    summary: Opsional. Jika diatur ke true, provisi akan selesai segera setelah skrip dimulai dan tidak akan menunggu skrip selesai.
+    description: ''
+  - name: --command-id
+    summary: Tentukan commandId dari skrip bawaan yang telah ditentukan sebelumnya.
+    description: ''
+  - name: --error-blob-uri
+    summary: Tentukan blob penyimpanan Azure tempat aliran kesalahan skrip akan diunggah.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --output-blob-uri
+    summary: Tentukan blob penyimpanan Azure tempat aliran output skrip akan diunggah.
+    description: ''
+  - name: --parameters
+    summary: Parameter yang digunakan oleh skrip.
+    description: 'Penggunaan: --parameters arg1=XX arg2=XX.'
+  - name: --protected-parameters
+    summary: Parameter yang digunakan oleh skrip.
+    description: 'Penggunaan: --protected-parameters credentials=somefoo secret=somebar.'
+  - name: --run-as-password
+    summary: Kata sandi jika diperlukan untuk menggunakan parameter run-as-user. Ini akan dienkripsi dan tidak dicatat.
+    description: ''
+  - name: --run-as-user
+    summary: Secara default proses skrip berjalan di bawah sistem/pengguna root. Tentukan pengguna kustom untuk menghosting proses.
+    description: ''
+  - name: --script
+    summary: Tentukan konten skrip yang akan dijalankan pada VM.
+    description: ''
+  - name: --script-uri
+    summary: Tentukan lokasi pengunduhan skrip.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --timeout-in-seconds
+    summary: Batas waktu dalam detik untuk menjalankan perintah jalankan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_run-command_delete
+  name: az vm run-command delete
+  summary: Operasi untuk menghapus perintah jalankan.
+  description: ''
+  syntax: >-
+    az vm run-command delete --name
+                             [--ids]
+                             [--no-wait]
+                             [--resource-group]
+                             [--vm-name]
+                             [--yes]
+  examples:
+  - summary: Menghapus perintah jalankan.
+    syntax: az vm run-command delete --resource-group "myResourceGroup" --run-command-name "myRunCommand" --vm-name "myVM"
+  requiredParameters:
+  - isRequired: true
+    name: --name --run-command-name
+    summary: Nama perintah eksekusi komputer virtual.
+    description: ''
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --vm-name
+    summary: Nama komputer virtual.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_run-command_invoke
+  name: az vm run-command invoke
+  summary: Jalankan perintah eksekusi tertentu pada vm.
+  description: '`az vm run-command show` mengembalikan informasi bermanfaat pada setiap run-command. Temukan Jalankan command-id melalui `az vmss run-command list`.'
+  syntax: >-
+    az vm run-command invoke --command-id
+                             [--ids]
+                             [--name]
+                             [--parameters]
+                             [--resource-group]
+                             [--scripts]
+  examples:
+  - summary: Instal nginx pada VM linux.
+    syntax: az vm run-command invoke -g MyResourceGroup -n MyVm --command-id RunShellScript --scripts "sudo apt-get update && sudo apt-get install -y nginx"
+  - summary: Jalankan perintah shell pada VM linux dengan parameter.
+    syntax: az vm run-command invoke -g MyResourceGroup -n MyVm --command-id RunShellScript --scripts 'echo $1 $2' --parameters hello world
+  - summary: Jalankan skrip powershell pada VM windows dengan parameter. Skrip yang disediakan sebaris. Waspadalah terhadap single-quoting di CMD.exe.
+    syntax: >-
+      az vm run-command invoke  --command-id RunPowerShellScript --name win-vm -g my-resource-group  \
+          --scripts 'param([string]$arg1,[string]$arg2)' \
+          'Write-Host This is a sample script with parameters $arg1 and $arg2' \
+          --parameters 'arg1=somefoo' 'arg2=somebar'
+  - summary: Jalankan skrip powershell pada VM windows dengan parameter. Skrip yang disediakan dari file.
+    syntax: >-
+      # script.ps1
+
+      #   param(
+
+      #       [string]$arg1,
+
+      #       [string]$arg2
+
+      #   )
+
+      #   Write-Host This is a sample script with parameters $arg1 and $arg2
+
+
+      az vm run-command invoke  --command-id RunPowerShellScript --name win-vm -g my-resource-group \
+          --scripts @script.ps1 --parameters "arg1=somefoo" "arg2=somebar"
+  requiredParameters:
+  - isRequired: true
+    name: --command-id
+    summary: Id perintah.
+    description: ''
+    valueFrom: az vm run-command list
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  - name: --parameters
+    summary: Parameter yang dipisahkan spasi dalam format '[name=]value'.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --scripts
+    summary: Baris skrip yang dipisahkan spasi. Gunakan @{file} untuk memuat skrip dari file.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_run-command_list
+  name: az vm run-command list
+  summary: Operasi untuk mendapatkan semua perintah eksekusi Komputer Virtual. Dan Mencantumkan semua perintah eksekusi yang tersedia untuk langganan di lokasi.
+  description: ''
+  syntax: >-
+    az vm run-command list [--expand]
+                           [--location]
+                           [--resource-group]
+                           [--vm-name]
+  examples:
+  - summary: Mencantumkan perintah jalankan di Komputer Virtual.
+    syntax: az vm run-command list --resource-group "myResourceGroup" --vm-name "myVM"
+  - summary: Mencantumkan semua perintah eksekusi yang tersedia untuk langganan di lokasi.
+    syntax: az vm run-command list --location "SoutheastAsia"
+  optionalParameters:
+  - name: --expand
+    summary: Ekspresi perluas untuk diterapkan pada operasi.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --vm-name
+    summary: Nama komputer virtual.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_run-command_show
+  name: az vm run-command show
+  summary: Operasi untuk mendapatkan perintah jalankan. Dan Mendapatkan perintah eksekusi khusus untuk langganan di lokasi.
+  description: ''
+  syntax: >-
+    az vm run-command show [--command-id]
+                           [--expand]
+                           [--ids]
+                           [--instance-view]
+                           [--location]
+                           [--name]
+                           [--resource-group]
+                           [--vm-name]
+  examples:
+  - summary: Dapatkan perintah jalankan di komputer virtual.
+    syntax: az vm run-command show --resource-group "myResourceGroup" --run-command-name "myRunCommand" --vm-name "myVM"
+  - summary: Dapatkan perintah jalankan tertentu untuk langganan di lokasi.
+    syntax: az vm run-command show --command-id "RunPowerShellScript" --location "SoutheastAsia"
+  optionalParameters:
+  - name: --command-id
+    summary: Id perintah.
+    description: ''
+  - name: --expand
+    summary: Ekspresi perluas untuk diterapkan pada operasi.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --instance-view
+    summary: Tampilan instans perintah jalankan.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --name --run-command-name
+    summary: Nama perintah eksekusi komputer virtual.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --vm-name
+    summary: Nama komputer virtual.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_run-command_update
+  name: az vm run-command update
+  summary: Operasi untuk memperbarui perintah jalankan.
+  description: ''
+  syntax: >-
+    az vm run-command update --name
+                             [--async-execution {false, true}]
+                             [--command-id]
+                             [--error-blob-uri]
+                             [--ids]
+                             [--location]
+                             [--no-wait]
+                             [--output-blob-uri]
+                             [--parameters]
+                             [--protected-parameters]
+                             [--resource-group]
+                             [--run-as-password]
+                             [--run-as-user]
+                             [--script]
+                             [--script-uri]
+                             [--tags]
+                             [--timeout-in-seconds]
+                             [--vm-name]
+  examples:
+  - summary: Perbarui perintah jalankan.
+    syntax: az vm run-command update --resource-group "myResourceGroup" --location "West US" --async-execution false --parameters arg1=param1 arg2=value1 --run-as-password "<runAsPassword>" --run-as-user "user1" --script "Write-Host Hello World!" --timeout-in-seconds 3600 --run-command-name "myRunCommand" --vm-name "myVM"
+  requiredParameters:
+  - isRequired: true
+    name: --name --run-command-name
+    summary: Nama perintah eksekusi komputer virtual.
+    description: ''
+  optionalParameters:
+  - name: --async-execution
+    parameterValueGroup: false, true
+    summary: Opsional. Jika diatur ke true, provisi akan selesai segera setelah skrip dimulai dan tidak akan menunggu skrip selesai.
+    description: ''
+  - name: --command-id
+    summary: Tentukan commandId skrip bawaan yang telah ditentukan sebelumnya.
+    description: ''
+  - name: --error-blob-uri
+    summary: Tentukan blob penyimpanan Azure tempat aliran kesalahan skrip akan diunggah.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --output-blob-uri
+    summary: Tentukan blob penyimpanan Azure tempat aliran output skrip akan diunggah.
+    description: ''
+  - name: --parameters
+    summary: Parameter yang digunakan oleh skrip.
+    description: 'Penggunaan: --parameters arg1=XX arg2=XX.'
+  - name: --protected-parameters
+    summary: Parameter yang digunakan oleh skrip.
+    description: 'Penggunaan: --protected-parameters credentials=somefoo secret=somebar.'
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --run-as-password
+    summary: Kata sandi jika diperlukan untuk menggunakan parameter run-as-user. Ini akan dienkripsi dan tidak dicatat.
+    description: ''
+  - name: --run-as-user
+    summary: Secara default, proses skrip berjalan di bawah sistem/pengguna root. Tentukan pengguna kustom untuk menghosting proses.
+    description: ''
+  - name: --script
+    summary: Tentukan konten skrip yang akan dijalankan pada VM.
+    description: ''
+  - name: --script-uri
+    summary: Tentukan lokasi pengunduhan skrip.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --timeout-in-seconds
+    summary: Batas waktu dalam detik untuk menjalankan perintah jalankan.
+    description: ''
+  - name: --vm-name
+    summary: Nama komputer virtual.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_run-command_wait
+  name: az vm run-command wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi perintah res virtual-machine-run-terpenuhi.
+  description: ''
+  syntax: >-
+    az vm run-command wait [--command-id]
+                           [--created]
+                           [--custom]
+                           [--deleted]
+                           [--exists]
+                           [--expand]
+                           [--ids]
+                           [--instance-view]
+                           [--interval]
+                           [--location]
+                           [--name]
+                           [--resource-group]
+                           [--timeout]
+                           [--updated]
+                           [--vm-name]
+  optionalParameters:
+  - name: --command-id
+    summary: Id perintah.
+    description: ''
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --expand
+    summary: Ekspresi perluas untuk diterapkan pada operasi.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --instance-view
+    summary: Tampilan instans perintah jalankan.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --name --run-command-name
+    summary: Nama perintah eksekusi komputer virtual.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --diperbarui
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+  - name: --vm-name
+    summary: Nama komputer virtual.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+commands:
+- az_vm_run-command_create
+- az_vm_run-command_delete
+- az_vm_run-command_invoke
+- az_vm_run-command_list
+- az_vm_run-command_show
+- az_vm_run-command_update
+- az_vm_run-command_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 04/01/2022
+  description: Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/virtual-machines/windows/run-command atau https://docs.microsoft.com/azure/virtual-machines/linux/run-command.
+  ms.openlocfilehash: cadda4689a83722f0eb0ef98c1b975824c97469b
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141415564"

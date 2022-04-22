@@ -1,0 +1,279 @@
+### YamlMime:AzureCLIGroup
+uid: az_vm_extension
+name: az vm extension
+summary: Mengelola ekstensi pada VM.
+description: Ekstensi adalah aplikasi kecil yang menyediakan konfigurasi pasca-penyebaran dan tugas otomatisasi pada komputer virtual Azure. Misalnya, jika komputer virtual memerlukan penginstalan perangkat lunak, perlindungan anti-virus, atau konfigurasi Docker, ekstensi VM dapat digunakan untuk menyelesaikan tugas-tugas ini. Ekstensi dapat dibundel dengan penyebaran komputer virtual baru atau dijalankan terhadap sistem yang ada.
+directCommands:
+- uid: az_vm_extension_delete
+  name: az vm extension delete
+  summary: Menghapus ekstensi yang dilampirkan ke VM.
+  description: ''
+  syntax: >-
+    az vm extension delete [--ids]
+                           [--name]
+                           [--no-wait]
+                           [--resource-group]
+                           [--vm-name]
+  examples:
+  - summary: Gunakan nama dan ekstensi VM untuk menghapus ekstensi dari VM.
+    syntax: az vm extension delete -g MyResourceGroup --vm-name MyVm -n extension_name
+  - summary: Hapus ekstensi dengan ID yang berisi string "MyExtension" dari VM.
+    syntax: >-
+      az vm extension delete --ids \
+          $(az resource list --query "[?contains(name, 'MyExtension')].id" -o tsv)
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama ekstensi.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --vm-name
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_extension_list
+  name: az vm extension list
+  summary: Mencantumkan ekstensi yang dilampirkan ke VM.
+  description: ''
+  syntax: >-
+    az vm extension list --resource-group
+                         --vm-name
+  examples:
+  - summary: Mencantumkan ekstensi terlampir ke VM bernama.
+    syntax: az vm extension list -g MyResourceGroup --vm-name MyVm
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vm-name
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_extension_set
+  name: az vm extension set
+  summary: Atur ekstensi untuk VM.
+  description: Dapatkan detail ekstensi dari `az vm extension image list`.
+  syntax: >-
+    az vm extension set --name
+                        --publisher
+                        [--enable-auto-upgrade {false, true}]
+                        [--extension-instance-name]
+                        [--force-update]
+                        [--ids]
+                        [--no-auto-upgrade {false, true}]
+                        [--no-auto-upgrade-minor-version {false, true}]
+                        [--no-wait]
+                        [--protected-settings]
+                        [--resource-group]
+                        [--settings]
+                        [--version]
+                        [--vm-name]
+  examples:
+  - summary: Tambahkan akun pengguna ke VM Linux.
+    syntax: >-
+      az vm extension set -n VMAccessForLinux --publisher Microsoft.OSTCExtensions --version 1.4 \
+          --vm-name MyVm --resource-group MyResourceGroup \
+          --protected-settings '{"username":"user1", "ssh_key":"ssh_rsa ..."}'
+  - summary: Tambahkan ekstensi customScript ke VM yang ditentukan oleh --ids.
+    syntax: az vm extension set -n customScript --publisher Microsoft.Azure.Extensions --ids {vm_id}
+  - summary: Tambahkan ekstensi dan aktifkan peningkatan otomatis oleh platform jika ada versi ekstensi yang lebih baru yang tersedia.
+    syntax: >-
+      az vm extension set -n extName --publisher publisher --vm-name MyVM -g MyResourceGroup \
+
+      --enable-auto-upgrade true
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama ekstensi.
+    description: ''
+    valueFrom: az vm extension image list
+  - isRequired: true
+    name: --publisher
+    summary: Nama penerbit ekstensi.
+    description: ''
+  optionalParameters:
+  - name: --enable-auto-upgrade
+    parameterValueGroup: false, true
+    summary: Tunjukkan ekstensi harus ditingkatkan secara otomatis oleh platform jika ada versi ekstensi yang lebih baru yang tersedia.
+    description: ''
+  - name: --extension-instance-name
+    summary: 'Nama instans ekstensi, yang dapat disesuaikan. Default: nama ekstensi.'
+    description: ''
+  - name: --force-update
+    summary: Paksa untuk memperbarui meskipun konfigurasi ekstensi tidak berubah.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --no-auto-upgrade
+    parameterValueGroup: false, true
+    summary: Jika diatur, layanan ekstensi tidak akan secara otomatis memilih atau meningkatkan ke versi minor terbaru, bahkan jika ekstensi disebarkan ulang.
+    description: ''
+  - name: --no-auto-upgrade-minor-version
+    parameterValueGroup: false, true
+    summary: Jika diatur, layanan ekstensi tidak akan secara otomatis memilih atau meningkatkan ke versi minor terbaru, bahkan jika ekstensi disebarkan ulang.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --protected-settings
+    summary: Pengaturan yang dilindungi dalam format JSON untuk informasi sensitif seperti kredensial. Jalur file JSON juga diterima.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --settings
+    summary: Pengaturan ekstensi dalam format JSON. Jalur file JSON juga diterima.
+    description: ''
+  - name: --version
+    summary: Versi ekstensi. Untuk menyematkan versi ekstensi ke nilai ini, tentukan --no-auto-upgrade-minor-version.
+    description: ''
+  - name: --vm-name
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_extension_show
+  name: az vm extension show
+  summary: Menampilkan informasi tentang ekstensi yang dilampirkan ke VM.
+  description: ''
+  syntax: >-
+    az vm extension show [--expand]
+                         [--ids]
+                         [--instance-view]
+                         [--name]
+                         [--resource-group]
+                         [--vm-name]
+  examples:
+  - summary: Gunakan nama VM dan nama ekstensi untuk menampilkan ekstensi yang dilampirkan ke VM.
+    syntax: az vm extension show -g MyResourceGroup --vm-name MyVm -n extension_name
+  optionalParameters:
+  - name: --expand
+    summary: Ekspresi perluas untuk diterapkan pada operasi.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --instance-view
+    summary: Tampilan instans ekstensi komputer virtual.
+    description: ''
+  - name: --name -n
+    summary: Nama ekstensi.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --vm-name
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+- uid: az_vm_extension_wait
+  name: az vm extension wait
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi ekstensi komputer virtual terpenuhi.
+  description: ''
+  syntax: >-
+    az vm extension wait [--created]
+                         [--custom]
+                         [--deleted]
+                         [--exists]
+                         [--expand]
+                         [--ids]
+                         [--interval]
+                         [--name]
+                         [--resource-group]
+                         [--timeout]
+                         [--updated]
+                         [--vm-name]
+  examples:
+  - summary: Tempatkan CLI dalam status menunggu hingga kondisi ekstensi komputer virtual terpenuhi. (dibuat otomatis)
+    syntax: az vm extension wait --created --name MyExtension --resource-group MyResourceGroup --vm-name MyVm
+  - summary: Tempatkan CLI dalam status menunggu hingga kondisi ekstensi komputer virtual terpenuhi. (dibuat otomatis)
+    syntax: az vm extension wait --exists --name MyExtension --resource-group MyResourceGroup --vm-name MyVm
+  - summary: Tempatkan CLI dalam status menunggu hingga kondisi ekstensi komputer virtual terpenuhi. (dibuat otomatis)
+    syntax: az vm extension wait --ids @- --name MyExtension --subscription MySubscription --updated --vm-name MyVm
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --expand
+    summary: Ekspresi perluas untuk diterapkan pada operasi.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --name -n
+    summary: Nama ekstensi.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --diperbarui
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+  - name: --vm-name
+    summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+commands:
+- az_vm_extension_delete
+- az_vm_extension_image
+- az_vm_extension_image_list
+- az_vm_extension_image_list-names
+- az_vm_extension_image_list-versions
+- az_vm_extension_image_show
+- az_vm_extension_list
+- az_vm_extension_set
+- az_vm_extension_show
+- az_vm_extension_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 04/01/2022
+  description: Ekstensi adalah aplikasi kecil yang menyediakan konfigurasi pasca-penyebaran dan tugas otomatisasi pada komputer virtual Azure. Misalnya, jika komputer virtual memerlukan penginstalan perangkat lunak, perlindungan anti-virus, atau konfigurasi Docker, ekstensi VM dapat digunakan untuk menyelesaikan tugas-tugas ini. Ekstensi dapat dibundel dengan penyebaran komputer virtual baru atau dijalankan terhadap sistem yang ada.
+  ms.openlocfilehash: b142bbc1990d1744975e176b4c68d11b1be9b430
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141455706"

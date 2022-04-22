@@ -1,0 +1,286 @@
+### YamlMime:AzureCLIGroup
+uid: az_iot_central_export_destination
+name: az iot central export destination
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **azure-iot** untuk Azure CLI (versi 2.24.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **tujuan ekspor az iot central** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola dan mengonfigurasi tujuan ekspor IoT Central.
+description: ''
+directCommands:
+- uid: az_iot_central_export_destination_create
+  name: az iot central export destination create
+  summary: Membuat tujuan ekspor untuk aplikasi IoT Central.
+  description: ''
+  syntax: >-
+    az iot central export destination create --app-id
+                                             --dest-id
+                                             --display-name
+                                             --type {blobstorage@v1, dataexplorer@v1, eventhubs@v1, servicebusqueue@v1, servicebustopic@v1, webhook@v1}
+                                             [--api-version {1.1-preview}]
+                                             [--au]
+                                             [--central-api-uri]
+                                             [--cluster-url]
+                                             [--database]
+                                             [--header]
+                                             [--table]
+                                             [--token]
+                                             [--url]
+  examples:
+  - summary: Membuat tujuan ekspor webhook dengan payload json
+    syntax: "az iot central export destination create --app-id {appid} --dest-id {destinationid} --name {displayname} --url {url} --type webhook@v1 --header '{\"x-custom-region\":{\"value\":\"westus\", \"secret\": false}}'"
+  - summary: Membuat tujuan ekspor penyimpanan blob dengan payload json
+    syntax: >-
+      az iot central export destination create --app-id {appid} --dest-id {destintionid} --type blobstorage@v1 --name {displayname} --authorization '{
+        "type": "connectionString",
+        "connectionString":"DefaultEndpointsProtocol=https;AccountName=[accountName];AccountKey=[key];EndpointSuffix=core.windows.net",
+        "containerName": "test"
+      }'
+  - summary: Membuat tujuan ekspor Azure Data Explorer dengan payload json
+    syntax: >-
+      az iot central export destination create --app-id {appid} --dest-id {destintionid} --type dataexplorer@v1 --name {displayname} --cluster-url {clusterurl} --database {database} --table {table} --authorization '{
+        "type": "servicePrincipal",
+        "clientId": "3b420743-2020-44c6-9b70-cc42f945db0x",
+        "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+        "clientSecret": "[Secret]"
+      }'
+  - summary: Membuat tujuan ekspor Pusat Aktivitas dengan payload json
+    syntax: >-
+      az iot central export destination create --app-id {appid} --dest-id {destintionid} --type eventhubs@v1 --name {displayname} --authorization '{
+        "type": "connectionString",
+        "connectionString": "Endpoint=sb://[hubName].servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=*****;EntityPath=entityPath1"
+      }'
+  - summary: Membuat tujuan antrean Bus Layanan dengan payload json
+    syntax: >-
+      az iot central export destination create --app-id {appid} --dest-id {destintionid} --type servicebusqueue@v1 --name {displayname} --authorization '{
+        "type": "connectionString",
+        "connectionString": "Endpoint=sb://[namespance].servicebus.windows.net/;SharedAccessKeyName=xxx;SharedAccessKey=[key];EntityPath=[name]"
+      }'
+  - summary: Membuat tujuan Topik Bus Layanan dengan payload json
+    syntax: >-
+      az iot central export destination create --app-id {appid} --dest-id {destintionid} --type servicebustopic@v1 --name {displayname} --authorization '{
+        "type": "connectionString",
+        "connectionString": "Endpoint=sb://[namespace].servicebus.windows.net/;SharedAccessKeyName=xxx;SharedAccessKey=[key];EntityPath=[name]"
+      }'
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --dest-id
+    summary: Pengidentifikasi unik untuk tujuan ekspor.
+    description: ''
+  - isRequired: true
+    name: --display-name --name
+    summary: Nama tampilan tujuan.
+    description: ''
+  - isRequired: true
+    name: --type -t
+    parameterValueGroup: blobstorage@v1, dataexplorer@v1, eventhubs@v1, servicebusqueue@v1, servicebustopic@v1, webhook@v1
+    summary: Jenis tujuan.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: 1.1-preview
+    parameterValueGroup: 1.1-preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --au --authorization
+    summary: Konfigurasi otorisasi di json.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --cluster-url --cu
+    summary: Url kluster penjelajah data azure.
+    description: ''
+  - name: --database
+    summary: Database azure data explorer.
+    description: ''
+  - name: --header
+    summary: Tujuan webhook memakstimasi koleksi header di json.
+    description: ''
+  - name: --table
+    summary: Tabel azure data explorer.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+  - name: --url
+    summary: Url webhook.
+    description: ''
+- uid: az_iot_central_export_destination_delete
+  name: az iot central export destination delete
+  summary: Menghapus tujuan ekspor untuk aplikasi IoT Central.
+  description: ''
+  syntax: >-
+    az iot central export destination delete --app-id
+                                             --dest-id
+                                             [--api-version {1.1-preview}]
+                                             [--central-api-uri]
+                                             [--token]
+  examples:
+  - summary: Menghapus tujuan ekspor
+    syntax: az iot central export destination delete --app-id {appid} --dest-id {destinationid}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --dest-id
+    summary: Pengidentifikasi unik untuk tujuan ekspor.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: 1.1-preview
+    parameterValueGroup: 1.1-preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+- uid: az_iot_central_export_destination_list
+  name: az iot central export destination list
+  summary: Dapatkan daftar lengkap tujuan ekspor untuk aplikasi IoT Central.
+  description: ''
+  syntax: >-
+    az iot central export destination list --app-id
+                                           [--api-version {1.1-preview}]
+                                           [--central-api-uri]
+                                           [--token]
+  examples:
+  - summary: Mencantumkan semua tujuan ekspor dalam aplikasi
+    syntax: az iot central export destination list --app-id {appid}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: 1.1-preview
+    parameterValueGroup: 1.1-preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+- uid: az_iot_central_export_destination_show
+  name: az iot central export destination show
+  summary: Dapatkan detail tujuan ekspor.
+  description: ''
+  syntax: >-
+    az iot central export destination show --app-id
+                                           --dest-id
+                                           [--api-version {1.1-preview}]
+                                           [--central-api-uri]
+                                           [--token]
+  examples:
+  - summary: Mendapatkan detail tujuan ekspor
+    syntax: az iot central export destination show --app-id {appid} --dest-id {destinationid}
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --dest-id
+    summary: Pengidentifikasi unik untuk tujuan ekspor.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: 1.1-preview
+    parameterValueGroup: 1.1-preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+- uid: az_iot_central_export_destination_update
+  name: az iot central export destination update
+  summary: Memperbarui tujuan ekspor untuk aplikasi IoT Central.
+  description: Jenis tujuan tidak dapat diubah setelah dibuat. Tujuan baru harus dibuat dengan jenis baru.
+  syntax: >-
+    az iot central export destination update --app-id
+                                             --content
+                                             --dest-id
+                                             [--api-version {1.1-preview}]
+                                             [--central-api-uri]
+                                             [--token]
+  examples:
+  - summary: Memperbarui tujuan ekspor dari file
+    syntax: az iot central export destination update --app-id {appid} --dest-id {destinationid} --content './filepath/payload.json'
+  - summary: Memperbarui tujuan ekspor dengan payload json-patch
+    syntax: "az iot central export destination update --app-id {appid} --dest-id {destinationid} --content '{\"displayName\": \"Web Hook Updated\"}'"
+  requiredParameters:
+  - isRequired: true
+    name: --app-id -n
+    summary: ID Aplikasi aplikasi IoT Central yang ingin Anda kelola. Anda dapat menemukan ID Aplikasi di halaman "Tentang" untuk aplikasi Anda di bawah menu bantuan.
+    description: ''
+  - isRequired: true
+    name: --content -k
+    summary: Definisi tujuan parsial. Sediakan jalur ke file JSON atau JSON yang di-string mentah. [Contoh Jalur File:./path/to/file.json] [Contoh JSON yang di string:{<Destination Data JSON>}]. Isi permintaan harus berisi konten parsial Tujuan.
+    description: ''
+  - isRequired: true
+    name: --dest-id
+    summary: Pengidentifikasi unik untuk tujuan ekspor.
+    description: ''
+  optionalParameters:
+  - name: --api-version --av
+    defaultValue: 1.1-preview
+    parameterValueGroup: 1.1-preview
+    summary: Versi API untuk operasi yang diminta.
+    description: ''
+  - name: --central-api-uri --central-dns-suffix
+    defaultValue: azureiotcentral.com
+    summary: Akhiran DNS IoT Central yang terkait dengan aplikasi Anda.
+    description: ''
+  - name: --token
+    summary: Jika Anda lebih suka mengirimkan permintaan tanpa mengautentikasi terhadap Azure CLI, Anda dapat menentukan token pengguna yang valid untuk mengautentikasi permintaan Anda. Anda harus menentukan jenis kunci sebagai bagian dari permintaan. Pelajari lebih lanjut di https://aka.ms/iotcentraldocsapi.
+    description: ''
+commands:
+- az_iot_central_export_destination_create
+- az_iot_central_export_destination_delete
+- az_iot_central_export_destination_list
+- az_iot_central_export_destination_show
+- az_iot_central_export_destination_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola dan mengonfigurasi tujuan ekspor IoT Central.
+  ms.openlocfilehash: ee91f5d512a891083865d0bcff2b5497515780e8
+  ms.sourcegitcommit: b179e8c36fc1222f584a3780aaf61c99bf78a40d
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/01/2022
+  ms.locfileid: "141310738"

@@ -1,0 +1,296 @@
+### YamlMime:AzureCLIGroup
+uid: az_network_traffic-manager_profile
+name: az network traffic-manager profile
+summary: Mengelola profil Azure Traffic Manager.
+description: ''
+directCommands:
+- uid: az_network_traffic-manager_profile_check-dns
+  name: az network traffic-manager profile check-dns
+  summary: Periksa ketersediaan nama DNS relatif.
+  description: Ini memeriksa ketersediaan awalan dns untuk trafficmanager.net.
+  syntax: az network traffic-manager profile check-dns --name
+  examples:
+  - summary: Periksa ketersediaan 'mywebapp.trafficmanager.net' di Azure.
+    syntax: az network traffic-manager profile check-dns -n mywebapp
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Awalan DNS untuk memverifikasi ketersediaan.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_traffic-manager_profile_create
+  name: az network traffic-manager profile create
+  summary: Membuat profil traffic manager.
+  description: ''
+  syntax: >-
+    az network traffic-manager profile create --name
+                                              --resource-group
+                                              --routing-method {Geographic, Multivalue, Performance, Priority, Subnet, Weighted}
+                                              --unique-dns-name
+                                              [--custom-headers]
+                                              [--interval]
+                                              [--max-failures]
+                                              [--max-return]
+                                              [--path]
+                                              [--port]
+                                              [--protocol {HTTP, HTTPS, TCP}]
+                                              [--status {Disabled, Enabled}]
+                                              [--status-code-ranges]
+                                              [--tags]
+                                              [--timeout]
+                                              [--ttl]
+  examples:
+  - summary: Buat profil traffic manager dengan perutean performa.
+    syntax: >-
+      az network traffic-manager profile create -g MyResourceGroup -n MyTmProfile --routing-method Performance \
+          --unique-dns-name mywebapp --ttl 30 --protocol HTTP --port 80 --path "/"
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama profil traffic manager.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --routing-method
+    parameterValueGroup: Geographic, Multivalue, Performance, Priority, Subnet, Weighted
+    summary: Metode perutean.
+    description: ''
+  - isRequired: true
+    name: --unique-dns-name
+    summary: Nama DNS relatif untuk profil traffic manager. FQDN yang dihasilkan akan dan `<unique-dns-name>.trafficmanager.net` harus unik secara global.
+    description: ''
+  optionalParameters:
+  - name: --custom-headers
+    summary: Daftar pasangan NAME=VALUE yang dipisahkan spasi.
+    description: ''
+  - name: --interval
+    summary: Interval dalam hitungan detik di mana pemeriksaan kesehatan dilakukan.
+    description: ''
+  - name: --max-failures
+    summary: Jumlah pemeriksaan kesehatan gagal berturut-turut yang ditoleransi sebelum titik akhir dianggap terdegradasi.
+    description: ''
+  - name: --max-return
+    summary: Jumlah maksimum titik akhir yang akan dikembalikan untuk jenis perutean MultiNilai.
+    description: ''
+  - name: --path
+    summary: Jalur untuk memantau. Gunakan ""('""' di PowerShell) untuk tidak ada.
+    description: ''
+  - name: --port
+    defaultValue: "80"
+    summary: Port untuk dipantau.
+    description: ''
+  - name: --protocol
+    defaultValue: HTTP
+    parameterValueGroup: HTTP, HTTPS, TCP
+    summary: Protokol pemantauan.
+    description: ''
+  - name: --status
+    defaultValue: Enabled
+    parameterValueGroup: Disabled, Enabled
+    summary: Status profil Traffic Manager.
+    description: ''
+  - name: --status-code-ranges
+    summary: Daftar kode status yang dipisahkan spasi dalam format MIN-MAX atau VAL.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --timeout
+    summary: Waktu dalam detik yang diizinkan untuk titik akhir merespons pemeriksaan kesehatan.
+    description: ''
+  - name: --ttl
+    defaultValue: "30"
+    summary: Konfigurasi DNS time-to-live dalam hitung detik.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_traffic-manager_profile_delete
+  name: az network traffic-manager profile delete
+  summary: Menghapus profil traffic manager.
+  description: ''
+  syntax: >-
+    az network traffic-manager profile delete [--ids]
+                                              [--name]
+                                              [--resource-group]
+  examples:
+  - summary: Menghapus profil traffic manager.
+    syntax: az network traffic-manager profile delete -g MyResourceGroup -n MyTmProfile
+  - summary: Menghapus profil traffic manager. (dibuat otomatis)
+    syntax: az network traffic-manager profile delete --name MyTmProfile --resource-group MyResourceGroup --subscription MySubscription
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama profil Traffic Manager yang akan dihapus.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_traffic-manager_profile_list
+  name: az network traffic-manager profile list
+  summary: Mencantumkan profil traffic manager.
+  description: ''
+  syntax: az network traffic-manager profile list [--resource-group]
+  examples:
+  - summary: Mencantumkan profil traffic manager.
+    syntax: az network traffic-manager profile list -g MyResourceGroup
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_traffic-manager_profile_show
+  name: az network traffic-manager profile show
+  summary: Dapatkan detail profil traffic manager.
+  description: ''
+  syntax: >-
+    az network traffic-manager profile show [--ids]
+                                            [--name]
+                                            [--resource-group]
+  examples:
+  - summary: Dapatkan detail profil traffic manager.
+    syntax: az network traffic-manager profile show -g MyResourceGroup -n MyTmProfile
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --name -n
+    summary: Nama profil Traffic Manager.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+- uid: az_network_traffic-manager_profile_update
+  name: az network traffic-manager profile update
+  summary: Memperbarui profil traffic manager.
+  description: ''
+  syntax: >-
+    az network traffic-manager profile update [--add]
+                                              [--custom-headers]
+                                              [--force-string]
+                                              [--ids]
+                                              [--interval]
+                                              [--max-failures]
+                                              [--max-return]
+                                              [--name]
+                                              [--path]
+                                              [--port]
+                                              [--protocol {HTTP, HTTPS, TCP}]
+                                              [--remove]
+                                              [--resource-group]
+                                              [--routing-method {Geographic, Multivalue, Performance, Priority, Subnet, Weighted}]
+                                              [--set]
+                                              [--status {Disabled, Enabled}]
+                                              [--status-code-ranges]
+                                              [--tags]
+                                              [--timeout]
+                                              [--ttl]
+  examples:
+  - summary: Perbarui profil traffic manager untuk mengubah TTL menjadi 300.
+    syntax: az network traffic-manager profile update -g MyResourceGroup -n MyTmProfile --ttl 300
+  - summary: Memperbarui profil traffic manager. (dibuat otomatis)
+    syntax: az network traffic-manager profile update --name MyTmProfile --resource-group MyResourceGroup --status Enabled
+  optionalParameters:
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --custom-headers
+    summary: Daftar pasangan NAME=VALUE yang dipisahkan spasi.
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --interval
+    summary: Interval dalam hitungan detik di mana pemeriksaan kesehatan dilakukan.
+    description: ''
+  - name: --max-failures
+    summary: Jumlah pemeriksaan kesehatan gagal berturut-turut yang ditoleransi sebelum titik akhir dianggap terdegradasi.
+    description: ''
+  - name: --max-return
+    summary: Jumlah maksimum titik akhir yang akan dikembalikan untuk jenis perutean MultiNilai.
+    description: ''
+  - name: --name -n
+    summary: Nama profil Traffic Manager.
+    description: ''
+  - name: --path
+    summary: Jalur untuk memantau. Gunakan ""('""' di PowerShell) untuk tidak ada.
+    description: ''
+  - name: --port
+    summary: Port untuk dipantau.
+    description: ''
+  - name: --protocol
+    parameterValueGroup: HTTP, HTTPS, TCP
+    summary: Protokol pemantauan.
+    description: ''
+  - name: --remove
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --routing-method
+    parameterValueGroup: Geographic, Multivalue, Performance, Priority, Subnet, Weighted
+    summary: Metode perutean.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
+    description: ''
+  - name: --status
+    parameterValueGroup: Disabled, Enabled
+    summary: Status profil Traffic Manager.
+    description: ''
+  - name: --status-code-ranges
+    summary: Daftar kode status yang dipisahkan spasi dalam format MIN-MAX atau VAL.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --timeout
+    summary: Waktu dalam detik yang diizinkan untuk titik akhir merespons pemeriksaan kesehatan.
+    description: ''
+  - name: --ttl
+    summary: Konfigurasi DNS time-to-live dalam hitung detik.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
+commands:
+- az_network_traffic-manager_profile_check-dns
+- az_network_traffic-manager_profile_create
+- az_network_traffic-manager_profile_delete
+- az_network_traffic-manager_profile_list
+- az_network_traffic-manager_profile_show
+- az_network_traffic-manager_profile_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 03/09/2022
+  description: Mengelola profil Azure Traffic Manager.
+  ms.openlocfilehash: 566c05ce2aff620865cd550fe5da4e02ae78046b
+  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 04/06/2022
+  ms.locfileid: "141422207"
