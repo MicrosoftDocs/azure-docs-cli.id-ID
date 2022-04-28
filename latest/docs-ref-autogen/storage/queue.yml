@@ -6,7 +6,7 @@ description: ''
 directCommands:
 - uid: az_storage_queue_create
   name: az storage queue create
-  summary: Membuat antrean di bawah akun yang diberikan.
+  summary: Buat antrean di bawah akun yang diberikan.
   description: ''
   syntax: >-
     az storage queue create --name
@@ -16,8 +16,12 @@ directCommands:
                             [--connection-string]
                             [--fail-on-exist]
                             [--metadata]
+                            [--queue-endpoint]
                             [--sas-token]
                             [--timeout]
+  examples:
+  - summary: Buat antrean di bawah akun yang diberikan dengan metadata.
+    syntax: az storage queue create -n myqueue --metadata key1=value1 key2=value2 --account-name mystorageaccount
   requiredParameters:
   - isRequired: true
     name: --name -n
@@ -25,7 +29,7 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --account-key
-    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
     description: ''
   - name: --account-name
     summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
@@ -38,13 +42,16 @@ directCommands:
     summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
   - name: --fail-on-exist
-    summary: Menentukan apakah akan melemparkan pengecualian jika antrean sudah ada.
+    summary: Tentukan apakah akan melemparkan pengecualian jika antrean sudah ada.
     description: ''
   - name: --metadata
     summary: Metadata dalam pasangan key=value yang dipisahkan spasi. Ini menimpa metadata yang ada.
     description: ''
+  - name: --queue-endpoint
+    summary: 'Storage titik akhir layanan data. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Anda dapat menemukan setiap titik akhir utama layanan dengan `az storage account show`. Variabel lingkungan: AZURE_STORAGE_SERVICE_ENDPOINT.'
+    description: ''
   - name: --sas-token
-    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   - name: --timeout
     summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
@@ -52,8 +59,8 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_queue_delete
   name: az storage queue delete
-  summary: Menghapus antrean yang ditentukan dan pesan apa pun yang ada di dalamnya.
-  description: Ketika antrean berhasil dihapus, antrean segera ditandai untuk dihapus dan tidak lagi dapat diakses oleh klien. Antrean kemudian dihapus dari layanan Antrean selama pengumpulan sampah.  Perhatikan bahwa menghapus antrean kemungkinan akan memakan waktu setidaknya 40 detik untuk diselesaikan.  Jika operasi dicoba terhadap antrean saat sedang dihapus, AzureConflictHttpError akan dilemparkan.
+  summary: Hapus antrean yang ditentukan dan pesan apa pun yang ada di dalamnya.
+  description: ''
   syntax: >-
     az storage queue delete --name
                             [--account-key]
@@ -61,8 +68,12 @@ directCommands:
                             [--auth-mode {key, login}]
                             [--connection-string]
                             [--fail-not-exist]
+                            [--queue-endpoint]
                             [--sas-token]
                             [--timeout]
+  examples:
+  - summary: Hapus antrean yang ditentukan, berikan pengecualian jika antrean tidak ada.
+    syntax: az storage queue delete -n myqueue --fail-not-exist --account-name mystorageaccount
   requiredParameters:
   - isRequired: true
     name: --name -n
@@ -70,7 +81,7 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --account-key
-    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
     description: ''
   - name: --account-name
     summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
@@ -83,17 +94,20 @@ directCommands:
     summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
   - name: --fail-not-exist
-    summary: Menentukan apakah akan melemparkan pengecualian jika antrean tidak ada.
+    summary: Tentukan apakah akan melemparkan pengecualian jika antrean tidak ada.
+    description: ''
+  - name: --queue-endpoint
+    summary: 'Storage titik akhir layanan data. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Anda dapat menemukan setiap titik akhir utama layanan dengan `az storage account show`. Variabel lingkungan: AZURE_STORAGE_SERVICE_ENDPOINT.'
     description: ''
   - name: --sas-token
-    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   - name: --timeout
     summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_queue_exists
-  name: ada antrean penyimpanan az
+  name: az storage queue exists
   summary: Mengembalikan boolean yang menunjukkan apakah antrean ada.
   description: ''
   syntax: >-
@@ -102,8 +116,12 @@ directCommands:
                             [--account-name]
                             [--auth-mode {key, login}]
                             [--connection-string]
+                            [--queue-endpoint]
                             [--sas-token]
                             [--timeout]
+  examples:
+  - summary: Periksa apakah antrean ada.
+    syntax: az storage queue exists -n myqueue --account-name mystorageaccount
   requiredParameters:
   - isRequired: true
     name: --name -n
@@ -111,7 +129,7 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --account-key
-    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
     description: ''
   - name: --account-name
     summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
@@ -123,8 +141,11 @@ directCommands:
   - name: --connection-string
     summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
+  - name: --queue-endpoint
+    summary: 'Storage titik akhir layanan data. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Anda dapat menemukan setiap titik akhir utama layanan dengan `az storage account show`. Variabel lingkungan: AZURE_STORAGE_SERVICE_ENDPOINT.'
+    description: ''
   - name: --sas-token
-    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   - name: --timeout
     summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
@@ -132,8 +153,8 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_queue_generate-sas
   name: az storage queue generate-sas
-  summary: Menghasilkan tanda tangan akses bersama untuk antrean.
-  description: Gunakan tanda tangan yang dikembalikan dengan parameter sas_token QueueService.
+  summary: Buat tanda tangan akses bersama untuk antrean. Gunakan tanda tangan yang dikembalikan dengan parameter sas_token QueueService.
+  description: ''
   syntax: >-
     az storage queue generate-sas --name
                                   [--account-key]
@@ -144,7 +165,19 @@ directCommands:
                                   [--ip]
                                   [--permissions]
                                   [--policy-name]
+                                  [--queue-endpoint]
                                   [--start]
+  examples:
+  - summary: Buat token sas untuk antrean dengan izin baca-saja.
+    syntax: >-
+      end=`date -u -d "30 minutes" '+%Y-%m-%dT%H:%MZ'`
+
+      az storage queue generate-sas -n myqueue --account-name mystorageaccount --permissions r --expiry $end --https-only
+  - summary: Buat token sas untuk antrean dengan rentang ip yang ditentukan.
+    syntax: >-
+      end=`date -u -d "30 minutes" '+%Y-%m-%dT%H:%MZ'`
+
+      az storage queue generate-sas -n myqueue --account-name mystorageaccount --ip "176.134.171.0-176.134.171.255" --permissions r --expiry $end --https-only
   requiredParameters:
   - isRequired: true
     name: --name -n
@@ -152,7 +185,7 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --account-key
-    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
     description: ''
   - name: --account-name
     summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
@@ -160,7 +193,7 @@ directCommands:
   - name: --connection-string
     summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
-  - name: --kedaluwarsa
+  - name: --expiry
     summary: Menentukan tanggalwaktu UTC (Y-m-d'T'H:M'Z') di mana SAS menjadi tidak valid. Jangan gunakan jika kebijakan akses tersimpan dirujuk dengan --policy-name yang menentukan nilai ini.
     description: ''
   - name: --https-only
@@ -170,10 +203,13 @@ directCommands:
     summary: Menentukan alamat IP atau rentang alamat IP tempat menerima permintaan. Hanya mendukung alamat gaya IPv4.
     description: ''
   - name: --permissions
-    summary: 'Izin yang diberikan SAS. Nilai yang diizinkan: (a)dd (a)dd (p)rocess (p)rocess (r)ead (r)ead (u)pdate (u)pdate. Jangan gunakan jika kebijakan akses tersimpan dirujuk dengan --id yang menentukan nilai ini. Dapat digabungkan.'
+    summary: 'Izin yang diberikan SAS. Nilai yang diizinkan: (a)dd (p)rocess (r)ead (u)pdate. Jangan gunakan jika kebijakan akses tersimpan dirujuk dengan --id yang menentukan nilai ini. Dapat digabungkan.'
     description: ''
   - name: --policy-name
     summary: Nama kebijakan akses tersimpan dalam ACL berbagi.
+    description: ''
+  - name: --queue-endpoint
+    summary: 'Storage titik akhir layanan data. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Anda dapat menemukan setiap titik akhir utama layanan dengan `az storage account show`. Variabel lingkungan: AZURE_STORAGE_SERVICE_ENDPOINT.'
     description: ''
   - name: --start
     summary: Menentukan tanggalwaktu UTC (Y-m-d'T'H:M'Z') di mana SAS menjadi valid. Jangan gunakan jika kebijakan akses tersimpan dirujuk dengan --policy-name yang menentukan nilai ini. Default ke waktu permintaan.
@@ -192,6 +228,7 @@ directCommands:
                           [--marker]
                           [--num-results]
                           [--prefix]
+                          [--queue-endpoint]
                           [--sas-token]
                           [--show-next-marker]
                           [--timeout]
@@ -200,7 +237,7 @@ directCommands:
     syntax: az storage queue list --prefix myprefix --account-name mystorageaccount
   optionalParameters:
   - name: --account-key
-    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
     description: ''
   - name: --account-name
     summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
@@ -215,7 +252,7 @@ directCommands:
   - name: --include-metadata
     summary: Tentukan bahwa metadata antrean dikembalikan dalam respons.
     description: ''
-  - name: --penanda
+  - name: --marker
     summary: Nilai string yang mengidentifikasi bagian dari daftar kontainer yang akan dikembalikan dengan operasi daftar berikutnya. Operasi mengembalikan nilai NextMarker dalam isi respons jika operasi daftar tidak mengembalikan semua kontainer yang tersisa untuk dicantumkan dengan halaman saat ini. Jika ditentukan, generator ini akan mulai mengembalikan hasil dari titik di mana generator sebelumnya berhenti.
     description: ''
   - name: --num-results
@@ -225,8 +262,11 @@ directCommands:
   - name: --prefix
     summary: Filter hasil untuk mengembalikan hanya antrean yang namanya dimulai dengan awalan yang ditentukan.
     description: ''
+  - name: --queue-endpoint
+    summary: 'Storage titik akhir layanan data. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Anda dapat menemukan setiap titik akhir utama layanan dengan `az storage account show`. Variabel lingkungan: AZURE_STORAGE_SERVICE_ENDPOINT.'
+    description: ''
   - name: --sas-token
-    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   - name: --show-next-marker
     summary: Perlihatkan nextMarker dalam hasil ketika ditentukan.
@@ -236,19 +276,23 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_queue_stats
-  name: statistik antrean penyimpanan az
-  summary: Mengambil statistik yang terkait dengan replikasi untuk layanan Antrean.
-  description: Ini hanya tersedia ketika replikasi geo-redundan akses baca diaktifkan untuk akun penyimpanan.  Dengan replikasi geo-redundan, Azure Storage mempertahankan data Anda tetap tahan lama di dua lokasi. Di kedua lokasi, Azure Storage terus mempertahankan beberapa replika data Anda yang sehat. Lokasi tempat Anda membaca, membuat, memperbarui, atau menghapus data adalah lokasi akun penyimpanan utama.  Lokasi utama ada di wilayah yang Anda pilih pada saat Anda membuat akun melalui portal klasik Azure Management Azure, misalnya, US Tengah Utara. Lokasi tempat data Anda direplikasi adalah lokasi sekunder. Lokasi sekunder secara otomatis ditentukan berdasarkan lokasi primer; berada di pusat data kedua yang berada di wilayah yang sama dengan lokasi utama. Akses baca-saja tersedia dari lokasi sekunder, jika replikasi geo-redundan akses baca diaktifkan untuk akun penyimpanan Anda.
+  name: az storage queue stats
+  summary: Ambil statistik yang terkait dengan replikasi untuk layanan Antrean. Ini hanya tersedia ketika replikasi geo-redundan akses baca diaktifkan untuk akun penyimpanan.
+  description: ''
   syntax: >-
     az storage queue stats [--account-key]
                            [--account-name]
                            [--auth-mode {key, login}]
                            [--connection-string]
+                           [--queue-endpoint]
                            [--sas-token]
                            [--timeout]
+  examples:
+  - summary: Tampilkan statistik yang terkait dengan replikasi untuk layanan Antrean.
+    syntax: az storage queue stats --account-name mystorageaccount
   optionalParameters:
   - name: --account-key
-    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
     description: ''
   - name: --account-name
     summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
@@ -260,8 +304,11 @@ directCommands:
   - name: --connection-string
     summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
+  - name: --queue-endpoint
+    summary: 'Storage titik akhir layanan data. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Anda dapat menemukan setiap titik akhir utama layanan dengan `az storage account show`. Variabel lingkungan: AZURE_STORAGE_SERVICE_ENDPOINT.'
+    description: ''
   - name: --sas-token
-    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   - name: --timeout
     summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
@@ -302,11 +349,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 03/29/2022
+  ms.date: 04/13/2022
   description: Mengelola antrean penyimpanan.
-  ms.openlocfilehash: 151c22e76d019959f138beb5a87f5d4ec5fa5b30
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: 49ac7dc38776cd710b79e2769cbe46df193ab292
+  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141472194"
+  ms.lasthandoff: 04/27/2022
+  ms.locfileid: "144058397"

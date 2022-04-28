@@ -53,15 +53,15 @@ directCommands:
     summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
   - name: --handle-id
-    summary: Menentukan ID handel yang dibuka pada file atau direktori yang akan ditutup. Astrix ('\*') adalah wildcard yang menentukan semua handel.
+    summary: Menentukan ID handel yang dibuka pada file atau direktori yang akan ditutup. Astrix ('\*') adalah kartubebas yang menentukan semua handel.
     description: ''
-  - name: --penanda
+  - name: --marker
     summary: Token kelanjutan buram. Nilai ini dapat diambil dari bidang next_marker dari objek generator sebelumnya jika belum selesai menutup handel. Jika ditentukan, generator ini akan mulai menutup handel dari titik di mana generator sebelumnya berhenti.
     description: ''
   - name: --path -p
     summary: Jalur ke file dalam berbagi file.
     description: ''
-  - name: --rekursif
+  - name: --recursive
     parameterValueGroup: false, true
     summary: Boolean yang menentukan apakah operasi harus berlaku untuk direktori yang ditentukan dalam URI, filenya, subdirektorinya, dan filenya.
     description: ''
@@ -113,7 +113,7 @@ directCommands:
   - name: --metadata
     summary: Metadata dalam pasangan key=value yang dipisahkan spasi. Ini menimpa metadata yang ada.
     description: ''
-  - name: --kuota
+  - name: --quota
     summary: Menentukan ukuran maksimum berbagi, dalam gigabyte. Harus lebih besar dari 0, dan kurang dari atau sama dengan 5TB (5120).
     description: ''
   - name: --sas-token
@@ -170,7 +170,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_share_exists
-  name: az storage share ada
+  name: az storage share exists
   summary: Periksa keberadaan berbagi file.
   description: ''
   syntax: >-
@@ -271,16 +271,16 @@ directCommands:
     summary: Nilai header respons untuk Content-Language saat sumber daya diakses menggunakan tanda tangan akses bersama ini.
     description: ''
   - name: --content-type
-    summary: Nilai header respons untuk Content-Type saat sumber daya diakses menggunakan tanda tangan akses bersama ini.
+    summary: Nilai header respons untuk Jenis Konten saat sumber daya diakses menggunakan tanda tangan akses bersama ini.
     description: ''
-  - name: --kedaluwarsa
+  - name: --expiry
     summary: Menentukan tanggalwaktu UTC (Y-m-d'T'H:M'Z') di mana SAS menjadi tidak valid. Jangan gunakan jika kebijakan akses tersimpan dirujuk dengan --policy-name yang menentukan nilai ini.
     description: ''
   - name: --https-only
     summary: Hanya izinkan permintaan yang dibuat dengan protokol HTTPS. Jika dihilangkan, permintaan dari protokol HTTP dan HTTPS diizinkan.
     description: ''
   - name: --ip
-    summary: Menentukan alamat IP atau rentang alamat IP tempat menerima permintaan. Hanya mendukung alamat gaya IPv4.
+    summary: Menentukan alamat IP atau rentang alamat IP untuk menerima permintaan. Hanya mendukung alamat gaya IPv4.
     description: ''
   - name: --permissions
     summary: 'Izin yang diberikan SAS. Nilai yang diizinkan: (d)elete (d)elete (l)ist (l)ist (r)ead (r)ead (w)rite (w)rite. Jangan gunakan jika kebijakan akses tersimpan dirujuk dengan --id yang menentukan nilai ini. Dapat digabungkan.'
@@ -323,12 +323,12 @@ directCommands:
   - name: --include-snapshots
     summary: Menentukan bahwa salinan bayangan berbagi dikembalikan dalam respons.
     description: ''
-  - name: --penanda
-    summary: Token kelanjutan buram. Nilai ini dapat diambil dari bidang next_marker dari objek generator sebelumnya jika num_results ditentukan dan generator tersebut telah selesai menghitung hasil. Jika ditentukan, generator ini akan mulai mengembalikan hasil dari titik di mana generator sebelumnya berhenti.
+  - name: --marker
+    summary: Token kelanjutan buram. Nilai ini dapat diambil dari bidang next_marker objek generator sebelumnya jika num_results ditentukan dan generator tersebut telah selesai menghitung hasil. Jika ditentukan, generator ini akan mulai mengembalikan hasil dari titik di mana generator sebelumnya berhenti.
     description: ''
   - name: --num-results
     defaultValue: "5000"
-    summary: Tentukan jumlah maksimum yang akan dikembalikan. Jika permintaan tidak menentukan num_results, atau menentukan nilai yang lebih besar dari 5000, server akan mengembalikan hingga 5000 item. Perhatikan bahwa jika operasi daftar melewati batas partisi, maka layanan akan mengembalikan token kelanjutan untuk mengambil sisa hasil. Sediakan "\*" untuk mengembalikan semua.
+    summary: Tentukan angka maksimum yang akan dikembalikan. Jika permintaan tidak menentukan num_results, atau menentukan nilai yang lebih besar dari 5000, server akan mengembalikan hingga 5000 item. Perhatikan bahwa jika operasi daftar melewati batas partisi, maka layanan akan mengembalikan token kelanjutan untuk mengambil sisa hasil. Berikan "\*" untuk mengembalikan semua.
     description: ''
   - name: --prefix
     summary: Memfilter hasil untuk mengembalikan hanya berbagi yang namanya dimulai dengan awalan yang ditentukan.
@@ -361,7 +361,7 @@ directCommands:
     syntax: az storage share list-handle --account-name MyAccount --name MyFileShare --recursive
   - summary: Mencantumkan semua handel file direktori file secara rekursif.
     syntax: az storage share list-handle --account-name MyAccount --name MyFileShare --path 'dir1' --recursive
-  - summary: Mencantumkan semua handel file dari file.
+  - summary: Mencantumkan semua handel file.
     syntax: az storage share list-handle --account-name MyAccount --name MyFileShare --path 'dir1/test.txt'
   requiredParameters:
   - isRequired: true
@@ -378,11 +378,11 @@ directCommands:
   - name: --connection-string
     summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
-  - name: --penanda
-    summary: Token kelanjutan buram. Nilai ini dapat diambil dari bidang next_marker dari objek generator sebelumnya jika max_results ditentukan dan generator tersebut telah selesai menghitung hasil. Jika ditentukan, generator ini akan mulai mengembalikan hasil dari titik di mana generator sebelumnya berhenti.
+  - name: --marker
+    summary: Token kelanjutan buram. Nilai ini dapat diambil dari bidang next_marker objek generator sebelumnya jika max_results ditentukan dan generator tersebut telah selesai menghitung hasil. Jika ditentukan, generator ini akan mulai mengembalikan hasil dari titik di mana generator sebelumnya berhenti.
     description: ''
   - name: --max-results
-    summary: Menentukan jumlah maksimum handel yang diambil pada file dan/atau direktori untuk dikembalikan. Jika permintaan tidak menentukan max_results atau menentukan nilai yang lebih besar dari 5.000, server akan mengembalikan hingga 5.000 item. Mengatur max_results ke nilai yang kurang dari atau sama dengan nol menghasilkan kode respons kesalahan 400 (Permintaan Buruk).
+    summary: Menentukan jumlah maksimum handel yang diambil pada file dan/atau direktori yang akan dikembalikan. Jika permintaan tidak menentukan max_results atau menentukan nilai yang lebih besar dari 5.000, server akan mengembalikan hingga 5.000 item. Mengatur max_results ke nilai yang kurang dari atau sama dengan nol menghasilkan kode respons kesalahan 400 (Permintaan Buruk).
     description: ''
   - name: --path -p
     summary: Jalur ke file dalam berbagi file.
@@ -439,7 +439,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_share_snapshot
-  name: rekam jepret berbagi penyimpanan az
+  name: az storage share snapshot
   summary: Membuat rekam jepret dari berbagi yang ada di bawah akun yang ditentukan.
   description: ''
   syntax: >-
@@ -469,7 +469,7 @@ directCommands:
   - name: --metadata
     summary: Metadata dalam pasangan key=value yang dipisahkan spasi. Ini menimpa metadata yang ada.
     description: ''
-  - name: --kuota
+  - name: --quota
     summary: Menentukan ukuran maksimum berbagi, dalam gigabyte. Harus lebih besar dari 0, dan kurang dari atau sama dengan 5TB (5120).
     description: ''
   - name: --sas-token
@@ -480,7 +480,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_share_stats
-  name: statistik berbagi penyimpanan az
+  name: az storage share stats
   summary: Mendapatkan perkiraan ukuran data yang disimpan pada berbagi, dibulatkan ke gigabyte terdekat.
   description: Perhatikan bahwa nilai ini mungkin tidak menyertakan semua file yang baru dibuat atau baru-baru ini diubah ukurannya.
   syntax: >-
@@ -530,7 +530,7 @@ directCommands:
     summary: Nama berbagi file.
     description: ''
   - isRequired: true
-    name: --kuota
+    name: --quota
     summary: Menentukan ukuran maksimum berbagi, dalam gigabyte. Harus lebih besar dari 0, dan kurang dari atau sama dengan 5 TB (5120 GB).
     description: ''
   optionalParameters:
@@ -551,7 +551,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_share_url
-  name: url berbagi penyimpanan az
+  name: az storage share url
   summary: Buat URI untuk mengakses berbagi file.
   description: ''
   syntax: >-
@@ -633,11 +633,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 03/29/2022
+  ms.date: 04/13/2022
   description: Mengelola berbagi file.
-  ms.openlocfilehash: a2e44fd607921826bbb6f5b85226e3a3e2c518ed
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: e484cf17fe0568fb9b2b5985044b122d04e46957
+  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141429047"
+  ms.lasthandoff: 04/27/2022
+  ms.locfileid: "144058307"

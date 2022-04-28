@@ -59,7 +59,7 @@ directCommands:
 - uid: az_storage_blob_incremental-copy_start
   name: az storage blob incremental-copy start
   summary: Menyalin salinan inkremental blob secara asinkron.
-  description: Operasi ini mengembalikan objek properti operasi salin, termasuk ID salinan yang dapat Anda gunakan untuk memeriksa atau membatalkan operasi salin. Blob service menyalin blob berdasarkan upaya terbaik. Blob sumber untuk operasi penyalinan inkremental harus berupa blob halaman. Panggil get_blob_properties pada blob tujuan untuk memeriksa status operasi salin. Blob terakhir akan dilakukan ketika salinan selesai.
+  description: Operasi ini mengembalikan objek properti operasi salin, termasuk ID salinan yang dapat Anda gunakan untuk memeriksa atau membatalkan operasi salin. Blob service menyalin blob berdasarkan upaya terbaik. Blob sumber untuk operasi penyalinan bertahap harus berupa blob halaman. Panggil get_blob_properties pada blob tujuan untuk memeriksa status operasi salin. Blob terakhir akan dilakukan ketika salinan selesai.
   syntax: >-
     az storage blob incremental-copy start --destination-blob
                                            --destination-container
@@ -84,7 +84,7 @@ directCommands:
                                            [--source-uri]
                                            [--timeout]
   examples:
-  - summary: Upload semua file yang berakhiran .py kecuali blob ada dan telah dimodifikasi sejak tanggal tertentu.
+  - summary: Upload semua file yang diakhir dengan .py kecuali blob ada dan telah dimodifikasi sejak tanggal yang diberikan.
     syntax: az storage blob incremental-copy start --source-container MySourceContainer --source-blob MyBlob --source-account-name MySourceAccount --source-account-key MySourceKey --source-snapshot MySnapshot --destination-container MyDestinationContainer --destination-blob MyDestinationBlob
   - summary: Menyalin salinan inkremental blob secara asinkron. (dibuat otomatis)
     syntax: az storage blob incremental-copy start --account-key 00000000 --account-name MyAccount --destination-blob MyDestinationBlob --destination-container MyDestinationContainer --source-account-key MySourceKey --source-account-name MySourceAccount --source-blob MyBlob --source-container MySourceContainer --source-snapshot MySnapshot
@@ -120,7 +120,7 @@ directCommands:
     summary: Dimulai hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
     description: ''
   - name: --destination-if-none-match
-    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan nilai ETag untuk header kondisional ini untuk menyalin blob hanya jika nilai ETag yang ditentukan tidak cocok dengan nilai ETag untuk blob tujuan. Tentukan karakter kartubebas (\*) untuk melakukan operasi hanya jika blob tujuan tidak ada. Jika kondisi yang ditentukan tidak terpenuhi, layanan Blob mengembalikan kode status 412 (Prasyarat Gagal).
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan nilai ETag untuk header kondisional ini untuk menyalin blob hanya jika nilai ETag yang ditentukan tidak cocok dengan nilai ETag untuk blob tujuan. Tentukan karakter kartubebas (\*) untuk melakukan operasi hanya jika blob tujuan tidak ada. Jika kondisi yang ditentukan tidak terpenuhi, blob service mengembalikan kode status 412 (Prasyarat Gagal).
     description: ''
   - name: --destination-if-unmodified-since
     summary: Dimulai hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
@@ -156,7 +156,7 @@ directCommands:
     summary: Rekam jepret blob untuk akun penyimpanan sumber.
     description: ''
   - name: --source-uri -u
-    summary: 'URL dengan panjang hingga 2 KB yang menentukan blob halaman Azure. Nilai harus dikodekan URL seperti yang akan muncul dalam URI permintaan. Sumber penyalinan harus berupa rekam jepret dan menyertakan token SAS yang valid atau publik. Contoh: `https://myaccount.blob.core.windows.net/mycontainer/myblob?snapshot=<DateTime>&sastoken`.'
+    summary: 'URL dengan panjang hingga 2 KB yang menentukan blob halaman Azure. Nilai harus dikodekan URL karena akan muncul dalam URI permintaan. Sumber penyalinan harus berupa rekam jepret dan menyertakan token SAS yang valid atau publik. Contoh: `https://myaccount.blob.core.windows.net/mycontainer/myblob?snapshot=<DateTime>&sastoken`.'
     description: ''
   - name: --timeout
     summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
@@ -184,11 +184,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 03/29/2022
+  ms.date: 04/13/2022
   description: Mengelola operasi salinan bertambah bertahap blob.
-  ms.openlocfilehash: eb1cbfcef85d3c98b8f04c8fd25c1f2ea09bc9d9
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: 83c8e9f70c346bd23366ae97dc8a1a2387a0212c
+  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141416248"
+  ms.lasthandoff: 04/27/2022
+  ms.locfileid: "144045600"

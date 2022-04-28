@@ -5,9 +5,9 @@ summary: Mengelola penyimpanan objek untuk data tidak terstruktur (blob).
 description: 'Tentukan salah satu parameter autentikasi berikut untuk perintah Anda: --auth-mode, --account-key, --connection-string, --sas-token. Anda juga dapat menggunakan variabel lingkungan yang sesuai untuk menyimpan kredensial autentikasi Anda, misalnya AZURE_STORAGE_KEY, AZURE_STORAGE_CONNECTION_STRING, dan AZURE_STORAGE_SAS_TOKEN.'
 directCommands:
 - uid: az_storage_blob_delete
-  name: penghapusan az storage blob
+  name: az storage blob delete
   summary: Tandai blob atau rekam jepret untuk dihapus.
-  description: Blob ditandai untuk penghapusan nanti selama pengumpulan sampah.  Untuk menghapus blob, semua rekam jepretnya juga harus dihapus. Keduanya dapat dihapus secara bersamaan.
+  description: Blob ditandai untuk dihapus nanti selama pengumpulan sampah.  Untuk menghapus blob, semua rekam jepretnya juga harus dihapus. Keduanya dapat dihapus secara bersamaan.
   syntax: >-
     az storage blob delete --container-name
                            --name
@@ -77,8 +77,8 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_delete-batch
-  name: batch penghapusan az storage blob
-  summary: Hapus blob dari kontainer blob secara rekursif.
+  name: az storage blob delete-batch
+  summary: Menghapus blob dari kontainer blob secara rekursif.
   description: ''
   syntax: >-
     az storage blob delete-batch --source
@@ -96,7 +96,7 @@ directCommands:
                                  [--sas-token]
                                  [--timeout]
   examples:
-  - summary: Hapus semua blob yang berakhiran ".py" dalam kontainer yang belum dimodifikasi selama 10 hari.
+  - summary: Hapus semua blob yang diakhir dengan ".py" dalam kontainer yang belum dimodifikasi selama 10 hari.
     syntax: >-
       date=`date -d "10 days ago" '+%Y-%m-%dT%H:%MZ'`
 
@@ -145,7 +145,7 @@ directCommands:
     summary: Id sewa aktif untuk blob.
     description: ''
   - name: --pattern
-    summary: Pola yang digunakan untuk mengglobbing file atau blob di sumbernya. Pola yang didukung adalah '\*', '?', '[seq]', dan '[!seq]'. Untuk informasi lebih lanjut, silakan merujuk ke https://docs.python.org/3.7/library/fnmatch.html.
+    summary: Pola yang digunakan untuk globbing file atau blob di sumbernya. Pola yang didukung adalah '\*', '?', '[seq]', dan '[!seq]'. Untuk informasi lebih lanjut, silakan merujuk ke https://docs.python.org/3.7/library/fnmatch.html.
     description: Ketika Anda menggunakan '*' dalam --pattern, itu akan cocok dengan karakter apa pun termasuk pemisah direktori '/'. Anda juga dapat mencoba perintah "az storage remove" dengan --include dan --exclude dengan azure cli >= 2.0.70 agar sesuai dengan beberapa pola.
   - name: --sas-token
     summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
@@ -155,7 +155,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_download
-  name: pengunduhan az storage blob
+  name: az storage blob download
   summary: Unduh blob ke jalur file.
   description: ''
   syntax: >-
@@ -242,7 +242,7 @@ directCommands:
     summary: Mode yang digunakan saat membuka file.
     description: ''
   - name: --range-get-content-md5
-    summary: Ketika header ini diatur ke True dan ditentukan bersama dengan header Rentang, layanan mengembalikan hash MD5 untuk rentang tersebut, selama rentangnya berukuran kurang dari atau sama dengan 4 MB.
+    summary: Ketika header ini diatur ke True dan ditentukan bersama dengan header Rentang, layanan mengembalikan hash MD5 untuk rentang, selama rentang berukuran kurang dari atau sama dengan 4 MB.
     description: ''
   - name: --retry-interval
     defaultValue: "1.0"
@@ -255,7 +255,7 @@ directCommands:
     summary: Parameter rekam jepret adalah nilai DateTime buram yang, saat ada, menentukan rekam jepret blob untuk diambil.
     description: ''
   - name: --socket-timeout
-    summary: Batas waktu soket (detik), digunakan oleh layanan untuk mengatur aliran data.
+    summary: Batas waktu soket(detik), digunakan oleh layanan untuk mengatur aliran data.
     description: ''
   - name: --start-range
     summary: 'Mulai rentang byte yang digunakan untuk mengunduh bagian blob. Jika tidak ada end_range yang diberikan, semua byte setelah start_range akan diunduh. Param start_range dan end_range inklusif. Misalnya: start_range=0, end_range=511 akan mengunduh 512 byte blob pertama.'
@@ -329,7 +329,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_exists
-  name: blob penyimpanan az ada
+  name: az storage blob exists
   summary: Periksa keberadaan blob dalam kontainer.
   description: ''
   syntax: >-
@@ -374,7 +374,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_filter
-  name: filter blob penyimpanan az
+  name: az storage blob filter
   summary: Mencantumkan blob di semua kontainer yang tagnya cocok dengan ekspresi pencarian tertentu.
   description: Blob filter mencari di semua kontainer dalam akun penyimpanan tetapi dapat dilingkupkan dalam ekspresi ke satu kontainer.
   syntax: >-
@@ -476,7 +476,7 @@ directCommands:
   - name: --content-type
     summary: Nilai header respons untuk Tipe-Konten saat sumber daya diakses menggunakan tanda tangan akses bersama ini.
     description: ''
-  - name: --kedaluwarsa
+  - name: --expiry
     summary: Menentukan tanggalwaktu UTC (Y-m-d'T'H:M'Z') di mana SAS menjadi tidak valid. Jangan gunakan jika kebijakan akses tersimpan dirujuk dengan --policy-name yang menentukan nilai ini.
     description: ''
   - name: --full-uri
@@ -502,7 +502,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_list
-  name: unggah blob penyimpanan az
+  name: az storage blob list
   summary: Mencantumkan blob dalam kontainer tertentu.
   description: ''
   syntax: >-
@@ -535,20 +535,20 @@ directCommands:
   - name: --connection-string
     summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
-  - name: --pemisah
+  - name: --delimiter
     summary: Ketika permintaan menyertakan parameter ini, operasi mengembalikan elemen BlobPrefix dalam daftar hasil yang bertindak sebagai tempat penampung untuk semua blob yang namanya dimulai dengan substring yang sama hingga tampilan karakter pemisah. Pemisah mungkin satu karakter atau string.
     description: ''
   - name: --include
     summary: Menentukan satu atau beberapa himpunan data tambahan untuk disertakan dalam respons.
     description: ''
-  - name: --penanda
+  - name: --marker
     summary: Token kelanjutan buram. Nilai ini dapat diambil dari bidang next_marker objek generator sebelumnya jika num_results ditentukan dan generator tersebut telah selesai menghitung hasil. Jika ditentukan, generator ini akan mulai mengembalikan hasil dari titik di mana generator sebelumnya berhenti.
     description: ''
   - name: --num-results
     defaultValue: "5000"
     summary: Menentukan jumlah maksimum hasil yang akan dikembalikan. Berikan "\*" untuk mengembalikan semua.
     description: ''
-  - name: --prefiks
+  - name: --prefix
     summary: Memfilter hasil untuk mengembalikan hanya blob yang namanya dimulai dengan awalan yang ditentukan.
     description: ''
   - name: --sas-token
@@ -807,7 +807,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_snapshot
-  name: rekam jepret blob penyimpanan az
+  name: az storage blob snapshot
   summary: Membuat rekam jepret baca-saja dari blob.
   description: ''
   syntax: >-
@@ -869,7 +869,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_sync
-  name: sinkronisasi blob penyimpanan az
+  name: az storage blob sync
   summary: Sinkronkan blob secara rekursif ke kontainer blob penyimpanan.
   description: ''
   syntax: >-
@@ -878,6 +878,7 @@ directCommands:
                          [--account-key]
                          [--account-name]
                          [--connection-string]
+                         [--delete-destination]
                          [--destination]
                          [--exclude-path]
                          [--exclude-pattern]
@@ -906,6 +907,10 @@ directCommands:
     description: ''
   - name: --connection-string
     summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --delete-destination
+    defaultValue: "true"
+    summary: ''
     description: ''
   - name: --destination -d
     summary: Jalur tujuan yang akan ditambahkan sebelumnya ke nama blob.
@@ -1057,7 +1062,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_upload
-  name: unggah blob penyimpanan az
+  name: az storage blob upload
   summary: Upload file ke blob penyimpanan.
   description: Buat blob baru dari jalur file, atau perbarui konten blob yang ada dengan pemberitahuan penggugusan dan kemajuan otomatis.
   syntax: >-
@@ -1181,7 +1186,7 @@ directCommands:
     description: ''
   - name: --type -t
     parameterValueGroup: append, block, page
-    summary: Default ke 'halaman' untuk \*file .vhd, atau 'blokir' jika tidak.
+    summary: Default ke 'page' untuk \*file .vhd, atau 'block' sebaliknya.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_upload-batch
@@ -1217,7 +1222,7 @@ directCommands:
                                  [--timeout]
                                  [--type {append, block, page}]
   examples:
-  - summary: Upload semua file yang diakhir dengan .py kecuali blob ada dan telah dimodifikasi sejak tanggal yang diberikan.
+  - summary: Upload semua file yang berakhiran .py kecuali blob ada dan telah dimodifikasi sejak tanggal tertentu.
     syntax: az storage blob upload-batch -d mycontainer --account-name mystorageaccount --account-key 00000000 -s <path-to-directory> --pattern *.py --if-unmodified-since 2018-08-27T20:51Z
   - summary: Upload semua file dari direktori jalur lokal ke kontainer bernama "mycontainer".
     syntax: az storage blob upload-batch -d mycontainer -s <path-to-directory>
@@ -1263,7 +1268,7 @@ directCommands:
     summary: Jenis MIME konten.
     description: ''
   - name: --destination-path
-    summary: Jalur tujuan yang akan ditambahkan sebelumnya ke nama blob.
+    summary: Jalur tujuan yang akan ditambahkan ke nama blob.
     description: ''
   - name: --dryrun
     summary: Tampilkan ringkasan operasi yang akan diambil alih-alih benar-benar mengunggah file.
@@ -1285,7 +1290,7 @@ directCommands:
     description: ''
   - name: --max-connections
     defaultValue: "2"
-    summary: Jumlah maksimum koneksi paralel yang akan digunakan ketika ukuran blob melebihi 64MB.
+    summary: Jumlah maksimum koneksi paralel yang digunakan ketika ukuran blob melebihi 64MB.
     description: ''
   - name: --maxsize-condition
     summary: Panjang maksimum dalam byte yang diizinkan untuk blob tambahan.
@@ -1297,7 +1302,7 @@ directCommands:
     summary: Sertakan bendera ini untuk menonaktifkan pelaporan kemajuan untuk perintah.
     description: ''
   - name: --pattern
-    summary: Pola yang digunakan untuk globbing file atau blob di sumbernya. Pola yang didukung adalah '\*', '?', '[seq]', dan '[!seq]'. Untuk informasi lebih lanjut, silakan merujuk ke https://docs.python.org/3.7/library/fnmatch.html.
+    summary: Pola yang digunakan untuk mengglobbing file atau blob di sumbernya. Pola yang didukung adalah '\*', '?', '[seq]', dan '[!seq]'. Untuk informasi lebih lanjut, silakan merujuk ke https://docs.python.org/3.7/library/fnmatch.html.
     description: Ketika Anda menggunakan '*' dalam --pattern, itu akan cocok dengan karakter apa pun termasuk pemisah direktori '/'.
   - name: --sas-token
     summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
@@ -1314,7 +1319,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_url
-  name: url blob penyimpanan az
+  name: az storage blob url
   summary: Buat url untuk mengakses blob.
   description: ''
   syntax: >-
@@ -1446,11 +1451,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 03/29/2022
+  ms.date: 04/13/2022
   description: 'Tentukan salah satu parameter autentikasi berikut untuk perintah Anda: --auth-mode, --account-key, --connection-string, --sas-token. Anda juga dapat menggunakan variabel lingkungan yang sesuai untuk menyimpan kredensial autentikasi Anda, misalnya AZURE_STORAGE_KEY, AZURE_STORAGE_CONNECTION_STRING, dan AZURE_STORAGE_SAS_TOKEN.'
-  ms.openlocfilehash: 755de79ec049adef77378b98bb9580b189e07ed5
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: a4dbd5e170a6568ded32aabdc30a220431bfaf81
+  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141437651"
+  ms.lasthandoff: 04/27/2022
+  ms.locfileid: "144047201"
