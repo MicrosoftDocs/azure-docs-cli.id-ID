@@ -4,7 +4,7 @@ name: az dataprotection backup-instance
 extensionInformation: >-
   > [!Note]
 
-  > Referensi ini adalah bagian dari ekstensi **perlindungan data** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az dataprotection backup-instance** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+  > Referensi ini adalah bagian dari ekstensi **perlindungan data** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **az dataprotection backup-instance** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
 summary: Mengelola instans cadangan dengan perlindungan data.
 description: ''
 directCommands:
@@ -56,7 +56,7 @@ directCommands:
                                              --vault-name
                                              [--no-wait]
   examples:
-  - summary: membuat instans cadangan di vault cadangan
+  - summary: membuat instans cadangan di brankas cadangan
     syntax: az dataprotection backup-instance create -g MyResourceGroup --vault-name MyVault --backup-instance backupinstance.json
   requiredParameters:
   - isRequired: true
@@ -138,7 +138,7 @@ directCommands:
     description: ''
   - isRequired: true
     name: --policy-id
-    summary: Id kebijakan pencadangan sumber data akan dikaitkan.
+    summary: Id kebijakan pencadangan yang akan dikaitkan dengan sumber data.
     description: ''
   optionalParameters:
   - name: --secret-store-type
@@ -191,7 +191,7 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --datasource-id
-    summary: Tentukan filter id sumber data untuk diterapkan.
+    summary: Tentukan filter id sumber data yang akan diterapkan.
     description: ''
   - name: --protection-status
     parameterValueGroup: ProtectionConfigured, ProtectionError
@@ -205,6 +205,35 @@ directCommands:
     description: ''
   - name: --vaults
     summary: Daftar nama vault.
+    description: ''
+- uid: az_dataprotection_backup-instance_resume-protection
+  name: az dataprotection backup-instance resume-protection
+  summary: Operasi ini akan melanjutkan perlindungan untuk instans cadangan yang dihentikan.
+  description: ''
+  syntax: >-
+    az dataprotection backup-instance resume-protection --backup-instance-name
+                                                        --resource-group
+                                                        --vault-name
+                                                        [--no-wait]
+  examples:
+  - summary: ResumeProtection
+    syntax: az dataprotection backup-instance resume-protection --name "testbi" --resource-group "testrg" --vault-name "testvault"
+  requiredParameters:
+  - isRequired: true
+    name: --backup-instance-name --name -n
+    summary: Nama instans cadangan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vault-name
+    summary: Nama brankas cadangan.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
     description: ''
 - uid: az_dataprotection_backup-instance_show
   name: az dataprotection backup-instance show
@@ -229,6 +258,64 @@ directCommands:
   - isRequired: true
     name: --vault-name
     summary: Nama brankas cadangan.
+    description: ''
+- uid: az_dataprotection_backup-instance_stop-protection
+  name: az dataprotection backup-instance stop-protection
+  summary: Operasi ini akan menghentikan perlindungan instans cadangan dan data akan disimpan selamanya.
+  description: ''
+  syntax: >-
+    az dataprotection backup-instance stop-protection --backup-instance-name
+                                                      --resource-group
+                                                      --vault-name
+                                                      [--no-wait]
+  examples:
+  - summary: StopProtection
+    syntax: az dataprotection backup-instance stop-protection --name "testbi" --resource-group "testrg" --vault-name "testvault"
+  requiredParameters:
+  - isRequired: true
+    name: --backup-instance-name --name -n
+    summary: Nama instans cadangan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vault-name
+    summary: Nama brankas cadangan.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_dataprotection_backup-instance_suspend-backup
+  name: az dataprotection backup-instance suspend-backup
+  summary: Operasi ini akan menghentikan pencadangan untuk instans cadangan.
+  description: ''
+  syntax: >-
+    az dataprotection backup-instance suspend-backup --backup-instance-name
+                                                     --resource-group
+                                                     --vault-name
+                                                     [--no-wait]
+  examples:
+  - summary: TangguhkanBackups
+    syntax: az dataprotection backup-instance suspend-backup --name "testbi" --resource-group "testrg" --vault-name "testvault"
+  requiredParameters:
+  - isRequired: true
+    name: --backup-instance-name --name -n
+    summary: Nama instans cadangan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vault-name
+    summary: Nama brankas cadangan.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
     description: ''
 - uid: az_dataprotection_backup-instance_update-policy
   name: az dataprotection backup-instance update-policy
@@ -305,7 +392,7 @@ directCommands:
                                                            [--no-wait]
   examples:
   - summary: Validasi Pemulihan
-    syntax: az dataprotection backup-instance validate-for-restore --name "testInstance1" --restore-request-object "{\"objectType\":\"AzureBackupRecoveryPointBasedRestoreRequest\",\"recoveryPointId\":\"hardcodedRP\",\"restoreTargetInfo\":{\"datasourceAuthCredentials\":{\"objectType\":\"SecretStoreBasedAuthCredentials\",\"secretStoreResource\":{\"secretStoreType\":\"AzureKeyVault\",\"uri\":\"https://samplevault.vault.azure.net/secrets/credentials\"}},\"datasourceInfo\":{\"datasourceType\":\"OssDB\",\"objectType\":\"Datasource\",\"resourceID\":\"/subscriptions/f75d8d8b-6735-4697-82e1-1a7a3ff0d5d4/resourceGroups/viveksipgtest/providers/Microsoft.DBforPostgreSQL/servers/viveksipgtest/databases/testdb\",\"resourceLocation\":\"\",\"resourceName\":\"testdb\",\"resourceType\":\"Microsoft.DBforPostgreSQL/servers/databases\",\"resourceUri\":\"\"},\"datasourceSetInfo\":{\"datasourceType\":\"OssDB\",\"objectType\":\"DatasourceSet\",\"resourceID\":\"/subscriptions/f75d8d8b-6735-4697-82e1-1a7a3ff0d5d4/resourceGroups/viveksipgtest/providers/Microsoft.DBforPostgreSQL/servers/viveksipgtest\",\"resourceLocation\":\"\",\"resourceName\":\"viveksipgtest\",\"resourceType\":\"Microsoft.DBforPostgreSQL/servers\",\"resourceUri\":\"\"},\"objectType\":\"RestoreTargetInfo\",\"recoveryOption\":\"FailIfExists\",\"restoreLocation\":\"southeastasia\"},\"sourceDataStoreType\":\"VaultStore\"}" --resource-group "000pikumar" --vault-name "PratikPrivatePreviewVault1"
+    syntax: az dataprotection backup-instance validate-for-restore --name "testInstance1" --restore-request-object "{\"objectType\":\"AzureBackupRecoveryPointBasedRestoreRequest\",\"recoveryPointId\":\"hardcodedRP\",\"restoreTargetInfo\":{\"datasourceAuthCredentials\":{\"objectType\":\"SecretStoreBasedAuthCredentials\",\"secretStoreResource\":{\"secretStoreType\":\"AzureKeyVault\",\"uri\":\"https://samplevault.vault.azure.net/secrets/credentials\"}},\"datasourceInfo\":{\"datasourceType\":\"Microsoft.DBforPostgreSQL/servers/databases\",\"objectType\":\"Datasource\",\"resourceID\":\"/subscriptions/f75d8d8b-6735-4697-82e1-1a7a3ff0d5d4/resourceGroups/viveksipgtest/providers/Microsoft.DBforPostgreSQL/servers/viveksipgtest/databases/targetdb\",\"resourceLocation\":\"\",\"resourceName\":\"targetdb\",\"resourceType\":\"Microsoft.DBforPostgreSQL/servers/databases\",\"resourceUri\":\"\"},\"datasourceSetInfo\":{\"datasourceType\":\"Microsoft.DBforPostgreSQL/servers/databases\",\"objectType\":\"DatasourceSet\",\"resourceID\":\"/subscriptions/f75d8d8b-6735-4697-82e1-1a7a3ff0d5d4/resourceGroups/viveksipgtest/providers/Microsoft.DBforPostgreSQL/servers/viveksipgtest\",\"resourceLocation\":\"\",\"resourceName\":\"viveksipgtest\",\"resourceType\":\"Microsoft.DBforPostgreSQL/servers\",\"resourceUri\":\"\"},\"objectType\":\"RestoreTargetInfo\",\"recoveryOption\":\"FailIfExists\",\"restoreLocation\":\"southeastasia\"},\"sourceDataStoreType\":\"VaultStore\",\"sourceResourceId\":\"/subscriptions/f75d8d8b-6735-4697-82e1-1a7a3ff0d5d4/resourceGroups/viveksipgtest/providers/Microsoft.DBforPostgreSQL/servers/viveksipgtest/databases/testdb\"}" --resource-group "000pikumar" --vault-name "PratikPrivatePreviewVault1"
   requiredParameters:
   - isRequired: true
     name: --backup-instance-name --name -n
@@ -396,7 +483,10 @@ commands:
 - az_dataprotection_backup-instance_restore_initialize-for-data-recovery-as-files
 - az_dataprotection_backup-instance_restore_initialize-for-item-recovery
 - az_dataprotection_backup-instance_restore_trigger
+- az_dataprotection_backup-instance_resume-protection
 - az_dataprotection_backup-instance_show
+- az_dataprotection_backup-instance_stop-protection
+- az_dataprotection_backup-instance_suspend-backup
 - az_dataprotection_backup-instance_update-policy
 - az_dataprotection_backup-instance_validate-for-backup
 - az_dataprotection_backup-instance_validate-for-restore
@@ -420,9 +510,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Mengelola instans cadangan dengan perlindungan data.
-  ms.openlocfilehash: 977892f4c812b849d9b64fcf2b3eccfd19a5610c
-  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.openlocfilehash: 70cf8a4fd96e52754edf33c835c7d9cbbfc339be
+  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 03/25/2022
-  ms.locfileid: "141133771"
+  ms.lasthandoff: 04/27/2022
+  ms.locfileid: "144074669"

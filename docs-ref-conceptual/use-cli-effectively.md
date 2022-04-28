@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
-ms.openlocfilehash: 80c6701787b2ded269139fd37608ef34003685c0
-ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
+ms.openlocfilehash: 7f313ff865b38749cfa8ef1cd5fef1d55cf7a6be
+ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/22/2022
-ms.locfileid: "144004091"
+ms.lasthandoff: 04/27/2022
+ms.locfileid: "144037337"
 ---
 # <a name="how-to-use-azure-cli-effectively"></a>Cara menggunakan Azure CLI secara efektif
 
@@ -182,7 +182,7 @@ Jika Anda menggunakan Azure CLI melalui server proksi, kesalahan berikut dapat t
 
 Tambahkan sertifikat server proksi ke file ini atau salin kontennya ke file sertifikat lain, lalu atur `REQUESTS_CA_BUNDLE` ke dalamnya. Anda mungkin juga perlu mengatur variabel lingkungan `HTTP_PROXY` atau `HTTPS_PROXY`.
 
-Beberapa proksi memerlukan autentikasi. Format variabel lingkungan `HTTP_PROXY` atau `HTTPS_PROXY` lingkungan harus menyertakan autentikasi, seperti `HTTPS_PROXY="https://username:password@proxy-server:port"`. Untuk mengetahui detailnya, lihat [Cara mengonfigurasi proksi untuk pustaka Azure](/azure/developer/python/azure-sdk-configure-proxy?tabs=bash).
+Beberapa proksi memerlukan autentikasi. Format variabel lingkungan `HTTP_PROXY` atau `HTTPS_PROXY` lingkungan harus menyertakan autentikasi, seperti `HTTPS_PROXY="https://username:password@proxy-server:port"`. Untuk mengetahui detailnya, lihat [Cara mengonfigurasi proksi untuk pustaka Azure](/azure/developer/python/sdk/azure-sdk-configure-proxy?tabs=bash).
 
 ## <a name="concurrent-builds"></a>Build bersamaan
 
