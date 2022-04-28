@@ -6,7 +6,7 @@ description: 'Tentukan salah satu parameter autentikasi berikut untuk perintah A
 directCommands:
 - uid: az_storage_message_clear
   name: az storage message clear
-  summary: Menghapus semua pesan dari antrean yang ditentukan.
+  summary: Hapus semua pesan dari antrean yang ditentukan.
   description: ''
   syntax: >-
     az storage message clear --queue-name
@@ -16,6 +16,9 @@ directCommands:
                              [--connection-string]
                              [--sas-token]
                              [--timeout]
+  examples:
+  - summary: Hapus semua pesan dari antrean yang ditentukan.
+    syntax: az storage message clear -q myqueue --account-name mystorageaccount
   requiredParameters:
   - isRequired: true
     name: --queue-name -q
@@ -44,8 +47,8 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_message_delete
   name: az storage message delete
-  summary: Menghapus pesan yang ditentukan.
-  description: 'Biasanya setelah klien mengambil pesan dengan operasi get_messages, klien diharapkan untuk memproses dan menghapus pesan. Untuk menghapus pesan, Anda harus memiliki dua item data: id dan pop_receipt. Id dikembalikan dari operasi get_messages sebelumnya. Pop_receipt dikembalikan dari operasi get_messages() atau update_message() terbaru. Agar operasi delete_message berhasil, pop_receipt yang ditentukan pada permintaan harus cocok dengan pop_receipt yang dikembalikan dari operasi get_messages() atau update_message().'
+  summary: Hapus pesan yang ditentukan.
+  description: ''
   syntax: >-
     az storage message delete --id
                               --pop-receipt
@@ -56,6 +59,9 @@ directCommands:
                               [--connection-string]
                               [--sas-token]
                               [--timeout]
+  examples:
+  - summary: Hapus pesan yang ditentukan.
+    syntax: az storage message delete --id messageid --pop-receipt popreceiptreturned -q myqueue --account-name mystorageaccount
   requiredParameters:
   - isRequired: true
     name: --id
@@ -63,7 +69,7 @@ directCommands:
     description: ''
   - isRequired: true
     name: --pop-receipt
-    summary: Nilai tanda terima pop yang valid yang dikembalikan dari panggilan sebelumnya ke get_messages() atau update_message().
+    summary: Nilai tanda terima pop yang valid dikembalikan dari panggilan sebelumnya ke get_messages() atau update_message().
     description: ''
   - isRequired: true
     name: --queue-name -q
@@ -92,8 +98,8 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_message_get
   name: az storage message get
-  summary: Mengambil satu atau beberapa pesan dari depan antrean.
-  description: Saat pesan diambil dari antrean, respons menyertakan konten pesan dan nilai pop_receipt, yang diperlukan untuk menghapus pesan.  Pesan tidak dihapus secara otomatis dari antrean, tetapi setelah diambil, pesan tidak terlihat oleh klien lain untuk interval waktu yang ditentukan oleh parameter visibility_timeout.  Jika bidang key-encryption-key atau resolver diatur pada objek layanan lokal, pesan akan didekripsi sebelum dikembalikan.
+  summary: Ambil satu atau beberapa pesan dari depan antrean.
+  description: ''
   syntax: >-
     az storage message get --queue-name
                            [--account-key]
@@ -104,6 +110,9 @@ directCommands:
                            [--sas-token]
                            [--timeout]
                            [--visibility-timeout]
+  examples:
+  - summary: Ambil satu pesan dari depan antrean dan reset batas waktu visibilitas menjadi 5 menit kemudian.
+    syntax: az storage message get -q myqueue --visibility-timeout 300 --account-name mystorageaccount
   requiredParameters:
   - isRequired: true
     name: --queue-name -q
@@ -137,9 +146,9 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_message_peek
-  name: intip pesan penyimpanan az
-  summary: Mengambil satu atau beberapa pesan dari depan antrean, tetapi tidak mengubah visibilitas pesan.
-  description: Hanya pesan yang terlihat yang dapat diambil. Saat pesan diambil untuk pertama kalinya dengan panggilan ke get_messages, properti dequeue_count diatur ke 1. Jika tidak dihapus dan kemudian diambil lagi, properti dequeue_count akan dinaikkan. Klien dapat menggunakan nilai ini untuk menentukan berapa kali pesan telah diambil. Perhatikan bahwa panggilan ke peek_messages tidak menambah nilai DequeueCount, tetapi mengembalikan nilai ini untuk dibaca klien.  Jika bidang kunci-enkripsi-kunci atau resolver diatur pada objek layanan lokal, pesan akan didekripsi sebelum dikembalikan.
+  name: az storage message peek
+  summary: Ambil satu atau beberapa pesan dari depan antrean, tetapi jangan ubah visibilitas pesan.
+  description: ''
   syntax: >-
     az storage message peek --queue-name
                             [--account-key]
@@ -149,6 +158,9 @@ directCommands:
                             [--num-messages]
                             [--sas-token]
                             [--timeout]
+  examples:
+  - summary: Ambil 5 pesan dari depan antrean (jangan ubah visibilitas pesan).
+    syntax: az storage message peek -q myqueue --num-messages 5 --account-name mystorageaccount
   requiredParameters:
   - isRequired: true
     name: --queue-name -q
@@ -180,8 +192,8 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_message_put
   name: az storage message put
-  summary: Menambahkan pesan baru ke bagian belakang antrean pesan.
-  description: Batas waktu visibilitas menentukan waktu pesan tidak akan terlihat. Setelah batas waktu berakhir, pesan akan terlihat.  Jika batas waktu visibilitas tidak ditentukan, nilai default 0 akan digunakan.  Waktu hidup pesan menentukan berapa lama pesan akan tetap berada dalam antrean. Pesan akan dihapus dari antrean ketika periode time-to-live berakhir.  Jika bidang kunci-enkripsi-kunci diatur pada objek layanan lokal, metode ini akan mengenkripsi konten sebelum mengunggah.
+  summary: Tambahkan pesan baru ke bagian belakang antrean pesan.
+  description: ''
   syntax: >-
     az storage message put --content
                            --queue-name
@@ -193,6 +205,9 @@ directCommands:
                            [--time-to-live]
                            [--timeout]
                            [--visibility-timeout]
+  examples:
+  - summary: Tambahkan pesan baru yang akan aktif satu hari.
+    syntax: az storage message put -q myqueue --content mymessagecontent --time-to-live 86400 --account-name mystorageaccount
   requiredParameters:
   - isRequired: true
     name: --content
@@ -231,8 +246,8 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_message_update
   name: az storage message update
-  summary: Memperbarui batas waktu visibilitas pesan.
-  description: Anda juga dapat menggunakan operasi ini untuk memperbarui konten pesan.  Operasi ini dapat digunakan untuk terus memperluas tidak terlihatnya pesan antrean. Fungsionalitas ini dapat berguna jika Anda ingin peran pekerja "menyewakan" pesan antrean. Misalnya, jika peran pekerja memanggil get_messages dan mengenali bahwa perlu lebih banyak waktu untuk memproses pesan, peran tersebut dapat terus memperluas tembus pandang pesan hingga diproses. Jika peran pekerja gagal selama pemrosesan, akhirnya pesan akan terlihat lagi dan peran pekerja lain dapat memprosesnya.  Jika bidang kunci-enkripsi-kunci diatur pada objek layanan lokal, metode ini akan mengenkripsi konten sebelum mengunggah.
+  summary: Perbarui batas waktu visibilitas pesan.
+  description: ''
   syntax: >-
     az storage message update --id
                               --pop-receipt
@@ -245,6 +260,12 @@ directCommands:
                               [--content]
                               [--sas-token]
                               [--timeout]
+  examples:
+  - summary: Perbarui batas waktu visibilitas dan konten pesan.
+    syntax: >-
+      az storage message update --id messageid --pop-receipt popreceiptreturned -q myqueue
+
+      --visibility-timeout 3600 --content newmessagecontent --account-name mystorageaccount
   requiredParameters:
   - isRequired: true
     name: --id
@@ -252,7 +273,7 @@ directCommands:
     description: ''
   - isRequired: true
     name: --pop-receipt
-    summary: Nilai tanda terima pop yang valid yang dikembalikan dari panggilan sebelumnya ke operasi get_messages() atau update_message().
+    summary: Nilai tanda terima pop yang valid dikembalikan dari panggilan sebelumnya ke operasi get_messages() atau update_message().
     description: ''
   - isRequired: true
     name: --queue-name -q
@@ -260,7 +281,7 @@ directCommands:
     description: ''
   - isRequired: true
     name: --visibility-timeout
-    summary: Menentukan nilai batas waktu visibilitas baru, dalam detik, relatif terhadap waktu server. Nilai baru harus lebih besar dari atau sama dengan 0, dan tidak boleh lebih besar dari 7 hari. Batas waktu visibilitas pesan tidak dapat diatur ke nilai lebih lambat dari waktu kedaluwarsa. Pesan dapat diperbarui hingga dihapus atau telah kedaluwarsa.
+    summary: Menentukan nilai batas waktu visibilitas baru, dalam hitungan detik, relatif terhadap waktu server. Nilai baru harus lebih besar dari atau sama dengan 0, dan tidak boleh lebih besar dari 7 hari. Batas waktu visibilitas pesan tidak dapat diatur ke nilai lebih lambat dari waktu kedaluwarsa. Pesan dapat diperbarui hingga pesan dihapus atau telah kedaluwarsa.
     description: ''
   optionalParameters:
   - name: --account-key
@@ -312,11 +333,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 03/29/2022
+  ms.date: 04/13/2022
   description: 'Tentukan salah satu parameter autentikasi berikut untuk perintah Anda: --auth-mode, --account-key, --connection-string, --sas-token. Anda juga dapat menggunakan variabel lingkungan yang sesuai untuk menyimpan kredensial autentikasi Anda, misalnya AZURE_STORAGE_KEY, AZURE_STORAGE_CONNECTION_STRING, dan AZURE_STORAGE_SAS_TOKEN.'
-  ms.openlocfilehash: 050aa7f3ab7b74fcb20cf0a5878973a7aa4f9582
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: 30999afc96350ef219b54c36af282eeb4b750257
+  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141431243"
+  ms.lasthandoff: 04/27/2022
+  ms.locfileid: "144062004"

@@ -14,6 +14,7 @@ directCommands:
                                   [--account-key]
                                   [--account-name]
                                   [--auth-mode {key, login}]
+                                  [--blob-endpoint]
                                   [--connection-string]
                                   [--if-match]
                                   [--if-modified-since]
@@ -38,7 +39,7 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --account-key
-    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
     description: ''
   - name: --account-name
     summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
@@ -46,6 +47,9 @@ directCommands:
   - name: --auth-mode
     parameterValueGroup: key, login
     summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --blob-endpoint
+    summary: 'Storage titik akhir layanan data. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Anda dapat menemukan setiap titik akhir utama layanan dengan `az storage account show`. Variabel lingkungan: AZURE_STORAGE_SERVICE_ENDPOINT.'
     description: ''
   - name: --connection-string
     summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
@@ -70,10 +74,10 @@ directCommands:
     summary: ID sewa yang diusulkan, dalam format string GUID. Blob service mengembalikan 400 (Permintaan tidak valid) jika ID sewa yang diusulkan tidak dalam format yang benar.
     description: ''
   - name: --sas-token
-    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   - name: --tags-condition
-    summary: Tentukan SQL di mana klausul pada tag blob hanya beroperasi pada blob dengan nilai yang cocok.
+    summary: Tentukan SQL di mana klausa pada tag blob hanya beroperasi pada blob dengan nilai yang cocok.
     description: ''
   - name: --timeout
     summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
@@ -82,13 +86,14 @@ directCommands:
 - uid: az_storage_blob_lease_break
   name: az storage blob lease break
   summary: Putuskan sewa, jika kontainer atau blob memiliki sewa aktif.
-  description: Setelah sewa rusak, sewa tidak dapat diperpanjang. Setiap permintaan yang diotorisasi dapat melanggar sewa; permintaan tidak diperlukan untuk menentukan ID sewa yang cocok. Ketika sewa rusak, periode jeda sewa diizinkan untuk berlalu, selama waktu tersebut tidak ada operasi sewa kecuali jeda dan pelepasan dapat dilakukan pada kontainer atau blob. Ketika sewa berhasil rusak, respons menunjukkan interval dalam hitungan detik sampai sewa baru dapat diperoleh.
+  description: Setelah sewa rusak, sewa tidak dapat diperpanjang. Setiap permintaan yang diotorisasi dapat memutus sewa; permintaan tidak diperlukan untuk menentukan ID sewa yang cocok. Ketika sewa rusak, periode jeda sewa diizinkan untuk berlalu, selama waktu tersebut tidak ada operasi sewa kecuali pemutusan dan pelepasan dapat dilakukan pada kontainer atau blob. Ketika sewa berhasil rusak, respons menunjukkan interval dalam hitungan detik sampai sewa baru dapat diperoleh.
   syntax: >-
     az storage blob lease break --blob-name
                                 --container-name
                                 [--account-key]
                                 [--account-name]
                                 [--auth-mode {key, login}]
+                                [--blob-endpoint]
                                 [--connection-string]
                                 [--if-match]
                                 [--if-modified-since]
@@ -109,7 +114,7 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --account-key
-    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
     description: ''
   - name: --account-name
     summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
@@ -117,6 +122,9 @@ directCommands:
   - name: --auth-mode
     parameterValueGroup: key, login
     summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --blob-endpoint
+    summary: 'Storage titik akhir layanan data. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Anda dapat menemukan setiap titik akhir utama layanan dengan `az storage account show`. Variabel lingkungan: AZURE_STORAGE_SERVICE_ENDPOINT.'
     description: ''
   - name: --connection-string
     summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
@@ -134,13 +142,13 @@ directCommands:
     summary: Dimulai hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
     description: ''
   - name: --lease-break-period
-    summary: Ini adalah usulan durasi detik bahwa sewa harus dilanjutkan sebelum rusak, antara 0 dan 60 detik. Periode istirahat ini hanya digunakan jika lebih pendek dari waktu yang tersisa pada sewa. Jika lebih lama, waktu yang tersisa pada sewa digunakan. Sewa baru tidak akan tersedia sebelum periode istirahat berakhir, tetapi sewa dapat ditahan lebih lama dari periode istirahat. Jika header ini tidak muncul dengan operasi jeda, sewa durasi tetap berhenti setelah periode sewa yang tersisa berlalu, dan sewa tak terbatas segera berhenti.
+    summary: Ini adalah durasi detik yang diusulkan bahwa sewa harus dilanjutkan sebelum rusak, antara 0 dan 60 detik. Periode istirahat ini hanya digunakan jika lebih pendek dari waktu yang tersisa pada sewa. Jika lebih lama, waktu yang tersisa pada sewa digunakan. Sewa baru tidak akan tersedia sebelum periode istirahat berakhir, tetapi sewa dapat ditahan lebih lama dari periode istirahat. Jika header ini tidak muncul dengan operasi pemutusan, sewa durasi tetap berhenti setelah periode sewa yang tersisa berlalu, dan sewa tak terbatas segera berhenti.
     description: ''
   - name: --sas-token
-    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   - name: --tags-condition
-    summary: Tentukan SQL di mana klausul pada tag blob hanya beroperasi pada blob dengan nilai yang cocok.
+    summary: Tentukan SQL di mana klausa pada tag blob hanya beroperasi pada blob dengan nilai yang cocok.
     description: ''
   - name: --timeout
     summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
@@ -158,6 +166,7 @@ directCommands:
                                  [--account-key]
                                  [--account-name]
                                  [--auth-mode {key, login}]
+                                 [--blob-endpoint]
                                  [--connection-string]
                                  [--if-match]
                                  [--if-modified-since]
@@ -185,7 +194,7 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --account-key
-    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
     description: ''
   - name: --account-name
     summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
@@ -193,6 +202,9 @@ directCommands:
   - name: --auth-mode
     parameterValueGroup: key, login
     summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --blob-endpoint
+    summary: 'Storage titik akhir layanan data. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Anda dapat menemukan setiap titik akhir utama layanan dengan `az storage account show`. Variabel lingkungan: AZURE_STORAGE_SERVICE_ENDPOINT.'
     description: ''
   - name: --connection-string
     summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
@@ -210,19 +222,19 @@ directCommands:
     summary: Dimulai hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
     description: ''
   - name: --sas-token
-    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   - name: --tags-condition
-    summary: Tentukan SQL di mana klausul pada tag blob hanya beroperasi pada blob dengan nilai yang cocok.
+    summary: Tentukan SQL di mana klausa pada tag blob hanya beroperasi pada blob dengan nilai yang cocok.
     description: ''
   - name: --timeout
     summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_lease_release
-  name: rilis sewa blob penyimpanan az
+  name: az storage blob lease release
   summary: Lepaskan sewanya.
-  description: "Sewa dapat dirilis jika id sewa klien yang ditentukan cocok dengan yang terkait dengan kontainer atau blob. Melepaskan sewa memungkinkan klien lain untuk segera memperoleh sewa untuk kontainer atau blob segera setelah rilis selesai.  :kata kunci ~datetime.datetime if_modified_since: Nilai DateTime. Azure mengharapkan nilai tanggal yang diteruskan menjadi UTC.     Jika zona waktu disertakan, tanggalwaktu non-UTC apa pun akan dikonversi ke UTC.     Jika tanggal diteruskan tanpa info zona waktu, diasumsikan sebagai UTC.     Tentukan header ini untuk melakukan operasi hanya jika sumber daya telah dimodifikasi sejak waktu yang ditentukan. :kata kunci ~datetime.datetime if_unmodified_since: Nilai DateTime. Azure mengharapkan nilai tanggal yang diteruskan menjadi UTC.     Jika zona waktu disertakan, tanggalwaktu non-UTC apa pun akan dikonversi ke UTC.     Jika tanggal diteruskan tanpa info zona waktu, diasumsikan sebagai UTC.     Tentukan header ini untuk melakukan operasi hanya jika sumber daya belum dimodifikasi sejak tanggal/waktu yang ditentukan. :kata kunci str etag: Nilai ETag, atau karakter kartubebas (*). Digunakan untuk memeriksa apakah sumber daya telah berubah, dan bertindak sesuai dengan kondisi yang ditentukan oleh `match_condition` parameter . :kata kunci ~azure.core.MatchConditions match_condition: Kondisi pencocokan untuk digunakan pada etag. :kata kunci str if_tags_match_condition: Tentukan SQL di mana klausa pada tag blob hanya beroperasi pada blob dengan nilai yang cocok.     misalnya. <literal>\"\\\"tagname\\\"='my tag'\"</literal>      .. versionadded:: 12.4.0 :keyword int timeout: Parameter batas waktu dinyatakan dalam detik. :return: None."
+  description: "Sewa dapat dirilis jika id sewa klien yang ditentukan cocok dengan yang terkait dengan kontainer atau blob. Melepaskan sewa memungkinkan klien lain untuk segera memperoleh sewa untuk kontainer atau blob segera setelah rilis selesai.  :keyword ~datetime.datetime if_modified_since: Nilai DateTime. Azure mengharapkan nilai tanggal yang diteruskan menjadi UTC.     Jika zona waktu disertakan, tanggalwaktu non-UTC apa pun akan dikonversi ke UTC.     Jika tanggal diteruskan tanpa info zona waktu, diasumsikan sebagai UTC.     Tentukan header ini untuk melakukan operasi hanya jika sumber daya telah dimodifikasi sejak waktu yang ditentukan. :keyword ~datetime.datetime if_unmodified_since: Nilai DateTime. Azure mengharapkan nilai tanggal yang diteruskan menjadi UTC.     Jika zona waktu disertakan, tanggalwaktu non-UTC apa pun akan dikonversi ke UTC.     Jika tanggal diteruskan tanpa info zona waktu, diasumsikan sebagai UTC.     Tentukan header ini untuk melakukan operasi hanya jika sumber daya belum diubah sejak tanggal/waktu yang ditentukan. :kata kunci str etag: Nilai ETag, atau karakter kartubebas (*). Digunakan untuk memeriksa apakah sumber daya telah berubah, dan bertindak sesuai dengan kondisi yang ditentukan oleh `match_condition` parameter . :keyword ~azure.core.MatchConditions match_condition: Kondisi kecocokan untuk digunakan pada etag. :keyword str if_tags_match_condition: Tentukan SQL di mana klausa pada tag blob hanya beroperasi pada blob dengan nilai yang cocok.     misalnya. <literal>\"\\\"tagname\\\"='my tag'\"</literal>      .. versionadded:: 12.4.0 :keyword int timeout: Parameter batas waktu dinyatakan dalam detik. :return: None."
   syntax: >-
     az storage blob lease release --blob-name
                                   --container-name
@@ -230,6 +242,7 @@ directCommands:
                                   [--account-key]
                                   [--account-name]
                                   [--auth-mode {key, login}]
+                                  [--blob-endpoint]
                                   [--connection-string]
                                   [--if-match]
                                   [--if-modified-since]
@@ -253,7 +266,7 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --account-key
-    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
     description: ''
   - name: --account-name
     summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
@@ -261,6 +274,9 @@ directCommands:
   - name: --auth-mode
     parameterValueGroup: key, login
     summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --blob-endpoint
+    summary: 'Storage titik akhir layanan data. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Anda dapat menemukan setiap titik akhir utama layanan dengan `az storage account show`. Variabel lingkungan: AZURE_STORAGE_SERVICE_ENDPOINT.'
     description: ''
   - name: --connection-string
     summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
@@ -278,17 +294,17 @@ directCommands:
     summary: Dimulai hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
     description: ''
   - name: --sas-token
-    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   - name: --tags-condition
-    summary: Tentukan SQL di mana klausul pada tag blob hanya beroperasi pada blob dengan nilai yang cocok.
+    summary: Tentukan SQL di mana klausa pada tag blob hanya beroperasi pada blob dengan nilai yang cocok.
     description: ''
   - name: --timeout
     summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_lease_renew
-  name: perpanjangan sewa blob penyimpanan az
+  name: az storage blob lease renew
   summary: Perpanjang sewa.
   description: ''
   syntax: >-
@@ -298,6 +314,7 @@ directCommands:
                                 [--account-key]
                                 [--account-name]
                                 [--auth-mode {key, login}]
+                                [--blob-endpoint]
                                 [--connection-string]
                                 [--if-match]
                                 [--if-modified-since]
@@ -324,7 +341,7 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --account-key
-    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
     description: ''
   - name: --account-name
     summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
@@ -332,6 +349,9 @@ directCommands:
   - name: --auth-mode
     parameterValueGroup: key, login
     summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
+    description: ''
+  - name: --blob-endpoint
+    summary: 'Storage titik akhir layanan data. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Anda dapat menemukan setiap titik akhir utama layanan dengan `az storage account show`. Variabel lingkungan: AZURE_STORAGE_SERVICE_ENDPOINT.'
     description: ''
   - name: --connection-string
     summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
@@ -349,10 +369,10 @@ directCommands:
     summary: Dimulai hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
     description: ''
   - name: --sas-token
-    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   - name: --tags-condition
-    summary: Tentukan SQL di mana klausul pada tag blob hanya beroperasi pada blob dengan nilai yang cocok.
+    summary: Tentukan SQL di mana klausa pada tag blob hanya beroperasi pada blob dengan nilai yang cocok.
     description: ''
   - name: --timeout
     summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
@@ -383,11 +403,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 03/29/2022
+  ms.date: 04/13/2022
   description: Mengelola penyewaan blob penyimpanan.
-  ms.openlocfilehash: 70f24a805b3cb779cf0a5f0ff20be438953b54c8
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: e747ec4587f251e785b30adae3e8280d07c2cf9c
+  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141429407"
+  ms.lasthandoff: 04/27/2022
+  ms.locfileid: "144043133"

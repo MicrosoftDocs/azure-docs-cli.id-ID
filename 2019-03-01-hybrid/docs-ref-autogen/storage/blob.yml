@@ -5,7 +5,7 @@ summary: Mengelola penyimpanan objek untuk data tidak terstruktur (blob).
 description: 'Tentukan salah satu parameter autentikasi berikut untuk perintah Anda: --auth-mode, --account-key, --connection-string, --sas-token. Anda juga dapat menggunakan variabel lingkungan yang sesuai untuk menyimpan kredensial autentikasi Anda, misalnya AZURE_STORAGE_KEY, AZURE_STORAGE_CONNECTION_STRING, dan AZURE_STORAGE_SAS_TOKEN.'
 directCommands:
 - uid: az_storage_blob_delete
-  name: penghapusan az storage blob
+  name: az storage blob delete
   summary: Tandai blob atau rekam jepret untuk dihapus.
   description: Blob ditandai untuk penghapusan nanti selama pengumpulan sampah.  Untuk menghapus blob, semua rekam jepretnya juga harus dihapus. Keduanya dapat dihapus secara bersamaan.
   syntax: >-
@@ -82,7 +82,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_delete-batch
-  name: batch penghapusan az storage blob
+  name: az storage blob delete-batch
   summary: Hapus blob dari kontainer blob secara rekursif.
   description: ''
   syntax: >-
@@ -155,7 +155,7 @@ directCommands:
     summary: Id sewa aktif untuk blob.
     description: ''
   - name: --pattern
-    summary: Pola yang digunakan untuk globbing file atau blob di sumbernya. Pola yang didukung adalah '\*', '?', '[seq]', dan '[!seq]'. Untuk informasi lebih lanjut, silakan merujuk ke https://docs.python.org/3.7/library/fnmatch.html.
+    summary: Pola yang digunakan untuk mengglobbing file atau blob di sumbernya. Pola yang didukung adalah '\*', '?', '[seq]', dan '[!seq]'. Untuk informasi lebih lanjut, silakan merujuk ke https://docs.python.org/3.7/library/fnmatch.html.
     description: Ketika Anda menggunakan '*' dalam --pattern, itu akan cocok dengan karakter apa pun termasuk pemisah direktori '/'. Anda juga dapat mencoba perintah "az storage remove" dengan --include dan --exclude dengan azure cli >= 2.0.70 agar sesuai dengan beberapa pola.
   - name: --sas-token
     summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
@@ -165,7 +165,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_download
-  name: pengunduhan az storage blob
+  name: az storage blob download
   summary: Unduh blob ke jalur file.
   description: ''
   syntax: >-
@@ -241,14 +241,14 @@ directCommands:
     description: ''
   - name: --max-connections
     defaultValue: "2"
-    summary: Jika diatur ke 2 atau lebih besar, get awal akan dilakukan untuk diri pertama. MAX_SINGLE_GET_SIZE byte blob. Jika ini adalah seluruh blob, metode akan kembali pada titik ini. Jika tidak, itu akan mengunduh paralel data yang tersisa menggunakan jumlah utas yang sama dengan max_connections. Setiap gugus akan berukuran sendiri. MAX_CHUNK_GET_SIZE. Jika diatur ke 1, satu permintaan get besar akan dilakukan. Ini umumnya tidak direkomendasikan tetapi tersedia jika sangat sedikit utas yang harus digunakan, permintaan jaringan sangat mahal, atau aliran yang tidak dapat dicari mencegah unduhan paralel. Ini mungkin juga berguna jika banyak blob diharapkan kosong karena permintaan tambahan diperlukan untuk blob kosong jika max_connections lebih besar dari 1.
+    summary: Jika diatur ke 2 atau lebih besar, get awal akan dilakukan untuk diri pertama. MAX_SINGLE_GET_SIZE byte blob. Jika ini adalah seluruh blob, metode akan kembali pada saat ini. Jika tidak, itu akan mengunduh paralel data yang tersisa menggunakan jumlah utas yang sama dengan max_connections. Setiap gugus akan berukuran sendiri. MAX_CHUNK_GET_SIZE. Jika diatur ke 1, satu permintaan get besar akan dilakukan. Ini umumnya tidak direkomendasikan tetapi tersedia jika sangat sedikit utas yang harus digunakan, permintaan jaringan sangat mahal, atau aliran yang tidak dapat dicari mencegah unduhan paralel. Ini mungkin juga berguna jika banyak blob diperkirakan kosong karena permintaan tambahan diperlukan untuk blob kosong jika max_connections lebih besar dari 1.
     description: ''
   - name: --no-progress
     summary: Sertakan bendera ini untuk menonaktifkan pelaporan kemajuan untuk perintah.
     description: ''
   - name: --open-mode
     defaultValue: wb
-    summary: Mode yang digunakan saat membuka file. Perhatikan bahwa menentukan penambahan hanya open_mode mencegah pengunduhan paralel. Jadi, max_connections harus diatur ke 1 jika open_mode ini digunakan.
+    summary: Mode yang digunakan saat membuka file. Perhatikan bahwa menentukan tambahkan hanya open_mode mencegah pengunduhan paralel. Jadi, max_connections harus diatur ke 1 jika open_mode ini digunakan.
     description: ''
   - name: --sas-token
     summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
@@ -257,7 +257,7 @@ directCommands:
     summary: Parameter rekam jepret adalah nilai DateTime buram yang, saat ada, menentukan rekam jepret blob untuk diambil.
     description: ''
   - name: --socket-timeout
-    summary: Batas waktu soket(detik), digunakan oleh layanan untuk mengatur aliran data.
+    summary: Batas waktu soket (detik), digunakan oleh layanan untuk mengatur aliran data.
     description: ''
   - name: --start-range
     summary: 'Mulai rentang byte yang digunakan untuk mengunduh bagian blob. Jika tidak ada end_range yang diberikan, semua byte setelah start_range akan diunduh. Param start_range dan end_range inklusif. Misalnya: start_range=0, end_range=511 akan mengunduh 512 byte blob pertama.'
@@ -266,7 +266,7 @@ directCommands:
     summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
     description: ''
   - name: --validate-content
-    summary: Jika diatur ke true, memvalidasi hash MD5 untuk setiap bagian blob yang diambil. Ini terutama berharga untuk mendeteksi bitflip pada kawat jika menggunakan http alih-alih https sebagai https (default) sudah akan memvalidasi. Perhatikan bahwa layanan hanya akan mengembalikan MD5 transaksional untuk potongan 4MB atau kurang sehingga permintaan get pertama akan berukuran sendiri. MAX_CHUNK_GET_SIZE bukan diri sendiri. MAX_SINGLE_GET_SIZE. Jika diri sendiri. MAX_CHUNK_GET_SIZE diatur ke lebih besar dari 4MB, kesalahan akan dilemparkan. Karena komputasi MD5 membutuhkan waktu pemrosesan dan lebih banyak permintaan perlu dilakukan karena ukuran gugus yang berkurang mungkin ada beberapa peningkatan latensi.
+    summary: Jika diatur ke true, memvalidasi hash MD5 untuk setiap bagian blob yang diambil. Ini terutama berharga untuk mendeteksi bitflips pada kawat jika menggunakan http alih-alih https sebagai https (default) sudah akan memvalidasi. Perhatikan bahwa layanan hanya akan mengembalikan MD5 transaksional untuk potongan 4MB atau kurang sehingga permintaan get pertama akan berukuran sendiri. MAX_CHUNK_GET_SIZE bukan diri sendiri. MAX_SINGLE_GET_SIZE. Jika diri sendiri. MAX_CHUNK_GET_SIZE diatur ke lebih besar dari 4MB, kesalahan akan dilemparkan. Karena komputasi MD5 membutuhkan waktu pemrosesan dan lebih banyak permintaan perlu dilakukan karena berkurangnya ukuran gugus mungkin ada beberapa peningkatan latensi.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_download-batch
@@ -323,23 +323,23 @@ directCommands:
     description: ''
   - name: --max-connections
     defaultValue: "2"
-    summary: Jumlah maksimum koneksi paralel yang akan digunakan ketika ukuran blob melebihi 64MB.
+    summary: Jumlah maksimum koneksi paralel yang digunakan ketika ukuran blob melebihi 64MB.
     description: ''
   - name: --no-progress
     summary: Sertakan bendera ini untuk menonaktifkan pelaporan kemajuan untuk perintah.
     description: ''
   - name: --pattern
-    summary: Pola yang digunakan untuk globbing file atau blob di sumbernya. Pola yang didukung adalah '\*', '?', '[seq]', dan '[!seq]'. Untuk informasi lebih lanjut, silakan merujuk ke https://docs.python.org/3.7/library/fnmatch.html.
+    summary: Pola yang digunakan untuk mengglobbing file atau blob di sumbernya. Pola yang didukung adalah '\*', '?', '[seq]', dan '[!seq]'. Untuk informasi lebih lanjut, silakan merujuk ke https://docs.python.org/3.7/library/fnmatch.html.
     description: Ketika Anda menggunakan '*' dalam --pattern, itu akan cocok dengan karakter apa pun termasuk pemisah direktori '/'.
   - name: --sas-token
     summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   - name: --socket-timeout
-    summary: Batas waktu soket(detik), digunakan oleh layanan untuk mengatur aliran data.
+    summary: Batas waktu soket (detik), digunakan oleh layanan untuk mengatur aliran data.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_exists
-  name: blob penyimpanan az ada
+  name: az storage blob exists
   summary: Periksa keberadaan blob dalam kontainer.
   description: ''
   syntax: >-
@@ -389,7 +389,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_filter
-  name: filter blob penyimpanan az
+  name: az storage blob filter
   summary: Mencantumkan blob di semua kontainer yang tagnya cocok dengan ekspresi pencarian tertentu.
   description: Blob filter mencari di semua kontainer dalam akun penyimpanan tetapi dapat dilingkupkan dalam ekspresi ke satu kontainer.
   syntax: >-
@@ -496,7 +496,7 @@ directCommands:
   - name: --content-type
     summary: Nilai header respons untuk Tipe-Konten saat sumber daya diakses menggunakan tanda tangan akses bersama ini.
     description: ''
-  - name: --kedaluwarsa
+  - name: --expiry
     summary: Menentukan tanggalwaktu UTC (Y-m-d'T'H:M'Z') di mana SAS menjadi tidak valid. Jangan gunakan jika kebijakan akses tersimpan dirujuk dengan --policy-name yang menentukan nilai ini.
     description: ''
   - name: --full-uri
@@ -522,7 +522,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_list
-  name: unggah blob penyimpanan az
+  name: az storage blob list
   summary: Mencantumkan blob dalam kontainer tertentu.
   description: ''
   syntax: >-
@@ -560,18 +560,18 @@ directCommands:
   - name: --connection-string
     summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
-  - name: --pemisah
+  - name: --delimiter
     summary: Ketika permintaan menyertakan parameter ini, operasi mengembalikan elemen BlobPrefix dalam daftar hasil yang bertindak sebagai tempat penampung untuk semua blob yang namanya dimulai dengan substring yang sama hingga tampilan karakter pemisah. Pemisah mungkin satu karakter atau string.
     description: ''
   - name: --include
     summary: Menentukan satu atau beberapa himpunan data tambahan untuk disertakan dalam respons.
     description: ''
-  - name: --penanda
-    summary: Token kelanjutan buram. Nilai ini dapat diambil dari bidang next_marker dari objek generator sebelumnya jika num_results ditentukan dan generator tersebut telah selesai menghitung hasil. Jika ditentukan, generator ini akan mulai mengembalikan hasil dari titik di mana generator sebelumnya berhenti.
+  - name: --marker
+    summary: Token kelanjutan buram. Nilai ini dapat diambil dari bidang next_marker objek generator sebelumnya jika num_results ditentukan dan generator tersebut telah selesai menghitung hasil. Jika ditentukan, generator ini akan mulai mengembalikan hasil dari titik di mana generator sebelumnya berhenti.
     description: ''
   - name: --num-results
     defaultValue: "5000"
-    summary: Menentukan jumlah maksimum hasil yang akan dikembalikan. Sediakan "\*" untuk mengembalikan semua.
+    summary: Menentukan jumlah maksimum hasil yang akan dikembalikan. Berikan "\*" untuk mengembalikan semua.
     description: ''
   - name: --prefix
     summary: Memfilter hasil untuk mengembalikan hanya blob yang namanya dimulai dengan awalan yang ditentukan.
@@ -761,7 +761,7 @@ directCommands:
     summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   - name: --timeout
-    summary: Parameter batas waktu dinyatakan dalam hitung detik. Metode ini dapat melakukan beberapa panggilan ke layanan Azure dan batas waktu akan berlaku untuk setiap panggilan satu per satu.
+    summary: Parameter batas waktu dinyatakan dalam detik. Metode ini dapat melakukan beberapa panggilan ke layanan Azure dan batas waktu akan berlaku untuk setiap panggilan satu per satu.
     description: ''
   - name: --type -t
     defaultValue: block
@@ -842,7 +842,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_snapshot
-  name: rekam jepret blob penyimpanan az
+  name: az storage blob snapshot
   summary: Membuat rekam jepret baca-saja dari blob.
   description: ''
   syntax: >-
@@ -909,7 +909,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_sync
-  name: sinkronisasi blob penyimpanan az
+  name: az storage blob sync
   summary: Sinkronkan blob secara rekursif ke kontainer blob penyimpanan.
   description: ''
   syntax: >-
@@ -919,6 +919,7 @@ directCommands:
                          [--account-name]
                          [--auth-mode {key, login}]
                          [--connection-string]
+                         [--delete-destination]
                          [--destination]
                          [--exclude-path]
                          [--exclude-pattern]
@@ -952,8 +953,12 @@ directCommands:
   - name: --connection-string
     summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
+  - name: --delete-destination
+    defaultValue: "true"
+    summary: ''
+    description: ''
   - name: --destination -d
-    summary: Jalur tujuan yang akan ditambahkan ke nama blob.
+    summary: Jalur tujuan yang akan ditambahkan sebelumnya ke nama blob.
     description: ''
   - name: --exclude-path
     summary: 'Kecualikan jalur ini. Opsi ini tidak mendukung karakter kartubebas (\*). Memeriksa awalan jalur relatif. Misalnya: myFolder;myFolder/subDirName/file.pdf.'
@@ -970,7 +975,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_undelete
   name: az storage blob undelete
-  summary: Operasi batal hapus Blob memulihkan konten dan metadata blob atau rekam jepret yang dihapus sementara.
+  summary: Operasi Batal hapus Blob memulihkan konten dan metadata blob atau rekam jepret yang dihapus sementara.
   description: Mencoba membatalkan penghapusan blob atau rekam jepret yang tidak dihapus sementara akan berhasil tanpa perubahan apa pun.
   syntax: >-
     az storage blob undelete --container-name
@@ -1104,7 +1109,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_upload
-  name: unggah blob penyimpanan az
+  name: az storage blob upload
   summary: Upload file ke blob penyimpanan.
   description: Buat blob baru dari jalur file, atau perbarui konten blob yang ada dengan pemberitahuan penggugusan dan kemajuan otomatis.
   syntax: >-
@@ -1146,7 +1151,7 @@ directCommands:
     syntax: az storage blob upload --account-name mystorageaccount --account-key 0000-0000 --container-name mycontainer --file /path/to/file --name myblob
   - summary: Upload string ke blob.
     syntax: az storage blob upload --data "teststring" -c mycontainer -n myblob --account-name mystorageaccount --account-key 0000-0000
-  - summary: Upload ke pipa.
+  - summary: Upload ke pipa melalui.
     syntax: echo $data | az storage blob upload --data @- -c mycontainer -n myblob --account-name mystorageaccount --account-key 0000-0000
   requiredParameters:
   - isRequired: true
@@ -1213,7 +1218,7 @@ directCommands:
     description: ''
   - name: --max-connections
     defaultValue: "2"
-    summary: Jumlah maksimum koneksi paralel yang akan digunakan ketika ukuran blob melebihi 64MB.
+    summary: Jumlah maksimum koneksi paralel yang digunakan ketika ukuran blob melebihi 64MB.
     description: ''
   - name: --maxsize-condition
     summary: Panjang maksimum dalam byte yang diizinkan untuk blob tambahan.
@@ -1228,7 +1233,7 @@ directCommands:
     summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   - name: --socket-timeout
-    summary: Batas waktu soket(detik), digunakan oleh layanan untuk mengatur aliran data.
+    summary: Batas waktu soket (detik), digunakan oleh layanan untuk mengatur aliran data.
     description: ''
   - name: --tier
     parameterValueGroup: P10, P20, P30, P4, P40, P50, P6, P60
@@ -1239,7 +1244,7 @@ directCommands:
     description: ''
   - name: --type -t
     parameterValueGroup: append, block, page
-    summary: Default ke 'halaman' untuk \*file .vhd, atau 'blokir' jika tidak.
+    summary: Default ke 'page' untuk \*file .vhd, atau 'block' sebaliknya.
     description: ''
   - name: --validate-content
     summary: Tentukan bahwa hash MD5 harus dihitung untuk setiap gugus blob dan diverifikasi oleh layanan ketika gugus telah tiba.
@@ -1280,7 +1285,7 @@ directCommands:
                                  [--type {append, block, page}]
                                  [--validate-content]
   examples:
-  - summary: Upload semua file yang diakhir dengan .py kecuali blob ada dan telah dimodifikasi sejak tanggal yang diberikan.
+  - summary: Upload semua file yang berakhiran .py kecuali blob ada dan telah dimodifikasi sejak tanggal tertentu.
     syntax: az storage blob upload-batch -d mycontainer --account-name mystorageaccount --account-key 00000000 -s <path-to-directory> --pattern *.py --if-unmodified-since 2018-08-27T20:51Z
   - summary: Upload semua file dari direktori jalur lokal ke kontainer bernama "mycontainer".
     syntax: az storage blob upload-batch -d mycontainer -s <path-to-directory>
@@ -1384,7 +1389,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_url
-  name: url blob penyimpanan az
+  name: az storage blob url
   summary: Buat url untuk mengakses blob.
   description: ''
   syntax: >-
@@ -1524,11 +1529,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 03/29/2022
+  ms.date: 04/13/2022
   description: 'Tentukan salah satu parameter autentikasi berikut untuk perintah Anda: --auth-mode, --account-key, --connection-string, --sas-token. Anda juga dapat menggunakan variabel lingkungan yang sesuai untuk menyimpan kredensial autentikasi Anda, misalnya AZURE_STORAGE_KEY, AZURE_STORAGE_CONNECTION_STRING, dan AZURE_STORAGE_SAS_TOKEN.'
-  ms.openlocfilehash: a47aa97f35d6f0e66306f40e9c90b0ad7f3961cb
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: 9044d37b2cac4851c8037f1cddd81b8c9c5a5711
+  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141421991"
+  ms.lasthandoff: 04/27/2022
+  ms.locfileid: "144038317"
