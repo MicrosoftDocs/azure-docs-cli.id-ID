@@ -5,7 +5,7 @@ summary: Mengelola kontainer penyimpanan blob.
 description: 'Tentukan salah satu parameter autentikasi berikut untuk perintah Anda: --auth-mode, --account-key, --connection-string, --sas-token. Anda juga dapat menggunakan variabel lingkungan yang sesuai untuk menyimpan kredensial autentikasi Anda, misalnya AZURE_STORAGE_KEY, AZURE_STORAGE_CONNECTION_STRING, dan AZURE_STORAGE_SAS_TOKEN.'
 directCommands:
 - uid: az_storage_container_create
-  name: pembuatan kontainer penyimpanan az
+  name: az storage container create
   summary: Buat kontainer di akun penyimpanan.
   description: Secara default, data kontainer bersifat privat ("nonaktif") kepada pemilik akun. Gunakan "blob" untuk memungkinkan akses baca publik untuk blob. Gunakan "kontainer" untuk mengizinkan akses baca dan daftar publik ke seluruh kontainer. Anda dapat mengonfigurasi --public-access menggunakan `az storage container set-permission -n CONTAINER_NAME --public-access blob/container/off`.
   syntax: >-
@@ -52,14 +52,14 @@ directCommands:
     summary: Default kontainer untuk menggunakan cakupan enkripsi tertentu untuk semua penulisan.
     description: ''
   - name: --fail-on-exist
-    summary: Lempar pengecualian jika kontainer sudah ada.
+    summary: Berikan pengecualian jika kontainer sudah ada.
     description: ''
   - name: --metadata
     summary: Metadata dalam pasangan key=value yang dipisahkan spasi. Ini menimpa metadata yang ada.
     description: ''
   - name: --prevent-encryption-scope-override -p
     parameterValueGroup: false, true
-    summary: Blokir penimpaan cakupan enkripsi dari default kontainer.
+    summary: Penimpaan blok cakupan enkripsi dari default kontainer.
     description: ''
   - name: --public-access
     parameterValueGroup: blob, container, off
@@ -76,7 +76,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_container_delete
-  name: penghapusan kontainer penyimpanan az
+  name: az storage container delete
   summary: Menandai kontainer yang ditentukan untuk penghapusan.
   description: Kontainer dan blob apa pun yang terkandung di dalamnya kemudian dihapus selama pengumpulan sampah.
   syntax: >-
@@ -112,13 +112,13 @@ directCommands:
     summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
     description: ''
   - name: --bypass-immutability-policy
-    summary: Melewati perilaku layanan mendatang yang akan memblokir kontainer agar tidak dihapus jika memiliki kebijakan kekekalan. Menentukan ini akan mengabaikan argumen selain yang digunakan untuk mengidentifikasi kontainer ("--name", "--account-name").
+    summary: Melewati perilaku layanan mendatang yang akan memblokir kontainer agar tidak dihapus jika memiliki kebijakan yang tidak dapat diubah. Menentukan ini akan mengabaikan argumen selain yang digunakan untuk mengidentifikasi kontainer ("--name", "--account-name").
     description: ''
   - name: --connection-string
     summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
   - name: --fail-not-exist
-    summary: Lempar pengecualian jika kontainer tidak ada.
+    summary: Berikan pengecualian jika kontainer tidak ada.
     description: ''
   - name: --if-modified-since
     summary: Dimulai hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
@@ -243,16 +243,16 @@ directCommands:
     summary: Nilai header respons untuk Content-Language saat sumber daya diakses menggunakan tanda tangan akses bersama ini.
     description: ''
   - name: --content-type
-    summary: Nilai header respons untuk Content-Type saat sumber daya diakses menggunakan tanda tangan akses bersama ini.
+    summary: Nilai header respons untuk Tipe-Konten saat sumber daya diakses menggunakan tanda tangan akses bersama ini.
     description: ''
-  - name: --kedaluwarsa
+  - name: --expiry
     summary: Menentukan tanggalwaktu UTC (Y-m-d'T'H:M'Z') di mana SAS menjadi tidak valid. Jangan gunakan jika kebijakan akses tersimpan dirujuk dengan --policy-name yang menentukan nilai ini.
     description: ''
   - name: --https-only
     summary: Hanya izinkan permintaan yang dibuat dengan protokol HTTPS. Jika dihilangkan, permintaan dari protokol HTTP dan HTTPS diizinkan.
     description: ''
   - name: --ip
-    summary: Menentukan alamat IP atau rentang alamat IP tempat menerima permintaan. Hanya mendukung alamat gaya IPv4.
+    summary: Menentukan alamat IP atau rentang alamat IP untuk menerima permintaan. Hanya mendukung alamat gaya IPv4.
     description: ''
   - name: --permissions
     summary: 'Izin yang diberikan SAS. Nilai yang diizinkan: (d)elete (d)elete (l)ist (l)ist (r)ead (r)ead (w)rite (w)rite. Jangan gunakan jika kebijakan akses tersimpan dirujuk dengan --id yang menentukan nilai ini. Dapat digabungkan.'
@@ -268,7 +268,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_container_list
-  name: daftar kontainer penyimpanan az
+  name: az storage container list
   summary: Mencantumkan kontainer di akun penyimpanan.
   description: ''
   syntax: >-
@@ -304,12 +304,12 @@ directCommands:
   - name: --include-metadata
     summary: Menentukan bahwa metadata kontainer dikembalikan dalam respons.
     description: ''
-  - name: --penanda
-    summary: Token kelanjutan buram. Nilai ini dapat diambil dari bidang next_marker dari objek generator sebelumnya jika num_results ditentukan dan generator tersebut telah selesai menghitung hasil. Jika ditentukan, generator ini akan mulai mengembalikan hasil dari titik di mana generator sebelumnya berhenti.
+  - name: --marker
+    summary: Token kelanjutan buram. Nilai ini dapat diambil dari bidang next_marker objek generator sebelumnya jika num_results ditentukan dan generator tersebut telah selesai menghitung hasil. Jika ditentukan, generator ini akan mulai mengembalikan hasil dari titik di mana generator sebelumnya berhenti.
     description: ''
   - name: --num-results
     defaultValue: "5000"
-    summary: Menentukan jumlah maksimum hasil yang akan dikembalikan. Sediakan "\*" untuk mengembalikan semua.
+    summary: Menentukan jumlah maksimum hasil yang akan dikembalikan. Berikan "\*" untuk mengembalikan semua.
     description: ''
   - name: --prefix
     summary: Memfilter hasil untuk mengembalikan hanya kontainer yang namanya dimulai dengan awalan yang ditentukan.
@@ -322,7 +322,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_container_restore
-  name: pemulihan kontainer penyimpanan az
+  name: az storage container restore
   summary: Pulihkan kontainer yang dihapus sementara.
   description: Operasi hanya akan berhasil jika digunakan dalam jumlah hari yang ditentukan yang ditetapkan dalam kebijakan penyimpanan penghapusan.
   syntax: >-
@@ -552,11 +552,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 03/29/2022
+  ms.date: 04/13/2022
   description: 'Tentukan salah satu parameter autentikasi berikut untuk perintah Anda: --auth-mode, --account-key, --connection-string, --sas-token. Anda juga dapat menggunakan variabel lingkungan yang sesuai untuk menyimpan kredensial autentikasi Anda, misalnya AZURE_STORAGE_KEY, AZURE_STORAGE_CONNECTION_STRING, dan AZURE_STORAGE_SAS_TOKEN.'
-  ms.openlocfilehash: 2aa1533d69e0c8e3b55eb0fb86558b871adf7ebc
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: b7471c164894958cfc0cf35f4208326c3fb00970
+  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141439127"
+  ms.lasthandoff: 04/27/2022
+  ms.locfileid: "144074417"

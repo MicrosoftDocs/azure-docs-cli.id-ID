@@ -6,7 +6,7 @@ description: ''
 directCommands:
 - uid: az_acr_task_cancel-run
   name: az acr task cancel-run
-  summary: Membatalkan eksekusi Azure Container Registry tertentu.
+  summary: Membatalkan eksekusi Azure Container Registry yang ditentukan.
   description: ''
   syntax: >-
     az acr task cancel-run --registry
@@ -18,7 +18,7 @@ directCommands:
   requiredParameters:
   - isRequired: true
     name: --registry -r
-    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    summary: Nama registri kontainer. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
     description: ''
   - isRequired: true
     name: --run-id
@@ -82,7 +82,7 @@ directCommands:
           -c https://github.com/Azure/acr-builder.git -f Dockerfile \
           --commit-trigger-enabled false --base-image-trigger-enabled false \
           --arg DOCKER_CLI_BASE_IMAGE=docker:18.03.0-ce-git
-  - summary: Buat tugas Linux menggunakan cabang tertentu dari repositori Azure DevOps privat yang membangun gambar hello-world pada arsitektur Arm (varian V7) dan mengaktifkan pemicu.
+  - summary: Buat tugas Linux menggunakan cabang tertentu dari repositori Azure DevOps privat yang membangun gambar hello-world pada arsitektur Arm (varian V7) dan telah mengaktifkan pemicu.
     syntax: >-
       az acr task create -t hello-world:{{.Run.ID}} -n hello-world -r MyRegistry \
           -c https://msazure.visualstudio.com/DefaultCollection/Project/_git/Repo#Branch:Folder \
@@ -97,7 +97,7 @@ directCommands:
       az acr task create -t acb:{{.Run.ID}} -n acb-win -r MyRegistry \
           -c https://github.com/Azure/acr-builder.git -f Windows.Dockerfile \
           --commit-trigger-enabled false --platform Windows/amd64
-  - summary: Buat tugas multi-langkah Linux dari repositori GitHub publik dengan identitas terkelola dan gambar dasar yang ditetapkan sistem dan ditetapkan pengguna, penerapan git, permintaan pull, dan pemicu timer yang menjalankan tugas pada hari Senin hingga Jumat dengan nama pemicu timer yang disediakan.
+  - summary: Buat tugas multi-langkah Linux dari repositori GitHub publik dengan identitas terkelola yang ditetapkan sistem dan ditetapkan pengguna dan gambar dasar, penerapan git, permintaan pull, dan pemicu timer yang menjalankan tugas pada siang hari pada hari Senin hingga Jumat dengan nama pemicu timer yang disediakan.
     syntax: >-
       az acr task create -t hello-world:{{.Run.ID}} -n hello-world -r MyRegistry \
           --pull-request-trigger-enabled true --schedule "dailyTimer:0 12 * * Mon-Fri" \
@@ -110,7 +110,7 @@ directCommands:
     description: ''
   - isRequired: true
     name: --registry -r
-    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    summary: Nama registri kontainer. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
     description: ''
   optionalParameters:
   - name: --agent-pool
@@ -139,7 +139,7 @@ directCommands:
     summary: Jenis pemicu otomatis untuk pembaruan dependensi gambar dasar.
     description: ''
   - name: --cmd
-    summary: Perintah untuk dijalankan. Ini juga mendukung parameter eksekusi docker tambahan (https://docs.docker.com/engine/reference/commandline/run/) atau bahkan perintah docker lainnya (https://docs.docker.com/engine/reference/commandline/docker/).
+    summary: Perintah untuk dijalankan. Ini juga mendukung parameter eksekusi docker tambahan atau bahkan perintah docker lainnya.
     description: ''
   - name: --commit-trigger-enabled
     defaultValue: "1"
@@ -147,7 +147,7 @@ directCommands:
     summary: Menunjukkan apakah pemicu penerapan kontrol sumber diaktifkan.
     description: ''
   - name: --context -c
-    summary: URL lengkap ke repositori kode sumber (Memerlukan akhiran '.git' untuk repositori github) atau repositori artefak OCI di registri kontainer Azure (misalnya, 'oci://myregistry.azurecr.io/myartifact:mytag'). Jika '/dev/null' ditentukan, nilai akan diatur ke Tidak Ada dan diabaikan. Ini adalah argumen yang diperlukan jika tugas bukan tugas sistem.
+    summary: URL lengkap ke repositori kode sumber (Memerlukan akhiran '.git' untuk repositori github) atau tarball jarak jauh (misalnya, 'http://server/context.tar.gz'), atau repositori artefak OCI di registri kontainer Azure (misalnya, 'oci://myregistry.azurecr.io/myartifact:mytag'). Jika '/dev/null' ditentukan, nilai akan diatur ke Tidak Ada dan diabaikan. Ini adalah argumen yang diperlukan jika tugas bukan tugas sistem.
     description: ''
   - name: --cpu
     defaultValue: "2"
@@ -177,7 +177,7 @@ directCommands:
     summary: Menunjukkan apakah gambar yang dibuat harus didorong ke registri.
     description: ''
   - name: --platform
-    summary: Platform tempat build/tugas dijalankan, Misalnya, 'windows' dan 'linux'. Ketika digunakan dalam perintah build, perintah tersebut juga dapat ditentukan dalam format 'os/arch/variant' untuk gambar yang dihasilkan. Misalnya, linux/arm/v7. Bagian 'arch' dan 'varian' bersifat opsional.
+    summary: Platform tempat build/task dijalankan, Misalnya, 'windows' dan 'linux'. Saat digunakan dalam perintah build, perintah tersebut juga dapat ditentukan dalam format 'os/arch/variant' untuk gambar yang dihasilkan. Misalnya, linux/arm/v7. Bagian 'arch' dan 'varian' bersifat opsional.
     description: ''
   - name: --pull-request-trigger-enabled
     parameterValueGroup: false, true
@@ -193,7 +193,7 @@ directCommands:
     summary: Argumen build rahasia dalam format '--secret-arg name[=value]'. Kelipatan didukung dengan meneruskan --secret-arg beberapa kali.
     description: ''
   - name: --set
-    summary: Nilai tugas dalam format '--set nama[=value]'. Kelipatan didukung dengan melewati --set beberapa kali.
+    summary: Nilai tugas dalam format '--set name[=value]'. Kelipatan didukung dengan meneruskan --set beberapa kali.
     description: ''
   - name: --set-secret
     summary: Nilai tugas rahasia dalam format '--set-secret name[=value]'. Kelipatan didukung dengan meneruskan --set-secret beberapa kali.
@@ -243,7 +243,7 @@ directCommands:
     description: ''
   - isRequired: true
     name: --registry -r
-    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    summary: Nama registri kontainer. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
     description: ''
   optionalParameters:
   - name: --resource-group -g
@@ -266,7 +266,7 @@ directCommands:
   requiredParameters:
   - isRequired: true
     name: --registry -r
-    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    summary: Nama registri kontainer. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
     description: ''
   optionalParameters:
   - name: --resource-group -g
@@ -285,18 +285,18 @@ directCommands:
                           [--run-status]
                           [--top]
   examples:
-  - summary: Cantumkan semua eksekusi untuk registri dan perlihatkan hasilnya dalam tabel.
+  - summary: Mencantumkan semua eksekusi untuk registri dan memperlihatkan hasilnya dalam tabel.
     syntax: az acr task list-runs -r MyRegistry -o table
   - summary: Daftar berjalan untuk tugas dan memperlihatkan hasilnya dalam tabel.
     syntax: az acr task list-runs -r MyRegistry -n MyTask -o table
-  - summary: Cantumkan 10 eksekusi terakhir yang berhasil untuk registri dan perlihatkan hasilnya dalam tabel.
+  - summary: Cantumkan 10 eksekusi terakhir yang berhasil untuk registri dan tampilkan hasilnya dalam tabel.
     syntax: az acr task list-runs -r MyRegistry --run-status Succeeded --top 10 -o table
-  - summary: Cantumkan semua eksekusi yang membangun gambar 'hello-world' untuk registri dan tampilkan hasilnya dalam tabel.
+  - summary: Cantumkan semua eksekusi yang membangun gambar 'hello-world' untuk registri dan menampilkan hasilnya dalam tabel.
     syntax: az acr task list-runs -r MyRegistry --image hello-world -o table
   requiredParameters:
   - isRequired: true
     name: --registry -r
-    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    summary: Nama registri kontainer. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
     description: ''
   optionalParameters:
   - name: --image -t
@@ -324,6 +324,7 @@ directCommands:
     az acr task logs --registry
                      [--image]
                      [--name]
+                     [--no-format]
                      [--resource-group]
                      [--run-id]
   examples:
@@ -338,7 +339,7 @@ directCommands:
   requiredParameters:
   - isRequired: true
     name: --registry -r
-    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    summary: Nama registri kontainer. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
     description: ''
   optionalParameters:
   - name: --image -t
@@ -346,6 +347,9 @@ directCommands:
     description: ''
   - name: --name -n
     summary: Nama tugas.
+    description: ''
+  - name: --no-format
+    summary: Menunjukkan apakah log harus ditampilkan dalam format mentah.
     description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
@@ -366,6 +370,7 @@ directCommands:
                     [--context]
                     [--file]
                     [--log-template]
+                    [--no-format]
                     [--no-logs]
                     [--no-wait]
                     [--resource-group]
@@ -390,7 +395,7 @@ directCommands:
     description: ''
   - isRequired: true
     name: --registry -r
-    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    summary: Nama registri kontainer. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
     description: ''
   optionalParameters:
   - name: --agent-pool
@@ -400,13 +405,16 @@ directCommands:
     summary: Argumen build dalam format '--arg name[=value]'. Kelipatan didukung dengan meneruskan '--arg' beberapa kali.
     description: ''
   - name: --context -c
-    summary: URL lengkap ke repositori kode sumber (Memerlukan akhiran '.git' untuk repositori github) atau repositori artefak OCI di registri kontainer Azure (misalnya, 'oci://myregistry.azurecr.io/myartifact:mytag'). Jika '/dev/null' ditentukan, nilai akan diatur ke Tidak Ada dan diabaikan. Ini adalah argumen yang diperlukan jika tugas bukan tugas sistem.
+    summary: URL lengkap ke repositori kode sumber (Memerlukan akhiran '.git' untuk repositori github) atau tarball jarak jauh (misalnya, 'http://server/context.tar.gz'), atau repositori artefak OCI di registri kontainer Azure (misalnya, 'oci://myregistry.azurecr.io/myartifact:mytag'). Jika '/dev/null' ditentukan, nilai akan diatur ke Tidak Ada dan diabaikan. Ini adalah argumen yang diperlukan jika tugas bukan tugas sistem.
     description: ''
   - name: --file -f
     summary: Jalur relatif file tugas/docker ke folder akar kode sumber. File tugas harus diakhiri dengan '.yaml' atau disalurkan dari input standar menggunakan '-'.
     description: ''
   - name: --log-template
     summary: "Templat repositori dan tag untuk menjalankan artefak log menggunakan format: 'log/repo:tag' (misalnya, 'acr/logs:{{.Run.ID}}'). Hanya berlaku untuk registri yang diaktifkan CMK."
+    description: ''
+  - name: --no-format
+    summary: Menunjukkan apakah log harus ditampilkan dalam format mentah.
     description: ''
   - name: --no-logs
     summary: Jangan tampilkan log setelah berhasil mengantre build.
@@ -454,7 +462,7 @@ directCommands:
     description: ''
   - isRequired: true
     name: --registry -r
-    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    summary: Nama registri kontainer. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
     description: ''
   optionalParameters:
   - name: --resource-group -g
@@ -478,7 +486,7 @@ directCommands:
   requiredParameters:
   - isRequired: true
     name: --registry -r
-    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    summary: Nama registri kontainer. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
     description: ''
   - isRequired: true
     name: --run-id
@@ -543,7 +551,7 @@ directCommands:
     description: ''
   - isRequired: true
     name: --registry -r
-    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    summary: Nama registri kontainer. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
     description: ''
   optionalParameters:
   - name: --agent-pool
@@ -567,7 +575,7 @@ directCommands:
     summary: Menunjukkan apakah pemicu penerapan kontrol sumber diaktifkan.
     description: ''
   - name: --context -c
-    summary: URL lengkap ke repositori kode sumber (Memerlukan akhiran '.git' untuk repositori github) atau repositori artefak OCI di registri kontainer Azure (misalnya, 'oci://myregistry.azurecr.io/myartifact:mytag'). Jika '/dev/null' ditentukan, nilai akan diatur ke Tidak Ada dan diabaikan. Ini adalah argumen yang diperlukan jika tugas bukan tugas sistem.
+    summary: URL lengkap ke repositori kode sumber (Memerlukan akhiran '.git' untuk repositori github) atau tarball jarak jauh (misalnya, 'http://server/context.tar.gz'), atau repositori artefak OCI di registri kontainer Azure (misalnya, 'oci://myregistry.azurecr.io/myartifact:mytag'). Jika '/dev/null' ditentukan, nilai akan diatur ke Tidak Ada dan diabaikan. Ini adalah argumen yang diperlukan jika tugas bukan tugas sistem.
     description: ''
   - name: --cpu
     summary: Konfigurasi CPU dalam hal jumlah inti yang diperlukan untuk eksekusi.
@@ -606,7 +614,7 @@ directCommands:
     summary: Argumen build rahasia dalam format '--secret-arg name[=value]'. Kelipatan didukung dengan meneruskan --secret-arg beberapa kali.
     description: ''
   - name: --set
-    summary: Nilai tugas dalam format '--set nama[=value]'. Kelipatan didukung dengan melewati --set beberapa kali.
+    summary: Nilai tugas dalam format '--set name[=value]'. Kelipatan didukung dengan meneruskan --set beberapa kali.
     description: ''
   - name: --set-secret
     summary: Nilai tugas rahasia dalam format '--set-secret name[=value]'. Kelipatan didukung dengan meneruskan --set-secret beberapa kali.
@@ -645,7 +653,7 @@ directCommands:
   requiredParameters:
   - isRequired: true
     name: --registry -r
-    summary: Nama registri kontainer. Ini harus ditentukan dalam huruf kecil. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
+    summary: Nama registri kontainer. Anda dapat mengonfigurasi nama registri default menggunakan `az configure --defaults acr=<registry name>`.
     description: ''
   - isRequired: true
     name: --run-id
@@ -707,9 +715,9 @@ metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
   ms.date: 03/28/2022
   description: Kelola kumpulan langkah-langkah untuk membangun, menguji, dan OS & Framework menambal gambar kontainer menggunakan Azure Container Registries.
-  ms.openlocfilehash: f13402ff8270d85287b07366441c8219f9b172cc
-  ms.sourcegitcommit: d016676aca62d5461b07446d98cf38e30bba07cd
+  ms.openlocfilehash: 12031acb96cee571a7786ee1fdc704411f5939c7
+  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/19/2022
-  ms.locfileid: "143883397"
+  ms.lasthandoff: 04/27/2022
+  ms.locfileid: "144048227"
