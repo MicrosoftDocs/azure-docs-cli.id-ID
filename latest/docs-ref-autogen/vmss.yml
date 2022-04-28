@@ -5,7 +5,7 @@ summary: Mengelola pengelompokan komputer virtual dalam Azure Virtual Machine Sc
 description: ''
 directCommands:
 - uid: az_vmss_create
-  name: buat vmss az
+  name: az vmss create
   summary: Membuat Set Skala Komputer Virtual Azure.
   description: Untuk tutorial end-to-end, lihat https://docs.microsoft.com/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-linux-create-cli.
   syntax: >-
@@ -34,6 +34,7 @@ directCommands:
                    [--data-disk-iops]
                    [--data-disk-mbps]
                    [--data-disk-sizes-gb]
+                   [--disable-integrity-monitoring]
                    [--disable-overprovision]
                    [--dns-servers]
                    [--edge-zone]
@@ -247,6 +248,9 @@ directCommands:
   - name: --data-disk-sizes-gb
     summary: Ukuran disk data terkelola kosong yang dipisahkan spasi dalam GB untuk dibuat.
     description: ''
+  - name: --disable-integrity-monitoring
+    summary: Nonaktifkan perilaku default menginstal ekstensi pengesahan tamu dan mengaktifkan Identitas yang Ditetapkan Sistem untuk VM dan VMSS yang diaktifkan Peluncuran Tepercaya.
+    description: ''
   - name: --disable-overprovision
     summary: Opsi provisi berlebih (lihat https://azure.microsoft.com/documentation/articles/virtual-machine-scale-sets-overview/ untuk detailnya).
     description: ''
@@ -337,19 +341,19 @@ directCommands:
     summary: Harga maksimum (dalam Dolar AS) yang bersedia Anda bayar untuk Spot VM/VMSS. -1 menunjukkan bahwa Spot VM/VMSS tidak boleh dikeluarkan karena alasan harga.
     description: ''
   - name: --max-unhealthy-instance-percent
-    summary: 'Persentase maksimum dari total instans komputer virtual dalam set skala yang secara bersamaan dapat tidak sehat. Default: 20%.'
+    summary: 'Persentase maksimum dari total instans komputer virtual dalam set skala yang dapat secara bersamaan tidak sehat. Default: 20%.'
     description: ''
   - name: --max-unhealthy-upgraded-instance-percent
     summary: 'Persentase maksimum instans komputer virtual yang ditingkatkan yang dapat ditemukan dalam keadaan tidak sehat. Default: 20%.'
     description: ''
   - name: --network-api-version
-    summary: Tentukan versi MICROSOFT.Network API yang digunakan saat membuat sumber daya jaringan di Konfigurasi Antarmuka Jaringan untuk Set Skala Komputer Virtual dengan mode orkestrasi 'Flexible'. Nilai defaultnya adalah 2020-11-01.
+    summary: Tentukan versi MICROSOFT.Network API yang digunakan saat membuat sumber daya jaringan di Konfigurasi Antarmuka Jaringan untuk Set Skala Komputer Virtual dengan mode orkestrasi 'Fleksibel'. Nilai defaultnya adalah 2020-11-01.
     description: ''
   - name: --no-wait
     summary: Jangan menunggu operasi jangka panjang selesai.
     description: ''
   - name: --nsg
-    summary: Nama atau ID dari Kelompok Keamanan Jaringan yang ada.
+    summary: Nama atau ID Grup Keamanan Jaringan yang ada.
     description: ''
   - name: --orchestration-mode
     defaultValue: Uniform
@@ -375,9 +379,9 @@ directCommands:
     description: ''
   - name: --patch-mode
     parameterValueGroup: AutomaticByOS, AutomaticByPlatform, ImageDefault, Manual
-    summary: 'Mode patching in-guest ke komputer virtual IaaS. Nilai yang diizinkan untuk VM Windows: AutomaticByOS, AutomaticByPlatform, Manual. Nilai yang diizinkan untuk Linux VM: AutomaticByPlatform, ImageDefault. Manual - Anda mengontrol aplikasi patch ke komputer virtual. Anda melakukan ini dengan menerapkan patch secara manual di dalam VM. Dalam mode ini, pembaruan otomatis dinonaktifkan; paramater --enable-auto-update harus false. AutomaticByOS - Komputer virtual akan diperbarui secara otomatis oleh OS. Parameter --enable-auto-update harus benar. AutomaticByPlatform - komputer virtual akan diperbarui secara otomatis oleh OS. ImageDefault - Konfigurasi patching default komputer virtual digunakan. Parameter --enable-agent dan --enable-auto-update harus benar.'
+    summary: 'Mode patching in-guest ke komputer virtual IaaS. Nilai yang diizinkan untuk VM Windows: AutomaticByOS, AutomaticByPlatform, Manual. Nilai yang diizinkan untuk VM Linux: AutomaticByPlatform, ImageDefault. Manual - Anda mengontrol aplikasi patch ke komputer virtual. Anda melakukan ini dengan menerapkan patch secara manual di dalam VM. Dalam mode ini, pembaruan otomatis dinonaktifkan; paramater --enable-auto-update harus false. AutomaticByOS - Komputer virtual akan diperbarui secara otomatis oleh OS. Parameter --enable-auto-update harus benar. AutomaticByPlatform - komputer virtual akan diperbarui secara otomatis oleh OS. ImageDefault - Konfigurasi patching default komputer virtual digunakan. Parameter --enable-agent dan --enable-auto-update harus benar.'
     description: ''
-  - name: --pause-time-between-batchs
+  - name: --pause-time-between-batches
     summary: 'Waktu tunggu antara menyelesaikan pembaruan untuk semua komputer virtual dalam satu batch dan memulai batch berikutnya. Default: 0 detik.'
     description: ''
   - name: --plan-name
@@ -402,7 +406,7 @@ directCommands:
     parameterValueGroup: false, true
     summary: Atur properti Boolean ini akan menyebabkan semua instans yang tidak sehat dalam set skala ditingkatkan sebelum instans sehat apa pun.
     description: ''
-  - name: --prioritas
+  - name: --priority
     parameterValueGroup: Low, Regular, Spot
     summary: Prioritas. Gunakan 'Spot' untuk menjalankan beban kerja berumur pendek dengan cara yang hemat biaya. Enum 'Rendah' akan ditolak di masa depan. Silakan gunakan 'Spot' untuk menyebarkan Azure spot VM dan/atau VMSS. Default ke Reguler.
     description: ''
@@ -426,7 +430,7 @@ directCommands:
     parameterValueGroup: Default, NewestVM, OldestVM
     summary: Tentukan kebijakan penyempurnaan skala (dibatasi ruang) yang memutuskan komputer virtual mana yang dipilih untuk dihapus saat Set Skala Komputer Virtual diskalakan.
     description: ''
-  - name: --cakupan
+  - name: --scope
     summary: Cakupan yang dapat diakses oleh identitas yang ditetapkan sistem.
     description: ''
   - name: --secrets
@@ -555,7 +559,7 @@ directCommands:
                    [--resource-group]
   optionalParameters:
   - name: --force-deletion
-    summary: Parameter opsional untuk memaksa penghapusan set skala VM. (Fitur dalam Pratinjau).
+    summary: Parameter opsional untuk menghapus paksa set skala VM. (Fitur dalam Pratinjau).
     description: ''
   - name: --ids
     summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
@@ -651,7 +655,7 @@ directCommands:
   description: ''
   syntax: az vmss list [--resource-group]
   examples:
-  - summary: Mencantumkan VMSS (dibuat otomatis)
+  - summary: Daftar VMSS (dibuat otomatis)
     syntax: az vmss list --resource-group MyResourceGroup
   optionalParameters:
   - name: --resource-group -g
@@ -835,7 +839,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
 - uid: az_vmss_scale
-  name: skala az vmss
+  name: az vmss scale
   summary: Ubah jumlah VM dalam VMSS.
   description: ''
   syntax: >-
@@ -1158,7 +1162,7 @@ directCommands:
   - name: --no-wait
     summary: Jangan menunggu operasi jangka panjang selesai.
     description: ''
-  - name: --pause-time-between-batchs
+  - name: --pause-time-between-batches
     summary: 'Waktu tunggu antara menyelesaikan pembaruan untuk semua komputer virtual dalam satu batch dan memulai batch berikutnya. Default: 0 detik.'
     description: ''
   - name: --ppg
@@ -1168,7 +1172,7 @@ directCommands:
     parameterValueGroup: false, true
     summary: Atur properti Boolean ini akan menyebabkan semua instans yang tidak sehat dalam set skala ditingkatkan sebelum instans sehat apa pun.
     description: ''
-  - name: --prioritas
+  - name: --priority
     parameterValueGroup: Low, Regular, Spot
     summary: Prioritas. Gunakan 'Spot' untuk menjalankan beban kerja berumur pendek dengan cara yang hemat biaya. Enum 'Rendah' akan ditolak di masa depan. Silakan gunakan 'Spot' untuk menyebarkan Azure spot VM dan/atau VMSS. Default ke Reguler.
     description: ''
@@ -1218,7 +1222,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
 - uid: az_vmss_update-instances
   name: az vmss update-instances
-  summary: Meningkatkan VM dalam VMSS.
+  summary: Tingkatkan VM dalam VMSS.
   description: ''
   syntax: >-
     az vmss update-instances --instance-ids
@@ -1226,7 +1230,7 @@ directCommands:
                              --resource-group
                              [--no-wait]
   examples:
-  - summary: Meningkatkan VM dalam VMSS. (dibuat otomatis)
+  - summary: Tingkatkan VM dalam VMSS. (dibuat otomatis)
     syntax: az vmss update-instances --instance-ids 1 --name MyScaleSet --resource-group MyResourceGroup
   requiredParameters:
   - isRequired: true
@@ -1263,9 +1267,9 @@ directCommands:
                  [--timeout]
                  [--updated]
   examples:
-  - summary: Tempatkan CLI dalam status menunggu hingga VMSS telah diperbarui.
+  - summary: Tempatkan CLI dalam status menunggu hingga VMSS diperbarui.
     syntax: az vmss wait --updated --name MyScaleSet --resource-group MyResourceGroup
-  - summary: Tempatkan CLI dalam status menunggu hingga instans VMSS telah diperbarui.
+  - summary: Tempatkan CLI dalam status menunggu hingga instans VMSS diperbarui.
     syntax: az vmss wait --updated --instance-id 1 --name MyScaleSet --resource-group MyResourceGroup
   - summary: Tempatkan CLI dalam status menunggu hingga kondisi set skala terpenuhi. (dibuat otomatis)
     syntax: az vmss wait --created --name MyScaleSet --resource-group MyResourceGroup
@@ -1302,7 +1306,7 @@ directCommands:
     defaultValue: "3600"
     summary: Waktu tunggu maksimum dalam detik.
     description: ''
-  - name: --diperbarui
+  - name: --updated
     summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
@@ -1394,9 +1398,9 @@ metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
   ms.date: 04/01/2022
   description: Mengelola pengelompokan komputer virtual dalam Azure Virtual Machine Scale Set (VMSS).
-  ms.openlocfilehash: 587c96e8d9b4995dab7bc26f244f6d7a14f8c26d
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: cc9aeefd765ee6280fb3e904dc40613de5542d9f
+  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141420299"
+  ms.lasthandoff: 04/27/2022
+  ms.locfileid: "144049757"
