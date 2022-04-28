@@ -16,6 +16,7 @@ directCommands:
                                           [--account-name]
                                           [--auth-mode {key, login}]
                                           [--batch-size]
+                                          [--blob-endpoint]
                                           [--connection-string]
                                           [--continuation]
                                           [--continue-on-failure {false, true}]
@@ -40,7 +41,7 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --account-key
-    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
     description: ''
   - name: --account-name
     summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
@@ -52,6 +53,9 @@ directCommands:
   - name: --batch-size
     summary: Opsional. Jika ukuran himpunan data melebihi ukuran batch, maka operasi akan dibagi menjadi beberapa permintaan sehingga kemajuan dapat dilacak. Ukuran batch harus antara 1 dan 2000. Default saat tidak ditentukan adalah 2000.
     description: ''
+  - name: --blob-endpoint
+    summary: 'Storage titik akhir layanan data. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Anda dapat menemukan setiap titik akhir utama layanan dengan `az storage account show`. Variabel lingkungan: AZURE_STORAGE_SERVICE_ENDPOINT.'
+    description: ''
   - name: --connection-string
     summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
@@ -62,11 +66,11 @@ directCommands:
     parameterValueGroup: false, true
     summary: Jika diatur ke False, operasi akan berakhir dengan cepat saat mengalami kesalahan pengguna (4XX). Jika True, operasi akan mengabaikan kesalahan pengguna dan melanjutkan operasi pada sub-entitas lain dari direktori. Token kelanjutan hanya akan dikembalikan ketika --continue-on-failure adalah True jika terjadi kesalahan pengguna. Jika tidak diatur, nilai defaultnya adalah False untuk ini.
     description: ''
-  - name: --max-baches
+  - name: --max-batches
     summary: Opsional. Tentukan jumlah maksimum batch yang dapat dijalankan oleh operasi Access Control perubahan tunggal. Jika maksimum tercapai sebelum semua sub-jalur diproses, maka token kelanjutan dapat digunakan untuk melanjutkan operasi. Nilai kosong menunjukkan bahwa jumlah maksimum batch dalam unbound dan operasi berlanjut hingga akhir.
     description: ''
   - name: --sas-token
-    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   - name: --timeout
     summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
@@ -83,6 +87,7 @@ directCommands:
                              [--account-name]
                              [--acl]
                              [--auth-mode {key, login}]
+                             [--blob-endpoint]
                              [--connection-string]
                              [--group]
                              [--owner]
@@ -108,7 +113,7 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --account-key
-    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
     description: ''
   - name: --account-name
     summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
@@ -120,6 +125,9 @@ directCommands:
     parameterValueGroup: key, login
     summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
     description: ''
+  - name: --blob-endpoint
+    summary: 'Storage titik akhir layanan data. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Anda dapat menemukan setiap titik akhir utama layanan dengan `az storage account show`. Variabel lingkungan: AZURE_STORAGE_SERVICE_ENDPOINT.'
+    description: ''
   - name: --connection-string
     summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
@@ -130,10 +138,10 @@ directCommands:
     summary: Pengguna pemilik file atau direktori. Pengguna Azure Active Directory ID objek atau nama prinsipal pengguna untuk ditetapkan sebagai pemilik. Untuk informasi lebih lanjut, silakan merujuk ke https://docs.microsoft.com/azure/storage/blobs/data-lake-storage-access-control#the-owning-user.
     description: ''
   - name: --permissions
-    summary: Tidak valid bersama dengan acl. Izin akses POSIX untuk pemilik file, grup pemilik file, dan lainnya. Setiap kelas dapat diberikan izin read(r), write(w), atau execute(x). Notasi simbolis (rwxrw-rw-) dan oktal 4 digit (misalnya 0766) didukung.'.
+    summary: Tidak valid bersama dengan acl. Izin akses POSIX untuk pemilik file, grup pemilik file, dan lainnya. Setiap kelas dapat diberikan izin read(r), write(w), atau execute(x). Notasi simbolis (rwxrw-rw-) dan 4 digit oktal (misalnya 0766) didukung.'.
     description: ''
   - name: --sas-token
-    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_fs_access_set-recursive
@@ -148,6 +156,7 @@ directCommands:
                                        [--account-name]
                                        [--auth-mode {key, login}]
                                        [--batch-size]
+                                       [--blob-endpoint]
                                        [--connection-string]
                                        [--continuation]
                                        [--continue-on-failure {false, true}]
@@ -172,7 +181,7 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --account-key
-    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
     description: ''
   - name: --account-name
     summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
@@ -184,21 +193,24 @@ directCommands:
   - name: --batch-size
     summary: Opsional. Jika ukuran himpunan data melebihi ukuran batch, maka operasi akan dibagi menjadi beberapa permintaan sehingga kemajuan dapat dilacak. Ukuran batch harus antara 1 dan 2000. Default saat tidak ditentukan adalah 2000.
     description: ''
+  - name: --blob-endpoint
+    summary: 'Storage titik akhir layanan data. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Anda dapat menemukan setiap titik akhir utama layanan dengan `az storage account show`. Variabel lingkungan: AZURE_STORAGE_SERVICE_ENDPOINT.'
+    description: ''
   - name: --connection-string
     summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
-  - name: --kelanjutan
+  - name: --continuation
     summary: Token kelanjutan opsional yang dapat digunakan untuk melanjutkan operasi yang dihentikan sebelumnya.
     description: ''
   - name: --continue-on-failure
     parameterValueGroup: false, true
     summary: Jika diatur ke False, operasi akan berakhir dengan cepat saat mengalami kesalahan pengguna (4XX). Jika True, operasi akan mengabaikan kesalahan pengguna dan melanjutkan operasi pada sub-entitas lain dari direktori. Token kelanjutan hanya akan dikembalikan ketika --continue-on-failure adalah True jika terjadi kesalahan pengguna. Jika tidak diatur, nilai defaultnya adalah False untuk ini.
     description: ''
-  - name: --max-batchs
+  - name: --max-batches
     summary: Opsional. Tentukan jumlah maksimum batch yang dapat dijalankan oleh operasi Access Control perubahan tunggal. Jika maksimum tercapai sebelum semua sub-jalur diproses, maka token kelanjutan dapat digunakan untuk melanjutkan operasi. Nilai kosong menunjukkan bahwa jumlah maksimum batch dalam unbound dan operasi berlanjut hingga akhir.
     description: ''
   - name: --sas-token
-    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   - name: --timeout
     summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
@@ -214,10 +226,11 @@ directCommands:
                               [--account-key]
                               [--account-name]
                               [--auth-mode {key, login}]
+                              [--blob-endpoint]
                               [--connection-string]
                               [--sas-token]
   examples:
-  - summary: Perlihatkan properti kontrol akses jalur.
+  - summary: Tampilkan properti kontrol akses jalur.
     syntax: az storage fs access show -p dir -f myfilesystem --account-name myadlsaccount --account-key 0000-0000
   requiredParameters:
   - isRequired: true
@@ -230,7 +243,7 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --account-key
-    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
     description: ''
   - name: --account-name
     summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
@@ -239,11 +252,14 @@ directCommands:
     parameterValueGroup: key, login
     summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
     description: ''
+  - name: --blob-endpoint
+    summary: 'Storage titik akhir layanan data. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Anda dapat menemukan setiap titik akhir utama layanan dengan `az storage account show`. Variabel lingkungan: AZURE_STORAGE_SERVICE_ENDPOINT.'
+    description: ''
   - name: --connection-string
     summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
   - name: --sas-token
-    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_fs_access_update-recursive
@@ -258,6 +274,7 @@ directCommands:
                                           [--account-name]
                                           [--auth-mode {key, login}]
                                           [--batch-size]
+                                          [--blob-endpoint]
                                           [--connection-string]
                                           [--continuation]
                                           [--continue-on-failure {false, true}]
@@ -282,7 +299,7 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --account-key
-    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
     description: ''
   - name: --account-name
     summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
@@ -294,21 +311,24 @@ directCommands:
   - name: --batch-size
     summary: Opsional. Jika ukuran himpunan data melebihi ukuran batch, maka operasi akan dibagi menjadi beberapa permintaan sehingga kemajuan dapat dilacak. Ukuran batch harus antara 1 dan 2000. Default saat tidak ditentukan adalah 2000.
     description: ''
+  - name: --blob-endpoint
+    summary: 'Storage titik akhir layanan data. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Anda dapat menemukan setiap titik akhir utama layanan dengan `az storage account show`. Variabel lingkungan: AZURE_STORAGE_SERVICE_ENDPOINT.'
+    description: ''
   - name: --connection-string
     summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
-  - name: --kelanjutan
+  - name: --continuation
     summary: Token kelanjutan opsional yang dapat digunakan untuk melanjutkan operasi yang dihentikan sebelumnya.
     description: ''
   - name: --continue-on-failure
     parameterValueGroup: false, true
     summary: Jika diatur ke False, operasi akan berakhir dengan cepat saat mengalami kesalahan pengguna (4XX). Jika True, operasi akan mengabaikan kesalahan pengguna dan melanjutkan operasi pada sub-entitas lain dari direktori. Token kelanjutan hanya akan dikembalikan ketika --continue-on-failure adalah True jika terjadi kesalahan pengguna. Jika tidak diatur, nilai defaultnya adalah False untuk ini.
     description: ''
-  - name: --max-batchs
+  - name: --max-batches
     summary: Opsional. Tentukan jumlah maksimum batch yang dapat dijalankan oleh operasi Access Control perubahan tunggal. Jika maksimum tercapai sebelum semua sub-jalur diproses, maka token kelanjutan dapat digunakan untuk melanjutkan operasi. Nilai kosong menunjukkan bahwa jumlah maksimum batch dalam unbound dan operasi berlanjut hingga akhir.
     description: ''
   - name: --sas-token
-    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   - name: --timeout
     summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
@@ -339,11 +359,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 03/29/2022
+  ms.date: 04/13/2022
   description: Mengelola akses dan izin sistem file untuk akun Azure Data Lake Storage Gen2.
-  ms.openlocfilehash: c757ae2127aa1d8e1bca48c2e01d63cf10810a7c
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: 8625896ca6be4383cedcdf16cc1b2aaabfd73c3f
+  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141429227"
+  ms.lasthandoff: 04/27/2022
+  ms.locfileid: "144058735"

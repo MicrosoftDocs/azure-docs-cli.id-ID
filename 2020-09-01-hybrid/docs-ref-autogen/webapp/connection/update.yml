@@ -353,7 +353,7 @@ directCommands:
 
       object-id : Opsional. Id objek dari perwakilan layanan (Aplikasi Perusahaan).
 
-      rahasia : Diperlukan. Rahasia perwakilan layanan.
+      secret : Diperlukan. Rahasia perwakilan layanan.
   - name: --system-identity
     summary: Info autentikasi identitas yang ditetapkan sistem.
     description: 'Penggunaan: --system-identity.'
@@ -428,7 +428,7 @@ directCommands:
 
       object-id : Opsional. Id objek dari perwakilan layanan (Aplikasi Perusahaan).
 
-      rahasia : Diperlukan. Rahasia perwakilan layanan.
+      secret : Diperlukan. Rahasia perwakilan layanan.
   - name: --system-identity
     summary: Info autentikasi identitas yang ditetapkan sistem.
     description: 'Penggunaan: --system-identity.'
@@ -446,7 +446,7 @@ directCommands:
     description: ''
 - uid: az_webapp_connection_update_cosmos-table
   name: az webapp connection update cosmos-table
-  summary: Perbarui aplikasi web ke koneksi cosmos-table.
+  summary: Perbarui webapp ke koneksi cosmos-table.
   description: ''
   syntax: >-
     az webapp connection update cosmos-table [--client-type {dotnet, java, nodejs, none, python, springBoot}]
@@ -1100,6 +1100,59 @@ directCommands:
   - name: --vault-id
     summary: Id brankas kunci untuk menyimpan nilai rahasia.
     description: ''
+- uid: az_webapp_connection_update_sql
+  name: az webapp connection update sql
+  summary: Perbarui aplikasi web ke koneksi sql.
+  description: ''
+  syntax: >-
+    az webapp connection update sql [--client-type {django, dotnet, go, java, nodejs, none, php, python, ruby, springBoot}]
+                                    [--connection]
+                                    [--id]
+                                    [--name]
+                                    [--no-wait]
+                                    [--resource-group]
+                                    [--secret]
+                                    [--service-endpoint {false, true}]
+                                    [--vault-id]
+  examples:
+  - summary: Memperbarui jenis koneksi klien dengan nama sumber daya
+    syntax: az webapp connection update sql -g WebAppRG -n MyWebApp --connection MyConnection --client-type dotnet
+  - summary: Memperbarui jenis koneksi klien dengan id sumber daya
+    syntax: az webapp connection update sql --id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.Web/sites/{site}/providers/Microsoft.ServiceLinker/linkers/{linker} --client-type dotnet
+  optionalParameters:
+  - name: --client-type
+    parameterValueGroup: django, dotnet, go, java, nodejs, none, php, python, ruby, springBoot
+    summary: Jenis klien yang digunakan pada aplikasi web.
+    description: ''
+  - name: --connection
+    summary: Nama koneksi webapp.
+    description: ''
+  - name: --id
+    summary: Id sumber daya koneksi. ['--resource-group', '--name', '--connection'] diperlukan jika '--id' tidak ditentukan.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi web. Diperlukan jika '--id' tidak ditentukan.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya yang berisi aplikasi web. Diperlukan jika '--id' tidak ditentukan.
+    description: ''
+  - name: --secret
+    summary: Info autentikasi rahasia.
+    description: >-
+      Penggunaan: --secret name=XX secret=XX
+
+
+      nama : Diperlukan. Nama pengguna atau nama akun untuk autentikasi rahasia. rahasia : Diperlukan. Kata sandi atau kunci akun untuk autentikasi rahasia.
+  - name: --service-endpoint
+    parameterValueGroup: false, true
+    summary: Koneksi layanan target menurut titik akhir layanan. Sumber daya sumber harus berada di VNet dan SKU target harus mendukung fitur titik akhir layanan. Solusi jaringan virtual lainnya (tautan privat) untuk koneksi dapat ditemukan di Portal Microsoft Azure.
+    description: ''
+  - name: --vault-id
+    summary: Id brankas kunci untuk menyimpan nilai rahasia.
+    description: ''
 - uid: az_webapp_connection_update_storage-blob
   name: az webapp connection update storage-blob
   summary: Perbarui aplikasi web ke koneksi storage-blob.
@@ -1283,7 +1336,7 @@ directCommands:
 
       object-id : Opsional. Id objek dari perwakilan layanan (Aplikasi Perusahaan).
 
-      rahasia : Diperlukan. Rahasia perwakilan layanan.
+      secret : Diperlukan. Rahasia perwakilan layanan.
   - name: --system-identity
     summary: Info autentikasi identitas yang ditetapkan sistem.
     description: 'Penggunaan: --system-identity.'
@@ -1348,6 +1401,76 @@ directCommands:
   - name: --vault-id
     summary: Id brankas kunci untuk menyimpan nilai rahasia.
     description: ''
+- uid: az_webapp_connection_update_webpubsub
+  name: az webapp connection update webpubsub
+  summary: Perbarui webapp ke koneksi webpubsub.
+  description: ''
+  syntax: >-
+    az webapp connection update webpubsub [--client-type {dotnet, java, nodejs, none, python}]
+                                          [--connection]
+                                          [--id]
+                                          [--name]
+                                          [--no-wait]
+                                          [--resource-group]
+                                          [--secret]
+                                          [--service-principal]
+                                          [--system-identity]
+                                          [--user-identity]
+                                          [--vault-id]
+  examples:
+  - summary: Memperbarui jenis koneksi klien dengan nama sumber daya
+    syntax: az webapp connection update webpubsub -g WebAppRG -n MyWebApp --connection MyConnection --client-type dotnet
+  - summary: Memperbarui jenis koneksi klien dengan id sumber daya
+    syntax: az webapp connection update webpubsub --id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.Web/sites/{site}/providers/Microsoft.ServiceLinker/linkers/{linker} --client-type dotnet
+  optionalParameters:
+  - name: --client-type
+    parameterValueGroup: dotnet, java, nodejs, none, python
+    summary: Jenis klien yang digunakan pada aplikasi web.
+    description: ''
+  - name: --connection
+    summary: Nama koneksi webapp.
+    description: ''
+  - name: --id
+    summary: Id sumber daya koneksi. ['--resource-group', '--name', '--connection'] diperlukan jika '--id' tidak ditentukan.
+    description: ''
+  - name: --name -n
+    summary: Nama aplikasi web. Diperlukan jika '--id' tidak ditentukan.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya yang berisi aplikasi web. Diperlukan jika '--id' tidak ditentukan.
+    description: ''
+  - name: --secret
+    summary: Info autentikasi rahasia.
+    description: 'Penggunaan: --secret.'
+  - name: --service-principal
+    summary: Info autentikasi perwakilan layanan.
+    description: >-
+      Penggunaan: --service-principal client-id=XX secret=XX
+
+
+      client-id : Diperlukan. Id klien dari perwakilan layanan.
+
+      object-id : Opsional. Id objek dari perwakilan layanan (Aplikasi Perusahaan).
+
+      rahasia : Diperlukan. Rahasia perwakilan layanan.
+  - name: --system-identity
+    summary: Info autentikasi identitas yang ditetapkan sistem.
+    description: 'Penggunaan: --system-identity.'
+  - name: --user-identity
+    summary: Info autentikasi identitas yang ditetapkan pengguna.
+    description: >-
+      Penggunaan: --user-identity client-id=XX subs-id=XX
+
+
+      client-id : Diperlukan. Id klien dari identitas yang ditetapkan pengguna.
+
+      subs-id : Diperlukan. Id langganan identitas yang ditetapkan pengguna.
+  - name: --vault-id
+    summary: Id brankas kunci untuk menyimpan nilai rahasia.
+    description: ''
 commands:
 - az_webapp_connection_update_appconfig
 - az_webapp_connection_update_confluent-cloud
@@ -1366,10 +1489,12 @@ commands:
 - az_webapp_connection_update_redis-enterprise
 - az_webapp_connection_update_servicebus
 - az_webapp_connection_update_signalr
+- az_webapp_connection_update_sql
 - az_webapp_connection_update_storage-blob
 - az_webapp_connection_update_storage-file
 - az_webapp_connection_update_storage-queue
 - az_webapp_connection_update_storage-table
+- az_webapp_connection_update_webpubsub
 globalParameters:
 - name: --debug
   summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
@@ -1389,9 +1514,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Memperbarui koneksi webapp.
-  ms.openlocfilehash: 9e1cc28e12b64dd58bcaeaa2940067ff5c39f6ea
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: 6ca0d757de2629e5b9ab54e8faaa91088a599207
+  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141449928"
+  ms.lasthandoff: 04/27/2022
+  ms.locfileid: "144079934"
