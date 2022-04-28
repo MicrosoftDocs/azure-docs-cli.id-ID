@@ -5,12 +5,12 @@ manager: barbkess
 ms.date: 09/29/2020
 ms.topic: include
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 41bd9e223e3be325194a97d61119cb481e207c2a
-ms.sourcegitcommit: d016676aca62d5461b07446d98cf38e30bba07cd
+ms.openlocfilehash: 7de8b88fa4ebbab7994624f94abb96572af4901e
+ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/19/2022
-ms.locfileid: "143910268"
+ms.lasthandoff: 04/27/2022
+ms.locfileid: "144093504"
 ---
 ## <a name="overview"></a>Gambaran Umum
 
@@ -22,7 +22,7 @@ Manajer paket `apt` berisi paket x86_64 untuk Azure CLI yang telah diuji pada di
 | Debian       | 9 (Stretch), 10 (Buster), 11 (Bullseye) |
 
 > [!WARNING]
-> Mulai dari Azure CLI 2.34.0, tidak ada paket DEB yang dirilis untuk Ubuntu 14.04 (Trusty Tahir) dan Debian 8 (Jessie). Anda dapat terus menggunakan versi historis Azure CLI pada sistem ini, tetapi tidak akan ada pembaruan atau perbaikan bug. Pertimbangkan untuk memutakhirkan ke versi Ubuntu atau Debian yang lebih baru untuk menggunakan Azure CLI terbaru.
+> Mulai dari Azure CLI 2.37.0, tidak ada paket DEB yang akan dirilis untuk Ubuntu 16.04 (Xenial Xerus) dan Debian 9 (Stretch). Anda dapat terus menggunakan versi historis Azure CLI pada sistem ini, tetapi tidak akan ada pembaruan atau perbaikan bug. Pertimbangkan untuk memutakhirkan ke versi Ubuntu atau Debian yang lebih baru untuk menggunakan Azure CLI terbaru.
 
 > [!WARNING]
 > Ubuntu 20.04 (Focal Fossa) dan 20.10 (Groovy Gorilla) menyertakan paket `azure-cli` dengan versi `2.0.81` yang disediakan oleh repositori `universe`. Paket ini sudah tidak digunakan dan tidak direkomendasikan. Jika paket ini terinstal, hapus paket tersebut sebelum melanjutkan dengan menjalankan perintah `sudo apt remove azure-cli -y && sudo apt autoremove -y`.
