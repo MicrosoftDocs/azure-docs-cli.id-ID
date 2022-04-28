@@ -1,6 +1,6 @@
 ### YamlMime:AzureCLIGroup
 uid: az_storage
-name: penyimpanan az
+name: az storage
 summary: Mengelola sumber daya Azure Cloud Storage.
 description: ''
 directCommands:
@@ -55,7 +55,7 @@ directCommands:
     syntax: az storage copy -s /path/to/dir --destination-account-name mystorageaccount --destination-container mycontainer --recursive
   - summary: Upload sekumpulan file ke Azure Blob menggunakan wildcard dengan url.
     syntax: az storage copy -s /path/*foo/*bar/*.pdf -d https://[account].blob.core.windows.net/[container]/[path/to/directory]
-  - summary: Upload sekumpulan file ke Azure Blob menggunakan wildcard dengan nama akun dan nama kontainer.
+  - summary: Upload sekumpulan file ke Azure Blob menggunakan kartubebas dengan nama akun dan nama kontainer.
     syntax: az storage copy -s /path/*foo/*bar/*.pdf --destination-account-name mystorageaccount --destination-container mycontainer
   - summary: Upload file dan direktori ke Azure Blob menggunakan wildcard dengan url.
     syntax: az storage copy -s /path/*foo/*bar* -d https://[account].blob.core.windows.net/[container]/[path/to/directory] --recursive
@@ -77,7 +77,7 @@ directCommands:
     syntax: az storage copy -s https://s3.amazonaws.com/[bucket]/[object] -d https://[destaccount].blob.core.windows.net/[container]/[path/to/blob]
   - summary: Salin seluruh direktori dari S3 dengan kunci akses ke direktori virtual blob, dan Anda juga dapat menentukan akun penyimpanan dan informasi kontainer seperti di atas.
     syntax: az storage copy -s https://s3.amazonaws.com/[bucket]/[folder] -d https://[destaccount].blob.core.windows.net/[container]/[path/to/directory] --recursive
-  - summary: Salin semua wadah dalam layanan S3 dengan kunci akses ke akun blob, dan Anda juga dapat menentukan informasi akun penyimpanan Seperti di atas.
+  - summary: Salin semua wadah dalam layanan S3 dengan kunci akses ke akun blob, dan Anda juga dapat menentukan informasi akun penyimpanan Anda seperti di atas.
     syntax: az storage copy -s https://s3.amazonaws.com/ -d https://[destaccount].blob.core.windows.net --recursive
   - summary: Salin semua wadah di wilayah S3 dengan kunci akses ke akun blob, dan Anda juga dapat menentukan informasi akun penyimpanan Seperti di atas.
     syntax: az storage copy -s https://s3-[region].amazonaws.com/ -d https://[destaccount].blob.core.windows.net --recursive
@@ -91,7 +91,7 @@ directCommands:
     syntax: az storage copy -s /path/to/dir --destination-account-name mystorageaccount --destination-share myshare --recursive
   - summary: Upload sekumpulan file ke Azure File Share menggunakan kartubebas dengan nama akun dan nama berbagi.
     syntax: az storage copy -s /path/*foo/*bar/*.pdf --destination-account-name mystorageaccount --destination-share myshare
-  - summary: Upload file dan direktori ke Azure File Share menggunakan kartubebas dengan url.
+  - summary: Upload file dan direktori ke Azure File Share menggunakan wildcard dengan url.
     syntax: az storage copy -s /path/*foo/*bar* -d https://[account].file.core.windows.net/[share]/[path/to/directory] --recursive
   - summary: Upload file dan direktori ke Azure File Share menggunakan kartubebas dengan nama akun dan nama berbagi.
     syntax: az storage copy -s /path/*foo/*bar* --destination-account-name mystorageaccount --destination-share myshare --recursive
@@ -99,9 +99,9 @@ directCommands:
     syntax: az storage copy -s https://[account].file.core.windows.net/[share]/[path/to/file] -d /path/to/file.txt
   - summary: Unduh seluruh direktori dari Azure File Share, dan Anda juga dapat menentukan akun penyimpanan Anda dan berbagi informasi seperti di atas.
     syntax: az storage copy -s https://[account].file.core.windows.net/[share]/[path/to/directory] -d /path/to/dir --recursive
-  - summary: Unduh sekumpulan file dari Azure File Share menggunakan wildcard, dan Anda juga dapat menentukan akun penyimpanan Anda dan berbagi informasi seperti di atas.
+  - summary: Unduh sekumpulan file dari Azure File Share menggunakan kartubebas, dan Anda juga dapat menentukan akun penyimpanan Anda dan berbagi informasi seperti di atas.
     syntax: az storage copy -s https://[account].file.core.windows.net/[share]/ --include-pattern foo* -d /path/to/dir --recursive
-  - summary: Upload satu file ke Azure Blob menggunakan url dengan pass-through opsi azcopy.
+  - summary: Upload satu file ke Azure Blob menggunakan url dengan opsi azcopy pass-through.
     syntax: az storage copy -s /path/to/file.txt -d https://[account].blob.core.windows.net/[container]/[path/to/blob] -- --block-size-mb=0.25 --check-length
   optionalParameters:
   - name: --account-key
@@ -142,7 +142,7 @@ directCommands:
     summary: Jalur/url tujuan salin. Ini bisa menjadi jalur lokal, url ke server penyimpanan azure. Jika Anda menyediakan parameter tujuan di sini, Anda tidak perlu memberikan argumen dalam grup argumen tujuan salin dan menyalin argumen tujuan akan ditolak di masa mendatang.
     description: ''
   - name: --destination-share
-    summary: Nama berbagi file dari akun penyimpanan tujuan salin.
+    summary: Nama berbagi file dari salin akun penyimpanan tujuan.
     description: ''
   - name: --exclude-path
     summary: 'Kecualikan jalur ini. Opsi ini tidak mendukung karakter kartubebas (\*). Memeriksa awalan jalur relatif. Misalnya: myFolder;myFolder/subDirName/file.pdf.'
@@ -173,13 +173,13 @@ directCommands:
     summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   - name: --source -s
-    summary: Jalur/url sumber salin. Ini bisa menjadi jalur lokal, url ke server penyimpanan azure atau wadah AWS S3. Jika Anda menyediakan parameter sumber di sini, Anda tidak perlu memberikan argumen dalam grup argumen sumber salin dan argumen sumber salin tidak akan digunakan lagi di masa mendatang.
+    summary: Jalur/url sumber salin. Ini bisa menjadi jalur lokal, url ke server penyimpanan azure atau wadah AWS S3. Jika Anda memberikan parameter sumber di sini, Anda tidak perlu memberikan argumen dalam grup argumen sumber salin dan menyalin argumen sumber akan ditolak di masa mendatang.
     description: ''
   - name: --source-account-key
     summary: Kunci akun dari salin akun penyimpanan sumber. Harus digunakan bersama dengan nama akun penyimpanan sumber.
     description: ''
   - name: --source-account-name
-    summary: Nama akun dari salin akun penyimpanan sumber.
+    summary: Nama akun salin akun penyimpanan sumber.
     description: ''
   - name: --source-blob
     summary: Nama blob dalam kontainer blob akun penyimpanan sumber salin.
@@ -191,10 +191,10 @@ directCommands:
     summary: Nama kontainer akun penyimpanan sumber salin.
     description: ''
   - name: --source-file-path
-    summary: Jalur file dalam berbagi file dari akun penyimpanan sumber salin.
+    summary: Jalur file dalam berbagi file dari salin akun penyimpanan sumber.
     description: ''
   - name: --source-local-path
-    summary: Jalur/url sumber salin. Ini bisa menjadi jalur lokal, url ke server penyimpanan azure atau wadah AWS S3. Jika Anda menyediakan parameter sumber di sini, Anda tidak perlu memberikan argumen dalam grup argumen sumber salin dan argumen sumber salin tidak akan digunakan lagi di masa mendatang.
+    summary: Jalur/url sumber salin. Ini bisa menjadi jalur lokal, url ke server penyimpanan azure atau wadah AWS S3. Jika Anda memberikan parameter sumber di sini, Anda tidak perlu memberikan argumen dalam grup argumen sumber salin dan menyalin argumen sumber akan ditolak di masa mendatang.
     description: ''
   - name: --source-sas
     summary: Token Tanda Tangan Akses Bersama (SAS) dari sumber salin. Harus digunakan bersama dengan nama akun penyimpanan sumber.
@@ -203,7 +203,7 @@ directCommands:
     summary: Nama berbagi file dari salin akun penyimpanan sumber.
     description: ''
   - name: <EXTRA_OPTIONS>
-    summary: Opsi lain yang akan diteruskan ke azcopy apa adanya. Harap letakkan semua opsi tambahan setelah .`--`
+    summary: Opsi lain yang akan diteruskan ke azcopy apa adanya. Harap letakkan semua opsi tambahan setelah `--`.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_remove
@@ -658,11 +658,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 03/29/2022
+  ms.date: 04/13/2022
   description: Mengelola sumber daya Azure Cloud Storage.
-  ms.openlocfilehash: fb3c75f48373312a52d30021a4dd2c0871577cef
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: c7efb7b77e7f7c40223ca3fb60e5ca8ba0e97875
+  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141435059"
+  ms.lasthandoff: 04/27/2022
+  ms.locfileid: "144033565"
