@@ -6,7 +6,7 @@ description: ''
 directCommands:
 - uid: az_storage_queue_create
   name: az storage queue create
-  summary: Membuat antrean di bawah akun yang diberikan.
+  summary: Buat antrean di bawah akun yang diberikan.
   description: ''
   syntax: >-
     az storage queue create --name
@@ -18,6 +18,9 @@ directCommands:
                             [--metadata]
                             [--sas-token]
                             [--timeout]
+  examples:
+  - summary: Buat antrean di bawah akun yang diberikan dengan metadata.
+    syntax: az storage queue create -n myqueue --metadata key1=value1 key2=value2 --account-name mystorageaccount
   requiredParameters:
   - isRequired: true
     name: --name -n
@@ -52,8 +55,8 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_queue_delete
   name: az storage queue delete
-  summary: Menghapus antrean yang ditentukan dan pesan apa pun yang ada di dalamnya.
-  description: Ketika antrean berhasil dihapus, antrean segera ditandai untuk dihapus dan tidak lagi dapat diakses oleh klien. Antrean kemudian dihapus dari layanan Antrean selama pengumpulan sampah.  Perhatikan bahwa menghapus antrean kemungkinan akan memakan waktu setidaknya 40 detik untuk diselesaikan.  Jika operasi dicoba terhadap antrean saat sedang dihapus, AzureConflictHttpError akan dilemparkan.
+  summary: Hapus antrean yang ditentukan dan pesan apa pun yang ada di dalamnya.
+  description: ''
   syntax: >-
     az storage queue delete --name
                             [--account-key]
@@ -63,6 +66,9 @@ directCommands:
                             [--fail-not-exist]
                             [--sas-token]
                             [--timeout]
+  examples:
+  - summary: Hapus antrean yang ditentukan, berikan pengecualian jika antrean tidak ada.
+    syntax: az storage queue delete -n myqueue --fail-not-exist --account-name mystorageaccount
   requiredParameters:
   - isRequired: true
     name: --name -n
@@ -93,7 +99,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_queue_exists
-  name: ada antrean penyimpanan az
+  name: az storage queue exists
   summary: Mengembalikan boolean yang menunjukkan apakah antrean ada.
   description: ''
   syntax: >-
@@ -104,6 +110,9 @@ directCommands:
                             [--connection-string]
                             [--sas-token]
                             [--timeout]
+  examples:
+  - summary: Periksa apakah antrean ada.
+    syntax: az storage queue exists -n myqueue --account-name mystorageaccount
   requiredParameters:
   - isRequired: true
     name: --name -n
@@ -132,8 +141,8 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_queue_generate-sas
   name: az storage queue generate-sas
-  summary: Menghasilkan tanda tangan akses bersama untuk antrean.
-  description: Gunakan tanda tangan yang dikembalikan dengan parameter sas_token QueueService.
+  summary: Buat tanda tangan akses bersama untuk antrean. Gunakan tanda tangan yang dikembalikan dengan parameter sas_token QueueService.
+  description: ''
   syntax: >-
     az storage queue generate-sas --name
                                   [--account-key]
@@ -147,6 +156,17 @@ directCommands:
                                   [--policy-name]
                                   [--sas-token]
                                   [--start]
+  examples:
+  - summary: Buat token sas untuk antrean dengan izin baca-saja.
+    syntax: >-
+      end=`date -u -d "30 minutes" '+%Y-%m-%dT%H:%MZ'`
+
+      az storage queue generate-sas -n myqueue --account-name mystorageaccount --permissions r --expiry $end --https-only
+  - summary: Buat token sas untuk antrean dengan rentang ip yang ditentukan.
+    syntax: >-
+      end=`date -u -d "30 minutes" '+%Y-%m-%dT%H:%MZ'`
+
+      az storage queue generate-sas -n myqueue --account-name mystorageaccount --ip "176.134.171.0-176.134.171.255" --permissions r --expiry $end --https-only
   requiredParameters:
   - isRequired: true
     name: --name -n
@@ -166,14 +186,14 @@ directCommands:
   - name: --connection-string
     summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
-  - name: --kedaluwarsa
+  - name: --expiry
     summary: Menentukan tanggalwaktu UTC (Y-m-d'T'H:M'Z') di mana SAS menjadi tidak valid. Jangan gunakan jika kebijakan akses tersimpan dirujuk dengan --policy-name yang menentukan nilai ini.
     description: ''
   - name: --https-only
     summary: Hanya izinkan permintaan yang dibuat dengan protokol HTTPS. Jika dihilangkan, permintaan dari protokol HTTP dan HTTPS diizinkan.
     description: ''
   - name: --ip
-    summary: Menentukan alamat IP atau rentang alamat IP tempat menerima permintaan. Hanya mendukung alamat gaya IPv4.
+    summary: Menentukan alamat IP atau rentang alamat IP untuk menerima permintaan. Hanya mendukung alamat gaya IPv4.
     description: ''
   - name: --permissions
     summary: 'Izin yang diberikan SAS. Nilai yang diizinkan: (a)dd (a)dd (p)rocess (p)rocess (r)ead (r)ead (u)pdate (u)pdate. Jangan gunakan jika kebijakan akses tersimpan dirujuk dengan --id yang menentukan nilai ini. Dapat digabungkan.'
@@ -223,8 +243,8 @@ directCommands:
   - name: --include-metadata
     summary: Menentukan bahwa metadata kontainer dikembalikan dalam respons.
     description: ''
-  - name: --penanda
-    summary: Token kelanjutan buram. Nilai ini dapat diambil dari bidang next_marker dari objek generator sebelumnya jika num_results ditentukan dan generator tersebut telah selesai menghitung hasil. Jika ditentukan, generator ini akan mulai mengembalikan hasil dari titik di mana generator sebelumnya berhenti.
+  - name: --marker
+    summary: Token kelanjutan buram. Nilai ini dapat diambil dari bidang next_marker objek generator sebelumnya jika num_results ditentukan dan generator tersebut telah selesai menghitung hasil. Jika ditentukan, generator ini akan mulai mengembalikan hasil dari titik di mana generator sebelumnya berhenti.
     description: ''
   - name: --num-results
     summary: Jumlah maksimum antrean yang akan dikembalikan.
@@ -240,9 +260,9 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_queue_stats
-  name: statistik antrean penyimpanan az
-  summary: Mengambil statistik yang terkait dengan replikasi untuk layanan Antrean.
-  description: Ini hanya tersedia ketika replikasi geo-redundan akses baca diaktifkan untuk akun penyimpanan.  Dengan replikasi geo-redundan, Azure Storage mempertahankan data Anda tetap tahan lama di dua lokasi. Di kedua lokasi, Azure Storage terus mempertahankan beberapa replika data Anda yang sehat. Lokasi tempat Anda membaca, membuat, memperbarui, atau menghapus data adalah lokasi akun penyimpanan utama.  Lokasi utama ada di wilayah yang Anda pilih pada saat Anda membuat akun melalui portal klasik Azure Management Azure, misalnya, US Tengah Utara. Lokasi tempat data Anda direplikasi adalah lokasi sekunder. Lokasi sekunder secara otomatis ditentukan berdasarkan lokasi primer; berada di pusat data kedua yang berada di wilayah yang sama dengan lokasi utama. Akses baca-saja tersedia dari lokasi sekunder, jika replikasi geo-redundan akses baca diaktifkan untuk akun penyimpanan Anda.
+  name: az storage queue stats
+  summary: Ambil statistik yang terkait dengan replikasi untuk layanan Antrean. Ini hanya tersedia ketika replikasi geo-redundan akses baca diaktifkan untuk akun penyimpanan.
+  description: ''
   syntax: >-
     az storage queue stats [--account-key]
                            [--account-name]
@@ -250,6 +270,9 @@ directCommands:
                            [--connection-string]
                            [--sas-token]
                            [--timeout]
+  examples:
+  - summary: Tampilkan statistik yang terkait dengan replikasi untuk layanan Antrean.
+    syntax: az storage queue stats --account-name mystorageaccount
   optionalParameters:
   - name: --account-key
     summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
@@ -306,11 +329,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 03/29/2022
+  ms.date: 04/13/2022
   description: Mengelola antrean penyimpanan.
-  ms.openlocfilehash: eb68cbb75bacea08f5298df89eeb59e17aeb212e
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: 8b34463337a1ebafe95bfb4ce50024c4a6cfd22e
+  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141431207"
+  ms.lasthandoff: 04/27/2022
+  ms.locfileid: "144061963"

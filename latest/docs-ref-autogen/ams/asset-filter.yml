@@ -43,11 +43,11 @@ directCommands:
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
   optionalParameters:
-  - name: --laju bit
+  - name: --bitrate
     summary: Laju bit kualitas pertama.
     description: ''
   - name: --end-timestamp
-    summary: Berlaku untuk Video on Demand (VoD). Untuk presentasi Streaming Langsung, presentasi diabaikan dan diterapkan secara diam-diam saat presentasi berakhir dan aliran menjadi VoD.Ini adalah nilai panjang yang mewakili titik akhir absolut presentasi, dibulatkan ke awal GOP terdekat berikutnya. Unit ini adalah skala waktu, jadi endTimestamp 1800000000 akan selama 3 menit. Gunakan startTimestamp dan endTimestamp untuk memangkas fragmen yang akan ada di daftar putar (manifes). Misalnya, startTimestamp=40000000 dan endTimestamp=100000000 menggunakan skala waktu default akan menghasilkan daftar putar yang berisi fragmen dari antara 4 detik dan 10 detik presentasi VoD. Jika fragmen mengangkangi batas, seluruh fragmen akan disertakan dalam manifes.
+    summary: Berlaku untuk Video on Demand (VoD). Untuk presentasi Streaming Langsung, presentasi diabaikan dan diterapkan secara diam-diam ketika presentasi berakhir dan aliran menjadi VoD.Ini adalah nilai panjang yang mewakili titik akhir absolut presentasi, dibulatkan ke awal GOP terdekat berikutnya. Unit ini adalah skala waktu, sehingga endTimestamp 1800000000 akan selama 3 menit. Gunakan startTimestamp dan endTimestamp untuk memangkas fragmen yang akan ada di daftar putar (manifes). Misalnya, startTimestamp=40000000 dan endTimestamp=100000000 menggunakan skala waktu default akan menghasilkan daftar putar yang berisi fragmen dari antara 4 detik dan 10 detik presentasi VoD. Jika fragmen mengangkangi batas, seluruh fragmen akan disertakan dalam manifes.
     description: ''
   - name: --first-quality
     summary: Laju bit kualitas pertama (terendah) yang disertakan dalam manifes.
@@ -60,7 +60,7 @@ directCommands:
     summary: Hanya berlaku untuk Live Streaming. Nilai ini menentukan posisi live terbaru yang dapat dicari klien. Dengan menggunakan properti ini, Anda dapat menunda posisi pemutaran live dan membuat buffer sisi server untuk pemain. Unit untuk properti ini adalah skala waktu (lihat di bawah). Durasi live back off maksimum adalah 300 detik (3000000000). Misalnya, nilai 2000000000 berarti bahwa konten terbaru yang tersedia adalah 20 detik tertunda dari tepi live nyata.
     description: ''
   - name: --presentation-window-duration
-    summary: Hanya berlaku untuk Streaming Langsung. Gunakan presentationWindowDuration untuk menerapkan jendela geser fragmen untuk disertakan dalam daftar putar. Unit untuk properti ini bernilai skala waktu (lihat di bawah). Misalnya, atur presentationWindowDuration=12000000000 untuk menerapkan jendela geser dua menit. Media dalam waktu 2 menit dari tepi live akan disertakan dalam daftar putar. Jika fragmen mengabaikan batas, seluruh fragmen akan disertakan dalam daftar putar. Durasi jendela presentasi minimum adalah 60 detik.
+    summary: Hanya berlaku untuk Streaming Langsung. Gunakan presentationWindowDuration untuk menerapkan jendela geser fragmen untuk disertakan dalam daftar putar. Unit untuk properti ini bernilai skala waktu (lihat di bawah). Misalnya, atur presentationWindowDuration=1200000000 untuk menerapkan jendela geser dua menit. Media dalam waktu 2 menit dari tepi live akan disertakan dalam daftar putar. Jika fragmen mengabaikan batas, seluruh fragmen akan disertakan dalam daftar putar. Durasi jendela presentasi minimum adalah 60 detik.
     description: ''
   - name: --start-timestamp
     summary: Berlaku untuk Video on Demand (VoD) atau Live Streaming. Ini adalah nilai panjang yang mewakili titik awal absolut dari aliran. Nilai akan dibulatkan menjadi nilai yang terdekat dengan mulai GOP berikutnya. Unit ini adalah skala waktu, sehingga startTimestamp 150000000 akan menjadi selama 15 detik. Gunakan startTimestamp dan endTimestampp untuk memangkas fragmen yang akan ada di daftar putar (manifes). Misalnya, startTimestamp=40000000 dan endTimestamp=100000000 menggunakan skala waktu default akan menghasilkan daftar putar yang berisi fragmen dari antara 4 detik dan 10 detik presentasi VoD. Jika fragmen mengangkangi batas, seluruh fragmen akan disertakan dalam manifes.
@@ -150,7 +150,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/ams/_help.py
 - uid: az_ams_asset-filter_update
   name: az ams asset-filter update
-  summary: Memperbarui detail filter aset.
+  summary: Perbarui detail filter aset.
   description: ''
   syntax: >-
     az ams asset-filter update [--account-name]
@@ -181,13 +181,13 @@ directCommands:
   - name: --asset-name
     summary: Nama aset.
     description: ''
-  - name: --laju bit
+  - name: --bitrate
     summary: Laju bit kualitas pertama.
     description: ''
   - name: --end-timestamp
     summary: Berlaku untuk Video on Demand (VoD). Untuk presentasi Streaming Langsung, presentasi diabaikan dan diterapkan secara diam-diam ketika presentasi berakhir dan aliran menjadi VoD.Ini adalah nilai panjang yang mewakili titik akhir absolut presentasi, dibulatkan ke awal GOP terdekat berikutnya. Unit ini adalah skala waktu, sehingga endTimestamp 1800000000 akan selama 3 menit. Gunakan startTimestamp dan endTimestamp untuk memangkas fragmen yang akan ada di daftar putar (manifes). Misalnya, startTimestamp=40000000 dan endTimestamp=100000000 menggunakan skala waktu default akan menghasilkan daftar putar yang berisi fragmen dari antara 4 detik dan 10 detik presentasi VoD. Jika fragmen mengangkangi batas, seluruh fragmen akan disertakan dalam manifes.
     description: ''
-  - name: --kualitas pertama
+  - name: --first-quality
     summary: Laju bit kualitas pertama (terendah) yang disertakan dalam manifes.
     description: ''
   - name: --force-end-timestamp
@@ -221,7 +221,7 @@ directCommands:
   - name: --start-timestamp
     summary: Berlaku untuk Video on Demand (VoD) atau Live Streaming. Ini adalah nilai panjang yang mewakili titik awal absolut dari aliran. Nilai akan dibulatkan menjadi nilai yang terdekat dengan mulai GOP berikutnya. Unit ini adalah skala waktu, sehingga startTimestamp 150000000 akan menjadi selama 15 detik. Gunakan startTimestamp dan endTimestampp untuk memangkas fragmen yang akan ada di daftar putar (manifes). Misalnya, startTimestamp=40000000 dan endTimestamp=100000000 menggunakan skala waktu default akan menghasilkan daftar putar yang berisi fragmen dari antara 4 detik dan 10 detik presentasi VoD. Jika fragmen mengangkangi batas, seluruh fragmen akan disertakan dalam manifes.
     description: ''
-  - name: --skala waktu
+  - name: --timescale
     summary: Berlaku untuk semua tanda waktu dan durasi dalam Rentang Waktu Presentasi, yang ditentukan sebagai jumlah kenaikan dalam satu detik. Defaultnya adalah 10000000 - sepuluh juta kenaikan dalam satu detik, di mana setiap kenaikan akan menjadi 100 nanodetik panjang. Misalnya, jika Anda ingin mengatur startTimestamp pada 30 detik, Anda akan menggunakan nilai 300000000 saat menggunakan skala waktu default.
     description: ''
   - name: --tracks
@@ -253,11 +253,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 03/30/2022
+  ms.date: 04/21/2022
   description: Mengelola filter aset untuk akun Azure Media Services.
-  ms.openlocfilehash: 6299e3a0eb0ee3cd638ebf03c6f98058adf12a9d
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: 83d0d9bf870ca16d0226bbbc1a16cd8ae195889e
+  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141454446"
+  ms.lasthandoff: 04/27/2022
+  ms.locfileid: "144029811"
