@@ -15,19 +15,13 @@ directCommands:
   syntax: >-
     az monitor data-collection rule create --name
                                            --resource-group
-                                           [--data-flows]
+                                           --rule-file
                                            [--description]
-                                           [--extensions]
                                            [--location]
-                                           [--log-analytics]
-                                           [--monitor-metrics]
-                                           [--performance-counters]
-                                           [--syslog]
                                            [--tags]
-                                           [--windows-event-logs]
   examples:
   - summary: Buat aturan pengumpulan data
-    syntax: az monitor data-collection rule create --resource-group "myResourceGroup" --location "eastus" --name "myCollectionRule" --data-flows destinations="centralWorkspace" streams="Microsoft-Perf" streams="Microsoft-Syslog" streams="Microsoft-WindowsEvent" --log-analytics name="centralWorkspace" resource-id="/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/centralTeamWorkspace" --performance-counters name="cloudTeamCoreCounters" counter-specifiers="\\Processor(_Total)\\% Processor Time" counter-specifiers="\\Memory\\Committed Bytes" counter-specifiers="\\LogicalDisk(_Total)\\Free Megabytes" counter-specifiers="\\PhysicalDisk(_Total)\\Avg. Disk Queue Length" sampling-frequency=15 streams="Microsoft-Perf" --performance-counters name="appTeamExtraCounters" counter-specifiers="\\Process(_Total)\\Thread Count" sampling-frequency=30 streams="Microsoft-Perf" --syslog name="cronSyslog" facility-names="cron" log-levels="Debug" log-levels="Critical" log-levels="Emergency" streams="Microsoft-Syslog" --syslog name="syslogBase" facility-names="syslog" log-levels="Alert" log-levels="Critical" log-levels="Emergency" streams="Microsoft-Syslog" --windows-event-logs name="cloudSecurityTeamEvents" streams="Microsoft-WindowsEvent" x-path-queries="Security!" --windows-event-logs name="appTeam1AppEvents" streams="Microsoft-WindowsEvent" x-path-queries="System![System[(Level = 1 or Level = 2 or Level = 3)]]" x-path-queries="Application!*[System[(Level = 1 or Level = 2 or Level = 3)]]"
+    syntax: az monitor data-collection rule create --resource-group "myResourceGroup" --location "eastus" --name "myCollectionRule" --rule-file "C:\samples\dcrEx1.json"
   requiredParameters:
   - isRequired: true
     name: --name -n
@@ -37,96 +31,20 @@ directCommands:
     name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
+  - isRequired: true
+    name: --rule-file
+    summary: File json untuk parameter aturan.
+    description: ''
   optionalParameters:
-  - name: --data-flows
-    summary: Spesifikasi aliran data.
-    description: >-
-      Penggunaan: --data-flows streams=XX1 streams=XX2 destinations=XX1 destinations=XX2
-
-
-      stream: Diperlukan. Daftar aliran untuk aliran data ini.
-
-      tujuan: Diperlukan. Daftar tujuan untuk aliran data ini.
-
-
-      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --data-flows.
   - name: --description
     summary: Deskripsi aturan pengumpulan data.
-    description: ''
-  - name: --extensions
-    summary: 'Daftar konfigurasi sumber data ekstensi Azure VM. Nilai yang diharapkan: json-string/@json-file.'
     description: ''
   - name: --location -l
     summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
     description: ''
-  - name: --log-analytics
-    summary: Daftar tujuan Analitik Log.
-    description: >-
-      Penggunaan: --log-analytics resource-id=XX name=XX
-
-
-      resource-id: Diperlukan. ID sumber daya ruang kerja Analitik Log.
-
-      nama: Diperlukan. Nama yang mudah diingat untuk tujuan.  Nama ini harus unik di semua tujuan (terlepas dari jenisnya) dalam aturan pengumpulan data.
-
-
-      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --log-analytics.
-  - name: --monitor-metrics
-    summary: Tujuan Metrik Azure Monitor.
-    description: >-
-      Penggunaan: --monitor-metrics name=XX
-
-
-      nama: Diperlukan. Nama yang mudah diingat untuk tujuan.  Nama ini harus unik di semua tujuan (terlepas dari jenisnya) dalam aturan pengumpulan data.
-  - name: --performance-counters
-    summary: Daftar konfigurasi sumber data penghitung kinerja.
-    description: >-
-      Penggunaan: --performance-counters streams=XX1 streams=XX2 sampling-frequency=XX counter-specifiers=XX1 counter-specifiers=XX2 name=XX
-
-
-      stream: Diperlukan. Daftar aliran tempat sumber data ini akan dikirim. Aliran menunjukkan skema apa yang akan digunakan untuk data ini dan biasanya tabel apa di Analitik Log tempat data akan dikirim.
-
-      frekuensi pengambilan sampel: Diperlukan. Jumlah detik antara pengukuran penghitung berturut-turut (sampel).
-
-      counter-specifier: Diperlukan. Daftar nama penentu penghitung kinerja yang ingin Anda kumpulkan. Gunakan kartubebas (*) untuk mengumpulkan penghitung untuk semua instans. Untuk mendapatkan daftar penghitung kinerja di Windows, jalankan perintah 'typeperf'.
-
-      nama: Diperlukan. Nama yang mudah diingat untuk sumber data.  Nama ini harus unik di semua sumber data (terlepas dari jenisnya) dalam aturan pengumpulan data.
-
-
-      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --performance-counters.
-  - name: --syslog
-    summary: Daftar konfigurasi sumber data Syslog.
-    description: >-
-      Penggunaan: --syslog streams=XX1 streams=XX2 facility-names=XX1 facility-names=XX2 log-levels=XX1 log-levels=XX2 name=XX1
-
-
-      stream: Diperlukan. Daftar aliran tempat sumber data ini akan dikirim. Aliran menunjukkan skema apa yang akan digunakan untuk data ini dan biasanya tabel apa di Analitik Log tempat data akan dikirim.
-
-      nama fasilitas: Diperlukan. Daftar nama fasilitas.
-
-      tingkat log: Tingkat log yang akan dikumpulkan.
-
-      nama: Diperlukan. Nama yang mudah diingat untuk sumber data.  Nama ini harus unik di semua sumber data (terlepas dari jenisnya) dalam aturan pengumpulan data.
-
-
-      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --syslog.
   - name: --tags
     summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
     description: ''
-  - name: --windows-event-logs
-    summary: Daftar konfigurasi sumber data Log Peristiwa Windows.
-    description: >-
-      Penggunaan: --windows-event-logs streams=XX1 streams=XX2 x-path-queries=XX1 x-path-queries=XX2 name=XX
-
-
-      stream: Diperlukan. Daftar aliran tempat sumber data ini akan dikirim. Aliran menunjukkan skema apa yang akan digunakan untuk data ini dan biasanya tabel apa di Analitik Log tempat data akan dikirim.
-
-      x-path-queries: Diperlukan. Daftar kueri log peristiwa Windows dalam format XPATH.
-
-      nama: Diperlukan. Nama yang mudah diingat untuk sumber data.  Nama ini harus unik di semua sumber data (terlepas dari jenisnya) dalam aturan pengumpulan data.
-
-
-      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --windows-event-logs.
 - uid: az_monitor_data-collection_rule_delete
   name: az monitor data-collection rule delete
   summary: Menghapus aturan pengumpulan data.
@@ -260,7 +178,7 @@ directCommands:
 
       frekuensi pengambilan sampel: Diperlukan. Jumlah detik antara pengukuran penghitung berturut-turut (sampel).
 
-      penentu penghitung: Diperlukan. Daftar nama penentu penghitung kinerja yang ingin Anda kumpulkan. Gunakan kartubebas (*) untuk mengumpulkan penghitung untuk semua instans. Untuk mendapatkan daftar penghitung kinerja di Windows, jalankan perintah 'typeperf'.
+      counter-specifier: Diperlukan. Daftar nama penentu penghitung kinerja yang ingin Anda kumpulkan. Gunakan kartubebas (*) untuk mengumpulkan penghitung untuk semua instans. Untuk mendapatkan daftar penghitung kinerja di Windows, jalankan perintah 'typeperf'.
 
       nama: Diperlukan. Nama yang mudah diingat untuk sumber data.  Nama ini harus unik di semua sumber data (terlepas dari jenisnya) dalam aturan pengumpulan data.
 
@@ -269,12 +187,12 @@ directCommands:
   - name: --syslog
     summary: Daftar konfigurasi sumber data Syslog.
     description: >-
-      Penggunaan: --syslog streams=XX1 streams=XX2 facility-names=XX1 facility-names=XX2 log-levels=XX1 log-levels=XX2 name=XX
+      Penggunaan: --syslog streams=XX1 streams=XX2 facility-names=XX1 facility-names=XX2 log-levels=XX1 log-levels=XX2 name=XX1
 
 
       stream: Diperlukan. Daftar aliran tempat sumber data ini akan dikirim. Aliran menunjukkan skema apa yang akan digunakan untuk data ini dan biasanya tabel apa di Analitik Log tempat data akan dikirim.
 
-      nama fasilitas: Wajib diisi. Daftar nama fasilitas.
+      nama fasilitas: Diperlukan. Daftar nama fasilitas.
 
       tingkat log: Tingkat log yang akan dikumpulkan.
 
@@ -357,9 +275,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Mengelola aturan pengumpulan data untuk layanan kontrol monitor.
-  ms.openlocfilehash: 76527ab529d5f9e91efe22973f88ca5c32be4023
-  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.openlocfilehash: b3de5317e07da2bee7f97b4230e15924813237a3
+  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 03/25/2022
-  ms.locfileid: "140894138"
+  ms.lasthandoff: 04/27/2022
+  ms.locfileid: "144045131"

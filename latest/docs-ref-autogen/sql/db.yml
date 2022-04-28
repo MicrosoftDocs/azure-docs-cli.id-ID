@@ -40,11 +40,11 @@ directCommands:
   requiredParameters:
   - isRequired: true
     name: --dest-name
-    summary: Nama database yang akan dibuat sebagai tujuan penyalinan.
+    summary: Nama database yang akan dibuat sebagai tujuan salin.
     description: ''
   optionalParameters:
-  - name: --auto-jeuse-delay
-    summary: Waktu dalam menit setelah database dijeda secara otomatis. Nilai -1 berarti bahwa jeda otomatis dinonaktifkan.
+  - name: --auto-pause-delay
+    summary: Waktu dalam menit setelah database dijeda secara otomatis. Nilai -1 berarti jeda otomatis dinonaktifkan.
     description: ''
   - name: --backup-storage-redundancy --bsr
     summary: 'Redundansi penyimpanan cadangan yang digunakan untuk menyimpan cadangan. Nilai yang diizinkan meliputi: Lokal, Zona, Geo.'
@@ -89,7 +89,7 @@ directCommands:
     description: ''
   - name: --read-scale
     parameterValueGroup: Disabled, Enabled
-    summary: Jika diaktifkan, koneksi yang memiliki niat aplikasi diatur ke readonly dalam string koneksinya dapat dirutekan ke replika sekunder baca-saja. Properti ini hanya dapat diatur untuk database Premium dan Business Critical.
+    summary: Jika diaktifkan, koneksi yang memiliki niat aplikasi yang diatur ke baca-saja dalam string koneksinya dapat dirutekan ke replika sekunder baca-saja. Properti ini hanya dapat diatur untuk database Premium dan Business Critical.
     description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
@@ -109,7 +109,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
 - uid: az_sql_db_create
-  name: buat az sql db
+  name: az sql db create
   summary: Membuat database.
   description: Daftar lengkap opsi tingkat performa dapat dilihat dengan mengeksekusi `az sql db list-editions -a -o table -l LOCATION`.
   syntax: >-
@@ -147,11 +147,11 @@ directCommands:
     syntax: az sql db create -g mygroup -s myserver -n mydb -z
   - summary: Membuat database dengan redundansi zona yang dinonaktifkan secara eksplisit
     syntax: az sql db create -g mygroup -s myserver -n mydb -z false
-  - summary: Membuat database generalPurpose Gen5 2 vcore tanpa server dengan penundaan jeda otomatis 120 menit
+  - summary: Membuat database tanpa server GeneralPurpose Gen5 2 vcore dengan penundaan jeda otomatis 120 menit
     syntax: az sql db create -g mygroup -s myserver -n mydb -e GeneralPurpose -f Gen5 -c 2 --compute-model Serverless --auto-pause-delay 120
   - summary: Membuat database Hyperscale Gen5 2 vcore dengan 2 replika baca
     syntax: az sql db create -g mygroup -s myserver -n mydb -e Hyperscale -f Gen5 -c 2 --read-replicas 2
-  - summary: Membuat database GeneralPurpose dengan penyimpanan cadangan redundan secara lokal
+  - summary: Membuat database GeneralPurpose dengan penyimpanan cadangan yang berlebihan secara lokal
     syntax: az sql db create -g mygroup -s myserver -n mydb -e GeneralPurpose --backup-storage-redundancy Local
   requiredParameters:
   - isRequired: true
@@ -167,8 +167,8 @@ directCommands:
     summary: Nama server Azure SQL. Anda dapat mengonfigurasi default menggunakan `az configure --defaults sql-server=<name>`.
     description: ''
   optionalParameters:
-  - name: --auto-jeuse-delay
-    summary: Waktu dalam menit setelah database dijeda secara otomatis. Nilai -1 berarti bahwa jeda otomatis dinonaktifkan.
+  - name: --auto-pause-delay
+    summary: Waktu dalam menit setelah database dijeda secara otomatis. Nilai -1 berarti jeda otomatis dinonaktifkan.
     description: ''
   - name: --backup-storage-redundancy --bsr
     summary: 'Redundansi penyimpanan cadangan yang digunakan untuk menyimpan cadangan. Nilai yang diizinkan meliputi: Lokal, Zona, Geo.'
@@ -181,7 +181,7 @@ directCommands:
     summary: Kolate katalog metadata.
     description: ''
   - name: --collation
-    summary: Kolae database.
+    summary: Kolatasi database.
     description: ''
   - name: --compute-model
     parameterValueGroup: Provisioned, Serverless
@@ -221,7 +221,7 @@ directCommands:
     description: ''
   - name: --read-scale
     parameterValueGroup: Disabled, Enabled
-    summary: Jika diaktifkan, koneksi yang memiliki niat aplikasi diatur ke readonly dalam string koneksinya dapat dirutekan ke replika sekunder baca-saja. Properti ini hanya dapat diatur untuk database Premium dan Business Critical.
+    summary: Jika diaktifkan, koneksi yang memiliki niat aplikasi yang diatur ke baca-saja dalam string koneksinya dapat dirutekan ke replika sekunder baca-saja. Properti ini hanya dapat diatur untuk database Premium dan Business Critical.
     description: ''
   - name: --sample-name
     parameterValueGroup: AdventureWorksLT
@@ -242,7 +242,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
 - uid: az_sql_db_delete
-  name: az sql db menghapus
+  name: az sql db delete
   summary: Menghapus database.
   description: ''
   syntax: >-
@@ -276,7 +276,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
 - uid: az_sql_db_export
-  name: ekspor az sql db
+  name: az sql db export
   summary: Ekspor database ke bacpac.
   description: ''
   syntax: >-
@@ -418,7 +418,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
 - uid: az_sql_db_list
-  name: az sql db daftar
+  name: az sql db list
   summary: Mencantumkan database di server atau kumpulan elastis.
   description: ''
   syntax: >-
@@ -463,7 +463,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
 - uid: az_sql_db_list-editions
-  name: az sql db daftar-edisi
+  name: az sql db list-editions
   summary: Perlihatkan edisi database yang tersedia untuk langganan yang saat ini aktif.
   description: Termasuk tujuan layanan dan batas penyimpanan yang tersedia. Untuk mengurangi verbositas, pengaturan untuk dengan sengaja mengurangi batas penyimpanan disembunyikan secara default.
   syntax: >-
@@ -503,12 +503,12 @@ directCommands:
     parameterValueGroup: max-size
     summary: Daftar detail tambahan untuk disertakan dalam output.
     description: ''
-  - name: --vcore
+  - name: --vcores
     summary: Jumlah vcore yang akan dicari. Jika tidak ditentukan, semua ukuran vcore ditampilkan.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
 - uid: az_sql_db_list-usages
-  name: az sql db daftar-pemakaian
+  name: az sql db list-usages
   summary: Mendapatkan penggunaan database.
   description: ''
   syntax: >-
@@ -531,7 +531,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
 - uid: az_sql_db_rename
-  name: az sql db ganti nama
+  name: az sql db rename
   summary: Mengganti nama database.
   description: ''
   syntax: >-
@@ -563,7 +563,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
 - uid: az_sql_db_restore
-  name: pulihkan db sql az
+  name: az sql db restore
   summary: Buat database baru dengan memulihkan dari cadangan.
   description: ''
   syntax: >-
@@ -600,7 +600,7 @@ directCommands:
     summary: Nama database yang akan dibuat sebagai tujuan pemulihan.
     description: ''
   optionalParameters:
-  - name: --auto-jeuse-delay
+  - name: --auto-pause-delay
     summary: Waktu dalam menit setelah database dijeda secara otomatis. Nilai -1 berarti bahwa jeda otomatis dinonaktifkan.
     description: ''
   - name: --backup-storage-redundancy --bsr
@@ -669,7 +669,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
 - uid: az_sql_db_show
-  name: az sql db menunjukkan
+  name: az sql db show
   summary: Dapatkan detail untuk database.
   description: ''
   syntax: >-
@@ -732,7 +732,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
 - uid: az_sql_db_update
-  name: az sql db memperbarui
+  name: az sql db update
   summary: Memperbarui database.
   description: ''
   syntax: >-
@@ -774,14 +774,14 @@ directCommands:
     syntax: az sql db update -g mygroup -s myserver -n mydb -z false
   - summary: Memperbarui database ke model komputasi tanpa server
     syntax: az sql db update -g mygroup -s myserver -n mydb --edition GeneralPurpose --capacity 2 --family Gen5 --compute-model Serverless
-  - summary: Memperbarui database dengan penyimpanan cadangan yang berlebihan secara lokal
+  - summary: Memperbarui database dengan penyimpanan cadangan yang redundan secara lokal
     syntax: az sql db update -g mygroup -s myserver -n mydb --backup-storage-redundancy Local
   optionalParameters:
   - name: --add
     summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
     description: ''
-  - name: --auto-jeda-tunda
-    summary: Waktu dalam menit setelah database dijeda secara otomatis. Nilai -1 berarti jeda otomatis dinonaktifkan.
+  - name: --auto-pause-delay
+    summary: Waktu dalam menit setelah database dijeda secara otomatis. Nilai -1 berarti bahwa jeda otomatis dinonaktifkan.
     description: ''
   - name: --backup-storage-redundancy --bsr
     summary: 'Redundansi penyimpanan cadangan yang digunakan untuk menyimpan cadangan. Nilai yang diizinkan meliputi: Lokal, Zona, Geo.'
@@ -797,7 +797,7 @@ directCommands:
     summary: 'Komponen edisi sku. Nilai yang diizinkan meliputi: Dasar, Standar, Premium, GeneralPurpose, BusinessCritical, Hyperscale.'
     description: ''
   - name: --elastic-pool
-    summary: Nama atau id sumber daya kumpulan elastis untuk memindahkan database.
+    summary: Nama atau id sumber daya kumpulan elastis untuk memindahkan database ke dalamnya.
     description: ''
   - name: --family -f
     summary: 'Komponen pembuatan komputasi sku (hanya untuk sku vcore). Nilai yang diizinkan meliputi: Gen4, Gen5.'
@@ -928,11 +928,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 03/29/2022
+  ms.date: 04/15/2022
   description: Mengelola database.
-  ms.openlocfilehash: df460a5b2d67ad34dcbb12f42262f200969c852a
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: 1c02cc8af3d5a1445afd6a60609e84b154fa148b
+  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141417112"
+  ms.lasthandoff: 04/27/2022
+  ms.locfileid: "144079115"

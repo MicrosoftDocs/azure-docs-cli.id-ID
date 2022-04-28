@@ -2,13 +2,13 @@
 author: dbradish-microsoft
 ms.author: dbradish
 manager: barbkess
-ms.date: 04/05/2022
+ms.date: 04/26/2022
 ms.topic: include
-ms.openlocfilehash: 694c3561937291b143988cf6c5de84eb022dcd4b
-ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+ms.openlocfilehash: aee5ad2c4d73380dce37b1b4a288cd2b678d9053
+ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/06/2022
-ms.locfileid: "141477465"
+ms.lasthandoff: 04/27/2022
+ms.locfileid: "144093483"
 ---
-Versi Azure CLI saat ini adalah __2.35.0__. Untuk informasi tentang rilis terbaru, lihat [catatan rilis](../release-notes-azure-cli.md). Untuk menemukan versi yang terinstal dan melihat apakah Anda perlu memperbarui, jalankan [az version](/cli/azure/reference-index#az_version).
+Versi Azure CLI saat ini adalah __2.36.0__. Untuk informasi tentang rilis terbaru, lihat [catatan rilis](../release-notes-azure-cli.md). Untuk menemukan versi yang terinstal dan melihat apakah Anda perlu memperbarui, jalankan [az version](/cli/azure/reference-index#az_version).
