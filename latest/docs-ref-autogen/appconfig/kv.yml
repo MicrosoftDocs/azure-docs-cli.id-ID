@@ -5,7 +5,7 @@ summary: Mengelola nilai kunci yang disimpan dalam App Configuration.
 description: ''
 directCommands:
 - uid: az_appconfig_kv_delete
-  name: menghapus az appconfig kv
+  name: az appconfig kv delete
   summary: Hapus kunci-nilai.
   description: ''
   syntax: >-
@@ -19,29 +19,29 @@ directCommands:
   examples:
   - summary: Hapus kunci menggunakan nama App Configuration tanpa konfirmasi.
     syntax: az appconfig kv delete -n MyAppConfiguration --key color --label MyLabel --yes
-  - summary: Hapus kunci menggunakan string koneksi.
+  - summary: Menghapus kunci menggunakan string koneksi.
     syntax: az appconfig kv delete --connection-string Endpoint=https://contoso.azconfig.io;Id=xxx;Secret=xxx --key color --label MyLabel
   - summary: Hapus kunci menggunakan kredensial 'az login' dan titik akhir App Configuration Anda.
     syntax: az appconfig kv delete --endpoint https://myappconfiguration.azconfig.io --key color --auth-mode login --yes
   requiredParameters:
   - isRequired: true
-    name: --kunci
-    summary: Mendukung tanda bintang sebagai filter, misalnya \* berarti semua kunci dan abc\* berarti kunci dengan abc sebagai awalan.
+    name: --key
+    summary: Tanda bintang dukungan sebagai filter, misalnya \* berarti semua kunci dan abc\* berarti kunci dengan abc sebagai awalan.
     description: ''
   optionalParameters:
   - name: --auth-mode
     defaultValue: key
     parameterValueGroup: key, login
-    summary: Parameter ini dapat digunakan untuk menunjukkan bagaimana operasi data akan diotorisasi. Jika mode autentikasi adalah "kunci", berikan string koneksi atau nama penyimpanan dan kunci akses akun Anda akan diambil untuk otorisasi. Jika mode autentikasi adalah "login", berikan titik akhir penyimpanan atau nama toko dan kredensial "az login" Anda akan digunakan untuk otorisasi. Anda dapat mengonfigurasi mode autentikasi default menggunakan `az configure --defaults appconfig_auth_mode=<auth_mode>`. Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/azure-app-configuration/concept-enable-rbac.
+    summary: Parameter ini dapat digunakan untuk menunjukkan bagaimana operasi data akan diotorisasi. Jika mode autentikasi adalah "kunci", berikan string koneksi atau nama penyimpanan dan kunci akses akun Anda akan diambil untuk otorisasi. Jika mode auth adalah "login", berikan titik akhir toko atau nama toko dan kredensial "az login" Anda akan digunakan untuk otorisasi. Anda dapat mengonfigurasi mode autentikasi default menggunakan `az configure --defaults appconfig_auth_mode=<auth_mode>`. Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/azure-app-configuration/concept-enable-rbac.
     description: ''
   - name: --connection-string
-    summary: Kombinasi kunci akses dan titik akhir App Configuration. Dapat ditemukan menggunakan 'az appconfig credential list'. Pengguna dapat melakukan prasetel menggunakan `az configure --defaults appconfig_connection_string=<connection_string>` variabel lingkungan atau dengan nama AZURE_APPCONFIG_CONNECTION_STRING.
+    summary: Kombinasi kunci akses dan titik akhir App Configuration. Dapat ditemukan menggunakan 'az appconfig credential list'. Pengguna dapat mengaturnya menggunakan `az configure --defaults appconfig_connection_string=<connection_string>` variabel lingkungan atau dengan nama AZURE_APPCONFIG_CONNECTION_STRING.
     description: ''
   - name: --endpoint
     summary: Jika mode autentikasi adalah "login", berikan URL titik akhir App Configuration. Titik akhir dapat diambil menggunakan perintah "az appconfig show". Anda dapat mengonfigurasi titik akhir default menggunakan `az configure --defaults appconfig_endpoint=<endpoint>`.
     description: ''
   - name: --label
-    summary: Jika tidak ada label yang ditentukan, hapus entri dengan label null. Mendukung tanda bintang sebagai filter, misalnya \* berarti semua label dan abc\* berarti label dengan abc sebagai awalan.
+    summary: Jika tidak ada label yang ditentukan, hapus entri dengan label null. Tanda bintang dukungan sebagai filter, misalnya \* berarti semua label dan abc\* berarti label dengan abc sebagai awalan.
     description: ''
   - name: --name -n
     summary: Nama App Configuration. Anda dapat mengonfigurasi nama default menggunakan `az configure --defaults app_configuration_store=<name>`.
@@ -84,7 +84,7 @@ directCommands:
     syntax: az appconfig kv export -n MyAppConfiguration --label test -d file --path D:/abc.json --format json
   - summary: Ekspor semua kunci dengan label null ke aplikasi App Service.
     syntax: az appconfig kv export -n MyAppConfiguration -d appservice --appservice-account MyAppService
-  - summary: Ekspor semua kunci dengan uji label tidak termasuk bendera fitur ke file json.
+  - summary: Ekspor semua kunci dengan pengujian label tidak termasuk bendera fitur ke file json.
     syntax: az appconfig kv export -n MyAppConfiguration --label test -d file --path D:/abc.json --format json --skip-features
   - summary: Ekspor semua kunci dan bendera fitur dengan semua label ke App Configuration lain.
     syntax: az appconfig kv export -n MyAppConfiguration -d appconfig --dest-name AnotherAppConfiguration --key * --label * --preserve-labels
@@ -102,15 +102,15 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --appservice-account
-    summary: ARM ID untuk AppService ATAU nama AppService, dengan asumsi berada dalam grup langganan dan sumber daya yang sama dengan App Configuration. Diperlukan untuk argumen AppService.
+    summary: ARM ID untuk AppService ATAU nama AppService, dengan asumsi berada dalam langganan dan grup sumber daya yang sama dengan App Configuration. Diperlukan untuk argumen AppService.
     description: ''
   - name: --auth-mode
     defaultValue: key
     parameterValueGroup: key, login
-    summary: Parameter ini dapat digunakan untuk menunjukkan bagaimana operasi data akan diotorisasi. Jika mode autentikasi adalah "kunci", berikan string koneksi atau nama penyimpanan dan kunci akses akun Anda akan diambil untuk otorisasi. Jika mode autentikasi adalah "login", berikan titik akhir penyimpanan atau nama toko dan kredensial "az login" Anda akan digunakan untuk otorisasi. Anda dapat mengonfigurasi mode autentikasi default menggunakan `az configure --defaults appconfig_auth_mode=<auth_mode>`. Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/azure-app-configuration/concept-enable-rbac.
+    summary: Parameter ini dapat digunakan untuk menunjukkan bagaimana operasi data akan diotorisasi. Jika mode autentikasi adalah "kunci", berikan string koneksi atau nama penyimpanan dan kunci akses akun Anda akan diambil untuk otorisasi. Jika mode auth adalah "login", berikan titik akhir toko atau nama toko dan kredensial "az login" Anda akan digunakan untuk otorisasi. Anda dapat mengonfigurasi mode autentikasi default menggunakan `az configure --defaults appconfig_auth_mode=<auth_mode>`. Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/azure-app-configuration/concept-enable-rbac.
     description: ''
   - name: --connection-string
-    summary: Kombinasi kunci akses dan titik akhir App Configuration. Dapat ditemukan menggunakan 'az appconfig credential list'. Pengguna dapat melakukan prasetel menggunakan `az configure --defaults appconfig_connection_string=<connection_string>` variabel lingkungan atau dengan nama AZURE_APPCONFIG_CONNECTION_STRING.
+    summary: Kombinasi kunci akses dan titik akhir App Configuration. Dapat ditemukan menggunakan 'az appconfig credential list'. Pengguna dapat mengaturnya menggunakan `az configure --defaults appconfig_connection_string=<connection_string>` variabel lingkungan atau dengan nama AZURE_APPCONFIG_CONNECTION_STRING.
     description: ''
   - name: --dest-auth-mode
     defaultValue: key
@@ -136,11 +136,11 @@ directCommands:
     parameterValueGroup: json, properties, yaml
     summary: Format file yang diekspor ke. Diperlukan untuk argumen file. Saat ini, bendera fitur tidak didukung dalam format properti.
     description: ''
-  - name: --kunci
+  - name: --key
     summary: Jika tidak ada kunci yang ditentukan, kembalikan semua kunci secara default. Mendukung tanda bintang sebagai filter, misalnya abc\* berarti kunci dengan abc sebagai awalan. Pemfilteran kunci tidak berlaku untuk bendera fitur. Secara default, semua bendera fitur dengan label yang ditentukan akan diekspor.
     description: ''
   - name: --label
-    summary: Hanya kunci dan bendera fitur dengan label ini yang akan diekspor. Jika tidak ada label yang ditentukan, ekspor kunci dan bendera fitur dengan label null secara default. Hanya ketika tujuan ekspor adalah appconfig, kami mendukung tanda bintang sebagai filter, misalnya \* berarti semua label dan abc\* berarti label dengan abc sebagai awalan. Filter label tidak didukung saat mengekspor ke file atau appservice.
+    summary: Hanya kunci dan bendera fitur dengan label ini yang akan diekspor. Jika tidak ada label yang ditentukan, ekspor kunci dan bendera fitur dengan label null secara default. Ketika tujuan ekspor adalah appconfig, atau ketika tujuan ekspor adalah file dengan `appconfig/kvset` profil, argumen ini mendukung tanda bintang dan tanda koma untuk pemfilteran label, misalnya, \* berarti semua label, abc\* berarti label dengan abc sebagai awalan, dan abc,xyz berarti label dengan abc atau xyz.
     description: ''
   - name: --name -n
     summary: Nama App Configuration. Anda dapat mengonfigurasi nama default menggunakan `az configure --defaults app_configuration_store=<name>`.
@@ -163,29 +163,29 @@ directCommands:
   - name: --profile
     defaultValue: appconfig/default
     parameterValueGroup: appconfig/default, appconfig/kvset
-    summary: Ekspor profil yang akan digunakan untuk mengekspor kunci-nilai. Opsi 'kedalaman', 'pemisah', 'naming-convention', 'prefix', 'dest-label' dan, 'resolve-keyvault' tidak didukung saat menggunakan profil 'appconfig/kvset'.
+    summary: Ekspor profil yang akan digunakan untuk mengekspor nilai kunci. Opsi 'depth', 'separator', 'naming-convention', 'prefix', 'dest-label' dan, 'resolve-keyvault' tidak didukung saat menggunakan profil 'appconfig/kvset'.
     description: ''
   - name: --resolve-keyvault
     parameterValueGroup: false, true
     summary: Atasi konten referensi brankas kunci.
     description: ''
-  - name: --pemisah
+  - name: --separator
     summary: "Pemisah untuk meratakan pasangan kunci-nilai ke file json atau yaml. Diperlukan untuk mengekspor struktur hierarkis. Pemisah akan diabaikan untuk file properti dan bendera fitur. Nilai yang didukung: '.', ',', ';', '-', '_', '__', '/', ':'."
     description: ''
   - name: --skip-features
     parameterValueGroup: false, true
-    summary: Ekspor item tidak termasuk semua bendera fitur. Secara default, semua fitur dengan label yang ditentukan akan diekspor ke file atau appconfig. Tidak berlaku untuk appservice.
+    summary: Ekspor item yang tidak termasuk semua bendera fitur. Secara default, semua fitur dengan label yang ditentukan akan diekspor ke file atau appconfig. Tidak berlaku untuk appservice.
     description: ''
   - name: --skip-keyvault
     parameterValueGroup: false, true
-    summary: Ekspor item tidak termasuk semua referensi brankas kunci. Secara default, semua referensi brankas kunci dengan label yang ditentukan akan diekspor.
+    summary: Ekspor item yang tidak termasuk semua referensi brankas kunci. Secara default, semua referensi brankas kunci dengan label yang ditentukan akan diekspor.
     description: ''
   - name: --yes -y
     summary: Jangan meminta pratinjau.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appconfig/_help.py
 - uid: az_appconfig_kv_import
-  name: mengimpor az appconfig kv
+  name: az appconfig kv import
   summary: Impor konfigurasi ke App Configuration Anda dari tempat lain.
   description: ''
   syntax: >-
@@ -214,7 +214,7 @@ directCommands:
                            [--strict {false, true}]
                            [--yes]
   examples:
-  - summary: Impor semua kunci dan bendera fitur dari file dan terapkan label pengujian.
+  - summary: Impor semua kunci dan bendera fitur dari file dan terapkan label uji.
     syntax: az appconfig kv import -n MyAppConfiguration --label test -s file --path D:/abc.json --format json
   - summary: Impor semua kunci dan bendera fitur dengan label null dan terapkan label baru dari App Configuration.
     syntax: az appconfig kv import -n MyAppConfiguration -s appconfig --src-name AnotherAppConfiguration --label ImportedKeys
@@ -238,15 +238,15 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --appservice-account
-    summary: ARM ID untuk AppService ATAU nama AppService, dengan asumsi berada dalam grup langganan dan sumber daya yang sama dengan App Configuration. Diperlukan untuk argumen AppService.
+    summary: ARM ID untuk AppService ATAU nama AppService, dengan asumsi berada dalam langganan dan grup sumber daya yang sama dengan App Configuration. Diperlukan untuk argumen AppService.
     description: ''
   - name: --auth-mode
     defaultValue: key
     parameterValueGroup: key, login
-    summary: Parameter ini dapat digunakan untuk menunjukkan bagaimana operasi data akan diotorisasi. Jika mode autentikasi adalah "kunci", berikan string koneksi atau nama penyimpanan dan kunci akses akun Anda akan diambil untuk otorisasi. Jika mode autentikasi adalah "login", berikan titik akhir penyimpanan atau nama toko dan kredensial "az login" Anda akan digunakan untuk otorisasi. Anda dapat mengonfigurasi mode autentikasi default menggunakan `az configure --defaults appconfig_auth_mode=<auth_mode>`. Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/azure-app-configuration/concept-enable-rbac.
+    summary: Parameter ini dapat digunakan untuk menunjukkan bagaimana operasi data akan diotorisasi. Jika mode autentikasi adalah "kunci", berikan string koneksi atau nama penyimpanan dan kunci akses akun Anda akan diambil untuk otorisasi. Jika mode auth adalah "login", berikan titik akhir toko atau nama toko dan kredensial "az login" Anda akan digunakan untuk otorisasi. Anda dapat mengonfigurasi mode autentikasi default menggunakan `az configure --defaults appconfig_auth_mode=<auth_mode>`. Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/azure-app-configuration/concept-enable-rbac.
     description: ''
   - name: --connection-string
-    summary: Kombinasi kunci akses dan titik akhir App Configuration. Dapat ditemukan menggunakan 'az appconfig credential list'. Pengguna dapat melakukan prasetel menggunakan `az configure --defaults appconfig_connection_string=<connection_string>` variabel lingkungan atau dengan nama AZURE_APPCONFIG_CONNECTION_STRING.
+    summary: Kombinasi kunci akses dan titik akhir App Configuration. Dapat ditemukan menggunakan 'az appconfig credential list'. Pengguna dapat mengaturnya menggunakan `az configure --defaults appconfig_connection_string=<connection_string>` variabel lingkungan atau dengan nama AZURE_APPCONFIG_CONNECTION_STRING.
     description: ''
   - name: --content-type
     summary: Tipe isi semua item yang diimpor.
@@ -280,9 +280,9 @@ directCommands:
   - name: --profile
     defaultValue: appconfig/default
     parameterValueGroup: appconfig/default, appconfig/kvset
-    summary: Impor profil yang akan digunakan untuk mengimpor kunci-nilai. Opsi 'kedalaman', 'pemisah', 'content-type', 'label', 'skip-features' dan, 'prefiks' tidak didukung saat menggunakan profil 'appconfig/kvset'.
+    summary: Impor profil yang akan digunakan untuk mengimpor nilai kunci. Opsi 'depth', 'separator', 'content-type', 'label', 'skip-features' dan, 'prefix' tidak didukung saat menggunakan profil 'appconfig/kvset'.
     description: ''
-  - name: --pemisah
+  - name: --separator
     summary: "Pemisah untuk meratakan file json atau yaml ke pasangan kunci-nilai. Pemisah akan diabaikan untuk file properti dan bendera fitur. Nilai yang didukung: '.', ',', ';', '-', '_', '__', '/', ':'."
     description: ''
   - name: --skip-features
@@ -298,13 +298,13 @@ directCommands:
     summary: Kombinasi kunci akses dan titik akhir penyimpanan sumber.
     description: ''
   - name: --src-endpoint
-    summary: Jika --src-auth-mode adalah "login", berikan URL titik akhir sumber App Configuration.
+    summary: Jika --src-auth-mode adalah "login", berikan URL titik akhir dari App Configuration sumber.
     description: ''
   - name: --src-key
-    summary: Jika tidak ada kunci yang ditentukan, impor semua kunci secara default. Mendukung tanda bintang sebagai filter, misalnya abc\* berarti kunci dengan abc sebagai awalan. Pemfilteran kunci tidak berlaku untuk bendera fitur. Secara default, semua bendera fitur dengan label yang ditentukan akan diimpor.
+    summary: Jika tidak ada kunci yang ditentukan, impor semua kunci secara default. Mendukung tanda bintang sebagai filter, misalnya abc\* berarti kunci dengan abc sebagai awalan. Pemfilteran kunci tidak berlaku untuk bendera fitur. Secara default, semua bendera fitur dengan label tertentu akan diimpor.
     description: ''
   - name: --src-label
-    summary: Hanya kunci dengan label ini di AppConfig sumber yang akan diimpor. Jika tidak ada nilai yang ditentukan, impor kunci dengan label null secara default. Mendukung tanda bintang sebagai filter, misalnya \* berarti semua label, abc\* berarti label dengan abc sebagai awalan.
+    summary: Hanya kunci dengan label ini di AppConfig sumber yang akan diimpor. Jika tidak ada nilai yang ditentukan, impor kunci dengan label null secara default. Tanda bintang dukungan sebagai filter, misalnya \* berarti semua label, abc\* berarti label dengan abc sebagai awalan.
     description: ''
   - name: --src-name
     summary: Nama App Configuration sumber.
@@ -318,8 +318,8 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appconfig/_help.py
 - uid: az_appconfig_kv_list
-  name: mendaftar az appconfig kv
-  summary: Mencantumkan nilai kunci.
+  name: az appconfig kv list
+  summary: Mencantumkan kunci-nilai.
   description: ''
   syntax: >-
     az appconfig kv list [--all]
@@ -340,7 +340,7 @@ directCommands:
     syntax: az appconfig kv list --key color --connection-string Endpoint=https://contoso.azconfig.io;Id=xxx;Secret=xxx --label v1.*
   - summary: Cantumkan semua kunci dengan label apa pun dan kueri hanya kunci, nilai, dan tag.
     syntax: az appconfig kv list --connection-string Endpoint=https://contoso.azconfig.io;Id=xxx;Secret=xxx --fields key value tags --datetime "2019-05-01T11:24:12Z"
-  - summary: Daftar konten referensi brankas kunci dengan awalan kunci 'KVRef_' dan hanya pilih kunci dan nilai.
+  - summary: Cantumkan konten referensi brankas kunci dengan awalan kunci 'KVRef_' dan hanya pilih kunci dan nilai.
     syntax: az appconfig kv list -n MyAppConfiguration --key "KVRef_*" --resolve-keyvault --query "[*].{key:key, value:value}"
   - summary: Mencantumkan nilai kunci dengan beberapa label.
     syntax: az appconfig kv list --label test,prod,\0 -n MyAppConfiguration
@@ -348,15 +348,15 @@ directCommands:
     syntax: az appconfig kv list --endpoint https://myappconfiguration.azconfig.io --auth-mode login
   optionalParameters:
   - name: --all
-    summary: Cantumkan semua item.
+    summary: Mencantumkan semua item.
     description: ''
   - name: --auth-mode
     defaultValue: key
     parameterValueGroup: key, login
-    summary: Parameter ini dapat digunakan untuk menunjukkan bagaimana operasi data akan diotorisasi. Jika mode autentikasi adalah "kunci", berikan string koneksi atau nama penyimpanan dan kunci akses akun Anda akan diambil untuk otorisasi. Jika mode autentikasi adalah "login", berikan titik akhir penyimpanan atau nama toko dan kredensial "az login" Anda akan digunakan untuk otorisasi. Anda dapat mengonfigurasi mode autentikasi default menggunakan `az configure --defaults appconfig_auth_mode=<auth_mode>`. Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/azure-app-configuration/concept-enable-rbac.
+    summary: Parameter ini dapat digunakan untuk menunjukkan bagaimana operasi data akan diotorisasi. Jika mode autentikasi adalah "kunci", berikan string koneksi atau nama penyimpanan dan kunci akses akun Anda akan diambil untuk otorisasi. Jika mode auth adalah "login", berikan titik akhir toko atau nama toko dan kredensial "az login" Anda akan digunakan untuk otorisasi. Anda dapat mengonfigurasi mode autentikasi default menggunakan `az configure --defaults appconfig_auth_mode=<auth_mode>`. Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/azure-app-configuration/concept-enable-rbac.
     description: ''
   - name: --connection-string
-    summary: Kombinasi kunci akses dan titik akhir App Configuration. Dapat ditemukan menggunakan 'az appconfig credential list'. Pengguna dapat melakukan prasetel menggunakan `az configure --defaults appconfig_connection_string=<connection_string>` variabel lingkungan atau dengan nama AZURE_APPCONFIG_CONNECTION_STRING.
+    summary: Kombinasi kunci akses dan titik akhir App Configuration. Dapat ditemukan menggunakan 'az appconfig credential list'. Pengguna dapat mengaturnya menggunakan `az configure --defaults appconfig_connection_string=<connection_string>` variabel lingkungan atau dengan nama AZURE_APPCONFIG_CONNECTION_STRING.
     description: ''
   - name: --datetime
     summary: 'Format: "YYYY-MM-DDThh:mm:ssZ". Jika tidak ada zona waktu yang ditentukan, gunakan UTC secara default.'
@@ -368,7 +368,7 @@ directCommands:
     parameterValueGroup: content_type, etag, key, label, last_modified, locked, tags, value
     summary: Bidang output yang disesuaikan yang dipisahkan spasi.
     description: ''
-  - name: --kunci
+  - name: --key
     summary: Jika tidak ada kunci yang ditentukan, kembalikan semua kunci secara default. Mendukung tanda bintang sebagai filter, misalnya abc\* berarti kunci dengan abc sebagai awalan.
     description: ''
   - name: --label
@@ -386,7 +386,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appconfig/_help.py
 - uid: az_appconfig_kv_lock
-  name: kunci az appconfig kv
+  name: az appconfig kv lock
   summary: Kunci kunci-nilai untuk melarang operasi tulis.
   description: ''
   syntax: >-
@@ -398,23 +398,23 @@ directCommands:
                          [--name]
                          [--yes]
   examples:
-  - summary: Kunci nilai kunci menggunakan nama App Configuration.
+  - summary: Kunci kunci-nilai menggunakan nama App Configuration.
     syntax: az appconfig kv lock -n MyAppConfiguration --key color --label test
-  - summary: Mengunci kunci-nilai menggunakan string koneksi.
+  - summary: Mengunci kunci-nilai secara paksa menggunakan string koneksi.
     syntax: az appconfig kv lock --connection-string Endpoint=https://contoso.azconfig.io;Id=xxx;Secret=xxx --key color --label test --yes
   requiredParameters:
   - isRequired: true
-    name: --kunci
+    name: --key
     summary: Kunci yang akan dikunci.
     description: ''
   optionalParameters:
   - name: --auth-mode
     defaultValue: key
     parameterValueGroup: key, login
-    summary: Parameter ini dapat digunakan untuk menunjukkan bagaimana operasi data akan diotorisasi. Jika mode autentikasi adalah "kunci", berikan string koneksi atau nama penyimpanan dan kunci akses akun Anda akan diambil untuk otorisasi. Jika mode autentikasi adalah "login", berikan titik akhir penyimpanan atau nama toko dan kredensial "az login" Anda akan digunakan untuk otorisasi. Anda dapat mengonfigurasi mode autentikasi default menggunakan `az configure --defaults appconfig_auth_mode=<auth_mode>`. Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/azure-app-configuration/concept-enable-rbac.
+    summary: Parameter ini dapat digunakan untuk menunjukkan bagaimana operasi data akan diotorisasi. Jika mode autentikasi adalah "kunci", berikan string koneksi atau nama penyimpanan dan kunci akses akun Anda akan diambil untuk otorisasi. Jika mode auth adalah "login", berikan titik akhir toko atau nama toko dan kredensial "az login" Anda akan digunakan untuk otorisasi. Anda dapat mengonfigurasi mode autentikasi default menggunakan `az configure --defaults appconfig_auth_mode=<auth_mode>`. Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/azure-app-configuration/concept-enable-rbac.
     description: ''
   - name: --connection-string
-    summary: Kombinasi kunci akses dan titik akhir App Configuration. Dapat ditemukan menggunakan 'az appconfig credential list'. Pengguna dapat melakukan prasetel menggunakan `az configure --defaults appconfig_connection_string=<connection_string>` variabel lingkungan atau dengan nama AZURE_APPCONFIG_CONNECTION_STRING.
+    summary: Kombinasi kunci akses dan titik akhir App Configuration. Dapat ditemukan menggunakan 'az appconfig credential list'. Pengguna dapat mengaturnya menggunakan `az configure --defaults appconfig_connection_string=<connection_string>` variabel lingkungan atau dengan nama AZURE_APPCONFIG_CONNECTION_STRING.
     description: ''
   - name: --endpoint
     summary: Jika mode autentikasi adalah "login", berikan URL titik akhir App Configuration. Titik akhir dapat diambil menggunakan perintah "az appconfig show". Anda dapat mengonfigurasi titik akhir default menggunakan `az configure --defaults appconfig_endpoint=<endpoint>`.
@@ -464,7 +464,7 @@ directCommands:
   - name: --endpoint
     summary: Jika mode autentikasi adalah "login", berikan URL titik akhir App Configuration. Titik akhir dapat diambil menggunakan perintah "az appconfig show". Anda dapat mengonfigurasi titik akhir default menggunakan `az configure --defaults appconfig_endpoint=<endpoint>`.
     description: ''
-  - name: --kunci
+  - name: --key
     summary: Jika tidak ada kunci yang ditentukan, pulihkan semua kunci secara default. Mendukung tanda bintang sebagai filter, misalnya abc\* berarti kunci dengan abc sebagai awalan.
     description: ''
   - name: --label
@@ -478,7 +478,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appconfig/_help.py
 - uid: az_appconfig_kv_set
-  name: mengatur az appconfig kv
+  name: az appconfig kv set
   summary: Atur kunci-nilai.
   description: ''
   syntax: >-
@@ -507,7 +507,7 @@ directCommands:
     syntax: az appconfig kv set --endpoint https://myappconfiguration.azconfig.io --key color --value red --auth-mode login
   requiredParameters:
   - isRequired: true
-    name: --kunci
+    name: --key
     summary: Kunci yang akan diatur. Kunci tidak boleh berupa '.' atau '..', atau berisi karakter '%'.
     description: ''
   optionalParameters:
@@ -562,7 +562,7 @@ directCommands:
     syntax: az appconfig kv set-keyvault --connection-string Endpoint=https://contoso.azconfig.io;Id=xxx;Secret=xxx --key HostSecret --secret-identifier https://contoso.vault.azure.net/Secrets/DummySecret --tags tag1=value1 tag2=value2
   requiredParameters:
   - isRequired: true
-    name: --kunci
+    name: --key
     summary: Kunci yang akan diatur. Kunci tidak boleh berupa '.' atau '..', atau berisi karakter '%'.
     description: ''
   - isRequired: true
@@ -615,17 +615,17 @@ directCommands:
     syntax: az appconfig kv show --key color --auth-mode login --endpoint https://myappconfiguration.azconfig.io
   requiredParameters:
   - isRequired: true
-    name: --kunci
+    name: --key
     summary: Kunci yang akan ditampilkan.
     description: ''
   optionalParameters:
   - name: --auth-mode
     defaultValue: key
     parameterValueGroup: key, login
-    summary: Parameter ini dapat digunakan untuk menunjukkan bagaimana operasi data akan diotorisasi. Jika mode autentikasi adalah "kunci", berikan string koneksi atau nama penyimpanan dan kunci akses akun Anda akan diambil untuk otorisasi. Jika mode auth adalah "login", berikan titik akhir toko atau nama toko dan kredensial "az login" Anda akan digunakan untuk otorisasi. Anda dapat mengonfigurasi mode autentikasi default menggunakan `az configure --defaults appconfig_auth_mode=<auth_mode>`. Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/azure-app-configuration/concept-enable-rbac.
+    summary: Parameter ini dapat digunakan untuk menunjukkan bagaimana operasi data akan diotorisasi. Jika mode autentikasi adalah "kunci", berikan string koneksi atau nama penyimpanan dan kunci akses akun Anda akan diambil untuk otorisasi. Jika mode autentikasi adalah "login", berikan titik akhir penyimpanan atau nama toko dan kredensial "az login" Anda akan digunakan untuk otorisasi. Anda dapat mengonfigurasi mode autentikasi default menggunakan `az configure --defaults appconfig_auth_mode=<auth_mode>`. Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/azure-app-configuration/concept-enable-rbac.
     description: ''
   - name: --connection-string
-    summary: Kombinasi kunci akses dan titik akhir App Configuration. Dapat ditemukan menggunakan 'az appconfig credential list'. Pengguna dapat mengaturnya menggunakan `az configure --defaults appconfig_connection_string=<connection_string>` variabel lingkungan atau dengan nama AZURE_APPCONFIG_CONNECTION_STRING.
+    summary: Kombinasi kunci akses dan titik akhir App Configuration. Dapat ditemukan menggunakan 'az appconfig credential list'. Pengguna dapat melakukan prasetel menggunakan `az configure --defaults appconfig_connection_string=<connection_string>` variabel lingkungan atau dengan nama AZURE_APPCONFIG_CONNECTION_STRING.
     description: ''
   - name: --datetime
     summary: 'Format: "YYYY-MM-DDThh:mm:ssZ". Jika tidak ada zona waktu yang ditentukan, gunakan UTC secara default.'
@@ -659,17 +659,17 @@ directCommands:
     syntax: az appconfig kv unlock --connection-string Endpoint=https://contoso.azconfig.io;Id=xxx;Secret=xxx --key color --label test --yes
   requiredParameters:
   - isRequired: true
-    name: --kunci
+    name: --key
     summary: Kunci yang akan dibuka kuncinya.
     description: ''
   optionalParameters:
   - name: --auth-mode
     defaultValue: key
     parameterValueGroup: key, login
-    summary: Parameter ini dapat digunakan untuk menunjukkan bagaimana operasi data akan diotorisasi. Jika mode autentikasi adalah "kunci", berikan string koneksi atau nama penyimpanan dan kunci akses akun Anda akan diambil untuk otorisasi. Jika mode auth adalah "login", berikan titik akhir toko atau nama toko dan kredensial "az login" Anda akan digunakan untuk otorisasi. Anda dapat mengonfigurasi mode autentikasi default menggunakan `az configure --defaults appconfig_auth_mode=<auth_mode>`. Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/azure-app-configuration/concept-enable-rbac.
+    summary: Parameter ini dapat digunakan untuk menunjukkan bagaimana operasi data akan diotorisasi. Jika mode autentikasi adalah "kunci", berikan string koneksi atau nama penyimpanan dan kunci akses akun Anda akan diambil untuk otorisasi. Jika mode autentikasi adalah "login", berikan titik akhir penyimpanan atau nama toko dan kredensial "az login" Anda akan digunakan untuk otorisasi. Anda dapat mengonfigurasi mode autentikasi default menggunakan `az configure --defaults appconfig_auth_mode=<auth_mode>`. Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/azure-app-configuration/concept-enable-rbac.
     description: ''
   - name: --connection-string
-    summary: Kombinasi kunci akses dan titik akhir App Configuration. Dapat ditemukan menggunakan 'az appconfig credential list'. Pengguna dapat mengaturnya menggunakan `az configure --defaults appconfig_connection_string=<connection_string>` variabel lingkungan atau dengan nama AZURE_APPCONFIG_CONNECTION_STRING.
+    summary: Kombinasi kunci akses dan titik akhir App Configuration. Dapat ditemukan menggunakan 'az appconfig credential list'. Pengguna dapat melakukan prasetel menggunakan `az configure --defaults appconfig_connection_string=<connection_string>` variabel lingkungan atau dengan nama AZURE_APPCONFIG_CONNECTION_STRING.
     description: ''
   - name: --endpoint
     summary: Jika mode autentikasi adalah "login", berikan URL titik akhir App Configuration. Titik akhir dapat diambil menggunakan perintah "az appconfig show". Anda dapat mengonfigurasi titik akhir default menggunakan `az configure --defaults appconfig_endpoint=<endpoint>`.
@@ -716,9 +716,9 @@ metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
   ms.date: 03/16/2022
   description: Mengelola nilai kunci yang disimpan dalam App Configuration.
-  ms.openlocfilehash: 64d8391c797bf0f6f152640be11838d4e22590d9
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: 85623c281175292e13ce857b77887407d6d35874
+  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141446543"
+  ms.lasthandoff: 04/27/2022
+  ms.locfileid: "144029137"

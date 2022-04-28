@@ -6,7 +6,7 @@ description: ''
 directCommands:
 - uid: az_ams_live-event_create
   name: az ams live-event create
-  summary: Buat acara langsung.
+  summary: Membuat acara langsung.
   description: ''
   syntax: >-
     az ams live-event create --account-name
@@ -28,7 +28,7 @@ directCommands:
                              [--preset-name]
                              [--preview-ips]
                              [--preview-locator]
-                             [--stream-options {Default, LowLatency}]
+                             [--stream-options {Default, LowLatency, LowLatencyV2}]
                              [--streaming-policy-name]
                              [--stretch-mode]
                              [--tags]
@@ -58,7 +58,7 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --access-token
-    summary: Pengidentifikasi unik untuk aliran. Ini dapat ditentukan pada waktu pembuatan tetapi tidak dapat diperbarui. Jika dihilangkan, layanan akan menghasilkan nilai unik.
+    summary: Pengidentifikasi unik untuk streaming. Ini dapat ditentukan pada waktu pembuatan tetapi tidak dapat diperbarui. Jika dihilangkan, layanan akan menghasilkan nilai unik.
     description: ''
   - name: --alternative-media-id
     summary: Pengidentifikasi Media Alternatif yang terkait dengan StreamingLocator yang dibuat untuk pratinjau. Nilai ini ditentukan pada waktu pembuatan dan tidak dapat diperbarui. Pengidentifikasi dapat digunakan dalam CustomLicenseAcquisitionUrlTemplate atau CustomKeyAcquisitionUrlTemplate dari StreamingPolicy yang ditentukan di bidang StreamingPolicyName.
@@ -67,10 +67,10 @@ directCommands:
     summary: Bendera menunjukkan apakah sumber daya harus dimulai secara otomatis saat pembuatan.
     description: ''
   - name: --client-access-policy
-    summary: Filepath ke clientaccesspolicy.xml digunakan oleh Microsoft Silverlight dan Adobe Flash. Gunakan @{file} untuk memuat dari file.
+    summary: Filepath ke clientaccesspolicy.xml yang digunakan oleh Microsoft Silverlight dan Adobe Flash. Gunakan @{file} untuk memuat dari file.
     description: ''
   - name: --cross-domain-policy
-    summary: Filepath ke crossdomain.xml digunakan oleh Microsoft Silverlight dan Adobe Flash. Gunakan @{file} untuk memuat dari file.
+    summary: Filepath ke crossdomain.xml yang digunakan oleh Microsoft Silverlight dan Adobe Flash. Gunakan @{file} untuk memuat dari file.
     description: ''
   - name: --description
     summary: Deskripsi acara langsung.
@@ -79,13 +79,13 @@ directCommands:
     summary: 'Jenis pengodean untuk acara langsung. Nilai ini ditentukan pada waktu pembuatan dan tidak dapat diperbarui. Nilai yang diizinkan: Premium1080p, None, Standard.'
     description: ''
   - name: --hostname-prefix
-    summary: Saat useStaticHostname diatur ke true, hostname_prefix menentukan bagian pertama dari nama host yang ditetapkan ke pratinjau acara langsung dan titik akhir penyerapan. Nama host akhir akan menjadi kombinasi dari awalan ini, nama akun layanan media dan kode pendek untuk pusat data Azure Media Services.
+    summary: Saat useStaticHostname diatur ke true, hostname_prefix menentukan bagian pertama dari nama host yang ditetapkan ke pratinjau acara langsung dan menyerap titik akhir. Nama host akhir akan menjadi kombinasi dari awalan ini, nama akun layanan media dan kode pendek untuk pusat data Azure Media Services.
     description: ''
   - name: --key-frame-interval
-    summary: Gunakan nilai waktu ISO 8601 antara 0,5 hingga 20 detik untuk menentukan panjang fragmen output untuk video dan audiotrack acara langsung pengodean. Misalnya, gunakan PT2S untuk menunjukkan 2 detik. Untuk trek video, ini juga menentukan interval bingkai kunci, atau panjang GoP (sekelompok gambar). Jika nilai ini tidak diatur untuk anencoding acara langsung, durasi fragmen default ke 2 detik. Nilai tidak dapat diatur untuk acara langsung pass-through.
+    summary: Gunakan nilai waktu ISO 8601 antara 0,5 hingga 20 detik untuk menentukan panjang fragmen output untuk video dan audiotrack dari acara langsung pengodean. Misalnya, gunakan PT2S untuk menunjukkan 2 detik. Untuk trek video, ini juga mendefinisikan interval bingkai kunci, atau panjang GoP (sekelompok gambar). Jika nilai ini tidak diatur untuk anencoding acara langsung, durasi fragmen default ke 2 detik. Nilai tidak dapat diatur untuk acara langsung pass-through.
     description: ''
   - name: --key-frame-interval-duration
-    summary: Durasi rentang waktu ISO 8601 dari durasi interval bingkai kunci dalam hitungan detik. Nilai harus berupa interger dalam kisaran 1 (PT1S atau 00:00:01) hingga 30 (PT30S atau 00:00:30) detik.
+    summary: Durasi rentang waktu ISO 8601 dari durasi interval bingkai kunci dalam hitungan detik. Nilai harus interger dalam rentang 1 (PT1S atau 00:00:01) hingga 30 (PT30S atau 00:00:30) detik.
     description: ''
   - name: --no-wait
     summary: Jangan menunggu operasi jangka panjang selesai.
@@ -97,17 +97,17 @@ directCommands:
     summary: Alamat IP yang dipisahkan spasi untuk kontrol akses. Alamat IP yang diizinkan dapat ditentukan sebagai satu alamat IP (misalnya "10.0.0.1") atau sebagai rentang IP menggunakan alamat IP dan subnet mask CIDR (misalnya "10.0.0.1/22"). Gunakan "" untuk menghapus daftar yang ada. Gunakan "AllowAll" untuk mengizinkan semua alamat IP. Mengizinkan semua IP tidak disarankan untuk lingkungan produksi.
     description: ''
   - name: --preview-locator
-    summary: Pengidentifikasi pencari pratinjau dalam format Guid. Menentukan ini pada waktu pembuatan memungkinkan penelepon untuk mengetahui url pencari pratinjau sebelum peristiwa dibuat. Jika dihilangkan, layanan akan menghasilkan pengidentifikasi acak. Nilai ini tidak dapat diperbarui setelah acara langsung dibuat.
+    summary: Pengidentifikasi pencari pratinjau dalam format Guid. Menentukan ini pada waktu pembuatan memungkinkan pemanggil untuk mengetahui url pencari pratinjau sebelum peristiwa dibuat. Jika dihilangkan, layanan akan menghasilkan pengidentifikasi acak. Nilai ini tidak dapat diperbarui setelah acara langsung dibuat.
     description: ''
   - name: --stream-options
-    parameterValueGroup: Default, LowLatency
+    parameterValueGroup: Default, LowLatency, LowLatencyV2
     summary: Opsi yang digunakan untuk LiveEvent. Nilai ini ditentukan pada waktu pembuatan dan tidak dapat diperbarui.
     description: ''
   - name: --streaming-policy-name
     summary: Nama kebijakan streaming yang digunakan untuk pratinjau acara langsung. Ini dapat ditentukan pada waktu pembuatan tetapi tidak dapat diperbarui.
     description: ''
   - name: --stretch-mode
-    summary: 'Menentukan bagaimana video input akan diubah ukurannya agar sesuai dengan resolusi output yang diinginkan. Defaultnya adalah Tidak Ada.  Nilai yang diizinkan: None, AutoSize, AutoFit.'
+    summary: 'Menentukan bagaimana video input akan diubah ukurannya agar sesuai dengan resolusi output yang diinginkan. Defaultnya adalah Tidak Ada.  Nilai yang diizinkan: Tidak Ada, Ukuran Otomatis, Paskan Otomatis.'
     description: ''
   - name: --tags
     summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
@@ -143,7 +143,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/ams/_help.py
 - uid: az_ams_live-event_list
-  name: daftar acara langsung az ams
+  name: az ams live-event list
   summary: Mencantumkan semua acara langsung akun Azure Media Services.
   description: ''
   syntax: >-
@@ -213,7 +213,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/ams/_help.py
 - uid: az_ams_live-event_standby
-  name: siaga acara langsung az ams
+  name: az ams live-event standby
   summary: Alokasikan acara langsung untuk dimulai nanti.
   description: ''
   syntax: >-
@@ -268,7 +268,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/ams/_help.py
 - uid: az_ams_live-event_stop
   name: az ams live-event stop
-  summary: Menghentikan acara langsung.
+  summary: Hentikan acara langsung.
   description: ''
   syntax: >-
     az ams live-event stop [--account-name]
@@ -299,7 +299,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/ams/_help.py
 - uid: az_ams_live-event_update
   name: az ams live-event update
-  summary: Memperbarui detail acara langsung.
+  summary: Perbarui detail acara langsung.
   description: ''
   syntax: >-
     az ams live-event update [--account-name]
@@ -318,9 +318,9 @@ directCommands:
                              [--set]
                              [--tags]
   examples:
-  - summary: Atur alamat IP baru yang diizinkan dan hapus alamat IP yang ada pada indeks '0'.
+  - summary: Atur alamat IP baru yang diizinkan dan hapus alamat IP yang ada di indeks '0'.
     syntax: az ams live-event update -a amsAccount -g resourceGroup -n liveEventName --remove input.accessControl.ip.allow 0 --add input.accessControl.ip.allow 1.2.3.4/22
-  - summary: Hapus alamat IP yang ada dan atur alamat IP baru.
+  - summary: Hapus alamat IP yang ada dan atur yang baru.
     syntax: az ams live-event update -a amsAccount -g resourceGroup -n liveEventName --ips 1.2.3.4/22 5.6.7.8/30
   optionalParameters:
   - name: --account-name -a
@@ -330,10 +330,10 @@ directCommands:
     summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
     description: ''
   - name: --client-access-policy
-    summary: Filepath ke clientaccesspolicy.xml digunakan oleh Microsoft Silverlight dan Adobe Flash. Gunakan @{file} untuk memuat dari file.
+    summary: Filepath ke clientaccesspolicy.xml yang digunakan oleh Microsoft Silverlight dan Adobe Flash. Gunakan @{file} untuk memuat dari file.
     description: ''
   - name: --cross-domain-policy
-    summary: Filepath ke crossdomain.xml digunakan oleh Microsoft Silverlight dan Adobe Flash. Gunakan @{file} untuk memuat dari file.
+    summary: Filepath ke crossdomain.xml yang digunakan oleh Microsoft Silverlight dan Adobe Flash. Gunakan @{file} untuk memuat dari file.
     description: ''
   - name: --description
     summary: Deskripsi acara langsung.
@@ -348,7 +348,7 @@ directCommands:
     summary: Alamat IP yang dipisahkan spasi untuk kontrol akses. Alamat IP yang diizinkan dapat ditentukan sebagai satu alamat IP (misalnya "10.0.0.1") atau sebagai rentang IP menggunakan alamat IP dan subnet mask CIDR (misalnya "10.0.0.1/22"). Gunakan "" untuk menghapus daftar yang ada. Gunakan "AllowAll" untuk mengizinkan semua alamat IP. Mengizinkan semua IP tidak disarankan untuk lingkungan produksi.
     description: ''
   - name: --key-frame-interval-duration
-    summary: Durasi rentang waktu ISO 8601 dari durasi interval bingkai kunci dalam hitungan detik. Nilai harus berupa interger dalam kisaran 1 (PT1S atau 00:00:01) hingga 30 (PT30S atau 00:00:30) detik.
+    summary: Durasi rentang waktu ISO 8601 dari durasi interval bingkai kunci dalam hitungan detik. Nilai harus interger dalam rentang 1 (PT1S atau 00:00:01) hingga 30 (PT30S atau 00:00:30) detik.
     description: ''
   - name: --name -n
     summary: Nama acara langsung.
@@ -357,7 +357,7 @@ directCommands:
     summary: Alamat IP yang dipisahkan spasi untuk kontrol akses. Alamat IP yang diizinkan dapat ditentukan sebagai satu alamat IP (misalnya "10.0.0.1") atau sebagai rentang IP menggunakan alamat IP dan subnet mask CIDR (misalnya "10.0.0.1/22"). Gunakan "" untuk menghapus daftar yang ada. Gunakan "AllowAll" untuk mengizinkan semua alamat IP. Mengizinkan semua IP tidak disarankan untuk lingkungan produksi.
     description: ''
   - name: --remove
-    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
     description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
@@ -421,7 +421,7 @@ directCommands:
     defaultValue: "3600"
     summary: Waktu tunggu maksimum dalam detik.
     description: ''
-  - name: --diperbarui
+  - name: --updated
     summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/ams/_help.py
@@ -455,11 +455,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 03/30/2022
+  ms.date: 04/21/2022
   description: Mengelola acara langsung untuk akun Azure Media Service.
-  ms.openlocfilehash: 63945636dab37bde8e02eb00463818a61a301356
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: a21ec849c23bf0692e4f0dd5c97dd398e587b928
+  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141454356"
+  ms.lasthandoff: 04/27/2022
+  ms.locfileid: "144029569"

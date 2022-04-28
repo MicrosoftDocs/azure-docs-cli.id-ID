@@ -6,12 +6,12 @@ ms.author: dbradish
 ms.prod: non-product-specific
 ms.topic: sample
 ms.date: 04/18/2022
-ms.openlocfilehash: 86361bc0cc47b733aa45e547e8b707d2b858951f
-ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
+ms.openlocfilehash: 0247b3c3bd5c79df7eba0c85f243f01e4f7b27c3
+ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/22/2022
-ms.locfileid: "144003805"
+ms.lasthandoff: 04/27/2022
+ms.locfileid: "144038875"
 ---
 # <a name="learn-to-use-bash-with-the-azure-cli"></a>Pelajari cara menggunakan Bash dengan Azure CLI
 
@@ -140,8 +140,7 @@ subscriptionId="$(az account list --query "[? contains(name, 'Test')].id" -o tsv
 az account set -s $subscriptionId # Sets the current active subscription
 ```
 
-- Untuk informasi selengkapnya tentang mengkueri nilai boolean, lihat [Mengkueri nilai boolean](./query-azure-cli.md).
-- Untuk informasi selengkapnya tentang pemfilteran array, lihat [Memfilter array](./query-azure-cli.md).
+- Untuk informasi selengkapnya tentang memfilter array dan mengkueri nilai boolean, lihat [Memfilter array dengan ekspresi boolean](./query-azure-cli.md#filter-arrays-with-boolean-expressions).
 - Untuk informasi selengkapnya tentang menggunakan variabel, lihat [Cara menggunakan variabel](./azure-cli-variables.md).
 - Untuk informasi selengkapnya tentang bekerja dengan langganan, lihat [Mengelola langganan](./manage-azure-subscriptions-azure-cli.md).
 
@@ -401,7 +400,7 @@ help set
 help help
 ```
 
-## <a name="clean-up-resources"></a>Membersihkan sumber daya
+## <a name="clean-up-resources"></a>Bersihkan sumber daya
 
 Setelah anda selesai artikel ini, hapus grup sumber daya dan semua sumber daya di dalamnya. `--no-wait` Gunakan argumen .
 
