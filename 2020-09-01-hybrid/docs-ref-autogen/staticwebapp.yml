@@ -6,20 +6,20 @@ description: ''
 directCommands:
 - uid: az_staticwebapp_create
   name: az staticwebapp create
-  summary: Buat aplikasi statis dengan konten dari URL repositori GitHub dan di cabang yang disediakan. Jika repositori berada di bawah organisasi Github, pastikan bahwa Aplikasi Azure CLI Github memiliki akses ke organisasi. Akses dapat diminta di browser saat menggunakan argumen "--login-with-github". Akses harus diberikan oleh admin organisasi.
+  summary: Membuat aplikasi statis. Untuk menyediakan konten ke aplikasi web statis dan berintegrasi dengan repositori Github, berikan URL repositori Github (--source) dan cabang (--cabang). Jika repositori berada di bawah organisasi Github, pastikan bahwa Aplikasi Azure CLI Github memiliki akses ke organisasi. Akses dapat diminta di browser saat menggunakan argumen "--login-with-github". Akses harus diberikan oleh admin organisasi.
   description: ''
   syntax: >-
-    az staticwebapp create --branch
-                           --location
-                           --name
+    az staticwebapp create --name
                            --resource-group
-                           --source
                            [--api-location]
                            [--app-location]
+                           [--branch]
+                           [--location]
                            [--login-with-github]
                            [--no-wait]
                            [--output-location]
                            [--sku {Free, Standard}]
+                           [--source]
                            [--tags]
                            [--token]
   examples:
@@ -27,15 +27,9 @@ directCommands:
     syntax: az staticwebapp create -n MyStaticAppName -g MyExistingRg -s https://github.com/JohnDoe/my-first-static-web-app -l WestUs2 -b master -t MyAccessToken
   - summary: Membuat aplikasi statis dalam langganan, mengambil token secara interaktif
     syntax: az staticwebapp create -n MyStaticAppName -g MyExistingRg -s https://github.com/JohnDoe/my-first-static-web-app -l WestUs2 -b master --login-with-github
+  - summary: Membuat aplikasi web statis tanpa konten apa pun dan tanpa integrasi github
+    syntax: az staticwebapp create -n MyStaticAppName -g MyExistingRg
   requiredParameters:
-  - isRequired: true
-    name: --branch -b
-    summary: Cabang target di repositori.
-    description: ''
-  - isRequired: true
-    name: --location -l
-    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
-    description: ''
   - isRequired: true
     name: --name -n
     summary: Nama situs statis.
@@ -44,10 +38,6 @@ directCommands:
     name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
-  - isRequired: true
-    name: --source -s
-    summary: URL untuk repositori situs statis.
-    description: ''
   optionalParameters:
   - name: --api-location
     summary: Lokasi kode Azure Functions Anda. Misalnya, '/api' mewakili folder yang disebut 'api'.
@@ -55,6 +45,13 @@ directCommands:
   - name: --app-location
     defaultValue: /
     summary: Lokasi kode aplikasi Anda. Misalnya, '/' mewakili akar aplikasi Anda, sementara '/app' mewakili direktori yang disebut 'app'.
+    description: ''
+  - name: --branch -b
+    summary: Cabang target di repositori.
+    description: ''
+  - name: --location -l
+    defaultValue: centralus
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
     description: ''
   - name: --login-with-github
     summary: Masuk secara interaktif dengan Github untuk mengambil Token Akses Pribadi.
@@ -69,6 +66,9 @@ directCommands:
     defaultValue: Free
     parameterValueGroup: Free, Standard
     summary: Tingkat harga untuk Static Web App.
+    description: ''
+  - name: --source -s
+    summary: URL untuk repositori situs statis.
     description: ''
   - name: --tags
     summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
@@ -104,7 +104,7 @@ directCommands:
     summary: Jangan meminta konfirmasi.
     description: ''
 - uid: az_staticwebapp_disconnect
-  name: az staticwebapp terputus
+  name: az staticwebapp disconnect
   summary: Putuskan sambungan kontrol sumber untuk mengaktifkan menyambungkan ke repositori yang berbeda.
   description: ''
   syntax: >-
@@ -139,7 +139,7 @@ directCommands:
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
 - uid: az_staticwebapp_reconnect
-  name: az staticwebapp terhubung kembali
+  name: az staticwebapp reconnect
   summary: Koneksi ke repositori dan cabang setelah perintah putuskan sambungan.
   description: ''
   syntax: >-
@@ -304,9 +304,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Mengelola aplikasi statis.
-  ms.openlocfilehash: 128987c1597d309e93b2cd968c73d68049a70910
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: bd7cd0932cc24678b7edbb6e9dd2c1accce02041
+  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141446957"
+  ms.lasthandoff: 04/27/2022
+  ms.locfileid: "144046265"

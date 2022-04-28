@@ -73,7 +73,7 @@ directCommands:
     syntax: az webapp create -g MyResourceGroup -p MyPlan -n MyUniqueAppName -i MyImageName -s username -w password
   - summary: Buat aplikasi web dengan gambar dari Azure Container Registry privat.
     syntax: az webapp create -g MyResourceGroup -p MyPlan -n MyUniqueAppName -i myregistry.azurecr.io/docker-image:tag
-  - summary: buat WebApp menggunakan paket App Service bersama yang berada di grup sumber daya yang berbeda.
+  - summary: buat WebApp menggunakan Paket App Service bersama yang berada di grup sumber daya yang berbeda.
     syntax: AppServicePlanID=$(az appservice plan show -n SharedAppServicePlan -g MyASPRG --query "id" --out tsv) az webapp create -g MyResourceGroup -p "$AppServicePlanID" -n MyUniqueAppName
   requiredParameters:
   - isRequired: true
@@ -82,7 +82,7 @@ directCommands:
     description: ''
   - isRequired: true
     name: --plan -p
-    summary: Nama atau id sumber daya paket layanan aplikasi. Gunakan 'pembuatan rencana layanan aplikasi' untuk mendapatkannya.
+    summary: Nama atau id sumber daya paket layanan aplikasi. Gunakan 'appservice plan create' untuk mendapatkannya.
     description: ''
   - isRequired: true
     name: --resource-group -g
@@ -127,16 +127,16 @@ directCommands:
     summary: Nama peran atau id yang akan dimiliki identitas yang ditetapkan sistem.
     description: ''
   - name: --runtime -r
-    summary: 'Runtime web kanonis dalam format Framework:Version, misalnya "PHP:7.2". Pemisah yang diizinkan: "|" atau ":". Jika menggunakan powershell, silakan gunakan pemisah ":" atau pastikan untuk melepaskan karakter "|" dengan benar. Gunakan `az webapp list-runtimes` untuk daftar yang tersedia.'
+    summary: 'Runtime web kanonis dalam format Framework:Version, misalnya "PHP:7.2". Pemisah yang diizinkan: "|" atau ":". Jika menggunakan powershell, gunakan pemisah ":" atau pastikan untuk melepaskan karakter "|" dengan benar. Gunakan `az webapp list-runtimes` untuk daftar yang tersedia.'
     description: ''
-  - name: --cakupan
+  - name: --scope
     summary: Cakupan yang dapat diakses oleh identitas yang ditetapkan sistem.
     description: ''
   - name: --startup-file
     summary: Hanya Linux. File startup web.
     description: ''
   - name: --subnet
-    summary: Nama atau ID sumber daya dari subnet yang sudah ada sebelumnya agar webapp bergabung. Argumen --vnet juga diperlukan jika menentukan subnet berdasarkan nama.
+    summary: Nama atau ID sumber daya dari subnet yang sudah ada sebelumnya agar aplikasi web bergabung. Argumen --vnet juga diperlukan jika menentukan subnet berdasarkan nama.
     description: ''
   - name: --tags
     summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
@@ -239,7 +239,7 @@ directCommands:
   - summary: Menyebarkan file teks statis ke wwwroot/staticfiles/test.txt
     syntax: az webapp deploy --resource-group ResouceGroup --name AppName --src-path SourcePath --type static --target-path staticfiles/test.txt
   optionalParameters:
-  - name: --asinkron
+  - name: --async
     parameterValueGroup: false, true
     summary: Jika true, artefak disebarkan secara asinkron. (Perintah akan keluar setelah artefak didorong ke aplikasi web.).
     description: ''
@@ -504,7 +504,7 @@ directCommands:
     description: ''
 - uid: az_webapp_up
   name: az webapp up
-  summary: Buat aplikasi web dan sebarkan kode dari ruang kerja lokal ke aplikasi. Perintah diperlukan untuk menjalankan dari folder tempat kode ada. Dukungan saat ini mencakup Node, Python, .NET Core, dan ASP.NET. Node, aplikasi Python dibuat sebagai aplikasi Linux. Aplikasi .Net Core, ASP.NET, dan HTML statis dibuat sebagai aplikasi Windows. Tambahkan bendera html untuk disebarkan sebagai aplikasi HTML statis. Setiap kali perintah berhasil dijalankan, nilai argumen default untuk grup sumber daya, sku, lokasi, paket, dan nama disimpan untuk direktori saat ini. Default ini kemudian digunakan untuk argumen apa pun yang tidak disediakan pada eksekusi perintah berikutnya dalam direktori yang sama.  Gunakan 'az configure' untuk mengelola default.
+  summary: Buat aplikasi web dan sebarkan kode dari ruang kerja lokal ke aplikasi. Perintah diperlukan untuk menjalankan dari folder tempat kode ada. Dukungan saat ini mencakup Node, Python, .NET Core dan ASP.NET. Node, aplikasi Python dibuat sebagai aplikasi Linux. Aplikasi .Net Core, ASP.NET, dan HTML statis dibuat sebagai aplikasi Windows. Tambahkan bendera html untuk disebarkan sebagai aplikasi HTML statis. Setiap kali perintah berhasil dijalankan, nilai argumen default untuk grup sumber daya, sku, lokasi, paket, dan nama disimpan untuk direktori saat ini. Default ini kemudian digunakan untuk argumen apa pun yang tidak disediakan pada eksekusi perintah berikutnya dalam direktori yang sama.  Gunakan 'az configure' untuk mengelola default.
   description: ''
   syntax: >-
     az webapp up [--app-service-environment]
@@ -527,7 +527,7 @@ directCommands:
     syntax: az webapp up
   - summary: Membuat aplikasi web dengan nama tertentu
     syntax: az webapp up -n MyUniqueAppName
-  - summary: Membuat aplikasi web dengan nama tertentu dan runtime Java 11 menggunakan pemisah '|' (tidak disarankan untuk powershell; gunakan pemisah ":" sebagai gantinya)
+  - summary: Buat aplikasi web dengan nama tertentu dan runtime Java 11 menggunakan pemisah '|' (tidak disarankan untuk powershell; gunakan pemisah ":" sebagai gantinya)
     syntax: az webapp up -n MyUniqueAppName --runtime "java|11|Java SE|11"
   - summary: Membuat aplikasi web dengan nama tertentu dan runtime Java 11 menggunakan pemisah ':'
     syntax: az webapp up -n MyUniqueAppName --runtime "java:11:Java SE:11"
@@ -542,7 +542,7 @@ directCommands:
     summary: Nama atau ID sumber daya dari Lingkungan App Service (yang sudah ada sebelumnya) untuk disebarkan. Memerlukan sku V2 Terisolasi [I1v2, I2v2, I3v2].
     description: ''
   - name: --dryrun
-    summary: Tampilkan ringkasan operasi buat dan sebarkan alih-alih menjalankannya.
+    summary: Tampilkan ringkasan operasi buat dan sebarkan alih-alih mengeksekusinya.
     description: ''
   - name: --html
     summary: Abaikan deteksi aplikasi dan sebarkan sebagai aplikasi html.
@@ -557,7 +557,7 @@ directCommands:
     summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
     description: ''
   - name: --logs
-    summary: Konfigurasikan pengelogan default yang diperlukan untuk mengaktifkan tampilan aliran log segera setelah meluncurkan aplikasi web.
+    summary: Konfigurasikan pengelogan default yang diperlukan untuk mengaktifkan melihat aliran log segera setelah meluncurkan aplikasi web.
     description: ''
   - name: --name -n
     summary: Nama aplikasi web. Jika dibiarkan tidak ditentukan, nama akan dibuat secara acak. Anda dapat mengonfigurasi default menggunakan `az configure --defaults web=<name>`.
@@ -573,15 +573,15 @@ directCommands:
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
   - name: --runtime -r
-    summary: 'Runtime web kanonis dalam format Framework:Version, misalnya "PHP:7.2". Pemisah yang diizinkan: "|" atau ":". Jika menggunakan powershell, silakan gunakan pemisah ":" atau pastikan untuk melepaskan karakter "|" dengan benar. Gunakan `az webapp list-runtimes` untuk daftar yang tersedia.'
+    summary: 'Runtime web kanonis dalam format Framework:Version, misalnya "PHP:7.2". Pemisah yang diizinkan: "|" atau ":". Jika menggunakan powershell, gunakan pemisah ":" atau pastikan untuk melepaskan karakter "|" dengan benar. Gunakan `az webapp list-runtimes` untuk daftar yang tersedia.'
     description: ''
   - name: --sku
     parameterValueGroup: B1, B2, B3, D1, F1, FREE, I1, I1v2, I2, I2v2, I3, I3v2, P1V2, P1V3, P2V2, P2V3, P3V2, P3V3, PC2, PC3, PC4, S1, S2, S3, SHARED, WS1, WS2, WS3
-    summary: Tingkat harga, misalnya, F1(Gratis), D1(Bersama), B1(Dasar Kecil), B2(Sedang Dasar), B3(Besar Dasar), S1(Standar Kecil), P1V2(Premium V2 Kecil), P1V3(Premium V3 Kecil), P2V3(Premium V3 Sedang), P3V3 (Premium V3 Besar), PC2 (kontainer Premium Kecil), PC3 (Premium Kontainer Sedang), PC4 ( Premium Kontainer Besar), I1 (Kecil Terisolasi), I2 (Sedang Terisolasi), I3 (Besar Terisolasi), I1v2 (V2 Kecil Terisolasi), I2v2 (Sedang V2 Terisolasi), I3v2 (V2 Besar Terisolasi), WS1 (Logic Apps Workflow Standard 1), WS2 (Logic Apps Workflow Standard 2), WS3 (Logic Apps Workflow Standard 3).
+    summary: Tingkat harga, misalnya, F1(Free), D1(Shared), B1(Basic Small), B2(Basic Medium), B3(Basic Large), S1(Standard Small), P1V2(Premium V2 Small), P1V3(Premium V3 Small), P2V3(Premium V3 Medium), P3V3(Premium V3 Large), PC2 (Premium Container Small), PC3 (Premium Container Medium), PC4 ( Premium Kontainer Besar), I1 (Kecil Terisolasi), I2 (Sedang Terisolasi), I3 (Besar Terisolasi), I1v2 (V2 Kecil Terisolasi), I2v2 (Sedang V2 Terisolasi), I3v2 (V2 Besar Terisolasi), WS1 (Logic Apps Workflow Standard 1), WS2 (Logic Apps Workflow Standard 2), WS3 (Logic Apps Workflow Standard 3).
     description: ''
 - uid: az_webapp_update
   name: az webapp update
-  summary: Memperbarui aplikasi web yang sudah ada.
+  summary: Perbarui aplikasi web yang sudah ada.
   description: ''
   syntax: >-
     az webapp update [--add]
@@ -601,7 +601,7 @@ directCommands:
                      [--slot]
                      [--ttl-in-seconds {false, true}]
   examples:
-  - summary: Memperbarui tag aplikasi web.
+  - summary: Perbarui tag aplikasi web.
     syntax: az webapp update -g MyResourceGroup -n MyAppName --set tags.tagName=tagValue
   - summary: Memperbarui aplikasi web. (dibuat otomatis)
     syntax: az webapp update --https-only true --name MyAppName --resource-group MyResourceGroup
@@ -615,7 +615,7 @@ directCommands:
     description: ''
   - name: --force-dns-registration
     parameterValueGroup: false, true
-    summary: Jika true, nama host aplikasi web akan dipaksa terdaftar di DNS.
+    summary: Jika true, nama host aplikasi web dipaksa terdaftar di DNS.
     description: ''
   - name: --force-string
     summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
@@ -637,7 +637,7 @@ directCommands:
     summary: Jumlah instans preWarmed. Aplikasi harus dalam skala elastis App Service Plan.
     description: ''
   - name: --remove
-    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
     description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
@@ -647,7 +647,7 @@ directCommands:
     description: ''
   - name: --skip-custom-domain-verification
     parameterValueGroup: false, true
-    summary: Jika true, domain kustom (non \*.azurewebsites.net) yang terkait dengan aplikasi web tidak diverifikasi.
+    summary: Jika benar, domain kustom (non \*.azurewebsites.net) yang terkait dengan aplikasi web tidak diverifikasi.
     description: ''
   - name: --skip-dns-registration
     parameterValueGroup: false, true
@@ -763,10 +763,12 @@ commands:
 - az_webapp_connection_create_redis-enterprise
 - az_webapp_connection_create_servicebus
 - az_webapp_connection_create_signalr
+- az_webapp_connection_create_sql
 - az_webapp_connection_create_storage-blob
 - az_webapp_connection_create_storage-file
 - az_webapp_connection_create_storage-queue
 - az_webapp_connection_create_storage-table
+- az_webapp_connection_create_webpubsub
 - az_webapp_connection_delete
 - az_webapp_connection_list
 - az_webapp_connection_list-configuration
@@ -790,10 +792,12 @@ commands:
 - az_webapp_connection_update_redis-enterprise
 - az_webapp_connection_update_servicebus
 - az_webapp_connection_update_signalr
+- az_webapp_connection_update_sql
 - az_webapp_connection_update_storage-blob
 - az_webapp_connection_update_storage-file
 - az_webapp_connection_update_storage-queue
 - az_webapp_connection_update_storage-table
+- az_webapp_connection_update_webpubsub
 - az_webapp_connection_validate
 - az_webapp_connection_wait
 - az_webapp_cors
@@ -904,9 +908,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Mengelola aplikasi web.
-  ms.openlocfilehash: b27ec69a05552adb75e344db198b1a2421062bef
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: d3627d15b47b7521f914db637929f96176af4c5a
+  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141433187"
+  ms.lasthandoff: 04/27/2022
+  ms.locfileid: "144030509"

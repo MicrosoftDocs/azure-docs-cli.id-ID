@@ -1,6 +1,6 @@
 ### YamlMime:AzureCLIGroup
 uid: az_storage
-name: penyimpanan az
+name: az storage
 summary: Mengelola sumber daya Azure Cloud Storage.
 description: ''
 directCommands:
@@ -36,7 +36,7 @@ directCommands:
     syntax: az storage copy -s /path/to/dir --destination-account-name mystorageaccount --destination-container mycontainer --recursive
   - summary: Upload sekumpulan file ke Azure Blob menggunakan wildcard dengan url.
     syntax: az storage copy -s /path/*foo/*bar/*.pdf -d https://[account].blob.core.windows.net/[container]/[path/to/directory]
-  - summary: Upload sekumpulan file ke Azure Blob menggunakan wildcard dengan nama akun dan nama kontainer.
+  - summary: Upload sekumpulan file ke Azure Blob menggunakan kartubebas dengan nama akun dan nama kontainer.
     syntax: az storage copy -s /path/*foo/*bar/*.pdf --destination-account-name mystorageaccount --destination-container mycontainer
   - summary: Upload file dan direktori ke Azure Blob menggunakan wildcard dengan url.
     syntax: az storage copy -s /path/*foo/*bar* -d https://[account].blob.core.windows.net/[container]/[path/to/directory] --recursive
@@ -58,7 +58,7 @@ directCommands:
     syntax: az storage copy -s https://s3.amazonaws.com/[bucket]/[object] -d https://[destaccount].blob.core.windows.net/[container]/[path/to/blob]
   - summary: Salin seluruh direktori dari S3 dengan kunci akses ke direktori virtual blob, dan Anda juga dapat menentukan akun penyimpanan dan informasi kontainer seperti di atas.
     syntax: az storage copy -s https://s3.amazonaws.com/[bucket]/[folder] -d https://[destaccount].blob.core.windows.net/[container]/[path/to/directory] --recursive
-  - summary: Salin semua wadah dalam layanan S3 dengan kunci akses ke akun blob, dan Anda juga dapat menentukan informasi akun penyimpanan Seperti di atas.
+  - summary: Salin semua wadah dalam layanan S3 dengan kunci akses ke akun blob, dan Anda juga dapat menentukan informasi akun penyimpanan Anda seperti di atas.
     syntax: az storage copy -s https://s3.amazonaws.com/ -d https://[destaccount].blob.core.windows.net --recursive
   - summary: Salin semua wadah di wilayah S3 dengan kunci akses ke akun blob, dan Anda juga dapat menentukan informasi akun penyimpanan Seperti di atas.
     syntax: az storage copy -s https://s3-[region].amazonaws.com/ -d https://[destaccount].blob.core.windows.net --recursive
@@ -72,7 +72,7 @@ directCommands:
     syntax: az storage copy -s /path/to/dir --destination-account-name mystorageaccount --destination-share myshare --recursive
   - summary: Upload sekumpulan file ke Azure File Share menggunakan kartubebas dengan nama akun dan nama berbagi.
     syntax: az storage copy -s /path/*foo/*bar/*.pdf --destination-account-name mystorageaccount --destination-share myshare
-  - summary: Upload file dan direktori ke Azure File Share menggunakan kartubebas dengan url.
+  - summary: Upload file dan direktori ke Azure File Share menggunakan wildcard dengan url.
     syntax: az storage copy -s /path/*foo/*bar* -d https://[account].file.core.windows.net/[share]/[path/to/directory] --recursive
   - summary: Upload file dan direktori ke Azure File Share menggunakan kartubebas dengan nama akun dan nama berbagi.
     syntax: az storage copy -s /path/*foo/*bar* --destination-account-name mystorageaccount --destination-share myshare --recursive
@@ -80,9 +80,9 @@ directCommands:
     syntax: az storage copy -s https://[account].file.core.windows.net/[share]/[path/to/file] -d /path/to/file.txt
   - summary: Unduh seluruh direktori dari Azure File Share, dan Anda juga dapat menentukan akun penyimpanan Anda dan berbagi informasi seperti di atas.
     syntax: az storage copy -s https://[account].file.core.windows.net/[share]/[path/to/directory] -d /path/to/dir --recursive
-  - summary: Unduh sekumpulan file dari Azure File Share menggunakan wildcard, dan Anda juga dapat menentukan akun penyimpanan Anda dan berbagi informasi seperti di atas.
+  - summary: Unduh sekumpulan file dari Azure File Share menggunakan kartubebas, dan Anda juga dapat menentukan akun penyimpanan Anda dan berbagi informasi seperti di atas.
     syntax: az storage copy -s https://[account].file.core.windows.net/[share]/ --include-pattern foo* -d /path/to/dir --recursive
-  - summary: Upload satu file ke Azure Blob menggunakan url dengan pass-through opsi azcopy.
+  - summary: Upload satu file ke Azure Blob menggunakan url dengan opsi azcopy pass-through.
     syntax: az storage copy -s /path/to/file.txt -d https://[account].blob.core.windows.net/[container]/[path/to/blob] -- --block-size-mb=0.25 --check-length
   requiredParameters:
   - isRequired: true
@@ -91,7 +91,7 @@ directCommands:
     description: ''
   - isRequired: true
     name: --source -s
-    summary: Jalur/url sumber salin. Ini bisa menjadi jalur lokal, url ke server penyimpanan azure atau wadah AWS S3. Jika Anda menyediakan parameter sumber di sini, Anda tidak perlu memberikan argumen dalam grup argumen sumber salin dan argumen sumber salin tidak akan digunakan lagi di masa mendatang.
+    summary: Jalur/url sumber salin. Ini bisa menjadi jalur lokal, url ke server penyimpanan azure atau wadah AWS S3. Jika Anda memberikan parameter sumber di sini, Anda tidak perlu memberikan argumen dalam grup argumen sumber salin dan menyalin argumen sumber akan ditolak di masa mendatang.
     description: ''
   optionalParameters:
   - name: --blob-type
@@ -160,11 +160,11 @@ directCommands:
     syntax: az storage remove -c mycontainer --recursive
   - summary: Hapus semua blob dalam Kontainer Storage.
     syntax: az storage remove -c mycontainer -n path/to/directory
-  - summary: Hapus subset blob di direktori virtual (Misalnya, hanya file jpg dan pdf, atau jika nama blob adalah "exactName" dan nama file tidak dimulai dengan "pengujian").
+  - summary: Hapus subset blob dalam direktori virtual (Misalnya, hanya file jpg dan pdf, atau jika nama blob adalah "exactName" dan nama file tidak dimulai dengan "uji").
     syntax: az storage remove -c mycontainer --include-path path/to/directory --include-pattern "*.jpg;*.pdf;exactName" --exclude-pattern "test*" --recursive
   - summary: Hapus seluruh direktori virtual tetapi kecualikan blob tertentu dari cakupan (Misalnya, setiap blob yang dimulai dengan foo atau diakhir dengan bilah).
     syntax: az storage remove -c mycontainer --include-path path/to/directory --exclude-pattern "foo*;*bar" --recursive
-  - summary: Hapus satu file.
+  - summary: Menghapus satu file.
     syntax: az storage remove -s MyShare -p MyFile
   - summary: Menghapus seluruh direktori.
     syntax: az storage remove -s MyShare -p path/to/directory --recursive
@@ -468,11 +468,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 03/29/2022
+  ms.date: 04/13/2022
   description: Mengelola sumber daya Azure Cloud Storage.
-  ms.openlocfilehash: 4d4695dc2993161f93bc91e0a420e132a71a3f46
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: 127ea6b3bf4876b3b020709fdcc4d91a30eb392b
+  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141443159"
+  ms.lasthandoff: 04/27/2022
+  ms.locfileid: "144073048"
