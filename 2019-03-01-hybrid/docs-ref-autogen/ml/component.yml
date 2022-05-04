@@ -1,13 +1,48 @@
 ### YamlMime:AzureCLIGroup
 uid: az_ml_component
-name: komponen az ml
+name: az ml component
 extensionInformation: >-
   > [!Note]
 
-  > This reference is part of the **ml** extension for the Azure CLI  (version 2.15.0 or higher).  The extension will automatically install the first time you run an **az ml component** command.  [Learn more](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) about extensions.
+  > Referensi ini adalah bagian dari ekstensi **ml** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **komponen az ml** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
 summary: Mengelola komponen Azure ML.
 description: Komponen Azure ML menentukan konfigurasi komponen untuk pekerjaan alur. Anda dapat mengonfigurasi port input/output, lingkungan eksekusi, dan perintah komponen. Setelah komponen dibuat, Anda dapat mereferensikan komponen dalam pekerjaan alur untuk menjalankannya dalam kontainer docker.
 directCommands:
+- uid: az_ml_component_archive
+  name: az ml component archive
+  summary: Mengarsipkan komponen.
+  description: Pengarsipan komponen akan menyembunyikannya secara default dari kueri daftar (`az ml component list`). Anda masih dapat terus mereferensikan dan menggunakan komponen yang diarsipkan di alur Anda. Anda dapat mengarsipkan kontainer komponen atau versi komponen tertentu. Pengarsipan kontainer komponen akan mengarsipkan semua versi komponen dengan nama yang diberikan. Anda dapat memulihkan komponen yang diarsipkan menggunakan `az ml component restore`. Jika seluruh kontainer komponen diarsipkan, Anda tidak dapat memulihkan versi komponen individual - Anda harus memulihkan kontainer komponen.
+  syntax: >-
+    az ml component archive --name
+                            --resource-group
+                            --workspace-name
+                            [--label]
+                            [--version]
+  examples:
+  - summary: Mengarsipkan kontainer komponen (mengarsipkan semua versi komponen tersebut)
+    syntax: az ml component archive --name my-component --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Mengarsipkan versi komponen tertentu
+    syntax: az ml component archive --name my-component --version 1 --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama komponen.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --label -l
+    summary: Label komponen.
+    description: ''
+  - name: --version -v
+    summary: Versi komponen.
+    description: ''
 - uid: az_ml_component_create
   name: az ml component create
   summary: Membuat komponen.
@@ -26,7 +61,7 @@ directCommands:
   requiredParameters:
   - isRequired: true
     name: --file -f
-    summary: Jalur lokal ke file YAML yang berisi spesifikasi komponen Azure ML.
+    summary: 'Jalur lokal ke file YAML yang berisi spesifikasi komponen Azure ML. Dokumen referensi YAML untuk komponen dapat ditemukan di: https://aka.ms/ml-cli-v2-component-command-yaml-reference.'
     description: ''
   - isRequired: true
     name: --resource-group -g
@@ -50,6 +85,8 @@ directCommands:
   syntax: >-
     az ml component list --resource-group
                          --workspace-name
+                         [--archived-only]
+                         [--include-archived]
                          [--max-results]
                          [--name]
   examples:
@@ -69,11 +106,52 @@ directCommands:
     summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
     description: ''
   optionalParameters:
+  - name: --archived-only
+    summary: Daftar komponen yang diarsipkan saja.
+    description: ''
+  - name: --include-archived
+    summary: Mencantumkan komponen yang diarsipkan dan komponen aktif.
+    description: ''
   - name: --max-results -r
     summary: Jumlah maksimum hasil yang akan dikembalikan.
     description: ''
   - name: --name -n
     summary: Nama komponen.
+    description: ''
+- uid: az_ml_component_restore
+  name: az ml component restore
+  summary: Memulihkan komponen yang diarsipkan.
+  description: Ketika komponen yang diarsipkan dipulihkan, komponen tersebut tidak akan lagi disembunyikan dari kueri daftar (`az ml component list`). Jika seluruh kontainer komponen diarsipkan, Anda dapat memulihkan kontainer yang diarsipkan tersebut. Ini akan memulihkan semua versi komponen dengan nama yang diberikan. Anda tidak dapat memulihkan hanya versi komponen tertentu jika seluruh kontainer komponen diarsipkan - Anda harus memulihkan seluruh kontainer. Jika hanya versi komponen individual yang diarsipkan, Anda dapat memulihkan versi tertentu tersebut.
+  syntax: >-
+    az ml component restore --name
+                            --resource-group
+                            --workspace-name
+                            [--label]
+                            [--version]
+  examples:
+  - summary: Memulihkan kontainer komponen yang diarsipkan (memulihkan semua versi komponen tersebut)
+    syntax: az ml component restore --name my-component --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Memulihkan versi komponen tertentu yang diarsipkan
+    syntax: az ml component restore --name my-component --version 1 --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama komponen.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --label -l
+    summary: Label komponen.
+    description: ''
+  - name: --version -v
+    summary: Versi komponen.
     description: ''
 - uid: az_ml_component_show
   name: az ml component show
@@ -158,8 +236,10 @@ directCommands:
     summary: Versi komponen.
     description: ''
 commands:
+- az_ml_component_archive
 - az_ml_component_create
 - az_ml_component_list
+- az_ml_component_restore
 - az_ml_component_show
 - az_ml_component_update
 globalParameters:
@@ -181,9 +261,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Komponen Azure ML menentukan konfigurasi komponen untuk pekerjaan alur. Anda dapat mengonfigurasi port input/output, lingkungan eksekusi, dan perintah komponen. Setelah komponen dibuat, Anda dapat mereferensikan komponen dalam pekerjaan alur untuk menjalankannya dalam kontainer docker.
-  ms.openlocfilehash: 57a43a405e78c5e07d6bdf575ad42178760c67b7
-  ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+  ms.openlocfilehash: 0bc75efcc0019775a4df2684a5519a1e47606f62
+  ms.sourcegitcommit: 013ae480807b6745bf8786b0ffc4362af301f8e8
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141405527"
+  ms.lasthandoff: 05/04/2022
+  ms.locfileid: "144764764"

@@ -1,17 +1,17 @@
 ### YamlMime:AzureCLIGroup
 uid: az_ml_model
-name: model az ml
+name: az ml model
 extensionInformation: >-
   > [!Note]
 
-  > This reference is part of the **ml** extension for the Azure CLI  (version 2.15.0 or higher).  The extension will automatically install the first time you run an **az ml model** command.  [Learn more](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) about extensions.
-summary: Mengelola model Azure ML.
+  > Referensi ini adalah bagian dari ekstensi **ml** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **model az ml** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola model ML Azure.
 description: Model Azure ML terdiri dari file biner yang mewakili model pembelajaran mesin dan metadata yang sesuai.  Model-model ini dapat digunakan dalam penyebaran titik akhir untuk inferensi real time dan batch.
 directCommands:
 - uid: az_ml_model_archive
-  name: arsip model az ml
+  name: az ml model archive
   summary: Mengarsipkan model.
-  description: Pengarsipan model akan menyembunyikannya secara default dari kueri daftar (`az ml model list`). Anda masih dapat terus mereferensikan dan menggunakan model yang diarsipkan dalam alur kerja Anda. Anda dapat mengarsipkan kontainer model atau versi model tertentu. Pengarsipan kontainer model akan mengarsipkan semua versi model dengan nama yang diberikan. Anda dapat memulihkan model yang diarsipkan menggunakan `az ml model restore`. Jika seluruh kontainer model diarsipkan, Anda tidak dapat memulihkan versi model individual - Anda harus memulihkan kontainer model.
+  description: Pengarsipan model akan menyembunyikannya secara default dari kueri daftar (`az ml model list`). Anda masih dapat terus mereferensikan dan menggunakan model yang diarsipkan di alur kerja Anda. Anda dapat mengarsipkan kontainer model atau versi model tertentu. Pengarsipan kontainer model akan mengarsipkan semua versi model dengan nama yang diberikan. Anda dapat memulihkan model yang diarsipkan menggunakan `az ml model restore`. Jika seluruh kontainer model diarsipkan, Anda tidak dapat memulihkan versi model individual - Anda harus memulihkan kontainer model.
   syntax: >-
     az ml model archive --name
                         --resource-group
@@ -77,7 +77,7 @@ directCommands:
     summary: Deskripsi model.
     description: ''
   - name: --file -f
-    summary: Jalur lokal ke file YAML yang berisi spesifikasi model Azure ML. --name/-n dan --version/-v harus disediakan jika file YAML tidak memiliki nama dan versi.
+    summary: 'Jalur lokal ke file YAML yang berisi spesifikasi model Azure ML. Dokumen referensi YAML untuk model dapat ditemukan di: https://aka.ms/ml-cli-v2-model-yaml-reference.'
     description: ''
   - name: --name -n
     summary: Nama model.
@@ -98,7 +98,7 @@ directCommands:
     summary: Versi model.
     description: ''
 - uid: az_ml_model_download
-  name: unduhan model ml az
+  name: az ml model download
   summary: Unduh semua file terkait model.
   description: File akan diunduh ke dalam folder yang dinamai sesuai dengan nama model.
   syntax: >-
@@ -140,6 +140,7 @@ directCommands:
   syntax: >-
     az ml model list --resource-group
                      --workspace-name
+                     [--archived-only]
                      [--include-archived]
                      [--max-results]
                      [--name]
@@ -160,6 +161,9 @@ directCommands:
     summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
     description: ''
   optionalParameters:
+  - name: --archived-only
+    summary: Cantumkan model yang diarsipkan saja.
+    description: ''
   - name: --include-archived
     summary: Mencantumkan model yang diarsipkan dan model aktif.
     description: ''
@@ -172,7 +176,7 @@ directCommands:
 - uid: az_ml_model_restore
   name: az ml model restore
   summary: Memulihkan model yang diarsipkan.
-  description: Ketika model yang diarsipkan dipulihkan, model tidak akan lagi disembunyikan dari kueri daftar (`az ml model list`). Jika seluruh kontainer model diarsipkan, Anda dapat memulihkan kontainer yang diarsipkan tersebut. Ini akan memulihkan semua versi model dengan nama yang diberikan. Anda tidak dapat memulihkan hanya versi model tertentu jika seluruh kontainer model diarsipkan - Anda harus memulihkan seluruh kontainer. Jika hanya versi model individual yang diarsipkan, Anda dapat memulihkan versi tertentu tersebut.
+  description: Ketika model yang diarsipkan dipulihkan, model tersebut tidak akan lagi disembunyikan dari kueri daftar (`az ml model list`). Jika seluruh kontainer model diarsipkan, Anda dapat memulihkan kontainer yang diarsipkan tersebut. Ini akan memulihkan semua versi model dengan nama yang diberikan. Anda tidak dapat memulihkan hanya versi model tertentu jika seluruh kontainer model diarsipkan - Anda harus memulihkan seluruh kontainer. Jika hanya versi model individual yang diarsipkan, Anda dapat memulihkan versi tertentu tersebut.
   syntax: >-
     az ml model restore --name
                         --resource-group
@@ -180,9 +184,9 @@ directCommands:
                         [--label]
                         [--version]
   examples:
-  - summary: Memulihkan kontainer model yang diarsipkan (memulihkan semua versi model tersebut )
+  - summary: Memulihkan kontainer model yang diarsipkan (memulihkan semua versi model tersebut)
     syntax: az ml model restore --name my-model --resource-group my-resource-group --workspace-name my-workspace
-  - summary: Memulihkan versi model tertentu yang diarsipkan
+  - summary: Memulihkan versi model yang diarsipkan tertentu
     syntax: az ml model restore --name my-model --version 1 --resource-group my-resource-group --workspace-name my-workspace
   requiredParameters:
   - isRequired: true
@@ -278,7 +282,7 @@ directCommands:
     summary: Label model.
     description: ''
   - name: --remove
-    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
     description: ''
   - name: --set
     summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
@@ -313,9 +317,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Model Azure ML terdiri dari file biner yang mewakili model pembelajaran mesin dan metadata yang sesuai.  Model-model ini dapat digunakan dalam penyebaran titik akhir untuk inferensi real time dan batch.
-  ms.openlocfilehash: 593785bfd11af6746f71005aa7b1a650dfd622c9
-  ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+  ms.openlocfilehash: 91aec2ea32e757e7db70f074683852af2faa9c39
+  ms.sourcegitcommit: 013ae480807b6745bf8786b0ffc4362af301f8e8
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141412036"
+  ms.lasthandoff: 05/04/2022
+  ms.locfileid: "144763774"

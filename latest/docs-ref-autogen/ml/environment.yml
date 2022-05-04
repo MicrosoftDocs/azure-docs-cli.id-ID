@@ -1,17 +1,17 @@
 ### YamlMime:AzureCLIGroup
 uid: az_ml_environment
-name: lingkungan az ml
+name: az ml environment
 extensionInformation: >-
   > [!Note]
 
-  > This reference is part of the **ml** extension for the Azure CLI  (version 2.15.0 or higher).  The extension will automatically install the first time you run an **az ml environment** command.  [Learn more](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) about extensions.
+  > Referensi ini adalah bagian dari ekstensi **ml** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **lingkungan ml az** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
 summary: Mengelola lingkungan Azure ML.
 description: Lingkungan Azure ML menentukan lingkungan eksekusi untuk pekerjaan dan penyebaran titik akhir, merangkum dependensi untuk pelatihan dan inferensi. Definisi lingkungan ini dibangun ke dalam gambar Docker.
 directCommands:
 - uid: az_ml_environment_archive
-  name: arsip lingkungan ml az
+  name: az ml environment archive
   summary: Mengarsipkan lingkungan.
-  description: Pengarsipan lingkungan akan menyembunyikannya secara default dari kueri daftar (`az ml environment list`). Anda masih dapat terus mereferensikan dan menggunakan lingkungan yang diarsipkan di alur kerja Anda. Anda dapat mengarsipkan kontainer lingkungan atau versi lingkungan tertentu. Pengarsipan kontainer lingkungan akan mengarsipkan semua versi lingkungan dengan nama yang diberikan. Anda dapat memulihkan lingkungan yang diarsipkan menggunakan `az ml environment restore`. Jika seluruh kontainer lingkungan diarsipkan, Anda tidak dapat memulihkan versi lingkungan individual - Anda harus memulihkan kontainer lingkungan.
+  description: Mengarsipkan lingkungan akan menyembunyikannya secara default dari kueri daftar (`az ml environment list`). Anda masih dapat terus mereferensikan dan menggunakan lingkungan yang diarsipkan dalam alur kerja Anda. Anda dapat mengarsipkan kontainer lingkungan atau versi lingkungan tertentu. Mengarsipkan kontainer lingkungan akan mengarsipkan semua versi lingkungan dengan nama yang diberikan. Anda dapat memulihkan lingkungan yang diarsipkan menggunakan `az ml environment restore`. Jika seluruh kontainer lingkungan diarsipkan, Anda tidak dapat memulihkan versi lingkungan individual - Anda harus memulihkan kontainer lingkungan.
   syntax: >-
     az ml environment archive --name
                               --resource-group
@@ -62,6 +62,7 @@ directCommands:
                              [--image]
                              [--name]
                              [--os-type]
+                             [--registry-name]
                              [--set]
                              [--tags]
                              [--version]
@@ -98,7 +99,7 @@ directCommands:
     summary: Jalur relatif ke Dockerfile dalam direktori yang ditentukan oleh --build-context/-b. Jika dihilangkan, './Dockerfile' digunakan.
     description: ''
   - name: --file -f
-    summary: Jalur lokal ke file YAML yang berisi spesifikasi lingkungan Azure ML.
+    summary: 'Jalur lokal ke file YAML yang berisi spesifikasi lingkungan Azure ML. Dokumen referensi YAML untuk lingkungan dapat ditemukan di: https://aka.ms/ml-cli-v2-environment-yaml-reference.'
     description: ''
   - name: --image -i
     summary: Gambar Docker. --image/-i dan --build-context/-b adalah argumen yang saling eksklusif.
@@ -108,6 +109,9 @@ directCommands:
     description: ''
   - name: --os-type
     summary: 'Jenis sistem operasi. Nilai yang diizinkan: linux, windows. Default: linux.'
+    description: ''
+  - name: --registry-name
+    summary: Ini akan berinteraksi dengan nama yang disediakan registri, bukan menggunakan ruang kerja.
     description: ''
   - name: --set
     summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur. Contoh: --set property1.property2=<value>.'
@@ -125,6 +129,7 @@ directCommands:
   syntax: >-
     az ml environment list --resource-group
                            --workspace-name
+                           [--archived-only]
                            [--include-archived]
                            [--max-results]
                            [--name]
@@ -145,6 +150,9 @@ directCommands:
     summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
     description: ''
   optionalParameters:
+  - name: --archived-only
+    summary: Cantumkan lingkungan yang diarsipkan saja.
+    description: ''
   - name: --include-archived
     summary: Mencantumkan lingkungan yang diarsipkan dan lingkungan aktif.
     description: ''
@@ -191,7 +199,7 @@ directCommands:
     description: ''
 - uid: az_ml_environment_show
   name: az ml environment show
-  summary: Tampilkan detail untuk lingkungan.
+  summary: Menampilkan detail untuk lingkungan.
   description: ''
   syntax: >-
     az ml environment show --name
@@ -233,6 +241,7 @@ directCommands:
                              [--add]
                              [--force-string]
                              [--label]
+                             [--registry-name]
                              [--remove]
                              [--set]
                              [--version]
@@ -258,6 +267,9 @@ directCommands:
     description: ''
   - name: --label -l
     summary: Label lingkungan.
+    description: ''
+  - name: --registry-name
+    summary: Ini akan berinteraksi dengan nama yang disediakan registri, bukan menggunakan ruang kerja.
     description: ''
   - name: --remove
     summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
@@ -294,9 +306,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Lingkungan Azure ML menentukan lingkungan eksekusi untuk pekerjaan dan penyebaran titik akhir, merangkum dependensi untuk pelatihan dan inferensi. Definisi lingkungan ini dibangun ke dalam gambar Docker.
-  ms.openlocfilehash: 7ecd766da2e6914d200d5b647630e1b32efd25e5
-  ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+  ms.openlocfilehash: d8ca28dcfd6fea28a4d576f3c7e8a7ef7c3350b3
+  ms.sourcegitcommit: 013ae480807b6745bf8786b0ffc4362af301f8e8
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141408526"
+  ms.lasthandoff: 05/04/2022
+  ms.locfileid: "144762046"

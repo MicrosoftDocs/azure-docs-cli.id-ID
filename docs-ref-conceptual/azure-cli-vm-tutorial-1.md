@@ -11,12 +11,12 @@ ms.prod: azure
 ms.technology: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli create vm, mesin virtual di azure cli, variabel shell
-ms.openlocfilehash: ad9fc5a6149d74cabd85ca353dd475db2d9e3277
-ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+ms.openlocfilehash: b4c034fe26db1e9b047656d74ce718d6912dcd7e
+ms.sourcegitcommit: 013ae480807b6745bf8786b0ffc4362af301f8e8
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/06/2022
-ms.locfileid: "141398433"
+ms.lasthandoff: 05/04/2022
+ms.locfileid: "144764710"
 ---
 # <a name="1---overview-and-prerequisites"></a>1 - Ringkasan dan Prasyarat
 

@@ -4,8 +4,8 @@ name: az stack-hci cluster
 extensionInformation: >-
   > [!Note]
 
-  > Referensi ini adalah bagian dari ekstensi **stack-hci** untuk Azure CLI (versi 2.3.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **kluster az stack-hci** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
-summary: Perintah untuk mengelola kluster stack-hci.
+  > Referensi ini adalah bagian dari ekstensi **stack-hci** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **kluster az stack-hci** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola kluster dengan tumpukan hci.
 description: ''
 directCommands:
 - uid: az_stack-hci_cluster_create
@@ -13,22 +13,26 @@ directCommands:
   summary: Membuat kluster HCI.
   description: ''
   syntax: >-
-    az stack-hci cluster create --aad-client-id
-                                --name
+    az stack-hci cluster create --cluster-name
                                 --resource-group
+                                [--aad-client-id]
                                 [--aad-tenant-id]
+                                [--created-at]
+                                [--created-by]
+                                [--created-by-type {Application, Key, ManagedIdentity, User}]
+                                [--desired-properties]
+                                [--endpoint]
+                                [--last-modified-at]
+                                [--last-modified-by]
+                                [--last-modified-by-type {Application, Key, ManagedIdentity, User}]
                                 [--location]
                                 [--tags]
   examples:
-  - summary: Membuat kluster HCI
-    syntax: az stack-hci cluster create --location "East US" --aad-client-id "24a6e53d-04e5-44d2-b7cc-1b732a847dfc" --aad-tenant-id "7e589cc1-a8b6-4dff-91bd-5ec0fa18db94" --name "myCluster" --resource-group "test-rg"
+  - summary: Buat kluster
+    syntax: az stack-hci cluster create --location "East US" --aad-client-id "24a6e53d-04e5-44d2-b7cc-1b732a847dfc" --aad-tenant-id "7e589cc1-a8b6-4dff-91bd-5ec0fa18db94" --endpoint "https://98294836-31be-4668-aeae-698667faf99b.waconazure.com" --name "myCluster" --resource-group "test-rg"
   requiredParameters:
   - isRequired: true
-    name: --aad-client-id
-    summary: ID aplikasi identitas AAD kluster.
-    description: ''
-  - isRequired: true
-    name: --name -n
+    name: --cluster-name --name -n
     summary: Nama kluster.
     description: ''
   - isRequired: true
@@ -36,8 +40,43 @@ directCommands:
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
   optionalParameters:
+  - name: --aad-client-id
+    summary: Id aplikasi identitas AAD kluster.
+    description: ''
   - name: --aad-tenant-id
-    summary: ID penyewa identitas AAD kluster. Defaultnya adalah ID penyewa saat ini.
+    summary: Id penyewa identitas AAD kluster.
+    description: ''
+  - name: --created-at
+    summary: Tanda waktu pembuatan sumber daya (UTC).
+    description: ''
+  - name: --created-by
+    summary: Identitas yang membuat sumber daya.
+    description: ''
+  - name: --created-by-type
+    parameterValueGroup: Application, Key, ManagedIdentity, User
+    summary: Jenis identitas yang membuat sumber daya.
+    description: ''
+  - name: --desired-properties
+    summary: Properti kluster yang diinginkan.
+    description: >-
+      Penggunaan: --desired-properties windows-server-subscription=XX diagnostic-level=XX
+
+
+      windows-server-subscription: Status langganan server Windows yang diinginkan.
+
+      tingkat diagnostik: Tingkat data diagnostik yang diinginkan yang dipancarkan oleh kluster.
+  - name: --endpoint
+    summary: Titik akhir dikonfigurasi untuk manajemen dari portal Azure.
+    description: ''
+  - name: --last-modified-at
+    summary: Tanda waktu modifikasi terakhir sumber daya (UTC).
+    description: ''
+  - name: --last-modified-by
+    summary: Identitas yang terakhir memodifikasi sumber daya.
+    description: ''
+  - name: --last-modified-by-type
+    parameterValueGroup: Application, Key, ManagedIdentity, User
+    summary: Jenis identitas yang terakhir mengubah sumber daya.
     description: ''
   - name: --location -l
     summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
@@ -50,15 +89,15 @@ directCommands:
   summary: Menghapus kluster HCI.
   description: ''
   syntax: >-
-    az stack-hci cluster delete --name
+    az stack-hci cluster delete --cluster-name
                                 --resource-group
                                 [--yes]
   examples:
-  - summary: Menghapus kluster HCI
+  - summary: Menghapus kluster
     syntax: az stack-hci cluster delete --name "myCluster" --resource-group "test-rg"
   requiredParameters:
   - isRequired: true
-    name: --name -n
+    name: --cluster-name --name -n
     summary: Nama kluster.
     description: ''
   - isRequired: true
@@ -71,29 +110,31 @@ directCommands:
     description: ''
 - uid: az_stack-hci_cluster_list
   name: az stack-hci cluster list
-  summary: Mencantumkan semua kluster HCI dalam langganan.
+  summary: Mencantumkan semua kluster HCI dalam grup sumber daya. Dan Daftar semua kluster HCI dalam langganan.
   description: ''
   syntax: az stack-hci cluster list [--resource-group]
   examples:
-  - summary: Mencantumkan semua kluster HCI dalam grup sumber daya
+  - summary: Mencantumkan kluster dalam grup sumber daya tertentu
     syntax: az stack-hci cluster list --resource-group "test-rg"
+  - summary: Mencantumkan kluster dalam langganan tertentu
+    syntax: az stack-hci cluster list
   optionalParameters:
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
 - uid: az_stack-hci_cluster_show
   name: az stack-hci cluster show
-  summary: Mendapatkan kluster HCI.
+  summary: Dapatkan kluster HCI.
   description: ''
   syntax: >-
-    az stack-hci cluster show --name
+    az stack-hci cluster show --cluster-name
                               --resource-group
   examples:
-  - summary: Mendapatkan kluster HCI
+  - summary: Dapatkan kluster
     syntax: az stack-hci cluster show --name "myCluster" --resource-group "test-rg"
   requiredParameters:
   - isRequired: true
-    name: --name -n
+    name: --cluster-name --name -n
     summary: Nama kluster.
     description: ''
   - isRequired: true
@@ -105,15 +146,19 @@ directCommands:
   summary: Memperbarui kluster HCI.
   description: ''
   syntax: >-
-    az stack-hci cluster update --name
+    az stack-hci cluster update --cluster-name
                                 --resource-group
+                                [--aad-client-id]
+                                [--aad-tenant-id]
+                                [--desired-properties]
+                                [--endpoint]
                                 [--tags]
   examples:
-  - summary: Memperbarui kluster HCI
-    syntax: az stack-hci cluster update --tags tag1="value1" tag2="value2" --name "myCluster" --resource-group "test-rg"
+  - summary: Memperbarui kluster
+    syntax: az stack-hci cluster update --endpoint "https://98294836-31be-4668-aeae-698667faf99b.waconazure.com" --desired-properties diagnostic-level="Basic" windows-server-subscription="Enabled" --tags tag1="value1" tag2="value2" --name "myCluster" --resource-group "test-rg"
   requiredParameters:
   - isRequired: true
-    name: --name -n
+    name: --cluster-name --name -n
     summary: Nama kluster.
     description: ''
   - isRequired: true
@@ -121,6 +166,24 @@ directCommands:
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
   optionalParameters:
+  - name: --aad-client-id
+    summary: Id aplikasi identitas AAD kluster.
+    description: ''
+  - name: --aad-tenant-id
+    summary: Id penyewa identitas AAD kluster.
+    description: ''
+  - name: --desired-properties
+    summary: Properti kluster yang diinginkan.
+    description: >-
+      Penggunaan: --desired-properties windows-server-subscription=XX diagnostic-level=XX
+
+
+      windows-server-subscription: Status langganan server Windows yang diinginkan.
+
+      tingkat diagnostik: Tingkat data diagnostik yang diinginkan yang dipancarkan oleh kluster.
+  - name: --endpoint
+    summary: Titik akhir dikonfigurasi untuk manajemen dari portal Azure.
+    description: ''
   - name: --tags
     summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
     description: ''
@@ -148,10 +211,10 @@ globalParameters:
 - name: --verbose
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
-  description: Perintah untuk mengelola kluster stack-hci.
-  ms.openlocfilehash: fa729c7ab950c7f20b1c303998f7f574d3cae892
-  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  description: Mengelola kluster dengan tumpukan hci.
+  ms.openlocfilehash: 3b9b1a43223dae1a8df6afd7195cfc9743f2a1e5
+  ms.sourcegitcommit: 013ae480807b6745bf8786b0ffc4362af301f8e8
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 03/25/2022
-  ms.locfileid: "141090283"
+  ms.lasthandoff: 05/04/2022
+  ms.locfileid: "144766042"

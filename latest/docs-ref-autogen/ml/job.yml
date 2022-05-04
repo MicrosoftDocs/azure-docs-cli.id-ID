@@ -1,21 +1,21 @@
 ### YamlMime:AzureCLIGroup
 uid: az_ml_job
-name: pekerjaan az ml
+name: az ml job
 extensionInformation: >-
   > [!Note]
 
-  > This reference is part of the **ml** extension for the Azure CLI  (version 2.15.0 or higher).  The extension will automatically install the first time you run an **az ml job** command.  [Learn more](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) about extensions.
+  > Referensi ini adalah bagian dari ekstensi **ml** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **az ml job** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
 summary: Mengelola pekerjaan Azure ML.
 description: >-
-  Pekerjaan Azure ML menjalankan tugas terhadap target komputasi tertentu. Anda dapat mengonfigurasi pekerjaan untuk menskalakan pelatihan model di Azure. Azure ML mendukung berbagai jenis pekerjaan dengan kemampuan yang berbeda. Misalnya, pekerjaan paling dasar, pekerjaan perintah, menjalankan perintah dalam kontainer Docker dan dapat dimanfaatkan untuk simpul tunggal dan pelatihan terdistribusi. Pekerjaan pembersihan menjalankan pembersihan hyperparameter di atas ruang pencarian tertentu untuk menyetel hiperparameter model.
+  Pekerjaan Azure ML menjalankan tugas terhadap target komputasi tertentu. Anda dapat mengonfigurasi pekerjaan untuk menskalakan pelatihan model di Azure. Azure ML mendukung berbagai jenis pekerjaan dengan kemampuan yang berbeda. Misalnya, pekerjaan paling mendasar, pekerjaan perintah, menjalankan perintah dalam kontainer Docker dan dapat dimanfaatkan untuk simpul tunggal dan pelatihan terdistribusi. Pekerjaan pembersihan menjalankan pembersihan hiperparameter di atas ruang pencarian tertentu untuk menyetel hiperparameter model.
 
 
-  Pekerjaan juga memungkinkan pelacakan sistematis untuk eksperimen dan alur kerja ML Anda. Setelah pekerjaan dibuat, Azure ML mempertahankan catatan eksekusi untuk pekerjaan yang menyertakan metadata, metrik, log, dan artefak apa pun yang dihasilkan selama pekerjaan, kode yang dijalankan, dan lingkungan Azure ML yang digunakan. Semua rekaman eksekusi pekerjaan Anda dapat dilihat di studio Azure ML.
+  Pekerjaan juga memungkinkan pelacakan sistematis untuk eksperimen dan alur kerja ML Anda. Setelah pekerjaan dibuat, Azure ML mempertahankan catatan eksekusi untuk pekerjaan yang menyertakan metadata, metrik, log, dan artefak apa pun yang dihasilkan selama pekerjaan, kode yang dijalankan, dan lingkungan Azure ML yang digunakan. Semua rekaman eksekusi pekerjaan Anda dapat dilihat di Azure ML studio.
 directCommands:
 - uid: az_ml_job_archive
-  name: arsip pekerjaan az ml
+  name: az ml job archive
   summary: Mengarsipkan pekerjaan.
-  description: Pengarsipan pekerjaan akan menyembunyikannya secara default dari kueri daftar (`az ml job list`). Anda masih dapat terus mereferensikan dan menggunakan pekerjaan yang diarsipkan di alur kerja Anda. Hanya pekerjaan yang telah selesai yang dapat diarsipkan.
+  description: Pengarsipan pekerjaan akan menyembunyikannya secara default dari kueri daftar (`az ml job list`). Anda masih dapat terus mereferensikan dan menggunakan pekerjaan yang diarsipkan di alur kerja Anda. Hanya pekerjaan yang selesai yang dapat diarsipkan.
   syntax: >-
     az ml job archive --name
                       --resource-group
@@ -35,7 +35,7 @@ directCommands:
     description: ''
 - uid: az_ml_job_cancel
   name: az ml job cancel
-  summary: Batalkan pekerjaan.
+  summary: Membatalkan pekerjaan.
   description: ''
   syntax: >-
     az ml job cancel --name
@@ -75,7 +75,7 @@ directCommands:
   requiredParameters:
   - isRequired: true
     name: --file -f
-    summary: Jalur lokal ke file YAML yang berisi spesifikasi pekerjaan Azure ML.
+    summary: 'Jalur lokal ke file YAML yang berisi spesifikasi pekerjaan Azure ML. Dokumen referensi YAML untuk pekerjaan dapat ditemukan di: https://aka.ms/ml-cli-v2-job-command-yaml-reference, , https://aka.ms/ml-cli-v2-job-sweep-yaml-referencehttps://aka.ms/ml-cli-v2-job-pipeline-yaml-reference.'
     description: ''
   - isRequired: true
     name: --resource-group -g
@@ -102,7 +102,7 @@ directCommands:
     summary: Tampilkan detail eksekusi pekerjaan di Azure ML studio di browser web.
     description: ''
 - uid: az_ml_job_download
-  name: unduh pekerjaan az ml
+  name: az ml job download
   summary: Unduh semua file terkait pekerjaan.
   description: File akan diunduh dalam folder bernama sesuai dengan nama pekerjaan.
   syntax: >-
@@ -146,6 +146,7 @@ directCommands:
     az ml job list --resource-group
                    --workspace-name
                    [--all-results {false, true}]
+                   [--archived-only]
                    [--include-archived]
                    [--max-results]
                    [--parent-job-name]
@@ -165,6 +166,9 @@ directCommands:
   - name: --all-results
     parameterValueGroup: false, true
     summary: Mengembalikan semua hasil.
+    description: ''
+  - name: --archived-only
+    summary: Mencantumkan pekerjaan yang diarsipkan saja.
     description: ''
   - name: --include-archived
     summary: Mencantumkan pekerjaan yang diarsipkan dan pekerjaan aktif.
@@ -281,7 +285,7 @@ directCommands:
     summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
     description: ''
   - name: --remove
-    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
     description: ''
   - name: --set
     summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
@@ -318,13 +322,13 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: >-
-    Pekerjaan Azure ML menjalankan tugas terhadap target komputasi tertentu. Anda dapat mengonfigurasi pekerjaan untuk menskalakan pelatihan model di Azure. Azure ML mendukung berbagai jenis pekerjaan dengan kemampuan yang berbeda. Misalnya, pekerjaan paling mendasar, pekerjaan perintah, menjalankan perintah dalam kontainer Docker dan dapat dimanfaatkan untuk simpul tunggal dan pelatihan terdistribusi. Pekerjaan pembersihan menjalankan pembersihan hiperparameter di atas ruang pencarian tertentu untuk menyetel hiperparameter model.
+    Pekerjaan Azure ML menjalankan tugas terhadap target komputasi tertentu. Anda dapat mengonfigurasi pekerjaan untuk menskalakan pelatihan model di Azure. Azure ML mendukung berbagai jenis pekerjaan dengan kemampuan yang berbeda. Misalnya, pekerjaan paling dasar, pekerjaan perintah, menjalankan perintah dalam kontainer Docker dan dapat dimanfaatkan untuk simpul tunggal dan pelatihan terdistribusi. Pekerjaan pembersihan menjalankan pembersihan hyperparameter di atas ruang pencarian tertentu untuk menyetel hiperparameter model.
 
 
-    Pekerjaan juga memungkinkan pelacakan sistematis untuk eksperimen dan alur kerja ML Anda. Setelah pekerjaan dibuat, Azure ML mempertahankan catatan eksekusi untuk pekerjaan yang menyertakan metadata, metrik, log, dan artefak apa pun yang dihasilkan selama pekerjaan, kode yang dijalankan, dan lingkungan Azure ML yang digunakan. Semua rekaman eksekusi pekerjaan Anda dapat dilihat di Azure ML studio.
-  ms.openlocfilehash: d8bbb27432d9823fc27ba5cf08dd381e3bf86df9
-  ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+    Pekerjaan juga memungkinkan pelacakan sistematis untuk eksperimen dan alur kerja ML Anda. Setelah pekerjaan dibuat, Azure ML mempertahankan catatan eksekusi untuk pekerjaan yang menyertakan metadata, metrik, log, dan artefak apa pun yang dihasilkan selama pekerjaan, kode yang dijalankan, dan lingkungan Azure ML yang digunakan. Semua rekaman eksekusi pekerjaan Anda dapat dilihat di studio Azure ML.
+  ms.openlocfilehash: 2835baeceffefdaa1069c3cba0c11d58c31abf4f
+  ms.sourcegitcommit: 013ae480807b6745bf8786b0ffc4362af301f8e8
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141408436"
+  ms.lasthandoff: 05/04/2022
+  ms.locfileid: "144764458"
