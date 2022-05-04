@@ -4,7 +4,7 @@ description: Pelajari cara menginstal dan menjalankan Azure CLI di Linux secara 
 author: jiasli
 ms.author: jiasli
 manager: yonzhan
-ms.date: 08/19/2021
+ms.date: 04/29/2022
 ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
@@ -12,12 +12,12 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 zone_pivot_group_filename: azure/zone-pivot-groups.json
 zone_pivot_groups: cli-linux-installation-method
 keywords: linux cli, azure cli linux, menginstal azure cli ubuntu, menginstal azure cli linux
-ms.openlocfilehash: 197c520a7fae534bf421f102dc7641dee6e3e97d
-ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
+ms.openlocfilehash: c09ea4824bec55d02f35a56f292c80e69a14a3d0
+ms.sourcegitcommit: 013ae480807b6745bf8786b0ffc4362af301f8e8
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/22/2022
-ms.locfileid: "144003553"
+ms.lasthandoff: 05/04/2022
+ms.locfileid: "144762334"
 ---
 # <a name="install-the-azure-cli-on-linux"></a>Menginstal Azure CLI di Linux
 

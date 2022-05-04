@@ -4,10 +4,45 @@ name: az ml data
 extensionInformation: >-
   > [!Note]
 
-  > This reference is part of the **ml** extension for the Azure CLI  (version 2.15.0 or higher).  The extension will automatically install the first time you run an **az ml data** command.  [Learn more](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) about extensions.
+  > Referensi ini adalah bagian dari ekstensi **ml** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **az ml data** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
 summary: Mengelola aset data Azure ML.
-description: Aset data Azure ML adalah referensi ke file di layanan penyimpanan atau URL publik Anda bersama dengan metadata yang sesuai. Mereka bukan salinan data Anda. Anda dapat menggunakan aset data ini untuk mengakses data yang relevan selama pelatihan model dan memasang atau mengunduh data yang dirujuk ke target komputasi Anda.
+description: Azure ML aset data adalah referensi ke file di layanan penyimpanan atau URL publik Anda bersama dengan metadata yang sesuai. Mereka bukan salinan data Anda. Anda dapat menggunakan aset data ini untuk mengakses data yang relevan selama pelatihan model dan memasang atau mengunduh data yang dirujuk ke target komputasi Anda.
 directCommands:
+- uid: az_ml_data_archive
+  name: az ml data archive
+  summary: Mengarsipkan aset data.
+  description: Pengarsipan aset data akan menyembunyikannya secara default dari kueri daftar (`az ml data list`). Anda masih dapat terus mereferensikan dan menggunakan aset data yang diarsipkan di alur kerja Anda. Anda dapat mengarsipkan kontainer aset data atau versi aset data tertentu. Pengarsipan kontainer aset data akan mengarsipkan semua versi aset data dengan nama yang diberikan. Anda dapat memulihkan aset data yang diarsipkan menggunakan `az ml data restore`. Jika seluruh kontainer aset data diarsipkan, Anda tidak dapat memulihkan versi aset data individual - Anda harus memulihkan kontainer aset data.
+  syntax: >-
+    az ml data archive --name
+                       --resource-group
+                       --workspace-name
+                       [--label]
+                       [--version]
+  examples:
+  - summary: Mengarsipkan kontainer aset data (mengarsipkan semua versi aset data tersebut)
+    syntax: az ml data archive --name my-env --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Mengarsipkan versi aset data tertentu
+    syntax: az ml data archive --name my-env --version 1 --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aset data.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --label -l
+    summary: Label aset data.
+    description: ''
+  - name: --version -v
+    summary: Versi aset data.
+    description: ''
 - uid: az_ml_data_create
   name: az ml data create
   summary: Membuat aset data.
@@ -30,7 +65,8 @@ directCommands:
                       [--name]
                       [--path]
                       [--set]
-                      [--type {uri_file, uri_folder}]
+                      [--skip-validation]
+                      [--type {mltable, uri_file, uri_folder}]
                       [--version]
   examples:
   - summary: Membuat aset data dari file spesifikasi YAML
@@ -51,7 +87,7 @@ directCommands:
     summary: Deskripsi aset data.
     description: ''
   - name: --file -f
-    summary: Jalur lokal ke file YAML yang berisi spesifikasi data Azure ML. --name/-n dan --version/-v harus disediakan jika file YAML tidak memiliki nama dan versi.
+    summary: 'Jalur lokal ke file YAML yang berisi spesifikasi data Azure ML. Dokumen referensi YAML untuk data dapat ditemukan di: https://aka.ms/ml-cli-v2-data-yaml-reference.'
     description: ''
   - name: --name -n
     summary: Nama aset data.
@@ -62,8 +98,11 @@ directCommands:
   - name: --set
     summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur. Contoh: --set property1.property2=<value>.'
     description: ''
+  - name: --skip-validation
+    summary: Lewati validasi metadata MLTable saat jenisnya adalah MLTable.
+    description: ''
   - name: --type -t
-    parameterValueGroup: uri_file, uri_folder
+    parameterValueGroup: mltable, uri_file, uri_folder
     summary: Jenis aset data.
     description: ''
   - name: --version -v
@@ -76,6 +115,7 @@ directCommands:
   syntax: >-
     az ml data list --resource-group
                     --workspace-name
+                    [--archived-only]
                     [--include-archived]
                     [--max-results]
                     [--name]
@@ -96,6 +136,9 @@ directCommands:
     summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
     description: ''
   optionalParameters:
+  - name: --archived-only
+    summary: Cantumkan aset data yang diarsipkan saja.
+    description: ''
   - name: --include-archived
     summary: Mencantumkan aset data yang diarsipkan dan aset data aktif.
     description: ''
@@ -105,6 +148,41 @@ directCommands:
   - name: --name -n
     summary: Nama aset data. Jika disediakan, semua versi data dengan nama ini akan dikembalikan.
     description: ''
+- uid: az_ml_data_restore
+  name: az ml data restore
+  summary: Memulihkan aset data yang diarsipkan.
+  description: Ketika aset data yang diarsipkan dipulihkan, aset tersebut tidak akan lagi disembunyikan dari kueri daftar (`az ml data list`). Jika seluruh kontainer aset data diarsipkan, Anda dapat memulihkan kontainer yang diarsipkan tersebut. Ini akan memulihkan semua versi aset data dengan nama yang diberikan. Anda tidak dapat memulihkan hanya versi aset data tertentu jika seluruh kontainer aset data diarsipkan - Anda harus memulihkan seluruh kontainer. Jika hanya versi aset data individual yang diarsipkan, Anda dapat memulihkan versi tertentu tersebut.
+  syntax: >-
+    az ml data restore --name
+                       --resource-group
+                       --workspace-name
+                       [--label]
+                       [--version]
+  examples:
+  - summary: Memulihkan kontainer aset data yang diarsipkan (memulihkan semua versi aset data tersebut)
+    syntax: az ml data restore --name my-env --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Memulihkan versi aset data tertentu yang diarsipkan
+    syntax: az ml data restore --name my-env --version 1 --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama aset data.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name -w
+    summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --label -l
+    summary: Label aset data.
+    description: ''
+  - name: --version -v
+    summary: Versi aset data.
+    description: ''
 - uid: az_ml_data_show
   name: az ml data show
   summary: Memperlihatkan detail untuk aset data.
@@ -112,8 +190,9 @@ directCommands:
   syntax: >-
     az ml data show --name
                     --resource-group
-                    --version
                     --workspace-name
+                    [--label]
+                    [--version]
   examples:
   - summary: Menampilkan detail untuk aset data dengan nama dan versi yang ditentukan
     syntax: az ml data show --name my-data --version 1 --resource-group my-resource-group --workspace-name my-workspace
@@ -127,12 +206,15 @@ directCommands:
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
   - isRequired: true
-    name: --version -v
-    summary: Versi aset data.
-    description: ''
-  - isRequired: true
     name: --workspace-name -w
     summary: Nama ruang kerja Azure ML. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults workspace=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --label -l
+    summary: Label aset data.
+    description: ''
+  - name: --version -v
+    summary: Versi aset data.
     description: ''
 - uid: az_ml_data_update
   name: az ml data update
@@ -145,6 +227,7 @@ directCommands:
                       --workspace-name
                       [--add]
                       [--force-string]
+                      [--label]
                       [--remove]
                       [--set]
   requiredParameters:
@@ -171,15 +254,20 @@ directCommands:
   - name: --force-string
     summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
     description: ''
+  - name: --label -l
+    summary: Label aset data.
+    description: ''
   - name: --remove
-    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
     description: ''
   - name: --set
     summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
     description: ''
 commands:
+- az_ml_data_archive
 - az_ml_data_create
 - az_ml_data_list
+- az_ml_data_restore
 - az_ml_data_show
 - az_ml_data_update
 globalParameters:
@@ -201,9 +289,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Azure ML aset data adalah referensi ke file di layanan penyimpanan atau URL publik Anda bersama dengan metadata yang sesuai. Mereka bukan salinan data Anda. Anda dapat menggunakan aset data ini untuk mengakses data yang relevan selama pelatihan model dan memasang atau mengunduh data yang dirujuk ke target komputasi Anda.
-  ms.openlocfilehash: 8735d4812f68790efb7ef1bd38876d782f33314e
-  ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+  ms.openlocfilehash: 489a551d1c22fa03444b7521e1b74dee4c3342df
+  ms.sourcegitcommit: 013ae480807b6745bf8786b0ffc4362af301f8e8
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141407860"
+  ms.lasthandoff: 05/04/2022
+  ms.locfileid: "144763233"

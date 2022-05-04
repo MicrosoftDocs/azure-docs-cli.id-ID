@@ -1,7 +1,7 @@
 ### YamlMime:AzureCLIGroup
 uid: az_mysql_flexible-server
 name: az mysql flexible-server
-summary: Mengelola Azure Database for MySQL Server Fleksibel.
+summary: Kelola Azure Database for MySQL Server Fleksibel.
 description: ''
 directCommands:
 - uid: az_mysql_flexible-server_connect
@@ -31,7 +31,7 @@ directCommands:
   - name: --database-name -d
     summary: Nama database.
     description: ''
-  - name: --interaktif
+  - name: --interactive
     summary: Teruskan parameter ini untuk menyambungkan ke database dalam mode interaktif.
     description: ''
   - name: --querytext -q
@@ -39,7 +39,7 @@ directCommands:
     description: ''
 - uid: az_mysql_flexible-server_create
   name: az mysql flexible-server create
-  summary: Membuat server fleksibel MySQL.
+  summary: Buat server fleksibel MySQL.
   description: >-
     Buat server fleksibel MySQL dengan konfigurasi kustom atau default. Untuk informasi selengkapnya tentang konfigurasi jaringan, lihat
 
@@ -82,9 +82,9 @@ directCommands:
         --standby-zone 3 --storage-auto-grow Enabled --iops 500
   - summary: Buat server fleksibel MySQL dengan parameter default dan akses publik yang diaktifkan secara default.       Grup sumber daya, nama server, nama pengguna, kata sandi, dan database default akan dibuat oleh CLI
     syntax: az mysql flexible-server create
-  - summary: Buat server fleksibel MySQL dengan akses publik dan tambahkan rentang alamat IP untuk memiliki akses ke server ini. Parameter --public-access dapat berupa 'All', 'None', <startIpAddress>, atau <startIpAddress>-<endIpAddress>
+  - summary: Buat server fleksibel MySQL dengan akses publik dan tambahkan rentang alamat IP untuk memiliki akses ke server ini. Parameter --public-access dapat berupa 'Semua', 'Tidak Ada', <startIpAddress>, atau <startIpAddress>-<endIpAddress>
     syntax: az mysql flexible-server create --resource-group testGroup --name testserver --public-access 125.23.54.31-125.23.54.35
-  - summary: Buat server fleksibel MySQL dengan akses privat. Jika jaringan virtual dan subnet yang disediakan tidak ada, jaringan virtual dan subnet dengan awalan alamat yang ditentukan akan dibuat.
+  - summary: Buat server fleksibel MySQL dengan akses privat. Jika jaringan virtual dan subnet yang disediakan tidak ada, jaringan virtual dan subnet dengan prefiks alamat yang ditentukan akan dibuat.
     syntax: az mysql flexible-server create --resource-group testGroup --name testserver --vnet myVnet --subnet mySubnet --address-prefixes 10.0.0.0/16 --subnet-prefixes 10.0.0.0/24
   - summary: Buat server fleksibel MySQL menggunakan ID sumber daya subnet baru dan ID sumber daya zona DNS privat baru. Subnet dan zona DNS dapat dibuat di langganan atau grup sumber daya yang berbeda.
     syntax: >-
@@ -133,7 +133,7 @@ directCommands:
     summary: 'Kata sandi administrator. Minimal 8 karakter dan maksimum 128 karakter. Sandi Anda harus berisi karakter dari tiga kategori berikut: huruf besar bahasa Inggris, huruf kecil bahasa Inggris, angka, dan karakter non-alfanumerik.'
     description: ''
   - name: --admin-user -u
-    defaultValue: medicalferret2
+    defaultValue: medicaltruffle1
     summary: Nama pengguna administrator untuk server. Setelah diatur, itu tidak dapat diubah.
     description: ''
   - name: --backup-retention
@@ -146,15 +146,15 @@ directCommands:
   - name: --geo-redundant-backup
     defaultValue: Disabled
     parameterValueGroup: Disabled, Enabled
-    summary: Apakah pencadangan geo redundan diaktifkan atau tidak.
+    summary: Apakah pencadangan redundan geografis diaktifkan atau tidak.
     description: ''
-  - name: --ketersediaan tinggi
+  - name: --high-availability
     defaultValue: Disabled
     parameterValueGroup: Disabled, Enabled, SameZone, ZoneRedundant
     summary: Aktifkan (ZoneRedundant atau SameZone) atau nonaktifkan fitur ketersediaan tinggi. Nilai defaultnya adalah Dinonaktifkan. Ketersediaan tinggi hanya dapat diatur selama waktu pembuatan server yang fleksibel.
     description: ''
   - name: --iops
-    summary: Jumlah IOPS yang akan dialokasikan untuk server ini. Anda akan mendapatkan sejumlah IOPS gratis berdasarkan komputasi dan penyimpanan yang disediakan. Nilai default untuk IOPS adalah IOPS gratis. Untuk mempelajari lebih lanjut tentang IOPS berdasarkan komputasi dan penyimpanan, lihat IOPS di Azure Database for MySQL Server Fleksibel.
+    summary: Jumlah IOPS yang akan dialokasikan untuk server ini. Anda akan mendapatkan sejumlah IOPS gratis berdasarkan komputasi dan penyimpanan yang disediakan. Nilai default untuk IOPS adalah IOPS gratis. Untuk mempelajari lebih lanjut tentang IOPS berdasarkan komputasi dan penyimpanan, lihat IOPS di server fleksibel Azure Database for MySQL.
     description: ''
   - name: --location -l
     summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
@@ -166,7 +166,7 @@ directCommands:
     summary: Parameter ini hanya berlaku untuk server dengan akses privat. Nama atau id zona dns privat baru atau yang sudah ada. Anda bisa menggunakan zona dns privat dari grup sumber daya yang sama, grup sumber daya yang berbeda, atau langganan yang berbeda. Jika Anda ingin menggunakan zona dari grup sumber daya atau langganan yang berbeda, harap berikan Id sumber daya. CLI membuat zona dns privat baru dalam grup sumber daya yang sama dengan jaringan virtual jika tidak disediakan oleh pengguna.
     description: ''
   - name: --public-access
-    summary: Menentukan akses publik. Masukkan satu atau rentang alamat IP yang akan disertakan dalam daftar IP yang diizinkan. Rentang alamat IP harus dipisahkan garis putus-putus dan tidak berisi spasi apa pun. Menentukan 0.0.0.0 memungkinkan akses publik dari sumber daya apa pun yang disebarkan dalam Azure untuk mengakses server Anda. Mengaturnya ke "Tidak Ada" mengatur server dalam mode akses publik tetapi tidak membuat aturan firewall.
+    summary: Menentukan akses publik. Masukkan satu atau rentang alamat IP yang akan disertakan dalam daftar IP yang diizinkan. Rentang alamat IP harus dipisahkan dengan garis putus-putus dan tidak berisi spasi apa pun. Menentukan 0.0.0.0 memungkinkan akses publik dari sumber daya apa pun yang disebarkan dalam Azure untuk mengakses server Anda. Mengaturnya ke "Tidak Ada" mengatur server dalam mode akses publik tetapi tidak membuat aturan firewall.
     description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
@@ -181,7 +181,7 @@ directCommands:
   - name: --storage-auto-grow
     defaultValue: Enabled
     parameterValueGroup: Disabled, Enabled
-    summary: Mengaktifkan atau menonaktifkan pertumbuhan otomatis penyimpanan. Nilai default Diaktifkan.
+    summary: Mengaktifkan atau menonaktifkan pertumbuhan otomatis penyimpanan. Nilai default diaktifkan.
     description: ''
   - name: --storage-size
     defaultValue: "32"
@@ -470,13 +470,13 @@ directCommands:
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
   - name: --restore-time
-    defaultValue: 2022-04-28T13:26:12+00:00
+    defaultValue: 2022-05-03T13:43:26+00:00
     summary: Titik waktu dalam UTC untuk memulihkan dari (format ISO8601), misalnya, 2017-04-26T02:10:00+00:00Nilai default diatur ke waktu saat ini.
     description: ''
   - name: --subnet
-    summary: Nama atau ID sumber daya dari subnet baru atau yang sudah ada. Jika Anda ingin menggunakan subnet dari grup sumber daya atau langganan yang berbeda, berikan ID sumber daya, bukan nama. Harap dicatat bahwa subnet akan didelegasikan ke flexibleServers. Setelah delegasi, subnet ini tidak dapat digunakan untuk jenis sumber daya Azure lainnya.
+    summary: Nama atau ID sumber daya dari subnet baru atau yang sudah ada. Jika Anda ingin menggunakan subnet dari grup sumber daya atau langganan yang berbeda, harap berikan ID sumber daya alih-alih nama. Harap dicatat bahwa subnet akan didelegasikan ke flexibleServers. Setelah delegasi, subnet ini tidak dapat digunakan untuk jenis sumber daya Azure lainnya.
     description: ''
-  - name: --subnet-prefiks
+  - name: --subnet-prefixes
     summary: Awalan alamat IP subnet yang akan digunakan saat membuat subnet baru dalam format CIDR. Nilai defaultnya adalah 10.0.0.0/24.
     description: ''
   - name: --vnet
@@ -626,7 +626,7 @@ directCommands:
   - name: --force-string
     summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
     description: ''
-  - name: --ketersediaan tinggi
+  - name: --high-availability
     parameterValueGroup: Disabled, Enabled, SameZone, ZoneRedundant
     summary: Aktifkan (ZoneRedundant atau SameZone) atau nonaktifkan fitur ketersediaan tinggi. Nilai defaultnya adalah Dinonaktifkan. Ketersediaan tinggi hanya dapat diatur selama waktu pembuatan server yang fleksibel.
     description: ''
@@ -657,7 +657,7 @@ directCommands:
   - name: --sku-name
     summary: 'Nama SKU komputasi. Mengikuti konvensi Standard_{nama VM}. Contoh: Standard_D4s_v3.'
     description: ''
-  - name: --zona siaga
+  - name: --standby-zone
     summary: Informasi zona ketersediaan server siaga ketika ketersediaan tinggi diaktifkan.
     description: ''
   - name: --storage-auto-grow
@@ -721,7 +721,7 @@ directCommands:
     defaultValue: "3600"
     summary: Waktu tunggu maksimum dalam detik.
     description: ''
-  - name: --diperbarui
+  - name: --updated
     summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
     description: ''
 commands:
@@ -780,10 +780,10 @@ globalParameters:
 - name: --verbose
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
-  description: Kelola Azure Database for MySQL Server Fleksibel.
-  ms.openlocfilehash: ed73dbcfe7d4546c853ceec6507af435a6a2a412
-  ms.sourcegitcommit: e3ae474e5b1b16657f4935a6dceef8c8470bff87
+  description: Mengelola Azure Database for MySQL Server Fleksibel.
+  ms.openlocfilehash: 42ea7cd39ec056e0746f5a2d4df4cff5a72960a8
+  ms.sourcegitcommit: 013ae480807b6745bf8786b0ffc4362af301f8e8
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/29/2022
-  ms.locfileid: "144403670"
+  ms.lasthandoff: 05/04/2022
+  ms.locfileid: "144763288"
