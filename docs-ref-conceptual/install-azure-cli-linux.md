@@ -12,12 +12,12 @@ ms.custom: devx-track-azurecli, seo-azure-cli
 zone_pivot_group_filename: azure/zone-pivot-groups.json
 zone_pivot_groups: cli-linux-installation-method
 keywords: linux cli, azure cli linux, menginstal azure cli ubuntu, menginstal azure cli linux
-ms.openlocfilehash: c09ea4824bec55d02f35a56f292c80e69a14a3d0
-ms.sourcegitcommit: 013ae480807b6745bf8786b0ffc4362af301f8e8
+ms.openlocfilehash: 150db5016d264d47da7f7bf6b584e5dd32b95998
+ms.sourcegitcommit: 458438e54726db3a020b476922b529b514b512d8
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/04/2022
-ms.locfileid: "144762334"
+ms.lasthandoff: 05/11/2022
+ms.locfileid: "144850568"
 ---
 # <a name="install-the-azure-cli-on-linux"></a>Menginstal Azure CLI di Linux
 
@@ -35,6 +35,12 @@ Jika sudah siap menginstal Azure CLI di Linux, sebaiknya Anda menggunakan pengel
 ::: zone pivot="dnf"
 
 [!INCLUDE [cli-install-linux-apt](includes/cli-install-linux-dnf.md)]
+
+::: zone-end
+
+::: zone pivot="tdnf"
+
+[!INCLUDE [cli-install-linux-tdnf](includes/cli-install-linux-tdnf.md)]
 
 ::: zone-end
 
