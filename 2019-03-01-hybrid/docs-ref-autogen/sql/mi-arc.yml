@@ -1,0 +1,642 @@
+### YamlMime:AzureCLIGroup
+uid: az_sql_mi-arc
+name: az sql mi-arc
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **arcdata** untuk Azure CLI (versi 2.3.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az sql mi-arc** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola SQL Managed Instance dengan dukungan Azure Arc.
+description: ''
+directCommands:
+- uid: az_sql_mi-arc_create
+  name: az sql mi-arc create
+  summary: Membuat instans terkelola SQL.
+  description: Untuk mengatur kata sandi instans terkelola SQL, atur variabel lingkungan AZDATA_PASSWORD.
+  syntax: >-
+    az sql mi-arc create --name
+                         [--ad-account-name]
+                         [--ad-connector-name]
+                         [--admin-login-secret]
+                         [--agent-enabled]
+                         [--annotations]
+                         [--cert-private-key-file]
+                         [--cert-public-key-file]
+                         [--collation]
+                         [--cores-limit]
+                         [--cores-request]
+                         [--custom-location]
+                         [--dev]
+                         [--k8s-namespace]
+                         [--keytab-secret]
+                         [--labels]
+                         [--language]
+                         [--license-type]
+                         [--location]
+                         [--memory-limit]
+                         [--memory-request]
+                         [--no-external-endpoint]
+                         [--no-wait]
+                         [--path]
+                         [--primary-dns-name]
+                         [--primary-port-number]
+                         [--readable-secondaries]
+                         [--replicas]
+                         [--resource-group]
+                         [--retention-days]
+                         [--service-annotations]
+                         [--service-cert-secret]
+                         [--service-labels]
+                         [--storage-annotations]
+                         [--storage-class-backups]
+                         [--storage-class-data]
+                         [--storage-class-datalogs]
+                         [--storage-class-logs]
+                         [--storage-labels]
+                         [--tier]
+                         [--time-zone]
+                         [--trace-flags]
+                         [--use-k8s]
+                         [--volume-size-backups]
+                         [--volume-size-data]
+                         [--volume-size-datalogs]
+                         [--volume-size-logs]
+  examples:
+  - summary: Buat instans terkelola SQL yang terhubung secara tidak langsung.
+    syntax: az sql mi-arc create -n sqlmi1 --k8s-namespace namespace --use-k8s
+  - summary: Buat instans terkelola SQL yang terhubung secara tidak langsung dengan 3 replika dalam skenario HA.
+    syntax: az sql mi-arc create -n sqlmi2 --replicas 3  --k8s-namespace namespace --use-k8s
+  - summary: Buat instans terkelola SQL yang terhubung langsung.
+    syntax: az sql mi-arc create --name name --resource-group group  --location location --subscription subscription   --custom-location custom-location
+  - summary: Buat instans terkelola SQL yang terhubung secara tidak langsung dengan autentikasi Direktori Aktif.
+    syntax: az sql mi-arc create --name contososqlmi --k8s-namespace arc --ad-connector-name arcadc --ad-account-name arcuser --keytab-secret arcuser-keytab-secret --primary-dns-name contososqlmi-primary.contoso.local --primary-port-number 8143 --use-k8s
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama instans terkelola SQL.
+    description: ''
+  optionalParameters:
+  - name: --ad-account-name
+    summary: Nama akun Direktori Aktif untuk SQL Managed Instance yang diaktifkan Arc ini. Akun ini perlu dibuat sebelum penyebaran instans ini.
+    description: ''
+  - name: --ad-connector-name
+    summary: Nama Konektor Direktori Aktif. Parameter ini menunjukkan niat untuk disebarkan dengan dukungan AD.
+    description: ''
+  - name: --admin-login-secret
+    summary: Nama rahasia Kubernetes untuk menghasilkan host atau akan menjadi host mandat akun login admin pengguna.
+    description: ''
+  - name: --agent-enabled
+    summary: Aktifkan agen SQL Server untuk instans. Default dinonaktifkan. Nilai yang diizinkan adalah 'true' atau 'false'.
+    description: ''
+  - name: --annotations
+    summary: Daftar anotasi yang dipisahkan koma dari instans terkelola SQL.
+    description: ''
+  - name: --cert-private-key-file
+    summary: Jalur ke file yang berisi kunci privat sertifikat dengan format PEM yang akan digunakan untuk SQL Server.
+    description: ''
+  - name: --cert-public-key-file
+    summary: Jalur ke file yang berisi kunci publik sertifikat dengan format PEM yang akan digunakan untuk SQL Server.
+    description: ''
+  - name: --collation
+    summary: Kolase SQL Server untuk instans.
+    description: ''
+  - name: --cores-limit -c
+    summary: Batas inti dari instans terkelola sebagai bilangan bulat.
+    description: ''
+  - name: --cores-request
+    summary: Permintaan untuk inti dari instans terkelola sebagai bilangan bulat.
+    description: ''
+  - name: --custom-location
+    summary: Lokasi kustom untuk instans ini.
+    description: ''
+  - name: --dev
+    summary: Jika ditentukan, maka akan dianggap sebagai instans dev dan tidak akan ditagih.
+    description: ''
+  - name: --k8s-namespace -k
+    summary: Namespace layanan tempat instans terkelola SQL akan disebarkan. Jika tidak ada namespace layanan yang ditentukan, maka namespace layanan yang ditentukan dalam kubeconfig akan digunakan.
+    description: ''
+  - name: --keytab-secret
+    summary: Nama rahasia Kubernetes yang berisi file keytab untuk SQL Managed Instance berkemampuan Arc ini.
+    description: ''
+  - name: --labels
+    summary: Daftar label yang dipisahkan koma dari instans terkelola SQL.
+    description: ''
+  - name: --language
+    summary: SQL Server lokal untuk setiap pengidentifikasi bahasa yang didukung (LCID) untuk instans.
+    description: ''
+  - name: --license-type -l
+    summary: 'Jenis lisensi yang akan diterapkan untuk instans terkelola ini Nilai yang diizinkan adalah: BasePrice, LicenseIncluded, DisasterRecovery.Default adalah LicenseIncluded. Jenis lisensi dapat diubah..'
+    description: ''
+  - name: --location
+    summary: Lokasi Azure tempat metadata sqlmi akan disimpan (misalnya eastus).
+    description: ''
+  - name: --memory-limit -m
+    summary: 'Batas kapasitas instans terkelola sebagai bilangan bulat diikuti oleh Gi (gigabyte). Contoh: 4Gi.'
+    description: ''
+  - name: --memory-request
+    summary: 'Permintaan untuk kapasitas instans terkelola sebagai bilangan bulat diikuti oleh Gi (gigabyte). Contoh: 4Gi.'
+    description: ''
+  - name: --no-external-endpoint
+    summary: Jika ditentukan, tidak ada layanan eksternal yang akan dibuat. Jika tidak, layanan eksternal akan dibuat menggunakan jenis layanan yang sama dengan pengontrol data.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --path
+    summary: Jalur ke file azext_arcdata untuk file json instans terkelola SQL.
+    description: ''
+  - name: --primary-dns-name
+    summary: Nama DNS layanan utama yang diekspos ke pengguna akhir untuk terhubung ke SQL Managed Instance yang diaktifkan Arc ini (misalnya sqlinstancename.contoso.com).
+    description: ''
+  - name: --primary-port-number
+    summary: Nomor port tempat layanan DNS utama diekspos ke pengguna akhir (misalnya 31433).
+    description: ''
+  - name: --readable-secondaries
+    summary: Jumlah replika yang akan dibuat dapat dibaca. Hanya berlaku untuk tingkat Kritis Bisnis.  Nilai harus antara 0 dan jumlah replika dikurangi 1.
+    description: ''
+  - name: --replicas
+    summary: Opsi ini menentukan jumlah replika SQL Managed Instance yang akan disebarkan di kluster Kubernetes Anda untuk tujuan ketersediaan tinggi. Nilai yang diizinkan adalah '3', '2', '1' dengan default '1'.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya Azure tempat sumber daya sqlmi harus ditambahkan.
+    description: ''
+  - name: --retention-days
+    summary: Periode retensi cadangan, ditentukan dalam hari. Nilai yang diizinkan adalah 0 hingga 35. Defaultnya adalah 7. Mengatur periode retensi ke 0 akan menonaktifkan pencadangan otomatis untuk semua database pada instans terkelola SQL dan cadangan sebelumnya akan dihapus.
+    description: ''
+  - name: --service-annotations
+    summary: Daftar anotasi yang dipisahkan koma yang akan diterapkan ke semua layanan eksternal.
+    description: ''
+  - name: --service-cert-secret
+    summary: Nama rahasia Kubernetes untuk menghasilkan host atau akan menjadi host sertifikat layanan SQL.
+    description: ''
+  - name: --service-labels
+    summary: Daftar label yang dipisahkan koma yang akan diterapkan ke semua layanan eksternal.
+    description: ''
+  - name: --storage-annotations
+    summary: Daftar anotasi yang dipisahkan koma yang akan diterapkan ke semua PVC.
+    description: ''
+  - name: --storage-class-backups
+    summary: Kelas penyimpanan berkemampuan ReadWriteMany (RWX) yang akan digunakan untuk pencadangan (/var/opt/mssql/backups). Jika tidak ada nilai yang ditentukan, kelas penyimpanan default akan digunakan.
+    description: ''
+  - name: --storage-class-data -d
+    summary: Kelas penyimpanan yang akan digunakan untuk file data (.mdf, .ndf). Jika tidak ada nilai yang ditentukan, maka tidak ada kelas penyimpanan yang akan ditentukan, yang akan menyebabkan Kubernetes menggunakan kelas penyimpanan default.
+    description: ''
+  - name: --storage-class-datalogs
+    summary: Kelas penyimpanan yang akan digunakan untuk log database (.ldf). Jika tidak ada nilai yang ditentukan, maka tidak ada kelas penyimpanan yang akan ditentukan, yang akan menyebabkan Kubernetes menggunakan kelas penyimpanan default.
+    description: ''
+  - name: --storage-class-logs
+    summary: Kelas penyimpanan yang akan digunakan untuk log (/var/log). Jika tidak ada nilai yang ditentukan, maka tidak ada kelas penyimpanan yang akan ditentukan, yang akan menyebabkan Kubernetes menggunakan kelas penyimpanan default.
+    description: ''
+  - name: --storage-labels
+    summary: Daftar label yang dipisahkan koma yang akan diterapkan ke semua PVC.
+    description: ''
+  - name: --tier -t
+    summary: 'Tingkat harga untuk instans. Nilai yang diizinkan: BusinessCritical (disingkat bc) atau GeneralPurpose (disingkat gp). Default adalah GeneralPurpose. Tingkat harga tidak dapat diubah.'
+    description: ''
+  - name: --time-zone
+    summary: Zona waktu SQL Server untuk instans.
+    description: ''
+  - name: --trace-flags
+    summary: Daftar traceflags yang dipisahkan koma. Tidak ada bendera secara default.
+    description: ''
+  - name: --use-k8s
+    summary: Membuat instans terkelola SQL menggunakan API Kube lokal.
+    description: ''
+  - name: --volume-size-backups
+    summary: Ukuran volume penyimpanan yang akan digunakan untuk cadangan sebagai angka positif diikuti oleh Ki (kilobyte), Mi (megabyte), atau Gi (gigabyte).
+    description: ''
+  - name: --volume-size-data
+    summary: Ukuran volume penyimpanan yang akan digunakan untuk data sebagai angka positif diikuti oleh Ki (kilobyte), Mi (megabyte), atau Gi (gigabyte).
+    description: ''
+  - name: --volume-size-datalogs
+    summary: Ukuran volume penyimpanan yang akan digunakan untuk log data sebagai angka positif diikuti oleh Ki (kilobyte), Mi (megabyte), atau Gi (gigabyte).
+    description: ''
+  - name: --volume-size-logs
+    summary: Ukuran volume penyimpanan yang akan digunakan untuk log sebagai angka positif diikuti oleh Ki (kilobyte), Mi (megabyte), atau Gi (gigabyte).
+    description: ''
+- uid: az_sql_mi-arc_delete
+  name: az sql mi-arc delete
+  summary: Menghapus instans terkelola SQL.
+  description: ''
+  syntax: >-
+    az sql mi-arc delete --name
+                         [--k8s-namespace]
+                         [--no-wait]
+                         [--resource-group]
+                         [--use-k8s]
+  examples:
+  - summary: Hapus instans terkelola SQL menggunakan namespace default.
+    syntax: az sql mi-arc delete --name sqlmi1 --use-k8s
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama instans terkelola SQL akan dihapus.
+    description: ''
+  optionalParameters:
+  - name: --k8s-namespace -k
+    summary: Namespace layanan tempat instans terkelola SQL akan disebarkan. Jika tidak ada namespace layanan yang ditentukan, maka namespace layanan yang ditentukan dalam kubeconfig akan digunakan.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya Azure tempat sumber daya sqlmi harus dihapus.
+    description: ''
+  - name: --use-k8s
+    summary: Membuat instans terkelola SQL menggunakan API Kube lokal.
+    description: ''
+- uid: az_sql_mi-arc_edit
+  name: az sql mi-arc edit
+  summary: Tidak digunakan lagi, gunakan pembaruan melalui pengeditan.
+  description: ''
+  syntax: >-
+    az sql mi-arc edit --name
+                       [--agent-enabled]
+                       [--annotations]
+                       [--cores-limit]
+                       [--cores-request]
+                       [--custom-location]
+                       [--dev]
+                       [--k8s-namespace]
+                       [--labels]
+                       [--license-type]
+                       [--location]
+                       [--memory-limit]
+                       [--memory-request]
+                       [--no-wait]
+                       [--path]
+                       [--resource-group]
+                       [--retention-days]
+                       [--service-annotations]
+                       [--service-labels]
+                       [--tag-name]
+                       [--tag-value]
+                       [--time-zone]
+                       [--trace-flags]
+                       [--use-k8s]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama instans terkelola SQL yang sedang diedit. Nama yang digunakan untuk penyebaran instans tidak dapat diubah.
+    description: ''
+  optionalParameters:
+  - name: --agent-enabled
+    summary: Aktifkan agen SQL Server untuk instans. Default dinonaktifkan.
+    description: ''
+  - name: --annotations
+    summary: Daftar anotasi yang dipisahkan koma dari instans terkelola SQL.
+    description: ''
+  - name: --cores-limit -c
+    summary: Batas inti dari instans terkelola sebagai bilangan bulat.
+    description: ''
+  - name: --cores-request
+    summary: Permintaan untuk inti dari instans terkelola sebagai bilangan bulat.
+    description: ''
+  - name: --custom-location
+    summary: '[Diperlukan] Lokasi kustom untuk instans ini.'
+    description: ''
+  - name: --dev
+    summary: Jika ditentukan, maka akan dianggap sebagai instans dev dan tidak akan ditagih.
+    description: ''
+  - name: --k8s-namespace -k
+    summary: Namespace layanan tempat instans terkelola SQL akan disebarkan. Jika tidak ada namespace layanan yang ditentukan, maka namespace layanan yang ditentukan dalam kubeconfig akan digunakan.
+    description: ''
+  - name: --labels
+    summary: Daftar label yang dipisahkan koma dari instans terkelola SQL.
+    description: ''
+  - name: --license-type
+    summary: 'Jenis lisensi yang akan diperbarui untuk instans terkelola ini Nilai yang diizinkan adalah: BasePrice, LicenseIncluded, DisasterRecovery. Default adalah LisensiIncluded.'
+    description: ''
+  - name: --location
+    summary: Lokasi Azure tempat metadata sqlmi akan disimpan (misalnya eastus).
+    description: ''
+  - name: --memory-limit -m
+    summary: 'Batas kapasitas instans terkelola sebagai bilangan bulat diikuti oleh Gi (gigabyte). Contoh: 4Gi.'
+    description: ''
+  - name: --memory-request
+    summary: 'Permintaan untuk kapasitas instans terkelola sebagai bilangan bulat diikuti oleh Gi (gigabyte). Contoh: 4Gi.'
+    description: ''
+  - name: --no-wait
+    summary: Jika diberikan, perintah tidak akan menunggu instans berada dalam keadaan siap sebelum menampilkan.
+    description: ''
+  - name: --path
+    summary: Jalur ke file azext_arcdata untuk file json instans terkelola SQL.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya Azure tempat sumber daya sqlmi harus ditambahkan.
+    description: ''
+  - name: --retention-days
+    summary: Periode retensi cadangan, ditentukan dalam hari. Nilai yang diizinkan adalah 0 hingga 35. Defaultnya adalah 7. Mengatur periode retensi ke 0 akan menonaktifkan pencadangan otomatis untuk semua database pada instans terkelola SQL dan cadangan sebelumnya akan dihapus.
+    description: ''
+  - name: --service-annotations
+    summary: Daftar anotasi yang dipisahkan koma yang akan diterapkan ke semua layanan eksternal.
+    description: ''
+  - name: --service-labels
+    summary: Daftar label yang dipisahkan koma yang akan diterapkan ke semua layanan eksternal.
+    description: ''
+  - name: --tag-name
+    summary: Nama tag instans terkelola SQL.
+    description: ''
+  - name: --tag-value
+    summary: Nilai tag instans terkelola SQL.
+    description: ''
+  - name: --time-zone
+    summary: Zona waktu SQL Server untuk instans.
+    description: ''
+  - name: --trace-flags
+    summary: Daftar traceflags yang dipisahkan koma. Tidak ada bendera secara default.
+    description: ''
+  - name: --use-k8s
+    summary: Membuat instans terkelola SQL menggunakan API Kube lokal.
+    description: ''
+- uid: az_sql_mi-arc_get-mirroring-cert
+  name: az sql mi-arc get-mirroring-cert
+  summary: Mengambil sertifikat grup ketersediaan yang mencerminkan titik akhir dari sql mi dan simpan dalam file.
+  description: ''
+  syntax: >-
+    az sql mi-arc get-mirroring-cert --cert-file
+                                     --name
+                                     [--k8s-namespace]
+                                     [--use-k8s]
+  examples:
+  - summary: Mengambil sertifikat grup ketersediaan yang mencerminkan titik akhir dari sqlmi1 dan menyimpannya dalam file fileName1
+    syntax: az sql mi-arc get-mirroring-cert -n sqlmi1 --cert-file fileName1
+  requiredParameters:
+  - isRequired: true
+    name: --cert-file
+    summary: Nama file lokal untuk menyimpan sertifikat yang diambil dalam format PEM.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama instans terkelola SQL.
+    description: ''
+  optionalParameters:
+  - name: --k8s-namespace -k
+    summary: Namespace layanan tempat instans terkelola SQL akan disebarkan. Jika tidak ada namespace layanan yang ditentukan, maka namespace layanan yang ditentukan dalam kubeconfig akan digunakan.
+    description: ''
+  - name: --use-k8s
+    summary: Membuat instans terkelola SQL menggunakan API Kube lokal.
+    description: ''
+- uid: az_sql_mi-arc_list
+  name: az sql mi-arc list
+  summary: Daftar instans terkelola SQL.
+  description: ''
+  syntax: >-
+    az sql mi-arc list [--k8s-namespace]
+                       [--resource-group]
+                       [--use-k8s]
+  examples:
+  - summary: Daftar instans terkelola SQL.
+    syntax: az sql mi-arc list --use-k8s
+  optionalParameters:
+  - name: --k8s-namespace -k
+    summary: Namespace layanan tempat instans terkelola SQL akan disebarkan. Jika tidak ada namespace layanan yang ditentukan, maka namespace layanan yang ditentukan dalam kubeconfig akan digunakan.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya Azure tempat sumber daya sqlmi harus dicantumkan.
+    description: ''
+  - name: --use-k8s
+    summary: Membuat instans terkelola SQL menggunakan API Kube lokal.
+    description: ''
+- uid: az_sql_mi-arc_show
+  name: az sql mi-arc show
+  summary: Menampilkan detail instans terkelola SQL.
+  description: ''
+  syntax: >-
+    az sql mi-arc show --name
+                       [--k8s-namespace]
+                       [--path]
+                       [--resource-group]
+                       [--use-k8s]
+  examples:
+  - summary: Tampilkan detail instans terkelola SQL terhubung tidak langsung.
+    syntax: az sql mi-arc show --name sqlmi1 --k8s-namespace namespace --use-k8s
+  - summary: Tampilkan detail instans terkelola SQL yang terhubung langsung.
+    syntax: az sql mi-arc show --name sqlmi1 --resource-group resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama instans terkelola SQL akan ditampilkan.
+    description: ''
+  optionalParameters:
+  - name: --k8s-namespace -k
+    summary: Namespace layanan tempat instans terkelola SQL akan disebarkan. Jika tidak ada namespace layanan yang ditentukan, maka namespace layanan yang ditentukan dalam kubeconfig akan digunakan.
+    description: ''
+  - name: --path -p
+    summary: Jalur tempat spesifikasi lengkap untuk instans terkelola SQL tertulis. Jika dihilangkan, spesifikasi akan ditulis dengan output standar.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya Azure tempat sumber daya sqlmi harus ditampilkan.
+    description: ''
+  - name: --use-k8s
+    summary: Membuat instans terkelola SQL menggunakan API Kube lokal.
+    description: ''
+- uid: az_sql_mi-arc_update
+  name: az sql mi-arc update
+  summary: Memperbarui konfigurasi instans terkelola SQL.
+  description: ''
+  syntax: >-
+    az sql mi-arc update --name
+                         [--agent-enabled]
+                         [--annotations]
+                         [--cert-private-key-file]
+                         [--cert-public-key-file]
+                         [--cores-limit]
+                         [--cores-request]
+                         [--k8s-namespace]
+                         [--keytab-secret]
+                         [--labels]
+                         [--license-type]
+                         [--memory-limit]
+                         [--memory-request]
+                         [--no-wait]
+                         [--path]
+                         [--preferred-primary-replica]
+                         [--readable-secondaries]
+                         [--replicas]
+                         [--resource-group]
+                         [--retention-days]
+                         [--service-annotations]
+                         [--service-cert-secret]
+                         [--service-labels]
+                         [--time-zone]
+                         [--trace-flags]
+                         [--use-k8s]
+  examples:
+  - summary: Memperbarui konfigurasi instans terkelola SQL.
+    syntax: az sql mi-arc update --path ./spec.json -n sqlmi1 --use-k8s
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama instans terkelola SQL yang sedang diedit. Nama yang digunakan untuk penyebaran instans tidak dapat diubah.
+    description: ''
+  optionalParameters:
+  - name: --agent-enabled
+    summary: Aktifkan agen SQL Server untuk instans. Default dinonaktifkan.
+    description: ''
+  - name: --annotations
+    summary: Daftar anotasi yang dipisahkan koma dari instans terkelola SQL.
+    description: ''
+  - name: --cert-private-key-file
+    summary: Jalur ke file yang berisi kunci privat sertifikat dengan format PEM yang akan digunakan untuk SQL Server.
+    description: ''
+  - name: --cert-public-key-file
+    summary: Jalur ke file yang berisi kunci publik sertifikat dengan format PEM yang akan digunakan untuk SQL Server.
+    description: ''
+  - name: --cores-limit -c
+    summary: Batas inti dari instans terkelola sebagai bilangan bulat.
+    description: ''
+  - name: --cores-request
+    summary: Permintaan untuk inti dari instans terkelola sebagai bilangan bulat.
+    description: ''
+  - name: --k8s-namespace -k
+    summary: Namespace layanan tempat instans terkelola SQL akan disebarkan. Jika tidak ada namespace layanan yang ditentukan, maka namespace layanan yang ditentukan dalam kubeconfig akan digunakan.
+    description: ''
+  - name: --keytab-secret
+    summary: Nama rahasia Kubernetes yang berisi file keytab untuk SQL Managed Instance berkemampuan Arc ini.
+    description: ''
+  - name: --labels
+    summary: Daftar label yang dipisahkan koma dari instans terkelola SQL.
+    description: ''
+  - name: --license-type -l
+    summary: 'Jenis lisensi yang akan diterapkan untuk instans terkelola ini Nilai yang diizinkan adalah: BasePrice, LicenseIncluded, DisasterRecovery.Default adalah LicenseIncluded. Jenis lisensi dapat diubah..'
+    description: ''
+  - name: --memory-limit -m
+    summary: 'Batas kapasitas instans terkelola sebagai bilangan bulat diikuti oleh Gi (gigabyte). Contoh: 4Gi.'
+    description: ''
+  - name: --memory-request
+    summary: 'Permintaan untuk kapasitas instans terkelola sebagai bilangan bulat diikuti oleh Gi (gigabyte). Contoh: 4Gi.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --path
+    summary: Jalur ke file azext_arcdata untuk file json instans terkelola SQL.
+    description: ''
+  - name: --preferred-primary-replica
+    summary: Replika utama pilihan yang akan diperbarui.
+    description: ''
+  - name: --readable-secondaries
+    summary: Jumlah replika yang akan dibuat dapat dibaca. Hanya berlaku untuk tingkat Kritis Bisnis.  Nilai harus antara 0 dan jumlah replika dikurangi 1.
+    description: ''
+  - name: --replicas
+    summary: Opsi ini menentukan jumlah replika SQL Managed Instance yang akan disebarkan di kluster Kubernetes Anda untuk tujuan ketersediaan tinggi. Nilai yang diizinkan adalah '3', '2', '1' dengan default '1'.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya Azure tempat sumber daya sqlmi harus diperbarui.
+    description: ''
+  - name: --retention-days
+    summary: Periode retensi cadangan, ditentukan dalam hari. Nilai yang diizinkan adalah 0 hingga 35. Defaultnya adalah 7. Mengatur periode retensi ke 0 akan menonaktifkan pencadangan otomatis untuk semua database pada instans terkelola SQL dan cadangan sebelumnya akan dihapus.
+    description: ''
+  - name: --service-annotations
+    summary: Daftar anotasi yang dipisahkan koma yang akan diterapkan ke semua layanan eksternal.
+    description: ''
+  - name: --service-cert-secret
+    summary: Nama rahasia Kubernetes untuk menghasilkan host atau akan menjadi host sertifikat layanan SQL.
+    description: ''
+  - name: --service-labels
+    summary: Daftar label yang dipisahkan koma yang akan diterapkan ke semua layanan eksternal.
+    description: ''
+  - name: --time-zone
+    summary: Zona waktu SQL Server untuk instans.
+    description: ''
+  - name: --trace-flags
+    summary: Daftar traceflags yang dipisahkan koma. Tidak ada bendera secara default.
+    description: ''
+  - name: --use-k8s
+    summary: Membuat instans terkelola SQL menggunakan API Kube lokal.
+    description: ''
+- uid: az_sql_mi-arc_upgrade
+  name: az sql mi-arc upgrade
+  summary: Peningkatan instans terkelola SQL.
+  description: Tingkatkan instans terkelola SQL ke versi tertentu yang diinginkan.  Jika versi yang diinginkan tidak ditentukan, versi pengontrol data akan digunakan.
+  syntax: >-
+    az sql mi-arc upgrade [--desired-version]
+                          [--dry-run]
+                          [--field-filter]
+                          [--force]
+                          [--k8s-namespace]
+                          [--label-filter]
+                          [--name]
+                          [--no-wait]
+                          [--resource-group]
+                          [--target]
+                          [--use-k8s]
+  examples:
+  - summary: Peningkatan instans terkelola SQL.
+    syntax: az sql mi-arc upgrade -n sqlmi1 -k arc --desired-version v1.1.0 --use-k8s
+  optionalParameters:
+  - name: --desired-version -v
+    summary: Versi yang diinginkan untuk ditingkatkan. Opsional jika tidak ada versi yang ditentukan, versi pengontrol data akan digunakan.
+    description: ''
+  - name: --dry-run -d
+    summary: Menunjukkan instans mana yang akan ditingkatkan tetapi tidak benar-benar meningkatkan instans.
+    description: ''
+  - name: --field-filter -f
+    summary: Filter untuk memilih instans yang akan ditingkatkan berdasarkan properti sumber daya.
+    description: ''
+  - name: --force
+    summary: Mengambil alih semua kebijakan yang mungkin diterapkan ke instans, dan mencoba peningkatan.
+    description: ''
+  - name: --k8s-namespace -k
+    summary: Namespace layanan tempat instans terkelola SQL akan disebarkan. Jika tidak ada namespace layanan yang ditentukan, maka namespace layanan yang ditentukan dalam kubeconfig akan digunakan.
+    description: ''
+  - name: --label-filter -l
+    summary: Filter untuk memilih instans yang akan ditingkatkan berdasarkan label.
+    description: ''
+  - name: --name -n
+    summary: Nama instans terkelola SQL.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya Azure tempat sumber daya sqlmi harus ditambahkan.
+    description: ''
+  - name: --target
+    summary: Versi yang diinginkan untuk ditingkatkan. Opsional jika tidak ada versi yang ditentukan, versi pengontrol data akan digunakan.
+    description: ''
+  - name: --use-k8s
+    summary: Membuat instans terkelola SQL menggunakan API Kube lokal.
+    description: ''
+commands:
+- az_sql_mi-arc_config
+- az_sql_mi-arc_config_add
+- az_sql_mi-arc_config_init
+- az_sql_mi-arc_config_patch
+- az_sql_mi-arc_config_remove
+- az_sql_mi-arc_config_replace
+- az_sql_mi-arc_create
+- az_sql_mi-arc_delete
+- az_sql_mi-arc_edit
+- az_sql_mi-arc_endpoint
+- az_sql_mi-arc_endpoint_list
+- az_sql_mi-arc_get-mirroring-cert
+- az_sql_mi-arc_list
+- az_sql_mi-arc_show
+- az_sql_mi-arc_update
+- az_sql_mi-arc_upgrade
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola SQL Managed Instance dengan dukungan Azure Arc.
+  ms.openlocfilehash: d7a09949c45cad1d5e941a17cff72356a2b6b691
+  ms.sourcegitcommit: 458438e54726db3a020b476922b529b514b512d8
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 05/11/2022
+  ms.locfileid: "144928436"

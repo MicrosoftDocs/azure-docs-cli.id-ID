@@ -1,0 +1,237 @@
+### YamlMime:AzureCLIGroup
+uid: az_arcdata_ad-connector
+name: az arcdata ad-connector
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **arcdata** untuk Azure CLI (versi 2.3.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az arcdata ad-connector** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola autentikasi Direktori Aktif untuk layanan data Azure Arc.
+description: ''
+directCommands:
+- uid: az_arcdata_ad-connector_create
+  name: az arcdata ad-connector create
+  summary: Buat konektor Direktori Aktif baru.
+  description: ''
+  syntax: >-
+    az arcdata ad-connector create --account-provisioning
+                                   --name
+                                   --nameserver-addresses
+                                   --realm
+                                   [--data-controller-name]
+                                   [--dns-domain-name]
+                                   [--dns-replicas]
+                                   [--domain-service-account-secret]
+                                   [--k8s-namespace]
+                                   [--netbios-domain-name]
+                                   [--ou-distinguished-name]
+                                   [--prefer-k8s-dns]
+                                   [--primary-ad-dc-hostname]
+                                   [--resource-group]
+                                   [--secondary-ad-dc-hostnames]
+                                   [--use-k8s]
+  examples:
+  - summary: Contoh 1 - Sebarkan konektor Direktori Aktif baru dalam mode tidak langsung.
+    syntax: az arcdata ad-connector create  --name arcadc  --k8s-namespace arc  --realm CONTOSO.LOCAL  --account-provisioning manual --primary-ad-dc-hostname azdc01.contoso.local  --secondary-ad-dc-hostnames "azdc02.contoso.local, azdc03.contoso.local"  --netbios-domain-name CONTOSO  --dns-domain-name contoso.local  --nameserver-addresses 10.10.10.11,10.10.10.12,10.10.10.13  --dns-replicas 2  --prefer-k8s-dns false  --use-k8s
+  requiredParameters:
+  - isRequired: true
+    name: --account-provisioning
+    summary: "Nilai yang menunjukkan apakah provisi akun layanan untuk layanan data harus otomatis atau manual. Nilai yang diizinkan adalah: 'manual' atau 'otomatis'."
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama konektor Direktori Aktif.
+    description: ''
+  - isRequired: true
+    name: --nameserver-addresses
+    summary: Daftar alamat IP server DNS Direktori Aktif yang dipisahkan oleh ',' (misalnya 10.10.10.11,10.10.10.12,10.10.10.13).
+    description: ''
+  - isRequired: true
+    name: --realm
+    summary: Nama domain Direktori Aktif dalam huruf besar (misalnya CONTOSO. LOKAL).
+    description: ''
+  optionalParameters:
+  - name: --data-controller-name
+    summary: Nama pengontrol data Arc yang terkait dengan konektor Direktori Aktif ini.
+    description: ''
+  - name: --dns-domain-name
+    summary: Nama domain DNS (misalnya contoso.com).
+    description: ''
+  - name: --dns-replicas
+    defaultValue: "1"
+    summary: Jumlah salinan untuk layanan proksi DNS.
+    description: ''
+  - name: --domain-service-account-secret
+    summary: Nama rahasia Kubernetes yang berisi kredensial untuk akun Direktori Aktif yang telah dibuat sebelumnya dengan izin untuk membuat dan mengelola akun di OU yang diberikan. Atau, mengatur variabel env 'DOMAIN_SERVICE_ACCOUNT_USERNAME' dan 'DOMAIN_SERVICE_ACCOUNT_PASSWORD' akan membuat rahasia ini secara otomatis.
+    description: ''
+  - name: --k8s-namespace -k
+    summary: Namespace Layanan Kubernetes untuk menyebarkan konektor Direktori Aktif.
+    description: ''
+  - name: --netbios-domain-name
+    summary: Nama NETBIOS domain Direktori Aktif (misalnya CONTOSO).
+    description: ''
+  - name: --ou-distinguished-name
+    summary: Nama terhormat dari Unit Organisasi (OU) yang telah dibuat sebelumnya di domain Direktori Aktif. (misalnya OU=arcou,DC=contoso,DC=com).
+    description: ''
+  - name: --prefer-k8s-dns
+    defaultValue: "true"
+    summary: Gunakan respons Server DNS Kubernetes melalui respons server DNS Direktori Aktif untuk pencarian alamat IP. Nilai yang diizinkan adalah 'true' atau 'false'.
+    description: ''
+  - name: --primary-ad-dc-hostname
+    summary: Nama host pengendali domain AD utama.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya Azure dari pengontrol data Arc yang terkait dengan konektor Direktori Aktif ini.
+    description: ''
+  - name: --secondary-ad-dc-hostnames
+    summary: Daftar nama host pengendali domain Active Directory sekunder yang dipisahkan oleh ','(misalnya azdc02.contoso.local,azdc03.contoso.local).
+    description: ''
+  - name: --use-k8s
+    summary: Gunakan API Kube lokal untuk melakukan tindakan ini.
+    description: ''
+- uid: az_arcdata_ad-connector_delete
+  name: az arcdata ad-connector delete
+  summary: Menghapus konektor Direktori Aktif yang sudah ada.
+  description: ''
+  syntax: >-
+    az arcdata ad-connector delete --name
+                                   [--data-controller-name]
+                                   [--k8s-namespace]
+                                   [--resource-group]
+                                   [--use-k8s]
+  examples:
+  - summary: Contoh 1 - Hapus konektor Direktori Aktif yang ada dalam mode tidak langsung.
+    syntax: az arcdata ad-connector delete  --name arcadc  --k8s-namespace arc  --use-k8s
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama konektor Direktori Aktif.
+    description: ''
+  optionalParameters:
+  - name: --data-controller-name
+    summary: Nama pengontrol data Arc yang terkait dengan konektor Direktori Aktif ini.
+    description: ''
+  - name: --k8s-namespace -k
+    summary: Namespace Layanan Kubernetes untuk menyebarkan konektor Direktori Aktif.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya Azure dari pengontrol data Arc yang terkait dengan konektor Direktori Aktif ini.
+    description: ''
+  - name: --use-k8s
+    summary: Gunakan API Kube lokal untuk melakukan tindakan ini.
+    description: ''
+- uid: az_arcdata_ad-connector_show
+  name: az arcdata ad-connector show
+  summary: Dapatkan detail konektor Direktori Aktif yang ada.
+  description: ''
+  syntax: >-
+    az arcdata ad-connector show --name
+                                 [--data-controller-name]
+                                 [--k8s-namespace]
+                                 [--resource-group]
+                                 [--use-k8s]
+  examples:
+  - summary: Contoh 1 - Dapatkan konektor Direktori Aktif yang ada dalam mode tidak langsung.
+    syntax: az arcdata ad-connector show  --name arcadc  --k8s-namespace arc  --use-k8s
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama konektor Direktori Aktif.
+    description: ''
+  optionalParameters:
+  - name: --data-controller-name
+    summary: Nama pengontrol data Arc yang terkait dengan konektor Direktori Aktif ini.
+    description: ''
+  - name: --k8s-namespace -k
+    summary: Namespace Layanan Kubernetes untuk menyebarkan konektor Direktori Aktif.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya Azure dari pengontrol data Arc yang terkait dengan konektor Direktori Aktif ini.
+    description: ''
+  - name: --use-k8s
+    summary: Gunakan API Kube lokal untuk melakukan tindakan ini.
+    description: ''
+- uid: az_arcdata_ad-connector_update
+  name: az arcdata ad-connector update
+  summary: Perbarui pengaturan konektor Direktori Aktif yang sudah ada.
+  description: ''
+  syntax: >-
+    az arcdata ad-connector update --name
+                                   [--data-controller-name]
+                                   [--dns-replicas]
+                                   [--domain-service-account-secret]
+                                   [--k8s-namespace]
+                                   [--nameserver-addresses]
+                                   [--prefer-k8s-dns]
+                                   [--primary-ad-dc-hostname]
+                                   [--resource-group]
+                                   [--secondary-ad-dc-hostnames]
+                                   [--use-k8s]
+  examples:
+  - summary: Contoh 1 - Perbarui konektor Direktori Aktif yang ada dalam mode tidak langsung.
+    syntax: az arcdata ad-connector update  --name arcadc  --k8s-namespace arc  --primary-ad-dc-hostname azdc01.contoso.local --secondary-ad-dc-hostname "azdc02.contoso.local, azdc03.contoso.local"  --nameserver-addresses 10.10.10.11,10.10.10.12,10.10.10.13 --dns-replicas 2  --prefer-k8s-dns false  --use-k8s
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama konektor Direktori Aktif.
+    description: ''
+  optionalParameters:
+  - name: --data-controller-name
+    summary: Nama pengontrol data Arc yang terkait dengan konektor Direktori Aktif ini.
+    description: ''
+  - name: --dns-replicas
+    summary: Jumlah salinan untuk layanan proksi DNS.
+    description: ''
+  - name: --domain-service-account-secret
+    summary: Nama rahasia Kubernetes yang berisi kredensial untuk akun Direktori Aktif yang telah dibuat sebelumnya dengan izin untuk membuat dan mengelola akun di OU yang diberikan.
+    description: ''
+  - name: --k8s-namespace -k
+    summary: Namespace Layanan Kubernetes untuk menyebarkan konektor Direktori Aktif.
+    description: ''
+  - name: --nameserver-addresses
+    summary: Daftar alamat IP server DNS Direktori Aktif yang dipisahkan oleh ',' (misalnya 10.10.10.11,10.10.10.12,10.10.10.13).
+    description: ''
+  - name: --prefer-k8s-dns
+    summary: Gunakan respons Server DNS Kubernetes melalui respons server DNS Direktori Aktif untuk pencarian alamat IP. Nilai yang diizinkan adalah 'true' atau 'false'.
+    description: ''
+  - name: --primary-ad-dc-hostname
+    summary: Nama host pengendali domain AD utama.
+    description: ''
+  - name: --resource-group -g
+    summary: Grup sumber daya Azure dari pengontrol data Arc yang terkait dengan konektor Direktori Aktif ini.
+    description: ''
+  - name: --secondary-ad-dc-hostnames
+    summary: Daftar nama host pengendali domain Active Directory sekunder yang dipisahkan oleh ','(misalnya azdc02.contoso.local,azdc03.contoso.local).
+    description: ''
+  - name: --use-k8s
+    summary: Gunakan API Kube lokal untuk melakukan tindakan ini.
+    description: ''
+commands:
+- az_arcdata_ad-connector_create
+- az_arcdata_ad-connector_delete
+- az_arcdata_ad-connector_show
+- az_arcdata_ad-connector_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola autentikasi Direktori Aktif untuk layanan data Azure Arc.
+  ms.openlocfilehash: a09650d2ea998ec16bd99706fcd023d92661e8fc
+  ms.sourcegitcommit: 458438e54726db3a020b476922b529b514b512d8
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 05/11/2022
+  ms.locfileid: "144928556"
