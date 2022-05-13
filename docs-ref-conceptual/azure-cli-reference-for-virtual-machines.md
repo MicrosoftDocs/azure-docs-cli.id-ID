@@ -11,12 +11,12 @@ ms.service: azure-cli
 ms.reviewer: robb
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, mesin virtual azure, virtualisasi desktop, gambar, galeri gambar bersama
-ms.openlocfilehash: 00cd5398bce98b05799991d70d433c7246e6d89a
-ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+ms.openlocfilehash: e0956b2751c0f9b1782af4aef9fca8b91aad9937
+ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/06/2022
-ms.locfileid: "141409912"
+ms.lasthandoff: 05/13/2022
+ms.locfileid: "144977023"
 ---
 # <a name="azure-cli-reference-commands-for-azure-virtual-machines"></a>Perintah referensi Azure CLI untuk Azure Virtual Machines
 
@@ -138,8 +138,6 @@ Beberapa referensi dalam tabel ini adalah bagian dari ekstensi [serial-console](
 
 ## <a name="see-also"></a>Lihat juga
 
-- [Mulai gunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari penginstalan dan aktivitas masuk.
-
-- Temukan [referensi](../latest/docs-ref-autogen/reference-index.yml) tambahan dan [ekstensi yang tersedia](./azure-cli-extensions-list.md) di dokumentasi Azure CLI.
-
-- Pelajari ekstensi lebih lanjut di [Menggunakan ekstensi dengan Azure CLI](./azure-cli-extensions-overview.md).
+* [Mulai gunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari penginstalan dan aktivitas masuk.
+* Temukan [perintah referensi](../latest/docs-ref-autogen/reference-index.yml) tambahan dan [ekstensi yang tersedia](./azure-cli-extensions-list.md) dalam dokumentasi Azure CLI.
+* [Pelajari cara menggunakan Bash dengan Azure CLI](./azure-cli-learn-bash.md)

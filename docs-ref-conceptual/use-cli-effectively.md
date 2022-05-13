@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
-ms.openlocfilehash: 7f313ff865b38749cfa8ef1cd5fef1d55cf7a6be
-ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
+ms.openlocfilehash: 7df9c12d6ae0696b0e2cfeb91ecb7e883ec0d259
+ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/27/2022
-ms.locfileid: "144037337"
+ms.lasthandoff: 05/13/2022
+ms.locfileid: "144977383"
 ---
 # <a name="how-to-use-azure-cli-effectively"></a>Cara menggunakan Azure CLI secara efektif
 
@@ -324,10 +324,8 @@ Contoh tersebut mengembalikan `$ErrorActionPreference` ke nilai default-nya.
 
 Untuk informasi selengkapnya tentang penanganan kesalahan PowerShell, lihat [Segala hal yang ingin Anda ketahui tentang pengecualian](/powershell/scripting/learn/deep-dives/everything-about-exceptions).
 
-## <a name="next-steps"></a>Langkah berikutnya
+## <a name="see-also"></a>Lihat juga
 
-- [Menentukan nilai dalam perintah Azure CLI](azure-cli-variables.md)
-- [Mengkueri output perintah Azure CLI](query-azure-cli.md)
-- [Format output untuk perintah Azure CLI](format-output-azure-cli.md)
-- [Menggunakan langganan Azure dengan Azure CLI](manage-azure-subscriptions-azure-cli.md)
-
+* [Pelajari cara menggunakan Bash dengan Azure CLI](./azure-cli-learn-bash.md)
+* [Mengkueri output perintah Azure CLI](./query-azure-cli.md)
+* [Menggunakan variabel dalam perintah Azure CLI](./azure-cli-variables.md)

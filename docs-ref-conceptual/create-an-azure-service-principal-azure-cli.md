@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: perwakilan layanan azure, membuat perwakilan layanan azure, membuat perwakilan layanan azure cli
-ms.openlocfilehash: 4c1a3b9e79ece52c274a36c5403dd1e619b1bc2c
-ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
+ms.openlocfilehash: a77f64b1c1840e2ef114a81e2982d2b3aa7d1ba2
+ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/22/2022
-ms.locfileid: "144003229"
+ms.lasthandoff: 05/13/2022
+ms.locfileid: "144976753"
 ---
 # <a name="create-an-azure-service-principal-with-the-azure-cli"></a>Membuat perwakilan layanan Azure dengan Azure CLI
 
@@ -38,12 +38,12 @@ Saat membuat perwakilan layanan, pilih jenis autentikasi masuk yang digunakannya
 > [!WARNING]
 > Saat Anda membuat perwakilan layanan Azure menggunakan perintah `az ad sp create-for-rbac`, output akan menyertakan info masuk yang harus dilindungi. Pastikan Anda tidak menyertakan info masuk ini dalam kode atau memasukkan info masuk ke dalam kontrol sumber Anda. Sebagai alternatif, pertimbangkan untuk menggunakan [identitas terkelola](/azure/active-directory/managed-identities-azure-resources/overview) jika tersedia untuk mencegah penggunaan info masuk.
 >
-> Untuk mengurangi risiko perwakilan layanan yang disusupi, tetapkan peran yang lebih spesifik dan persempit cakupan ke sumber daya atau grup sumber daya. Untuk informasi selengkapnya, lihat [Langkah-langkah untuk menambahkan penetapan peran](/azure/role-based-access-control/role-assignments-steps).
+> Untuk mengurangi risiko perwakilan layanan yang disusupi, tetapkan peran yang lebih spesifik dan persempit cakupan ke grup sumber daya atau sumber daya. Untuk informasi selengkapnya, lihat [Langkah-langkah untuk menambahkan penetapan peran](/azure/role-based-access-control/role-assignments-steps).
 
 
 ### <a name="password-based-authentication"></a>Autentikasi berbasis kata sandi
 
-Dengan autentikasi berbasis kata sandi, kata sandi acak dibuat untuk Anda.  Jika Anda tidak menentukan `--name` nilai parameter, nama yang berisi stempel waktu akan dibuat untuk Anda.  Anda harus menentukan sebagai `--scopes` nilai ini tidak memiliki default.  Jika mau, Anda dapat mengatur penetapan peran nanti dengan menggunakan [az role assignment create](/cli/azure/role/assignment#az-role-assignment-create).
+Dengan autentikasi berbasis kata sandi, kata sandi acak dibuat untuk Anda.  Jika Anda tidak menentukan `--name` nilai parameter, nama yang berisi stempel waktu akan dibuat untuk Anda.  Anda harus menentukan karena `--scopes` nilai ini tidak memiliki default.  Jika mau, Anda dapat mengatur penetapan peran nanti dengan menggunakan [az role assignment create](/cli/azure/role/assignment#az-role-assignment-create).
 
 ```azurecli-interactive
 # Create a service principal with required parameter
@@ -74,7 +74,7 @@ Output perwakilan layanan dengan autentikasi kata sandi menyertakan kunci `passw
 
 ### <a name="certificate-based-authentication"></a>Autentikasi berbasis sertifikat
 
-Untuk autentikasi berbasis sertifikat, gunakan `--cert` parameter . Parameter ini mengharuskan Anda memegang sertifikat yang sudah ada. Pastikan alat apa pun yang menggunakan perwakilan layanan ini memiliki akses ke kunci privat sertifikat. Sertifikat harus dalam format ASCII seperti PEM, CER, atau DER. Teruskan sertifikat sebagai string, atau gunakan format `@path` untuk memuat sertifikat dari file.
+Untuk autentikasi berbasis sertifikat, gunakan `--cert` parameter . Parameter ini mengharuskan Anda menyimpan sertifikat yang sudah ada. Pastikan alat apa pun yang menggunakan perwakilan layanan ini memiliki akses ke kunci privat sertifikat. Sertifikat harus dalam format ASCII seperti PEM, CER, atau DER. Teruskan sertifikat sebagai string, atau gunakan format `@path` untuk memuat sertifikat dari file.
 
 > [!NOTE]
 > Saat menggunakan file PEM, **CERTIFICATE** harus ditambahkan ke **PRIVATE KEY** di dalam file.
@@ -261,7 +261,7 @@ Untuk masuk dengan perwakilan layanan, Anda memerlukan `appID`, `tenantID`, dan 
     az group create --location westus --name myResourceGroupName
     ```
 
-1. Membuat akun penyimpanan.
+1. Buat akun penyimpanan.
 
     Untuk Azure Storage, nilai yang valid untuk parameter `<KIND>` adalah:
 
@@ -306,4 +306,7 @@ Jika akun Anda tidak memiliki izin untuk menetapkan peran, Anda akan melihat pes
 ## <a name="see-also"></a>Lihat juga
 
 * [Objek aplikasi dan perwakilan layanan di Azure Active Directory](/azure/active-directory/develop/app-objects-and-service-principals)
-* [Cara mengelola perwakilan layanan](/azure/developer/python/how-to-manage-service-principals)
+* [Kelola perwakilan layanan menggunakan portal Azure](/azure/developer/python/how-to-manage-service-principals)
+* [Autentikasi Azure dengan perwakilan layanan](/azure/developer/java/sdk/identity-service-principal-auth)
+* [Perwakilan layanan dengan Azure Kubernetes Services (AKS)](/azure/aks/kubernetes-service-principal)
+* [Melihat perwakilan layanan identitas terkelola](/azure/active-directory/managed-identities-azure-resources/how-to-view-managed-identity-service-principal-cli)

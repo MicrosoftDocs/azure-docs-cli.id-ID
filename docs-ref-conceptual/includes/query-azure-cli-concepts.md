@@ -5,14 +5,14 @@ author: dbradish-microsoft
 ms.author: dbradish
 manager: barbkess
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 8c8f9c0f369b8c212034e26198e0f3fc94d9c674
-ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
+ms.openlocfilehash: 6de202a44be38db9cab0634ecea18ec6f2d9d75d
+ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/22/2022
-ms.locfileid: "144003490"
+ms.lasthandoff: 05/13/2022
+ms.locfileid: "144977687"
 ---
-Azure CLI menggunakan kueri untuk memilih dan mengubah output perintah Azure CLI. Kueri dijalankan di sisi klien pada objek JSON yang dikembalikan perintah Azure CLI sebelum pemformatan tampilan apa pun.
+Azure CLI menggunakan kueri untuk memilih dan memodifikasi output perintah Azure CLI. Kueri dijalankan sisi klien pada objek JSON yang dikembalikan perintah Azure CLI sebelum pemformatan tampilan apa pun.
 
 Karakter escape yang diperlukan dalam kueri berbeda untuk lingkungan yang berbeda. Disarankan untuk menjalankan kueri di Azure CloudShell atau cmd karena shell ini membutuhkan lebih sedikit karakter escape. Untuk memastikan contoh kueri benar secara sintaksis, pilih tab untuk shell yang Anda gunakan.
 
@@ -109,7 +109,7 @@ Perintah berikut membuat kunci umum SSH diotorisasi untuk terhubung ke VM dengan
 ### <a name="bash"></a>[Bash](#tab/bash)
 
 ```azurecli-interactive
-az vm show --resource-group QueryDemo --name TestVM --query 'osProfile.linuxConfiguration.ssh.publicKeys'
+az vm show --resource-group QueryDemo --name TestVM --query "osProfile.linuxConfiguration.ssh.publicKeys"
 ```
 
 ### <a name="powershell"></a>[PowerShell](#tab/powershell)
@@ -144,7 +144,7 @@ Untuk mendapatkan lebih dari satu properti, letakkan ekspresi yang dipisahkan ol
 ### <a name="bash"></a>[Bash](#tab/bash)
 
 ```azurecli-interactive
-az vm show --resource-group QueryDemo --name TestVM --query '[name, osProfile.adminUsername, osProfile.linuxConfiguration.ssh.publicKeys[0].keyData]'
+az vm show --resource-group QueryDemo --name TestVM --query "[name, osProfile.adminUsername, osProfile.linuxConfiguration.ssh.publicKeys[0].keyData]"
 ```
 
 ### <a name="powershell"></a>[PowerShell](#tab/powershell)
@@ -179,7 +179,7 @@ Format untuk hash multiselect adalah `{displayName:JMESPathExpression, ...}`.
 ### <a name="bash"></a>[Bash](#tab/bash)
 
 ```azurecli-interactive
-az vm show --resource-group QueryDemo --name TestVM --query '{VMName:name, admin:osProfile.adminUsername, sshKey:osProfile.linuxConfiguration.ssh.publicKeys[0].keyData }'
+az vm show --resource-group QueryDemo --name TestVM --query "{VMName:name, admin:osProfile.adminUsername, sshKey:osProfile.linuxConfiguration.ssh.publicKeys[0].keyData}"
 ```
 
 ### <a name="powershell"></a>[PowerShell](#tab/powershell)
@@ -215,7 +215,7 @@ Kueri berikut mendapatkan nama, OS, dan nama administrator untuk setiap VM dalam
 ### <a name="bash"></a>[Bash](#tab/bash)
 
 ```azurecli-interactive
-az vm list --resource-group QueryDemo --query '[].{Name:name, OS:storageProfile.osDisk.osType, admin:osProfile.adminUsername}'
+az vm list --resource-group QueryDemo --query "[].{Name:name, OS:storageProfile.osDisk.osType, admin:osProfile.adminUsername}"
 ```
 
 ### <a name="powershell"></a>[PowerShell](#tab/powershell)
@@ -258,7 +258,7 @@ Ekspresi kueri ini meratakan array `osProfile.linuxConfiguration.ssh.publicKeys`
 ### <a name="bash"></a>[Bash](#tab/bash)
 
 ```azurecli-interactive
-az vm show --resource-group QueryDemo --name TestVM --query '{VMName:name, admin:osProfile.adminUsername, sshKeys:osProfile.linuxConfiguration.ssh.publicKeys[].keyData }'
+az vm show --resource-group QueryDemo --name TestVM --query "{VMName:name, admin:osProfile.adminUsername, sshKeys:osProfile.linuxConfiguration.ssh.publicKeys[].keyData }"
 ```
 
 ### <a name="powershell"></a>[PowerShell](#tab/powershell)
@@ -289,17 +289,17 @@ az vm show --resource-group QueryDemo --name TestVM --query "{VMName:name, admin
 Operasi lain yang digunakan untuk mendapatkan data dari array adalah _pemfilteran_. Pemfilteran dilakukan dengan operator `[?...]` JMESPath.
 Operator ini mengambil predikat sebagai isinya. Predikat adalah pernyataan apa pun, termasuk properti Boolean, yang dapat dievaluasi ke atau `true` `false`. Ekspresi di mana predikat mengevaluasi ke `true` disertakan dalam output.
 
-Kueri pertama menunjukkan cara mencantumkan nama semua langganan Azure yang tersambung ke akun Anda yang propertinya `isDefault` benar. Kueri kedua dan ketiga memperlihatkan dua cara berbeda untuk mencantumkan semua langganan yang propertinya `isDefault` salah.
+Kueri pertama menunjukkan cara mencantumkan nama semua langganan Azure yang tersambung ke akun Anda yang propertinya `isDefault` benar. Kueri kedua dan ketiga menunjukkan dua cara berbeda untuk mencantumkan semua langganan yang propertinya `isDefault` salah.
 
 ### <a name="bash"></a>[Bash](#tab/bash)
 
 ```azurecli-interactive
 # Boolean values are assumed to be true, so you can directly evaluate the isDefault property to return the default subscription.
-az account list --query '[?isDefault].name'
+az account list --query "[?isDefault].name"
 
 # To check if a Boolean property is false, you can use the comparison operator == or the logical operator !.
 az account list --query '[?!isDefault].name'
-az account list --query '[?isDefault == `false`].name'
+az account list --query "[?isDefault == \`false\`].name"
 ```
 
 ### <a name="powershell"></a>[PowerShell](#tab/powershell)
@@ -313,6 +313,8 @@ az account list --query "[?!isDefault].name"
 az account list --query "[?isDefault == ``false``].name"
 ```
 
+Perhatikan karakter escape tambahan (`` ` ``) di sekitar 50 dalam perintah di atas. Karakter escape tambahan ini ada karena perintah Azure CLI dianggap sebagai skrip Prompt Perintah, sehingga penguraian PowerShell dan Command Prompt perlu dipertimbangkan. Azure CLI hanya akan menerima simbol jika masih ada setelah 2 putaran penguraian. Untuk informasi selengkapnya tentang kemungkinan masalah kutipan lainnya, lihat [Mengutip masalah dengan PowerShell](https://github.com/Azure/azure-cli/blob/dev/doc/quoting-issues-with-powershell.md).
+
 ### <a name="cmd"></a>[Cmd](#tab/cmd)
 
 ```cmd
@@ -324,7 +326,7 @@ az account list --query "[?!isDefault].name"
 az account list --query "[?isDefault == `false`].name"
 ```
 
-Harap dicatat bahwa contoh di atas hanya berfungsi saat menggunakan Prompt Perintah secara interaktif. Untuk menjalankan beberapa perintah az dalam skrip batch menggunakan Prompt Perintah, awali setiap perintah az dengan `call`. Misalnya gunakan `call az account list` alih-alih `az account list`.
+Harap dicatat bahwa contoh di atas hanya berfungsi saat menggunakan Prompt Perintah secara interaktif. Untuk menjalankan beberapa perintah az dalam skrip batch menggunakan Command Prompt, awali setiap perintah az dengan `call`. Misalnya gunakan `call az account list` alih-alih `az account list`.
 
 ---
 
@@ -335,7 +337,7 @@ Di bagian terakhir, Anda meratakan array untuk mendapatkan daftar lengkap semua 
 ### <a name="bash"></a>[Bash](#tab/bash)
 
 ```azurecli-interactive
-az vm list --resource-group QueryDemo --query '[?storageProfile.osDisk.osType==`Linux`].{Name:name,  admin:osProfile.adminUsername}' --output table
+az vm list --resource-group QueryDemo --query "[?storageProfile.osDisk.osType=='Linux'].{Name:name,  admin:osProfile.adminUsername}" --output table
 ```
 
 ### <a name="powershell"></a>[PowerShell](#tab/powershell)
@@ -364,7 +366,7 @@ Anda juga dapat memfilter nilai numerik seperti ukuran disk OS. Contoh berikut m
 ### <a name="bash"></a>[Bash](#tab/bash)
 
 ```azurecli-interactive
-az vm list --resource-group QueryDemo --query '[?storageProfile.osDisk.diskSizeGb >=`50`].{Name:name,  admin:osProfile.adminUsername, DiskSize:storageProfile.osDisk.diskSizeGb }' --output table
+az vm list --resource-group QueryDemo --query "[?storageProfile.osDisk.diskSizeGb >=\`50\`].{Name:name,  admin:osProfile.adminUsername, DiskSize:storageProfile.osDisk.diskSizeGb }" --output table
 ```
 
 ### <a name="powershell"></a>[PowerShell](#tab/powershell)
@@ -373,7 +375,7 @@ az vm list --resource-group QueryDemo --query '[?storageProfile.osDisk.diskSizeG
 az vm list --resource-group QueryDemo --query "[?storageProfile.osDisk.diskSizeGb >=``50``].{Name:name,  admin:osProfile.adminUsername, DiskSize:storageProfile.osDisk.diskSizeGb }" --output table
 ```
 
-Perhatikan karakter escape tambahan (`` ` ``) di sekitar 50 dalam perintah di atas. Karakter escape tambahan ini ada karena perintah Azure CLI dianggap sebagai skrip Prompt Perintah, sehingga penguraian PowerShell dan Prompt Perintah perlu dipertimbangkan. Azure CLI hanya akan menerima simbol jika masih ada setelah 2 putaran penguraian. Untuk informasi selengkapnya tentang kemungkinan masalah kutipan lainnya, lihat [Mengutip masalah dengan PowerShell](https://github.com/Azure/azure-cli/blob/dev/doc/quoting-issues-with-powershell.md).
+Perhatikan karakter escape tambahan (`` ` ``) di sekitar 50 dalam perintah di atas. Karakter escape tambahan ini ada karena perintah Azure CLI dianggap sebagai skrip Prompt Perintah, sehingga penguraian PowerShell dan Command Prompt perlu dipertimbangkan. Azure CLI hanya akan menerima simbol jika masih ada setelah 2 putaran penguraian. Untuk informasi selengkapnya tentang kemungkinan masalah kutipan lainnya, lihat [Mengutip masalah dengan PowerShell](https://github.com/Azure/azure-cli/blob/dev/doc/quoting-issues-with-powershell.md).
 
 ### <a name="cmd"></a>[Cmd](#tab/cmd)
 
@@ -404,7 +406,7 @@ Ekspresi dievaluasi sebelum memanggil fungsi, sehingga argumen itu sendiri dapat
 ### <a name="bash"></a>[Bash](#tab/bash)
 
 ```azurecli-interactive
-az vm list --resource-group QueryDemo --query '[?contains(storageProfile.osDisk.managedDisk.storageAccountType,`SSD`)].{Name:name, Storage:storageProfile.osDisk.managedDisk.storageAccountType}'
+az vm list --resource-group QueryDemo --query "[?contains(storageProfile.osDisk.managedDisk.storageAccountType,'SSD')].{Name:name, Storage:storageProfile.osDisk.managedDisk.storageAccountType}"
 ```
 
 ### <a name="powershell"></a>[PowerShell](#tab/powershell)
@@ -441,7 +443,7 @@ Mirip dengan cara `|` digunakan dalam baris perintah, `|` dapat digunakan dalam 
 ### <a name="bash"></a>[Bash](#tab/bash)
 
 ```azurecli-interactive
-az vm list --resource-group QueryDemo --query '[].{Name:name, Storage:storageProfile.osDisk.managedDisk.storageAccountType} | [? contains(Storage,`SSD`)]'
+az vm list --resource-group QueryDemo --query "[].{Name:name, Storage:storageProfile.osDisk.managedDisk.storageAccountType} | [? contains(Storage,'SSD')]"
 ```
 
 ### <a name="powershell"></a>[PowerShell](#tab/powershell)
@@ -480,7 +482,7 @@ Fungsi JMESPath juga memiliki tujuan lain, yaitu untuk beroperasi pada hasil kue
 ### <a name="bash"></a>[Bash](#tab/bash)
 
 ```azurecli-interactive
-az vm list --resource-group QueryDemo --query 'sort_by([].{Name:name, Size:storageProfile.osDisk.diskSizeGb}, &Size)' --output table
+az vm list --resource-group QueryDemo --query "sort_by([].{Name:name, Size:storageProfile.osDisk.diskSizeGb}, &Size)" --output table
 ```
 
 ### <a name="powershell"></a>[PowerShell](#tab/powershell)
@@ -501,7 +503,7 @@ az vm list --resource-group QueryDemo --query "sort_by([].{Name:name, Size:stora
 Name     Size
 -------  ------
 Test-2   30
-Test-VM  32
+TestVM   32
 WinTest  127
 ```
 
@@ -522,7 +524,7 @@ Satu kasus penggunaan untuk `tsv` pemformatan adalah kueri yang mengambil nilai 
 ### <a name="bash"></a>[Bash](#tab/bash)
 
 ```azurecli-interactive
-USER=$(az vm show --resource-group QueryDemo --name TestVM --query 'osProfile.adminUsername')
+USER=$(az vm show --resource-group QueryDemo --name TestVM --query "osProfile.adminUsername")
 echo $USER
 ```
 
@@ -546,12 +548,12 @@ echo %USER%
 "azureuser"
 ```
 
-Untuk mencegah menyertakan nilai pengembalian dengan informasi jenis, gunakan `tsv`pemformatan seperti yang ditunjukkan dalam kueri berikut:
+Untuk mencegah menyertakan nilai pengembalian dengan informasi jenis, gunakan `tsv` pemformatan seperti yang ditunjukkan dalam kueri berikut:
 
 ### <a name="bash"></a>[Bash](#tab/bash)
 
 ```azurecli-interactive
-USER=$(az vm show --resource-group QueryDemo --name TestVM --query 'osProfile.adminUsername' --output tsv)
+USER=$(az vm show --resource-group QueryDemo --name TestVM --query "osProfile.adminUsername" --output tsv)
 echo $USER
 ```
 
@@ -592,7 +594,7 @@ Kita dapat menggunakan kueri sebelumnya untuk menunjukkan hal ini. Kueri asli me
 ### <a name="bash"></a>[Bash](#tab/bash)
 
 ```azurecli-interactive
-az vm list --resource-group QueryDemo --query '[].{Name:name, OS:storageProfile.osDisk.osType, admin:osProfile.adminUsername}'
+az vm list --resource-group QueryDemo --query "[].{Name:name, OS:storageProfile.osDisk.osType, admin:osProfile.adminUsername}"
 ```
 
 ### <a name="powershell"></a>[PowerShell](#tab/powershell)
@@ -634,7 +636,7 @@ Ketika dikombinasikan dengan `--output table` format output, nama kolom cocok de
 ### <a name="bash"></a>[Bash](#tab/bash)
 
 ```azurecli-interactive
-az vm list --resource-group QueryDemo --query '[].{Name:name, OS:storageProfile.osDisk.osType, Admin:osProfile.adminUsername}' --output table
+az vm list --resource-group QueryDemo --query "[].{Name:name, OS:storageProfile.osDisk.osType, Admin:osProfile.adminUsername}" --output table
 ```
 
 ### <a name="powershell"></a>[PowerShell](#tab/powershell)

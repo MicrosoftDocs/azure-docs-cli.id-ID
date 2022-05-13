@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli, menginstal azure cli, unduhan azure cli, mengunduh azure cli
-ms.openlocfilehash: 53d247196cbc49846b75811507fed5347871e34c
-ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
+ms.openlocfilehash: 8c1f64cd7f0da5ee8d14032f9cabaecaa1267d1b
+ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/22/2022
-ms.locfileid: "144003049"
+ms.lasthandoff: 05/13/2022
+ms.locfileid: "144978065"
 ---
 # <a name="how-to-install-the-azure-cli"></a>Cara menginstal Azure CLI
 
@@ -41,5 +41,6 @@ Azure CLI dapat diinstal di lingkungan Windows, macOS, dan Linux.  Ini juga dapa
 
 ## <a name="see-also"></a>Lihat juga
 
-* [Memperbarui Azure CLI](update-azure-cli.md)
-* [Apa itu Azure CLI?](what-is-azure-cli.md)
+* [Pilih alat baris perintah yang tepat](./choose-the-right-azure-command-line-tool.md)
+* [Memperbarui Azure CLI](./update-azure-cli.md)
+* [Apa itu Azure CLI?](./what-is-azure-cli.md)

@@ -11,12 +11,12 @@ ms.date: 09/21/2021
 ms.author: dbradish
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, azure data share cli
-ms.openlocfilehash: 28ed01b12d297732ecf441f80bb1eecf6469a39a
-ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
+ms.openlocfilehash: c1f5dc47075da75fdbd20cd92ce52ab8892e6137
+ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/22/2022
-ms.locfileid: "144002964"
+ms.lasthandoff: 05/13/2022
+ms.locfileid: "144976681"
 ---
 # <a name="azure-cli-reference-commands-for-azure-data-share"></a>Perintah referensi Azure CLI untuk Azure Data Share
 
@@ -65,5 +65,5 @@ az datashare account create --location westus --tags tag1=Red tag2=White --name 
 ## <a name="see-also"></a>Lihat juga
 
 * [Mulai gunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari penginstalan dan aktivitas masuk.
-
-* Temukan referensi [core](../latest/docs-ref-autogen/reference-index.yml) dan [ekstensi](./azure-cli-extensions-list.md) tambahan dalam dokumentasi Azure CLI.
+* Temukan [perintah referensi](../latest/docs-ref-autogen/reference-index.yml) tambahan dan [ekstensi yang tersedia](./azure-cli-extensions-list.md) dalam dokumentasi Azure CLI.
+* [Pelajari cara menggunakan Bash dengan Azure CLI](./azure-cli-learn-bash.md)

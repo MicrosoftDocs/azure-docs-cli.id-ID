@@ -11,12 +11,12 @@ ms.prod: azure
 ms.technology: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: informasi selengkapnya tentang azure cli dan vm, mesin virtual di azure cli
-ms.openlocfilehash: 01300f8a1b3b564676c2b522200567098651598d
-ms.sourcegitcommit: 62469e9c1ad07f215129ece5db89c530f1a77968
+ms.openlocfilehash: f121a6b04c893d7d80353089c40f559f9417a923
+ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 12/15/2021
-ms.locfileid: "135157753"
+ms.lasthandoff: 05/13/2022
+ms.locfileid: "144976627"
 ---
 # <a name="7---summary"></a>7 - Ringkasan
 
@@ -45,8 +45,9 @@ Jika Anda ingin memberikan umpan balik, saran, atau mengajukan pertanyaan tentan
 
 Untuk informasi selengkapnya tentang fitur CLI yang ditunjukkan dalam tutorial, lihat:
 
-* [Format output untuk perintah Azure CLI](format-output-azure-cli.md)
-* [Cara mengkueri output perintah Azure CLI menggunakan kueri JMESPath](query-azure-cli.md)
+* [Format output untuk perintah Azure CLI](./format-output-azure-cli.md)
+* [Cara mengkueri output perintah Azure CLI](./query-azure-cli.md)
+* [Cara menggunakan variabel dalam perintah Azure CLI](./azure-cli-variables.md)
 
 Untuk informasi selengkapnya tentang jaringan virtual dan mesin virtual, lihat:
 

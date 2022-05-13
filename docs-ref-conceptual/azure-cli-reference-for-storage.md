@@ -11,12 +11,12 @@ ms.service: azure-cli
 ms.reviewer: robb
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, azure storage, azure storage sync, azure import-export
-ms.openlocfilehash: da1dfc80c978e8dbffd1eca37dfeb649fbc0fcc3
-ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+ms.openlocfilehash: 4e6d2faa8c23b4f8fa82da85f79023c3d05f2e31
+ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/06/2022
-ms.locfileid: "141412432"
+ms.lasthandoff: 05/13/2022
+ms.locfileid: "144976933"
 ---
 # <a name="azure-cli-reference-commands-for-azure-storage"></a>Perintah referensi Azure CLI untuk Azure Storage
 
@@ -171,8 +171,6 @@ Beberapa referensi dalam tabel ini adalah bagian dari ekstensi [storage-preview]
 
 ## <a name="see-also"></a>Lihat juga
 
-- [Mulai gunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari penginstalan dan aktivitas masuk.
-
-- Temukan [referensi](../latest/docs-ref-autogen/reference-index.yml) tambahan dan [ekstensi yang tersedia](./azure-cli-extensions-list.md) di dokumentasi Azure CLI.
-
-- Pelajari ekstensi lebih lanjut di [Menggunakan ekstensi dengan Azure CLI](./azure-cli-extensions-overview.md).
+* [Mulai gunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari penginstalan dan aktivitas masuk.
+* Temukan [perintah referensi](../latest/docs-ref-autogen/reference-index.yml) tambahan dan [ekstensi yang tersedia](./azure-cli-extensions-list.md) dalam dokumentasi Azure CLI.
+* [Pelajari cara menggunakan Bash dengan Azure CLI](./azure-cli-learn-bash.md)

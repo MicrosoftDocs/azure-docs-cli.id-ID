@@ -5,12 +5,12 @@ author: dbradish-microsoft
 ms.author: dbradish
 manager: barbkess
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: db0ef72eb067fc6a482f74e2c6cec3213d0d0bef
-ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
+ms.openlocfilehash: 5371a09143a01b5c90b9bdd268b5a19d60ebafe9
+ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/22/2022
-ms.locfileid: "144003462"
+ms.lasthandoff: 05/13/2022
+ms.locfileid: "144977686"
 ---
 Bagian ini berisi contoh kueri JMESPath untuk sumber daya Azure yang berbeda.
 
@@ -23,7 +23,7 @@ Bagian ini memperlihatkan contoh kueri untuk akun penyimpanan.
 ### <a name="bash"></a>[Bash](#tab/bash)
 
 ```azurecli-interactive
-az account show --query '{tenantId:tenantId,subscriptionid:id}'
+az account show --query "{tenantId:tenantId,subscriptionid:id}"
 ```
 
 ### <a name="powershell"></a>[PowerShell](#tab/powershell)
@@ -42,14 +42,14 @@ az account show --query "{tenantId:tenantId,subscriptionid:id}"
 
 ### <a name="query-examples-for-azure-active-directory-service-principals"></a>Contoh kueri untuk perwakilan layanan Azure Active Directory
 
-Bagian ini memperlihatkan contoh kueri untuk AAD perwakilan layanan.
+Bagian ini memperlihatkan contoh kueri untuk perwakilan layanan AAD.
 
 - Kueri berikut mengembalikan perwakilan layanan aplikasi Microsoft Graph pertama yang memiliki izin baca.
 
 ### <a name="bash"></a>[Bash](#tab/bash)
 
 ```azurecli-interactive
-az ad sp list --display-name "Microsoft Graph" --query '[0].appRoles[?value==`User.Read.All` && contains(allowedMemberTypes, `Application`)].id' --output tsv
+az ad sp list --display-name "Microsoft Graph" --query "[0].appRoles[?value=='User.Read.All' && contains(allowedMemberTypes, 'Application')].id" --output tsv
 ```
 
 ### <a name="powershell"></a>[PowerShell](#tab/powershell)
@@ -75,7 +75,7 @@ Bagian ini memperlihatkan contoh kueri untuk akun penyimpanan.
 ### <a name="bash"></a>[Bash](#tab/bash)
 
 ```azurecli-interactive
-az storage account show --resource-group QueryDemo --name mystorageaccount --query 'primaryEndpoints.table'
+az storage account show --resource-group QueryDemo --name mystorageaccount --query "primaryEndpoints.table"
 ```
 
 ### <a name="powershell"></a>[PowerShell](#tab/powershell)
@@ -101,7 +101,7 @@ Bagian ini memperlihatkan contoh kueri untuk Virtual Machines (VM).
 ### <a name="bash"></a>[Bash](#tab/bash)
 
 ```azurecli-interactive
-az vm list --resource-group QueryDemo --query '[?storageProfile.osDisk.diskSizeGb >=`50`].{Name:name,  admin:osProfile.adminUsername, DiskSize:storageProfile.osDisk.diskSizeGb }' --output table
+az vm list --resource-group QueryDemo --query "[?storageProfile.osDisk.diskSizeGb >=\`50\`].{Name:name,  admin:osProfile.adminUsername, DiskSize:storageProfile.osDisk.diskSizeGb }" --output table
 ```
 
 ### <a name="powershell"></a>[PowerShell](#tab/powershell)
@@ -111,7 +111,6 @@ az vm list --resource-group QueryDemo --query "[?storageProfile.osDisk.diskSizeG
 ```
 
 Perhatikan karakter escape tambahan (`` ` ``) di sekitar 50 dalam perintah di atas. Karakter escape tambahan ini ada karena perintah Azure CLI dianggap sebagai skrip Prompt Perintah, sehingga penguraian PowerShell dan Prompt Perintah perlu dipertimbangkan. Azure CLI hanya akan menerima simbol jika masih ada setelah 2 putaran penguraian. Untuk informasi selengkapnya tentang kemungkinan masalah kutipan lainnya, lihat [Mengutip masalah dengan PowerShell](https://github.com/Azure/azure-cli/blob/dev/doc/quoting-issues-with-powershell.md).
-
 
 ### <a name="cmd"></a>[Cmd](#tab/cmd)
 
@@ -126,7 +125,7 @@ az vm list --resource-group QueryDemo --query "[?storageProfile.osDisk.diskSizeG
 ### <a name="bash"></a>[Bash](#tab/bash)
 
 ```azurecli-interactive
-az vm list --resource-group QueryDemo --query '[].{Name:name, Storage:storageProfile.osDisk.managedDisk.storageAccountType} | [? contains(Storage,`SSD`)]'
+az vm list --resource-group QueryDemo --query "[].{Name:name, Storage:storageProfile.osDisk.managedDisk.storageAccountType} | [? contains(Storage,'SSD')]"
 ```
 
 ### <a name="powershell"></a>[PowerShell](#tab/powershell)
@@ -151,7 +150,7 @@ Bagian ini memperlihatkan contoh kueri untuk layanan kognitif.
 ### <a name="bash"></a>[Bash](#tab/bash)
 
 ```azurecli-interactive
-az cognitiveservices account show --resource-group QueryDemo --name DemoAccount --query 'properties.endpoint'
+az cognitiveservices account show --resource-group QueryDemo --name DemoAccount --query "properties.endpoint"
 
 ```
 
@@ -208,7 +207,7 @@ Bagian ini memperlihatkan contoh kueri untuk aplikasi web.
 ### <a name="bash"></a>[Bash](#tab/bash)
 
 ```azurecli-interactive
-az webapp list --resource-group DemoGroup --query '[?state==`Running`]'
+az webapp list --resource-group DemoGroup --query "[?state=='Running']"
 ```
 
 ### <a name="powershell"></a>[PowerShell](#tab/powershell)
@@ -230,7 +229,7 @@ az webapp list --resource-group DemoGroup --query "[?state=='Running']"
 ### <a name="bash"></a>[Bash](#tab/bash)
 
 ```azurecli-interactive
-az webapp deployment list-publishing-profiles --resource-group DemoGroup --name DemoApp --query '[?ends_with(profileName, `FTP`)].{profileName: profileName, publishUrl: publishUrl}'
+az webapp deployment list-publishing-profiles --resource-group DemoGroup --name DemoApp --query "[?ends_with(profileName, 'FTP')].{profileName: profileName, publishUrl: publishUrl}"
 ```
 
 ### <a name="powershell"></a>[PowerShell](#tab/powershell)

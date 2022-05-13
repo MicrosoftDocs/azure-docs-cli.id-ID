@@ -6,12 +6,12 @@ ms.author: dbradish
 ms.prod: non-product-specific
 ms.topic: sample
 ms.date: 04/18/2022
-ms.openlocfilehash: 0247b3c3bd5c79df7eba0c85f243f01e4f7b27c3
-ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
+ms.openlocfilehash: 34ad35d406794b4e6a05a9dc2257e2e26447f7c7
+ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/27/2022
-ms.locfileid: "144038875"
+ms.lasthandoff: 05/13/2022
+ms.locfileid: "144978029"
 ---
 # <a name="learn-to-use-bash-with-the-azure-cli"></a>Pelajari cara menggunakan Bash dengan Azure CLI
 
@@ -262,7 +262,7 @@ accountKey=$(az storage account keys list --resource-group $resourceGroup --acco
 echo $accountKey
 ```
 
-### <a name="create-storage-container"></a>Membuat kontainer penyimpanan
+### <a name="create-storage-container"></a>Buat kontainer penyimpanan
 
 Kita akan mulai dengan menggunakan [az storage container create](/cli/azure/storage/container#az-storage-container-create) untuk membuat satu kontainer penyimpanan lalu menggunakan [az storage container list untuk mengkueri](/cli/azure/storage/container#az-storage-container-list) nama kontainer yang dibuat.
 
@@ -400,7 +400,7 @@ help set
 help help
 ```
 
-## <a name="clean-up-resources"></a>Bersihkan sumber daya
+## <a name="clean-up-resources"></a>Membersihkan sumber daya
 
 Setelah anda selesai artikel ini, hapus grup sumber daya dan semua sumber daya di dalamnya. `--no-wait` Gunakan argumen .
 
@@ -411,3 +411,8 @@ else
    echo The $resourceGroup resource group does not exist
 fi
 ```
+
+## <a name="see-also"></a>Lihat juga
+
+* [Cara menggunakan Azure CLI secara efektif](use-cli-effectively.md)
+* [Cara mengkueri output perintah Azure CLI](query-azure-cli.md)

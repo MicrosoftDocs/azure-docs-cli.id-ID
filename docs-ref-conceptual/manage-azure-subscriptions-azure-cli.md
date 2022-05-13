@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: Langganan Azure, kelola langganan Azure, grup manajemen Azure, langganan set Azure cli, langganan pilih Azure cli
-ms.openlocfilehash: 2c5a3c1a953a2d3772dbb08bcbcc37e9186fb44f
-ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
+ms.openlocfilehash: 9798bb134921203c661c19917c5927ef2418e475
+ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/22/2022
-ms.locfileid: "144002905"
+ms.lasthandoff: 05/13/2022
+ms.locfileid: "144977643"
 ---
 # <a name="how-to-manage-azure-subscriptions-with-the-azure-cli"></a>Cara mengelola langganan Azure dengan Azure CLI
 
@@ -170,4 +170,4 @@ az account lock delete --name "Cannot delete subscription"
 
 * [Kamus terminologi cloud Azure](/azure/azure-glossary-cloud-terminology)
 * [Mengaitkan atau menambahkan langganan Azure ke penyewa Azure Active Directory Anda](/azure/active-directory/active-directory-how-subscriptions-associated-directory)
-* [Masuk dengan Azure CLI](./authenticate-azure-cli.md)
+* [Mengelola grup sumber daya](./manage-azure-groups-azure-cli.md)

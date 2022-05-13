@@ -8,12 +8,12 @@ ms.topic: how-to
 ms.date: 08/01/2021
 ms.custom: template-how-to, devx-track-azurecli, seo-azure-cli
 keywords: variabel azure cli, perintah azure cli, nilai variabel, variabel shell
-ms.openlocfilehash: 36ca640aaa7d8c3a1ecfaca142494628f383a3a4
-ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
+ms.openlocfilehash: 5e8dd15c25ef87cf862747f9d4278c41cacd5bde
+ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/22/2022
-ms.locfileid: "144004109"
+ms.lasthandoff: 05/13/2022
+ms.locfileid: "144976915"
 ---
 # <a name="how-to-use-variables-in-azure-cli-commands"></a>Cara menggunakan variabel dalam perintah Azure CLI
 
@@ -135,8 +135,8 @@ Anda dapat menghapus parameter persisten dengan menjalankan perintah [az config 
 az config param-persist delete --all
 ```
 
-## <a name="next-steps"></a>Langkah berikutnya
+## <a name="see-also"></a>Lihat juga
 
-* [Parameter tetap Azure CLI](param-persist-howto.md)
-* [Bekerja dengan grup sumber daya di Azure CLI](manage-azure-groups-azure-cli.md)
-* [Membuat permintaan dukungan Azure di Azure CLI](azure-cli-support-request.md)
+* [Pelajari cara menggunakan Bash dengan Azure CLI](./azure-cli-learn-bash.md)
+* [Cara menggunakan Azure CLI secara efektif](./use-cli-effectively.md)
+* [Cara mengkueri output perintah Azure CLI](./query-azure-cli.md)

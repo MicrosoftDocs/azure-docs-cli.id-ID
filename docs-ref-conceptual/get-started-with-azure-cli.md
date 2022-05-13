@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli, cara menggunakan azure cli, antarmuka baris perintah azure, cara membuka azure cli, perintah azure cli
-ms.openlocfilehash: af30f80beef8b48148fad0ff0177f49ae36b8c60
-ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
+ms.openlocfilehash: efe3b7a95e6ced53e9a900bbd11c692360f386e6
+ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/22/2022
-ms.locfileid: "144003031"
+ms.lasthandoff: 05/13/2022
+ms.locfileid: "144977813"
 ---
 # <a name="get-started-with-azure-cli"></a>Memulai dengan Azure CLI
 
@@ -127,5 +127,7 @@ az feedback
 
 ## <a name="see-also"></a>Lihat juga
 
-* [Layanan yang dapat dikelola Azure CLI](azure-services-the-azure-cli-can-manage.md)
+* [Pilih alat baris perintah yang tepat](./choose-the-right-azure-command-line-tool.md)
+* [Pelajari cara menggunakan Bash dengan Azure CLI](./azure-cli-learn-bash.md)
+* [Layanan yang dapat dikelola Azure CLI](./azure-services-the-azure-cli-can-manage.md)
 * [Daftar referensi perintah lengkap untuk Azure CLI](../latest/docs-ref-autogen/reference-index.yml)

@@ -11,12 +11,12 @@ ms.service: azure-cli
 ms.reviewer: paymaun.heidari
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, azure iot, azure maps, azure tsi
-ms.openlocfilehash: 73901b20392fcb39ff55fc6a22b8366def0ee1f4
-ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+ms.openlocfilehash: 004c52686626f464b2253bf0010e8904e9ae9a11
+ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/06/2022
-ms.locfileid: "141405681"
+ms.lasthandoff: 05/13/2022
+ms.locfileid: "144977642"
 ---
 # <a name="azure-cli-reference-commands-for-azure-iot"></a>Perintah referensi Azure CLI untuk Azure IoT
 
@@ -88,6 +88,6 @@ az iot hub create --resource-group MyResourceGroup --name MyIotHub --location we
 
 ## <a name="see-also"></a>Lihat juga
 
-- [Mulai gunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari penginstalan dan aktivitas masuk.
-
-- Temukan referensi [core](../latest/docs-ref-autogen/reference-index.yml) dan [ekstensi](./azure-cli-extensions-list.md) tambahan dalam dokumentasi Azure CLI.
+* [Mulai gunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari penginstalan dan aktivitas masuk.
+* Temukan [perintah referensi](../latest/docs-ref-autogen/reference-index.yml) tambahan dan [ekstensi yang tersedia](./azure-cli-extensions-list.md) dalam dokumentasi Azure CLI.
+* [Pelajari cara menggunakan Bash dengan Azure CLI](./azure-cli-learn-bash.md)

@@ -55,6 +55,7 @@ directCommands:
                         [--tags]
                         [--vnet-subnet-id]
                         [--workload-runtime {OCIContainer, WasmWasi}]
+                        [--zones {1, 2, 3}]
   examples:
   - summary: Buat nodepool di kluster AKS yang ada dengan os ephemeral diaktifkan.
     syntax: az aks nodepool add -g MyResourceGroup -n nodepool1 --cluster-name MyManagedCluster --node-osdisk-type Ephemeral --node-osdisk-size 48
@@ -173,12 +174,12 @@ directCommands:
   - name: --node-vm-size -s
     summary: Ukuran Virtual Machines untuk dibuat sebagai simpul Kubernetes.
     description: ''
-  - name: --node-zones --zones -z
+  - name: --node-zones
     parameterValueGroup: 1, 2, 3
-    summary: (tidak akan digunakan lagi, gunakan --zones) Zona ketersediaan tempat simpul agen akan ditempatkan.
+    summary: (--node-zones akan tidak digunakan lagi) Daftar zona ketersediaan yang dipisahkan ruang tempat simpul agen akan ditempatkan.
     description: ''
   - name: --os-sku
-    summary: Os-sku dari kumpulan simpul agen. Ubuntu atau CBLMariner.
+    summary: Os-sku dari kumpulan simpul agen. Ubuntu atau CBLMariner ketika os-type adalah Linux, defaultnya adalah Ubuntu jika tidak diatur; Windows2019 atau Windows2022 ketika jenis os Windows, default saat ini adalah Windows2019 jika tidak diatur, dan default akan diubah ke Windows2022 setelah Windows2019 tidak digunakan lagi.
     description: ''
   - name: --os-type
     summary: Jenis OS. Linux atau Windows.
@@ -216,6 +217,10 @@ directCommands:
     defaultValue: OCIContainer
     parameterValueGroup: OCIContainer, WasmWasi
     summary: Menentukan jenis beban kerja yang dapat dijalankan simpul. Default ke OCIContainer.
+    description: ''
+  - name: --zones -z
+    parameterValueGroup: 1, 2, 3
+    summary: Daftar zona ketersediaan yang dipisahkan ruang tempat simpul agen akan ditempatkan.
     description: ''
 - uid: az_aks_nodepool_delete
   name: az aks nodepool delete
@@ -370,7 +375,7 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --aks-custom-headers
-    summary: Mengirim header kustom. Ketika ditentukan, format harus Key1=Value1,Key2=Value2.
+    summary: Kirim header kustom. Ketika ditentukan, format harus Key1=Value1,Key2=Value2.
     description: ''
   - name: --no-wait
     summary: Jangan menunggu operasi jangka panjang selesai.
@@ -403,7 +408,7 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --aks-custom-headers
-    summary: Mengirim header kustom. Ketika ditentukan, format harus Key1=Value1,Key2=Value2.
+    summary: Kirim header kustom. Ketika ditentukan, format harus Key1=Value1,Key2=Value2.
     description: ''
   - name: --no-wait
     summary: Jangan menunggu operasi jangka panjang selesai.
@@ -411,7 +416,7 @@ directCommands:
 - uid: az_aks_nodepool_update
   name: az aks nodepool update
   summary: Memperbarui properti kumpulan simpul.
-  description: Perbarui kumpulan simpul untuk mengaktifkan/menonaktifkan penskala otomatis kluster atau mengubah jumlah min atau jumlah maks.  Ketika dipanggil tanpa argumen opsional, ini mencoba memindahkan kluster ke status tujuannya tanpa mengubah konfigurasi kluster saat ini. Ini dapat digunakan untuk keluar dari status tidak berhasil.
+  description: Perbarui kumpulan simpul untuk mengaktifkan/menonaktifkan cluster-autoscaler atau mengubah jumlah min atau jumlah maks.  Ketika dipanggil tanpa argumen opsional, ini mencoba memindahkan kluster ke status tujuannya tanpa mengubah konfigurasi kluster saat ini. Ini dapat digunakan untuk keluar dari status tidak berhasil.
   syntax: >-
     az aks nodepool update --cluster-name
                            --name
@@ -429,7 +434,7 @@ directCommands:
                            [--tags]
                            [--update-cluster-autoscaler]
   examples:
-  - summary: Rekonsiliasi kumpulan simpul kembali ke statusnya saat ini.
+  - summary: Rekonsiliasi nodepool kembali ke statusnya saat ini.
     syntax: az aks nodepool update -g MyResourceGroup -n nodepool1 --cluster-name MyManagedCluster
   - summary: Aktifkan penskala otomatis kluster dalam rentang jumlah simpul [1,5]
     syntax: az aks nodepool update --enable-cluster-autoscaler --min-count 1 --max-count 5 -g MyResourceGroup -n nodepool1 --cluster-name MyManagedCluster
@@ -466,14 +471,14 @@ directCommands:
     summary: Jumlah simpul maksimum yang digunakan untuk autoscaler, ketika "--enable-cluster-autoscaler" ditentukan. Tentukan nilai dalam rentang [1, 100].
     description: ''
   - name: --max-surge
-    summary: Simpul tambahan yang digunakan untuk mempercepat peningkatan. Ketika ditentukan, itu menunjukkan angka atau persen yang digunakan, misalnya. 5 atau 33%.
+    summary: Simpul tambahan yang digunakan untuk mempercepat peningkatan. Ketika ditentukan, ini menunjukkan angka atau persentase yang digunakan, misalnya. 5 atau 33%.
     description: ''
   - name: --min-count
     summary: Jumlah simpul minimun yang digunakan untuk autoscaler, ketika "--enable-cluster-autoscaler" ditentukan. Tentukan nilai dalam rentang [1, 100].
     description: ''
   - name: --mode
     parameterValueGroup: System, User
-    summary: Mode untuk kumpulan simpul yang menentukan fungsi utama kumpulan simpul. Jika diatur sebagai "Sistem", AKS lebih memilih pod sistem yang menjadwalkan kumpulan simpul dengan mode `System`. Pelajari lebih lanjut di https://aka.ms/aks/nodepool/mode.
+    summary: Mode untuk kumpulan simpul yang menentukan fungsi utama kumpulan simpul. Jika ditetapkan sebagai "Sistem", AKS lebih memilih pod sistem yang menjadwalkan kumpulan simpul dengan mode `System`. Pelajari lebih lanjut di https://aka.ms/aks/nodepool/mode.
     description: ''
   - name: --no-wait
     summary: Jangan menunggu operasi jangka panjang selesai.
@@ -483,7 +488,7 @@ directCommands:
     description: ''
   - name: --scale-down-mode
     parameterValueGroup: Deallocate, Delete
-    summary: Menjelaskan bagaimana VM ditambahkan atau dihapus dari kumpulan simpul.
+    summary: Menjelaskan bagaimana VM ditambahkan ke atau dihapus dari nodepool.
     description: ''
   - name: --tags
     summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
@@ -520,13 +525,13 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --aks-custom-headers
-    summary: Mengirim header kustom. Ketika ditentukan, format harus Key1=Value1,Key2=Value2.
+    summary: Kirim header kustom. Ketika ditentukan, format harus Key1=Value1,Key2=Value2.
     description: ''
   - name: --kubernetes-version -k
     summary: Versi Kubernetes untuk meningkatkan kumpulan simpul ke, seperti "1.11.12".
     description: ''
   - name: --max-surge
-    summary: Simpul tambahan yang digunakan untuk mempercepat peningkatan. Ketika ditentukan, itu menunjukkan angka atau persen yang digunakan, misalnya. 5 atau 33%.
+    summary: Simpul tambahan yang digunakan untuk mempercepat peningkatan. Ketika ditentukan, ini menunjukkan angka atau persentase yang digunakan, misalnya. 5 atau 33%.
     description: ''
   - name: --no-wait
     summary: Jangan menunggu operasi jangka panjang selesai.
@@ -572,9 +577,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Perintah untuk mengelola kumpulan simpul di kluster Kubernetes terkelola.
-  ms.openlocfilehash: 3ca8d4df3397f7b62e099b705dfd87e06928d47b
-  ms.sourcegitcommit: 458438e54726db3a020b476922b529b514b512d8
+  ms.openlocfilehash: fd288ae9d00d1919d7683c816ad99f76e3e996a8
+  ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 05/11/2022
-  ms.locfileid: "144850037"
+  ms.lasthandoff: 05/13/2022
+  ms.locfileid: "144976645"

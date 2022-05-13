@@ -11,12 +11,12 @@ ms.devlang: azurecli
 ms.reviewer: mohnader
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, jaringan azure
-ms.openlocfilehash: fa0f100250321a7db8ae98a5097e05334cd400bc
-ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+ms.openlocfilehash: bf0754024dee57ae0af1c0582654cada541d2158
+ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/06/2022
-ms.locfileid: "141406978"
+ms.lasthandoff: 05/13/2022
+ms.locfileid: "144977041"
 ---
 # <a name="azure-cli-reference-commands-for-azure-network"></a>Perintah referensi Azure CLI untuk Azure Network
 
@@ -126,8 +126,6 @@ Lihat [az network](../latest/docs-ref-autogen/network.yml) untuk mengetahui daft
 
 ## <a name="see-also"></a>Lihat juga
 
-- [Mulai gunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari penginstalan dan aktivitas masuk.
-
-- Temukan referensi [inti](../latest/docs-ref-autogen/reference-index.yml) dan [ekstensi](./azure-cli-extensions-list.md) lainnya di dokumentasi Azure CLI.
-
-- Kelola mesin virtual Linux atau Windows dengan [az vm](../latest/docs-ref-autogen/vm.yml).
+* Kelola mesin virtual Linux atau Windows dengan [az vm](../latest/docs-ref-autogen/vm.yml).
+* Temukan [perintah referensi](../latest/docs-ref-autogen/reference-index.yml) tambahan dan [ekstensi yang tersedia](./azure-cli-extensions-list.md) dalam dokumentasi Azure CLI.
+* [Pelajari cara menggunakan Bash dengan Azure CLI](./azure-cli-learn-bash.md)

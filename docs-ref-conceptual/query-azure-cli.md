@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: ''
-ms.openlocfilehash: 52fe1f3db96aaabce56f0b5c090d7190765f5bdc
-ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
+ms.openlocfilehash: 7dec54634d14fc0a6b4d0f4ad87c0658d817be9e
+ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/22/2022
-ms.locfileid: "144003461"
+ms.lasthandoff: 05/13/2022
+ms.locfileid: "144977688"
 ---
 # <a name="how-to-query-azure-cli-command-output-using-a-jmespath-query"></a>Cara mengkueri output perintah Azure CLI menggunakan kueri JMESPath
 
@@ -39,5 +39,6 @@ Untuk mempelajari selengkapnya tentang kueri JMESPath, lihat [Tutorial JMESPath]
 
 Untuk mempelajari selengkapnya tentang konsep Azure CLI lain yang disebutkan dalam artikel ini lihat:
 
-- [Format output untuk perintah Azure CLI](./format-output-azure-cli.md)
-- [Cara menggunakan Azure CLI secara efektif](./use-cli-effectively.md)
+* [Format output untuk perintah Azure CLI](./format-output-azure-cli.md)
+* [Cara menggunakan Azure CLI secara efektif](./use-cli-effectively.md)
+* [Pelajari cara menggunakan Bash dengan Azure CLI](./azure-cli-learn-bash.md)

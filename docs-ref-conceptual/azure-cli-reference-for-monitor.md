@@ -11,12 +11,12 @@ ms.service: azure-cli
 ms.reviewer: robb
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure, azure monitor
-ms.openlocfilehash: afe7d33635f9d1bbc3d885ec97bfb8e92e0dc602
-ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
+ms.openlocfilehash: dc8acd67edaed5f007b13fbb72a1c46fb7968cfc
+ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/22/2022
-ms.locfileid: "144003211"
+ms.lasthandoff: 05/13/2022
+ms.locfileid: "144977347"
 ---
 # <a name="azure-cli-reference-commands-for-azure-monitor"></a>Perintah referensi Azure CLI untuk Azure Monitor
 
@@ -78,8 +78,6 @@ az monitor activity-log alert create --name MyAlertName --resource-group MyResou
 
 ## <a name="see-also"></a>Lihat juga
 
-- [Mulai gunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari penginstalan dan aktivitas masuk.
-
-- Temukan referensi [inti](../latest/docs-ref-autogen/reference-index.yml) dan [ekstensi](./azure-cli-extensions-list.md) lainnya di dokumentasi Azure CLI.
-
-- Pelajari referensi ekstensi lebih lanjut di [Menggunakan ekstensi dengan Azure CLI](./azure-cli-extensions-overview.md).
+* [Mulai gunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari penginstalan dan aktivitas masuk.
+* Temukan [perintah referensi](../latest/docs-ref-autogen/reference-index.yml) tambahan dan [ekstensi yang tersedia](./azure-cli-extensions-list.md) dalam dokumentasi Azure CLI.
+* [Pelajari cara menggunakan Bash dengan Azure CLI](./azure-cli-learn-bash.md)

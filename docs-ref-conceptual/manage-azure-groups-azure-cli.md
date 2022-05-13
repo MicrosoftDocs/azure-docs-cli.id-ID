@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: Grup sumber daya Azure, grup sumber daya di Azure
-ms.openlocfilehash: fd599d236f33a133c5506eb89a32bb2062913b00
-ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
+ms.openlocfilehash: 36c8fe927e4dbf31e51ea4313f9672619aefcf93
+ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/22/2022
-ms.locfileid: "144003912"
+ms.lasthandoff: 05/13/2022
+ms.locfileid: "144978263"
 ---
 # <a name="how-to-manage-azure-resource-groups-with-the-azure-cli"></a>Cara mengelola grup sumber daya Azure dengan Azure CLI
 
@@ -167,8 +167,6 @@ az config param-persist delete --all
 
 ## <a name="see-also"></a>Lihat juga
 
-[Konfigurasi CLI Azure](./azure-cli-configuration.md)
-
-[Tutorial: Gunakan parameter tetap untuk menyederhanakan perintah Azure CLI berurutan](./param-persist-tutorial.md)
-
-[Menggunakan beberapa langganan Azure](manage-azure-subscriptions-azure-cli.md)
+* [Konfigurasi CLI Azure](./azure-cli-configuration.md)
+* [Tutorial: Gunakan parameter tetap untuk menyederhanakan perintah Azure CLI berurutan](./param-persist-tutorial.md)
+* [Menggunakan beberapa langganan Azure](./manage-azure-subscriptions-azure-cli.md)

@@ -11,12 +11,12 @@ ms.service: azure-cli
 ms.reviewer: robb
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, azure sql
-ms.openlocfilehash: 4cbaf5ab5c5279c3b9e24c75d8e98bb0633c5b62
-ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+ms.openlocfilehash: 692d3632488a4d052c4261fcb1a34007c3a57829
+ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/06/2022
-ms.locfileid: "141409894"
+ms.lasthandoff: 05/13/2022
+ms.locfileid: "144977555"
 ---
 # <a name="azure-cli-reference-commands-for-azure-sql"></a>Perintah referensi Azure CLI untuk Azure SQL
 
@@ -107,6 +107,6 @@ Perintah Azure CLI untuk [Azure SQL](/azure/azure-sql/) hanya terdiri dari refer
 
 ## <a name="see-also"></a>Lihat juga
 
-- [Mulai gunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari penginstalan dan aktivitas masuk.
-
-- Temukan [referensi](../latest/docs-ref-autogen/reference-index.yml) tambahan dan [ekstensi yang tersedia](./azure-cli-extensions-list.md) di dokumentasi Azure CLI.
+* [Mulai gunakan Azure CLI](./get-started-with-azure-cli.md) untuk mempelajari penginstalan dan aktivitas masuk.
+* Temukan [perintah referensi](../latest/docs-ref-autogen/reference-index.yml) tambahan dan [ekstensi yang tersedia](./azure-cli-extensions-list.md) dalam dokumentasi Azure CLI.
+* [Pelajari cara menggunakan Bash dengan Azure CLI](./azure-cli-learn-bash.md)

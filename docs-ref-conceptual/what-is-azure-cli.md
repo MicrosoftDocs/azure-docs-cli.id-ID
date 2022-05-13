@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: antarmuka baris perintah, azure cli, baris perintah azure, antarmuka baris perintah azure, apa itu cli, contoh azure cli
-ms.openlocfilehash: 6639eb90fa4b5cf2ebfc432ab6cefa4746d23ae3
-ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+ms.openlocfilehash: ca8419a510d5c309bcd26f01bbfdc6c12c425af1
+ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/06/2022
-ms.locfileid: "141411820"
+ms.lasthandoff: 05/13/2022
+ms.locfileid: "144977329"
 ---
 # <a name="what-is-the-azure-cli"></a>Apa itu Azure CLI?
 
@@ -74,7 +74,7 @@ Lihat [Membuat perwakilan layanan Azure dengan Azure CLI](create-an-azure-servic
 
 ## <a name="see-also"></a>Lihat juga
 
-- [Mulai menggunakan Azure CLI](get-started-with-azure-cli.md)
-- [Mengontrol layanan Azure dengan Azure CLI](/learn/modules/control-azure-services-with-cli/)
-- [Daftar referensi perintah lengkap untuk Azure CLI](../latest/docs-ref-autogen/reference-index.yml)
-- [Sumber daya Azure yang dapat dikelola oleh Azure CLI](azure-services-the-azure-cli-can-manage.md)
+* [Mulai menggunakan Azure CLI](./get-started-with-azure-cli.md)
+* [Mengontrol layanan Azure dengan Azure CLI](/learn/modules/control-azure-services-with-cli/)
+* [Sumber daya Azure yang dapat dikelola oleh Azure CLI](./azure-services-the-azure-cli-can-manage.md)
+* [Daftar referensi perintah lengkap untuk Azure CLI](../latest/docs-ref-autogen/reference-index.yml)
