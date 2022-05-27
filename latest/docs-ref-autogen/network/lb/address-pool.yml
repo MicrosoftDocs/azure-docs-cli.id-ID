@@ -6,17 +6,19 @@ description: ''
 directCommands:
 - uid: az_network_lb_address-pool_create
   name: az network lb address-pool create
-  summary: Buat kumpulan alamat.
+  summary: Membuat kumpulan alamat.
   description: ''
   syntax: >-
     az network lb address-pool create --lb-name
                                       --name
                                       --resource-group
+                                      [--admin-state {Down, Drain, None, Up}]
                                       [--backend-address]
                                       [--backend-addresses-config-file]
+                                      [--drain-period]
                                       [--vnet]
   examples:
-  - summary: Buat kumpulan alamat.
+  - summary: Membuat kumpulan alamat.
     syntax: az network lb address-pool create -g MyResourceGroup --lb-name MyLb -n MyAddressPool
   - summary: Buat kumpulan alamat dengan beberapa alamat backend menggunakan argumen kunci-nilai.
     syntax: az network lb address-pool create -g MyResourceGroup --lb-name MyLb -n MyAddressPool --vnet {VnetResourceId} --backend-address name=addr1 ip-address=10.0.0.1 --backend-address name=addr2 ip-address=10.0.0.3
@@ -36,8 +38,12 @@ directCommands:
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
   optionalParameters:
+  - name: --admin-state
+    parameterValueGroup: Down, Drain, None, Up
+    summary: Status administratif yang setelah diatur dapat menimpa pemeriksaan kesehatan sehingga Load Balancer akan selalu meneruskan koneksi baru ke backend, atau menolak koneksi baru dan mengatur ulang koneksi yang ada.
+    description: ''
   - name: --backend-address
-    summary: Informasi alamat backend untuk kumpulan alamat backend. Jika digunakan, --vnet diperlukan atau subnet diperlukan.
+    summary: Informasi alamat backend untuk kumpulan alamat backend. Jika digunakan, diperlukan --vnet atau subnet diperlukan.
     description: >-
       Penggunaan1: --backend-address name=addr1 ip-address=10.0.0.1 --vnet MyVnet Usage2: --backend-address name=addr1 ip-address=10.0.0.1 subnet=/subscriptions/000/resourceGroups/MyRg/providers/Microsoft.Network/virtualNetworks/vnet/subnets/subnet1 Usage3: --backend-address name=addr1 ip-address=10.0.0.1 subnet=subnet1 --vnet MyVnet
 
@@ -56,9 +62,12 @@ directCommands:
       Penggunaan: --backend-addresses-config-file @"{config_file.json}"
 
 
-      Contoh file konfigurasi adalah [ { "name": "address1", "virtualNetwork": "clitestvnet", "ipAddress": "10.0.0.4" }, { "name": "address2", "virtualNetwork": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/virtualNetworks/clitestvnet", "ipAddress": "10.0.0.5" }, { "name": "address3", "subnet": "subnet3", "ipAddress": "10.0.0.6" }, { "name": "address4", "subnet":  "/subscriptions/000/resourceGroups/MyRg/providers/Microsoft.Network/virtualNetworks/vnet/subnets/subnet4", "ipAddress": "10.0.0.7" } ].
+      Contoh file konfigurasi adalah [ { "name": "address1", "virtualNetwork": "clitestvnet", "ipAddress": "10.0.0.4" }, { "name": "address2", "virtualNetwork": "/subscriptions/00000000-0000-0000-0000-0000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/virtualNetworks/clitestvnet", "ipAddress": "10.0.0.5" }, { "name": "address3", "subnet": "subnet3", "ipAddress": "10.0.0.6" }, { "name": "address4", "subnet":  "/subscriptions/000/resourceGroups/MyRg/providers/Microsoft.Network/virtualNetworks/vnet/subnets/subnet4", "ipAddress": "10.0.0.7" } ].
+  - name: --drain-period
+    summary: Jumlah detik Load Balancer menunggu sebelum mengirim RESET ke klien dan alamat backend.
+    description: ''
   - name: --vnet
-    summary: Nama atau Id jaringan virtual yang diterapkan ke semua alamat backend.
+    summary: Nama atau Id jaringan virtual diterapkan ke semua alamat backend.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
 - uid: az_network_lb_address-pool_delete
@@ -140,8 +149,10 @@ directCommands:
                                       --name
                                       --resource-group
                                       [--add]
+                                      [--admin-state {Down, Drain, None, Up}]
                                       [--backend-address]
                                       [--backend-addresses-config-file]
+                                      [--drain-period]
                                       [--force-string]
                                       [--remove]
                                       [--set]
@@ -166,8 +177,12 @@ directCommands:
   - name: --add
     summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
     description: ''
+  - name: --admin-state
+    parameterValueGroup: Down, Drain, None, Up
+    summary: Status administratif yang setelah diatur dapat menimpa pemeriksaan kesehatan sehingga Load Balancer akan selalu meneruskan koneksi baru ke backend, atau menolak koneksi baru dan mengatur ulang koneksi yang ada.
+    description: ''
   - name: --backend-address
-    summary: Informasi alamat backend untuk kumpulan alamat backend. Jika digunakan, --vnet diperlukan atau subnet diperlukan.
+    summary: Informasi alamat backend untuk kumpulan alamat backend. Jika digunakan, diperlukan --vnet atau subnet diperlukan.
     description: >-
       Penggunaan1: --backend-address name=addr1 ip-address=10.0.0.1 --vnet MyVnet Usage2: --backend-address name=addr1 ip-address=10.0.0.1 subnet=/subscriptions/000/resourceGroups/MyRg/providers/Microsoft.Network/virtualNetworks/vnet/subnets/subnet1 Usage3: --backend-address name=addr1 ip-address=10.0.0.1 subnet=subnet1 --vnet MyVnet
 
@@ -186,18 +201,21 @@ directCommands:
       Penggunaan: --backend-addresses-config-file @"{config_file.json}"
 
 
-      Contoh file konfigurasi adalah [ { "name": "address1", "virtualNetwork": "clitestvnet", "ipAddress": "10.0.0.4" }, { "name": "address2", "virtualNetwork": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/virtualNetworks/clitestvnet", "ipAddress": "10.0.0.5" }, { "name": "address3", "subnet": "subnet3", "ipAddress": "10.0.0.6" }, { "name": "address4", "subnet":  "/subscriptions/000/resourceGroups/MyRg/providers/Microsoft.Network/virtualNetworks/vnet/subnets/subnet4", "ipAddress": "10.0.0.7" } ].
+      Contoh file konfigurasi adalah [ { "name": "address1", "virtualNetwork": "clitestvnet", "ipAddress": "10.0.0.4" }, { "name": "address2", "virtualNetwork": "/subscriptions/00000000-0000-0000-0000-0000000000000/resourceGroups/cli_test_lb_address_pool_addresses000001/providers/Microsoft.Network/virtualNetworks/clitestvnet", "ipAddress": "10.0.0.5" }, { "name": "address3", "subnet": "subnet3", "ipAddress": "10.0.0.6" }, { "name": "address4", "subnet":  "/subscriptions/000/resourceGroups/MyRg/providers/Microsoft.Network/virtualNetworks/vnet/subnets/subnet4", "ipAddress": "10.0.0.7" } ].
+  - name: --drain-period
+    summary: Jumlah detik Load Balancer menunggu sebelum mengirim RESET ke klien dan alamat backend.
+    description: ''
   - name: --force-string
     summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
     description: ''
   - name: --remove
-    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
     description: ''
   - name: --set
     summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
     description: ''
   - name: --vnet
-    summary: Nama atau Id jaringan virtual yang diterapkan ke semua alamat backend.
+    summary: Nama atau Id jaringan virtual diterapkan ke semua alamat backend.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
 commands:
@@ -234,11 +252,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 04/06/2022
+  ms.date: 05/19/2022
   description: Mengelola kumpulan alamat load balancer.
-  ms.openlocfilehash: 6966fd0ae07db41002e04121a0ef55daae2c0229
-  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
+  ms.openlocfilehash: 9ea89a40d1ae3f0ba385edbe3cd02dd57f5d8f70
+  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/27/2022
-  ms.locfileid: "144043727"
+  ms.lasthandoff: 05/24/2022
+  ms.locfileid: "145218695"

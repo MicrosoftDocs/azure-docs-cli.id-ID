@@ -7,7 +7,7 @@ directCommands:
 - uid: az_storage_blob_delete
   name: az storage blob delete
   summary: Tandai blob atau rekam jepret untuk dihapus.
-  description: Blob ditandai untuk penghapusan nanti selama pengumpulan sampah.  Untuk menghapus blob, semua rekam jepretnya juga harus dihapus. Keduanya dapat dihapus secara bersamaan.
+  description: Blob ditandai untuk dihapus nanti selama pengumpulan sampah.  Untuk menghapus blob, semua rekam jepretnya juga harus dihapus. Keduanya dapat dihapus secara bersamaan.
   syntax: >-
     az storage blob delete --container-name
                            --name
@@ -83,7 +83,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_delete-batch
   name: az storage blob delete-batch
-  summary: Hapus blob dari kontainer blob secara rekursif.
+  summary: Menghapus blob dari kontainer blob secara rekursif.
   description: ''
   syntax: >-
     az storage blob delete-batch --source
@@ -102,7 +102,7 @@ directCommands:
                                  [--sas-token]
                                  [--timeout]
   examples:
-  - summary: Hapus semua blob yang berakhiran ".py" dalam kontainer yang belum dimodifikasi selama 10 hari.
+  - summary: Hapus semua blob yang diakhir dengan ".py" dalam kontainer yang belum dimodifikasi selama 10 hari.
     syntax: >-
       date=`date -d "10 days ago" '+%Y-%m-%dT%H:%MZ'`
 
@@ -155,7 +155,7 @@ directCommands:
     summary: Id sewa aktif untuk blob.
     description: ''
   - name: --pattern
-    summary: Pola yang digunakan untuk mengglobbing file atau blob di sumbernya. Pola yang didukung adalah '\*', '?', '[seq]', dan '[!seq]'. Untuk informasi lebih lanjut, silakan merujuk ke https://docs.python.org/3.7/library/fnmatch.html.
+    summary: Pola yang digunakan untuk globbing file atau blob di sumbernya. Pola yang didukung adalah '\*', '?', '[seq]', dan '[!seq]'. Untuk informasi lebih lanjut, silakan merujuk ke https://docs.python.org/3.7/library/fnmatch.html.
     description: Ketika Anda menggunakan '*' dalam --pattern, itu akan cocok dengan karakter apa pun termasuk pemisah direktori '/'. Anda juga dapat mencoba perintah "az storage remove" dengan --include dan --exclude dengan azure cli >= 2.0.70 agar sesuai dengan beberapa pola.
   - name: --sas-token
     summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
@@ -194,6 +194,8 @@ directCommands:
   examples:
   - summary: Unduh blob.
     syntax: az storage blob download -f /path/to/file -c mycontainer -n MyBlob
+  - summary: Unduh konten blob ke stdout (dukungan pipa).
+    syntax: az storage blob download -c mycontainer -n myblob --account-name mystorageaccount --account-key myaccountkey
   requiredParameters:
   - isRequired: true
     name: --container-name -c
@@ -761,7 +763,7 @@ directCommands:
     summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   - name: --timeout
-    summary: Parameter batas waktu dinyatakan dalam detik. Metode ini dapat melakukan beberapa panggilan ke layanan Azure dan batas waktu akan berlaku untuk setiap panggilan satu per satu.
+    summary: Parameter batas waktu dinyatakan dalam hitung detik. Metode ini dapat melakukan beberapa panggilan ke layanan Azure dan batas waktu akan berlaku untuk setiap panggilan satu per satu.
     description: ''
   - name: --type -t
     defaultValue: block
@@ -975,8 +977,8 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_undelete
   name: az storage blob undelete
-  summary: Operasi Batal hapus Blob memulihkan konten dan metadata blob atau rekam jepret yang dihapus sementara.
-  description: Mencoba membatalkan penghapusan blob atau rekam jepret yang tidak dihapus sementara akan berhasil tanpa perubahan apa pun.
+  summary: Pulihkan blob atau rekam jepret yang dihapus sementara.
+  description: Operasi hanya akan berhasil jika digunakan dalam jumlah hari yang ditentukan yang ditetapkan dalam kebijakan penyimpanan penghapusan. Mencoba membatalkan penghapusan blob atau rekam jepret yang tidak dihapus sementara akan berhasil tanpa perubahan apa pun.
   syntax: >-
     az storage blob undelete --container-name
                              --name
@@ -986,6 +988,11 @@ directCommands:
                              [--connection-string]
                              [--sas-token]
                              [--timeout]
+  examples:
+  - summary: Membatalkan penghapusan blob.
+    syntax: az storage blob undelete -c mycontainer -n MyBlob
+  - summary: Membatalkan penghapusan blob menggunakan kredensial masuk.
+    syntax: az storage blob undelete -c mycontainer -n MyBlob --account-name mystorageaccount --auth-mode login
   requiredParameters:
   - isRequired: true
     name: --container-name -c
@@ -1018,7 +1025,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_update
   name: az storage blob update
-  summary: Mengatur properti sistem pada blob.
+  summary: Mengatur properti sistem di blob.
   description: Jika satu properti diatur untuk content_settings, semua properti akan ditimpa.
   syntax: >-
     az storage blob update --container-name
@@ -1529,11 +1536,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 04/13/2022
+  ms.date: 05/19/2022
   description: 'Tentukan salah satu parameter autentikasi berikut untuk perintah Anda: --auth-mode, --account-key, --connection-string, --sas-token. Anda juga dapat menggunakan variabel lingkungan yang sesuai untuk menyimpan kredensial autentikasi Anda, misalnya AZURE_STORAGE_KEY, AZURE_STORAGE_CONNECTION_STRING, dan AZURE_STORAGE_SAS_TOKEN.'
-  ms.openlocfilehash: 9044d37b2cac4851c8037f1cddd81b8c9c5a5711
-  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
+  ms.openlocfilehash: f9de349a31214d0ba11c8865d9e646b59983c944
+  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/27/2022
-  ms.locfileid: "144038317"
+  ms.lasthandoff: 05/24/2022
+  ms.locfileid: "145208489"
