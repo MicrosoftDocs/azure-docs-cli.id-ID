@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: microsoft graph, ms graph, active directory graph, ad graph
-ms.openlocfilehash: 87a4bd1699474338aaf8927b36fb506d9e8949db
-ms.sourcegitcommit: bd63e04a53877fcd43d09e2de1229d90a99e645e
+ms.openlocfilehash: 0c4154dc74b28831ef1977c877cc9009998dc176
+ms.sourcegitcommit: 52656c1c4e806d686ba3e799fd1d471944083360
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/08/2022
-ms.locfileid: "141536405"
+ms.lasthandoff: 05/17/2022
+ms.locfileid: "145064637"
 ---
 # <a name="microsoft-graph-migration"></a>Microsoft Graph migrasi
 
@@ -24,6 +24,8 @@ Karena [penghentian Graph Azure Active Directory (Azure AD),](/graph/migrate-azu
 ## <a name="breaking-changes"></a>Perubahan mencolok
 
 Untuk perbedaan PERUBAHAN pemecahan JSON API dan output yang [mendasar, lihat Perbedaan properti antara Azure AD Graph dan Microsoft Graph](/graph/migrate-azure-ad-graph-property-differences).
+
+Misalnya, perubahan yang paling luar biasa adalah bahwa `objectId` properti dalam output JSON dari objek Graph digantikan oleh `id`.
 
 Argumen perintah dan perubahan pemecahan perilaku tercantum di bawah ini.
 
@@ -41,6 +43,7 @@ Argumen perintah dan perubahan pemecahan perilaku tercantum di bawah ini.
 ### `az ad app permission grant`
 
 - Hapus `--expires`
+- `--scope` tidak lagi default ke `user_impersonation` dan sekarang diperlukan
 
 ### `az ad app credential reset`
 
@@ -58,7 +61,16 @@ Argumen perintah dan perubahan pemecahan perilaku tercantum di bawah ini.
 
 ### `az ad sp credential reset`
 
+- Ganti `--name`dengan `--id`
 - Hapus `--password`. Tanpa menentukan argumen sertifikat, layanan Graph membuat kata sandi untuk Anda (https://github.com/Azure/azure-cli/issues/20675)
+
+### `az ad user create`
+
+- Ganti `--force-change-password-next-login`dengan `--force-change-password-next-sign-in`
+
+### `az ad user update`
+
+- Ganti `--force-change-password-next-login`dengan `--force-change-password-next-sign-in`
 
 ### `az ad group get-member-groups`
 
