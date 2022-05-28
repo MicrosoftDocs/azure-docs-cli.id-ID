@@ -124,13 +124,13 @@ directCommands:
     summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan nilai ETag untuk header kondisional ini untuk menyalin blob hanya jika nilai ETag yang ditentukan cocok dengan nilai ETag untuk blob tujuan yang ada. Jika ETag untuk blob tujuan tidak cocok dengan ETag yang ditentukan untuk If-Match, layanan Blob mengembalikan kode status 412 (Prasyarat Gagal).
     description: ''
   - name: --destination-if-modified-since
-    summary: Nilai TanggalWaktu. Azure mengharapkan nilai tanggal yang diteruskan menjadi UTC. Jika zona waktu disertakan, tanggalwaktu non-UTC apa pun akan dikonversi ke UTC. Jika tanggal diteruskan tanpa info zona waktu, diasumsikan sebagai UTC. Tentukan header kondisional ini untuk menyalin blob hanya jika blob tujuan telah dimodifikasi sejak tanggal/waktu yang ditentukan. Jika blob tujuan belum dimodifikasi, layanan Blob mengembalikan kode status 412 (Prasyarat Gagal).
+    summary: Nilai TanggalWaktu. Azure mengharapkan nilai tanggal yang diteruskan menjadi UTC. Jika zona waktu disertakan, tanggalwaktu non-UTC apa pun akan dikonversi ke UTC. Jika tanggal diteruskan tanpa info zona waktu, diasumsikan sebagai UTC. Tentukan header kondisional ini untuk menyalin blob hanya jika blob tujuan telah dimodifikasi sejak tanggal/waktu yang ditentukan. Jika blob tujuan belum dimodifikasi, blob service mengembalikan kode status 412 (Prasyarat Gagal).
     description: ''
   - name: --destination-if-none-match
-    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan nilai ETag untuk header kondisional ini untuk menyalin blob hanya jika nilai ETag yang ditentukan tidak cocok dengan nilai ETag untuk blob tujuan. Tentukan karakter kartubebas (\*) untuk melakukan operasi hanya jika blob tujuan tidak ada. Jika kondisi yang ditentukan tidak terpenuhi, layanan Blob mengembalikan kode status 412 (Prasyarat Gagal).
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan nilai ETag untuk header kondisional ini untuk menyalin blob hanya jika nilai ETag yang ditentukan tidak cocok dengan nilai ETag untuk blob tujuan. Tentukan karakter kartubebas (\*) untuk melakukan operasi hanya jika blob tujuan tidak ada. Jika kondisi yang ditentukan tidak terpenuhi, blob service mengembalikan kode status 412 (Prasyarat Gagal).
     description: ''
   - name: --destination-if-unmodified-since
-    summary: Nilai TanggalWaktu. Azure mengharapkan nilai tanggal yang diteruskan menjadi UTC. Jika zona waktu disertakan, tanggalwaktu non-UTC apa pun akan dikonversi ke UTC. Jika tanggal diteruskan tanpa info zona waktu, diasumsikan sebagai UTC. Tentukan header kondisional ini untuk menyalin blob hanya jika blob tujuan belum dimodifikasi sejak tanggal/waktu yang ditentukan. Jika blob tujuan telah dimodifikasi, layanan Blob mengembalikan kode status 412 (Prasyarat Gagal).
+    summary: Nilai TanggalWaktu. Azure mengharapkan nilai tanggal yang diteruskan menjadi UTC. Jika zona waktu disertakan, tanggalwaktu non-UTC apa pun akan dikonversi ke UTC. Jika tanggal diteruskan tanpa info zona waktu, diasumsikan sebagai UTC. Tentukan header kondisional ini untuk menyalin blob hanya jika blob tujuan belum dimodifikasi sejak tanggal/waktu yang ditentukan. Jika blob tujuan telah dimodifikasi, blob service mengembalikan kode status 412 (Prasyarat Gagal).
     description: ''
   - name: --destination-lease-id
     summary: ID sewa yang ditentukan untuk header ini harus cocok dengan ID sewa blob tujuan. Jika permintaan tidak menyertakan ID sewa atau tidak valid, operasi gagal dengan kode status 412 (Prasyarat Gagal).
@@ -140,7 +140,7 @@ directCommands:
     description: ''
   - name: --requires-sync
     parameterValueGroup: false, true
-    summary: Terapkan bahwa layanan tidak akan mengembalikan respons sampai salinan selesai. Bukan dukungan untuk blob halaman standar.
+    summary: Terapkan bahwa layanan tidak akan mengembalikan respons hingga salinan selesai. Tidak mendukung untuk blob halaman standar.
     description: ''
   - name: --sas-token
     summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
@@ -164,7 +164,7 @@ directCommands:
     summary: Nilai TanggalWaktu. Azure mengharapkan nilai tanggal yang diteruskan menjadi UTC. Jika zona waktu disertakan, tanggalwaktu non-UTC apa pun akan dikonversi ke UTC. Jika tanggal diteruskan tanpa info zona waktu, diasumsikan sebagai UTC. Tentukan header kondisional ini untuk menyalin blob hanya jika blob sumber telah dimodifikasi sejak tanggal/waktu yang ditentukan.
     description: ''
   - name: --source-if-none-match
-    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header kondisional ini untuk menyalin blob hanya jika ETag-nya tidak cocok dengan nilai yang ditentukan. Jika nilainya identik, layanan Blob mengembalikan kode status 412 (Prasyarat Gagal). Header ini tidak dapat ditentukan jika sumbernya adalah File Azure.
+    summary: Nilai ETag, atau karakter kartubebas (\*). Tentukan header kondisional ini untuk menyalin blob hanya jika ETag-nya tidak cocok dengan nilai yang ditentukan. Jika nilainya identik, blob service mengembalikan kode status 412 (Prasyarat Gagal). Header ini tidak dapat ditentukan jika sumbernya adalah File Azure.
     description: ''
   - name: --source-if-unmodified-since
     summary: Nilai TanggalWaktu. Azure mengharapkan nilai tanggal yang diteruskan menjadi UTC. Jika zona waktu disertakan, tanggalwaktu non-UTC apa pun akan dikonversi ke UTC. Jika tanggal diteruskan tanpa info zona waktu, diasumsikan sebagai UTC. Tentukan header kondisional ini untuk menyalin blob hanya jika blob sumber belum dimodifikasi sejak tanggal/waktu yang ditentukan.
@@ -285,11 +285,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 04/13/2022
+  ms.date: 05/19/2022
   description: Mengelola operasi salinan blob. Gunakan `az storage blob show` untuk memeriksa status blob.
-  ms.openlocfilehash: a1b4829485ff69d72d627f4391be56b091e38156
-  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
+  ms.openlocfilehash: d578b8b28d53d82ae5b661126b43732f712e377c
+  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/27/2022
-  ms.locfileid: "144072508"
+  ms.lasthandoff: 05/24/2022
+  ms.locfileid: "145207031"

@@ -37,7 +37,7 @@ directCommands:
       az network vnet-gateway create -g MyResourceGroup -n MyVnetGateway --public-ip-address MyGatewayIp \
           --vnet MyVnet --gateway-type Vpn --sku VpnGw1 --vpn-type RouteBased --address-prefixes 40.1.0.0/24 \
           --client-protocol IkeV2 SSTP --radius-secret 111_aaa --radius-server 30.1.1.15 --vpn-gateway-generation Generation1
-  - summary: Membuat gateway jaringan virtual dasar dengan multi autentikasi
+  - summary: Membuat gateway jaringan virtual dasar dengan multi-autentikasi
     syntax: az network vnet-gateway create -g MyResourceGroup -n MyVnetGateway --public-ip-address MyGatewayIp --vnet MyVnet --gateway-type Vpn --sku VpnGw1 --vpn-type RouteBased --address-prefixes 40.1.0.0/24 --client-protocol OpenVPN --radius-secret 111_aaa --radius-server 30.1.1.15 --aad-issuer https://sts.windows.net/00000-000000-00000-0000-000/ --aad-tenant https://login.microsoftonline.com/000 --aad-audience 0000-000 --root-cert-name root-cert --root-cert-data "root-cert.cer" --vpn-auth-type AAD Certificate Radius
   - summary: Buat gateway jaringan virtual. (dibuat otomatis)
     syntax: az network vnet-gateway create --gateway-type Vpn --location westus2 --name MyVnetGateway --no-wait --public-ip-addresses myVGPublicIPAddress --resource-group MyResourceGroup --sku Basic --vnet MyVnet --vpn-type PolicyBased
@@ -48,7 +48,7 @@ directCommands:
     description: ''
   - isRequired: true
     name: --public-ip-addresses
-    summary: Tentukan SATU IP publik (nama atau ID) untuk gateway aktif-siaga. Tentukan dua IP publik yang dipisahkan spasi untuk gateway aktif-aktif.
+    summary: Tentukan SATU IP publik (nama atau ID) untuk gateway siaga aktif. Tentukan dua IP publik yang dipisahkan spasi untuk gateway aktif-aktif.
     description: ''
   - isRequired: true
     name: --resource-group -g
@@ -56,11 +56,11 @@ directCommands:
     description: ''
   - isRequired: true
     name: --vnet
-    summary: Nama atau ID jaringan virtual yang sudah ada yang memiliki subnet bernama 'GatewaySubnet'.
+    summary: Nama atau ID jaringan virtual yang ada yang memiliki subnet bernama 'GatewaySubnet'.
     description: ''
   optionalParameters:
   - name: --address-prefixes
-    summary: Daftar awalan CIDR yang dipisahkan spasi mewakili ruang alamat untuk P2S Vpnclient.
+    summary: Daftar awalan CIDR yang dipisahkan spasi yang mewakili ruang alamat untuk P2S Vpnclient.
     description: ''
   - name: --asn
     summary: Nomor Sistem Otonom yang digunakan untuk pengaturan BGP.
@@ -113,7 +113,7 @@ directCommands:
   name: az network vnet-gateway delete
   summary: Menghapus gateway jaringan virtual.
   description: >-
-    Untuk menghapus Virtual Network Gateway, Anda harus terlebih dahulu menghapus SEMUA objek Koneksi di Azure yang tersambung ke Gateway. Setelah menghapus Gateway, lanjutkan untuk menghapus sumber daya lain sekarang tidak digunakan.
+    Untuk menghapus gateway Virtual Network, Anda harus terlebih dahulu menghapus SEMUA objek Koneksi di Azure yang tersambung ke Gateway. Setelah menghapus Gateway, lanjutkan untuk menghapus sumber daya lain sekarang tidak digunakan.
 
     Untuk informasi selengkapnya, ikuti urutan instruksi di halaman ini: https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-delete-vnet-gateway-portal.
   syntax: >-
@@ -200,7 +200,7 @@ directCommands:
     summary: Nama gateway VNet.
     description: ''
   - name: --peer
-    summary: Alamat IP peer untuk mengambil status.
+    summary: Alamat IP serekan untuk mengambil status. Nilai defaultnya adalah Tidak Ada.
     description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
@@ -244,7 +244,7 @@ directCommands:
     syntax: az network vnet-gateway reset -g MyResourceGroup -n MyVnetGateway --gateway-vip MyGatewayIP
   optionalParameters:
   - name: --gateway-vip
-    summary: Alamat vip gateway jaringan virtual yang disediakan untuk memulai reset gateway yang diaktifkan fitur aktif-aktif.
+    summary: Alamat vip gateway jaringan virtual yang disediakan untuk memulai reset gateway yang diaktifkan fitur aktif-aktif. Nilai defaultnya adalah Tidak Ada.
     description: ''
   - name: --ids
     summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
@@ -511,11 +511,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 04/06/2022
+  ms.date: 05/19/2022
   description: Untuk mempelajari selengkapnya tentang Azure Virtual Network Gateway, kunjungi https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-howto-site-to-site-resource-manager-cli.
-  ms.openlocfilehash: 8b712cf883a8a1eda036d1dca7445d875dd6f3ae
-  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
+  ms.openlocfilehash: 26aec1b6548a75622a6a17e3e93d8ae17c9f4986
+  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/27/2022
-  ms.locfileid: "144052439"
+  ms.lasthandoff: 05/24/2022
+  ms.locfileid: "145209749"

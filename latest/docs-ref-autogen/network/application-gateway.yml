@@ -20,7 +20,7 @@ directCommands:
                                           [--frontend-port]
                                           [--http-settings-cookie-based-affinity {Disabled, Enabled}]
                                           [--http-settings-port]
-                                          [--http-settings-protocol {Http, Https}]
+                                          [--http-settings-protocol {Http, Https, Tcp, Tls}]
                                           [--http2 {Disabled, Enabled}]
                                           [--identity]
                                           [--key-vault-secret-id]
@@ -28,6 +28,7 @@ directCommands:
                                           [--max-capacity]
                                           [--min-capacity]
                                           [--no-wait]
+                                          [--priority]
                                           [--private-ip-address]
                                           [--private-link-ip-address]
                                           [--private-link-primary {false, true}]
@@ -101,7 +102,7 @@ directCommands:
     description: ''
   - name: --http-settings-protocol
     defaultValue: Http
-    parameterValueGroup: Http, Https
+    parameterValueGroup: Http, Https, Tcp, Tls
     summary: Protokol pengaturan HTTP.
     description: ''
   - name: --http2
@@ -125,6 +126,9 @@ directCommands:
     description: ''
   - name: --no-wait
     summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --priority
+    summary: Prioritas aturan perutean permintaan. Tingkat SKU yang didukung Standard_v2, WAF_v2.
     description: ''
   - name: --private-ip-address
     summary: Alamat IP privat statis untuk digunakan.
@@ -309,7 +313,7 @@ directCommands:
                                                        [--match-status-codes]
                                                        [--name]
                                                        [--path]
-                                                       [--protocol {Http, Https}]
+                                                       [--protocol {Http, Https, Tcp, Tls}]
                                                        [--resource-group]
                                                        [--timeout]
   examples:
@@ -338,7 +342,7 @@ directCommands:
     summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
     description: ''
   - name: --match-body
-    summary: Tubuh yang harus terkandung dalam respons kesehatan.
+    summary: Isi yang harus terkandung dalam respons kesehatan.
     description: ''
   - name: --match-status-codes
     summary: Daftar yang dipisahkan ruang dari rentang kode status sehat yang diizinkan untuk respons kesehatan.
@@ -350,14 +354,14 @@ directCommands:
     summary: Jalur relatif probe. Jalur yang valid dimulai dari "/".
     description: ''
   - name: --protocol
-    parameterValueGroup: Http, Https
+    parameterValueGroup: Http, Https, Tcp, Tls
     summary: Protokol pengaturan HTTP.
     description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
   - name: --timeout
-    summary: Waktu pemeriksaan habis dalam hitung detik.
+    summary: Batas waktu pemeriksaan dalam hitung detik.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
 - uid: az_network_application-gateway_start
@@ -451,7 +455,7 @@ directCommands:
     summary: Batas atas pada jumlah instans gateway aplikasi.
     description: ''
   - name: --min-capacity
-    summary: Terikat lebih rendah pada jumlah instans gateway aplikasi.
+    summary: Batas bawah pada jumlah instans gateway aplikasi.
     description: ''
   - name: --name -n
     summary: Nama gateway aplikasi.
@@ -460,7 +464,7 @@ directCommands:
     summary: Jangan menunggu operasi jangka panjang selesai.
     description: ''
   - name: --remove
-    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
     description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
@@ -578,6 +582,12 @@ commands:
 - az_network_application-gateway_identity_remove
 - az_network_application-gateway_identity_show
 - az_network_application-gateway_list
+- az_network_application-gateway_listener
+- az_network_application-gateway_listener_create
+- az_network_application-gateway_listener_delete
+- az_network_application-gateway_listener_list
+- az_network_application-gateway_listener_show
+- az_network_application-gateway_listener_update
 - az_network_application-gateway_private-link
 - az_network_application-gateway_private-link_add
 - az_network_application-gateway_private-link_ip-config
@@ -629,12 +639,24 @@ commands:
 - az_network_application-gateway_root-cert_list
 - az_network_application-gateway_root-cert_show
 - az_network_application-gateway_root-cert_update
+- az_network_application-gateway_routing-rule
+- az_network_application-gateway_routing-rule_create
+- az_network_application-gateway_routing-rule_delete
+- az_network_application-gateway_routing-rule_list
+- az_network_application-gateway_routing-rule_show
+- az_network_application-gateway_routing-rule_update
 - az_network_application-gateway_rule
 - az_network_application-gateway_rule_create
 - az_network_application-gateway_rule_delete
 - az_network_application-gateway_rule_list
 - az_network_application-gateway_rule_show
 - az_network_application-gateway_rule_update
+- az_network_application-gateway_settings
+- az_network_application-gateway_settings_create
+- az_network_application-gateway_settings_delete
+- az_network_application-gateway_settings_list
+- az_network_application-gateway_settings_show
+- az_network_application-gateway_settings_update
 - az_network_application-gateway_show
 - az_network_application-gateway_show-backend-health
 - az_network_application-gateway_ssl-cert
@@ -726,11 +748,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 04/06/2022
+  ms.date: 05/19/2022
   description: Untuk mempelajari selengkapnya tentang Application Gateway, kunjungi https://docs.microsoft.com/azure/application-gateway/application-gateway-create-gateway-cli.
-  ms.openlocfilehash: 131bf29b9e70b7a4ae98eb9948b6a071cea09a02
-  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
+  ms.openlocfilehash: a84c6e3c4ad3298325a15a3723ac7eb433d891af
+  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/27/2022
-  ms.locfileid: "144076991"
+  ms.lasthandoff: 05/24/2022
+  ms.locfileid: "145229225"
