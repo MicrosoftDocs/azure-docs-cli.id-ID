@@ -1,0 +1,459 @@
+### YamlMime:AzureCLIGroup
+uid: az_spring
+name: az spring
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **spring** untuk Azure CLI (versi 2.30.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **az spring** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Perintah untuk mengelola Azure Spring Apps.
+description: ''
+directCommands:
+- uid: az_spring_create
+  name: az spring create
+  summary: Membuat Azure Spring Apps.
+  description: ''
+  syntax: >-
+    az spring create --name
+                     --resource-group
+                     [--ap-instance]
+                     [--app-insights]
+                     [--app-insights-key]
+                     [--app-network-resource-group]
+                     [--app-subnet]
+                     [--build-pool-size {S1, S2, S3, S4, S5}]
+                     [--disable-app-insights {false, true}]
+                     [--enable-acs]
+                     [--enable-api-portal]
+                     [--enable-gateway]
+                     [--enable-java-agent {false, true}]
+                     [--enable-service-registry]
+                     [--gateway-instance-count]
+                     [--location]
+                     [--no-wait]
+                     [--reserved-cidr-range]
+                     [--sampling-rate]
+                     [--service-runtime-network-resource-group]
+                     [--service-runtime-subnet]
+                     [--sku {Basic, Enterprise, Standard}]
+                     [--tags]
+                     [--vnet]
+                     [--zone-redundant {false, true}]
+  examples:
+  - summary: Buat Azure Spring Apps baru di westus.
+    syntax: az spring create -n MyService -g MyResourceGroup -l westus
+  - summary: Buat Azure Spring Apps baru di westus dengan Insights Aplikasi yang ada dengan menggunakan string Koneksi (disarankan) atau kunci Instrumentasi.
+    syntax: az spring create -n MyService -g MyResourceGroup -l westus --app-insights-key "MyConnectionString"
+  - summary: Buat Azure Spring Apps baru di westus dengan Insights Aplikasi yang sudah ada.
+    syntax: az spring create -n MyService -g MyResourceGroup -l westus --app-insights appInsightsName
+  - summary: Buat Azure Spring Apps baru di westus dengan Insights Aplikasi yang ada dan tentukan laju pengambilan sampel.
+    syntax: az spring create -n MyService -g MyResourceGroup -l westus --app-insights appInsightsName --sampling-rate 10
+  - summary: Buat Azure Spring Apps baru dengan Aplikasi Insights dinonaktifkan.
+    syntax: az spring create -n MyService -g MyResourceGroup --disable-app-insights
+  - summary: Membuat Azure Spring Apps baru dengan VNet yang disuntikkan melalui pemberian nama VNet di grup sumber daya saat ini
+    syntax: az spring create -n MyService -g MyResourceGroup --vnet MyVNet --app-subnet MyAppSubnet --service-runtime-subnet MyServiceRuntimeSubnet
+  - summary: Membuat Azure Spring Apps baru dengan VNet yang disuntikkan melalui pemberian ID sumber daya subnet
+    syntax: az spring create -n MyService -g MyResourceGroup --app-subnet /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyVnetRg/providers/Microsoft.Network/VirtualNetworks/test-vnet/subnets/app --service-runtime-subnet /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyVnetRg/providers/Microsoft.Network/VirtualNetworks/test-vnet/subnets/svc --reserved-cidr-range 10.0.0.0/16,10.1.0.0/16,10.2.0.1/16
+  - summary: Membuat instans Azure Spring Apps Enterprise jika Langganan Azure tidak pernah menghosting instans Azure Spring Apps Enterprise
+    syntax: >-
+      az provider register -n Microsoft.SaaS
+
+      az term accept --publisher vmware-inc --product azure-spring-cloud-vmware-tanzu-2 --plan tanzu-asc-ent-mtr
+
+      az spring create -n MyService -g MyResourceGroup --sku Enterprise
+  - summary: Buat instans Azure Spring Apps Enterprise dengan komponen Tanzu diaktifkan.
+    syntax: az spring create -n MyService -g MyResourceGroup --sku Enterprise --enable-application-configuration-service --enable-service-registry --enable-gateway --enable-api-portal
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Azure Spring Apps.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --ap-instance --api-portal-instance-count
+    summary: (Hanya Tingkat Perusahaan) Jumlah instans portal API.
+    description: ''
+  - name: --app-insights
+    summary: Nama Insights Aplikasi yang ada di Grup Sumber Daya yang sama. Atau ID Sumber Daya dari Insights Aplikasi yang ada di Grup Sumber Daya yang berbeda.
+    description: ''
+  - name: --app-insights-key
+    summary: String koneksi (disarankan) atau kunci Instrumentasi dari Insights Aplikasi yang ada.
+    description: ''
+  - name: --app-network-resource-group --app-nrg
+    summary: Grup sumber daya tempat semua sumber daya jaringan untuk aplikasi akan dibuat.
+    description: ''
+  - name: --app-subnet
+    summary: 'Nama atau ID subnet yang ada di "vnet" untuk menyebarkan aplikasi Spring Apps. Diperlukan saat menyebarkan ke dalam Virtual Network. Ukuran subnet yang lebih kecil didukung, silakan lihat: https://aka.ms/azure-spring-cloud-smaller-subnet-vnet-docs.'
+    description: ''
+  - name: --build-pool-size
+    parameterValueGroup: S1, S2, S3, S4, S5
+    summary: (Hanya Tingkat Perusahaan) Ukuran kumpulan agen build. Lihat https://aka.ms/azure-spring-cloud-build-service-docs untuk info ukuran.
+    description: ''
+  - name: --disable-app-insights
+    parameterValueGroup: false, true
+    summary: Nonaktifkan Insights Aplikasi, jika tidak dinonaktifkan dan tidak ada Insights Aplikasi yang ditentukan dengan --app-insights-key atau --app-insights, akan membuat instans Insights Aplikasi baru di grup sumber daya yang sama.
+    description: ''
+  - name: --enable-acs --enable-application-configuration-service
+    summary: (Hanya Tingkat Perusahaan) Aktifkan Layanan Konfigurasi Aplikasi.
+    description: ''
+  - name: --enable-api-portal
+    summary: (Hanya Tingkat Perusahaan) Aktifkan portal API.
+    description: ''
+  - name: --enable-gateway
+    summary: (Hanya Tingkat Perusahaan) Aktifkan Spring Cloud Gateway.
+    description: ''
+  - name: --enable-java-agent
+    parameterValueGroup: false, true
+    summary: Java dalam agen proses sekarang di-GA-ed dan digunakan secara default ketika Aplikasi Insights diaktifkan. Parameter ini tidak lagi diperlukan dan akan dihapus dalam rilis mendatang.
+    description: ''
+  - name: --enable-service-registry --enable-sr
+    summary: (Hanya Tingkat Perusahaan) Aktifkan Service Registry.
+    description: ''
+  - name: --gateway-instance-count
+    summary: (Hanya Tingkat Perusahaan) Jumlah instans Spring Cloud Gateway.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --reserved-cidr-range
+    summary: Daftar rentang alamat IP yang dipisahkan koma dalam format CIDR. Rentang IP dicadangkan untuk menghosting infrastruktur Azure Spring Apps yang mendasar, yang seharusnya 3 setidaknya /16 rentang IP yang tidak digunakan, tidak boleh tumpang tindih dengan rentang IP Subnet apa pun.
+    description: ''
+  - name: --sampling-rate
+    summary: Laju Pengambilan Sampel wawasan aplikasi. Minimum adalah 0, maksimum adalah 100.
+    description: ''
+  - name: --service-runtime-network-resource-group --svc-nrg
+    summary: Grup sumber daya tempat semua sumber daya jaringan untuk runtime layanan Azure Spring Apps akan dibuat.
+    description: ''
+  - name: --service-runtime-subnet --svc-subnet
+    summary: Nama atau ID subnet yang ada di "vnet" untuk menyebarkan runtime layanan Spring Apps. Diperlukan saat menyebarkan ke dalam Virtual Network.
+    description: ''
+  - name: --sku
+    defaultValue: Standard
+    parameterValueGroup: Basic, Enterprise, Standard
+    summary: Nama SKU. Perusahaan masih dalam Pratinjau.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --vnet
+    summary: Nama atau ID Virtual Network yang ada untuk menyebarkan instans Spring Apps.
+    description: ''
+  - name: --zone-redundant
+    parameterValueGroup: false, true
+    summary: Buat layanan Azure Spring Apps Anda di zona ketersediaan Azure atau tidak, ini hanya dapat didukung di beberapa wilayah saat ini.
+    description: ''
+- uid: az_spring_delete
+  name: az spring delete
+  summary: Menghapus Azure Spring Apps.
+  description: ''
+  syntax: >-
+    az spring delete --name
+                     --resource-group
+                     [--no-wait]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Azure Spring Apps.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_spring_list
+  name: az spring list
+  summary: Cantumkan semua Azure Spring Apps di grup sumber daya yang diberikan, jika tidak, cantumkan langganan.
+  description: ''
+  syntax: az spring list [--resource-group]
+  optionalParameters:
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_spring_show
+  name: az spring show
+  summary: Tampilkan detail untuk Azure Spring Apps.
+  description: ''
+  syntax: >-
+    az spring show --name
+                   --resource-group
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Azure Spring Apps.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_spring_start
+  name: az spring start
+  summary: Memulai Azure Spring Apps.
+  description: ''
+  syntax: >-
+    az spring start --name
+                    --resource-group
+                    [--no-wait]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Azure Spring Apps.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_spring_stop
+  name: az spring stop
+  summary: Menghentikan Azure Spring Apps.
+  description: ''
+  syntax: >-
+    az spring stop --name
+                   --resource-group
+                   [--no-wait]
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Azure Spring Apps.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_spring_update
+  name: az spring update
+  summary: Memperbarui Azure Spring Apps.
+  description: ''
+  syntax: >-
+    az spring update --name
+                     --resource-group
+                     [--app-insights]
+                     [--app-insights-key]
+                     [--build-pool-size {S1, S2, S3, S4, S5}]
+                     [--disable-app-insights {false, true}]
+                     [--no-wait]
+                     [--sku {Basic, Enterprise, Standard}]
+                     [--tags]
+  examples:
+  - summary: Perbarui tingkat harga.
+    syntax: az spring update -n MyService --sku Standard -g MyResourceGroup
+  - summary: Perbarui tag Azure Spring Apps yang ada.
+    syntax: az spring update -n MyService -g MyResourceGroup --tags key1=value1 key2=value2
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Azure Spring Apps.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --app-insights
+    summary: Nama Insights Aplikasi yang ada di Grup Sumber Daya yang sama. Atau ID Sumber Daya dari Insights Aplikasi yang ada di Grup Sumber Daya yang berbeda.
+    description: ''
+  - name: --app-insights-key
+    summary: String koneksi (disarankan) atau kunci Instrumentasi dari Insights Aplikasi yang ada.
+    description: ''
+  - name: --build-pool-size
+    parameterValueGroup: S1, S2, S3, S4, S5
+    summary: (Hanya Tingkat Perusahaan) Ukuran kumpulan agen build. Lihat https://aka.ms/azure-spring-cloud-build-service-docs untuk info ukuran.
+    description: ''
+  - name: --disable-app-insights
+    parameterValueGroup: false, true
+    summary: Nonaktifkan Insights Aplikasi, jika tidak dinonaktifkan dan tidak ada Insights Aplikasi yang ditentukan dengan --app-insights-key atau --app-insights, akan membuat instans Insights Aplikasi baru di grup sumber daya yang sama.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --sku
+    parameterValueGroup: Basic, Enterprise, Standard
+    summary: Nama SKU. Perusahaan masih dalam Pratinjau.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+commands:
+- az_spring_api-portal
+- az_spring_api-portal_clear
+- az_spring_api-portal_custom-domain
+- az_spring_api-portal_custom-domain_bind
+- az_spring_api-portal_custom-domain_list
+- az_spring_api-portal_custom-domain_show
+- az_spring_api-portal_custom-domain_unbind
+- az_spring_api-portal_custom-domain_update
+- az_spring_api-portal_show
+- az_spring_api-portal_update
+- az_spring_app
+- az_spring_app_append-loaded-public-certificate
+- az_spring_app_append-persistent-storage
+- az_spring_app_binding
+- az_spring_app_binding_cosmos
+- az_spring_app_binding_cosmos_add
+- az_spring_app_binding_cosmos_update
+- az_spring_app_binding_list
+- az_spring_app_binding_mysql
+- az_spring_app_binding_mysql_add
+- az_spring_app_binding_mysql_update
+- az_spring_app_binding_redis
+- az_spring_app_binding_redis_add
+- az_spring_app_binding_redis_update
+- az_spring_app_binding_remove
+- az_spring_app_binding_show
+- az_spring_app_create
+- az_spring_app_custom-domain
+- az_spring_app_custom-domain_bind
+- az_spring_app_custom-domain_list
+- az_spring_app_custom-domain_show
+- az_spring_app_custom-domain_unbind
+- az_spring_app_custom-domain_update
+- az_spring_app_delete
+- az_spring_app_deploy
+- az_spring_app_deployment
+- az_spring_app_deployment_create
+- az_spring_app_deployment_delete
+- az_spring_app_deployment_generate-heap-dump
+- az_spring_app_deployment_generate-thread-dump
+- az_spring_app_deployment_list
+- az_spring_app_deployment_show
+- az_spring_app_deployment_start-jfr
+- az_spring_app_identity
+- az_spring_app_identity_assign
+- az_spring_app_identity_force-set
+- az_spring_app_identity_remove
+- az_spring_app_identity_show
+- az_spring_app_list
+- az_spring_app_log
+- az_spring_app_log_tail
+- az_spring_app_logs
+- az_spring_app_restart
+- az_spring_app_scale
+- az_spring_app_set-deployment
+- az_spring_app_show
+- az_spring_app_show-deploy-log
+- az_spring_app_start
+- az_spring_app_stop
+- az_spring_app_unset-deployment
+- az_spring_app_update
+- az_spring_app-insights
+- az_spring_app-insights_show
+- az_spring_app-insights_update
+- az_spring_application-configuration-service
+- az_spring_application-configuration-service_bind
+- az_spring_application-configuration-service_clear
+- az_spring_application-configuration-service_git
+- az_spring_application-configuration-service_git_repo
+- az_spring_application-configuration-service_git_repo_add
+- az_spring_application-configuration-service_git_repo_list
+- az_spring_application-configuration-service_git_repo_remove
+- az_spring_application-configuration-service_git_repo_update
+- az_spring_application-configuration-service_show
+- az_spring_application-configuration-service_unbind
+- az_spring_build-service
+- az_spring_build-service_builder
+- az_spring_build-service_builder_buildpack-binding
+- az_spring_build-service_builder_buildpack-binding_create
+- az_spring_build-service_builder_buildpack-binding_delete
+- az_spring_build-service_builder_buildpack-binding_list
+- az_spring_build-service_builder_buildpack-binding_set
+- az_spring_build-service_builder_buildpack-binding_show
+- az_spring_build-service_builder_create
+- az_spring_build-service_builder_delete
+- az_spring_build-service_builder_show
+- az_spring_build-service_builder_update
+- az_spring_certificate
+- az_spring_certificate_add
+- az_spring_certificate_list
+- az_spring_certificate_list-reference-app
+- az_spring_certificate_remove
+- az_spring_certificate_show
+- az_spring_config-server
+- az_spring_config-server_clear
+- az_spring_config-server_git
+- az_spring_config-server_git_repo
+- az_spring_config-server_git_repo_add
+- az_spring_config-server_git_repo_list
+- az_spring_config-server_git_repo_remove
+- az_spring_config-server_git_repo_update
+- az_spring_config-server_git_set
+- az_spring_config-server_set
+- az_spring_config-server_show
+- az_spring_create
+- az_spring_delete
+- az_spring_gateway
+- az_spring_gateway_clear
+- az_spring_gateway_custom-domain
+- az_spring_gateway_custom-domain_bind
+- az_spring_gateway_custom-domain_list
+- az_spring_gateway_custom-domain_show
+- az_spring_gateway_custom-domain_unbind
+- az_spring_gateway_custom-domain_update
+- az_spring_gateway_route-config
+- az_spring_gateway_route-config_create
+- az_spring_gateway_route-config_list
+- az_spring_gateway_route-config_remove
+- az_spring_gateway_route-config_show
+- az_spring_gateway_route-config_update
+- az_spring_gateway_show
+- az_spring_gateway_update
+- az_spring_list
+- az_spring_service-registry
+- az_spring_service-registry_bind
+- az_spring_service-registry_show
+- az_spring_service-registry_unbind
+- az_spring_show
+- az_spring_start
+- az_spring_stop
+- az_spring_storage
+- az_spring_storage_add
+- az_spring_storage_list
+- az_spring_storage_list-persistent-storage
+- az_spring_storage_remove
+- az_spring_storage_show
+- az_spring_storage_update
+- az_spring_test-endpoint
+- az_spring_test-endpoint_disable
+- az_spring_test-endpoint_enable
+- az_spring_test-endpoint_list
+- az_spring_test-endpoint_renew-key
+- az_spring_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Perintah untuk mengelola Azure Spring Apps.
+  ms.openlocfilehash: 0007b9abefa84b660eead4c487b468bac6e4a3f3
+  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 05/24/2022
+  ms.locfileid: "145224449"
