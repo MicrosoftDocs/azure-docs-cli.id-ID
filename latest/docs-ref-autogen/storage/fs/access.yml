@@ -29,7 +29,7 @@ directCommands:
   requiredParameters:
   - isRequired: true
     name: --acl
-    summary: Menghapus hak kontrol akses POSIX pada file dan direktori. Nilai adalah daftar entri kontrol akses yang dipisahkan koma. Setiap entri kontrol akses (ACE) terdiri dari cakupan, jenis, dan pengidentifikasi pengguna atau grup dalam format "[scope:][type]:[id]".
+    summary: Hapus hak kontrol akses POSIX pada file dan direktori. Nilai adalah daftar entri kontrol akses yang dipisahkan koma. Setiap entri kontrol akses (ACE) terdiri dari cakupan, jenis, dan pengidentifikasi pengguna atau grup dalam format "[scope:][type]:[id]".
     description: ''
   - isRequired: true
     name: --file-system -f
@@ -120,7 +120,7 @@ directCommands:
     description: ''
   - name: --acl
     summary: Tidak valid bersama dengan acl. Hak kontrol akses POSIX pada file dan direktori dalam format "[scope:][type]:[id]:[permissions]". misalnya "user::rwx,group::r--,other::---,mask::rwx".
-    description: 'Nilai adalah daftar entri kontrol akses yang dipisahkan koma. Setiap entri kontrol akses (ACE) terdiri dari cakupan, jenis, pengidentifikasi pengguna atau grup, dan izin dalam format "[scope:][type]:[id]:[permissions]". Cakupan harus "default" untuk menunjukkan ACE milik ACL default untuk direktori; jika tidak, cakupan bersifat implisit dan ACE milik ACL akses. Ada empat jenis ACE: "pengguna" memberikan hak kepada pemilik atau pengguna bernama, "grup" memberikan hak kepada grup pemilik atau grup bernama, "mask" membatasi hak yang diberikan kepada pengguna bernama dan anggota grup, dan "lainnya" memberikan hak untuk semua pengguna yang tidak ditemukan dalam entri lain. Pengidentifikasi pengguna atau grup dihilangkan untuk entri jenis "masker" dan "lainnya". Pengidentifikasi pengguna atau grup juga dihilangkan untuk pemilik dan grup pemilik. Misalnya, ACL berikut memberikan hak baca, tulis, dan eksekusi kepada pemilik john.doe@contosofile , hak baca untuk grup pemilik, dan tidak ada untuk orang lain: "user::rwx,user:john.doe@contoso:rwx,group::r--,other::---,mask::rwx". Untuk informasi lebih lanjut, silakan merujuk ke https://docs.microsoft.com/azure/storage/blobs/data-lake-storage-access-control.'
+    description: 'Nilai adalah daftar entri kontrol akses yang dipisahkan koma. Setiap entri kontrol akses (ACE) terdiri dari cakupan, jenis, pengidentifikasi pengguna atau grup, dan izin dalam format "[scope:][type]:[id]:[permissions]". Cakupan harus "default" untuk menunjukkan ACE milik ACL default untuk direktori; jika tidak, cakupan bersifat implisit dan ACE milik ACL akses. Ada empat jenis ACE: "pengguna" memberikan hak kepada pemilik atau pengguna bernama, "grup" memberikan hak kepada grup pemilik atau grup bernama, "mask" membatasi hak yang diberikan kepada pengguna bernama dan anggota grup, dan hak pemberian "lainnya" kepada semua pengguna yang tidak ditemukan di salah satu entri lainnya. Pengidentifikasi pengguna atau grup dihilangkan untuk entri jenis "masker" dan "lainnya". Pengidentifikasi pengguna atau grup juga dihilangkan untuk pemilik dan grup pemilik. Misalnya, ACL berikut memberikan hak baca, tulis, dan eksekusi kepada pemilik john.doe@contosofile , hak baca untuk grup pemilik, dan tidak ada bagi orang lain: "user::rwx,,user:john.doe@contoso:rwxgroup::r--,other::---,mask::rwx". Untuk informasi lebih lanjut, silakan merujuk ke https://docs.microsoft.com/azure/storage/blobs/data-lake-storage-access-control.'
   - name: --auth-mode
     parameterValueGroup: key, login
     summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
@@ -138,7 +138,7 @@ directCommands:
     summary: Pengguna pemilik file atau direktori. Pengguna Azure Active Directory ID objek atau nama prinsipal pengguna untuk ditetapkan sebagai pemilik. Untuk informasi lebih lanjut, silakan merujuk ke https://docs.microsoft.com/azure/storage/blobs/data-lake-storage-access-control#the-owning-user.
     description: ''
   - name: --permissions
-    summary: Tidak valid bersama dengan acl. Izin akses POSIX untuk pemilik file, grup pemilik file, dan lainnya. Setiap kelas dapat diberikan izin read(r), write(w), atau execute(x). Notasi simbolis (rwxrw-rw-) dan 4 digit oktal (misalnya 0766) didukung.'.
+    summary: Tidak valid bersama dengan acl. Izin akses POSIX untuk pemilik file, grup pemilik file, dan lainnya. Setiap kelas dapat diberikan izin read(r), write(w), atau execute(x). Notasi simbolis (rwxrw-rw-) dan oktal 4 digit (misalnya 0766) didukung.'.
     description: ''
   - name: --sas-token
     summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
@@ -230,7 +230,7 @@ directCommands:
                               [--connection-string]
                               [--sas-token]
   examples:
-  - summary: Tampilkan properti kontrol akses jalur.
+  - summary: Perlihatkan properti kontrol akses jalur.
     syntax: az storage fs access show -p dir -f myfilesystem --account-name myadlsaccount --account-key 0000-0000
   requiredParameters:
   - isRequired: true
@@ -359,11 +359,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 04/13/2022
+  ms.date: 05/19/2022
   description: Mengelola akses dan izin sistem file untuk akun Azure Data Lake Storage Gen2.
-  ms.openlocfilehash: 8625896ca6be4383cedcdf16cc1b2aaabfd73c3f
-  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
+  ms.openlocfilehash: e0907a66799e7c1baa5cb74bad838b34e7f682ae
+  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/27/2022
-  ms.locfileid: "144058735"
+  ms.lasthandoff: 05/24/2022
+  ms.locfileid: "145203863"

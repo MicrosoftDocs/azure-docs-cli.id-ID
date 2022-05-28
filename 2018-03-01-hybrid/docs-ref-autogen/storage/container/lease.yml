@@ -6,8 +6,8 @@ description: ''
 directCommands:
 - uid: az_storage_container_lease_acquire
   name: az storage container lease acquire
-  summary: Meminta sewa baru.
-  description: Jika kontainer tidak memiliki sewa aktif, Blob service membuat sewa pada kontainer dan mengembalikan ID sewa baru.
+  summary: Minta sewa baru.
+  description: Jika kontainer tidak memiliki sewa aktif, blob service membuat sewa pada kontainer dan mengembalikan ID sewa baru.
   syntax: >-
     az storage container lease acquire --container-name
                                        [--account-key]
@@ -19,6 +19,9 @@ directCommands:
                                        [--proposed-lease-id]
                                        [--sas-token]
                                        [--timeout]
+  examples:
+  - summary: Minta sewa baru.
+    syntax: az storage container lease acquire --container-name mycontainer --account-name mystorageaccount --account-key 0000-0000
   requiredParameters:
   - isRequired: true
     name: --container-name -c
@@ -57,7 +60,7 @@ directCommands:
 - uid: az_storage_container_lease_break
   name: az storage container lease break
   summary: Putuskan sewa, jika kontainer memiliki sewa aktif.
-  description: Setelah sewa rusak, sewa tidak dapat diperpanjang. Setiap permintaan yang diotorisasi dapat melanggar sewa; permintaan tidak diperlukan untuk menentukan ID sewa yang cocok. Ketika sewa rusak, periode jeda sewa diizinkan untuk berlalu, selama waktu itu tidak ada operasi sewa kecuali jeda dan pelepasan dapat dilakukan pada kontainer. Ketika sewa berhasil rusak, respons menunjukkan interval dalam hitungan detik sampai sewa baru dapat diperoleh.
+  description: Setelah sewa rusak, sewa tidak dapat diperpanjang. Setiap permintaan yang diotorisasi dapat memutus sewa; permintaan tidak diperlukan untuk menentukan ID sewa yang cocok. Ketika sewa rusak, periode jeda sewa diizinkan untuk berlalu, selama waktu tersebut tidak ada operasi sewa kecuali jeda dan pelepasan dapat dilakukan pada kontainer. Ketika sewa berhasil rusak, respons menunjukkan interval dalam hitungan detik sampai sewa baru dapat diperoleh.
   syntax: >-
     az storage container lease break --container-name
                                      [--account-key]
@@ -68,6 +71,9 @@ directCommands:
                                      [--lease-break-period]
                                      [--sas-token]
                                      [--timeout]
+  examples:
+  - summary: Putuskan sewanya.
+    syntax: az storage container lease break -c mycontainer --lease-break-period 10 --account-name mystorageaccount --account-key 0000-0000
   requiredParameters:
   - isRequired: true
     name: --container-name -c
@@ -90,7 +96,7 @@ directCommands:
     summary: Dimulai hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
     description: ''
   - name: --lease-break-period
-    summary: Ini adalah usulan durasi detik bahwa sewa harus dilanjutkan sebelum rusak, antara 0 dan 60 detik. Periode istirahat ini hanya digunakan jika lebih pendek dari waktu yang tersisa pada sewa. Jika lebih lama, waktu yang tersisa pada sewa digunakan. Sewa baru tidak akan tersedia sebelum periode istirahat berakhir, tetapi sewa dapat ditahan lebih lama dari periode istirahat. Jika header ini tidak muncul dengan operasi jeda, sewa durasi tetap berhenti setelah periode sewa yang tersisa berlalu, dan sewa tak terbatas segera berhenti.
+    summary: Ini adalah durasi detik yang diusulkan bahwa sewa harus dilanjutkan sebelum rusak, antara 0 dan 60 detik. Periode istirahat ini hanya digunakan jika lebih pendek dari waktu yang tersisa pada sewa. Jika lebih lama, waktu yang tersisa pada sewa digunakan. Sewa baru tidak akan tersedia sebelum periode istirahat berakhir, tetapi sewa dapat ditahan lebih lama dari periode istirahat. Jika header ini tidak muncul dengan operasi pemutusan, sewa durasi tetap berhenti setelah periode sewa yang tersisa berlalu, dan sewa tak terbatas segera berhenti.
     description: ''
   - name: --sas-token
     summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
@@ -114,6 +120,9 @@ directCommands:
                                       [--if-unmodified-since]
                                       [--sas-token]
                                       [--timeout]
+  examples:
+  - summary: Ubah sewa.
+    syntax: az storage container lease change -c mycontainer --lease-id "32fe23cd-4779-4919-adb3-357e76c9b1bb" --proposed-lease-id "sef2ef2d-4779-4919-adb3-357e76c9b1bb" --account-name mystorageaccount --account-key 0000-0000
   requiredParameters:
   - isRequired: true
     name: --container-name -c
@@ -164,6 +173,9 @@ directCommands:
                                        [--if-unmodified-since]
                                        [--sas-token]
                                        [--timeout]
+  examples:
+  - summary: Lepaskan sewanya.
+    syntax: az storage container lease release -c mycontainer --lease-id "32fe23cd-4779-4919-adb3-357e76c9b1bb" --account-name mystorageaccount --account-key 0000-0000
   requiredParameters:
   - isRequired: true
     name: --container-name -c
@@ -198,7 +210,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_container_lease_renew
   name: az storage container lease renew
-  summary: Memperpanjang sewa.
+  summary: Perpanjang sewa.
   description: Sewa dapat diperbarui jika ID sewa yang ditentukan cocok dengan yang terkait dengan kontainer. Perhatikan bahwa sewa dapat diperpanjang meskipun telah kedaluwarsa selama kontainer belum disewakan lagi sejak kedaluwarsa sewa tersebut. Saat Anda memperbarui sewa, jam durasi sewa direset.
   syntax: >-
     az storage container lease renew --container-name
@@ -210,6 +222,9 @@ directCommands:
                                      [--if-unmodified-since]
                                      [--sas-token]
                                      [--timeout]
+  examples:
+  - summary: Perpanjang sewa.
+    syntax: az storage container lease renew -c mycontainer --lease-id "32fe23cd-4779-4919-adb3-357e76c9b1bb" --account-name mystorageaccount --account-key 0000-0000
   requiredParameters:
   - isRequired: true
     name: --container-name -c
@@ -267,11 +282,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 04/13/2022
+  ms.date: 05/19/2022
   description: Mengelola penyewaan kontainer penyimpanan blob.
-  ms.openlocfilehash: 79aed76d9c875216a528cc253132e1f231e9fcd6
-  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
+  ms.openlocfilehash: 961ea91e93f8a82cd44565e0d8660bd8808d5768
+  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/27/2022
-  ms.locfileid: "144077711"
+  ms.lasthandoff: 05/24/2022
+  ms.locfileid: "145241807"

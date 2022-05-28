@@ -183,6 +183,8 @@ directCommands:
   examples:
   - summary: Unduh blob.
     syntax: az storage blob download -f /path/to/file -c mycontainer -n MyBlob
+  - summary: Unduh konten blob ke stdout (dukungan pipa).
+    syntax: az storage blob download -c mycontainer -n myblob --account-name mystorageaccount --account-key myaccountkey
   requiredParameters:
   - isRequired: true
     name: --container-name -c
@@ -425,7 +427,7 @@ directCommands:
       end=`date -u -d "30 minutes" '+%Y-%m-%dT%H:%MZ'`
 
       az storage blob generate-sas -c myycontainer -n MyBlob --permissions r --expiry $end --https-only
-  - summary: Buat token sas untuk blob dengan rentang ip yang ditentukan.
+  - summary: Hasilkan token sas untuk blob dengan rentang ip yang ditentukan.
     syntax: >-
       end=`date -u -d "30 minutes" '+%Y-%m-%dT%H:%MZ'`
 
@@ -464,7 +466,7 @@ directCommands:
     summary: Nilai header respons untuk Content-Language saat sumber daya diakses menggunakan tanda tangan akses bersama ini.
     description: ''
   - name: --content-type
-    summary: Nilai header respons untuk Content-Type saat sumber daya diakses menggunakan tanda tangan akses bersama ini.
+    summary: Nilai header respons untuk Tipe-Konten saat sumber daya diakses menggunakan tanda tangan akses bersama ini.
     description: ''
   - name: --expiry
     summary: Menentukan tanggalwaktu UTC (Y-m-d'T'H:M'Z') di mana SAS menjadi tidak valid. Jangan gunakan jika kebijakan akses tersimpan dirujuk dengan --policy-name yang menentukan nilai ini.
@@ -476,7 +478,7 @@ directCommands:
     summary: Hanya izinkan permintaan yang dibuat dengan protokol HTTPS. Jika dihilangkan, permintaan dari protokol HTTP dan HTTPS diizinkan.
     description: ''
   - name: --ip
-    summary: Menentukan alamat IP atau rentang alamat IP tempat menerima permintaan. Hanya mendukung alamat gaya IPv4.
+    summary: Menentukan alamat IP atau rentang alamat IP untuk menerima permintaan. Hanya mendukung alamat gaya IPv4.
     description: ''
   - name: --permissions
     summary: 'Izin yang diberikan SAS. Nilai yang diizinkan: (a)dd (a)dd (c)reate (c)reate (d)elete (d)elete (r)ead (r)ead (w)rite (w)rite. Jangan gunakan jika kebijakan akses tersimpan dirujuk dengan --id yang menentukan nilai ini. Dapat digabungkan.'
@@ -508,7 +510,7 @@ directCommands:
                          [--sas-token]
                          [--timeout]
   examples:
-  - summary: Cantumkan semua blob penyimpanan dalam kontainer yang namanya dimulai dengan 'foo'; akan cocok dengan nama seperti 'foo', 'foobar', dan 'foo/bar'
+  - summary: Mencantumkan semua blob penyimpanan dalam kontainer yang namanya dimulai dengan 'foo'; akan cocok dengan nama seperti 'foo', 'foobar', dan 'foo/bar'
     syntax: az storage blob list -c mycontainer --prefix foo
   requiredParameters:
   - isRequired: true
@@ -532,11 +534,11 @@ directCommands:
     summary: Menentukan satu atau beberapa himpunan data tambahan untuk disertakan dalam respons.
     description: ''
   - name: --marker
-    summary: Token kelanjutan buram. Nilai ini dapat diambil dari bidang next_marker dari objek generator sebelumnya jika num_results ditentukan dan generator tersebut telah selesai menghitung hasil. Jika ditentukan, generator ini akan mulai mengembalikan hasil dari titik di mana generator sebelumnya berhenti.
+    summary: Token kelanjutan buram. Nilai ini dapat diambil dari bidang next_marker objek generator sebelumnya jika num_results ditentukan dan generator tersebut telah selesai menghitung hasil. Jika ditentukan, generator ini akan mulai mengembalikan hasil dari titik di mana generator sebelumnya berhenti.
     description: ''
   - name: --num-results
     defaultValue: "5000"
-    summary: Menentukan jumlah maksimum hasil yang akan dikembalikan. Sediakan "\*" untuk mengembalikan semua.
+    summary: Menentukan jumlah maksimum hasil yang akan dikembalikan. Berikan "\*" untuk mengembalikan semua.
     description: ''
   - name: --prefix
     summary: Memfilter hasil untuk mengembalikan hanya blob yang namanya dimulai dengan awalan yang ditentukan.
@@ -966,7 +968,7 @@ directCommands:
     description: ''
 - uid: az_storage_blob_update
   name: az storage blob update
-  summary: Mengatur properti sistem pada blob.
+  summary: Mengatur properti sistem di blob.
   description: Jika satu properti diatur untuk content_settings, semua properti akan ditimpa.
   syntax: >-
     az storage blob update --container-name
@@ -1093,7 +1095,7 @@ directCommands:
     syntax: az storage blob upload --account-name mystorageaccount --account-key 0000-0000 --container-name mycontainer --file /path/to/file --name myblob
   - summary: Upload string ke blob.
     syntax: az storage blob upload --data "teststring" -c mycontainer -n myblob --account-name mystorageaccount --account-key 0000-0000
-  - summary: Upload ke pipa melalui.
+  - summary: Upload ke pipa.
     syntax: echo $data | az storage blob upload --data @- -c mycontainer -n myblob --account-name mystorageaccount --account-key 0000-0000
   requiredParameters:
   - isRequired: true
@@ -1156,7 +1158,7 @@ directCommands:
     description: ''
   - name: --max-connections
     defaultValue: "2"
-    summary: Jumlah maksimum koneksi paralel yang digunakan ketika ukuran blob melebihi 64MB.
+    summary: Jumlah maksimum koneksi paralel yang akan digunakan ketika ukuran blob melebihi 64MB.
     description: ''
   - name: --maxsize-condition
     summary: Panjang maksimum dalam byte yang diizinkan untuk blob tambahan.
@@ -1171,7 +1173,7 @@ directCommands:
     summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   - name: --socket-timeout
-    summary: Batas waktu soket (detik), digunakan oleh layanan untuk mengatur aliran data.
+    summary: Batas waktu soket(detik), digunakan oleh layanan untuk mengatur aliran data.
     description: ''
   - name: --tier
     parameterValueGroup: P10, P20, P30, P4, P40, P50, P6, P60
@@ -1182,7 +1184,7 @@ directCommands:
     description: ''
   - name: --type -t
     parameterValueGroup: append, block, page
-    summary: Default ke 'page' untuk \*file .vhd, atau 'block' sebaliknya.
+    summary: Default ke 'halaman' untuk \*file .vhd, atau 'blokir' jika tidak.
     description: ''
   - name: --validate-content
     summary: Tentukan bahwa hash MD5 harus dihitung untuk setiap gugus blob dan diverifikasi oleh layanan ketika gugus telah tiba.
@@ -1222,7 +1224,7 @@ directCommands:
                                  [--type {append, block, page}]
                                  [--validate-content]
   examples:
-  - summary: Upload semua file yang berakhiran .py kecuali blob ada dan telah dimodifikasi sejak tanggal tertentu.
+  - summary: Upload semua file yang diakhir dengan .py kecuali blob ada dan telah dimodifikasi sejak tanggal yang diberikan.
     syntax: az storage blob upload-batch -d mycontainer --account-name mystorageaccount --account-key 00000000 -s <path-to-directory> --pattern *.py --if-unmodified-since 2018-08-27T20:51Z
   - summary: Upload semua file dari direktori jalur lokal ke kontainer bernama "mycontainer".
     syntax: az storage blob upload-batch -d mycontainer -s <path-to-directory>
@@ -1268,7 +1270,7 @@ directCommands:
     summary: Jenis MIME konten.
     description: ''
   - name: --destination-path
-    summary: Jalur tujuan yang akan ditambahkan ke nama blob.
+    summary: Jalur tujuan yang akan ditambahkan sebelumnya ke nama blob.
     description: ''
   - name: --dryrun
     summary: Tampilkan ringkasan operasi yang akan diambil alih-alih benar-benar mengunggah file.
@@ -1457,11 +1459,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 04/13/2022
+  ms.date: 05/19/2022
   description: 'Tentukan salah satu parameter autentikasi berikut untuk perintah Anda: --auth-mode, --account-key, --connection-string, --sas-token. Anda juga dapat menggunakan variabel lingkungan yang sesuai untuk menyimpan kredensial autentikasi Anda, misalnya AZURE_STORAGE_KEY, AZURE_STORAGE_CONNECTION_STRING, dan AZURE_STORAGE_SAS_TOKEN.'
-  ms.openlocfilehash: 0ab0951f2a034c04dffb52c0cc717457c42af12a
-  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
+  ms.openlocfilehash: 301b8a07af8d84bca40291c1f4ac214a7418a832
+  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/27/2022
-  ms.locfileid: "144076523"
+  ms.lasthandoff: 05/24/2022
+  ms.locfileid: "145241951"
