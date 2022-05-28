@@ -42,7 +42,7 @@ directCommands:
     syntax: az policy state list --resource "myKeyVault" --namespace "Microsoft.KeyVault" --resource-type "vaults" -g "myresourcegroup"
   - summary: Dapatkan status kebijakan terbaru untuk sumber daya berlapis menggunakan nama sumber daya.
     syntax: az policy state list --resource "myRule1" --namespace "Microsoft.Network" --resource-type "securityRules" --parent "networkSecurityGroups/mysecuritygroup1" -g "myresourcegroup"
-  - summary: Dapatkan status kebijakan terbaru untuk definisi yang ditetapkan kebijakan dalam langganan saat ini.
+  - summary: Dapatkan status kebijakan terbaru untuk definisi kumpulan kebijakan dalam langganan saat ini.
     syntax: az policy state list -s "fff58873-fff8-fff5-fffc-fffbe7c9d697"
   - summary: Dapatkan status kebijakan terbaru untuk definisi kebijakan dalam langganan saat ini.
     syntax: az policy state list -d "fff69973-fff8-fff5-fffc-fffbe7c9d698"
@@ -50,7 +50,7 @@ directCommands:
     syntax: az policy state list -a "ddd8ef92e3714a5ea3d208c1"
   - summary: Dapatkan status kebijakan terbaru untuk penetapan kebijakan di grup sumber daya yang ditentukan dalam langganan saat ini.
     syntax: az policy state list -g "myRg" -a "ddd8ef92e3714a5ea3d208c1"
-  - summary: Dapatkan 5 status kebijakan terbaru teratas dalam langganan saat ini, memilih subset properti dan menyesuaikan urutan.
+  - summary: Dapatkan 5 status kebijakan terbaru teratas dalam langganan saat ini, memilih subset properti dan menyesuaikan pemesanan.
     syntax: az policy state list --top 5 --order-by "timestamp desc, policyAssignmentName asc" --select "timestamp, resourceId, policyAssignmentId, policySetDefinitionId, policyDefinitionId"
   - summary: Dapatkan status kebijakan terbaru dalam langganan saat ini selama interval waktu kustom.
     syntax: az policy state list --from "2018-03-08T00:00:00Z" --to "2018-03-15T00:00:00Z"
@@ -58,7 +58,7 @@ directCommands:
     syntax: az policy state list --filter "(policyDefinitionAction eq 'deny' or policyDefinitionAction eq 'audit') and resourceLocation ne 'eastus'"
   - summary: Dapatkan jumlah status kebijakan terbaru dalam langganan saat ini.
     syntax: az policy state list --apply "aggregate($count as numberOfRecords)"
-  - summary: Dapatkan status kebijakan terbaru dalam langganan saat ini yang menggabungkan hasil berdasarkan beberapa properti.
+  - summary: Dapatkan status kebijakan terbaru dalam hasil agregasi langganan saat ini berdasarkan beberapa properti.
     syntax: az policy state list --apply "groupby((policyAssignmentId, policySetDefinitionId, policyDefinitionReferenceId, policyDefinitionId), aggregate($count as numStates))"
   - summary: Dapatkan status kebijakan terbaru dalam hasil pengelompokan langganan saat ini berdasarkan beberapa properti.
     syntax: az policy state list --apply "groupby((policyAssignmentName, resourceId))"
@@ -98,7 +98,7 @@ directCommands:
     summary: Mengurutkan ekspresi menggunakan notasi OData.
     description: ''
   - name: --parent
-    summary: 'Jalur induk (Misalnya: resourceTypeA/nameA/resourceTypeB/nameB).'
+    summary: 'Jalur induk (Mis: resourceTypeA/nameA/resourceTypeB/nameB).'
     description: ''
   - name: --policy-assignment -a
     summary: Nama penetapan kebijakan.
@@ -110,7 +110,7 @@ directCommands:
     summary: Nama definisi kumpulan kebijakan.
     description: ''
   - name: --resource
-    summary: ID sumber daya atau nama sumber daya. Jika nama diberikan, berikan grup sumber daya dan argumen id sumber daya lain yang relevan.
+    summary: ID sumber daya atau nama sumber daya. Jika nama diberikan, berikan grup sumber daya dan argumen id sumber daya relevan lainnya.
     description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
@@ -151,7 +151,7 @@ directCommands:
     syntax: az policy state summarize
   - summary: Dapatkan ringkasan status kebijakan terbaru yang tidak sesuai di cakupan grup manajemen.
     syntax: az policy state summarize -m "myMg"
-  - summary: Dapatkan ringkasan status kebijakan terbaru yang tidak patuh di cakupan grup sumber daya dalam langganan saat ini.
+  - summary: Dapatkan ringkasan status kebijakan terbaru yang tidak sesuai di cakupan grup sumber daya dalam langganan saat ini.
     syntax: az policy state summarize -g "myRg"
   - summary: Dapatkan ringkasan status kebijakan terbaru yang tidak sesuai untuk sumber daya menggunakan ID sumber daya.
     syntax: az policy state summarize --resource "/subscriptions/fff10b27-fff3-fff5-fff8-fffbe01e86a5/resourceGroups/myResourceGroup /providers/Microsoft.EventHub/namespaces/myns1/eventhubs/eh1/consumergroups/cg1"
@@ -161,13 +161,13 @@ directCommands:
     syntax: az policy state summarize --resource "myRule1" --namespace "Microsoft.Network" --resource-type "securityRules" --parent "networkSecurityGroups/mysecuritygroup1" -g "myresourcegroup"
   - summary: Dapatkan ringkasan status kebijakan terbaru yang tidak patuh untuk definisi yang ditetapkan kebijakan dalam langganan saat ini.
     syntax: az policy state summarize -s "fff58873-fff8-fff5-fffc-fffbe7c9d697"
-  - summary: Dapatkan ringkasan status kebijakan terbaru yang tidak sesuai untuk definisi kebijakan dalam langganan saat ini.
+  - summary: Dapatkan ringkasan status kebijakan terbaru yang tidak patuh untuk definisi kebijakan dalam langganan saat ini.
     syntax: az policy state summarize -d "fff69973-fff8-fff5-fffc-fffbe7c9d698"
   - summary: Dapatkan ringkasan status kebijakan terbaru yang tidak patuh untuk penetapan kebijakan dalam langganan saat ini.
     syntax: az policy state summarize -a "ddd8ef92e3714a5ea3d208c1"
   - summary: Dapatkan ringkasan status kebijakan terbaru yang tidak patuh untuk penetapan kebijakan di grup sumber daya yang ditentukan dalam langganan saat ini.
     syntax: az policy state summarize -g "myRg" -a "ddd8ef92e3714a5ea3d208c1"
-  - summary: Dapatkan ringkasan status kebijakan terbaru yang tidak sesuai dalam langganan saat ini, membatasi ringkasan tugas ke 5 teratas.
+  - summary: Dapatkan ringkasan status kebijakan terbaru yang tidak sesuai dalam langganan saat ini, membatasi ringkasan penugasan ke 5 teratas.
     syntax: az policy state summarize --top 5
   - summary: Dapatkan ringkasan status kebijakan terbaru yang tidak sesuai dalam langganan saat ini untuk interval waktu kustom.
     syntax: az policy state summarize --from "2018-03-08T00:00:00Z" --to "2018-03-15T00:00:00Z"
@@ -187,7 +187,7 @@ directCommands:
     summary: 'Namespace penyedia (Misalnya: Microsoft.Provider).'
     description: ''
   - name: --parent
-    summary: 'Jalur induk (Misalnya: resourceTypeA/nameA/resourceTypeB/nameB).'
+    summary: 'Jalur induk (Mis: resourceTypeA/nameA/resourceTypeB/nameB).'
     description: ''
   - name: --policy-assignment -a
     summary: Nama penetapan kebijakan.
@@ -199,7 +199,7 @@ directCommands:
     summary: Nama definisi kumpulan kebijakan.
     description: ''
   - name: --resource
-    summary: ID sumber daya atau nama sumber daya. Jika nama diberikan, berikan grup sumber daya dan argumen id sumber daya lain yang relevan.
+    summary: ID sumber daya atau nama sumber daya. Jika nama diberikan, berikan grup sumber daya dan argumen id sumber daya relevan lainnya.
     description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
@@ -222,11 +222,11 @@ directCommands:
     az policy state trigger-scan [--no-wait]
                                  [--resource-group]
   examples:
-  - summary: Memicu evaluasi kepatuhan kebijakan pada cakupan langganan saat ini.
+  - summary: Picu evaluasi kepatuhan kebijakan pada cakupan langganan saat ini.
     syntax: az policy state trigger-scan
   - summary: Memicu evaluasi kepatuhan kebijakan untuk grup sumber daya.
     syntax: az policy state trigger-scan -g "myRg"
-  - summary: Memicu evaluasi kepatuhan kebijakan untuk grup sumber daya dan jangan menunggunya selesai.
+  - summary: Picu evaluasi kepatuhan kebijakan untuk grup sumber daya dan jangan tunggu hingga selesai.
     syntax: az policy state trigger-scan -g "myRg" --no-wait
   optionalParameters:
   - name: --no-wait
@@ -259,11 +259,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 04/21/2022
+  ms.date: 05/20/2022
   description: Mengelola status kepatuhan kebijakan.
-  ms.openlocfilehash: a9fd729b5a1068cd50dbf43d423044f2d0db8159
-  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
+  ms.openlocfilehash: 3e9b8330fce33e84907cd91b39572c3faf4f5ecc
+  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/27/2022
-  ms.locfileid: "144081761"
+  ms.lasthandoff: 05/24/2022
+  ms.locfileid: "145272191"

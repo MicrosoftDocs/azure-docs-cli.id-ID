@@ -1,0 +1,346 @@
+### YamlMime:AzureCLIGroup
+uid: az_healthcareapis_workspace_fhir-service
+name: az healthcareapis workspace fhir-service
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **healthcareapis** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az healthcareapis workspace fhir-service** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola layanan fhir dengan layanan kesehatan.
+description: ''
+directCommands:
+- uid: az_healthcareapis_workspace_fhir-service_create
+  name: az healthcareapis workspace fhir-service create
+  summary: Buat sumber daya Layanan FHIR dengan parameter yang ditentukan.
+  description: ''
+  syntax: >-
+    az healthcareapis workspace fhir-service create --fhir-service-name
+                                                    --resource-group
+                                                    --workspace-name
+                                                    [--access-policies]
+                                                    [--authentication-configuration]
+                                                    [--cors-configuration]
+                                                    [--default {no-version, versioned, versioned-update}]
+                                                    [--etag]
+                                                    [--export-configuration-storage-account-name]
+                                                    [--identity-type {None, SystemAssigned, SystemAssigned,UserAssigned, UserAssigned}]
+                                                    [--kind {fhir-R4, fhir-Stu3}]
+                                                    [--location]
+                                                    [--login-servers]
+                                                    [--no-wait]
+                                                    [--oci-artifacts]
+                                                    [--public-network-access {Disabled, Enabled}]
+                                                    [--resource-type-overrides]
+                                                    [--tags]
+                                                    [--user-assigned-identities]
+  examples:
+  - summary: Membuat atau memperbarui Layanan Fhir
+    syntax: az healthcareapis workspace fhir-service create --name "fhirservice1" --identity-type "SystemAssigned" --kind "fhir-R4" --location "westus" --access-policies object-id="c487e7d1-3210-41a3-8ccc-e9372b78da47" --access-policies object-id="5b307da8-43d4-492b-8b66-b0294ade872f" --login-servers "test1.azurecr.io" --authentication-configuration audience="https://azurehealthcareapis.com" authority="https://login.microsoftonline.com/abfde7b2-df0f-47e6-aabf-2462b07508dc" smart-proxy-enabled=true --cors-configuration allow-credentials=false headers="*" max-age=1440 methods="DELETE" methods="GET" methods="OPTIONS" methods="PATCH" methods="POST" methods="PUT" origins="*" --export-configuration-storage-account-name "existingStorageAccount" --tags additionalProp1="string" additionalProp2="string" additionalProp3="string" --resource-group "testRG" --workspace-name "workspace1"
+  requiredParameters:
+  - isRequired: true
+    name: --fhir-service-name --name -n
+    summary: Nama sumber daya Layanan FHIR.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama sumber daya ruang kerja.
+    description: ''
+  optionalParameters:
+  - name: --access-policies
+    summary: Kebijakan akses Layanan Fhir.
+    description: >-
+      Penggunaan: --access-policies object-id=XX
+
+
+      object-id: Diperlukan. ID objek Azure AD (Pengguna atau Aplikasi) yang diizinkan mengakses layanan FHIR.
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --access-policies.
+  - name: --authentication-configuration -c
+    summary: Konfigurasi autentikasi Layanan Fhir.
+    description: >-
+      Penggunaan: --authentication-configuration authority=XX audience=XX smart-proxy-enabled=XX
+
+
+      otoritas: Url otoritas untuk audiens layanan: Url audiens untuk layanan yang mendukung proksi pintar: Jika smart pada proksi FHIR diaktifkan.
+  - name: --cors-configuration
+    summary: Konfigurasi Fhir Service Cors.
+    description: >-
+      Penggunaan: --cors-configuration origins=XX headers=XX methods=XX max-age=XX allow-credentials=XX
+
+
+      origins: Asal-usul yang akan diizinkan melalui CORS.
+
+      header: Header yang akan diizinkan melalui CORS.
+
+      metode: Metode yang akan diizinkan melalui CORS.
+
+      usia maksimal: Usia maksimal yang diizinkan melalui CORS.
+
+      allow-credentials: Jika kredensial diizinkan melalui CORS.
+  - name: --default
+    parameterValueGroup: no-version, versioned, versioned-update
+    summary: Nilai default untuk riwayat pelacakan di semua sumber daya.
+    description: ''
+  - name: --etag
+    summary: Etag yang terkait dengan sumber daya, digunakan untuk konkurensi optimis saat mengeditnya.
+    description: ''
+  - name: --export-configuration-storage-account-name -s
+    summary: Nama akun penyimpanan ekspor default.
+    description: ''
+  - name: --identity-type
+    parameterValueGroup: None, SystemAssigned, SystemAssigned,UserAssigned, UserAssigned
+    summary: Jenis identitas yang ditentukan, saat ini SystemAssigned dan None diperbolehkan.
+    description: ''
+  - name: --kind
+    parameterValueGroup: fhir-R4, fhir-Stu3
+    summary: Jenis layanan.
+    description: ''
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
+    description: ''
+  - name: --login-servers
+    summary: Daftar server login registri kontainer Azure.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --oci-artifacts
+    summary: Daftar artefak Open Container Initiative (OCI).
+    description: >-
+      Penggunaan: --oci-artifacts login-server=XX image-name=XX digest=XX
+
+
+      login-server: Server login Azure Container Registry.
+
+      image-name: Nama artefak.
+
+      hash: Hash artefak.
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --oci-artifacts.
+  - name: --public-network-access
+    parameterValueGroup: Disabled, Enabled
+    summary: Izin kontrol untuk lalu lintas sarana data yang berasal dari jaringan publik saat titik akhir privat diaktifkan.
+    description: ''
+  - name: --resource-type-overrides -r
+    summary: 'Daftar Sumber Daya FHIR dan penimpaan kebijakan versinya. Nilai harapan: KEY1=VALUE1 KEY2=VALUE2 ...'
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --user-assigned-identities -i
+    summary: "Kumpulan identitas yang ditetapkan pengguna yang terkait dengan sumber daya. Kunci kamus userAssignedIdentities akan menjadi id sumber daya ARM dalam formulir: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. Nilai kamus dapat berupa objek kosong ({}) dalam permintaan. Nilai yang diharapkan: json-string/json-file/@json-file."
+    description: ''
+- uid: az_healthcareapis_workspace_fhir-service_delete
+  name: az healthcareapis workspace fhir-service delete
+  summary: Menghapus Layanan FHIR.
+  description: ''
+  syntax: >-
+    az healthcareapis workspace fhir-service delete --fhir-service-name
+                                                    --resource-group
+                                                    --workspace-name
+                                                    [--no-wait]
+                                                    [--yes]
+  examples:
+  - summary: Menghapus Layanan Fhir
+    syntax: az healthcareapis workspace fhir-service delete --name "fhirservice1" --resource-group "testRG" --workspace-name "workspace1"
+  requiredParameters:
+  - isRequired: true
+    name: --fhir-service-name --name -n
+    summary: Nama sumber daya Layanan FHIR.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama sumber daya ruang kerja.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
+    description: ''
+- uid: az_healthcareapis_workspace_fhir-service_list
+  name: az healthcareapis workspace fhir-service list
+  summary: Mencantumkan semua Layanan FHIR untuk ruang kerja yang diberikan.
+  description: ''
+  syntax: >-
+    az healthcareapis workspace fhir-service list --resource-group
+                                                  --workspace-name
+  examples:
+  - summary: Daftar fhirservices
+    syntax: az healthcareapis workspace fhir-service list --resource-group "testRG" --workspace-name "workspace1"
+  requiredParameters:
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama sumber daya ruang kerja.
+    description: ''
+- uid: az_healthcareapis_workspace_fhir-service_show
+  name: az healthcareapis workspace fhir-service show
+  summary: Mendapatkan properti dari Layanan FHIR yang ditentukan.
+  description: ''
+  syntax: >-
+    az healthcareapis workspace fhir-service show --fhir-service-name
+                                                  --resource-group
+                                                  --workspace-name
+  examples:
+  - summary: Mendapatkan Layanan Fhir
+    syntax: az healthcareapis workspace fhir-service show --name "fhirservices1" --resource-group "testRG" --workspace-name "workspace1"
+  requiredParameters:
+  - isRequired: true
+    name: --fhir-service-name --name -n
+    summary: Nama sumber daya Layanan FHIR.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama sumber daya ruang kerja.
+    description: ''
+- uid: az_healthcareapis_workspace_fhir-service_update
+  name: az healthcareapis workspace fhir-service update
+  summary: Detail Layanan Patch FHIR.
+  description: ''
+  syntax: >-
+    az healthcareapis workspace fhir-service update --fhir-service-name
+                                                    --resource-group
+                                                    --workspace-name
+                                                    [--identity-type {None, SystemAssigned, SystemAssigned,UserAssigned, UserAssigned}]
+                                                    [--no-wait]
+                                                    [--tags]
+                                                    [--user-assigned-identities]
+  examples:
+  - summary: Memperbarui Layanan Fhir
+    syntax: az healthcareapis workspace fhir-service update --name "fhirservice1" --tags tagKey="tagValue" --resource-group "testRG" --workspace-name "workspace1"
+  requiredParameters:
+  - isRequired: true
+    name: --fhir-service-name --name -n
+    summary: Nama sumber daya Layanan FHIR.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama sumber daya ruang kerja.
+    description: ''
+  optionalParameters:
+  - name: --identity-type
+    parameterValueGroup: None, SystemAssigned, SystemAssigned,UserAssigned, UserAssigned
+    summary: Jenis identitas yang ditentukan, saat ini SystemAssigned dan None diperbolehkan.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --tags
+    summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --user-assigned-identities -i
+    summary: "Kumpulan identitas yang ditetapkan pengguna yang terkait dengan sumber daya. Kunci kamus userAssignedIdentities akan menjadi id sumber daya ARM dalam formulir: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. Nilai kamus dapat berupa objek kosong ({}) dalam permintaan. Nilai yang diharapkan: json-string/json-file/@json-file."
+    description: ''
+- uid: az_healthcareapis_workspace_fhir-service_wait
+  name: az healthcareapis workspace fhir-service wait
+  summary: Tempatkan CLI dalam keadaan menunggu sampai kondisi layanan fhir ruang kerja layanan kesehatan terpenuhi.
+  description: ''
+  syntax: >-
+    az healthcareapis workspace fhir-service wait --fhir-service-name
+                                                  --resource-group
+                                                  --workspace-name
+                                                  [--created]
+                                                  [--custom]
+                                                  [--deleted]
+                                                  [--exists]
+                                                  [--interval]
+                                                  [--timeout]
+                                                  [--updated]
+  examples:
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga layanan fhir ruang kerja healthcareapis berhasil dibuat.
+    syntax: az healthcareapis workspace fhir-service wait --name "fhirservices1" --resource-group "testRG" --workspace-name "workspace1" --created
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga layanan fhir ruang kerja healthcareapis berhasil diperbarui.
+    syntax: az healthcareapis workspace fhir-service wait --name "fhirservices1" --resource-group "testRG" --workspace-name "workspace1" --updated
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga layanan fhir ruang kerja healthcareapis berhasil dihapus.
+    syntax: az healthcareapis workspace fhir-service wait --name "fhirservices1" --resource-group "testRG" --workspace-name "workspace1" --deleted
+  requiredParameters:
+  - isRequired: true
+    name: --fhir-service-name --name -n
+    summary: Nama sumber daya Layanan FHIR.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama sumber daya ruang kerja.
+    description: ''
+  optionalParameters:
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+commands:
+- az_healthcareapis_workspace_fhir-service_create
+- az_healthcareapis_workspace_fhir-service_delete
+- az_healthcareapis_workspace_fhir-service_list
+- az_healthcareapis_workspace_fhir-service_show
+- az_healthcareapis_workspace_fhir-service_update
+- az_healthcareapis_workspace_fhir-service_wait
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Kelola layanan fhir dengan layanan kesehatan.
+  ms.openlocfilehash: 759697581e711a85960c216f5b59635bd12b5546
+  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 05/24/2022
+  ms.locfileid: "145277686"
