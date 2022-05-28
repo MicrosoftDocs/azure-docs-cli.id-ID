@@ -15,7 +15,7 @@ directCommands:
   requiredParameters:
   - isRequired: true
     name: --id
-    summary: Uri pengidentifikasi, id aplikasi, atau id objek aplikasi terkait.
+    summary: Pengidentifikasi uri, id aplikasi, atau id objek dari aplikasi terkait.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
 - uid: az_ad_sp_create-for-rbac
@@ -29,8 +29,8 @@ directCommands:
   syntax: >-
     az ad sp create-for-rbac [--cert]
                              [--create-cert]
+                             [--display-name]
                              [--keyvault]
-                             [--name]
                              [--role]
                              [--scopes]
                              [--sdk-auth {false, true}]
@@ -56,17 +56,17 @@ directCommands:
   - name: --create-cert
     summary: Buat sertifikat yang ditandatangani sendiri untuk digunakan untuk kredensial. Hanya pengguna OS saat ini yang memiliki izin baca/tulis ke sertifikat ini.
     description: Gunakan dengan `--keyvault` untuk membuat sertifikat di Key Vault. Jika tidak, sertifikat akan dibuat secara lokal.
+  - name: --display-name --name -n
+    summary: Nama tampilan perwakilan layanan. Jika tidak ada, default ke azure-cli-%Y-%m-%d-%H-%M-%S di mana akhiran adalah waktu pembuatan.
+    description: ''
   - name: --keyvault
     summary: Nama atau ID KeyVault yang digunakan untuk membuat atau mengambil sertifikat.
-    description: ''
-  - name: --name -n
-    summary: Nama tampilan perwakilan layanan. Jika tidak ada, default ke azure-cli-%Y-%m-%d-%H-%M-%S di mana akhiran adalah waktu pembuatan.
     description: ''
   - name: --role
     summary: Peran perwakilan layanan.
     description: ''
-  - name: --cakupan
-    summary: Daftar cakupan yang dipisahkan ruang yang berlaku untuk penetapan peran perwakilan layanan. misalnya, /subscriptions/0b1f6471-1bf0-4dda-aec3-1111222223333/resourceGroups/myGroup, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM.
+  - name: --scopes
+    summary: Daftar cakupan yang dipisahkan ruang lingkup yang berlaku untuk penetapan peran perwakilan layanan. misalnya, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM.
     description: ''
   - name: --sdk-auth
     parameterValueGroup: false, true
@@ -76,7 +76,7 @@ directCommands:
     parameterValueGroup: false, true
     summary: No-op.
     description: ''
-  - name: --tahun
+  - name: --years
     summary: 'Jumlah tahun di mana kredensial akan valid. Default: 1 tahun.'
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/role/_help.py
@@ -127,8 +127,12 @@ directCommands:
   description: ''
   syntax: az ad sp show --id
   examples:
-  - summary: Dapatkan detail perwakilan layanan. (dibuat otomatis)
+  - summary: Dapatkan detail perwakilan layanan dengan appId.
     syntax: az ad sp show --id 00000000-0000-0000-0000-000000000000
+  - summary: Dapatkan detail perwakilan layanan dengan id.
+    syntax: az ad sp show --id 00000000-0000-0000-0000-000000000000
+  - summary: Dapatkan detail perwakilan layanan dengan URI pengidentifikasi.
+    syntax: az ad sp show --id api://myapp
   requiredParameters:
   - isRequired: true
     name: --id
@@ -161,7 +165,7 @@ directCommands:
     summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
     description: ''
   - name: --remove
-    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
     description: ''
   - name: --set
     summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
@@ -199,11 +203,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 03/09/2022
+  ms.date: 05/16/2022
   description: Mengelola Azure Active Directory perwakilan layanan untuk autentikasi otomatisasi.
-  ms.openlocfilehash: 13a51c8732da7f6f69c1ed2cb75af2d1e17d3e0a
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: f82c5625b601d150b0be8c7342a60e1b332524af
+  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141423755"
+  ms.lasthandoff: 05/24/2022
+  ms.locfileid: "145216463"
