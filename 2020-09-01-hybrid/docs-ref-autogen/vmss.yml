@@ -5,7 +5,7 @@ summary: Mengelola pengelompokan komputer virtual dalam Azure Virtual Machine Sc
 description: ''
 directCommands:
 - uid: az_vmss_create
-  name: buat vmss az
+  name: az vmss create
   summary: Membuat Set Skala Komputer Virtual Azure.
   description: Untuk tutorial end-to-end, lihat https://docs.microsoft.com/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-linux-create-cli.
   syntax: >-
@@ -48,7 +48,7 @@ directCommands:
                    [--lb]
                    [--lb-nat-pool-name]
                    [--lb-sku {Basic, Standard}]
-                   [--license-type {None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server}]
+                   [--license-type {None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server}]
                    [--location]
                    [--max-price]
                    [--no-wait]
@@ -250,13 +250,13 @@ directCommands:
     summary: Kebijakan pengeluaran untuk komputer virtual dalam set skala prioritas Spot. Kebijakan pengeluaran default adalah Batalkan alokasi untuk set skala prioritas Spot.
     description: ''
   - name: --generate-ssh-keys
-    summary: Buat file kunci publik dan privat SSH jika hilang. Kunci akan disimpan di direktori ~/.ssh.
+    summary: Hasilkan file kunci publik dan privat SSH jika hilang. Kunci akan disimpan di direktori ~/.ssh.
     description: ''
   - name: --health-probe
     summary: Nama pemeriksaan dari load balancer yang ada, terutama digunakan untuk peningkatan bergulir atau perbaikan otomatis.
     description: ''
   - name: --host-group
-    summary: Nama atau ID grup host khusus tempat skala komputer virtual ditetapkan berada.
+    summary: Nama atau ID grup host khusus tempat set skala komputer virtual berada.
     description: ''
   - name: --image
     summary: 'Nama citra sistem operasi sebagai alias URN, URN, nama gambar kustom atau ID, atau URI blob VHD. Selain itu, ini juga mendukung gambar galeri bersama. Format URN yang valid: "Publisher:Offer:Sku:Version".'
@@ -277,7 +277,7 @@ directCommands:
     summary: Sku Load Balancer untuk dibuat. Default ke 'Standar' saat grup penempatan tunggal dinonaktifkan; jika tidak, default ke 'Dasar'. IP publik didukung untuk dibuat di zona tepi hanya ketika 'Standar'.
     description: ''
   - name: --license-type
-    parameterValueGroup: None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server
+    parameterValueGroup: None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server
     summary: Menentukan bahwa gambar atau disk Windows dilisensikan secara lokal. Untuk mengaktifkan Azure Hybrid Benefit untuk Windows Server, gunakan 'Windows_Server'. Untuk mengaktifkan Hak Hosting Multi-penyewa untuk Windows 10, gunakan 'Windows_Client'. Untuk informasi selengkapnya, lihat dokumen online Azure Windows VM.
     description: ''
   - name: --location -l
@@ -290,7 +290,7 @@ directCommands:
     summary: Jangan menunggu operasi jangka panjang selesai.
     description: ''
   - name: --nsg
-    summary: Nama atau ID Grup Keamanan Jaringan yang ada.
+    summary: Nama atau ID dari Kelompok Keamanan Jaringan yang ada.
     description: ''
   - name: --orchestration-mode
     defaultValue: Uniform
@@ -332,12 +332,12 @@ directCommands:
   - name: --ppg
     summary: Nama atau ID grup penempatan kedekatan yang harus dikaitkan dengan VMSS.
     description: ''
-  - name: --prioritas
+  - name: --priority
     parameterValueGroup: Low, Regular, Spot
-    summary: Prioritas. Gunakan 'Spot' untuk menjalankan beban kerja berumur pendek dengan cara yang hemat biaya. Enum 'Rendah' akan ditolak di masa depan. Silakan gunakan 'Spot' untuk menyebarkan Azure spot VM dan/atau VMSS. Default ke Reguler.
+    summary: Prioritas. Gunakan 'Spot' untuk menjalankan beban kerja berumur pendek dengan cara yang hemat biaya. Enum 'rendah' akan ditolak di masa mendatang. Silakan gunakan 'Spot' untuk menyebarkan Azure spot VM dan/atau VMSS. Default ke Reguler.
     description: ''
   - name: --public-ip-address
-    summary: Nama alamat IP publik saat membuat satu (default) atau mereferensikan yang sudah ada. Dapat juga mereferensikan IP publik yang ada berdasarkan ID atau menentukan "" untuk Tidak Ada ('"' di Azure CLI menggunakan operator PowerShell atau --%).
+    summary: Nama alamat IP publik saat membuat alamat IP publik (default) atau mereferensikan yang sudah ada. Dapat juga mereferensikan IP publik yang ada dengan ID atau menentukan "" untuk Tidak Ada ('""' di Azure CLI menggunakan operator PowerShell atau --%).
     description: ''
   - name: --public-ip-address-allocation
     parameterValueGroup: dynamic, static
@@ -356,7 +356,7 @@ directCommands:
     parameterValueGroup: Default, NewestVM, OldestVM
     summary: Tentukan kebijakan penyempurnaan skala (dibatasi ruang) yang memutuskan komputer virtual mana yang dipilih untuk dihapus saat Set Skala Komputer Virtual diskalakan.
     description: ''
-  - name: --cakupan
+  - name: --scope
     summary: Cakupan yang dapat diakses oleh identitas yang ditetapkan sistem.
     description: ''
   - name: --secrets
@@ -625,10 +625,10 @@ directCommands:
                            [--select]
   optionalParameters:
   - name: --expand
-    summary: Ekspresi perluas untuk diterapkan ke operasi. Nilai yang diizinkan adalah 'instanceView'.
+    summary: Ekspresi perluas untuk diterapkan ke operasi. Nilai yang diizinkan adalah 'instanceView'. Nilai defaultnya adalah Tidak Ada.
     description: ''
   - name: --filter
-    summary: Filter yang akan diterapkan ke operasi. Nilai yang diizinkan adalah 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'.
+    summary: Filter yang akan diterapkan ke operasi. Nilai yang diizinkan adalah 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'. Nilai defaultnya adalah Tidak Ada.
     description: ''
   - name: --ids
     summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
@@ -640,7 +640,7 @@ directCommands:
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
   - name: --select
-    summary: Parameter daftar. Nilai yang diizinkan adalah 'instanceView', 'instanceView/statuses'.
+    summary: Parameter daftar. Nilai yang diizinkan adalah 'instanceView', 'instanceView/statuses'. Nilai defaultnya adalah Tidak Ada.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
 - uid: az_vmss_list-skus
@@ -682,7 +682,7 @@ directCommands:
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
   - name: --vm-instance-i-ds
-    summary: Daftar ID instans komputer virtual dari set skala VM.
+    summary: Daftar ID instans komputer virtual dari set skala VM. Nilai defaultnya adalah Tidak Ada.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
 - uid: az_vmss_reimage
@@ -717,7 +717,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
 - uid: az_vmss_restart
   name: az vmss restart
-  summary: Hidupkan ulang VM dalam VMSS.
+  summary: Mulai ulang VM dalam VMSS.
   description: ''
   syntax: >-
     az vmss restart --name
@@ -725,7 +725,7 @@ directCommands:
                     [--instance-ids]
                     [--no-wait]
   examples:
-  - summary: Hidupkan ulang VM dalam VMSS. (dibuat otomatis)
+  - summary: Mulai ulang VM dalam VMSS. (dibuat otomatis)
     syntax: az vmss restart --instance-ids 1 --name MyScaleSet --resource-group MyResourceGroup
   requiredParameters:
   - isRequired: true
@@ -745,7 +745,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
 - uid: az_vmss_scale
-  name: skala az vmss
+  name: az vmss scale
   summary: Ubah jumlah VM dalam VMSS.
   description: ''
   syntax: >-
@@ -782,7 +782,7 @@ directCommands:
   description: ''
   syntax: >-
     az vmss set-orchestration-service-state --action {Resume, Suspend}
-                                            --service-name {AutomaticRepairs, DummyOrchestrationServiceName}
+                                            --service-name {AutomaticRepairs}
                                             [--ids]
                                             [--name]
                                             [--no-wait]
@@ -798,7 +798,7 @@ directCommands:
     description: ''
   - isRequired: true
     name: --service-name
-    parameterValueGroup: AutomaticRepairs, DummyOrchestrationServiceName
+    parameterValueGroup: AutomaticRepairs
     summary: Nama layanan orkestrasi.
     description: ''
   optionalParameters:
@@ -943,7 +943,7 @@ directCommands:
                    [--force-string]
                    [--ids]
                    [--instance-id]
-                   [--license-type {None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server}]
+                   [--license-type {None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server}]
                    [--max-price]
                    [--name]
                    [--no-wait]
@@ -993,7 +993,7 @@ directCommands:
     summary: Hanya berlaku saat digunakan dengan `--vm-sku`. Memungkinkan Anda memilih lokasi provisi disk OS Ephemeral.
     description: ''
   - name: --force-deletion
-    summary: Properti ini memungkinkan Anda menentukan apakah komputer virtual yang dipilih untuk penghapusan harus dihapus paksa saat set skala komputer virtual sedang diskalakan.
+    summary: Properti ini memungkinkan Anda menentukan apakah komputer virtual yang dipilih untuk penghapusan harus dihapus paksa ketika set skala komputer virtual sedang diskalakan.
     description: ''
   - name: --force-string
     summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
@@ -1005,7 +1005,7 @@ directCommands:
     summary: Perbarui instans VM dengan ID ini. Jika hilang, Perbarui VMSS.
     description: ''
   - name: --license-type
-    parameterValueGroup: None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server
+    parameterValueGroup: None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server
     summary: Menentukan bahwa gambar atau disk Windows dilisensikan secara lokal. Untuk mengaktifkan Azure Hybrid Benefit untuk Windows Server, gunakan 'Windows_Server'. Untuk mengaktifkan Hak Hosting Multi-penyewa untuk Windows 10, gunakan 'Windows_Client'. Untuk informasi selengkapnya, lihat dokumen online Azure Windows VM.
     description: ''
   - name: --max-price
@@ -1020,9 +1020,9 @@ directCommands:
   - name: --ppg
     summary: Nama atau ID grup penempatan kedekatan yang harus dikaitkan dengan VMSS.
     description: ''
-  - name: --prioritas
+  - name: --priority
     parameterValueGroup: Low, Regular, Spot
-    summary: Prioritas. Gunakan 'Spot' untuk menjalankan beban kerja berumur pendek dengan cara yang hemat biaya. Enum 'Rendah' akan ditolak di masa depan. Silakan gunakan 'Spot' untuk menyebarkan Azure spot VM dan/atau VMSS. Default ke Reguler.
+    summary: Prioritas. Gunakan 'Spot' untuk menjalankan beban kerja berumur pendek dengan cara yang hemat biaya. Enum 'rendah' akan ditolak di masa mendatang. Silakan gunakan 'Spot' untuk menyebarkan Azure spot VM dan/atau VMSS. Default ke Reguler.
     description: ''
   - name: --protect-from-scale-in
     parameterValueGroup: false, true
@@ -1033,7 +1033,7 @@ directCommands:
     summary: Lindungi instans VM dari tindakan set skala (termasuk penyempurnaan skala).
     description: ''
   - name: --remove
-    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
     description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
@@ -1050,7 +1050,7 @@ directCommands:
     description: ''
   - name: --ultra-ssd-enabled
     parameterValueGroup: false, true
-    summary: Mengaktifkan atau menonaktifkan kemampuan untuk memiliki 1 atau lebih disk data terkelola dengan akun penyimpanan UltraSSD_LRS.
+    summary: Mengaktifkan atau menonaktifkan kemampuan untuk memiliki 1 disk data terkelola atau lebih dengan akun penyimpanan UltraSSD_LRS.
     description: ''
   - name: --vm-sku
     summary: Ukuran baru instans komputer virtual dalam set skala. Default ke "Standard_DS1_v2". Lihat https://azure.microsoft.com/pricing/details/virtual-machines/ untuk info ukuran.
@@ -1058,7 +1058,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
 - uid: az_vmss_update-instances
   name: az vmss update-instances
-  summary: Meningkatkan VM dalam VMSS.
+  summary: Tingkatkan VM dalam VMSS.
   description: ''
   syntax: >-
     az vmss update-instances --instance-ids
@@ -1066,7 +1066,7 @@ directCommands:
                              --resource-group
                              [--no-wait]
   examples:
-  - summary: Meningkatkan VM dalam VMSS. (dibuat otomatis)
+  - summary: Tingkatkan VM dalam VMSS. (dibuat otomatis)
     syntax: az vmss update-instances --instance-ids 1 --name MyScaleSet --resource-group MyResourceGroup
   requiredParameters:
   - isRequired: true
@@ -1103,9 +1103,9 @@ directCommands:
                  [--timeout]
                  [--updated]
   examples:
-  - summary: Tempatkan CLI dalam status menunggu hingga VMSS telah diperbarui.
+  - summary: Tempatkan CLI dalam status menunggu hingga VMSS diperbarui.
     syntax: az vmss wait --updated --name MyScaleSet --resource-group MyResourceGroup
-  - summary: Tempatkan CLI dalam status menunggu hingga instans VMSS telah diperbarui.
+  - summary: Tempatkan CLI dalam status menunggu hingga instans VMSS diperbarui.
     syntax: az vmss wait --updated --instance-id 1 --name MyScaleSet --resource-group MyResourceGroup
   - summary: Tempatkan CLI dalam status menunggu hingga kondisi set skala terpenuhi. (dibuat otomatis)
     syntax: az vmss wait --created --name MyScaleSet --resource-group MyResourceGroup
@@ -1142,7 +1142,7 @@ directCommands:
     defaultValue: "3600"
     summary: Waktu tunggu maksimum dalam detik.
     description: ''
-  - name: --diperbarui
+  - name: --updated
     summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
@@ -1229,11 +1229,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 04/01/2022
+  ms.date: 05/20/2022
   description: Mengelola pengelompokan komputer virtual dalam Azure Virtual Machine Scale Set (VMSS).
-  ms.openlocfilehash: 02b1eb5772977581ac4dd27ce533b95cdff4b4d2
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: 97b07161baebf838d4a198aef213cbd6fd1e224d
+  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141436391"
+  ms.lasthandoff: 05/24/2022
+  ms.locfileid: "145217165"

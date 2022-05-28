@@ -4,7 +4,7 @@ name: az containerapp ingress traffic
 extensionInformation: >-
   > [!Note]
 
-  > Referensi ini adalah bagian dari ekstensi **containerapp** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **lalu lintas ingress az containerapp** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+  > Referensi ini adalah bagian dari ekstensi **containerapp** untuk Azure CLI (versi 2.37.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **lalu lintas masuk az containerapp** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
 summary: Perintah untuk mengelola pemisahan lalu lintas.
 description: ''
 directCommands:
@@ -15,12 +15,18 @@ directCommands:
   syntax: >-
     az containerapp ingress traffic set --name
                                         --resource-group
-                                        --traffic-weight
+                                        [--label-weight]
+                                        [--revision-weight]
+                                        [--traffic-weight]
   examples:
-  - summary: Rutekan 100%% lalu lintas aplikasi kontainer ke revisi terbarunya.
-    syntax: az containerapp ingress traffic set -n MyContainerapp -g MyResourceGroup --traffic-weight latest=100
+  - summary: Merutekan 100% lalu lintas aplikasi kontainer ke revisi terbarunya.
+    syntax: az containerapp ingress traffic set -n MyContainerapp -g MyResourceGroup --revision-weight latest=100
   - summary: Membagi lalu lintas aplikasi kontainer antara dua revisi.
-    syntax: az containerapp ingress traffic set -n MyContainerapp -g MyResourceGroup --traffic-weight latest=80 MyRevisionName=20
+    syntax: az containerapp ingress traffic set -n MyContainerapp -g MyResourceGroup --revision-weight latest=80 MyRevisionName=20
+  - summary: Membagi lalu lintas aplikasi kontainer di antara dua label.
+    syntax: az containerapp ingress traffic set -n MyContainerapp -g MyResourceGroup --label-weight myLabel=80 myLabel2=20
+  - summary: Membagi lalu lintas aplikasi kontainer antara label dan revisi.
+    syntax: az containerapp ingress traffic set -n MyContainerapp -g MyResourceGroup --revision-weight latest=80 --label-weight myLabel=20
   requiredParameters:
   - isRequired: true
     name: --name -n
@@ -30,8 +36,14 @@ directCommands:
     name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
-  - isRequired: true
-    name: --traffic-weight
+  optionalParameters:
+  - name: --label-weight
+    summary: Daftar bobot label untuk aplikasi kontainer. Nilai yang dipisahkan spasi dalam format 'label_name=weight'.
+    description: ''
+  - name: --revision-weight
+    summary: Daftar bobot revisi untuk aplikasi kontainer. Nilai yang dipisahkan spasi dalam format 'revision_name=weight'. Untuk revisi terbaru, gunakan 'latest=weight'.
+    description: ''
+  - name: --traffic-weight
     summary: Daftar bobot revisi untuk aplikasi kontainer. Nilai yang dipisahkan spasi dalam format 'revision_name=weight'. Untuk revisi terbaru, gunakan 'latest=weight'.
     description: ''
 - uid: az_containerapp_ingress_traffic_show
@@ -75,9 +87,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Perintah untuk mengelola pemisahan lalu lintas.
-  ms.openlocfilehash: fd2be0984a439c28f1d03eebf3f2274d6f7d9952
-  ms.sourcegitcommit: 347d879cfee65108790e90ffe0abe845b01072f1
+  ms.openlocfilehash: 750c02cb082d008d9c1bb38a07352481a9608049
+  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 03/28/2022
-  ms.locfileid: "141202464"
+  ms.lasthandoff: 05/24/2022
+  ms.locfileid: "145259625"
