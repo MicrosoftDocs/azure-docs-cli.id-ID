@@ -4,8 +4,8 @@ name: az ml batch-endpoint
 extensionInformation: >-
   > [!Note]
 
-  > Referensi ini adalah bagian dari ekstensi **ml** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **az ml batch-endpoint** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
-summary: Mengelola titik akhir batch Azure ML.
+  > Referensi ini adalah bagian dari ekstensi **ml** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az ml batch-endpoint** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola titik akhir azure ML batch.
 description: Titik akhir Azure ML menyediakan antarmuka sederhana untuk membuat dan mengelola penyebaran model. Setiap titik akhir dapat memiliki satu atau beberapa penyebaran. Titik akhir batch digunakan untuk penilaian batch offline.
 directCommands:
 - uid: az_ml_batch-endpoint_create
@@ -82,30 +82,39 @@ directCommands:
 - uid: az_ml_batch-endpoint_invoke
   name: az ml batch-endpoint invoke
   summary: Memanggil titik akhir.
-  description: Anda dapat memulai eksekusi inferensi batch dengan memanggil titik akhir dengan beberapa data. Untuk titik akhir batch, pemanggilan akan memicu pekerjaan penilaian batch asinkron.
+  description: Anda dapat memulai inferensi batch yang dijalankan dengan memanggil titik akhir dengan beberapa data. Untuk titik akhir batch, pemanggilan akan memicu pekerjaan penilaian batch asinkron.
   syntax: >-
-    az ml batch-endpoint invoke --name
+    az ml batch-endpoint invoke --input
+                                --name
                                 --resource-group
                                 --workspace-name
                                 [--deployment-name]
-                                [--input-data]
-                                [--input-local-path]
-                                [--input-path]
+                                [--input-type]
                                 [--instance-count]
                                 [--job-name]
                                 [--mini-batch-size]
                                 [--output-path]
                                 [--set]
   examples:
-  - summary: Panggil titik akhir batch dengan data input dari aset data Azure ML terdaftar (dan ambil alih pengaturan penyebaran default untuk mini_batch_size)
-    syntax: az ml batch-endpoint invoke --name my-batch-endpoint  --input-data azureml:my-dataset:1 --mini-batch-size 64 --resource-group my-resource-group --workspace-name my-workspace
-  - summary: Memanggil titik akhir batch dengan data input dari URL penyimpanan
-    syntax: az ml batch-endpoint invoke --name my-batch-endpoint  --input-path folder:https://pipelinedata.blob.core.windows.net/sampledata/mnist --resource-group my-resource-group --workspace-name my-workspace
-  - summary: Memanggil titik akhir batch dengan data input dari file lokal
-    syntax: az ml batch-endpoint invoke --name my-batch-endpoint  --input-local-path ./mnist --resource-group my-resource-group --workspace-name my-workspace
-  - summary: Panggil titik akhir batch dengan direktori lokal sebagai jalur input dan output dan timpa beberapa pengaturan penyebaran batch selama pemanggilan titik akhir
-    syntax: az ml batch-endpoint invoke --name my-batch-endpoint  --input-local-path ./mnist --instance-count 2 --mini-batch-size 5 --output-path folder:azureml://datastores/workspaceblobstore/paths/tests/output --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Panggil titik akhir batch dengan data input dari aset data Azure ML terdaftar dan ambil alih pengaturan penyebaran default untuk mini_batch_size
+    syntax: az ml batch-endpoint invoke --name my-batch-endpoint --input azureml:my-dataset:1 --mini-batch-size 64 --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Memanggil titik akhir batch dengan file input dari URI publik
+    syntax: az ml batch-endpoint invoke --name my-batch-endpoint --input-type uri_file --input https://pipelinedata.blob.core.windows.net/sampledata/mnist/0.png --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Memanggil titik akhir batch dengan file input dari datastore terdaftar
+    syntax: az ml batch-endpoint invoke --name my-batch-endpoint --input-type uri_file --input azureml://datastores/workspaceblobstore/paths/{path_to_data}/mnist/0.png --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Memanggil titik akhir batch dengan folder input dari URI publik
+    syntax: az ml batch-endpoint invoke --name my-batch-endpoint --input-type uri_folder --input https://pipelinedata.blob.core.windows.net/sampledata/mnist --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Memanggil titik akhir batch dengan folder input dari datastore terdaftar
+    syntax: az ml batch-endpoint invoke --name my-batch-endpoint --input-type uri_folder --input azureml://datastores/workspaceblobstore/paths/{path_to_data}/mnist --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Memanggil titik akhir batch dengan file di folder lokal
+    syntax: az ml batch-endpoint invoke --name my-batch-endpoint --input ./mnist_folder --resource-group my-resource-group --workspace-name my-workspace
+  - summary: Panggil titik akhir batch dengan folder lokal sebagai jalur input dan output dan timpa beberapa pengaturan penyebaran batch selama pemanggilan titik akhir
+    syntax: az ml batch-endpoint invoke --name my-batch-endpoint --input ./mnist_folder --instance-count 2 --mini-batch-size 5 --output-path azureml://datastores/workspaceblobstore/paths/tests/output --resource-group my-resource-group --workspace-name my-workspace
   requiredParameters:
+  - isRequired: true
+    name: --input
+    summary: Referensi ke data input yang akan digunakan untuk inferensi batch. Ini bisa menjadi jalur di datastore, URI publik, aset data terdaftar, atau jalur folder lokal.
+    description: ''
   - isRequired: true
     name: --name -n
     summary: Nama titik akhir batch.
@@ -122,14 +131,8 @@ directCommands:
   - name: --deployment-name -d
     summary: Nama penyebaran ke target.
     description: ''
-  - name: --input-data
-    summary: Input aset data. Format harus azureml:<nama data>:<> versi data.
-    description: ''
-  - name: --input-local-path
-    summary: Jalur lokal ke data input. File akan diunggah dan didaftarkan sebagai aset data Azure ML.
-    description: ''
-  - name: --input-path
-    summary: URL atau jalur di datastore tempat data input berada.
+  - name: --input-type
+    summary: 'Jenis input, menentukan apakah itu file atau folder. Gunakan ini saat Anda menggunakan jalur di datastore atau URI publik. Nilai yang didukung: uri_folder, uri_file.'
     description: ''
   - name: --instance-count -c
     summary: Jumlah instans yang akan dijalankan prediksi.
@@ -141,7 +144,7 @@ directCommands:
     summary: Ukuran setiap batch mini yang akan dibagi data input untuk prediksi.
     description: ''
   - name: --output-path
-    summary: Jalur pada datastore tempat file output akan diunggah.
+    summary: Jalur di datastore tempat file output akan diunggah.
     description: ''
   - name: --set
     summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur. Contoh: --set property1.property2=<value>.'
@@ -222,7 +225,7 @@ directCommands:
 - uid: az_ml_batch-endpoint_update
   name: az ml batch-endpoint update
   summary: Memperbarui titik akhir.
-  description: Properti 'description', 'tags', dan 'defaults' dari titik akhir dapat diperbarui. Selain itu, penyebaran baru dapat ditambahkan ke titik akhir, dan penyebaran yang ada dapat diperbarui.
+  description: Properti 'deskripsi', 'tag', dan 'default' dari titik akhir dapat diperbarui. Selain itu, penyebaran baru dapat ditambahkan ke titik akhir, dan penyebaran yang ada dapat diperbarui.
   syntax: >-
     az ml batch-endpoint update --resource-group
                                 --workspace-name
@@ -268,7 +271,7 @@ directCommands:
     summary: Jangan menunggu operasi jangka panjang selesai. Defaultnya adalah False.
     description: ''
   - name: --remove
-    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
     description: ''
   - name: --set
     summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
@@ -300,9 +303,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Titik akhir Azure ML menyediakan antarmuka sederhana untuk membuat dan mengelola penyebaran model. Setiap titik akhir dapat memiliki satu atau beberapa penyebaran. Titik akhir batch digunakan untuk penilaian batch offline.
-  ms.openlocfilehash: 5c581daf833c2d16c088d4c8a6c25492ded92efc
-  ms.sourcegitcommit: 013ae480807b6745bf8786b0ffc4362af301f8e8
+  ms.openlocfilehash: fb19a7a1bcf36c42a6fc01b9145e4e3578bf72ab
+  ms.sourcegitcommit: 2196dbeccfb2c3fd95a72a3d52f1dc41271a04e7
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 05/04/2022
-  ms.locfileid: "144763684"
+  ms.lasthandoff: 05/25/2022
+  ms.locfileid: "145758187"

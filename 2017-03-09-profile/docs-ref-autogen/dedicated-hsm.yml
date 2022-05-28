@@ -4,8 +4,8 @@ name: az dedicated-hsm
 extensionInformation: >-
   > [!Note]
 
-  > Referensi ini adalah bagian dari ekstensi **modul keamanan perangkat keras** untuk Azure CLI (versi 2.3.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **az dedicated-hsm** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
-summary: Dedicated-hsm untuk membuat, memperbarui, mencantumkan, menampilkan, dan menghapus HSM.
+  > Referensi ini adalah bagian dari ekstensi **modul keamanan perangkat keras** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **az dedicated-hsm** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola hsm khusus dengan modul keamanan perangkat keras.
 description: ''
 directCommands:
 - uid: az_dedicated-hsm_create
@@ -13,26 +13,28 @@ directCommands:
   summary: Buat HSM khusus dalam langganan yang ditentukan.
   description: ''
   syntax: >-
-    az dedicated-hsm create --location
-                            --name
+    az dedicated-hsm create --name
                             --resource-group
-                            [--network-profile-network-interfaces]
+                            [--location]
+                            [--mgmt-network-interfaces]
+                            [--mgmt-network-subnet]
+                            [--network-interfaces]
                             [--no-wait]
-                            [--sku]
+                            [--sku {SafeNet Luna Network HSM A790, payShield10K_LMK1_CPS250, payShield10K_LMK1_CPS2500, payShield10K_LMK1_CPS60, payShield10K_LMK2_CPS250, payShield10K_LMK2_CPS2500, payShield10K_LMK2_CPS60}]
                             [--stamp-id]
                             [--subnet]
                             [--tags]
                             [--zones]
   examples:
-  - summary: Membuat HSM khusus baru
-    syntax: az dedicated-hsm create -n "hsm1" -l "japanwest" -i private-ip-address="1.0.0.1" -s id="/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.Network/virtualNetworks/hsm/subnets/hsm" --stamp-id "stamp1" --sku name="SafeNet Luna Network HSM A790" --tags Dept="hsm" Environment="dogfood" -g "hsm-group"
+  - summary: Membuat HSM khusus baru atau memperbarui HSM khusus yang ada
+    syntax: az dedicated-hsm create --name "hsm1" --location "westus" --network-interfaces private-ip-address="1.0.0.1" --subnet id="/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.Network/virtualNetworks/stamp01/subnets/stamp01" --stamp-id "stamp01" --sku "SafeNet Luna Network HSM A790" --tags Dept="hsm" Environment="dogfood" --resource-group "hsm-group"
+  - summary: Membuat baru atau memperbarui HSM pembayaran yang sudah ada
+    syntax: az dedicated-hsm create --name "hsm1" --location "westus" --mgmt-network-interfaces private-ip-address="1.0.0.1" --mgmt-network-subnet id="/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.Network/virtualNetworks/stamp01/subnets/stamp01" --stamp-id "stamp01" --sku "payShield10K_LMK1_CPS60" --tags Dept="hsm" Environment="dogfood" --resource-group "hsm-group"
+  - summary: Membuat baru atau memperbarui HSM pembayaran yang sudah ada dengan profil manajemen
+    syntax: az dedicated-hsm create --name "hsm1" --location "westus" --network-interfaces private-ip-address="1.0.0.2" --subnet id="/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.Network/virtualNetworks/stamp01/subnets/stamp01" --mgmt-network-interfaces private-ip-address="1.0.0.1" --mgmt-network-subnet id="/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.Network/virtualNetworks/stamp01/subnets/stamp01" --stamp-id "stamp02" --sku "payShield10K_LMK1_CPS60" --tags Dept="hsm" Environment="dogfood" --resource-group "hsm-group"
   requiredParameters:
   - isRequired: true
-    name: --location -l
-    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
-    description: ''
-  - isRequired: true
-    name: --name -n
+    name: --name
     summary: Nama Hsm khusus.
     description: ''
   - isRequired: true
@@ -40,21 +42,53 @@ directCommands:
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
   optionalParameters:
-  - name: --network-profile-network-interfaces -i
-    summary: 'Menentukan daftar alamat ip dari subnet yang ditentukan untuk antarmuka jaringan yang terkait dengan HSM khusus. Nilai yang diharapkan: -i private-ip-address=xx.'
+  - name: --location -l
+    summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
     description: ''
+  - name: --mgmt-network-interfaces -m
+    summary: Menentukan daftar Id sumber daya untuk antarmuka jaringan yang terkait dengan HSM khusus.
+    description: >-
+      Penggunaan: --mgmt-network-interfaces private-ip-address=XX
+
+
+      private-ip-address: Alamat IP privat antarmuka
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --mgmt-network-interfaces.
+  - name: --mgmt-network-subnet
+    summary: Menentukan pengidentifikasi subnet.
+    description: >-
+      Penggunaan: --mgmt-network-subnet id=XX
+
+
+      id: Id sumber daya ARM dalam bentuk /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/...
+  - name: --network-interfaces -i
+    summary: Menentukan daftar Id sumber daya untuk antarmuka jaringan yang terkait dengan HSM khusus.
+    description: >-
+      Penggunaan: --network-interfaces private-ip-address=XX
+
+
+      private-ip-address: Alamat IP privat antarmuka
+
+
+      Beberapa tindakan dapat ditentukan dengan menggunakan lebih dari satu argumen --network-interfaces.
   - name: --no-wait
     summary: Jangan menunggu operasi jangka panjang selesai.
     description: ''
   - name: --sku
-    summary: 'SKU perangkat HSM jika HSM non-standar diinginkan (defaultnya adalah: SafeNet Luna Network HSM A790).'
+    parameterValueGroup: SafeNet Luna Network HSM A790, payShield10K_LMK1_CPS250, payShield10K_LMK1_CPS2500, payShield10K_LMK1_CPS60, payShield10K_LMK2_CPS250, payShield10K_LMK2_CPS2500, payShield10K_LMK2_CPS60
+    summary: SKU HSM khusus.
     description: ''
   - name: --stamp-id
     summary: Bidang ini akan digunakan ketika RP tidak mendukung Zona ketersediaan.
     description: ''
-  - name: --subnet -s
-    summary: 'Menentukan pengidentifikasi subnet. Nilai yang diharapkan: id=xx.'
-    description: ''
+  - name: --subnet
+    summary: Menentukan pengidentifikasi subnet.
+    description: >-
+      Penggunaan: --subnet id=XX
+
+
+      id: Id sumber daya ARM dalam bentuk /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/...
   - name: --tags
     summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
     description: ''
@@ -72,10 +106,10 @@ directCommands:
                             [--yes]
   examples:
   - summary: Menghapus HSM khusus
-    syntax: az dedicated-hsm delete -n "hsm1" -g "hsm-group"
+    syntax: az dedicated-hsm delete --name "hsm1" --resource-group "hsm-group"
   requiredParameters:
   - isRequired: true
-    name: --name -n
+    name: --name
     summary: Nama HSM khusus yang akan dihapus.
     description: ''
   - isRequired: true
@@ -91,13 +125,19 @@ directCommands:
     description: ''
 - uid: az_dedicated-hsm_list
   name: az dedicated-hsm list
-  summary: Operasi Daftar mendapatkan informasi tentang HSM khusus yang terkait dengan langganan.
+  summary: Operasi Daftar mendapatkan informasi tentang hsm khusus yang terkait dengan langganan dan dalam grup sumber daya yang ditentukan. Dan operasi Daftar mendapatkan informasi tentang HSM khusus yang terkait dengan langganan.
   description: ''
   syntax: >-
     az dedicated-hsm list [--resource-group]
                           [--top]
   examples:
+  - summary: Mencantumkan perangkat HSM khusus dalam grup sumber daya
+    syntax: az dedicated-hsm list --resource-group "hsm-group"
+  - summary: Mencantumkan perangkat HSM khusus dalam grup sumber daya termasuk HSM pembayaran
+    syntax: az dedicated-hsm list --resource-group "hsm-group"
   - summary: Mencantumkan perangkat HSM khusus dalam langganan
+    syntax: az dedicated-hsm list
+  - summary: Mencantumkan perangkat HSM khusus dalam langganan termasuk HSM pembayaran
     syntax: az dedicated-hsm list
   optionalParameters:
   - name: --resource-group -g
@@ -105,6 +145,25 @@ directCommands:
     description: ''
   - name: --top
     summary: Jumlah hasil maksimum yang akan dikembalikan.
+    description: ''
+- uid: az_dedicated-hsm_list-outbound-network-dependency-endpoint
+  name: az dedicated-hsm list-outbound-network-dependency-endpoint
+  summary: Mendapatkan daftar titik akhir keluar (titik akhir jaringan dari semua dependensi keluar) di sumber daya hsm khusus yang ditentukan. Operasi mengembalikan properti dari setiap titik akhir keluar.
+  description: ''
+  syntax: >-
+    az dedicated-hsm list-outbound-network-dependency-endpoint --name
+                                                               --resource-group
+  examples:
+  - summary: Daftar OutboundNetworkDependenciesEndpoints menurut Kluster Terkelola
+    syntax: az dedicated-hsm list-outbound-network-dependency-endpoint --name "hsm1" --resource-group "hsm-group"
+  requiredParameters:
+  - isRequired: true
+    name: --name
+    summary: Nama HSM khusus.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
 - uid: az_dedicated-hsm_show
   name: az dedicated-hsm show
@@ -115,10 +174,14 @@ directCommands:
                           --resource-group
   examples:
   - summary: Mendapatkan HSM khusus
-    syntax: az dedicated-hsm show -n "hsm1" -g "hsm-group"
+    syntax: az dedicated-hsm show --name "hsm1" --resource-group "hsm-group"
+  - summary: Mendapatkan HSM pembayaran
+    syntax: az dedicated-hsm show --name "hsm1" --resource-group "hsm-group"
+  - summary: Dapatkan HSM pembayaran dengan versi api 2018-10-31Preview
+    syntax: az dedicated-hsm show --name "hsm1" --resource-group "hsm-group"
   requiredParameters:
   - isRequired: true
-    name: --name -n
+    name: --name
     summary: Nama HSM khusus.
     description: ''
   - isRequired: true
@@ -136,10 +199,12 @@ directCommands:
                             [--tags]
   examples:
   - summary: Memperbarui HSM khusus yang ada
-    syntax: az dedicated-hsm update -n "hsm1" --tags Dept="hsm" Environment="dogfood" Slice="A" -g "hsm-group"
+    syntax: az dedicated-hsm update --name "hsm1" --tags Dept="hsm" Environment="dogfood" Slice="A" --resource-group "hsm-group"
+  - summary: Memperbarui HSM pembayaran yang ada
+    syntax: az dedicated-hsm update --name "hsm1" --tags Dept="hsm" Environment="dogfood" Slice="A" --resource-group "hsm-group"
   requiredParameters:
   - isRequired: true
-    name: --name -n
+    name: --name
     summary: Nama HSM khusus.
     description: ''
   - isRequired: true
@@ -155,7 +220,7 @@ directCommands:
     description: ''
 - uid: az_dedicated-hsm_wait
   name: az dedicated-hsm wait
-  summary: Menunggu operasi selesai.
+  summary: Tempatkan CLI dalam status menunggu sampai kondisi dedicated-hsm terpenuhi.
   description: ''
   syntax: >-
     az dedicated-hsm wait --name
@@ -168,8 +233,12 @@ directCommands:
                           [--timeout]
                           [--updated]
   examples:
-  - summary: Menghapus HSM khusus
-    syntax: az dedicated-hsm wait --created -g "hsm-group" --name "hsm1"
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga dedicated-hsm berhasil dibuat.
+    syntax: az dedicated-hsm wait --name "hsm1" --resource-group "hsm-group" --created
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga dedicated-hsm berhasil diperbarui.
+    syntax: az dedicated-hsm wait --name "hsm1" --resource-group "hsm-group" --updated
+  - summary: Jeda menjalankan baris skrip CLI berikutnya hingga dedicated-hsm berhasil dihapus.
+    syntax: az dedicated-hsm wait --name "hsm1" --resource-group "hsm-group" --deleted
   requiredParameters:
   - isRequired: true
     name: --name
@@ -207,6 +276,7 @@ commands:
 - az_dedicated-hsm_create
 - az_dedicated-hsm_delete
 - az_dedicated-hsm_list
+- az_dedicated-hsm_list-outbound-network-dependency-endpoint
 - az_dedicated-hsm_show
 - az_dedicated-hsm_update
 - az_dedicated-hsm_wait
@@ -228,10 +298,10 @@ globalParameters:
 - name: --verbose
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
-  description: Dedicated-hsm untuk membuat, memperbarui, mencantumkan, menampilkan, dan menghapus HSM.
-  ms.openlocfilehash: 9676690ec68d2c3170e46e4f426726ab9e6208de
-  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  description: Mengelola hsm khusus dengan modul keamanan perangkat keras.
+  ms.openlocfilehash: 859bf95d72ccb9262c882f8e79da096eb7f2396e
+  ms.sourcegitcommit: 58f8c1b4de0e62e71cb4670bf613d9c73deb030c
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 03/25/2022
-  ms.locfileid: "141012364"
+  ms.lasthandoff: 05/27/2022
+  ms.locfileid: "145908580"
