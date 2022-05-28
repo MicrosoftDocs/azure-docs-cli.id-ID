@@ -1,12 +1,12 @@
 ### YamlMime:AzureCLIGroup
 uid: az_vm_unmanaged-disk
 name: az vm unmanaged-disk
-summary: Mengelola disk data yang tidak terkelola yang terpasang pada VM.
+summary: Kelola disk data yang tidak terkelola yang terpasang pada VM.
 description: >-
   Azure Virtual Machines menggunakan disk sebagai tempat untuk menyimpan sistem operasi, aplikasi, dan data. Semua komputer virtual Azure memiliki setidaknya dua disk: Disk sistem operasi, dan disk sementara. Disk sistem operasi dibuat dari gambar, dan disk sistem operasi dan gambar sebenarnya adalah hard disk virtual (VHD) yang disimpan di akun penyimpanan Azure. Komputer virtual juga dapat memiliki satu atau beberapa disk data, yang juga disimpan sebagai VHD.
 
 
-  Azure Managed dan Unmanaged Data Disks memiliki ukuran maksimum 4095 GB (dengan pengecualian disk yang lebih besar dalam pratinjau). Azure Unmanaged Disks juga memiliki kapasitas maksimum 4095 GB.
+  Azure Managed dan Unmanaged Data Disks memiliki ukuran maksimum 4095 GB (dengan pengecualian disk yang lebih besar dalam pratinjau). Disk Tidak Terkelola Azure juga memiliki kapasitas maksimum 4095 GB.
 
 
   Untuk informasi selengkapnya, lihat:
@@ -19,7 +19,7 @@ description: >-
 directCommands:
 - uid: az_vm_unmanaged-disk_attach
   name: az vm unmanaged-disk attach
-  summary: Lampirkan disk persisten yang tidak dikelola ke VM.
+  summary: Lampirkan disk persisten yang tidak terkelola ke VM.
   description: Ini memungkinkan pelestarian data, bahkan jika VM disediakan ulang karena pemeliharaan atau pengubahan ukuran.
   syntax: >-
     az vm unmanaged-disk attach --resource-group
@@ -37,7 +37,7 @@ directCommands:
     syntax: >-
       az vm unmanaged-disk attach -g MyResourceGroup --vm-name MyVm --name MyDataDisk \
           --vhd-uri https://mystorage.blob.core.windows.net/vhds/d1.vhd
-  - summary: Lampirkan disk persisten yang tidak dikelola ke VM. (dibuat otomatis)
+  - summary: Lampirkan disk persisten yang tidak terkelola ke VM. (dibuat otomatis)
     syntax: az vm unmanaged-disk attach --name MyDataDisk --new --resource-group MyResourceGroup --size-gb 50 --vm-name MyVm
   requiredParameters:
   - isRequired: true
@@ -49,7 +49,7 @@ directCommands:
     summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
     description: ''
   optionalParameters:
-  - name: --penembolokan
+  - name: --caching
     parameterValueGroup: None, ReadOnly, ReadWrite
     summary: Kebijakan penembolokan disk.
     description: ''
@@ -67,7 +67,7 @@ directCommands:
     summary: 'Ukuran dalam GB. Ukuran maksimum: 4095 GB (disk pratinjau tertentu bisa lebih besar).'
     description: ''
   - name: --vhd-uri
-    summary: 'URI hard disk virtual. Misalnya: https://mystorage.blob.core.windows.net/vhds/d1.vhd.'
+    summary: 'URI hard disk virtual. Contoh: https://mystorage.blob.core.windows.net/vhds/d1.vhd.'
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
 - uid: az_vm_unmanaged-disk_detach
@@ -103,9 +103,9 @@ directCommands:
     az vm unmanaged-disk list --name
                               --resource-group
   examples:
-  - summary: Cantumkan disk yang tidak terkelola yang terpasang pada VM.
+  - summary: Mencantumkan disk yang tidak terkelola yang terpasang pada VM.
     syntax: az vm unmanaged-disk list -g MyResourceGroup --vm-name MyVm
-  - summary: Cantumkan disk yang tidak dikelola dengan nama yang berisi string "data_disk".
+  - summary: Cantumkan disk yang tidak terkelola dengan nama yang berisi string "data_disk".
     syntax: >-
       az vm unmanaged-disk list -g MyResourceGroup --vm-name MyVm \
           --query "[?contains(name, 'data_disk')]" --output table
@@ -142,12 +142,12 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 04/01/2022
+  ms.date: 05/20/2022
   description: >-
     Azure Virtual Machines menggunakan disk sebagai tempat untuk menyimpan sistem operasi, aplikasi, dan data. Semua komputer virtual Azure memiliki setidaknya dua disk: Disk sistem operasi, dan disk sementara. Disk sistem operasi dibuat dari gambar, dan disk sistem operasi dan gambar sebenarnya adalah hard disk virtual (VHD) yang disimpan di akun penyimpanan Azure. Komputer virtual juga dapat memiliki satu atau beberapa disk data, yang juga disimpan sebagai VHD.
 
 
-    Azure Managed dan Unmanaged Data Disks memiliki ukuran maksimum 4095 GB (dengan pengecualian disk yang lebih besar dalam pratinjau). Azure Unmanaged Disks juga memiliki kapasitas maksimum 4095 GB.
+    Azure Managed dan Unmanaged Data Disks memiliki ukuran maksimum 4095 GB (dengan pengecualian disk yang lebih besar dalam pratinjau). Disk Tidak Terkelola Azure juga memiliki kapasitas maksimum 4095 GB.
 
 
     Untuk informasi selengkapnya, lihat:
@@ -157,9 +157,9 @@ metadata:
     - Disk Terkelola yang Lebih Besar di Pratinjau Umum - https://azure.microsoft.com/blog/introducing-the-public-preview-of-larger-managed-disks-sizes/
 
     - Disk Terkelola SSD Ultra di Pratinjau Umum - https://docs.microsoft.com/azure/virtual-machines/disks-types.
-  ms.openlocfilehash: aeaa83c53194c1c3c454f2b2e39323f474265d9c
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: c7e9bb2de5246773dc15569afff1214d0d857c70
+  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141451386"
+  ms.lasthandoff: 05/24/2022
+  ms.locfileid: "145267061"

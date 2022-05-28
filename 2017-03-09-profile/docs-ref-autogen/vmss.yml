@@ -5,7 +5,7 @@ summary: Mengelola pengelompokan komputer virtual dalam Azure Virtual Machine Sc
 description: ''
 directCommands:
 - uid: az_vmss_create
-  name: buat vmss az
+  name: az vmss create
   summary: Membuat Set Skala Komputer Virtual Azure.
   description: Untuk tutorial end-to-end, lihat https://docs.microsoft.com/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-linux-create-cli.
   syntax: >-
@@ -34,7 +34,7 @@ directCommands:
                    [--instance-count]
                    [--lb]
                    [--lb-nat-pool-name]
-                   [--license-type {None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server}]
+                   [--license-type {None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server}]
                    [--location]
                    [--no-wait]
                    [--nsg]
@@ -72,7 +72,7 @@ directCommands:
   examples:
   - summary: Buat set skala VM Windows dengan 5 instans, load balancer, alamat IP publik, disk data 2GB, dan disk OS 40GB.
     syntax: az vmss create -n MyVmss -g MyResourceGroup --instance-count 5 --image Win2016Datacenter --data-disk-sizes-gb 2 --os-disk-size-gb 40
-  - summary: Buat set skala VM Linux dengan pasangan kunci ssh yang dihasilkan secara otomatis, alamat IP publik, entri DNS, load balancer yang ada, dan jaringan virtual yang ada.
+  - summary: Buat set skala VM Linux dengan pasangan kunci ssh yang dibuat secara otomatis, alamat IP publik, entri DNS, load balancer yang ada, dan jaringan virtual yang ada.
     syntax: >-
       az vmss create -n MyVmss -g MyResourceGroup --public-ip-address-dns-name my-globally-dns-name \
           --load-balancer MyLoadBalancer --vnet-name MyVnet --subnet MySubnet --image UbuntuLTS \
@@ -112,11 +112,11 @@ directCommands:
     syntax: az vmss create -n MyVmss -g rg1 --image debian --assign-identity  [system] /subscriptions/99999999-1bf0-4dda-aec3-cb9272f09590/resourcegroups/myRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myID
   - summary: Buat VMSS yang mendukung SpotRestore.
     syntax: az vmss create -n MyVmss -g MyResourceGroup  --location NorthEurope --instance-count 2 --image Centos --priority Spot --eviction-policy Deallocate --single-placement-group --enable-spot-restore True --spot-restore-timeout PT1H
-  - summary: Buat VMSS dari gambar galeri bersama. (fitur pratinjau privat, silakan hubungi tim galeri gambar bersama melalui email sigpmdev@microsoft.com untuk mendaftar pratinjau jika Anda tertarik menggunakan fitur ini).
+  - summary: Buat VMSS dari gambar galeri bersama. (fitur pratinjau pribadi, silakan hubungi tim galeri gambar bersama melalui email sigpmdev@microsoft.com untuk mendaftar pratinjau jika Anda tertarik menggunakan fitur ini).
     syntax: az vmss create -n MyVmss -g MyResourceGroup --image /SharedGalleries/{gallery_unique_name}/Images/{image}/Versions/{version}
   - summary: Buat VMSS dari gambar galeri komunitas (fitur pratinjau pribadi, silakan hubungi tim galeri gambar komunitas melalui email sigpmdev@microsoft.com untuk mendaftar pratinjau jika Anda tertarik menggunakan fitur ini).
     syntax: az vmss create -n MyVmss -g MyResourceGroup --image /CommunityGalleries/{gallery_unique_name}/Images/{image}/Versions/{version}
-  - summary: Membuat VMSS Windows dengan mode patch 'Manual' (Mode patch 'AutomaticByPlatform' saat ini tidak didukung selama pembuatan VMSS sebagai ekstensi kesehatan yang diperlukan untuk mode 'AutomaticByPlatform' tidak dapat diatur selama pembuatan VMSS).
+  - summary: Buat VMSS Windows dengan mode patch 'Manual' (Mode patch 'AutomaticByPlatform' saat ini tidak didukung selama pembuatan VMSS sebagai ekstensi kesehatan yang diperlukan untuk mode 'AutomaticByPlatform' tidak dapat diatur selama pembuatan VMSS).
     syntax: az vmss create -n MyVmss -g MyResourceGroup --image Win2019Datacenter --enable-agent --enable-auto-update false --patch-mode Manual --orchestration-mode Flexible
   requiredParameters:
   - isRequired: true
@@ -135,10 +135,10 @@ directCommands:
     summary: Kata sandi untuk VM jika jenis autentikasi adalah 'Kata Sandi'.
     description: ''
   - name: --admin-username
-    summary: Nama pengguna untuk VM. Nilai default adalah nama pengguna OS saat ini. Jika nilai default adalah sistem yang dicadangkan, maka nilai default akan diatur ke azureuser. Silakan merujuk ke https://docs.microsoft.com/rest/api/compute/virtualmachines/createorupdate#osprofile untuk mendapatkan daftar lengkap nilai yang dipesan.
+    summary: Nama pengguna untuk VM. Nilai default adalah nama pengguna OS saat ini. Jika nilai default dicadangkan sistem, maka nilai default akan diatur ke azureuser. Silakan merujuk ke https://docs.microsoft.com/rest/api/compute/virtualmachines/createorupdate#osprofile untuk mendapatkan daftar lengkap nilai yang dipesan.
     description: ''
   - name: --app-gateway
-    summary: Nama yang akan digunakan saat membuat gateway aplikasi baru (default) atau mereferensikan yang sudah ada. Dapat juga mereferensikan gateway aplikasi yang ada berdasarkan ID atau menentukan "" untuk tidak ada.
+    summary: Nama yang akan digunakan saat membuat gateway aplikasi baru (default) atau mereferensikan yang sudah ada. Dapat juga mereferensikan gateway aplikasi yang ada dengan ID atau menentukan "" untuk tidak ada.
     description: ''
   - name: --app-gateway-capacity
     defaultValue: "10"
@@ -156,7 +156,7 @@ directCommands:
     description: ''
   - name: --authentication-type
     parameterValueGroup: all, password, ssh
-    summary: Jenis autentikasi yang akan digunakan dengan VM. Default ke kata sandi untuk kunci umum Windows dan SSH untuk Linux. "all" memungkinkan autentikasi ssh dan kata sandi.
+    summary: Jenis autentikasi yang akan digunakan dengan VM. Default ke kata sandi untuk Windows dan kunci publik SSH untuk Linux. "all" memungkinkan autentikasi ssh dan kata sandi.
     description: ''
   - name: --backend-pool-name
     summary: Nama yang akan digunakan untuk kumpulan backend saat membuat load balancer atau gateway aplikasi baru.
@@ -181,10 +181,10 @@ directCommands:
     description: ''
   - name: --encryption-at-host
     parameterValueGroup: false, true
-    summary: Aktifkan Enkripsi Host untuk VM atau VMSS. Ini akan mengaktifkan enkripsi untuk semua disk termasuk disk Sumber Daya/Temp di host itu sendiri.
+    summary: Aktifkan Enkripsi Host untuk VM atau VMSS. Ini akan mengaktifkan enkripsi untuk semua disk termasuk disk Resource/Temp di host itu sendiri.
     description: ''
   - name: --generate-ssh-keys
-    summary: Buat file kunci publik dan privat SSH jika hilang. Kunci akan disimpan di direktori ~/.ssh.
+    summary: Hasilkan file kunci publik dan privat SSH jika hilang. Kunci akan disimpan di direktori ~/.ssh.
     description: ''
   - name: --health-probe
     summary: Nama pemeriksaan dari load balancer yang ada, terutama digunakan untuk peningkatan bergulir atau perbaikan otomatis.
@@ -204,7 +204,7 @@ directCommands:
     summary: Nama yang akan digunakan untuk kumpulan NAT saat membuat load balancer baru.
     description: ''
   - name: --license-type
-    parameterValueGroup: None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server
+    parameterValueGroup: None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server
     summary: Menentukan bahwa gambar atau disk Windows dilisensikan secara lokal. Untuk mengaktifkan Azure Hybrid Benefit untuk Windows Server, gunakan 'Windows_Server'. Untuk mengaktifkan Hak Hosting Multi-penyewa untuk Windows 10, gunakan 'Windows_Client'. Untuk informasi selengkapnya, lihat dokumen online Azure Windows VM.
     description: ''
   - name: --location -l
@@ -214,7 +214,7 @@ directCommands:
     summary: Jangan menunggu operasi jangka panjang selesai.
     description: ''
   - name: --nsg
-    summary: Nama atau ID Grup Keamanan Jaringan yang ada.
+    summary: Nama atau ID dari Kelompok Keamanan Jaringan yang ada.
     description: ''
   - name: --orchestration-mode
     defaultValue: Uniform
@@ -248,7 +248,7 @@ directCommands:
     summary: Merencanakan penerbit.
     description: ''
   - name: --public-ip-address
-    summary: Nama alamat IP publik saat membuat satu (default) atau mereferensikan yang sudah ada. Dapat juga mereferensikan IP publik yang ada berdasarkan ID atau menentukan "" untuk Tidak Ada ('"' di Azure CLI menggunakan operator PowerShell atau --%).
+    summary: Nama alamat IP publik saat membuat alamat IP publik (default) atau mereferensikan yang sudah ada. Dapat juga mereferensikan IP publik yang ada dengan ID atau menentukan "" untuk Tidak Ada ('""' di Azure CLI menggunakan operator PowerShell atau --%).
     description: ''
   - name: --public-ip-address-allocation
     parameterValueGroup: dynamic, static
@@ -263,7 +263,7 @@ directCommands:
   - name: --scale-in-policy
     summary: Tentukan kebijakan penyempurnaan skala (dibatasi ruang) yang memutuskan komputer virtual mana yang dipilih untuk dihapus saat Set Skala Komputer Virtual diskalakan.
     description: ''
-  - name: --cakupan
+  - name: --scope
     summary: Cakupan yang dapat diakses oleh identitas yang ditetapkan sistem.
     description: ''
   - name: --secrets
@@ -291,7 +291,7 @@ directCommands:
     summary: 'SKU akun penyimpanan untuk mempertahankan VM. Gunakan sku tunggal yang akan diterapkan di semua disk, atau tentukan disk individual. Penggunaan: [--storage-sku SKU | --storage-sku ID=SKU ID=SKU ID=SKU...], di mana setiap ID adalah "os" atau lun yang diindeks 0. Nilai yang diizinkan: Premium_LRS, Standard_LRS.'
     description: ''
   - name: --subnet
-    summary: Nama subnet saat membuat VNet baru atau mereferensikan yang sudah ada. Dapat juga mereferensikan subnet yang ada berdasarkan ID. Jika nama vnet dan subnet dihilangkan, VNet dan subnet yang sesuai akan dipilih secara otomatis, atau yang baru akan dibuat.
+    summary: Nama subnet saat membuat VNet baru atau mereferensikan yang sudah ada. Juga dapat mereferensikan subnet yang ada berdasarkan ID. Jika nama vnet dan subnet dihilangkan, VNet dan subnet yang sesuai akan dipilih secara otomatis, atau yang baru akan dibuat.
     description: ''
   - name: --subnet-address-prefix
     summary: Awalan alamat IP subnet yang akan digunakan saat membuat VNet baru dalam format CIDR.
@@ -499,10 +499,10 @@ directCommands:
                            [--select]
   optionalParameters:
   - name: --expand
-    summary: Ekspresi perluas untuk diterapkan ke operasi. Nilai yang diizinkan adalah 'instanceView'.
+    summary: Ekspresi perluas untuk diterapkan ke operasi. Nilai yang diizinkan adalah 'instanceView'. Nilai defaultnya adalah Tidak Ada.
     description: ''
   - name: --filter
-    summary: Filter yang akan diterapkan ke operasi. Nilai yang diizinkan adalah 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'.
+    summary: Filter yang akan diterapkan ke operasi. Nilai yang diizinkan adalah 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'. Nilai defaultnya adalah Tidak Ada.
     description: ''
   - name: --ids
     summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
@@ -514,7 +514,7 @@ directCommands:
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
   - name: --select
-    summary: Parameter daftar. Nilai yang diizinkan adalah 'instanceView', 'instanceView/statuses'.
+    summary: Parameter daftar. Nilai yang diizinkan adalah 'instanceView', 'instanceView/statuses'. Nilai defaultnya adalah Tidak Ada.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
 - uid: az_vmss_list-skus
@@ -566,7 +566,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
 - uid: az_vmss_scale
-  name: skala az vmss
+  name: az vmss scale
   summary: Ubah jumlah VM dalam VMSS.
   description: ''
   syntax: >-
@@ -729,7 +729,7 @@ directCommands:
                    [--force-string]
                    [--ids]
                    [--instance-id]
-                   [--license-type {None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server}]
+                   [--license-type {None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server}]
                    [--name]
                    [--no-wait]
                    [--remove]
@@ -757,7 +757,7 @@ directCommands:
     summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
     description: ''
   - name: --force-deletion
-    summary: Properti ini memungkinkan Anda menentukan apakah komputer virtual yang dipilih untuk penghapusan harus dihapus paksa ketika set skala komputer virtual sedang diskalakan.
+    summary: Properti ini memungkinkan Anda menentukan apakah komputer virtual yang dipilih untuk penghapusan harus dihapus paksa saat set skala komputer virtual sedang diskalakan.
     description: ''
   - name: --force-string
     summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
@@ -769,7 +769,7 @@ directCommands:
     summary: Perbarui instans VM dengan ID ini. Jika hilang, Perbarui VMSS.
     description: ''
   - name: --license-type
-    parameterValueGroup: None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server
+    parameterValueGroup: None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server
     summary: Menentukan bahwa gambar atau disk Windows dilisensikan secara lokal. Untuk mengaktifkan Azure Hybrid Benefit untuk Windows Server, gunakan 'Windows_Server'. Untuk mengaktifkan Hak Hosting Multi-penyewa untuk Windows 10, gunakan 'Windows_Client'. Untuk informasi selengkapnya, lihat dokumen online Azure Windows VM.
     description: ''
   - name: --name -n
@@ -779,7 +779,7 @@ directCommands:
     summary: Jangan menunggu operasi jangka panjang selesai.
     description: ''
   - name: --remove
-    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
     description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
@@ -796,7 +796,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
 - uid: az_vmss_update-instances
   name: az vmss update-instances
-  summary: Meningkatkan VM dalam VMSS.
+  summary: Tingkatkan VM dalam VMSS.
   description: ''
   syntax: >-
     az vmss update-instances --instance-ids
@@ -804,7 +804,7 @@ directCommands:
                              --resource-group
                              [--no-wait]
   examples:
-  - summary: Meningkatkan VM dalam VMSS. (dibuat otomatis)
+  - summary: Tingkatkan VM dalam VMSS. (dibuat otomatis)
     syntax: az vmss update-instances --instance-ids 1 --name MyScaleSet --resource-group MyResourceGroup
   requiredParameters:
   - isRequired: true
@@ -841,9 +841,9 @@ directCommands:
                  [--timeout]
                  [--updated]
   examples:
-  - summary: Tempatkan CLI dalam status menunggu hingga VMSS telah diperbarui.
+  - summary: Tempatkan CLI dalam status menunggu hingga VMSS diperbarui.
     syntax: az vmss wait --updated --name MyScaleSet --resource-group MyResourceGroup
-  - summary: Tempatkan CLI dalam status menunggu hingga instans VMSS telah diperbarui.
+  - summary: Tempatkan CLI dalam status menunggu hingga instans VMSS diperbarui.
     syntax: az vmss wait --updated --instance-id 1 --name MyScaleSet --resource-group MyResourceGroup
   - summary: Tempatkan CLI dalam status menunggu hingga kondisi set skala terpenuhi. (dibuat otomatis)
     syntax: az vmss wait --created --name MyScaleSet --resource-group MyResourceGroup
@@ -880,7 +880,7 @@ directCommands:
     defaultValue: "3600"
     summary: Waktu tunggu maksimum dalam detik.
     description: ''
-  - name: --diperbarui
+  - name: --updated
     summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
@@ -943,11 +943,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 04/01/2022
+  ms.date: 05/20/2022
   description: Mengelola pengelompokan komputer virtual dalam Azure Virtual Machine Scale Set (VMSS).
-  ms.openlocfilehash: a48166e24fb7681982d6ca436f23e54670cb55d3
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: 260614f77d976aac2812cc76c0410df7a07a50f0
+  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141422855"
+  ms.lasthandoff: 05/24/2022
+  ms.locfileid: "145260301"
