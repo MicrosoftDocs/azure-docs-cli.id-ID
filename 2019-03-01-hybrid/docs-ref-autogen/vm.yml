@@ -5,7 +5,7 @@ summary: Mengelola komputer virtual Linux atau Windows.
 description: ''
 directCommands:
 - uid: az_vm_auto-shutdown
-  name: matikan otomatis az vm
+  name: az vm auto-shutdown
   summary: Mengelola matikan otomatis untuk VM.
   description: ''
   syntax: >-
@@ -125,7 +125,7 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
 - uid: az_vm_create
-  name: membuat vm az
+  name: az vm create
   summary: Membuat Azure Virtual Machine.
   description: Untuk tutorial end-to-end, lihat https://docs.microsoft.com/azure/virtual-machines/linux/quick-create-cli.
   syntax: >-
@@ -151,7 +151,7 @@ directCommands:
                  [--eviction-policy]
                  [--generate-ssh-keys]
                  [--image]
-                 [--license-type {None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server}]
+                 [--license-type {None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server}]
                  [--location]
                  [--nics]
                  [--no-wait]
@@ -196,9 +196,9 @@ directCommands:
     syntax: az vm create -n MyVm -g MyResourceGroup --image UbuntuLTS
   - summary: Buat VM RedHat default dengan autentikasi SSH otomatis menggunakan URN gambar.
     syntax: az vm create -n MyVm -g MyResourceGroup --image RedHat:RHEL:7-RAW:7.4.2018010506
-  - summary: Buat komputer virtual Windows Server default dengan alamat IP privat.
+  - summary: Buat Windows Server VM default dengan alamat IP privat.
     syntax: az vm create -n MyVm -g MyResourceGroup --public-ip-address "" --image Win2012R2Datacenter
-  - summary: Membuat VM dari gambar terkelola kustom.
+  - summary: Buat VM dari gambar terkelola kustom.
     syntax: az vm create -g MyResourceGroup -n MyVm --image MyImage
   - summary: Buat VM dari versi gambar galeri umum.
     syntax: az vm create -g MyResourceGroup -n MyVm --image /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.Compute/galleries/myGallery/images/myImage/versions/1.0.0
@@ -233,7 +233,7 @@ directCommands:
 
       az vm create -g group-name -n vm-name --admin-username deploy  \
         --image debian --secrets "$vm_secrets"
-  - summary: Buat komputer virtual CentOS dengan identitas yang ditetapkan sistem. VM akan memiliki peran 'Kontributor' dengan akses ke akun penyimpanan.
+  - summary: Buat VM CentOS dengan identitas yang ditetapkan sistem. VM akan memiliki peran 'Kontributor' dengan akses ke akun penyimpanan.
     syntax: az vm create -n MyVm -g rg1 --image centos --assign-identity [system] --scope /subscriptions/99999999-1bf0-4dda-aec3-cb9272f09590/MyResourceGroup/myRG/providers/Microsoft.Storage/storageAccounts/storage1 --role Contributor
   - summary: Buat VM debian dengan identitas yang ditetapkan pengguna.
     syntax: az vm create -n MyVm -g rg1 --image debian --assign-identity /subscriptions/99999999-1bf0-4dda-aec3-cb9272f09590/resourcegroups/myRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myID
@@ -257,7 +257,7 @@ directCommands:
   optionalParameters:
   - name: --accelerated-networking
     parameterValueGroup: false, true
-    summary: Aktifkan jaringan yang dipercepat. Kecuali ditentukan, CLI akan mengaktifkannya berdasarkan gambar dan ukuran komputer.
+    summary: Aktifkan jaringan terakselerasi. Kecuali ditentukan, CLI akan mengaktifkannya berdasarkan gambar dan ukuran komputer.
     description: ''
   - name: --accept-term
     summary: Terima perjanjian lisensi dan pernyataan privasi.
@@ -320,7 +320,7 @@ directCommands:
     description: ''
     valueFrom: az vm image list, az vm image show, az sig image-version show-shared
   - name: --license-type
-    parameterValueGroup: None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server
+    parameterValueGroup: None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server
     summary: Menentukan bahwa gambar atau disk Windows dilisensikan secara lokal. Untuk mengaktifkan Azure Hybrid Benefit untuk Windows Server, gunakan 'Windows_Server'. Untuk mengaktifkan Hak Hosting Multi-penyewa untuk Windows 10, gunakan 'Windows_Client'. Untuk informasi selengkapnya, lihat dokumen online Azure Windows VM.
     description: ''
   - name: --location -l
@@ -385,7 +385,7 @@ directCommands:
   - name: --role
     summary: Nama peran atau id yang akan dimiliki identitas yang ditetapkan sistem.
     description: ''
-  - name: --cakupan
+  - name: --scope
     summary: Cakupan yang dapat diakses oleh identitas yang ditetapkan sistem.
     description: ''
   - name: --secrets
@@ -454,7 +454,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
 - uid: az_vm_deallocate
   name: az vm deallocate
-  summary: Batalkan alokasi VM.
+  summary: Batalkan alokasi VM sehingga sumber daya komputasi tidak lagi dialokasikan (ditagih tidak lagi berlaku). Status akan berubah dari 'Dihentikan' menjadi 'Dihentikan (Dibatalkan Alokasi)'.
   description: Untuk tutorial end-to-end, lihat https://docs.microsoft.com/azure/virtual-machines/linux/capture-image.
   syntax: >-
     az vm deallocate [--ids]
@@ -577,7 +577,7 @@ directCommands:
   examples:
   - summary: Gunakan grup sumber daya dan nama untuk mendapatkan informasi tampilan instans VM.
     syntax: az vm get-instance-view -g MyResourceGroup -n MyVm
-  - summary: Mendapatkan tampilan instans untuk semua VM dalam grup sumber daya.
+  - summary: Dapatkan tampilan instans untuk semua VM dalam grup sumber daya.
     syntax: az vm get-instance-view --ids $(az vm list -g MyResourceGroup --query "[].id" -o tsv)
   optionalParameters:
   - name: --ids
@@ -663,11 +663,11 @@ directCommands:
   examples:
   - summary: Mencantumkan semua SKU di wilayah US Barat.
     syntax: az vm list-skus -l westus
-  - summary: Cantumkan semua ukuran vm yang tersedia di wilayah US Timur2 yang mendukung zona ketersediaan.
+  - summary: Cantumkan semua ukuran vm yang tersedia di wilayah US2 Timur yang mendukung zona ketersediaan.
     syntax: az vm list-skus -l eastus2 --zone
   - summary: Cantumkan semua ukuran vm yang tersedia di wilayah US Timur2 yang mendukung zona ketersediaan dengan nama seperti "standard_ds1...".
     syntax: az vm list-skus -l eastus2 --zone --size standard_ds1
-  - summary: Mencantumkan set ketersediaan informasi sku terkait di wilayah US Barat.
+  - summary: Mencantumkan informasi sku terkait set ketersediaan di wilayah US Barat.
     syntax: az vm list-skus -l westus --resource-type availabilitySets
   optionalParameters:
   - name: --all
@@ -729,7 +729,7 @@ directCommands:
 - uid: az_vm_open-port
   name: az vm open-port
   summary: Membuka mesin virtual ke lalu lintas masuk pada port tertentu.
-  description: Menambahkan aturan keamanan ke kelompok keamanan jaringan (NSG) yang dilampirkan ke antarmuka jaringan (NIC) atau subnet VM. NSG yang ada akan digunakan atau yang baru akan dibuat. Nama aturan adalah 'open-port-{port}' dan akan menimpa aturan yang ada dengan nama ini. Untuk VM multi-NIC, atau untuk kontrol yang lebih halus, gunakan perintah jaringan yang sesuai secara langsung (buat aturan nsg, dll).
+  description: Menambahkan aturan keamanan ke kelompok keamanan jaringan (NSG) yang dilampirkan ke antarmuka jaringan (NIC) atau subnet VM. NSG yang ada akan digunakan atau NSG baru akan dibuat. Nama aturan adalah 'open-port-{port}' dan akan menimpa aturan yang ada dengan nama ini. Untuk VM multi-NIC, atau untuk kontrol yang lebih halus, gunakan perintah jaringan yang sesuai secara langsung (buat aturan nsg, dll).
   syntax: >-
     az vm open-port --port
                     [--apply-to-subnet]
@@ -743,14 +743,14 @@ directCommands:
     syntax: az vm open-port -g MyResourceGroup -n MyVm --port '*'
   - summary: Buka berbagai port pada VM untuk lalu lintas masuk dengan prioritas tertinggi.
     syntax: az vm open-port -g MyResourceGroup -n MyVm --port 80-100 --priority 100
-  - summary: Buka port 555, 557, 558, dan 559 ke lalu lintas masuk dengan prioritas tertinggi.
+  - summary: Buka port 555, 557, 558, dan 559 untuk lalu lintas masuk dengan prioritas tertinggi.
     syntax: az vm open-port -g MyResourceGroup -n MyVm --port 555,557-559 --priority 100
   - summary: Buka semua port untuk semua VM dalam grup sumber daya.
     syntax: az vm open-port --ids $(az vm list -g MyResourceGroup --query "[].id" -o tsv) --port '*'
   requiredParameters:
   - isRequired: true
     name: --port
-    summary: "Rentang port atau port (misalnya: 80-100) untuk membuka lalu lintas masuk. Gunakan '\\*' untuk mengizinkan lalu lintas ke semua port. Gunakan nilai yang dipisahkan koma untuk menentukan lebih dari satu port atau rentang port."
+    summary: "Port atau rentang port (misalnya: 80-100) untuk membuka lalu lintas masuk. Gunakan '\\*' untuk mengizinkan lalu lintas ke semua port. Gunakan nilai yang dipisahkan koma untuk menentukan lebih dari satu port atau rentang port."
     description: ''
   optionalParameters:
   - name: --apply-to-subnet
@@ -765,7 +765,7 @@ directCommands:
   - name: --nsg-name
     summary: Nama grup keamanan jaringan yang akan dibuat jika tidak ada. Diabaikan jika NSG sudah ada.
     description: ''
-  - name: --prioritas
+  - name: --priority
     defaultValue: "900"
     summary: Prioritas aturan, antara 100 (prioritas tertinggi) dan 4096 (prioritas terendah). Harus unik untuk setiap aturan dalam koleksi.
     description: ''
@@ -821,8 +821,8 @@ directCommands:
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
 - uid: az_vm_resize
-  name: mengubah ukuran az vm
-  summary: Perbarui ukuran VM.
+  name: az vm resize
+  summary: Memperbarui ukuran VM.
   description: ''
   syntax: >-
     az vm resize --size
@@ -984,7 +984,7 @@ directCommands:
                  [--disk-caching]
                  [--force-string]
                  [--ids]
-                 [--license-type {None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server}]
+                 [--license-type {None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server}]
                  [--name]
                  [--no-wait]
                  [--os-disk]
@@ -1033,7 +1033,7 @@ directCommands:
     summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
     description: ''
   - name: --license-type
-    parameterValueGroup: None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server
+    parameterValueGroup: None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server
     summary: Menentukan bahwa gambar atau disk Windows dilisensikan secara lokal. Untuk mengaktifkan Azure Hybrid Benefit untuk Windows Server, gunakan 'Windows_Server'. Untuk mengaktifkan Hak Hosting Multi-penyewa untuk Windows 10, gunakan 'Windows_Client'. Untuk informasi selengkapnya, lihat dokumen online Azure Windows VM.
     description: ''
   - name: --name -n
@@ -1046,7 +1046,7 @@ directCommands:
     summary: ID disk OS terkelola atau nama untuk ditukar.
     description: ''
   - name: --remove
-    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
     description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
@@ -1066,7 +1066,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
 - uid: az_vm_wait
   name: az vm wait
-  summary: Tempatkan CLI dalam status menunggu sampai kondisi VM terpenuhi.
+  summary: Tempatkan CLI dalam status menunggu hingga kondisi VM terpenuhi.
   description: ''
   syntax: >-
     az vm wait [--created]
@@ -1114,7 +1114,7 @@ directCommands:
     defaultValue: "3600"
     summary: Waktu tunggu maksimum dalam detik.
     description: ''
-  - name: --diperbarui
+  - name: --updated
     summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
@@ -1249,11 +1249,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 04/01/2022
+  ms.date: 05/20/2022
   description: Mengelola komputer virtual Linux atau Windows.
-  ms.openlocfilehash: 5bc812e3a7c1d84c8df3aa6d92e535b82669f432
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: 7e98c885b8579092cada299a79cd3c825705764d
+  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141451674"
+  ms.lasthandoff: 05/24/2022
+  ms.locfileid: "145235111"
