@@ -10,6 +10,7 @@ directCommands:
   description: ''
   syntax: >-
     az bicep build --file
+                   [--no-restore]
                    [--outdir]
                    [--outfile]
                    [--stdout]
@@ -22,12 +23,17 @@ directCommands:
     syntax: az bicep build --file {bicep_file} --outdir {out_dir}
   - summary: Buat file Bicep dan simpan hasilnya ke file yang ditentukan.
     syntax: az bicep build --file {bicep_file} --outfile {out_file}
+  - summary: Buat file Bicep tanpa memulihkan modul eksternal.
+    syntax: az bicep build --file {bicep_file} --no-restore
   requiredParameters:
   - isRequired: true
     name: --file -f
     summary: Jalur ke file Bicep untuk dibangun dalam sistem file.
     description: ''
   optionalParameters:
+  - name: --no-restore
+    summary: Saat diatur, membangun file bicep tanpa memulihkan modul eksternal.
+    description: ''
   - name: --outdir
     summary: Saat diatur, menyimpan output pada direktori yang ditentukan.
     description: ''
@@ -35,20 +41,28 @@ directCommands:
     summary: Saat diatur, menyimpan output sebagai jalur file yang ditentukan.
     description: ''
   - name: --stdout
-    summary: Ketika diatur, mencetak semua output ke stdout alih-alih file yang sesuai.
+    summary: Saat diatur, mencetak semua output ke stdout alih-alih file yang sesuai.
     description: ''
 - uid: az_bicep_decompile
   name: az bicep decompile
   summary: Coba dekompilasi file templat ARM ke file Bicep.
   description: ''
-  syntax: az bicep decompile --file
+  syntax: >-
+    az bicep decompile --file
+                       [--force]
   examples:
   - summary: Mendekompilasi file templat ARM.
     syntax: az bicep decompile --file {json_template_file}
+  - summary: Dekompilasi file templat ARM dan timpa file Bicep yang ada.
+    syntax: az bicep decompile --file {json_template_file} --force
   requiredParameters:
   - isRequired: true
     name: --file -f
     summary: Jalur ke templat ARM untuk didekompilasi dalam sistem file.
+    description: ''
+  optionalParameters:
+  - name: --force
+    summary: Memungkinkan penimpaan file output jika ada.
     description: ''
 - uid: az_bicep_install
   name: az bicep install
@@ -74,7 +88,7 @@ directCommands:
     description: ''
 - uid: az_bicep_list-versions
   name: az bicep list-versions
-  summary: Daftar semua versi Bicep CLI yang tersedia.
+  summary: Daftar semua versi CLI Bicep yang tersedia.
   description: ''
   syntax: az bicep list-versions
 - uid: az_bicep_publish
@@ -96,6 +110,27 @@ directCommands:
     name: --target -t
     summary: Lokasi target tempat modul Bicep akan diterbitkan.
     description: ''
+- uid: az_bicep_restore
+  name: az bicep restore
+  summary: Pulihkan modul eksternal untuk file bicep.
+  description: ''
+  syntax: >-
+    az bicep restore --file
+                     [--force]
+  examples:
+  - summary: Menyimpan ulang modul eksternal.
+    syntax: az bicep restore --file {bicep_file}
+  - summary: Simpan ulang modul eksternal dan timpa modul eksternal yang di-cache.
+    syntax: az bicep restore --file {bicep_file} --force
+  requiredParameters:
+  - isRequired: true
+    name: --file -f
+    summary: Jalur ke file Bicep untuk memulihkan modul eksternal.
+    description: ''
+  optionalParameters:
+  - name: --force
+    summary: Memungkinkan penimpaan modul eksternal yang di-cache.
+    description: ''
 - uid: az_bicep_uninstall
   name: az bicep uninstall
   summary: Hapus instalan Bicep CLI.
@@ -103,13 +138,13 @@ directCommands:
   syntax: az bicep uninstall
 - uid: az_bicep_upgrade
   name: az bicep upgrade
-  summary: Tingkatkan CLI Bicep ke versi terbaru.
+  summary: Tingkatkan Bicep CLI ke versi terbaru.
   description: ''
   syntax: az bicep upgrade [--target-platform {linux-musl-x64, linux-x64, osx-x64, win-x64}]
   examples:
-  - summary: Tingkatkan CLI Bicep.
+  - summary: Tingkatkan Bicep CLI.
     syntax: az bicep upgrade
-  - summary: Tingkatkan CLI Bicep dan tentukan platform target.
+  - summary: Tingkatkan Bicep CLI dan tentukan platform target.
     syntax: az bicep upgrade --target-platform linux-x64
   optionalParameters:
   - name: --target-platform -t
@@ -127,6 +162,7 @@ commands:
 - az_bicep_install
 - az_bicep_list-versions
 - az_bicep_publish
+- az_bicep_restore
 - az_bicep_uninstall
 - az_bicep_upgrade
 - az_bicep_version
@@ -149,9 +185,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Grup perintah CLI Bicep.
-  ms.openlocfilehash: bcf5cdad88a7bfca5645ded3ce78067da1029bf5
-  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.openlocfilehash: 801c1c7b9c7403afcde26190d9ac221554a34729
+  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 03/25/2022
-  ms.locfileid: "140989088"
+  ms.lasthandoff: 05/24/2022
+  ms.locfileid: "145269959"
