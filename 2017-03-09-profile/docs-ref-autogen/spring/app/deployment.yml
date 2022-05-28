@@ -1,0 +1,371 @@
+### YamlMime:AzureCLIGroup
+uid: az_spring_app_deployment
+name: az spring app deployment
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **spring** untuk Azure CLI (versi 2.30.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **penyebaran aplikasi az spring** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Perintah untuk mengelola siklus hidup penyebaran aplikasi di Azure Spring Apps. Lebih banyak operasi pada penyebaran dapat dilakukan pada tingkat aplikasi dengan parameter --deployment. misalnya az spring app deploy --deployment <staging deployment>.
+description: ''
+directCommands:
+- uid: az_spring_app_deployment_create
+  name: az spring app deployment create
+  summary: Buat penyebaran penahapan untuk aplikasi. Untuk menyebarkan kode atau memperbarui pengaturan ke penyebaran yang ada, gunakan `az spring app deploy/update --deployment <staging deployment>`.
+  description: ''
+  syntax: >-
+    az spring app deployment create --app
+                                    --name
+                                    --resource-group
+                                    --service
+                                    [--artifact-path]
+                                    [--build-env]
+                                    [--builder]
+                                    [--config-file-patterns]
+                                    [--container-args]
+                                    [--container-command]
+                                    [--container-image]
+                                    [--container-registry]
+                                    [--cpu]
+                                    [--disable-probe {false, true}]
+                                    [--disable-validation {false, true}]
+                                    [--env]
+                                    [--instance-count]
+                                    [--jvm-options]
+                                    [--main-entry]
+                                    [--memory]
+                                    [--no-wait]
+                                    [--registry-password]
+                                    [--registry-username]
+                                    [--runtime-version {Java_11, Java_17, Java_8, NetCore_31}]
+                                    [--skip-clone-settings]
+                                    [--source-path]
+                                    [--target-module]
+                                    [--version]
+  examples:
+  - summary: Sebarkan kode sumber ke penyebaran baru aplikasi. Ini akan mengemas direktori saat ini, membangun biner dengan Pivotal Build Service lalu menyebarkan.
+    syntax: az spring app deployment create -n green-deployment --app MyApp -s MyCluster -g MyResourceGroup
+  - summary: Sebarkan jar bawaan ke aplikasi dengan opsi jvm dan variabel lingkungan.
+    syntax: az spring app deployment create -n green-deployment --app MyApp -s MyCluster -g MyResourceGroup --jar-path app.jar --jvm-options="-XX:+UseG1GC -XX:+UseStringDeduplication" --env foo=bar
+  - summary: Sebarkan gambar kontainer di Docker Hub ke aplikasi.
+    syntax: az spring app deployment create -n green-deployment --app MyApp -s MyCluster -g MyResourceGroup --container-image contoso/your-app:v1
+  - summary: Menyebarkan gambar kontainer pada registri privat ke aplikasi.
+    syntax: az spring app deployment create -n green-deployment --app MyApp -s MyCluster -g MyResourceGroup --container-image contoso/your-app:v1 --container-registry myacr.azurecr.io --registry-username <username> --registry-password <password>
+  requiredParameters:
+  - isRequired: true
+    name: --app
+    summary: Nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama penyebaran.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service -s
+    summary: Nama Azure Spring Apps, Anda dapat mengonfigurasi layanan default menggunakan az configure --defaults spring=<name>.
+    description: ''
+  optionalParameters:
+  - name: --artifact-path
+    summary: Sebarkan artefak bawaan yang ditentukan (jar atau netcore zip).
+    description: ''
+  - name: --build-env
+    summary: Variabel lingkungan yang dipisahkan spasi dalam format 'key[=value]'.
+    description: ''
+  - name: --builder
+    defaultValue: default
+    summary: (Hanya Tingkat Perusahaan) Build penyusun layanan yang digunakan untuk membangun executable.
+    description: ''
+  - name: --config-file-patterns
+    summary: (Hanya Tingkat Perusahaan) Pola file konfigurasi dipisahkan dengan ',' untuk memutuskan pola Layanan Konfigurasi Aplikasi mana yang akan digunakan. Gunakan '""' untuk menghapus konfigurasi yang ada.
+    description: ''
+  - name: --container-args
+    summary: Argumen gambar kontainer.
+    description: ''
+  - name: --container-command
+    summary: Perintah gambar kontainer.
+    description: ''
+  - name: --container-image
+    summary: Tag gambar kontainer.
+    description: ''
+  - name: --container-registry
+    defaultValue: docker.io
+    summary: Registri gambar kontainer.
+    description: ''
+  - name: --cpu
+    summary: Kuantitas sumber daya CPU. Harus 500m atau jumlah inti CPU.
+    description: ''
+  - name: --disable-probe
+    parameterValueGroup: false, true
+    summary: Jika true, nonaktifkan pemeriksaan keaktifan dan kesiapan.
+    description: ''
+  - name: --disable-validation
+    parameterValueGroup: false, true
+    summary: Jika true, nonaktifkan validasi jar.
+    description: ''
+  - name: --env
+    summary: Variabel lingkungan yang dipisahkan spasi dalam format 'key[=value]'.
+    description: ''
+  - name: --instance-count
+    summary: Jumlah instans.
+    description: ''
+  - name: --jvm-options
+    summary: "String yang berisi opsi jvm, gunakan '=' alih-alih ' ' untuk argumen ini untuk menghindari kesalahan penguraian bash, misalnya: --jvm-options='-Xms1024m -Xmx2048m'."
+    description: ''
+  - name: --main-entry -m
+    summary: String yang berisi jalur ke .NET yang dapat dieksekusi relatif terhadap akar zip.
+    description: ''
+  - name: --memory
+    summary: 'Kuantitas sumber daya memori. Harus 512Mi atau #Gi, misalnya, 1Gi, 3Gi.'
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --registry-password
+    summary: Kata sandi registri kontainer.
+    description: ''
+  - name: --registry-username
+    summary: Nama pengguna registri kontainer.
+    description: ''
+  - name: --runtime-version
+    parameterValueGroup: Java_11, Java_17, Java_8, NetCore_31
+    summary: Versi runtime bahasa yang digunakan.
+    description: ''
+  - name: --skip-clone-settings
+    summary: Membuat penyebaran penahapan akan secara otomatis menyalin pengaturan dari penyebaran produksi.
+    description: ''
+  - name: --source-path
+    summary: Sebarkan folder sumber yang ditentukan. Folder akan dikemas ke dalam tar, diunggah, dan dibangun menggunakan kpack. Default ke folder saat ini jika tidak ada nilai yang disediakan.
+    description: ''
+  - name: --target-module
+    summary: Modul anak yang akan disebarkan, diperlukan untuk beberapa paket jar yang dibangun dari kode sumber.
+    description: ''
+  - name: --version
+    summary: Versi penyebaran, tetap tidak berubah jika tidak diatur.
+    description: ''
+- uid: az_spring_app_deployment_delete
+  name: az spring app deployment delete
+  summary: Menghapus penyebaran aplikasi.
+  description: ''
+  syntax: >-
+    az spring app deployment delete --app
+                                    --name
+                                    --resource-group
+                                    --service
+                                    [--no-wait]
+  requiredParameters:
+  - isRequired: true
+    name: --app
+    summary: Nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama penyebaran.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service -s
+    summary: Nama Azure Spring Apps, Anda dapat mengonfigurasi layanan default menggunakan az configure --defaults spring=<name>.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_spring_app_deployment_generate-heap-dump
+  name: az spring app deployment generate-heap-dump
+  summary: Buat heap dump instans aplikasi target Anda ke jalur file yang diberikan.
+  description: ''
+  syntax: >-
+    az spring app deployment generate-heap-dump --app
+                                                --app-instance
+                                                --file-path
+                                                --resource-group
+                                                --service
+                                                [--deployment]
+  requiredParameters:
+  - isRequired: true
+    name: --app
+    summary: Nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --app-instance
+    summary: Instans aplikasi target yang ingin Anda buang.
+    description: ''
+  - isRequired: true
+    name: --file-path
+    summary: Jalur file pemasangan untuk file cadangan Anda.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service -s
+    summary: Nama Azure Spring Apps, Anda dapat mengonfigurasi layanan default menggunakan az configure --defaults spring=<name>.
+    description: ''
+  optionalParameters:
+  - name: --deployment -d
+    summary: Nama penyebaran aplikasi yang ada. Default ke penyebaran produksi jika tidak ditentukan.
+    description: ''
+- uid: az_spring_app_deployment_generate-thread-dump
+  name: az spring app deployment generate-thread-dump
+  summary: Buat cadangan utas instans aplikasi target Anda ke jalur file tertentu.
+  description: ''
+  syntax: >-
+    az spring app deployment generate-thread-dump --app
+                                                  --app-instance
+                                                  --file-path
+                                                  --resource-group
+                                                  --service
+                                                  [--deployment]
+  requiredParameters:
+  - isRequired: true
+    name: --app
+    summary: Nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --app-instance
+    summary: Instans aplikasi target yang ingin Anda buang.
+    description: ''
+  - isRequired: true
+    name: --file-path
+    summary: Jalur file pemasangan untuk file cadangan Anda.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service -s
+    summary: Nama Azure Spring Apps, Anda dapat mengonfigurasi layanan default menggunakan az configure --defaults spring=<name>.
+    description: ''
+  optionalParameters:
+  - name: --deployment -d
+    summary: Nama penyebaran aplikasi yang ada. Default ke penyebaran produksi jika tidak ditentukan.
+    description: ''
+- uid: az_spring_app_deployment_list
+  name: az spring app deployment list
+  summary: Mencantumkan semua penyebaran dalam aplikasi.
+  description: ''
+  syntax: >-
+    az spring app deployment list --app
+                                  --resource-group
+                                  --service
+  requiredParameters:
+  - isRequired: true
+    name: --app
+    summary: Nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service -s
+    summary: Nama Azure Spring Apps, Anda dapat mengonfigurasi layanan default menggunakan az configure --defaults spring=<name>.
+    description: ''
+- uid: az_spring_app_deployment_show
+  name: az spring app deployment show
+  summary: Menampilkan detail penyebaran.
+  description: ''
+  syntax: >-
+    az spring app deployment show --app
+                                  --name
+                                  --resource-group
+                                  --service
+  requiredParameters:
+  - isRequired: true
+    name: --app
+    summary: Nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama penyebaran.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service -s
+    summary: Nama Azure Spring Apps, Anda dapat mengonfigurasi layanan default menggunakan az configure --defaults spring=<name>.
+    description: ''
+- uid: az_spring_app_deployment_start-jfr
+  name: az spring app deployment start-jfr
+  summary: Mulai JFR pada instans aplikasi target Anda ke jalur file tertentu.
+  description: ''
+  syntax: >-
+    az spring app deployment start-jfr --app
+                                       --app-instance
+                                       --file-path
+                                       --resource-group
+                                       --service
+                                       [--deployment]
+                                       [--duration]
+  requiredParameters:
+  - isRequired: true
+    name: --app
+    summary: Nama aplikasi.
+    description: ''
+  - isRequired: true
+    name: --app-instance
+    summary: Instans aplikasi target yang ingin Anda buang.
+    description: ''
+  - isRequired: true
+    name: --file-path
+    summary: Jalur file pemasangan untuk file cadangan Anda.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --service -s
+    summary: Nama Azure Spring Apps, Anda dapat mengonfigurasi layanan default menggunakan az configure --defaults spring=<name>.
+    description: ''
+  optionalParameters:
+  - name: --deployment -d
+    summary: Nama penyebaran aplikasi yang ada. Default ke penyebaran produksi jika tidak ditentukan.
+    description: ''
+  - name: --duration
+    defaultValue: 60s
+    summary: Durasi JFR.
+    description: ''
+commands:
+- az_spring_app_deployment_create
+- az_spring_app_deployment_delete
+- az_spring_app_deployment_generate-heap-dump
+- az_spring_app_deployment_generate-thread-dump
+- az_spring_app_deployment_list
+- az_spring_app_deployment_show
+- az_spring_app_deployment_start-jfr
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Perintah untuk mengelola siklus hidup penyebaran aplikasi di Azure Spring Apps. Lebih banyak operasi pada penyebaran dapat dilakukan pada tingkat aplikasi dengan parameter --deployment. misalnya az spring app deploy --deployment <staging deployment>.
+  ms.openlocfilehash: a27483376eed8061946d0b82705685e7b6c293d8
+  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 05/24/2022
+  ms.locfileid: "145277362"

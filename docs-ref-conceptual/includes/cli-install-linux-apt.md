@@ -5,12 +5,12 @@ manager: barbkess
 ms.date: 09/29/2020
 ms.topic: include
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 7de8b88fa4ebbab7994624f94abb96572af4901e
-ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
+ms.openlocfilehash: 2a69abb902ecc3ea7d389e700762d9dc08a98d0e
+ms.sourcegitcommit: 58f8c1b4de0e62e71cb4670bf613d9c73deb030c
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/27/2022
-ms.locfileid: "144093504"
+ms.lasthandoff: 05/27/2022
+ms.locfileid: "145920424"
 ---
 ## <a name="overview"></a>Gambaran Umum
 
@@ -18,8 +18,8 @@ Manajer paket `apt` berisi paket x86_64 untuk Azure CLI yang telah diuji pada di
 
 | Distribusi | Versi |
 |:-------------|:--------|
-| Ubuntu       | 16.04 LTS (Xenial Xerus), 18.04 LTS (Bionic Beaver), 20.04 LTS (Focal Fossa), 21.10 (Impish Indri), 22.04 (Jammy Jellyfish) |
-| Debian       | 9 (Stretch), 10 (Buster), 11 (Bullseye) |
+| Ubuntu       | 18.04 LTS (Bionic Beaver), 20.04 LTS (Focal Fossa), 21.10 (Impish Indri), 22.04 (Jammy Jellyfish) |
+| Debian       | 10 (Buster), 11 (Bullseye) |
 
 > [!WARNING]
 > Mulai dari Azure CLI 2.37.0, tidak ada paket DEB yang akan dirilis untuk Ubuntu 16.04 (Xenial Xerus) dan Debian 9 (Stretch). Anda dapat terus menggunakan versi historis Azure CLI pada sistem ini, tetapi tidak akan ada pembaruan atau perbaikan bug. Pertimbangkan untuk memutakhirkan ke versi Ubuntu atau Debian yang lebih baru untuk menggunakan Azure CLI terbaru.
