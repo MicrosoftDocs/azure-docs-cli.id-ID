@@ -1,0 +1,255 @@
+### YamlMime:AzureCLIGroup
+uid: az_aks_draft
+name: az aks draft
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **pratinjau aks** untuk Azure CLI (versi 2.35.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **draf az aks** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Perintah untuk membangun file penyebaran dalam direktori proyek dan menyebarkan ke kluster AKS.
+description: ''
+directCommands:
+- uid: az_aks_draft_create
+  name: az aks draft create
+  summary: Buat Dockerfile dan file penyebaran Kubernetes minimum yang diperlukan (helm, kustomisasi, manifes) untuk direktori proyek Anda.
+  description: ''
+  syntax: >-
+    az aks draft create [--app]
+                        [--create-config]
+                        [--deployment-only]
+                        [--destination]
+                        [--dockerfile-only]
+                        [--language]
+                        [--path]
+  examples:
+  - summary: Minta untuk membuat file Dockerfile dan penyebaran di direktori saat ini.
+    syntax: az aks draft create
+  - summary: Hanya hasilkan Dockerfile di direktori saat ini.
+    syntax: az aks draft create --dockerfile-only=true
+  - summary: Hanya hasilkan file penyebaran di direktori saat ini.
+    syntax: az aks draft create --deployment-only=true
+  - summary: Buat Dockerfile dan file penyebaran dalam proyek Java dengan nama aplikasi di direktori proyek tertentu.
+    syntax: az aks draft create --language=java --app=some_app --destination=/projects/some_project
+  optionalParameters:
+  - name: --app
+    summary: Tentukan nama rilis helm.
+    description: ''
+  - name: --create-config
+    summary: Tentukan jalur ke file konfigurasi.
+    description: ''
+  - name: --deployment-only
+    summary: Hanya hasilkan file penyebaran (helm, kustomisasi, manifes) untuk penyebaran Kubernetes.
+    description: ''
+  - name: --destination
+    defaultValue: .
+    summary: Tentukan jalur ke direktori proyek (defaultnya adalah .).
+    description: ''
+  - name: --dockerfile-only
+    summary: Hanya hasilkan Dockerfile untuk penyebaran Kubernetes.
+    description: ''
+  - name: --language
+    summary: Tentukan bahasa yang digunakan untuk membuat penyebaran Kubernetes.
+    description: ''
+  - name: --path
+    summary: Unduh dan gunakan biner Draf secara otomatis di lokasi yang ditentukan.
+    description: ''
+- uid: az_aks_draft_generate-workflow
+  name: az aks draft generate-workflow
+  summary: Buat alur kerja Github untuk build otomatis dan sebarkan ke AKS.
+  description: Sebelum menjalankan perintah ini, Pastikan Anda telah menyiapkan Github OIDC untuk aplikasi Anda. Anda juga perlu membuat grup sumber daya, registri kontainer, dan kluster Kubernetes di Azure dan menautkan tiga sumber daya menggunakan `az aks update -n <cluster-name> -g <resource-group-name> --attach-acr <acr-name>`.
+  syntax: >-
+    az aks draft generate-workflow [--branch]
+                                   [--cluster-name]
+                                   [--container-name]
+                                   [--destination]
+                                   [--path]
+                                   [--registry-name]
+                                   [--resource-group]
+  examples:
+  - summary: Minta untuk membuat alur kerja Github di direktori saat ini.
+    syntax: az aks draft generate-workflow
+  - summary: Minta untuk membuat alur kerja Github di direktori proyek tertentu.
+    syntax: az aks draft generate-workflow --destination=/projects/some_project
+  - summary: Buat alur kerja Github dengan grup sumber daya, nama kluster AKS, nama registri kontainer dalam direktori proyek tertentu.
+    syntax: az aks draft generate-workflow --resource-group=some_rg --cluster-name=some_cluster --registry-name=some_registry --destination=/projects/some_project
+  - summary: Buat alur kerja Github yang disebarkan dari cabang utama dengan grup sumber daya, nama kluster AKS, nama registri kontainer, dan nama gambar kontainer dalam direktori proyek tertentu.
+    syntax: az aks draft generate-workflow --branch=main --resource-group=some_rg --cluster-name=some_cluster --registry-name=some_registry --container-name=some_image --destination=/projects/some_project
+  optionalParameters:
+  - name: --branch
+    summary: Tentukan cabang Github untuk menyebarkan secara otomatis.
+    description: ''
+  - name: --cluster-name
+    summary: Tentukan nama kluster AKS.
+    description: ''
+  - name: --container-name
+    summary: Tentukan nama gambar kontainer.
+    description: ''
+  - name: --destination
+    summary: Tentukan jalur ke direktori proyek (defaultnya adalah .).
+    description: ''
+  - name: --path
+    summary: Unduh dan gunakan biner Draf secara otomatis di lokasi yang ditentukan.
+    description: ''
+  - name: --registry-name
+    summary: Tentukan jalur ke direktori proyek.
+    description: ''
+  - name: --resource-group
+    summary: Tentukan nama grup sumber daya Azure.
+    description: ''
+- uid: az_aks_draft_setup-gh
+  name: az aks draft setup-gh
+  summary: Siapkan Github OIDC untuk aplikasi Anda.
+  description: ''
+  syntax: >-
+    az aks draft setup-gh [--app]
+                          [--gh-repo]
+                          [--path]
+                          [--provider]
+                          [--resource-group]
+                          [--subscription-id]
+  examples:
+  - summary: Minta untuk menyiapkan Github OIDC untuk repositori.
+    syntax: az aks draft setup-gh
+  - summary: Siapkan github OIDC di Azure untuk repositori tertentu.
+    syntax: az aks draft setup-gh --provider=azure --gh-repo=some_organization/some_repo
+  - summary: Siapkan github OIDC di Azure dengan ID langganan dan grup sumber daya.
+    syntax: az aks draft setup-gh --provider=azure --subscription-id=some_subscription --resource-group=some_rg
+  - summary: Siapkan github OIDC dengan nama aplikasi di Azure dengan ID langganan dan grup sumber daya untuk repositori tertentu.
+    syntax: az aks draft setup-gh --app=some_app --provider=azure --subscription-id=some_subscription --resource-group=some_rg --gh-repo=some_organization/some_repo
+  optionalParameters:
+  - name: --app
+    summary: Tentukan nama aplikasi Azure Active Directory.
+    description: ''
+  - name: --gh-repo
+    summary: Tentukan repositori github (organisasi/repo_name).
+    description: ''
+  - name: --path
+    summary: Unduh dan gunakan biner Draf secara otomatis di lokasi yang ditentukan.
+    description: ''
+  - name: --provider
+    defaultValue: azure
+    summary: Tentukan penyedia cloud (defaultnya adalah azure).
+    description: ''
+  - name: --resource-group
+    summary: Tentukan nama grup sumber daya Azure.
+    description: ''
+  - name: --subscription-id
+    summary: Tentukan ID langganan Azure.
+    description: ''
+- uid: az_aks_draft_up
+  name: az aks draft up
+  summary: Siapkan Github OIDC dan buat alur kerja Github untuk build otomatis dan sebarkan ke AKS.
+  description: Perintah ini menggabungkan `az aks draft setup-gh` dan `az aks draft generate-workflow`. Sebelum menjalankan perintah ini, buat grup sumber daya, registri kontainer dan kluster Kubernetes di Azure dan tautkan tiga sumber daya menggunakan `az aks update -n <cluster-name> -g <resource-group-name> --attach-acr <acr-name>`.
+  syntax: >-
+    az aks draft up [--app]
+                    [--branch]
+                    [--cluster-name]
+                    [--container-name]
+                    [--destination]
+                    [--gh-repo]
+                    [--path]
+                    [--provider]
+                    [--registry-name]
+                    [--resource-group]
+                    [--subscription-id]
+  examples:
+  - summary: Minta untuk menyiapkan Github OIDC lalu buat alur kerja Github di direktori saat ini.
+    syntax: az aks draft up
+  - summary: Minta untuk menyiapkan Github OIDC lalu buat alur kerja Github di direktori proyek tertentu.
+    syntax: az aks draft up --destination=/projects/some_project
+  - summary: Minta untuk menyiapkan Github OIDC untuk repositori tertentu lalu buat alur kerja Github di direktori proyek tertentu.
+    syntax: az aks draft up --gh-repo=some_organization/some_repo --destination=/projects/some_project
+  optionalParameters:
+  - name: --app
+    summary: Tentukan nama aplikasi.
+    description: ''
+  - name: --branch
+    summary: Tentukan cabang Github untuk menyebarkan secara otomatis.
+    description: ''
+  - name: --cluster-name
+    summary: Tentukan nama kluster AKS.
+    description: ''
+  - name: --container-name
+    summary: Tentukan nama gambar kontainer.
+    description: ''
+  - name: --destination
+    summary: Tentukan jalur ke direktori proyek (defaultnya adalah .).
+    description: ''
+  - name: --gh-repo
+    summary: Tentukan repositori github (organisasi/repo_name).
+    description: ''
+  - name: --path
+    summary: Unduh dan gunakan biner Draf secara otomatis di lokasi yang ditentukan.
+    description: ''
+  - name: --provider
+    defaultValue: azure
+    summary: Tentukan penyedia cloud (defaultnya adalah azure).
+    description: ''
+  - name: --registry-name
+    summary: Tentukan jalur ke direktori proyek.
+    description: ''
+  - name: --resource-group
+    summary: Tentukan nama grup sumber daya Azure.
+    description: ''
+  - name: --subscription-id
+    summary: Tentukan ID langganan Azure.
+    description: ''
+- uid: az_aks_draft_update
+  name: az aks draft update
+  summary: Perbarui aplikasi Anda agar dapat diakses internet.
+  description: Perintah ini secara otomatis memperbarui file yaml Anda seperlunya sehingga aplikasi Anda akan dapat menerima permintaan eksternal.
+  syntax: >-
+    az aks draft update [--certificate]
+                        [--destination]
+                        [--host]
+                        [--path]
+  examples:
+  - summary: Minta untuk memperbarui aplikasi agar dapat diakses internet.
+    syntax: az aks draft update
+  - summary: Minta untuk memperbarui aplikasi agar dapat diakses internet dalam direktori proyek tertentu.
+    syntax: az aks draft update --destination=/projects/some_project
+  - summary: Perbarui aplikasi agar dapat diakses internet dengan sejumlah sumber daya ingress dan sertifikat Keyvault di direktori proyek tertentu.
+    syntax: az aks draft update --host=some_host --certificate=some_certificate --destination=/projects/some_project
+  optionalParameters:
+  - name: --certificate
+    summary: Tentukan URI sertifikat Keyvault yang akan disajikan.
+    description: ''
+  - name: --destination
+    summary: Tentukan jalur ke direktori proyek (defaultnya adalah .).
+    description: ''
+  - name: --host
+    summary: Tentukan host sumber daya ingress.
+    description: ''
+  - name: --path
+    summary: Unduh dan gunakan biner Draf secara otomatis di lokasi yang ditentukan.
+    description: ''
+commands:
+- az_aks_draft_create
+- az_aks_draft_generate-workflow
+- az_aks_draft_setup-gh
+- az_aks_draft_up
+- az_aks_draft_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Perintah untuk membangun file penyebaran dalam direktori proyek dan menyebarkan ke kluster AKS.
+  ms.openlocfilehash: 447415daa45cb41bc3d68ff007284e4f781ae321
+  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 05/24/2022
+  ms.locfileid: "145277909"
