@@ -1,0 +1,161 @@
+### YamlMime:AzureCLIGroup
+uid: az_containerapp_auth
+name: az containerapp auth
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **containerapp** untuk Azure CLI (versi 2.37.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **az containerapp auth** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola autentikasi dan otorisasi containerapp.
+description: ''
+directCommands:
+- uid: az_containerapp_auth_show
+  name: az containerapp auth show
+  summary: Tampilkan pengaturan autentikasi untuk containerapp.
+  description: ''
+  syntax: >-
+    az containerapp auth show --name
+                              --resource-group
+  examples:
+  - summary: Tampilkan pengaturan autentikasi untuk containerapp.
+    syntax: az containerapp auth show --name MyContainerapp --resource-group MyResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Containerapp.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+- uid: az_containerapp_auth_update
+  name: az containerapp auth update
+  summary: Perbarui pengaturan autentikasi untuk containerapp.
+  description: ''
+  syntax: >-
+    az containerapp auth update --name
+                                --resource-group
+                                [--action {AllowAnonymous, RedirectToLoginPage, RejectWith401, RejectWith404}]
+                                [--config-file-path]
+                                [--custom-host-header]
+                                [--custom-proto-header]
+                                [--enable-token-store {false, true}]
+                                [--enabled {false, true}]
+                                [--excluded-paths]
+                                [--proxy-convention {Custom, NoProxy, Standard}]
+                                [--redirect-provider]
+                                [--require-https {false, true}]
+                                [--runtime-version]
+                                [--set]
+  examples:
+  - summary: Perbarui ID klien penyedia AAD yang sudah dikonfigurasi.
+    syntax: az containerapp auth update -g myResourceGroup --name MyContainerapp --set identityProviders.azureActiveDirectory.registration.clientId=my-client-id
+  - summary: Konfigurasikan aplikasi dengan autentikasi berbasis file dengan mengatur jalur file konfigurasi.
+    syntax: az containerapp auth update -g myResourceGroup --name MyContainerapp --config-file-path D:\home\site\wwwroot\auth.json
+  - summary: Konfigurasikan aplikasi untuk mengizinkan permintaan yang tidak diaturentikasi untuk mencapai aplikasi.
+    syntax: az containerapp auth update -g myResourceGroup --name MyContainerapp --unauthenticated-client-action AllowAnonymous
+  - summary: Mengonfigurasi aplikasi untuk mengalihkan permintaan yang tidak diaturentikasi ke penyedia Facebook.
+    syntax: az containerapp auth update -g myResourceGroup --name MyContainerapp --redirect-provider Facebook
+  - summary: Konfigurasikan aplikasi untuk mendengarkan header penerusan X-FORWARDED-HOST dan X-FORWARDED-PROTO.
+    syntax: az containerapp auth update -g myResourceGroup --name MyContainerapp --proxy-convention Standard
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Containerapp.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  optionalParameters:
+  - name: --action --unauthenticated-client-action
+    parameterValueGroup: AllowAnonymous, RedirectToLoginPage, RejectWith401, RejectWith404
+    summary: Tindakan yang harus diambil ketika klien yang tidak diaauthenticated mencoba mengakses aplikasi.
+    description: ''
+  - name: --config-file-path
+    summary: Jalur file konfigurasi yang berisi pengaturan autentikasi jika berasal dari file.
+    description: ''
+  - name: --custom-host-header --proxy-custom-host-header
+    summary: Nama header yang berisi host permintaan.
+    description: ''
+  - name: --custom-proto-header --proxy-custom-proto-header
+    summary: Nama header yang berisi skema permintaan.
+    description: ''
+  - name: --enable-token-store
+    parameterValueGroup: false, true
+    summary: Benar untuk menyimpan token keamanan khusus platform yang diperoleh selama alur masuk; jika tidak, salah.
+    description: ''
+  - name: --enabled
+    parameterValueGroup: false, true
+    summary: True jika fitur Autentikasi / Otorisasi diaktifkan untuk aplikasi saat ini; jika tidak, salah.
+    description: ''
+  - name: --excluded-paths
+    summary: Daftar jalur yang harus dikecualikan dari aturan autentikasi.
+    description: ''
+  - name: --proxy-convention
+    parameterValueGroup: Custom, NoProxy, Standard
+    summary: Konvensi yang digunakan untuk menentukan url permintaan yang dibuat.
+    description: ''
+  - name: --redirect-provider
+    summary: Penyedia autentikasi default yang digunakan saat beberapa penyedia dikonfigurasi.
+    description: ''
+  - name: --require-https
+    parameterValueGroup: false, true
+    summary: False jika respons autentikasi/otorisasi yang tidak memiliki skema HTTPS diizinkan; jika tidak, benar.
+    description: ''
+  - name: --runtime-version
+    summary: RuntimeVersion dari fitur Autentikasi/ Otorisasi yang digunakan untuk aplikasi saat ini.
+    description: ''
+  - name: --set
+    summary: Nilai bidang tertentu dalam pengaturan konfigurasi untuk fitur Autentikasi/ Otorisasi Azure App Service.
+    description: ''
+commands:
+- az_containerapp_auth_apple
+- az_containerapp_auth_apple_show
+- az_containerapp_auth_apple_update
+- az_containerapp_auth_facebook
+- az_containerapp_auth_facebook_show
+- az_containerapp_auth_facebook_update
+- az_containerapp_auth_github
+- az_containerapp_auth_github_show
+- az_containerapp_auth_github_update
+- az_containerapp_auth_google
+- az_containerapp_auth_google_show
+- az_containerapp_auth_google_update
+- az_containerapp_auth_microsoft
+- az_containerapp_auth_microsoft_show
+- az_containerapp_auth_microsoft_update
+- az_containerapp_auth_openid-connect
+- az_containerapp_auth_openid-connect_add
+- az_containerapp_auth_openid-connect_remove
+- az_containerapp_auth_openid-connect_show
+- az_containerapp_auth_openid-connect_update
+- az_containerapp_auth_show
+- az_containerapp_auth_twitter
+- az_containerapp_auth_twitter_show
+- az_containerapp_auth_twitter_update
+- az_containerapp_auth_update
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Mengelola autentikasi dan otorisasi containerapp.
+  ms.openlocfilehash: daafe821d05474a9e95619b2ecaaf6a8d186b7b7
+  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 05/24/2022
+  ms.locfileid: "145276747"
