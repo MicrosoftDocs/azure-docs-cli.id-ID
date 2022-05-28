@@ -4,7 +4,7 @@ name: az network firewall
 extensionInformation: >-
   > [!Note]
 
-  > Referensi ini adalah bagian dari ekstensi **azure-firewall** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **firewall jaringan az** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+  > Referensi ini adalah bagian dari ekstensi **azure-firewall** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **firewall jaringan az** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
 summary: Mengelola dan mengonfigurasi Azure Firewalls.
 description: ''
 directCommands:
@@ -25,7 +25,7 @@ directCommands:
                                [--sku {AZFW_Hub, AZFW_VNet}]
                                [--tags]
                                [--threat-intel-mode {Alert, Deny, Off}]
-                               [--tier {Premium, Standard}]
+                               [--tier {Basic, Premium, Standard}]
                                [--vhub]
                                [--zones {1, 2, 3}]
   examples:
@@ -48,7 +48,7 @@ directCommands:
     summary: Izinkan FTP Aktif. Secara default, ini adalah false. Ini hanya diperbolehkan untuk firewall azure di jaringan virtual.
     description: ''
   - name: --count --public-ip-count
-    summary: Jumlah Alamat IP Publik yang terkait dengan azure firewall. Ini digunakan untuk menambahkan alamat IP publik ke firewall ini.
+    summary: Jumlah Alamat IP Publik yang terkait dengan azure firewall. Ini digunakan untuk menambahkan alamat ip publik ke firewall ini.
     description: ''
   - name: --dns-servers
     summary: Daftar alamat IP server DNS yang dipisahkan spasi.
@@ -64,11 +64,11 @@ directCommands:
     summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
     description: ''
   - name: --private-ranges
-    summary: Daftar rentang privat SNAT yang dipisahkan spasi. Nilai validasi adalah Ip tunggal, awalan Ip, atau satu nilai khusus "IANAPrivateRanges".
+    summary: Daftar rentang privat SNAT yang dipisahkan spasi. Nilai validasi adalah ip tunggal, awalan Ip atau satu nilai khusus "IANAPrivateRanges".
     description: ''
   - name: --sku
     parameterValueGroup: AZFW_Hub, AZFW_VNet
-    summary: SKU firewall Azure. Bidang ini tidak dapat diperbarui setelah pembuatan. Sku default di akhir server adalah AZFW_VNet. Jika Anda ingin melampirkan azure firewall ke vhub, Anda harus mengatur sku ke AZFW_Hub.
+    summary: SKU firewall Azure. Bidang ini tidak dapat diperbarui setelah pembuatan. Sku default di akhir server adalah AZFW_VNet. Jika Anda ingin melampirkan firewall azure ke vhub, Anda harus mengatur sku ke AZFW_Hub.
     description: ''
   - name: --tags
     summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
@@ -79,8 +79,8 @@ directCommands:
     description: ''
   - name: --tier
     defaultValue: Standard
-    parameterValueGroup: Premium, Standard
-    summary: Tingkat firewall azure. --tier akan berlaku hanya ketika --sku diatur.
+    parameterValueGroup: Basic, Premium, Standard
+    summary: Tingkat firewall azure. --tier hanya akan berlaku ketika --sku diatur.
     description: ''
   - name: --vhub --virtual-hub
     summary: Nama atau ID virtualHub tempat firewall berada.
@@ -117,7 +117,7 @@ directCommands:
 - uid: az_network_firewall_list-fqdn-tags
   name: az network firewall list-fqdn-tags
   summary: Mendapatkan semua Tag FQDN Azure Firewall dalam langganan.
-  description: 'kata kunci yang dapat dipanggil clsA jenis kustom atau fungsi yang akan diteruskan respons langsung :return: Iterator seperti contoh AzureFirewallFqdnTagListResult atau hasil cls(response) :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.v2020_07_01.models. AzureFirewallFqdnTagListResult] :raises: ~azure.core.exceptions.HttpResponseError.'
+  description: 'kata kunci versi api_versionApi. Nilai defaultnya adalah "2021-08-01". Perhatikan bahwa mengesampingkan nilai default ini dapat mengakibatkan perilaku yang tidak didukung. :p aramtype api_version: str :keyword callable cls: Jenis atau fungsi kustom yang akan diteruskan respons langsung :return: Iterator seperti instans AzureFirewallFqdnTagListResult atau hasil cls(response) :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.v2021_08_01.models. AzureFirewallFqdnTagListResult] :raises: ~azure.core.exceptions.HttpResponseError.'
   syntax: az network firewall list-fqdn-tags
 - uid: az_network_firewall_show
   name: az network firewall show
@@ -137,7 +137,7 @@ directCommands:
     description: ''
 - uid: az_network_firewall_update
   name: az network firewall update
-  summary: Memperbarui Azure Firewall.
+  summary: Perbarui Azure Firewall.
   description: ''
   syntax: >-
     az network firewall update --name
@@ -175,7 +175,7 @@ directCommands:
     summary: Izinkan FTP Aktif. Secara default, ini adalah false. Ini hanya diperbolehkan untuk firewall azure di jaringan virtual.
     description: ''
   - name: --count --public-ip-count
-    summary: Jumlah Alamat IP Publik yang terkait dengan azure firewall. Ini digunakan untuk menambahkan alamat IP publik ke firewall ini.
+    summary: Jumlah Alamat IP Publik yang terkait dengan azure firewall. Ini digunakan untuk menambahkan alamat ip publik ke firewall ini.
     description: ''
   - name: --dns-servers
     summary: Daftar alamat IP server DNS yang dipisahkan spasi.
@@ -191,13 +191,13 @@ directCommands:
     summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
     description: ''
   - name: --private-ranges
-    summary: Daftar rentang privat SNAT yang dipisahkan spasi. Nilai validasi adalah Ip tunggal, awalan Ip, atau satu nilai khusus "IANAPrivateRanges".
+    summary: Daftar rentang privat SNAT yang dipisahkan spasi. Nilai validasi adalah ip tunggal, awalan Ip atau satu nilai khusus "IANAPrivateRanges".
     description: ''
   - name: --public-ips
     summary: Daftar alamat IP Publik yang dipisahkan spasi yang terkait dengan azure firewall. Ini digunakan untuk menghapus alamat IP publik dari firewall ini.
     description: ''
   - name: --remove
-    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
     description: ''
   - name: --set
     summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
@@ -307,9 +307,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Mengelola dan mengonfigurasi Azure Firewalls.
-  ms.openlocfilehash: f749bb11f8c75b8583a0ccde47285f16136251bc
-  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.openlocfilehash: fb0aa1d7277fb73485479c1083f919253aef9d58
+  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 03/25/2022
-  ms.locfileid: "141078241"
+  ms.lasthandoff: 05/24/2022
+  ms.locfileid: "145213709"

@@ -4,7 +4,7 @@ name: az datamigration
 extensionInformation: >-
   > [!Note]
 
-  > Referensi ini adalah bagian dari ekstensi **datamigrasi** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **az datamigration** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+  > Referensi ini adalah bagian dari ekstensi **datamigrasi** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **az datamigration** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
 summary: Kelola Migrasi Data.
 description: ''
 directCommands:
@@ -22,6 +22,8 @@ directCommands:
     syntax: az datamigration get-assessment --connection-string "Data Source=LabServer.database.net;Initial Catalog=master;Integrated Security=False;User Id=User;Password=password" --output-folder "C:\AssessmentOutput" --overwrite
   - summary: Jalankan Penilaian SQL pada SQL Server tertentu menggunakan file konfigurasi penilaian.
     syntax: az datamigration get-assessment --config-file-path "C:\Users\user\document\config.json"
+  - summary: Jalankan Penilaian SQL pada beberapa Server SQL dalam satu panggilan menggunakan string koneksi.
+    syntax: az datamigration get-assessment --connection-string "Data Source=LabServer1.database.net;Initial Catalog=master;Integrated Security=False;User Id=User;Password=password" "Data Source=LabServer2.database.net;Initial Catalog=master;Integrated Security=False;User Id=User;Password=password" --output-folder "C:\AssessmentOutput" --overwrite
   optionalParameters:
   - name: --config-file-path
     summary: Jalur ConfigFile.
@@ -55,7 +57,7 @@ directCommands:
                                             [--target-sql-instance]
   examples:
   - summary: Dapatkan rekomendasi SKU untuk SQL Server yang diberikan menggunakan baris perintah.
-    syntax: az datamigration get-sku-recommendation --output-folder "C:\PerfCollectionOutput" --database-allow-list AdventureWorks, AdventureWorks2 --display-result --overwrite
+    syntax: az datamigration get-sku-recommendation --output-folder "C:\PerfCollectionOutput" --database-allow-list AdventureWorks1 AdventureWorks2 --display-result --overwrite
   - summary: Dapatkan rekomendasi SKU untuk SQL Server yang diberikan menggunakan file konfigurasi penilaian.
     syntax: az datamigration get-sku-recommendation --config-file-path "C:\Users\user\document\config.json"
   optionalParameters:
@@ -66,16 +68,16 @@ directCommands:
     summary: 'Daftar nama database yang dipisahkan spasi untuk diizinkan untuk pertimbangan rekomendasi SKU sambil mengecualikan semua yang lain. Hanya atur salah satu dari berikut ini atau tidak: databaseAllowList, databaseDenyList. Default: null.'
     description: ''
   - name: --database-deny-list
-    summary: 'Daftar nama database yang dipisahkan spasi tidak dipertimbangkan untuk rekomendasi SKU. Hanya atur salah satu dari berikut ini atau tidak: databaseAllowList, databaseDenyList. Default: null.'
+    summary: 'Daftar nama database yang dipisahkan spasi agar tidak dipertimbangkan untuk rekomendasi SKU. Hanya atur salah satu dari berikut ini atau tidak: databaseAllowList, databaseDenyList. Default: null.'
     description: ''
   - name: --display-result
     summary: Apakah akan mencetak hasil rekomendasi SKU ke konsol atau tidak. Aktifkan parameter ini untuk menampilkan hasil.
     description: ''
   - name: --elastic-strategy
-    summary: Apakah menggunakan strategi elastis untuk rekomendasi SKU berdasarkan pembuatan profil penggunaan sumber daya atau tidak. Aktifkan parameter ini untuk menggunakan strategi elastis.
+    summary: Apakah akan menggunakan strategi elastis untuk rekomendasi SKU berdasarkan pembuatan profil penggunaan sumber daya atau tidak. Aktifkan parameter ini untuk menggunakan strategi elastis.
     description: ''
   - name: --end-time
-    summary: 'Waktu akhir UTC titik data performa yang perlu dipertimbangkan selama agregasi, dalam format YYYY-MM-DD HH:MM. Hanya digunakan untuk strategi garis besar (non-elastis). Default: semua titik data yang dikumpulkan akan dipertimbangkan.'
+    summary: 'Waktu akhir UTC titik data performa yang perlu dipertimbangkan selama agregasi, dalam format HH:MM-DD YYYY-MM. Hanya digunakan untuk strategi garis besar (non-elastis). Default: semua poin data yang dikumpulkan akan dipertimbangkan.'
     description: ''
   - name: --output-folder
     summary: Folder output tempat data performa SQL Server disimpan. Nilai di sini harus sama dengan yang digunakan dalam PerfDataCollection.
@@ -88,7 +90,7 @@ directCommands:
     summary: Faktor penskalaan (kenyamanan) yang digunakan selama rekomendasi SKU. Misalnya, jika ditentukan bahwa ada persyaratan CPU 4 vCore dengan faktor penskalaan 150%, maka persyaratan CPU yang sebenarnya adalah 6 vCore.
     description: ''
   - name: --start-time
-    summary: 'Waktu mulai UTC titik data performa yang perlu dipertimbangkan selama agregasi, dalam format YYYY-MM-DD HH:MM. Hanya digunakan untuk strategi garis besar (non-elastis). Default: semua titik data yang dikumpulkan akan dipertimbangkan.'
+    summary: 'Waktu mulai UTC titik data performa yang perlu dipertimbangkan selama agregasi, dalam format YYYY-MM-DD HH:MM. Hanya digunakan untuk strategi garis besar (non-elastis). Default: semua poin data yang dikumpulkan akan dipertimbangkan.'
     description: ''
   - name: --target-percentile
     defaultValue: "95"
@@ -96,14 +98,14 @@ directCommands:
     description: ''
   - name: --target-platform
     defaultValue: Any
-    summary: 'Platform target untuk rekomendasi SKU: AzureSqlDatabase, AzureSqlManagedInstance, AzureSqlVirtualMachine, atau Apa pun. Jika Ada yang dipilih, maka rekomendasi SKU untuk ketiga platform target akan dievaluasi, dan yang paling cocok akan dikembalikan.'
+    summary: 'Platform target untuk rekomendasi SKU: Baik AzureSqlDatabase, AzureSqlManagedInstance, AzureSqlVirtualMachine, atau Apa pun. Jika ada yang dipilih, maka rekomendasi SKU untuk ketiga platform target akan dievaluasi, dan yang paling cocok akan dikembalikan.'
     description: ''
   - name: --target-sql-instance
     summary: 'Nama instans SQL di mana SKU harus direkomendasikan. Default: outputFolder akan dipindai untuk file yang dibuat oleh tindakan PerfDataCollection, dan rekomendasi akan diberikan untuk setiap instans yang ditemukan.'
     description: ''
 - uid: az_datamigration_performance-data-collection
   name: az datamigration performance-data-collection
-  summary: Kumpulkan data performa untuk instans SQL Server tertentu.
+  summary: Kumpulkan data performa untuk instans SQL Server yang diberikan.
   description: ''
   syntax: >-
     az datamigration performance-data-collection [--config-file-path]
@@ -112,11 +114,16 @@ directCommands:
                                                  [--output-folder]
                                                  [--perf-query-interval]
                                                  [--static-query-interval]
+                                                 [--time]
   examples:
   - summary: Kumpulkan data performa dari SQL Server tertentu menggunakan string koneksi.
     syntax: az datamigration performance-data-collection --connection-string "Data Source=LabServer.database.net;Initial Catalog=master;Integrated Security=False;User Id=User;Password=password" --output-folder "C:\PerfCollectionOutput" --number-of-iteration 5 --perf-query-interval 10 --static-query-interval 60
-  - summary: Kumpulkan data performa dari SQL Server tertentu menggunakan file konfigurasi penilaian.
+  - summary: Kumpulkan data performa beberapa Server SQL dalam satu panggilan menggunakan string koneksi.
+    syntax: az datamigration performance-data-collection --connection-string "Data Source=LabServer1.database.net;Initial Catalog=master;Integrated Security=False;User Id=User;Password=password" "Data Source=LabServer2.database.net;Initial Catalog=master;Integrated Security=False;User Id=User;Password=password" --output-folder "C:\PerfCollectionOutput" --number-of-iteration 5 --perf-query-interval 10 --static-query-interval 60
+  - summary: Kumpulkan data performa SQL Server tertentu menggunakan file konfigurasi penilaian.
     syntax: az datamigration performance-data-collection --config-file-path "C:\Users\user\document\config.json"
+  - summary: Kumpulkan data performa dari SQL Server tertentu dengan menentukan batas waktu. Jika batas waktu yang ditentukan adalah sebelum kompplisi siklus perulangan, proses akan berakhir tanpa menyimpan data performa siklus terakhir.
+    syntax: az datamigration performance-data-collection --connection-string "Data Source=LabServer.database.net;Initial Catalog=master;Integrated Security=False;User Id=User;Password=password" --output-folder "C:\PerfCollectionOutput" --number-of-iteration 5 --perf-query-interval 10 --static-query-interval 60 --time 60
   optionalParameters:
   - name: --config-file-path
     summary: Jalur ConfigFile.
@@ -126,7 +133,7 @@ directCommands:
     description: ''
   - name: --number-of-iteration
     defaultValue: "20"
-    summary: 'Jumlah perulangan pengumpulan data performa yang harus dilakukan sebelum bertahan pada file. Misalnya, dengan nilai default, data performa akan dipertahankan setiap 30 detik \* 20 iterasi = 10 menit. Minimum: 2.'
+    summary: 'Jumlah perulangan pengumpulan data performa yang harus dilakukan sebelum bertahan ke file. Misalnya, dengan nilai default, data performa akan dipertahankan setiap 30 detik \* 20 iterasi = 10 menit. Minimum: 2.'
     description: ''
   - name: --output-folder
     summary: Folder output untuk menyimpan data performa.
@@ -139,24 +146,33 @@ directCommands:
     defaultValue: "3600"
     summary: Interval untuk mengkueri dan mempertahankan data konfigurasi statis, dalam hitungan detik.
     description: ''
+  - name: --time
+    summary: Waktu setelah eksekusi perintah secara otomatis berhenti, dalam detik. Jika parameter ini tidak ditentukan, intervensi manual akan diperlukan untuk menghentikan eksekusi perintah.
+    description: ''
 - uid: az_datamigration_register-integration-runtime
   name: az datamigration register-integration-runtime
   summary: Daftarkan Database Migration Service di Integration Runtime.
   description: ''
   syntax: >-
     az datamigration register-integration-runtime --auth-key
+                                                  [--installed-ir-path]
                                                   [--ir-path]
   examples:
   - summary: Daftarkan Sql Migration Service di Integration Runtime yang Dihost sendiri.
     syntax: az datamigration register-integration-runtime --auth-key "IR@00000-0000000-000000-aaaaa-bbbb-cccc"
   - summary: Instal Integration Runtime dan daftarkan Sql Migration Service di dalamnya.
     syntax: az datamigration register-integration-runtime --auth-key "IR@00000-0000000-000000-aaaaa-bbbb-cccc" --ir-path "C:\Users\user\Downloads\IntegrationRuntime.msi"
+  - summary: Baca Integration Runtime dari lokasi penginstalan tertentu.
+    syntax: az datamigration register-integration-runtime --auth-key "IR@00000-0000000-000000-aaaaa-bbbb-cccc" --installed-ir-path "D:\My Softwares\Microsoft Integration Runtime\5.0"
   requiredParameters:
   - isRequired: true
     name: --auth-key
     summary: AuthKey dari SQL Migration Service.
     description: ''
   optionalParameters:
+  - name: --installed-ir-path
+    summary: 'Jalur folder versi di lokasi Integration Runtime terinstal. Ini dapat disediakan ketika IR diinstal tetapi perintah gagal membacanya. Format: "<parent-folder-path>Microsoft Integration Runtime<Version>".'
+    description: ''
   - name: --ir-path
     summary: Jalur MSI Integration Runtime.
     description: ''
@@ -214,9 +230,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Kelola Migrasi Data.
-  ms.openlocfilehash: e080f5bb040ae5c4919e3fe20334eb8ae6544c9e
-  ms.sourcegitcommit: d016676aca62d5461b07446d98cf38e30bba07cd
+  ms.openlocfilehash: 9b6dd6e17463837b53fb4fb8b7cbfe6e5956a4e9
+  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/19/2022
-  ms.locfileid: "143881561"
+  ms.lasthandoff: 05/24/2022
+  ms.locfileid: "145214593"
