@@ -3,7 +3,7 @@ title: Referensi Azure CLI untuk Azure Virtual Machines | Microsoft Docs
 description: Temukan perintah referensi inti dan ekstensi Azure CLI untuk mengelola Azure Virtual Machines.  Ikuti link ke artikel populer untuk mempelajari cara menggunakan Azure CLI for Azure VM.
 author: dbradish-microsoft
 manager: barbkess
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.topic: reference
 ms.date: 09/21/2021
 ms.author: dbradish
@@ -11,12 +11,12 @@ ms.service: azure-cli
 ms.reviewer: robb
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, mesin virtual azure, virtualisasi desktop, gambar, galeri gambar bersama
-ms.openlocfilehash: e0956b2751c0f9b1782af4aef9fca8b91aad9937
-ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
+ms.openlocfilehash: 3b53e1d16553e5d319790d3415971355a814a9f9
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/13/2022
-ms.locfileid: "144977023"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145939262"
 ---
 # <a name="azure-cli-reference-commands-for-azure-virtual-machines"></a>Perintah referensi Azure CLI untuk Azure Virtual Machines
 

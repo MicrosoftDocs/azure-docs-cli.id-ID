@@ -5,18 +5,18 @@ ms.date: 11/12/2021
 ms.author: dbradish
 author: dbradish-microsoft
 manager: barbkess
-ms.devlang: azure-cli
+ms.tool: azure-cli
 ms.topic: tutorial
 ms.prod: azure
 ms.technology: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli membersihkan sumber daya, mesin virtual di azure cli
-ms.openlocfilehash: 3bb61e9ede907c1e95fb21b85d51c225161fa957
-ms.sourcegitcommit: 62469e9c1ad07f215129ece5db89c530f1a77968
+ms.openlocfilehash: 060f36738915dc93a0b6d2024e11726c6ebd45af
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 12/15/2021
-ms.locfileid: "135157667"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145939028"
 ---
 # <a name="6---cleanup"></a>6 - Pembersihan
 

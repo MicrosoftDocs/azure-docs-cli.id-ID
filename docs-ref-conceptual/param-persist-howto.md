@@ -7,16 +7,16 @@ manager: barbkess
 ms.prod: azure
 ms.date: 08/19/2021
 ms.topic: conceptual
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.technology: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: parameter tetap azure, parameter tetap
-ms.openlocfilehash: a47c533f15f7f745a64bc77762f084fe2498750f
-ms.sourcegitcommit: cbb162f5b74c5250338109317f06a152809c4b4c
+ms.openlocfilehash: 7f351910e436afeceb9a6a5a1f0c6a5184c1b2c7
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/06/2022
-ms.locfileid: "141397550"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145939550"
 ---
 # <a name="azure-cli-persisted-parameter"></a>Parameter tetap Azure CLI
 

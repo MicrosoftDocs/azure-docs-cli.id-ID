@@ -5,18 +5,18 @@ ms.date: 11/12/2021
 ms.author: dbradish
 author: dbradish-microsoft
 manager: barbkess
-ms.devlang: azure-cli
+ms.tool: azure-cli
 ms.topic: tutorial
 ms.prod: azure
 ms.technology: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli create vm, mesin virtual di azure cli, variabel shell
-ms.openlocfilehash: b4c034fe26db1e9b047656d74ce718d6912dcd7e
-ms.sourcegitcommit: 013ae480807b6745bf8786b0ffc4362af301f8e8
+ms.openlocfilehash: a6d05eaa51d0ae227c92d043475944b5fbf4e9fb
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/04/2022
-ms.locfileid: "144764710"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145939154"
 ---
 # <a name="1---overview-and-prerequisites"></a>1 - Ringkasan dan Prasyarat
 

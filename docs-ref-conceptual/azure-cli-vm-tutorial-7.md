@@ -5,18 +5,18 @@ ms.date: 11/12/2021
 ms.author: dbradish
 author: dbradish-microsoft
 manager: barbkess
-ms.devlang: azure-cli
+ms.tool: azure-cli
 ms.topic: tutorial
 ms.prod: azure
 ms.technology: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: informasi selengkapnya tentang azure cli dan vm, mesin virtual di azure cli
-ms.openlocfilehash: f121a6b04c893d7d80353089c40f559f9417a923
-ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
+ms.openlocfilehash: 4d46a8f5b66c0e54c9b18d2f5c2fb9e94da2c400
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/13/2022
-ms.locfileid: "144976627"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145939010"
 ---
 # <a name="7---summary"></a>7 - Ringkasan
 

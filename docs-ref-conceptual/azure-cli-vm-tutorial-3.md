@@ -5,18 +5,18 @@ ms.date: 11/12/2021
 ms.author: dbradish
 author: dbradish-microsoft
 manager: barbkess
-ms.devlang: azure-cli
+ms.tool: azure-cli
 ms.topic: tutorial
 ms.prod: azure
 ms.technology: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli create vm, mesin virtual di azure cli
-ms.openlocfilehash: 6fd9b399424db7a4ce9dce5f6fa56e5a5d23b18e
-ms.sourcegitcommit: 62469e9c1ad07f215129ece5db89c530f1a77968
+ms.openlocfilehash: eb097a38d5f7983f184ddc9c46afc988580c4d55
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 12/15/2021
-ms.locfileid: "135157679"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145940126"
 ---
 # <a name="3---create-a-virtual-machine-on-a-virtual-network"></a>3 - Buat mesin virtual di jaringan virtual
 

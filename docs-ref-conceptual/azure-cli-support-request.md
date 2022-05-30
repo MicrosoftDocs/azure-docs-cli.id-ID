@@ -6,14 +6,15 @@ ms.author: dbradish
 ms.service: azure-supportability
 ms.topic: how-to
 ms.date: 08/01/2021
+ms.tool: azure-cli
 ms.custom: template-how-to, devx-track-azurecli, seo-azure-cli
 keywords: permintaan dukungan azure, dukungan azure, tiket dukungan azure, manajemen tiket dukungan
-ms.openlocfilehash: c466acdadbf2ee04062390ed9b15ec93c48b58b6
-ms.sourcegitcommit: ecad34e4d4654660377050fccba7861e942e03de
+ms.openlocfilehash: e2e1cc87c02ae2671a61a89b08cc113d33451a8d
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 09/13/2021
-ms.locfileid: "132439046"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145939226"
 ---
 # <a name="create-an-azure-support-ticket-in-azure-cli"></a>Membuat tiket dukungan Azure di Azure CLI
 

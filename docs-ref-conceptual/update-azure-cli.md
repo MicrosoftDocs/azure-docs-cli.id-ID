@@ -7,15 +7,15 @@ manager: yonzhan
 ms.date: 9/21/2021
 ms.topic: conceptual
 ms.service: azure-cli
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: update azure cli
-ms.openlocfilehash: 05481019389e9ac3204f1695f386eb731e4fec7e
-ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
+ms.openlocfilehash: d80ee4017b481964fa1dfc11c1062b4879b51186
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/22/2022
-ms.locfileid: "144003193"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145938740"
 ---
 # <a name="how-to-update-the-azure-cli"></a>Cara memperbarui Azure CLI
 

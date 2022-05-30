@@ -7,16 +7,16 @@ ms.topic: reference
 ms.date: 09/21/2021
 ms.author: dbradish
 ms.service: azure-cli
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.reviewer: mohnader
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, jaringan azure
-ms.openlocfilehash: bf0754024dee57ae0af1c0582654cada541d2158
-ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
+ms.openlocfilehash: 4df164fa20072106f8aebf3527ff54cb8dfd12bb
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/13/2022
-ms.locfileid: "144977041"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145937732"
 ---
 # <a name="azure-cli-reference-commands-for-azure-network"></a>Perintah referensi Azure CLI untuk Azure Network
 

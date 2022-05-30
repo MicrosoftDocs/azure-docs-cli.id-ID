@@ -7,15 +7,15 @@ manager: barbkess
 ms.date: 11/11/2021
 ms.topic: conceptual
 ms.service: azure-cli
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: perintah azure cli
-ms.openlocfilehash: 3b9a935c8259fd327b3567ddd2ebc84ce302c27c
-ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
+ms.openlocfilehash: 978b1d84869fd67dbcd7afcbbbbce0acf9e01ead
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/13/2022
-ms.locfileid: "144977939"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145939874"
 ---
 # <a name="output-formats-for-azure-cli-commands"></a>Format output untuk perintah Azure CLI
 

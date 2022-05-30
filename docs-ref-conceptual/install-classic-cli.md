@@ -7,15 +7,15 @@ manager: yonzhan
 ms.date: 08/19/2021
 ms.topic: conceptual
 ms.service: azure-cli
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure classic cli, azure classic
-ms.openlocfilehash: 5b2ee5caff38238efbc55e1072b6512081436ed3
-ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
+ms.openlocfilehash: 449e1f7ed78f58f63a38e8d8b605b88028388972
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/22/2022
-ms.locfileid: "144003391"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145938182"
 ---
 # <a name="install-the-azure-classic-cli"></a>Pasang CLI klasik Azure
 

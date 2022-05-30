@@ -7,17 +7,17 @@ manager: yonzhan
 ms.date: 04/29/2022
 ms.topic: conceptual
 ms.service: azure-cli
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 zone_pivot_group_filename: azure/zone-pivot-groups.json
 zone_pivot_groups: cli-linux-installation-method
 keywords: linux cli, azure cli linux, menginstal azure cli ubuntu, menginstal azure cli linux
-ms.openlocfilehash: 150db5016d264d47da7f7bf6b584e5dd32b95998
-ms.sourcegitcommit: 458438e54726db3a020b476922b529b514b512d8
+ms.openlocfilehash: 8603f0864a36c475f0a29563e917a9d317e9deca
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/11/2022
-ms.locfileid: "144850568"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145938920"
 ---
 # <a name="install-the-azure-cli-on-linux"></a>Menginstal Azure CLI di Linux
 

@@ -7,15 +7,15 @@ manager: barbkess
 ms.date: 08/19/2021
 ms.topic: conceptual
 ms.service: azure-cli
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli, cara menggunakan azure cli, antarmuka baris perintah azure, cara membuka azure cli, perintah azure cli
-ms.openlocfilehash: efe3b7a95e6ced53e9a900bbd11c692360f386e6
-ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
+ms.openlocfilehash: 9620aa857f2efa73e16194dfac492c34c92f1254
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/13/2022
-ms.locfileid: "144977813"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145938902"
 ---
 # <a name="get-started-with-azure-cli"></a>Memulai dengan Azure CLI
 

@@ -5,18 +5,18 @@ ms.date: 11/12/2021
 ms.author: dbradish
 author: dbradish-microsoft
 manager: barbkess
-ms.devlang: azure-cli
+ms.tool: azure-cli
 ms.topic: tutorial
 ms.prod: azure
 ms.technology: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: mesin virtual di azure cli, atur variabel shell dari output cli
-ms.openlocfilehash: abc99d9c47da49b75a4ea596f2016da1fc1d172f
-ms.sourcegitcommit: 766c21c494eb7fbdc5160c437868c187c0b6e587
+ms.openlocfilehash: 91c97ae4c527c0c4d968733e2dbe1d4f7e23042a
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 02/17/2022
-ms.locfileid: "138989714"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145939082"
 ---
 # <a name="5---set-shell-variables-from-cli-output"></a>5 - Atur variabel shell dari output CLI
 

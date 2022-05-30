@@ -7,14 +7,14 @@ manager: barbkess
 ms.date: 10/01/2021
 ms.topic: conceptual
 ms.service: azure-cli
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
-ms.openlocfilehash: 7df9c12d6ae0696b0e2cfeb91ecb7e883ec0d259
-ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
+ms.openlocfilehash: 9dbf7b36fd8de22d4a002134a9a6142f6116d94c
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/13/2022
-ms.locfileid: "144977383"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145938668"
 ---
 # <a name="how-to-use-azure-cli-effectively"></a>Cara menggunakan Azure CLI secara efektif
 

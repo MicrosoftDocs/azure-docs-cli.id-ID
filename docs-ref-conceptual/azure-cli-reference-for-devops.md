@@ -3,7 +3,7 @@ title: Referensi Azure CLI untuk Azure DevOps | Microsoft Docs
 description: Temukan perintah referensi inti dan ekstensi Azure CLI untuk mengelola Azure DevOps.  Ikuti link ke artikel populer untuk mempelajari cara menggunakan Azure CLI for Azure DevOps.
 author: dbradish-microsoft
 manager: barbkess
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.topic: reference
 ms.date: 09/21/2021
 ms.author: dbradish
@@ -11,12 +11,12 @@ ms.service: azure-cli
 ms.reviewer: robb
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, azure devops
-ms.openlocfilehash: dcdb2a24b00ef5134fa7eccbe04cf49875f9b86a
-ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
+ms.openlocfilehash: b1041ebc0fd5217541c9b2ef4f85c3a35c10159b
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/13/2022
-ms.locfileid: "144977401"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145938362"
 ---
 # <a name="azure-cli-reference-commands-for-azure-devops"></a>Perintah referensi Azure CLI untuk Azure DevOps
 

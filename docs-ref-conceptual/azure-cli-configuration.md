@@ -7,15 +7,15 @@ manager: barbkess
 ms.date: 08/01/2021
 ms.topic: conceptual
 ms.service: azure-cli
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: variabel lingkungan, file konfigurasi, pengaturan konfigurasi, konfigurasi pengguna, variabel azure cli, konfigurasi azure cli, konfigurasi cli
-ms.openlocfilehash: adafe1eebc4fc0fab0f76fca9dadf099703287b0
-ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
+ms.openlocfilehash: 4f662426ea786813fd52f851a7ea1203bf677198
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/13/2022
-ms.locfileid: "144977059"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145938056"
 ---
 # <a name="azure-cli-configuration"></a>Konfigurasi CLI Azure
 

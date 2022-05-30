@@ -7,15 +7,15 @@ manager: barbkess
 ms.date: 03/01/2022
 ms.topic: conceptual
 ms.service: azure-cli
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: perwakilan layanan azure, membuat perwakilan layanan azure, membuat perwakilan layanan azure cli
-ms.openlocfilehash: a77f64b1c1840e2ef114a81e2982d2b3aa7d1ba2
-ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
+ms.openlocfilehash: 6a5c2eb17f9046c18ce4cdaf905613b8742b3b26
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/13/2022
-ms.locfileid: "144976753"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145939946"
 ---
 # <a name="create-an-azure-service-principal-with-the-azure-cli"></a>Membuat perwakilan layanan Azure dengan Azure CLI
 
@@ -261,7 +261,7 @@ Untuk masuk dengan perwakilan layanan, Anda memerlukan `appID`, `tenantID`, dan 
     az group create --location westus --name myResourceGroupName
     ```
 
-1. Buat akun penyimpanan.
+1. Membuat akun penyimpanan.
 
     Untuk Azure Storage, nilai yang valid untuk parameter `<KIND>` adalah:
 

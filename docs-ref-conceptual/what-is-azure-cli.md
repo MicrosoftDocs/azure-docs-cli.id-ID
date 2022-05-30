@@ -7,15 +7,15 @@ manager: barbkess
 ms.date: 9/21/2021
 ms.topic: overview
 ms.service: azure-cli
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: antarmuka baris perintah, azure cli, baris perintah azure, antarmuka baris perintah azure, apa itu cli, contoh azure cli
-ms.openlocfilehash: ca8419a510d5c309bcd26f01bbfdc6c12c425af1
-ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
+ms.openlocfilehash: bcbb9d1723011ecf6cdf618ba7117587cc8c0fb7
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/13/2022
-ms.locfileid: "144977329"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145937624"
 ---
 # <a name="what-is-the-azure-cli"></a>Apa itu Azure CLI?
 

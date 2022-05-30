@@ -7,15 +7,15 @@ manager: barbkess
 ms.date: 05/24/2022
 ms.topic: article
 ms.service: azure-cli
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: pembaruan Azure cli, catatan Azure cli, versi Azure cli
-ms.openlocfilehash: 774801cf1b0b56e24fcad8e4a7c9e8b1f5302e1a
-ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
+ms.openlocfilehash: 704473409f4b59f86b0f75bb841b4c377193c7f3
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/24/2022
-ms.locfileid: "145214393"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145939820"
 ---
 # <a name="azure-cli-release-notes"></a>Catatan rilis Azure CLI
 
@@ -323,7 +323,7 @@ Versi 2.35.0
 
 * [BREAKING CHANGE] `az acr create`: Menolak permintaan dengan nama menggunakan huruf besar
 * [BREAKING CHANGE] `az acr connected-registry create`: Menolak permintaan dengan nama menggunakan huruf besar
-* `az acr update`: Menonaktifkan jaringan publik sekarang menampilkan pesan peringatan
+* `az acr update`: Nonaktifkan jaringan publik sekarang menampilkan pesan peringatan
 * `az acr manifest metadata` Menghentikan grup perintah
 * `az acr manifest`: Tambahkan `show-metadata`perintah , `list-metadata` dan `update-metadata`
 
@@ -350,7 +350,7 @@ Versi 2.35.0
 
 ### <a name="apim"></a>APIM
 
-* `apim api schema create`: Tambahkan perintah baru untuk mendukung pembuatan skema untuk API graphql
+* `apim api schema create`: Tambahkan perintah baru untuk mendukung pembuatan skema untuk graphql API
 * `apim api schema delete`: Tambahkan perintah baru untuk mendukung penghapusan skema API
 * `apim api schema list`: Tambahkan perintah baru untuk mendukung memperlihatkan daftar skema API
 * `apim api schema show`: Tambahkan perintah baru untuk mendukung mendapatkan skema API
@@ -362,7 +362,7 @@ Versi 2.35.0
 * `az appconfig kv export`: Berhenti melemparkan kesalahan jika tidak ada nilai kunci yang diekspor ke App Service
 * `az appconfig create`: Tambahkan opsi `retention-days` baru dan `enable-purge-protection`
 * `az appconfig list-deleted`: Tambahkan perintah baru untuk mencantumkan semua App Configuration yang dihapus tetapi belum dihapus menyeluruh
-* `az appconfig show-deleted`: Tambahkan perintah baru untuk menampilkan properti yang dihapus tetapi belum dihapus menyeluruh App Configuration
+* `az appconfig show-deleted`: Tambahkan perintah baru untuk memperlihatkan properti App Configuration yang dihapus tetapi belum dihapus menyeluruh
 * `az appconfig recover`: Tambahkan perintah baru untuk memulihkan App Configuration yang dihapus tetapi belum dihapus menyeluruh
 * `az appconfig purge`: Tambahkan perintah baru untuk menghapus menyeluruh penyimpanan yang dihapus
 
@@ -376,27 +376,27 @@ Versi 2.35.0
 * `az staticwebapp update` : Hapus properti yang tidak perlu dari output
 * `az webapp deployment slot create`: Izinkan penimpaan pengaturan kontainer
 * Perbaikan #21080: `az webapp up`: Memperbaiki objek tidak memiliki atribut 'respons'
-* Perbaikan #19747: `az webapp up`: Fix TypeError: Objek 'NoneType' tidak dapat diulang
-* `az webapp up`: Validasi bahwa ASE ada, adalah ASE v3, dan bukan ILB ASE; Validasi bahwa rencana yang sudah ada sebelumnya ada di ASE; Default ke SKU I1V2 jika menggunakan ASE
+* Perbaikan #19747: `az webapp up`: Perbaiki TypeError: Objek 'NoneType' tidak dapat diulang
+* `az webapp up`: Memvalidasi bahwa ASE ada, adalah ASE v3, dan bukan ILB ASE; Validasi bahwa rencana yang sudah ada sebelumnya ada di ASE; Default ke SKU I1V2 jika menggunakan ASE
 * Perbaikan #20240: `az functionapp deployment source config-zip`: Perbaiki bug yang tidak berfungsi oleh parameter `--slot`
 * Perbaikan #12090: `az webapp create`: Izinkan paket di grup sumber daya yang berbeda dari aplikasi web
-* `az staticwebapp identity assign`, , `az staticwebapp hostname set``az staticwebapp create`: Fix #21186: Tampilkan pesan kesalahan terperinci alih-alih "permintaan buruk"
+* `az staticwebapp identity assign`, , `az staticwebapp hostname set`: `az staticwebapp create`Perbaikan #21186: Tampilkan pesan kesalahan terperinci alih-alih "permintaan buruk"
 * `az staticwebapp update`: Perbaikan #21465: Izinkan menentukan grup sumber daya aplikasi web statis
-* Perbaikan #21728: `az webapp deployment github-actions add`: Izinkan melewati runtime dengan pemisah titik dua
+* Perbaikan #21728: `az webapp deployment github-actions add`: Izinkan passing dalam runtime dengan pemisah titik dua
 * `az webapp config`: Perbaikan untuk Storage Persisten Aplikasi Web dinonaktifkan setelah setiap penyebaran
 * `az appservice ase create-inbound-services`: Menambahkan dukungan untuk pembuatan zona DNS privat Azure di ASEv3
 
 ### <a name="arm"></a>ARM
 
-* Perbaikan #20842: `az bicep`: Perbaikan untuk menggunakan variabel lingkungan permintaan untuk bundel CA
+* Perbaikan #20842: `az bicep`: Memperbaiki penggunaan variabel lingkungan permintaan untuk bundel CA
 * `az policy assignment create`: Parameter dukungan `--subscription`
 
 ### <a name="backup"></a>Cadangan
 
 * Mencantumkan perintah perbaikan bug respons multi-halaman
 * `az backup restore restore-disks`: Menambahkan dukungan untuk Pemulihan Lokasi Asli dan Pemulihan Lokasi Alternatif
-* `az backup policy create/set/list`: Menambahkan dukungan untuk membuat dan secara selektif mencantumkan Kebijakan yang ditingkatkan
-* `az backup protection enable-for-vm`: Menambahkan dukungan untuk VM Tepercaya mengonfigurasi perlindungan dengan Kebijakan yang Ditingkatkan
+* `az backup policy create/set/list`: Menambahkan dukungan untuk membuat dan mencantumkan kebijakan yang Ditingkatkan secara selektif
+* `az backup protection enable-for-vm`: Menambahkan dukungan untuk perlindungan konfigurasi VM Tepercaya dengan Kebijakan yang Ditingkatkan
 * `az backup vault backup-properties`: Tambahkan parameter `--hybrid-backup-security-features` baru untuk mendukung pengaturan fitur keamanan untuk pencadangan hibrid
 
 ### <a name="cdn"></a>CDN
@@ -412,11 +412,11 @@ Versi 2.35.0
 
 * [BREAKING CHANGE] `az vm/vmss create`: Menghapus nilai `Contributor` default parameter `--role`
 * `az vm host`: Tambahkan perintah `restart` baru untuk mendukung boot ulang host khusus
-* `az vm extension show`: Tambahkan parameter `--instance-view` baru untuk mendukung lacak kemajuan ekstensi vm
+* `az vm extension show`: Tambahkan parameter `--instance-view` baru untuk mendukung melacak kemajuan ekstensi vm
 * Ubah info `--enable-bursting` bantuan untuk menandainya hanya untuk sesuai permintaan
 * Perbaikan #20174: `az vm create`: Tentukan informasi paket saat menggunakan alias gambar
 * `az disk/snapshot/sig definitiion create/update`: Tambahkan parameter `--architecture` baru untuk mendukung ARM64
-* `az vm disk attach`: Tambahkan parameter `--disks` baru untuk mendukung melampirkan beberapa disk dalam satu panggilan API
+* `az vm disk attach`: Tambahkan parameter `--disks` baru untuk mendukung pemasangan beberapa disk dalam satu panggilan API
 * `az vm/vmss create`: Mendukung pembuatan VM/VMSS dari gambar galeri komunitas
 * `az vm/vmss create`: Menambahkan penerimaan perjanjian hukum galeri komunitas
 * `az vm/vmss create`: Tambahkan verifikasi apakah `--os-type` benar saat membuat VM dari gambar galeri komunitas atau gambar galeri bersama
@@ -429,7 +429,7 @@ Versi 2.35.0
 
 ### <a name="event-grid"></a>Event Grid
 
-* Perbaikan #21521: Kesalahan atribut pembaruan langganan topik sistem
+* Perbaikan #21521: Topik sistem kesalahan atribut pembaruan langganan
 * Mendukung identitas pengguna dan mode campuran
 
 ### <a name="event-hubs"></a>Event Hubs
@@ -586,7 +586,7 @@ Versi 2.34.0
 * `az vm disk attach`: Mengubah deskripsi bantuan untuk memandu cara menggunakan `--ids` parameter dengan benar
 * `az restore-point`: Tambahkan grup perintah baru untuk mendukung pengelolaan titik pemulihan
 * `az vmss create/update`: Tambahkan parameter `--security-type`baru , `--enable-secure-boot` dan `--enable-vtpm` untuk mendukung Peluncuran Tepercaya
-* `az vmss create/update`: Tambahkan parameter `--automatic-repairs-action` baru untuk mendukung tindakan perbaikan
+* `az vmss create/update`: Menambahkan parameter `--automatic-repairs-action` baru untuk mendukung tindakan perbaikan
 * `az vmss create/update`: Menambahkan parameter baru `--v-cpus-available` dan `--v-cpus-per-core` untuk mendukung penyesuaian VMSize
 
 ### <a name="cosmos-db"></a>Cosmos DB
@@ -617,7 +617,7 @@ Versi 2.34.0
 
 * `az monitor log-analytics workspace table`: Tambahkan perintah `create`baru , `delete` dan `search-job create` untuk mendukung operasi tabel Log/Hasil Pencarian Microsoft/Kustom
 * `az monitor log-analytics workspace update`: Tambahkan parameter `--data-collection-rule` baru untuk mendukung pembaruan defaultDataCollectionRuleResourceId
-* `az monitor log-analytics workspace table`: Tambahkan perintah `restore create` baru dan `migrate` untuk mendukung operasi tabel/migrasi log yang dipulihkan
+* `az monitor log-analytics workspace table`: Tambahkan perintah `restore create` baru dan `migrate` untuk mendukung tabel log yang dipulihkan/operasi migrasi
 
 ### <a name="network"></a>Jaringan
 
@@ -626,14 +626,14 @@ Versi 2.34.0
 
 ### <a name="packaging"></a>Pengemasan
 
-* [PERUBAHAN MENEROBOS] Drop dukungan Ubuntu 14.04 Trusty Tahr dan Debian 8 Jessie
-* [PERUBAHAN MENEROBOS] Hilangkan dukungan Hirsute Hippo Ubuntu 21.04
+* [MELANGGAR PERUBAHAN] Drop Ubuntu 14.04 Trusty Tahr dan Debian 8 Dukungan Jessie
+* [MELANGGAR PERUBAHAN] Hilangkan dukungan Hirsute Hippo Ubuntu 21.04
 * Menambahkan dukungan Ubuntu 21.10 Impish Indri
 * Bump embedded Python ke 3.8 untuk paket deb
 
 ### <a name="profile"></a>Profil
 
-* PERUBAHAN `az account show`[MENEROBOS] : Hilangkan`--sdk-auth`
+* [MELANGGAR PERUBAHAN] `az account show`: Hilangkan `--sdk-auth`
 
 ### <a name="rdbms"></a>RDBMS
 
@@ -651,8 +651,8 @@ Versi 2.34.0
 ### <a name="storage"></a>Penyimpanan
 
 * `az storage account create/update`: Dukungan `--sam-account-name` dan `--account-type`
-* `az storage blob upload`: Tambahkan `--tier`, migrasi ke track2
-* `az storage blob upload-batch`: Migrasi ke track2
+* `az storage blob upload`: Tambahkan `--tier`, migrasikan ke track2
+* `az storage blob upload-batch`: Bermigrasi ke track2
 
 ## <a name="february-14-2022"></a>14 Februari 2022
 

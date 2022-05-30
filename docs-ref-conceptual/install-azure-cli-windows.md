@@ -7,16 +7,16 @@ manager: yonzhan
 ms.prod: azure
 ms.date: 08/19/2021
 ms.topic: conceptual
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.technology: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: Menginstal azure cli, unduhan azure cli, cli untuk windows, menginstal azure cli di windows, azure cli windows, menginstal azure cli windows
-ms.openlocfilehash: 098caabddfa2c1abbe6551b5f51fc76105f0d0e4
-ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
+ms.openlocfilehash: f4046481be09d67bb3d8ee0568e77f0afeeaf490
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/22/2022
-ms.locfileid: "144003102"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145938308"
 ---
 # <a name="install-azure-cli-on-windows"></a>Instal Azure CLI di Windows
 

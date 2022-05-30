@@ -6,14 +6,15 @@ ms.author: dbradish
 ms.service: azure-cli
 ms.topic: how-to
 ms.date: 08/01/2021
+ms.tool: azure-cli
 ms.custom: template-how-to, devx-track-azurecli, seo-azure-cli
 keywords: variabel azure cli, perintah azure cli, nilai variabel, variabel shell
-ms.openlocfilehash: 5e8dd15c25ef87cf862747f9d4278c41cacd5bde
-ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
+ms.openlocfilehash: a0b14df09080840ccae27ae37a27fb118c8c3eeb
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/13/2022
-ms.locfileid: "144976915"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145940162"
 ---
 # <a name="how-to-use-variables-in-azure-cli-commands"></a>Cara menggunakan variabel dalam perintah Azure CLI
 

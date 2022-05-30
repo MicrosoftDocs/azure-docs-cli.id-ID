@@ -7,15 +7,15 @@ manager: yonzhan
 ms.date: 10/28/2021
 ms.topic: conceptual
 ms.service: azure-cli
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: msal, msal-based azure cli
-ms.openlocfilehash: 54a57a3246178fa4bf47623524121c61ad4aec4a
-ms.sourcegitcommit: 9d7e461f68914e3d66f29d030bdf50ae58a4ef8b
+ms.openlocfilehash: daecbcf6a6359610b51696b4f12cab162dfff052
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 01/19/2022
-ms.locfileid: "136921360"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145939892"
 ---
 # <a name="msal-based-azure-cli"></a>Azure CLI berbasis MSAL
 

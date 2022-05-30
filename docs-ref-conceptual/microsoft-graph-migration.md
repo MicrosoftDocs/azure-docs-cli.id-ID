@@ -4,18 +4,18 @@ description: Pelajari tentang migrasi Microsoft Graph Azure CLI.
 author: jiasli
 ms.author: jiasli
 manager: yonzhan
-ms.date: 03/08/2022
+ms.date: 05/25/2022
 ms.topic: conceptual
 ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: microsoft graph, ms graph, active directory graph, ad graph
-ms.openlocfilehash: 0c4154dc74b28831ef1977c877cc9009998dc176
-ms.sourcegitcommit: 52656c1c4e806d686ba3e799fd1d471944083360
+ms.openlocfilehash: 6353af7fc45d241b37ba3306c0aebc7227c39075
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/17/2022
-ms.locfileid: "145064637"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145939604"
 ---
 # <a name="microsoft-graph-migration"></a>Microsoft Graph migrasi
 
@@ -83,76 +83,12 @@ Argumen perintah dan perubahan pemecahan perilaku tercantum di bawah ini.
 ## <a name="known-issues"></a>Masalah yang diketahui
 
 - Argumen `--add`pembaruan generik , `--set` dan `--remove` saat ini tidak berfungsi. Anda dapat menggunakan `az rest` untuk langsung memanggil Microsoft Graph API untuk properti yang tidak didukung.
-- Microsoft Graph perintah terkait seperti `az ad` dan `az role` akan gagal di lingkungan Azure Stack yang tidak memiliki dukungan Microsoft Graph. Silakan gunakan Azure CLI 3.36.0 atau versi yang lebih lama untuk lingkungan Azure Stack.
+- Microsoft Graph perintah terkait seperti `az ad` dan `az role` akan gagal di lingkungan Azure Stack yang tidak memiliki dukungan Microsoft Graph. Silakan gunakan Azure CLI 2.36.0 atau versi yang lebih lama untuk lingkungan Azure Stack.
 
-## <a name="try-azure-cli-beta-with-microsoft-graph"></a>Coba Azure CLI beta dengan Microsoft Graph
+## <a name="install-a-previous-version"></a>Menginstal versi sebelumnya
 
-Azure CLI dibangun di [Python](https://www.python.org/). Versi Python yang didukung adalah 3.7, 3.8, 3.9, 3.10. Pada Windows, Anda harus [menginstal Python](https://www.python.org/downloads/windows/) terlebih dahulu.
+Jika Anda belum siap untuk migrasi, seperti tidak memiliki izin Microsoft Graph, Anda mungkin tetap menggunakan versi Azure CLI <= 2.36.0. Jika Anda telah menginstal 2.37.0, Anda dapat kembali ke versi sebelumnya mengikuti bagian "Instal versi tertentu" di bawah [dokumen penginstalan](/cli/azure/install-azure-cli) (kecuali untuk Homebrew yang tidak mendukung penginstalan versi sebelumnya).
 
-Azure CLI beta hanya dapat diinstal dengan `pip` dari repositori Microsoft. Gunakan `python` atau `python3` untuk menjalankan perintah berikut, tergantung pada distribusi Linux atau versi Python yang diinstal.
+## <a name="give-feedback"></a>Berikan umpan balik
 
-Untuk menghindari penimpaan Azure CLI yang diinstal, sebaiknya instal versi beta di [lingkungan virtual](https://docs.python.org/3/tutorial/venv.html).
-
-1. Membuat lingkungan virtual
-
-   Navigasi ke folder tempat Anda ingin membuat lingkungan virtual, lalu jalankan:
-
-   ```bash
-   python -m venv <env_name>
-   ```
-
-2. Mengaktifkan lingkungan virtual
-
-   ### <a name="powershell"></a>[PowerShell](#tab/powershell)
-
-   ```powershell
-   . .\<env_name>\Scripts\Activate.ps1
-   ```
-
-   ### <a name="linuxmacos-bash"></a>[Linux/macOS Bash](#tab/bash)
-
-   ```bash
-   . <env_name>/bin/activate
-   ```
-   ---
-   Perintah ini juga dapat digunakan untuk mengaktifkan kembali lingkungan virtual Anda.
-
-3. Menginstal Azure CLI beta
-
-   ```bash
-   python -m pip install --upgrade pip
-   pip install --extra-index-url https://azurecliprod.blob.core.windows.net/beta/simple/ azure-cli
-   ```
-   Anda sekarang dapat mulai menggunakan Azure CLI beta.
-
-4. Jika ada pembaruan, Anda dapat meningkatkan versi beta Azure CLI
-
-   ```bash
-   pip install --extra-index-url https://azurecliprod.blob.core.windows.net/beta/simple/ --upgrade azure-cli
-   ```
-
-5. Menonaktifkan lingkungan virtual
-
-   Setelah selesai menggunakan Azure CLI beta, Anda dapat menutup jendela terminal, atau menggunakan `deactivate` perintah .
-
-   ```bash
-   deactivate
-   ```
-
-## <a name="uninstall-azure-cli-beta"></a>Mencopot pemasangan beta Azure CLI
-
-Untuk menghapus instalan Azure CLI beta, hapus folder lingkungan virtual.
-
-### <a name="powershell"></a>[PowerShell](#tab/powershell)
-
-```powershell
-Remove-Item -Force -Recurse <env_name>
-```
-
-### <a name="linuxmacos-bash"></a>[Linux/macOS Bash](#tab/bash)
-
-```bash
-rm -rf <env_name>
-```
-
----
+Jika Anda memiliki pertanyaan, silakan [kirimi kami umpan balik Anda](/cli/azure/get-started-with-azure-cli#give-feedback).

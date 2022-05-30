@@ -3,7 +3,7 @@ title: Referensi Azure CLI untuk aplikasi yang di-host Azure | Microsoft Docs
 description: Temukan perintah referensi inti dan ekstensi Azure CLI untuk mengelola aplikasi yang di-host Azure.  Ikuti tautan ke artikel populer untuk mempelajari cara menggunakan Azure CLI untuk aplikasi yang di-host Azure.
 author: dbradish-microsoft
 manager: barbkess
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.topic: reference
 ms.date: 09/21/2021
 ms.author: dbradish
@@ -11,12 +11,12 @@ ms.service: azure-cli
 ms.reviewer: robb
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, aplikasi yang dihost azure, azure web apps, aplikasi web statik Azure, azure app service
-ms.openlocfilehash: f2b16aa784419076566c76082310e8bcaa4155fb
-ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
+ms.openlocfilehash: f2ffb3d2d923da10694684bf3c3b019bc2aab9a1
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/13/2022
-ms.locfileid: "144977365"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145940144"
 ---
 # <a name="azure-cli-reference-commands-for-azure-hosted-apps"></a>Perintah referensi Azure CLI untuk aplikasi yang di-host Azure
 

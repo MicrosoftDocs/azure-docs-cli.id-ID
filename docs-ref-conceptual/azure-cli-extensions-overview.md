@@ -7,15 +7,15 @@ manager: barbkess
 ms.date: 08/06/2020
 ms.topic: conceptual
 ms.service: azure-cli
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: mengelola ekstensi, ekstensi microsoft, menginstal ekstensi, menghapus instalan ekstensi, ekstensi azure, ekstensi azure cli
-ms.openlocfilehash: 84b884490f2277448b7a68bcea7e16d170fca856
-ms.sourcegitcommit: ad79327952adf0f8be8f1b9678e72434d9f03f0c
+ms.openlocfilehash: f62b449d1e33e872a8c14e35be0c47440c8b25f8
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 02/12/2022
-ms.locfileid: "138486547"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145937984"
 ---
 # <a name="use-and-manage-extensions-with-the-azure-cli"></a>Menggunakan dan mengelola ekstensi dengan Azure CLI 
 

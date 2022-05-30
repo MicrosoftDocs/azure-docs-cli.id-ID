@@ -3,7 +3,7 @@ title: Referensi Azure CLI untuk Azure SQL | Microsoft Docs
 description: Temukan perintah referensi inti dan ekstensi Azure CLI untuk mengelola Azure SQL.  Ikuti tautan ke artikel populer untuk mempelajari cara menggunakan Azure CLI for Azure SQL
 author: dbradish-microsoft
 manager: barbkess
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.topic: reference
 ms.date: 09/21/2021
 ms.author: dbradish
@@ -11,12 +11,12 @@ ms.service: azure-cli
 ms.reviewer: robb
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, azure sql
-ms.openlocfilehash: 692d3632488a4d052c4261fcb1a34007c3a57829
-ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
+ms.openlocfilehash: 9925417541c043d4af82375ba54eff12d0683fa4
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/13/2022
-ms.locfileid: "144977555"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145938344"
 ---
 # <a name="azure-cli-reference-commands-for-azure-sql"></a>Perintah referensi Azure CLI untuk Azure SQL
 

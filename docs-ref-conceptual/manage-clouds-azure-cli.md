@@ -7,15 +7,15 @@ ms.author: dbradish
 ms.date: 08/19/2021
 ms.topic: conceptual
 ms.service: azure-cli
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: manajemen cloud azure
-ms.openlocfilehash: 2ab4b2e200104023607e5726938c41a3af442ab7
-ms.sourcegitcommit: ecad34e4d4654660377050fccba7861e942e03de
+ms.openlocfilehash: 5e267fecc650d5e24d108f596464226ff7397cb6
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 09/13/2021
-ms.locfileid: "132439038"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145938722"
 ---
 # <a name="azure-cloud-management-with-the-azure-cli"></a>Manajemen cloud Azure dengan Azure CLI
 

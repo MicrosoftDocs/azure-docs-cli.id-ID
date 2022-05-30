@@ -3,7 +3,7 @@ title: Referensi Azure CLI untuk Azure Monitor | Microsoft Docs
 description: Temukan perintah referensi inti dan ekstensi Azure CLI untuk mengelola Azure Monitor. Ikuti tautan ke artikel populer untuk mempelajari cara menggunakan Azure CLI untuk Azure Monitor
 author: dbradish-microsoft
 manager: barbkess
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.topic: reference
 ms.date: 09/21/2021
 ms.author: dbradish
@@ -11,12 +11,12 @@ ms.service: azure-cli
 ms.reviewer: robb
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure, azure monitor
-ms.openlocfilehash: dc8acd67edaed5f007b13fbb72a1c46fb7968cfc
-ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
+ms.openlocfilehash: b1b142fe0d1a4f51604c79e3696502d4c13adbc0
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/13/2022
-ms.locfileid: "144977347"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145937660"
 ---
 # <a name="azure-cli-reference-commands-for-azure-monitor"></a>Perintah referensi Azure CLI untuk Azure Monitor
 

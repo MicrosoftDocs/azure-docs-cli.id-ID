@@ -7,17 +7,17 @@ manager: barbkess
 ms.date: 02/10/2022
 ms.topic: conceptual
 ms.service: azure-cli
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, jenis referensi, status referensi
-ms.openlocfilehash: 4ac362b3579e7aac70295cd0f3222afbfcfbf0f6
-ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
+ms.openlocfilehash: 79c4bfcabc54a029c116e3909985b7449f9365e7
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/22/2022
-ms.locfileid: "144003769"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145939838"
 ---
-# <a name="overview-azure-cli-terminology-and-support-levels"></a>Gambaran umum: Terminologi Azure CLI dan tingkat dukungan
+# <a name="overview-azure-cli-terminology-and-support-levels"></a>Ringkasan: Terminologi Azure CLI dan tingkat dukungan
 
 Artikel ini menjelaskan terminologi Azure CLI.  Ada komponen sintaks, jenis referensi, dan status.  Ini adalah status yang menentukan tingkat dukungan.
 
@@ -79,7 +79,7 @@ Anda dapat mempelajari referensi ekstensi lebih lanjut termasuk penginstalan dan
 
 ## <a name="what-is-reference-status"></a>Apa itu status referensi?
 
-Terlepas dari jenis referensi, referensi Azure CLI termasuk dalam tiga kategori status: **GA** (Tersedia Umum), **pratinjau publik** atau **eksperimental**. Ini adalah status perintah referensi, bukan jenis, yang menentukan stabilitas dan tingkat dukungan.
+Terlepas dari jenis referensi, referensi Azure CLI termasuk dalam tiga kategori status: **GA** (Tersedia Umum), **pratinjau publik** , atau **eksperimental**. Ini adalah status perintah referensi, bukan jenis, yang menentukan stabilitas dan tingkat dukungan.
 
 | | GA  | Pratinjau umum | Eksperimental
 |-|-|-|-|

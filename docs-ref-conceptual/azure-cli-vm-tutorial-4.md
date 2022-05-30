@@ -5,18 +5,18 @@ ms.date: 11/12/2021
 ms.author: dbradish
 author: dbradish-microsoft
 manager: barbkess
-ms.devlang: azure-cli
+ms.tool: azure-cli
 ms.topic: tutorial
 ms.prod: azure
 ms.technology: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: informasi vm tampilan azure cli, kueri di azure cli
-ms.openlocfilehash: dc4ffce9bbeda4e26a0cdc811e55a55f7d93f8e1
-ms.sourcegitcommit: 766c21c494eb7fbdc5160c437868c187c0b6e587
+ms.openlocfilehash: 7a3502eb3c45f5ae0dde1f60564a5b69cc6f9c7e
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 02/17/2022
-ms.locfileid: "138922106"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145939118"
 ---
 # <a name="4---get-vm-information-with-queries"></a>4 - Dapatkan informasi VM dengan kueri
 

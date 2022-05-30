@@ -3,7 +3,7 @@ title: Referensi Azure CLI untuk Azure IoT | Microsoft Docs
 description: Temukan perintah referensi inti dan ekstensi Azure CLI untuk mengelola Azure IoT. Dengan lebih dari 100 perintah berbeda yang tersedia, Anda dapat bekerja secara efektif dengan Azure IoT dari baris perintah.
 author: dbradish-microsoft
 manager: barbkess
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.topic: reference
 ms.date: 09/21/2021
 ms.author: dbradish
@@ -11,12 +11,12 @@ ms.service: azure-cli
 ms.reviewer: paymaun.heidari
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, azure iot, azure maps, azure tsi
-ms.openlocfilehash: 004c52686626f464b2253bf0010e8904e9ae9a11
-ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
+ms.openlocfilehash: 8098a71e5ff5a196a6a148bac64199560a35bead
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/13/2022
-ms.locfileid: "144977642"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145938002"
 ---
 # <a name="azure-cli-reference-commands-for-azure-iot"></a>Perintah referensi Azure CLI untuk Azure IoT
 

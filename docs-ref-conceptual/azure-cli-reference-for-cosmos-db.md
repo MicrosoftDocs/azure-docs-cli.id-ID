@@ -3,7 +3,7 @@ title: Referensi Azure CLI untuk Azure Cosmos DB | Microsoft Docs
 description: Temukan perintah referensi inti dan ekstensi Azure CLI untuk mengelola Azure Cosmos DB.  Ikuti tautan ke artikel populer untuk mempelajari cara menggunakan Azure CLI untuk Azure Cosmos DB.
 author: dbradish-microsoft
 manager: barbkess
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.topic: reference
 ms.date: 09/21/2021
 ms.author: dbradish
@@ -11,12 +11,12 @@ ms.service: azure-cli
 ms.reviewer: robb
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, azure cosmos db
-ms.openlocfilehash: d7174d7d64e3c6163a7ea14ca0b15816d1d04591
-ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
+ms.openlocfilehash: 528b9d4b90f3ce3d7e4005f3edb3bd53cae963e4
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/13/2022
-ms.locfileid: "144976717"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145937696"
 ---
 # <a name="azure-cli-reference-commands-for-azure-cosmos-db"></a>Perintah referensi Azure CLI untuk Azure Cosmos DB
 

@@ -7,15 +7,15 @@ manager: barbkess
 ms.date: 9/21/2021
 ms.topic: conceptual
 ms.service: azure-cli
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure, cli, baris perintah
-ms.openlocfilehash: f8b989b907353b83e6f3d48ca89a8db246ca16aa
-ms.sourcegitcommit: 82cb7af10a689b9b485859552d2f834bd593f6a1
+ms.openlocfilehash: 1096129eb38e4840f1baa22c2c60197baa8ad61a
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 10/06/2021
-ms.locfileid: "132439082"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145939928"
 ---
 # <a name="differences-between-azure-cli-products"></a>Perbedaan antara produk Azure CLI
 

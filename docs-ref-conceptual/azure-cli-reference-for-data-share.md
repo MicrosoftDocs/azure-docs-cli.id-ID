@@ -5,18 +5,18 @@ services: data-share
 author: dbradish-microsoft
 manager: barbkess
 ms.service: data-share
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.topic: reference
 ms.date: 09/21/2021
 ms.author: dbradish
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, azure data share cli
-ms.openlocfilehash: c1f5dc47075da75fdbd20cd92ce52ab8892e6137
-ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
+ms.openlocfilehash: 078b8ff3ed05b9bba363efb361e1281bbc964af3
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/13/2022
-ms.locfileid: "144976681"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145937642"
 ---
 # <a name="azure-cli-reference-commands-for-azure-data-share"></a>Perintah referensi Azure CLI untuk Azure Data Share
 

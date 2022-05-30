@@ -6,12 +6,13 @@ ms.author: dbradish
 ms.prod: non-product-specific
 ms.topic: sample
 ms.date: 04/18/2022
-ms.openlocfilehash: 34ad35d406794b4e6a05a9dc2257e2e26447f7c7
-ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
+ms.tool: azure-cli
+ms.openlocfilehash: e5c4982621f1a346e0c48cae6ec0da7d3e0e4834
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/13/2022
-ms.locfileid: "144978029"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145937966"
 ---
 # <a name="learn-to-use-bash-with-the-azure-cli"></a>Pelajari cara menggunakan Bash dengan Azure CLI
 

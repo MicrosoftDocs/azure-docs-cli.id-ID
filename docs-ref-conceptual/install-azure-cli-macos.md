@@ -7,15 +7,15 @@ manager: yonzhan
 ms.date: 08/19/2021
 ms.topic: conceptual
 ms.service: azure-cli
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: Menginstal azure cli, azure cli macos, macos cli, menginstal azure cli macos
-ms.openlocfilehash: 15ecf56d9c16b04adf31c43d8ab81e5c749d8ad6
-ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
+ms.openlocfilehash: 99fc348130a2d4394d4fa2460e2681b15249f689
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/22/2022
-ms.locfileid: "144003499"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145938830"
 ---
 # <a name="install-azure-cli-on-macos"></a>Instal Azure CLI di macOS
 

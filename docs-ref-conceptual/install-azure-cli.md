@@ -7,15 +7,15 @@ manager: yonzhan
 ms.date: 08/01/2021
 ms.topic: conceptual
 ms.service: azure-cli
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli, menginstal azure cli, unduhan azure cli, mengunduh azure cli
-ms.openlocfilehash: 8c1f64cd7f0da5ee8d14032f9cabaecaa1267d1b
-ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
+ms.openlocfilehash: 4ea14fa3cc60780368f914a1dbd100a6b3cea3ac
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/13/2022
-ms.locfileid: "144978065"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145938326"
 ---
 # <a name="how-to-install-the-azure-cli"></a>Cara menginstal Azure CLI
 

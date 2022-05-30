@@ -7,16 +7,16 @@ manager: barbkess
 ms.prod: azure
 ms.date: 09/16/2021
 ms.topic: tutorial
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.technology: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: tutorial parameter tetap
-ms.openlocfilehash: ad3f419931c2d93c06f340cf7371c8c2e3f4c166
-ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
+ms.openlocfilehash: 78fcfbd5b8b3bcc0a46d4ed567d778f459f89571
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/22/2022
-ms.locfileid: "144003337"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145937714"
 ---
 # <a name="tutorial-use-persisted-parameters-to-simplify-sequential-azure-cli-commands"></a>Tutorial: Gunakan parameter tetap untuk menyederhanakan perintah Azure CLI berurutan
 

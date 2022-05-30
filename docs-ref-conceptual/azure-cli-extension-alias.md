@@ -7,15 +7,15 @@ manager: barbkess
 ms.date: 9/21/2021
 ms.topic: conceptual
 ms.service: azure-cli
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: ekstensi alias azure cli, ekstensi alias, perintah alias
-ms.openlocfilehash: a4cc624fd8f71297248bc2b67b94fc882d9f4e8e
-ms.sourcegitcommit: 82cb7af10a689b9b485859552d2f834bd593f6a1
+ms.openlocfilehash: 74dfa16c4994b2d8a304aeb8637493b7dcc7c67e
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 10/06/2021
-ms.locfileid: "132439098"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145938020"
 ---
 # <a name="how-to-use-the-azure-cli-alias-extension"></a>Cara menggunakan ekstensi alias Azure CLI
 

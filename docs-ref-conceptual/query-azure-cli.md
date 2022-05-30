@@ -7,15 +7,15 @@ manager: barbkess
 ms.date: 04/14/2022
 ms.topic: conceptual
 ms.service: azure-cli
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: ''
-ms.openlocfilehash: 7dec54634d14fc0a6b4d0f4ad87c0658d817be9e
-ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
+ms.openlocfilehash: 08e46d62f396a0d8d9eea1fdaa85d01abca580ba
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/13/2022
-ms.locfileid: "144977688"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145937840"
 ---
 # <a name="how-to-query-azure-cli-command-output-using-a-jmespath-query"></a>Cara mengkueri output perintah Azure CLI menggunakan kueri JMESPath
 

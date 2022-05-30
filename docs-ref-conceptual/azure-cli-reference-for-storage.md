@@ -3,7 +3,7 @@ title: Referensi Azure CLI untuk Azure Storage | Microsoft Docs
 description: Temukan perintah referensi inti dan ekstensi Azure CLI untuk mengelola Azure Storage.  Ikuti tautan ke artikel populer untuk mempelajari cara menggunakan Azure CLI untuk Azure Storage.
 author: dbradish-microsoft
 manager: barbkess
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.topic: reference
 ms.date: 09/21/2021
 ms.author: dbradish
@@ -11,12 +11,12 @@ ms.service: azure-cli
 ms.reviewer: robb
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, azure storage, azure storage sync, azure import-export
-ms.openlocfilehash: 4e6d2faa8c23b4f8fa82da85f79023c3d05f2e31
-ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
+ms.openlocfilehash: 28378dd776fd666cfcce093d60277feb57613bc9
+ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/13/2022
-ms.locfileid: "144976933"
+ms.lasthandoff: 05/30/2022
+ms.locfileid: "145939280"
 ---
 # <a name="azure-cli-reference-commands-for-azure-storage"></a>Perintah referensi Azure CLI untuk Azure Storage
 
