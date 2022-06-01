@@ -4,19 +4,19 @@ description: Daftar lengkap ekstensi resmi Azure Command-Line Interface (CLI) ya
 author: haroldrandom
 ms.author: jianzen
 manager: yonzhan,yungezz
-ms.date: 05/27/2022
+ms.date: 05/31/2022
 ms.topic: article
 ms.prod: azure
 ms.technology: azure-cli
 ms.devlang: azure-cli
 ms.custom: devx-track-azurecli
 keywords: ekstensi az, ekstensi azure cli, ekstensi azure
-ms.openlocfilehash: 1312fb4975c19324dc2a54f201002ab1497bb946
-ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
+ms.openlocfilehash: a5ac98206f42cb39325e8b94131b6126bc347e5b
+ms.sourcegitcommit: 2a85e64314b5148ec079bfbb1d39a959c6bd371a
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/30/2022
-ms.locfileid: "145938038"
+ms.lasthandoff: 06/01/2022
+ms.locfileid: "145962538"
 ---
 # <a name="available-azure-cli-extensions"></a>Ekstensi Azure CLI yang tersedia
 
@@ -35,7 +35,7 @@ Anda akan diminta untuk menginstal ekstensi saat digunakan pertama kali.
 |[ad](https://github.com/Azure/azure-cli-extensions/tree/master/src/ad) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi DomainServicesResourceProvider | GA | [0.1.0](https://github.com/Azure/azure-cli-extensions/tree/master/src/ad/HISTORY.rst) |
 |[aem](https://github.com/Azure/azure-cli-extensions) | 2.19.1 | Mengelola Ekstensi Pemantauan Yang Disempurnakan Azure untuk SAP | GA | [0.3.0](https://github.com/Azure/azure-cli-extensions) |
 |[ai-examples](https://github.com/Azure/azure-cli-extensions/tree/master/src/ai-examples) | 2.2.0 | Menambahkan contoh yang didukung AI ke konten bantuan. | Pratinjau | [0.2.5](https://github.com/Azure/azure-cli-extensions/tree/master/src/ai-examples/HISTORY.rst) |
-|[aks-preview](https://github.com/Azure/azure-cli-extensions/tree/main/src/aks-preview) | 2.35.0 | Menyediakan pratinjau untuk fitur AKS mendatang | Pratinjau | [0.5.75](https://github.com/Azure/azure-cli-extensions/tree/main/src/aks-preview/HISTORY.rst) |
+|[aks-preview](https://github.com/Azure/azure-cli-extensions/tree/main/src/aks-preview) | 2.35.0 | Menyediakan pratinjau untuk fitur AKS mendatang | Pratinjau | [0.5.76](https://github.com/Azure/azure-cli-extensions/tree/main/src/aks-preview/HISTORY.rst) |
 |[alertsmanagement](https://github.com/Azure/azure-cli-extensions/tree/main/src/alertsmanagement) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi AlertsManagementClient | Pratinjau | [0.2.2](https://github.com/Azure/azure-cli-extensions/tree/main/src/alertsmanagement/HISTORY.rst) |
 |[alias](https://github.com/Azure/azure-cli-extensions) | 2.0.50.dev0 | Dukungan untuk alias perintah | Pratinjau | [0.5.2](https://github.com/Azure/azure-cli-extensions) |
 |[Amg](https://github.com/Azure/azure-cli-extensions/tree/master/src/amg) | 2.30.0 | Alat Microsoft Azure Command-Line Ekstensi Grafana Terkelola Azure | Pratinjau | [0.1.1](https://github.com/Azure/azure-cli-extensions/tree/master/src/amg/HISTORY.rst) |
@@ -75,7 +75,7 @@ Anda akan diminta untuk menginstal ekstensi saat digunakan pertama kali.
 |[datadog](https://github.com/Azure/azure-cli-extensions/tree/master/src/datadog) | 2.17.0 | Alat Baris Perintah Microsoft Azure Ekstensi MicrosoftDatadogClient | Eksperimental | [0.1.1](https://github.com/Azure/azure-cli-extensions/tree/master/src/datadog/HISTORY.rst) |
 |[datafactory](https://github.com/Azure/azure-cli-extensions/tree/master/src/datafactory) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi DataFactoryManagementClient | GA | [0.5.0](https://github.com/Azure/azure-cli-extensions/tree/master/src/datafactory/HISTORY.rst) |
 |[datamigration](https://github.com/Azure/azure-cli-extensions/tree/master/src/datamigration) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi DataMigrationManagementClient | Eksperimental | [0.3.1](https://github.com/Azure/azure-cli-extensions/tree/master/src/datamigration/HISTORY.rst) |
-|[dataprotection](https://github.com/Azure/azure-cli-extensions/tree/main/src/dataprotection) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi DataProtectionClient | Eksperimental | [0.3.0](https://github.com/Azure/azure-cli-extensions/tree/main/src/dataprotection/HISTORY.rst) |
+|[dataprotection](https://github.com/Azure/azure-cli-extensions/tree/main/src/dataprotection) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi DataProtectionClient | Eksperimental | [0.4.0](https://github.com/Azure/azure-cli-extensions/tree/main/src/dataprotection/HISTORY.rst) |
 |[datashare](https://github.com/Azure/azure-cli-extensions/tree/master/src/datashare) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi DataShareManagementClient | Eksperimental | [0.2.0](https://github.com/Azure/azure-cli-extensions/tree/master/src/datashare/HISTORY.rst) |
 |[db-up](https://github.com/Azure/azure-cli-extensions/tree/main/src/db-up) | 2.0.46 | Perintah lain untuk menyederhanakan alur kerja Azure Database. | Pratinjau | [0.2.7](https://github.com/Azure/azure-cli-extensions/tree/main/src/db-up/HISTORY.rst) |
 |[deploy-to-azure](https://github.com/Azure/deploy-to-azure-cli-extension) | 2.0.60 | Menyebarkan ke Azure menggunakan Github Actions. | Pratinjau | [0.2.0](https://github.com/Azure/deploy-to-azure-cli-extension) |
@@ -116,14 +116,14 @@ Anda akan diminta untuk menginstal ekstensi saat digunakan pertama kali.
 |[logic](https://github.com/Azure/azure-cli-extensions/tree/main/src/logic) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi LogicManagementClient | Pratinjau | [0.1.6](https://github.com/Azure/azure-cli-extensions/tree/main/src/logic/HISTORY.rst) |
 |[logz](https://github.com/Azure/azure-cli-extensions/tree/master/src/logz) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi MicrosoftLogz | Eksperimental | [0.1.0](https://github.com/Azure/azure-cli-extensions/tree/master/src/logz/HISTORY.rst) |
 |[maintenance](https://github.com/Azure/azure-cli-extensions/tree/master/src/maintenance) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi MaintenanceManagementClient | Eksperimental | [1.3.0](https://github.com/Azure/azure-cli-extensions/tree/master/src/maintenance/HISTORY.rst) |
-|[managementpartner](https://github.com/Azure/azure-cli-extensions) | 2.0.67 | Dukungan untuk pratinjau Mitra Manajemen | GA | [0.1.3](https://github.com/Azure/azure-cli-extensions) |
+|[managementpartner](https://github.com/Azure/azure-cli-extensions) | 2.0.67 | Dukungan untuk pratinjau Mitra Manajemen | GA | [0.1.3](https://github.com/Azure/azure-cli-extensions/HISTORY.rst) |
 |[mesh](https://github.com/Azure/azure-cli-extensions/tree/master/src/mesh) | 2.0.67 | Dukungan untuk Microsoft Azure Service Fabric Mesh - Pratinjau Umum | Pratinjau | [0.10.7](https://github.com/Azure/azure-cli-extensions/tree/master/src/mesh/HISTORY.rst) |
 |[mixed-reality](https://github.com/Azure/azure-cli-extensions/tree/master/src/mixed-reality) | 2.15.0 | Ekstensi Mixed Reality Azure CLI. | Pratinjau | [0.0.4](https://github.com/Azure/azure-cli-extensions/tree/master/src/mixed-reality/HISTORY.rst) |
-|[ml](https://github.com/Azure/azureml-examples) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi AzureMachineLearningWorkspaces | GA | [2.4.1](https://github.com/Azure/azureml-examples) |
+|[ml](https://github.com/Azure/azureml-examples) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi AzureMachineLearningWorkspaces | GA | [2.4.1](https://github.com/Azure/azureml-examples/HISTORY.rst) |
 |[monitor-control-service](https://github.com/Azure/azure-cli-extensions/tree/main/src/monitor-control-service) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi MonitorClient | GA | [0.3.0](https://github.com/Azure/azure-cli-extensions/tree/main/src/monitor-control-service/HISTORY.rst) |
 |[netappfiles-preview](https://github.com/Azure/azure-cli-extensions/tree/master/src/netappfiles-preview) | 2.0.56 | Menyediakan pratinjau untuk fitur Azure NetApp Files (ANF) mendatang. | Pratinjau | [0.3.2](https://github.com/Azure/azure-cli-extensions/tree/master/src/netappfiles-preview/HISTORY.rst) |
-|[next](https://github.com/Azure/azure-cli-extensions) | 2.20.0 | Alat Baris Perintah Microsoft Azure Ekstensi Next | Eksperimental | [0.1.2](https://github.com/Azure/azure-cli-extensions) |
-|[notification-hub](https://github.com/Azure/azure-cli-extensions) | 2.3.1 | Alat Baris Perintah Microsoft Azure Ekstensi Notification Hub | Eksperimental | [0.2.0](https://github.com/Azure/azure-cli-extensions) |
+|[next](https://github.com/Azure/azure-cli-extensions) | 2.20.0 | Alat Baris Perintah Microsoft Azure Ekstensi Next | Eksperimental | [0.1.2](https://github.com/Azure/azure-cli-extensions/HISTORY.rst) |
+|[notification-hub](https://github.com/Azure/azure-cli-extensions) | 2.3.1 | Alat Baris Perintah Microsoft Azure Ekstensi Notification Hub | Eksperimental | [0.2.0](https://github.com/Azure/azure-cli-extensions/HISTORY.rst) |
 |[offazure](https://github.com/Azure/azure-cli-extensions/tree/master/src/offazure) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi AzureMigrateV2 | Eksperimental | [0.1.0](https://github.com/Azure/azure-cli-extensions/tree/master/src/offazure/HISTORY.rst) |
 |[peering](https://github.com/Azure/azure-cli-extensions/tree/master/src/peering) | 2.3.1 | Alat Baris Perintah Microsoft Azure Ekstensi PeeringManagementClient | GA | [0.2.1](https://github.com/Azure/azure-cli-extensions/tree/master/src/peering/HISTORY.rst) |
 |[portal](https://github.com/Azure/azure-cli-extensions/tree/master/src/portal) | 2.3.1 | Alat Baris Perintah Microsoft Azure Ekstensi Portal | Eksperimental | [0.1.2](https://github.com/Azure/azure-cli-extensions/tree/master/src/portal/HISTORY.rst) |
@@ -136,26 +136,26 @@ Anda akan diminta untuk menginstal ekstensi saat digunakan pertama kali.
 |[redisenterprise](https://github.com/Azure/azure-cli-extensions/tree/master/src/redisenterprise) | 2.15.0 | Microsoft Azure Command-Line Tools RedisEnterpriseManagementClient Extension | Pratinjau | [0.1.1](https://github.com/Azure/azure-cli-extensions/tree/master/src/redisenterprise/HISTORY.rst) |
 |[resource-graph](https://github.com/Azure/azure-cli-extensions/tree/master/src/resource-graph) | 2.22.0 | Dukungan untuk mengkueri sumber daya Azure dengan Resource Graph. | GA | [2.1.0](https://github.com/Azure/azure-cli-extensions/tree/master/src/resource-graph/HISTORY.rst) |
 |[resource-mover](https://github.com/Azure/azure-cli-extensions/tree/master/src/resource-mover) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi ResourceMoverServiceAPI | Eksperimental | [0.1.1](https://github.com/Azure/azure-cli-extensions/tree/master/src/resource-mover/HISTORY.rst) |
-|[sap-hana](https://github.com/Azure/azure-hanaonazure-cli-extension) | 2.0.46 | Perintah lain yang berfungsi dengan instans SAP HanaOnAzure. | GA | [0.6.5](https://github.com/Azure/azure-hanaonazure-cli-extension) |
-|[scheduled-query](https://github.com/Azure/azure-cli-extensions) | 2.20.0 | Alat Baris Perintah Microsoft Azure Ekstensi Scheduled_query | Pratinjau | [0.5.0](https://github.com/Azure/azure-cli-extensions) |
-|[scvmm](https://github.com/Azure/azure-cli-extensions/tree/main/src/connectedvmware) | 2.15.0 | Microsoft Azure Command-Line Alat Ekstensi SCVMM | Pratinjau | [0.1.4](https://github.com/Azure/azure-cli-extensions/tree/main/src/connectedvmware/HISTORY.rst) |
-|[sentinel](https://github.com/Azure/azure-cli-extensions/tree/main/src/sentinel) | 2.11.0 | Alat Baris Perintah Microsoft Azure Ekstensi SecurityInsights | GA | [0.1.2](https://github.com/Azure/azure-cli-extensions/tree/main/src/sentinel) |
-|[serial-console](https://github.com/Azure/azure-cli-extensions/tree/master/src/serialconsole) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi Serial Console | Pratinjau | [0.1.1](https://github.com/Azure/azure-cli-extensions/tree/master/src/serialconsole) |
-|[Musim semi](https://github.com/Azure/azure-cli-extensions/tree/main/src/spring) | 2.30.0 | Microsoft Azure Command-Line Tools spring Extension | GA | [1.0.0](https://github.com/Azure/azure-cli-extensions/tree/main/src/spring) |
-|[spring-cloud](https://github.com/Azure/azure-cli-extensions/tree/main/src/spring-cloud) | 2.30.0 | Alat Baris Perintah Microsoft Azure Ekstensi spring-cloud | GA | [3.1.5](https://github.com/Azure/azure-cli-extensions/tree/main/src/spring-cloud) |
-|[ssh](https://github.com/Azure/azure-cli-extensions/tree/main/src/ssh) | 2.4.0 | SSH ke Azure VM menggunakan Sertifikat OpenSSH AAD dan RBAC | GA | [1.1.1](https://github.com/Azure/azure-cli-extensions/tree/main/src/ssh) |
+|[sap-hana](https://github.com/Azure/azure-hanaonazure-cli-extension) | 2.0.46 | Perintah lain yang berfungsi dengan instans SAP HanaOnAzure. | GA | [0.6.5](https://github.com/Azure/azure-hanaonazure-cli-extension/HISTORY.rst) |
+|[scheduled-query](https://github.com/Azure/azure-cli-extensions) | 2.20.0 | Alat Baris Perintah Microsoft Azure Ekstensi Scheduled_query | Pratinjau | [0.5.0](https://github.com/Azure/azure-cli-extensions/HISTORY.rst) |
+|[scvmm](https://github.com/Azure/azure-cli-extensions/tree/main/src/connectedvmware) | 2.15.0 | Ekstensi SCVMM Alat Microsoft Azure Command-Line | Pratinjau | [0.1.4](https://github.com/Azure/azure-cli-extensions/tree/main/src/connectedvmware/HISTORY.rst) |
+|[sentinel](https://github.com/Azure/azure-cli-extensions/tree/main/src/sentinel) | 2.11.0 | Alat Baris Perintah Microsoft Azure Ekstensi SecurityInsights | GA | [0.1.2](https://github.com/Azure/azure-cli-extensions/tree/main/src/sentinel/HISTORY.rst) |
+|[serial-console](https://github.com/Azure/azure-cli-extensions/tree/master/src/serialconsole) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi Serial Console | Pratinjau | [0.1.1](https://github.com/Azure/azure-cli-extensions/tree/master/src/serialconsole/HISTORY.rst) |
+|[Musim semi](https://github.com/Azure/azure-cli-extensions/tree/main/src/spring) | 2.30.0 | Microsoft Azure Command-Line Tools spring Extension | GA | [1.0.0](https://github.com/Azure/azure-cli-extensions/tree/main/src/spring/HISTORY.rst) |
+|[spring-cloud](https://github.com/Azure/azure-cli-extensions/tree/main/src/spring-cloud) | 2.30.0 | Alat Baris Perintah Microsoft Azure Ekstensi spring-cloud | GA | [3.1.5](https://github.com/Azure/azure-cli-extensions/tree/main/src/spring-cloud/HISTORY.rst) |
+|[ssh](https://github.com/Azure/azure-cli-extensions/tree/main/src/ssh) | 2.4.0 | SSH ke Azure VM menggunakan Sertifikat OpenSSH AAD dan RBAC | GA | [1.1.1](https://github.com/Azure/azure-cli-extensions/tree/main/src/ssh/HISTORY.rst) |
 |[stack-hci](https://github.com/Azure/azure-cli-extensions/tree/main/src/stack-hci) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi AzureStackHCIClient | GA | [0.1.5](https://github.com/Azure/azure-cli-extensions/tree/main/src/stack-hci/HISTORY.rst) |
-|[storage-blob-preview](https://github.com/Azure/azure-cli-extensions) | 2.27.0 | Alat Baris Perintah Microsoft Azure Ekstensi Storage-blob-preview | Pratinjau | [0.6.1](https://github.com/Azure/azure-cli-extensions) |
+|[storage-blob-preview](https://github.com/Azure/azure-cli-extensions) | 2.27.0 | Alat Baris Perintah Microsoft Azure Ekstensi Storage-blob-preview | Pratinjau | [0.6.1](https://github.com/Azure/azure-cli-extensions/HISTORY.rst) |
 |[storage-preview](https://github.com/Azure/azure-cli-extensions/tree/main/src/storage-preview) | 2.25.0 | Menyediakan pratinjau untuk fitur penyimpanan mendatang. | Pratinjau | [0.8.3](https://github.com/Azure/azure-cli-extensions/tree/main/src/storage-preview/HISTORY.rst) |
 |[storagesync](https://github.com/Azure/azure-cli-extensions/tree/master/src/storagesync) | 2.3.1 | Alat Baris Perintah Microsoft Azure Ekstensi MicrosoftStorageSync | GA | [0.1.2](https://github.com/Azure/azure-cli-extensions/tree/master/src/storagesync/HISTORY.rst) |
 |[stream-analytics](https://github.com/Azure/azure-cli-extensions/tree/main/src/stream-analytics) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi StreamAnalyticsManagementClient | Eksperimental | [0.1.2](https://github.com/Azure/azure-cli-extensions/tree/main/src/stream-analytics/HISTORY.rst) |
 |[langganan](https://github.com/Azure/azure-cli-extensions/tree/main/src/subscription) | 2.0.30 | Dukungan untuk pratinjau pengelolaan langganan. | Pratinjau | [0.1.5](https://github.com/Azure/azure-cli-extensions/tree/main/src/subscription/HISTORY.rst) |
-|[support](https://github.com/azure/azure-cli-extensions/tree/master/src/support) | 2.0.81 | Alat Baris Perintah Microsoft Azure Ekstensi Support | GA | [1.0.3](https://github.com/azure/azure-cli-extensions/tree/master/src/support) |
+|[support](https://github.com/azure/azure-cli-extensions/tree/master/src/support) | 2.0.81 | Alat Baris Perintah Microsoft Azure Ekstensi Support | GA | [1.0.3](https://github.com/azure/azure-cli-extensions/tree/master/src/support/HISTORY.rst) |
 |[timeseriesinsights](https://github.com/Azure/azure-cli-extensions/tree/master/src/timeseriesinsights) | 2.11.0 | Alat Baris Perintah Microsoft Azure Ekstensi TimeSeriesInsightsClient | GA | [0.2.1](https://github.com/Azure/azure-cli-extensions/tree/master/src/timeseriesinsights/HISTORY.rst) |
 |[virtual-network-manager](https://github.com/Azure/azure-cli-extensions/tree/main/src/network-manager) | 2.15.0 | Alat Baris Perintah Microsoft Azure Ekstensi NetworkManagementClient | Pratinjau | [0.5.0](https://github.com/Azure/azure-cli-extensions/tree/main/src/network-manager/HISTORY.rst) |
-|[virtual-network-tap](https://github.com/Azure/azure-cli-extensions/tree/master/src/virtual-network-tap) | 2.0.46 | Mengelola pengetukan jaringan virtual (VTAP). | Pratinjau | [0.1.0](https://github.com/Azure/azure-cli-extensions/tree/master/src/virtual-network-tap) |
+|[virtual-network-tap](https://github.com/Azure/azure-cli-extensions/tree/master/src/virtual-network-tap) | 2.0.46 | Mengelola pengetukan jaringan virtual (VTAP). | Pratinjau | [0.1.0](https://github.com/Azure/azure-cli-extensions/tree/master/src/virtual-network-tap/HISTORY.rst) |
 |[virtual-wan](https://github.com/Azure/azure-cli-extensions/tree/main/src/virtual-wan) | 2.15.0 | Mengelola WAN virtual, hub, gateway VPN, dan situs VPN. | Pratinjau | [0.2.12](https://github.com/Azure/azure-cli-extensions/tree/main/src/virtual-wan/HISTORY.rst) |
 |[vm-repair](https://github.com/Azure/azure-cli-extensions/tree/main/src/vm-repair) | 2.0.67 | Perintah perbaikan otomatis untuk memperbaiki VM. | GA | [0.4.3](https://github.com/Azure/azure-cli-extensions/tree/main/src/vm-repair/HISTORY.rst) |
-|[vmware](https://github.com/Azure/azure-cli-extensions/tree/main/src/vmware) | 2.11.0 | Perintah Azure VMware Solution. | GA | [4.0.2](https://github.com/Azure/azure-cli-extensions/tree/main/src/vmware) |
+|[vmware](https://github.com/Azure/azure-cli-extensions/tree/main/src/vmware) | 2.11.0 | Perintah Azure VMware Solution. | GA | [4.0.2](https://github.com/Azure/azure-cli-extensions/tree/main/src/vmware/HISTORY.rst) |
 |[webapp](https://github.com/Azure/azure-cli-extensions/tree/master/src/webapp) | 2.23.0 | Perintah lain untuk Azure AppService. | Pratinjau | [0.4.0](https://github.com/Azure/azure-cli-extensions/tree/master/src/webapp/HISTORY.rst) |
 |[webpubsub](https://github.com/Azure/azure-cli-extensions/tree/master/src/webpubsub) | 2.22.0 | Alat Baris Perintah Microsoft Azure Ekstensi Webpubsub | GA | [1.1.0](https://github.com/Azure/azure-cli-extensions/tree/master/src/webpubsub/HISTORY.rst) |
