@@ -24,15 +24,15 @@ directCommands:
                                      [--sync-token]
                                      [--sync-window]
   examples:
-  - summary: Buat registri yang terhubung dalam mode registri dengan akses ke aplikasi repos/hello-world dan service/mycomponent. Ini akan membuat token sinkronisasi dan peta cakupan dengan izin repositori yang tepat.
+  - summary: Buat registri yang terhubung dalam mode registri dengan akses ke repos app/hello-world dan service/mycomponent. Ini akan membuat token sinkronisasi dan peta cakupan dengan izin repositori yang tepat.
     syntax: >-
       az acr connected-registry create --registry mycloudregistry --name myconnectedregistry \
           --repository "app/hello-world" "service/mycomponent"
-  - summary: Membuat registri yang terhubung hanya baca dengan izin baca saja dan meneruskan token sinkronisasi
+  - summary: Membuat registri yang terhubung hanya baca dengan izin baca saja dan teruskan token sinkronisasi
     syntax: >-
       az acr connected-registry create --registry mycloudregistry  --name myreadonlyacr \
           --mode readonly --parent myconnectedregistry --sync-token mySyncTokenName
-  - summary: Buat registri yang terhubung baca saja dengan token klien, yang disinkronkan setiap hari pada jendela midninght dan sinkronisasi 4 jam.
+  - summary: Buat registri yang terhubung hanya baca dengan token klien, yang disinkronkan setiap hari di midninght dan jendela sinkronisasi 4 jam.
     syntax: >-
       az acr connected-registry create -r mycloudregistry -n myreadonlyacr -p myconnectedregistry \
           --repository "app/mycomponent" -m ReadOnly -s "0 12 * * *" -w PT4H \
@@ -44,7 +44,7 @@ directCommands:
     description: ''
   - isRequired: true
     name: --registry -r
-    summary: Server masuk registri Cloud ACR. Harus FQDN untuk mendukung juga Azure Stack.
+    summary: Server login registri Cloud ACR. Harus FQDN untuk mendukung juga Azure Stack.
     description: ''
   optionalParameters:
   - name: --audit-logs-enabled
@@ -52,7 +52,7 @@ directCommands:
     summary: Menunjukkan apakah sinkronisasi log audit diaktifkan. Enkripsi diaktifkan secara default.
     description: ''
   - name: --client-tokens
-    summary: Tentukan akses klien ke repositori di registri yang terhubung. Bisa dalam format [TOKEN_NAME01] [TOKEN_NAME02]...
+    summary: Tentukan akses klien ke repositori di registri yang terhubung. Ini bisa dalam format [TOKEN_NAME01] [TOKEN_NAME02]...
     description: ''
   - name: --log-level
     defaultValue: Information
@@ -64,7 +64,7 @@ directCommands:
     summary: Tentukan akses yang akan dimilikinya saat disinkronkan.
     description: ''
   - name: --notifications
-    summary: Daftar pola artefak yang pemberitahuannya perlu dihasilkan. Gunakan format "--notifications [PATTERN1 PATTERN2 ...]".
+    summary: Daftar pola artefak yang pemberitahuannya perlu dibuat. Gunakan format "--notifications [PATTERN1 PATTERN2 ...]".
     description: ''
   - name: --parent -p
     summary: Nama registri yang terhubung dengan induk.
@@ -109,7 +109,7 @@ directCommands:
     description: ''
   - isRequired: true
     name: --registry -r
-    summary: Server masuk registri Cloud ACR. Harus FQDN untuk mendukung juga Azure Stack.
+    summary: Server login registri Cloud ACR. Harus FQDN untuk mendukung juga Azure Stack.
     description: ''
   optionalParameters:
   - name: --resource-group -g
@@ -121,7 +121,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
 - uid: az_acr_connected-registry_delete
   name: az acr connected-registry delete
-  summary: Menghapus registri yang tersambung dari Azure Container Registry.
+  summary: Menghapus registri yang terhubung dari Azure Container Registry.
   description: ''
   syntax: >-
     az acr connected-registry delete --name
@@ -141,7 +141,7 @@ directCommands:
     description: ''
   - isRequired: true
     name: --registry -r
-    summary: Server masuk registri Cloud ACR. Harus FQDN untuk mendukung juga Azure Stack.
+    summary: Server login registri Cloud ACR. Harus FQDN untuk mendukung juga Azure Stack.
     description: ''
   optionalParameters:
   - name: --cleanup
@@ -182,7 +182,7 @@ directCommands:
     description: ''
   - isRequired: true
     name: --registry -r
-    summary: Server masuk registri Cloud ACR. Harus FQDN untuk mendukung juga Azure Stack.
+    summary: Server login registri Cloud ACR. Harus FQDN untuk mendukung juga Azure Stack.
     description: ''
   optionalParameters:
   - name: --generate-password
@@ -208,14 +208,14 @@ directCommands:
   examples:
   - summary: Cantumkan semua registri yang terhubung dari 'mycloudregistry' dalam format tabel.
     syntax: az acr connected-registry list --registry mycloudregistry --output table
-  - summary: Cantumkan hanya turunan langsung dari 'mycloudregistry' dalam formulir yang diperluas dalam tabel.
+  - summary: Cantumkan hanya anak-anak perantara 'mycloudregistry' dalam bentuk yang diperluas dalam tabel.
     syntax: az acr connected-registry list --registry mycloudregistry --no-children --output table
   - summary: Cantumkan semua keturunan 'myconnectedregistry' dalam bentuk yang diperluas di dalam tabel.
     syntax: az acr connected-registry list -r mycloudregistry -p myconnectedregistry --output table
   requiredParameters:
   - isRequired: true
     name: --registry -r
-    summary: Server masuk registri Cloud ACR. Harus FQDN untuk mendukung juga Azure Stack.
+    summary: Server login registri Cloud ACR. Harus FQDN untuk mendukung juga Azure Stack.
     description: ''
   optionalParameters:
   - name: --no-children
@@ -246,7 +246,7 @@ directCommands:
     description: ''
   - isRequired: true
     name: --registry -r
-    summary: Server masuk registri Cloud ACR. Harus FQDN untuk mendukung juga Azure Stack.
+    summary: Server login registri Cloud ACR. Harus FQDN untuk mendukung juga Azure Stack.
     description: ''
   optionalParameters:
   - name: --resource-group -g
@@ -255,7 +255,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/acr/_help.py
 - uid: az_acr_connected-registry_repo
   name: az acr connected-registry repo
-  summary: Perbarui semua izin repositori peta cakupan sinkronisasi registri yang terhubung yang diperlukan.
+  summary: Perbarui semua izin repositori peta lingkup sinkronisasi registri yang terhubung yang diperlukan.
   description: ''
   syntax: >-
     az acr connected-registry repo --name
@@ -277,14 +277,14 @@ directCommands:
     description: ''
   - isRequired: true
     name: --registry -r
-    summary: Server masuk registri Cloud ACR. Harus FQDN untuk mendukung juga Azure Stack.
+    summary: Server login registri Cloud ACR. Harus FQDN untuk mendukung juga Azure Stack.
     description: ''
   optionalParameters:
   - name: --add
-    summary: Izin repositori untuk ditambahkan ke registri terhubung yang ditargetkan dan ini adalah peta cakupan sinkronisasi leluhur. Gunakan format "--add [REPO1 REPO2 ...]" per bendera. Tindakan yang valid adalah {'content/read', 'content/write', 'metadata/write', 'content/delete', 'metadata/read'}.
+    summary: Izin repositori untuk ditambahkan ke registri terhubung yang ditargetkan dan peta cakupan sinkronisasi leluhurnya. Gunakan format "--add [REPO1 REPO2 ...]" per bendera. Tindakan yang valid adalah {'content/read', 'content/write', 'content/delete', 'metadata/read', 'metadata/write'}.
     description: ''
   - name: --remove
-    summary: Izin respsitory yang akan dihapus dari registri terhubung yang ditargetkan dan peta cakupan sinkronisasi berhasil. Gunakan format "--remove [REPO1 REPO2 ...]" per bendera. Tindakan yang valid adalah {'content/read', 'content/write', 'metadata/write', 'content/delete', 'metadata/read'}.
+    summary: Izin respsitory yang akan dihapus dari registri terhubung yang ditargetkan dan peta cakupan sinkronisasi berhasil. Gunakan format "--remove [REPO1 REPO2 ...]" per bendera. Tindakan yang valid adalah {'content/read', 'content/write', 'content/delete', 'metadata/read', 'metadata/write'}.
     description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
@@ -420,9 +420,9 @@ metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
   ms.date: 03/28/2022
   description: Mengelola sumber daya registri yang terhubung dengan Azure Container Registries.
-  ms.openlocfilehash: 5fde9bdb3d5e7c32c5efba1ea126d0a39654052e
-  ms.sourcegitcommit: 58f8c1b4de0e62e71cb4670bf613d9c73deb030c
+  ms.openlocfilehash: c34f5de777edf58e85490b5bd720ddc0f20d829c
+  ms.sourcegitcommit: 61b3a314a7ffb66a52a90ffa59f18ef359f47813
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 05/27/2022
-  ms.locfileid: "145908850"
+  ms.lasthandoff: 06/03/2022
+  ms.locfileid: "146042664"
