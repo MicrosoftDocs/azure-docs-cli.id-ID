@@ -4,20 +4,20 @@ description: Pelajari berbagai jenis autentikasi untuk aktivitas masuk Azure CLI
 author: jiasli
 ms.author: jiasli
 manager: yonzhan
-ms.date: 09/10/2021
+ms.date: 05/27/2022
 ms.topic: conceptual
 ms.service: azure-cli
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: az login, jenis autentikasi, metode autentikasi, azure, cli login, az login powershell, cli login
-ms.openlocfilehash: f2b5bedd66fdb29bd6ddb78dc3392208b7e7a969
-ms.sourcegitcommit: a805041ebd77f92fa4b3025ba6856ea4aedae2ac
+ms.openlocfilehash: 09344685e590bde3e7a560a2ea48dd19583d8f03
+ms.sourcegitcommit: 2a38060aef3a6574be9863b222b9daa6c6d11ece
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 04/22/2022
-ms.locfileid: "144002996"
+ms.lasthandoff: 06/08/2022
+ms.locfileid: "146186044"
 ---
-# <a name="sign-in-with-azure-cli"></a>Masuk dengan Azure CLI 
+# <a name="sign-in-with-azure-cli"></a>Masuk dengan Azure CLI
 
 Ada beberapa jenis autentikasi untuk Azure Command-Line Interface (CLI), jadi bagaimana cara Anda masuk?  Cara termudah untuk memulai adalah dengan [Azure Cloud Shell](/azure/cloud-shell/overview), yang secara otomatis memasukkan Anda.
 Secara lokal, Anda dapat masuk secara interaktif melalui browser dengan perintah [az login](/cli/azure/reference-index#az-login). Saat menulis skrip, pendekatan yang disarankan adalah menggunakan perwakilan layanan. Dengan hanya memberikan izin yang sesuai yang diperlukan untuk prinsip layanan, Anda dapat menjaga otomatisasi tetap aman.
@@ -25,6 +25,9 @@ Secara lokal, Anda dapat masuk secara interaktif melalui browser dengan perintah
 Tak satu pun dari informasi masuk Anda disimpan oleh Azure CLI. Sebagai gantinya, [token refresh autentikasi](/azure/active-directory/develop/v1-id-and-access-tokens#refresh-tokens) dihasilkan oleh Azure dan disimpan. Mulai Agustus 2018, token ini dicabut setelah 90 hari tidak aktif, tetapi nilai ini dapat diubah oleh Microsoft atau administrator penyewa Anda. Setelah token dicabut, Anda mendapatkan pesan dari CLI yang meminta Anda untuk masuk lagi.
 
 Setelah masuk, perintah CLI dijalankan terhadap langganan default Anda. Jika memiliki beberapa langganan, Anda dapat [mengubah langganan default](manage-azure-subscriptions-azure-cli.md).
+
+> [!Note]
+> Bergantung pada metode masuk Anda, penyewa Anda mungkin memiliki kebijakan Akses Bersyarat yang membatasi akses Anda ke sumber daya tertentu.
 
 ## <a name="sign-in-interactively"></a>Masuk secara interaktif
 
@@ -68,7 +71,7 @@ Untuk masuk dengan perwakilan layanan, Anda memerlukan:
 * Penyewa yang terkait dengan perwakilan layanan, baik sebagai domain `.onmicrosoft.com` atau ID objek Azure
 
 > [!NOTE]
-> **CERTIFICATE** harus ditambahkan ke **PRIVATE KEY** dalam file PEM. Untuk contoh format file PEM, lihat [Autentikasi berbasis sertifikat](create-an-azure-service-principal-azure-cli.md#certificate-based-authentication). 
+> **CERTIFICATE** harus ditambahkan ke **PRIVATE KEY** dalam file PEM. Untuk contoh format file PEM, lihat [Autentikasi berbasis sertifikat](create-an-azure-service-principal-azure-cli.md#certificate-based-authentication).
 
 > [!IMPORTANT]
 >
@@ -114,3 +117,9 @@ az login --identity --username <client_id|object_id|resource_id>
 ```
 
 Untuk mempelajari lebih lanjut identitas terkelola untuk sumber daya Azure, lihat [Mengonfigurasi identitas terkelola untuk sumber daya Azure](/azure/active-directory/managed-identities-azure-resources/qs-configure-cli-windows-vm) dan [Menggunakan identitas terkelola untuk sumber daya Azure untuk aktivitas masuk](/azure/active-directory/managed-identities-azure-resources/how-to-use-vm-sign-in).
+
+## <a name="see-also"></a>Lihat juga
+
+* [Cara mengubah penyewa aktif Anda](manage-azure-subscriptions-azure-cli.md#change-the-active-tenant)
+* [Cara mengubah langganan aktif Anda](manage-azure-subscriptions-azure-cli.md#change-the-active-subscription)
+* [Pelajari cara menggunakan Bash dengan Azure CLI](azure-cli-learn-bash.md)

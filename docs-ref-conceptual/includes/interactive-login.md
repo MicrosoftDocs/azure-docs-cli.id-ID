@@ -4,12 +4,12 @@ ms.author: sttramer
 manager: carmonm
 ms.date: 09/07/2018
 ms.topic: include
-ms.openlocfilehash: 6ca0c82bfc362a892f19f38faefe769622db73b8127333f3fc8f8837468bbbdb
-ms.sourcegitcommit: 16753e7a57048868e186c49e44c1877406530fa5
+ms.openlocfilehash: bfa0435be676e66fe19e9ecd6c5570e219ca91c1
+ms.sourcegitcommit: 2a38060aef3a6574be9863b222b9daa6c6d11ece
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 08/06/2021
-ms.locfileid: "132439020"
+ms.lasthandoff: 06/08/2022
+ms.locfileid: "146186043"
 ---
 1. Jalankan perintah `login`.
 
@@ -17,10 +17,10 @@ ms.locfileid: "132439020"
     az login
     ```
 
-    Jika CLI dapat membuka browser default Anda, CLI akan melakukannya dan memuat halaman masuk Azure.
+    Jika CLI dapat membuka browser default Anda, CLI akan memulai [alur kode otorisasi](/azure/active-directory/develop/v2-oauth2-auth-code-flow) dan membuka browser default untuk memuat halaman masuk Azure.
 
-    Jika tidak, buka halaman browser di [https://aka.ms/devicelogin](https://aka.ms/devicelogin) dan masukkan kode otorisasi yang ditampilkan di terminal Anda.
+    Jika tidak, ini akan memulai [alur kode perangkat](/azure/active-directory/develop/v2-oauth2-device-code) dan memberi tahu Anda untuk membuka halaman browser di [https://aka.ms/devicelogin](https://aka.ms/devicelogin) dan memasukkan kode yang ditampilkan di terminal Anda.
 
-    Jika tidak ada browser atau browser web tidak dapat dibuka, gunakan alur kode perangkat dengan **az login --use-device-code**.
+    Jika tidak ada browser web yang tersedia atau browser web gagal dibuka, Anda dapat memaksa alur kode perangkat dengan **az login --use-device-code**.
 
 2. Masuk menggunakan info masuk akun Anda di browser.

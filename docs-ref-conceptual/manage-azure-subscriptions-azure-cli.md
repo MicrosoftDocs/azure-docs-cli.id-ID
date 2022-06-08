@@ -4,18 +4,18 @@ description: Pelajari tentang penyewa, pengguna, dan langganan Azure. Gunakan Az
 author: dbradish-microsoft
 ms.author: dbradish
 manager: barbkess
-ms.date: 08/19/2021
+ms.date: 05/27/2022
 ms.topic: conceptual
 ms.service: azure-cli
-ms.devlang: azurecli
+ms.tool: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: Langganan Azure, kelola langganan Azure, grup manajemen Azure, langganan set Azure cli, langganan pilih Azure cli
-ms.openlocfilehash: 9798bb134921203c661c19917c5927ef2418e475
-ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
+ms.openlocfilehash: b2f6d59d4c738e888ced2d99be57781d0026ff15
+ms.sourcegitcommit: 2a38060aef3a6574be9863b222b9daa6c6d11ece
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/13/2022
-ms.locfileid: "144977643"
+ms.lasthandoff: 06/08/2022
+ms.locfileid: "146185963"
 ---
 # <a name="how-to-manage-azure-subscriptions-with-the-azure-cli"></a>Cara mengelola langganan Azure dengan Azure CLI
 
@@ -25,74 +25,85 @@ Untuk informasi mendetail tentang langganan, penagihan, dan manajemen biaya, lih
 
 ## <a name="tenants-users-and-subscriptions"></a>Penyewa, pengguna, dan langganan
 
-_Penyewa_ adalah entitas Azure Active Directory yang mencakup seluruh organisasi. Penyewa memiliki satu atau beberapa _langganan_ dan _pengguna_. Pengguna adalah individu dan dikaitkan dengan hanya satu penyewa, organisasi tempat mereka berada. Pengguna adalah akun yang masuk ke Azure untuk membuat, mengelola, dan menggunakan sumber daya. Pengguna mungkin memiliki akses ke beberapa _langganan_, yang merupakan perjanjian dengan Microsoft untuk menggunakan layanan awan, termasuk Azure. Setiap sumber daya dikaitkan dengan langganan.
+_Penyewa_ adalah entitas Azure Active Directory yang mencakup seluruh organisasi. Penyewa memiliki satu atau beberapa _langganan_ dan _pengguna_. Pengguna adalah akun yang masuk ke Azure untuk membuat, mengelola, dan menggunakan sumber daya. Pengguna mungkin memiliki akses ke beberapa _langganan_, tetapi pengguna hanya dikaitkan dengan satu penyewa.  _Langganan_ adalah perjanjian dengan Microsoft untuk menggunakan layanan cloud, termasuk Azure. Setiap sumber daya dikaitkan dengan langganan.
 
-* Untuk mempelajari selengkapnya tentang perbedaan antara penyewa, pengguna, dan langganan, lihat [Kamus terminologi cloud Azure](/azure/azure-glossary-cloud-terminology).
-* Untuk mempelajari cara menambahkan langganan baru ke penyewa Azure Active Directory Anda, lihat [Mengaitkan atau menambahkan langganan Azure ke penyewa Azure Active Directory Anda](/azure/active-directory/active-directory-how-subscriptions-associated-directory).
-* Untuk mempelajari cara masuk ke penyewa tertentu, lihat [Masuk dengan Azure CLI](./authenticate-azure-cli.md).
+Untuk mempelajari selengkapnya tentang perbedaan antara penyewa, pengguna, dan langganan, lihat [Kamus terminologi cloud Azure](/azure/azure-glossary-cloud-terminology).
 
-## <a name="commands-in-an-azure-subscription"></a>Perintah dalam langganan Azure
+## <a name="get-the-active-tenant"></a>Mendapatkan penyewa aktif
 
-Banyak perintah Azure CLI bertindak dalam langganan. Anda selalu dapat menentukan langganan mana yang akan digunakan dengan menggunakan parameter **langganan** di perintah Anda. Parameter tersebut bersifat opsional. Jika Anda tidak menentukan langganan, perintah akan menggunakan langganan aktif Anda saat ini.
+Gunakan [az account tenant list](/cli/azure/account/tenant) atau [az account show](/cli/azure/account#az-account-show) untuk mendapatkan ID penyewa aktif.
+```azurecli-interactive
+az account tenant list
 
-Untuk melihat langganan yang sedang Anda gunakan atau untuk mendapatkan daftar langganan yang tersedia, jalankan perintah [az account show](/cli/azure/account#az-account-show) atau [az account list](/cli/azure/account#az-account-list):
+az account show
+```
 
-```azurecli
+## <a name="change-the-active-tenant"></a>Mengubah penyewa aktif
+
+Untuk beralih penyewa, Anda perlu masuk sebagai pengguna dalam penyewa yang diinginkan.  Gunakan [az login](/cli/azure/reference-index#az-login-examples) untuk mengubah penyewa aktif dan memperbarui daftar langganan tempat Anda berada.
+
+```azurecli-interactive
+# sign in as a different user
+az login --user <myAlias@myCompany.com> -password <myPassword>
+
+# sign in with a different tenant
+az login --tenant <myTenantID>
+```
+
+Jika organisasi Anda memerlukan autentikasi multifaktor, Anda mungkin menerima kesalahan ini saat menggunakan `az login --user`:
+
+```output
+Due to a configuration change made by your administrator, or because you moved to a new location, you must use multi-factor authentication to access...
+```
+
+Menggunakan perintah alternatif `az login --tenant` akan meminta Anda untuk membuka halaman HTTPS dan memasukkan kode yang disediakan.  Anda kemudian dapat menggunakan autentikasi multifaktor dan berhasil masuk.  Untuk mempelajari selengkapnya tentang opsi masuk dengan azure CLI, lihat [Masuk dengan Azure CLI](./authenticate-azure-cli.md).
+
+## <a name="get-the-active-subscription"></a>Mendapatkan langganan aktif
+
+Sebagian besar perintah Azure CLI bertindak dalam langganan.  Untuk keamanan optimal, perintah Azure CLI tidak lagi default ID langganan ke langganan Aktif Anda saat ini.  Sekarang Anda harus menentukan langganan untuk dikerjakan dengan menggunakan `--subscription` parameter atau `--scope` dalam perintah Anda.
+
+Untuk melihat langganan yang saat ini Anda gunakan atau untuk mendapatkan daftar langganan yang tersedia, jalankan perintah [az account show](/cli/azure/account#az-account-show) atau [az account list](/cli/azure/account#az-account-list) .  Buka [Pelajari cara menggunakan Bash dengan Azure CLI](azure-cli-learn-bash.md#querying-and-formatting-single-values-and-nested-values) untuk melihat contoh cara menggunakan `az account show`lainnya.
+
+```azurecli-interactive
 # get the current default subscription using show
 az account show --output table
 
 # get the current default subscription using list
 az account list --query "[?isDefault]"
 
-# get a list of subscriptions except for the default subscription
-az account list --query "[?isDefault == false]"
-
-# get the details of a specific subscription
-az account show --subscription MySubscriptionName
+# store the default subscription  in a variable
+subscriptionId="$(az account list --query "[?isDefault].id" -o tsv)"
+echo $subscriptionId
 ```
 
 > [!TIP]
 > `--output` Parameternya adalah parameter global, tersedia untuk semua perintah. Nilai **tabel** menyajikan output dalam format yang bersahabat. Untuk informasi selengkapnya, lihat [Format output untuk perintah Azure CLI](./format-output-azure-cli.md).
 
-Langganan berisi grup sumber daya. Grup sumber daya adalah kontainer yang menampung sumber daya terkait untuk sebuah solusi Azure. Jika perintah berfungsi dengan sumber daya di langganan aktif Anda, Anda tidak perlu menentukan `--subscription`.
-
-Perintah ini membuat akun penyimpanan di grup sumber daya yang ditentukan:
-
-```azurecli
-az storage account create --resource-group StorageGroups --name storage136 \
-    --location eastus --sku Standard_LRS
-```
-
-Jika grup penyimpanan bukan bagian dari langganan aktif Anda saat ini, perintah ini akan gagal.
-
-Jika perlu, ubah langganan aktif, seperti yang dijelaskan di bagian berikutnya, atau tentukan langganan dalam perintah:
-
-```azurecli
-az storage account create --resource-group StorageGroups --subscription "My Demos" \
-    --name storage136 --location eastus --sku Standard_LRS
-```
+Langganan berisi grup sumber daya. Grup sumber daya adalah kontainer yang menampung sumber daya terkait untuk sebuah solusi Azure. Untuk mempelajari cara mengelola grup sumber daya dalam langganan Anda, lihat [Cara mengelola grup sumber daya Azure dengan Azure CLI](manage-azure-groups-azure-cli.md)
 
 ## <a name="change-the-active-subscription"></a>Mengubah langganan aktif
 
-Anda dapat mengubah langganan aktif dengan menggunakan perintah [az account set](/cli/azure/account#az-account-set).
+Langganan Azure memiliki nama dan ID.  Anda dapat beralih ke langganan lain menggunakan [set akun az](/cli/azure/account#az-account-set) yang menentukan ID atau nama langganan yang diinginkan.
 
-Dapatkan daftar langganan Anda dengan perintah [daftar akun az](/cli/azure/account#az-account-list):
-
-```azurecli
-az account list --output table
-```
-
-Perintah ini mencantumkan semua langganan yang dapat Anda akses. Langganan aktif Anda ditandai sebagai `True` di kolom `IsDefault`. Jika Anda tidak melihat langganan yang Anda harapkan, tambahkan parameter `--refresh` untuk mendapatkan daftar langganan terbaru.
-
-Untuk beralih ke langganan lain, gunakan [az account set](/cli/azure/account#az-account-set) dengan ID atau nama langganan yang ingin Anda alihkan.
-
-```azurecli
+```azurecli-interactive
+# change the active subscription using the subscription name
 az account set --subscription "My Demos"
+
+# change the active subscription using the subscription ID
+az account set --subscription "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
+# change the active subscription using a variable
+subscriptionId="$(az account list --query "[?isDefault].id" -o tsv)"
+az account set --subscription $subscriptionId
 ```
 
-Langganan Anda memiliki nama dan ID, yang merupakan GUID. Anda dapat menggunakan salah satu untuk perintah ini. Jika Anda menggunakan nama yang menyertakan spasi, gunakan tanda kutip.
+Anda tidak dapat mengubah langganan aktif Anda menjadi langganan _dalam penyewa lain_ menggunakan `az account set` perintah .  Anda harus terlebih dahulu masuk sebagai pengguna dalam penyewa yang diinginkan.  Jika Anda mencoba dan mengatur langganan ke langganan dalam penyewa lain, Anda akan menerima kesalahan ini:
 
-Jika Anda menjalankan kembali perintah [az account list](/cli/azure/account#az_account_list), kolom `IsDefault` menunjukkan langganan aktif Anda saat ini.
+```output
+The subscription of 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' doesn't exist in cloud 'AzureCloud'.
+```
+
+Untuk mempelajari cara menambahkan langganan baru ke penyewa Azure Active Directory Anda, lihat [Mengaitkan atau menambahkan langganan Azure ke penyewa Azure Active Directory Anda](/azure/active-directory/active-directory-how-subscriptions-associated-directory).
 
 ## <a name="create-azure-management-groups"></a>Membuat grup manajemen Azure
 
@@ -102,32 +113,32 @@ Gunakan perintah [az account management-group](../latest/docs-ref-autogen/accoun
 
 Anda dapat membuat grup manajemen untuk beberapa langganan Anda dengan menggunakan perintah [az account management-group create](/cli/azure/account/management-group#az-account-management-group-create):
 
-```azurecli
+```azurecli-interactive
 az account management-group create --name Contoso01
 ```
 
 Untuk melihat semua grup manajemen Anda, gunakan perintah [az account management-group list](/cli/azure/account/management-group#az-account-management-group-list):
 
-```azurecli
+```azurecli-interactive
 az account management-group list
 ```
 
 Tambahkan langganan ke grup baru Anda dengan menggunakan perintah [az account management-group subscription add](/cli/azure/account/management-group/subscription#az-account-management-group-subscription-add):
 
-```azurecli
+```azurecli-interactive
 az account management-group subscription add --name Contoso01 --subscription "My Demos"
 az account management-group subscription add --name Contoso01 --subscription "My Second Demos"
 ```
 
 Untuk menghapus langganan, gunakan perintah [az account management-group subscription remove](/cli/azure/account/management-group/subscription#az-account-management-group-subscription-remove):
 
-```azurecli
+```azurecli-interactive
 az account management-group subscription remove --name Contoso01 --subscription "My Demos"
 ```
 
 Untuk menghapus grup manajemen, jalankan perintah [az account management-group delete](/cli/azure/account/management-group#az-account-management-group-delete):
 
-```azurecli
+```azurecli-interactive
 az account management-group delete --name Contoso01
 ```
 
@@ -139,7 +150,7 @@ Sebagai administrator, Anda mungkin perlu mengunci langganan untuk mencegah peng
 
 Di Azure CLI, gunakan perintah [az account lock](../latest/docs-ref-autogen/account/lock.yml). Misalnya, perintah [az account lock create](/cli/azure/account/lock#az-account-lock-create) dapat mencegah pengguna menghapus langganan:
 
-```azurecli
+```azurecli-interactive
 az account lock create --name "Cannot delete subscription" --lock-type CanNotDelete
 ```
 
@@ -148,7 +159,7 @@ az account lock create --name "Cannot delete subscription" --lock-type CanNotDel
 
 Untuk melihat gembok saat ini pada langganan Anda, gunakan perintah [az account lock list](/cli/azure/account/lock#az-account-lock-list):
 
-```azurecli
+```azurecli-interactive
 az account lock list --output table
 ```
 
@@ -156,13 +167,13 @@ Jika Anda membuat akun baca saja, hasilnya seperti pemberian izin peran Pembaca 
 
 Untuk melihat detail kunci, gunakan perintah [az account lock show](/cli/azure/account/lock#az-account-lock-show):
 
-```azurecli
+```azurecli-interactive
 az account lock show --name "Cannot delete subscription"
 ```
 
 Anda dapat menghapus kunci dengan menggunakan perintah [az account lock delete](/cli/azure/account/lock#az-account-lock-delete):
 
-```azurecli
+```azurecli-interactive
 az account lock delete --name "Cannot delete subscription"
 ```
 
