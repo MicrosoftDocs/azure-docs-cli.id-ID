@@ -4,7 +4,7 @@ name: az containerapp auth
 extensionInformation: >-
   > [!Note]
 
-  > Referensi ini adalah bagian dari ekstensi **containerapp** untuk Azure CLI (versi 2.37.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **az containerapp auth** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+  > Referensi ini adalah bagian dari ekstensi **containerapp** untuk Azure CLI (versi 2.37.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az containerapp auth** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
 summary: Mengelola autentikasi dan otorisasi containerapp.
 description: ''
 directCommands:
@@ -34,7 +34,7 @@ directCommands:
   syntax: >-
     az containerapp auth update --name
                                 --resource-group
-                                [--action {AllowAnonymous, RedirectToLoginPage, RejectWith401, RejectWith404}]
+                                [--action {AllowAnonymous, RedirectToLoginPage, Return401, Return403}]
                                 [--config-file-path]
                                 [--custom-host-header]
                                 [--custom-proto-header]
@@ -53,7 +53,7 @@ directCommands:
     syntax: az containerapp auth update -g myResourceGroup --name MyContainerapp --config-file-path D:\home\site\wwwroot\auth.json
   - summary: Konfigurasikan aplikasi untuk mengizinkan permintaan yang tidak diaturentikasi untuk mencapai aplikasi.
     syntax: az containerapp auth update -g myResourceGroup --name MyContainerapp --unauthenticated-client-action AllowAnonymous
-  - summary: Mengonfigurasi aplikasi untuk mengalihkan permintaan yang tidak diaturentikasi ke penyedia Facebook.
+  - summary: Konfigurasikan aplikasi untuk mengalihkan permintaan yang tidak diautentikasi ke penyedia Facebook.
     syntax: az containerapp auth update -g myResourceGroup --name MyContainerapp --redirect-provider Facebook
   - summary: Konfigurasikan aplikasi untuk mendengarkan header penerusan X-FORWARDED-HOST dan X-FORWARDED-PROTO.
     syntax: az containerapp auth update -g myResourceGroup --name MyContainerapp --proxy-convention Standard
@@ -68,7 +68,7 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --action --unauthenticated-client-action
-    parameterValueGroup: AllowAnonymous, RedirectToLoginPage, RejectWith401, RejectWith404
+    parameterValueGroup: AllowAnonymous, RedirectToLoginPage, Return401, Return403
     summary: Tindakan yang harus diambil ketika klien yang tidak diaauthenticated mencoba mengakses aplikasi.
     description: ''
   - name: --config-file-path
@@ -86,7 +86,7 @@ directCommands:
     description: ''
   - name: --enabled
     parameterValueGroup: false, true
-    summary: True jika fitur Autentikasi / Otorisasi diaktifkan untuk aplikasi saat ini; jika tidak, salah.
+    summary: True jika fitur Autentikasi/ Otorisasi diaktifkan untuk aplikasi saat ini; jika tidak, salah.
     description: ''
   - name: --excluded-paths
     summary: Daftar jalur yang harus dikecualikan dari aturan autentikasi.
@@ -96,14 +96,14 @@ directCommands:
     summary: Konvensi yang digunakan untuk menentukan url permintaan yang dibuat.
     description: ''
   - name: --redirect-provider
-    summary: Penyedia autentikasi default yang digunakan saat beberapa penyedia dikonfigurasi.
+    summary: Penyedia autentikasi default untuk digunakan saat beberapa penyedia dikonfigurasi.
     description: ''
   - name: --require-https
     parameterValueGroup: false, true
     summary: False jika respons autentikasi/otorisasi yang tidak memiliki skema HTTPS diizinkan; jika tidak, benar.
     description: ''
   - name: --runtime-version
-    summary: RuntimeVersion dari fitur Autentikasi/ Otorisasi yang digunakan untuk aplikasi saat ini.
+    summary: RuntimeVersion fitur Autentikasi/ Otorisasi yang digunakan untuk aplikasi saat ini.
     description: ''
   - name: --set
     summary: Nilai bidang tertentu dalam pengaturan konfigurasi untuk fitur Autentikasi/ Otorisasi Azure App Service.
@@ -153,9 +153,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Mengelola autentikasi dan otorisasi containerapp.
-  ms.openlocfilehash: daafe821d05474a9e95619b2ecaaf6a8d186b7b7
-  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
+  ms.openlocfilehash: a524c4e947177948e15e088475c64a806b30ba74
+  ms.sourcegitcommit: da7e708d772bd935895d2e7db41f557f0678e53d
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 05/24/2022
-  ms.locfileid: "145276747"
+  ms.lasthandoff: 06/10/2022
+  ms.locfileid: "146197828"

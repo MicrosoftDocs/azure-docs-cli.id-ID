@@ -17,6 +17,7 @@ directCommands:
                                        --resource-group
                                        --revision
                                        [--name]
+                                       [--no-prompt]
   examples:
   - summary: Tambahkan label ke revisi terbaru.
     syntax: az containerapp revision label add -n MyContainerapp -g MyResourceGroup --label myLabel --revision latest
@@ -38,6 +39,9 @@ directCommands:
   optionalParameters:
   - name: --name -n
     summary: Nama Containerapp.
+    description: ''
+  - name: --no-prompt --yes -y
+    summary: Jangan meminta konfirmasi.
     description: ''
 - uid: az_containerapp_revision_label_remove
   name: az containerapp revision label remove
@@ -63,9 +67,39 @@ directCommands:
     name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
+- uid: az_containerapp_revision_label_swap
+  name: az containerapp revision label swap
+  summary: Tukar label revisi antara dua revisi dengan bobot lalu lintas terkait.
+  description: ''
+  syntax: >-
+    az containerapp revision label swap --name
+                                        --resource-group
+                                        --source
+                                        --target
+  examples:
+  - summary: Menukar label revisi di antara dua revisi.
+    syntax: az containerapp revision label swap -n MyContainerapp -g MyResourceGroup --source myLabel1 --target myLabel2
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama Containerapp.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --source
+    summary: Label sumber yang akan ditukar.
+    description: ''
+  - isRequired: true
+    name: --target
+    summary: Label target yang akan ditukar.
+    description: ''
 commands:
 - az_containerapp_revision_label_add
 - az_containerapp_revision_label_remove
+- az_containerapp_revision_label_swap
 globalParameters:
 - name: --debug
   summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
@@ -85,9 +119,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Mengelola label revisi yang ditetapkan untuk bobot lalu lintas.
-  ms.openlocfilehash: 9daf1db3f1d1ed0a0d15d6a944a5b36773224f5e
-  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
+  ms.openlocfilehash: 9b091ba4de6ec2cad823e8e699d30556a9d0c267
+  ms.sourcegitcommit: da7e708d772bd935895d2e7db41f557f0678e53d
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 05/24/2022
-  ms.locfileid: "145243841"
+  ms.lasthandoff: 06/10/2022
+  ms.locfileid: "146197864"
