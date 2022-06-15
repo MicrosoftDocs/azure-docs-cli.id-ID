@@ -107,16 +107,23 @@ directCommands:
                          --service
                          [--assign-endpoint {false, true}]
                          [--assign-identity {false, true}]
+                         [--assign-public-endpoint {false, true}]
                          [--cpu]
                          [--disable-probe {false, true}]
+                         [--enable-liveness-probe {false, true}]
                          [--enable-persistent-storage {false, true}]
+                         [--enable-readiness-probe {false, true}]
+                         [--enable-startup-probe {false, true}]
                          [--env]
                          [--instance-count]
                          [--jvm-options]
+                         [--liveness-probe-config]
                          [--loaded-public-certificate-file]
                          [--memory]
                          [--persistent-storage]
+                         [--readiness-probe-config]
                          [--runtime-version {Java_11, Java_17, Java_8, NetCore_31}]
+                         [--startup-probe-config]
                          [--system-assigned {false, true}]
                          [--user-assigned]
   examples:
@@ -146,6 +153,10 @@ directCommands:
     parameterValueGroup: false, true
     summary: Aktifkan identitas terkelola yang ditetapkan sistem.
     description: ''
+  - name: --assign-public-endpoint
+    parameterValueGroup: false, true
+    summary: Jika true, tetapkan URL titik akhir yang dapat diakses dari jaringan virtual untuk aplikasi instans injeksi vnet.
+    description: ''
   - name: --cpu
     defaultValue: "1"
     summary: Kuantitas sumber daya CPU. Harus 500m atau jumlah inti CPU.
@@ -154,9 +165,21 @@ directCommands:
     parameterValueGroup: false, true
     summary: Jika true, nonaktifkan pemeriksaan keaktifan dan kesiapan.
     description: ''
+  - name: --enable-liveness-probe
+    parameterValueGroup: false, true
+    summary: Jika false, akan menonaktifkan pemeriksaan keaktifan instans aplikasi.
+    description: ''
   - name: --enable-persistent-storage --enable-ps
     parameterValueGroup: false, true
     summary: Jika true, pasang disk 50G (tingkat Harga Standar) atau 1G (tingkat Harga Dasar) dengan jalur default.
+    description: ''
+  - name: --enable-readiness-probe
+    parameterValueGroup: false, true
+    summary: Jika false, akan menonaktifkan pemeriksaan kesiapan instans aplikasi.
+    description: ''
+  - name: --enable-startup-probe
+    parameterValueGroup: false, true
+    summary: Jika false, akan menonaktifkan pemeriksaan startup instans aplikasi.
     description: ''
   - name: --env
     summary: Variabel lingkungan yang dipisahkan spasi dalam format 'key[=value]'.
@@ -168,6 +191,9 @@ directCommands:
   - name: --jvm-options
     summary: "String yang berisi opsi jvm, gunakan '=' alih-alih ' ' untuk argumen ini untuk menghindari kesalahan penguraian bash, misalnya: --jvm-options='-Xms1024m -Xmx2048m'."
     description: ''
+  - name: --liveness-probe-config
+    summary: Jalur file json menunjukkan konfigurasi pemeriksaan keakuratan.
+    description: ''
   - name: --loaded-public-certificate-file -f
     summary: Jalur file json menunjukkan sertifikat yang akan dimuat ke aplikasi.
     description: ''
@@ -178,9 +204,15 @@ directCommands:
   - name: --persistent-storage
     summary: Jalur file json untuk penyimpanan persisten yang akan dipasang ke aplikasi.
     description: ''
+  - name: --readiness-probe-config
+    summary: Jalur file json menunjukkan konfigurasi pemeriksaan kesiapan.
+    description: ''
   - name: --runtime-version
     parameterValueGroup: Java_11, Java_17, Java_8, NetCore_31
     summary: Versi runtime bahasa yang digunakan.
+    description: ''
+  - name: --startup-probe-config
+    summary: Jalur file json menunjukkan konfigurasi pemeriksaan startup.
     description: ''
   - name: --system-assigned
     parameterValueGroup: false, true
@@ -219,7 +251,9 @@ directCommands:
                          --resource-group
                          --service
                          [--artifact-path]
+                         [--build-cpu]
                          [--build-env]
+                         [--build-memory]
                          [--builder]
                          [--config-file-patterns]
                          [--container-args]
@@ -229,14 +263,20 @@ directCommands:
                          [--deployment]
                          [--disable-probe {false, true}]
                          [--disable-validation {false, true}]
+                         [--enable-liveness-probe {false, true}]
+                         [--enable-readiness-probe {false, true}]
+                         [--enable-startup-probe {false, true}]
                          [--env]
                          [--jvm-options]
+                         [--liveness-probe-config]
                          [--main-entry]
                          [--no-wait]
+                         [--readiness-probe-config]
                          [--registry-password]
                          [--registry-username]
                          [--runtime-version {Java_11, Java_17, Java_8, NetCore_31}]
                          [--source-path]
+                         [--startup-probe-config]
                          [--target-module]
                          [--version]
   examples:
@@ -269,8 +309,16 @@ directCommands:
   - name: --artifact-path
     summary: Sebarkan artefak bawaan yang ditentukan (jar atau netcore zip).
     description: ''
+  - name: --build-cpu
+    defaultValue: "1"
+    summary: Kuantitas sumber daya CPU. Harus 500m atau jumlah inti CPU.
+    description: ''
   - name: --build-env
     summary: Variabel lingkungan yang dipisahkan spasi dalam format 'key[=value]'.
+    description: ''
+  - name: --build-memory
+    defaultValue: 2Gi
+    summary: 'Kuantitas sumber daya memori. Harus 512Mi atau #Gi, misalnya, 1Gi, 3Gi.'
     description: ''
   - name: --builder
     defaultValue: default
@@ -303,17 +351,35 @@ directCommands:
     parameterValueGroup: false, true
     summary: Jika true, nonaktifkan validasi jar.
     description: ''
+  - name: --enable-liveness-probe
+    parameterValueGroup: false, true
+    summary: Jika false, akan menonaktifkan pemeriksaan keaktifan instans aplikasi.
+    description: ''
+  - name: --enable-readiness-probe
+    parameterValueGroup: false, true
+    summary: Jika false, akan menonaktifkan pemeriksaan kesiapan instans aplikasi.
+    description: ''
+  - name: --enable-startup-probe
+    parameterValueGroup: false, true
+    summary: Jika false, akan menonaktifkan pemeriksaan startup instans aplikasi.
+    description: ''
   - name: --env
     summary: Variabel lingkungan yang dipisahkan spasi dalam format 'key[=value]'.
     description: ''
   - name: --jvm-options
     summary: "String yang berisi opsi jvm, gunakan '=' alih-alih ' ' untuk argumen ini untuk menghindari kesalahan penguraian bash, misalnya: --jvm-options='-Xms1024m -Xmx2048m'."
     description: ''
+  - name: --liveness-probe-config
+    summary: Jalur file json menunjukkan konfigurasi pemeriksaan keakuratan.
+    description: ''
   - name: --main-entry -m
     summary: String yang berisi jalur ke .NET yang dapat dieksekusi relatif terhadap akar zip.
     description: ''
   - name: --no-wait
     summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --readiness-probe-config
+    summary: Jalur file json menunjukkan konfigurasi pemeriksaan kesiapan.
     description: ''
   - name: --registry-password
     summary: Kata sandi registri kontainer.
@@ -327,6 +393,9 @@ directCommands:
     description: ''
   - name: --source-path
     summary: Sebarkan folder sumber yang ditentukan. Folder akan dikemas ke dalam tar, diunggah, dan dibangun menggunakan kpack. Default ke folder saat ini jika tidak ada nilai yang disediakan.
+    description: ''
+  - name: --startup-probe-config
+    summary: Jalur file json menunjukkan konfigurasi pemeriksaan startup.
     description: ''
   - name: --target-module
     summary: Modul anak yang akan disebarkan, diperlukan untuk beberapa paket jar yang dibangun dari kode sumber.
@@ -396,7 +465,7 @@ directCommands:
     description: ''
   - name: --limit
     defaultValue: "2048"
-    summary: Kilobyte maksimum log untuk dikembalikan. Nomor langit-langit adalah 2048.
+    summary: Kilobyte maksimum log yang akan dikembalikan. Nomor plafon adalah 2048.
     description: ''
   - name: --lines
     defaultValue: "50"
@@ -451,7 +520,7 @@ directCommands:
   examples:
   - summary: Tingkatkan skala aplikasi menjadi 4 inti cpu dan memori 8 Gb per instans.
     syntax: az spring app scale -n MyApp -s MyCluster -g MyResourceGroup --cpu 3 --memory 8
-  - summary: Perluas skala penyebaran aplikasi ke 5 instans.
+  - summary: Meluaskan skala penyebaran aplikasi ke 5 instans.
     syntax: az spring app scale -n MyApp -s MyCluster -g MyResourceGroup -d green-deployment --instance-count 5
   requiredParameters:
   - isRequired: true
@@ -661,19 +730,26 @@ directCommands:
                          --resource-group
                          --service
                          [--assign-endpoint {false, true}]
+                         [--assign-public-endpoint {false, true}]
                          [--config-file-patterns]
                          [--deployment]
                          [--disable-probe {false, true}]
                          [--enable-ingress-to-app-tls {false, true}]
+                         [--enable-liveness-probe {false, true}]
                          [--enable-persistent-storage {false, true}]
+                         [--enable-readiness-probe {false, true}]
+                         [--enable-startup-probe {false, true}]
                          [--env]
                          [--https-only {false, true}]
                          [--jvm-options]
+                         [--liveness-probe-config]
                          [--loaded-public-certificate-file]
                          [--main-entry]
                          [--no-wait]
                          [--persistent-storage]
+                         [--readiness-probe-config]
                          [--runtime-version {Java_11, Java_17, Java_8, NetCore_31}]
+                         [--startup-probe-config]
   examples:
   - summary: Tambahkan variabel lingkungan untuk aplikasi.
     syntax: az spring app update -n MyApp -s MyCluster -g MyResourceGroup --env foo=bar
@@ -695,6 +771,10 @@ directCommands:
     parameterValueGroup: false, true
     summary: Jika true, tetapkan URL titik akhir untuk akses langsung.
     description: ''
+  - name: --assign-public-endpoint
+    parameterValueGroup: false, true
+    summary: Jika true, tetapkan URL titik akhir yang dapat diakses dari jaringan virtual untuk aplikasi instans injeksi vnet.
+    description: ''
   - name: --config-file-patterns
     summary: (Hanya Tingkat Perusahaan) Pola file konfigurasi dipisahkan dengan ',' untuk memutuskan pola Layanan Konfigurasi Aplikasi mana yang akan digunakan. Gunakan '""' untuk menghapus konfigurasi yang ada.
     description: ''
@@ -709,9 +789,21 @@ directCommands:
     parameterValueGroup: false, true
     summary: Jika true, aktifkan ingress ke tls aplikasi.
     description: ''
+  - name: --enable-liveness-probe
+    parameterValueGroup: false, true
+    summary: Jika false, akan menonaktifkan pemeriksaan keaktifan instans aplikasi.
+    description: ''
   - name: --enable-persistent-storage --enable-ps
     parameterValueGroup: false, true
     summary: Jika true, pasang disk 50G (tingkat Harga Standar) atau 1G (tingkat Harga Dasar) dengan jalur default.
+    description: ''
+  - name: --enable-readiness-probe
+    parameterValueGroup: false, true
+    summary: Jika false, akan menonaktifkan pemeriksaan kesiapan instans aplikasi.
+    description: ''
+  - name: --enable-startup-probe
+    parameterValueGroup: false, true
+    summary: Jika false, akan menonaktifkan pemeriksaan startup instans aplikasi.
     description: ''
   - name: --env
     summary: Variabel lingkungan yang dipisahkan spasi dalam format 'key[=value]'.
@@ -722,6 +814,9 @@ directCommands:
     description: ''
   - name: --jvm-options
     summary: "String yang berisi opsi jvm, gunakan '=' alih-alih ' ' untuk argumen ini untuk menghindari kesalahan penguraian bash, misalnya: --jvm-options='-Xms1024m -Xmx2048m'."
+    description: ''
+  - name: --liveness-probe-config
+    summary: Jalur file json menunjukkan konfigurasi pemeriksaan keaktifan.
     description: ''
   - name: --loaded-public-certificate-file -f
     summary: Jalur file json menunjukkan sertifikat yang akan dimuat ke aplikasi.
@@ -735,9 +830,15 @@ directCommands:
   - name: --persistent-storage
     summary: Jalur file json untuk penyimpanan persisten yang akan dipasang ke aplikasi.
     description: ''
+  - name: --readiness-probe-config
+    summary: Jalur file json menunjukkan konfigurasi pemeriksaan kesiapan.
+    description: ''
   - name: --runtime-version
     parameterValueGroup: Java_11, Java_17, Java_8, NetCore_31
     summary: Versi runtime bahasa yang digunakan.
+    description: ''
+  - name: --startup-probe-config
+    summary: Jalur file json menunjukkan konfigurasi pemeriksaan startup.
     description: ''
 commands:
 - az_spring_app_append-loaded-public-certificate
@@ -809,9 +910,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Perintah untuk mengelola aplikasi di Azure Spring Apps.
-  ms.openlocfilehash: 0e27946ced4315737ff02424906497280a0d5040
-  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
+  ms.openlocfilehash: 0dc4c2256e9fb8c7cd8571a8beface01e6125879
+  ms.sourcegitcommit: 95520c4f260996f92274864cadf4410fd36cd4f7
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 05/24/2022
-  ms.locfileid: "145276866"
+  ms.lasthandoff: 06/15/2022
+  ms.locfileid: "146352861"

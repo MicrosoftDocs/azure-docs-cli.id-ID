@@ -26,8 +26,10 @@ directCommands:
                      [--enable-api-portal]
                      [--enable-gateway]
                      [--enable-java-agent {false, true}]
+                     [--enable-log-stream-public-endpoint {false, true}]
                      [--enable-service-registry]
                      [--gateway-instance-count]
+                     [--ingress-read-timeout]
                      [--location]
                      [--no-wait]
                      [--reserved-cidr-range]
@@ -108,11 +110,18 @@ directCommands:
     parameterValueGroup: false, true
     summary: Java dalam agen proses sekarang di-GA-ed dan digunakan secara default ketika Aplikasi Insights diaktifkan. Parameter ini tidak lagi diperlukan dan akan dihapus dalam rilis mendatang.
     description: ''
+  - name: --enable-log-stream-public-endpoint --enable-lspa
+    parameterValueGroup: false, true
+    summary: Jika true, tetapkan titik akhir publik untuk streaming log dalam instans injeksi vnet yang dapat diakses dari jaringan virtual.
+    description: ''
   - name: --enable-service-registry --enable-sr
     summary: (Hanya Tingkat Perusahaan) Aktifkan Service Registry.
     description: ''
   - name: --gateway-instance-count
     summary: (Hanya Tingkat Perusahaan) Jumlah instans Spring Cloud Gateway.
+    description: ''
+  - name: --ingress-read-timeout
+    summary: Nilai batas waktu baca Ingress dalam hitung detik. Default 300, Minimum adalah 1, maksimum adalah 1800.
     description: ''
   - name: --location -l
     summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
@@ -246,6 +255,8 @@ directCommands:
                      [--app-insights-key]
                      [--build-pool-size {S1, S2, S3, S4, S5}]
                      [--disable-app-insights {false, true}]
+                     [--enable-log-stream-public-endpoint {false, true}]
+                     [--ingress-read-timeout]
                      [--no-wait]
                      [--sku {Basic, Enterprise, Standard}]
                      [--tags]
@@ -277,6 +288,13 @@ directCommands:
   - name: --disable-app-insights
     parameterValueGroup: false, true
     summary: Nonaktifkan Insights Aplikasi, jika tidak dinonaktifkan dan tidak ada Insights Aplikasi yang ditentukan dengan --app-insights-key atau --app-insights, akan membuat instans Insights Aplikasi baru di grup sumber daya yang sama.
+    description: ''
+  - name: --enable-log-stream-public-endpoint --enable-lspa
+    parameterValueGroup: false, true
+    summary: Jika true, tetapkan titik akhir publik untuk streaming log dalam instans injeksi vnet yang dapat diakses dari jaringan virtual.
+    description: ''
+  - name: --ingress-read-timeout
+    summary: Nilai batas waktu baca Ingress dalam hitung detik. Minimum adalah 1, maksimum adalah 1800.
     description: ''
   - name: --no-wait
     summary: Jangan menunggu operasi jangka panjang selesai.
@@ -451,9 +469,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Perintah untuk mengelola Azure Spring Apps.
-  ms.openlocfilehash: 0007b9abefa84b660eead4c487b468bac6e4a3f3
-  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
+  ms.openlocfilehash: 70552758c9365e17375c5615f2d15ca5118e83a7
+  ms.sourcegitcommit: 95520c4f260996f92274864cadf4410fd36cd4f7
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 05/24/2022
-  ms.locfileid: "145277442"
+  ms.lasthandoff: 06/15/2022
+  ms.locfileid: "146353725"

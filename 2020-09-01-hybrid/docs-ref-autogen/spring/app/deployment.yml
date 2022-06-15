@@ -4,13 +4,13 @@ name: az spring app deployment
 extensionInformation: >-
   > [!Note]
 
-  > Referensi ini adalah bagian dari ekstensi **spring** untuk Azure CLI (versi 2.30.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **penyebaran aplikasi az spring** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+  > Referensi ini adalah bagian dari ekstensi **spring** untuk Azure CLI (versi 2.30.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **penyebaran aplikasi az spring** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
 summary: Perintah untuk mengelola siklus hidup penyebaran aplikasi di Azure Spring Apps. Lebih banyak operasi pada penyebaran dapat dilakukan pada tingkat aplikasi dengan parameter --deployment. misalnya az spring app deploy --deployment <staging deployment>.
 description: ''
 directCommands:
 - uid: az_spring_app_deployment_create
   name: az spring app deployment create
-  summary: Buat penyebaran penahapan untuk aplikasi. Untuk menyebarkan kode atau memperbarui pengaturan ke penyebaran yang ada, gunakan `az spring app deploy/update --deployment <staging deployment>`.
+  summary: Buat penyebaran penahapan untuk aplikasi. Untuk menyebarkan pengaturan kode atau pembaruan ke penyebaran yang ada, gunakan `az spring app deploy/update --deployment <staging deployment>`.
   description: ''
   syntax: >-
     az spring app deployment create --app
@@ -28,21 +28,27 @@ directCommands:
                                     [--cpu]
                                     [--disable-probe {false, true}]
                                     [--disable-validation {false, true}]
+                                    [--enable-liveness-probe {false, true}]
+                                    [--enable-readiness-probe {false, true}]
+                                    [--enable-startup-probe {false, true}]
                                     [--env]
                                     [--instance-count]
                                     [--jvm-options]
+                                    [--liveness-probe-config]
                                     [--main-entry]
                                     [--memory]
                                     [--no-wait]
+                                    [--readiness-probe-config]
                                     [--registry-password]
                                     [--registry-username]
                                     [--runtime-version {Java_11, Java_17, Java_8, NetCore_31}]
                                     [--skip-clone-settings]
                                     [--source-path]
+                                    [--startup-probe-config]
                                     [--target-module]
                                     [--version]
   examples:
-  - summary: Sebarkan kode sumber ke penyebaran baru aplikasi. Ini akan mengemas direktori saat ini, membangun biner dengan Pivotal Build Service lalu menyebarkan.
+  - summary: Menyebarkan kode sumber ke penyebaran baru aplikasi. Ini akan mengemas direktori saat ini, membangun biner dengan Layanan Build Pivotal lalu menyebarkan.
     syntax: az spring app deployment create -n green-deployment --app MyApp -s MyCluster -g MyResourceGroup
   - summary: Sebarkan jar bawaan ke aplikasi dengan opsi jvm dan variabel lingkungan.
     syntax: az spring app deployment create -n green-deployment --app MyApp -s MyCluster -g MyResourceGroup --jar-path app.jar --jvm-options="-XX:+UseG1GC -XX:+UseStringDeduplication" --env foo=bar
@@ -76,7 +82,7 @@ directCommands:
     description: ''
   - name: --builder
     defaultValue: default
-    summary: (Hanya Tingkat Perusahaan) Build penyusun layanan yang digunakan untuk membangun executable.
+    summary: (Hanya Tingkat Perusahaan) Build service builder yang digunakan untuk membangun executable.
     description: ''
   - name: --config-file-patterns
     summary: (Hanya Tingkat Perusahaan) Pola file konfigurasi dipisahkan dengan ',' untuk memutuskan pola Layanan Konfigurasi Aplikasi mana yang akan digunakan. Gunakan '""' untuk menghapus konfigurasi yang ada.
@@ -105,6 +111,18 @@ directCommands:
     parameterValueGroup: false, true
     summary: Jika true, nonaktifkan validasi jar.
     description: ''
+  - name: --enable-liveness-probe
+    parameterValueGroup: false, true
+    summary: Jika false, akan menonaktifkan pemeriksaan keaktifan instans aplikasi.
+    description: ''
+  - name: --enable-readiness-probe
+    parameterValueGroup: false, true
+    summary: Jika false, akan menonaktifkan pemeriksaan kesiapan instans aplikasi.
+    description: ''
+  - name: --enable-startup-probe
+    parameterValueGroup: false, true
+    summary: Jika false, akan menonaktifkan pemeriksaan startup instans aplikasi.
+    description: ''
   - name: --env
     summary: Variabel lingkungan yang dipisahkan spasi dalam format 'key[=value]'.
     description: ''
@@ -114,6 +132,9 @@ directCommands:
   - name: --jvm-options
     summary: "String yang berisi opsi jvm, gunakan '=' alih-alih ' ' untuk argumen ini untuk menghindari kesalahan penguraian bash, misalnya: --jvm-options='-Xms1024m -Xmx2048m'."
     description: ''
+  - name: --liveness-probe-config
+    summary: Jalur file json menunjukkan konfigurasi pemeriksaan keakuratan.
+    description: ''
   - name: --main-entry -m
     summary: String yang berisi jalur ke .NET yang dapat dieksekusi relatif terhadap akar zip.
     description: ''
@@ -122,6 +143,9 @@ directCommands:
     description: ''
   - name: --no-wait
     summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+  - name: --readiness-probe-config
+    summary: Jalur file json menunjukkan konfigurasi pemeriksaan kesiapan.
     description: ''
   - name: --registry-password
     summary: Kata sandi registri kontainer.
@@ -138,6 +162,9 @@ directCommands:
     description: ''
   - name: --source-path
     summary: Sebarkan folder sumber yang ditentukan. Folder akan dikemas ke dalam tar, diunggah, dan dibangun menggunakan kpack. Default ke folder saat ini jika tidak ada nilai yang disediakan.
+    description: ''
+  - name: --startup-probe-config
+    summary: Jalur file json menunjukkan konfigurasi pemeriksaan startup.
     description: ''
   - name: --target-module
     summary: Modul anak yang akan disebarkan, diperlukan untuk beberapa paket jar yang dibangun dari kode sumber.
@@ -178,7 +205,7 @@ directCommands:
     description: ''
 - uid: az_spring_app_deployment_generate-heap-dump
   name: az spring app deployment generate-heap-dump
-  summary: Buat heap dump instans aplikasi target Anda ke jalur file yang diberikan.
+  summary: Buat heap dump instans aplikasi target Anda ke jalur file tertentu.
   description: ''
   syntax: >-
     az spring app deployment generate-heap-dump --app
@@ -297,7 +324,7 @@ directCommands:
     description: ''
 - uid: az_spring_app_deployment_start-jfr
   name: az spring app deployment start-jfr
-  summary: Mulai JFR pada instans aplikasi target Anda ke jalur file tertentu.
+  summary: Mulai JFR pada instans aplikasi target Anda ke jalur file yang diberikan.
   description: ''
   syntax: >-
     az spring app deployment start-jfr --app
@@ -363,9 +390,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Perintah untuk mengelola siklus hidup penyebaran aplikasi di Azure Spring Apps. Lebih banyak operasi pada penyebaran dapat dilakukan pada tingkat aplikasi dengan parameter --deployment. misalnya az spring app deploy --deployment <staging deployment>.
-  ms.openlocfilehash: a27483376eed8061946d0b82705685e7b6c293d8
-  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
+  ms.openlocfilehash: 3acb28446da3460c16df90208f6f60da8b97da64
+  ms.sourcegitcommit: 95520c4f260996f92274864cadf4410fd36cd4f7
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 05/24/2022
-  ms.locfileid: "145276358"
+  ms.lasthandoff: 06/15/2022
+  ms.locfileid: "146353689"

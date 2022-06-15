@@ -9,12 +9,12 @@ ms.date: 08/01/2021
 ms.tool: azure-cli
 ms.custom: template-how-to, devx-track-azurecli, seo-azure-cli
 keywords: permintaan dukungan azure, dukungan azure, tiket dukungan azure, manajemen tiket dukungan
-ms.openlocfilehash: e2e1cc87c02ae2671a61a89b08cc113d33451a8d
-ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
+ms.openlocfilehash: d4f0dbb87c558931e69f9df695c3185eccbfe81c
+ms.sourcegitcommit: 95520c4f260996f92274864cadf4410fd36cd4f7
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/30/2022
-ms.locfileid: "145939226"
+ms.lasthandoff: 06/15/2022
+ms.locfileid: "146352969"
 ---
 # <a name="create-an-azure-support-ticket-in-azure-cli"></a>Membuat tiket dukungan Azure di Azure CLI
 
@@ -31,7 +31,7 @@ Untuk membuat permintaan dukungan, Anda harus menjadi [Pemilik](/azure/role-base
 
 ## <a name="create-a-support-ticket"></a>Buat tiket dukungan
 
-1. Untuk mendapatkan daftar layanan, gunakan perintah [az support services list](/cli/azure/ext/support/support/services#ext_support_az_support_services_list):
+1. Untuk mendapatkan daftar layanan, gunakan perintah [az support services list](/cli/azure/support/services#az-support-services-list):
 
    ```azurecli
    az support services list --output table
@@ -39,7 +39,7 @@ Untuk membuat permintaan dukungan, Anda harus menjadi [Pemilik](/azure/role-base
 
    Untuk contoh ini, temukan nilai untuk **Mesin Virtual yang menjalankan Windows**, yaitu **6f16735c-b0ae-b275-ad3a-03479cfa1396**.
 
-1. Untuk mendapatkan jenis masalah dan subjenis masalah yang menjelaskan masalah Anda, jalankan perintah [az support services problem-classifications list](/cli/azure/ext/support/support/services/problem-classifications#ext_support_az_support_services_problem_classifications_list):
+1. Untuk mendapatkan jenis masalah dan subjenis masalah yang menjelaskan masalah Anda, jalankan perintah [az support services problem-classifications list](/cli/azure/support/services/problem-classifications#az-support-services-problem-classifications-list):
 
    ```azurecli
    az support services problem-classifications list --service-name 6f16735c-b0ae-b275-ad3a-03479cfa1396 --output table
@@ -47,7 +47,7 @@ Untuk membuat permintaan dukungan, Anda harus menjadi [Pemilik](/azure/role-base
 
    Untuk contoh ini, temukan **Tidak dapat terhubung ke VM saya/Saya memiliki masalah dengan IP publik saya**. Jenis tersebut memiliki nilai **e5c307e3-50ff-5dc9-c8ae-7d35051f88c9**.
 
-1. Buat tiket dengan menggunakan perintah [az support ticket create](/cli/azure/ext/support/support/tickets#ext_support_az_support_tickets_create):
+1. Buat tiket dengan menggunakan perintah [az support ticket create](/cli/azure/support/tickets#az-support-tickets-create):
 
    ```azurecli
    az support tickets create --ticket-name "VM012" --title "Issue with public IP" \
@@ -62,15 +62,15 @@ Teknisi dukungan akan menghubungi Anda menggunakan metode yang Anda pilih. Untuk
 
 ## <a name="manage-support-tickets"></a>Mengelola tiket dukungan
 
-Azure CLI memungkinkan Anda melakukan manajemen tiket dukungan menggunakan berbagai perintah. Untuk melihat tiket dukungan Azure untuk langganan Anda saat ini, jalankan perintah [az support tickets list](/cli/azure/ext/support/support/tickets#ext_support_az_support_tickets_list):
+Azure CLI memungkinkan Anda melakukan manajemen tiket dukungan menggunakan berbagai perintah. Untuk melihat tiket dukungan Azure untuk langganan Anda saat ini, jalankan perintah [az support tickets list](/cli/azure/support/tickets#az-support-tickets-list):
 
 ```azurecli
 az support tickets list
 ```
 
-Untuk melihat tiket dukungan Azure di langganan lain, jalankan perintah [az account set](/cli/azure/account#az_account_set) untuk mengubah langganan Anda saat ini, lalu jalankan perintah.
+Untuk melihat tiket dukungan Azure di langganan lain, jalankan perintah [az account set](/cli/azure/account#az-account-set) untuk mengubah langganan Anda saat ini, lalu jalankan perintah.
 
-Anda juga dapat memperbarui tiket dengan menggunakan perintah [az support ticket update](/cli/azure/ext/support/support/tickets#ext_support_az_support_tickets_update):
+Anda juga dapat memperbarui tiket dengan menggunakan perintah [az support ticket update](/cli/azure/support/tickets#az-support-tickets-update):
 
 ```azurecli
 az support tickets update --ticket-name VM012 --severity moderate
@@ -80,7 +80,7 @@ az support tickets update --ticket-name VM012 --severity moderate
 
 Anda tidak dapat menghapus tiket dukungan yang dibuat dengan menggunakan Azure CLI. Sebagai gantinya, kirim pesan untuk menutup tiket. Jika Anda perlu membuka kembali permintaan dukungan tertutup, buat pesan baru, yang secara otomatis membuka kembali permintaan.
 
-Untuk berkomunikasi tentang tiket Anda, jalankan perintah [az support ticket communications create](/cli/azure/ext/support/support/tickets/communications#ext_support_az_support_tickets_communications_create):
+Untuk berkomunikasi tentang tiket Anda, jalankan perintah [az support ticket communications create](/cli/azure/support/tickets/communications#az-support-tickets-communications-create):
 
 ```azurecli
 az support tickets communications create --ticket-name VM012 \
@@ -89,7 +89,7 @@ az support tickets communications create --ticket-name VM012 \
     --communication-subject "Delaying VM fixes due to scheduling on our end."
 ```
 
-Untuk melihat semua komunikasi tiket, gunakan perintah [az support tickets communications list](/cli/azure/ext/support/support/tickets/communications#ext_support_az_support_tickets_communications_list):
+Untuk melihat semua komunikasi tiket, gunakan perintah [az support tickets communications list](/cli/azure/support/tickets/communications#az-support-tickets-communications-list):
 
 ```azurecli
 az support tickets communications list --ticket-name VM012

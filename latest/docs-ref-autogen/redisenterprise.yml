@@ -5,7 +5,7 @@ extensionInformation: >-
   > [!Note]
 
   > Referensi ini adalah bagian dari ekstensi **redisenterprise** untuk Azure CLI (versi 2.15.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az redisenterprise** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
-summary: Mengelola cache Redis Enterprise khusus untuk aplikasi Azure Anda.
+summary: Kelola cache Redis Enterprise khusus untuk aplikasi Azure Anda.
 description: ''
 directCommands:
 - uid: az_redisenterprise_create
@@ -20,6 +20,8 @@ directCommands:
                               [--client-protocol {Encrypted, Plaintext}]
                               [--clustering-policy {EnterpriseCluster, OSSCluster}]
                               [--eviction-policy {AllKeysLFU, AllKeysLRU, AllKeysRandom, NoEviction, VolatileLFU, VolatileLRU, VolatileRandom, VolatileTTL}]
+                              [--group-nickname]
+                              [--linked-databases]
                               [--location]
                               [--minimum-tls-version {1.0, 1.1, 1.2}]
                               [--modules]
@@ -64,6 +66,12 @@ directCommands:
     parameterValueGroup: AllKeysLFU, AllKeysLRU, AllKeysRandom, NoEviction, VolatileLFU, VolatileLRU, VolatileRandom, VolatileTTL
     summary: Kebijakan pengeluaran Redis - defaultnya adalah VolatileLRU.
     description: ''
+  - name: --group-nickname
+    summary: Nama untuk grup sumber daya database tertaut.
+    description: ''
+  - name: --linked-databases
+    summary: Daftar sumber daya database untuk ditautkan dengan database ini.
+    description: ''
   - name: --location -l
     summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
     description: ''
@@ -95,11 +103,11 @@ directCommands:
 
       aof-enabled: Mengatur apakah AOF diaktifkan.  Nilai yang diizinkan: true, false.
 
-      aof-frequency: Mengatur frekuensi di mana data ditulis ke disk.  Nilai yang diizinkan: 1 detik, selalu.
+      aof-frequency: Mengatur frekuensi di mana data ditulis ke disk.  Nilai yang diizinkan: 1d, selalu.
 
       diaktifkan rdb: Mengatur apakah RDB diaktifkan.  Nilai yang diizinkan: true, false.
 
-      Frekuensi rdb: Mengatur frekuensi pembuatan rekam jepret database.  Nilai yang diizinkan: 1 jam, 6 jam, 12 jam.
+      Frekuensi rdb: Mengatur frekuensi pembuatan rekam jepret database.  Nilai yang diizinkan: 1h, 6h, 12h.
 
 
       Setelah mengaktifkan persistensi, Anda tidak akan dapat menonaktifkannya. Dukungan untuk menonaktifkan persistensi setelah mengaktifkan akan ditambahkan di kemudian hari.
@@ -148,7 +156,7 @@ directCommands:
   examples:
   - summary: Mencantumkan semua cache Redis Enterprise dalam grup sumber daya.
     syntax: az redisenterprise list --resource-group "rg1"
-  - summary: Mencantumkan semua cache Redis Enterprise dalam langganan saat ini.
+  - summary: Cantumkan semua cache Redis Enterprise dalam langganan saat ini.
     syntax: az redisenterprise list
   optionalParameters:
   - name: --resource-group -g
@@ -275,6 +283,7 @@ commands:
 - az_redisenterprise_database_create
 - az_redisenterprise_database_delete
 - az_redisenterprise_database_export
+- az_redisenterprise_database_force-unlink
 - az_redisenterprise_database_import
 - az_redisenterprise_database_list
 - az_redisenterprise_database_list-keys
@@ -308,9 +317,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Kelola cache Redis Enterprise khusus untuk aplikasi Azure Anda.
-  ms.openlocfilehash: 68b3a3b6b77dc89fca2a95fa4bc55338ea74496a
-  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.openlocfilehash: c22daf93e3895a16ff04349231c7a17c60d62eee
+  ms.sourcegitcommit: 95520c4f260996f92274864cadf4410fd36cd4f7
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 03/25/2022
-  ms.locfileid: "140919572"
+  ms.lasthandoff: 06/15/2022
+  ms.locfileid: "146352177"

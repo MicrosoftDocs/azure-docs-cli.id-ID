@@ -4,7 +4,7 @@ name: az spring
 extensionInformation: >-
   > [!Note]
 
-  > Referensi ini adalah bagian dari ekstensi **spring** untuk Azure CLI (versi 2.30.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **az spring** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+  > Referensi ini adalah bagian dari ekstensi **spring** untuk Azure CLI (versi 2.30.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az spring** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
 summary: Perintah untuk mengelola Azure Spring Apps.
 description: ''
 directCommands:
@@ -26,8 +26,10 @@ directCommands:
                      [--enable-api-portal]
                      [--enable-gateway]
                      [--enable-java-agent {false, true}]
+                     [--enable-log-stream-public-endpoint {false, true}]
                      [--enable-service-registry]
                      [--gateway-instance-count]
+                     [--ingress-read-timeout]
                      [--location]
                      [--no-wait]
                      [--reserved-cidr-range]
@@ -47,11 +49,11 @@ directCommands:
     syntax: az spring create -n MyService -g MyResourceGroup -l westus --app-insights appInsightsName
   - summary: Buat Azure Spring Apps baru di westus dengan Insights Aplikasi yang ada dan tentukan laju pengambilan sampel.
     syntax: az spring create -n MyService -g MyResourceGroup -l westus --app-insights appInsightsName --sampling-rate 10
-  - summary: Buat Azure Spring Apps baru dengan Aplikasi Insights dinonaktifkan.
+  - summary: Buat Azure Spring Apps baru dengan Application Insights dinonaktifkan.
     syntax: az spring create -n MyService -g MyResourceGroup --disable-app-insights
-  - summary: Membuat Azure Spring Apps baru dengan VNet yang disuntikkan melalui pemberian nama VNet di grup sumber daya saat ini
+  - summary: Buat Azure Spring Apps baru dengan VNet yang disuntikkan melalui pemberian nama VNet di grup sumber daya saat ini
     syntax: az spring create -n MyService -g MyResourceGroup --vnet MyVNet --app-subnet MyAppSubnet --service-runtime-subnet MyServiceRuntimeSubnet
-  - summary: Membuat Azure Spring Apps baru dengan VNet yang disuntikkan melalui pemberian ID sumber daya subnet
+  - summary: Buat Azure Spring Apps baru dengan VNet yang disuntikkan melalui pemberian ID sumber daya subnet
     syntax: az spring create -n MyService -g MyResourceGroup --app-subnet /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyVnetRg/providers/Microsoft.Network/VirtualNetworks/test-vnet/subnets/app --service-runtime-subnet /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyVnetRg/providers/Microsoft.Network/VirtualNetworks/test-vnet/subnets/svc --reserved-cidr-range 10.0.0.0/16,10.1.0.0/16,10.2.0.1/16
   - summary: Membuat instans Azure Spring Apps Enterprise jika Langganan Azure tidak pernah menghosting instans Azure Spring Apps Enterprise
     syntax: >-
@@ -93,7 +95,7 @@ directCommands:
     description: ''
   - name: --disable-app-insights
     parameterValueGroup: false, true
-    summary: Nonaktifkan Insights Aplikasi, jika tidak dinonaktifkan dan tidak ada Insights Aplikasi yang ditentukan dengan --app-insights-key atau --app-insights, akan membuat instans Insights Aplikasi baru di grup sumber daya yang sama.
+    summary: Nonaktifkan Insights Aplikasi, jika tidak dinonaktifkan dan tidak ada Insights Aplikasi yang ditentukan dengan --app-insights-key atau --app-insights, akan membuat instans Insights Aplikasi baru dalam grup sumber daya yang sama.
     description: ''
   - name: --enable-acs --enable-application-configuration-service
     summary: (Hanya Tingkat Perusahaan) Aktifkan Layanan Konfigurasi Aplikasi.
@@ -108,11 +110,18 @@ directCommands:
     parameterValueGroup: false, true
     summary: Java dalam agen proses sekarang di-GA-ed dan digunakan secara default ketika Aplikasi Insights diaktifkan. Parameter ini tidak lagi diperlukan dan akan dihapus dalam rilis mendatang.
     description: ''
+  - name: --enable-log-stream-public-endpoint --enable-lspa
+    parameterValueGroup: false, true
+    summary: Jika true, tetapkan titik akhir publik untuk streaming log dalam instans injeksi vnet yang dapat diakses dari jaringan virtual.
+    description: ''
   - name: --enable-service-registry --enable-sr
-    summary: (Hanya Tingkat Perusahaan) Aktifkan Service Registry.
+    summary: (Hanya Tingkat Perusahaan) Aktifkan Registri Layanan.
     description: ''
   - name: --gateway-instance-count
     summary: (Hanya Tingkat Perusahaan) Jumlah instans Spring Cloud Gateway.
+    description: ''
+  - name: --ingress-read-timeout
+    summary: Nilai batas waktu baca Ingress dalam detik. Default 300, Minimum adalah 1, maksimum adalah 1800.
     description: ''
   - name: --location -l
     summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
@@ -121,7 +130,7 @@ directCommands:
     summary: Jangan menunggu operasi jangka panjang selesai.
     description: ''
   - name: --reserved-cidr-range
-    summary: Daftar rentang alamat IP yang dipisahkan koma dalam format CIDR. Rentang IP dicadangkan untuk menghosting infrastruktur Azure Spring Apps yang mendasar, yang seharusnya 3 setidaknya /16 rentang IP yang tidak digunakan, tidak boleh tumpang tindih dengan rentang IP Subnet apa pun.
+    summary: Daftar rentang alamat IP yang dipisahkan koma dalam format CIDR. Rentang IP dicadangkan untuk menghosting infrastruktur Azure Spring Apps yang mendasar, yang harus 3 setidaknya /16 rentang IP yang tidak digunakan, tidak boleh tumpang tindih dengan rentang IP Subnet apa pun.
     description: ''
   - name: --sampling-rate
     summary: Laju Pengambilan Sampel wawasan aplikasi. Minimum adalah 0, maksimum adalah 100.
@@ -135,7 +144,7 @@ directCommands:
   - name: --sku
     defaultValue: Standard
     parameterValueGroup: Basic, Enterprise, Standard
-    summary: Nama SKU. Perusahaan masih dalam Pratinjau.
+    summary: Nama SKU. Enterprise masih dalam Pratinjau.
     description: ''
   - name: --tags
     summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
@@ -246,11 +255,13 @@ directCommands:
                      [--app-insights-key]
                      [--build-pool-size {S1, S2, S3, S4, S5}]
                      [--disable-app-insights {false, true}]
+                     [--enable-log-stream-public-endpoint {false, true}]
+                     [--ingress-read-timeout]
                      [--no-wait]
                      [--sku {Basic, Enterprise, Standard}]
                      [--tags]
   examples:
-  - summary: Perbarui tingkat harga.
+  - summary: Memperbarui tingkat harga.
     syntax: az spring update -n MyService --sku Standard -g MyResourceGroup
   - summary: Perbarui tag Azure Spring Apps yang ada.
     syntax: az spring update -n MyService -g MyResourceGroup --tags key1=value1 key2=value2
@@ -276,14 +287,21 @@ directCommands:
     description: ''
   - name: --disable-app-insights
     parameterValueGroup: false, true
-    summary: Nonaktifkan Insights Aplikasi, jika tidak dinonaktifkan dan tidak ada Insights Aplikasi yang ditentukan dengan --app-insights-key atau --app-insights, akan membuat instans Insights Aplikasi baru di grup sumber daya yang sama.
+    summary: Nonaktifkan Insights Aplikasi, jika tidak dinonaktifkan dan tidak ada Insights Aplikasi yang ditentukan dengan --app-insights-key atau --app-insights, akan membuat instans Insights Aplikasi baru dalam grup sumber daya yang sama.
+    description: ''
+  - name: --enable-log-stream-public-endpoint --enable-lspa
+    parameterValueGroup: false, true
+    summary: Jika true, tetapkan titik akhir publik untuk streaming log dalam instans injeksi vnet yang dapat diakses dari jaringan virtual.
+    description: ''
+  - name: --ingress-read-timeout
+    summary: Nilai batas waktu baca Ingress dalam detik. Minimum adalah 1, maksimum adalah 1800.
     description: ''
   - name: --no-wait
     summary: Jangan menunggu operasi jangka panjang selesai.
     description: ''
   - name: --sku
     parameterValueGroup: Basic, Enterprise, Standard
-    summary: Nama SKU. Perusahaan masih dalam Pratinjau.
+    summary: Nama SKU. Enterprise masih dalam Pratinjau.
     description: ''
   - name: --tags
     summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
@@ -451,9 +469,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Perintah untuk mengelola Azure Spring Apps.
-  ms.openlocfilehash: 0007b9abefa84b660eead4c487b468bac6e4a3f3
-  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
+  ms.openlocfilehash: 70552758c9365e17375c5615f2d15ca5118e83a7
+  ms.sourcegitcommit: 95520c4f260996f92274864cadf4410fd36cd4f7
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 05/24/2022
-  ms.locfileid: "145277210"
+  ms.lasthandoff: 06/15/2022
+  ms.locfileid: "146353131"

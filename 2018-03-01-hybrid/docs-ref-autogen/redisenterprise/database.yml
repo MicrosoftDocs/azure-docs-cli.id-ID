@@ -18,6 +18,8 @@ directCommands:
                                        [--client-protocol {Encrypted, Plaintext}]
                                        [--clustering-policy {EnterpriseCluster, OSSCluster}]
                                        [--eviction-policy {AllKeysLFU, AllKeysLRU, AllKeysRandom, NoEviction, VolatileLFU, VolatileLRU, VolatileRandom, VolatileTTL}]
+                                       [--group-nickname]
+                                       [--linked-databases]
                                        [--modules]
                                        [--no-wait]
                                        [--persistence]
@@ -46,6 +48,12 @@ directCommands:
   - name: --eviction-policy
     parameterValueGroup: AllKeysLFU, AllKeysLRU, AllKeysRandom, NoEviction, VolatileLFU, VolatileLRU, VolatileRandom, VolatileTTL
     summary: Kebijakan pengeluaran Redis - defaultnya adalah VolatileLRU.
+    description: ''
+  - name: --group-nickname
+    summary: Nama untuk grup sumber daya database tertaut.
+    description: ''
+  - name: --linked-databases
+    summary: Daftar sumber daya database untuk ditautkan dengan database ini.
     description: ''
   - name: --modules
     summary: Set modul redis opsional untuk diaktifkan dalam database ini - modul hanya dapat ditambahkan pada waktu pembuatan.
@@ -136,6 +144,35 @@ directCommands:
   - name: --no-wait
     summary: Jangan menunggu operasi jangka panjang selesai.
     description: ''
+- uid: az_redisenterprise_database_force-unlink
+  name: az redisenterprise database force-unlink
+  summary: Menghapus tautan secara paksa ke sumber daya database yang ditentukan.
+  description: ''
+  syntax: >-
+    az redisenterprise database force-unlink --cluster-name
+                                             --resource-group
+                                             --unlink-ids
+                                             [--no-wait]
+  examples:
+  - summary: Cara membatalkan tautan database selama pemadaman regional
+    syntax: az redisenterprise database force-unlink --cluster-name "cache1" --unlink-ids "/subscriptions/subid2/resourceGroups/rg2/providers/Microsoft.Cache/redisEnterprise/cache2/databases/default" --resource-group "rg1"
+  requiredParameters:
+  - isRequired: true
+    name: --cluster-name --name -n
+    summary: Nama kluster RedisEnterprise.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --unlink-ids
+    summary: ID sumber daya sumber daya database yang akan dilepas tautannya.
+    description: ''
+  optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
 - uid: az_redisenterprise_database_import
   name: az redisenterprise database import
   summary: Mengimpor data ke database Redis Enterprise.
@@ -143,7 +180,7 @@ directCommands:
   syntax: >-
     az redisenterprise database import --cluster-name
                                        --resource-group
-                                       --sas-uri
+                                       --sas-uris
                                        [--no-wait]
   examples:
   - summary: Impor data dari file database ke database Redis Enterprise target.
@@ -158,8 +195,8 @@ directCommands:
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
   - isRequired: true
-    name: --sas-uri
-    summary: SAS URI untuk blob target yang akan diimpor.
+    name: --sas-uris
+    summary: URI SAS untuk blob target yang akan diimpor.
     description: ''
   optionalParameters:
   - name: --no-wait
@@ -261,6 +298,8 @@ directCommands:
                                        --resource-group
                                        [--client-protocol {Encrypted, Plaintext}]
                                        [--eviction-policy {AllKeysLFU, AllKeysLRU, AllKeysRandom, NoEviction, VolatileLFU, VolatileLRU, VolatileRandom, VolatileTTL}]
+                                       [--group-nickname]
+                                       [--linked-databases]
                                        [--no-wait]
                                        [--persistence]
   examples:
@@ -283,6 +322,12 @@ directCommands:
   - name: --eviction-policy
     parameterValueGroup: AllKeysLFU, AllKeysLRU, AllKeysRandom, NoEviction, VolatileLFU, VolatileLRU, VolatileRandom, VolatileTTL
     summary: Kebijakan pengeluaran Redis.
+    description: ''
+  - name: --group-nickname
+    summary: Nama untuk grup sumber daya database tertaut.
+    description: ''
+  - name: --linked-databases
+    summary: Daftar sumber daya database untuk ditautkan dengan database ini.
     description: ''
   - name: --no-wait
     summary: Jangan menunggu operasi jangka panjang selesai.
@@ -361,6 +406,7 @@ commands:
 - az_redisenterprise_database_create
 - az_redisenterprise_database_delete
 - az_redisenterprise_database_export
+- az_redisenterprise_database_force-unlink
 - az_redisenterprise_database_import
 - az_redisenterprise_database_list
 - az_redisenterprise_database_list-keys
@@ -387,9 +433,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Mengelola database Redis Enterprise.
-  ms.openlocfilehash: 8d53aa925388d6796e95364edd1eb559073ddb9d
-  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.openlocfilehash: a1bfeaf2001647f1bc796ce684a6c91bd417d495
+  ms.sourcegitcommit: 95520c4f260996f92274864cadf4410fd36cd4f7
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 03/25/2022
-  ms.locfileid: "140888306"
+  ms.lasthandoff: 06/15/2022
+  ms.locfileid: "146352465"
