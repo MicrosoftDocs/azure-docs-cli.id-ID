@@ -4,7 +4,7 @@ name: az sql mi-arc
 extensionInformation: >-
   > [!Note]
 
-  > Referensi ini adalah bagian dari ekstensi **arcdata** untuk Azure CLI (versi 2.3.1 atau lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az sql mi-arc** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+  > Referensi ini adalah bagian dari ekstensi **arcdata** untuk Azure CLI (versi 2.3.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az sql mi-arc** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
 summary: Mengelola SQL Managed Instance dengan dukungan Azure Arc.
 description: ''
 directCommands:
@@ -40,7 +40,7 @@ directCommands:
                          [--primary-dns-name]
                          [--primary-port-number]
                          [--readable-secondaries]
-                         [--replicas]
+                         [--replicas {1, 2, 3}]
                          [--resource-group]
                          [--retention-days]
                          [--service-annotations]
@@ -52,6 +52,7 @@ directCommands:
                          [--storage-class-datalogs]
                          [--storage-class-logs]
                          [--storage-labels]
+                         [--sync-secondary-to-commit {-1, 0, 1, 2}]
                          [--tier]
                          [--time-zone]
                          [--trace-flags]
@@ -115,7 +116,7 @@ directCommands:
     summary: Namespace layanan tempat instans terkelola SQL akan disebarkan. Jika tidak ada namespace layanan yang ditentukan, maka namespace layanan yang ditentukan dalam kubeconfig akan digunakan.
     description: ''
   - name: --keytab-secret
-    summary: Nama rahasia Kubernetes yang berisi file keytab untuk SQL Managed Instance yang diaktifkan Arc ini.
+    summary: Nama rahasia Kubernetes yang berisi file keytab untuk SQL Managed Instance berkemampuan Arc ini.
     description: ''
   - name: --labels
     summary: Daftar label yang dipisahkan koma dari instans terkelola SQL.
@@ -154,7 +155,8 @@ directCommands:
     summary: Jumlah replika yang akan dibuat dapat dibaca. Hanya berlaku untuk tingkat Kritis Bisnis.  Nilai harus antara 0 dan jumlah replika dikurangi 1.
     description: ''
   - name: --replicas
-    summary: Opsi ini menentukan jumlah replika SQL Managed Instance yang akan disebarkan di kluster Kubernetes Anda untuk tujuan ketersediaan tinggi. Nilai yang diizinkan adalah '3', '2', '1' dengan default '1'.
+    parameterValueGroup: 1, 2, 3
+    summary: Opsi ini menentukan jumlah replika SQL Managed Instance yang akan disebarkan di kluster Kubernetes untuk tujuan ketersediaan tinggi. Defaultnya adalah 1 replika untuk Tujuan Umum, 3 replika untuk Business Critical.
     description: ''
   - name: --resource-group -g
     summary: Grup sumber daya Azure tempat sumber daya sqlmi harus ditambahkan.
@@ -188,6 +190,11 @@ directCommands:
     description: ''
   - name: --storage-labels
     summary: Daftar label yang dipisahkan koma yang akan diterapkan ke semua PVC.
+    description: ''
+  - name: --sync-secondary-to-commit
+    defaultValue: "-1"
+    parameterValueGroup: -1, 0, 1, 2
+    summary: Jumlah replika sekunder yang harus disinkronkan untuk diterapkan. Mengatur nilai ini ke -1 akan mengatur jumlah sekunder yang disinkronkan yang diperlukan ke '(# replika - 1) / 2', dibulatkan ke bawah.
     description: ''
   - name: --tier -t
     summary: 'Tingkat harga untuk instans. Nilai yang diizinkan: BusinessCritical (disingkat bc) atau GeneralPurpose (disingkat gp). Default adalah GeneralPurpose. Tingkat harga tidak dapat diubah.'
@@ -452,12 +459,13 @@ directCommands:
                          [--path]
                          [--preferred-primary-replica]
                          [--readable-secondaries]
-                         [--replicas]
+                         [--replicas {1, 2, 3}]
                          [--resource-group]
                          [--retention-days]
                          [--service-annotations]
                          [--service-cert-secret]
                          [--service-labels]
+                         [--sync-secondary-to-commit {-1, 0, 1, 2}]
                          [--time-zone]
                          [--trace-flags]
                          [--use-k8s]
@@ -492,7 +500,7 @@ directCommands:
     summary: Namespace layanan tempat instans terkelola SQL akan disebarkan. Jika tidak ada namespace layanan yang ditentukan, maka namespace layanan yang ditentukan dalam kubeconfig akan digunakan.
     description: ''
   - name: --keytab-secret
-    summary: Nama rahasia Kubernetes yang berisi file keytab untuk SQL Managed Instance yang diaktifkan Arc ini.
+    summary: Nama rahasia Kubernetes yang berisi file keytab untuk SQL Managed Instance berkemampuan Arc ini.
     description: ''
   - name: --labels
     summary: Daftar label yang dipisahkan koma dari instans terkelola SQL.
@@ -519,7 +527,8 @@ directCommands:
     summary: Jumlah replika yang akan dibuat dapat dibaca. Hanya berlaku untuk tingkat Kritis Bisnis.  Nilai harus antara 0 dan jumlah replika dikurangi 1.
     description: ''
   - name: --replicas
-    summary: Opsi ini menentukan jumlah replika SQL Managed Instance yang akan disebarkan di kluster Kubernetes Anda untuk tujuan ketersediaan tinggi. Nilai yang diizinkan adalah '3', '2', '1' dengan default '1'.
+    parameterValueGroup: 1, 2, 3
+    summary: Opsi ini menentukan jumlah replika SQL Managed Instance yang akan disebarkan di kluster Kubernetes untuk tujuan ketersediaan tinggi.
     description: ''
   - name: --resource-group -g
     summary: Grup sumber daya Azure tempat sumber daya sqlmi harus diperbarui.
@@ -535,6 +544,10 @@ directCommands:
     description: ''
   - name: --service-labels
     summary: Daftar label yang dipisahkan koma yang akan diterapkan ke semua layanan eksternal.
+    description: ''
+  - name: --sync-secondary-to-commit
+    parameterValueGroup: -1, 0, 1, 2
+    summary: Jumlah replika sekunder yang harus disinkronkan untuk diterapkan. Mengatur nilai ini ke -1 akan mengatur jumlah sekunder yang disinkronkan yang diperlukan ke '(# replika - 1) / 2', dibulatkan ke bawah.
     description: ''
   - name: --time-zone
     summary: Zona waktu SQL Server untuk instans.
@@ -581,7 +594,7 @@ directCommands:
     summary: Namespace layanan tempat instans terkelola SQL akan disebarkan. Jika tidak ada namespace layanan yang ditentukan, maka namespace layanan yang ditentukan dalam kubeconfig akan digunakan.
     description: ''
   - name: --label-filter -l
-    summary: Filter untuk memilih instans untuk ditingkatkan berdasarkan label.
+    summary: Filter untuk memilih instans yang akan ditingkatkan berdasarkan label.
     description: ''
   - name: --name -n
     summary: Nama instans terkelola SQL.
@@ -634,9 +647,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Mengelola SQL Managed Instance dengan dukungan Azure Arc.
-  ms.openlocfilehash: d7a09949c45cad1d5e941a17cff72356a2b6b691
-  ms.sourcegitcommit: 458438e54726db3a020b476922b529b514b512d8
+  ms.openlocfilehash: 3312e3dd01649d7cc4ae24112eb54f194f8c5baf
+  ms.sourcegitcommit: 41b129b133e65ad2487139c3fef7247ab0b63834
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 05/11/2022
-  ms.locfileid: "144928589"
+  ms.lasthandoff: 06/17/2022
+  ms.locfileid: "146423394"

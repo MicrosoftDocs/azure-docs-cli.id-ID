@@ -4,7 +4,7 @@ name: az connectedvmware vm-template
 extensionInformation: >-
   > [!Note]
 
-  > Referensi ini adalah bagian dari ekstensi **connectedvmware** untuk Azure CLI (versi 2.0.67 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az connectedvmware vm-template** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+  > Referensi ini adalah bagian dari ekstensi **connectedvmware** untuk Azure CLI (versi 2.0.67 atau lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **az connectedvmware vm-template** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
 summary: Sumber daya templat VM.
 description: ''
 directCommands:
@@ -14,21 +14,24 @@ directCommands:
   description: ''
   syntax: >-
     az connectedvmware vm-template create --custom-location
+                                          --inventory-item
                                           --location
                                           --name
                                           --resource-group
-                                          [--inventory-item]
-                                          [--mo-ref-id]
+                                          --vcenter
                                           [--no-wait]
                                           [--tags]
-                                          [--vcenter]
   examples:
   - summary: Membuat templat vm
-    syntax: az connectedvmware vm-template create --custom-location "custom location name"                --location "region name" --mo-ref-id "mo-ref id of the resource in vc" --name                "vm template name" --resource-group "resource group name" --vcenter "name or id of                the vcenter" --inventory-item "inventory item name or id"
+    syntax: az connectedvmware vm-template create --custom-location "custom location name"                --location "location name" --inventory-item "name or id the inventory item"                --name "vm template name" --resource-group "resource group name"                --vcenter "name or id of the vcenter"
   requiredParameters:
   - isRequired: true
     name: --custom-location -c
     summary: Nama atau ID lokasi kustom yang akan mengelola sumber daya ini.
+    description: ''
+  - isRequired: true
+    name: --inventory-item -i
+    summary: Nama atau ID item inventori.
     description: ''
   - isRequired: true
     name: --location -l
@@ -42,25 +45,20 @@ directCommands:
     name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
+  - isRequired: true
+    name: --vcenter -v
+    summary: Nama atau ID vCenter Server yang mengelola sumber daya ini.
+    description: ''
   optionalParameters:
-  - name: --inventory-item -i
-    summary: Nama atau ID item inventori.
-    description: ''
-  - name: --mo-ref-id -m
-    summary: ID VCenter MoRef (Referensi Objek Terkelola) untuk sumber daya yang ada.
-    description: ''
   - name: --no-wait
     summary: Jangan menunggu operasi jangka panjang selesai.
     description: ''
   - name: --tags
     summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
     description: ''
-  - name: --vcenter -v
-    summary: Nama atau ID vCenter Server yang mengelola sumber daya ini.
-    description: ''
 - uid: az_connectedvmware_vm-template_delete
   name: az connectedvmware vm-template delete
-  summary: Menghapus sumber daya templat vm.
+  summary: Hapus sumber daya templat vm.
   description: ''
   syntax: >-
     az connectedvmware vm-template delete --name
@@ -82,7 +80,7 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --force
-    summary: Apakah hapus paksa atau tidak.
+    summary: Apakah penghapusan paksa atau tidak.
     description: ''
   - name: --no-wait
     summary: Jangan menunggu operasi jangka panjang selesai.
@@ -92,7 +90,7 @@ directCommands:
     description: ''
 - uid: az_connectedvmware_vm-template_list
   name: az connectedvmware vm-template list
-  summary: Ambil daftar templat vm dari grup sumber daya yang diberikan.
+  summary: Ambil daftar templat vm dari grup sumber daya tertentu.
   description: ''
   syntax: az connectedvmware vm-template list [--resource-group]
   examples:
@@ -104,7 +102,7 @@ directCommands:
     description: ''
 - uid: az_connectedvmware_vm-template_show
   name: az connectedvmware vm-template show
-  summary: Dapatkan detail templat vm berdasarkan id, grup sumber daya, nama kumpulan sumber daya, atau langganan.
+  summary: Dapatkan detail templat vm menurut id, grup sumber daya, nama kumpulan sumber daya, atau langganan.
   description: ''
   syntax: >-
     az connectedvmware vm-template show --name
@@ -145,9 +143,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Sumber daya templat VM.
-  ms.openlocfilehash: 23b7d05d972ba9eb619625e14f1cce4b2b82ff9a
-  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.openlocfilehash: 7143d8cad5743563d794716b9041db5f2575e3ca
+  ms.sourcegitcommit: 41b129b133e65ad2487139c3fef7247ab0b63834
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 03/25/2022
-  ms.locfileid: "140955422"
+  ms.lasthandoff: 06/17/2022
+  ms.locfileid: "146422728"

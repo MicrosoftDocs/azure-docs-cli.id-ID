@@ -10,22 +10,22 @@ ms.service: azure-cli
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: microsoft graph, ms graph, active directory graph, ad graph
-ms.openlocfilehash: 8dc2a640462c34dc817d662d93a53b2f349ca336
-ms.sourcegitcommit: 2a38060aef3a6574be9863b222b9daa6c6d11ece
+ms.openlocfilehash: 9836712a26f234ae063adb88ccfa4e004fda64cd
+ms.sourcegitcommit: 41b129b133e65ad2487139c3fef7247ab0b63834
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 06/08/2022
-ms.locfileid: "146185639"
+ms.lasthandoff: 06/17/2022
+ms.locfileid: "146421342"
 ---
-# <a name="microsoft-graph-migration"></a>Migrasi Microsoft Graph
+# <a name="microsoft-graph-migration"></a>Microsoft Graph migrasi
 
-Karena [penghentian Azure Active Directory (Azure AD) Graph](/graph/migrate-azure-ad-graph-overview), ACTIVE Directory Graph API yang mendasar akan digantikan oleh [Microsoft Graph API](/graph/api/overview) di Azure CLI 2.37.0.
+Karena [penghentian Graph Azure Active Directory (Azure AD),](/graph/migrate-azure-ad-graph-overview) ACTIVE Directory Graph API yang mendasar akan digantikan oleh [Microsoft Graph API](/graph/api/overview) di Azure CLI 2.37.0.
 
 ## <a name="breaking-changes"></a>Perubahan mencolok
 
-Untuk perbedaan API yang mendasar dan perubahan pemecahan JSON output, lihat [Perbedaan properti antara Azure AD Graph dan Microsoft Graph](/graph/migrate-azure-ad-graph-property-differences).
+Untuk perbedaan PERUBAHAN pemecahan JSON API dan output yang [mendasar, lihat Perbedaan properti antara Azure AD Graph dan Microsoft Graph](/graph/migrate-azure-ad-graph-property-differences).
 
-Misalnya, perubahan yang paling luar biasa adalah bahwa `objectId` properti dalam JSON output objek Graph digantikan oleh `id`.
+Misalnya, perubahan yang paling luar biasa adalah bahwa `objectId` properti dalam output JSON dari objek Graph digantikan oleh `id`.
 
 Argumen perintah dan perubahan pemecahan perilaku tercantum di bawah ini.
 
@@ -83,20 +83,20 @@ Argumen perintah dan perubahan pemecahan perilaku tercantum di bawah ini.
 ## <a name="known-issues"></a>Masalah yang diketahui
 
 - Argumen `--add`pembaruan generik , `--set` dan `--remove` saat ini tidak berfungsi. Anda dapat menggunakan `az rest` untuk langsung memanggil Microsoft Graph API untuk properti yang tidak didukung.
-- Perintah terkait Microsoft Graph seperti `az ad` dan `az role` akan gagal di lingkungan Azure Stack yang tidak memiliki dukungan Microsoft Graph. Gunakan Azure CLI 2.36.0 atau versi yang lebih lama untuk lingkungan Azure Stack.
+- Microsoft Graph perintah terkait seperti `az ad` dan `az role` akan gagal di lingkungan Azure Stack yang tidak memiliki dukungan Microsoft Graph. Silakan gunakan Azure CLI 2.36.0 atau versi yang lebih lama untuk lingkungan Azure Stack.
 
 ## <a name="install-a-previous-version"></a>Menginstal versi sebelumnya
 
-Jika Anda belum siap untuk migrasi, seperti tidak memiliki izin Microsoft Graph, Anda mungkin tetap menggunakan versi Azure CLI <= 2.36.0. Jika Anda telah menginstal 2.37.0, Anda dapat kembali ke versi sebelumnya mengikuti bagian "Instal versi tertentu" di bawah [dokumen penginstalan](/cli/azure/install-azure-cli) (kecuali untuk Homebrew yang tidak mendukung penginstalan versi sebelumnya).
+Jika Anda belum siap untuk migrasi, seperti tidak memiliki izin Microsoft Graph, Anda mungkin tetap menggunakan versi Azure CLI <= 2.36.0. Jika Anda telah menginstal 2.37.0, Anda dapat kembali ke versi sebelumnya mengikuti bagian "Instal versi tertentu" di bawah [dokumen penginstalan](./install-azure-cli.md) (kecuali untuk Homebrew yang tidak mendukung penginstalan versi sebelumnya).
 
 ## <a name="troubleshooting"></a>Pemecahan Masalah
 
-### <a name="graph-command-fails-with-aadsts50005-or-aadsts53000"></a>Perintah Graph gagal dengan `AADSTS50005` atau `AADSTS53000`
+### <a name="graph-command-fails-with-aadsts50005-or-aadsts53000"></a>perintah Graph gagal dengan `AADSTS50005` atau`AADSTS53000`
 
-Penyewa Anda mungkin memiliki kebijakan Akses Bersyarah yang memblokir penggunaan alur kode perangkat untuk mengakses Microsoft Graph. Dalam kasus seperti itu, gunakan alur kode otorisasi atau perwakilan layanan untuk masuk sebagai gantinya. Untuk informasi selengkapnya tentang metode masuk, silakan lihat [Masuk dengan Azure CLI](authenticate-azure-cli.md).
+Penyewa Anda mungkin memiliki kebijakan Akses Bersyar yang memblokir penggunaan alur kode perangkat untuk mengakses Microsoft Graph. Dalam kasus seperti itu, gunakan alur kode otorisasi atau perwakilan layanan untuk masuk sebagai gantinya. Untuk informasi selengkapnya tentang metode masuk, silakan lihat [Masuk dengan Azure CLI](authenticate-azure-cli.md).
 
-Penyewa Microsoft (72f988bf-86f1-41af-91ab-2d7cd011db47) memiliki kebijakan Akses Bersyarkat yang dikonfigurasi.
+Penyewa Microsoft (72f988bf-86f1-41af-91ab-2d7cd011db47) memiliki kebijakan Akses Bersyar yang dikonfigurasi.
 
 ## <a name="give-feedback"></a>Berikan umpan balik
 
-Jika Anda memiliki pertanyaan, silakan [kirimi kami umpan balik Anda](/cli/azure/get-started-with-azure-cli#give-feedback).
+Jika Anda memiliki pertanyaan, silakan [kirimi kami umpan balik Anda](./get-started-with-azure-cli.md#give-feedback).

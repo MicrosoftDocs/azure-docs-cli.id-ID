@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.service: azure-cli
 ms.tool: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
-ms.openlocfilehash: 9dbf7b36fd8de22d4a002134a9a6142f6116d94c
-ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
+ms.openlocfilehash: b889e47ade0044745a9e04b59a5e63c81ae2e540
+ms.sourcegitcommit: 41b129b133e65ad2487139c3fef7247ab0b63834
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/30/2022
-ms.locfileid: "145938668"
+ms.lasthandoff: 06/17/2022
+ms.locfileid: "146423862"
 ---
 # <a name="how-to-use-azure-cli-effectively"></a>Cara menggunakan Azure CLI secara efektif
 
@@ -178,7 +178,7 @@ Jika Anda menggunakan Azure CLI melalui server proksi, kesalahan berikut dapat t
 | Windows                | C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\Lib\site-packages\certifi\cacert.pem |
 | Ubuntu/Debian Linux    | /opt/az/lib/python<version>/site-packages/certifi/cacert.pem                                |
 | CentOS/RHEL/SUSE Linux | /usr/lib64/az/lib/python<version>/site-packages/certifi/cacert.pem                          |
-| macOS                  | /usr/local/Cellar/azure-cli/<cliversion>/libexec/lib/python<version>/site-packages/certifi/cacert.pem|
+| macOS                  | /usr/local/Cellar/azure-cli/\<cliversion\>/libexec/lib/python<version>/site-packages/certifi/cacert.pem|
 
 Tambahkan sertifikat server proksi ke file ini atau salin kontennya ke file sertifikat lain, lalu atur `REQUESTS_CA_BUNDLE` ke dalamnya. Anda mungkin juga perlu mengatur variabel lingkungan `HTTP_PROXY` atau `HTTPS_PROXY`.
 
