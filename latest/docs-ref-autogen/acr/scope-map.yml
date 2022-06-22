@@ -16,9 +16,9 @@ directCommands:
                             [--repository]
                             [--resource-group]
   examples:
-  - summary: Buat peta lingkup yang memungkinkan tindakan konten/tulis dan metadata/baca untuk `hello-world` repositori, dan tindakan konten/baca untuk `hello-world-again`.
+  - summary: Buat peta cakupan yang memungkinkan tindakan konten/tulis dan metadata/baca untuk `hello-world` repositori, dan tindakan konten/baca untuk `hello-world-again`.
     syntax: az acr scope-map create -n MyScopeMap -r MyRegistry --repository hello-world content/write metadata/read --repository hello-world-again content/read --description "Sample scope map."
-  - summary: Buat peta lingkup yang memungkinkan semua tindakan repositori untuk `test`, dan semua tindakan gateway untuk `connectedRegistry`.
+  - summary: Buat peta cakupan yang memungkinkan semua tindakan repositori untuk `test`, dan semua tindakan gateway untuk `connectedRegistry`.
     syntax: >-
       az acr scope-map create -n MyScopeMap -r MyRegistry --description "Sample scope map."
         --repository test content/delete content/read content/write metadata/read metadata/write
@@ -34,13 +34,13 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --description
-    summary: Deskripsi untuk peta lingkup. Maksimal 256 karakter diperbolehkan.
+    summary: Deskripsi untuk peta cakupan. Maksimal 256 karakter diperbolehkan.
     description: ''
   - name: --gateway
-    summary: Izin gateway. Gunakan format "--gateway GATEWAY [ACTION1 ACTION2 ...]" per bendera. Tindakan yang valid adalah {'message/read', 'config/write', 'config/read', 'message/write'}.
+    summary: Izin gateway. Gunakan format "--gateway GATEWAY [ACTION1 ACTION2 ...]" per bendera. Tindakan yang valid adalah {'message/write', 'config/read', 'message/read', 'config/write'}.
     description: ''
   - name: --repository
-    summary: Izin repositori. Gunakan format "--repositori REPO [ACTION1 ACTION2 ...]" per bendera. Tindakan yang valid adalah {'metadata/write', 'content/write', 'metadata/read', 'content/read', 'content/delete'}.
+    summary: Izin repositori. Gunakan format "--repository REPO [ACTION1 ACTION2 ...]" per bendera. Tindakan yang valid adalah {'content/read', 'metadata/read', 'content/write', 'content/delete', 'metadata/write'}.
     description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
@@ -134,7 +134,7 @@ directCommands:
                             [--remove-repository]
                             [--resource-group]
   examples:
-  - summary: Perbarui peta lingkup 'MyScopeMap' menghapus metadata/baca dan konten/tindakan baca untuk `hello-world` repositori, dan tindakan pesan/tulis untuk `connectedRegistry`.
+  - summary: Perbarui peta lingkup 'MyScopeMap' yang menghapus metadata/baca dan konten/tindakan baca untuk `hello-world` repositori, dan tindakan pesan/tulis untuk `connectedRegistry`.
     syntax: az acr scope-map update -n MyScopeMap -r MyRegistry --remove-repo hello-world metadata/read content/read --remove-gateway connectedRegistry message/write
   requiredParameters:
   - isRequired: true
@@ -147,19 +147,19 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --add-gateway
-    summary: Izin gateway yang akan ditambahkan. Gunakan format "--add-gateway GATEWAY [ACTION1 ACTION2 ...]" per bendera. Tindakan yang valid adalah {'message/read', 'config/write', 'config/read', 'message/write'}.
+    summary: Izin gateway untuk ditambahkan. Gunakan format "--add-gateway GATEWAY [ACTION1 ACTION2 ...]" per bendera. Tindakan yang valid adalah {'message/write', 'config/read', 'message/read', 'config/write'}.
     description: ''
   - name: --add-repository
-    summary: Izin repositori yang akan ditambahkan. Gunakan format "--add-repository REPO [ACTION1 ACTION2 ...]" per bendera. Tindakan yang valid adalah {'metadata/write', 'content/write', 'metadata/read', 'content/read', 'content/delete'}.
+    summary: Izin repositori untuk ditambahkan. Gunakan format "--add-repository REPO [ACTION1 ACTION2 ...]" per bendera. Tindakan yang valid adalah {'content/read', 'metadata/read', 'content/write', 'content/delete', 'metadata/write'}.
     description: ''
   - name: --description
-    summary: Deskripsi untuk peta lingkup. Maksimal 256 karakter diperbolehkan.
+    summary: Deskripsi untuk peta cakupan. Maksimal 256 karakter diperbolehkan.
     description: ''
   - name: --remove-gateway
-    summary: Izin gateway yang akan dihapus. Gunakan format "--remove-gateway GATEWAY [ACTION1 ACTION2 ...]" per bendera. Tindakan yang valid adalah {'message/read', 'config/write', 'config/read', 'message/write'}.
+    summary: Izin gateway yang akan dihapus. Gunakan format "--remove-gateway GATEWAY [ACTION1 ACTION2 ...]" per bendera. Tindakan yang valid adalah {'message/write', 'config/read', 'message/read', 'config/write'}.
     description: ''
   - name: --remove-repository
-    summary: Izin respsitory yang akan dihapus. Gunakan format "--remove-repository REPO [ACTION1 ACTION2 ...]" per bendera. Tindakan yang valid adalah {'metadata/write', 'content/write', 'metadata/read', 'content/read', 'content/delete'}.
+    summary: Izin respsitory yang akan dihapus. Gunakan format "--remove-repository REPO [ACTION1 ACTION2 ...]" per bendera. Tindakan yang valid adalah {'content/read', 'metadata/read', 'content/write', 'content/delete', 'metadata/write'}.
     description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
@@ -192,9 +192,9 @@ metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
   ms.date: 03/28/2022
   description: Mengelola peta akses cakupan untuk Azure Container Registries.
-  ms.openlocfilehash: 87d3437ffe7b372002fe72c51d36e8c050f874d7
-  ms.sourcegitcommit: 41b129b133e65ad2487139c3fef7247ab0b63834
+  ms.openlocfilehash: 5278be4b385136fa9368d2d8c5a4c7a5d8b492a6
+  ms.sourcegitcommit: 4972b72ce712edcacb644e2e0fd8a51b9d7ec0d9
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 06/17/2022
-  ms.locfileid: "146424078"
+  ms.lasthandoff: 06/22/2022
+  ms.locfileid: "146542169"

@@ -63,17 +63,19 @@ directCommands:
                   [--appgw-name]
                   [--appgw-subnet-cidr]
                   [--appgw-subnet-id]
-                  [--appgw-subnet-prefix]
                   [--appgw-watch-namespace]
                   [--assign-identity]
                   [--assign-kubelet-identity]
                   [--attach-acr]
                   [--auto-upgrade-channel {node-image, none, patch, rapid, stable}]
                   [--azure-keyvault-kms-key-id]
+                  [--azure-keyvault-kms-key-vault-network-access {Private, Public}]
+                  [--azure-keyvault-kms-key-vault-resource-id]
+                  [--ca-profile]
                   [--client-secret]
-                  [--cluster-autoscaler-profile]
                   [--cluster-snapshot-id]
                   [--crg-id]
+                  [--defender-config]
                   [--disable-disk-driver]
                   [--disable-file-driver]
                   [--disable-local-accounts]
@@ -94,6 +96,7 @@ directCommands:
                   [--enable-azure-rbac]
                   [--enable-cluster-autoscaler]
                   [--enable-custom-ca-trust]
+                  [--enable-defender]
                   [--enable-encryption-at-host {false, true}]
                   [--enable-fips-image]
                   [--enable-keda]
@@ -105,11 +108,9 @@ directCommands:
                   [--enable-pod-identity-with-kubenet]
                   [--enable-pod-security-policy]
                   [--enable-private-cluster]
-                  [--enable-rbac]
                   [--enable-secret-rotation]
                   [--enable-sgxquotehelper]
                   [--enable-ultra-ssd]
-                  [--enable-vmss]
                   [--enable-windows-gmsa]
                   [--enable-workload-identity {false, true}]
                   [--fqdn-subdomain]
@@ -294,9 +295,6 @@ directCommands:
   - name: --appgw-subnet-id
     summary: Id Sumber Daya dari Subnet yang ada yang digunakan untuk menyebarkan Application Gateway. Gunakan dengan addon ingress-azure.
     description: ''
-  - name: --appgw-subnet-prefix
-    summary: Awalan Subnet yang akan digunakan untuk subnet baru yang dibuat untuk menyebarkan Application Gateway. Gunakan dengan addon ingress-azure.
-    description: ''
   - name: --appgw-watch-namespace
     summary: Tentukan namespace layanan, yang harus ditonton AGIC. Ini bisa menjadi nilai untai (karakter) tunggal, atau daftar kumpulan nama XML yang dipisahkan koma.
     description: ''
@@ -316,17 +314,28 @@ directCommands:
   - name: --azure-keyvault-kms-key-id
     summary: Pengidentifikasi kunci Azure Key Vault.
     description: ''
+  - name: --azure-keyvault-kms-key-vault-network-access
+    defaultValue: Public
+    parameterValueGroup: Private, Public
+    summary: Akses Jaringan azure Key Vault.
+    description: Nilai yang diizinkan adalah "Publik", "Privat". Jika tidak diatur, default untuk mengetik "Publik". Memerlukan --azure-keyvault-kms-key-id untuk digunakan.
+  - name: --azure-keyvault-kms-key-vault-resource-id
+    summary: ID sumber daya Azure Key Vault.
+    description: ''
+  - name: --ca-profile --cluster-autoscaler-profile
+    summary: Daftar pasangan key=value yang dipisahkan spasi untuk mengonfigurasi autoscaler kluster. Teruskan string kosong untuk menghapus profil.
+    description: ''
   - name: --client-secret
     summary: Rahasia yang terkait dengan perwakilan layanan. Argumen ini diperlukan jika `--service-principal` ditentukan.
-    description: ''
-  - name: --cluster-autoscaler-profile
-    summary: Daftar pasangan key=value yang dipisahkan spasi untuk mengonfigurasi autoscaler kluster. Teruskan string kosong untuk menghapus profil.
     description: ''
   - name: --cluster-snapshot-id
     summary: Id rekam jepret kluster sumber digunakan untuk membuat kluster baru.
     description: ''
   - name: --crg-id
     summary: crg-id yang digunakan untuk mengaitkan kluster baru dengan sumber daya Grup Reservasi Kapasitas yang ada.
+    description: ''
+  - name: --defender-config
+    summary: Jalur ke file JSON yang berisi konfigurasi profil Pertahanan Microsoft.
     description: ''
   - name: --disable-disk-driver
     summary: Nonaktifkan Driver CSI AzureDisk.
@@ -412,6 +421,9 @@ directCommands:
   - name: --enable-custom-ca-trust
     summary: Aktifkan Kepercayaan CA Kustom pada kumpulan simpul agen.
     description: ''
+  - name: --enable-defender
+    summary: Aktifkan profil keamanan Pertahanan Microsoft.
+    description: ''
   - name: --enable-encryption-at-host
     parameterValueGroup: false, true
     summary: Aktifkan EncryptionAtHost pada kumpulan simpul agen.
@@ -448,9 +460,6 @@ directCommands:
   - name: --enable-private-cluster
     summary: Aktifkan kluster privat.
     description: ''
-  - name: --enable-rbac -r
-    summary: 'Aktifkan Role-Based Access Control Kubernetes. Default: diaktifkan.'
-    description: ''
   - name: --enable-secret-rotation
     summary: Aktifkan rotasi rahasia. Gunakan dengan addon azure-keyvault-secrets-provider.
     description: ''
@@ -459,9 +468,6 @@ directCommands:
     description: ''
   - name: --enable-ultra-ssd
     summary: Aktifkan UltraSSD pada kumpulan simpul agen.
-    description: ''
-  - name: --enable-vmss
-    summary: Tidak digunakan lagi. Gunakan vm_set_type sebagai gantinya.
     description: ''
   - name: --enable-windows-gmsa
     summary: Aktifkan gmsa Windows.
@@ -550,7 +556,7 @@ directCommands:
     description: ''
   - name: --nat-gateway-idle-timeout
     summary: Batas waktu diam gateway NAT dalam hitung menit.
-    description: Batas waktu menganggur yang diinginkan untuk alur keluar gateway NAT, defaultnya adalah 4 menit. Tentukan nilai dalam rentang [4, 120]. Berlaku untuk kluster load balancer SKU Standar dengan jenis keluar managedNATGateway saja.
+    description: Batas waktu diam yang diinginkan untuk alur keluar gateway NAT, defaultnya adalah 4 menit. Tentukan nilai dalam rentang [4, 120]. Berlaku untuk kluster load balancer SKU Standar dengan jenis keluar managedNATGateway saja.
   - name: --nat-gateway-managed-outbound-ip-count
     summary: Jumlah IP keluar yang dikelola gateway NAT.
     description: Jumlah IP keluar terkelola yang diinginkan untuk koneksi keluar gateway NAT. Tentukan nilai dalam rentang [1, 16]. Berlaku untuk kluster load balancer SKU Standar dengan jenis keluar managedNATGateway saja.
@@ -563,7 +569,7 @@ directCommands:
     description: >-
       Menggunakan bersama dengan plugin jaringan "azure".
 
-      Tentukan "azure" untuk pengelola kebijakan jaringan Azure dan "calico" untuk pengontrol kebijakan jaringan calico.
+      Tentukan "azure" untuk manajer kebijakan jaringan Azure dan "calico" untuk pengontrol kebijakan jaringan calico.
 
       Default ke "" (kebijakan jaringan dinonaktifkan).
   - name: --no-ssh-key -x
@@ -577,7 +583,7 @@ directCommands:
     summary: Jumlah simpul di kumpulan simpul Kubernetes. Ini diperlukan ketika --enable-cluster-autoscaler ditentukan. Setelah membuat kluster, Anda dapat mengubah ukuran kumpulan simpulnya dengan `az aks scale`.
     description: ''
   - name: --node-osdisk-diskencryptionset-id -d
-    summary: ResourceId dari enkripsi disk yang diatur untuk digunakan untuk mengaktifkan enkripsi saat tidak aktif pada disk os node agen.
+    summary: ResourceId dari set enkripsi disk yang akan digunakan untuk mengaktifkan enkripsi saat tidak aktif pada disk os node agen.
     description: ''
   - name: --node-osdisk-size
     summary: Ukuran dalam GB disk OS untuk setiap simpul di kumpulan simpul. Minimal 30 GB.
@@ -630,8 +636,8 @@ directCommands:
     summary: The ID of a PPG.
     description: ''
   - name: --private-dns-zone
-    summary: Mode zona dns privat untuk kluster privat. Mode "tidak ada" dalam pratinjau.
-    description: Nilai yang diizinkan adalah "sistem", "tidak ada" (Pratinjau) atau id sumber daya zona dns privat kustom Anda. Jika tidak diatur, default untuk mengetik sistem. Memerlukan --enable-private-cluster untuk digunakan.
+    summary: Mode zona dns privat untuk kluster privat. Mode "none" dalam pratinjau.
+    description: Nilai yang diizinkan adalah "system", "none" (Preview) atau id sumber daya zona dns privat kustom Anda. Jika tidak diatur, default untuk mengetik sistem. Memerlukan --enable-private-cluster untuk digunakan.
   - name: --rotation-poll-interval
     summary: Atur interval polling rotasi. Gunakan dengan addon azure-keyvault-secrets-provider.
     description: ''
@@ -680,20 +686,20 @@ directCommands:
           - Nilai yang tidak diizinkan: "", "abc@123P@$$w 0rd", "P@ssw0rd", "P@ssword123", "Pa$$word", "pass@word1", "Password!", "Password1", "Password22", "iloveyou!"
       Referensi: https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.management.compute.models.virtualmachinescalesetosprofile.adminpassword?view=azure-dotnet.
   - name: --windows-admin-username
-    summary: Akun pengguna untuk dibuat pada VM simpul windows.
+    summary: Akun pengguna yang akan dibuat pada VM simpul windows.
     description: >-
       Aturan untuk windows-admin-username:
           - pembatasan: Tidak dapat berakhiran "."
           - Nilai yang tidak diizinkan: "administrator", "admin", "user", "user1", "test", "user2", "test1", "user3", "admin1", "1", "123", "a", "actuser", "adm", "admin2", "aspnet", "backup", "console", "david", "guest", "john", "owner", "root", "server", "sql", "support", "support_388945a0", "sys", "test2", "test3", "user4", "user5".
           - Panjang minimum: 1 karakter
-          - Panjang maksimum: 20 karakter Referensi: https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.management.compute.models.virtualmachinescalesetosprofile.adminusername?view=azure-dotnet.
+          - Panjang maksimum: Referensi 20 karakter: https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.management.compute.models.virtualmachinescalesetosprofile.adminusername?view=azure-dotnet.
   - name: --workload-runtime
     defaultValue: OCIContainer
     parameterValueGroup: OCIContainer, WasmWasi
     summary: Menentukan jenis beban kerja yang dapat dijalankan simpul. Default ke OCIContainer.
     description: ''
   - name: --workspace-resource-id
-    summary: ID sumber daya dari Ruang Kerja Analitik Log yang ada untuk digunakan untuk menyimpan data pemantauan. Jika tidak ditentukan, gunakan Ruang Kerja Analitik Log default jika ada, jika tidak, buatlah.
+    summary: ID sumber daya Ruang Kerja Analitik Log yang ada untuk digunakan untuk menyimpan data pemantauan. Jika tidak ditentukan, gunakan Ruang Kerja Analitik Log default jika ada, jika tidak, buatlah.
     description: ''
   - name: --yes -y
     summary: Jangan meminta konfirmasi.
@@ -1161,11 +1167,15 @@ directCommands:
                   [--attach-acr]
                   [--auto-upgrade-channel {node-image, none, patch, rapid, stable}]
                   [--azure-keyvault-kms-key-id]
-                  [--cluster-autoscaler-profile]
+                  [--azure-keyvault-kms-key-vault-network-access {Private, Public}]
+                  [--azure-keyvault-kms-key-vault-resource-id]
+                  [--ca-profile]
+                  [--defender-config]
                   [--detach-acr]
                   [--disable-ahub]
                   [--disable-azure-rbac]
                   [--disable-cluster-autoscaler]
+                  [--disable-defender]
                   [--disable-disk-driver]
                   [--disable-file-driver]
                   [--disable-keda]
@@ -1182,6 +1192,7 @@ directCommands:
                   [--enable-azure-keyvault-kms]
                   [--enable-azure-rbac]
                   [--enable-cluster-autoscaler]
+                  [--enable-defender]
                   [--enable-disk-driver]
                   [--enable-file-driver]
                   [--enable-keda]
@@ -1316,8 +1327,18 @@ directCommands:
   - name: --azure-keyvault-kms-key-id
     summary: Pengidentifikasi kunci Azure Key Vault.
     description: ''
-  - name: --cluster-autoscaler-profile
+  - name: --azure-keyvault-kms-key-vault-network-access
+    parameterValueGroup: Private, Public
+    summary: Akses Jaringan azure Key Vault.
+    description: Nilai yang diizinkan adalah "Publik", "Privat". Jika tidak diatur, default untuk mengetik "Publik". Memerlukan --azure-keyvault-kms-key-id untuk digunakan.
+  - name: --azure-keyvault-kms-key-vault-resource-id
+    summary: ID sumber daya Azure Key Vault.
+    description: ''
+  - name: --ca-profile --cluster-autoscaler-profile
     summary: Daftar pasangan key=value yang dipisahkan spasi untuk mengonfigurasi autoscaler kluster. Teruskan string kosong untuk menghapus profil.
+    description: ''
+  - name: --defender-config
+    summary: Jalur ke file JSON yang berisi konfigurasi profil Pertahanan Microsoft.
     description: ''
   - name: --detach-acr
     summary: Nonaktifkan penetapan peran 'acrpull' ke ACR yang ditentukan oleh nama atau ID sumber daya.
@@ -1330,6 +1351,9 @@ directCommands:
     description: ''
   - name: --disable-cluster-autoscaler -d
     summary: Nonaktifkan autoscaler kluster.
+    description: ''
+  - name: --disable-defender
+    summary: Nonaktifkan profil defender.
     description: ''
   - name: --disable-disk-driver
     summary: Nonaktifkan Driver CSI AzureDisk.
@@ -1379,6 +1403,9 @@ directCommands:
     description: ''
   - name: --enable-cluster-autoscaler -e
     summary: Aktifkan autoscaler kluster.
+    description: ''
+  - name: --enable-defender
+    summary: Aktifkan profil keamanan Pertahanan Microsoft.
     description: ''
   - name: --enable-disk-driver
     summary: Aktifkan Driver CSI AzureDisk.
@@ -1529,13 +1556,13 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --aks-custom-headers
-    summary: Kirim header kustom. Ketika ditentukan, format harus Key1=Value1,Key2=Value2.
+    summary: Mengirim header kustom. Ketika ditentukan, format harus Key1=Value1,Key2=Value2.
     description: ''
   - name: --control-plane-only
     summary: Tingkatkan sarana kontrol kluster saja. Jika tidak ditentukan, sarana kontrol DAN semua kumpulan simpul akan ditingkatkan.
     description: ''
   - name: --kubernetes-version -k
-    summary: Versi Kubernetes untuk meningkatkan kluster ke, seperti "1.11.12".
+    summary: Versi Kubernetes untuk meningkatkan kluster, seperti "1.11.12".
     description: ''
     valueFrom: '`az aks get-upgrades`'
   - name: --no-wait
@@ -1608,7 +1635,7 @@ directCommands:
   examples:
   - summary: Tunggu hingga kluster ditingkatkan, polling setiap menit hingga tiga puluh menit.
     syntax: az aks wait -g MyResourceGroup -n MyManagedCluster --updated --interval 60 --timeout 1800
-  - summary: Tunggu hingga kluster Kubernetes terkelola mencapai status yang diinginkan (dibuat secara otomatis)
+  - summary: Tunggu kluster Kubernetes terkelola mencapai status yang diinginkan (dibuat secara otomatis)
     syntax: az aks wait --created --interval 60 --name MyManagedCluster --resource-group MyResourceGroup --timeout 1800
   requiredParameters:
   - isRequired: true
@@ -1744,9 +1771,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Kelola Azure Kubernetes Services.
-  ms.openlocfilehash: 70a6fc4591b87850be7a531fa6974ebc5c3880ce
-  ms.sourcegitcommit: 41b129b133e65ad2487139c3fef7247ab0b63834
+  ms.openlocfilehash: 46a434cd88c2407e756003ab603272dffdced5ae
+  ms.sourcegitcommit: 4972b72ce712edcacb644e2e0fd8a51b9d7ec0d9
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 06/17/2022
-  ms.locfileid: "146422026"
+  ms.lasthandoff: 06/22/2022
+  ms.locfileid: "146541953"

@@ -10,12 +10,12 @@ ms.service: azure-cli
 ms.tool: azure-cli
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: variabel lingkungan, file konfigurasi, pengaturan konfigurasi, konfigurasi pengguna, variabel azure cli, konfigurasi azure cli, konfigurasi cli
-ms.openlocfilehash: 4f662426ea786813fd52f851a7ea1203bf677198
-ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
+ms.openlocfilehash: 16447afc17c87167783bfc64909d3a007989a75d
+ms.sourcegitcommit: 4972b72ce712edcacb644e2e0fd8a51b9d7ec0d9
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/30/2022
-ms.locfileid: "145938056"
+ms.lasthandoff: 06/22/2022
+ms.locfileid: "146542007"
 ---
 # <a name="azure-cli-configuration"></a>Konfigurasi CLI Azure
 
@@ -48,6 +48,12 @@ Misalnya, berikut cara menetapkan grup sumber daya default dan lokasi untuk semu
 
 ```azurecli-interactive
 az config set defaults.location=westus2 defaults.group=MyResourceGroup
+```
+
+Perintah berikut menonaktifkan tautan survei saat menjalankan perintah Azure CLI:
+
+```azurecli-interactive
+az config set output.show_survey_link=no
 ```
 
 ## <a name="cli-configuration-file"></a>File konfigurasi CLI
