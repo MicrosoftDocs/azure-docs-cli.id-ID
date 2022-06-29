@@ -4,7 +4,7 @@ name: az aks
 extensionInformation: >-
   > [!Note]
 
-  > Referensi ini adalah bagian dari ekstensi **aks-preview** untuk Azure CLI (versi 2.35.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az aks** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+  > Referensi ini adalah bagian dari ekstensi **pratinjau aks** untuk Azure CLI (versi 2.37.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az aks** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
 summary: Kelola Azure Kubernetes Services.
 description: ''
 directCommands:
@@ -32,7 +32,7 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --disable-browser
-    summary: Jangan meluncurkan browser web setelah membuat penerusan port.
+    summary: Jangan luncurkan browser web setelah membuat penerusan port.
     description: Tambahkan argumen ini saat meluncurkan browser web secara manual, atau untuk pengujian otomatis.
   - name: --listen-address
     defaultValue: 127.0.0.1
@@ -94,6 +94,7 @@ directCommands:
                   [--enable-apiserver-vnet-integration]
                   [--enable-azure-keyvault-kms]
                   [--enable-azure-rbac]
+                  [--enable-blob-driver]
                   [--enable-cluster-autoscaler]
                   [--enable-custom-ca-trust]
                   [--enable-defender]
@@ -188,7 +189,7 @@ directCommands:
     syntax: az aks create -g MyResourceGroup -n MyManagedCluster --kubernetes-version 1.13.9 --node-count 3 --enable-cluster-autoscaler --min-count 1 --max-count 5
   - summary: Buat kluster kubernetes dengan k8s 1.13.9 tetapi gunakan vmas.
     syntax: az aks create -g MyResourceGroup -n MyManagedCluster --kubernetes-version 1.13.9 --vm-set-type AvailabilitySet
-  - summary: Buat kluster kubernetes dengan vesrion kubernetes default, load balancer SKU default(standar) dan jenis set vm default (VirtualMachineScaleSets).
+  - summary: Buat kluster kubernetes dengan vesrion kubernetes default, load balancer SKU default(standar) dan jenis set vm default(VirtualMachineScaleSets).
     syntax: az aks create -g MyResourceGroup -n MyManagedCluster
   - summary: Buat kluster kubernetes dengan load balancer SKU standar dan dua IP yang dibuat AKS untuk penggunaan koneksi keluar load balancer.
     syntax: az aks create -g MyResourceGroup -n MyManagedCluster --load-balancer-managed-outbound-ip-count 2
@@ -208,7 +209,7 @@ directCommands:
     syntax: az aks create -g MyResourceGroup -n MyManagedCluster --node-osdisk-diskencryptionset-id <disk-encryption-set-resource-id>
   - summary: Membuat kluster kubernetes dengan userDefinedRouting, SKU load balancer standar, dan subnet kustom yang telah dikonfigurasi sebelumnya dengan tabel rute
     syntax: az aks create -g MyResourceGroup -n MyManagedCluster --outbound-type userDefinedRouting --load-balancer-sku standard --vnet-subnet-id customUserSubnetVnetID
-  - summary: Buat kluster kubernetes dengan mendukung Windows kumpulan agen dengan AHUB diaktifkan.
+  - summary: Buat kluster kubernetes dengan mendukung kumpulan agen Windows dengan AHUB diaktifkan.
     syntax: az aks create -g MyResourceGroup -n MyManagedCluster --load-balancer-sku Standard --network-plugin azure --windows-admin-username azure --windows-admin-password 'replacePassword1234$' --enable-ahub
   - summary: Buat kluster kubernetes dengan AAD terkelola diaktifkan.
     syntax: az aks create -g MyResourceGroup -n MyManagedCluster --enable-aad --aad-admin-group-object-ids <id-1,id-2> --aad-tenant-id <id>
@@ -226,9 +227,9 @@ directCommands:
     syntax: az aks create -g MyResourceGroup -n MyManagedCluster --enable-aad --enable-azure-rbac
   - summary: Membuat kluster kubernetes dengan os-sku tertentu
     syntax: az aks create -g MyResourceGroup -n MyManagedCluster --os-sku Ubuntu
-  - summary: Buat kluster kubernetes dengan mengaktifkan Windows gmsa dan dengan mengatur server DNS di vnet yang digunakan oleh kluster.
+  - summary: Buat kluster kubernetes dengan mengaktifkan gmsa Windows dan dengan mengatur server DNS di vnet yang digunakan oleh kluster.
     syntax: az aks create -g MyResourceGroup -n MyManagedCluster --load-balancer-sku Standard --network-plugin azure --windows-admin-username azure --windows-admin-password 'replacePassword1234$' --enable-windows-gmsa
-  - summary: Buat kluster kubernetes dengan mengaktifkan Windows gmsa tetapi tanpa mengatur server DNS di vnet yang digunakan oleh kluster.
+  - summary: Buat kluster kubernetes dengan mengaktifkan gmsa Windows tetapi tanpa mengatur server DNS di vnet yang digunakan oleh kluster.
     syntax: az aks create -g MyResourceGroup -n MyManagedCluster --load-balancer-sku Standard --network-plugin azure --windows-admin-username azure --windows-admin-password 'replacePassword1234$' --enable-windows-gmsa --gmsa-dns-server "10.240.0.4" --gmsa-root-domain-name "contoso.com"
   - summary: buat kluster kubernetes dengan id rekam jepret nodepool.
     syntax: az aks create -g MyResourceGroup -n MyManagedCluster --kubernetes-version 1.20.9 --snapshot-id "/subscriptions/00000/resourceGroups/AnotherResourceGroup/providers/Microsoft.ContainerService/snapshots/mysnapshot1"
@@ -236,11 +237,11 @@ directCommands:
     syntax: az aks create -g MyResourceGroup -n MyManagedCluster --cluster-snapshot-id "/subscriptions/00000/resourceGroups/AnotherResourceGroup/providers/Microsoft.ContainerService/managedclustersnapshots/mysnapshot1"
   - summary: buat kluster kubernetes dengan ID Grup Reservasi Kapasitas (CRG).
     syntax: az aks create -g MyResourceGroup -n MyMC --kubernetes-version 1.20.9 --node-vm-size VMSize --assign-identity CRG-RG-ID --enable-managed-identity --crg-id "subscriptions/SubID/resourceGroups/RGName/providers/Microsoft.ContainerService/CapacityReservationGroups/MyCRGID"
-  - summary: buat kluster kubernetes dengan dukungan id hostgroup.
+  - summary: buat kluster kubernetes dengan dukungan id grup host.
     syntax: az aks create -g MyResourceGroup -n MyMC --kubernetes-version 1.20.13 --location westus2 --host-group-id /subscriptions/00000/resourceGroups/AnotherResourceGroup/providers/Microsoft.ContainerService/hostGroups/myHostGroup --node-vm-size VMSize --enable-managed-identity --assign-identity <user_assigned_identity_resource_id>
   - summary: Buat kluster kubernetes tanpa CNI yang terinstal.
     syntax: az aks create -g MyResourceGroup -n MyManagedCluster --network-plugin none
-  - summary: Buat kluster kubernetes dengan Kepercayaan CA Kustom diaktifkan.
+  - summary: Buat kluster kubernetes dengan Custom CA Trust diaktifkan.
     syntax: az aks create -g MyResourceGroup -n MyManagedCluster --enable-custom-ca-trust
   requiredParameters:
   - isRequired: true
@@ -272,10 +273,10 @@ directCommands:
     description: ''
   - name: --admin-username -u
     defaultValue: azureuser
-    summary: Akun pengguna untuk membuat pada VM simpul untuk akses SSH.
+    summary: Akun pengguna yang akan dibuat pada VM simpul untuk akses SSH.
     description: ''
   - name: --aks-custom-headers
-    summary: Mengirim header kustom. Ketika ditentukan, format harus Key1=Value1,Key2=Value2.
+    summary: Kirim header kustom. Ketika ditentukan, format harus Key1=Value1,Key2=Value2.
     description: ''
   - name: --api-server-authorized-ip-ranges
     summary: Daftar rentang IP apiserver resmi yang dipisahkan koma. Atur ke 0.0.0.0/32 untuk membatasi lalu lintas apiserver ke kumpulan simpul.
@@ -384,21 +385,21 @@ directCommands:
 
       pemantauan - aktifkan pemantauan Analitik Log. Menggunakan Ruang Kerja Default Analitik Log jika ada, atau membuatnya. Tentukan "--workspace-resource-id" untuk menggunakan ruang kerja yang ada.
 
-      Jika addon pemantauan diaktifkan --no-wait argumen tidak akan berpengaruh virtual-node - aktifkan AKS Virtual Node. Memerlukan --aci-subnet-name untuk memberikan nama subnet yang ada agar Simpul Virtual dapat digunakan.
+      Jika addon pemantauan diaktifkan --no-wait argumen tidak akan berpengaruh virtual-node - aktifkan AKS Virtual Node. Memerlukan --aci-subnet-name untuk memberikan nama subnet yang ada untuk digunakan oleh Simpul Virtual.
 
       aci-subnet-name harus berada di vnet yang sama yang ditentukan oleh --vnet-subnet-id (diperlukan juga).
 
       azure-policy - aktifkan kebijakan Azure. Add-on Azure Policy untuk AKS memungkinkan penegakan dan perlindungan dalam skala besar pada kluster Anda secara terpusat dan konsisten.
 
-      Pelajari selengkapnya di aka.ms/aks/policy.
+      Pelajari lebih lanjut di aka.ms/aks/policy.
 
       ingress-appgw - aktifkan addon Pengontrol Ingress Application Gateway (PRATINJAU).
 
       confcom - aktifkan addon confcom, ini akan mengaktifkan plugin perangkat SGX secara default (PRATINJAU).
 
-      open-service-mesh - aktifkan addon Mesh Layanan Terbuka (PRATINJAU).
+      open-service-mesh - aktifkan addon Open Service Mesh (PRATINJAU).
 
-      gitops - aktifkan GitOps (PRATINJAU).
+      gitops - aktifkan GitOps (PREVIEW).
 
       azure-keyvault-secrets-provider - aktifkan addon Penyedia Rahasia Azure Keyvault (PRATINJAU).
 
@@ -410,10 +411,13 @@ directCommands:
     summary: Aktifkan integrasi vnet pengguna dengan pod apiserver sarana kontrol.
     description: ''
   - name: --enable-azure-keyvault-kms
-    summary: Aktifkan Azure KeyVault Key Management Service.
+    summary: Aktifkan Layanan Manajemen Kunci Azure KeyVault.
     description: ''
   - name: --enable-azure-rbac
     summary: Aktifkan Azure RBAC untuk mengontrol pemeriksaan otorisasi pada kluster.
+    description: ''
+  - name: --enable-blob-driver
+    summary: Aktifkan Driver CSI AzureBlob.
     description: ''
   - name: --enable-cluster-autoscaler
     summary: Aktifkan autoscaler kluster, nilai defaultnya adalah false.
@@ -464,13 +468,13 @@ directCommands:
     summary: Aktifkan rotasi rahasia. Gunakan dengan addon azure-keyvault-secrets-provider.
     description: ''
   - name: --enable-sgxquotehelper
-    summary: Aktifkan pembantu kutipan SGX untuk addon confcom.
+    summary: Aktifkan pembantu kuotasi SGX untuk addon confcom.
     description: ''
   - name: --enable-ultra-ssd
     summary: Aktifkan UltraSSD pada kumpulan simpul agen.
     description: ''
   - name: --enable-windows-gmsa
-    summary: Aktifkan gmsa Windows.
+    summary: Aktifkan Windows gmsa.
     description: ''
   - name: --enable-workload-identity
     parameterValueGroup: false, true
@@ -480,7 +484,7 @@ directCommands:
     summary: Awalan untuk FQDN yang dibuat untuk kluster privat dengan skenario zona dns privat kustom.
     description: ''
   - name: --generate-ssh-keys
-    summary: Buat file kunci publik dan privat SSH jika hilang.
+    summary: Hasilkan file kunci publik dan privat SSH jika hilang.
     description: ''
   - name: --gmsa-dns-server
     summary: Tentukan server DNS untuk gmsa Windows untuk kluster ini.
@@ -505,7 +509,7 @@ directCommands:
     summary: Konfigurasi Proksi Http untuk kluster ini.
     description: ''
   - name: --ip-families
-    summary: Daftar versi IP yang dipisahkan koma yang akan digunakan untuk jaringan kluster.
+    summary: Daftar versi IP yang dipisahkan koma untuk digunakan untuk jaringan kluster.
     description: Setiap versi IP harus dalam format IPvN. Misalnya, IPv4.
   - name: --kubelet-config
     summary: Konfigurasi Kubelet untuk simpul agen.
@@ -518,7 +522,7 @@ directCommands:
     summary: Konfigurasi OS untuk simpul agen Linux.
     description: ''
   - name: --load-balancer-idle-timeout
-    summary: Batas waktu diam load balancer dalam hitung menit.
+    summary: Batas waktu diam load balancer dalam menit.
     description: Batas waktu diam yang diinginkan untuk alur keluar load balancer, defaultnya adalah 30 menit. Tentukan nilai dalam rentang [4, 100].
   - name: --load-balancer-managed-outbound-ip-count
     summary: Jumlah IP keluar yang dikelola load balancer.
@@ -556,7 +560,7 @@ directCommands:
     description: ''
   - name: --nat-gateway-idle-timeout
     summary: Batas waktu diam gateway NAT dalam hitung menit.
-    description: Batas waktu diam yang diinginkan untuk alur keluar gateway NAT, defaultnya adalah 4 menit. Tentukan nilai dalam rentang [4, 120]. Berlaku untuk kluster load balancer SKU Standar dengan jenis keluar managedNATGateway saja.
+    description: Batas waktu menganggur yang diinginkan untuk alur keluar gateway NAT, defaultnya adalah 4 menit. Tentukan nilai dalam rentang [4, 120]. Berlaku untuk kluster load balancer SKU Standar dengan jenis keluar managedNATGateway saja.
   - name: --nat-gateway-managed-outbound-ip-count
     summary: Jumlah IP keluar yang dikelola gateway NAT.
     description: Jumlah IP keluar terkelola yang diinginkan untuk koneksi keluar gateway NAT. Tentukan nilai dalam rentang [1, 16]. Berlaku untuk kluster load balancer SKU Standar dengan jenis keluar managedNATGateway saja.
@@ -569,7 +573,7 @@ directCommands:
     description: >-
       Menggunakan bersama dengan plugin jaringan "azure".
 
-      Tentukan "azure" untuk manajer kebijakan jaringan Azure dan "calico" untuk pengontrol kebijakan jaringan calico.
+      Tentukan "azure" untuk pengelola kebijakan jaringan Azure dan "calico" untuk pengontrol kebijakan jaringan calico.
 
       Default ke "" (kebijakan jaringan dinonaktifkan).
   - name: --no-ssh-key -x
@@ -583,7 +587,7 @@ directCommands:
     summary: Jumlah simpul di kumpulan simpul Kubernetes. Ini diperlukan ketika --enable-cluster-autoscaler ditentukan. Setelah membuat kluster, Anda dapat mengubah ukuran kumpulan simpulnya dengan `az aks scale`.
     description: ''
   - name: --node-osdisk-diskencryptionset-id -d
-    summary: ResourceId dari set enkripsi disk yang akan digunakan untuk mengaktifkan enkripsi saat tidak aktif pada disk os node agen.
+    summary: ResourceId dari enkripsi disk yang diatur untuk digunakan untuk mengaktifkan enkripsi saat tidak aktif pada disk os node agen.
     description: ''
   - name: --node-osdisk-size
     summary: Ukuran dalam GB disk OS untuk setiap simpul di kumpulan simpul. Minimal 30 GB.
@@ -636,8 +640,8 @@ directCommands:
     summary: The ID of a PPG.
     description: ''
   - name: --private-dns-zone
-    summary: Mode zona dns privat untuk kluster privat. Mode "none" dalam pratinjau.
-    description: Nilai yang diizinkan adalah "system", "none" (Preview) atau id sumber daya zona dns privat kustom Anda. Jika tidak diatur, default untuk mengetik sistem. Memerlukan --enable-private-cluster untuk digunakan.
+    summary: Mode zona dns privat untuk kluster privat. Mode "tidak ada" dalam pratinjau.
+    description: Nilai yang diizinkan adalah "sistem", "tidak ada" (Pratinjau) atau id sumber daya zona dns privat kustom Anda. Jika tidak diatur, default untuk mengetik sistem. Memerlukan --enable-private-cluster untuk digunakan.
   - name: --rotation-poll-interval
     summary: Atur interval polling rotasi. Gunakan dengan addon azure-keyvault-secrets-provider.
     description: ''
@@ -686,20 +690,20 @@ directCommands:
           - Nilai yang tidak diizinkan: "", "abc@123P@$$w 0rd", "P@ssw0rd", "P@ssword123", "Pa$$word", "pass@word1", "Password!", "Password1", "Password22", "iloveyou!"
       Referensi: https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.management.compute.models.virtualmachinescalesetosprofile.adminpassword?view=azure-dotnet.
   - name: --windows-admin-username
-    summary: Akun pengguna yang akan dibuat pada VM simpul windows.
+    summary: Akun pengguna untuk dibuat pada VM simpul windows.
     description: >-
       Aturan untuk windows-admin-username:
           - pembatasan: Tidak dapat berakhiran "."
           - Nilai yang tidak diizinkan: "administrator", "admin", "user", "user1", "test", "user2", "test1", "user3", "admin1", "1", "123", "a", "actuser", "adm", "admin2", "aspnet", "backup", "console", "david", "guest", "john", "owner", "root", "server", "sql", "support", "support_388945a0", "sys", "test2", "test3", "user4", "user5".
           - Panjang minimum: 1 karakter
-          - Panjang maksimum: Referensi 20 karakter: https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.management.compute.models.virtualmachinescalesetosprofile.adminusername?view=azure-dotnet.
+          - Panjang maksimum: 20 karakter Referensi: https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.management.compute.models.virtualmachinescalesetosprofile.adminusername?view=azure-dotnet.
   - name: --workload-runtime
     defaultValue: OCIContainer
     parameterValueGroup: OCIContainer, WasmWasi
     summary: Menentukan jenis beban kerja yang dapat dijalankan simpul. Default ke OCIContainer.
     description: ''
   - name: --workspace-resource-id
-    summary: ID sumber daya Ruang Kerja Analitik Log yang ada untuk digunakan untuk menyimpan data pemantauan. Jika tidak ditentukan, gunakan Ruang Kerja Analitik Log default jika ada, jika tidak, buatlah.
+    summary: ID sumber daya dari Ruang Kerja Analitik Log yang ada untuk digunakan untuk menyimpan data pemantauan. Jika tidak ditentukan, gunakan Ruang Kerja Analitik Log default jika ada, jika tidak, buatlah.
     description: ''
   - name: --yes -y
     summary: Jangan meminta konfirmasi.
@@ -732,7 +736,7 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --ignore-pod-disruption-budget
-    summary: Ignore-pod-disruption-budget=true untuk menghapus pod tersebut pada sebuah simpul tanpa mempertimbangkan Anggaran Gangguan Pod. Nilai defaultnya adalah Tidak Ada.
+    summary: Ignore-pod-disruption-budget=true untuk menghapus pod tersebut pada sebuah node tanpa mempertimbangkan Anggaran Gangguan Pod. Nilai defaultnya adalah Tidak Ada.
     description: ''
   - name: --no-wait
     summary: Jangan menunggu operasi jangka panjang selesai.
@@ -777,17 +781,17 @@ directCommands:
 
     pemantauan - aktifkan pemantauan Analitik Log. Menggunakan Ruang Kerja Default Analitik Log jika ada, atau membuatnya. Tentukan "--workspace-resource-id" untuk menggunakan ruang kerja yang ada.
 
-    Jika addon pemantauan diaktifkan --no-wait argumen tidak akan berpengaruh virtual-node - aktifkan AKS Virtual Node. Memerlukan --subnet-name untuk memberikan nama subnet yang ada agar Simpul Virtual dapat digunakan.
+    Jika addon pemantauan diaktifkan --no-wait argumen tidak akan berpengaruh virtual-node - aktifkan AKS Virtual Node. Memerlukan --subnet-name untuk memberikan nama subnet yang ada untuk digunakan oleh Simpul Virtual.
 
     azure-policy - aktifkan kebijakan Azure. Add-on Azure Policy untuk AKS memungkinkan penegakan dan perlindungan dalam skala besar pada kluster Anda secara terpusat dan konsisten.
 
-    Pelajari selengkapnya di aka.ms/aks/policy.
+    Pelajari lebih lanjut di aka.ms/aks/policy.
 
     ingress-appgw - aktifkan addon Pengontrol Ingress Application Gateway (PRATINJAU).
 
-    open-service-mesh - aktifkan addon Mesh Layanan Terbuka (PRATINJAU).
+    open-service-mesh - aktifkan addon Open Service Mesh (PRATINJAU).
 
-    gitops - aktifkan GitOps (PRATINJAU).
+    gitops - aktifkan GitOps (PREVIEW).
 
     azure-keyvault-secrets-provider - aktifkan addon Penyedia Rahasia Azure Keyvault (PRATINJAU).
 
@@ -860,7 +864,7 @@ directCommands:
     summary: Aktifkan rotasi rahasia. Gunakan dengan addon azure-keyvault-secrets-provider.
     description: ''
   - name: --enable-sgxquotehelper
-    summary: Aktifkan pembantu kutipan SGX untuk addon confcom.
+    summary: Aktifkan pembantu kuotasi SGX untuk addon confcom.
     description: ''
   - name: --no-wait
     summary: Jangan menunggu operasi jangka panjang selesai.
@@ -872,7 +876,7 @@ directCommands:
     summary: Nama subnet untuk simpul virtual yang akan digunakan.
     description: ''
   - name: --workspace-resource-id
-    summary: ID sumber daya Ruang Kerja Analitik Log yang ada untuk digunakan untuk menyimpan data pemantauan.
+    summary: ID sumber daya dari Ruang Kerja Analitik Log yang ada untuk digunakan untuk menyimpan data pemantauan.
     description: ''
 - uid: az_aks_get-credentials
   name: az aks get-credentials
@@ -1174,6 +1178,7 @@ directCommands:
                   [--detach-acr]
                   [--disable-ahub]
                   [--disable-azure-rbac]
+                  [--disable-blob-driver]
                   [--disable-cluster-autoscaler]
                   [--disable-defender]
                   [--disable-disk-driver]
@@ -1191,6 +1196,7 @@ directCommands:
                   [--enable-apiserver-vnet-integration]
                   [--enable-azure-keyvault-kms]
                   [--enable-azure-rbac]
+                  [--enable-blob-driver]
                   [--enable-cluster-autoscaler]
                   [--enable-defender]
                   [--enable-disk-driver]
@@ -1276,15 +1282,15 @@ directCommands:
     syntax: az aks update -g MyResourceGroup -n MyManagedCluster --disable-pod-identity
   - summary: Memperbarui tag kluster kubernetes
     syntax: az aks update -g MyResourceGroup -n MyManagedCLuster --tags "foo=bar" "baz=qux"
-  - summary: Memperbarui kata sandi Windows kluster kubernetes
+  - summary: Memperbarui kata sandi Windows dari kluster kubernetes
     syntax: az aks update -g MyResourceGroup -n MyManagedCLuster --windows-admin-password "Repl@cePassw0rd12345678"
   - summary: Memperbarui kluster AAD AKS terkelola untuk menggunakan Azure RBAC
     syntax: az aks update -g MyResourceGroup -n MyManagedCluster --enable-azure-rbac
   - summary: Menonaktifkan Azure RBAC dalam kluster AAD AKS terkelola
     syntax: az aks update -g MyResourceGroup -n MyManagedCluster --disable-azure-rbac
-  - summary: Aktifkan Windows gmsa untuk kluster kubernetes dengan mengatur server DNS di vnet yang digunakan oleh kluster.
+  - summary: Aktifkan gmsa Windows untuk kluster kubernetes dengan mengatur server DNS di vnet yang digunakan oleh kluster.
     syntax: az aks update -g MyResourceGroup -n MyManagedCluster --enable-windows-gmsa
-  - summary: Aktifkan Windows gmsa untuk kluster kubernetes tanpa mengatur server DNS di vnet yang digunakan oleh kluster.
+  - summary: Aktifkan gmsa Windows untuk kluster kubernetes tanpa mengatur server DNS di vnet yang digunakan oleh kluster.
     syntax: az aks update -g MyResourceGroup -n MyManagedCluster --enable-windows-gmsa --gmsa-dns-server "10.240.0.4" --gmsa-root-domain-name "contoso.com"
   requiredParameters:
   - isRequired: true
@@ -1349,6 +1355,9 @@ directCommands:
   - name: --disable-azure-rbac
     summary: Nonaktifkan Azure RBAC untuk mengontrol pemeriksaan otorisasi pada kluster.
     description: ''
+  - name: --disable-blob-driver
+    summary: Nonaktifkan Driver CSI AzureBlob.
+    description: ''
   - name: --disable-cluster-autoscaler -d
     summary: Nonaktifkan autoscaler kluster.
     description: ''
@@ -1401,6 +1410,9 @@ directCommands:
   - name: --enable-azure-rbac
     summary: Aktifkan Azure RBAC untuk mengontrol pemeriksaan otorisasi pada kluster.
     description: ''
+  - name: --enable-blob-driver
+    summary: Aktifkan Driver CSI AzureBlob.
+    description: ''
   - name: --enable-cluster-autoscaler -e
     summary: Aktifkan autoscaler kluster.
     description: ''
@@ -1444,20 +1456,20 @@ directCommands:
     summary: Aktifkan Pengontrol Rekam Jepret.
     description: ''
   - name: --enable-windows-gmsa
-    summary: Aktifkan Windows gmsa pada kluster.
+    summary: Aktifkan gmsa Windows pada kluster.
     description: ''
   - name: --enable-workload-identity
     parameterValueGroup: false, true
     summary: Aktifkan addon Identitas Beban Kerja untuk kluster.
     description: ''
   - name: --gmsa-dns-server
-    summary: Tentukan server DNS untuk Windows gmsa pada kluster.
+    summary: Tentukan server DNS untuk gmsa Windows pada kluster.
     description: >-
       Anda tidak perlu mengatur ini jika Anda telah mengatur server DNS di VNET yang digunakan oleh kluster.
 
       Anda harus mengatur atau tidak mengatur --gmsa-dns-server dan --gmsa-root-domain-name pada saat yang sama saat mengatur --enable-windows-gmsa.
   - name: --gmsa-root-domain-name
-    summary: Tentukan nama domain akar untuk Windows gmsa pada kluster.
+    summary: Tentukan nama domain akar untuk gmsa Windows pada kluster.
     description: >-
       Anda tidak perlu mengatur ini jika Anda telah mengatur server DNS di VNET yang digunakan oleh kluster.
 
@@ -1556,13 +1568,13 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --aks-custom-headers
-    summary: Mengirim header kustom. Ketika ditentukan, format harus Key1=Value1,Key2=Value2.
+    summary: Kirim header kustom. Ketika ditentukan, format harus Key1=Value1,Key2=Value2.
     description: ''
   - name: --control-plane-only
     summary: Tingkatkan sarana kontrol kluster saja. Jika tidak ditentukan, sarana kontrol DAN semua kumpulan simpul akan ditingkatkan.
     description: ''
   - name: --kubernetes-version -k
-    summary: Versi Kubernetes untuk meningkatkan kluster, seperti "1.11.12".
+    summary: Versi Kubernetes untuk meningkatkan kluster ke, seperti "1.11.12".
     description: ''
     valueFrom: '`az aks get-upgrades`'
   - name: --no-wait
@@ -1635,7 +1647,7 @@ directCommands:
   examples:
   - summary: Tunggu hingga kluster ditingkatkan, polling setiap menit hingga tiga puluh menit.
     syntax: az aks wait -g MyResourceGroup -n MyManagedCluster --updated --interval 60 --timeout 1800
-  - summary: Tunggu kluster Kubernetes terkelola mencapai status yang diinginkan (dibuat secara otomatis)
+  - summary: Tunggu hingga kluster Kubernetes terkelola mencapai status yang diinginkan (dibuat secara otomatis)
     syntax: az aks wait --created --interval 60 --name MyManagedCluster --resource-group MyResourceGroup --timeout 1800
   requiredParameters:
   - isRequired: true
@@ -1771,9 +1783,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Kelola Azure Kubernetes Services.
-  ms.openlocfilehash: 46a434cd88c2407e756003ab603272dffdced5ae
-  ms.sourcegitcommit: 4972b72ce712edcacb644e2e0fd8a51b9d7ec0d9
+  ms.openlocfilehash: 227565517e883d3ac1e28dab02357135688ab13e
+  ms.sourcegitcommit: 762ee662631c391498b81809e1603edb00bfdfae
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 06/22/2022
-  ms.locfileid: "146542259"
+  ms.lasthandoff: 06/29/2022
+  ms.locfileid: "146662580"
