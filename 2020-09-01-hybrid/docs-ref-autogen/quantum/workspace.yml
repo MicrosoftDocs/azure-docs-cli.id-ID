@@ -4,13 +4,13 @@ name: az quantum workspace
 extensionInformation: >-
   > [!Note]
 
-  > Referensi ini adalah bagian dari ekstensi **kuantum** untuk Azure CLI (versi 2.23.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **az quantum workspace** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+  > Referensi ini adalah bagian dari ekstensi **kuantum** untuk Azure CLI (versi 2.23.0 atau lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **az quantum workspace** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
 summary: Mengelola ruang kerja Azure Quantum.
 description: ''
 directCommands:
 - uid: az_quantum_workspace_clear
   name: az quantum workspace clear
-  summary: Kosongkan ruang kerja Azure Quantum default.
+  summary: Hapus ruang kerja Azure Quantum default.
   description: ''
   syntax: az quantum workspace clear
   examples:
@@ -21,13 +21,18 @@ directCommands:
   summary: Buat ruang kerja Azure Quantum baru.
   description: ''
   syntax: >-
-    az quantum workspace create [--location]
+    az quantum workspace create [--auto-accept]
+                                [--location]
                                 [--provider-sku-list]
                                 [--resource-group]
                                 [--skip-role-assignment]
                                 [--storage-account]
                                 [--workspace-name]
   examples:
+  - summary: Buat ruang kerja Azure Quantum baru dengan penyedia yang menawarkan kredit gratis.
+    syntax: >-
+      az quantum workspace create -g MyResourceGroup -w MyWorkspace -l MyLocation \
+          -a MyStorageAccountName
   - summary: Buat ruang kerja Azure Quantum baru dengan daftar penyedia tertentu.
     syntax: >-
       az quantum workspace create -g MyResourceGroup -w MyWorkspace -l MyLocation \
@@ -36,6 +41,9 @@ directCommands:
       To display a list of available providers and their SKUs, use the following command:
           az quantum offerings list -l MyLocation -o table
   optionalParameters:
+  - name: --auto-accept
+    summary: Jika ditentukan, ketentuan penyedia diterima tanpa perintah Y/N interaktif.
+    description: ''
   - name: --location -l
     summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
     description: ''
@@ -62,7 +70,7 @@ directCommands:
     az quantum workspace delete [--resource-group]
                                 [--workspace-name]
   examples:
-  - summary: Menghapus ruang kerja Azure Quantum menurut nama dan grup.
+  - summary: Hapus ruang kerja Azure Quantum menurut nama dan grup.
     syntax: az quantum workspace delete -g MyResourceGroup -w MyWorkspace
   - summary: Hapus dan kosongkan ruang kerja Azure Quantum default (jika telah ditetapkan).
     syntax: az quantum workspace delete
@@ -107,7 +115,7 @@ directCommands:
   examples:
   - summary: Cantumkan informasi kuota ruang kerja default jika ditetapkan.
     syntax: az quantum workspace quotas
-  - summary: Mencantumkan informasi kuota ruang kerja Azure Quantum tertentu.
+  - summary: Cantumkan informasi kuota ruang kerja Azure Quantum tertentu.
     syntax: az quantum workspace quotas -g MyResourceGroup -w MyWorkspace -l MyLocation
   optionalParameters:
   - name: --location -l
@@ -148,7 +156,7 @@ directCommands:
     az quantum workspace show [--resource-group]
                               [--workspace-name]
   examples:
-  - summary: Tampilkan ruang kerja Azure Quantum default yang saat ini dipilih.
+  - summary: Perlihatkan ruang kerja Azure Quantum default yang saat ini dipilih.
     syntax: az quantum workspace show
   - summary: Memperlihatkan detail ruang kerja Azure Quantum yang disediakan.
     syntax: az quantum workspace show -g MyResourceGroup -w MyWorkspace
@@ -186,9 +194,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Mengelola ruang kerja Azure Quantum.
-  ms.openlocfilehash: e21d0f967090ea99310c695da52b576557bbf714
-  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
+  ms.openlocfilehash: 2916d80316bf7ea2dcbf61c65478174f2a25d70e
+  ms.sourcegitcommit: 1c90b81d8746101eeff6dab16f71270efb6d6827
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/27/2022
-  ms.locfileid: "144066504"
+  ms.lasthandoff: 07/01/2022
+  ms.locfileid: "146790892"
