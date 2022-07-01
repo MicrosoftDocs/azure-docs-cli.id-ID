@@ -4,8 +4,8 @@ name: az iot device
 extensionInformation: >-
   > [!Note]
 
-  > Referensi ini adalah bagian dari ekstensi **azure-iot** untuk Azure CLI (versi 2.24.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **perangkat az iot** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
-summary: Manfaatkan kemampuan olahpesan perangkat-ke-cloud dan cloud-ke-perangkat.
+  > Referensi ini adalah bagian dari ekstensi **azure-iot** untuk Azure CLI (versi 2.30.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis diinstal saat pertama kali Anda menjalankan perintah **perangkat az iot** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Manfaatkan simulasi perangkat dan operasi yang ber sentris perangkat lainnya seperti kemampuan olahpesan perangkat-ke-cloud atau cloud-ke-perangkat.
 description: ''
 directCommands:
 - uid: az_iot_device_send-d2c-message
@@ -15,20 +15,27 @@ directCommands:
 
     Perintah ini mendukung pengiriman pesan dengan properti aplikasi dan sistem.
 
-
-    Catatan: Perintah hanya berfungsi untuk perangkat berbasis symmetric key auth (SAS).
+    Catatan: Jika menggunakan metode autentikasi x509, sertifikat dan file kunci (dan frasa sandi jika diperlukan) harus disediakan.
   description: ''
   syntax: >-
     az iot device send-d2c-message --device-id
+                                   [--certificate-file-path]
                                    [--da]
                                    [--hub-name]
+                                   [--key]
+                                   [--key-file-path]
                                    [--login]
                                    [--mc]
+                                   [--pass]
                                    [--properties]
                                    [--resource-group]
   examples:
   - summary: Penggunaan dasar
     syntax: az iot device send-d2c-message -n {iothub_name} -d {device_id}
+  - summary: Penggunaan dasar untuk perangkat dengan autentikasi x509
+    syntax: az iot device send-d2c-message -n {iothub_name} -d {device_id} --cp {certificate_file_path} --kp {key_file_path}
+  - summary: Penggunaan dasar untuk perangkat dengan autentikasi x509 di mana file kunci memiliki frasa sandi
+    syntax: az iot device send-d2c-message -n {iothub_name} -d {device_id} --cp {certificate_file_path} --kp {key_file_path} --pass {passphrase}
   - summary: Penggunaan dasar dengan data kustom
     syntax: az iot device send-d2c-message -n {iothub_name} -d {device_id} --data {message_body}
   - summary: Mengirim properti aplikasi
@@ -41,6 +48,9 @@ directCommands:
     summary: Perangkat Target.
     description: ''
   optionalParameters:
+  - name: --certificate-file-path --cp
+    summary: Jalur ke file sertifikat.
+    description: ''
   - name: --da --data
     defaultValue: Ping from Az CLI IoT Extension
     summary: Isi pesan.
@@ -48,12 +58,21 @@ directCommands:
   - name: --hub-name -n
     summary: nama IoT Hub. Diperlukan jika --login tidak disediakan.
     description: ''
+  - name: --key --symmetric-key
+    summary: Kunci konten yang digunakan untuk perangkat. Jika kunci konten dan argumen autentikasi perangkat lainnya disediakan, kunci konten akan diprioritaskan.
+    description: ''
+  - name: --key-file-path --kp
+    summary: Jalur ke file kunci.
+    description: ''
   - name: --login -l
     summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
     description: ''
   - name: --mc --msg-count
     defaultValue: "1"
     summary: Jumlah pesan perangkat yang akan dikirim ke IoT Hub.
+    description: ''
+  - name: --pass --passphrase
+    summary: Frase sandi untuk file kunci.
     description: ''
   - name: --properties --props -p
     summary: 'Tas properti pesan dalam pasangan kunci-nilai dengan format berikut: a=b;c=d. Untuk olahpesan mqtt - Anda dapat mengirim properti sistem menggunakan $.<name> =value. Misalnya $.cid=12345 mengatur properti Id korelasi sistem. Contoh pengidentifikasi properti sistem lainnya termasuk $.ct untuk jenis konten, $.mid untuk Id pesan dan $.ce untuk pengodean konten.'
@@ -66,25 +85,26 @@ directCommands:
   summary: >-
     Simulasikan perangkat dalam Azure IoT Hub.
 
-
     Saat simulasi perangkat berjalan, perangkat akan secara otomatis menerima dan mengakui pesan cloud-to-device (c2d). Untuk simulasi mqtt, semua pesan c2d akan diakui dengan penyelesaian. Untuk pengakuan c2d simulasi http didasarkan pada pilihan pengguna yang dapat diselesaikan, ditolak, atau ditinggalkan. Simulasi mqtt juga mendukung pemanggilan metode langsung yang dapat diakui oleh kode status respons dan payload respons.
 
-
-    Catatan: Simulasi MQTT hanya didukung untuk perangkat berbasis autentikasi kunci konten (SAS).
-
-
     Catatan: Perintah secara default akan mengatur jenis konten ke aplikasi/json dan pengodean konten ke utf-8. Ini bisa ditimpa.
+
+    Catatan: Jika menggunakan metode autentikasi x509, sertifikat dan file kunci (dan frasa sandi jika diperlukan) harus disediakan.
   description: ''
   syntax: >-
     az iot device simulate --device-id
+                           [--certificate-file-path]
                            [--da]
                            [--hub-name]
                            [--init-reported-properties]
+                           [--key]
+                           [--key-file-path]
                            [--login]
                            [--mc]
                            [--method-response-code]
                            [--method-response-payload]
                            [--mi]
+                           [--pass]
                            [--properties]
                            [--proto {http, mqtt}]
                            [--receive-settle {abandon, complete, reject}]
@@ -92,6 +112,10 @@ directCommands:
   examples:
   - summary: Penggunaan dasar (mqtt)
     syntax: az iot device simulate -n {iothub_name} -d {device_id}
+  - summary: Penggunaan dasar untuk perangkat dengan autentikasi x509 (mqtt)
+    syntax: az iot device simulate -n {iothub_name} -d {device_id} --cp {certificate_file_path} --kp {key_file_path}
+  - summary: Penggunaan dasar untuk perangkat dengan autentikasi x509 (mqtt) di mana file kunci memiliki frase sandi
+    syntax: az iot device simulate -n {iothub_name} -d {device_id} --cp {certificate_file_path} --kp {key_file_path} --pass {passphrase}
   - summary: Mengirim properti campuran (mqtt)
     syntax: az iot device simulate -n {iothub_name} -d {device_id} --properties "myprop=myvalue;$.ct=application/json"
   - summary: Kirim kode status respons metode langsung dan payload respons metode langsung sebagai json mentah (hanya mqtt)
@@ -118,6 +142,9 @@ directCommands:
     summary: Perangkat Target.
     description: ''
   optionalParameters:
+  - name: --certificate-file-path --cp
+    summary: Jalur ke file sertifikat.
+    description: ''
   - name: --da --data
     defaultValue: Ping from Az CLI IoT Extension
     summary: Isi pesan.
@@ -127,6 +154,12 @@ directCommands:
     description: ''
   - name: --init-reported-properties --irp
     summary: Status awal properti yang dilaporkan kembar untuk perangkat target saat simulator dijalankan. Param opsional, hanya didukung untuk mqtt.
+    description: ''
+  - name: --key --symmetric-key
+    summary: Kunci konten yang digunakan untuk perangkat. Jika kunci konten dan argumen autentikasi perangkat lainnya disediakan, kunci konten akan diprioritaskan.
+    description: ''
+  - name: --key-file-path --kp
+    summary: Jalur ke file kunci.
     description: ''
   - name: --login -l
     summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string koneksi entitas dan nama disediakan, string koneksi akan diprioritaskan. Diperlukan jika --hub-name tidak disediakan.
@@ -144,6 +177,9 @@ directCommands:
   - name: --mi --msg-interval
     defaultValue: "3"
     summary: Penundaan dalam detik antara pesan perangkat-ke-cloud.
+    description: ''
+  - name: --pass --passphrase
+    summary: Frase sandi untuk file kunci.
     description: ''
   - name: --properties --props -p
     summary: 'Tas properti pesan dalam pasangan kunci-nilai dengan format berikut: a=b;c=d. Untuk olahpesan mqtt - Anda dapat mengirim properti sistem menggunakan $.<name> =value. Misalnya $.cid=12345 mengatur properti Id korelasi sistem. Contoh pengidentifikasi properti sistem lainnya termasuk $.ct untuk jenis konten, $.mid untuk Id pesan dan $.ce untuk pengodean konten.  Untuk pesan http - properti aplikasi dikirim menggunakan iothub-app-<name>=value, misalnya iothub-app-myprop=myvalue. Properti sistem umumnya diawali dengan iothub-<name> seperti iothub-correlationid tetapi ada pengecualian seperti jenis konten dan pengodean konten.'
@@ -163,7 +199,7 @@ directCommands:
     description: ''
 - uid: az_iot_device_upload-file
   name: az iot device upload-file
-  summary: Upload file lokal sebagai perangkat ke kontainer penyimpanan blob yang telah dikonfigurasi sebelumnya.
+  summary: Unggah file lokal sebagai perangkat ke kontainer penyimpanan blob yang telah dikonfigurasi sebelumnya.
   description: ''
   syntax: >-
     az iot device upload-file --content-type
@@ -203,6 +239,8 @@ commands:
 - az_iot_device_c2d-message_receive
 - az_iot_device_c2d-message_reject
 - az_iot_device_c2d-message_send
+- az_iot_device_registration
+- az_iot_device_registration_create
 - az_iot_device_send-d2c-message
 - az_iot_device_simulate
 - az_iot_device_upload-file
@@ -224,10 +262,10 @@ globalParameters:
 - name: --verbose
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
-  description: Manfaatkan kemampuan olahpesan perangkat-ke-cloud dan cloud-ke-perangkat.
-  ms.openlocfilehash: f38f1f8e12783fa9674f903350bc414bbc287e59
-  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  description: Manfaatkan simulasi perangkat dan operasi yang ber sentris perangkat lainnya seperti kemampuan olahpesan perangkat-ke-cloud atau cloud-ke-perangkat.
+  ms.openlocfilehash: 8d059983bb0cb5fff8ccb52980a312ca29f08538
+  ms.sourcegitcommit: 1c90b81d8746101eeff6dab16f71270efb6d6827
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 03/25/2022
-  ms.locfileid: "141110659"
+  ms.lasthandoff: 07/01/2022
+  ms.locfileid: "146801080"

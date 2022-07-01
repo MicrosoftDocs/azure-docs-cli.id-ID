@@ -11,12 +11,12 @@ ms.tool: azure-cli
 ms.reviewer: mohnader
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: referensi azure cli, jaringan azure
-ms.openlocfilehash: 4df164fa20072106f8aebf3527ff54cb8dfd12bb
-ms.sourcegitcommit: 6822e5d700742617eabda5904fe2ca217bae9d28
+ms.openlocfilehash: d999fd41e52f7163af4e0b962000cfb9fb2a131e
+ms.sourcegitcommit: 1c90b81d8746101eeff6dab16f71270efb6d6827
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/30/2022
-ms.locfileid: "145937732"
+ms.lasthandoff: 07/01/2022
+ms.locfileid: "146802123"
 ---
 # <a name="azure-cli-reference-commands-for-azure-network"></a>Perintah referensi Azure CLI untuk Azure Network
 
@@ -89,7 +89,7 @@ Lihat [az network](../latest/docs-ref-autogen/network.yml) untuk mengetahui daft
 | Subgrup | Referensi | Penggunaan | Berupa ekstensi
 |-|-|-|-|
 | ASG | [az asg](../latest/docs-ref-autogen/network/asg.yml) | Mengelola kelompok keamanan aplikasi. |
-| Bastion | [az network bastion](../latest/docs-ref-autogen/network/bastion.yml) | Mengelola host bastion Azure. |
+| Bastion | [az network bastion](../latest/docs-ref-autogen/network/bastion.yml) | Mengelola host Azure Bastion. |
 | DDoS | [az network ddos-protection](../latest/docs-ref-autogen/network/ddos-protection.yml) | Mengelola Paket DDoS Protection. |
 | Firewall | [az network firewall](../latest/docs-ref-autogen/network/firewall.yml) | Mengelola dan mengonfigurasi Azure Firewalls. | ya
 | Firewall | [az network security-partner-provider](../latest/docs-ref-autogen/network/security-partner-provider.yml) | Mengelola penyedia mitra keamanan Azure. |
