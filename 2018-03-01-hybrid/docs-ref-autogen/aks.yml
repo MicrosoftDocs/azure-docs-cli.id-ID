@@ -140,6 +140,7 @@ directCommands:
                   [--nat-gateway-idle-timeout]
                   [--nat-gateway-managed-outbound-ip-count]
                   [--network-plugin {azure, kubenet, none}]
+                  [--network-plugin-mode {overlay}]
                   [--network-policy]
                   [--no-ssh-key]
                   [--no-wait]
@@ -568,6 +569,10 @@ directCommands:
     parameterValueGroup: azure, kubenet, none
     summary: Plugin jaringan Kubernetes yang akan digunakan.
     description: Tentukan "azure" untuk IP pod yang dapat dirutekan dari VNET, "kubenet" untuk IP pod yang tidak dapat dirutekan dengan jaringan overlay, atau "tidak ada" untuk tidak ada jaringan yang dikonfigurasi.
+  - name: --network-plugin-mode
+    parameterValueGroup: overlay
+    summary: Mode plugin jaringan yang akan digunakan.
+    description: Digunakan untuk mengontrol mode tempat plugin jaringan harus beroperasi. Misalnya, "overlay" yang digunakan dengan --network-plugin=azure akan menggunakan jaringan overlay (IP non-VNET) untuk pod di kluster.
   - name: --network-policy
     summary: (PRATINJAU) Kebijakan jaringan Kubernetes yang akan digunakan.
     description: >-
@@ -703,7 +708,7 @@ directCommands:
     summary: Menentukan jenis beban kerja yang dapat dijalankan simpul. Default ke OCIContainer.
     description: ''
   - name: --workspace-resource-id
-    summary: ID sumber daya Ruang Kerja Analitik Log yang ada untuk digunakan untuk menyimpan data pemantauan. Jika tidak ditentukan, gunakan Ruang Kerja Analitik Log default jika ada, jika tidak, buatlah.
+    summary: ID sumber daya dari Ruang Kerja Analitik Log yang ada untuk digunakan untuk menyimpan data pemantauan. Jika tidak ditentukan, gunakan Ruang Kerja Analitik Log default jika ada, jika tidak, buatlah.
     description: ''
   - name: --yes -y
     summary: Jangan meminta konfirmasi.
@@ -736,7 +741,7 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --ignore-pod-disruption-budget
-    summary: Ignore-pod-disruption-budget=true untuk menghapus pod tersebut pada sebuah simpul tanpa mempertimbangkan Anggaran Gangguan Pod. Nilai defaultnya adalah Tidak Ada.
+    summary: Ignore-pod-disruption-budget=true untuk menghapus pod tersebut pada sebuah node tanpa mempertimbangkan Anggaran Gangguan Pod. Nilai defaultnya adalah Tidak Ada.
     description: ''
   - name: --no-wait
     summary: Jangan menunggu operasi jangka panjang selesai.
@@ -781,17 +786,17 @@ directCommands:
 
     pemantauan - aktifkan pemantauan Analitik Log. Menggunakan Ruang Kerja Default Analitik Log jika ada, atau membuatnya. Tentukan "--workspace-resource-id" untuk menggunakan ruang kerja yang ada.
 
-    Jika addon pemantauan diaktifkan --no-wait argumen tidak akan berpengaruh virtual-node - aktifkan AKS Virtual Node. Memerlukan --subnet-name untuk memberikan nama subnet yang ada agar Simpul Virtual dapat digunakan.
+    Jika addon pemantauan diaktifkan --no-wait argumen tidak akan berpengaruh virtual-node - aktifkan AKS Virtual Node. Memerlukan --subnet-name untuk memberikan nama subnet yang ada untuk digunakan oleh Simpul Virtual.
 
     azure-policy - aktifkan kebijakan Azure. Add-on Azure Policy untuk AKS memungkinkan penegakan dan perlindungan dalam skala besar pada kluster Anda secara terpusat dan konsisten.
 
-    Pelajari selengkapnya di aka.ms/aks/policy.
+    Pelajari lebih lanjut di aka.ms/aks/policy.
 
     ingress-appgw - aktifkan addon Pengontrol Ingress Application Gateway (PRATINJAU).
 
     open-service-mesh - aktifkan addon Open Service Mesh (PRATINJAU).
 
-    gitops - aktifkan GitOps (PRATINJAU).
+    gitops - aktifkan GitOps (PREVIEW).
 
     azure-keyvault-secrets-provider - aktifkan addon Penyedia Rahasia Azure Keyvault (PRATINJAU).
 
@@ -864,7 +869,7 @@ directCommands:
     summary: Aktifkan rotasi rahasia. Gunakan dengan addon azure-keyvault-secrets-provider.
     description: ''
   - name: --enable-sgxquotehelper
-    summary: Aktifkan pembantu kutipan SGX untuk addon confcom.
+    summary: Aktifkan pembantu kuotasi SGX untuk addon confcom.
     description: ''
   - name: --no-wait
     summary: Jangan menunggu operasi jangka panjang selesai.
@@ -876,7 +881,7 @@ directCommands:
     summary: Nama subnet untuk simpul virtual yang akan digunakan.
     description: ''
   - name: --workspace-resource-id
-    summary: ID sumber daya Ruang Kerja Analitik Log yang ada untuk digunakan untuk menyimpan data pemantauan.
+    summary: ID sumber daya dari Ruang Kerja Analitik Log yang ada untuk digunakan untuk menyimpan data pemantauan.
     description: ''
 - uid: az_aks_get-credentials
   name: az aks get-credentials
@@ -985,7 +990,7 @@ directCommands:
 
     Anda dapat menyediakan akun penyimpanan dengan tiga cara: nama akun penyimpanan dan tanda tangan akses bersama dengan izin tulis.
 
-    id sumber daya ke akun penyimpanan yang Anda miliki.
+    ID sumber daya ke akun penyimpanan yang Anda miliki.
 
     akun storagea dalam pengaturan diagnostik untuk kluster terkelola Anda.
   syntax: >-
@@ -1004,9 +1009,9 @@ directCommands:
     syntax: az aks kollect -g MyResourceGroup -n MyManagedCluster --storage-account "MyStoreageAccountResourceId"
   - summary: menggunakan akun storagea dalam pengaturan diagnostik untuk kluster terkelola Anda.
     syntax: az aks kollect -g MyResourceGroup -n MyManagedCluster
-  - summary: sesuaikan log kontainer yang akan dikumpulkan.
+  - summary: sesuaikan log kontainer untuk dikumpulkan.
     syntax: az aks kollect -g MyResourceGroup -n MyManagedCluster --container-logs "mynamespace1/mypod1 myns2"
-  - summary: sesuaikan objek kubernetes yang akan dikumpulkan.
+  - summary: sesuaikan objek kubernetes untuk dikumpulkan.
     syntax: az aks kollect -g MyResourceGroup -n MyManagedCluster --kube-objects "mynamespace1/service myns2/deployment/deployment1"
   - summary: sesuaikan file log simpul yang akan dikumpulkan.
     syntax: az aks kollect -g MyResourceGroup -n MyManagedCluster --node-logs "/var/log/azure-vnet.log /var/log/azure-vnet-ipam.log"
@@ -1022,7 +1027,7 @@ directCommands:
   optionalParameters:
   - name: --container-logs
     summary: Daftar log kontainer yang akan dikumpulkan.
-    description: Daftar log kontainer yang akan dikumpulkan. Nilainya dapat berupa semua kontainer dalam namespace, misalnya, kube-system, atau kontainer tertentu dalam namespace, misalnya, kube-system/tunnelfront.
+    description: Daftar log kontainer yang akan dikumpulkan. Nilainya dapat berupa semua kontainer dalam namespace, misalnya, kube-system, atau kontainer tertentu dalam namespace layanan, misalnya, kube-system/tunnelfront.
   - name: --kube-objects
     summary: Daftar objek kubernetes untuk dijelaskan.
     description: Daftar objek kubernetes untuk dijelaskan. Nilainya dapat berupa semua objek jenis dalam namespace, misalnya, kube-system/pod, atau objek tertentu dari jenis dalam namespace, misalnya, kube-system/deployment/tunnelfront.
@@ -1136,7 +1141,7 @@ directCommands:
 - uid: az_aks_stop
   name: az aks stop
   summary: Menghentikan Kluster Terkelola.
-  description: Ini hanya dapat dilakukan pada azure Virtual Machine Scale set kluster yang didukung. Menghentikan kluster menghentikan sarana kontrol dan simpul agen sepenuhnya, sambil mempertahankan semua status objek dan kluster. Kluster tidak dikenakan biaya saat dihentikan. Lihat menghentikan kluster<target ids="stopping-a-cluster" names="stopping\ a\ cluster" refuri="https://docs.microsoft.com/azure/aks/start-stop-cluster"></target> untuk detail selengkapnya tentang menghentikan kluster.
+  description: Ini hanya dapat dilakukan pada kluster yang didukung set Skala Komputer Virtual Azure. Menghentikan kluster menghentikan sarana kontrol dan simpul agen sepenuhnya, sambil mempertahankan semua status objek dan kluster. Kluster tidak dikenakan biaya saat dihentikan. Lihat menghentikan kluster<target ids="stopping-a-cluster" names="stopping\ a\ cluster" refuri="https://docs.microsoft.com/azure/aks/start-stop-cluster"></target> untuk detail selengkapnya tentang menghentikan kluster.
   syntax: >-
     az aks stop --name
                 --resource-group
@@ -1156,8 +1161,8 @@ directCommands:
     description: ''
 - uid: az_aks_update
   name: az aks update
-  summary: Memperbarui properti kluster Kubernetes terkelola.
-  description: Memperbarui properti kluster Kubernetes terkelola. Dapat digunakan misalnya untuk mengaktifkan/menonaktifkan penskala otomatis kluster.  Ketika dipanggil tanpa argumen opsional, ini mencoba memindahkan kluster ke status tujuannya tanpa mengubah konfigurasi kluster saat ini. Ini dapat digunakan untuk keluar dari status tidak berhasil.
+  summary: Perbarui properti kluster Kubernetes terkelola.
+  description: Perbarui properti kluster Kubernetes terkelola. Dapat digunakan misalnya untuk mengaktifkan/menonaktifkan penskala otomatis kluster.  Ketika dipanggil tanpa argumen opsional, ini mencoba memindahkan kluster ke status tujuannya tanpa mengubah konfigurasi kluster saat ini. Ini dapat digunakan untuk keluar dari status tidak berhasil.
   syntax: >-
     az aks update --name
                   --resource-group
@@ -1262,15 +1267,15 @@ directCommands:
     syntax: az aks update -g MyResourceGroup -n MyManagedCluster --api-server-authorized-ip-ranges 193.168.1.0/24,194.168.1.0/24
   - summary: Nonaktifkan fitur rentang ip apiserver resmi untuk kluster kubernetes.
     syntax: az aks update -g MyResourceGroup -n MyManagedCluster --api-server-authorized-ip-ranges ""
-  - summary: Batasi lalu lintas apiserver dalam kluster kubernetes ke simpul agentpool.
+  - summary: Batasi lalu lintas apiserver di kluster kubernetes ke simpul agentpool.
     syntax: az aks update -g MyResourceGroup -n MyManagedCluster --api-server-authorized-ip-ranges 0.0.0.0/32
   - summary: Perbarui kluster AAD yang dikelola AKS dengan ID penyewa atau ID objek grup admin.
     syntax: az aks update -g MyResourceGroup -n MyManagedCluster --aad-admin-group-object-ids <id-1,id-2> --aad-tenant-id <id>
-  - summary: Migrasikan kluster AAD-Integrated AKS atau kluster non-AAAAD ke kluster AAD yang dikelola AKS.
+  - summary: Migrasikan kluster AKS AAD-Integrated atau kluster non-AAAAD ke kluster AAD yang dikelola AKS.
     syntax: az aks update -g MyResourceGroup -n MyManagedCluster --enable-aad --aad-admin-group-object-ids <id-1,id-2> --aad-tenant-id <id>
-  - summary: Aktifkan feattur Manfaat Pengguna Azure Hybrid untuk kluster kubernetes.
+  - summary: Aktifkan featture Manfaat Pengguna Azure Hybrid untuk kluster kubernetes.
     syntax: az aks update -g MyResourceGroup -n MyManagedCluster --enable-ahub
-  - summary: Nonaktifkan feattur Manfaat Pengguna Hibrid Azure untuk kluster kubernetes.
+  - summary: Nonaktifkan feattur Manfaat Pengguna Azure Hybrid untuk kluster kubernetes.
     syntax: az aks update -g MyResourceGroup -n MyManagedCluster --disable-ahub
   - summary: Perbarui kluster untuk menggunakan identitas terkelola yang ditetapkan sistem di sarana kontrol.
     syntax: az aks update -g MyResourceGroup -n MyManagedCluster --enable-managed-identity
@@ -1309,7 +1314,7 @@ directCommands:
     summary: ID penyewa Azure Active Directory.
     description: ''
   - name: --aks-custom-headers
-    summary: Mengirim header kustom. Ketika ditentukan, format harus Key1=Value1,Key2=Value2.
+    summary: Kirim header kustom. Ketika ditentukan, format harus Key1=Value1,Key2=Value2.
     description: ''
   - name: --api-server-authorized-ip-ranges
     summary: Daftar rentang IP apiserver resmi yang dipisahkan koma. Atur ke "" untuk mengizinkan semua lalu lintas pada kluster yang dibatasi sebelumnya. Atur ke 0.0.0.0/32 untuk membatasi lalu lintas apiserver ke kumpulan simpul.
@@ -1362,7 +1367,7 @@ directCommands:
     summary: Nonaktifkan autoscaler kluster.
     description: ''
   - name: --disable-defender
-    summary: Nonaktifkan profil pertahanan.
+    summary: Nonaktifkan profil defender.
     description: ''
   - name: --disable-disk-driver
     summary: Nonaktifkan Driver CSI AzureDisk.
@@ -1377,7 +1382,7 @@ directCommands:
     summary: (Pratinjau) Jika diatur ke true, mendapatkan kredensial statis akan dinonaktifkan untuk kluster ini.
     description: ''
   - name: --disable-pod-identity
-    summary: (PRATINJAU) Nonaktifkan addon Identitas Pod untuk kluster.
+    summary: (PRATINJAU) Nonaktifkan addon Pod Identity untuk kluster.
     description: ''
   - name: --disable-pod-security-policy
     summary: (PRATINJAU) Nonaktifkan kebijakan keamanan pod.
@@ -1405,7 +1410,7 @@ directCommands:
     summary: Aktifkan integrasi vnet pengguna dengan pod apiserver sarana kontrol.
     description: ''
   - name: --enable-azure-keyvault-kms
-    summary: Aktifkan Layanan Manajemen Kunci Azure KeyVault.
+    summary: Aktifkan Azure KeyVault Key Management Service.
     description: ''
   - name: --enable-azure-rbac
     summary: Aktifkan Azure RBAC untuk mengontrol pemeriksaan otorisasi pada kluster.
@@ -1438,7 +1443,7 @@ directCommands:
     summary: (PRATINJAU) Aktifkan pengeluar sertifikat OIDC.
     description: ''
   - name: --enable-pod-identity
-    summary: (PRATINJAU) Aktifkan addon Identitas Pod untuk kluster.
+    summary: (PRATINJAU) Aktifkan addon Pod Identity untuk kluster.
     description: ''
   - name: --enable-pod-identity-with-kubenet
     summary: (PRATINJAU) Aktifkan addon identitas pod untuk kluster menggunakan plugin jaringan Kubnet.
@@ -1478,20 +1483,20 @@ directCommands:
     summary: Konfigurasi Proksi HTTP untuk kluster ini.
     description: ''
   - name: --load-balancer-idle-timeout
-    summary: Batas waktu diam load balancer dalam menit.
+    summary: Batas waktu diam load balancer dalam hitung menit.
     description: Batas waktu diam yang diinginkan untuk alur keluar load balancer, defaultnya adalah 30 menit. Tentukan nilai dalam rentang [4, 100].
   - name: --load-balancer-managed-outbound-ip-count
     summary: Jumlah IP keluar yang dikelola load balancer.
-    description: Jumlah IP keluar terkelola yang diinginkan untuk koneksi keluar load balancer. Hanya berlaku untuk kluster load balancer SKU Standar. Jika diperbarui, ini akan menghapus pengaturan yang ada pada jumlah IP keluar yang dikelola load balancer; ID sumber daya IP keluar load balancer dan ID sumber daya awalan IP keluar load balancer.
+    description: Jumlah IP keluar terkelola yang diinginkan untuk koneksi keluar load balancer. Hanya berlaku untuk kluster load balancer SKU Standar. Jika diperbarui, itu akan menghapus pengaturan yang ada pada Load balancer yang dikelola jumlah IP keluar; ID sumber daya IP keluar load balancer dan ID sumber daya awalan IP keluar load balancer.
   - name: --load-balancer-managed-outbound-ipv6-count
     summary: Load balancer mengelola jumlah IP IPv6 keluar.
-    description: Jumlah IP IPv6 keluar yang diinginkan untuk koneksi keluar load balancer. Hanya berlaku untuk dual-stack (--ip-families IPv4,IPv6). Jika diperbarui, ini akan menghapus pengaturan yang ada pada jumlah IPv6 keluar yang dikelola load balancer; ID sumber daya IP keluar load balancer dan ID sumber daya awalan IP keluar load balancer.
+    description: Jumlah IP IPv6 keluar yang diinginkan untuk koneksi keluar load balancer. Hanya berlaku untuk dual-stack (--ip-families IPv4,IPv6). Jika diperbarui, itu akan menghapus pengaturan yang ada pada jumlah IPv6 keluar yang dikelola load balancer; ID sumber daya IP keluar load balancer dan ID sumber daya awalan IP keluar load balancer.
   - name: --load-balancer-outbound-ip-prefixes
     summary: ID sumber daya awalan IP keluar load balancer.
-    description: ID sumber daya prefiks IP publik yang dipisahkan koma untuk koneksi keluar load balancer. Hanya berlaku untuk kluster load balancer SKU Standar. Jika diperbarui, ini akan menghapus pengaturan yang ada pada jumlah IP keluar yang dikelola load balancer; ID sumber daya IP keluar load balancer dan ID sumber daya awalan IP keluar load balancer.
+    description: ID sumber daya prefiks IP publik yang dipisahkan koma untuk koneksi keluar load balancer. Hanya berlaku untuk kluster load balancer SKU Standar. Jika diperbarui, itu akan menghapus pengaturan yang ada pada Load balancer yang dikelola jumlah IP keluar; ID sumber daya IP keluar load balancer dan ID sumber daya awalan IP keluar load balancer.
   - name: --load-balancer-outbound-ips
     summary: ID sumber daya IP keluar load balancer.
-    description: ID sumber daya IP publik yang dipisahkan koma untuk koneksi keluar load balancer. Hanya berlaku untuk kluster load balancer SKU Standar. Jika diperbarui, ini akan menghapus pengaturan yang ada pada jumlah IP keluar yang dikelola load balancer; ID sumber daya IP keluar load balancer dan ID sumber daya awalan IP keluar load balancer.
+    description: ID sumber daya IP publik yang dipisahkan koma untuk koneksi keluar load balancer. Hanya berlaku untuk kluster load balancer SKU Standar. Jika diperbarui, itu akan menghapus pengaturan yang ada pada Load balancer yang dikelola jumlah IP keluar; ID sumber daya IP keluar load balancer dan ID sumber daya awalan IP keluar load balancer.
   - name: --load-balancer-outbound-ports
     summary: Port yang dialokasikan keluar load balancer.
     description: Jumlah statis port keluar yang diinginkan per VM di kumpulan backend load balancer. Secara default, atur ke 0 yang menggunakan alokasi default berdasarkan jumlah VM. Tentukan nilai dalam rentang [0, 64000] yang merupakan kelipatan 8.
@@ -1503,7 +1508,7 @@ directCommands:
     description: ''
   - name: --nat-gateway-idle-timeout
     summary: Batas waktu diam gateway NAT dalam hitung menit.
-    description: Batas waktu menganggur yang diinginkan untuk alur keluar gateway NAT, defaultnya adalah 4 menit. Tentukan nilai dalam rentang [4, 120]. Berlaku untuk kluster load balancer SKU Standar dengan jenis keluar managedNATGateway saja.
+    description: Batas waktu diam yang diinginkan untuk alur keluar gateway NAT, defaultnya adalah 4 menit. Tentukan nilai dalam rentang [4, 120]. Berlaku untuk kluster load balancer SKU Standar dengan jenis keluar managedNATGateway saja.
   - name: --nat-gateway-managed-outbound-ip-count
     summary: Jumlah IP keluar yang dikelola gateway NAT.
     description: Jumlah IP keluar terkelola yang diinginkan untuk koneksi keluar gateway NAT. Tentukan nilai dalam rentang [1, 16]. Berlaku untuk kluster load balancer SKU Standar dengan jenis keluar managedNATGateway saja.
@@ -1783,9 +1788,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Kelola Azure Kubernetes Services.
-  ms.openlocfilehash: 227565517e883d3ac1e28dab02357135688ab13e
-  ms.sourcegitcommit: 762ee662631c391498b81809e1603edb00bfdfae
+  ms.openlocfilehash: 3edeaef662affd769dd74d5fcb8db90bd7c9f24b
+  ms.sourcegitcommit: 1c90b81d8746101eeff6dab16f71270efb6d6827
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 06/29/2022
-  ms.locfileid: "146660640"
+  ms.lasthandoff: 07/01/2022
+  ms.locfileid: "146807091"

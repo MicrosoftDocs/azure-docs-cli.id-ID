@@ -1,0 +1,126 @@
+### YamlMime:AzureCLIGroup
+uid: az_iot_device_registration
+name: az iot device registration
+extensionInformation: >-
+  > [!Note]
+
+  > Referensi ini adalah bagian dari ekstensi **azure-iot** untuk Azure CLI (versi 2.30.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal saat pertama kali Anda menjalankan perintah **pendaftaran perangkat az iot** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+summary: Mengelola pendaftaran perangkat IoT untuk IoT Device Provisioning Service.
+description: Gunakan `az iot dps enrollment registration` atau `az iot dps enrollment-group registration` untuk melihat dan menghapus pendaftaran.
+directCommands:
+- uid: az_iot_device_registration_create
+  name: az iot device registration create
+  summary: Daftarkan perangkat IoT dengan IoT Device Provisioning Service.
+  description: >-
+    Mekanisme pengesahan berikut didukung:
+
+    - Kunci simetris
+
+    - Sertifikat x509 Jika menggunakan metode autentikasi x509, sertifikat dan file kunci (dan frase sandi jika diperlukan) harus disediakan.
+  syntax: >-
+    az iot device registration create --registration-id
+                                      [--auth-type {key, login}]
+                                      [--certificate-file-path]
+                                      [--ck]
+                                      [--dps-name]
+                                      [--enrollment-group-id]
+                                      [--host]
+                                      [--id-scope]
+                                      [--key]
+                                      [--key-file-path]
+                                      [--login]
+                                      [--pass]
+                                      [--payload]
+                                      [--resource-group]
+  examples:
+  - summary: Daftarkan perangkat IoT menggunakan pendaftaran individu.
+    syntax: az iot device registration create -n {dps_name} --rid {registration_id}
+  - summary: Daftarkan perangkat IoT menggunakan pendaftaran grup.
+    syntax: az iot device registration create -n {dps_name} --rid {registration_id} --gid {group_enrollment_id}
+  - summary: Daftarkan perangkat IoT menggunakan pendaftaran individu, Cakupan ID Device Provisioning Service, dan kunci konten yang diberikan. Ini akan melewati pengambilan Cakupan ID dan kunci simetris pendaftaran individal.
+    syntax: az iot device registration create --id-scope {id_scope} --rid {registration_id} --key {symmetric_key}
+  - summary: Daftarkan perangkat IoT menggunakan pendaftaran grup, Cakupan ID Device Provisioning Service, dan kunci konten grup pendaftaran yang diberikan. Ini akan melewati pengambilan Cakupan ID dan kunci simetris grup pendaftaran. Kunci konten yang digunakan untuk pendaftaran perangkat akan dihitung dari kunci konten yang diberikan.
+    syntax: az iot device registration create --id-scope {id_scope} --rid {registration_id} --gid {group_enrollment_id} --key {symmetric_key} --ck
+  - summary: Daftarkan perangkat IoT menggunakan pendaftaran grup, Cakupan ID Device Provisioning Service, dan kunci konten yang diberikan. Ini akan melewati pengambilan Cakupan ID. Perhatikan bahwa karena kunci konten harus menjadi kunci perangkat komputasi, id grup pendaftaran tidak diperlukan.
+    syntax: az iot device registration create --id-scope {id_scope} --rid {registration_id} --key {symmetric_key}
+  - summary: Daftarkan perangkat IoT menggunakan pendaftaran individu, Cakupan ID Device Provisioning Service, serta sertifikat dan file kunci yang diberikan. Ini akan melewati pengambilan Cakupan ID.
+    syntax: az iot device registration create --id-scope {id_scope} --rid {registration_id} --cp {certificate_file} --kp {key_file}
+  - summary: Daftarkan perangkat IoT menggunakan pendaftaran individu, Cakupan ID Device Provisioning Service, dan sertifikat serta file kunci dan frase sandi yang diberikan untuk file kunci. Ini akan melewati pengambilan Cakupan ID.
+    syntax: az iot device registration create --id-scope {id_scope} --rid {registration_id} --cp {certificate_file} --kp {key_file} --pass {passphrase}
+  - summary: Daftarkan perangkat IoT menggunakan pendaftaran grup, Cakupan ID Device Provisioning Service, serta sertifikat dan file kunci yang diberikan. Ini akan melewati pengambilan Cakupan ID. Perhatikan bahwa id pendaftaran grup tidak diperlukan untuk pengesahan x509 dan subjek file sertifikat adalah id pendaftaran.
+    syntax: az iot device registration create --id-scope {id_scope} --rid {registration_id} --cp {certificate_file} --kp {key_file}
+  requiredParameters:
+  - isRequired: true
+    name: --registration-id --rid
+    summary: ID pendaftaran perangkat atau ID pendaftaran individu.
+    description: ''
+  optionalParameters:
+  - name: --auth-type
+    defaultValue: key
+    parameterValueGroup: key, login
+    summary: Menunjukkan apakah operasi harus memperoleh kunci kebijakan secara otomatis atau menggunakan sesi Azure AD saat ini. Anda dapat mengonfigurasi default menggunakan `az configure --defaults iothub-data-auth-type=<auth-type-value>`.
+    description: ''
+  - name: --certificate-file-path --cp
+    summary: Jalur ke file PEM sertifikat. Diperlukan untuk pendaftaran x509.
+    description: ''
+  - name: --ck --compute-key
+    summary: Bendera untuk menunjukkan bahwa kunci konten untuk pendaftaran perangkat harus dihitung dari kunci yang diberikan dengan --symmetric-key.
+    description: ''
+  - name: --dps-name -n
+    summary: Nama Azure IoT Hub Device Provisioning Service. Diperlukan jika --login tidak disediakan atau argumen authenticaton dan --id-scope tidak disediakan.
+    description: ''
+  - name: --enrollment-group-id --gid --group-id
+    summary: ID grup pendaftaran. Hanya diperlukan untuk mengambil argumen autentikasi.
+    description: ''
+  - name: --host --provisioning-host
+    defaultValue: global.azure-devices-provisioning.net
+    summary: Titik akhir menunjuk ke host provisi untuk digunakan.
+    description: ''
+  - name: --id-scope --scope
+    summary: Cakupan Id Azure IoT Hub Device Provisioning Service. Jika disediakan dengan argumen autentikasi, akan menghindari login sesi.
+    description: ''
+  - name: --key --symmetric-key
+    summary: Kunci akses bersama simetris untuk pendaftaran perangkat.
+    description: ''
+  - name: --key-file-path --kp
+    summary: Jalur ke file PEM kunci. Diperlukan untuk pendaftaran x509.
+    description: ''
+  - name: --login -l
+    summary: Perintah ini mendukung string koneksi entitas dengan hak untuk melakukan tindakan. Gunakan untuk menghindari login sesi melalui "az login". Jika string dan nama koneksi entitas disediakan, string koneksi akan diprioritaskan. Diperlukan jika --dps-name tidak disediakan atau argumen authenticaton dan --id-scope tidak disediakan.
+    description: ''
+  - name: --pass --passphrase
+    summary: Frase sandi untuk sertifikat.
+    description: ''
+  - name: --payload
+    summary: Payload alokasi kustom sebagai JSON. Khusus untuk digunakan dengan kebijakan alokasi kustom menggunakan Azure Functions.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+commands:
+- az_iot_device_registration_create
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  description: Gunakan `az iot dps enrollment registration` atau `az iot dps enrollment-group registration` untuk melihat dan menghapus pendaftaran.
+  ms.openlocfilehash: 836d38b3dbcf62213c3514f7936582068c10dc9f
+  ms.sourcegitcommit: 1c90b81d8746101eeff6dab16f71270efb6d6827
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 07/01/2022
+  ms.locfileid: "146811629"
