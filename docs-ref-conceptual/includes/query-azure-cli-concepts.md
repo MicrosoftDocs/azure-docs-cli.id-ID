@@ -5,12 +5,12 @@ author: dbradish-microsoft
 ms.author: dbradish
 manager: barbkess
 ms.custom: devx-track-azurecli
-ms.openlocfilehash: 6de202a44be38db9cab0634ecea18ec6f2d9d75d
-ms.sourcegitcommit: 4293ab0b6b4c04df8018d6dfd999db69b1becdd5
+ms.openlocfilehash: c3f7a9dc740cf1465942b40d53c4f03f5d0b13b4
+ms.sourcegitcommit: 1c90b81d8746101eeff6dab16f71270efb6d6827
 ms.translationtype: MT
 ms.contentlocale: id-ID
-ms.lasthandoff: 05/13/2022
-ms.locfileid: "144977687"
+ms.lasthandoff: 07/01/2022
+ms.locfileid: "146820627"
 ---
 Azure CLI menggunakan kueri untuk memilih dan memodifikasi output perintah Azure CLI. Kueri dijalankan sisi klien pada objek JSON yang dikembalikan perintah Azure CLI sebelum pemformatan tampilan apa pun.
 
@@ -313,7 +313,7 @@ az account list --query "[?!isDefault].name"
 az account list --query "[?isDefault == ``false``].name"
 ```
 
-Perhatikan karakter escape tambahan (`` ` ``) di sekitar 50 dalam perintah di atas. Karakter escape tambahan ini ada karena perintah Azure CLI dianggap sebagai skrip Prompt Perintah, sehingga penguraian PowerShell dan Command Prompt perlu dipertimbangkan. Azure CLI hanya akan menerima simbol jika masih ada setelah 2 putaran penguraian. Untuk informasi selengkapnya tentang kemungkinan masalah kutipan lainnya, lihat [Mengutip masalah dengan PowerShell](https://github.com/Azure/azure-cli/blob/dev/doc/quoting-issues-with-powershell.md).
+Perhatikan karakter escape tambahan (`` ` ``) yang mengelilingi nilai `false` dalam perintah di atas. Karakter escape tambahan ini ada karena perintah Azure CLI dianggap sebagai skrip Prompt Perintah, sehingga penguraian PowerShell dan Command Prompt perlu dipertimbangkan. Azure CLI hanya akan menerima simbol jika masih ada setelah 2 putaran penguraian. Untuk informasi selengkapnya tentang kemungkinan masalah kutipan lainnya, lihat [Mengutip masalah dengan PowerShell](https://github.com/Azure/azure-cli/blob/dev/doc/quoting-issues-with-powershell.md).
 
 ### <a name="cmd"></a>[Cmd](#tab/cmd)
 
@@ -375,7 +375,7 @@ az vm list --resource-group QueryDemo --query "[?storageProfile.osDisk.diskSizeG
 az vm list --resource-group QueryDemo --query "[?storageProfile.osDisk.diskSizeGb >=``50``].{Name:name,  admin:osProfile.adminUsername, DiskSize:storageProfile.osDisk.diskSizeGb }" --output table
 ```
 
-Perhatikan karakter escape tambahan (`` ` ``) di sekitar 50 dalam perintah di atas. Karakter escape tambahan ini ada karena perintah Azure CLI dianggap sebagai skrip Prompt Perintah, sehingga penguraian PowerShell dan Command Prompt perlu dipertimbangkan. Azure CLI hanya akan menerima simbol jika masih ada setelah 2 putaran penguraian. Untuk informasi selengkapnya tentang kemungkinan masalah kutipan lainnya, lihat [Mengutip masalah dengan PowerShell](https://github.com/Azure/azure-cli/blob/dev/doc/quoting-issues-with-powershell.md).
+Perhatikan karakter escape tambahan (`` ` ``) di sekitar 50 dalam perintah di atas. Karakter escape tambahan ini ada karena perintah Azure CLI dianggap sebagai skrip Prompt Perintah, sehingga penguraian PowerShell dan Prompt Perintah perlu dipertimbangkan. Azure CLI hanya akan menerima simbol jika masih ada setelah 2 putaran penguraian. Untuk informasi selengkapnya tentang kemungkinan masalah kutipan lainnya, lihat [Mengutip masalah dengan PowerShell](https://github.com/Azure/azure-cli/blob/dev/doc/quoting-issues-with-powershell.md).
 
 ### <a name="cmd"></a>[Cmd](#tab/cmd)
 
@@ -438,7 +438,7 @@ az vm list --resource-group QueryDemo --query "[?contains(storageProfile.osDisk.
 
 ## <a name="pipe-expressions"></a>Ekspresi pipa
 
-Mirip dengan cara `|` digunakan dalam baris perintah, `|` dapat digunakan dalam kueri JMESPath untuk menerapkan ekspresi ke hasil kueri perantara. Kita juga dapat menggunakan `|` untuk memecah kueri kompleks menjadi subekspresi yang lebih sederhana. Untuk mempersingkat kueri dari bagian sebelumnya, gunakan `|` untuk menerapkan filter setelah meratakan dan memilih data.
+Mirip dengan cara `|` digunakan di baris perintah, `|` dapat digunakan dalam kueri JMESPath untuk menerapkan ekspresi ke hasil kueri perantara. Kita juga dapat menggunakan `|` untuk memecah kueri kompleks menjadi subekspresi yang lebih sederhana. Untuk mempersingkat kueri dari bagian sebelumnya, gunakan `|` untuk menerapkan filter setelah meratakan dan memilih data.
 
 ### <a name="bash"></a>[Bash](#tab/bash)
 
@@ -511,7 +511,7 @@ Lihat [Spesifikasi JMESPath - Fungsi Bawaan](http://jmespath.org/specification.h
 
 ## <a name="formatting-query-results"></a>Memformat hasil kueri
 
-Azure CLI menggunakan JSON sebagai format output defaultnya, namun format output yang berbeda mungkin lebih sesuai dengan kueri tergantung pada tujuan dan hasilnya. Perhatikan bahwa kueri selalu dijalankan pada output terlebih dahulu lalu diformat `JSON` .
+Azure CLI menggunakan JSON sebagai format output defaultnya, namun format output yang berbeda mungkin lebih sesuai dengan kueri tergantung pada tujuan dan hasilnya. Perhatikan bahwa kueri selalu dijalankan pada output terlebih `JSON` dahulu lalu diformat.
 
 Bagian ini akan membahas `tsv` dan `table` memformat dan beberapa kasus penggunaan untuk setiap format. Untuk informasi selengkapnya tentang format output, lihat [Format output untuk perintah Azure CLI](../format-output-azure-cli.md).
 
@@ -631,7 +631,7 @@ az vm list --resource-group QueryDemo --query "[].{Name:name, OS:storageProfile.
 ]
 ```
 
-Ketika dikombinasikan dengan `--output table` format output, nama kolom cocok dengan `displayKey` nilai hash multipilih sehingga lebih mudah untuk melompati informasi:
+Ketika dikombinasikan `--output table` dengan format output, nama kolom cocok dengan `displayKey` nilai hash multipilih sehingga lebih mudah untuk melompati informasi:
 
 ### <a name="bash"></a>[Bash](#tab/bash)
 
