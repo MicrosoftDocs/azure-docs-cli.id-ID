@@ -18,7 +18,7 @@ directCommands:
                               [--no-wait]
                               [--number-of-workers]
                               [--per-site-scaling]
-                              [--sku {B1, B2, B3, D1, F1, FREE, I1, I1v2, I2, I2v2, I3, I3v2, P1V2, P1V3, P2V2, P2V3, P3V2, P3V3, PC2, PC3, PC4, S1, S2, S3, SHARED, WS1, WS2, WS3}]
+                              [--sku {B1, B2, B3, D1, F1, FREE, I1, I1v2, I2, I2v2, I3, I3v2, P1V2, P1V3, P2V2, P2V3, P3V2, P3V3, S1, S2, S3, SHARED, WS1, WS2, WS3}]
                               [--tags]
                               [--zone-redundant]
   examples:
@@ -64,8 +64,8 @@ directCommands:
     description: ''
   - name: --sku
     defaultValue: B1
-    parameterValueGroup: B1, B2, B3, D1, F1, FREE, I1, I1v2, I2, I2v2, I3, I3v2, P1V2, P1V3, P2V2, P2V3, P3V2, P3V3, PC2, PC3, PC4, S1, S2, S3, SHARED, WS1, WS2, WS3
-    summary: Tingkat harga, misalnya, F1(Gratis), D1(Bersama), B1(Dasar Kecil), B2(Sedang Dasar), B3(Besar Dasar), S1(Standar Kecil), P1V2(Premium V2 Kecil), P1V3(Premium V3 Kecil), P2V3(Premium V3 Sedang), P3V3 (Premium V3 Besar), PC2 (kontainer Premium Kecil), PC3 (Premium Kontainer Sedang), PC4 ( Premium Kontainer Besar), I1 (Kecil Terisolasi), I2 (Sedang Terisolasi), I3 (Besar Terisolasi), I1v2 (V2 Kecil Terisolasi), I2v2 (Sedang V2 Terisolasi), I3v2 (V2 Besar Terisolasi), WS1 (Logic Apps Workflow Standard 1), WS2 (Logic Apps Workflow Standard 2), WS3 (Logic Apps Workflow Standard 3).
+    parameterValueGroup: B1, B2, B3, D1, F1, FREE, I1, I1v2, I2, I2v2, I3, I3v2, P1V2, P1V3, P2V2, P2V3, P3V2, P3V3, S1, S2, S3, SHARED, WS1, WS2, WS3
+    summary: Tingkat harga, misalnya, F1(Free), D1(Shared), B1(Basic Small), B2(Basic Medium), B3(Basic Large), S1(Standard Small), P1V2(Premium V2 Small), P1V3(Premium V3 Small), P2V3(Premium V3 Medium), P3V3(Premium V3 Besar), I1 (Kecil Terisolasi), I2 (Sedang Terisolasi), I3 (Besar Terisolasi), I1v2 (Terisolasi V2 Kecil), I2v2 (Sedang V2 Terisolasi), I3v2 (V2 Terisolasi Besar),  WS1 (Logic Apps Workflow Standard 1), WS2 (Logic Apps Workflow Standard 2), WS3 (Logic Apps Workflow Standard 3).
     description: ''
   - name: --tags
     summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
@@ -106,9 +106,9 @@ directCommands:
   description: ''
   syntax: az appservice plan list [--resource-group]
   examples:
-  - summary: Cantumkan semua paket App Service tingkat gratis.
+  - summary: Daftar semua paket App Service tingkat gratis.
     syntax: az appservice plan list --query "[?sku.tier=='Free']"
-  - summary: Cantumkan semua paket App Service untuk lingkungan App Service.
+  - summary: Mencantumkan semua paket App Service untuk lingkungan App Service.
     syntax: az appservice plan list --query "[?hostingEnvironmentProfile.name=='<ase-name>']"
   optionalParameters:
   - name: --resource-group -g
@@ -153,7 +153,7 @@ directCommands:
                               [--remove]
                               [--resource-group]
                               [--set]
-                              [--sku {B1, B2, B3, D1, F1, FREE, I1, I1v2, I2, I2v2, I3, I3v2, P1V2, P1V3, P2V2, P2V3, P3V2, P3V3, PC2, PC3, PC4, S1, S2, S3, SHARED, WS1, WS2, WS3}]
+                              [--sku {B1, B2, B3, D1, F1, FREE, I1, I1v2, I2, I2v2, I3, I3v2, P1V2, P1V3, P2V2, P2V3, P3V2, P3V3, S1, S2, S3, SHARED, WS1, WS2, WS3}]
   examples:
   - summary: Memperbarui paket layanan aplikasi. (dibuat otomatis)
     syntax: az appservice plan update --name MyAppServicePlan --resource-group MyResourceGroup --sku F1
@@ -163,7 +163,7 @@ directCommands:
     description: ''
   - name: --elastic-scale
     parameterValueGroup: false, true
-    summary: Mengaktifkan atau menonaktifkan penskalakan otomatis. Atur ke "true" untuk mengaktifkan skala elastis untuk paket ini, atau "false" untuk menonaktifkan skala elastis untuk paket ini. SKU harus Premium V2 SKU (P1V2, P2V2, P3V2) atau Premium V3 SKU (P1V3, P2V3, P3V3).
+    summary: Aktifkan atau nonaktifkan penskalaian otomatis. Atur ke "true" untuk mengaktifkan skala elastis untuk paket ini, atau "false" untuk menonaktifkan skala elastis untuk paket ini. SKU harus premium V2 SKU (P1V2, P2V2, P3V2) atau Premium V3 SKU (P1V3, P2V3, P3V3).
     description: ''
   - name: --force-string
     summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
@@ -172,7 +172,7 @@ directCommands:
     summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
     description: ''
   - name: --max-elastic-worker-count -m
-    summary: Jumlah maksimum instans yang dapat diskalakan oleh paket. Rencana harus merupakan rencana skala elastis.
+    summary: Jumlah maksimum instans yang dapat diskalakan oleh paket. Rencananya harus merupakan rencana skala elastis.
     description: ''
   - name: --name -n
     summary: Nama paket layanan aplikasi.
@@ -185,7 +185,7 @@ directCommands:
     summary: Jumlah pekerja yang akan dialokasikan.
     description: ''
   - name: --remove
-    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
     description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
@@ -194,8 +194,8 @@ directCommands:
     summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
     description: ''
   - name: --sku
-    parameterValueGroup: B1, B2, B3, D1, F1, FREE, I1, I1v2, I2, I2v2, I3, I3v2, P1V2, P1V3, P2V2, P2V3, P3V2, P3V3, PC2, PC3, PC4, S1, S2, S3, SHARED, WS1, WS2, WS3
-    summary: Tingkat harga, misalnya, F1(Gratis), D1(Bersama), B1(Dasar Kecil), B2(Sedang Dasar), B3(Besar Dasar), S1(Standar Kecil), P1V2(Premium V2 Kecil), P1V3(Premium V3 Kecil), P2V3(Premium V3 Sedang), P3V3 (Premium V3 Besar), PC2 (kontainer Premium Kecil), PC3 (Premium Kontainer Sedang), PC4 ( Premium Kontainer Besar), I1 (Kecil Terisolasi), I2 (Sedang Terisolasi), I3 (Besar Terisolasi), I1v2 (V2 Kecil Terisolasi), I2v2 (Sedang V2 Terisolasi), I3v2 (V2 Besar Terisolasi), WS1 (Logic Apps Workflow Standard 1), WS2 (Logic Apps Workflow Standard 2), WS3 (Logic Apps Workflow Standard 3).
+    parameterValueGroup: B1, B2, B3, D1, F1, FREE, I1, I1v2, I2, I2v2, I3, I3v2, P1V2, P1V3, P2V2, P2V3, P3V2, P3V3, S1, S2, S3, SHARED, WS1, WS2, WS3
+    summary: Tingkat harga, misalnya, F1(Free), D1(Shared), B1(Basic Small), B2(Basic Medium), B3(Basic Large), S1(Standard Small), P1V2(Premium V2 Small), P1V3(Premium V3 Small), P2V3(Premium V3 Medium), P3V3(Premium V3 Besar), I1 (Kecil Terisolasi), I2 (Sedang Terisolasi), I3 (Besar Terisolasi), I1v2 (Terisolasi V2 Kecil), I2v2 (Sedang V2 Terisolasi), I3v2 (V2 Terisolasi Besar),  WS1 (Logic Apps Workflow Standard 1), WS2 (Logic Apps Workflow Standard 2), WS3 (Logic Apps Workflow Standard 3).
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/appservice/_help.py
 commands:
@@ -223,11 +223,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 04/13/2022
+  ms.date: 06/28/2022
   description: Mengelola paket layanan aplikasi.
-  ms.openlocfilehash: 3c561dee92158169cb3dd97c7e41d5d5c8b0768f
-  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
+  ms.openlocfilehash: 24a2caf20426c00a560b393c75dff4ea4c13b97d
+  ms.sourcegitcommit: 72fad8cc38b3cb770675568f31436405d83944f2
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/27/2022
-  ms.locfileid: "144063761"
+  ms.lasthandoff: 07/05/2022
+  ms.locfileid: "146933749"

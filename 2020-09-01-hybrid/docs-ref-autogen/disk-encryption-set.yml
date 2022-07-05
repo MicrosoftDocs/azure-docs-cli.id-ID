@@ -12,7 +12,7 @@ directCommands:
     az disk-encryption-set create --key-url
                                   --name
                                   --resource-group
-                                  [--encryption-type {EncryptionAtRestWithCustomerKey, EncryptionAtRestWithPlatformAndCustomerKeys, EncryptionAtRestWithPlatformKey}]
+                                  [--encryption-type {ConfidentialVmEncryptedWithCustomerKey, EncryptionAtRestWithCustomerKey, EncryptionAtRestWithPlatformAndCustomerKeys, EncryptionAtRestWithPlatformKey}]
                                   [--location]
                                   [--no-wait]
                                   [--source-vault]
@@ -20,6 +20,14 @@ directCommands:
   examples:
   - summary: Buat set enkripsi disk.
     syntax: az disk-encryption-set create --resource-group MyResourceGroup --name MyDiskEncryptionSet --key-url MyKey --source-vault MyVault
+  - summary: Buat set enkripsi disk dengan identitas yang ditetapkan sistem.
+    syntax: az disk-encryption-set create --resource-group MyResourceGroup --name MyDiskEncryptionSet --key-url MyKey --source-vault MyVault --mi-system-assigned
+  - summary: Buat set enkripsi disk dengan identitas yang ditetapkan pengguna.
+    syntax: az disk-encryption-set create --resource-group MyResourceGroup --name MyDiskEncryptionSet --key-url MyKey --source-vault MyVault --mi-user-assigned myAssignedId
+  - summary: Buat set enkripsi disk dengan identitas yang ditetapkan sistem dan identitas yang ditetapkan pengguna.
+    syntax: az disk-encryption-set create --resource-group MyResourceGroup --name MyDiskEncryptionSet --key-url MyKey --source-vault MyVault --mi-system-assigned --mi-user-assigned myAssignedId
+  - summary: Buat set enkripsi disk dengan id klien aplikasi multi-penyewa untuk mengakses brankas kunci di penyewa yang berbeda.
+    syntax: az disk-encryption-set create --resource-group MyResourceGroup --name MyDiskEncryptionSet --key-url MyKey --source-vault MyVault --federated-client-id myFederatedClientId
   - summary: Buat set enkripsi disk yang mendukung enkripsi ganda.
     syntax: az disk-encryption-set create --resource-group MyResourceGroup --name MyDiskEncryptionSet --key-url MyKey --source-vault MyVault --encryption-type EncryptionAtRestWithPlatformAndCustomerKeys
   requiredParameters:
@@ -37,8 +45,8 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --encryption-type
-    parameterValueGroup: EncryptionAtRestWithCustomerKey, EncryptionAtRestWithPlatformAndCustomerKeys, EncryptionAtRestWithPlatformKey
-    summary: 'Jenis kunci yang digunakan untuk mengenkripsi data disk. EncryptionAtRestWithPlatformKey: Disk dienkripsi saat tidak aktif dengan kunci yang dikelola Platform. Ini adalah jenis enkripsi default. EncryptionAtRestWithCustomerKey: Disk dienkripsi saat tidak aktif dengan kunci yang dikelola Pelanggan yang dapat diubah dan dicabut oleh pelanggan. EncryptionAtRestWithPlatformAndCustomerKeys: Disk dienkripsi saat tidak aktif dengan 2 lapisan enkripsi. Salah satu kuncinya adalah Dikelola pelanggan dan kunci lainnya adalah dikelola Platform.'
+    parameterValueGroup: ConfidentialVmEncryptedWithCustomerKey, EncryptionAtRestWithCustomerKey, EncryptionAtRestWithPlatformAndCustomerKeys, EncryptionAtRestWithPlatformKey
+    summary: 'Jenis kunci yang digunakan untuk mengenkripsi data disk. EncryptionAtRestWithPlatformKey: Disk dienkripsi saat tidak aktif dengan kunci yang dikelola Platform. Ini adalah jenis enkripsi default. EncryptionAtRestWithCustomerKey: Disk dienkripsi saat tidak aktif dengan kunci yang dikelola Pelanggan yang dapat diubah dan dicabut oleh pelanggan. EncryptionAtRestWithPlatformAndCustomerKeys: Disk dienkripsi saat tidak aktif dengan 2 lapisan enkripsi. Salah satu kuncinya adalah Dikelola pelanggan dan kunci lainnya adalah dikelola Platform. ConfidentialVmEncryptedWithCustomerKey: Jenis enkripsi tambahan yang diterima untuk VM rahasia. Disk dienkripsi saat tidak aktif dengan kunci yang dikelola Pelanggan.'
     description: ''
   - name: --location -l
     summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
@@ -120,6 +128,10 @@ directCommands:
   examples:
   - summary: Memperbarui set enkripsi disk. (dibuat otomatis)
     syntax: az disk-encryption-set update --name MyDiskEncryptionSet --resource-group MyResourceGroup --key-url MyKey --source-vault MyVault
+  - summary: Perbarui id klien aplikasi multi-penyewa dari set enkripsi disk.
+    syntax: az disk-encryption-set update --name MyDiskEncryptionSet --resource-group MyResourceGroup --key-url MyKey --source-vault MyVault --federated-client-id myFederatedClientId
+  - summary: Hapus id klien aplikasi multi-penyewa dari set enkripsi disk.
+    syntax: az disk-encryption-set update --name MyDiskEncryptionSet --resource-group MyResourceGroup --key-url MyKey --source-vault MyVault --federated-client-id None
   optionalParameters:
   - name: --add
     summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
@@ -173,9 +185,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Sumber daya Set Enkripsi Disk.
-  ms.openlocfilehash: ca8baf59d57d7bc6b54b518e99e2103f80cf1ab0
-  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.openlocfilehash: 45a49dbc1cd228e1c3050797ab87921c9f295846
+  ms.sourcegitcommit: 72fad8cc38b3cb770675568f31436405d83944f2
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 03/25/2022
-  ms.locfileid: "141119605"
+  ms.lasthandoff: 07/05/2022
+  ms.locfileid: "146933083"
