@@ -7,17 +7,17 @@ directCommands:
 - uid: az_storage_blob_service-properties_show
   name: az storage blob service-properties show
   summary: Mendapatkan properti blob service akun penyimpanan, termasuk Azure Storage Analytics.
-  description: ''
+  description: 'kata kunci batas waktu habisParameter batas waktu dinyatakan dalam hitung detik. :returns: Objek yang berisi properti layanan blob seperti pengelogan analitik, metrik jam/menit, aturan cors, dll. :rtype: Dict[str, Any] .. admonition:: Contoh: .. literalinclude:: .. /samples/blob_samples_service.py :start-after: [START get_blob_service_properties] :end-before: [END get_blob_service_properties] :language: python :d edent: 8 :caption: Mendapatkan properti layanan untuk layanan blob.'
   syntax: >-
     az storage blob service-properties show [--account-key]
                                             [--account-name]
                                             [--auth-mode {key, login}]
+                                            [--blob-endpoint]
                                             [--connection-string]
                                             [--sas-token]
-                                            [--timeout]
   optionalParameters:
   - name: --account-key
-    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
     description: ''
   - name: --account-name
     summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
@@ -26,14 +26,14 @@ directCommands:
     parameterValueGroup: key, login
     summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
     description: ''
+  - name: --blob-endpoint
+    summary: 'Titik akhir layanan data penyimpanan. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Anda dapat menemukan setiap titik akhir utama layanan dengan `az storage account show`. Variabel lingkungan: AZURE_STORAGE_SERVICE_ENDPOINT.'
+    description: ''
   - name: --connection-string
-    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    summary: 'String koneksi akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
   - name: --sas-token
-    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
-    description: ''
-  - name: --timeout
-    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 - uid: az_storage_blob_service-properties_update
@@ -46,6 +46,7 @@ directCommands:
                                               [--account-name]
                                               [--add]
                                               [--auth-mode {key, login}]
+                                              [--blob-endpoint]
                                               [--connection-string]
                                               [--delete-retention {false, true}]
                                               [--delete-retention-period]
@@ -55,7 +56,6 @@ directCommands:
                                               [--sas-token]
                                               [--set]
                                               [--static-website {false, true}]
-                                              [--timeout]
   examples:
   - summary: Memperbarui properti layanan blob penyimpanan. (dibuat otomatis)
     syntax: az storage blob service-properties update --404-document error.html --account-name mystorageccount --account-key 00000000 --index-document index.html --static-website true
@@ -64,7 +64,7 @@ directCommands:
     summary: Mewakili jalur ke dokumen kesalahan yang harus ditampilkan ketika kesalahan 404 dikeluarkan, dengan kata lain, ketika browser meminta halaman yang tidak ada.
     description: ''
   - name: --account-key
-    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
     description: ''
   - name: --account-name
     summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
@@ -76,8 +76,11 @@ directCommands:
     parameterValueGroup: key, login
     summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
     description: ''
+  - name: --blob-endpoint
+    summary: 'Titik akhir layanan data penyimpanan. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Anda dapat menemukan setiap titik akhir utama layanan dengan `az storage account show`. Variabel lingkungan: AZURE_STORAGE_SERVICE_ENDPOINT.'
+    description: ''
   - name: --connection-string
-    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    summary: 'String koneksi akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
   - name: --delete-retention
     parameterValueGroup: false, true
@@ -93,10 +96,10 @@ directCommands:
     summary: Mewakili nama dokumen indeks. Ini biasanya "index.html".
     description: ''
   - name: --remove
-    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
     description: ''
   - name: --sas-token
-    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   - name: --set
     summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
@@ -104,9 +107,6 @@ directCommands:
   - name: --static-website
     parameterValueGroup: false, true
     summary: Mengaktifkan situs web statis.
-    description: ''
-  - name: --timeout
-    summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/storage/_help.py
 commands:
@@ -134,11 +134,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 05/19/2022
+  ms.date: 06/16/2022
   description: Mengelola properti layanan blob penyimpanan.
-  ms.openlocfilehash: 87e74ca7fef2a1166d572aaf2c0bbed26d12ac5a
-  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
+  ms.openlocfilehash: 4044dad065a15cffca2829c7103594c4e6c042e3
+  ms.sourcegitcommit: 72fad8cc38b3cb770675568f31436405d83944f2
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 05/24/2022
-  ms.locfileid: "145214843"
+  ms.lasthandoff: 07/05/2022
+  ms.locfileid: "146923670"

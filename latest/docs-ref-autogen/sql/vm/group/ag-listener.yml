@@ -6,7 +6,7 @@ description: ''
 directCommands:
 - uid: az_sql_vm_group_ag-listener_create
   name: az sql vm group ag-listener create
-  summary: Membuat pendengar grup ketersediaan.
+  summary: Membuat listener grup ketersediaan.
   description: ''
   syntax: >-
     az sql vm group ag-listener create --ag-name
@@ -22,9 +22,9 @@ directCommands:
                                        [--public-ip]
                                        [--vnet-name]
   examples:
-  - summary: Membuat pendengar grup ketersediaan. Perhatikan bahwa komputer virtual SQL berada dalam grup sumber daya yang sama dengan grup komputer virtual SQL.
+  - summary: Buat listener grup ketersediaan. Perhatikan bahwa komputer virtual SQL berada dalam grup sumber daya yang sama dengan grup komputer virtual SQL.
     syntax: az sql vm group ag-listener create -n aglistenertest -g myresourcegroup --ag-name agname --group-name sqlvmgroup --ip-address 10.0.0.11 --load-balancer '/subscriptions/{yoursubscription}/resourceGroups/{yourrg}/providers/Microsoft.Network/loadBalancers/{lbname}' --probe-port 59999 --subnet '/subscriptions/{yoursubscription}/resourceGroups/{yourrg}/providers/Microsoft.Network/virtualNetworks/{vnname}/subnets/{subnetname}' --sqlvms sqlvm1 sqlvm2
-  - summary: Membuat pendengar grup ketersediaan. Perhatikan bahwa semua sumber daya berada dalam grup sumber daya yang sama.
+  - summary: Buat listener grup ketersediaan. Perhatikan bahwa semua sumber daya berada dalam grup sumber daya yang sama.
     syntax: az sql vm group ag-listener create -n aglistenertest -g myresourcegroup --ag-name agname --group-name sqlvmgroup --ip-address 10.0.0.11 --load-balancer {lbname} --probe-port 59999 --subnet {subnetname} --vnet-name {vnname} --sqlvms sqlvm1 sqlvm2
   requiredParameters:
   - isRequired: true
@@ -37,7 +37,7 @@ directCommands:
     description: ''
   - isRequired: true
     name: --ip-address -i
-    summary: Alamat IP privat terikat ke pendengar grup ketersediaan.
+    summary: Alamat IP privat yang terikat ke pendengar grup ketersediaan.
     description: ''
   - isRequired: true
     name: --load-balancer -b
@@ -57,11 +57,11 @@ directCommands:
     description: ''
   - isRequired: true
     name: --sqlvms -q
-    summary: Daftar yang dipisahkan ruang SQL nama instans komputer virtual atau ID sumber daya yang terdaftar ke dalam grup ketersediaan.
+    summary: Daftar nama instans komputer virtual SQL yang dipisahkan ruang atau ID sumber daya yang terdaftar ke dalam grup ketersediaan.
     description: ''
   - isRequired: true
     name: --subnet -u
-    summary: Nama atau id sumber daya subnet yang akan disertakan dalam IP privat.
+    summary: Nama atau id sumber daya subnet untuk disertakan dalam IP privat.
     description: ''
   optionalParameters:
   - name: --port -p
@@ -77,7 +77,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
 - uid: az_sql_vm_group_ag-listener_delete
   name: az sql vm group ag-listener delete
-  summary: Menghapus listener grup ketersediaan.
+  summary: Menghapus pendengar grup ketersediaan.
   description: ''
   syntax: >-
     az sql vm group ag-listener delete --group-name
@@ -123,7 +123,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
 - uid: az_sql_vm_group_ag-listener_show
   name: az sql vm group ag-listener show
-  summary: Mendapatkan pendengar grup ketersediaan.
+  summary: Mendapatkan listener grup ketersediaan.
   description: ''
   syntax: >-
     az sql vm group ag-listener show --group-name
@@ -153,7 +153,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
 - uid: az_sql_vm_group_ag-listener_update
   name: az sql vm group ag-listener update
-  summary: Memperbarui pendengar grup ketersediaan.
+  summary: Updates pendengar grup ketersediaan.
   description: ''
   syntax: >-
     az sql vm group ag-listener update --group-name
@@ -166,7 +166,7 @@ directCommands:
                                        [--set]
                                        [--sqlvms]
   examples:
-  - summary: Ganti komputer virtual SQL yang berada dalam grup ketersediaan.
+  - summary: Ganti komputer virtual SQL yang ada di grup ketersediaan.
     syntax: az sql vm group ag-listener update -n aglistenertest -g myresourcegroup --sqlvms sqlvm3 sqlvm4 --group-name mygroup
   requiredParameters:
   - isRequired: true
@@ -187,7 +187,7 @@ directCommands:
     summary: Nama pendengar grup ketersediaan.
     description: ''
   - name: --remove
-    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
     description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
@@ -196,7 +196,7 @@ directCommands:
     summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
     description: ''
   - name: --sqlvms -q
-    summary: Daftar yang dipisahkan ruang SQL nama instans komputer virtual atau ID sumber daya yang terdaftar ke dalam grup ketersediaan.
+    summary: Daftar nama instans komputer virtual SQL yang dipisahkan ruang atau ID sumber daya yang terdaftar ke dalam grup ketersediaan.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
 commands:
@@ -224,11 +224,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 04/15/2022
+  ms.date: 06/30/2022
   description: Mengelola listener grup ketersediaan SQL.
-  ms.openlocfilehash: 07ce60d793777b5dbd8d7e120147efa920dcea59
-  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
+  ms.openlocfilehash: 465a9defe1623cbcd4924e784b018b8348ffb388
+  ms.sourcegitcommit: 72fad8cc38b3cb770675568f31436405d83944f2
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 05/24/2022
-  ms.locfileid: "145253381"
+  ms.lasthandoff: 07/05/2022
+  ms.locfileid: "146924227"

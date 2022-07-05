@@ -29,6 +29,7 @@ directCommands:
                                   [--kdc-ip]
                                   [--ldap-over-tls]
                                   [--ldap-signing {false, true}]
+                                  [--no-wait]
                                   [--organizational-unit]
                                   [--remove]
                                   [--resource-group]
@@ -111,6 +112,9 @@ directCommands:
     parameterValueGroup: false, true
     summary: Menentukan apakah lalu lintas LDAP perlu ditandatangani atau tidak.
     description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
   - name: --organizational-unit
     summary: Unit Organisasi (OU) dalam Direktori Aktif Windows.
     description: ''
@@ -164,6 +168,7 @@ directCommands:
     az netappfiles account ad remove --active-directory
                                      [--account-name]
                                      [--ids]
+                                     [--no-wait]
                                      [--resource-group]
   examples:
   - summary: Menghapus direktori aktif dari akun
@@ -180,13 +185,16 @@ directCommands:
   - name: --ids
     summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
     description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/netappfiles/_help.py
 - uid: az_netappfiles_account_ad_update
   name: az netappfiles account ad update
-  summary: Memperbarui direktori aktif ke akun.
+  summary: Updates direktori aktif ke akun.
   description: ''
   syntax: >-
     az netappfiles account ad update --active-directory-id
@@ -210,6 +218,7 @@ directCommands:
                                      [--kdc-ip]
                                      [--ldap-over-tls]
                                      [--ldap-signing {false, true}]
+                                     [--no-wait]
                                      [--organizational-unit]
                                      [--remove]
                                      [--resource-group]
@@ -296,6 +305,9 @@ directCommands:
     parameterValueGroup: false, true
     summary: Menentukan apakah lalu lintas LDAP perlu ditandatangani atau tidak.
     description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
   - name: --organizational-unit
     summary: Unit Organisasi (OU) dalam Direktori Aktif Windows.
     description: ''
@@ -321,11 +333,61 @@ directCommands:
     summary: Ini menentukan DN pengguna, yang mengambil alih DN dasar untuk pencarian pengguna.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/netappfiles/_help.py
+- uid: az_netappfiles_account_ad_wait
+  name: az netappfiles account ad wait
+  summary: Tunggu operasi iklan akun.
+  description: ''
+  syntax: >-
+    az netappfiles account ad wait [--account-name]
+                                   [--created]
+                                   [--custom]
+                                   [--deleted]
+                                   [--exists]
+                                   [--ids]
+                                   [--interval]
+                                   [--resource-group]
+                                   [--timeout]
+                                   [--updated]
+  optionalParameters:
+  - name: --account-name --name -a -n
+    summary: Nama akun ANF.
+    description: ''
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/netappfiles/_help.py
 commands:
 - az_netappfiles_account_ad_add
 - az_netappfiles_account_ad_list
 - az_netappfiles_account_ad_remove
 - az_netappfiles_account_ad_update
+- az_netappfiles_account_ad_wait
 globalParameters:
 - name: --debug
   summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
@@ -345,11 +407,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 05/05/2022
+  ms.date: 06/27/2022
   description: Mengelola direktori aktif Akun Azure NetApp Files (ANF).
-  ms.openlocfilehash: 8432a764cb91385a8c3385624da78c860dc25fe3
-  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
+  ms.openlocfilehash: 42040a8cab91f312c989636138f101653ba0020b
+  ms.sourcegitcommit: 72fad8cc38b3cb770675568f31436405d83944f2
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 05/24/2022
-  ms.locfileid: "145209407"
+  ms.lasthandoff: 07/05/2022
+  ms.locfileid: "146925091"

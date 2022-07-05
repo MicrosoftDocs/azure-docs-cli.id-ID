@@ -6,8 +6,8 @@ description: ''
 directCommands:
 - uid: az_storage_file_copy_cancel
   name: az storage file copy cancel
-  summary: Membatalkan operasi copy_file yang tertunda, dan meninggalkan file tujuan dengan panjang nol dan metadata penuh.
-  description: ''
+  summary: Membatalkan operasi penyalinan yang sedang berlangsung.
+  description: Ini akan meninggalkan file tujuan dengan panjang nol dan metadata penuh. Ini akan menimbulkan kesalahan jika operasi salin telah berakhir.
   syntax: >-
     az storage file copy cancel --copy-id
                                 --destination-path
@@ -20,7 +20,7 @@ directCommands:
   requiredParameters:
   - isRequired: true
     name: --copy-id
-    summary: Salin pengidentifikasi yang disediakan dalam copy.id operasi copy_file asli.
+    summary: Operasi salin untuk membatalkan. Ini bisa berupa ID, atau instans FileProperties.
     description: ''
   - isRequired: true
     name: --destination-path -p
@@ -38,7 +38,7 @@ directCommands:
     summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
     description: ''
   - name: --connection-string
-    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    summary: 'String koneksi akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
   - name: --sas-token
     summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
@@ -57,6 +57,7 @@ directCommands:
                                [--account-key]
                                [--account-name]
                                [--connection-string]
+                               [--file-endpoint]
                                [--file-snapshot]
                                [--metadata]
                                [--sas-token]
@@ -88,13 +89,16 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --account-key
-    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
+    summary: 'Kunci akun penyimpanan. Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_KEY.'
     description: ''
   - name: --account-name
     summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
     description: ''
   - name: --connection-string
-    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    summary: 'String koneksi akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    description: ''
+  - name: --file-endpoint
+    summary: 'Titik akhir layanan data penyimpanan. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Anda dapat menemukan setiap titik akhir utama layanan dengan `az storage account show`. Variabel lingkungan: AZURE_STORAGE_SERVICE_ENDPOINT.'
     description: ''
   - name: --file-snapshot
     summary: Rekam jepret file untuk akun penyimpanan sumber.
@@ -103,7 +107,7 @@ directCommands:
     summary: Metadata dalam pasangan key=value yang dipisahkan spasi. Ini menimpa metadata yang ada.
     description: ''
   - name: --sas-token
-    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
+    summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan atau titik akhir layanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
     description: ''
   - name: --source-account-key
     summary: Kunci akun penyimpanan blob sumber.
@@ -130,7 +134,7 @@ directCommands:
     summary: Rekam jepret blob untuk akun penyimpanan sumber.
     description: ''
   - name: --source-uri -u
-    summary: 'URL dengan panjang hingga 2 KB yang menentukan file atau blob Azure. Nilai harus dikodekan URL seperti yang akan muncul dalam URI permintaan. Jika sumber berada di akun lain, sumber harus bersifat publik atau harus diautentikasi melalui tanda tangan akses bersama. Jika sumbernya bersifat publik, tidak diperlukan autentikasi. Contoh: https://myaccount.file.core.windows.net/myshare/mydir/myfilehttps://otheraccount.file.core.windows.net/myshare/mydir/myfile?sastoken.'
+    summary: 'URL dengan panjang hingga 2 KB yang menentukan file atau blob Azure. Nilai harus dikodekan URL karena akan muncul dalam URI permintaan. Jika sumber berada di akun lain, sumber harus bersifat publik atau harus diautentikasi melalui tanda tangan akses bersama. Jika sumbernya bersifat publik, tidak diperlukan autentikasi. Contoh: https://myaccount.file.core.windows.net/myshare/mydir/myfilehttps://otheraccount.file.core.windows.net/myshare/mydir/myfile?sastoken.'
     description: ''
   - name: --timeout
     summary: Minta batas waktu dalam hitung detik. Berlaku untuk setiap panggilan ke layanan.
@@ -170,7 +174,7 @@ directCommands:
     summary: 'Nama akun penyimpanan. Variabel lingkungan terkait: AZURE_STORAGE_ACCOUNT. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Jika tidak ada, perintah akan mencoba mengkueri kunci akun penyimpanan menggunakan akun Azure yang diautentikasi. Jika sejumlah besar perintah penyimpanan dijalankan, kuota API dapat tertembak.'
     description: ''
   - name: --connection-string
-    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    summary: 'String koneksi akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
   - name: --destination-path
     summary: Direktori tempat data sumber disalin. Jika dihilangkan, data disalin ke direktori akar.
@@ -185,7 +189,7 @@ directCommands:
     summary: Metadata dalam pasangan key=value yang dipisahkan spasi. Ini menimpa metadata yang ada.
     description: ''
   - name: --pattern
-    summary: Pola yang digunakan untuk mengglobbing file dan blob. Pola yang didukung adalah '\*', '?', '[seq]', dan '[!seq]'. Untuk informasi lebih lanjut, silakan merujuk ke https://docs.python.org/3.7/library/fnmatch.html.
+    summary: Pola yang digunakan untuk mengolah file dan blob. Pola yang didukung adalah '\*', '?', '[seq]', dan '[!seq]'. Untuk informasi lebih lanjut, silakan merujuk ke https://docs.python.org/3.7/library/fnmatch.html.
     description: Ketika Anda menggunakan '*' dalam --pattern, itu akan cocok dengan karakter apa pun termasuk pemisah direktori '/'.
   - name: --sas-token
     summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
@@ -194,7 +198,7 @@ directCommands:
     summary: Kunci akun untuk akun penyimpanan sumber. Jika dihilangkan, login aktif digunakan untuk menentukan kunci akun.
     description: ''
   - name: --source-account-name
-    summary: Akun penyimpanan sumber untuk menyalin data. Jika dihilangkan, akun tujuan digunakan.
+    summary: Akun penyimpanan sumber untuk menyalin data. Jika dihilangkan, akun tujuan akan digunakan.
     description: ''
   - name: --source-container
     summary: Blob kontainer sumber disalin dari.
@@ -235,11 +239,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 05/19/2022
+  ms.date: 06/16/2022
   description: Mengelola operasi penyalinan file.
-  ms.openlocfilehash: c1846df6b51bc1347df1365def09c674470fba9c
-  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
+  ms.openlocfilehash: 7b94dab094bc2fda4740d51f3a75cc5764f70a9f
+  ms.sourcegitcommit: 72fad8cc38b3cb770675568f31436405d83944f2
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 05/24/2022
-  ms.locfileid: "145244057"
+  ms.lasthandoff: 07/05/2022
+  ms.locfileid: "146923435"

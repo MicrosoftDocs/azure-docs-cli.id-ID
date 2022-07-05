@@ -92,7 +92,7 @@ directCommands:
   optionalParameters:
   - name: --access-tier
     parameterValueGroup: Cool, Hot, Premium
-    summary: Tingkat akses yang digunakan untuk penagihan akun StandardBlob. Tidak dapat diatur untuk jenis akun StandardLRS, StandardGRS, StandardRAGRS, atau PremiumLRS. Diperlukan untuk akun StandardBlob selama pembuatan.
+    summary: Tingkat akses yang digunakan untuk penagihan akun StandardBlob. Tidak dapat diatur untuk jenis akun StandardLRS, StandardGRS, StandardRAGRS, atau PremiumLRS. Ini diperlukan untuk akun StandardBlob selama pembuatan.
     description: ''
   - name: --account-type
     parameterValueGroup: Computer, User
@@ -108,18 +108,18 @@ directCommands:
     description: ''
   - name: --allow-blob-public-access
     parameterValueGroup: false, true
-    summary: Mengizinkan atau melarang akses publik ke semua blob atau kontainer di akun penyimpanan. Nilai default untuk properti ini adalah null, yang setara dengan true. Jika true, kontainer di akun dapat dikonfigurasi untuk akses publik. Perhatikan bahwa mengatur properti ini ke true tidak mengaktifkan akses anonim ke data apa pun di akun. Langkah tambahan mengonfigurasi pengaturan akses publik untuk kontainer diperlukan untuk mengaktifkan akses anonim.
+    summary: Mengizinkan atau melarang akses publik ke semua blob atau kontainer di akun penyimpanan. Nilai default untuk properti ini adalah null, yang setara dengan true. Jika true, kontainer di akun dapat dikonfigurasi untuk akses publik. Perhatikan bahwa mengatur properti ini ke true tidak mengaktifkan akses anonim ke data apa pun di akun. Langkah tambahan untuk mengonfigurasi pengaturan akses publik untuk kontainer diperlukan untuk mengaktifkan akses anonim.
     description: ''
   - name: --allow-cross-tenant-replication -r
     parameterValueGroup: false, true
-    summary: Mengizinkan atau melarang replikasi objek penyewa AAD silang. Interpretasi default adalah true untuk properti ini.
+    summary: Mengizinkan atau melarang replikasi objek penyewa AAD lintas. Interpretasi default berlaku untuk properti ini.
     description: ''
   - name: --allow-shared-key-access -k
     parameterValueGroup: false, true
-    summary: Tunjukkan apakah akun penyimpanan mengizinkan permintaan untuk diotorisasi dengan kunci akses akun melalui Kunci Bersama. Jika false, semua permintaan, termasuk tanda tangan akses bersama, harus diotorisasi dengan Azure Active Directory (Azure AD). Nilai defaultnya adalah null, yang setara dengan true.
+    summary: Menunjukkan apakah akun penyimpanan mengizinkan permintaan untuk diotorisasi dengan kunci akses akun melalui Kunci Bersama. Jika false, maka semua permintaan, termasuk tanda tangan akses bersama, harus diotorisasi dengan Azure Active Directory (Azure AD). Nilai default adalah null, yang setara dengan true.
     description: ''
   - name: --assign-identity
-    summary: Buat dan tetapkan Identitas Akun Storage baru untuk akun penyimpanan ini untuk digunakan dengan layanan manajemen utama seperti Azure KeyVault.
+    summary: Buat dan tetapkan Identitas Akun Penyimpanan baru untuk akun penyimpanan ini untuk digunakan dengan layanan manajemen utama seperti Azure KeyVault.
     description: ''
   - name: --azure-storage-sid
     summary: Tentukan pengidentifikasi keamanan (SID) untuk Azure Storage. Diperlukan ketika --enable-files-adds diatur ke True.
@@ -133,7 +133,7 @@ directCommands:
     description: ''
   - name: --default-action
     parameterValueGroup: Allow, Deny
-    summary: Tindakan default yang akan diterapkan ketika tidak ada aturan yang cocok.
+    summary: Tindakan default yang akan diterapkan saat tidak ada aturan yang cocok.
     description: ''
   - name: --default-share-permission -d
     parameterValueGroup: None, StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor, StorageFileDataSmbShareReader
@@ -143,7 +143,7 @@ directCommands:
     summary: Tentukan GUID domain. Diperlukan ketika --enable-files-adds diatur ke True.
     description: ''
   - name: --domain-name
-    summary: Tentukan domain utama tempat server DNS AD berwenang. Diperlukan ketika --enable-files-adds diatur ke True.
+    summary: Tentukan domain utama tempat server DNS AD berotoritatif. Diperlukan ketika --enable-files-adds diatur ke True.
     description: ''
   - name: --domain-sid
     summary: Tentukan pengidentifikasi keamanan (SID). Diperlukan ketika --enable-files-adds diatur ke True.
@@ -161,7 +161,7 @@ directCommands:
     description: ''
   - name: --enable-files-adds
     parameterValueGroup: false, true
-    summary: Aktifkan Azure Files Autentikasi Layanan Domain Direktori Aktif untuk akun penyimpanan. Ketika --enable-files-adds diatur ke true, argumen properti Azure Active Directory harus disediakan.
+    summary: Aktifkan Azure Files Autentikasi Layanan Domain Direktori Aktif untuk akun penyimpanan. Ketika --enable-files-adds diatur ke true, argumen Properti Azure Active Directory harus disediakan.
     description: ''
   - name: --enable-hierarchical-namespace --hns
     parameterValueGroup: false, true
@@ -356,7 +356,6 @@ directCommands:
                                     --services
                                     [--account-key]
                                     [--account-name]
-                                    [--auth-mode {key, login}]
                                     [--blob-endpoint]
                                     [--connection-string]
                                     [--encryption-scope]
@@ -401,15 +400,11 @@ directCommands:
   - name: --account-name
     summary: 'Nama akun penyimpanan. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Variabel Lingkungan: AZURE_STORAGE_ACCOUNT.'
     description: ''
-  - name: --auth-mode
-    parameterValueGroup: key, login
-    summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
-    description: ''
   - name: --blob-endpoint
-    summary: 'Storage titik akhir layanan data. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Anda dapat menemukan setiap titik akhir utama layanan dengan `az storage account show`. Variabel lingkungan: AZURE_STORAGE_SERVICE_ENDPOINT.'
+    summary: 'Titik akhir layanan data penyimpanan. Harus digunakan bersama dengan kunci akun penyimpanan atau token SAS. Anda dapat menemukan setiap titik akhir utama layanan dengan `az storage account show`. Variabel lingkungan: AZURE_STORAGE_SERVICE_ENDPOINT.'
     description: ''
   - name: --connection-string
-    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    summary: 'String koneksi akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
   - name: --encryption-scope
     summary: Cakupan enkripsi yang telah ditentukan sebelumnya yang digunakan untuk mengenkripsi data pada layanan.
@@ -650,7 +645,7 @@ directCommands:
     summary: Tunjukkan apakah akun penyimpanan mengizinkan permintaan untuk diotorisasi dengan kunci akses akun melalui Kunci Bersama. Jika false, semua permintaan, termasuk tanda tangan akses bersama, harus diotorisasi dengan Azure Active Directory (Azure AD). Nilai defaultnya adalah null, yang setara dengan true.
     description: ''
   - name: --assign-identity
-    summary: Buat dan tetapkan Identitas Akun Storage baru untuk akun penyimpanan ini untuk digunakan dengan layanan manajemen utama seperti Azure KeyVault.
+    summary: Buat dan tetapkan Identitas Akun Penyimpanan baru untuk akun penyimpanan ini untuk digunakan dengan layanan manajemen utama seperti Azure KeyVault.
     description: ''
   - name: --azure-storage-sid
     summary: Tentukan pengidentifikasi keamanan (SID) untuk Azure Storage. Diperlukan ketika --enable-files-adds diatur ke True.
@@ -685,7 +680,7 @@ directCommands:
     description: ''
   - name: --enable-files-adds
     parameterValueGroup: false, true
-    summary: Aktifkan Azure Files Autentikasi Layanan Domain Direktori Aktif untuk akun penyimpanan. Ketika --enable-files-adds diatur ke true, argumen properti Azure Active Directory harus disediakan.
+    summary: Aktifkan Azure Files Autentikasi Layanan Domain Direktori Aktif untuk akun penyimpanan. Ketika --enable-files-adds diatur ke true, argumen Properti Azure Active Directory harus disediakan.
     description: ''
   - name: --enable-large-file-share
     summary: Aktifkan kemampuan untuk mendukung berbagi file besar dengan kapasitas lebih dari 5 TiB untuk akun penyimpanan. Setelah properti diaktifkan, fitur tidak dapat dinonaktifkan. Saat ini hanya didukung untuk jenis replikasi LRS dan ZRS, oleh karena itu konversi akun ke akun geo-redundan tidak akan dimungkinkan. Untuk informasi lebih lanjut, silakan merujuk ke https://go.microsoft.com/fwlink/?linkid=2086047.
@@ -882,11 +877,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 05/19/2022
+  ms.date: 06/16/2022
   description: Mengelola akun penyimpanan.
-  ms.openlocfilehash: 7cd3512aae05076c3f51878f3657dc8e44bf60e9
-  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
+  ms.openlocfilehash: 5edd1de98f423c711b0075f90b944c9add4034e7
+  ms.sourcegitcommit: 72fad8cc38b3cb770675568f31436405d83944f2
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 05/24/2022
-  ms.locfileid: "145269275"
+  ms.lasthandoff: 07/05/2022
+  ms.locfileid: "146924137"

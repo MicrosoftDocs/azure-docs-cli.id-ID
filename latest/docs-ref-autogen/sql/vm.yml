@@ -17,12 +17,12 @@ directCommands:
                            [--resource-group]
                            [--service-acc-pwd]
   examples:
-  - summary: Tambahkan SQL komputer virtual ke grup.
+  - summary: Tambahkan komputer virtual SQL ke grup.
     syntax: az sql vm add-to-group -n sqlvm -g myresourcegroup --sqlvm-group sqlvmgroup --bootstrap-acc-pwd {bootstrappassword} --operator-acc-pwd {operatorpassword} --service-acc-pwd {servicepassword}
   requiredParameters:
   - isRequired: true
     name: --sqlvm-group -r
-    summary: Nama atau ID sumber daya dari grup komputer virtual SQL. Jika hanya nama yang disediakan, SQL grup komputer virtual harus berada dalam grup sumber daya yang sama dari komputer virtual SQL.
+    summary: Nama atau ID sumber daya dari grup komputer virtual SQL. Jika hanya nama yang disediakan, grup komputer virtual SQL harus berada dalam grup sumber daya yang sama dari komputer virtual SQL.
     description: ''
   optionalParameters:
   - name: --bootstrap-acc-pwd -b
@@ -56,7 +56,7 @@ directCommands:
                      [--backup-system-dbs {false, true}]
                      [--connectivity-type {LOCAL, PRIVATE, PUBLIC}]
                      [--credential-name]
-                     [--day-of-week {Friday, Monday, Saturday, Sunday, Thursday, Tuesday, Wednesday}]
+                     [--day-of-week {Everyday, Friday, Monday, Saturday, Sunday, Thursday, Tuesday, Wednesday}]
                      [--enable-auto-backup {false, true}]
                      [--enable-auto-patching {false, true}]
                      [--enable-encryption {false, true}]
@@ -95,16 +95,16 @@ directCommands:
     syntax: az sql vm create -n sqlvm -g myresourcegroup -l eastus --license-type AHUB --sql-mgmt-type NoAgent --image-sku Enterprise --image-offer SQL2008-WS2008R2
   - summary: Aktifkan layanan R di SQL2016 dan seterusnya.
     syntax: az sql vm create -n sqlvm -g myresourcegroup -l eastus --license-type PAYG --sql-mgmt-type Full --enable-r-services true
-  - summary: Buat SQL komputer virtual dan konfigurasikan pengaturan pencadangan otomatis.
+  - summary: Buat komputer virtual SQL dan konfigurasikan pengaturan pencadangan otomatis.
     syntax: az sql vm create -n sqlvm -g myresourcegroup -l eastus --license-type PAYG --sql-mgmt-type Full --backup-schedule-type manual --full-backup-frequency Weekly --full-backup-start-hour 2 --full-backup-duration 2 --sa-key {storageKey} --storage-account 'https://storageacc.blob.core.windows.net/' --retention-period 30 --log-backup-frequency 60
-  - summary: Buat SQL komputer virtual dan konfigurasikan pengaturan patching otomatis.
+  - summary: Buat komputer virtual SQL dan konfigurasikan pengaturan patching otomatis.
     syntax: az sql vm create -n sqlvm -g myresourcegroup -l eastus --license-type PAYG --sql-mgmt-type Full --day-of-week sunday --maintenance-window-duration 60 --maintenance-window-start-hour 2
-  - summary: Buat SQL komputer virtual dan konfigurasikan pengaturan konektivitas SQL.
+  - summary: Buat komputer virtual SQL dan konfigurasikan pengaturan konektivitas SQL.
     syntax: az sql vm create -n sqlvm -g myresourcegroup -l eastus --license-type PAYG --sql-mgmt-type Full --connectivity-type private --port 1433 --sql-auth-update-username {newlogin} --sql-auth-update-pwd {sqlpassword}
   requiredParameters:
   - isRequired: true
     name: --name -n
-    summary: Nama komputer virtual SQL. Nama komputer virtual SQL baru harus sama dengan komputer virtual dasar yang dibuat dari gambar marketplace SQL.
+    summary: Nama komputer virtual SQL. Nama komputer virtual SQL baru harus sama dengan komputer virtual dasar yang dibuat dari citra marketplace SQL.
     description: ''
   - isRequired: true
     name: --resource-group -g
@@ -130,12 +130,12 @@ directCommands:
     summary: Nama kredensial.
     description: ''
   - name: --day-of-week
-    parameterValueGroup: Friday, Monday, Saturday, Sunday, Thursday, Tuesday, Wednesday
+    parameterValueGroup: Everyday, Friday, Monday, Saturday, Sunday, Thursday, Tuesday, Wednesday
     summary: Hari dalam seminggu untuk menerapkan patch pada.
     description: ''
   - name: --enable-auto-backup
     parameterValueGroup: false, true
-    summary: Aktifkan atau nonaktifkan autobackup pada komputer virtual SQL. Jika ada pengaturan cadangan yang disediakan, parameter secara otomatis diatur ke true.
+    summary: Aktifkan atau nonaktifkan pencadangan otomatis pada komputer virtual SQL. Jika ada pengaturan cadangan yang disediakan, parameter secara otomatis diatur ke true.
     description: ''
   - name: --enable-auto-patching
     parameterValueGroup: false, true
@@ -164,11 +164,11 @@ directCommands:
     summary: Waktu mulai hari tertentu kapan pencadangan penuh dapat berlangsung. 0-23 jam.
     description: ''
   - name: --image-offer
-    summary: SQL penawaran gambar. Contohnya termasuk SQL2008R2-WS2008, SQL2008-WS2008.
+    summary: Penawaran gambar SQL. Contohnya termasuk SQL2008R2-WS2008, SQL2008-WS2008.
     description: ''
   - name: --image-sku
     parameterValueGroup: Developer, Enterprise, Express, Standard, Web
-    summary: SQL gambar sku.
+    summary: Sku gambar SQL.
     description: ''
   - name: --key-vault
     summary: Url Azure Key Vault.
@@ -196,7 +196,7 @@ directCommands:
     summary: Periode retensi cadangan. 1-30 hari.
     description: ''
   - name: --sa-key
-    summary: Storage kunci akun tempat pencadangan akan diambil.
+    summary: Kunci akun penyimpanan tempat pencadangan akan diambil.
     description: ''
   - name: --sp-name
     summary: Nama perwakilan layanan untuk mengakses brankas kunci.
@@ -220,7 +220,7 @@ directCommands:
     summary: SQL Server jenis beban kerja.
     description: ''
   - name: --storage-account
-    summary: Storage url akun tempat pencadangan akan diambil.
+    summary: Url akun penyimpanan tempat pencadangan akan diambil.
     description: ''
   - name: --tags
     summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
@@ -251,7 +251,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
 - uid: az_sql_vm_list
   name: az sql vm list
-  summary: Mencantumkan semua SQL komputer virtual dalam grup sumber daya atau langganan.
+  summary: Mencantumkan semua komputer virtual SQL dalam grup sumber daya atau langganan.
   description: ''
   syntax: az sql vm list [--resource-group]
   optionalParameters:
@@ -261,14 +261,14 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
 - uid: az_sql_vm_remove-from-group
   name: az sql vm remove-from-group
-  summary: Hapus SQL komputer virtual dari grup komputer virtual SQL saat ini.
+  summary: Hapus komputer virtual SQL dari grup komputer virtual SQL saat ini.
   description: ''
   syntax: >-
     az sql vm remove-from-group [--ids]
                                 [--name]
                                 [--resource-group]
   examples:
-  - summary: Hapus SQL komputer virtual dari grup.
+  - summary: Menghapus komputer virtual SQL dari grup.
     syntax: az sql vm remove-from-group -n sqlvm -g myresourcegroup
   optionalParameters:
   - name: --ids
@@ -307,14 +307,14 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
 - uid: az_sql_vm_start-assessment
   name: az sql vm start-assessment
-  summary: Memulai Penilaian Praktik Terbaik SQL pada komputer virtual SQL.
+  summary: Memulai penilaian praktik terbaik SQL pada komputer virtual SQL.
   description: ''
   syntax: >-
     az sql vm start-assessment [--ids]
                                [--name]
                                [--resource-group]
   examples:
-  - summary: Memulai Penilaian Praktik Terbaik SQL.
+  - summary: Memulai penilaian praktik terbaik SQL.
     syntax: az sql vm start-assessment -n sqlvm -g myresourcegroup
   optionalParameters:
   - name: --ids
@@ -329,7 +329,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/sql/_help.py
 - uid: az_sql_vm_update
   name: az sql vm update
-  summary: Memperbarui properti komputer virtual SQL.
+  summary: Updates properti komputer virtual SQL.
   description: ''
   syntax: >-
     az sql vm update [--add]
@@ -343,7 +343,7 @@ directCommands:
                      [--backup-system-dbs {false, true}]
                      [--connectivity-type {LOCAL, PRIVATE, PUBLIC}]
                      [--credential-name]
-                     [--day-of-week {Friday, Monday, Saturday, Sunday, Thursday, Tuesday, Wednesday}]
+                     [--day-of-week {Everyday, Friday, Monday, Saturday, Sunday, Thursday, Tuesday, Wednesday}]
                      [--enable-assessment {false, true}]
                      [--enable-auto-backup {false, true}]
                      [--enable-auto-patching {false, true}]
@@ -374,6 +374,8 @@ directCommands:
                      [--sql-workload-type {DW, GENERAL, OLTP}]
                      [--storage-account]
                      [--tags]
+                     [--workspace-name]
+                     [--workspace-rg]
                      [--yes]
   examples:
   - summary: Menambahkan atau memperbarui tag.
@@ -382,28 +384,30 @@ directCommands:
     syntax: az sql vm update -n sqlvm -g myresourcegroup --remove tags.tagName
   - summary: Perbarui komputer virtual SQL dengan jenis sku tertentu.
     syntax: az sql vm update -n sqlvm -g myresourcegroup --image-sku Enterprise
-  - summary: Perbarui SQL pengelolaan komputer virtual dari Ringan ke Penuh.
+  - summary: Perbarui pengelolaan komputer virtual SQL dari Ringan ke Penuh.
     syntax: az sql vm update -n sqlvm -g myresourcegroup --sql-mgmt-type Full --yes
-  - summary: Perbarui SQL pengaturan pencadangan otomatis komputer virtual.
+  - summary: Perbarui pengaturan pencadangan otomatis komputer virtual SQL.
     syntax: az sql vm update -n sqlvm -g myresourcegroup --backup-schedule-type manual --full-backup-frequency Weekly --full-backup-start-hour 2 --full-backup-duration 2 --sa-key {storageKey} --storage-account 'https://storageacc.blob.core.windows.net/' --retention-period 30 --log-backup-frequency 60
-  - summary: Nonaktifkan SQL pengaturan pencadangan otomatis komputer virtual.
+  - summary: Nonaktifkan pengaturan pencadangan otomatis komputer virtual SQL.
     syntax: az sql vm update -n sqlvm -g myresourcegroup --enable-auto-backup false
-  - summary: Perbarui SQL pengaturan patching otomatis komputer virtual.
+  - summary: Perbarui pengaturan patching otomatis komputer virtual SQL.
     syntax: az sql vm update -n sqlvm -g myresourcegroup --day-of-week sunday --maintenance-window-duration 60 --maintenance-window-start-hour 2
-  - summary: Nonaktifkan SQL pengaturan patching otomatis komputer virtual.
+  - summary: Nonaktifkan pengaturan patching otomatis komputer virtual SQL.
     syntax: az sql vm update -n sqlvm -g myresourcegroup --enable-auto-patching false
   - summary: Perbarui tag penagihan komputer virtual SQL ke AHUB.
     syntax: az sql vm update -n sqlvm -g myresourcegroup --license-type AHUB
   - summary: Perbarui tag penagihan komputer virtual SQL ke DR.
     syntax: az sql vm update -n sqlvm -g myresourcegroup --license-type DR
-  - summary: Perbarui komputer virtual SQL untuk menonaktifkan Penilaian Praktik Terbaik SQL.
+  - summary: Perbarui komputer virtual SQL untuk menonaktifkan penilaian praktik terbaik SQL.
     syntax: az sql vm update -n sqlvm -g myresourcegroup --enable-assessment false
   - summary: Perbarui komputer virtual SQL untuk menonaktifkan jadwal penilaian praktik terbaik SQL.
     syntax: az sql vm update -n sqlvm -g myresourcegroup --enable-assessment-schedule false
-  - summary: Perbarui komputer virtual SQL untuk mengaktifkan jadwal dengan interval mingguan untuk Penilaian Praktik Terbaik SQL.
-    syntax: az sql vm update -n sqlvm -g myresourcegroup --enable-assessment true --enable-assessment-schedule true --assessment-weekly-interval 1 --assessment-day-of-week monday --assessment-start-time-local '19:30'
-  - summary: Perbarui komputer virtual SQL untuk mengaktifkan jadwal dengan kejadian bulanan untuk Penilaian Praktik Terbaik SQL.
-    syntax: az sql vm update -n sqlvm -g myresourcegroup --enable-assessment true --enable-assessment-schedule true --assessment-monthly-occurrence 1 --assessment-day-of-week monday --assessment-start-time-local '19:30'
+  - summary: Perbarui komputer virtual SQL untuk mengaktifkan jadwal dengan interval mingguan untuk penilaian praktik terbaik SQL saat VM sudah dikaitkan dengan ruang kerja Analitik Log.
+    syntax: az sql vm update -n sqlvm -g myresourcegroup --assessment-weekly-interval 1 --assessment-day-of-week monday --assessment-start-time-local '19:30'
+  - summary: Perbarui komputer virtual SQL untuk mengaktifkan jadwal dengan kejadian bulanan untuk penilaian praktik terbaik SQL saat mengaitkan dengan ruang kerja Analitik Log.
+    syntax: az sql vm update -n sqlvm -g myresourcegroup --workspace-name myLogAnalyticsWorkspace --workspace-rg myRg --assessment-monthly-occurrence 1 --assessment-day-of-week monday --assessment-start-time-local '19:30'
+  - summary: Memperbarui komputer virtual SQL untuk mengaktifkan penilaian praktik terbaik SQL tanpa mengatur jadwal untuk menjalankan penilaian sesuai permintaan
+    syntax: az sql vm update -n sqlvm -g myresourcegroup --enable-assessment true
   optionalParameters:
   - name: --add
     summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
@@ -446,7 +450,7 @@ directCommands:
     summary: Nama kredensial.
     description: ''
   - name: --day-of-week
-    parameterValueGroup: Friday, Monday, Saturday, Sunday, Thursday, Tuesday, Wednesday
+    parameterValueGroup: Everyday, Friday, Monday, Saturday, Sunday, Thursday, Tuesday, Wednesday
     summary: Hari dalam seminggu untuk menerapkan patch pada.
     description: ''
   - name: --enable-assessment
@@ -455,7 +459,7 @@ directCommands:
     description: ''
   - name: --enable-auto-backup
     parameterValueGroup: false, true
-    summary: Aktifkan atau nonaktifkan autobackup pada komputer virtual SQL. Jika ada pengaturan cadangan yang disediakan, parameter secara otomatis diatur ke true.
+    summary: Aktifkan atau nonaktifkan pencadangan otomatis pada komputer virtual SQL. Jika ada pengaturan cadangan yang disediakan, parameter secara otomatis diatur ke true.
     description: ''
   - name: --enable-auto-patching
     parameterValueGroup: false, true
@@ -491,7 +495,7 @@ directCommands:
     description: ''
   - name: --image-sku
     parameterValueGroup: Developer, Enterprise, Express, Standard, Web
-    summary: SQL gambar sku.
+    summary: Sku gambar SQL.
     description: ''
   - name: --key-vault
     summary: Url Azure Key Vault.
@@ -525,7 +529,7 @@ directCommands:
     summary: Periode retensi cadangan. 1-30 hari.
     description: ''
   - name: --sa-key
-    summary: Storage kunci akun tempat pencadangan akan diambil.
+    summary: Kunci akun penyimpanan tempat pencadangan akan diambil.
     description: ''
   - name: --set
     summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
@@ -538,17 +542,23 @@ directCommands:
     description: ''
   - name: --sql-mgmt-type
     parameterValueGroup: Full
-    summary: SQL Server jenis manajemen. Pembaruan dari Ringan ke Penuh.
+    summary: SQL Server jenis manajemen. Updates dari Ringan ke Penuh.
     description: ''
   - name: --sql-workload-type
     parameterValueGroup: DW, GENERAL, OLTP
     summary: SQL Server jenis beban kerja.
     description: ''
   - name: --storage-account
-    summary: Storage url akun tempat pencadangan akan diambil.
+    summary: Url akun penyimpanan tempat pencadangan akan diambil.
     description: ''
   - name: --tags
     summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --workspace-name
+    summary: Nama ruang kerja Analitik Log untuk dikaitkan dengan VM.
+    description: ''
+  - name: --workspace-rg
+    summary: Grup sumber daya yang berisi ruang kerja Analitik Log.
     description: ''
   - name: --yes -y
     defaultValue: "1"
@@ -595,11 +605,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 04/15/2022
+  ms.date: 06/30/2022
   description: Mengelola mesin virtual SQL.
-  ms.openlocfilehash: a4803bec4a9e7752e5fad0a78d130780e9111003
-  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
+  ms.openlocfilehash: 3c4a1e006f418a40b5b51da52d7f40d815103a04
+  ms.sourcegitcommit: 72fad8cc38b3cb770675568f31436405d83944f2
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 05/24/2022
-  ms.locfileid: "145201631"
+  ms.lasthandoff: 07/05/2022
+  ms.locfileid: "146924263"
