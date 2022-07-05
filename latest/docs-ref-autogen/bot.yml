@@ -1,7 +1,7 @@
 ### YamlMime:AzureCLIGroup
 uid: az_bot
 name: az bot
-summary: Mengelola Microsoft Azure Bot Service.
+summary: Mengelola microsoft Azure Bot Service.
 description: ''
 directCommands:
 - uid: az_bot_create
@@ -9,29 +9,27 @@ directCommands:
   summary: Buat bot SDK v4 baru.
   description: Buat bot SDK v4 baru.
   syntax: >-
-    az bot create --appid
-                  --kind {registration, webapp}
+    az bot create --app-type
+                  --appid
                   --name
                   --resource-group
                   [--cmk]
                   [--description]
                   [--display-name]
-                  [--echo {false, true}]
                   [--endpoint]
-                  [--lang {Csharp, Javascript}]
                   [--location]
-                  [--password]
+                  [--msi-resource-id]
                   [--sku {F0, S1}]
                   [--tags]
+                  [--tenant-id]
   requiredParameters:
+  - isRequired: true
+    name: --app-type
+    summary: Jenis Aplikasi Microsoft untuk bot.
+    description: ''
   - isRequired: true
     name: --appid
     summary: ID akun Microsoft (ID MSA) yang akan digunakan dengan bot.
-    description: ''
-  - isRequired: true
-    name: --kind -k
-    parameterValueGroup: registration, webapp
-    summary: Jenis bot.
     description: ''
   - isRequired: true
     name: --name -n
@@ -51,23 +49,15 @@ directCommands:
   - name: --display-name
     summary: Nama tampilan bot. Jika tidak ditentukan, default ke nama bot.
     description: ''
-  - name: --echo
-    parameterValueGroup: false, true
-    summary: Sebarkan templat Echo Bot ke Bot Aplikasi Web v4 yang baru dibuat.
-    description: ''
   - name: --endpoint -e
     summary: Titik akhir olahpesan bot.
-    description: ''
-  - name: --lang
-    parameterValueGroup: Csharp, Javascript
-    summary: Bahasa yang akan digunakan untuk membuat bot.
     description: ''
   - name: --location -l
     defaultValue: global
     summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
     description: ''
-  - name: --password -p
-    summary: Kata sandi akun Microsoft (MSA) untuk bot. Digunakan untuk mengotorisasi pesan yang dikirim dari bot. Diperlukan ketika "--kind" adalah "webapp".
+  - name: --msi-resource-id
+    summary: Id Sumber Daya Identitas Terkelola Aplikasi Microsoft untuk bot.
     description: ''
   - name: --sku
     defaultValue: F0
@@ -76,6 +66,9 @@ directCommands:
     description: ''
   - name: --tags
     summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
+    description: ''
+  - name: --tenant-id
+    summary: Id Penyewa Aplikasi Microsoft untuk bot.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/botservice/_help.py
 - uid: az_bot_delete
@@ -283,13 +276,13 @@ directCommands:
     description: ''
   optionalParameters:
   - name: --ai-api-key --app-insights-api-key
-    summary: Azure Application Insights API Key digunakan untuk membaca data analitik bot. Berikan kunci jika Anda ingin melihat analitik tentang bot Anda di bilah Analytics.
+    summary: Kunci API Azure Application Insights digunakan untuk membaca data analitik bot. Berikan kunci jika Anda ingin melihat analitik tentang bot Anda di bilah Analytics.
     description: ''
   - name: --ai-app-id --app-insights-app-id
-    summary: ID Aplikasi azure Insights yang digunakan untuk membaca data analitik bot. Berikan Id jika Anda ingin melihat analitik tentang bot Anda di bilah Analitik.
+    summary: ID Aplikasi Azure Application Insights digunakan untuk membaca data analitik bot. Berikan Id jika Anda ingin melihat analitik tentang bot Anda di bilah Analytics.
     description: ''
   - name: --ai-key --app-insights-key
-    summary: Azure Application Insights Key digunakan untuk menulis data analitik bot. Berikan kunci jika Anda ingin menerima analitik bot.
+    summary: Kunci Azure Application Insights digunakan untuk menulis data analitik bot. Berikan kunci jika Anda ingin menerima analitik bot.
     description: ''
   - name: --cmk --cmk-key-vault-key-url
     summary: Url kunci brankas kunci untuk mengaktifkan enkripsi Kunci yang Dikelola Pelanggan.
@@ -391,10 +384,10 @@ globalParameters:
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
   ms.date: 12/11/2019
-  description: Kelola Microsoft Azure Bot Service.
-  ms.openlocfilehash: a9c0b633046a25f88bd7bf28999d1dbf30533653
-  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  description: Mengelola Bot Service Microsoft Azure.
+  ms.openlocfilehash: 921bc0e296395534ab19988ccd8b8484f6614a5d
+  ms.sourcegitcommit: 72fad8cc38b3cb770675568f31436405d83944f2
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 03/25/2022
-  ms.locfileid: "140995262"
+  ms.lasthandoff: 07/05/2022
+  ms.locfileid: "146940193"

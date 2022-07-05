@@ -4,7 +4,7 @@ name: az cosmosdb
 extensionInformation: >-
   > [!Note]
 
-  > Referensi ini adalah bagian dari ekstensi **cosmosdb-preview** untuk Azure CLI (versi 2.17.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az cosmosdb** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
+  > Referensi ini adalah bagian dari ekstensi **pratinjau cosmosdb** untuk Azure CLI (versi 2.17.1 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az cosmosdb** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
 summary: Mengelola akun database Azure Cosmos DB.
 description: ''
 directCommands:
@@ -46,7 +46,7 @@ directCommands:
                        [--network-acl-bypass-resource-ids]
                        [--restore-source]
                        [--restore-timestamp]
-                       [--server-version {3.2, 3.6, 4.0}]
+                       [--server-version {3.2, 3.6, 4.0, 4.2}]
                        [--tables-to-restore]
                        [--tags]
                        [--virtual-network-rules]
@@ -77,7 +77,7 @@ directCommands:
     summary: Tetapkan identitas yang ditetapkan sistem atau pengguna yang dipisahkan oleh spasi. Gunakan '[system]' untuk merujuk identitas yang ditetapkan sistem.
     description: ''
   - name: --backup-interval
-    summary: Frekuensi(dalam menit) tempat pencadangan diambil (hanya untuk akun dengan cadangan mode berkala).
+    summary: Frekuensi(dalam menit) tempat cadangan diambil (hanya untuk akun dengan cadangan mode berkala).
     description: ''
   - name: --backup-policy-type
     parameterValueGroup: Continuous, Periodic
@@ -85,7 +85,7 @@ directCommands:
     description: ''
   - name: --backup-redundancy
     parameterValueGroup: Geo, Local, Zone
-    summary: Jenis redundansi akun Storage cadangan.
+    summary: Jenis redundansi akun Penyimpanan cadangan.
     description: ''
   - name: --backup-retention
     summary: Waktu(dalam jam) di mana setiap cadangan dipertahankan (hanya untuk akun dengan cadangan mode berkala).
@@ -95,7 +95,7 @@ directCommands:
     description: ''
   - name: --continuous-tier
     parameterValueGroup: Continuous30Days, Continuous7Days
-    summary: Tingkat pencadangan berkelanjutan.
+    summary: Tingkat pencadangan Berkelanjutan.
     description: ''
   - name: --databases-to-restore
     summary: Tambahkan database dan nama koleksinya untuk dipulihkan.
@@ -105,7 +105,7 @@ directCommands:
     summary: Tingkat konsistensi default akun database Cosmos DB.
     description: ''
   - name: --default-identity
-    summary: Identitas utama untuk mengakses brankas kunci dalam fitur terkait CMK. misalnya 'FirstPartyIdentity', 'SystemAssignedIdentity' dan banyak lagi.
+    summary: Identitas utama untuk mengakses brankas kunci di fitur terkait CMK. misalnya 'FirstPartyIdentity', 'SystemAssignedIdentity' dan banyak lagi.
     description: ''
   - name: --disable-key-based-metadata-write-access
     parameterValueGroup: false, true
@@ -117,15 +117,15 @@ directCommands:
     description: ''
   - name: --enable-automatic-failover
     parameterValueGroup: false, true
-    summary: Mengaktifkan failover otomatis wilayah tulis jika wilayah tersebut tidak tersedia karena pemadaman. Failover otomatis akan menghasilkan wilayah tulis baru untuk akun dan dipilih berdasarkan prioritas failover yang dikonfigurasi untuk akun tersebut.
+    summary: Memungkinkan failover otomatis wilayah tulis dalam peristiwa langka bahwa wilayah tersebut tidak tersedia karena pemadaman. Failover otomatis akan menghasilkan wilayah tulis baru untuk akun dan dipilih berdasarkan prioritas failover yang dikonfigurasi untuk akun tersebut.
     description: ''
   - name: --enable-free-tier
     parameterValueGroup: false, true
-    summary: Jika diaktifkan, akun adalah tingkat gratis.
+    summary: Jika diaktifkan, akun berjenjang gratis.
     description: ''
   - name: --enable-materialized-views --enable-mv
     parameterValueGroup: false, true
-    summary: Bendera untuk mengaktifkan MaterializedViews pada akun.
+    summary: Benderai untuk mengaktifkan MaterializedViews pada akun.
     description: ''
   - name: --enable-multiple-write-locations
     parameterValueGroup: false, true
@@ -133,7 +133,7 @@ directCommands:
     description: ''
   - name: --enable-public-network -e
     parameterValueGroup: false, true
-    summary: Aktifkan atau nonaktifkan akses jaringan publik ke server.
+    summary: Mengaktifkan atau menonaktifkan akses jaringan publik ke server.
     description: ''
   - name: --enable-virtual-network
     parameterValueGroup: false, true
@@ -143,7 +143,7 @@ directCommands:
     summary: Tambahkan database gremlin dan nama grafiknya untuk dipulihkan.
     description: 'Penggunaan: --gremlin-databases-to-restore name=DatabaseName graphs=graph1 [graph2 ...].'
   - name: --ip-range-filter
-    summary: Dukungan firewall. Menentukan sekumpulan alamat IP atau rentang alamat IP dalam formulir CIDR untuk disertakan sebagai daftar IP klien yang diizinkan untuk akun database tertentu. Alamat/rentang IP harus dipisahkan koma dan tidak boleh berisi spasi apa pun.
+    summary: Dukungan firewall. Menentukan kumpulan alamat IP atau rentang alamat IP dalam formulir CIDR yang akan disertakan sebagai daftar IP klien yang diizinkan untuk akun database tertentu. Alamat/rentang IP harus dipisahkan koma dan tidak boleh berisi spasi apa pun.
     description: ''
   - name: --is-restore-request -r
     parameterValueGroup: false, true
@@ -155,7 +155,7 @@ directCommands:
   - name: --kind
     defaultValue: GlobalDocumentDB
     parameterValueGroup: GlobalDocumentDB, MongoDB, Parse
-    summary: Jenis akun database Cosmos DB yang akan dibuat.
+    summary: Jenis akun database Cosmos DB untuk dibuat.
     description: ''
   - name: --locations
     summary: Tambahkan lokasi ke akun database Cosmos DB.
@@ -167,15 +167,15 @@ directCommands:
       Beberapa lokasi dapat ditentukan dengan menggunakan lebih dari satu `--locations` argumen.
   - name: --max-interval
     defaultValue: "5"
-    summary: Ketika digunakan dengan konsistensi Keusangan Terikat, nilai ini menunjukkan jumlah waktu kedaluarsa (dalam detik) yang ditoleransi. Rentang yang diterima untuk nilai ini adalah 1 - 100.
+    summary: Ketika digunakan dengan konsistensi Keusangan Terikat, nilai ini menunjukkan jumlah waktu keusangan (dalam detik) yang ditoleransi. Rentang yang diterima untuk nilai ini adalah 1 - 100.
     description: ''
   - name: --max-staleness-prefix
     defaultValue: "100"
-    summary: Saat digunakan dengan konsistensi Keusangan Terikat, nilai ini menunjukkan jumlah permintaan kedaluarsa yang ditoleransi. Rentang yang diterima untuk nilai ini adalah 1 - 2.147.483.647.
+    summary: Saat digunakan dengan konsistensi Bounded Staleness, nilai ini menunjukkan jumlah permintaan kedaluarsa yang ditoleransi. Rentang yang diterima untuk nilai ini adalah 1 - 2.147.483.647.
     description: ''
   - name: --network-acl-bypass
     parameterValueGroup: AzureServices, None
-    summary: Bendera untuk mengaktifkan atau menonaktifkan Bypass Acl Jaringan.
+    summary: Benderai untuk mengaktifkan atau menonaktifkan Bypass Acl Jaringan.
     description: ''
   - name: --network-acl-bypass-resource-ids -i
     summary: Daftar Id Sumber Daya untuk mengizinkan Bypass Acl Jaringan.
@@ -187,7 +187,7 @@ directCommands:
     summary: Tanda waktu tempat akun harus dipulihkan. Diperlukan jika --is-restore-request diatur ke true.
     description: ''
   - name: --server-version
-    parameterValueGroup: 3.2, 3.6, 4.0
+    parameterValueGroup: 3.2, 3.6, 4.0, 4.2
     summary: Hanya berlaku untuk akun MongoDB.
     description: ''
   - name: --tables-to-restore
@@ -226,7 +226,7 @@ directCommands:
     syntax: az cosmosdb restore --target-database-account-name MyRestoredCosmosDBDatabaseAccount --account-name MySourceAccount --restore-timestamp 2020-07-13T16:03:41+0000 -g MyResourceGroup --location westus
   - summary: Buat akun database Azure Cosmos DB Sql atau MongoDB baru dengan memulihkan hanya database dan koleksi yang dipilih dari akun database yang sudah ada.
     syntax: az cosmosdb restore -g MyResourceGroup --target-database-account-name MyRestoredCosmosDBDatabaseAccount --account-name MySourceAccount --restore-timestamp 2020-07-13T16:03:41+0000 --location westus --databases-to-restore name=MyDB1 collections=collection1 collection2 --databases-to-restore name=MyDB2 collections=collection3 collection4
-  - summary: Buat akun database Gremlin Azure Cosmos DB baru dengan memulihkan hanya database atau grafik yang dipilih dari akun database yang sudah ada.
+  - summary: Buat akun database Azure Cosmos DB Gremlin baru dengan memulihkan hanya database atau grafik yang dipilih dari akun database yang sudah ada.
     syntax: az cosmosdb restore -g MyResourceGroup --target-database-account-name MyRestoredCosmosDBDatabaseAccount --account-name MySourceAccount --restore-timestamp 2020-07-13T16:03:41+0000 --location westus --gremlin-databases-to-restore name=graphdb1 graphs=graph1 graph2
   - summary: Buat akun database Tabel Azure Cosmos DB baru dengan memulihkan hanya tabel yang dipilih dari akun database yang sudah ada.
     syntax: az cosmosdb restore -g MyResourceGroup --target-database-account-name MyRestoredCosmosDBDatabaseAccount --account-name MySourceAccount --restore-timestamp 2020-07-13T16:03:41+0000 --location westus --tables-to-restore table1,table2
@@ -237,7 +237,7 @@ directCommands:
     description: ''
   - isRequired: true
     name: --location -l
-    summary: Lokasi akun sumber tempat pemulihan dipicu. Ini juga akan menjadi wilayah tulis dari akun yang dipulihkan.
+    summary: Lokasi akun sumber tempat pemulihan dipicu. Ini juga akan menjadi wilayah tulis akun yang dipulihkan.
     description: ''
   - isRequired: true
     name: --resource-group -g
@@ -309,7 +309,7 @@ directCommands:
                        [--max-staleness-prefix]
                        [--network-acl-bypass {AzureServices, None}]
                        [--network-acl-bypass-resource-ids]
-                       [--server-version {3.2, 3.6, 4.0}]
+                       [--server-version {3.2, 3.6, 4.0, 4.2}]
                        [--tags]
                        [--virtual-network-rules]
   examples:
@@ -340,7 +340,7 @@ directCommands:
     description: ''
   - name: --backup-redundancy
     parameterValueGroup: Geo, Local, Zone
-    summary: Jenis redundansi akun Storage cadangan.
+    summary: Jenis redundansi akun Penyimpanan cadangan.
     description: ''
   - name: --backup-retention
     summary: Waktu(dalam jam) di mana setiap cadangan dipertahankan (hanya untuk akun dengan cadangan mode berkala).
@@ -412,7 +412,7 @@ directCommands:
     summary: Daftar Id Sumber Daya untuk mengizinkan Bypass Acl Jaringan.
     description: ''
   - name: --server-version
-    parameterValueGroup: 3.2, 3.6, 4.0
+    parameterValueGroup: 3.2, 3.6, 4.0, 4.2
     summary: Hanya berlaku untuk akun MongoDB.
     description: ''
   - name: --tags
@@ -502,9 +502,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Mengelola akun database Azure Cosmos DB.
-  ms.openlocfilehash: 2125e5fa5c06fa47d0420201dd66187140e7132c
-  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
+  ms.openlocfilehash: 38f9fd4b507c89d7731fa6dc4d6997ef9b494389
+  ms.sourcegitcommit: 72fad8cc38b3cb770675568f31436405d83944f2
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 05/24/2022
-  ms.locfileid: "145269239"
+  ms.lasthandoff: 07/05/2022
+  ms.locfileid: "146941741"
