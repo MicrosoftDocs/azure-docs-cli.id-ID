@@ -30,17 +30,17 @@ directCommands:
   examples:
   - summary: Buat instans Redis Cache baru. (dibuat otomatis)
     syntax: az redis create --location westus2 --name MyRedisCache --resource-group MyResourceGroup --sku Basic --vm-size c0
-  - summary: Mengonfigurasi beberapa zona untuk Premium Azure Cache for Redis baru
+  - summary: Mengonfigurasi beberapa zona untuk Azure Cache for Redis Premium baru
     syntax: az redis create --location westus2 --name MyRedisCache --resource-group MyResourceGroup --sku Premium --vm-size p1 --zones 1 2
   - summary: Konfigurasikan kebijakan memori untuk cache.
     syntax: az redis create --resource-group resourceGroupName --name cacheName --location westus2 --sku Standard --vm-size c0 --redis-configuration @"config_max-memory.json"
-  - summary: Konfigurasikan dan aktifkan persistensi data cadangan RDB untuk Premium Azure Cache for Redis baru.
+  - summary: Konfigurasikan dan aktifkan persistensi data cadangan RDB untuk Azure Cache for Redis Premium baru.
     syntax: az redis create --location westus2 --name MyRedisCache --resource-group MyResourceGroup --sku Premium --vm-size p1 --redis-configuration @"config_rdb.json"
-  - summary: Mengonfigurasi dan mengaktifkan persistensi data cadangan AOF untuk Premium Azure Cache for Redis baru
+  - summary: Mengonfigurasi dan mengaktifkan persistensi data cadangan AOF untuk Azure Cache for Redis Premium baru
     syntax: az redis create --location westus2 --name MyRedisCache --resource-group MyResourceGroup --sku Premium --vm-size p1 --redis-configuration @"config_aof.json"
-  - summary: Membuat Premium Azure Cache for Redis dengan pengklusteran diaktifkan
+  - summary: Membuat Azure Cache for Redis Premium dengan pengklusteran diaktifkan
     syntax: az redis create --location westus2 --name MyRedisCache --resource-group MyResourceGroup --sku Premium --vm-size p1 --shard-count 2
-  - summary: Menyebarkan Premium Azure Cache for Redis di dalam azure Virtual Network yang sudah ada
+  - summary: Menyebarkan Azure Cache for Redis Premium di dalam azure Virtual Network yang sudah ada
     syntax: az redis create --location westus2 --name MyRedisCache --resource-group MyResourceGroup --sku Premium --vm-size p1 --subnet-id "/subscriptions/{subid}/resourceGroups/{resourceGroupName}/providers/Microsoft.{Network|ClassicNetwork}/virtualNetworks/vnet1/subnets/subnet1"
   requiredParameters:
   - isRequired: true
@@ -63,7 +63,7 @@ directCommands:
   - isRequired: true
     name: --vm-size
     parameterValueGroup: c0, c1, c2, c3, c4, c5, c6, p1, p2, p3, p4, p5
-    summary: Ukuran cache Redis untuk disebarkan. Ukuran Cache Dasar dan Standar dimulai dengan ukuran C. Premium Cache dimulai dengan P.
+    summary: Ukuran cache Redis untuk disebarkan. Ukuran Cache Dasar dan Standar dimulai dengan C. Ukuran Cache Premium dimulai dengan P.
     description: ''
   optionalParameters:
   - name: --enable-non-ssl-port
@@ -99,7 +99,7 @@ directCommands:
     summary: Jumlah replika yang akan dibuat per master.
     description: ''
   - name: --shard-count
-    summary: Jumlah pecahan yang akan dibuat pada Premium Cluster Cache.
+    summary: Jumlah pecahan yang akan dibuat pada Cache Kluster Premium.
     description: ''
   - name: --static-ip
     summary: Tentukan ip statis jika diperlukan untuk VNET. Jika Anda tidak menentukan IP statis, maka alamat IP dipilih secara otomatis.
@@ -354,18 +354,18 @@ directCommands:
   examples:
   - summary: Perbarui kebijakan maxmemory untuk Azure Cache for Redis Anda bernama MyRedisCache
     syntax: az redis update --name MyRedisCache --resource-group MyResourceGroup --set "redisConfiguration.maxmemory-policy"="allkeys-lru"
-  - summary: Nonaktifkan RDB mencadangkan persistensi data untuk Premium Azure Cache for Redis
+  - summary: Nonaktifkan persistensi data cadangan RDB untuk Azure Cache for Redis Premium
     syntax: az redis update --name MyRedisCache --resource-group MyResourceGroup --set "redisConfiguration.rdb-backup-enabled"="false"
-  - summary: Mengonfigurasi persistensi data yang diaktifkan pencadangan RDB untuk Premium Azure Cache for Redis yang sudah dibuat
+  - summary: Mengonfigurasi persistensi data yang diaktifkan pencadangan RDB untuk Azure Cache for Redis Premium yang sudah dibuat
     syntax: az redis update --name MyRedisCache --resource-group MyResourceGroup --set "redisConfiguration.rdb-storage-connection-string"="DefaultEndpointsProtocol=https;AccountName=mystorageaccount;AccountKey=myAccountKey;EndpointSuffix=core.windows.net" "redisConfiguration.rdb-backup-enabled"="true" "redisConfiguration.rdb-backup-frequency"="15" "redisConfiguration.rdb-backup-max-snapshot-count"="1"
   - summary: Skalakan Instans Azure Cache for Redis - Perbarui ke ukuran yang berbeda (Contoh untuk menskalakan dari c0 ke c1).
     syntax: az redis update --name MyRedisCache --resource-group MyResourceGroup --set "sku.capacity"="2"
-  - summary: Menskalakan Instans Azure Cache for Redis - Perbarui ke tingkat yang berbeda (Dari Dasar ke Standar atau Standar ke Premium).
+  - summary: Skalakan Instans Azure Cache for Redis - Perbarui ke tingkat yang berbeda (Dari Dasar ke Standar atau Standar ke Premium).
     syntax: az redis update --name MyRedisCache --resource-group MyResourceGroup --set "sku.name"="Premium" "sku.capacity"="1" "sku.family"="P"
   - summary: Menskalakan Instans Azure Cache for Redis - Aktifkan Pengklusteran.
-    syntax: az redis update --name MyRedisCache --resource-group MyResourceGroup --set "shardCount"="1"
+    syntax: az redis update --name MyRedisCache --resource-group MyResourceGroup --set shardCount=1
   - summary: Menskalakan Instans Azure Cache for Redis masuk/keluar menggunakan Kluster Redis.
-    syntax: az redis update --name MyRedisCache --resource-group MyResourceGroup --set "shardCount"="2"
+    syntax: az redis update --name MyRedisCache --resource-group MyResourceGroup --set shardCount=2
   optionalParameters:
   - name: --add
     summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
@@ -394,7 +394,7 @@ directCommands:
     description: ''
   - name: --vm-size
     parameterValueGroup: c0, c1, c2, c3, c4, c5, c6, p1, p2, p3, p4, p5
-    summary: Ukuran cache Redis untuk disebarkan. Ukuran Cache Dasar dan Standar dimulai dengan ukuran C. Premium Cache dimulai dengan P.
+    summary: Ukuran cache Redis untuk disebarkan. Ukuran Cache Dasar dan Standar dimulai dengan C. Ukuran Cache Premium dimulai dengan P.
     description: ''
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/redis/_help.py
 commands:
@@ -448,11 +448,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 12/29/2021
+  ms.date: 05/23/2022
   description: Mengelola cache Redis khusus untuk aplikasi Azure Anda.
-  ms.openlocfilehash: 0e0c69d2fffd90509fda42079d268fb15da38d88
-  ms.sourcegitcommit: 80a188c9ed20b78495059a8a91c7875c5187c69e
+  ms.openlocfilehash: 1150f5d5af8436feb1226634a46e01fd4e04b703
+  ms.sourcegitcommit: 72fad8cc38b3cb770675568f31436405d83944f2
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 03/25/2022
-  ms.locfileid: "141013241"
+  ms.lasthandoff: 07/05/2022
+  ms.locfileid: "146908945"
