@@ -257,7 +257,7 @@ directCommands:
   - name: --description
     summary: Deskripsi definisi gambar galeri.
     description: ''
-  - name: --disallowed-disk-type
+  - name: --disallowed-disk-types
     summary: Jenis disk yang tidak akan berfungsi dengan gambar, misalnya, Standard_LRS.
     description: ''
   - name: --end-of-life-date
@@ -352,12 +352,13 @@ directCommands:
     description: ''
 - uid: az_sig_image-definition_list-community
   name: az sig image-definition list-community
-  summary: Mencantumkan definisi Gambar VM di komunitas galeri (pratinjau).
-  description: Cantumkan definisi Gambar VM di komunitas galeri (fitur pratinjau pribadi, silakan hubungi tim galeri gambar komunitas melalui email sigpmdev@microsoft.com untuk mendaftar pratinjau jika Anda tertarik menggunakan fitur ini).
+  summary: Mencantumkan definisi Gambar VM di komunitas galeri.
+  description: Mencantumkan definisi Gambar VM di komunitas galeri.
   syntax: >-
-    az sig image-definition list-community --location
-                                           --public-gallery-name
+    az sig image-definition list-community [--ids]
+                                           [--location]
                                            [--marker]
+                                           [--public-gallery-name]
                                            [--show-next-marker]
   examples:
   - summary: Mencantumkan definisi gambar di komunitas galeri.
@@ -365,26 +366,26 @@ directCommands:
       az sig image-definition list-community --public-gallery-name publicGalleryName \
 
       --location myLocation
-  requiredParameters:
-  - isRequired: true
-    name: --location -l
+  optionalParameters:
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --location -l
     summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
     description: ''
-  - isRequired: true
-    name: --public-gallery-name
-    summary: Nama publik galeri komunitas.
-    description: ''
-  optionalParameters:
-  - name: --penanda
+  - name: --marker
     summary: Nilai string yang mengidentifikasi bagian dari daftar kontainer yang akan dikembalikan dengan operasi daftar berikutnya. Operasi mengembalikan nilai NextMarker dalam isi respons jika operasi daftar tidak mengembalikan semua kontainer yang tersisa untuk dicantumkan dengan halaman saat ini. Jika ditentukan, generator ini akan mulai mengembalikan hasil dari titik di mana generator sebelumnya berhenti.
+    description: ''
+  - name: --public-gallery-name
+    summary: Nama publik galeri komunitas.
     description: ''
   - name: --show-next-marker
     summary: Perlihatkan nextMarker dalam hasil ketika ditentukan.
     description: ''
 - uid: az_sig_image-definition_list-shared
   name: az sig image-definition list-shared
-  summary: Mencantumkan definisi Gambar VM di galeri yang dibagikan langsung ke langganan atau penyewa Anda (pratinjau).
-  description: Mencantumkan definisi Gambar VM di galeri yang dibagikan langsung ke langganan atau penyewa Anda (fitur pratinjau privat, silakan hubungi tim galeri gambar bersama melalui email sigpmdev@microsoft.com untuk mendaftar pratinjau jika Anda tertarik menggunakan fitur ini).
+  summary: Mencantumkan definisi Gambar VM di galeri yang dibagikan langsung ke langganan atau penyewa Anda.
+  description: Mencantumkan definisi Gambar VM di galeri yang dibagikan langsung ke langganan atau penyewa Anda.
   syntax: >-
     az sig image-definition list-shared [--gallery-unique-name]
                                         [--ids]
@@ -413,7 +414,7 @@ directCommands:
   - name: --location -l
     summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
     description: ''
-  - name: --penanda
+  - name: --marker
     summary: Nilai string yang mengidentifikasi bagian dari daftar kontainer yang akan dikembalikan dengan operasi daftar berikutnya. Operasi mengembalikan nilai NextMarker dalam isi respons jika operasi daftar tidak mengembalikan semua kontainer yang tersisa untuk dicantumkan dengan halaman saat ini. Jika ditentukan, generator ini akan mulai mengembalikan hasil dari titik di mana generator sebelumnya berhenti.
     description: ''
   - name: --shared-to
@@ -447,35 +448,30 @@ directCommands:
     description: ''
 - uid: az_sig_image-definition_show-community
   name: az sig image-definition show-community
-  summary: Mendapatkan gambar di komunitas galeri (pratinjau).
-  description: Dapatkan gambar di komunitas galeri (fitur pratinjau pribadi, silakan hubungi tim galeri gambar komunitas melalui email sigpmdev@microsoft.com untuk mendaftar pratinjau jika Anda tertarik menggunakan fitur ini).
+  summary: Dapatkan gambar galeri komunitas.
+  description: ''
   syntax: >-
-    az sig image-definition show-community --gallery-image-definition
-                                           --location
-                                           --public-gallery-name
-  examples:
-  - summary: Dapatkan definisi gambar di komunitas galeri di lokasi tertentu.
-    syntax: >-
-      az sig image-definition show-community --public-gallery-name publicGalleryName \
-
-      --gallery-image-definition myGalleryImageName --location myLocation
-  requiredParameters:
-  - isRequired: true
-    name: --gallery-image-definition -i
+    az sig image-definition show-community [--gallery-image-definition]
+                                           [--ids]
+                                           [--location]
+                                           [--public-gallery-name]
+  optionalParameters:
+  - name: --gallery-image-definition -i
     summary: Nama definisi gambar galeri komunitas tempat versi gambar akan dicantumkan.
     description: ''
-  - isRequired: true
-    name: --location -l
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --location -l
     summary: 'Lokasi. Nilai dari: `az account list-locations`. Anda dapat mengonfigurasi lokasi default menggunakan `az configure --defaults location=<location>`.'
     description: ''
-  - isRequired: true
-    name: --public-gallery-name
+  - name: --public-gallery-name
     summary: Nama publik galeri komunitas.
     description: ''
 - uid: az_sig_image-definition_show-shared
   name: az sig image-definition show-shared
-  summary: Mendapatkan gambar galeri bersama (pratinjau).
-  description: Dapatkan gambar galeri bersama yang telah dibagikan langsung ke langganan atau penyewa Anda (fitur pratinjau privat, silakan hubungi tim galeri gambar bersama melalui email sigpmdev@microsoft.com untuk mendaftar pratinjau jika Anda tertarik menggunakan fitur ini).
+  summary: Dapatkan gambar galeri bersama.
+  description: Dapatkan gambar galeri bersama yang telah dibagikan langsung ke langganan atau penyewa Anda.
   syntax: >-
     az sig image-definition show-shared [--gallery-image-definition]
                                         [--gallery-unique-name]
@@ -586,9 +582,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Mengelola gambar galeri bersama dengan VM.
-  ms.openlocfilehash: 5b59b3c1b5a5d0d68a5f7e1bc57c00fcba4ca837
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: eb5539f0fc39252758804020f979604cf55d7936
+  ms.sourcegitcommit: 72fad8cc38b3cb770675568f31436405d83944f2
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141417220"
+  ms.lasthandoff: 07/05/2022
+  ms.locfileid: "146961271"
