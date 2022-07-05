@@ -5,13 +5,13 @@ extensionInformation: >-
   > [!Note]
 
   > Referensi ini adalah bagian dari ekstensi **ssh** untuk Azure CLI (versi 2.4.0 atau yang lebih tinggi).  Ekstensi akan secara otomatis menginstal pertama kali Anda menjalankan perintah **az ssh** .  [Pelajari lebih lanjut](https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview) tentang ekstensi.
-summary: SSH ke dalam sumber daya (Azure VM, server Arc, dll) menggunakan sertifikat openssh yang diterbitkan AAD.
+summary: SSH ke dalam sumber daya (Azure VM, server Arc, dll) menggunakan sertifikat openssh yang dikeluarkan AAD.
 description: ''
 directCommands:
 - uid: az_ssh_arc
   name: az ssh arc
   summary: SSH ke Azure Arc Servers.
-  description: Pengguna dapat masuk menggunakan sertifikat yang dikeluarkan AAD atau menggunakan kredensial pengguna lokal. Sebaiknya masuk menggunakan sertifikat yang diterbitkan AAD. Untuk SSH menggunakan kredensial pengguna lokal, Anda harus memberikan nama pengguna lokal menggunakan parameter --local-user.
+  description: Pengguna dapat masuk menggunakan sertifikat yang dikeluarkan AAD atau menggunakan kredensial pengguna lokal. Sebaiknya masuk menggunakan sertifikat yang dikeluarkan AAD. Untuk SSH menggunakan kredensial pengguna lokal, Anda harus memberikan nama pengguna lokal menggunakan parameter --local-user.
   syntax: >-
     az ssh arc [--certificate-file]
                [--delete-private-key]
@@ -20,12 +20,13 @@ directCommands:
                [--port]
                [--private-key-file]
                [--public-key-file]
+               [--rdp]
                [--resource-group]
                [--ssh-client-folder]
                [--ssh-proxy-folder]
                [<SSH_ARGS>]
   examples:
-  - summary: Berikan nama grup sumber daya dan nama komputer ke SSH menggunakan sertifikat yang diterbitkan AAD
+  - summary: Berikan nama grup sumber daya dan nama komputer ke SSH menggunakan sertifikat yang dikeluarkan AAD
     syntax: az ssh arc --resource-group myResourceGroup --name myMachine
   - summary: Menggunakan file kunci privat kustom
     syntax: az ssh arc --resource-group myResourceGroup --name myMachine --private-key-file key --public-key-file key.pub
@@ -39,6 +40,8 @@ directCommands:
     syntax: az ssh arc --local-user username --resource-group myResourceGroup --name myMachine
   - summary: Berikan Folder Klien SSH untuk menggunakan executable ssh di folder tersebut, seperti ssh-keygen.exe dan ssh.exe. Jika tidak disediakan, ekstensi mencoba menggunakan klien OpenSSH yang telah diinstal sebelumnya (pada Windows, ekstensi mencari executable yang telah diinstal sebelumnya di bawah C:WindowsSystem32OpenSSH).
     syntax: az ssh arc --resource-group myResourceGroup --name myMachine --ssh-client-folder "C:\Program Files\OpenSSH"
+  - summary: Buka koneksi RDP melalui SSH. Berguna untuk menyambungkan melalui RDP ke Arc Server tanpa alamat IP publik. Saat ini hanya didukung untuk klien Windows.
+    syntax: az ssh arc --resource-group myResourceGroup --name myVM --local-user username --rdp
   optionalParameters:
   - name: --certificate-file -c
     summary: Jalur ke file sertifikat.
@@ -60,6 +63,9 @@ directCommands:
     description: ''
   - name: --public-key-file -p
     summary: Jalur file kunci publik RSA.
+    description: ''
+  - name: --rdp --winrdp
+    summary: Mulai koneksi RDP melalui SSH.
     description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
@@ -117,7 +123,7 @@ directCommands:
                   [--ssh-client-folder]
                   [--ssh-proxy-folder]
   examples:
-  - summary: Berikan grup sumber daya dan nama komputer untuk membuat konfigurasi menggunakan sertifikat yang diterbitkan AAD, simpan dalam file lokal, lalu ssh ke sumber daya tersebut
+  - summary: Berikan grup sumber daya dan nama komputer untuk membuat konfigurasi menggunakan sertifikat yang dikeluarkan AAD, simpan dalam file lokal, lalu ssh ke sumber daya tersebut
     syntax: >-
       az ssh config --resource-group myResourceGroup --name myVm --file ./sshconfig
 
@@ -207,7 +213,7 @@ directCommands:
 - uid: az_ssh_vm
   name: az ssh vm
   summary: SSH ke Azure VM atau Arc Server.
-  description: Pengguna dapat masuk menggunakan sertifikat yang dikeluarkan AAD atau menggunakan kredensial pengguna lokal. Sebaiknya masuk menggunakan sertifikat yang diterbitkan AAD. Untuk SSH menggunakan kredensial pengguna lokal, Anda harus memberikan nama pengguna lokal menggunakan parameter --local-user.
+  description: Pengguna dapat masuk menggunakan sertifikat yang dikeluarkan AAD atau menggunakan kredensial pengguna lokal. Sebaiknya masuk menggunakan sertifikat yang dikeluarkan AAD. Untuk SSH menggunakan kredensial pengguna lokal, Anda harus memberikan nama pengguna lokal menggunakan parameter --local-user.
   syntax: >-
     az ssh vm [--certificate-file]
               [--delete-private-key]
@@ -218,15 +224,16 @@ directCommands:
               [--prefer-private-ip]
               [--private-key-file]
               [--public-key-file]
+              [--rdp]
               [--resource-group]
               [--resource-type]
               [--ssh-client-folder]
               [--ssh-proxy-folder]
               [<SSH_ARGS>]
   examples:
-  - summary: Berikan nama grup sumber daya dan nama komputer ke SSH menggunakan sertifikat yang diterbitkan AAD
+  - summary: Berikan nama grup sumber daya dan nama komputer ke SSH menggunakan sertifikat yang dikeluarkan AAD
     syntax: az ssh vm --resource-group myResourceGroup --name myVM
-  - summary: Berikan IP publik (atau nama host) VM ke SSH menggunakan sertifikat yang diterbitkan AAD
+  - summary: Berikan IP publik (atau nama host) VM ke SSH menggunakan sertifikat yang dikeluarkan AAD
     syntax: >-
       az ssh vm --ip 1.2.3.4
 
@@ -245,6 +252,8 @@ directCommands:
     syntax: az ssh vm --local-user username --resource-group myResourceGroup --name myArcServer
   - summary: Berikan Folder Klien SSH untuk menggunakan executable ssh di folder tersebut, seperti ssh-keygen.exe dan ssh.exe. Jika tidak disediakan, ekstensi mencoba menggunakan klien OpenSSH yang telah diinstal sebelumnya (pada Windows, ekstensi mencari executable yang telah diinstal sebelumnya di bawah C:WindowsSystem32OpenSSH).
     syntax: az ssh vm --resource-group myResourceGroup --name myVM --ssh-client-folder "C:\Program Files\OpenSSH"
+  - summary: Buka koneksi RDP melalui SSH. Berguna untuk menyambungkan melalui RDP ke Arc Server tanpa alamat IP publik. Saat ini hanya didukung untuk klien Windows.
+    syntax: az ssh vm --resource-group myResourceGroup --name myVM --local-user username --rdp
   optionalParameters:
   - name: --certificate-file -c
     summary: Jalur ke file sertifikat yang digunakan untuk autentikasi saat menggunakan kredensial pengguna lokal.
@@ -265,13 +274,16 @@ directCommands:
     summary: Port SSH.
     description: ''
   - name: --prefer-private-ip
-    summary: Akan lebih memilih IP privat.  Membutuhkan konektivitas ke IP privat.
+    summary: Akan lebih memilih IP privat.  Memerlukan konektivitas ke IP privat.
     description: ''
   - name: --private-key-file -i
     summary: Jalur file kunci privat RSA.
     description: ''
   - name: --public-key-file -p
     summary: Jalur file kunci publik RSA.
+    description: ''
+  - name: --rdp --winrdp
+    summary: Mulai koneksi RDP melalui SSH.
     description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
@@ -312,9 +324,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: SSH ke dalam sumber daya (Azure VM, server Arc, dll) menggunakan sertifikat openssh yang dikeluarkan AAD.
-  ms.openlocfilehash: c8a9842e50fd0c3c6921bac6f498570a48fcaf8f
-  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
+  ms.openlocfilehash: 05b046277f68d1c3131c30cf6c28c297ad8e7ae4
+  ms.sourcegitcommit: 72fad8cc38b3cb770675568f31436405d83944f2
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/27/2022
-  ms.locfileid: "144049056"
+  ms.lasthandoff: 07/05/2022
+  ms.locfileid: "146913274"

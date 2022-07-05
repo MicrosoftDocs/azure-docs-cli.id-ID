@@ -119,6 +119,7 @@ directCommands:
                                                  --policy-id
                                                  [--secret-store-type {AzureKeyVault}]
                                                  [--secret-store-uri]
+                                                 [--snapshot-resource-group-name]
   examples:
   - summary: Menginisialisasi permintaan instans cadangan untuk Azure Disk
     syntax: az dataprotection backup-instance initialize --datasource-type AzureDisk -l southeastasia --policy-id {disk_policy_id} --datasource-id {disk_id}
@@ -147,6 +148,9 @@ directCommands:
     description: ''
   - name: --secret-store-uri
     summary: Tentukan uri penyimpanan rahasia yang akan digunakan untuk autentikasi.
+    description: ''
+  - name: --snapshot-resource-group-name --snapshot-rg
+    summary: Nama grup sumber daya tempat rekam jepret cadangan harus disimpan.
     description: ''
 - uid: az_dataprotection_backup-instance_list
   name: az dataprotection backup-instance list
@@ -316,6 +320,56 @@ directCommands:
   optionalParameters:
   - name: --no-wait
     summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
+- uid: az_dataprotection_backup-instance_update-msi-permissions
+  name: az dataprotection backup-instance update-msi-permissions
+  summary: Tetapkan izin yang diperlukan agar berhasil mengaktifkan pencadangan untuk sumber data.
+  description: ''
+  syntax: >-
+    az dataprotection backup-instance update-msi-permissions --datasource-type {AzureBlob, AzureDatabaseForPostgreSQL, AzureDisk}
+                                                             --operation {Backup}
+                                                             --permissions-scope {Resource, ResourceGroup, Subscription}
+                                                             --resource-group
+                                                             --vault-name
+                                                             [--backup-instance]
+                                                             [--keyvault-id]
+                                                             [--yes]
+  examples:
+  - summary: Tetapkan izin yang diperlukan agar berhasil mengaktifkan pencadangan untuk sumber data.
+    syntax: az dataprotection backup-instance update-msi-permissions --backup-instance backup_inst.json --resource-group samarth_resource_group --vault-name samarthbackupvault --datasource-type AzureDisk --operation Backup --permissions-scope ResourceGroup
+  requiredParameters:
+  - isRequired: true
+    name: --datasource-type
+    parameterValueGroup: AzureBlob, AzureDatabaseForPostgreSQL, AzureDisk
+    summary: Tentukan jenis sumber data sumber daya yang akan dicadangkan.
+    description: ''
+  - isRequired: true
+    name: --operation
+    parameterValueGroup: Backup
+    summary: Daftar kemungkinan operasi.
+    description: ''
+  - isRequired: true
+    name: --permissions-scope
+    parameterValueGroup: Resource, ResourceGroup, Subscription
+    summary: Cakupan untuk menetapkan izin ke vault cadangan.
+    description: ''
+  - isRequired: true
+    name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - isRequired: true
+    name: --vault-name
+    summary: Nama brankas.
+    description: ''
+  optionalParameters:
+  - name: --backup-instance
+    summary: 'Isi permintaan untuk operasi Nilai yang diharapkan: json-string/@json-file. Diperlukan ketika --operation adalah Backup.'
+    description: ''
+  - name: --keyvault-id
+    summary: ID ARM dari brankas kunci. Diperlukan saat --datasource-type adalah AzureDatabaseForPostgreSQL.
+    description: ''
+  - name: --yes -y
+    summary: Jangan meminta konfirmasi.
     description: ''
 - uid: az_dataprotection_backup-instance_update-policy
   name: az dataprotection backup-instance update-policy
@@ -487,6 +541,7 @@ commands:
 - az_dataprotection_backup-instance_show
 - az_dataprotection_backup-instance_stop-protection
 - az_dataprotection_backup-instance_suspend-backup
+- az_dataprotection_backup-instance_update-msi-permissions
 - az_dataprotection_backup-instance_update-policy
 - az_dataprotection_backup-instance_validate-for-backup
 - az_dataprotection_backup-instance_validate-for-restore
@@ -510,9 +565,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Mengelola instans cadangan dengan perlindungan data.
-  ms.openlocfilehash: 70cf8a4fd96e52754edf33c835c7d9cbbfc339be
-  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
+  ms.openlocfilehash: 43af9f5780001e71e5df3d439ea31c3a556b8373
+  ms.sourcegitcommit: 72fad8cc38b3cb770675568f31436405d83944f2
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/27/2022
-  ms.locfileid: "144053753"
+  ms.lasthandoff: 07/05/2022
+  ms.locfileid: "146916820"
