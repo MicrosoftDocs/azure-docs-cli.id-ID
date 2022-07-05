@@ -118,11 +118,11 @@ directCommands:
     syntax: az vmss create -n MyVmss -g rg1 --image debian --assign-identity  [system] /subscriptions/99999999-1bf0-4dda-aec3-cb9272f09590/resourcegroups/myRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myID
   - summary: Buat VMSS yang mendukung SpotRestore.
     syntax: az vmss create -n MyVmss -g MyResourceGroup  --location NorthEurope --instance-count 2 --image Centos --priority Spot --eviction-policy Deallocate --single-placement-group --enable-spot-restore True --spot-restore-timeout PT1H
-  - summary: Buat VMSS dari gambar galeri bersama. (fitur pratinjau pribadi, silakan hubungi tim galeri gambar bersama melalui email sigpmdev@microsoft.com untuk mendaftar pratinjau jika Anda tertarik menggunakan fitur ini).
+  - summary: Buat VMSS dari gambar galeri bersama.
     syntax: az vmss create -n MyVmss -g MyResourceGroup --image /SharedGalleries/{gallery_unique_name}/Images/{image}/Versions/{version}
-  - summary: Buat VMSS dari gambar galeri komunitas (fitur pratinjau pribadi, silakan hubungi tim galeri gambar komunitas melalui email sigpmdev@microsoft.com untuk mendaftar pratinjau jika Anda tertarik menggunakan fitur ini).
+  - summary: Buat VMSS dari gambar galeri komunitas.
     syntax: az vmss create -n MyVmss -g MyResourceGroup --image /CommunityGalleries/{gallery_unique_name}/Images/{image}/Versions/{version}
-  - summary: Buat VMSS Windows dengan mode patch 'Manual' (Mode patch 'AutomaticByPlatform' saat ini tidak didukung selama pembuatan VMSS sebagai ekstensi kesehatan yang diperlukan untuk mode 'AutomaticByPlatform' tidak dapat diatur selama pembuatan VMSS).
+  - summary: Membuat VMSS Windows dengan mode patch 'Manual' (Saat ini mode patch 'AutomaticByPlatform' tidak didukung selama pembuatan VMSS sebagai ekstensi kesehatan yang diperlukan untuk mode 'AutomaticByPlatform' tidak dapat diatur selama pembuatan VMSS).
     syntax: az vmss create -n MyVmss -g MyResourceGroup --image Win2019Datacenter --enable-agent --enable-auto-update false --patch-mode Manual --orchestration-mode Flexible
   requiredParameters:
   - isRequired: true
@@ -166,7 +166,7 @@ directCommands:
     description: ''
   - name: --authentication-type
     parameterValueGroup: all, password, ssh
-    summary: Jenis autentikasi yang akan digunakan dengan VM. Default ke kata sandi untuk Windows dan kunci publik SSH untuk Linux. "all" memungkinkan autentikasi ssh dan kata sandi.
+    summary: Jenis autentikasi yang akan digunakan dengan VM. Default ke kata sandi untuk kunci umum Windows dan SSH untuk Linux. "all" memungkinkan autentikasi ssh dan kata sandi.
     description: ''
   - name: --backend-pool-name
     summary: Nama yang akan digunakan untuk kumpulan backend saat membuat load balancer atau gateway aplikasi baru.
@@ -181,7 +181,7 @@ directCommands:
     summary: File atau teks skrip init kustom (cloud-init, cloud-config, dll..).
     description: ''
   - name: --data-disk-caching
-    summary: Storage jenis penembolokan untuk disk data, termasuk 'None', 'ReadOnly', 'ReadWrite', dll. Gunakan nilai tunggal untuk diterapkan pada semua disk, atau gunakan `<lun>=<vaule1> <lun>=<value2>` untuk mengonfigurasi disk individual.
+    summary: Jenis penembolokan penyimpanan untuk disk data, termasuk 'None', 'ReadOnly', 'ReadWrite', dll. Gunakan nilai tunggal untuk diterapkan pada semua disk, atau gunakan `<lun>=<vaule1> <lun>=<value2>` untuk mengonfigurasi disk individual.
     description: ''
   - name: --data-disk-sizes-gb
     summary: Ukuran disk data terkelola kosong yang dipisahkan spasi dalam GB untuk dibuat.
@@ -222,7 +222,7 @@ directCommands:
     description: ''
   - name: --license-type
     parameterValueGroup: None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server
-    summary: Menentukan bahwa gambar atau disk Windows dilisensikan secara lokal. Untuk mengaktifkan Azure Hybrid Benefit untuk Windows Server, gunakan 'Windows_Server'. Untuk mengaktifkan Hak Hosting Multi-penyewa untuk Windows 10, gunakan 'Windows_Client'. Untuk informasi selengkapnya, lihat dokumen online Azure Windows VM.
+    summary: Menentukan bahwa citra atau disk Windows telah dilisensikan secara lokal. Untuk mengaktifkan Azure Hybrid Benefit untuk Windows Server, gunakan 'Windows_Server'. Untuk mengaktifkan Hak Hosting Multi-penyewa untuk Windows 10, gunakan 'Windows_Client'. Untuk informasi selengkapnya, lihat dokumen online Azure Windows VM.
     description: ''
   - name: --location -l
     summary: Lokasi untuk membuat VM dan sumber daya terkait. Jika lokasi default tidak dikonfigurasi, akan default ke lokasi grup sumber daya.
@@ -240,7 +240,7 @@ directCommands:
     description: ''
   - name: --os-disk-caching
     parameterValueGroup: None, ReadOnly, ReadWrite
-    summary: 'Storage jenis penembolokan untuk disk OS VM. Default: ReadWrite.'
+    summary: 'Jenis penembolokan penyimpanan untuk disk OS VM. Default: ReadWrite.'
     description: ''
   - name: --os-disk-name
     summary: Nama disk OS VM baru.
@@ -311,7 +311,7 @@ directCommands:
     summary: 'SKU akun penyimpanan untuk mempertahankan VM. Gunakan sku tunggal yang akan diterapkan di semua disk, atau tentukan disk individual. Penggunaan: [--storage-sku SKU | --storage-sku ID=SKU ID=SKU ID=SKU...], di mana setiap ID adalah "os" atau lun yang diindeks 0. Nilai yang diizinkan: Standard_LRS, Premium_LRS.'
     description: ''
   - name: --subnet
-    summary: Nama subnet saat membuat VNet baru atau mereferensikan yang sudah ada. Dapat juga mereferensikan subnet yang ada berdasarkan ID. Jika nama vnet dan subnet dihilangkan, VNet dan subnet yang sesuai akan dipilih secara otomatis, atau yang baru akan dibuat.
+    summary: Nama subnet saat membuat VNet baru atau mereferensikan yang sudah ada. Juga dapat mereferensikan subnet yang ada berdasarkan ID. Jika nama vnet dan subnet dihilangkan, VNet dan subnet yang sesuai akan dipilih secara otomatis, atau yang baru akan dibuat.
     description: ''
   - name: --subnet-address-prefix
     summary: Awalan alamat IP subnet yang akan digunakan saat membuat VNet baru dalam format CIDR.
@@ -462,7 +462,7 @@ directCommands:
   description: ''
   syntax: az vmss list [--resource-group]
   examples:
-  - summary: Mencantumkan VMSS (dibuat otomatis)
+  - summary: Daftar VMSS (dibuat otomatis)
     syntax: az vmss list --resource-group MyResourceGroup
   optionalParameters:
   - name: --resource-group -g
@@ -814,7 +814,7 @@ directCommands:
     summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
     description: ''
   - name: --force-deletion
-    summary: Properti ini memungkinkan Anda menentukan apakah komputer virtual yang dipilih untuk penghapusan harus dihapus paksa saat set skala komputer virtual sedang diskalakan.
+    summary: Properti ini memungkinkan Anda menentukan apakah komputer virtual yang dipilih untuk penghapusan harus dihapus paksa ketika set skala komputer virtual sedang diskalakan.
     description: ''
   - name: --force-string
     summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
@@ -827,7 +827,7 @@ directCommands:
     description: ''
   - name: --license-type
     parameterValueGroup: None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server
-    summary: Menentukan bahwa gambar atau disk Windows dilisensikan secara lokal. Untuk mengaktifkan Azure Hybrid Benefit untuk Windows Server, gunakan 'Windows_Server'. Untuk mengaktifkan Hak Hosting Multi-penyewa untuk Windows 10, gunakan 'Windows_Client'. Untuk informasi selengkapnya, lihat dokumen online Azure Windows VM.
+    summary: Menentukan bahwa citra atau disk Windows telah dilisensikan secara lokal. Untuk mengaktifkan Azure Hybrid Benefit untuk Windows Server, gunakan 'Windows_Server'. Untuk mengaktifkan Hak Hosting Multi-penyewa untuk Windows 10, gunakan 'Windows_Client'. Untuk informasi selengkapnya, lihat dokumen online Azure Windows VM.
     description: ''
   - name: --name -n
     summary: Nama set skala. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vmss=<name>`.
@@ -836,7 +836,7 @@ directCommands:
     summary: Jangan menunggu operasi jangka panjang selesai.
     description: ''
   - name: --remove
-    summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
     description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
@@ -853,7 +853,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
 - uid: az_vmss_update-instances
   name: az vmss update-instances
-  summary: Tingkatkan VM dalam VMSS.
+  summary: Meningkatkan VM dalam VMSS.
   description: ''
   syntax: >-
     az vmss update-instances --instance-ids
@@ -861,7 +861,7 @@ directCommands:
                              --resource-group
                              [--no-wait]
   examples:
-  - summary: Tingkatkan VM dalam VMSS. (dibuat otomatis)
+  - summary: Meningkatkan VM dalam VMSS. (dibuat otomatis)
     syntax: az vmss update-instances --instance-ids 1 --name MyScaleSet --resource-group MyResourceGroup
   requiredParameters:
   - isRequired: true
@@ -898,9 +898,9 @@ directCommands:
                  [--timeout]
                  [--updated]
   examples:
-  - summary: Tempatkan CLI dalam status menunggu hingga VMSS diperbarui.
+  - summary: Tempatkan CLI dalam status menunggu hingga VMSS telah diperbarui.
     syntax: az vmss wait --updated --name MyScaleSet --resource-group MyResourceGroup
-  - summary: Tempatkan CLI dalam status menunggu hingga instans VMSS diperbarui.
+  - summary: Tempatkan CLI dalam status menunggu hingga instans VMSS telah diperbarui.
     syntax: az vmss wait --updated --instance-id 1 --name MyScaleSet --resource-group MyResourceGroup
   - summary: Tempatkan CLI dalam status menunggu hingga kondisi set skala terpenuhi. (dibuat otomatis)
     syntax: az vmss wait --created --name MyScaleSet --resource-group MyResourceGroup
@@ -1012,11 +1012,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 05/20/2022
+  ms.date: 07/01/2022
   description: Mengelola pengelompokan komputer virtual dalam Azure Virtual Machine Scale Set (VMSS).
-  ms.openlocfilehash: 650b23dafcbb5ba65249d31580054af59a75faac
-  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
+  ms.openlocfilehash: 4f69398756a562c284b8b3c3353f4609c0869f9c
+  ms.sourcegitcommit: 72fad8cc38b3cb770675568f31436405d83944f2
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 05/24/2022
-  ms.locfileid: "145244975"
+  ms.lasthandoff: 07/05/2022
+  ms.locfileid: "146951623"
