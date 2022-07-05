@@ -61,19 +61,17 @@ directCommands:
   examples:
   - summary: Buat aplikasi web dengan konfigurasi default.
     syntax: az webapp create -g MyResourceGroup -p MyPlan -n MyUniqueAppName
-  - summary: Buat aplikasi web dengan runtime Java 11 menggunakan pemisah '|'. (tidak disarankan untuk powershell; gunakan pemisah ":" sebagai gantinya)
-    syntax: az webapp create -g MyResourceGroup -p MyPlan -n MyUniqueAppName --runtime "java|11|Java SE|11"
-  - summary: Buat aplikasi web dengan runtime Java 11 menggunakan pemisah ':'.
+  - summary: Buat aplikasi web dengan runtime Java 11.
     syntax: az webapp create -g MyResourceGroup -p MyPlan -n MyUniqueAppName --runtime "java:11:Java SE:11"
   - summary: Buat aplikasi web dengan runtime NodeJS 10.14 dan sebarkan dari repositori git lokal.
-    syntax: az webapp create -g MyResourceGroup -p MyPlan -n MyUniqueAppName --runtime "node|12LTS" --deployment-local-git
+    syntax: az webapp create -g MyResourceGroup -p MyPlan -n MyUniqueAppName --runtime "node:12LTS" --deployment-local-git
   - summary: Buat aplikasi web dengan gambar dari DockerHub.
     syntax: az webapp create -g MyResourceGroup -p MyPlan -n MyUniqueAppName -i nginx
   - summary: Buat aplikasi web dengan gambar dari registri DockerHub privat.
     syntax: az webapp create -g MyResourceGroup -p MyPlan -n MyUniqueAppName -i MyImageName -s username -w password
   - summary: Buat aplikasi web dengan gambar dari Azure Container Registry privat.
     syntax: az webapp create -g MyResourceGroup -p MyPlan -n MyUniqueAppName -i myregistry.azurecr.io/docker-image:tag
-  - summary: buat WebApp menggunakan Paket App Service bersama yang berada di grup sumber daya yang berbeda.
+  - summary: buat WebApp menggunakan paket App Service bersama yang berada di grup sumber daya yang berbeda.
     syntax: AppServicePlanID=$(az appservice plan show -n SharedAppServicePlan -g MyASPRG --query "id" --out tsv) az webapp create -g MyResourceGroup -p "$AppServicePlanID" -n MyUniqueAppName
   requiredParameters:
   - isRequired: true
@@ -82,7 +80,7 @@ directCommands:
     description: ''
   - isRequired: true
     name: --plan -p
-    summary: Nama atau id sumber daya paket layanan aplikasi. Gunakan 'appservice plan create' untuk mendapatkannya.
+    summary: Nama atau id sumber daya paket layanan aplikasi. Gunakan 'pembuatan rencana layanan aplikasi' untuk mendapatkannya.
     description: ''
   - isRequired: true
     name: --resource-group -g
@@ -127,7 +125,7 @@ directCommands:
     summary: Nama peran atau id yang akan dimiliki identitas yang ditetapkan sistem.
     description: ''
   - name: --runtime -r
-    summary: 'Runtime web kanonis dalam format Framework:Version, misalnya "PHP:7.2". Pemisah yang diizinkan: "|" atau ":". Jika menggunakan powershell, gunakan pemisah ":" atau pastikan untuk melepaskan karakter "|" dengan benar. Gunakan `az webapp list-runtimes` untuk daftar yang tersedia.'
+    summary: Runtime web kanonis dalam format Framework:Version, misalnya "PHP:7.2". Gunakan `az webapp list-runtimes` untuk daftar yang tersedia.
     description: ''
   - name: --scope
     summary: Cakupan yang dapat diakses oleh identitas yang ditetapkan sistem.
@@ -136,7 +134,7 @@ directCommands:
     summary: Hanya Linux. File startup web.
     description: ''
   - name: --subnet
-    summary: Nama atau ID sumber daya dari subnet yang sudah ada sebelumnya agar aplikasi web bergabung. Argumen --vnet juga diperlukan jika menentukan subnet berdasarkan nama.
+    summary: Nama atau ID sumber daya dari subnet yang sudah ada sebelumnya agar webapp bergabung. Argumen --vnet juga diperlukan jika menentukan subnet berdasarkan nama.
     description: ''
   - name: --tags
     summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
@@ -167,7 +165,7 @@ directCommands:
     summary: Nama aplikasi web. Jika dibiarkan tidak ditentukan, nama akan dibuat secara acak. Anda dapat mengonfigurasi default menggunakan `az configure --defaults web=<name>`.
     description: ''
   - name: --port -p
-    summary: 'Port untuk koneksi jarak jauh. Default: Port acak yang tersedia.'
+    summary: 'Port untuk sambungan jarak jauh. Default: Port acak yang tersedia.'
     description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
@@ -201,7 +199,7 @@ directCommands:
     summary: Pertahankan pendaftaran DNS.
     description: ''
   - name: --keep-empty-plan
-    summary: Pertahankan paket layanan aplikasi kosong.
+    summary: Simpan paket layanan aplikasi kosong.
     description: ''
   - name: --keep-metrics
     summary: Simpan metrik aplikasi.
@@ -441,7 +439,7 @@ directCommands:
     summary: Nama aplikasi web. Jika dibiarkan tidak ditentukan, nama akan dibuat secara acak. Anda dapat mengonfigurasi default menggunakan `az configure --defaults web=<name>`.
     description: ''
   - name: --port -p
-    summary: 'Port untuk sambungan jarak jauh. Default: Port acak yang tersedia.'
+    summary: 'Port untuk koneksi jarak jauh. Default: Port acak yang tersedia.'
     description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
@@ -519,7 +517,7 @@ directCommands:
                  [--plan]
                  [--resource-group]
                  [--runtime]
-                 [--sku {B1, B2, B3, D1, F1, FREE, I1, I1v2, I2, I2v2, I3, I3v2, P1V2, P1V3, P2V2, P2V3, P3V2, P3V3, PC2, PC3, PC4, S1, S2, S3, SHARED, WS1, WS2, WS3}]
+                 [--sku {B1, B2, B3, D1, F1, FREE, I1, I1v2, I2, I2v2, I3, I3v2, P1V2, P1V3, P2V2, P2V3, P3V2, P3V3, S1, S2, S3, SHARED, WS1, WS2, WS3}]
   examples:
   - summary: Lihat detail aplikasi yang akan dibuat, tanpa benar-benar menjalankan operasi
     syntax: az webapp up --dryrun
@@ -527,9 +525,7 @@ directCommands:
     syntax: az webapp up
   - summary: Membuat aplikasi web dengan nama tertentu
     syntax: az webapp up -n MyUniqueAppName
-  - summary: Buat aplikasi web dengan nama tertentu dan runtime Java 11 menggunakan pemisah '|' (tidak disarankan untuk powershell; gunakan pemisah ":" sebagai gantinya)
-    syntax: az webapp up -n MyUniqueAppName --runtime "java|11|Java SE|11"
-  - summary: Membuat aplikasi web dengan nama tertentu dan runtime Java 11 menggunakan pemisah ':'
+  - summary: Membuat aplikasi web dengan nama tertentu dan runtime Java 11
     syntax: az webapp up -n MyUniqueAppName --runtime "java:11:Java SE:11"
   - summary: Buat aplikasi web di wilayah tertentu, dengan menjalankan perintah dari folder tempat kode yang akan disebarkan ada.
     syntax: az webapp up -l locationName
@@ -573,11 +569,11 @@ directCommands:
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
   - name: --runtime -r
-    summary: 'Runtime web kanonis dalam format Framework:Version, misalnya "PHP:7.2". Pemisah yang diizinkan: "|" atau ":". Jika menggunakan powershell, gunakan pemisah ":" atau pastikan untuk melepaskan karakter "|" dengan benar. Gunakan `az webapp list-runtimes` untuk daftar yang tersedia.'
+    summary: Runtime web kanonis dalam format Framework:Version, misalnya "PHP:7.2". Gunakan `az webapp list-runtimes` untuk daftar yang tersedia.
     description: ''
   - name: --sku
-    parameterValueGroup: B1, B2, B3, D1, F1, FREE, I1, I1v2, I2, I2v2, I3, I3v2, P1V2, P1V3, P2V2, P2V3, P3V2, P3V3, PC2, PC3, PC4, S1, S2, S3, SHARED, WS1, WS2, WS3
-    summary: Tingkat harga, misalnya, F1(Free), D1(Shared), B1(Basic Small), B2(Basic Medium), B3(Basic Large), S1(Standard Small), P1V2(Premium V2 Small), P1V3(Premium V3 Small), P2V3(Premium V3 Medium), P3V3(Premium V3 Large), PC2 (Premium Container Small), PC3 (Premium Container Medium), PC4 ( Premium Kontainer Besar), I1 (Kecil Terisolasi), I2 (Sedang Terisolasi), I3 (Besar Terisolasi), I1v2 (V2 Kecil Terisolasi), I2v2 (Sedang V2 Terisolasi), I3v2 (V2 Besar Terisolasi), WS1 (Logic Apps Workflow Standard 1), WS2 (Logic Apps Workflow Standard 2), WS3 (Logic Apps Workflow Standard 3).
+    parameterValueGroup: B1, B2, B3, D1, F1, FREE, I1, I1v2, I2, I2v2, I3, I3v2, P1V2, P1V3, P2V2, P2V3, P3V2, P3V3, S1, S2, S3, SHARED, WS1, WS2, WS3
+    summary: Tingkat harga, misalnya, F1(Free), D1(Shared), B1(Basic Small), B2(Basic Medium), B3(Basic Large), S1(Standard Small), P1V2(Premium V2 Small), P1V3(Premium V3 Small), P2V3(Premium V3 Medium), P3V3(Premium V3 Besar), I1 (Kecil Terisolasi), I2 (Sedang Terisolasi), I3 (Besar Terisolasi), I1v2 (Terisolasi V2 Kecil), I2v2 (Sedang V2 Terisolasi), I3v2 (V2 Terisolasi Besar),  WS1 (Logic Apps Workflow Standard 1), WS2 (Logic Apps Workflow Standard 2), WS3 (Logic Apps Workflow Standard 3).
     description: ''
 - uid: az_webapp_update
   name: az webapp update
@@ -908,9 +904,9 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   description: Mengelola aplikasi web.
-  ms.openlocfilehash: d3627d15b47b7521f914db637929f96176af4c5a
-  ms.sourcegitcommit: 1b372058d7da922e1d119ddd551ce2cc7c579f46
+  ms.openlocfilehash: 34fb00bcf174e6dbe7bb68dc079dc1514fcd5987
+  ms.sourcegitcommit: 72fad8cc38b3cb770675568f31436405d83944f2
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/27/2022
-  ms.locfileid: "144030509"
+  ms.lasthandoff: 07/05/2022
+  ms.locfileid: "146956969"
