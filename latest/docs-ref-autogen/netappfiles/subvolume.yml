@@ -1,7 +1,7 @@
 ### YamlMime:AzureCLIGroup
 uid: az_netappfiles_subvolume
 name: az netappfiles subvolume
-summary: Mengelola sumber daya subvolume Azure NetApp Files (ANF).
+summary: Mengelola Sumber Daya Subvolume Azure NetApp Files (ANF).
 description: ''
 directCommands:
 - uid: az_netappfiles_subvolume_create
@@ -14,6 +14,7 @@ directCommands:
                                     --resource-group
                                     --subvolume-name
                                     --volume-name
+                                    [--no-wait]
                                     [--parent-path]
                                     [--path]
                                     [--size]
@@ -42,6 +43,9 @@ directCommands:
     summary: Nama volume ANF.
     description: ''
   optionalParameters:
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
+    description: ''
   - name: --parent-path
     summary: Jalur ke subvolume induk.
     description: ''
@@ -59,6 +63,7 @@ directCommands:
   syntax: >-
     az netappfiles subvolume delete [--account-name]
                                     [--ids]
+                                    [--no-wait]
                                     [--pool-name]
                                     [--resource-group]
                                     [--subvolume-name]
@@ -73,6 +78,9 @@ directCommands:
     description: ''
   - name: --ids
     summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
     description: ''
   - name: --pool-name -p
     summary: Nama kumpulan ANF.
@@ -92,7 +100,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/netappfiles/_help.py
 - uid: az_netappfiles_subvolume_list
   name: az netappfiles subvolume list
-  summary: Cantumkan semua subvolumna ANF dalam volume NetApp yang ditentukan.
+  summary: Cantumkan semua subvolum ANF dalam volume NetApp yang ditentukan.
   description: ''
   syntax: >-
     az netappfiles subvolume list --account-name
@@ -100,7 +108,7 @@ directCommands:
                                   --resource-group
                                   --volume-name
   examples:
-  - summary: Mencantumkan semua subvolumna volume ANF
+  - summary: Mencantumkan semua subvokasi volume ANF
     syntax: az netappfiles subvolume list -g mygroup --account-name myaccountname  --pool-name mypoolname --volume-name myvolumename
   requiredParameters:
   - isRequired: true
@@ -160,10 +168,15 @@ directCommands:
   description: ''
   syntax: >-
     az netappfiles subvolume update [--account-name]
+                                    [--add]
+                                    [--force-string]
                                     [--ids]
+                                    [--no-wait]
                                     [--path]
                                     [--pool-name]
+                                    [--remove]
                                     [--resource-group]
+                                    [--set]
                                     [--size]
                                     [--subvolume-name]
                                     [--volume-name]
@@ -174,8 +187,17 @@ directCommands:
   - name: --account-name -a
     summary: Nama akun ANF.
     description: ''
+  - name: --add
+    summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
+    description: ''
+  - name: --force-string
+    summary: Saat menggunakan 'set' atau 'add', pertahankan literal string alih-alih mencoba mengonversi ke JSON.
+    description: ''
   - name: --ids
     summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --no-wait
+    summary: Jangan menunggu operasi jangka panjang selesai.
     description: ''
   - name: --path
     summary: Jalur ke subvolume.
@@ -183,14 +205,81 @@ directCommands:
   - name: --pool-name -p
     summary: Nama kumpulan ANF.
     description: ''
+  - name: --remove
+    summary: 'Menghapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
+    description: ''
   - name: --resource-group -g
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --set
+    summary: 'Perbarui objek dengan menentukan jalur properti dan nilai yang akan diatur.  Contoh: --set property1.property2=<value>.'
     description: ''
   - name: --size
     summary: Ukuran subvolume.
     description: ''
   - name: --subvolume-name
     summary: Nama subvolume ANF.
+    description: ''
+  - name: --volume-name -v
+    summary: Nama volume ANF.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/netappfiles/_help.py
+- uid: az_netappfiles_subvolume_wait
+  name: az netappfiles subvolume wait
+  summary: Tunggu operasi subvolume.
+  description: ''
+  syntax: >-
+    az netappfiles subvolume wait [--account-name]
+                                  [--created]
+                                  [--custom]
+                                  [--deleted]
+                                  [--exists]
+                                  [--ids]
+                                  [--interval]
+                                  [--pool-name]
+                                  [--resource-group]
+                                  [--subvolume-name]
+                                  [--timeout]
+                                  [--updated]
+                                  [--volume-name]
+  optionalParameters:
+  - name: --account-name -a
+    summary: Nama akun ANF.
+    description: ''
+  - name: --created
+    summary: Tunggu hingga dibuat dengan 'provisioningState' di 'Berhasil'.
+    description: ''
+  - name: --custom
+    summary: Tunggu hingga kondisi memenuhi kueri JMESPath kustom. Mis. provisioningState!='InProgress', instanceView.statuses[?code=='PowerState/running'].
+    description: ''
+  - name: --deleted
+    summary: Tunggu hingga dihapus.
+    description: ''
+  - name: --exists
+    summary: Tunggu hingga sumber daya ada.
+    description: ''
+  - name: --ids
+    summary: Satu atau beberapa ID sumber daya (dibatasi ruang). Ini harus menjadi ID sumber daya lengkap yang berisi semua informasi argumen 'Id Sumber Daya'. Anda harus menyediakan argumen --ids atau 'Resource Id' lainnya.
+    description: ''
+  - name: --interval
+    defaultValue: "30"
+    summary: Interval polling dalam hitungan detik.
+    description: ''
+  - name: --pool-name -p
+    summary: Nama kumpulan ANF.
+    description: ''
+  - name: --resource-group -g
+    summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
+    description: ''
+  - name: --subvolume-name
+    summary: Nama subvolume.
+    description: ''
+  - name: --timeout
+    defaultValue: "3600"
+    summary: Waktu tunggu maksimum dalam detik.
+    description: ''
+  - name: --updated
+    summary: Tunggu hingga diperbarui dengan provisioningState di 'Berhasil'.
     description: ''
   - name: --volume-name -v
     summary: Nama volume ANF.
@@ -204,6 +293,7 @@ commands:
 - az_netappfiles_subvolume_metadata_show
 - az_netappfiles_subvolume_show
 - az_netappfiles_subvolume_update
+- az_netappfiles_subvolume_wait
 globalParameters:
 - name: --debug
   summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
@@ -223,11 +313,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 05/05/2022
-  description: Mengelola sumber daya subvolume Azure NetApp Files (ANF).
-  ms.openlocfilehash: 7a08c4cc59ac4fb224ae402fda8225c7835bb77e
-  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
+  ms.date: 06/27/2022
+  description: Mengelola Sumber Daya Subvolume Azure NetApp Files (ANF).
+  ms.openlocfilehash: 421a0bc74a9eff459eca0c8248b67bb3da5fcad5
+  ms.sourcegitcommit: 72fad8cc38b3cb770675568f31436405d83944f2
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 05/24/2022
-  ms.locfileid: "145213727"
+  ms.lasthandoff: 07/05/2022
+  ms.locfileid: "146942965"

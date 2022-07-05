@@ -30,7 +30,7 @@ directCommands:
     syntax: az cdn endpoint create -g group -n endpoint --profile-name profile --origin www.example.com 88 4444
   - summary: Buat titik akhir dengan asal domain kustom dengan tautan privat diaktifkan.
     syntax: az cdn endpoint create -g group -n endpoint --profile-name profile --origin www.example.com 80 443 /subscriptions/subid/resourcegroups/rg1/providers/Microsoft.Network/privateLinkServices/pls1 eastus "Please approve this request"
-  - summary: Buat titik akhir khusus https dengan asal domain kustom dan kompresi dukungan untuk jenis MIME kompresi default Azure CDN.
+  - summary: Buat titik akhir khusus https dengan asal domain kustom dan dukung pemadatan untuk jenis MIME kompresi default Azure CDN.
     syntax: az cdn endpoint create -g group -n endpoint --profile-name profile --origin www.example.com --no-http --enable-compression
   - summary: Buat titik akhir dengan asal domain kustom dan kompresi dukungan untuk jenis MIME tertentu.
     syntax: az cdn endpoint create -g group -n endpoint --profile-name profile --origin www.example.com --enable-compression --content-types-to-compress text/plain text/html
@@ -52,7 +52,7 @@ directCommands:
     summary: Nama grup sumber daya. Anda dapat mengonfigurasi grup default menggunakan `az configure --defaults group=<name>`.
     description: ''
   optionalParameters:
-  - name: --content-type-to-compress
+  - name: --content-types-to-compress
     summary: Daftar tipe isi tempat pemadatan berlaku. Nilai harus berupa jenis MIME yang valid.
     description: ''
   - name: --enable-compression
@@ -74,14 +74,14 @@ directCommands:
     summary: Jangan menunggu operasi jangka panjang selesai.
     description: ''
   - name: --origin-host-header
-    summary: Header Host yang akan dikirim untuk permintaan ke asal ini. Jika Anda membiarkan ini kosong, nama host permintaan menentukan nilai ini. Azure CDN asal, seperti Web Apps, Storage Blob, dan Cloud Services memerlukan nilai header host ini agar sesuai dengan nama host asal secara default.
+    summary: Header Host yang akan dikirim untuk permintaan ke asal ini. Jika Anda membiarkan ini kosong, nama host permintaan menentukan nilai ini. Asal Azure CDN, seperti Web Apps, Blob Storage, dan Cloud Services memerlukan nilai header host ini agar sesuai dengan nama host asal secara default.
     description: ''
   - name: --origin-path
     summary: Jalur direktori pada asal yang dapat digunakan Azure CDN untuk mengambil konten.
     description: ''
   - name: --query-string-caching
     parameterValueGroup: BypassCaching, IgnoreQueryString, NotSet, UseQueryString
-    summary: Menentukan bagaimana CDN permintaan cache yang menyertakan string kueri. Anda dapat mengabaikan string kueri apa pun saat penembolokan, melewati penembolokan untuk mencegah permintaan yang berisi string kueri di-cache, atau menyimpan cache setiap permintaan dengan URL unik.
+    summary: Menentukan bagaimana CDN menyimpan permintaan yang menyertakan string kueri. Anda dapat mengabaikan string kueri apa pun saat penembolokan, melewati penembolokan untuk mencegah permintaan yang berisi string kueri di-cache, atau menyimpan cache setiap permintaan dengan URL unik.
     description: ''
   - name: --tags
     summary: 'Tag yang dipisahkan spasi: key[=value] [key[=value] ...]. Gunakan "" untuk menghapus tag yang ada.'
@@ -324,7 +324,7 @@ directCommands:
   - name: --add
     summary: 'Tambahkan objek ke daftar objek dengan menentukan jalur dan pasangan nilai kunci.  Contoh: --add property.listProperty <key=value, string, atau JSON string>.'
     description: ''
-  - name: --content-type-to-compress
+  - name: --content-types-to-compress
     summary: Daftar tipe isi tempat pemadatan berlaku. Nilai harus berupa jenis MIME yang valid.
     description: ''
   - name: --default-origin-group
@@ -355,7 +355,7 @@ directCommands:
     summary: Jangan menunggu operasi jangka panjang selesai.
     description: ''
   - name: --origin-host-header
-    summary: Header Host untuk mengirim permintaan ke asal ini. Jika Anda membiarkan ini kosong, nama host permintaan menentukan nilai ini. Azure CDN asal, seperti Web Apps, Blob Storage, dan Cloud Services memerlukan nilai header host ini agar sesuai dengan nama host asal secara default.
+    summary: Header Host untuk mengirim permintaan ke asal ini. Jika Anda membiarkan ini kosong, nama host permintaan menentukan nilai ini. Asal-usul Azure CDN, seperti Web Apps, Blob Storage, dan Cloud Services memerlukan nilai header host ini agar sesuai dengan nama host asal secara default.
     description: ''
   - name: --origin-path
     summary: Jalur direktori pada asal yang dapat digunakan Azure CDN untuk mengambil konten.
@@ -365,7 +365,7 @@ directCommands:
     description: ''
   - name: --query-string-caching
     parameterValueGroup: BypassCaching, IgnoreQueryString, NotSet, UseQueryString
-    summary: Menentukan bagaimana CDN membuat cache permintaan yang menyertakan string kueri. Anda dapat mengabaikan string kueri apa pun saat penembolokan, melewati penembolokan untuk mencegah permintaan yang berisi string kueri di-cache, atau menyimpan cache setiap permintaan dengan URL unik.
+    summary: Menentukan bagaimana CDN menyimpan permintaan yang menyertakan string kueri. Anda dapat mengabaikan string kueri apa pun saat penembolokan, melewati penembolokan untuk mencegah permintaan yang berisi string kueri di-cache, atau menyimpan cache setiap permintaan dengan URL unik.
     description: ''
   - name: --remove
     summary: 'Hapus properti atau elemen dari daftar.  Contoh: --remove property.list <indexToRemove> OR --remove propertyToRemove.'
@@ -459,11 +459,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 03/28/2022
+  ms.date: 05/26/2022
   description: Mengelola titik akhir CDN.
-  ms.openlocfilehash: 837426cca668b1c470795f98a0d44af4326dd8c3
-  ms.sourcegitcommit: b2d28cc4e2ccc5aa1a8e7fb3b8ab57ef55b5d4db
+  ms.openlocfilehash: 947bdae7c60ed6cdff65bcae5dff8022df1294c1
+  ms.sourcegitcommit: 72fad8cc38b3cb770675568f31436405d83944f2
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 04/06/2022
-  ms.locfileid: "141436031"
+  ms.lasthandoff: 07/05/2022
+  ms.locfileid: "146943276"
