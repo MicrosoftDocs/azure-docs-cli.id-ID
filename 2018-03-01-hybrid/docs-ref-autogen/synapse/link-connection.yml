@@ -1,0 +1,380 @@
+### YamlMime:AzureCLIGroup
+uid: az_synapse_link-connection
+name: az synapse link-connection
+summary: Mengelola koneksi tautan Synapse.
+description: ''
+directCommands:
+- uid: az_synapse_link-connection_create
+  name: az synapse link-connection create
+  summary: Membuat koneksi tautan.
+  description: ''
+  syntax: >-
+    az synapse link-connection create --file
+                                      --name
+                                      --workspace-name
+  examples:
+  - summary: Membuat koneksi tautan.
+    syntax: >-
+      az synapse link-connection create --workspace-name testsynapseworkspace \
+        --name testlinkconnectionname \
+        --file @"path/definition.json"
+  requiredParameters:
+  - isRequired: true
+    name: --file
+    summary: Properti dapat disediakan dari file JSON menggunakan `@{path}` sintaks atau string JSON.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama koneksi tautan.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_link-connection_delete
+  name: az synapse link-connection delete
+  summary: Menghapus koneksi tautan.
+  description: ''
+  syntax: >-
+    az synapse link-connection delete --name
+                                      --workspace-name
+  examples:
+  - summary: Menghapus koneksi tautan.
+    syntax: >-
+      az synapse link-connection delete --workspace-name testsynapseworkspace \
+        --name testlinkconnectionname
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama koneksi tautan.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_link-connection_edit-link-tables
+  name: az synapse link-connection edit-link-tables
+  summary: Edit tabel untuk koneksi tautan.
+  description: ''
+  syntax: >-
+    az synapse link-connection edit-link-tables --file
+                                                --name
+                                                --workspace-name
+  examples:
+  - summary: Edit tabel untuk koneksi tautan.
+    syntax: >-
+      az synapse link-connection edit-link-tables --workspace-name testsynapseworkspace \
+        --name linkconnectionname \
+        --file @path/edittablerequestfile.json
+      the file pattern should be:
+
+      {
+        "linkTables": [
+          {
+            "id": "<linkTableId1>",
+            "source": {
+              "tableName": "<sourceTableName1>",
+              "schemaName": "<sourceSchemaName1>"
+            },
+            "target": {
+              "tableName": "<sinkTableName1>",
+              "schemaName": "<sinkSchemaName1>",
+              "distributionOptions": {
+                "type": "<Hash|Round_RoBin|Replicate>",
+                "distributionColumn": "<distributionColumnName>"
+              }
+            },
+            "operationType": "add"
+          },
+          {
+            "id": "<linkTableId2>",
+            "operationType": "remove"
+          },
+          {
+            "id": "<linkTableId3>",
+            "source": {
+              "tableName": "<sourceTableName3>",
+              "schemaName": "<sourceSchemaName3>"
+            },
+            "target": {
+              "tableName": "<sinkTableName3>",
+              "schemaName": "<sinkSchemaName3>",
+              "distributionOptions": {
+                "type": "<Hash|Round_RoBin|Replicate>",
+                "distributionColumn": "<distributionColumnName>"
+              }
+            },
+            "operationType": "update"
+          }
+        ]
+      }
+  requiredParameters:
+  - isRequired: true
+    name: --file -f
+    summary: Jalur file Edit tabel tautan, Format file dapat dilihat menggunakan --help.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama koneksi tautan.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_link-connection_get-link-tables-status
+  name: az synapse link-connection get-link-tables-status
+  summary: Mengkueri status tabel tautan koneksi tautan.
+  description: ''
+  syntax: >-
+    az synapse link-connection get-link-tables-status --name
+                                                      --workspace-name
+                                                      [--continuation-token]
+                                                      [--max-segment-count]
+  examples:
+  - summary: Mengkueri status tabel tautan koneksi tautan.
+    syntax: >-
+      az synapse link-connection get-link-tables-status --workspace-name testsynapseworkspace \
+        --name linkconnectionname \
+        --max-segment-count 50 \
+        --continuation-token token
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama koneksi tautan.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  optionalParameters:
+  - name: --continuation-token
+    summary: Token kelanjutan untuk mengkueri status tabel.
+    description: ''
+  - name: --max-segment-count
+    defaultValue: "50"
+    summary: Jumlah segmen maksimum untuk mengkueri status tabel.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_link-connection_get-status
+  name: az synapse link-connection get-status
+  summary: Periksa status koneksi tautan setelah memulai/menghentikan koneksi tautan.
+  description: ''
+  syntax: >-
+    az synapse link-connection get-status --name
+                                          --workspace-name
+  examples:
+  - summary: Hentikan koneksi tautan.
+    syntax: >-
+      az synapse link-connection get-status --workspace-name testsynapseworkspace \
+        --name testlinkconnectionname
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama koneksi tautan.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_link-connection_list
+  name: az synapse link-connection list
+  summary: Mencantumkan koneksi tautan di ruang kerja synapse.
+  description: ''
+  syntax: az synapse link-connection list --workspace-name
+  examples:
+  - summary: Mencantumkan koneksi tautan.
+    syntax: az synapse link-connection list --workspace-name testsynapseworkspace
+  requiredParameters:
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_link-connection_list-link-tables
+  name: az synapse link-connection list-link-tables
+  summary: Mencantumkan tabel tautan koneksi tautan.
+  description: ''
+  syntax: >-
+    az synapse link-connection list-link-tables --name
+                                                --workspace-name
+  examples:
+  - summary: Mencantumkan tabel tautan koneksi tautan.
+    syntax: >-
+      az synapse link-connection list-link-tables --workspace-name testsynapseworkspace \
+        --name linkconnectionname \
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama koneksi tautan.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_link-connection_show
+  name: az synapse link-connection show
+  summary: Mendapatkan koneksi tautan.
+  description: ''
+  syntax: >-
+    az synapse link-connection show --name
+                                    --workspace-name
+  examples:
+  - summary: Dapatkan koneksi tautan.
+    syntax: >-
+      az synapse link-connection show --workspace-name testsynapseworkspace \
+        --name testlinkconectionname
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama koneksi tautan.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_link-connection_start
+  name: az synapse link-connection start
+  summary: Mulai sambungan tautan.
+  description: ''
+  syntax: >-
+    az synapse link-connection start --name
+                                     --workspace-name
+  examples:
+  - summary: Memulai koneksi tautan.
+    syntax: >-
+      az synapse link-connection start --workspace-name testsynapseworkspace \
+        --name testlinkconnectionname
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama koneksi tautan.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_link-connection_stop
+  name: az synapse link-connection stop
+  summary: Hentikan koneksi tautan.
+  description: ''
+  syntax: >-
+    az synapse link-connection stop --name
+                                    --workspace-name
+  examples:
+  - summary: Hentikan koneksi tautan.
+    syntax: >-
+      az synapse link-connection stop --workspace-name testsynapseworkspace \
+        --name testlinkconnectionname
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama koneksi tautan.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_link-connection_update
+  name: az synapse link-connection update
+  summary: Memperbarui koneksi tautan.
+  description: ''
+  syntax: >-
+    az synapse link-connection update --file
+                                      --name
+                                      --workspace-name
+  examples:
+  - summary: Memperbarui sambungan tautan.
+    syntax: >-
+      az synapse link-connection update --workspace-name testsynapseworkspace \
+        --name testlinkconnectionname \
+        --file @"path/definition.json"
+  requiredParameters:
+  - isRequired: true
+    name: --file
+    summary: Properti dapat disediakan dari file JSON menggunakan `@{path}` sintaks atau string JSON.
+    description: ''
+  - isRequired: true
+    name: --name -n
+    summary: Nama koneksi tautan.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+- uid: az_synapse_link-connection_update-landing-zone-credential
+  name: az synapse link-connection update-landing-zone-credential
+  summary: Perbarui credetial zona pendaratan koneksi tautan.
+  description: ''
+  syntax: >-
+    az synapse link-connection update-landing-zone-credential --name
+                                                              --sas-token
+                                                              --workspace-name
+  examples:
+  - summary: Perbarui credetial zona pendaratan koneksi tautan.
+    syntax: >-
+      az synapse link-connection update-landing-zone-credential --workspace-name testsynapseworkspace \
+        --name linkconnectionname \
+        --sas-token sastoken
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: Nama koneksi tautan.
+    description: ''
+  - isRequired: true
+    name: --sas-token
+    summary: Nilai string aman.
+    description: ''
+  - isRequired: true
+    name: --workspace-name
+    summary: Nama ruang kerja.
+    description: ''
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/synapse/_help.py
+commands:
+- az_synapse_link-connection_create
+- az_synapse_link-connection_delete
+- az_synapse_link-connection_edit-link-tables
+- az_synapse_link-connection_get-link-tables-status
+- az_synapse_link-connection_get-status
+- az_synapse_link-connection_list
+- az_synapse_link-connection_list-link-tables
+- az_synapse_link-connection_show
+- az_synapse_link-connection_start
+- az_synapse_link-connection_stop
+- az_synapse_link-connection_update
+- az_synapse_link-connection_update-landing-zone-credential
+globalParameters:
+- name: --debug
+  summary: Meningkatkan verbositas pengelogan untuk menampilkan semua log debug.
+- name: --help -h
+  summary: Menampilkan pesan bantuan ini dan keluar.
+- name: --only-show-errors
+  summary: Hanya menampilkan kesalahan, menyembunyikan peringatan.
+- name: --output -o
+  defaultValue: json
+  parameterValueGroup: json, jsonc, table, tsv
+  summary: Format output.
+- name: --query
+  summary: String kueri JMESPath. Lihat <a href="http://jmespath.org/">http://jmespath.org/</a> untuk informasi yang lebih lengkap beserta contohnya.
+- name: --subscription
+  summary: Nama atau ID langganan. Anda dapat mengonfigurasi langganan default menggunakan `az account set -s NAME_OR_ID`.
+- name: --verbose
+  summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
+metadata:
+  doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
+  ms.date: 10/27/2021
+  description: Mengelola koneksi tautan Synapse.
+  ms.openlocfilehash: fc05b7bc44838e9b37f90cbc5e3ea7acd5dfe3bf
+  ms.sourcegitcommit: 72fad8cc38b3cb770675568f31436405d83944f2
+  ms.translationtype: MT
+  ms.contentlocale: id-ID
+  ms.lasthandoff: 07/05/2022
+  ms.locfileid: "146971231"
