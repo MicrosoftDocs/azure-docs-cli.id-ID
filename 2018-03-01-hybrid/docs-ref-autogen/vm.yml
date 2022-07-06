@@ -196,7 +196,7 @@ directCommands:
     syntax: az vm create -n MyVm -g MyResourceGroup --image UbuntuLTS
   - summary: Buat VM RedHat default dengan autentikasi SSH otomatis menggunakan URN gambar.
     syntax: az vm create -n MyVm -g MyResourceGroup --image RedHat:RHEL:7-RAW:7.4.2018010506
-  - summary: Buat Windows Server VM default dengan alamat IP privat.
+  - summary: Buat VM Windows Server default dengan alamat IP privat.
     syntax: az vm create -n MyVm -g MyResourceGroup --public-ip-address "" --image Win2012R2Datacenter
   - summary: Buat VM dari gambar terkelola kustom.
     syntax: az vm create -g MyResourceGroup -n MyVm --image MyImage
@@ -241,9 +241,9 @@ directCommands:
     syntax: az vm create -n MyVm -g rg1 --image debian --assign-identity [system] /subscriptions/99999999-1bf0-4dda-aec3-cb9272f09590/resourcegroups/myRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myID
   - summary: Membuat beberapa VM. Dalam contoh ini, 3 VM dibuat. Mereka adalah MyVm0, MyVm1, MyVm2.
     syntax: az vm create -n MyVm -g MyResourceGroup --image centos --count 3
-  - summary: Buat VM dari gambar galeri bersama (fitur pratinjau pribadi, silakan hubungi tim galeri gambar bersama melalui email sigpmdev@microsoft.com untuk mendaftar pratinjau jika Anda tertarik menggunakan fitur ini).
+  - summary: Membuat VM dari gambar galeri bersama
     syntax: az vm create -n MyVm -g MyResourceGroup --image /SharedGalleries/{gallery_unique_name}/Images/{image}/Versions/{version}
-  - summary: Buat VM dari gambar galeri komunitas (fitur pratinjau pribadi, silakan hubungi tim galeri gambar komunitas melalui email sigpmdev@microsoft.com untuk mendaftar pratinjau jika Anda tertarik menggunakan fitur ini).
+  - summary: Membuat VM dari gambar galeri komunitas
     syntax: az vm create -n MyVm -g MyResourceGroup --image /CommunityGalleries/{gallery_unique_name}/Images/{image}/Versions/{version}
   requiredParameters:
   - isRequired: true
@@ -282,7 +282,7 @@ directCommands:
     description: ''
   - name: --authentication-type
     parameterValueGroup: all, password, ssh
-    summary: Jenis autentikasi yang akan digunakan dengan VM. Default ke kata sandi untuk Windows dan kunci publik SSH untuk Linux. "all" memungkinkan autentikasi ssh dan kata sandi.
+    summary: Jenis autentikasi yang akan digunakan dengan VM. Default ke kata sandi untuk kunci umum Windows dan SSH untuk Linux. "all" memungkinkan autentikasi ssh dan kata sandi.
     description: ''
   - name: --availability-set
     summary: Nama atau ID dari set ketersediaan yang ada untuk menambahkan VM. Tidak ada secara default.
@@ -294,34 +294,34 @@ directCommands:
     summary: Nama OS host komputer virtual. Default ke nama VM.
     description: ''
   - name: --count
-    summary: Jumlah komputer virtual yang akan dibuat. Rentang nilai adalah [2, 250], inklusif. Jangan tentukan parameter ini jika Anda ingin membuat VM tunggal normal. VM dibuat secara paralel. Output dari perintah ini adalah array VM, bukan satu VM tunggal. Setiap VM memiliki IP publiknya sendiri, NIC. VNET dan NSG dibagikan. Disarankan agar tidak ada IP publik, NIC, VNET, dan NSG yang ada dalam grup sumber daya. Ketika --count ditentukan, --attach-data-disks, --attach-os-disk, --boot-diagnostics-storage, --computer-name, --host, --host-group, --nics, --os-disk-name, --private-ip-address, --public-ip-address, --public-ip-address-dns-name, --storage-account, --storage-container-name, --subnet, --use-unmanaged-disk, --vnet-name tidak diizinkan.
+    summary: Jumlah komputer virtual yang akan dibuat. Rentang nilai adalah [2, 250], inklusif. Jangan tentukan parameter ini jika Anda ingin membuat VM tunggal normal. VM dibuat secara paralel. Output dari perintah ini adalah array VM, bukan satu VM tunggal. Setiap VM memiliki IP publik sendiri, NIC. VNET dan NSG dibagikan. Disarankan agar tidak ada IP publik, NIC, VNET, dan NSG yang ada dalam grup sumber daya. Ketika --count ditentukan, --attach-data-disks, --attach-os-disk, --boot-diagnostics-storage, --computer-name, --host, --host-group, --nics, --os-disk-name, --private-ip-address, --public-ip-address, --public-ip-address-dns-name, --storage-account, --storage-container-name, --subnet, --use-unmanaged-disk, --vnet-name tidak diizinkan.
     description: ''
   - name: --custom-data
     summary: File atau teks skrip init kustom (cloud-init, cloud-config, dll..).
     description: ''
   - name: --data-disk-caching
-    summary: Storage jenis penembolokan untuk disk data, termasuk 'None', 'ReadOnly', 'ReadWrite', dll. Gunakan nilai tunggal untuk diterapkan pada semua disk, atau gunakan `<lun>=<vaule1> <lun>=<value2>` untuk mengonfigurasi disk individual.
+    summary: Jenis penembolokan penyimpanan untuk disk data, termasuk 'None', 'ReadOnly', 'ReadWrite', dll. Gunakan nilai tunggal untuk diterapkan pada semua disk, atau gunakan `<lun>=<vaule1> <lun>=<value2>` untuk mengonfigurasi disk individual.
     description: ''
   - name: --data-disk-sizes-gb
     summary: Ukuran disk data terkelola kosong yang dipisahkan spasi dalam GB untuk dibuat.
     description: ''
   - name: --encryption-at-host
     parameterValueGroup: false, true
-    summary: Aktifkan Enkripsi Host untuk VM atau VMSS. Ini akan mengaktifkan enkripsi untuk semua disk termasuk disk Sumber Daya/Temp di host itu sendiri.
+    summary: Aktifkan Enkripsi Host untuk VM atau VMSS. Ini akan mengaktifkan enkripsi untuk semua disk termasuk disk Resource/Temp di host itu sendiri.
     description: ''
   - name: --eviction-policy
     summary: ''
     description: ''
   - name: --generate-ssh-keys
-    summary: Buat file kunci publik dan privat SSH jika hilang. Kunci akan disimpan di direktori ~/.ssh.
+    summary: Hasilkan file kunci publik dan privat SSH jika hilang. Kunci akan disimpan di direktori ~/.ssh.
     description: ''
   - name: --image
-    summary: 'Nama gambar sistem operasi sebagai alias URN, URN, nama gambar kustom atau ID, ID versi gambar kustom, atau URI blob VHD. Selain itu, ini juga mendukung gambar galeri bersama. Parameter ini diperlukan kecuali menggunakan `--attach-os-disk.` format URN yang Valid: "Publisher:Offer:Sku:Version". Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/virtual-machines/linux/cli-ps-findimage.'
+    summary: 'Nama gambar sistem operasi sebagai alias URN, URN, nama gambar kustom atau ID, ID versi gambar kustom, atau URI blob VHD. Selain itu, ini juga mendukung gambar galeri bersama. Parameter ini diperlukan kecuali menggunakan `--attach-os-disk.` format URN Yang Valid: "Publisher:Offer:Sku:Version". Untuk informasi selengkapnya, lihat https://docs.microsoft.com/azure/virtual-machines/linux/cli-ps-findimage.'
     description: ''
     valueFrom: az vm image list, az vm image show, az sig image-version show-shared
   - name: --license-type
     parameterValueGroup: None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server
-    summary: Menentukan bahwa gambar atau disk Windows dilisensikan secara lokal. Untuk mengaktifkan Azure Hybrid Benefit untuk Windows Server, gunakan 'Windows_Server'. Untuk mengaktifkan Hak Hosting Multi-penyewa untuk Windows 10, gunakan 'Windows_Client'. Untuk informasi selengkapnya, lihat dokumen online Azure Windows VM.
+    summary: Menentukan bahwa citra atau disk Windows telah dilisensikan secara lokal. Untuk mengaktifkan Azure Hybrid Benefit untuk Windows Server, gunakan 'Windows_Server'. Untuk mengaktifkan Hak Hosting Multi-penyewa untuk Windows 10, gunakan 'Windows_Client'. Untuk informasi selengkapnya, lihat dokumen online Azure Windows VM.
     description: ''
   - name: --location -l
     summary: Lokasi untuk membuat VM dan sumber daya terkait. Jika lokasi default tidak dikonfigurasi, akan default ke lokasi grup sumber daya.
@@ -333,15 +333,15 @@ directCommands:
     summary: Jangan menunggu operasi jangka panjang selesai.
     description: ''
   - name: --nsg
-    summary: Nama yang akan digunakan saat membuat Grup Keamanan Jaringan baru (default) atau mereferensikan yang sudah ada. Dapat juga mereferensikan NSG yang ada dengan ID atau menentukan "" untuk tidak ada ('"' di Azure CLI menggunakan operator PowerShell atau --%).
+    summary: Nama yang akan digunakan saat membuat Kelompok Keamanan Jaringan baru (default) atau mereferensikan yang sudah ada. Dapat juga mereferensikan NSG yang ada dengan ID atau menentukan "" untuk tidak ada ('""' di Azure CLI menggunakan operator PowerShell atau --%).
     description: ''
   - name: --nsg-rule
     parameterValueGroup: NONE, RDP, SSH
-    summary: Aturan NSG yang akan dibuat saat membuat NSG baru. Default untuk membuka port untuk mengizinkan RDP pada Windows dan mengizinkan SSH di Linux. NONE tidak mewakili aturan NSG.
+    summary: Aturan NSG untuk dibuat saat membuat NSG baru. Default untuk membuka port untuk mengizinkan RDP di Windows dan memungkinkan SSH di Linux. NONE tidak mewakili aturan NSG.
     description: ''
   - name: --os-disk-caching
     parameterValueGroup: None, ReadOnly, ReadWrite
-    summary: 'Storage jenis penembolokan untuk disk OS VM. Default: ReadWrite.'
+    summary: 'Jenis penembolokan penyimpanan untuk disk OS VM. Default: ReadWrite.'
     description: ''
   - name: --os-disk-name
     summary: Nama disk OS VM baru.
@@ -369,7 +369,7 @@ directCommands:
     summary: Alamat IP privat statis (misalnya 10.0.0.5).
     description: ''
   - name: --public-ip-address
-    summary: Nama alamat IP publik saat membuat satu (default) atau mereferensikan yang sudah ada. Dapat juga mereferensikan IP publik yang ada berdasarkan ID atau menentukan "" untuk Tidak Ada ('"' di Azure CLI menggunakan operator PowerShell atau --%).
+    summary: Nama alamat IP publik saat membuat alamat IP publik (default) atau mereferensikan yang sudah ada. Dapat juga mereferensikan IP publik yang ada dengan ID atau menentukan "" untuk Tidak Ada ('""' di Azure CLI menggunakan operator PowerShell atau --%).
     description: ''
   - name: --public-ip-address-allocation
     parameterValueGroup: dynamic, static
@@ -404,13 +404,13 @@ directCommands:
     summary: Jalur file tujuan pada VM untuk kunci SSH. Jika file sudah ada, kunci yang ditentukan ditambahkan ke file. Jalur tujuan untuk kunci umum SSH saat ini terbatas pada nilai defaultnya "/home/username/.ssh/authorized_keys" karena masalah yang diketahui di agen provisi Linux.
     description: ''
   - name: --ssh-key-name
-    summary: Gunakan sebagai kunci publik di komputer virtual. Ini harus menjadi sumber daya kunci SSH yang ada di Azure.
+    summary: Gunakan sebagai kunci umum di komputer virtual. Ini harus menjadi sumber daya kunci SSH yang ada di Azure.
     description: ''
   - name: --ssh-key-values
     summary: Daftar kunci umum SSH yang dipisahkan spasi atau jalur file kunci publik.
     description: ''
   - name: --storage-account
-    summary: Hanya berlaku saat digunakan dengan `--use-unmanaged-disk`. Nama yang akan digunakan saat membuat akun penyimpanan baru atau mereferensikan akun penyimpanan yang sudah ada. Jika dihilangkan, akun penyimpanan yang sesuai dalam grup sumber daya dan lokasi yang sama akan digunakan, atau yang baru akan dibuat.
+    summary: Hanya berlaku saat digunakan dengan `--use-unmanaged-disk`. Nama yang akan digunakan saat membuat akun penyimpanan baru atau mereferensikan akun penyimpanan yang sudah ada. Jika dihilangkan, akun penyimpanan yang sesuai di grup sumber daya dan lokasi yang sama akan digunakan, atau yang baru akan dibuat.
     description: ''
   - name: --storage-container-name
     summary: 'Hanya berlaku saat digunakan dengan `--use-unmanaged-disk`. Nama kontainer penyimpanan untuk disk OS VM. Default: vhds.'
@@ -419,7 +419,7 @@ directCommands:
     summary: 'SKU akun penyimpanan untuk mempertahankan VM. Gunakan sku tunggal yang akan diterapkan di semua disk, atau tentukan disk individual. Penggunaan: [--storage-sku SKU | --storage-sku ID=SKU ID=SKU ID=SKU...], di mana setiap ID adalah "os" atau lun yang diindeks 0. Nilai yang diizinkan: Standard_LRS, Premium_LRS.'
     description: ''
   - name: --subnet
-    summary: Nama subnet saat membuat VNet baru atau mereferensikan yang sudah ada. Dapat juga mereferensikan subnet yang ada berdasarkan ID. Jika nama vnet dan subnet dihilangkan, VNet dan subnet yang sesuai akan dipilih secara otomatis, atau yang baru akan dibuat.
+    summary: Nama subnet saat membuat VNet baru atau mereferensikan yang sudah ada. Juga dapat mereferensikan subnet yang ada berdasarkan ID. Jika nama vnet dan subnet dihilangkan, VNet dan subnet yang sesuai akan dipilih secara otomatis, atau yang baru akan dibuat.
     description: ''
   - name: --subnet-address-prefix
     defaultValue: 10.0.0.0/24
@@ -435,7 +435,7 @@ directCommands:
     summary: Buat dan validasi templat ARM tanpa membuat sumber daya apa pun.
     description: ''
   - name: --vmss
-    summary: Nama atau ID set skala komputer virtual yang ada yang harus ditetapkan oleh komputer virtual. Tidak ada secara default.
+    summary: Nama atau ID dari set skala komputer virtual yang ada yang harus ditetapkan komputer virtual. Tidak ada secara default.
     description: ''
   - name: --vnet-address-prefix
     defaultValue: 10.0.0.0/16
@@ -454,7 +454,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
 - uid: az_vm_deallocate
   name: az vm deallocate
-  summary: Batalkan alokasi VM sehingga sumber daya komputasi tidak lagi dialokasikan (dibebankan tidak lagi berlaku). Status akan berubah dari 'Dihentikan' menjadi 'Dihentikan (Dibatalkan Alokasi)'.
+  summary: Batalkan alokasi VM sehingga sumber daya komputasi tidak lagi dialokasikan (ditagih tidak lagi berlaku). Status akan berubah dari 'Dihentikan' menjadi 'Dihentikan (Dibatalkan Alokasi)'.
   description: Untuk tutorial end-to-end, lihat https://docs.microsoft.com/azure/virtual-machines/linux/capture-image.
   syntax: >-
     az vm deallocate [--ids]
@@ -507,7 +507,7 @@ directCommands:
   examples:
   - summary: Hapus VM tanpa permintaan konfirmasi.
     syntax: az vm delete -g MyResourceGroup -n MyVm --yes
-  - summary: Menghapus semua VM dalam grup sumber daya.
+  - summary: Hapus semua VM dalam grup sumber daya.
     syntax: az vm delete --ids $(az vm list -g MyResourceGroup --query "[].id" -o tsv)
   optionalParameters:
   - name: --ids
@@ -577,7 +577,7 @@ directCommands:
   examples:
   - summary: Gunakan grup sumber daya dan nama untuk mendapatkan informasi tampilan instans VM.
     syntax: az vm get-instance-view -g MyResourceGroup -n MyVm
-  - summary: Mendapatkan tampilan instans untuk semua VM dalam grup sumber daya.
+  - summary: Dapatkan tampilan instans untuk semua VM dalam grup sumber daya.
     syntax: az vm get-instance-view --ids $(az vm list -g MyResourceGroup --query "[].id" -o tsv)
   optionalParameters:
   - name: --ids
@@ -663,11 +663,11 @@ directCommands:
   examples:
   - summary: Mencantumkan semua SKU di wilayah US Barat.
     syntax: az vm list-skus -l westus
-  - summary: Cantumkan semua ukuran vm yang tersedia di wilayah US Timur2 yang mendukung zona ketersediaan.
+  - summary: Cantumkan semua ukuran vm yang tersedia di wilayah US2 Timur yang mendukung zona ketersediaan.
     syntax: az vm list-skus -l eastus2 --zone
   - summary: Cantumkan semua ukuran vm yang tersedia di wilayah US Timur2 yang mendukung zona ketersediaan dengan nama seperti "standard_ds1...".
     syntax: az vm list-skus -l eastus2 --zone --size standard_ds1
-  - summary: Mencantumkan set ketersediaan informasi sku terkait di wilayah US Barat.
+  - summary: Mencantumkan informasi sku terkait set ketersediaan di wilayah US Barat.
     syntax: az vm list-skus -l westus --resource-type availabilitySets
   optionalParameters:
   - name: --all
@@ -729,7 +729,7 @@ directCommands:
 - uid: az_vm_open-port
   name: az vm open-port
   summary: Membuka mesin virtual ke lalu lintas masuk pada port tertentu.
-  description: Menambahkan aturan keamanan ke kelompok keamanan jaringan (NSG) yang dilampirkan ke antarmuka jaringan (NIC) atau subnet VM. NSG yang ada akan digunakan atau yang baru akan dibuat. Nama aturan adalah 'open-port-{port}' dan akan menimpa aturan yang ada dengan nama ini. Untuk VM multi-NIC, atau untuk kontrol yang lebih halus, gunakan perintah jaringan yang sesuai secara langsung (buat aturan nsg, dll).
+  description: Menambahkan aturan keamanan ke kelompok keamanan jaringan (NSG) yang dilampirkan ke antarmuka jaringan (NIC) atau subnet VM. NSG yang ada akan digunakan atau NSG baru akan dibuat. Nama aturan adalah 'open-port-{port}' dan akan menimpa aturan yang ada dengan nama ini. Untuk VM multi-NIC, atau untuk kontrol yang lebih halus, gunakan perintah jaringan yang sesuai secara langsung (buat aturan nsg, dll).
   syntax: >-
     az vm open-port --port
                     [--apply-to-subnet]
@@ -743,14 +743,14 @@ directCommands:
     syntax: az vm open-port -g MyResourceGroup -n MyVm --port '*'
   - summary: Buka berbagai port pada VM untuk lalu lintas masuk dengan prioritas tertinggi.
     syntax: az vm open-port -g MyResourceGroup -n MyVm --port 80-100 --priority 100
-  - summary: Buka port 555, 557, 558, dan 559 ke lalu lintas masuk dengan prioritas tertinggi.
+  - summary: Buka port 555, 557, 558, dan 559 untuk lalu lintas masuk dengan prioritas tertinggi.
     syntax: az vm open-port -g MyResourceGroup -n MyVm --port 555,557-559 --priority 100
   - summary: Buka semua port untuk semua VM dalam grup sumber daya.
     syntax: az vm open-port --ids $(az vm list -g MyResourceGroup --query "[].id" -o tsv) --port '*'
   requiredParameters:
   - isRequired: true
     name: --port
-    summary: "Rentang port atau port (misalnya: 80-100) untuk membuka lalu lintas masuk. Gunakan '\\*' untuk mengizinkan lalu lintas ke semua port. Gunakan nilai yang dipisahkan koma untuk menentukan lebih dari satu port atau rentang port."
+    summary: "Port atau rentang port (misalnya: 80-100) untuk membuka lalu lintas masuk. Gunakan '\\*' untuk mengizinkan lalu lintas ke semua port. Gunakan nilai yang dipisahkan koma untuk menentukan lebih dari satu port atau rentang port."
     description: ''
   optionalParameters:
   - name: --apply-to-subnet
@@ -822,7 +822,7 @@ directCommands:
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
 - uid: az_vm_resize
   name: az vm resize
-  summary: Perbarui ukuran VM.
+  summary: Memperbarui ukuran VM.
   description: ''
   syntax: >-
     az vm resize --size
@@ -897,7 +897,7 @@ directCommands:
                [--resource-group]
                [--show-details]
   examples:
-  - summary: Tampilkan informasi tentang VM.
+  - summary: Menampilkan informasi tentang VM.
     syntax: az vm show -g MyResourceGroup -n MyVm -d
   - summary: Dapatkan detail untuk semua VM dalam grup sumber daya.
     syntax: az vm show -d --ids $(az vm list -g MyResourceGroup --query "[].id" -o tsv)
@@ -959,7 +959,7 @@ directCommands:
     syntax: az vm stop --resource-group MyResourceGroup --name MyVm
   - summary: Matikan VM yang sedang berjalan tanpa mematikan.
     syntax: az vm stop --resource-group MyResourceGroup --name MyVm --skip-shutdown
-  - summary: Mematikan VM dalam grup sumber daya.
+  - summary: Matikan VM dalam grup sumber daya.
     syntax: az vm stop --ids $(az vm list -g MyResourceGroup --query "[].id" -o tsv)
   optionalParameters:
   - name: --ids
@@ -1032,7 +1032,7 @@ directCommands:
     description: ''
   - name: --license-type
     parameterValueGroup: None, RHEL_BASE, RHEL_BASESAPAPPS, RHEL_BASESAPHA, RHEL_BYOS, RHEL_ELS_6, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, SLES, SLES_BYOS, SLES_HPC, SLES_SAP, SLES_STANDARD, Windows_Client, Windows_Server
-    summary: Menentukan bahwa gambar atau disk Windows dilisensikan secara lokal. Untuk mengaktifkan Azure Hybrid Benefit untuk Windows Server, gunakan 'Windows_Server'. Untuk mengaktifkan Hak Hosting Multi-penyewa untuk Windows 10, gunakan 'Windows_Client'. Untuk informasi selengkapnya, lihat dokumen online Azure Windows VM.
+    summary: Menentukan bahwa citra atau disk Windows telah dilisensikan secara lokal. Untuk mengaktifkan Azure Hybrid Benefit untuk Windows Server, gunakan 'Windows_Server'. Untuk mengaktifkan Hak Hosting Multi-penyewa untuk Windows 10, gunakan 'Windows_Client'. Untuk informasi selengkapnya, lihat dokumen online Azure Windows VM.
     description: ''
   - name: --name -n
     summary: Nama Komputer Virtual. Anda dapat mengonfigurasi default menggunakan `az configure --defaults vm=<name>`.
@@ -1240,11 +1240,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 05/20/2022
+  ms.date: 07/01/2022
   description: Mengelola komputer virtual Linux atau Windows.
-  ms.openlocfilehash: 01f1648fb7a30a1421c75f1091b8f1d39db64e2b
-  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
+  ms.openlocfilehash: 3f16b63c837d5bb0d3eed3d5eba37b71325d72d1
+  ms.sourcegitcommit: 72fad8cc38b3cb770675568f31436405d83944f2
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 05/24/2022
-  ms.locfileid: "145245625"
+  ms.lasthandoff: 07/05/2022
+  ms.locfileid: "146964510"

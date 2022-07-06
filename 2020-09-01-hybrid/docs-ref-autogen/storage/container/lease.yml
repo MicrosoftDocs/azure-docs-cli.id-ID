@@ -7,7 +7,7 @@ directCommands:
 - uid: az_storage_container_lease_acquire
   name: az storage container lease acquire
   summary: Minta sewa baru.
-  description: Jika kontainer tidak memiliki sewa aktif, blob service membuat sewa pada kontainer dan mengembalikan ID sewa baru.
+  description: Jika kontainer tidak memiliki sewa aktif, Blob service membuat sewa pada kontainer dan mengembalikan ID sewa baru.
   syntax: >-
     az storage container lease acquire --container-name
                                        [--account-key]
@@ -40,7 +40,7 @@ directCommands:
     summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
     description: ''
   - name: --connection-string
-    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    summary: 'String koneksi akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
   - name: --if-modified-since
     summary: Dimulai hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
@@ -65,7 +65,7 @@ directCommands:
 - uid: az_storage_container_lease_break
   name: az storage container lease break
   summary: Putuskan sewa, jika kontainer memiliki sewa aktif.
-  description: Setelah sewa rusak, sewa tidak dapat diperpanjang. Setiap permintaan yang diotorisasi dapat memutus sewa; permintaan tidak diperlukan untuk menentukan ID sewa yang cocok. Ketika sewa rusak, periode jeda sewa diizinkan untuk berlalu, selama waktu tersebut tidak ada operasi sewa kecuali jeda dan pelepasan dapat dilakukan pada kontainer. Ketika sewa berhasil rusak, respons menunjukkan interval dalam hitungan detik sampai sewa baru dapat diperoleh.
+  description: Setelah sewa rusak, sewa tidak dapat diperpanjang. Setiap permintaan yang diotorisasi dapat melanggar sewa; permintaan tidak diperlukan untuk menentukan ID sewa yang cocok. Ketika sewa rusak, periode jeda sewa diizinkan untuk berlalu, selama waktu itu tidak ada operasi sewa kecuali jeda dan pelepasan dapat dilakukan pada kontainer. Ketika sewa berhasil rusak, respons menunjukkan interval dalam hitungan detik sampai sewa baru dapat diperoleh.
   syntax: >-
     az storage container lease break --container-name
                                      [--account-key]
@@ -78,7 +78,7 @@ directCommands:
                                      [--sas-token]
                                      [--timeout]
   examples:
-  - summary: Putuskan sewanya.
+  - summary: Hentikan sewanya.
     syntax: az storage container lease break -c mycontainer --lease-break-period 10 --account-name mystorageaccount --account-key 0000-0000
   requiredParameters:
   - isRequired: true
@@ -97,7 +97,7 @@ directCommands:
     summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
     description: ''
   - name: --connection-string
-    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    summary: 'String koneksi akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
   - name: --if-modified-since
     summary: Dimulai hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
@@ -106,7 +106,7 @@ directCommands:
     summary: Dimulai hanya jika tidak dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
     description: ''
   - name: --lease-break-period
-    summary: Ini adalah durasi detik yang diusulkan bahwa sewa harus dilanjutkan sebelum rusak, antara 0 dan 60 detik. Periode istirahat ini hanya digunakan jika lebih pendek dari waktu yang tersisa pada sewa. Jika lebih lama, waktu yang tersisa pada sewa digunakan. Sewa baru tidak akan tersedia sebelum periode istirahat berakhir, tetapi sewa dapat ditahan lebih lama dari periode istirahat. Jika header ini tidak muncul dengan operasi pemutusan, sewa durasi tetap berhenti setelah periode sewa yang tersisa berlalu, dan sewa tak terbatas segera berhenti.
+    summary: Ini adalah usulan durasi detik bahwa sewa harus dilanjutkan sebelum rusak, antara 0 dan 60 detik. Periode istirahat ini hanya digunakan jika lebih pendek dari waktu yang tersisa pada sewa. Jika lebih lama, waktu yang tersisa pada sewa digunakan. Sewa baru tidak akan tersedia sebelum periode istirahat berakhir, tetapi sewa dapat ditahan lebih lama dari periode istirahat. Jika header ini tidak muncul dengan operasi jeda, sewa durasi tetap berhenti setelah periode sewa yang tersisa berlalu, dan sewa tak terbatas segera berhenti.
     description: ''
   - name: --sas-token
     summary: 'Tanda Tangan Akses Bersama (SAS). Harus digunakan bersama dengan nama akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_SAS_TOKEN.'
@@ -159,7 +159,7 @@ directCommands:
     summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
     description: ''
   - name: --connection-string
-    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    summary: 'String koneksi akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
   - name: --if-modified-since
     summary: Dimulai hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
@@ -213,7 +213,7 @@ directCommands:
     summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
     description: ''
   - name: --connection-string
-    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    summary: 'String koneksi akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
   - name: --if-modified-since
     summary: Dimulai hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
@@ -267,7 +267,7 @@ directCommands:
     summary: 'Mode untuk menjalankan perintah. Mode "login" akan langsung menggunakan kredensial masuk Anda untuk autentikasi. Mode "kunci" warisan akan mencoba mengkueri kunci akun jika tidak ada parameter autentikasi untuk akun yang disediakan. Variabel lingkungan: AZURE_STORAGE_AUTH_MODE.'
     description: ''
   - name: --connection-string
-    summary: 'Storage string koneksi akun. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
+    summary: 'String koneksi akun penyimpanan. Variabel lingkungan: AZURE_STORAGE_CONNECTION_STRING.'
     description: ''
   - name: --if-modified-since
     summary: Dimulai hanya jika dimodifikasi sejak tanggalwaktu UTC yang disediakan (Y-m-d'T'H:M'Z').
@@ -307,11 +307,11 @@ globalParameters:
   summary: Meningkatkan verbositas pengelogan. Gunakan --debug untuk log waktu lengkap.
 metadata:
   doc_source_url_repo: https://github.com/Azure/azure-cli/blob/dev/
-  ms.date: 05/19/2022
+  ms.date: 06/16/2022
   description: Mengelola penyewaan kontainer penyimpanan blob.
-  ms.openlocfilehash: 7eda2df0809d966e0e2088ce3084e8a61cfcc4d4
-  ms.sourcegitcommit: 3ada8ecc391e1722eb6664a0dcff2bce9fa5cf97
+  ms.openlocfilehash: dbdca0fec98f24ef6484f651998775e32b6b3749
+  ms.sourcegitcommit: 72fad8cc38b3cb770675568f31436405d83944f2
   ms.translationtype: MT
   ms.contentlocale: id-ID
-  ms.lasthandoff: 05/24/2022
-  ms.locfileid: "145212862"
+  ms.lasthandoff: 07/05/2022
+  ms.locfileid: "146962639"
